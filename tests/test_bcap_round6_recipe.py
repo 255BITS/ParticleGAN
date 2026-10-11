@@ -1,4 +1,5 @@
 """Public recipe contract for two isolated BCAP capabilities."""
+from copy import deepcopy
 import pytest
 import torch
 from particlegan import get_recipe
@@ -53,3 +54,41 @@ def test_disabled_settings_keep_original_recipe_packet():
         get_recipe('ka2', reg_zero_coeff=.05)
     with pytest.raises(ValueError):
         get_recipe('bcap_adam', optimizer_prior_smoothing=.01)
+
+
+@pytest.mark.parametrize('geometry', ['none', 'direction_blend'])
+def test_smoothing_and_proximal_spring_share_checkpoint_but_distinct_motion(geometry):
+    recipe = get_recipe('bcap', constraint_geometry_mode=geometry,
+                        optimizer_prior_smoothing=.01, prior_proximal_strength=.2)
+    initial = torch.tensor([[.1, .2], [.3, .4]], dtype=torch.float64)
+
+    def build(value):
+        table = torch.nn.Parameter(value.clone())
+        optimizer = recipe.make_generator_optimizer(
+            [dict(params=[table], role='prior', lr=.03)], latent_table=table)
+        return table, optimizer
+
+    def step(table, optimizer):
+        optimizer.zero_grad()
+        optimizer.set_sampled_rows(table, torch.tensor([0]))
+        loss = table[0].square().sum()
+        constraint_geometry_backward(loss, optimizer, [loss])
+        optimizer.step()
+
+    table, optimizer = build(initial)
+    step(table, optimizer)
+    assert torch.equal(table[1], initial[1])
+    base_energy = optimizer.prior_smoothing_stats['optimizer_displacement_squared_sum']
+    actual_energy = float((table.detach() - initial).square().sum())
+    assert actual_energy == pytest.approx(base_energy / (1 + .03 * .2) ** 2)
+    assert actual_energy < base_energy
+    saved = deepcopy(optimizer.state_dict())
+    restored_table, restored = build(table.detach())
+    restored.load_state_dict(saved)
+    assert restored.prior_smoothing_stats == optimizer.prior_smoothing_stats
+    assert restored.prior_proximal_stats == optimizer.prior_proximal_stats
+    step(table, optimizer)
+    step(restored_table, restored)
+    assert torch.equal(table, restored_table)
+    assert restored.prior_smoothing_stats == optimizer.prior_smoothing_stats
+    assert restored.prior_proximal_stats == optimizer.prior_proximal_stats

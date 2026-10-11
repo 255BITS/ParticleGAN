@@ -1,0 +1,20 @@
+{
+  "scope": "initial_displacement_software_probe_no_training",
+  "fixture": "64x2 deterministic initial locations displaced by +1.5",
+  "mmd": 0.2766839265823364,
+  "unweighted_row_gradient_norm_max": 0.008006544783711433,
+  "unweighted_row_gradient_norm_mean": 0.004143282305449247,
+  "bcap_smoothing": 0.001,
+  "prior_base_lr": 0.03,
+  "suggested_positive_strengths": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "weighted_max_gradient_over_smoothing": [
+    0.800654411315918,
+    8.00654411315918,
+    80.06543731689453
+  ],
+  "caveat": "Single declared displacement software probe; actual adversarial direction and sampled-panel gradient scale vary by task. No quality selection from this probe."
+}

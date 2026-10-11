@@ -7,6 +7,7 @@ import pytest
 import torch
 from torch import nn
 
+from particlegan import get_recipe
 from particlegan.optim import dualnorm
 from particlegan.optim.dualnorm import NormalizedOptimizer
 
@@ -209,9 +210,8 @@ def test_factory_omits_disabled_constructor_argument_and_forwards_enabled_value(
         return SimpleNamespace()
 
     monkeypatch.setattr(dualnorm, "NormalizedOptimizer", capture)
-    recipe = SimpleNamespace(critic_step_mode="none", constraint_geometry_mode="none",
-        optimizer_family="dualnorm", optimizer_momentum=0., optimizer_smoothing=.001,
-        optimizer_prior_smoothing=value, optimizer_convolution="none", optimizer_svd_backend="native")
+    recipe = get_recipe('bcap', constraint_geometry_mode='none',
+                        optimizer_convolution='none', optimizer_prior_smoothing=value)
     dualnorm.make_normalized_optimizer(recipe, [nn.Parameter(torch.ones(2, 2))])
     if value is None:
         assert "prior_smoothing" not in captured

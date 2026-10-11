@@ -1,0 +1,6261 @@
+{
+  "artifact_proofs": [
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/54e00094fb594dbb8f646d623f24ec25/provenance/provenance-state.pt",
+      "sha256": "5b11fc00845bfa517e3d1fa7cd4c117406e7d8fdbdf3086d41099f3cf0c0cd8d",
+      "size": 65727
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/54e00094fb594dbb8f646d623f24ec25/request.json",
+      "sha256": "72f0fc2a0cc18c655a18756217607e683c153abc69412961b3b813081730524c"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/54e00094fb594dbb8f646d623f24ec25/raw-result.json",
+      "sha256": "2835d27a76b945703e8f9c453fc169fe4e696ece2b7364212748fe26dc484ae4"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/699fde96f2714377b54876d55001e468/provenance/provenance-state.pt",
+      "sha256": "eae9af5ed3945a99bbd6c9c8e9f6d1b7926be7e8a6511b1da249deb8dd647d52",
+      "size": 841973
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/699fde96f2714377b54876d55001e468/request.json",
+      "sha256": "3d024eba48e4f64fcb7c40d22ec45b74080c819ead721448985a55ef84653691"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/699fde96f2714377b54876d55001e468/raw-result.json",
+      "sha256": "4a7ae0b3bc6c8496bda1bdeeb62419481fe945a466678dba866760eedd6aa8f9"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/96b441c247214d10ba653bc567cf834d/provenance/provenance-state.pt",
+      "sha256": "25bb3c93c86befc0f4505764343eebed6515eab31324d110f1b31be3bc5b5412",
+      "size": 164065
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/96b441c247214d10ba653bc567cf834d/request.json",
+      "sha256": "2807bfc10b1ee6a07282c2b1c0213b43dd9e9ffe5b911d9a8cdc2234bc7ef91b"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/96b441c247214d10ba653bc567cf834d/raw-result.json",
+      "sha256": "c994dddf5f543e37dd7c2d119579ed20f9e9dcccea72c766604bd7b0e2fd2aae"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c9f61298f63545a6b1289537bfca714f/provenance/provenance-state.pt",
+      "sha256": "169273cf2b840daa4a7426399f046eff433c0ceca6f523158169274bd2e2b918",
+      "size": 164321
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c9f61298f63545a6b1289537bfca714f/request.json",
+      "sha256": "d11f4bc19cc758ca396f9d7ac2e1549e6b92157a61921e5bf00004b00bfa68d2"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c9f61298f63545a6b1289537bfca714f/raw-result.json",
+      "sha256": "94773c270051ce627f13c206519448333b581985736a751074b19422c2ff2927"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/59a78e2d66df48ffa770757311f4ec22/provenance/provenance-state.pt",
+      "sha256": "2672d5a18c18dfde6ad22f332d93c375f0cfcbf4cdca69c8879ac15b80c4615b",
+      "size": 91627
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/59a78e2d66df48ffa770757311f4ec22/request.json",
+      "sha256": "84077da0d628adabfcc26aa1286104892247d5ca2f47ec71c90de85e89125436"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/59a78e2d66df48ffa770757311f4ec22/raw-result.json",
+      "sha256": "9880a3b605fec2a457e13e1f87fb2257280fbda4c657d65d4f4f729a47ebf259"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/d318948b864c4fb1b26d4eee3e9f05fb/provenance/provenance-state.pt",
+      "sha256": "6bd0c6407a687ea7f86e08af3160e896dcfd033038b9cbb659af13381cd8ab24",
+      "size": 124251
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/d318948b864c4fb1b26d4eee3e9f05fb/request.json",
+      "sha256": "046e3d8d8309ba8d07cf680849af8d9c46089f09ae58c823e8088ecb91c50635"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/d318948b864c4fb1b26d4eee3e9f05fb/raw-result.json",
+      "sha256": "61e902a87ae01e16b44669493d52deb8e8c80603c18b06f55a29c993a71ad03b"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/41344f3d5e7d492aae0d0e51722efcd9/provenance/provenance-state.pt",
+      "sha256": "11cc04fc35d9df2e4989b3209ef26dcff9f35df4f78da1e0c2a6bb15ccc6a37a",
+      "size": 96375
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/41344f3d5e7d492aae0d0e51722efcd9/request.json",
+      "sha256": "f2b9da0e1037a9553ea45e103dfe22f0555319eaed1d6b5b1cc01d42f45e4d57"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/41344f3d5e7d492aae0d0e51722efcd9/raw-result.json",
+      "sha256": "3504732d0c50ca3c29349bc2e588fc74ea9834b27be79f43023af76ea9dc9e30"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/687672ec34fe45a1b858dd71472d0e88/provenance/provenance-state.pt",
+      "sha256": "6355864289e77621b408e11b8a8e4dffc5bb82e81e939a3c0826c66734b0a01b",
+      "size": 283357
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/687672ec34fe45a1b858dd71472d0e88/request.json",
+      "sha256": "2f27aae45e29da9e2152c9069dc2998ea109b35ca277cddd9c625d3065e3342e"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/687672ec34fe45a1b858dd71472d0e88/raw-result.json",
+      "sha256": "d994b06d838e0cb59dd36fe061386eb2e7cc4e47cee183eb7841f8cf7f394ee3"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e715fd6f4f6643e8ae580aaa725891ab/provenance/provenance-state.pt",
+      "sha256": "d361de4c9f982fbcf4c6cb6ff8cead08bbb6ff75db48c3635e113f7148ca7be6",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e715fd6f4f6643e8ae580aaa725891ab/request.json",
+      "sha256": "a79df0c5d3d3d1c53ae83d9b1108ad58927414590d0377341b18ab990a77e06b"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e715fd6f4f6643e8ae580aaa725891ab/raw-result.json",
+      "sha256": "64fbedb92bae3ff07b723e2052f11ce6470ca184f78acc73a8addd8757698fe7"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/b211b73573974e66abe3c298fb204216/provenance/provenance-state.pt",
+      "sha256": "af9aa83aa269c71a6d27f306360e5696bafeeae3d40ff522b6c39bd8101e6341",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/b211b73573974e66abe3c298fb204216/request.json",
+      "sha256": "0f9a6c53eef7ec9d01be50054bad2c66a835bb6730e21554983f2940708a35c6"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/b211b73573974e66abe3c298fb204216/raw-result.json",
+      "sha256": "fda428fecf4d8f7b1def387caef88ef4b7ecb80c0429e427b10155dc19d54997"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8c4be74301418fbcd1787f7b81dd77/provenance/provenance-state.pt",
+      "sha256": "606e6f386a4f261be07f4af65649485e59222ac86e57c225c381752a50dc3f0b",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8c4be74301418fbcd1787f7b81dd77/request.json",
+      "sha256": "2ddd01ed3ec841e83a93a2d62e888ec26bcb9a34fb264294f6e32508d27f11f9"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8c4be74301418fbcd1787f7b81dd77/raw-result.json",
+      "sha256": "6a96a0afac6abd0f6e6e85aad3729855ccd8f2e4d438a30d76472d1bce9f575d"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/1dea26db7fdc4719b0352bac6df8997a/provenance/provenance-state.pt",
+      "sha256": "d00ab82f685b6c8a5c975c5237c7e2f24899dd2d4772e953b6566bcb1c7ac81e",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/1dea26db7fdc4719b0352bac6df8997a/request.json",
+      "sha256": "f195bbf97009ea0d45e9962e94dc09e05808fdfa990f2fa7a0e287e2d2747671"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/1dea26db7fdc4719b0352bac6df8997a/raw-result.json",
+      "sha256": "3c530a1c970707a4531eac1a13981b8a3de42773a9525b50ef77a2b39d1790d6"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/a3591ef48975404491fd2daabb3b6a8a/provenance/provenance-state.pt",
+      "sha256": "d7f68dc559204cbb303cb6148680386ddb5d2ce04a7043cb34bf807980a9a75d",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/a3591ef48975404491fd2daabb3b6a8a/request.json",
+      "sha256": "a549e2d48fecd50fe640b757ed428e08c986bb93542b334ab789125428d7a9b8"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/a3591ef48975404491fd2daabb3b6a8a/raw-result.json",
+      "sha256": "11be66898af5a04dec4bd3353d892503e6a6214c5b2a1159bf0dce98433b3469"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c949a1d52c7a46b2a0eaa36fd6d2cabe/provenance/provenance-state.pt",
+      "sha256": "4694163378d4a1f51d7434f56f9e2b66be09f7bd0be90c436fed86e793079d85",
+      "size": 110393
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c949a1d52c7a46b2a0eaa36fd6d2cabe/request.json",
+      "sha256": "a59bab05d6ec5b31059dac72f5d5129b379c597271e282a8939dfb5879915510"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/c949a1d52c7a46b2a0eaa36fd6d2cabe/raw-result.json",
+      "sha256": "357a8a10d2c55ece142da71ea3c073aa04a150563c9b65f88363f47ea52bdeff"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8bba9b74e44b3aba781496fc794109/provenance/provenance-state.pt",
+      "sha256": "df46a347ff3271baa8f2b1730bd7493914d00cce66db0c1ade29225769016dee",
+      "size": 96295
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8bba9b74e44b3aba781496fc794109/request.json",
+      "sha256": "3901a5fe9dbf5449abffe8e272b5bd262ea99e0c16ff37df8c85c1418eca63fe"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/bd8bba9b74e44b3aba781496fc794109/raw-result.json",
+      "sha256": "b9f121abcf4b4660a858f23ada990f5ce88b745a4237a9b51bf9d7c296741819"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/8e005fb2ffd24fd394e5e9698d0485f2/provenance/provenance-state.pt",
+      "sha256": "e66785ffd6668b4c23cf697e29393a067a4fc38406a4e30de1307f41b0766850",
+      "size": 96295
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/8e005fb2ffd24fd394e5e9698d0485f2/request.json",
+      "sha256": "bfddb96e677a45961960887d9093e13cbf1710efa1a9443c04f3ea5a2a0461c5"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/8e005fb2ffd24fd394e5e9698d0485f2/raw-result.json",
+      "sha256": "7bd3fa364a0525d15e2e1c71144e2d58a533e1a6e4ae0823f51678fdb26ba0c7"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/daf80d2ec5934e4b89e78d81d837dd76/provenance/provenance-state.pt",
+      "sha256": "186d804140ba93e6797a2e297ae80b160ecee9304553b0c7fa6df3d7e951e18d",
+      "size": 96295
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/daf80d2ec5934e4b89e78d81d837dd76/request.json",
+      "sha256": "1d2454900073e0b24ccd9adfe0f1e626dd0b1bb38bb04a50c970ddffd434504f"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/daf80d2ec5934e4b89e78d81d837dd76/raw-result.json",
+      "sha256": "36a4bf880364553465a0d1f10f52c801f68a96d30eee05defdddf070c0dc789f"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/77b7a3758dcf4996887bed1f5016f104/provenance/provenance-state.pt",
+      "sha256": "92bc2b276e099e125bee2bfab47e12a306788a91427f3ff35b049ffbe0516a29",
+      "size": 96295
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/77b7a3758dcf4996887bed1f5016f104/request.json",
+      "sha256": "11333ab36afde98ebb387850d4f95d7f3611ed5f49574615aaa679d98e47bb6e"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/77b7a3758dcf4996887bed1f5016f104/raw-result.json",
+      "sha256": "65e30772c0c56058150f29cb5e65e068c8586fa5024431f0bbe668e95a89a743"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/7069e9763fc74a3ba61372b1cfe6a1da/native100/grid100/summary.json",
+      "sha256": "ce948d4cb761fbdd0ca692ab42d16976f1602f25745951e12a68a5e7d491ece0",
+      "size": 6988
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/7069e9763fc74a3ba61372b1cfe6a1da/native100/grid100/holdout_samples.npz",
+      "sha256": "f2003d237ad59aba44a56e31f7d45106cf968c626dd71ad6009f16b81c83aa22",
+      "size": 2166441
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/7069e9763fc74a3ba61372b1cfe6a1da/provenance/provenance-state.pt",
+      "sha256": "f95d4f1d5f721d6177e3ec8a39cb0c9032dcd55938d8fdde167910b21ab30c00",
+      "size": 770525
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/7069e9763fc74a3ba61372b1cfe6a1da/request.json",
+      "sha256": "1e75b8de090a47535bb49244acdf1a32777b7b71c62c63a71f88fab9e8fa086f"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/7069e9763fc74a3ba61372b1cfe6a1da/raw-result.json",
+      "sha256": "c70b1c7aeb2d35d20f11c1d3e292cbc078c0c7afb68e446abcdc120baf4b814a"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/6ec9a3afa7a84424ba0a560671190944/native100/rotated100/summary.json",
+      "sha256": "441fb904b06e19bd8ee8fbf3c7a00b8d31e9a090f76cf6a3567407685c8f139a",
+      "size": 6795
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/6ec9a3afa7a84424ba0a560671190944/native100/rotated100/holdout_samples.npz",
+      "sha256": "ad13adc6bfdd3c4d4eb08ce1778e7a2edcdbb0edaa68a8490467c3f33dd48157",
+      "size": 2204818
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/6ec9a3afa7a84424ba0a560671190944/provenance/provenance-state.pt",
+      "sha256": "b217d1df78ec573fc76b040927fce13e24238d7ad55378930aa2a3355f6f9756",
+      "size": 770525
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/6ec9a3afa7a84424ba0a560671190944/request.json",
+      "sha256": "6340b2aa9d807e147121669d1f8e46db64efb7edfaf072ad6990c891bc6a853a"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/6ec9a3afa7a84424ba0a560671190944/raw-result.json",
+      "sha256": "4696ffc9c90580e04303b0eebded0b46a8dc53dcf2b0f071e5ace74c75ff715d"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e22678b9e57d442bb63aae58fcd32de3/native100/staggered100/summary.json",
+      "sha256": "f9c20b44f628573cb536238b7e4e0ebc344b3be72721666711c49b38fe2a3fb3",
+      "size": 6802
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e22678b9e57d442bb63aae58fcd32de3/native100/staggered100/holdout_samples.npz",
+      "sha256": "e71289cbb7788db24d51e49d76f1582b644428047a0afc2cd3714b9714f5c775",
+      "size": 2194750
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e22678b9e57d442bb63aae58fcd32de3/provenance/provenance-state.pt",
+      "sha256": "de916ba783ae524f971178190685e0e7a4931ba566d5c07989cb75b2d093f17c",
+      "size": 770525
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e22678b9e57d442bb63aae58fcd32de3/request.json",
+      "sha256": "be443ccc8693c18e591ff4da0d8c39665c8b817f1236ec8d961c73642ce39497"
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-default-adoption-20261010/queue/bcap-default-baseline-v1/e22678b9e57d442bb63aae58fcd32de3/raw-result.json",
+      "sha256": "7420a674d2f4d55abadf2cdb5ffd1c7e5250db1c4ddb612dfc82a9099880b51d"
+    }
+  ],
+  "base_commit": "0337bbbc2300fd351e77e9a222b92401137fd421",
+  "code_proofs": [
+    {
+      "matches_executed_source": true,
+      "path": "benchmarks/toy100/metrics.py",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    },
+    {
+      "matches_executed_source": true,
+      "path": "benchmarks/toy100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    {
+      "loaded_from_git_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "path": "particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  ],
+  "executed_source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+  "executed_source_digest": "6a225fcdd6922cdad37c9c947e163fb6f164f6ad4390293a3d3091b8f741ce44",
+  "inputs": [
+    {
+      "path": "reports/forge/bcap-default-baseline/results.json",
+      "sha256": "2961692f17e0f1fc09c44749c7de99bc3e13e900a75f352efd9f5e8267ae5fef"
+    },
+    {
+      "path": "reports/forge/bcap-default-baseline/spec.json",
+      "sha256": "3014996777c3b035fe8d184a658575eca4569229e35ba2910c2bea7b5e1d122b"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "prior_diagnostics": [
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.03746100511879713,
+      "dimensions": 2,
+      "eps": 0.0001,
+      "gradient_norm": 0.04007483270073997,
+      "maximum_row_gradient_norm": 0.004694884309967411,
+      "maximum_std": 1.215154919706651,
+      "minimum_std": 1.1209938738153535,
+      "rows": 256,
+      "std": [
+        1.215154919706651,
+        1.1209938738153535
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "gaussian1d_stability",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.03746100511879713,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.03932603625899156,
+      "dimensions": 2,
+      "eps": 0.0001,
+      "gradient_norm": 0.32856127084591374,
+      "maximum_row_gradient_norm": 0.19000457717502137,
+      "maximum_std": 0.8363689415131008,
+      "minimum_std": 0.5767534715400833,
+      "rows": 5,
+      "std": [
+        0.8363689415131008,
+        0.5767534715400833
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "five_word_joint_hold",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.3327648297323995,
+      "variance_hinge": 0.29343879347340796
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.0014036778447125164,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.13122883350418016,
+      "maximum_row_gradient_norm": 0.05299750496207376,
+      "maximum_std": 1.0001020913948266,
+      "minimum_std": 0.838617343920136,
+      "rows": 12,
+      "std": [
+        0.8637885094991353,
+        0.9070395104395523,
+        0.838617343920136,
+        1.0001020913948266
+      ],
+      "table": "prior0",
+      "target_std": 1,
+      "task_id": "trajectory",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.0990423368800066,
+      "variance_hinge": 0.09763865903529409
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.0002563004009615863,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.15089762496007375,
+      "maximum_row_gradient_norm": 0.06678764925776401,
+      "maximum_std": 0.9983794223237398,
+      "minimum_std": 0.9970381175359525,
+      "rows": 12,
+      "std": [
+        0.9970381175359525,
+        0.9976627024729398,
+        0.9983690553317048,
+        0.9983794223237398
+      ],
+      "table": "prior0",
+      "target_std": 1,
+      "task_id": "residual_student",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.002393975984877369,
+      "variance_hinge": 0.0021376755839157824
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.006952558667715443,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.13485190364270477,
+      "maximum_row_gradient_norm": 0.08816652200261692,
+      "maximum_std": 0.4757315721054945,
+      "minimum_std": 0.03473187886307646,
+      "rows": 12,
+      "std": [
+        0.4757315721054945,
+        0.24831697778329676,
+        0.03473187886307646,
+        0.034895484945958365
+      ],
+      "table": "prior0",
+      "target_std": 1,
+      "task_id": "cover_leftover",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.8085335802432589,
+      "variance_hinge": 0.8015810215755435
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 8.78792827767412e-08,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.13542278502457997,
+      "maximum_row_gradient_norm": 0.054435634665111525,
+      "maximum_std": 0.027189425028332947,
+      "minimum_std": 0.01940508818276498,
+      "rows": 12,
+      "std": [
+        0.023426109841753688,
+        0.01940508818276498,
+        0.027189425028332947,
+        0.022995517109007074
+      ],
+      "table": "prior1",
+      "target_std": 1,
+      "task_id": "cover_leftover",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.9767460528388181,
+      "variance_hinge": 0.9767459649595354
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.367152719424414,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.49394796242279576,
+      "maximum_row_gradient_norm": 0.21921104068801936,
+      "maximum_std": 1.349823681241285,
+      "minimum_std": 1.1193865916915917,
+      "rows": 12,
+      "std": [
+        1.1193865916915917,
+        1.3181580712602476,
+        1.2185470817639914,
+        1.349823681241285
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "mode_hold",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.36715271942441396,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.03822474154745548,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.02526287154289565,
+      "maximum_row_gradient_norm": 0.002943620571671241,
+      "maximum_std": 1.0984589440446064,
+      "minimum_std": 1.0036293764842783,
+      "rows": 256,
+      "std": [
+        1.027506158713124,
+        1.025696330957572,
+        1.0036293764842783,
+        1.0984589440446064
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_two_broad",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.03822474154745549,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.009833908595616187,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.01316974730287561,
+      "maximum_row_gradient_norm": 0.0018067017050496601,
+      "maximum_std": 1.2266520739362134,
+      "minimum_std": 1.0257146143346592,
+      "rows": 256,
+      "std": [
+        1.2266520739362134,
+        1.0257146143346592,
+        1.0737603043361095,
+        1.0319915206726331
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_unequal_mass",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.009833908595616189,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.03378372056992375,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.023629394401816668,
+      "maximum_row_gradient_norm": 0.002972945370003836,
+      "maximum_std": 1.1409417217682498,
+      "minimum_std": 1.0273829871744435,
+      "rows": 256,
+      "std": [
+        1.085884426611187,
+        1.049008603423293,
+        1.0273829871744435,
+        1.1409417217682498
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_unequal_width",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.03378372056992376,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.013331899590884735,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.026831367513558527,
+      "maximum_row_gradient_norm": 0.00380455249012707,
+      "maximum_std": 1.235233609091592,
+      "minimum_std": 0.9603563413776746,
+      "rows": 256,
+      "std": [
+        1.0739096946118618,
+        0.9603563413776746,
+        1.235233609091592,
+        0.983930150461909
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_anisotropic",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.027260276630988838,
+      "variance_hinge": 0.013928377040104106
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.019154717328925052,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.01801874145825921,
+      "maximum_row_gradient_norm": 0.002828890041838135,
+      "maximum_std": 1.0415452125106062,
+      "minimum_std": 1.015844213616197,
+      "rows": 256,
+      "std": [
+        1.0374528332308344,
+        1.015844213616197,
+        1.03810295135997,
+        1.0415452125106062
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_overlap",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 0.019154717328925052,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 0.020849562538048448,
+      "dimensions": 4,
+      "eps": 0.0001,
+      "gradient_norm": 0.01949587733424519,
+      "maximum_row_gradient_norm": 0.0030986305014671415,
+      "maximum_std": 1.0970474406836561,
+      "minimum_std": 1.0280491804529521,
+      "rows": 256,
+      "std": [
+        1.0574009082406937,
+        1.0280491804529521,
+        1.094058124131383,
+        1.0970474406836561
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "vector_spiral",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 0.020849562538048448,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 12.246899456812836,
+      "dimensions": 8,
+      "eps": 0.0001,
+      "gradient_norm": 2.989011378405724,
+      "maximum_row_gradient_norm": 0.7571564140968811,
+      "maximum_std": 3.8846959728778336,
+      "minimum_std": 1.1539049750277124,
+      "rows": 32,
+      "std": [
+        3.8846959728778336,
+        1.4818165956338236,
+        1.770385924653844,
+        1.413450504081273,
+        1.1539049750277124,
+        1.567024620293585,
+        1.5738112401103568,
+        1.2900250622152702
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "img_stripes2",
+      "task_status": "PASS",
+      "unweighted_vicreg_loss": 12.246899456812834,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 44.306530524568245,
+      "dimensions": 8,
+      "eps": 0.0001,
+      "gradient_norm": 6.995390750693682,
+      "maximum_row_gradient_norm": 2.1051606567621737,
+      "maximum_std": 2.9526274968078137,
+      "minimum_std": 1.3900106083596306,
+      "rows": 32,
+      "std": [
+        1.3900106083596306,
+        2.9526274968078137,
+        2.4551323165265124,
+        1.9954073606274525,
+        1.5185592698470571,
+        2.0300598415951883,
+        2.945994321860388,
+        1.819333932958528
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "img_bars4",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 44.306530524568245,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 16.326344444526313,
+      "dimensions": 8,
+      "eps": 0.0001,
+      "gradient_norm": 2.9927695637316414,
+      "maximum_row_gradient_norm": 0.7799392397316117,
+      "maximum_std": 2.4137983385645154,
+      "minimum_std": 1.069764636729501,
+      "rows": 32,
+      "std": [
+        1.5904165430797406,
+        2.310441971567432,
+        1.8314327762484264,
+        1.9840119715952045,
+        1.069764636729501,
+        1.642071380875385,
+        2.2742261385187796,
+        2.4137983385645154
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "img_blobs4",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 16.326344444526313,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 1.5916909948177365,
+      "dimensions": 8,
+      "eps": 0.0001,
+      "gradient_norm": 0.5599892125567426,
+      "maximum_row_gradient_norm": 0.1974828772583471,
+      "maximum_std": 1.5755746912172832,
+      "minimum_std": 1.0633484530249386,
+      "rows": 32,
+      "std": [
+        1.4026715936315832,
+        1.226803852283623,
+        1.5755746912172832,
+        1.3733490500694494,
+        1.0633484530249386,
+        1.4100749641384747,
+        1.2592598089446907,
+        1.4881688878060984
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "img_intensity2",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 1.591690994817736,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 1.64442175822533e-05,
+      "dimensions": 2,
+      "eps": 0.0001,
+      "gradient_norm": 8.852920756289618e-05,
+      "maximum_row_gradient_norm": 1.5350949366817732e-06,
+      "maximum_std": 1.0918159576407096,
+      "minimum_std": 1.0913528956285927,
+      "rows": 20000,
+      "std": [
+        1.0913528956285927,
+        1.0918159576407096
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "grid100",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 1.64442175822533e-05,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 7.055590641141976e-05,
+      "dimensions": 2,
+      "eps": 0.0001,
+      "gradient_norm": 0.00017813715714193762,
+      "maximum_row_gradient_norm": 2.9509231315123094e-06,
+      "maximum_std": 1.076020382619629,
+      "minimum_std": 1.0445290472726738,
+      "rows": 20000,
+      "std": [
+        1.076020382619629,
+        1.0445290472726738
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "rotated100",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 7.055590641141976e-05,
+      "variance_hinge": 0.0
+    },
+    {
+      "cohort": "deterministic full saved center table, CPU float64; not served samples",
+      "covariance_loss": 5.991817899667681e-06,
+      "dimensions": 2,
+      "eps": 0.0001,
+      "gradient_norm": 5.253254906958181e-05,
+      "maximum_row_gradient_norm": 8.890785799865528e-07,
+      "maximum_std": 1.0749999303982367,
+      "minimum_std": 1.07113225639201,
+      "rows": 20000,
+      "std": [
+        1.0749999303982367,
+        1.07113225639201
+      ],
+      "table": "prior",
+      "target_std": 1,
+      "task_id": "staggered100",
+      "task_status": "FAIL",
+      "unweighted_vicreg_loss": 5.991817899667681e-06,
+      "variance_hinge": 0.0
+    }
+  ],
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "random_sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "read_only_saved_evidence_investigation",
+  "tasks": [
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-gaussian1d_stability.gif",
+      "attempt_id": "54e00094fb594dbb8f646d623f24ec25",
+      "budget_steps": 6000,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "bfa5e2e562da18894abef64c890a48734d4faa96ffa6f453eb4ed6128c9d05b8",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "==",
+                  72
+                ]
+              ],
+              "metric": "stationary passing checks",
+              "score": 2,
+              "status": "FAIL",
+              "target": "== 72"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "deadline reacquisition",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  24
+                ]
+              ],
+              "metric": "shifted hold passing checks",
+              "score": 0,
+              "status": "FAIL",
+              "target": "== 24"
+            },
+            {
+              "limits": [],
+              "metric": "frozen-copy passing checks",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic control out of 48; no qualification gate"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  4096
+                ]
+              ],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "PASS",
+              "target": ">= 4096"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  1.0
+                ]
+              ],
+              "metric": "finite_fraction",
+              "score": 1.0,
+              "status": "PASS",
+              "target": "== 1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "mean_error_sigma",
+              "score": 0.25523836247157305,
+              "status": "FAIL",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.8
+                ],
+                [
+                  "<=",
+                  1.2
+                ]
+              ],
+              "metric": "std_ratio",
+              "score": 0.6623303366946823,
+              "status": "FAIL",
+              "target": ">= 0.8 and <= 1.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.05
+                ]
+              ],
+              "metric": "cdf_ks",
+              "score": 0.3206228939608994,
+              "status": "FAIL",
+              "target": "<= 0.05"
+            },
+            {
+              "limits": [],
+              "metric": "mean",
+              "score": 3.1276191812357865,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "std",
+              "score": 0.33116516834734117,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 6000,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "240450f5974612008a3e9d341a8c7aafa0db8b5044a45057723fa74ad908e551",
+      "task_id": "gaussian1d_stability",
+      "timeout_seconds": 600
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-five_word_joint_hold.gif",
+      "attempt_id": "699fde96f2714377b54876d55001e468",
+      "budget_steps": 4000,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "b312dcfab664e44a56e7d847c02aeb61644daabf37992ece549bb2ddc17a7db3",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "==",
+                  25
+                ]
+              ],
+              "metric": "passing primary checks",
+              "score": 25,
+              "status": "PASS",
+              "target": "== 25"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  25
+                ]
+              ],
+              "metric": "confirmed checks",
+              "score": 25,
+              "status": "PASS",
+              "target": "== 25"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  1024
+                ]
+              ],
+              "metric": "sample_count",
+              "score": 1024,
+              "status": "PASS",
+              "target": ">= 1024"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.95
+                ]
+              ],
+              "metric": "quality_fraction",
+              "score": 1.0,
+              "status": "PASS",
+              "target": ">= 0.95"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  5
+                ]
+              ],
+              "metric": "modes",
+              "score": 5,
+              "status": "PASS",
+              "target": "== 5"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.020898437500000006,
+              "status": "PASS",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  1
+                ]
+              ],
+              "metric": "reconstruction_exact",
+              "score": 1,
+              "status": "PASS",
+              "target": "== 1"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "minimum_reconstruction_token_probability",
+              "score": 0.9516345262527466,
+              "status": "PASS",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "completed_steps",
+              "score": 4834.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mass_apple",
+              "score": 0.2158203125,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mass_berry",
+              "score": 0.19140625,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mass_grape",
+              "score": 0.205078125,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mass_lemon",
+              "score": 0.193359375,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mass_melon",
+              "score": 0.1943359375,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "output_noise_added",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "policy_latent_perturbation",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reconstruction_nll",
+              "score": 0.0021863730760274033,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "served_averaged",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 4834,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "12fdeadd3d105545c3ed95035e82f1aa50b10e5566306fa3b0d4ca76f1bb874e",
+      "task_id": "five_word_joint_hold",
+      "timeout_seconds": 300
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-trajectory.gif",
+      "attempt_id": "96b441c247214d10ba653bc567cf834d",
+      "budget_steps": 400,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "9604bfe5e0ede5ee841b79c3b022327bfe6c692bab2cee3d22cca1128652f273",
+      "prior": {
+        "exception_reason": "The conditional host enumerates prior.z in its identity objective; a stochastic latent read changes the frozen host law.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": false,
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 19,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 19,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "identity_mse",
+              "score": 0.00025847996585071087,
+              "status": "PASS",
+              "target": "<= 0.02"
+            }
+          ]
+        },
+        {
+          "name": "Additional saved host diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "critic_gradient_max",
+              "score": 1.0409845113754272,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "critic_gradient_median",
+              "score": 0.9551243782043457,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "own_nearest_fraction",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "paired_target_mse",
+              "score": 0.00025847996585071087,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "particle_mean_square",
+              "score": 0.7511626482009888,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "particle_std_mean",
+              "score": 0.9023311734199524,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "set_cover",
+              "score": 0.004135679453611374,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "8c6311ac7e465fdbb7ab3916c11ffcf960cea0d2ce46337b6232a7e0bca0c0aa",
+      "task_id": "trajectory",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-residual_student.gif",
+      "attempt_id": "c9f61298f63545a6b1289537bfca714f",
+      "budget_steps": 400,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "b1d4f9c0ace89a1d7d45bd5cc3a9e0c2caba551781d70a3e15f4a3ab37e8bbbf",
+      "prior": {
+        "exception_reason": "The conditional residual objective directly enumerates prior.z; stochastic latent sampling needs a separately calibrated task.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": false,
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 21,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 21,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "identity_mse",
+              "score": 0.00024908853811211884,
+              "status": "PASS",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  1.0
+                ]
+              ],
+              "metric": "success_rate",
+              "score": 1.0,
+              "status": "PASS",
+              "target": ">= 1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.0
+                ]
+              ],
+              "metric": "wrong_pad_rate",
+              "score": 0.0,
+              "status": "PASS",
+              "target": "<= 0"
+            }
+          ]
+        },
+        {
+          "name": "Additional saved host diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "both_land_rows",
+              "score": 12,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cover_weight",
+              "score": 1.5,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "endpoint_l2",
+              "score": 0.0328872948884964,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "fm_weight",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "land_tol",
+              "score": 0.25,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "n_particles",
+              "score": 12,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "paired_target_mse",
+              "score": 0.00024908853811211884,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "particle_l2",
+              "score": 0.02,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "pass",
+              "score": true,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "pass_identity_mse",
+              "score": 0.02,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_coeff",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_kappa",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "residual_weight",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "seed",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "slow_impact_max",
+              "score": 0.1,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "steps",
+              "score": 400,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "success_min",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "vicreg_weight",
+              "score": 0.05,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "6fb560b5277aea7f973794416a369700657ab8d879525cfccc540180c45f5b34",
+      "task_id": "residual_student",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-unipolar.gif",
+      "attempt_id": "59a78e2d66df48ffa770757311f4ec22",
+      "budget_steps": 400,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "3f61abbc3eca47c32c1280311bd4c7df36da67ef84701d058e0dfc699ffce501",
+      "prior": {
+        "exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 18,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 20,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "cover",
+              "score": 0.9937999520132479,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.05
+                ]
+              ],
+              "metric": "off_caption",
+              "score": 6.617476388517429e-05,
+              "status": "PASS",
+              "target": "<= 0.05"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "neu_hold",
+              "score": 0.9897867292165756,
+              "status": "PASS",
+              "target": ">= 0.85"
+            }
+          ]
+        },
+        {
+          "name": "Additional saved host diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "cos_plus",
+              "score": 0.9999077320098877,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cover_weight",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "even_norm",
+              "score": 0.4965440034866333,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "fm_weight",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "half_norm_ratio",
+              "score": 0.5004566789212305,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "hit",
+              "score": true,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mag_ratio",
+              "score": 0.9938916563987732,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "odd_norm",
+              "score": 0.4965440034866333,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "origin_norm",
+              "score": 0.010213270783424377,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "polarity",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_coeff",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_is_gradient_penalty",
+              "score": false,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_kappa",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_lazy",
+              "score": 1,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "seed",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "steps",
+              "score": 400,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "c2e790d58173fcfdfb137caa295768d068fde4cc0c13c6e033d3ff1173a60d9a",
+      "task_id": "unipolar",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-cover_leftover.gif",
+      "attempt_id": "d318948b864c4fb1b26d4eee3e9f05fb",
+      "budget_steps": 800,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "82a811e375b8c68f82fd6295b922719986c7207ca26076c3331124ba99ee67f5",
+      "prior": {
+        "exception_reason": "This host uses two explicit learned clouds and separately declared host jitter; no implicit MoG kernel may replace that law.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": false,
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 22,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 22,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "u_kept",
+              "score": 1.0005231995666064,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.75
+                ]
+              ],
+              "metric": "content_kept",
+              "score": 1.0001545420778784,
+              "status": "PASS",
+              "target": ">= 0.75"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "leak_ratio",
+              "score": 0.007772335299060545,
+              "status": "PASS",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "pole_rel_err_plus",
+              "score": 0.00590538838878274,
+              "status": "PASS",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "pole_rel_err_minus",
+              "score": 0.009522897191345692,
+              "status": "PASS",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.25
+                ]
+              ],
+              "metric": "same_dir",
+              "score": 0.006510528227250449,
+              "status": "PASS",
+              "target": "<= 0.25"
+            }
+          ]
+        },
+        {
+          "name": "Additional saved host diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "cover_weight",
+              "score": 1.5,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "covered",
+              "score": true,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "even_norm",
+              "score": 0.0008829699363559484,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "fm_weight",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "kappa",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "leak_frac",
+              "score": -0.9999988079071045,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "n_particles",
+              "score": 12,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "odd_norm",
+              "score": 1.1131012439727783,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "on_content",
+              "score": 0.5359266400337219,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "on_e",
+              "score": -0.00012268079444766045,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "on_u",
+              "score": 0.9754640460014343,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "particle_l2",
+              "score": 0.02,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "particle_rms",
+              "score": 0.19819322228431702,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "pass",
+              "score": true,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_coeff",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "seed",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "steps",
+              "score": 800,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "cb7ce93d73269e37e0a763011982f2a85cc93622c3b644eab18d0c5eeb3f1b8e",
+      "task_id": "cover_leftover",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-mid_scale_identity.gif",
+      "attempt_id": "41344f3d5e7d492aae0d0e51722efcd9",
+      "budget_steps": 800,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "f43fdca142fc1e1e8e932d5a14f1c60772eefc8b80a54d84904a9a59deff1a69",
+      "prior": {
+        "exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": false,
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 20,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 21,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "concept_cos_plus",
+              "score": 0.9999440908432007,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "concept_cos_minus",
+              "score": 0.9999618530273438,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.75
+                ],
+                [
+                  "<=",
+                  1.25
+                ]
+              ],
+              "metric": "concept_mag_plus",
+              "score": 1.002039909362793,
+              "status": "PASS",
+              "target": ">= 0.75 and <= 1.25"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.75
+                ],
+                [
+                  "<=",
+                  1.25
+                ]
+              ],
+              "metric": "concept_mag_minus",
+              "score": 1.0001335144042969,
+              "status": "PASS",
+              "target": ">= 0.75 and <= 1.25"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "identity_at_0",
+              "score": 0.9847965896770511,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "identity_at_mid",
+              "score": 0.9929965628901036,
+              "status": "PASS",
+              "target": ">= 0.85"
+            }
+          ]
+        },
+        {
+          "name": "Additional saved host diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "cover_weight",
+              "score": 1.5,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "fm_weight",
+              "score": 0.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "leak_frac",
+              "score": -0.999849796295166,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "pass",
+              "score": true,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_calls",
+              "score": 3200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_coeff",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_is_gradient_penalty",
+              "score": false,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_kappa",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "reg_lazy",
+              "score": 1,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "same_dir",
+              "score": 0.00864692017631191,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "seed",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "steps",
+              "score": 800,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "f743c2129f6bd0a594729189f02a558a219c54751e2b5b892d90766282f7644a",
+      "task_id": "mid_scale_identity",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-mode_hold.gif",
+      "attempt_id": "687672ec34fe45a1b858dd71472d0e88",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 3,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 10,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  8
+                ]
+              ],
+              "metric": "modes",
+              "score": 8,
+              "status": "PASS",
+              "target": ">= 8"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.9892578125,
+              "status": "PASS",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "cover",
+              "score": 1.0,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "effective_modes",
+              "score": 7.157970905303955,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "n_modes",
+              "score": 8,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "f4211919249da4c18869b1626013a8d29d0127f5a9935ef32cd27eccc397052f",
+      "task_id": "mode_hold",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_two_broad.gif",
+      "attempt_id": "e715fd6f4f6643e8ae580aaa725891ab",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 22,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 22,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.13458950517280888,
+              "status": "PASS",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.06298828125,
+              "status": "PASS",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.98876953125,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.85
+                ]
+              ],
+              "metric": "component_covariance_error",
+              "score": 0.38558074831962585,
+              "status": "PASS",
+              "target": "<= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.15
+                ]
+              ],
+              "metric": "component_min_eigen_ratio",
+              "score": 0.40006646513938904,
+              "status": "PASS",
+              "target": ">= 0.15"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_covariance_error",
+              "score": 0.38558074831962585,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_min_eigen_ratio",
+              "score": 0.40006646513938904,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "covariance_error",
+              "score": 0.11147095263004303,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "max_component_spill",
+              "score": 0.018435753881931305,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_error",
+              "score": 0.1914638876914978,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "min_mass_ratio",
+              "score": 0.8740234375,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_covariance_error",
+              "score": 0.38558074831962585,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_min_eigen_ratio",
+              "score": 0.40006646513938904,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_max_component_spill",
+              "score": 0.018435753881931305,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 1.0555585622787476,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "6a1c397570e75dbc19130c91a510bfa71480922ce191581f9ee2a1223c393418",
+      "task_id": "vector_two_broad",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_unequal_mass.gif",
+      "attempt_id": "b211b73573974e66abe3c298fb204216",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "ea1b35df2bd0ab55b50d47ade00a758775d29130641fc1e76db28c03009164ff",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.15463841594489888,
+              "status": "PASS",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.07065428048372269,
+              "status": "PASS",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.95458984375,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.85
+                ]
+              ],
+              "metric": "component_covariance_error",
+              "score": 3.691653147339821,
+              "status": "FAIL",
+              "target": "<= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.15
+                ]
+              ],
+              "metric": "component_min_eigen_ratio",
+              "score": 0.009072906337678432,
+              "status": "FAIL",
+              "target": ">= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.25
+                ]
+              ],
+              "metric": "min_mass_ratio",
+              "score": 0.20751953125,
+              "status": "FAIL",
+              "target": ">= 0.25"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_covariance_error",
+              "score": 0.5303929001092911,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_min_eigen_ratio",
+              "score": 0.009072906337678432,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "covariance_error",
+              "score": 0.08032716810703278,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "max_component_spill",
+              "score": 0.22727273404598236,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_error",
+              "score": 0.21188154816627502,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_covariance_error",
+              "score": 0.3877243598302205,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_min_eigen_ratio",
+              "score": 0.3805922865867615,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_max_component_spill",
+              "score": 0.22727273404598236,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 1.7593294382095337,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "d5fad4624e0c731f99ad8adb02e5674a5f3f5d1de363e4da30dbbc7e054875e5",
+      "task_id": "vector_unequal_mass",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_unequal_width.gif",
+      "attempt_id": "bd8c4be74301418fbcd1787f7b81dd77",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.29586492482829,
+              "status": "FAIL",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.29150390625,
+              "status": "FAIL",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.978759765625,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.85
+                ]
+              ],
+              "metric": "component_covariance_error",
+              "score": 6.287559386342764,
+              "status": "FAIL",
+              "target": "<= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.15
+                ]
+              ],
+              "metric": "component_min_eigen_ratio",
+              "score": 0.3074720501899719,
+              "status": "PASS",
+              "target": ">= 0.15"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_covariance_error",
+              "score": 0.44417809322476387,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_min_eigen_ratio",
+              "score": 0.3074720501899719,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "covariance_error",
+              "score": 0.2580900490283966,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "max_component_spill",
+              "score": 0.08629441261291504,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_error",
+              "score": 0.4099489450454712,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "min_mass_ratio",
+              "score": 0.1923828125,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_covariance_error",
+              "score": 0.44417809322476387,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_min_eigen_ratio",
+              "score": 0.3074720501899719,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_max_component_spill",
+              "score": 0.08629441261291504,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 2.1343955993652344,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "0cf4c6372a875efc8e98393db5f1dc56878eb610e90227442a94187f500ecc0e",
+      "task_id": "vector_unequal_width",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_anisotropic.gif",
+      "attempt_id": "1dea26db7fdc4719b0352bac6df8997a",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "e98512a93ba2d3a10a5fe6640cf74c5d22f88f917e9a5cf313302cc4aed1a24b",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.19795188575255068,
+              "status": "FAIL",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.1959635466337204,
+              "status": "FAIL",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.85
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.97998046875,
+              "status": "PASS",
+              "target": ">= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.85
+                ]
+              ],
+              "metric": "component_covariance_error",
+              "score": 0.4496249854564667,
+              "status": "PASS",
+              "target": "<= 0.85"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.15
+                ]
+              ],
+              "metric": "component_min_eigen_ratio",
+              "score": 0.2040131390094757,
+              "status": "PASS",
+              "target": ">= 0.15"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_covariance_error",
+              "score": 0.34434618552525836,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "component_core_min_eigen_ratio",
+              "score": 0.2040131390094757,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "covariance_error",
+              "score": 0.3388926684856415,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "max_component_spill",
+              "score": 0.08588957041501999,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_error",
+              "score": 0.236064612865448,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "min_mass_ratio",
+              "score": 0.4775390625,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_covariance_error",
+              "score": 0.34434618552525836,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_core_min_eigen_ratio",
+              "score": 0.2040131390094757,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "resolved_max_component_spill",
+              "score": 0.08588957041501999,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 2.032285690307617,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "b45921534e4fa65b527372c85b746ed1dc510ce65b94511e7b548bb830804ba9",
+      "task_id": "vector_anisotropic",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_overlap.gif",
+      "attempt_id": "a3591ef48975404491fd2daabb3b6a8a",
+      "budget_steps": 1200,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "72bde8ab5f9a5222b095ee17849c27823156bd28675f443138d56542c9e69c35",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 5,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.25576908717598523,
+              "status": "FAIL",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mean_error",
+              "score": 0.38876625895500183,
+              "status": "FAIL",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.45
+                ]
+              ],
+              "metric": "covariance_error",
+              "score": 0.4384903311729431,
+              "status": "PASS",
+              "target": "<= 0.45"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1200,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 0.8501437306404114,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "c2f56a299b34f64112069405f93eea131dc3408d15a752963c492e703a859f28",
+      "task_id": "vector_overlap",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-vector_spiral.gif",
+      "attempt_id": "c949a1d52c7a46b2a0eaa36fd6d2cabe",
+      "budget_steps": 1600,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "d47cf689d77375873c25b5d6aa3610e9d6250ee5a9d2f2592538d49da943ff9f",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 23,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 23,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.18
+                ]
+              ],
+              "metric": "sw1_normalized",
+              "score": 0.058756239438637246,
+              "status": "PASS",
+              "target": "<= 0.18"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.15
+                ]
+              ],
+              "metric": "mean_error",
+              "score": 0.08249024301767349,
+              "status": "PASS",
+              "target": "<= 0.15"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.45
+                ]
+              ],
+              "metric": "covariance_error",
+              "score": 0.07180141657590866,
+              "status": "PASS",
+              "target": "<= 0.45"
+            },
+            {
+              "limits": [],
+              "metric": "sample_count",
+              "score": 4096,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 1600,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "target_scale",
+              "score": 1.224178433418274,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "a9ec31d83e10964ab560b82eda97b7e5834775dfce76828e8b6f0cf69818d4b9",
+      "task_id": "vector_spiral",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-img_stripes2.gif",
+      "attempt_id": "bd8bba9b74e44b3aba781496fc794109",
+      "budget_steps": 600,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "PASS",
+      "frozen_task_file_sha256": "010a96d3829b639d13f1150f30a5ff44119bcc10a23822f4191773bab177eb70",
+      "prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 12,
+              "status": "PASS",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 12,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  2
+                ]
+              ],
+              "metric": "modes",
+              "score": 2,
+              "status": "PASS",
+              "target": ">= 2"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "hq",
+              "score": 1.0,
+              "status": "PASS",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "distribution_tv",
+              "score": 0.125,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_rmse",
+              "score": 5.968976256554015e-05,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 600,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "PASS",
+      "task_contract_sha256": "21be130ac092de27d7e4057122175a53176ed49dee3093f95e2c4894fb46e558",
+      "task_id": "img_stripes2",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-img_bars4.gif",
+      "attempt_id": "8e005fb2ffd24fd394e5e9698d0485f2",
+      "budget_steps": 600,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "562c05c07de33e5a5e088cff097af9cf9f6f8b37bb436aed37bf502fb7aff86f",
+      "prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  4
+                ]
+              ],
+              "metric": "modes",
+              "score": 2,
+              "status": "FAIL",
+              "target": ">= 4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.96875,
+              "status": "PASS",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "distribution_tv",
+              "score": 0.40625,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_rmse",
+              "score": 0.01394852064549923,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 600,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "0df6a4d161f94f4248acd142fe691e4a474d49820a7e166d5906c7c8c490cfa8",
+      "task_id": "img_bars4",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-img_blobs4.gif",
+      "attempt_id": "daf80d2ec5934e4b89e78d81d837dd76",
+      "budget_steps": 600,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "15c7ec3cfe80539b14d24824afc1a6fffae99e27b5a38e75c991823b5aceb336",
+      "prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  4
+                ]
+              ],
+              "metric": "modes",
+              "score": 2,
+              "status": "FAIL",
+              "target": ">= 4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.75,
+              "status": "FAIL",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "distribution_tv",
+              "score": 0.1875,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_rmse",
+              "score": 0.056202083826065063,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 600,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "3d68c234af3b3dc8f60ee049dabd6a0f6dff97fc99c8ff469019077447dc0d62",
+      "task_id": "img_blobs4",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-img_intensity2.gif",
+      "attempt_id": "77b7a3758dcf4996887bed1f5016f104",
+      "budget_steps": 600,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "6a69162bee7dd1c50c9f596f29ed339a5e475c296156c4324e5092099cddf90d",
+      "prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  5
+                ]
+              ],
+              "metric": "terminal passing suffix",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 5"
+            },
+            {
+              "limits": [],
+              "metric": "passing scheduled observations",
+              "score": 0,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic count out of 24; suffix is the gate"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "complete declared execution",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            }
+          ]
+        },
+        {
+          "name": "Recorded endpoint",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  2
+                ]
+              ],
+              "metric": "modes",
+              "score": 2,
+              "status": "PASS",
+              "target": ">= 2"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.9
+                ]
+              ],
+              "metric": "hq",
+              "score": 0.6875,
+              "status": "FAIL",
+              "target": ">= 0.9"
+            },
+            {
+              "limits": [],
+              "metric": "distribution_tv",
+              "score": 0.03125,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "mean_rmse",
+              "score": 0.06014157459139824,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "step",
+              "score": 600,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "cb4ab905b944a91cf1e73a879b234f42241e32fa1d0a44d8a305b26bab96ea98",
+      "task_id": "img_intensity2",
+      "timeout_seconds": 1800
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-grid100.gif",
+      "attempt_id": "7069e9763fc74a3ba61372b1cfe6a1da",
+      "budget_steps": 7000,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "coverage decision",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  5
+                ]
+              ],
+              "metric": "terminal live accuracy passing checks",
+              "score": 0,
+              "status": "FAIL",
+              "target": "== 5"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint coverage, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 9,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.24435,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.14800000000000002,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.0228,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 4.140732105122583,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.506793448505782,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  100
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 100"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.24435,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint accuracy, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.2444,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.148,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.7444910034617578,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 4888,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent live holdout accuracy, 100000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.24072,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.14717999999999998,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": 1.5203146254152577,
+              "status": "FAIL",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": 0.3713849420827151,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": 0.49088295696197104,
+              "status": "FAIL",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": 6.510124117988179,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": 2.4968593612372434,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": 0.6628660086721742,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": 0.3713849420827151,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.7481710034617577,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 24072,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent holdout coverage recomputed on those same saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 8,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.24072,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 2e-05,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.14718,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.02201,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 2.6223483653489312,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 1.5767974554425077,
+              "status": "PASS",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.291166851669403,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  500
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 2,
+              "status": "FAIL",
+              "target": ">= 500"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.24072,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Saved holdout placement diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "nearest cells occupied",
+              "score": 100,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic reference 100; genuine modes use the coverage gate"
+            },
+            {
+              "limits": [],
+              "metric": "median nearest-center distance in target sigmas",
+              "score": 4.456664125124614,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "dace674ebda0e6bc6443ac7ecb55af7a9b3edd43d0eee22475cd77ecda1c7bbf",
+      "task_id": "grid100",
+      "timeout_seconds": 3600
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-rotated100.gif",
+      "attempt_id": "6ec9a3afa7a84424ba0a560671190944",
+      "budget_steps": 7000,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "coverage decision",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  5
+                ]
+              ],
+              "metric": "terminal live accuracy passing checks",
+              "score": 0,
+              "status": "FAIL",
+              "target": "== 5"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint coverage, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 13,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.2478,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.1397,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.02485,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 2.977535516208526,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.181645500772971,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  100
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 100"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.2478,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint accuracy, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.24785,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.1397,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.7410410034617577,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 4957,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent live holdout accuracy, 100000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.25552,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.14325000000000002,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.7333710034617578,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 25552,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent holdout coverage recomputed on those same saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 14,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.25552,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 1e-05,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.14325,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.0252,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 2.588468090027628,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 1.372060527077711,
+              "status": "PASS",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.488000574435061,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  500
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 1,
+              "status": "FAIL",
+              "target": ">= 500"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.25552,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Saved holdout placement diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "nearest cells occupied",
+              "score": 100,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic reference 100; genuine modes use the coverage gate"
+            },
+            {
+              "limits": [],
+              "metric": "median nearest-center distance in target sigmas",
+              "score": 4.732383290926616,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "42820715876504fc1467c3a9e70aa6368b687630e33508dc5caeb2080ae2abeb",
+      "task_id": "rotated100",
+      "timeout_seconds": 3600
+    },
+    {
+      "actual_training_gif": "../bcap-default-baseline/media/candidate-staggered100.gif",
+      "attempt_id": "e22678b9e57d442bb63aae58fcd32de3",
+      "budget_steps": 7000,
+      "candidate_revision": "921d584f816886ead170e3aac0195f818a2ec57bf5403a9b65d7da752f80dd5b",
+      "control_status": "FAIL",
+      "frozen_task_file_sha256": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "same_final_metrics_as_control": true,
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "sections": [
+        {
+          "name": "Required temporal gate",
+          "rows": [
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "coverage decision",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  5
+                ]
+              ],
+              "metric": "terminal live accuracy passing checks",
+              "score": 0,
+              "status": "FAIL",
+              "target": "== 5"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint coverage, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 20,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.29765,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.12455,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.0225,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 3.075481509422393,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.358456064438444,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  100
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 100"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.29765,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Live endpoint accuracy, 20000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 20000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  20000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 20000,
+              "status": "PASS",
+              "target": "== 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.29765,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.12455,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.6912410034617578,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 5953,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent live holdout accuracy, 100000 saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "all_finite",
+              "score": true,
+              "status": "PASS",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.30168,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.06
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.12276999999999998,
+              "status": "FAIL",
+              "target": "<= 0.06"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.2
+                ]
+              ],
+              "metric": "center_rms_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.2"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "abs_cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.04
+                ]
+              ],
+              "metric": "radial_ks",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "<= 0.04"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "accuracy_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "frozen_pass",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "accuracy_score",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "center_max_sigma",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_frob_rms",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "cov_trace_bias",
+              "score": null,
+              "status": "UNAVAILABLE",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "precision_gap",
+              "score": 0.6872110034617578,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            },
+            {
+              "limits": [],
+              "metric": "within_radius_n",
+              "score": 30168,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Independent holdout coverage recomputed on those same saved draws",
+          "rows": [
+            {
+              "limits": [
+                [
+                  ">=",
+                  20000
+                ]
+              ],
+              "metric": "n",
+              "score": 100000,
+              "status": "PASS",
+              "target": ">= 20000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100000
+                ]
+              ],
+              "metric": "valid_n",
+              "score": 100000,
+              "status": "PASS",
+              "target": "== 100000"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  100
+                ]
+              ],
+              "metric": "modes",
+              "score": 19,
+              "status": "FAIL",
+              "target": "== 100"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.97
+                ]
+              ],
+              "metric": "precision",
+              "score": 0.30168,
+              "status": "FAIL",
+              "target": ">= 0.97"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.005
+                ]
+              ],
+              "metric": "min_hq_mode_mass",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.005"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.1
+                ]
+              ],
+              "metric": "mass_tv",
+              "score": 0.12277,
+              "status": "FAIL",
+              "target": "<= 0.1"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  0.02
+                ]
+              ],
+              "metric": "max_mode_mass",
+              "score": 0.02277,
+              "status": "FAIL",
+              "target": "<= 0.02"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.4
+                ]
+              ],
+              "metric": "min_cov_eig_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.4"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.7
+                ]
+              ],
+              "metric": "max_cov_eig_ratio",
+              "score": 2.2536631635516486,
+              "status": "FAIL",
+              "target": "<= 1.7"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  0.65
+                ]
+              ],
+              "metric": "min_radial_median_ratio",
+              "score": 0.0,
+              "status": "FAIL",
+              "target": ">= 0.65"
+            },
+            {
+              "limits": [
+                [
+                  "<=",
+                  1.4
+                ]
+              ],
+              "metric": "max_radial_median_ratio",
+              "score": 2.2607798637931986,
+              "status": "FAIL",
+              "target": "<= 1.4"
+            },
+            {
+              "limits": [
+                [
+                  ">=",
+                  500
+                ]
+              ],
+              "metric": "min_hq_count",
+              "score": 0,
+              "status": "FAIL",
+              "target": ">= 500"
+            },
+            {
+              "limits": [
+                [
+                  "==",
+                  true
+                ]
+              ],
+              "metric": "passed",
+              "score": false,
+              "status": "FAIL",
+              "target": "== true"
+            },
+            {
+              "limits": [],
+              "metric": "hq",
+              "score": 0.30168,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        },
+        {
+          "name": "Saved holdout placement diagnostics",
+          "rows": [
+            {
+              "limits": [],
+              "metric": "nearest cells occupied",
+              "score": 100,
+              "status": "DIAGNOSTIC",
+              "target": "Diagnostic reference 100; genuine modes use the coverage gate"
+            },
+            {
+              "limits": [],
+              "metric": "median nearest-center distance in target sigmas",
+              "score": 4.127701620260875,
+              "status": "DIAGNOSTIC",
+              "target": "No declared gate"
+            }
+          ]
+        }
+      ],
+      "status": "FAIL",
+      "task_contract_sha256": "a8105b95c159ea31cf584548b1699442a0bce4113d0cf198f5292b7dc8d8babd",
+      "task_id": "staggered100",
+      "timeout_seconds": 3600
+    }
+  ],
+  "tier2_status_counts": {
+    "FAIL": 12,
+    "PASS": 9
+  },
+  "torch_global_rng_unchanged": true
+}

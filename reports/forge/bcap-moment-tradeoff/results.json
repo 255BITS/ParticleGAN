@@ -1,0 +1,1247 @@
+{
+  "analysis_device": "cpu",
+  "analysis_dtype": "float32 models; float64 geometry",
+  "analysis_source_files": {
+    "benchmarks/toy_audit/api_images.py": "5453d57842d0513f63f3d3069968a34466eb3c42bb09830e76b527a1fb83c9c0",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/moment_tether.py": "16bc50edae9ca43464240c84ffd20cb93691194f2b285a1056b56ff3a98c0e5a",
+    "particlegan/optim/direction_blend.py": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72",
+    "particlegan/optim/dualnorm.py": "9be95bc41e87f1cd49fe8f6b3e013e3cc57ef3a26e12689ebdacb0d979d3cfcd"
+  },
+  "constructor_rng_isolated_and_restored": true,
+  "diagnostic_model_execution": true,
+  "displacement_scope": "Hypothetical prior-only zero-momentum DualNorm displacement before direction blend. No optimizer step executed.",
+  "evidence_sha256": "c97f5a337561a0c43e56b55fb6a8070a2568e12a2e3fcf3c01d9b020d86bce4e",
+  "gradient_scope": "Fixed diagnostic panels at saved acquisition/final states, before any critic update. Not original training batches or failure-window gradients.",
+  "optimizer_updates_added": 0,
+  "original_observations": {
+    "control:five_word_joint_hold": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-control-v1/340578e2d22e4e6982e5d400e0a6a2ad",
+      "original_observation_count": 25,
+      "original_observations_sha256": "fb076576be43bebe4cb7027debce5b7be1686f7f44100385d58209be4524656c",
+      "receipt_sha256": "0d1a2374fe6aea390fa86b6b08c1a0a6c32117c51b0d0592b61b4652e26619b3",
+      "recorded_gate": "PASS",
+      "selected_original_observations": [
+        {
+          "completed_steps": 4834.0,
+          "mass_apple": 0.2158203125,
+          "mass_berry": 0.19140625,
+          "mass_grape": 0.205078125,
+          "mass_lemon": 0.193359375,
+          "mass_melon": 0.1943359375,
+          "mass_tv": 0.020898437500000006,
+          "minimum_reconstruction_token_probability": 0.9516345262527466,
+          "modes": 5,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "reconstruction_nll": 0.0021863730760274033,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 4834
+        }
+      ],
+      "terminal_five_window": null
+    },
+    "control:mode_hold": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-control-v1/43bce5b856c5429590104ca5023bc9ef",
+      "original_observation_count": 24,
+      "original_observations_sha256": "8ac530fbd9be2dfb96fc7db280a02ef30e8523cd5a696d306d8b218653a3f260",
+      "receipt_sha256": "753f1d8b9e6281ac861f7338ead3120aa5eb54dbe5750f164e072e67f98c23a8",
+      "recorded_gate": "FAIL",
+      "selected_original_observations": [
+        {
+          "cover": 1.0,
+          "effective_modes": 7.05831241607666,
+          "hq": 0.869384765625,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1050
+        },
+        {
+          "cover": 1.0,
+          "effective_modes": 7.157970905303955,
+          "hq": 0.9892578125,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1200
+        }
+      ],
+      "terminal_five_window": {
+        "first_step": 1000,
+        "last_step": 1200,
+        "minimum_hq": {
+          "score": 0.869384765625,
+          "target": ">= 0.9"
+        },
+        "minimum_modes": {
+          "score": 8,
+          "target": ">= 8"
+        },
+        "observations": 5
+      }
+    },
+    "moment_tether_0.01:five_word_joint_hold": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce",
+      "original_observation_count": 25,
+      "original_observations_sha256": "83574b3a663534b0f489ab31a2dea875280a66ef6024b0a8d4e4e8e3ccf6ac35",
+      "receipt_sha256": "9d408666b6e4663726f750d321c785418a100a562c2ab5f890acacc60129c2d2",
+      "recorded_gate": "FAIL",
+      "selected_original_observations": [
+        {
+          "completed_steps": 8167.0,
+          "mass_apple": 0.193359375,
+          "mass_berry": 0.19921875,
+          "mass_grape": 0.1953125,
+          "mass_lemon": 0.189453125,
+          "mass_melon": 0.22265625,
+          "mass_tv": 0.022656250000000017,
+          "minimum_reconstruction_token_probability": 0.9996554851531982,
+          "modes": 5,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "reconstruction_nll": 2.2018731432519734e-05,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 8167
+        }
+      ],
+      "terminal_five_window": null
+    },
+    "moment_tether_0.01:mode_hold": {
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/b399f9496269454f951cc031a25b8518",
+      "original_observation_count": 24,
+      "original_observations_sha256": "dc3e09f2485d7e23a85d680497f00c95b81ec3850e423b2a0d216aee5d1b6b00",
+      "receipt_sha256": "c35e415782663a0cab0e3ea3fe418d292161e77a8c2d2ba319b0d1238247583e",
+      "recorded_gate": "PASS",
+      "selected_original_observations": [
+        {
+          "cover": 1.0,
+          "effective_modes": 7.196232318878174,
+          "hq": 0.998046875,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1050
+        },
+        {
+          "cover": 1.0,
+          "effective_modes": 7.270858287811279,
+          "hq": 0.9990234375,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1200
+        }
+      ],
+      "terminal_five_window": {
+        "first_step": 1000,
+        "last_step": 1200,
+        "minimum_hq": {
+          "score": 0.98486328125,
+          "target": ">= 0.9"
+        },
+        "minimum_modes": {
+          "score": 8,
+          "target": ">= 8"
+        },
+        "observations": 5
+      }
+    }
+  },
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_moment_tradeoff_diagnostic",
+  "source_commit": "18e2aa1018f25de8c447a59287025df6f6aded3e",
+  "source_digest": "c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2",
+  "states": [
+    {
+      "actual_prior_regularizer": "vicreg",
+      "actual_weight": 0.0,
+      "baseline_tether_scope": "counterfactual at saved baseline state",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-control-v1/43bce5b856c5429590104ca5023bc9ef/provenance/provenance-state.pt",
+        "sha256": "6611290246d9bde018d2f74ada12f2e9cc28976664188fae856ed179c7d7852d",
+        "state_sha256": "eaf4d378dee7aa09baf977b75dbd222dd3dfd33718fa9b578bd32bd1376cbef6"
+      },
+      "covariance_discrepancy": 0.13231275975704193,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.14152590930461884,
+        "adversarial_only_step_norm": {
+          "max": 0.029995644465088844,
+          "median": 0.029988404363393784,
+          "min": 0.028751438483595848
+        },
+        "combined_direction_uphill_for_adversarial_rows": 0,
+        "combined_step_norm": {
+          "max": 0.02999565564095974,
+          "median": 0.029988324269652367,
+          "min": 0.02885550819337368
+        },
+        "opposed_rows": 5,
+        "per_row_cosine": {
+          "max": 0.9747203588485718,
+          "median": 0.10224884003400803,
+          "min": -0.9832091927528381
+        },
+        "per_row_norm_ratio": {
+          "max": 0.12914316356182098,
+          "median": 0.009718790650367737,
+          "min": 0.005731114186346531
+        },
+        "relative_step_change": 0.0356341116130352,
+        "rows": 12,
+        "total_norm_ratio": 0.011149571277201176,
+        "weighted_tether_gradient_norm": 0.0015779532259330153
+      },
+      "independent_moment_constraints": 14,
+      "initial_covariance": [
+        [
+          1.0409575700759888,
+          -0.2661947011947632,
+          -0.45589423179626465,
+          0.1522698700428009
+        ],
+        [
+          -0.2661947011947632,
+          0.890601634979248,
+          0.44327878952026367,
+          0.256104975938797
+        ],
+        [
+          -0.45589423179626465,
+          0.44327878952026367,
+          1.0962353944778442,
+          -0.12989796698093414
+        ],
+        [
+          0.1522698700428009,
+          0.256104975938797,
+          -0.12989796698093414,
+          1.0784379243850708
+        ]
+      ],
+      "initial_mean": [
+        -0.04449355602264404,
+        0.10598697513341904,
+        -0.32449719309806824,
+        0.004305362701416016
+      ],
+      "joint_latent_gradient_paths": null,
+      "kind": "final",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": -4.176946344358612e-09,
+      "mean_discrepancy": 0.002363472478464246,
+      "panel": {
+        "gaussian_sampling_law": false,
+        "kind": "symmetric_axis_sigma_panel",
+        "points": 108,
+        "rows": "all 12 raw locations, each weighted equally",
+        "sigma": 0.02500000037252903
+      },
+      "prior_scalar_parameters": 48,
+      "prior_shape": [
+        12,
+        4
+      ],
+      "role": "control",
+      "step": 1200,
+      "task": "mode_hold",
+      "weighted_covariance_gradient_norm": 0.0015721459640190005,
+      "weighted_mean_gradient_norm": 0.0001352534891339019
+    },
+    {
+      "actual_prior_regularizer": "moment_tether",
+      "actual_weight": 0.01,
+      "baseline_tether_scope": "actual configured tether",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/b399f9496269454f951cc031a25b8518/provenance/provenance-state.pt",
+        "sha256": "b87b473ef29dba12d84f3c978fde1ea1996e00f9a66362555fbf266b9038d020",
+        "state_sha256": "73e99fb17344c6e627de50e4c0278da12f3a3a2b7d7fc8d758fd5f9bba7bd93f"
+      },
+      "covariance_discrepancy": 0.11301809549331665,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.13363322615623474,
+        "adversarial_only_step_norm": {
+          "max": 0.02999269589781761,
+          "median": 0.029990561306476593,
+          "min": 0.029979951679706573
+        },
+        "combined_direction_uphill_for_adversarial_rows": 0,
+        "combined_step_norm": {
+          "max": 0.029992656782269478,
+          "median": 0.02999049983918667,
+          "min": 0.029980303719639778
+        },
+        "opposed_rows": 8,
+        "per_row_cosine": {
+          "max": 0.896433413028717,
+          "median": -0.5284984111785889,
+          "min": -0.9930746555328369
+        },
+        "per_row_norm_ratio": {
+          "max": 0.015704883262515068,
+          "median": 0.010862371884286404,
+          "min": 0.0030764932744205
+        },
+        "relative_step_change": 0.005663388874381781,
+        "rows": 12,
+        "total_norm_ratio": 0.010873391292989254,
+        "weighted_tether_gradient_norm": 0.0014530463377013803
+      },
+      "independent_moment_constraints": 14,
+      "initial_covariance": [
+        [
+          1.0409575700759888,
+          -0.2661947011947632,
+          -0.45589423179626465,
+          0.1522698700428009
+        ],
+        [
+          -0.2661947011947632,
+          0.890601634979248,
+          0.44327878952026367,
+          0.256104975938797
+        ],
+        [
+          -0.45589423179626465,
+          0.44327878952026367,
+          1.0962353944778442,
+          -0.12989796698093414
+        ],
+        [
+          0.1522698700428009,
+          0.256104975938797,
+          -0.12989796698093414,
+          1.0784379243850708
+        ]
+      ],
+      "initial_mean": [
+        -0.04449355602264404,
+        0.10598697513341904,
+        -0.32449719309806824,
+        0.004305362701416016
+      ],
+      "joint_latent_gradient_paths": null,
+      "kind": "final",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": 1.088108536606569e-08,
+      "mean_discrepancy": 0.0060097891837358475,
+      "panel": {
+        "gaussian_sampling_law": false,
+        "kind": "symmetric_axis_sigma_panel",
+        "points": 108,
+        "rows": "all 12 raw locations, each weighted equally",
+        "sigma": 0.02500000037252903
+      },
+      "prior_scalar_parameters": 48,
+      "prior_shape": [
+        12,
+        4
+      ],
+      "role": "moment_tether_0.01",
+      "step": 1200,
+      "task": "mode_hold",
+      "weighted_covariance_gradient_norm": 0.0014351247809827328,
+      "weighted_mean_gradient_norm": 0.00022750887728761882
+    },
+    {
+      "actual_prior_regularizer": "vicreg",
+      "actual_weight": 0.0,
+      "baseline_tether_scope": "counterfactual at saved baseline state",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-control-v1/340578e2d22e4e6982e5d400e0a6a2ad/provenance/provenance-state.pt",
+        "sha256": "ce20205219eb51ab2f1fe75dc93ccc869ded00a930715b694e9e3b2fdcf88b73",
+        "state_sha256": "9f9ed27d21bf96704dddd72a54f25b339d4b78e4b86d8a1b8e7fe6701a5e6bbb"
+      },
+      "covariance_discrepancy": 0.24050013720989227,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.00044604422873817384,
+        "adversarial_only_step_norm": {
+          "max": 0.007864829152822495,
+          "median": 0.006153683643788099,
+          "min": 0.0013827895745635033
+        },
+        "combined_direction_uphill_for_adversarial_rows": 1,
+        "combined_step_norm": {
+          "max": 0.026985391974449158,
+          "median": 0.026008347049355507,
+          "min": 0.02545453980565071
+        },
+        "opposed_rows": 2,
+        "per_row_cosine": {
+          "max": 0.7725769281387329,
+          "median": 0.15075255930423737,
+          "min": -0.9948499202728271
+        },
+        "per_row_norm_ratio": {
+          "max": 38.69227600097656,
+          "median": 7.8537492752075195,
+          "min": 7.344575881958008
+        },
+        "relative_step_change": 4.370848655700684,
+        "rows": 5,
+        "total_norm_ratio": 8.975850105285645,
+        "weighted_tether_gradient_norm": 0.004003626294434071
+      },
+      "independent_moment_constraints": 5,
+      "initial_covariance": [
+        [
+          1.2941575050354004,
+          -0.2617664039134979
+        ],
+        [
+          -0.2617664039134979,
+          0.807027280330658
+        ]
+      ],
+      "initial_mean": [
+        -0.5648459792137146,
+        -0.30898022651672363
+      ],
+      "joint_latent_gradient_paths": {
+        "direct_joint_latent_norm": 0.0004462181241251528,
+        "path_cosine": -0.03152944892644882,
+        "sum_matches_total": true,
+        "through_generator_norm": 7.527258730988251e-06
+      },
+      "kind": "final",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": 7.163741599924833e-09,
+      "mean_discrepancy": 0.22699657082557678,
+      "panel": {
+        "kind": "exact_five_row_enumeration",
+        "points": 5,
+        "rows": "all five raw locations, each weighted equally",
+        "sampling": false
+      },
+      "prior_scalar_parameters": 10,
+      "prior_shape": [
+        5,
+        2
+      ],
+      "role": "control",
+      "step": 4834,
+      "task": "five_word_joint_hold",
+      "weighted_covariance_gradient_norm": 0.0026244099717587233,
+      "weighted_mean_gradient_norm": 0.003023490309715271,
+      "word_alignment": {
+        "closest_prior_row": [
+          2,
+          1,
+          4,
+          3,
+          0
+        ],
+        "encoded_to_prior_distance": [
+          [
+            1.789704442024231,
+            1.447172999382019,
+            0.2191934883594513,
+            0.970607340335846,
+            1.0520813465118408
+          ],
+          [
+            0.9829450845718384,
+            0.15493614971637726,
+            1.0731604099273682,
+            2.0264692306518555,
+            1.311269760131836
+          ],
+          [
+            1.3255534172058105,
+            1.5206527709960938,
+            0.8588991761207581,
+            0.7720036506652832,
+            0.24795769155025482
+          ],
+          [
+            2.253790855407715,
+            2.3062937259674072,
+            1.21541428565979,
+            0.15705034136772156,
+            1.1625059843063354
+          ],
+          [
+            0.25242409110069275,
+            0.8561943769454956,
+            1.3630716800689697,
+            1.8686120510101318,
+            0.8899716734886169
+          ]
+        ],
+        "per_word_nearest_prior_distance": [
+          0.2191934883594513,
+          0.15493614971637726,
+          0.24795769155025482,
+          0.15705034136772156,
+          0.25242409110069275
+        ],
+        "per_word_reconstruction_min_probability": [
+          0.9999731779098511,
+          0.9998406171798706,
+          0.9516345262527466,
+          0.9999985694885254,
+          0.9995734095573425
+        ],
+        "prior_row_generated_words": [
+          "berry_",
+          "grape_",
+          "apple_",
+          "melon_",
+          "lemon_"
+        ],
+        "word_order": [
+          "apple",
+          "grape",
+          "lemon",
+          "melon",
+          "berry"
+        ]
+      }
+    },
+    {
+      "actual_prior_regularizer": "vicreg",
+      "actual_weight": 0.0,
+      "baseline_tether_scope": "counterfactual at saved baseline state",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-control-v1/8b16bff175424a88b4bf342fc697402e/acquisition/acquired-state.pt",
+        "sha256": "7396f33ef648edc176f5b119dabcd5ce0f5b0feca2d91df535f182c5f28c75c8",
+        "state_sha256": "96e684f93ee294d50abe49a32adb8f0060036eec3c7e379359adfc2191384dc8"
+      },
+      "covariance_discrepancy": 0.21067512035369873,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.007403485476970673,
+        "adversarial_only_step_norm": {
+          "max": 0.02894892543554306,
+          "median": 0.02877882681787014,
+          "min": 0.02809295617043972
+        },
+        "combined_direction_uphill_for_adversarial_rows": 1,
+        "combined_step_norm": {
+          "max": 0.028881924226880074,
+          "median": 0.02789880521595478,
+          "min": 0.02302664704620838
+        },
+        "opposed_rows": 5,
+        "per_row_cosine": {
+          "max": -0.30962836742401123,
+          "median": -0.6783241629600525,
+          "min": -0.9465519189834595
+        },
+        "per_row_norm_ratio": {
+          "max": 1.0880385637283325,
+          "median": 0.5574687123298645,
+          "min": 0.4203636646270752
+        },
+        "relative_step_change": 0.787946343421936,
+        "rows": 5,
+        "total_norm_ratio": 0.7282623052597046,
+        "weighted_tether_gradient_norm": 0.005391679238528013
+      },
+      "independent_moment_constraints": 5,
+      "initial_covariance": [
+        [
+          1.2941575050354004,
+          -0.2617664039134979
+        ],
+        [
+          -0.2617664039134979,
+          0.807027280330658
+        ]
+      ],
+      "initial_mean": [
+        -0.5648459792137146,
+        -0.30898022651672363
+      ],
+      "joint_latent_gradient_paths": {
+        "direct_joint_latent_norm": 0.007413072045892477,
+        "path_cosine": -0.40473881363868713,
+        "sum_matches_total": true,
+        "through_generator_norm": 2.376415068283677e-05
+      },
+      "kind": "own_acquisition",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": -1.823178585880214e-08,
+      "mean_discrepancy": 0.19732218980789185,
+      "panel": {
+        "kind": "exact_five_row_enumeration",
+        "points": 5,
+        "rows": "all five raw locations, each weighted equally",
+        "sampling": false
+      },
+      "prior_scalar_parameters": 10,
+      "prior_shape": [
+        5,
+        2
+      ],
+      "role": "control",
+      "step": 834,
+      "task": "five_word_joint_hold",
+      "weighted_covariance_gradient_norm": 0.004690499510616064,
+      "weighted_mean_gradient_norm": 0.0026588381733745337,
+      "word_alignment": {
+        "closest_prior_row": [
+          2,
+          1,
+          4,
+          3,
+          0
+        ],
+        "encoded_to_prior_distance": [
+          [
+            2.038158893585205,
+            1.8377480506896973,
+            0.3623720407485962,
+            1.7082297801971436,
+            1.246823787689209
+          ],
+          [
+            1.7160917520523071,
+            0.19015507400035858,
+            2.2067017555236816,
+            3.4343156814575195,
+            2.4213175773620605
+          ],
+          [
+            1.4087722301483154,
+            2.2928409576416016,
+            1.5501394271850586,
+            1.3681707382202148,
+            0.16700969636440277
+          ],
+          [
+            2.6756885051727295,
+            3.29779314994812,
+            1.5850248336791992,
+            0.12413174659013748,
+            1.1615889072418213
+          ],
+          [
+            0.32405880093574524,
+            1.3391034603118896,
+            2.5161116123199463,
+            3.0455703735351562,
+            1.7969858646392822
+          ]
+        ],
+        "per_word_nearest_prior_distance": [
+          0.3623720407485962,
+          0.19015507400035858,
+          0.16700969636440277,
+          0.12413174659013748,
+          0.32405880093574524
+        ],
+        "per_word_reconstruction_min_probability": [
+          0.9980641007423401,
+          0.9999972581863403,
+          0.9999442100524902,
+          0.9999614953994751,
+          0.9999991655349731
+        ],
+        "prior_row_generated_words": [
+          "berry_",
+          "grape_",
+          "apple_",
+          "melon_",
+          "lemon_"
+        ],
+        "word_order": [
+          "apple",
+          "grape",
+          "lemon",
+          "melon",
+          "berry"
+        ]
+      }
+    },
+    {
+      "actual_prior_regularizer": "moment_tether",
+      "actual_weight": 0.01,
+      "baseline_tether_scope": "actual configured tether",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce/provenance/provenance-state.pt",
+        "sha256": "a008e822f394da2a628e9c4cb8535fb03eae06161b365241b6ea215e8deff274",
+        "state_sha256": "b7b2033565bb0911bc9ecf7f7e696ed40eb95e76b9bf05b13da0b82c598b3780"
+      },
+      "covariance_discrepancy": 2.7898036933038384e-05,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.00023414348834194243,
+        "adversarial_only_step_norm": {
+          "max": 0.004043229389935732,
+          "median": 0.0032346739899367094,
+          "min": 0.0014801636571064591
+        },
+        "combined_direction_uphill_for_adversarial_rows": 0,
+        "combined_step_norm": {
+          "max": 0.004171742592006922,
+          "median": 0.003216685727238655,
+          "min": 0.0013895373558625579
+        },
+        "opposed_rows": 2,
+        "per_row_cosine": {
+          "max": 0.9999805688858032,
+          "median": 0.03188534453511238,
+          "min": -0.9411420822143555
+        },
+        "per_row_norm_ratio": {
+          "max": 0.6344150304794312,
+          "median": 0.2666899561882019,
+          "min": 0.14872580766677856
+        },
+        "relative_step_change": 0.34055209159851074,
+        "rows": 5,
+        "total_norm_ratio": 0.34145739674568176,
+        "weighted_tether_gradient_norm": 7.99500267021358e-05
+      },
+      "independent_moment_constraints": 5,
+      "initial_covariance": [
+        [
+          1.2941575050354004,
+          -0.2617664039134979
+        ],
+        [
+          -0.2617664039134979,
+          0.807027280330658
+        ]
+      ],
+      "initial_mean": [
+        -0.5648459792137146,
+        -0.30898022651672363
+      ],
+      "joint_latent_gradient_paths": {
+        "direct_joint_latent_norm": 0.0002342935185879469,
+        "path_cosine": -0.259206086397171,
+        "sum_matches_total": true,
+        "through_generator_norm": 5.814408154947159e-07
+      },
+      "kind": "final",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": 3.5435892442592376e-08,
+      "mean_discrepancy": 7.725428440608084e-05,
+      "panel": {
+        "kind": "exact_five_row_enumeration",
+        "points": 5,
+        "rows": "all five raw locations, each weighted equally",
+        "sampling": false
+      },
+      "prior_scalar_parameters": 10,
+      "prior_shape": [
+        5,
+        2
+      ],
+      "role": "moment_tether_0.01",
+      "step": 8167,
+      "task": "five_word_joint_hold",
+      "weighted_covariance_gradient_norm": 5.064353899797425e-05,
+      "weighted_mean_gradient_norm": 6.186468090163544e-05,
+      "word_alignment": {
+        "closest_prior_row": [
+          4,
+          1,
+          0,
+          2,
+          3
+        ],
+        "encoded_to_prior_distance": [
+          [
+            0.799569845199585,
+            1.7318509817123413,
+            1.5136404037475586,
+            2.0136284828186035,
+            0.0588517002761364
+          ],
+          [
+            2.407095432281494,
+            0.1510675549507141,
+            3.030978202819824,
+            2.7547903060913086,
+            1.617510437965393
+          ],
+          [
+            0.11480686068534851,
+            2.6335504055023193,
+            1.0721163749694824,
+            2.305967092514038,
+            0.9348983764648438
+          ],
+          [
+            1.0842901468276978,
+            3.207207202911377,
+            0.13097110390663147,
+            1.7428905963897705,
+            1.562574028968811
+          ],
+          [
+            2.1765623092651367,
+            2.6330103874206543,
+            1.6148731708526611,
+            0.12159770727157593,
+            1.8620431423187256
+          ]
+        ],
+        "per_word_nearest_prior_distance": [
+          0.0588517002761364,
+          0.1510675549507141,
+          0.11480686068534851,
+          0.13097110390663147,
+          0.12159770727157593
+        ],
+        "per_word_reconstruction_min_probability": [
+          0.9999942779541016,
+          0.9999998807907104,
+          1.0,
+          0.9999997615814209,
+          0.9996554851531982
+        ],
+        "prior_row_generated_words": [
+          "lemon_",
+          "grape_",
+          "melon_",
+          "berry_",
+          "apple_"
+        ],
+        "word_order": [
+          "apple",
+          "grape",
+          "lemon",
+          "melon",
+          "berry"
+        ]
+      }
+    },
+    {
+      "actual_prior_regularizer": "moment_tether",
+      "actual_weight": 0.01,
+      "baseline_tether_scope": "actual configured tether",
+      "checkpoint": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/65269f48a1c44e018acf2f36a93bdd79/acquisition/acquired-state.pt",
+        "sha256": "78a95234b3c036b2301743978567e7b5cf0b54b0b6351745d58e372963950ad9",
+        "state_sha256": "f7f8f47a8e703249241d25f10afed9617f1e05d8e07f878c404a8c3bdf95264e"
+      },
+      "covariance_discrepancy": 0.001436970429494977,
+      "cumulative_direction_blend": [
+        {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      ],
+      "diagnosed_weight": 0.01,
+      "diagnostic_model_state_unchanged": true,
+      "diagnostic_target": "none; no qualification gate",
+      "gradient": {
+        "adversarial_gradient_norm": 0.006149824243038893,
+        "adversarial_only_step_norm": {
+          "max": 0.02900058589875698,
+          "median": 0.027947137132287025,
+          "min": 0.021718140691518784
+        },
+        "combined_direction_uphill_for_adversarial_rows": 0,
+        "combined_step_norm": {
+          "max": 0.02893759310245514,
+          "median": 0.028026828542351723,
+          "min": 0.021927129477262497
+        },
+        "opposed_rows": 2,
+        "per_row_cosine": {
+          "max": 0.310111939907074,
+          "median": 0.061746347695589066,
+          "min": -0.3829725384712219
+        },
+        "per_row_norm_ratio": {
+          "max": 0.10713230073451996,
+          "median": 0.0926346555352211,
+          "min": 0.040958065539598465
+        },
+        "relative_step_change": 0.07959124445915222,
+        "rows": 5,
+        "total_norm_ratio": 0.07476965337991714,
+        "weighted_tether_gradient_norm": 0.0004598202067427337
+      },
+      "independent_moment_constraints": 5,
+      "initial_covariance": [
+        [
+          1.2941575050354004,
+          -0.2617664039134979
+        ],
+        [
+          -0.2617664039134979,
+          0.807027280330658
+        ]
+      ],
+      "initial_mean": [
+        -0.5648459792137146,
+        -0.30898022651672363
+      ],
+      "joint_latent_gradient_paths": {
+        "direct_joint_latent_norm": 0.006109869107604027,
+        "path_cosine": 0.5355610847473145,
+        "sum_matches_total": true,
+        "through_generator_norm": 7.401133188977838e-05
+      },
+      "kind": "own_acquisition",
+      "loaded_checkpoint_state_unchanged": true,
+      "mean_cov_gradient_cosine": 3.361245148880698e-08,
+      "mean_discrepancy": 0.0026716417632997036,
+      "panel": {
+        "kind": "exact_five_row_enumeration",
+        "points": 5,
+        "rows": "all five raw locations, each weighted equally",
+        "sampling": false
+      },
+      "prior_scalar_parameters": 10,
+      "prior_shape": [
+        5,
+        2
+      ],
+      "role": "moment_tether_0.01",
+      "step": 4167,
+      "task": "five_word_joint_hold",
+      "weighted_covariance_gradient_norm": 0.0003218896745238453,
+      "weighted_mean_gradient_norm": 0.0003283620753791183,
+      "word_alignment": {
+        "closest_prior_row": [
+          4,
+          1,
+          0,
+          2,
+          3
+        ],
+        "encoded_to_prior_distance": [
+          [
+            0.9428762793540955,
+            1.2921109199523926,
+            2.035475492477417,
+            2.0518033504486084,
+            0.14018748700618744
+          ],
+          [
+            2.4082272052764893,
+            0.24938105046749115,
+            3.423790216445923,
+            2.724778652191162,
+            1.6036654710769653
+          ],
+          [
+            0.21416836977005005,
+            2.26636004447937,
+            1.2598941326141357,
+            2.1503098011016846,
+            0.8482717275619507
+          ],
+          [
+            1.1779197454452515,
+            3.068552255630493,
+            0.3013426661491394,
+            1.5695750713348389,
+            1.9085845947265625
+          ],
+          [
+            2.1589725017547607,
+            2.7592058181762695,
+            1.944893479347229,
+            0.2905970513820648,
+            2.3676671981811523
+          ]
+        ],
+        "per_word_nearest_prior_distance": [
+          0.14018748700618744,
+          0.24938105046749115,
+          0.21416836977005005,
+          0.3013426661491394,
+          0.2905970513820648
+        ],
+        "per_word_reconstruction_min_probability": [
+          1.0,
+          0.9999998807907104,
+          1.0,
+          1.0,
+          0.9999797344207764
+        ],
+        "prior_row_generated_words": [
+          "lemon_",
+          "grape_",
+          "melon_",
+          "berry_",
+          "apple_"
+        ],
+        "word_order": [
+          "apple",
+          "grape",
+          "lemon",
+          "melon",
+          "berry"
+        ]
+      }
+    }
+  ],
+  "training_streams_consumed": 0,
+  "unavailable": [
+    "No mode_hold checkpoint or scored sample tensors at update 1050.",
+    "No word model/prior checkpoint at updates 5167 or 6167; scored outputs survive.",
+    "Historical adversarial/regularizer gradients and actual individual-row displacements are unavailable at failure windows."
+  ],
+  "word_failure_details": [
+    {
+      "cohort": "primary",
+      "generated_counts": {
+        "apple_": 220,
+        "berry_": 203,
+        "grape_": 203,
+        "lemon_": 398
+      },
+      "lowest_target_token": {
+        "position_zero_based": 3,
+        "probability": 0.9999822378158569,
+        "token": "l",
+        "word": "apple_"
+      },
+      "original_metrics": {
+        "completed_steps": 5167.0,
+        "mass_apple": 0.21484375,
+        "mass_berry": 0.1982421875,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.388671875,
+        "mass_melon": 0.0,
+        "mass_tv": 0.203515625,
+        "minimum_reconstruction_token_probability": 0.9999822378158569,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 1.4185993889232057e-06,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "qualification_regraded": false,
+      "reconstructed_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "role": "moment_tether_0.01",
+      "saved_outputs": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce/observed-records.pt",
+        "sha256": "282f01f3651c4262be430743b3a3f1cc1a1a67bfcadd959ee82d18c160ad1aff",
+        "state_sha256": "6f4d33576a04271ae78df36a3430f01109e71eca5164e49890c64ce133b8ff89"
+      },
+      "step": 5167
+    },
+    {
+      "cohort": "confirmation",
+      "generated_counts": {
+        "apple_": 206,
+        "berry_": 221,
+        "grape_": 200,
+        "lemon_": 397
+      },
+      "lowest_target_token": {
+        "position_zero_based": 3,
+        "probability": 0.9999822378158569,
+        "token": "l",
+        "word": "apple_"
+      },
+      "original_metrics": {
+        "completed_steps": 5167.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.2158203125,
+        "mass_grape": 0.1953125,
+        "mass_lemon": 0.3876953125,
+        "mass_melon": 0.0,
+        "mass_tv": 0.2046875,
+        "minimum_reconstruction_token_probability": 0.9999822378158569,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 1.4185993889232057e-06,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "qualification_regraded": false,
+      "reconstructed_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "role": "moment_tether_0.01",
+      "saved_outputs": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce/observed-records.pt",
+        "sha256": "282f01f3651c4262be430743b3a3f1cc1a1a67bfcadd959ee82d18c160ad1aff",
+        "state_sha256": "6f4d33576a04271ae78df36a3430f01109e71eca5164e49890c64ce133b8ff89"
+      },
+      "step": 5167
+    },
+    {
+      "cohort": "primary",
+      "generated_counts": {
+        "apple_": 204,
+        "berry_": 182,
+        "grape_": 215,
+        "lemon_": 221,
+        "melon_": 202
+      },
+      "lowest_target_token": {
+        "position_zero_based": 3,
+        "probability": 0.7967675924301147,
+        "token": "l",
+        "word": "apple_"
+      },
+      "original_metrics": {
+        "completed_steps": 6167.0,
+        "mass_apple": 0.19921875,
+        "mass_berry": 0.177734375,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2158203125,
+        "mass_melon": 0.197265625,
+        "mass_tv": 0.025781250000000006,
+        "minimum_reconstruction_token_probability": 0.7967675924301147,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.008084381997748307,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "qualification_regraded": false,
+      "reconstructed_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "role": "moment_tether_0.01",
+      "saved_outputs": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce/observed-records.pt",
+        "sha256": "282f01f3651c4262be430743b3a3f1cc1a1a67bfcadd959ee82d18c160ad1aff",
+        "state_sha256": "6f4d33576a04271ae78df36a3430f01109e71eca5164e49890c64ce133b8ff89"
+      },
+      "step": 6167
+    },
+    {
+      "cohort": "confirmation",
+      "generated_counts": {
+        "apple_": 205,
+        "berry_": 179,
+        "grape_": 209,
+        "lemon_": 213,
+        "melon_": 218
+      },
+      "lowest_target_token": {
+        "position_zero_based": 3,
+        "probability": 0.7967675924301147,
+        "token": "l",
+        "word": "apple_"
+      },
+      "original_metrics": {
+        "completed_steps": 6167.0,
+        "mass_apple": 0.2001953125,
+        "mass_berry": 0.1748046875,
+        "mass_grape": 0.2041015625,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.212890625,
+        "mass_tv": 0.025195312499999983,
+        "minimum_reconstruction_token_probability": 0.7967675924301147,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.008084381997748307,
+        "sample_count": 1024,
+        "served_averaged": 0.0
+      },
+      "qualification_regraded": false,
+      "reconstructed_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "role": "moment_tether_0.01",
+      "saved_outputs": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance/queue/bcap-prior-covariance-search-v1/3f1e394a6bda47a58c13d0ac9da8cbce/observed-records.pt",
+        "sha256": "282f01f3651c4262be430743b3a3f1cc1a1a67bfcadd959ee82d18c160ad1aff",
+        "state_sha256": "6f4d33576a04271ae78df36a3430f01109e71eca5164e49890c64ce133b8ff89"
+      },
+      "step": 6167
+    }
+  ]
+}

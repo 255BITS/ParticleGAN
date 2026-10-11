@@ -30,6 +30,9 @@ from .routing import RoutedBatch, RoutedCandidate, RoutedExecution, RoutedRows
 from .training import GANTrainer, InputNoise
 from .tensorflow_adam import TensorFlowV1Adam
 from .vicreg_loss import ParticleRegularizer
+from .coulomb_prior import CoulombPriorRegularizer
+from .sigreg import SIGReg
+from .initial_mmd import InitialMMDRegularizer
 from . import init
 
 __all__ = [
@@ -42,7 +45,7 @@ __all__ = [
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
-    "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
+    "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]

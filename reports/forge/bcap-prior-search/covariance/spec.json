@@ -1,0 +1,77 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/covariance",
+  "axis": "prior_reg",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-prior-covariance-control-v1",
+  "control_study_id": "bcap-prior-covariance-control-study-v1",
+  "falsifier": "No global strength converts a matched-control Tier 2 FAIL into a full sustained PASS; any lost Tier 1 prerequisite prevents ordinary Tier 2 qualification. Retain all regressions.",
+  "full_reservation_seconds": 172080,
+  "hypothesis": "A two-sided tether to fixed initialized latent mean and full covariance reduces drift and expansion enough to repair a sustained Tier 2 failure under the unchanged global BCAP direction-blend leader.",
+  "maximum_reserved_paid_seconds": 180000,
+  "name": "covariance",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-prior-covariance-search-v1",
+  "source_digest": "c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "task_contracts": {
+    "ae_gan_hold": "7a770d1ec323bb838b14d02f91a4e4413a79ea3e6e6859902e8d987f372368b7",
+    "clockfree_audit_measurement_v1": "5a54457597266bb21bcc3a9b3a948f20ca5c998927b40ca598c26b739ec50657",
+    "cover_leftover": "d9fd62b4209149e2795d29de7777d6d05bca346140f87e67e8688a8f4f0613d3",
+    "five_word_joint_hold": "22661ec15a744a7a2de23d86c9491606190931dee3ad08b4164cc512d7c73356",
+    "five_word_joint_smoke": "719ba9088caebd0f12219287caa3101aece102ed8bc05dcfe7b0b0ae27a6b372",
+    "gaussian1d_smoke": "af8be198265a563f61913917d0e3cdc1829769e4730aa06b4862316580889aa7",
+    "gaussian1d_stability": "4e744c73c9936ef1f971b6af0a2670dcc42df085200adca27f42dc49adf89f7a",
+    "grid100": "0071c48e67be8a0a04a31e63a766db4aaf4125a0fe7c9224bd5c7e32c0e01e77",
+    "img_bars4": "1eff52c9d5d88cd994f920ba9e456cb39b116feac1112e73f567f6823f0421e8",
+    "img_blobs4": "638bed1d87b135012d44b0c8a4f3e9020912633215b0adc96a80181f955cafa1",
+    "img_intensity2": "9246020221d4e444fdbb3b4cdab041eee6e9a6c964c72f8b5c6f2fd4015b4403",
+    "img_stripes2": "f3b61c07bfcc1bf6492ce8bafaf754356c6b47b55ff17ef576526eae3c6de564",
+    "mid_scale_identity": "41470d7a4c43f972572e122b1d17d498116cc85333179b09f509faf5494a9353",
+    "mode_hold": "1546c8c1ffd3e46de48eb55a9c80f53d46055efe2825629c0fa28097832dff9c",
+    "residual_student": "84853d2f852e53270d546211b7753c0f81446e8ec7c592fd56de27843d1b9a5a",
+    "ring16_acquisition": "2c9811ce4aa5b03b4f9fcf75a0fc8231a73d91ea27f1148e12d5ad9a1ecc17b7",
+    "ring_extension": "4a0c803df257ec66e90ddfe2fd1b91dfc0b3c37998e21fed80d943f6b4aa5ba9",
+    "ring_hold": "1ac1f4eff5203bff27642d989227e6f8f71bd376b78a285db9cdfdb7017a47f5",
+    "rotated100": "46c08b723ab59f600bfb42147bc86ff2e26089ce7beb1104e1deae9528b3b582",
+    "staggered100": "b36ba27930440249ea399792a1ade0a528fc01b93328f2ad0f14b33758de9a91",
+    "trajectory": "b75021a9551169c6faa9cfd3c06aaa4aee304861af7806c2d05313fbc57ca223",
+    "two_pole": "77bfa41f1bf38a6b71b207232f43284c1c36a039a04de546d606ed0e73dd8e21",
+    "unipolar": "23a314cbd377d7f045ed3e27207766fe9ecbb0dcf2e9e7302f99917c28b02c52",
+    "unused_token_hold": "07ce572dec2d4e90cbfae975c6996c10e1d48e38c57ec81788ab2f8db3db1c24",
+    "vector_anisotropic": "dc6571cb12320de94f86d5d96b21a3711ffda860c434f5e469be6780bb6ad88a",
+    "vector_overlap": "3ad16fb9bc1d40fa216e0667dba11d3c45333bef0bcf8a5e900f8ed90de98511",
+    "vector_spiral": "ab9250672364108948f0d2bc332f8ede49fb804b4ff3608587691b163e1cc808",
+    "vector_two_broad": "ee14f5246581ff003e81c3c65a87b5179cdc12511387e2b677cf9c997c589c73",
+    "vector_unequal_mass": "00a57dc8cde538d47f6d6c4cf937f20df57a495c9bb2bcf8ba87b378ec297a0a",
+    "vector_unequal_width": "75a53103e8f37e3bb46a8a16687b35764388795fc924f85651977f4e6d91c0e4"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "prior_reg": {
+      "candidate": 0.001,
+      "control": 0.0
+    },
+    "prior_regularizer": {
+      "candidate": "moment_tether",
+      "control": "vicreg"
+    }
+  },
+  "values": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "view_revision": 9
+}

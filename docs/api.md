@@ -944,7 +944,8 @@ value changes only the denominator of sampled learned-prior row updates,
 `g / hypot(norm(g), smoothing)`, with zero using the existing epsilon rule.
 It requires full DualNorm. Enabled optimizer checkpoints bind the value and
 save cumulative gradient energy, ideal row motion and rounded base-optimizer
-motion; direction protection may subsequently change that motion.
+motion; direction protection and an enabled proximal spring may subsequently
+change that motion. These counters do not include either later operation.
 `reg_zero_coeff=0` adds no loss. A positive value on BCAP adds
 `reg_zero_coeff/2 * (mean(real_slope_squared) + mean(fake_slope_squared))`
 to its original cap penalty, under the same lazy interval. This explicit
@@ -1278,7 +1279,9 @@ caller.
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
-| `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
+| `recipe.make_prior_regularizer(prior=None, reference=None, **kwargs)` | Selected VICReg, Coulomb, SIGReg, moment tether or initial MMD penalty, with `weight=recipe.prior_reg` applied once. `prior` and `reference` are aliases for the same initialized prior or tuple of priors. |
+| `recipe.prior_regularizer_checkpoint(module)` | Optional state for an active stochastic prior regularizer |
+| `recipe.restore_prior_regularizer(module, state)` | Validate/restore regularizer state for exact caller-owned continuation |
 
 ### Regularization factories
 

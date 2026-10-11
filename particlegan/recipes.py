@@ -75,6 +75,14 @@ class Recipe:
     prior_reg_target_std: float = 1.0
     prior_reg_eps: float = 1e-4
     prior_l2: float = 0.0
+    # Post-optimizer proximal spring to the initial latent table; zero is exact
+    # baseline behavior. Unlike a gradient penalty, restoration retains size.
+    prior_proximal_strength: float = 0.0
+    prior_coulomb_softening: float = .1
+    prior_coulomb_confinement: float = .35
+    prior_coulomb_neighbors: int = 8
+    prior_sigreg_projections: int = 32
+    prior_sigreg_knots: int = 17
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -242,9 +250,16 @@ class Recipe:
     def __post_init__(self):
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
-        if self.prior_regularizer not in ("vicreg", "none"):
-            raise ValueError("prior_regularizer must be vicreg or none")
-        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2"):
+        from .coulomb_prior import CoulombPriorRegularizer
+        CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
+                               confinement=self.prior_coulomb_confinement,
+                               neighbors=self.prior_coulomb_neighbors)
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether", "initial_mmd"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether or initial_mmd")
+        for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
+            if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
+                raise ValueError(f"{key} must be an integer >= {minimum}")
+        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
@@ -254,6 +269,13 @@ class Recipe:
             raise ValueError("prior_regularizer='none' requires prior_reg=0")
         if self.prior_update == "frozen" and (self.row_evidence_gate or self.particle_birth_death):
             raise ValueError("frozen priors require row evidence and birth/death disabled")
+        if self.prior_proximal_strength and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode not in ("none", "direction_blend")
+                or self.continuous_policy is not None or self.lr_control != "mobility"
+                or self.row_evidence_gate or self.particle_birth_death):
+            raise ValueError("prior_proximal_strength requires zero-momentum full DualNorm, "
+                             "geometry none/direction_blend and no adaptive prior policies")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -780,6 +802,12 @@ class Recipe:
         Protection must cover the joint generator/encoder/prior optimizer.
         The default mode requires no protected-loss hook and retains the
         original optimizer type and checkpoint format.
+
+        ``prior_proximal_strength > 0`` restores only update-owned latent rows
+        toward their positions at optimizer construction, after the complete
+        base update (including direction blend). Initialize tables first.
+        Checkpoints carry that independent reference and the spring settings.
+        Direct generated coordinates and frozen tables receive no spring.
         """
         from torch import nn
         if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
@@ -851,15 +879,53 @@ class Recipe:
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
-    def make_prior_regularizer(self, **overrides):
+    def make_prior_regularizer(self, *, prior=None, reference=None, **overrides):
+        if prior is not None and reference is not None and prior is not reference:
+            raise ValueError("prior and reference must identify the same initialized prior")
+        if prior is None:
+            prior = reference
+        if reference is None:
+            reference = prior
+        if self.prior_regularizer == "coulomb":
+            from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
+            options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
+                       "confinement": self.prior_coulomb_confinement,
+                       "neighbors": self.prior_coulomb_neighbors, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            if prior is not None and options["weight"] > 0:
+                options["center"], options["radius"] = coulomb_reference(prior)
+            return CoulombPriorRegularizer(**options)
         from .vicreg_loss import ParticleRegularizer
+        if self.prior_regularizer == "sigreg":
+            from .sigreg import SIGReg
+            options = {"weight": self.prior_reg, "projections": self.prior_sigreg_projections,
+                       "knots": self.prior_sigreg_knots, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            return SIGReg(**options)
         options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
                    "eps": self.prior_reg_eps, **overrides}
+        if self.prior_regularizer == "moment_tether":
+            unknown = set(options) - {"weight", "target_std", "eps"}
+            if unknown:
+                raise TypeError(f"unsupported moment_tether options: {sorted(unknown)}")
+            if self.prior_update == "learned" and self.prior_reg > 0:
+                from .moment_tether import MomentTetherRegularizer
+                return MomentTetherRegularizer(reference, weight=options["weight"], eps=options["eps"])
+            options["weight"] = 0.
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
             options["weight"] = 0.
+        if self.prior_regularizer == "initial_mmd" and options["weight"] > 0:
+            from .initial_mmd import InitialMMDRegularizer
+            if prior is None:
+                raise ValueError("initial_mmd requires prior= after public initialization")
+            if set(overrides) - {"weight"}:
+                raise ValueError("initial_mmd has fixed panel/kernel scales; only weight can be overridden")
+            return InitialMMDRegularizer.from_priors(prior, weight=options["weight"])
         return ParticleRegularizer(**options)
 
-    def prior_regularization(self, rows, *, regularizer=None):
+    def prior_regularization(self, rows, *, regularizer=None, prior=None, reference=None):
         """Return the complete weighted latent-prior objective, once.
 
         Callers select rows using their declared sampling law. Frozen rows and
@@ -872,10 +938,33 @@ class Recipe:
         # or doing any variance/covariance work for disabled penalties.
         result = rows[:0].sum()
         if self.prior_reg > 0:
-            result = (self.make_prior_regularizer() if regularizer is None else regularizer)(rows)
+            result = (self.make_prior_regularizer(prior=prior, reference=reference) if regularizer is None else regularizer)(rows)
         if self.prior_l2 > 0:
             result = result + self.prior_l2 * rows.square().mean()
         return result
+
+    def prior_regularizer_checkpoint(self, regularizer):
+        """Optional state for active stochastic families; old checkpoints stay flat."""
+        if (self.prior_regularizer == "sigreg" and self.prior_update == "learned"
+                and self.prior_reg > 0 and regularizer is not None):
+            state = regularizer.state_dict()
+            if state:
+                return {"prior_regularizer": state}
+        return {}
+
+    def restore_prior_regularizer(self, regularizer, state, *, validate_only=False):
+        """Validate an optional regularizer checkpoint before restoring its draws."""
+        from copy import deepcopy
+        expected = self.prior_regularizer_checkpoint(regularizer)
+        if not expected:
+            if state is not None:
+                raise ValueError("inactive prior regularizer cannot restore active state")
+            return
+        if not isinstance(state, dict):
+            raise ValueError("active prior regularizer requires checkpoint state")
+        deepcopy(regularizer).load_state_dict(state)
+        if not validate_only:
+            regularizer.load_state_dict(state)
 
     def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
         """Reject aliases before freezing, including already-frozen buffers."""
@@ -900,10 +989,16 @@ class Recipe:
         if self.prior_update == "learned":
             if not prior.z.requires_grad:
                 raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
+            if self.prior_regularizer == "moment_tether" and self.prior_reg > 0:
+                from .moment_tether import capture_initial_moments
+                capture_initial_moments(prior)
         elif prior.z.requires_grad:
             rows = prior.z.detach()
             del prior.z
             prior.register_buffer("z", rows)
+        if self.prior_regularizer == "coulomb" and self.prior_update == "learned" and self.prior_reg > 0:
+            from .coulomb_prior import capture_coulomb_reference
+            capture_coulomb_reference(prior)
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
