@@ -11,6 +11,7 @@ from copy import deepcopy
 from dataclasses import asdict
 import importlib.util
 import json
+import math
 from pathlib import Path
 import shutil
 import sys
@@ -160,17 +161,30 @@ def run(options):
     root, artifacts = options.repository.resolve(), options.artifacts.resolve()
     require(head(root) == options.source_commit and not artifacts.is_relative_to(root), 'Use exact committed source and external artifacts.')
     registration, selected = resolved(options)
-    shared.committed_source(root, selected['control']['source'],
-        [f'configs/forge/{kind}/{IDS[r]}{suffix}.json' for r in ROLES for kind, suffix in [('ideas', ''), ('studies', '-study')]])
+    declarations = [f'configs/forge/{kind}/{IDS[r]}{suffix}.json' for r in ROLES for kind, suffix in [('ideas', ''), ('studies', '-study')]]
+    declarations += [f'configs/forge/tasks/{name}.json' for name in registration['task_contracts']]
+    declarations += ['configs/forge/views/discriminator_stability.json', 'configs/forge/trainer-families.json',
+        'reports/forge/bcap-tier2-round6/run.py', 'reports/forge/bcap-tier2-round6/STUDY.md',
+        'reports/forge/bcap-tier2-round6/spec.json', 'reports/forge/bcap-tier2-round6/registration.json']
+    shared.committed_source(root, selected['control']['source'], declarations)
     from experiments.forge.queue import Queue, drain
     queue = Queue(artifacts / 'queue', report_root=root / 'reports/forge', on_completion=None)
     progress_path = artifacts / 'progress.json'
     if options.submit:
-        require(not progress_path.exists(), 'Already admitted; resume with --drain only.')
-        require(shutil.disk_usage(artifacts.parent).free >= 18 * 1024**3, 'Require18GiB free for bounded artifacts.')
-        progress = dict(phase='submitting', requests={}, source_commit=options.source_commit,
-            source_digest=registration['source_digest'], registration_sha256=file_hash(options.registration))
+        if progress_path.exists():
+            progress = read_json(progress_path)
+            require(progress['phase'] == 'submitting' and progress['source_commit'] == options.source_commit
+                and progress['registration_sha256'] == file_hash(options.registration), 'Already admitted; resume with --drain only.')
+        else:
+            require(shutil.disk_usage(artifacts.parent).free >= 18 * 1024**3, 'Require18GiB free for bounded artifacts.')
+            progress = dict(phase='submitting', requests={}, source_commit=options.source_commit,
+                source_digest=registration['source_digest'], registration_sha256=file_hash(options.registration))
         for role in ROLES:
+            if role in progress['requests']:
+                state = read_json(artifacts / 'queue/queue/state.json')
+                previous = state['submissions'][progress['requests'][role]]['request']
+                require(summary(previous) == registration['arms'][role], 'Partial admission changed.')
+                continue
             request = resolve_idea(root, IDS[role], study=f'{IDS[role]}-study', queue_root=artifacts / 'queue', freeze_source=True)
             require(summary(request) == registration['arms'][role], 'Freezing changed binding.')
             receipt = queue.submit(request, request['study']['campaign'])
@@ -189,6 +203,52 @@ def run(options):
         progress.update(phase='complete', updated_at=utc_now())
         atomic_json(progress_path, progress)
         print(json.dumps(dict(event='complete', requests=progress['requests'])), flush=True)
+
+
+def prior_counters(saved):
+    found = {}
+    def visit(value, path='state'):
+        if isinstance(value, dict):
+            meta = value.get('dualnorm', {})
+            if isinstance(meta, dict) and meta.get('prior_smoothing_stats', {}).get('sampled_rows', 0):
+                found[path] = deepcopy(meta['prior_smoothing_stats'])
+            for key, child in value.items():
+                if key not in {'models', 'role_parameters', 'streams', 'initialization'}:
+                    visit(child, f'{path}.{key}')
+        elif isinstance(value, (list, tuple)):
+            for i, child in enumerate(value):
+                visit(child, f'{path}[{i}]')
+    visit(saved)
+    return found
+
+
+def scalar_motion(collection):
+    measured = {}
+    for role in ROLES:
+        entries = {e['item']['task_id']: e for e in collection['final'] if e['item']['role'] == role
+                   and e['item']['task_id'] in {'gaussian1d_smoke', 'gaussian1d_stability'}}
+        if set(entries) != {'gaussian1d_smoke', 'gaussian1d_stability'}:
+            measured[role] = dict(status='UNAVAILABLE', reason='No complete own scalar continuation.')
+            continue
+        start, end = [prior_counters(entries[t]['saved']) for t in ('gaussian1d_smoke', 'gaussian1d_stability')]
+        if len(start) != 1 or start.keys() != end.keys():
+            measured[role] = dict(status='UNAVAILABLE', reason='Ambiguous/missing saved prior counters.')
+            continue
+        path = next(iter(start))
+        delta = {key: end[path][key] - start[path][key] for key in end[path]}
+        require(delta['steps'] == 5000 and delta['sampled_rows'] > 0, 'Scalar counter continuation does not bind1000->6000.')
+        stats = entries['gaussian1d_stability']['item']['mechanism_stats']
+        projected = [s['projected_steps'] for key, s in stats.items() if key.endswith('constraint_geometry')]
+        projection_inactive = bool(projected) and all(v == 0 for v in projected)
+        measured[role] = dict(status='MEASURED', prefix_update=1000, final_update=6000, counters=delta,
+            base_row_rms=math.sqrt(delta['optimizer_displacement_squared_sum'] / delta['sampled_rows']),
+            final_motion_verified=projection_inactive, motion_scope='Rounded base row motion; final applied motion only when all saved projection counters are zero.')
+    control, candidate = measured['control'], measured['prior_smoothing']
+    forecast = dict(status='UNAVAILABLE', criterion='At least25% lower row RMS during scalar1000->6000.')
+    if control.get('final_motion_verified') and candidate.get('final_motion_verified') and control['base_row_rms'] > 0:
+        ratio = candidate['base_row_rms'] / control['base_row_rms']
+        forecast.update(status='PASS' if ratio <= .75 else 'FAIL', candidate_control_rms_ratio=ratio)
+    return dict(roles=measured, prior_smoothing_forecast=forecast)
 
 
 def publish(options):
@@ -218,7 +278,11 @@ def publish(options):
         gif = output / 'media' / f'{item["role"]}-{item["task_id"]}.gif'
         with renderer.forbid_live_execution():
             receipt = saved.render_saved(entry, gif, renderer)
-        media.append(dict(role=item['role'], task_id=item['task_id'], gif=str(gif.relative_to(output)), receipt=receipt))
+        from PIL import Image
+        with Image.open(gif) as observed:
+            frames = observed.n_frames
+        require(frames >= 2, 'Actual training GIF needs multiple saved observations.')
+        media.append(dict(role=item['role'], task_id=item['task_id'], gif=str(gif.relative_to(output)), frames=frames, receipt=receipt))
         print(json.dumps(dict(event='saved_training_gif', role=item['role'], task=item['task_id'])), flush=True)
     cells = collection['cells']
     counts = {r: {str(t): dict(Counter(c['gate_status'] for c in cells if c['role'] == r and c['tier'] == t
@@ -237,7 +301,9 @@ def publish(options):
     result = dict(schema_version=1, scope='ordinary_bcap_tier2_round6', source_commit=options.source_commit,
         source_digest=progress['source_digest'], required_counts=dict(tier1=6, tier2=21), arm_counts=counts,
         decisions=decisions, task_cells=cells, task_results=[e['item'] for e in collection['final']],
-        accounting=collection['accounting'], paid_attempt_history=[dict(a['compact']) for a in collection['attempts'].values()],
+        accounting=collection['accounting'], scalar_motion=scalar_motion(collection),
+        prior_counters=[dict(role=e['item']['role'], task_id=e['item']['task_id'], counters=prior_counters(e['saved'])) for e in collection['final'] if e['saved'] is not None],
+        paid_attempt_history=[dict(a['compact']) for a in collection['attempts'].values()],
         actual_training_gifs=len(media), optimizer_updates_added=0, sampling_draws_added=0, scientific_default_adoption=False)
     atomic_json(output / 'results.json', result)
     atomic_json(output / 'audit.json', dict(audit, results_sha256=file_hash(output / 'results.json')))
