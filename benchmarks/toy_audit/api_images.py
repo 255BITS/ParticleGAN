@@ -926,6 +926,7 @@ class ImageFixture:
                     recipe=self.recipe.to_dict(), max_steps=self.max_steps,
                     data_generator=self.data_generator.get_state().clone(),
                     api_components=self.api_components,
+                    **(self.recipe.prior_regularizer_checkpoint(self.spread) if self.trainer is None else {}),
                     api_state=(self.trainer.state_dict() if self.trainer is not None else self.policy.state_dict()))
 
 
@@ -1222,6 +1223,7 @@ class WordFixture:
     def state_dict(self):
         return dict(version=VERSION, case=deepcopy(self.case), seed=self.seed, recipe=self.recipe.to_dict(),
                     max_steps=self.max_steps, data_generator=self.data_generator.get_state().clone(),
+                    **self.recipe.prior_regularizer_checkpoint(self.spread),
                     api_components=self.api_components, api_state=self.policy.state_dict(),
                     **({"component_transport": self.transport.state_dict()} if self.transport is not None else {}))
 

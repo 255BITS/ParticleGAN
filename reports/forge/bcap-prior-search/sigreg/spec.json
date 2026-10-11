@@ -1,0 +1,77 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/sigreg",
+  "axis": "prior_reg",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-prior-sigreg-control-v1",
+  "control_study_id": "bcap-prior-sigreg-control-study-v1",
+  "falsifier": "No positive global strength converts a matched-control Tier2 FAIL to a full sustained PASS; any lost pass remains visible, and every Tier1 failure blocks its higher-tier work.",
+  "full_reservation_seconds": 172080,
+  "hypothesis": "A spherical Gaussian characteristic-function prior penalty restrains mean, expansion and higher-moment deformation invisible to the VICReg floor, converting at least one sustained BCAP Tier2 failure while preserving all Tier1 prerequisites.",
+  "maximum_reserved_paid_seconds": 180000,
+  "name": "sigreg",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-prior-sigreg-search-v1",
+  "source_digest": "af27fe8e557defb5d97b82e8b4b3b6f48f70f22eef863da2921734e45e2adf37",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "task_contracts": {
+    "ae_gan_hold": "661a44f445f8f969f4182565e9aa993fccbb275cf84667de36637527b87a72d0",
+    "clockfree_audit_measurement_v1": "3c36e1475f090f94a0d703187c5fe9ae7ec161290b32f9cedbf6e061acdfe747",
+    "cover_leftover": "0ac94cbe435d42827d3fa8cd90fe6eb44ccbae0f740be3ec51183ea92caf1b52",
+    "five_word_joint_hold": "d2764957173df32684aadd8b0a2401e0cb71701ec039feb5bb788f681591ad42",
+    "five_word_joint_smoke": "8ba24d144f0fd10d67a365aa11b0ce37b4ea57f6f1eb9c1acc845100457f7269",
+    "gaussian1d_smoke": "b32c1f82b490259a16b91e066eb90de4aee81a780e1dbacd71960f0ebebd7b67",
+    "gaussian1d_stability": "136752eef98c182be161b203c24e01ea8aa9e64aa2f706c4487d8dc7cf8e7f63",
+    "grid100": "29a5a3f7883db3a23d3863e6a3911d5d2f0a4a0bddd2556d294f98a2812800b8",
+    "img_bars4": "77c8e36980c3b1352205b06289e8e522e0ce28680de4ea93e7e11676585f5827",
+    "img_blobs4": "c3d70726c8519475e78a4a0dc38a43f4d2ed8e0fadd27fc6605078f66f408b78",
+    "img_intensity2": "b29a1d57b266043dc2e2947d96b3f8aefa2a0e589a0586e12c1160a69fb64ed4",
+    "img_stripes2": "c357f5b5afa974159935b4f62ac3c928b37406e81bb3ecd527b5b6e7352f9112",
+    "mid_scale_identity": "956d07f070c8e2dcfe695da966352b021e3213a2b5bfa227902980f334345243",
+    "mode_hold": "ca5d9d583281f4c71b4330a5ed3d66aa8a5d97a5d5e718e7199aa53a403837c4",
+    "residual_student": "8b08bb0356e07798633fdb4020b9a7eb85f779275795669f58fb41f05ee05139",
+    "ring16_acquisition": "af6dfca4b4d450f9b7f2f392ec6594d066464683ea9f0e335f811706d086f1c0",
+    "ring_extension": "07c33f15ea2d8e854d81cf877d29086b695cfd5e027fcad813c29232d50147e4",
+    "ring_hold": "5a0d89d547bc75f7fa735cfb465c88601c905ef26412d2ceba52a1c708329e3e",
+    "rotated100": "28f216f628a5989c1951cc204aa259d8a9e6e2d4b9a902d53e46d2830cac49ca",
+    "staggered100": "47c496e72c7f7398447849b9f49cafe97579874ade86f0b1a205bf7754ae69f4",
+    "trajectory": "11bc6921b183a8eb47e11a0426e3a94d8f2c2a8bf7e8e6f488de3001283ed9c9",
+    "two_pole": "3614c264c7cb4ed5414dcd67e829e2d0d658741fc633e58d43b30b5ca1132aea",
+    "unipolar": "07eb3facaf0680bb8bb7e621c8a6906073291ddd80331f53d1f61e7cd0d398a1",
+    "unused_token_hold": "6db346bd8b7bf78f1685e96755ae6dd72e6d60230b2cb20be482ef010cfcfc31",
+    "vector_anisotropic": "cde857a34194f7883b61427a76cbd209cd8bc79d1501bfab8afd8e9d66557bcf",
+    "vector_overlap": "d246ae6c685a7eb98bda65b482dee1b8601027ff014318543bac427914e1f954",
+    "vector_spiral": "6fd44ebde8d78778e2307e556fdaba7dee38ce16c86c662249bb92cdf8936f54",
+    "vector_two_broad": "4fdd1ff8a631b6b787005f297df9c466f5d702953c6de5ffd49b9051ce038b02",
+    "vector_unequal_mass": "afe7c450823c29464a34d45fe16a7e86be30e5c01e3213ed32787c757e3ea074",
+    "vector_unequal_width": "e04336558fd87ccd5646599caf05e34b9ef2a920dbf02260a29f2a8ad9b548ef"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "prior_reg": {
+      "candidate": 0.0001,
+      "control": 0.0
+    },
+    "prior_regularizer": {
+      "candidate": "sigreg",
+      "control": "vicreg"
+    }
+  },
+  "values": [
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "view_revision": 9
+}

@@ -75,6 +75,8 @@ class Recipe:
     prior_coulomb_softening: float = .1
     prior_coulomb_confinement: float = .35
     prior_coulomb_neighbors: int = 8
+    prior_sigreg_projections: int = 32
+    prior_sigreg_knots: int = 17
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -244,8 +246,11 @@ class Recipe:
         CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
                                confinement=self.prior_coulomb_confinement,
                                neighbors=self.prior_coulomb_neighbors)
-        if self.prior_regularizer not in ("vicreg", "none", "coulomb"):
-            raise ValueError("prior_regularizer must be vicreg, none or coulomb")
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb or sigreg")
+        for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
+            if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
+                raise ValueError(f"{key} must be an integer >= {minimum}")
         for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
@@ -864,6 +869,13 @@ class Recipe:
                 options["center"], options["radius"] = coulomb_reference(prior)
             return CoulombPriorRegularizer(**options)
         from .vicreg_loss import ParticleRegularizer
+        if self.prior_regularizer == "sigreg":
+            from .sigreg import SIGReg
+            options = {"weight": self.prior_reg, "projections": self.prior_sigreg_projections,
+                       "knots": self.prior_sigreg_knots, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            return SIGReg(**options)
         options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
                    "eps": self.prior_reg_eps, **overrides}
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
@@ -887,6 +899,28 @@ class Recipe:
         if self.prior_l2 > 0:
             result = result + self.prior_l2 * rows.square().mean()
         return result
+
+    def prior_regularizer_checkpoint(self, regularizer):
+        """Optional state for active stochastic families; old checkpoints stay flat."""
+        if self.prior_update == "learned" and self.prior_reg > 0:
+            state = regularizer.state_dict()
+            if state:
+                return {"prior_regularizer": state}
+        return {}
+
+    def restore_prior_regularizer(self, regularizer, state, *, validate_only=False):
+        """Validate an optional regularizer checkpoint before restoring its draws."""
+        from copy import deepcopy
+        expected = self.prior_regularizer_checkpoint(regularizer)
+        if not expected:
+            if state is not None:
+                raise ValueError("inactive prior regularizer cannot restore active state")
+            return
+        if not isinstance(state, dict):
+            raise ValueError("active prior regularizer requires checkpoint state")
+        deepcopy(regularizer).load_state_dict(state)
+        if not validate_only:
+            regularizer.load_state_dict(state)
 
     def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
         """Reject aliases before freezing, including already-frozen buffers."""

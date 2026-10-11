@@ -5,7 +5,7 @@ recipe defines whether locations learn and how they are regularized:
 
 ```python
 prior_update = "learned"       # or "frozen"
-prior_regularizer = "vicreg"   # "none" (requires prior_reg=0) or "coulomb"
+prior_regularizer = "vicreg"   # or "none", "coulomb", "sigreg"
 prior_reg = 0                 # existing coefficient; presets unchanged
 prior_reg_target_std = 1
 prior_reg_eps = 1e-4
@@ -27,6 +27,33 @@ loss only through `prior_reg`. Disabled weighted factories do no variance or
 covariance work; frozen priors receive neither the diagnostic nor a penalty.
 Frozen locations must have storage independent of network and optimizer state;
 shared parameters and tensor views are rejected before freezing.
+
+Opt-in `sigreg` uses the Gaussian characteristic-function quadrature from
+[LeJEPA's minimal implementation](https://github.com/galilai-group/lejepa/blob/c293d291ca87cd4fddee9d3fffe4e914c7272052/MINIMAL.md).
+It uses 32 normalized random projections and 17 trapezoidal knots on [0,3],
+preserving the upstream multiplication by the selected row count. The existing
+`prior_reg` coefficient multiplies that statistic once. Mean shifts, expansion
+and higher moments are constrained; rows are never centered or standardized.
+It does not constrain generator output geometry or alter the initial prior.
+`prior_reg_target_std` and `prior_reg_eps` belong only to VICReg.
+
+The factory's SIGReg module owns a private CPU projection RNG with seed 0.
+Retain it across updates and checkpoint it with the new
+`Recipe.prior_regularizer_checkpoint(module)` /
+`Recipe.restore_prior_regularizer(module, state)` helpers in caller-owned loops.
+GANTrainer and the current Forge hosts save it automatically. Disabled or
+frozen penalties draw nothing and add no checkpoint field. Projection draws
+do not consume existing constructor, data, sampling, noise or evaluation RNGs.
+The same projection law runs on CPU and CUDA; arithmetic stays on the rows'
+device. See the [feature checks and bounded demo](../reports/forge/prior-sigreg/README.md).
+
+```python
+regularizer = recipe.make_prior_regularizer()
+loss = original_loss + recipe.prior_regularization(selected_rows, regularizer=regularizer)
+checkpoint = {**original_state, **recipe.prior_regularizer_checkpoint(regularizer)}
+# After reconstructing the same recipe/module:
+recipe.restore_prior_regularizer(regularizer, checkpoint.get("prior_regularizer"))
+```
 
 New tasks declare `execution.prior_contract: "recipe_owned_v1"` and omit
 `execution.prior.learnable`. This replaces hidden behavioral prior penalties:

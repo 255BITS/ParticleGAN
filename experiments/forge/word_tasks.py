@@ -211,8 +211,10 @@ def restore_parent(request, task, prerequisites, fixture, context):
             or saved["fixture"]["recipe"] != fixture.recipe.to_dict()
             or saved["fixture"]["seed"] != request["protocol"]["seed"]):
         raise ValueError("word saved state differs from its recipe/task/candidate/prefix binding")
+    fixture.recipe.restore_prior_regularizer(fixture.spread, saved["fixture"].get("prior_regularizer"), validate_only=True)
     context.streams.load_state_dict(saved["streams"])
     fixture.policy.load_state_dict(saved["fixture"]["api_state"])
+    fixture.recipe.restore_prior_regularizer(fixture.spread, saved["fixture"].get("prior_regularizer"))
     fixture.restore_component_transport(saved["fixture"].get("component_transport"))
     fixture.data_generator.set_state(saved["fixture"]["data_generator"].cpu())
     fixture.max_steps = saved["fixture"]["max_steps"]
