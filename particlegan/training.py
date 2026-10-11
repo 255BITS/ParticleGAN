@@ -396,15 +396,9 @@ class GANTrainer:
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg"
-                    or (recipe.prior_regularizer in {"coulomb", "moment_tether"} and recipe.prior_reg > 0)):
+            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
                 # Keep the historical unweighted diagnostic, even at weight 0.
                 # Its contribution to the training objective is recipe.prior_reg.
-                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
-                prior_reg = self.prior_regularizer(raw)
-            elif self.prior.z.requires_grad and recipe.prior_reg > 0:
-                # Stateful alternatives draw only when their weighted objective
-                # is active, retaining the host's existing row-selection law.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg

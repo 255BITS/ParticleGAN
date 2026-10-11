@@ -46,7 +46,7 @@ The task owns external model architecture independently of `Recipe`. Recipe
 fields such as `model`, `conditioning` and `encoder_mode` describe technique
 controls on the scalar trainer path. Existing behavioral tasks instead own their
 original component topology and objectives. For `execution.prior_contract: "recipe_owned_v1"`, the recipe owns
-`prior_update` (`learned`/`frozen`), `prior_regularizer` (`vicreg`/`coulomb`/`sigreg`/`moment_tether`/`none`),
+`prior_update` (`learned`/`frozen`), `prior_regularizer` (`vicreg`/`coulomb`/`sigreg`/`moment_tether`/`initial_mmd`/`none`),
 `prior_reg`, `prior_reg_target_std`, `prior_reg_eps`, and `prior_l2`. Every host
 uses these values exactly once; host VICReg/L2 constants become inactive
 provenance. `vicreg` means a variance floor plus off-diagonal covariance penalty,

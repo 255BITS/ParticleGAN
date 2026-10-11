@@ -923,7 +923,8 @@ class Recipe:
 
     def prior_regularizer_checkpoint(self, regularizer):
         """Optional state for active stochastic families; old checkpoints stay flat."""
-        if self.prior_update == "learned" and self.prior_reg > 0:
+        if (self.prior_regularizer == "sigreg" and self.prior_update == "learned"
+                and self.prior_reg > 0 and regularizer is not None):
             state = regularizer.state_dict()
             if state:
                 return {"prior_regularizer": state}

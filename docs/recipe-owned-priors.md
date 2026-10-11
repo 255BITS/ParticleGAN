@@ -44,7 +44,8 @@ preserving the upstream multiplication by the selected row count. The existing
 `prior_reg` coefficient multiplies that statistic once. Mean shifts, expansion
 and higher moments are constrained; rows are never centered or standardized.
 It does not constrain generator output geometry or alter the initial prior.
-`prior_reg_target_std` and `prior_reg_eps` belong only to VICReg.
+`prior_reg_target_std` is a VICReg setting. `prior_reg_eps` is used by VICReg
+and `moment_tether`; neither setting affects SIGReg.
 
 The factory's SIGReg module owns a private CPU projection RNG with seed 0.
 Retain it across updates and checkpoint it with the new
