@@ -1,0 +1,99 @@
+{
+  "actual_recipe_settings": {
+    "generator_idle_se": 1.0
+  },
+  "attempt_id": "050fcb26432342ed8e1674c627cb2347",
+  "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+  "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+  "certificate_sha256": {
+    "evidence": "a58ae8bb49f84d00808bd970b050d28697941b482b2886dd1323b624fe7ce46c",
+    "request": "cc55748670e79568c3f57318360d72ae10b8097ece2ca6dd634c1f43f86db755",
+    "result": "59568290a717b8bfdfa37ae5b74aa130fefcb14ef7564ef1623d57a814c40c52"
+  },
+  "context_sources": {
+    "initial_prior": "original_row.initial_prior",
+    "initialization": "original_row.initialization",
+    "initializer": "original_row.initializer",
+    "prior": "original_row.prior",
+    "prior_policy": "original_row.evidence.prior_policy",
+    "recipe": "original_row.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "0f9e38582484c7f32a9c8fc71f3971a3cd37713ebd80c364f92d29b69100bdda",
+  "evaluator_result_sha256": "87e9a55cff0c5264d04024ca9d75e0f70c2eb9d30515715d470bee203d115900",
+  "feature_invariance_claim": false,
+  "frames": 9,
+  "gate_status": "PASS",
+  "gif_sha256": "82295ae77096de2122b7dbb650d9d5f7812952556894121f252a6d5178b3c892",
+  "initial_prior_sha256": "6a45056b6bd99a368badaab53fb0472f622958e1e8c3759a061d32ad0fda1b62",
+  "initialization_sha256": "e1c414a38b310627c16750641f94ce3d51a2650d2929a3142141c9b1ebec2eac",
+  "initializer": "deterministic_orthogonal",
+  "initializer_sha256": "8900cf4ff41211763a023348b8c423ab94e501bed41f7f71fa5d720205544e40",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "original_certified_task",
+  "observation_count": 24,
+  "observations_sha256": "a72b95f93247cb2e059285576353b6bf7d3b2cf0ce526eb8affb8d2b6baad3a4",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "fc5a18661b77015ac4a5e5ab93a26b8830d78f405d3261fedeece467c1fb2b20",
+  "prior_policy": {
+    "applicability": "latent_prior",
+    "contract": "recipe_owned_v1",
+    "eps": 0.0001,
+    "l2": 0.0,
+    "regularizer": "vicreg",
+    "target_std": 1.0,
+    "trainable_locations": true,
+    "update": "learned",
+    "weight": 0.0
+  },
+  "prior_policy_sha256": "007805ccc3f819855f6325a3d124598dc23f9e8a5093e3471452bd69c585f450",
+  "prior_sha256": "764fea569fd6db4f58f9da96cd7897a9c2f291d9ad0062f3b7729ae6f9688c4b",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "8ce26d8b6a90b9b4cb5de811b549f76becbece4728dbbb33e8416103564d5ef5",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "60d45a6864313ddbf74171fc",
+  "rescored_observations": 0,
+  "retained_provenance": {
+    "artifact_manifest_sha256": "fa12ae94685ff528e6913c1631141be3d1cc10be76e59e0e6f371331e0ea3ac5",
+    "bytes": 841269,
+    "completed_steps": 20001,
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-search-v1/050fcb26432342ed8e1674c627cb2347/provenance/provenance-state.pt",
+    "purpose": "provenance_only",
+    "sha256": "63ae1d0a4a9f6370b783c5bf58b53eba0af25fb026de7ce82bdfbada7fe91df0",
+    "state_sha256": "dd78b91221ef43a2b454fef3bb26c2c5a4c730d5c97c625da44851040b0404c9"
+  },
+  "role": "configuration-4698574ce42c",
+  "sampling": {
+    "eval_output_noise": "clean",
+    "sampling_contract_version": 1,
+    "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "31150e9c3147e3936b86805d03159abcacb3cdc3267cb4b6941f91d777870589",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "settings": {
+    "generator_idle_se": 1.0
+  },
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-search-v1/050fcb26432342ed8e1674c627cb2347/observed-records.pt": "74735ad86094542812f830247db620d99b10c1a02324636688c45d875c380994"
+  },
+  "task_card_sha256": "006f3abe2bc48e5a40a55334b428ca82e8da9bfee90bdc9e38590a2d6ff15626",
+  "task_id": "five_word_joint_smoke"
+}

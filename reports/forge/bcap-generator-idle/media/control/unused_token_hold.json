@@ -1,0 +1,99 @@
+{
+  "actual_recipe_settings": {
+    "generator_idle_se": null
+  },
+  "attempt_id": "047f4683f8c24c809e606a3b7e9b5148",
+  "candidate_id": "bcap-generator-idle-control-v1",
+  "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+  "certificate_sha256": {
+    "evidence": "9ec65b0a3990ca8386e492e3b386a396ed857872edeadd9cbc0697d7b32b983b",
+    "request": "a66d09dbb2a97d1e67d034a6a361d24fa25adf1d56146507ff32bde5e2a31368",
+    "result": "6ebf97ed788065cc77114ecac19616ca62a0ab80839e1be8a3fd4f1b7eb2b70f"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "original_row.applied.initialization",
+    "initializer": "original_row.applied.initializer",
+    "prior": "original_row.applied.prior",
+    "prior_policy": "original_row.evidence.prior_policy",
+    "recipe": "original_row.applied.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "7a74e580fb7e7ad590681e546c6d7cba95bda77e12eda2b67fb5acb76240eaf1",
+  "evaluator_result_sha256": "f499ad4b1e5fec61ba3503bbe1624df8a2fcf4eebe8bab5190fec144684ef8f7",
+  "feature_invariance_claim": false,
+  "frames": 9,
+  "gate_status": "PASS",
+  "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "594dc897ea5e062005cb7a95f15f55215239f22442a76e50196d7d438838a601",
+  "initializer": "deterministic_orthogonal",
+  "initializer_sha256": "8900cf4ff41211763a023348b8c423ab94e501bed41f7f71fa5d720205544e40",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "original_certified_task",
+  "observation_count": 24,
+  "observations_sha256": "ee833301e76d1c836d79f850d982051da7afa680b36b5bc6fa0501c674146977",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "c1ff5c7a6454e2fb21a0ac99f74239b286ede0d27687972f975073d582811ecb",
+  "prior_policy": {
+    "applicability": "not_sampled",
+    "contract": "recipe_owned_v1",
+    "eps": 0.0001,
+    "l2": 0.0,
+    "regularizer": "vicreg",
+    "target_std": 1.0,
+    "trainable_locations": false,
+    "update": "learned",
+    "weight": 0.0
+  },
+  "prior_policy_sha256": "1584c1da841fd2af6f8effeb2bba4c52d8490339cccd54b18b62c15c4d4db80c",
+  "prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "88fae0155e1b3baf37020ed2a90f0381986eb8730c190cf74ecab173b5f8df59",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "bdef5229463a85235b07425e",
+  "rescored_observations": 0,
+  "retained_provenance": {
+    "artifact_manifest_sha256": "b5602ed1bd33ef9ee796182a865edb36a11c1e824190abf20e8995593b31f8b1",
+    "bytes": 57351,
+    "completed_steps": 200,
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-control-v1/047f4683f8c24c809e606a3b7e9b5148/provenance/provenance-state.pt",
+    "purpose": "provenance_only",
+    "sha256": "6714b345a9ee0e4dc02c0245cdd037e9fb7b143fe21b40a4a771a3cf4381bf07",
+    "state_sha256": "139499ac4e2b7a82ee6fe720f36776fbc12a217d35fff2125a618d76d5fc3b53"
+  },
+  "role": "control",
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "53583a93f784e3fd221a166c284a69f6136b0c7c944043e429273d02bc67f68d",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "settings": {
+    "generator_idle_se": null
+  },
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-control-v1/047f4683f8c24c809e606a3b7e9b5148/constraint_geometry-scored-outputs.pt": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+  },
+  "task_card_sha256": "f90167a9c3ced6ce4c9fb01d4ddb451719dddc68002ad10a3eabed9bcf8f8b43",
+  "task_id": "unused_token_hold"
+}

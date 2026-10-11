@@ -1,0 +1,76 @@
+{
+  "actual_recipe_settings": {
+    "generator_idle_se": 1.0
+  },
+  "attempt_id": "904c6258152c4be7a3b0de7d25533129",
+  "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+  "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+  "certificate_sha256": {
+    "evidence": "2af79aeb3b76eacbfdac2e3eededc6a898d54e2e0f3bdc12f92b3ef3e123018f",
+    "request": "6c6fb9f11f58b16a025bd5612d236b573f8011681e7bbd756b79f7c7a2a74413",
+    "result": "4766666fb0fc47f49b781524f4fc493125294198acdaaf51f09e19e264f445fb"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "not_recorded",
+    "initializer": "not_recorded",
+    "prior": "not_recorded",
+    "prior_policy": "not_recorded",
+    "recipe": "original_row.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+  "evaluator_result_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "feature_invariance_claim": false,
+  "frames": 4,
+  "gate_status": "PASS",
+  "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initializer": null,
+  "initializer_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "clock_probe_diagnostic",
+  "observation_count": 4,
+  "observations_sha256": "9a6ae9a7415a0e314e2cecb153c82d66c64b7450926e5e6d5568f850e7b8356c",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "ae89d1b7676802f2750b883317ff2b02c57f7fdb6ff71b0aa0aebbc868a73855",
+  "prior_policy": null,
+  "prior_policy_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "048888eecfeb10e58f4821af7a3668bf79809ad08f18788031a7c1151ed4313e",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "60d45a6864313ddbf74171fc",
+  "rescored_observations": 0,
+  "retained_provenance": null,
+  "role": "configuration-4698574ce42c",
+  "sampling": {
+    "eval_output_noise": "clean",
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "18baa5f9bf3969fe6ac6a3e2ebf2c8b833290bafa2addd505d52b42f77ebab95",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "settings": {
+    "generator_idle_se": 1.0
+  },
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-search-v1/904c6258152c4be7a3b0de7d25533129/clockfree-proof/comparisons.pt": "ff5f5f723cb2699b770bf3ac45a110943fa1ecd840f75b8aa76999405018e1bc"
+  },
+  "task_card_sha256": "172352ad314bf46a0c4dea2135cf50fa93e8a56564f19e96f03eb04538b875b8",
+  "task_id": "clockfree_audit_measurement_v1"
+}

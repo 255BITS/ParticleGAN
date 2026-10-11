@@ -1,0 +1,853 @@
+{
+  "actual_training_gifs": 13,
+  "media": [
+    {
+      "attempt_id": "0433e9e64ebd4999ba0da863044c2e7e",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "receipt": "control/gaussian1d_smoke.json",
+      "receipt_sha256": "896fe813f336dae9d756e2bdc8433dc9944ca7f786f2786fb522e0947d474d95",
+      "role": "control",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "55551141059d4408b1cefeef4212be0a",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/two_pole.gif",
+      "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "receipt": "control/two_pole.json",
+      "receipt_sha256": "42c649f85a1e0bced6011bdedaa0625eab2d00fe4a26bda77021985945fa79e1",
+      "role": "control",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "047f4683f8c24c809e606a3b7e9b5148",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/unused_token_hold.gif",
+      "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+      "receipt": "control/unused_token_hold.json",
+      "receipt_sha256": "e1d48546dafcc19a9ae745f353e168fa35158af7080a96fa4e2f2ede11ba03cb",
+      "role": "control",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "132021d287df44b9a077f7ff7cd55073",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/ae_gan_hold.gif",
+      "gif_sha256": "93fa16643a5f35677d4178adb34897cd070f0f61bf147bb105a94c299e991945",
+      "receipt": "control/ae_gan_hold.json",
+      "receipt_sha256": "871f3e7207ff4df6abd3187139400af96d21ef7fd8a2e73342231ea30c3dfe9c",
+      "role": "control",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "281015e96d8347bdac5e1274a99ede65",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/ring16_acquisition.gif",
+      "gif_sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+      "receipt": "control/ring16_acquisition.json",
+      "receipt_sha256": "5935190ba50a38340e4cb56d2035bc02ce6286ad943bcf058f34fc6de06d951e",
+      "role": "control",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "96b555ef31024e11b69f5aff7a5551a3",
+      "frames": 4,
+      "gate_status": "PASS",
+      "gif": "control/clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+      "receipt": "control/clockfree_audit_measurement_v1.json",
+      "receipt_sha256": "81db8ae4a15d30bf1ee207542e948eee64ab1868d1cbf7ced254e271cf3e007f",
+      "role": "control",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "5a537e61e7ad4694b46acbc508dc5a81",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/gaussian1d_smoke.gif",
+      "gif_sha256": "bac8919cccfd118bb1ef4b9c245396172dea9b93058655a7e9314566288b4f04",
+      "receipt": "configuration-4698574ce42c/gaussian1d_smoke.json",
+      "receipt_sha256": "92a061379a73aec6ded009d51e57fcfe3750e0422d1ccdec1e0d2223a7690334",
+      "role": "configuration-4698574ce42c",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "c8980b6a5d934399bd5f05cda2702dec",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/two_pole.gif",
+      "gif_sha256": "885bf205a982249c8a46fc85415f0f4c77e531569832b0faa3185496c68822ed",
+      "receipt": "configuration-4698574ce42c/two_pole.json",
+      "receipt_sha256": "2fc26d4502b7c0123197e2e01ef6985c1f91a4be1e3c57aeafc0bc7e02d04c70",
+      "role": "configuration-4698574ce42c",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "0d3a6198ffcf42a9ae88e74fd713b8f9",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/unused_token_hold.gif",
+      "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+      "receipt": "configuration-4698574ce42c/unused_token_hold.json",
+      "receipt_sha256": "01496153e94302b2a097463325be2ab31afceaa75aa923568a381b04083986de",
+      "role": "configuration-4698574ce42c",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "cf8767a9a5c947fcae7fe596a22af2dd",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/ae_gan_hold.gif",
+      "gif_sha256": "dea67ea0c33fdb4ca1fb21661819abf5eb0ae6d756bb2d31bb4f1de82f2d570a",
+      "receipt": "configuration-4698574ce42c/ae_gan_hold.json",
+      "receipt_sha256": "004a83a7da7ba0a24fbfff970aeb5a26859a347226c3dc364cc86ee8bb68d5a0",
+      "role": "configuration-4698574ce42c",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "85207b4387fb497b985df6f3458de058",
+      "frames": 9,
+      "gate_status": "FAIL",
+      "gif": "configuration-4698574ce42c/ring16_acquisition.gif",
+      "gif_sha256": "7500f6d6d4a784a59f5edd456af1f22990654c71ad1490be8ec73888f534332e",
+      "receipt": "configuration-4698574ce42c/ring16_acquisition.json",
+      "receipt_sha256": "3b4b364ef3b6510347083dd076e88b7379353e57994a340e164b0dbdfd8ec18b",
+      "role": "configuration-4698574ce42c",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "050fcb26432342ed8e1674c627cb2347",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/five_word_joint_smoke.gif",
+      "gif_sha256": "82295ae77096de2122b7dbb650d9d5f7812952556894121f252a6d5178b3c892",
+      "receipt": "configuration-4698574ce42c/five_word_joint_smoke.json",
+      "receipt_sha256": "f700f6da24e7b2b672c3fd22800b3b3286bafd67cc71708e940c60be3c16d6fe",
+      "role": "configuration-4698574ce42c",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "904c6258152c4be7a3b0de7d25533129",
+      "frames": 4,
+      "gate_status": "PASS",
+      "gif": "configuration-4698574ce42c/clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+      "receipt": "configuration-4698574ce42c/clockfree_audit_measurement_v1.json",
+      "receipt_sha256": "c39f9fe439524f3c22d863fb1ef4e2cb0d06670d410638a2e1dab636415356d6",
+      "role": "configuration-4698574ce42c",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "minimum_frames": 2,
+  "name": "../bcap-generator-idle",
+  "not_rendered": [
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "INCOMPLETE",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 1,
+      "reason": "task wall-time budget exhausted",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "trajectory"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "residual_student"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "unipolar"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "cover_leftover"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "mode_hold"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_overlap"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_spiral"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_stripes2"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_bars4"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_blobs4"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_intensity2"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "grid100"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "rotated100"
+    },
+    {
+      "candidate_id": "bcap-generator-idle-control-v1",
+      "candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "bdef5229463a85235b07425e",
+      "role": "control",
+      "settings": {
+        "generator_idle_se": null
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "staggered100"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "trajectory"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "residual_student"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "unipolar"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "cover_leftover"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "mode_hold"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_overlap"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "vector_spiral"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_stripes2"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_bars4"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_blobs4"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "img_intensity2"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "grid100"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "rotated100"
+    },
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "60d45a6864313ddbf74171fc",
+      "role": "configuration-4698574ce42c",
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+      "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+      "task_id": "staggered100"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_grades_unchanged": true,
+  "partial": false,
+  "qualification_input": false,
+  "requested_tasks": null,
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "every_certified_completed_prior_search_toy",
+  "script_sha256": "4ad4b523313bbf71f702fc0382ed9e8d92c7d870a8b50dcd6fc3bf5c26619bcc",
+  "shared_publisher_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183"
+}

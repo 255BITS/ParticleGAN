@@ -1,0 +1,99 @@
+{
+  "actual_recipe_settings": {
+    "generator_idle_se": 1.0
+  },
+  "attempt_id": "c8980b6a5d934399bd5f05cda2702dec",
+  "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+  "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+  "certificate_sha256": {
+    "evidence": "229977709a62efc1b03072ba776101a38731e7ad3e84aa1540b3f960a3fbf407",
+    "request": "37588b03c8cf74e63ee3671bc4d4e71cfed6e5a532ae06b6de02c9ba90e47ca5",
+    "result": "22ebffff1790b5655080ab15d6105e9bdf8fab617ea4fe33186bc570af48a03e"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "original_row.applied.initialization",
+    "initializer": "original_row.applied.initializer",
+    "prior": "original_row.applied.prior",
+    "prior_policy": "original_row.evidence.prior_policy",
+    "recipe": "original_row.applied.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "ad7824481c5d67e71b411b24a1694adebed7edea4224169f5cbc24a30367c4e7",
+  "evaluator_result_sha256": "e9a3176abd140132524938da4b21d56330997daf152b8c4c220351f93c436b5b",
+  "feature_invariance_claim": false,
+  "frames": 9,
+  "gate_status": "PASS",
+  "gif_sha256": "885bf205a982249c8a46fc85415f0f4c77e531569832b0faa3185496c68822ed",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "initializer": "deterministic_orthogonal",
+  "initializer_sha256": "8900cf4ff41211763a023348b8c423ab94e501bed41f7f71fa5d720205544e40",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "original_certified_task",
+  "observation_count": 24,
+  "observations_sha256": "5c03ab54e8eff7ac359cb87460de1141b20ae41b62bd2ceaa984214e9d4fef8e",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "f93974f8bfa81b68108905ba63c850bf5076dadfeccbad865baf4024db595430",
+  "prior_policy": {
+    "applicability": "not_sampled",
+    "contract": "recipe_owned_v1",
+    "eps": 0.0001,
+    "l2": 0.0,
+    "regularizer": "vicreg",
+    "target_std": 1.0,
+    "trainable_locations": false,
+    "update": "learned",
+    "weight": 0.0
+  },
+  "prior_policy_sha256": "1584c1da841fd2af6f8effeb2bba4c52d8490339cccd54b18b62c15c4d4db80c",
+  "prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "b20232854bbc10255535bae748fefc073d0c577642c2fb801954640d0091ed48",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "60d45a6864313ddbf74171fc",
+  "rescored_observations": 0,
+  "retained_provenance": {
+    "artifact_manifest_sha256": "d07fc816cc4b60bf0e17fb1d589c9c31e5054c5afb255a0251271187a18119d7",
+    "bytes": 53231,
+    "completed_steps": 80,
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-search-v1/c8980b6a5d934399bd5f05cda2702dec/provenance/provenance-state.pt",
+    "purpose": "provenance_only",
+    "sha256": "bde50fded8bbf09060916bb0b66cd5fcc1f8b3ac01ba05bc0f7e76e919be0716",
+    "state_sha256": "722e0d8e2f7a086821df5ee8797c43e6d2ac970d917093f1fc2eee8d01773d4c"
+  },
+  "role": "configuration-4698574ce42c",
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_particles_and_critic_gradient",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "219a79f3ee6e3cb891bd6a22d4ccaa5c10ec26575cd71d70684159905b4f8d84",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "settings": {
+    "generator_idle_se": 1.0
+  },
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1/queue/bcap-generator-idle-search-v1/c8980b6a5d934399bd5f05cda2702dec/constraint_geometry-scored-outputs.pt": "67c7ee905e69e7dc3f09a8bd3f90949d1c1b5fb38c113a2ad2964a4a7b7131d0"
+  },
+  "task_card_sha256": "362ec593e01aae8cd1671a13cba7599af97809490972b1ab9e2cf5df25fb6c35",
+  "task_id": "two_pole"
+}

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 815. Inventory coverage: complete. Unresolved import items: 7.
+Records: 819. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4006,6 +4006,22 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 [Evidence](../../reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json) · [Record](records/readout-4bd94051f203bbbb28a3e7a6.json)
 
+### bcap-generator-idle-control-v1 · readout-4ded766c74ffb9d7575aab9c
+
+**Scope:** current; scientific; revision `69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54`.
+
+Reproduce the unchanged BCAP leader on this feature's frozen source before scoring the idle rule.
+
+**Observed:** {'INCOMPLETE': 1, 'PASS': 6}; wall seconds 1056.571; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004353
+
+Matched BCAP leader control on the generator-idle source (seed 0): 5/6 Tier 1; five_word_joint_smoke INCOMPLETE at 19168/20001 updates when its 900 s allowance expired under shared-GPU contention, so all 21 Tier 2 cells are BLOCKED. Other Tier 1 gates PASS (ring16 terminal suffix 26/5). No retry was run.
+
+**Next:** Stop this control; it exists only as the matched baseline for the idle-rule comparison. A fresh leader control is needed before any further idle-rule scoring.
+
+[Evidence](../../reports/forge/attempts/0433e9e64ebd4999ba0da863044c2e7e/result.json) · [Record](records/readout-4ded766c74ffb9d7575aab9c.json)
+
 ### forge-no-critic-penalty · readout-4e04059eb9f631a2e406447e
 
 **Scope:** current; scientific; revision `ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5`.
@@ -4133,6 +4149,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.130
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
+
+### bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19 · readout-7439f587a72a406b15097acd
+
+**Scope:** current; scientific; revision `c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241`.
+
+Skipping the G/prior step while the critic's paired real-fake gap is within one standard error of zero stops the constant-rate BCAP leader drifting during holds, repairing gaussian1d_stability and mode_hold without losing any control pass.
+
+**Observed:** {'FAIL': 1, 'PASS': 6}; wall seconds 846.757; mechanism `floor_constant`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Opt-in generator idle rule, generator_idle_se=1.0 on the BCAP leader (seed 0): 5/6 Tier 1. ring16_acquisition regresses PASS->FAIL (terminal suffix 0/5, final component_covariance_error 3.09991 vs <=.85; control .496567) after skipping only 5/1600 G steps; Tier 2 BLOCKED. Idle fraction: gaussian1d_smoke 42.9%, ae_gan_hold 25.6%, five_word_joint_smoke 54.6%, two_pole 1.2%, unused_token_hold 0%. Registered repair criterion not met.
+
+**Next:** Keep generator_idle_se opt-in (default None); do not adopt. The 1-SE rule fires about half the time on easy 1D/word holds and almost never on ring or mode_hold, so it cannot repair mode_hold; a revision needs a different idle signal, registered as a new structural idea with a fresh control.
+
+[Evidence](../../reports/forge/attempts/050fcb26432342ed8e1674c627cb2347/result.json) · [Record](records/readout-7439f587a72a406b15097acd.json)
 
 ### forge-no-critic-penalty · readout-75d5cdc5a88167d59ceff1b2
 
@@ -5076,6 +5108,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **bcap-tier1-refresh-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-modern-family-round1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-modern-family-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **bcap-generator-idle-search-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-generator-idle-search-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round2-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-global-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round3-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
@@ -5203,4 +5236,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `60629b7b24cf1301af3b6ef65815cd0ebb3233877e52b106bcb1eaa5cfb786cd`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `99327ea29b148172146095aca7b8a4181f0f7685de887d349cf38ad163c1e0d6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
