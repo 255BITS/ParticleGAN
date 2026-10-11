@@ -26,7 +26,8 @@ TUNABLE_FIELDS = frozenset({
     "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
-    "prior_reg_target_std", "prior_reg_eps", "prior_l2",
+    "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
+    "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
@@ -45,6 +46,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "critic_step_mode",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
     "reg_anchor_min_decay", "reg_anchor_weight", "d_guard_ratio", "d_guard_min_steps",
@@ -242,10 +244,11 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             owner, status = "technique", "legacy_reference"
         elif owner == "task":
             source = "frozen task host/adapter resource binding"
-        prior_fields = {"prior_lr_mult", "prior_betas", "prior_eps"}
+        prior_fields = {"prior_lr_mult", "prior_betas", "prior_eps", "prior_proximal_strength"}
         if recipe_owned_prior(task):
             prior_fields |= {"prior_update", "prior_regularizer", "prior_reg", "prior_l2",
-                             "prior_reg_target_std", "prior_reg_eps"}
+                             "prior_reg_target_std", "prior_reg_eps", "prior_sigreg_projections", "prior_sigreg_knots",
+                             "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors"}
         optimizer_inactive = (name in prior_fields - {"prior_update"}
                               and resolved_recipe["prior_update"] == "frozen" and recipe_owned_prior(task))
         if (name in prior_fields and not prior_binding["latent_table_controls"]) or optimizer_inactive:

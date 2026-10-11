@@ -46,12 +46,21 @@ The task owns external model architecture independently of `Recipe`. Recipe
 fields such as `model`, `conditioning` and `encoder_mode` describe technique
 controls on the scalar trainer path. Existing behavioral tasks instead own their
 original component topology and objectives. For `execution.prior_contract: "recipe_owned_v1"`, the recipe owns
-`prior_update` (`learned`/`frozen`), `prior_regularizer` (`vicreg`/`none`),
+`prior_update` (`learned`/`frozen`), `prior_regularizer` (`vicreg`/`coulomb`/`sigreg`/`moment_tether`/`initial_mmd`/`none`),
 `prior_reg`, `prior_reg_target_std`, `prior_reg_eps`, and `prior_l2`. Every host
 uses these values exactly once; host VICReg/L2 constants become inactive
 provenance. `vicreg` means a variance floor plus off-diagonal covariance penalty,
 without a paired invariance term. Frozen priors receive no penalty or optimizer
 group. Direct output coordinates on nonsampled hosts remain generator parameters.
+
+SIGReg compares random one-dimensional characteristic functions with the
+standard spherical Gaussian, including mean, variance and higher moments. Its
+`prior_sigreg_projections` (32) and `prior_sigreg_knots` (17) are numerical
+hyperparameters with explicit ownership; the initial search keeps both fixed.
+The projection RNG is a private CPU stream with fixed seed 0, saved under
+`prior_regularizer.projection_rng_state`. Changing `prior_regularizer` is a
+structural idea; positive `prior_reg` values can be searched within that idea.
+VICReg-only target-std/eps knobs are inactive under SIGReg.
 
 Legacy tasks without this contract retain task-owned `learnable` and original
 behavioral host penalties under their archived source identities.

@@ -1,0 +1,29 @@
+{
+  "base_candidate": "bcap-prior-covariance-base-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 135000,
+    "candidate_budget_seconds": 45000,
+    "id": "bcap-prior-covariance-search-v1",
+    "purpose": "Three global positive prior strengths, all six Tier1 tasks then all21 Tier2 if eligible; complete_current_tier. Seed0, public initializer, original task architecture/data/prior/capacity/sampling/updates/cadence/gates. Separate matched leader control. No scientific retries, seed variants, Tier3, per-task recipes or default adoption. GPU sharing is intentional; costs are not a speed ranking.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "prior_reg": [
+      0.001,
+      0.01,
+      0.1
+    ]
+  },
+  "guide": "reports/forge/bcap-prior-search/covariance/spec.json",
+  "hypothesis": "A two-sided tether to fixed initialized latent mean and full covariance reduces drift and expansion enough to repair a sustained Tier 2 failure under the unchanged global BCAP direction-blend leader.",
+  "id": "bcap-prior-covariance-search-v1",
+  "protocol": "screening",
+  "rationale": "Convert at least one matched-control Tier2 FAIL to a sustained full-gate PASS. Retain every loss of a prior passing gate and all blocked/unmeasured cells. Search evidence is tuning, not independent confirmation.",
+  "schema_version": 2,
+  "trainer_family": "bcap-dualnorm",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

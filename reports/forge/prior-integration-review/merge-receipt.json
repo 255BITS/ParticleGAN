@@ -1,0 +1,512 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011",
+  "archived_results_rescored": false,
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "<test_files>",
+    "--junitxml=/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs/merged-tests.xml"
+  ],
+  "environment": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "PARTICLEGAN_PRIOR_REVIEW_FIXTURES": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/fixtures"
+  },
+  "initial_attempt": {
+    "causes": [
+      "four fixture restorations passed Recipe.name through a positional-name factory; corrected to saved Recipe restoration",
+      "system Python lacked matplotlib in two tests; final checks use the project environment"
+    ],
+    "failed": 6,
+    "junit": {
+      "bytes": 198149,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs/merged-tests-initial-fixture-environment-errors.xml",
+      "sha256": "7a1038cd88b981cd9bd09224538b028c907706db3208a500d3090f9d73319374"
+    },
+    "passed": 1196,
+    "stdout": {
+      "bytes": 22411,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs/merged-tests-initial-fixture-environment-errors.log",
+      "sha256": "9543b1f0c75cced151038945fed696be843d120283b860b66bc107800b8244f3"
+    }
+  },
+  "junit": {
+    "bytes": 178775,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs/merged-tests.xml",
+    "sha256": "07fa0646e10a566cf2c9ca287169c3cd42cf53ac3f26bf08b8d460d558da6db3"
+  },
+  "measurements": [
+    {
+      "name": "distinct_passing_software_tests",
+      "score": 1202,
+      "target": 1202
+    },
+    {
+      "name": "combined_compatibility_cases",
+      "score": 50,
+      "target": 50
+    }
+  ],
+  "original_integration_receipt_preserved": {
+    "bytes": 22606,
+    "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/reports/forge/prior-integration-review/receipt.json",
+    "sha256": "03af2ad373d7c84694958f30afae5fc6208fc184b5c31f84c069fb442e07a568"
+  },
+  "original_review_head": "555a42c5a0bc37436a3885d75d20a503ff76995f",
+  "preserved_default": "DEFAULT_RECIPE=bcap from promoted develop; no prior option enabled",
+  "promoted_develop_head": "3f9846cb7cb276dfbd0802b6eb4c100a8b75ac41",
+  "promoted_fixture": {
+    "bytes": 2179319,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/fixtures/promoted-develop.pt",
+    "sha256": "8ef8ea300b502b0742f98588aa2314a87ac89322001f39baa1b24649ec0d7feb"
+  },
+  "restoration_contract": "historical resolved Recipe packets; model-family historical checks pin trainer=ka2",
+  "scientific_experiments": 0,
+  "scope": "merge compatibility software fixtures; no scientific qualification",
+  "software_versions": {
+    "python": "3.12.13"
+  },
+  "stdout": {
+    "bytes": 1392,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/prior-develop-merge-20261011/logs/merged-tests.log",
+    "sha256": "403b2f84b14e7f7fd02f828fcaa5d81c5abe8c07fbfca7afcc7f12cc764ab603"
+  },
+  "test_files": [
+    "tests/test_ablation_switches.py",
+    "tests/test_adversarial_losses.py",
+    "tests/test_api_dogfood.py",
+    "tests/test_api_primitives.py",
+    "tests/test_bcap_default_baseline.py",
+    "tests/test_config.py",
+    "tests/test_coulomb_prior.py",
+    "tests/test_default_formulation.py",
+    "tests/test_denoising_api.py",
+    "tests/test_e22_recipe.py",
+    "tests/test_forge_behavior_adapters.py",
+    "tests/test_forge_boundaries.py",
+    "tests/test_forge_configuration_search.py",
+    "tests/test_forge_gaussian_media.py",
+    "tests/test_forge_gaussian_smoke.py",
+    "tests/test_forge_initialization.py",
+    "tests/test_forge_policy_integration.py",
+    "tests/test_forge_priors.py",
+    "tests/test_forge_search_space.py",
+    "tests/test_forge_technique_bindings.py",
+    "tests/test_forge_techniques.py",
+    "tests/test_forge_trainer_families.py",
+    "tests/test_forge_word_joint.py",
+    "tests/test_forge_word_provenance_cuda.py",
+    "tests/test_forge_word_smoke_hold.py",
+    "tests/test_initial_mmd.py",
+    "tests/test_ka2_default.py",
+    "tests/test_lazy_default_penalty.py",
+    "tests/test_legacy_learnable_noise.py",
+    "tests/test_legacy_recipe_schedule.py",
+    "tests/test_mog_api.py",
+    "tests/test_moment_tether.py",
+    "tests/test_prior_feature_integration.py",
+    "tests/test_prior_proximal.py",
+    "tests/test_recipe_defaults.py",
+    "tests/test_recipe_owned_priors.py",
+    "tests/test_recipe_prior_task_migration.py",
+    "tests/test_sigreg.py",
+    "tests/test_toy_api_images.py",
+    "tests/test_toy_api_vectors.py",
+    "tests/test_training.py",
+    "tests/test_transition.py"
+  ],
+  "tested_source_files": {
+    "benchmarks/legacy/recipe.py": {
+      "bytes": 10143,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/legacy/recipe.py",
+      "sha256": "9a78476be08d90068bd772b141fa21db6ebe193a9d73db2323b9bab018d27d62"
+    },
+    "benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 11381,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/locked_shared/mode_hold.py",
+      "sha256": "d312aa76fd631fb2adb2b8de53b92b1dc3f486b9c0a845ab2a25e895e643e855"
+    },
+    "benchmarks/toy_audit/api_images.py": {
+      "bytes": 89295,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/api_images.py",
+      "sha256": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d"
+    },
+    "benchmarks/toy_audit/api_vectors.py": {
+      "bytes": 53963,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/api_vectors.py",
+      "sha256": "fcf44675661835e5b44d05232bad5e58ccbb5760d909559d5db64e9eaff1c155"
+    },
+    "benchmarks/toy_audit/prior_proximal_smoke.py": {
+      "bytes": 9917,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/prior_proximal_smoke.py",
+      "sha256": "e1f78fc72d6bcda99aa56e20dcf1e4ec327dda668308afb599d9b30e9903edd4"
+    },
+    "experiments/config.py": {
+      "bytes": 3062,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/config.py",
+      "sha256": "403b142f35fb2038e99b237133c38d38428e3c87d37829362a5bdec8a32a4c5c"
+    },
+    "experiments/forge/behavior_adapters.py": {
+      "bytes": 41951,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/behavior_adapters.py",
+      "sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
+    },
+    "experiments/forge/boundaries.py": {
+      "bytes": 19474,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/boundaries.py",
+      "sha256": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814"
+    },
+    "experiments/forge/priors.py": {
+      "bytes": 7947,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/priors.py",
+      "sha256": "315ab55030a4ed5bc5895794c826d1f4561c640d80930e7f73f68316762e6f5c"
+    },
+    "experiments/forge/techniques.py": {
+      "bytes": 10498,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/techniques.py",
+      "sha256": "526c416f17c0b039788e3b557d158cc28362d528f4db7782f2db79f4c6cddc1c"
+    },
+    "experiments/forge/word_adapter.py": {
+      "bytes": 12189,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/word_adapter.py",
+      "sha256": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd"
+    },
+    "experiments/forge/word_tasks.py": {
+      "bytes": 23906,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/word_tasks.py",
+      "sha256": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814"
+    },
+    "experiments/train_cifar_ddgan.py": {
+      "bytes": 22448,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_cifar_ddgan.py",
+      "sha256": "66f065a61d1b72dd90170de280cafae12f99978eef859b1f9a98a6503be41dd9"
+    },
+    "experiments/train_cifar_particle_ae.py": {
+      "bytes": 17767,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_cifar_particle_ae.py",
+      "sha256": "f6d61dc90723177dae5fb1c4f414146dd44cabde2ee204c357295b81cdb7acf0"
+    },
+    "experiments/train_cifar_particle_ddgan.py": {
+      "bytes": 22975,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_cifar_particle_ddgan.py",
+      "sha256": "45f5293affba14329c8e25c9ed0c7c4692c15535e2e3c9db87b300410126fd43"
+    },
+    "experiments/train_denoising.py": {
+      "bytes": 17707,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_denoising.py",
+      "sha256": "0b33eb3b90bace0df76e70f1dcce078d2bbf14227795d9b02a03bff89f72544a"
+    },
+    "experiments/train_gym_control.py": {
+      "bytes": 15698,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_gym_control.py",
+      "sha256": "0995765a44ef782558ffbe183bcdeca7f31ba67fb808633b902b0b97a3d95bcd"
+    },
+    "experiments/train_gym_l2_finetune.py": {
+      "bytes": 13444,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_gym_l2_finetune.py",
+      "sha256": "23ddeab9e6380e7fe8f89e346cd68745657f7d6321919ce7aa72f6d05673b531"
+    },
+    "experiments/train_gym_slider_finetune.py": {
+      "bytes": 15515,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_gym_slider_finetune.py",
+      "sha256": "353a9a46135af15567577cf0fe082a910db7720483aa18bbbeb9e9ce6219c027"
+    },
+    "experiments/train_gym_transition.py": {
+      "bytes": 24345,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_gym_transition.py",
+      "sha256": "d0c895bb5e00b4e1a5950a10f9a4990d0ef5fb8b50c1729b7ba1e540881fcc34"
+    },
+    "experiments/train_mog_autoencoder.py": {
+      "bytes": 16819,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_mog_autoencoder.py",
+      "sha256": "9a9056d4fc8efcb8ac8b5dd091d128d032e4a7167051c662976ee8ce744ba24e"
+    },
+    "experiments/train_mog_vae.py": {
+      "bytes": 17503,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_mog_vae.py",
+      "sha256": "b1c430c5b046bfaa851d57bbebfa24cba271eee25e8d9ed0b93704d9a06999c3"
+    },
+    "experiments/train_mog_vae_stability.py": {
+      "bytes": 18786,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_mog_vae_stability.py",
+      "sha256": "f868e8806c696bca31fd8de80b9723ee0c537f70e182ea0c69d949be8a70ada1"
+    },
+    "experiments/train_sparse.py": {
+      "bytes": 23045,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_sparse.py",
+      "sha256": "531c00cd087d1f236fbc73fe4b14c3b708f08fc05bf63832a061991e396a2f25"
+    },
+    "experiments/train_trajectory.py": {
+      "bytes": 13813,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_trajectory.py",
+      "sha256": "ed709251b4cd08b11dd9bf35939eff16fb50f8f49ccbff7baec01a544c705d79"
+    },
+    "experiments/train_transition.py": {
+      "bytes": 23702,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/train_transition.py",
+      "sha256": "b2d0cfc688a2877fa129e5a320b1cc368b60a5ee19ed1e00ea6433fb5d4bec39"
+    },
+    "particlegan/__init__.py": {
+      "bytes": 2353,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/__init__.py",
+      "sha256": "9afa03984a9164a6fb132504208323b13460384a225a6c9f090a4fe757f67dc9"
+    },
+    "particlegan/coulomb_prior.py": {
+      "bytes": 5361,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/coulomb_prior.py",
+      "sha256": "cd4fed5a3b22510911bc098e7b48bfb794366ef5a9c8c983d1672172f15b10a3"
+    },
+    "particlegan/initial_mmd.py": {
+      "bytes": 6027,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/initial_mmd.py",
+      "sha256": "59b9573dd79ac9d846779f2198d5864f865d0ae8207101ed8b3f4da720260615"
+    },
+    "particlegan/moment_tether.py": {
+      "bytes": 4308,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/moment_tether.py",
+      "sha256": "16bc50edae9ca43464240c84ffd20cb93691194f2b285a1056b56ff3a98c0e5a"
+    },
+    "particlegan/optim/dualnorm.py": {
+      "bytes": 33619,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/optim/dualnorm.py",
+      "sha256": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa"
+    },
+    "particlegan/optim/prior_proximal.py": {
+      "bytes": 7404,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/optim/prior_proximal.py",
+      "sha256": "50b20c11f0e7f7cabb9496d4874136172f36ce9997baf6db8d5dce91e3ca32ea"
+    },
+    "particlegan/recipe_compat.py": {
+      "bytes": 1330,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/recipe_compat.py",
+      "sha256": "755a3347a5ce0a700f5b04d756dd1e6bca7bd01e0bb16620f1f48dd8acd2e562"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 84394,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/recipes.py",
+      "sha256": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+    },
+    "particlegan/sigreg.py": {
+      "bytes": 4172,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/sigreg.py",
+      "sha256": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b"
+    },
+    "particlegan/training.py": {
+      "bytes": 44434,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/training.py",
+      "sha256": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+    },
+    "tests/test_ablation_switches.py": {
+      "bytes": 5611,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_ablation_switches.py",
+      "sha256": "c641ebf7c9e7566638165a14e14a39782f46345b116e5a467eb24ff1d5d6f440"
+    },
+    "tests/test_adversarial_losses.py": {
+      "bytes": 9340,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_adversarial_losses.py",
+      "sha256": "a262b952428c63e947d4cc93caa19ad1b6dbc7b6aca371694cc64decaff06077"
+    },
+    "tests/test_api_dogfood.py": {
+      "bytes": 3559,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_api_dogfood.py",
+      "sha256": "8df949bd812b9733efe072201892bce4fe42b3345cccbd07623718a2a00ff171"
+    },
+    "tests/test_api_primitives.py": {
+      "bytes": 10346,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_api_primitives.py",
+      "sha256": "778c840a535f0c06199b0217f89e78de520e05e1eb07f67495a7b9c4a74105e8"
+    },
+    "tests/test_bcap_default_baseline.py": {
+      "bytes": 10727,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_bcap_default_baseline.py",
+      "sha256": "1b9a8279a969ae4efbdcc32b8abddaad56ba706842f8ea62b8643a096222ab26"
+    },
+    "tests/test_config.py": {
+      "bytes": 4223,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_config.py",
+      "sha256": "ec18ca09b90629f3132f98a004d3fcd226851a72011f24aab2bf832823bc7b5f"
+    },
+    "tests/test_coulomb_prior.py": {
+      "bytes": 12583,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_coulomb_prior.py",
+      "sha256": "65c92e99001de3550f9029cbec6d31dcf6210c4bf39d5a9b1971c3b836e71be8"
+    },
+    "tests/test_default_formulation.py": {
+      "bytes": 3807,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_default_formulation.py",
+      "sha256": "95ed01726506292a8505306d4fb64a0493d40d5e69b24780256ee0591c3f531f"
+    },
+    "tests/test_denoising_api.py": {
+      "bytes": 6462,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_denoising_api.py",
+      "sha256": "f7454cbc7e39e646d944299275ebf2484cd06b32a66c4dfab2eddb73dda77486"
+    },
+    "tests/test_e22_recipe.py": {
+      "bytes": 4201,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_e22_recipe.py",
+      "sha256": "1b1693fa8cb62aa1c7c643aeaa5a7d4aebf4b66b4f5211151d990e432ab5e150"
+    },
+    "tests/test_forge_behavior_adapters.py": {
+      "bytes": 11995,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_behavior_adapters.py",
+      "sha256": "c566df341a6808a2a1c14e22475012cd347d35eb7d355bc4d1525ca2059f6e68"
+    },
+    "tests/test_forge_boundaries.py": {
+      "bytes": 11249,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_boundaries.py",
+      "sha256": "93b696d7971d0973f17ca9d1919d1900ab24b874e23a3befc531795db09b31e8"
+    },
+    "tests/test_forge_configuration_search.py": {
+      "bytes": 36739,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_configuration_search.py",
+      "sha256": "44dbe8fb9852c65a6871d2f3ddfe4235dca7bc5d3dcf284a25d802f3f1c9614b"
+    },
+    "tests/test_forge_gaussian_media.py": {
+      "bytes": 4216,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_gaussian_media.py",
+      "sha256": "a97793ee42a4abfd4c31db81c2af1a811da53fc16c5c9ee420a2c38a1ba4416d"
+    },
+    "tests/test_forge_gaussian_smoke.py": {
+      "bytes": 10082,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_gaussian_smoke.py",
+      "sha256": "0ed96b631a43699606bbcc3862e6c21e7fbc01723f7929f3ec6356a1a701bb27"
+    },
+    "tests/test_forge_initialization.py": {
+      "bytes": 11162,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_initialization.py",
+      "sha256": "baefeb84519fa4efb58f77f37deb6d4feeb2f19873c4f35a5dc0f40199fdd09c"
+    },
+    "tests/test_forge_policy_integration.py": {
+      "bytes": 5788,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_policy_integration.py",
+      "sha256": "ff5749e1ec82e13825dbbe4663cbe851beef455ba834d70081e9f4d0f4596aa0"
+    },
+    "tests/test_forge_priors.py": {
+      "bytes": 6162,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_priors.py",
+      "sha256": "67908639055bef7d4a99c3fa98bbadcd830b1a49906f7829c0fc9fb3b2f6bc5c"
+    },
+    "tests/test_forge_search_space.py": {
+      "bytes": 6640,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_search_space.py",
+      "sha256": "5d632a690ad8c107610c2b1d24c556c52fde62993617c72098f4cc7fa8cd53ec"
+    },
+    "tests/test_forge_technique_bindings.py": {
+      "bytes": 2793,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_technique_bindings.py",
+      "sha256": "2b2bec16df5e50154dd7cf628718dc5504f28bc17ad107074f5ae53788e6cfc2"
+    },
+    "tests/test_forge_techniques.py": {
+      "bytes": 4242,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_techniques.py",
+      "sha256": "df3047e7bf018df9f1b700db98ec1f7b803d6bbc05267566fccdb6c3536c381a"
+    },
+    "tests/test_forge_trainer_families.py": {
+      "bytes": 36881,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_trainer_families.py",
+      "sha256": "f47513670e28a181db720adb1eff23fe9a78ce02412e3a80d9bf5a8fc87b2257"
+    },
+    "tests/test_forge_word_joint.py": {
+      "bytes": 16367,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_word_joint.py",
+      "sha256": "c89cf9cd058651396e1757b7aa2b27bba7a69a031aa2701ac8cb2783e298356a"
+    },
+    "tests/test_forge_word_provenance_cuda.py": {
+      "bytes": 3940,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_word_provenance_cuda.py",
+      "sha256": "efbd090325d0f202a40aca2c89213f44a861dc1f030ec75a61c306b483f8d3cd"
+    },
+    "tests/test_forge_word_smoke_hold.py": {
+      "bytes": 9546,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_forge_word_smoke_hold.py",
+      "sha256": "8b2045acd426d1e1ef5c2687fc3347d361e807152b5c16d2e14ea331de9aa694"
+    },
+    "tests/test_initial_mmd.py": {
+      "bytes": 10647,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_initial_mmd.py",
+      "sha256": "491051dbc8205106d5d0a14c96c4fae8a23b80f0641ecc5e9e41886375fb564f"
+    },
+    "tests/test_ka2_default.py": {
+      "bytes": 4668,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_ka2_default.py",
+      "sha256": "4e40051b2215d3ae017605b4ba11f6c78006f37af9b5080d181a57f34d901076"
+    },
+    "tests/test_lazy_default_penalty.py": {
+      "bytes": 3946,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_lazy_default_penalty.py",
+      "sha256": "055152e7bc2ef9c97d4cb7fbc2d8d402e68e6a0632d7cae64b7a59975e54703c"
+    },
+    "tests/test_legacy_learnable_noise.py": {
+      "bytes": 8225,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_legacy_learnable_noise.py",
+      "sha256": "ab3bb14e277bc82c5ee9d2c1269ecdaebdd5d922ff8ccf6b9789df2d1bd81a3f"
+    },
+    "tests/test_legacy_recipe_schedule.py": {
+      "bytes": 6733,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_legacy_recipe_schedule.py",
+      "sha256": "5ca029bf34f815c96c0d5781a55bea12bee6a1b13733aac7f29468e49338b48c"
+    },
+    "tests/test_mog_api.py": {
+      "bytes": 17740,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_mog_api.py",
+      "sha256": "567d244d7a51791cbeb9879935ddceae053cf7df682d42ebfec23945ecf2ae9b"
+    },
+    "tests/test_moment_tether.py": {
+      "bytes": 9325,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_moment_tether.py",
+      "sha256": "c87a56c01e4a359e14d355a20667c454de4c1030a6d35a07696a928543647c99"
+    },
+    "tests/test_prior_feature_integration.py": {
+      "bytes": 11775,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_prior_feature_integration.py",
+      "sha256": "9c6820224fcbae7cb96ab35920dd6e088cfbfe26e7a3be1d2fb196e391dee1af"
+    },
+    "tests/test_prior_proximal.py": {
+      "bytes": 13512,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_prior_proximal.py",
+      "sha256": "ee8a2bc3d756bf2a0f77d914675b5cf777e08785dcc59e13cd9fcb88c6377e68"
+    },
+    "tests/test_recipe_defaults.py": {
+      "bytes": 8711,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_recipe_defaults.py",
+      "sha256": "64765334d63abc3cda1bbb86887f67236db75f607425afdbf651d8438a9addbc"
+    },
+    "tests/test_recipe_owned_priors.py": {
+      "bytes": 16263,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_recipe_owned_priors.py",
+      "sha256": "2a7b3419443193f437a711ddfc4f5b086e0ce591c432cb2ab1901f272a4e7925"
+    },
+    "tests/test_recipe_prior_task_migration.py": {
+      "bytes": 1587,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_recipe_prior_task_migration.py",
+      "sha256": "598a8b1eeaac8259dbc9ac46963e7febaa646ff98731bdb48d1dddb45676cfe2"
+    },
+    "tests/test_sigreg.py": {
+      "bytes": 10304,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_sigreg.py",
+      "sha256": "d8268fd2d90e5a88908da6cea3f08d42444917181f793f74aa46aaf5e617031f"
+    },
+    "tests/test_toy_api_images.py": {
+      "bytes": 16961,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_toy_api_images.py",
+      "sha256": "c5063889b3f119aa7ddd237bbf3372ea847ab4ceb18a498ed3494547bda025f1"
+    },
+    "tests/test_toy_api_vectors.py": {
+      "bytes": 16126,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_toy_api_vectors.py",
+      "sha256": "b9daea7cdf07092404e57054f47dc4f60faeec0b01c4864551691594b9f72338"
+    },
+    "tests/test_training.py": {
+      "bytes": 17407,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_training.py",
+      "sha256": "d4927b69015bc2dbfc3927215b08adf0cd4ef7ed7f5f7b62e6f0b11ccaccd4dc"
+    },
+    "tests/test_transition.py": {
+      "bytes": 14451,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_transition.py",
+      "sha256": "4d5a09dd047d60d494809f3f6a41fa17a1ddb436a8027477f596acdab61383f8"
+    }
+  }
+}

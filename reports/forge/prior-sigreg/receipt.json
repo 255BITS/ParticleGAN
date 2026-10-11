@@ -1,0 +1,151 @@
+{
+  "bounds": {
+    "fixed_axis_sigreg_max": 4.0,
+    "nonfinite_count_max": 0,
+    "relative_error_max": 0.1,
+    "resume_state_mismatch_max": 0
+  },
+  "failed_bounds": [],
+  "gif_sha256": "0f55dd0e178a41c175c03f83ed28ccb8ea2a9e3cdb511ca909db4eb6984ad84d",
+  "initial_prior": {
+    "init_std": 2.0,
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "initialization": {
+    "discriminator": {
+      "initial_state_sha256": "d01abe6125801d363e2870c07801c574cbc90a03fc067375d3e9f8089b11e4b6",
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "0.bias": 6652631374610317303,
+        "0.weight": 3620272153336253636,
+        "2.bias": 7269094322969568603,
+        "2.weight": 5778109641139043506
+      }
+    },
+    "generator": {
+      "initial_state_sha256": "9e40491ac0316a6b4b64ce23500c990964c3add60f3ab237e2867b12714fca1c",
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "0.bias": 3118781841204788894,
+        "0.weight": 7063123783767706971,
+        "2.bias": 2297926149942541122,
+        "2.weight": 1165607292355943702
+      }
+    },
+    "prior": {
+      "initial_state_sha256": "67987d7b79c47f944fe4d73fc4493a1f5cba17a3ae72f1500f8df52490419656",
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "z": 6640234621280078221
+      }
+    }
+  },
+  "metrics": {
+    "fixed_axis_sigreg": 2.2785394191741943,
+    "nonfinite_count": 0,
+    "relative_error": 0.07398786928334179,
+    "resume_state_mismatch": 0
+  },
+  "passed": true,
+  "projection_rng": {
+    "checkpoint_path": "trainer.prior_regularizer.projection_rng_state",
+    "private_seed": 0
+  },
+  "protocol_seed": 0,
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 64,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "constraint_geometry_mode": "direction_blend",
+    "continuous_policy": null,
+    "critic_formulation": "bcap",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "bcap",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 128,
+    "observation_sigma": 0.03,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 2.5,
+    "prior_reg": 0.01,
+    "prior_regularizer": "sigreg",
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 128,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "scope": "128-update public API feature integration; no Tier 1/Tier 2 credit",
+  "scorer_controls": {
+    "destructive_zero": 411.69671630859375,
+    "oracle": 1.7110294103622437
+  },
+  "steps": 128,
+  "target": "N(0,I)"
+}

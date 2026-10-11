@@ -1,0 +1,285 @@
+{
+  "scope": "software_no_training",
+  "source_changes": [
+    {
+      "task": "ae_gan_hold",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "cover_leftover",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "five_word_joint_acquisition",
+      "source_changes": {
+        "benchmarks/toy_audit/api_images.py": {
+          "previous": "a79aafb643182d707796b25b2b3abec3dd3c7e452c615a7cf68274f157a778ea",
+          "current": "b6d7b70470313bce71aeb4b332d704d19eb18fda85043166ef03139f8cf0e8eb"
+        }
+      }
+    },
+    {
+      "task": "five_word_joint_hold",
+      "source_changes": {
+        "benchmarks/toy_audit/api_images.py": {
+          "previous": "a79aafb643182d707796b25b2b3abec3dd3c7e452c615a7cf68274f157a778ea",
+          "current": "b6d7b70470313bce71aeb4b332d704d19eb18fda85043166ef03139f8cf0e8eb"
+        },
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        },
+        "experiments/forge/word_adapter.py": {
+          "previous": "dd6c337d437637981b000f9e3f310c1c6f38010bf142ddc133f5deaccb45668e",
+          "current": "f4f629a479c9d30a5d059777f01ceb75dc86c3f1c675d53a99a86381e2afeaf3"
+        }
+      }
+    },
+    {
+      "task": "five_word_joint_smoke",
+      "source_changes": {
+        "benchmarks/toy_audit/api_images.py": {
+          "previous": "a79aafb643182d707796b25b2b3abec3dd3c7e452c615a7cf68274f157a778ea",
+          "current": "b6d7b70470313bce71aeb4b332d704d19eb18fda85043166ef03139f8cf0e8eb"
+        },
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        },
+        "experiments/forge/word_adapter.py": {
+          "previous": "dd6c337d437637981b000f9e3f310c1c6f38010bf142ddc133f5deaccb45668e",
+          "current": "f4f629a479c9d30a5d059777f01ceb75dc86c3f1c675d53a99a86381e2afeaf3"
+        }
+      }
+    },
+    {
+      "task": "mid_scale_identity",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "residual_student",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "trajectory",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "two_pole",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "unipolar",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    },
+    {
+      "task": "unused_token_hold",
+      "source_changes": {
+        "experiments/forge/behavior_adapters.py": {
+          "previous": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306",
+          "current": "5dda1d20fa8dd3d929a3aa1fa9fd283f5e832dfb5a9f3c2e801dfe71182cc9e7"
+        }
+      }
+    }
+  ],
+  "required_task_contexts": [
+    {
+      "task": "gaussian1d_smoke",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "two_pole",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "unused_token_hold",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "ae_gan_hold",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "ring16_acquisition",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "five_word_joint_smoke",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "gaussian1d_stability",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "five_word_joint_hold",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "trajectory",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "residual_student",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "unipolar",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "cover_leftover",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "mid_scale_identity",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "mode_hold",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_two_broad",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_unequal_mass",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_unequal_width",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_anisotropic",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_overlap",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "vector_spiral",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "img_stripes2",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "img_bars4",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "img_blobs4",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "img_intensity2",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "grid100",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "rotated100",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    },
+    {
+      "task": "staggered100",
+      "regularizer": "initial_mmd",
+      "weight": 1.0,
+      "source_gate_unchanged": true
+    }
+  ],
+  "unchanged_task_conditions_verified_against_commit": "0337bbbc2300fd351e77e9a222b92401137fd421"
+}
