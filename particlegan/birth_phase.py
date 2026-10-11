@@ -117,7 +117,7 @@ def allocate_anchor_births(snapshot, query_features, flags, pvalues, comparison,
     donor_rows = (flags & ~inside & ~protected_sources).nonzero().flatten()
     if snapshot.valid_metric and certificate['outside_certified'] and certificate['inside_certified']:
         for attempt in attempts:
-            if len(children) >= capacity or not len(donor_rows):
+            if len(children) >= capacity or len(children) >= len(donor_rows):
                 break
             cell, source = int(attempt['cell']), int(attempt['seed_row'])
             if not 0 <= cell < snapshot.cells or cell in cells:
