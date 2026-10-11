@@ -630,6 +630,7 @@
     },
     {
       "id": "bcap-zero-damping",
+      "inventory_visible": false,
       "label": "BCAP + weak R1/R2",
       "canonical_candidate": "bcap-tier2-round6-zero-damping-v1",
       "candidates": [

@@ -16,5 +16,86 @@
   "scientific_retries": 0,
   "additional_publication_updates": 0,
   "additional_publication_sampling_draws": 0,
-  "integration_validation": "pending"
+  "integration_validation": "PASS",
+  "integration_source_commit": "247df466190a14b2e65895dab055d157a2848bcd",
+  "integration_tests": {
+    "passed": 530,
+    "skipped": 0,
+    "seconds": 12.65,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/integration-tests-final.log",
+      "sha256": "72aebd206dc71b42f3d00ab3b06ba6e3d6036edc1ce506d8c9e14c957aaba5ce"
+    },
+    "archived_software_fixtures": {
+      "coulomb.pt": "4e28b386791a72745e0e0f1501608945b50d43e56ee629338d2dce45a08c7272",
+      "develop.pt": "4a0b7ee9b1474901e0fdde71790b5b63200a94b8748c6ef9c17ae6ed283fc8e9",
+      "initial_mmd.pt": "ffcfc5283e7b1210f0b4588a50d3250cad52ed7973a4f04f347c0857c42cb1fc",
+      "moment_tether.pt": "1356984aa9166c8cf3e25274dfe07eac02f35c5c27c511d8c4d9ea9828f63c87",
+      "promoted-develop.pt": "8ef8ea300b502b0742f98588aa2314a87ac89322001f39baa1b24649ec0d7feb",
+      "proximal.pt": "4e818a5f4d69431adb069640b4d1ff2413859813e52302ac59628d467b01a032",
+      "sigreg.pt": "658440c6239b0c54787435a45371d32553e84983e8a374247f9897c9661eb15f"
+    }
+  },
+  "forge_validate": {
+    "status": "PASS",
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/final-validate-final.json",
+      "sha256": "f1550b043de9b1d4a2e649cd14bf0c9462aeb4f8a745881e1c2ceae29d82e912"
+    }
+  },
+  "publication_refresh": {
+    "status": "PASS",
+    "scientific_rows_preserved": true,
+    "qualification_regraded": false,
+    "training_launched": false,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/publication-refresh-final.log",
+      "sha256": "77c7374a1e79713b52fd3fe0b60befd5019a4a226d7f0b19c292b4a84a8de863"
+    }
+  },
+  "publication_tests": {
+    "passed": 414,
+    "seconds": 164.2,
+    "deselected_known_upstream_failures": 7,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/publication-tests-final.log",
+      "sha256": "9d52ca91b7c092afa6a27bc1ec22782170d74b03e595c556799a6a517b4dafc2"
+    },
+    "initial_full_suite_log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/publication-tests.log",
+      "sha256": "498f7d3e02d5661e93efed60a65eaf5958a4d40327647ef4f26226ade6b563a5"
+    },
+    "introduced_failures_fixed": 3,
+    "known_upstream_failures": {
+      "source_commit": "0b3f98fbe3acf5415431198d145ff77976eda387",
+      "clean_detached_checkout": true,
+      "upstream_package_paths_verified": true,
+      "reproduced_failures": [
+        "tests/test_forge_current_technique_inventory.py::test_cli_has_one_default_destination",
+        "tests/test_forge_current_technique_inventory.py::test_committed_atlas_progress_display_matches_its_generator_without_raw_evidence",
+        "tests/test_forge_current_technique_inventory.py::test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence",
+        "tests/test_forge_current_technique_inventory.py::test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cells",
+        "tests/test_forge_passive_publications.py::test_one_table_context_preserves_historical_and_all_ordinary_values",
+        "reports/forge/recipe-prior-refactor/test_publication_migration.py::test_final_registration_and_actual_initial_laws_are_bound",
+        "reports/forge/recipe-prior-refactor/test_publication_migration.py::test_changed_registration_source_roster_or_initial_law_is_rejected[initial_law]"
+      ],
+      "seconds": 4.1,
+      "log": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/upstream-publication-baseline.log",
+        "sha256": "e595eb7d567d023e2b4e99ad870f753dbb21ba9170df9949a12ffbfc1e0f84f4"
+      },
+      "scope": "CLI and display expectations plus archived ownership migration resolved against live source. Preserve archived qualification; no scientific rerun or historical record rewrite."
+    }
+  },
+  "publication_validation": "PASS_WITH_REPRODUCED_UPSTREAM_TEST_FAILURES",
+  "memory_check": {
+    "status": "CURRENT",
+    "fresh": true,
+    "memory_current": true,
+    "publication_materialization_current": true,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/logs/memory-check-final.json",
+      "sha256": "b079d4056c40d8a1edb3172172c7a452ee9631671a6c63536558fe7a71d60a62"
+    }
+  }
 }
