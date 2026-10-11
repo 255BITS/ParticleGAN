@@ -246,8 +246,8 @@ class Recipe:
         CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
                                confinement=self.prior_coulomb_confinement,
                                neighbors=self.prior_coulomb_neighbors)
-        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg"):
-            raise ValueError("prior_regularizer must be vicreg, none, coulomb or sigreg")
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg or moment_tether")
         for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
             if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
                 raise ValueError(f"{key} must be an integer >= {minimum}")
@@ -857,7 +857,7 @@ class Recipe:
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
-    def make_prior_regularizer(self, *, prior=None, **overrides):
+    def make_prior_regularizer(self, *, prior=None, reference=None, **overrides):
         if self.prior_regularizer == "coulomb":
             from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
             options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
@@ -878,11 +878,19 @@ class Recipe:
             return SIGReg(**options)
         options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
                    "eps": self.prior_reg_eps, **overrides}
+        if self.prior_regularizer == "moment_tether":
+            unknown = set(options) - {"weight", "target_std", "eps"}
+            if unknown:
+                raise TypeError(f"unsupported moment_tether options: {sorted(unknown)}")
+            if self.prior_update == "learned" and self.prior_reg > 0:
+                from .moment_tether import MomentTetherRegularizer
+                return MomentTetherRegularizer(reference, weight=options["weight"], eps=options["eps"])
+            options["weight"] = 0.
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
             options["weight"] = 0.
         return ParticleRegularizer(**options)
 
-    def prior_regularization(self, rows, *, regularizer=None, prior=None):
+    def prior_regularization(self, rows, *, regularizer=None, prior=None, reference=None):
         """Return the complete weighted latent-prior objective, once.
 
         Callers select rows using their declared sampling law. Frozen rows and
@@ -895,7 +903,7 @@ class Recipe:
         # or doing any variance/covariance work for disabled penalties.
         result = rows[:0].sum()
         if self.prior_reg > 0:
-            result = (self.make_prior_regularizer(prior=prior) if regularizer is None else regularizer)(rows)
+            result = (self.make_prior_regularizer(prior=prior, reference=reference) if regularizer is None else regularizer)(rows)
         if self.prior_l2 > 0:
             result = result + self.prior_l2 * rows.square().mean()
         return result
@@ -945,6 +953,9 @@ class Recipe:
         if self.prior_update == "learned":
             if not prior.z.requires_grad:
                 raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
+            if self.prior_regularizer == "moment_tether" and self.prior_reg > 0:
+                from .moment_tether import capture_initial_moments
+                capture_initial_moments(prior)
         elif prior.z.requires_grad:
             rows = prior.z.detach()
             del prior.z

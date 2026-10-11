@@ -176,7 +176,7 @@ class GANTrainer:
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
-            prior=self.prior)
+            prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
@@ -397,7 +397,7 @@ class GANTrainer:
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg"
-                    or (recipe.prior_regularizer == "coulomb" and recipe.prior_reg > 0)):
+                    or (recipe.prior_regularizer in {"coulomb", "moment_tether"} and recipe.prior_reg > 0)):
                 # Keep the historical unweighted diagnostic, even at weight 0.
                 # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]

@@ -790,7 +790,7 @@ class ImageFixture:
                 self.opt_g, self.opt_d = self.recipe.make_optimizers(self.G, self.D, self.prior,
                                                                    ema_critic=deepcopy(self.D))
                 self.loss = self.recipe.make_loss()
-                self.spread = self.recipe.make_prior_regularizer(prior=self.prior)
+                self.spread = self.recipe.make_prior_regularizer(prior=self.prior, reference=self.prior)
                 self.penalty = self.recipe.make_critic_penalty(self.opt_d)
                 self._context = None
                 self.policy = UpdatePolicy(self.recipe, self.G, self.D, prior=self.prior,
@@ -1093,6 +1093,7 @@ class WordFixture:
             self.recipe.apply_prior_policy(self.prior)
             # Homogeneous roles are required by the public policy. This splits
             # the old G/E group without changing its optimizer settings.
+            self.recipe.apply_prior_policy(self.prior)
             groups = [
                 dict(params=list(self.G.parameters()), lr=self.recipe.lr),
                 dict(params=list(self.E.parameters()), lr=self.recipe.lr)]
@@ -1103,7 +1104,7 @@ class WordFixture:
                 latent_table=self.prior.z if self.prior.z.requires_grad else None)
             self.opt_d = self.recipe.make_critic_optimizer(self.D, ema_critic=deepcopy(self.D))
             self.loss = self.recipe.make_loss()
-            self.spread = self.recipe.make_prior_regularizer(prior=self.prior)
+            self.spread = self.recipe.make_prior_regularizer(prior=self.prior, reference=self.prior)
             self.penalty = self.recipe.make_critic_penalty(self.opt_d, collect_stats=components is not None)
             policy_streams = None if components is None else {
                 "latent_generator": components.streams.generator("prior", component="latent", purpose="indices"),
