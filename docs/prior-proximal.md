@@ -23,9 +23,19 @@ capacity, width, masses and sampling remain task-owned.
 The motivation is the [scalar saved-state diagnosis](../reports/forge/gaussian1d-diagnosis/README.md):
 an unchanged architecture/prior admits a good scalar fit, but learned prior
 locations move while acquired quality degrades. That older cohort supports a
-stability hypothesis, not a current BCAP repair. The measured reference for new
-comparisons is the [BCAP direction-blend leader](../reports/forge/bcap-default-baseline/README.md),
-with 6/6 Tier 1 and 9/21 Tier 2 passes. The spring is an additional recipe delta.
+stability hypothesis, not a current BCAP repair. The archived
+[BCAP direction-blend leader](../reports/forge/bcap-default-baseline/README.md)
+reports 6/6 Tier 1 and 9/21 Tier 2 passes. The
+[bounded comparison](../reports/forge/bcap-prior-search/proximal/README.md)
+reexecutes the complete disabled leader on this feature's scientific source;
+its current control cells receive no archived PASS counts. The spring is the
+only additional recipe delta.
+
+The [completed readout](../reports/forge/bcap-prior-search/proximal/readout.md)
+records a fresh 6/6 Tier 1, 9/21 Tier 2 control. Strengths .1, 1 and 10 pass
+4/6, 5/6 and 4/6 Tier 1 gates, respectively; all three fail Ring16 component
+shape and therefore leave Tier 2 unmeasured. The tested global bracket is not
+eligible for promotion. Keep strength zero as the default.
 
 Only a sampled latent-prior group receives restoration, and only if its current
 gradient was consumed. Unsampled rows remain fixed even with dense auxiliary
@@ -70,8 +80,9 @@ Compare each setting with the complete leader on the same executed source,
 protocol seed0, initializer, task data/architecture/prior, budgets and cadence;
 own-prefix continuation remains required. All six runnable Tier 1 tasks must
 finish, and a failure blocks ordinary Tier 2. The declared search budget and
-campaign are registered separately before execution. No Forge run is launched
-by this feature PR.
+campaign are registered separately before execution. The bounded comparison
+retains all three strengths and the matched disabled control, with no scientific
+retries, automatic refinement, independent confirmation or default adoption.
 
 The [software illustration](../reports/forge/prior-proximal-software/README.md)
 records numerical software gates and an actual-training GIF under the
