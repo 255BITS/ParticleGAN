@@ -1,0 +1,77 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/coulomb",
+  "axis": "prior_reg",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-prior-coulomb-control-v1",
+  "control_study_id": "bcap-prior-coulomb-control-study-v1",
+  "falsifier": "No eligible coefficient converts a matched-control Tier2 FAIL to PASS; any new loss of a control PASS remains a regression and prevents a global repair claim.",
+  "full_reservation_seconds": 172080,
+  "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+  "maximum_reserved_paid_seconds": 180000,
+  "name": "coulomb",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-prior-coulomb-search-v1",
+  "source_digest": "f56cd32fd97769f6863f8709efd3c96a4137349b46882124c713d1917d9d062c",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "task_contracts": {
+    "ae_gan_hold": "9e46da9d1c8366b003cf78f2534e9d592409637c1940e0528cc7261fe5e6d029",
+    "clockfree_audit_measurement_v1": "9f61b15b0448f3bfa7c725bb972302d96e8abc6b7d15118227d4714a9f2d97c6",
+    "cover_leftover": "38c9e67cfcd19be68c3e6de32f665344b69674e737ff5e3d43cf5dce9a61d76b",
+    "five_word_joint_hold": "080381cfe65556fce928b56182c695a3f7e5c20c399b8e9714b2b8f40971f32f",
+    "five_word_joint_smoke": "d1d677f525793d33440840d416eb8b9b70003d12eb7eb7514df5be7969a0b4e0",
+    "gaussian1d_smoke": "5d35fab6827d3bf0105d4bc38d25960446fea120d51301509b1f7dab7efe7b47",
+    "gaussian1d_stability": "2adc8439b9e4c11807a6d4df5f52ccfe1a0a7d728850d4387d7e8aa87ebb5536",
+    "grid100": "daa4c3dbd81ba8523ec9d6b006f3ed639711a97b59cae40b37f626c231d5c647",
+    "img_bars4": "17de1d1bb228b48b1a34bdb21f447ae5c61dd2c9324a2ac106a3dc079397a392",
+    "img_blobs4": "bb1b56f3908114163a21bfb58b908aa7a56df14c41a6208899dac4eb05d0dd93",
+    "img_intensity2": "105562b0a1a61c6a34f832c32ba2bc8cdc782f42c1654f907dd7433414e47b7b",
+    "img_stripes2": "b5f71cf76edd89cd66cb98049ecb013e0b481e966a32f81605d909ee4900e346",
+    "mid_scale_identity": "464891552c159691df1bcafe269305cf210acb890f006a890487e8ed331be2f1",
+    "mode_hold": "01437d00a55bd57903bfad6112fbc642aed48cc596201bacf1578c5b13fcaf82",
+    "residual_student": "f7be3589714a5db9cca3c5be355db94ce48b05b1ef0cbe9b3ab78812abd7c254",
+    "ring16_acquisition": "316c90ef4019ca6882ad8376d56c93af80e0da50d3ccb33ace75e545fd09b598",
+    "ring_extension": "1e253920770aae4c9e23994fca5da8f38e872db104473d909eb381ae841da9a3",
+    "ring_hold": "7a5012f42ddda1f1fb92e5331e860a1d8c1e0d9ba1b457c3e6e300ce1129e22c",
+    "rotated100": "c46f4366fdcb279ef7e6892bdb3111346684a230adb2ccfb6e15e782ef406ed3",
+    "staggered100": "30a2763bf7ceec988945a589df4678968222ce080336cd5b669ed1e83d5311c1",
+    "trajectory": "a1056728b653da0f3bb896626c3b2ffa8aceee13b15d6abb82efc32c4fbf3c02",
+    "two_pole": "610744f17d578b5b773118cb570182d81b82059eaaeedfada65918a23f80f539",
+    "unipolar": "43b2864101acfd381853c4e0def740a53d41d0551c63140c42245c993c5e6aaa",
+    "unused_token_hold": "7b433c71b789ef7a4abe7adcef3b6582f9cd94226918b1bb53678a4bc30f550e",
+    "vector_anisotropic": "76ff0125e26c6eebe69fbbb7f86170530e4b8be4647832d4a80e61d1f48c3ee5",
+    "vector_overlap": "f5551f7d7b9a2cad953e26998ee7c3ef00926c4be115c4dc9041b6e0e4cdd0bf",
+    "vector_spiral": "dd9bd4ebf09ebcfb7b59d970f19a47fb8567860294e19104695241daad675b4a",
+    "vector_two_broad": "d14fb0c104b6b06c47992054c48c4e06350e67ccd64533058706bff26a986739",
+    "vector_unequal_mass": "d0ceebd4128ac77cc14b78b7e2980de66aa3b30e89bd46f6ec715ed7db70e669",
+    "vector_unequal_width": "cf6d90a694455ee99fb51e1b945b46bca08fd91c1bbf9f788bcc2a58bbcd0864"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "prior_reg": {
+      "candidate": 0.001,
+      "control": 0.0
+    },
+    "prior_regularizer": {
+      "candidate": "coulomb",
+      "control": "vicreg"
+    }
+  },
+  "values": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "view_revision": 9
+}

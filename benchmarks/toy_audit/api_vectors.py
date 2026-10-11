@@ -625,7 +625,7 @@ class VectorFixture:
         self.opt_g, self.opt_d = self.recipe.make_optimizers(generator, critic, prior, ema_critic=self.ema_critic, foreach=False, fused=False)
         self.loss = self.recipe.make_loss()
         self.penalty = self.recipe.make_critic_penalty(self.opt_d)
-        self.regularizer = self.recipe.make_prior_regularizer()
+        self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
         self.latent_rng = torch.Generator(device=self.device).manual_seed(self.seed + 1)
         self.base_rates = [[group["lr"] for group in optimizer.param_groups] for optimizer in (self.opt_g, self.opt_d)]
         self.update_counts = dict(g=0, d=0)

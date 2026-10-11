@@ -56838,6 +56838,924 @@
       ]
     },
     {
+      "candidate_id": "bcap-dualnorm--733d4808e8272ec8643e62bca837494b678ad55b9300a75f5ceeafc4cd4e01b9",
+      "candidate_revision": "3e702b1886d961b273341c4a37e643b3b6b6e627372f5c87cf6ae1fb6986eab5",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 13, 'PASS': 15, 'UNKNOWN': 2}. Failed requirements: gaussian1d_stability, five_word_joint_hold, mode_hold, vector_unequal_mass, vector_unequal_width, vector_anisotropic, vector_overlap, img_bars4, img_blobs4, img_intensity2, grid100, rotated100, staggered100.",
+      "configuration_id": "733d4808e8272ec8643e62bca837494b678ad55b9300a75f5ceeafc4cd4e01b9",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "065b3cfe0ac64bf0bbdf1248df03ea41",
+            "result_hash": "fe8ab5380c1fcf22f0b3f9f93b58f18af8dfae6d2cbd09bc60b101dda8be2c16",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "159dc33f89944ad9aa8d11eab1ca3d56",
+            "result_hash": "2d9134296cbd9e68b55520213f60de53178a0796b70466f9ecfa8e7a2bd775a5",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "18db0b8b5be74754865e68b4e96c5884",
+            "result_hash": "d7ae755a1fdd2511ffc0a448725ebbfa2b68275a31eb3e258db65ce679d3ce42",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "19d0874cefb44b0fa31b10baab217286",
+            "result_hash": "c4dc8eb39d25a1be145c716a2349c01f999cca4af070d5be9224f68eb8535e73",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "1bd80a511b804ba5857a72f194bf6d44",
+            "result_hash": "5dbf994cfa3f2755c1fbe4917de2f7e6e49f526b4902cc846a47dbb19bf396d3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "21459f00cc274bfc978199fdadc1649d",
+            "result_hash": "b8364a4756839f993a16d41db9345ce53c475a2e67015e0d31ce045ac9f0a58a",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "25d03dd8ccb94388953b373e3e739dae",
+            "result_hash": "4339baaa04b8ad907a87913300ab406b8ebc48d19b9ddc2310713399e0511a6e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "2857789ca7094abb88dd299a324803c0",
+            "result_hash": "5425b6bb1c386ed915a02491813d81fb5456497f97c096583d826a190435e1e2",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "2b29301e76b443ed90396d4b24c4381c",
+            "result_hash": "a95b7d535ff12635cb089e6cca5c313c1af2cee2578b9ffcc2102730918494e2",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "357714011e514d77824210312002da01",
+            "result_hash": "f589099d539220b11a527bbadaa5afeb618c15245581e67f5a40dc81c5b34c79",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3acdbc69577e43f6bff2f030176c0424",
+            "result_hash": "3d1d54eea6c8e377d683fe8859935b3fe406e901d08cdf6334d45a16cb71740e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3e8969a01f964162856849eeaf116d19",
+            "result_hash": "55e79d85afc966676d034f9da980bc77d149d699c52c13efafa6aa87caa14794",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3ffb94d4acb0434b9f2e3832014b75e5",
+            "result_hash": "e872e895f50f473d308d8dd38971918a21c14608f9f4572cb43435e68286f0c1",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "481ef17fee694189af14d8cf69f00340",
+            "result_hash": "167836ce77f7cbec936e1e65fa59c41d5c599bb6e974b1356337a61f7db1cd8b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "5ec9f5d014ef412e9d6b03a86c49af71",
+            "result_hash": "d93f48e94b9089154f7dd5be2b3c256292897ec27417f2f42c6db371648d0466",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "6df88a49a70c4f4b8263301f85880452",
+            "result_hash": "a2fcade6326c902c3e4b3414b73e37edd25a6c241487a80899993bb3f7886678",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "82f3124726aa4ecc8156f370bfa78b23",
+            "result_hash": "2d036c229f0620632416213d6f2263a9dc6442d2a7d0b511075357c6a57db476",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "8e716f6467d84bc18b966cd1b3d13c72",
+            "result_hash": "526456013ac146268ef454567c10590fea56c464f9bdea605d66efeffdad50b3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9fbb8c686b9a4a16ae3a1e4a5a5687ce",
+            "result_hash": "102a5905352ac2aa44ddef85a8359c1c5fabb3144a15c4cca83dbc3896605473",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a2b8db3fa2a247a48d013a8393b7ca2e",
+            "result_hash": "faf9d2b353502134e00f51c574b62c301c31d62c452d51b028c9c040f329e569",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b1b2290704ce4c8395a393bce879608d",
+            "result_hash": "dcb76501ac152ce5763418fd88aaa57dd1baf7adfde74daef213fd2f6b67dac8",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "bbcd93fad593434b87419e65088b53ef",
+            "result_hash": "ac366a77fcc6f5b525eacafa536d305906ee2b4ecec066f422b31d854c6828c9",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "cb669543971c416fb45fe467d4aca6f0",
+            "result_hash": "78d3431e9119b46c71ff120cf971848d3d2eda0f83f7e13f7ce07584de1fbb32",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d07f55da517944e99fa3b7c71a83e76a",
+            "result_hash": "298442a01ae7daa9f756f2af0aa65fb4677c73c9a9d42547ac496e7030e48ea4",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "e7c4eb8ca0494418923331666feb97de",
+            "result_hash": "d87132b8f9deb0924c6a932cf545f9dd22a604e2a9a19ea5c17ef6bd9b573f20",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "f1620ad9226148c186d4c43ea89ecbc9",
+            "result_hash": "c341ef4969370f0971848983e0871f183eff2c82a7eec986a7717b948f4fa16b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "f8012d8ff2c4463e96bf98a3e736c1d9",
+            "result_hash": "7e6d03abd1d4259e9bd255728faa01f98556979535bbbf0d498aefbc0ba49124",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "fd111cf05033438d8c69410dbf72a1da",
+            "result_hash": "0b05e48eda1f351bc0bc0c59e3a1c25f9f824282658f850da6bd6aee64c05c42",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "3bf4d54fb052a8a212adf95232cf2dcad4b23ef34a3edd9417f9b4820f41ec29",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "f56cd32fd97769f6863f8709efd3c96a4137349b46882124c713d1917d9d062c"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-4c04f89be1dfcb7d0753f3e1",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 2223.7316252969904,
+        "new_paid_wall_seconds": 2223.7316252969904,
+        "wall_seconds": 2223.7316252969904
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 14,
+        "required_statuses": {
+          "FAIL": 13,
+          "PASS": 14,
+          "UNKNOWN": 2
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 6,
+            "required_total": 6,
+            "statuses": {
+              "PASS": 6
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 8,
+            "required_total": 21,
+            "statuses": {
+              "FAIL": 13,
+              "PASS": 8
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 14,
+        "tuning_required_total": 27
+      },
+      "schema_version": 1,
+      "settings": {
+        "prior_reg": 0.01
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/bcap-prior-coulomb-search-v1.json",
+        "sha256": "d6ae075972c85f16be9590a4496b2b03ac30854246788c85cb546794e9dd58ed"
+      },
+      "status": "FAIL",
+      "study_id": "bcap-prior-coulomb-search-v1",
+      "task_results": [
+        {
+          "_attempt_id": "3e8969a01f964162856849eeaf116d19",
+          "compatibility_key": "8d809f92baabaee2d55ce2053793ca43d068427c46d4ecff2decf39c48f67cd5",
+          "cost": {
+            "wall_seconds": 18.626146331007476
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.05626667547287978,
+            "finite_fraction": 1.0,
+            "mean": 2.016519438038813,
+            "mean_error_sigma": 0.0330388760776259,
+            "sample_count": 4096,
+            "std": 0.49059353848468734,
+            "std_ratio": 0.9811870769693747,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "159dc33f89944ad9aa8d11eab1ca3d56",
+          "compatibility_key": "d78831d61601e672ea0d69d80af73b657fdb2499ff34dc0ff9316cdca68afbe4",
+          "cost": {
+            "wall_seconds": 6.997577501999331
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.9523457288742065,
+            "mean_abs": 0.958502471446991
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "3ffb94d4acb0434b9f2e3832014b75e5",
+          "compatibility_key": "c7257caff7eca92a99a3fe4868f5569f06351d538329aa831a1fc4d615905bc2",
+          "cost": {
+            "wall_seconds": 8.233942154009128
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9593252904536698,
+            "unused_hold": 0.9867020286619663
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "19d0874cefb44b0fa31b10baab217286",
+          "compatibility_key": "8c2a0f15ab7c1be761e9bd696f549d6d3cb06616996526995124a742c0819a1d",
+          "cost": {
+            "wall_seconds": 10.20080687799782
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.013185475952923298,
+            "recon_mse": 0.005571076180785894
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "bbcd93fad593434b87419e65088b53ef",
+          "compatibility_key": "22e32e02d63472194ede9643995cb55ba6bf98aa71c73917946c3d97aab38f52",
+          "cost": {
+            "wall_seconds": 33.02078790499945
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.44968064315617085,
+            "component_core_min_eigen_ratio": 0.31807905435562134,
+            "component_covariance_error": 0.5294637316837907,
+            "component_min_eigen_ratio": 0.32870057225227356,
+            "covariance_error": 0.06921763718128204,
+            "hq": 0.947998046875,
+            "mass_tv": 0.076416015625,
+            "max_component_spill": 0.10294117778539658,
+            "mean_error": 0.04745950177311897,
+            "min_hq_mass_ratio": 0.71875,
+            "min_mass_ratio": 0.78125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.03854979320655835,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "18db0b8b5be74754865e68b4e96c5884",
+          "compatibility_key": "247fbb763b5f68bf4969e8d44b9ab68d828e8bec30953cfd622b9bf023956799",
+          "cost": {
+            "wall_seconds": 806.4970513580047
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1953125,
+            "mass_berry": 0.2109375,
+            "mass_grape": 0.1982421875,
+            "mass_lemon": 0.1875,
+            "mass_melon": 0.2080078125,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9991045594215393,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 5.4082618612454666e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "6df88a49a70c4f4b8263301f85880452",
+          "compatibility_key": "5a3b58ab79ba4e55edc57885b86556e6f29536f0c4e7c3345e454ec6597992e3",
+          "cost": {
+            "wall_seconds": 7.111882102995878
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "_attempt_id": "5ec9f5d014ef412e9d6b03a86c49af71",
+          "compatibility_key": "c11c382b0b446a92da1844ce05b3effe0a55e2d5eddeb7649797b56d2fcdc935",
+          "cost": {
+            "wall_seconds": 69.06194875598885
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.12518430205794956,
+            "finite_fraction": 1.0,
+            "mean": 3.185061404539738,
+            "mean_error_sigma": 0.3701228090794757,
+            "sample_count": 4096,
+            "std": 0.532396500789099,
+            "std_ratio": 1.064793001578198,
+            "step": 6000
+          },
+          "qualification_tier": 2,
+          "reason": "stationary hold, deadline reacquisition and shifted hold",
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "_attempt_id": "2857789ca7094abb88dd299a324803c0",
+          "compatibility_key": "9352cf49a378f9861fb038d27628b8e63c507ec988d86f9d9f07c5bbb705e3b6",
+          "cost": {
+            "wall_seconds": 169.5212029779941
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 8167.0,
+            "mass_apple": 0.1953125,
+            "mass_berry": 0.189453125,
+            "mass_grape": 0.19921875,
+            "mass_lemon": 0.22265625,
+            "mass_melon": 0.193359375,
+            "mass_tv": 0.022656250000000017,
+            "minimum_reconstruction_token_probability": 0.9999068975448608,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 1.526321217741662e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 8167
+          },
+          "qualification_tier": 2,
+          "reason": "every joint generation/inverse check throughout the fixed continuation window",
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "_attempt_id": "fd111cf05033438d8c69410dbf72a1da",
+          "compatibility_key": "580130be7f8dea5e4b55669b06a7f01f05b23c6a4cf4e0dceb12be6832beaaba",
+          "cost": {
+            "wall_seconds": 14.447804973009625
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0002388424181845039
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "trajectory"
+        },
+        {
+          "_attempt_id": "8e716f6467d84bc18b966cd1b3d13c72",
+          "compatibility_key": "520bc4e4c8bab40ad9dff182fe4cd40725073dab385f8a5ead3170b700fe8478",
+          "cost": {
+            "wall_seconds": 15.178705735001131
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.00017448938160669059,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "residual_student"
+        },
+        {
+          "_attempt_id": "2b29301e76b443ed90396d4b24c4381c",
+          "compatibility_key": "0c6bd64115efe4b64ff6c05f6780f80c01b39086cdb71193731e8241a4e58607",
+          "cost": {
+            "wall_seconds": 12.212032722993172
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cover": 0.9937999520132479,
+            "neu_hold": 0.9897867292165756,
+            "off_caption": 6.617476388517429e-05
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unipolar"
+        },
+        {
+          "_attempt_id": "357714011e514d77824210312002da01",
+          "compatibility_key": "09195ffc42840dba4ec977438240ba363217cfb127b3da5243ae1638c986c3ab",
+          "cost": {
+            "wall_seconds": 24.28747277900402
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "content_kept": 0.9768986524347394,
+            "leak_ratio": 0.010719794000858209,
+            "pole_rel_err_minus": 0.012354791164398193,
+            "pole_rel_err_plus": 0.01613752916455269,
+            "same_dir": 0.016311390076069826,
+            "u_kept": 0.9875426789711614
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "cover_leftover"
+        },
+        {
+          "_attempt_id": "21459f00cc274bfc978199fdadc1649d",
+          "compatibility_key": "f5007b3eed4f2189e84a370a64fe86cf14293f5902b4d7616e1cff21ffa90c48",
+          "cost": {
+            "wall_seconds": 26.685884884005645
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_cos_minus": 0.9999618530273438,
+            "concept_cos_plus": 0.9999440908432007,
+            "concept_mag_minus": 1.0001335144042969,
+            "concept_mag_plus": 1.002039909362793,
+            "identity_at_0": 0.9847965896770511,
+            "identity_at_mid": 0.9929965628901036
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "_attempt_id": "1bd80a511b804ba5857a72f194bf6d44",
+          "compatibility_key": "06824122ec1e726df2fff381b0e5d10bcef9cc822daceeba4e444499438ad976",
+          "cost": {
+            "wall_seconds": 42.42701216500427
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.875,
+            "effective_modes": 6.645655632019043,
+            "hq": 0.9326171875,
+            "modes": 7,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        },
+        {
+          "_attempt_id": "3acdbc69577e43f6bff2f030176c0424",
+          "compatibility_key": "4f766f91ea8e47735ef93b245aa21e34c3d9025d28487dad51b01b406b0a15a3",
+          "cost": {
+            "wall_seconds": 26.46786312898621
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.5278382748365402,
+            "component_core_min_eigen_ratio": 0.3197527527809143,
+            "component_covariance_error": 0.5278382748365402,
+            "component_min_eigen_ratio": 0.3197527527809143,
+            "covariance_error": 0.37410950660705566,
+            "hq": 0.96728515625,
+            "mass_tv": 0.040771484375,
+            "max_component_spill": 0.06049661338329315,
+            "mean_error": 0.20775987207889557,
+            "min_mass_ratio": 0.91845703125,
+            "resolved_core_covariance_error": 0.5278382748365402,
+            "resolved_core_min_eigen_ratio": 0.3197527527809143,
+            "resolved_max_component_spill": 0.06049661338329315,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.1723404589918514,
+            "target_scale": 1.0555585622787476
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
+        },
+        {
+          "_attempt_id": "9fbb8c686b9a4a16ae3a1e4a5a5687ce",
+          "compatibility_key": "6ee13afc1f31276a8821a96d019dc5c14ece5ff56ef1464daf488380cc295555",
+          "cost": {
+            "wall_seconds": 26.533398579005734
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.5256581902503967,
+            "component_core_min_eigen_ratio": 0.06357821077108383,
+            "component_covariance_error": 1.2176814824342728,
+            "component_min_eigen_ratio": 0.06357821077108383,
+            "covariance_error": 0.21662163734436035,
+            "hq": 0.9833984375,
+            "mass_tv": 0.07898438721895218,
+            "max_component_spill": 0.03888335078954697,
+            "mean_error": 0.22423645853996277,
+            "min_mass_ratio": 0.8056640625,
+            "resolved_core_covariance_error": 0.42221277952194214,
+            "resolved_core_min_eigen_ratio": 0.4263218343257904,
+            "resolved_max_component_spill": 0.03888335078954697,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.15992214563644588,
+            "target_scale": 1.7593294382095337
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "_attempt_id": "cb669543971c416fb45fe467d4aca6f0",
+          "compatibility_key": "61621f22fa3ef4cda40a9b593734141346d3d077a3d53100486654902197e618",
+          "cost": {
+            "wall_seconds": 26.321809336994193
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.531838096678257,
+            "component_core_min_eigen_ratio": 0.25898975133895874,
+            "component_covariance_error": 9.375255160033703,
+            "component_min_eigen_ratio": 0.3710017800331116,
+            "covariance_error": 0.16604843735694885,
+            "hq": 0.970703125,
+            "mass_tv": 0.301025390625,
+            "max_component_spill": 0.15019762516021729,
+            "mean_error": 0.37792161107063293,
+            "min_mass_ratio": 0.2470703125,
+            "resolved_core_covariance_error": 0.531838096678257,
+            "resolved_core_min_eigen_ratio": 0.25898975133895874,
+            "resolved_max_component_spill": 0.15019762516021729,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.28516901905922765,
+            "target_scale": 2.1343955993652344
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "_attempt_id": "065b3cfe0ac64bf0bbdf1248df03ea41",
+          "compatibility_key": "e5957af43320a3af94adf98ce059757693c4f3869af470561c783ba29787adbb",
+          "cost": {
+            "wall_seconds": 26.008554018990253
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.3286788910627365,
+            "component_core_min_eigen_ratio": 0.07466095685958862,
+            "component_covariance_error": 17.719346245129902,
+            "component_min_eigen_ratio": 0.9621944427490234,
+            "covariance_error": 0.7700392603874207,
+            "hq": 0.882568359375,
+            "mass_tv": 0.2898762822151184,
+            "max_component_spill": 0.7471910119056702,
+            "mean_error": 0.430046409368515,
+            "min_mass_ratio": 0.13037109375,
+            "resolved_core_covariance_error": 0.3286788910627365,
+            "resolved_core_min_eigen_ratio": 0.07466095685958862,
+            "resolved_max_component_spill": 0.7471910119056702,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.34801919844430285,
+            "target_scale": 2.032285690307617
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "_attempt_id": "82f3124726aa4ecc8156f370bfa78b23",
+          "compatibility_key": "cd899b53e4e7f5f9daef6be5bdd119da66ff004b5035d28453b3503a844a0f13",
+          "cost": {
+            "wall_seconds": 25.852618680990417
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "covariance_error": 0.12299823760986328,
+            "mean_error": 0.41199779510498047,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2513695357478014,
+            "target_scale": 0.8501437306404114
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_overlap"
+        },
+        {
+          "_attempt_id": "b1b2290704ce4c8395a393bce879608d",
+          "compatibility_key": "2c9b0af29d16e0c80cc32f9af1c1b932b5ef5b99ba4cd145840187402018e2c0",
+          "cost": {
+            "wall_seconds": 31.854204271992785
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "covariance_error": 0.06771405041217804,
+            "mean_error": 0.05010802298784256,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.04520110799303506,
+            "target_scale": 1.224178433418274
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_spiral"
+        },
+        {
+          "_attempt_id": "a2b8db3fa2a247a48d013a8393b7ca2e",
+          "compatibility_key": "f3519bd8f29fe543b92876745197f458c5e790c9b6be3c2360228efc2e12218a",
+          "cost": {
+            "wall_seconds": 27.576813623003545
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.09375,
+            "hq": 1.0,
+            "mean_rmse": 6.855063838884234e-05,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_stripes2"
+        },
+        {
+          "_attempt_id": "25d03dd8ccb94388953b373e3e739dae",
+          "compatibility_key": "a663eec294e2a170a47fa0b1496d37857b524e8c6522cb57808cd2bf382eba4a",
+          "cost": {
+            "wall_seconds": 26.67469799700484
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.4375,
+            "hq": 0.9375,
+            "mean_rmse": 0.023241829127073288,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_bars4"
+        },
+        {
+          "_attempt_id": "e7c4eb8ca0494418923331666feb97de",
+          "compatibility_key": "b65e3b0030e424d8492371908859a6d653b69d6770c6017af817a96c266d1560",
+          "cost": {
+            "wall_seconds": 26.94538896199083
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.1875,
+            "hq": 0.9375,
+            "mean_rmse": 0.02296261116862297,
+            "modes": 3,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_blobs4"
+        },
+        {
+          "_attempt_id": "f1620ad9226148c186d4c43ea89ecbc9",
+          "compatibility_key": "056d394be30cfb1b6f326c1dcb121a8731c431475ca74c110a0ec07e146db06a",
+          "cost": {
+            "wall_seconds": 26.621758496010443
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.5625,
+            "mean_rmse": 0.059953752905130386,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2"
+        },
+        {
+          "_attempt_id": "d07f55da517944e99fa3b7c71a83e76a",
+          "compatibility_key": "2ce98bdeeeba973fdb6207098bf1f6d94a8f22a53fbe1276d6417d8794653421",
+          "cost": {
+            "wall_seconds": 236.02089810000325
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.4756742928395199,
+            "accuracy_pass": false,
+            "accuracy_score": 6.006093900546812,
+            "all_finite": true,
+            "center_max_sigma": 2.3669291859000845,
+            "center_rms_sigma": 1.2929623912727708,
+            "cov_frob_rms": 0.6701145001960702,
+            "cov_trace_bias": 0.4756742928395199,
+            "frozen_pass": false,
+            "mass_tv": 0.1423,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.2803,
+            "precision_gap": 0.7085910034617577,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.41724616203046117,
+            "valid_n": 100000,
+            "within_radius_n": 28030
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "grid100"
+        },
+        {
+          "_attempt_id": "481ef17fee694189af14d8cf69f00340",
+          "compatibility_key": "8fd4bf6b4ee03a622df72a86259b3b8d6460a92c25eeb8a7211fc5b5b0f02424",
+          "cost": {
+            "wall_seconds": 222.79018142800487
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.5064469210772169,
+            "accuracy_pass": false,
+            "accuracy_score": 5.931555601463502,
+            "all_finite": true,
+            "center_max_sigma": 2.7448956632870445,
+            "center_rms_sigma": 1.3058162755534444,
+            "cov_frob_rms": 0.7697736650260695,
+            "cov_trace_bias": 0.5064469210772169,
+            "frozen_pass": false,
+            "mass_tv": 0.13708,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.28116,
+            "precision_gap": 0.7077310034617577,
+            "problem": "rotated100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.393920206025918,
+            "valid_n": 100000,
+            "within_radius_n": 28116
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "rotated100"
+        },
+        {
+          "_attempt_id": "f8012d8ff2c4463e96bf98a3e736c1d9",
+          "compatibility_key": "69edca89cdda0f442c1f68406db6f1c14a16af3c6ca4e403e41fa80e97ca6897",
+          "cost": {
+            "wall_seconds": 229.55317944999842
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.4982034698759994,
+            "accuracy_pass": false,
+            "accuracy_score": 5.737013796900917,
+            "all_finite": true,
+            "center_max_sigma": 2.0235130698561097,
+            "center_rms_sigma": 1.2218021135617705,
+            "cov_frob_rms": 0.6786831751189781,
+            "cov_trace_bias": 0.4982034698759994,
+            "frozen_pass": false,
+            "mass_tv": 0.12469,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.32204,
+            "precision_gap": 0.6668510034617577,
+            "problem": "staggered100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.3911537301747262,
+            "valid_n": 100000,
+            "within_radius_n": 32204
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
       "candidate_id": "bcap-tier2-search-v1--11",
       "conclusion": "Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -112373,6 +113291,924 @@
       ]
     },
     {
+      "candidate_id": "bcap-dualnorm--ee1193aa41553193ec3eb0d5bcf5aec53951c0b62b30ffa7f9b7ae07e8384f33",
+      "candidate_revision": "ac7fee04e7151cd2fb248dc256b9b76577ebd769734cb51c7589f4ce248444a4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 13, 'PASS': 15, 'UNKNOWN': 2}. Failed requirements: gaussian1d_stability, mode_hold, vector_two_broad, vector_unequal_mass, vector_unequal_width, vector_anisotropic, vector_overlap, img_bars4, img_blobs4, img_intensity2, grid100, rotated100, staggered100.",
+      "configuration_id": "ee1193aa41553193ec3eb0d5bcf5aec53951c0b62b30ffa7f9b7ae07e8384f33",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "00478d42ee4e4eb8b291188b2bbcdac9",
+            "result_hash": "4320f2ab4ee9611ad2b8bb3b08d5fdaafebc1bbd3f298ef04ceb282cb9105dba",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "175bcbc80755451a89ac538df3194100",
+            "result_hash": "df31bffa7264450e10e2e00ae19deaa601ad21696f6e841212eea2546402887d",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "1792a88b0eda4ce88f9762965ffdc77c",
+            "result_hash": "f1497ed9e298578ff59f4f589ab8f500213e953c3c2f9db1e4c816960141c3b8",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "1fd72acbef414a0ab43b380ae9a9d17d",
+            "result_hash": "627bbf7f61c9d40fa53c87ae3b8e793f461018be790d3ce0e275b7e40c587d79",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "29043fcc989c4a4ea8fa0f1aa24ff274",
+            "result_hash": "348a93253773c7538f312786bcf19cf770fb76e91920f36f10ced89400d87a54",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3df1b2cd25034135ab33f6dbb83c7df4",
+            "result_hash": "6313d086909f57492cc5bfd08ed92f8bf0e3092b5f61e6d3cd15b0b3fad85e4f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3e35791ceb6241908822f539c15d06b4",
+            "result_hash": "133beb4a7440519ed2169b25275ee98f53fef3bc0af4bcc46b3f2694b365f8c8",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "46545420cb214fdb9010a5a8676cf925",
+            "result_hash": "0efac04ccdf1a48e90b2ed7344abac59c4fbd020e15bd0821feb6befa25f623f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "4b99e261ce764350ab49026603269a69",
+            "result_hash": "2232c2ea60c6b70d552c4b373cce16e0a11575e48c629cb6d6b4e33fe9d0d227",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "581c8a55dffe44b484bdde21b9eb4010",
+            "result_hash": "5546fe0d47290c9e94133152636135b848c59ca9bcf8d26eed0c1a247e9a7c23",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "5fc2360e9585437c8e4cb72a3d3b4b7f",
+            "result_hash": "5aa4da1e649a8b81ff9e00e8a27a7cf498016e2c28bfd72f41a86a766950e087",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "6e3d085cde7e443db853d4fba751fe55",
+            "result_hash": "18d0c66f1c79485d3352ceba033efd32b5a221e7b792d14fefc8d5142ad99cc9",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "6fcf459a5313422885f1d3b409eb5abd",
+            "result_hash": "e857b0dd7a42af5dd75fcd32b66f7d3cc54ab12056935f3e63e5297c3ccb87db",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "7b8d3c968f0f4f5da9da3ddff00c2881",
+            "result_hash": "0dfca8ce318325cdb2e4b46ca02022e33043dd2db4cc1465c141ffe87015735a",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "88f2b740be8d4650aaf362b7b426dcf4",
+            "result_hash": "9604a21ba4b7e20c9b325af61ea8edaab06a407605b061f5905a042cd0902b55",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "8ffb986810ef46cf900ad497dda79a4e",
+            "result_hash": "c1d935ec119373a3f7d400ca15e9702dbbc4b049d886440ff8184cb8a98dd276",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9dca8eb0c41a443b8096c20cea145b13",
+            "result_hash": "c5066529a5270d2dcf203dd8c7327264a87be197820389ca9d5a20e1639c71b1",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a0867959b0d9475ba1d0d3f7d695d17d",
+            "result_hash": "a4e9b405a3cea499acbcaffa0b4851f40b3bd953d4fbaad36de1e00ac7bd7178",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a52a535a243344209abeaf5faae5966d",
+            "result_hash": "1f1d9bf3cc21d5b98f1b7203d58f709ac2066deed04950ec13ba772f73913338",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a880b2c7d7ac4639a27a5d2455732804",
+            "result_hash": "588f36896faa2c67489e00a4b4b86a5d65fd6c5b2899c08ad4f67770d87b7924",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "aadef3cd0ac3491cbf9c932901bc0a75",
+            "result_hash": "7e2e793c762897caffe3e41a0789a3202ae85e546ea07570efd66af498e50cda",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "af5cde3400a641d7b826d618f2b1ca40",
+            "result_hash": "1f440cb3122b7cf6bf2644b47e51e236c2c5a55bcf91c02eb20a533ea0e00bcf",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b99d1caa7d584cfeb6c1765647b0981d",
+            "result_hash": "b21753e93087134aef89e22dbb284b35e4d4deb2491e4953e594bdf074a517f6",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d65f0cb67ed24bf1a6cb11b5d741d655",
+            "result_hash": "c9035d13bfe95a1d4b1f772a7d121c48ff5d1aa635fb6b30c60dff88ca53647c",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "dc49208a87004e4da018cc27cdcb2137",
+            "result_hash": "36754e7514abec0ab470b86229deef3e5c9188f5cc4b7d79badf94a96ba4e52c",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "ec0fe7fdcb4d4227ae36f1b8163a3c8e",
+            "result_hash": "2bddceef0d3b8fbe0347565d1e19f7927922dc7a4f9102501e2d43924934d42c",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "ec7060f62d304d0abdc59cffb9dcb4c1",
+            "result_hash": "346428236dc380d6001f3a7216d304569d045ceb5044646115f160d357929a84",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "f900546721164b0f8b421561f097d149",
+            "result_hash": "e65681a1cc9d54643bc7192b4c4758e77f8800537a2e533e2e39014579c6024e",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "cb7a933aa71fb723f078e2cd66cf55e1f87e842fda8e6188f6985a904e29bf79",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "f56cd32fd97769f6863f8709efd3c96a4137349b46882124c713d1917d9d062c"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-b29cf910b82155f703a789d7",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 2229.4082101100357,
+        "new_paid_wall_seconds": 2229.4082101100357,
+        "wall_seconds": 2229.4082101100357
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 14,
+        "required_statuses": {
+          "FAIL": 13,
+          "PASS": 14,
+          "UNKNOWN": 2
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 6,
+            "required_total": 6,
+            "statuses": {
+              "PASS": 6
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 8,
+            "required_total": 21,
+            "statuses": {
+              "FAIL": 13,
+              "PASS": 8
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 14,
+        "tuning_required_total": 27
+      },
+      "schema_version": 1,
+      "settings": {
+        "prior_reg": 0.1
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/bcap-prior-coulomb-search-v1.json",
+        "sha256": "d6ae075972c85f16be9590a4496b2b03ac30854246788c85cb546794e9dd58ed"
+      },
+      "status": "FAIL",
+      "study_id": "bcap-prior-coulomb-search-v1",
+      "task_results": [
+        {
+          "_attempt_id": "aadef3cd0ac3491cbf9c932901bc0a75",
+          "compatibility_key": "871808d7d35e437f448e7cfaa9fcff78dcf5ca2082ae7dd32758d6d526846c60",
+          "cost": {
+            "wall_seconds": 18.918248233007034
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.13436665449218654,
+            "finite_fraction": 1.0,
+            "mean": 2.1509250523959054,
+            "mean_error_sigma": 0.30185010479181074,
+            "sample_count": 4096,
+            "std": 0.5330820729796356,
+            "std_ratio": 1.0661641459592712,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "1792a88b0eda4ce88f9762965ffdc77c",
+          "compatibility_key": "c011cedef454c0f8c69f0f43506755afb2b1e1838820daeb48e337c48088b300",
+          "cost": {
+            "wall_seconds": 6.8750123840000015
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.9523457288742065,
+            "mean_abs": 0.958502471446991
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "4b99e261ce764350ab49026603269a69",
+          "compatibility_key": "707789b879ac4fc86d399a42de99086d668e5791398e68add28895ca21e62b34",
+          "cost": {
+            "wall_seconds": 8.178528315998847
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9593252904536698,
+            "unused_hold": 0.9867020286619663
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "d65f0cb67ed24bf1a6cb11b5d741d655",
+          "compatibility_key": "b680927e6b3ba352f3c64c1db342a5a7fe5f62c22cb0f3c5d724f2c510e13e7d",
+          "cost": {
+            "wall_seconds": 10.47077678599453
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.030768046155571938,
+            "recon_mse": 0.009659679606556892
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "7b8d3c968f0f4f5da9da3ddff00c2881",
+          "compatibility_key": "6aed2dc67b326815c0db735a704f801968899d5e4f3e1c077712ffa9907d647e",
+          "cost": {
+            "wall_seconds": 32.744901883997954
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.4630359672009945,
+            "component_core_min_eigen_ratio": 0.2148018181324005,
+            "component_covariance_error": 0.5400696443393826,
+            "component_min_eigen_ratio": 0.21878568828105927,
+            "covariance_error": 0.06569603085517883,
+            "hq": 0.9326171875,
+            "mass_tv": 0.068115234375,
+            "max_component_spill": 0.1818181872367859,
+            "mean_error": 0.035176437348127365,
+            "min_hq_mass_ratio": 0.59765625,
+            "min_mass_ratio": 0.73046875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.03702837750910527,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "3df1b2cd25034135ab33f6dbb83c7df4",
+          "compatibility_key": "99052fede2eca087839f4338feb64b40e1189debb0b58ee7468daa94f25629e7",
+          "cost": {
+            "wall_seconds": 814.3125616960024
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2109375,
+            "mass_berry": 0.2080078125,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.1875,
+            "mass_melon": 0.1982421875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9999887943267822,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 2.241140395664153e-06,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "dc49208a87004e4da018cc27cdcb2137",
+          "compatibility_key": "964ed5fe010fdda7f4c5fc2d58d86da7f1eac8c3a62681a239a3a0afaa742884",
+          "cost": {
+            "wall_seconds": 6.924585355998715
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "_attempt_id": "3e35791ceb6241908822f539c15d06b4",
+          "compatibility_key": "1ee67bb53bab48ea93f9f5be2e9d13f4e9ffb415d705cf5bacae03f4cdc694cb",
+          "cost": {
+            "wall_seconds": 69.49639373201353
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.1305723760585955,
+            "finite_fraction": 1.0,
+            "mean": 2.9840273617301136,
+            "mean_error_sigma": 0.03194527653977275,
+            "sample_count": 4096,
+            "std": 0.34014426972093476,
+            "std_ratio": 0.6802885394418695,
+            "step": 6000
+          },
+          "qualification_tier": 2,
+          "reason": "stationary hold, deadline reacquisition and shifted hold",
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "_attempt_id": "a52a535a243344209abeaf5faae5966d",
+          "compatibility_key": "5ef7d114d02f167461e754f77f08fe35d52d485433283a31f2a47bd9995655b9",
+          "cost": {
+            "wall_seconds": 174.24314441499882
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 4834.0,
+            "mass_apple": 0.19140625,
+            "mass_berry": 0.193359375,
+            "mass_grape": 0.205078125,
+            "mass_lemon": 0.2158203125,
+            "mass_melon": 0.1943359375,
+            "mass_tv": 0.020898437500000006,
+            "minimum_reconstruction_token_probability": 0.999995231628418,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 1.148384071572352e-06,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 4834
+          },
+          "qualification_tier": 2,
+          "reason": "every joint generation/inverse check throughout the fixed continuation window",
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "_attempt_id": "b99d1caa7d584cfeb6c1765647b0981d",
+          "compatibility_key": "f884463898bd444f38129c914388a761a790255e3ccfe48f82a471b3ac3fce9d",
+          "cost": {
+            "wall_seconds": 14.141229001004831
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0003655310138128698
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "trajectory"
+        },
+        {
+          "_attempt_id": "88f2b740be8d4650aaf362b7b426dcf4",
+          "compatibility_key": "3370a5cea2e367605a583bf466fd0806815843d0076e1101408ee31c9d6b8d5b",
+          "cost": {
+            "wall_seconds": 14.784592363008414
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0002110027417074889,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "residual_student"
+        },
+        {
+          "_attempt_id": "00478d42ee4e4eb8b291188b2bbcdac9",
+          "compatibility_key": "17b29f1861038b3e2794f8ae85420c90f220f25aa82542f4f8a02e97ee5e2211",
+          "cost": {
+            "wall_seconds": 11.823840591008775
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cover": 0.9937999520132479,
+            "neu_hold": 0.9897867292165756,
+            "off_caption": 6.617476388517429e-05
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unipolar"
+        },
+        {
+          "_attempt_id": "f900546721164b0f8b421561f097d149",
+          "compatibility_key": "695c94d1e884ee2cf5249402a83a6a91fc56d28accf011f0c695335f8e1c234c",
+          "cost": {
+            "wall_seconds": 24.705913476995192
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "content_kept": 0.971362789872816,
+            "leak_ratio": 0.028740016424771163,
+            "pole_rel_err_minus": 0.02357904054224491,
+            "pole_rel_err_plus": 0.03266443684697151,
+            "same_dir": 0.012626997521012784,
+            "u_kept": 0.9800636074288257
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "cover_leftover"
+        },
+        {
+          "_attempt_id": "a880b2c7d7ac4639a27a5d2455732804",
+          "compatibility_key": "60a01836a54cfe445ed9bde1184f9a8e011957fc5a198bd78987fce341eda663",
+          "cost": {
+            "wall_seconds": 26.40535974901286
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_cos_minus": 0.9999618530273438,
+            "concept_cos_plus": 0.9999440908432007,
+            "concept_mag_minus": 1.0001335144042969,
+            "concept_mag_plus": 1.002039909362793,
+            "identity_at_0": 0.9847965896770511,
+            "identity_at_mid": 0.9929965628901036
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "_attempt_id": "5fc2360e9585437c8e4cb72a3d3b4b7f",
+          "compatibility_key": "af8f48cd3b3d9ce791090f92ff89bc697cf85b08a5b00e397bf6ad5a842612ec",
+          "cost": {
+            "wall_seconds": 41.396107759996084
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.75,
+            "effective_modes": 5.114006519317627,
+            "hq": 0.901611328125,
+            "modes": 6,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        },
+        {
+          "_attempt_id": "ec7060f62d304d0abdc59cffb9dcb4c1",
+          "compatibility_key": "f12ed0619324e807025e6cb097575441a19b60ff685d07dc2fabeb18446c61c3",
+          "cost": {
+            "wall_seconds": 25.920021077006822
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.4786068946123123,
+            "component_core_min_eigen_ratio": 0.3742630183696747,
+            "component_covariance_error": 0.4786068946123123,
+            "component_min_eigen_ratio": 0.3742630183696747,
+            "covariance_error": 0.31136244535446167,
+            "hq": 0.9912109375,
+            "mass_tv": 0.060546875,
+            "max_component_spill": 0.010555555112659931,
+            "mean_error": 0.1625586897134781,
+            "min_mass_ratio": 0.87890625,
+            "resolved_core_covariance_error": 0.4786068946123123,
+            "resolved_core_min_eigen_ratio": 0.3742630183696747,
+            "resolved_max_component_spill": 0.010555555112659931,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.17502545550273094,
+            "target_scale": 1.0555585622787476
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
+        },
+        {
+          "_attempt_id": "1fd72acbef414a0ab43b380ae9a9d17d",
+          "compatibility_key": "f64bcfb7d4b16754820d0075bd5c59d94dfa9637f7b475f0fed2970c5647603c",
+          "cost": {
+            "wall_seconds": 26.120202171994606
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.5492544770240784,
+            "component_core_min_eigen_ratio": 0.013005588203668594,
+            "component_covariance_error": 0.5486147999763489,
+            "component_min_eigen_ratio": 0.013005588203668594,
+            "covariance_error": 0.270039439201355,
+            "hq": 0.96484375,
+            "mass_tv": 0.07122070342302322,
+            "max_component_spill": 0.04751848056912422,
+            "mean_error": 0.19607584178447723,
+            "min_mass_ratio": 0.7706705331802368,
+            "resolved_core_covariance_error": 0.428389052549998,
+            "resolved_core_min_eigen_ratio": 0.41376855969429016,
+            "resolved_max_component_spill": 0.04751848056912422,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.16334069076267124,
+            "target_scale": 1.7593294382095337
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "_attempt_id": "8ffb986810ef46cf900ad497dda79a4e",
+          "compatibility_key": "fe9ae9b57ce70f9f6433090cc69fd1d9ee0b839128056756f514ca4fd16bac36",
+          "cost": {
+            "wall_seconds": 26.699149556996417
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.38254107534885406,
+            "component_core_min_eigen_ratio": 0.21350990235805511,
+            "component_covariance_error": 0.38254107534885406,
+            "component_min_eigen_ratio": 0.21350990235805511,
+            "covariance_error": 0.2545849084854126,
+            "hq": 0.990966796875,
+            "mass_tv": 0.281494140625,
+            "max_component_spill": 0.016627078875899315,
+            "mean_error": 0.4004104435443878,
+            "min_mass_ratio": 0.2529296875,
+            "resolved_core_covariance_error": 0.38254107534885406,
+            "resolved_core_min_eigen_ratio": 0.21350990235805511,
+            "resolved_max_component_spill": 0.016627078875899315,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2788336388040442,
+            "target_scale": 2.1343955993652344
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "_attempt_id": "ec0fe7fdcb4d4227ae36f1b8163a3c8e",
+          "compatibility_key": "ff9ad57732a82549a3f088368bd1a629158daa37090b356b9e6efe757db95d71",
+          "cost": {
+            "wall_seconds": 26.601406545989448
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.1673018882671992,
+            "component_core_min_eigen_ratio": 0.22332635521888733,
+            "component_covariance_error": 1.0677379816770554,
+            "component_min_eigen_ratio": 0.22332635521888733,
+            "covariance_error": 0.47700127959251404,
+            "hq": 0.985595703125,
+            "mass_tv": 0.2378743439912796,
+            "max_component_spill": 0.03580562770366669,
+            "mean_error": 0.35842204093933105,
+            "min_mass_ratio": 0.286376953125,
+            "resolved_core_covariance_error": 0.1673018882671992,
+            "resolved_core_min_eigen_ratio": 0.22332635521888733,
+            "resolved_max_component_spill": 0.03580562770366669,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2508139054981544,
+            "target_scale": 2.032285690307617
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "_attempt_id": "6e3d085cde7e443db853d4fba751fe55",
+          "compatibility_key": "5cf493f959acb485efc6237b405c106826084053cebe28edbf5b1096e9cfd2a3",
+          "cost": {
+            "wall_seconds": 25.802998835002654
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "covariance_error": 0.31929898262023926,
+            "mean_error": 0.30018356442451477,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.20752486583334764,
+            "target_scale": 0.8501437306404114
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_overlap"
+        },
+        {
+          "_attempt_id": "29043fcc989c4a4ea8fa0f1aa24ff274",
+          "compatibility_key": "3dbf54cc7b7c4605f95467e780c354bc79148ffdd1d16841f6696d4d207c18dc",
+          "cost": {
+            "wall_seconds": 31.29007542099862
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "covariance_error": 0.06343848258256912,
+            "mean_error": 0.06204203888773918,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.04690439781158193,
+            "target_scale": 1.224178433418274
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_spiral"
+        },
+        {
+          "_attempt_id": "9dca8eb0c41a443b8096c20cea145b13",
+          "compatibility_key": "c1d3fad3ad7d93a8bbccae8913823af0767844f445aa2dd3cac3f59b379fc9fc",
+          "cost": {
+            "wall_seconds": 27.673988139998983
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.125,
+            "hq": 1.0,
+            "mean_rmse": 0.0002864720590878278,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_stripes2"
+        },
+        {
+          "_attempt_id": "581c8a55dffe44b484bdde21b9eb4010",
+          "compatibility_key": "b93ed735ea0d3b745a9d44ebee184e1cc507bfec64c0cd671dd8e76ce98f254b",
+          "cost": {
+            "wall_seconds": 26.29380563199811
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.375,
+            "hq": 0.875,
+            "mean_rmse": 0.04206446558237076,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_bars4"
+        },
+        {
+          "_attempt_id": "a0867959b0d9475ba1d0d3f7d695d17d",
+          "compatibility_key": "b242f108a79b089737afdca6e0170aa24b938e08008cf6603ea5a58be7b990a0",
+          "cost": {
+            "wall_seconds": 26.68865073300549
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.15625,
+            "hq": 1.0,
+            "mean_rmse": 0.0028353254310786724,
+            "modes": 4,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_blobs4"
+        },
+        {
+          "_attempt_id": "46545420cb214fdb9010a5a8676cf925",
+          "compatibility_key": "934d95d5f6edb77f3b0871436e57db9e86dfd1a9b1ad3abdeed71fc9a19fcc3d",
+          "cost": {
+            "wall_seconds": 26.72426332300529
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.75,
+            "mean_rmse": 0.05387318506836891,
+            "modes": 2,
+            "step": 600
+          },
+          "qualification_tier": 2,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2"
+        },
+        {
+          "_attempt_id": "175bcbc80755451a89ac538df3194100",
+          "compatibility_key": "53edc5c5cf34026efe1f2b98fe9232df020324ad8090770c2ccd271ba2036592",
+          "cost": {
+            "wall_seconds": 234.0886243010027
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.26509523320030604,
+            "accuracy_pass": false,
+            "accuracy_score": 5.911328415691157,
+            "all_finite": true,
+            "center_max_sigma": 2.4482169217227883,
+            "center_rms_sigma": 1.553458163399822,
+            "cov_frob_rms": 0.5844627870119062,
+            "cov_trace_bias": 0.26509523320030604,
+            "frozen_pass": false,
+            "mass_tv": 0.16482,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.27582,
+            "precision_gap": 0.7130710034617578,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.41920282055049835,
+            "valid_n": 100000,
+            "within_radius_n": 27582
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "grid100"
+        },
+        {
+          "_attempt_id": "6fcf459a5313422885f1d3b409eb5abd",
+          "compatibility_key": "ccb9a217dc8d54d5625540c99a040503ef6b6ae0af92869497f1cd5e80d92a35",
+          "cost": {
+            "wall_seconds": 223.61875367000175
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": null,
+            "accuracy_pass": false,
+            "accuracy_score": null,
+            "all_finite": true,
+            "center_max_sigma": null,
+            "center_rms_sigma": null,
+            "cov_frob_rms": null,
+            "cov_trace_bias": null,
+            "frozen_pass": false,
+            "mass_tv": 0.13717000000000001,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.28306,
+            "precision_gap": 0.7058310034617578,
+            "problem": "rotated100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": null,
+            "valid_n": 100000,
+            "within_radius_n": 28306
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "rotated100"
+        },
+        {
+          "_attempt_id": "af5cde3400a641d7b826d618f2b1ca40",
+          "compatibility_key": "801e0b64a55dcf2f0e827c74f31ea03b0af193bce81ed0b87caf2178ed80dab1",
+          "cost": {
+            "wall_seconds": 226.46507495999685
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.4638290749775542,
+            "accuracy_pass": false,
+            "accuracy_score": 5.527656501539756,
+            "all_finite": true,
+            "center_max_sigma": 2.3051690909435893,
+            "center_rms_sigma": 1.2038108058347496,
+            "cov_frob_rms": 0.6408390540913188,
+            "cov_trace_bias": 0.4638290749775542,
+            "frozen_pass": false,
+            "mass_tv": 0.11494,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.34003,
+            "precision_gap": 0.6488610034617577,
+            "problem": "staggered100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.3815045824217227,
+            "valid_n": 100000,
+            "within_radius_n": 34003
+          },
+          "qualification_tier": 2,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
       "candidate_id": "k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
       "candidate_revision": "9d3b3e89bbf2c2ff3c9ec25336d05f8971cd53515b948f7b15d743c05928b280",
       "claim_contract": {
@@ -139569,6 +141405,444 @@
       "trainer_family": "bcap-dualnorm"
     },
     {
+      "candidate_id": "bcap-dualnorm--a2d195dd843676b98aebdd9f4ec1a91061b62a4744b349280bd36341b81d312f",
+      "candidate_revision": "68121c2b0024d0eb1c0b3831d4465a0c7e782d5f67d95a0395e42e6898fb7769",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 6, 'UNKNOWN': 23}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "a2d195dd843676b98aebdd9f4ec1a91061b62a4744b349280bd36341b81d312f",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "1b438b26a397431abd725501cbe40356",
+            "result_hash": "2d00fe82f7a09288ea468aff171f798ace8fc0c32999e272e27fedf0f27a0aaa",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "40113f6c20f34c229b07389c5b0e3351",
+            "result_hash": "a2e3b8a29480d9be6e078848b1ebb1930a50bb35aa02160ec1098c056f71e298",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "7fda3315fb6944a793ec5cf7927fd789",
+            "result_hash": "f99a462e95d18a6b883dff2346e767589423bb7b36d36df9f11fc811ed85642e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "86ba61e96d514e00953df71bc7a8d077",
+            "result_hash": "288e83bcf610cb225234696d4ccd900124ab87e7ac5755eadd9410c3e21ad35f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9fdcdcadf8b64e5baaf91e99f45fff2e",
+            "result_hash": "58a89d92e2b0f19f69eb72ee1fd668ac74125c57f12fa85774a52eac9b935290",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "ce31c04f0a964216bb6859b8d5c2b0cc",
+            "result_hash": "361371c466a9660b071230349f6d64ecc1b8aced633198134bacf235cf02b9b7",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "e46e0e948523419e82e451e73cf6dbb1",
+            "result_hash": "d0f9cd28fdc9bbb59e14555e3438212606aea8d5729139bda51978477f990379",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "c0be129ad6bbc0b8f315ab1a30676f6db484ecfcbc5c80f3d412e0d8f2850450",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "f56cd32fd97769f6863f8709efd3c96a4137349b46882124c713d1917d9d062c"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-dba71e80cad0037763b17d2f",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 882.5591431610083,
+        "new_paid_wall_seconds": 882.5591431610083,
+        "wall_seconds": 882.5591431610083
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 5,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 5,
+          "UNKNOWN": 23
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 5,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 5
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 21,
+            "statuses": {
+              "UNKNOWN": 21
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 5,
+        "tuning_required_total": 27
+      },
+      "schema_version": 1,
+      "settings": {
+        "prior_reg": 0.001
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/bcap-prior-coulomb-search-v1.json",
+        "sha256": "d6ae075972c85f16be9590a4496b2b03ac30854246788c85cb546794e9dd58ed"
+      },
+      "status": "FAIL",
+      "study_id": "bcap-prior-coulomb-search-v1",
+      "task_results": [
+        {
+          "_attempt_id": "9fdcdcadf8b64e5baaf91e99f45fff2e",
+          "compatibility_key": "d3f6b43c8a76206eb628f9a8b560fca402f5e37383cab8004eff03f2b593f024",
+          "cost": {
+            "wall_seconds": 18.752348761001485
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.10670731219573915,
+            "finite_fraction": 1.0,
+            "mean": 1.9861252972623333,
+            "mean_error_sigma": 0.027749405475333333,
+            "sample_count": 4096,
+            "std": 0.3997194851476089,
+            "std_ratio": 0.7994389702952178,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "ce31c04f0a964216bb6859b8d5c2b0cc",
+          "compatibility_key": "d377b3105bf52322ed2bc1fc2d946aae68290ac16d366d8268ed3c319428295a",
+          "cost": {
+            "wall_seconds": 6.714920120008173
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.9523457288742065,
+            "mean_abs": 0.958502471446991
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "e46e0e948523419e82e451e73cf6dbb1",
+          "compatibility_key": "bb5b4651050bac3923557ed6d04d5b45d467b1c603ecb62867380d6a783d86b5",
+          "cost": {
+            "wall_seconds": 8.03093392100709
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9593252904536698,
+            "unused_hold": 0.9867020286619663
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "7fda3315fb6944a793ec5cf7927fd789",
+          "compatibility_key": "a9f3ce39aa08d6424cc1b8071fd795167d9f31dcfb0d5942ae1fe659087ddd5e",
+          "cost": {
+            "wall_seconds": 10.305907622998348
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.011983496136963367,
+            "recon_mse": 0.004429034423083067
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "1b438b26a397431abd725501cbe40356",
+          "compatibility_key": "1f1cb3e86a342a97375c979ce21115e1a42bf17a99122020a4a471328afd1bf4",
+          "cost": {
+            "wall_seconds": 32.95819617300003
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.4743562340736389,
+            "component_core_min_eigen_ratio": 0.3584078848361969,
+            "component_covariance_error": 1.4546063542366028,
+            "component_min_eigen_ratio": 0.3584078848361969,
+            "covariance_error": 0.07389868795871735,
+            "hq": 0.94970703125,
+            "mass_tv": 0.056396484375,
+            "max_component_spill": 0.13636364042758942,
+            "mean_error": 0.03783833980560303,
+            "min_hq_mass_ratio": 0.703125,
+            "min_mass_ratio": 0.75,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.034661092396716615,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "40113f6c20f34c229b07389c5b0e3351",
+          "compatibility_key": "b5d841b7fd8eab79895e37cc43719766dda331d8d0a0d8b20d312c2ba9436385",
+          "cost": {
+            "wall_seconds": 798.7769414939976
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2109375,
+            "mass_berry": 0.1875,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.2080078125,
+            "mass_melon": 0.1982421875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.999289870262146,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 5.702471026144149e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "86ba61e96d514e00953df71bc7a8d077",
+          "compatibility_key": "95cca5517aa95e3f7cbf3e125021626480cd9d598888d58704aa23e080dceaec",
+          "cost": {
+            "wall_seconds": 7.019895068995538
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
       "candidate_id": "bcap-overnight-search-v1--1",
       "conclusion": "Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -143795,6 +146069,74 @@
       "trainer_family": "r1r2",
       "trial_ids": [
         "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f"
+      ]
+    },
+    {
+      "candidate_id": "bcap-prior-coulomb-search-v1",
+      "conclusion": "Concluded 3 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "f56cd32fd97769f6863f8709efd3c96a4137349b46882124c713d1917d9d062c"
+        ],
+        "spec_hash": "29e39ee8db6ae8eb12e176a2e2be30371197300b87bbdd4c83829b07eefe5677"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-e12169f60de84ef1454b6323",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 5335.698978568034,
+        "new_paid_wall_seconds": 5335.698978568034,
+        "observed_attempts": 63,
+        "wall_seconds": 5335.698978568034
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/bcap-prior-coulomb-search-v1.json",
+        "sha256": "d6ae075972c85f16be9590a4496b2b03ac30854246788c85cb546794e9dd58ed"
+      },
+      "study_id": "bcap-prior-coulomb-search-v1",
+      "task_results": [],
+      "trainer_family": "bcap-dualnorm",
+      "trial_ids": [
+        "bcap-dualnorm--733d4808e8272ec8643e62bca837494b678ad55b9300a75f5ceeafc4cd4e01b9",
+        "bcap-dualnorm--a2d195dd843676b98aebdd9f4ec1a91061b62a4744b349280bd36341b81d312f",
+        "bcap-dualnorm--ee1193aa41553193ec3eb0d5bcf5aec53951c0b62b30ffa7f9b7ae07e8384f33"
       ]
     },
     {

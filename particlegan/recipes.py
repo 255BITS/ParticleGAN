@@ -72,6 +72,9 @@ class Recipe:
     # Post-optimizer proximal spring to the initial latent table; zero is exact
     # baseline behavior. Unlike a gradient penalty, restoration retains size.
     prior_proximal_strength: float = 0.0
+    prior_coulomb_softening: float = .1
+    prior_coulomb_confinement: float = .35
+    prior_coulomb_neighbors: int = 8
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -237,8 +240,12 @@ class Recipe:
     def __post_init__(self):
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
-        if self.prior_regularizer not in ("vicreg", "none"):
-            raise ValueError("prior_regularizer must be vicreg or none")
+        from .coulomb_prior import CoulombPriorRegularizer
+        CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
+                               confinement=self.prior_coulomb_confinement,
+                               neighbors=self.prior_coulomb_neighbors)
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb"):
+            raise ValueError("prior_regularizer must be vicreg, none or coulomb")
         for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
@@ -845,7 +852,17 @@ class Recipe:
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
-    def make_prior_regularizer(self, **overrides):
+    def make_prior_regularizer(self, *, prior=None, **overrides):
+        if self.prior_regularizer == "coulomb":
+            from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
+            options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
+                       "confinement": self.prior_coulomb_confinement,
+                       "neighbors": self.prior_coulomb_neighbors, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            if prior is not None and options["weight"] > 0:
+                options["center"], options["radius"] = coulomb_reference(prior)
+            return CoulombPriorRegularizer(**options)
         from .vicreg_loss import ParticleRegularizer
         options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
                    "eps": self.prior_reg_eps, **overrides}
@@ -853,7 +870,7 @@ class Recipe:
             options["weight"] = 0.
         return ParticleRegularizer(**options)
 
-    def prior_regularization(self, rows, *, regularizer=None):
+    def prior_regularization(self, rows, *, regularizer=None, prior=None):
         """Return the complete weighted latent-prior objective, once.
 
         Callers select rows using their declared sampling law. Frozen rows and
@@ -866,7 +883,7 @@ class Recipe:
         # or doing any variance/covariance work for disabled penalties.
         result = rows[:0].sum()
         if self.prior_reg > 0:
-            result = (self.make_prior_regularizer() if regularizer is None else regularizer)(rows)
+            result = (self.make_prior_regularizer(prior=prior) if regularizer is None else regularizer)(rows)
         if self.prior_l2 > 0:
             result = result + self.prior_l2 * rows.square().mean()
         return result
@@ -898,6 +915,9 @@ class Recipe:
             rows = prior.z.detach()
             del prior.z
             prior.register_buffer("z", rows)
+        if self.prior_regularizer == "coulomb" and self.prior_update == "learned" and self.prior_reg > 0:
+            from .coulomb_prior import capture_coulomb_reference
+            capture_coulomb_reference(prior)
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,

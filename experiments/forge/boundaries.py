@@ -27,6 +27,7 @@ TUNABLE_FIELDS = frozenset({
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
+    "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}

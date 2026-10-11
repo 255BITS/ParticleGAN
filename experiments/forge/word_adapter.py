@@ -18,6 +18,7 @@ from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json, file_hash
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
 from .state import state_digest
+from .priors import recipe_owned_prior
 from .telemetry import PhaseTimer
 
 

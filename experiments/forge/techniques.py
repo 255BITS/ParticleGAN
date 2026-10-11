@@ -165,6 +165,10 @@ def recipe_field_active(name, value, *, task=None):
                 "prior_reg_target_std", "prior_reg_eps", "prior_proximal_strength"}:
         if not prior_active:
             return False
+    if name.startswith("prior_coulomb_"):
+        return prior_active and recipe.prior_regularizer == "coulomb" and recipe.prior_reg > 0
+    if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_regularizer != "vicreg":
+        return False
     if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_reg == 0:
         return False
     return True

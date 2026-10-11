@@ -5,7 +5,7 @@ recipe defines whether locations learn and how they are regularized:
 
 ```python
 prior_update = "learned"       # or "frozen"
-prior_regularizer = "vicreg"   # or "none" (requires prior_reg=0)
+prior_regularizer = "vicreg"   # "none" (requires prior_reg=0) or "coulomb"
 prior_reg = 0                 # existing coefficient; presets unchanged
 prior_reg_target_std = 1
 prior_reg_eps = 1e-4
@@ -52,3 +52,13 @@ prior. Existing failed/provisional profiles gain no qualification from this chan
 
 See [field ownership](forge-field-boundaries.md) and the
 [research glossary](../RESEARCH_GLOSSARY.md).
+
+
+Opt-in `prior_regularizer="coulomb"` uses softened inverse-distance repulsion
+plus quadratic confinement to the initialized centroid and RMS radius. Its
+fixed reference is captured by `apply_prior_policy` after public initialization
+and saved as persistent prior buffers; component factories accept `prior=prior`.
+The reusable knobs are `prior_coulomb_softening=.1`,
+`prior_coulomb_confinement=.35`, and `prior_coulomb_neighbors=8` (bounded 1..64).
+Caller row selection and sampled-row optimizer ownership stay unchanged.
+See the [force law, public API demo and starting values](../reports/forge/prior-coulomb/README.md).
