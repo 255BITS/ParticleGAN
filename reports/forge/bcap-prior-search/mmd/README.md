@@ -6490,3 +6490,5 @@ Recorded endpoint
 | Measurement | Score | Target | Status |
 | --- | ---: | --- | --- |
 | parity_comparisons | 4 | No declared gate | DIAGNOSTIC |
+
+Saved-only reproduction commands require the [mmd feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/e85cabc484140cd8afa3c44ce2abe1b93daf0443) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

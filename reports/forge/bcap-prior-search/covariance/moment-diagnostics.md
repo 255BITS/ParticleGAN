@@ -55,3 +55,5 @@ Counts are frozen prior capacities and dimensions. Unequal own continuation pref
 | 0.001 | two_pole | PASS | No certified completed live latent-prior objective |
 | 0.001 | unused_token_hold | PASS | No certified completed live latent-prior objective |
 | 0.001 | clockfree_audit_measurement_v1 | PASS | No certified completed live latent-prior objective |
+
+Saved-only reproduction commands require the [covariance feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/18e2aa1018f25de8c447a59287025df6f6aded3e) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

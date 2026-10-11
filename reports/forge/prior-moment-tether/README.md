@@ -130,3 +130,5 @@ PYTHONPATH=. python -u reports/forge/prior-moment-tether/software_toy.py --outpu
 Original implementation base: `0337bbbc2300fd351e77e9a222b92401137fd421`.
 Raw stdout/checkpoints remain ignored under `runs/software/prior-covariance/`;
 `tail -f runs/software/prior-covariance/toy.log` follows the diagnostic.
+
+Reproduction requires the [covariance feature's executed source](https://github.com/255BITS/ParticleGAN/tree/18e2aa1018f25de8c447a59287025df6f6aded3e); this aggregate PR contains reports and saved evidence. [The completed search](../bcap-prior-search/covariance/README.md) reports the ordinary task gates.

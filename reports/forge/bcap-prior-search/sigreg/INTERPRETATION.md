@@ -108,3 +108,5 @@ PYTHONPATH=. python reports/forge/bcap-prior-search/sigreg/protocol_audit.py \
 
 The generated measurement README's compact interpretation links and explicit
 BLOCKED header are report-only additions after saved-only generation.
+
+Saved-only reproduction commands require the [sigreg feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/a2a9183f042586968fe93daad1db5984c4621ddf) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

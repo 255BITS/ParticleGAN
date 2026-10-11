@@ -47,7 +47,7 @@ PYTHONPATH=. python -m benchmarks.toy_audit.prior_proximal_smoke \
 Logs, intermediate state, checkpoints and failed development probes remain
 ignored under `runs/prior-proximal/`. Only this compact receipt and final GIF
 are committed. The reproduction source is
-[prior_proximal_smoke.py](../../../benchmarks/toy_audit/prior_proximal_smoke.py).
+[prior_proximal_smoke.py](https://github.com/255BITS/ParticleGAN/blob/a28c9631d59e2977616c0375e2a07c73171a9930/benchmarks/toy_audit/prior_proximal_smoke.py).
 
 Disabled-feature parity was checked against base
 `0337bbbc2300fd351e77e9a222b92401137fd421`: after the same 64-update software
@@ -55,6 +55,8 @@ protocol, every model tensor, optimizer packet, trainer RNG and named consumed
 stream has the same content digest. Pending sampled ownership, reference
 storage independence, magnitude-sensitive restoration and atomic rejection of
 malformed checkpoints are covered by
-[test_prior_proximal.py](../../../tests/test_prior_proximal.py).
+[test_prior_proximal.py](https://github.com/255BITS/ParticleGAN/blob/a28c9631d59e2977616c0375e2a07c73171a9930/tests/test_prior_proximal.py).
 
-See [mechanism and proposed bracket](../../../docs/prior-proximal.md).
+See [mechanism and proposed bracket](https://github.com/255BITS/ParticleGAN/blob/a28c9631d59e2977616c0375e2a07c73171a9930/docs/prior-proximal.md).
+
+Reproduction requires the [proximal feature's executed source](https://github.com/255BITS/ParticleGAN/tree/a28c9631d59e2977616c0375e2a07c73171a9930); this aggregate PR contains reports and saved evidence. [The completed search](../bcap-prior-search/proximal/README.md) reports the ordinary task gates.

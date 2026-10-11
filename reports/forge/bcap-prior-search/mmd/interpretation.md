@@ -96,3 +96,5 @@ PYTHONPATH=. python reports/forge/bcap-prior-search/workflow.py publish --name m
 PYTHONPATH=. python reports/forge/bcap-prior-search/mmd/audit.py --archive /mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/mmd --control-word-audit reports/forge/bcap-prior-search/control_word_audit.json
 PYTHONPATH=. python reports/forge/bcap-prior-search/export_saved_media.py --name mmd --archive /mnt/ml7tb/ParticleGAN-forge/bcap-prior-search-20261010/mmd
 ```
+
+Saved-only reproduction commands require the [mmd feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/e85cabc484140cd8afa3c44ce2abe1b93daf0443) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

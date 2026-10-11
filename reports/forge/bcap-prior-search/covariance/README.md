@@ -6482,3 +6482,5 @@ Recorded endpoint
 | Measurement | Score | Target | Status |
 | --- | ---: | --- | --- |
 | parity_comparisons | 4 | No declared gate | DIAGNOSTIC |
+
+Saved-only reproduction commands require the [covariance feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/18e2aa1018f25de8c447a59287025df6f6aded3e) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

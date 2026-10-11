@@ -208,3 +208,5 @@ possible Coulomb formulation. The useful next question, if separately declared,
 is whether a prior mechanism can improve output density and component shape
 while keeping the mandatory hold windows stable. Latent expansion alone did
 not accomplish that here.
+
+Saved-only reproduction commands require the [coulomb feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/2ce01aec33c644ded0cf7f29b130bdb091e643ff) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

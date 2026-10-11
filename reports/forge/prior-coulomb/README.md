@@ -175,3 +175,5 @@ without output precision, component density and required sustained windows
 passing, the geometric hypothesis is insufficient. A rare-mode loss or failure
 of a previously passing global gate is a regression of that whole recipe;
 selecting different strengths per task is outside this comparison.
+
+Reproduction requires the [coulomb feature's executed source](https://github.com/255BITS/ParticleGAN/tree/2ce01aec33c644ded0cf7f29b130bdb091e643ff); this aggregate PR contains reports and saved evidence. [The completed search](../bcap-prior-search/coulomb/README.md) reports the ordinary task gates.

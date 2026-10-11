@@ -4,6 +4,8 @@ Recorded passes / required experiments, grouped by family and view. Click a fami
 
 A family is the high-level implementation and formulation. Optimizers, learning rates, momentum and other configuration choices stay within that family. Current benchmarks use the explicit family selection; BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain their separate evidence on the detail pages. Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.
 
+The [BCAP leader prior searches](bcap-prior-search/README.md) compare five opt-in mechanisms and fifteen global strengths, with every task measurement, score, target and source-bound repair or regression. Their [interpretation and recommendations](bcap-prior-search/findings.md) explain the results. The selected family configuration and its recorded counts remain unchanged.
+
 Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |

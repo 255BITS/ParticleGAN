@@ -242,3 +242,5 @@ Original observation SHA256: `a1245eef8dc218f6ff1874ea543891daaea6f9b488ba0b6047
 | hq | 0.758057 | >= 0.85 | FAIL |
 | component_covariance_error | 5.21724 | <= 0.85 | FAIL |
 | component_min_eigen_ratio | 0.31388 | >= 0.15 | PASS |
+
+Saved-only reproduction commands require the [mmd feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/e85cabc484140cd8afa3c44ce2abe1b93daf0443) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

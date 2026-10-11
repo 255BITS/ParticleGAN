@@ -5420,3 +5420,5 @@ Recorded endpoint
 | Measurement | Score | Target | Status |
 | --- | ---: | --- | --- |
 | parity_comparisons | 4 | No declared gate | DIAGNOSTIC |
+
+Saved-only reproduction commands require the [proximal feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/a28c9631d59e2977616c0375e2a07c73171a9930) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

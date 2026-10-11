@@ -136,3 +136,5 @@ tail -F runs/prior-mmd/integration.log runs/prior-mmd/toy.log
 Bulk checkpoints and stdout remain in ignored `runs/prior-mmd`. The numerical
 software readout, provenance, reproduction source and actual-training GIF are
 the compact committed artifacts. No second goal leaderboard is generated.
+
+Reproduction requires the [mmd feature's executed source](https://github.com/255BITS/ParticleGAN/tree/e85cabc484140cd8afa3c44ce2abe1b93daf0443); this aggregate PR contains reports and saved evidence. [The completed search](../bcap-prior-search/mmd/README.md) reports the ordinary task gates.

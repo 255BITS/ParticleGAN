@@ -5412,3 +5412,5 @@ Recorded endpoint
 | Measurement | Score | Target | Status |
 | --- | ---: | --- | --- |
 | parity_comparisons | 4 | No declared gate | DIAGNOSTIC |
+
+Saved-only reproduction commands require the [sigreg feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/a2a9183f042586968fe93daad1db5984c4621ddf) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

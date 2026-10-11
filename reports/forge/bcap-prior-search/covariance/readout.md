@@ -155,3 +155,5 @@ scientific rerun. This is provisional, one-seed screening evidence. Retain
 0.01 as the measured task-specific lead; retain the existing global BCAP
 leader and opt-in defaults because the word regression and native failures
 prevent a general replacement.
+
+Saved-only reproduction commands require the [covariance feature's executed checkout](https://github.com/255BITS/ParticleGAN/tree/18e2aa1018f25de8c447a59287025df6f6aded3e) and the original local archive. This aggregate branch contains reports and saved evidence; the feature PR contains its implementation.

@@ -129,3 +129,5 @@ three strengths, exact matched control, revision-9 view, full-tier gate policy,
 45,000-second per-candidate and 180,000-second combined ceilings. Executed
 source remains `a2a9183f042586968fe93daad1db5984c4621ddf`; subsequent report
 commits preserve its original certifications and sampling cohorts.
+
+Reproduction requires the [sigreg feature's executed source](https://github.com/255BITS/ParticleGAN/tree/a2a9183f042586968fe93daad1db5984c4621ddf); this aggregate PR contains reports and saved evidence. [The completed search](../bcap-prior-search/sigreg/README.md) reports the ordinary task gates.
