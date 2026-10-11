@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "9962fd59ebdf33225dacd04c2d09fce849eac74464f9433498fb06828e54872f",
+  "input_digest": "048f63a7eaf3ac62dcd4204f9ca062200f27d06a10543adeff60cef40a7394ed",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -1221,6 +1221,7 @@
     "reports/forge/records/archive-pr155-current-e4nh-9d90739f8c00.json": "a8a2d9871ccaca858015d15bc817b88c6dec6b6098e5e14ee25928e5ecf1b1a5",
     "reports/forge/records/archive-pr155-current-e4nh14k-e4138ef980fe.json": "73f01f2fe720ca548ffcce0b61a85222da0934df0d5c43ec5126a28222334d9a",
     "reports/forge/records/bcap-default-baseline-concluded-context-v1.json": "67f5d51d88b91263d083a91d546475c3b8e6ddc4bb1e4babb62b4125e62675b0",
+    "reports/forge/records/bcap-moment-tradeoff-saved-diagnostic-v1.json": "2d969444a184fb7618f08b7fc9cb3b654f3b2c6869fd9bb1991309cdad395d09",
     "reports/forge/records/bcap-three-phase-concluded-context-v1.json": "8d021ebe420c90660c2bae2774e193f90105c2309b993c696867532098ed6842",
     "reports/forge/records/context-local-mog-envelope-7f6e13219e35.json": "0baeb07d15baac85821e4a7b6e96b876fd9dd369a16c83a8ad1f56c79654f11e",
     "reports/forge/records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json": "f300158da394dba847b3e6117a87f228afaa86e8450b4be3459f9998def41892",
@@ -3826,7 +3827,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "f824c7ec28545ae3cf5a6c59d71b6ebae3353ed6a5e9d82e7bdf755c069cfb9a",
+    "reports/forge/EXPERIMENT_MEMORY.md": "ac1ce7f71d0a41ad3d1c4866018cf1123b7fca304deadb02aeaf0f692614c92e",
     "reports/forge/publication-records.json": "4153bf991b1203655f36753b051599807060f474feba3bba274d1244ae0ca1d7"
   },
   "pending_readout": [
@@ -3840,7 +3841,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 814,
+  "record_count": 815,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 814. Inventory coverage: complete. Unresolved import items: 7.
+Records: 815. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -645,6 +645,22 @@ Completed ordinary matched comparison: direction_blend passes 6/6 Tier 1 and 9/2
 **Next:** Use the exact direction-blend research baseline. Investigate one globally configured mass/density mechanism with an explicit numerical falsifier and measurements of actual force/displacement; preserve all six Tier 1 gates, trajectory, residual and own word hold. Inspect full/core component density, allocation and spill on the 12 remaining failures. Retain negative moonshot evidence and unavailable fields; do not rerun unchanged experiments for a merge or perform seed-only experiments.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/README.md) · [Record](records/bcap-default-baseline-concluded-context-v1.json)
+
+### bcap-moment-tradeoff-saved-diagnostic-v1 · bcap-moment-tradeoff-saved-diagnostic-v1
+
+**Scope:** task_only_diagnostic; family_context; revision `98625b0dfc8b82176cc3b05e7c44a3637aa26664d9c4f55db91d0e745eb0ca2f`.
+
+What distinguishes the moment-tether mode_hold repair from its five-word-hold regression?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_prior_force_and_word_path_diagnosis`.
+
+
+
+Mode repair improves the sustained quality suffix 3 to 7 against >=5. Word failure at5167 loses melon generation while paired reconstruction remains confident; at6167 generation passes while apple fourth-character reconstruction probability .796768 misses >=.9. All actual direction-blend counters remain zero. Fixed-panel tether/adversarial prior force ratio is .010873 at mode endpoint, .074770 at own word acquisition and .341457 at word endpoint. At word endpoint the direct joint-latent gradient norm is about403 times the decoder path. No historical failure-window checkpoint or gradient exists, so these endpoint diagnostics do not identify one causal explanation.
+
+**Next:** Investigate one global relative-force limit on the covariance tether, with actual gradients/applied displacements at discriminating windows and original word hold plus all incumbent passes as controls. Hypothesis unexecuted; no default adoption or automatic continuation.
+
+[Evidence](../../reports/forge/bcap-moment-tradeoff/results.json) · [Record](records/bcap-moment-tradeoff-saved-diagnostic-v1.json)
 
 ### bcap-three-phase-concluded-research · bcap-three-phase-concluded-context-v1
 
@@ -5187,4 +5203,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9962fd59ebdf33225dacd04c2d09fce849eac74464f9433498fb06828e54872f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `048f63a7eaf3ac62dcd4204f9ca062200f27d06a10543adeff60cef40a7394ed`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
