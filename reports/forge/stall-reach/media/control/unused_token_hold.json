@@ -1,0 +1,99 @@
+{
+  "actual_recipe_settings": {
+    "generator_critic_read": "none"
+  },
+  "attempt_id": "3d2ae717e06b4e4b8669be5bf570ad8b",
+  "candidate_id": "bcap-stall-reach-control-v1",
+  "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+  "certificate_sha256": {
+    "evidence": "70426324a4e0728b6791bba66427248ab46c49598a5b8be8e669a56ffbbc1a49",
+    "request": "05bdc685064b32a83c1da0cda6750a628be041bd0cb8d3753f5ee75b8e4d6498",
+    "result": "281782239856bfa77200d98535682910150470f760065e0faecda58f569d975e"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "original_row.applied.initialization",
+    "initializer": "original_row.applied.initializer",
+    "prior": "original_row.applied.prior",
+    "prior_policy": "original_row.evidence.prior_policy",
+    "recipe": "original_row.applied.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "329f4de21ca7349d8b50c967120d2e06de027b57b76969d286ebf94846cf2e1a",
+  "evaluator_result_sha256": "f499ad4b1e5fec61ba3503bbe1624df8a2fcf4eebe8bab5190fec144684ef8f7",
+  "feature_invariance_claim": false,
+  "frames": 9,
+  "gate_status": "PASS",
+  "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "594dc897ea5e062005cb7a95f15f55215239f22442a76e50196d7d438838a601",
+  "initializer": "deterministic_orthogonal",
+  "initializer_sha256": "8900cf4ff41211763a023348b8c423ab94e501bed41f7f71fa5d720205544e40",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "original_certified_task",
+  "observation_count": 24,
+  "observations_sha256": "ee833301e76d1c836d79f850d982051da7afa680b36b5bc6fa0501c674146977",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "10b635ed46280cd12fe0629d82bf15f77dfe87f1ae5cf063eeb026f95e4d1696",
+  "prior_policy": {
+    "applicability": "not_sampled",
+    "contract": "recipe_owned_v1",
+    "eps": 0.0001,
+    "l2": 0.0,
+    "regularizer": "vicreg",
+    "target_std": 1.0,
+    "trainable_locations": false,
+    "update": "learned",
+    "weight": 0.0
+  },
+  "prior_policy_sha256": "1584c1da841fd2af6f8effeb2bba4c52d8490339cccd54b18b62c15c4d4db80c",
+  "prior_sha256": "d52f8c22e5b4928aec0624f36c59f00b0bffe5647a75e707c6e1b7d985c7e8cf",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "a7def01ce45145d41e7d222b965c91479e46fb6953f54d1ea3cd174105927680",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "12f2b84c885ecee1b8bee3df",
+  "rescored_observations": 0,
+  "retained_provenance": {
+    "artifact_manifest_sha256": "74d5054d6d8bae3c2244dd0592279184ac7245d8d121dfa7e7cb0f30fd20ec3f",
+    "bytes": 57927,
+    "completed_steps": 200,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/queue/bcap-stall-reach-control-v1/3d2ae717e06b4e4b8669be5bf570ad8b/provenance/provenance-state.pt",
+    "purpose": "provenance_only",
+    "sha256": "b1252b671727d10c7b32f987f120a84cd6a906d567f6dba18c93be4a35c559ea",
+    "state_sha256": "032756912a25c6ba73426543659c770d22a7d2e26b99212c5e7f3f6d166ccf9f"
+  },
+  "role": "control",
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "53583a93f784e3fd221a166c284a69f6136b0c7c944043e429273d02bc67f68d",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "settings": {
+    "generator_critic_read": "none"
+  },
+  "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/queue/bcap-stall-reach-control-v1/3d2ae717e06b4e4b8669be5bf570ad8b/constraint_geometry-scored-outputs.pt": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+  },
+  "task_card_sha256": "bd59e8399295d781a4159b7d58d2e49089a808bc7187119f0a1f54380c4b0930",
+  "task_id": "unused_token_hold"
+}

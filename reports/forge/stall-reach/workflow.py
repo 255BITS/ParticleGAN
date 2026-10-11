@@ -148,7 +148,7 @@ def _tail_log(queue, path, stop):
         while True:
             state = queue.inspect()
             for key, job in sorted(state["jobs"].items()):
-                if key in seen or job["status"] in ("queued", "running"):
+                if key in seen or job["status"] != "terminal":  # jobs are pending, running or terminal
                     continue
                 seen.add(key)
                 result = job.get("result") or {}

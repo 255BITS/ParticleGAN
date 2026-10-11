@@ -1,0 +1,76 @@
+{
+  "actual_recipe_settings": {
+    "generator_critic_read": "stall_reach"
+  },
+  "attempt_id": "c8e4f5b9300c441cbfddd268da2f03f6",
+  "candidate_id": "bcap-stall-reach-base-v1",
+  "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+  "certificate_sha256": {
+    "evidence": "9fa0772654ba42aad9617eb3a75d81a8a046217ab5abd77dc5c8db5a0ba7be2f",
+    "request": "d2da62c4da9babb0d68fa99137720cb06636a26d876252e124807333b8a63f77",
+    "result": "03e8b0da5f6119e19eecf2c656c4412f9c2cfac1edb0373d5286105313858092"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "not_recorded",
+    "initializer": "not_recorded",
+    "prior": "not_recorded",
+    "prior_policy": "not_recorded",
+    "recipe": "original_row.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+  "evaluator_result_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "feature_invariance_claim": false,
+  "frames": 4,
+  "gate_status": "PASS",
+  "gif_sha256": "12fa644a002ddcf63b285931e041d5e86d4a593aba7951b51b814f4a7475040e",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initializer": null,
+  "initializer_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "clock_probe_diagnostic",
+  "observation_count": 4,
+  "observations_sha256": "d8d48cf71d22b2d86836846c7796f36b533616ec01f9f514da401d4aa6025f79",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "20bd517dfc8fc814df986d6d0c37b289d0a395da098a84320bfe67147088c8ea",
+  "prior_policy": null,
+  "prior_policy_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "a4887c1b5f93a46de0ccf7ae80a2868f12b2145c91c0144c704dd7b8b7ed210f",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "6f1ec18628da98b4006e22ae",
+  "rescored_observations": 0,
+  "retained_provenance": null,
+  "role": "stall_reach",
+  "sampling": {
+    "eval_output_noise": "clean",
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "18baa5f9bf3969fe6ac6a3e2ebf2c8b833290bafa2addd505d52b42f77ebab95",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "settings": {
+    "generator_critic_read": "stall_reach"
+  },
+  "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/queue/bcap-stall-reach-base-v1/c8e4f5b9300c441cbfddd268da2f03f6/clockfree-proof/comparisons.pt": "3474c408398eb0ef8ca3719f8a6d658102542ef82dfbd9c8c4753d667a936e25"
+  },
+  "task_card_sha256": "df90ed210447d8f0b4cf1b311bda11211c764d21dfe039e8992d58ec483d68d9",
+  "task_id": "clockfree_audit_measurement_v1"
+}

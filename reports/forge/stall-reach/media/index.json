@@ -1,0 +1,858 @@
+{
+  "actual_training_gifs": 12,
+  "media": [
+    {
+      "attempt_id": "d9cbe6639f7e470f883f3e6146143fdb",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/gaussian1d_smoke.gif",
+      "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+      "receipt": "control/gaussian1d_smoke.json",
+      "receipt_sha256": "3a1485164e363144e77bd3c6956e321b1e126ede24e7677f963d30da326a8517",
+      "role": "control",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "cd1ded89981c4e28a62a67cd2946aafb",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/two_pole.gif",
+      "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+      "receipt": "control/two_pole.json",
+      "receipt_sha256": "63a25087ade0a755c77b1caea6af4c14959121c879d6fce255a082d49644f163",
+      "role": "control",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "3d2ae717e06b4e4b8669be5bf570ad8b",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/unused_token_hold.gif",
+      "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+      "receipt": "control/unused_token_hold.json",
+      "receipt_sha256": "e0f73da1dabfe7b42ab91d9d3100d73f79eb2d140ea4dbeba3978719de627a37",
+      "role": "control",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "5e211aac7281487f81d2427e6145f654",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/ae_gan_hold.gif",
+      "gif_sha256": "93fa16643a5f35677d4178adb34897cd070f0f61bf147bb105a94c299e991945",
+      "receipt": "control/ae_gan_hold.json",
+      "receipt_sha256": "bd8ac7591170f21e2813c2bf09aefff19e2717c762f5d8c715b62f124ac112dd",
+      "role": "control",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "4b8fc6e8161f4086a4cf7ff2d0954286",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "control/ring16_acquisition.gif",
+      "gif_sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+      "receipt": "control/ring16_acquisition.json",
+      "receipt_sha256": "2c8974446adea407be4e74b66b1fa2b9c950087a1ec0dd0ff41488b0916771ec",
+      "role": "control",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "b7b3843682204e1285190fe57ee2f0f5",
+      "frames": 4,
+      "gate_status": "PASS",
+      "gif": "control/clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+      "receipt": "control/clockfree_audit_measurement_v1.json",
+      "receipt_sha256": "3bb6d4ca72fa5a078527457b8ba85bbadaf0916e2df4173340b9f4020d29aed6",
+      "role": "control",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "d8889bcb3fed4f8085489e5be0ffc059",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "stall_reach/gaussian1d_smoke.gif",
+      "gif_sha256": "3204947a790e25db798a6d6d40159fd198738b6c5b55794f5ca88a98bb4a487b",
+      "receipt": "stall_reach/gaussian1d_smoke.json",
+      "receipt_sha256": "f651ddad2234fdf5fa3341d821e27d917b3785ff063200412cbd883ad07c656c",
+      "role": "stall_reach",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "d26a05fcec3548feb8a400b946aa49a8",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "stall_reach/two_pole.gif",
+      "gif_sha256": "c403367c73c8dbad15c4562dfad4786fb319acdc3423a01062dc8142408da802",
+      "receipt": "stall_reach/two_pole.json",
+      "receipt_sha256": "376a6a497bdb153da68da0ea8e165ad8949f0b541459bf867508e556645106fb",
+      "role": "stall_reach",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "1e5803bcd5674a1f8241d950e508ac38",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "stall_reach/unused_token_hold.gif",
+      "gif_sha256": "ad743a0e6318c3ea97009a91fcaa555ce889e4adfc3abb1794f68be9871b6838",
+      "receipt": "stall_reach/unused_token_hold.json",
+      "receipt_sha256": "768367a26f34907e1f8283c26a9972b260292142d880e20d123d598fe11d7608",
+      "role": "stall_reach",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "17098f65f928464999fdd73acb9a6777",
+      "frames": 9,
+      "gate_status": "PASS",
+      "gif": "stall_reach/ae_gan_hold.gif",
+      "gif_sha256": "834c07cbbc70fd20c6c149153e80f187c45b3582690bffcae7e16c8f3ab9e332",
+      "receipt": "stall_reach/ae_gan_hold.json",
+      "receipt_sha256": "5ab870d5db9c27870c753f2c5d8e8e50c266365d141a386daeb48f79b14d40ce",
+      "role": "stall_reach",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "829f1b53feeb4c03a2a7e28f7d08749f",
+      "frames": 9,
+      "gate_status": "FAIL",
+      "gif": "stall_reach/ring16_acquisition.gif",
+      "gif_sha256": "d90ef427fa846cc7377eed51b47c88ac1cc0763932590ceb0a3ce826caf3dfd1",
+      "receipt": "stall_reach/ring16_acquisition.json",
+      "receipt_sha256": "7d6a1a1074796b3a0ee4f1d35bfe2ef9678f4bc44e747466dfce8b1c4922dc48",
+      "role": "stall_reach",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "c8e4f5b9300c441cbfddd268da2f03f6",
+      "frames": 4,
+      "gate_status": "PASS",
+      "gif": "stall_reach/clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "12fa644a002ddcf63b285931e041d5e86d4a593aba7951b51b814f4a7475040e",
+      "receipt": "stall_reach/clockfree_audit_measurement_v1.json",
+      "receipt_sha256": "0593f4f44ff36a7aac9fac6b8cd67b028e69eb51b17390ea014fff44118d316f",
+      "role": "stall_reach",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "minimum_frames": 2,
+  "name": "stall-reach",
+  "not_rendered": [
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "INCOMPLETE",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 1,
+      "reason": "task wall-time budget exhausted",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "trajectory"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "residual_student"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "unipolar"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "cover_leftover"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "mode_hold"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_overlap"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_spiral"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_stripes2"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_bars4"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_blobs4"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_intensity2"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "grid100"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "rotated100"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-control-v1",
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "12f2b84c885ecee1b8bee3df",
+      "role": "control",
+      "settings": {
+        "generator_critic_read": "none"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "staggered100"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "INCOMPLETE",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 1,
+      "reason": "task wall-time budget exhausted",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "trajectory"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "residual_student"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "unipolar"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "cover_leftover"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "mode_hold"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_overlap"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "vector_spiral"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_stripes2"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_bars4"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_blobs4"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "img_intensity2"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "grid100"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "rotated100"
+    },
+    {
+      "candidate_id": "bcap-stall-reach-base-v1",
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "gate_status": "UNMEASURED",
+      "media_status": "NOT_RENDERED",
+      "qualification_tier": 2,
+      "reason": "No certified completed PASS/FAIL",
+      "request_id": "6f1ec18628da98b4006e22ae",
+      "role": "stall_reach",
+      "settings": {
+        "generator_critic_read": "stall_reach"
+      },
+      "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+      "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+      "task_id": "staggered100"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "original_grades_unchanged": true,
+  "partial": false,
+  "qualification_input": false,
+  "requested_tasks": null,
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "every_certified_completed_prior_search_toy",
+  "script_sha256": "d6c293af51d3d30cbc950b69f971591bd7cfc2decc20539082a7a3955573ee9f",
+  "shared_publisher_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e"
+}

@@ -1,0 +1,99 @@
+{
+  "actual_recipe_settings": {
+    "generator_critic_read": "stall_reach"
+  },
+  "attempt_id": "d26a05fcec3548feb8a400b946aa49a8",
+  "candidate_id": "bcap-stall-reach-base-v1",
+  "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+  "certificate_sha256": {
+    "evidence": "265de68af9fb01aa4893d27570b8b1462b373013a0275dc8842dc2f37ccee4cf",
+    "request": "3b8c51f977ebf17c1837c328c841635cefd89f94f03e304a33ac001b20917562",
+    "result": "5a4f097a9f2db896120dea68d31e907f63a0dc460e1d44d02799b240eab68277"
+  },
+  "context_sources": {
+    "initial_prior": "not_recorded",
+    "initialization": "original_row.applied.initialization",
+    "initializer": "original_row.applied.initializer",
+    "prior": "original_row.applied.prior",
+    "prior_policy": "original_row.evidence.prior_policy",
+    "recipe": "original_row.applied.recipe"
+  },
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "evaluation_sha256": "82b2571763d983a0169649b474da65d3f8a83d78bed9aaa5215eed98f344158a",
+  "evaluator_result_sha256": "82610c95c131c0d81e64c3e9cfad37db74445554440e9d8ad8cf9b4093802723",
+  "feature_invariance_claim": false,
+  "frames": 9,
+  "gate_status": "PASS",
+  "gif_sha256": "c403367c73c8dbad15c4562dfad4786fb319acdc3423a01062dc8142408da802",
+  "initial_prior_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+  "initialization_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "initializer": "deterministic_orthogonal",
+  "initializer_sha256": "8900cf4ff41211763a023348b8c423ab94e501bed41f7f71fa5d720205544e40",
+  "kind": "actual_training_saved_observations_gif",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling forbidden",
+  "media_cohort": "original_certified_task",
+  "observation_count": 24,
+  "observations_sha256": "30b3587c7ebd82fbbec4f2c14e270fc86fadcc3fcb83dc40224d64a76c595912",
+  "optimizer_updates_added": 0,
+  "original_result_sha256": "10efcf5b19ee2fa3efdea54f4ec6d557629bef05a716040a3933e81d9da1380a",
+  "prior_policy": {
+    "applicability": "not_sampled",
+    "contract": "recipe_owned_v1",
+    "eps": 0.0001,
+    "l2": 0.0,
+    "regularizer": "vicreg",
+    "target_std": 1.0,
+    "trainable_locations": false,
+    "update": "learned",
+    "weight": 0.0
+  },
+  "prior_policy_sha256": "1584c1da841fd2af6f8effeb2bba4c52d8490339cccd54b18b62c15c4d4db80c",
+  "prior_sha256": "c39f827aa99e0718d429551481e71b388f2531da4c6d7460336da2db759694f8",
+  "qualification_input": false,
+  "qualification_tier": 1,
+  "recipe_sha256": "066256968f2bc0e8717993bb4ff3adda6137078dfe5ffe102fa2f06b909998ed",
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "request_id": "6f1ec18628da98b4006e22ae",
+  "rescored_observations": 0,
+  "retained_provenance": {
+    "artifact_manifest_sha256": "e1fbede8ea745655025646832eb65a57d0d6c87df91a4e8f265c2b6e43e1bb51",
+    "bytes": 53679,
+    "completed_steps": 80,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/queue/bcap-stall-reach-base-v1/d26a05fcec3548feb8a400b946aa49a8/provenance/provenance-state.pt",
+    "purpose": "provenance_only",
+    "sha256": "2653029393ad32b9507cadf68ee7ee37a7db89ad81eacb2841483165fc9406ab",
+    "state_sha256": "91fc419729d563dac85237fa845149978342c022605086d53415b8190f5698e9"
+  },
+  "role": "stall_reach",
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_particles_and_critic_gradient",
+    "scoring_weights": "live"
+  },
+  "sampling_draws_added": 0,
+  "sampling_sha256": "219a79f3ee6e3cb891bd6a22d4ccaa5c10ec26575cd71d70684159905b4f8d84",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "settings": {
+    "generator_critic_read": "stall_reach"
+  },
+  "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/queue/bcap-stall-reach-base-v1/d26a05fcec3548feb8a400b946aa49a8/constraint_geometry-scored-outputs.pt": "b385ece676f49f14e3fde72ce31867980eccf2222d93afd353da5199bc4a49ef"
+  },
+  "task_card_sha256": "413e0efc8a385a0ed1653a8ac3e6fd356cb048739845a3bf9d3c71a89c121de8",
+  "task_id": "two_pole"
+}

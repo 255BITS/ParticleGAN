@@ -1,0 +1,533 @@
+{
+  "closed_pr": 107,
+  "comparison": {
+    "accepted": false,
+    "lost_tier1": [
+      "ring16_acquisition"
+    ],
+    "regressed": [],
+    "repaired": [],
+    "tier1_passes": {
+      "base": {
+        "1": 4,
+        "2": 0
+      },
+      "control": {
+        "1": 5,
+        "2": 0
+      }
+    },
+    "unresolved_control_passes": [],
+    "verdict": "FALSIFIED"
+  },
+  "default_adoption": false,
+  "independent_confirmation": "not_performed",
+  "name": "stall-reach",
+  "roles": {
+    "base": {
+      "candidate_revision": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+      "cells": {
+        "ae_gan_hold": {
+          "critic_read": [
+            {
+              "counter": 0,
+              "kind": "stall_reach",
+              "max_width": 0.43956831097602844,
+              "observes": 250,
+              "stalled": 0,
+              "widened": 189,
+              "width": 0.15
+            }
+          ],
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 12.968021553999279
+        },
+        "cover_leftover": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "five_word_joint_hold": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "five_word_joint_smoke": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "task wall-time budget exhausted",
+          "status": "INCOMPLETE",
+          "tier": 1,
+          "wall_seconds": 900.2493657860032
+        },
+        "gaussian1d_smoke": {
+          "critic_read": {
+            "counter": 769,
+            "kind": "stall_reach",
+            "max_width": 0.5,
+            "observes": 1000,
+            "stalled": 720,
+            "widened": 985,
+            "width": 0.5
+          },
+          "hooks_exercised": true,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 33.104440635012
+        },
+        "gaussian1d_stability": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "grid100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_bars4": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_intensity2": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "mid_scale_identity": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "mode_hold": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "residual_student": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "ring16_acquisition": {
+          "critic_read": {
+            "counter": 1594,
+            "kind": "stall_reach",
+            "max_width": 0.5,
+            "observes": 1600,
+            "stalled": 1545,
+            "widened": 1597,
+            "width": 0.5
+          },
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "FAIL",
+          "tier": 1,
+          "wall_seconds": 75.21903776700492
+        },
+        "rotated100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "trajectory": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "two_pole": {
+          "critic_read": [
+            {
+              "counter": 39,
+              "kind": "stall_reach",
+              "max_width": 0.4895392954349518,
+              "observes": 80,
+              "stalled": 0,
+              "widened": 54,
+              "width": 0.4756609797477722
+            }
+          ],
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 8.08104645399726
+        },
+        "unipolar": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "unused_token_hold": {
+          "critic_read": [
+            {
+              "counter": 0,
+              "kind": "stall_reach",
+              "max_width": 0.5,
+              "observes": 200,
+              "stalled": 3,
+              "widened": 142,
+              "width": 0.16010522842407227
+            }
+          ],
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 11.068803072004812
+        },
+        "vector_anisotropic": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        }
+      },
+      "cost": {
+        "reserved_seconds": 0.0,
+        "spent_seconds": 1048.062564536027
+      },
+      "request_id": "6f1ec18628da98b4006e22ae"
+    },
+    "control": {
+      "candidate_revision": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4",
+      "cells": {
+        "ae_gan_hold": {
+          "critic_read": null,
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 9.788754356006393
+        },
+        "cover_leftover": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "five_word_joint_hold": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "five_word_joint_smoke": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "task wall-time budget exhausted",
+          "status": "INCOMPLETE",
+          "tier": 1,
+          "wall_seconds": 900.2687238779909
+        },
+        "gaussian1d_smoke": {
+          "critic_read": null,
+          "hooks_exercised": true,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 31.571492335002404
+        },
+        "gaussian1d_stability": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "grid100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_bars4": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_intensity2": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "mid_scale_identity": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "mode_hold": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "residual_student": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "ring16_acquisition": {
+          "critic_read": null,
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 72.199279493012
+        },
+        "rotated100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "trajectory": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "two_pole": {
+          "critic_read": null,
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 6.969777295016684
+        },
+        "unipolar": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "unused_token_hold": {
+          "critic_read": null,
+          "hooks_exercised": true,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "status": "PASS",
+          "tier": 1,
+          "wall_seconds": 8.404689765011426
+        },
+        "vector_anisotropic": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "critic_read": null,
+          "hooks_exercised": null,
+          "reason": "Blocked by a required Tier 1 non-PASS (complete_current_tier).",
+          "status": "BLOCKED",
+          "tier": 2,
+          "wall_seconds": null
+        }
+      },
+      "cost": {
+        "reserved_seconds": 0.0,
+        "spent_seconds": 1036.5841783970536
+      },
+      "request_id": "12f2b84c885ecee1b8bee3df"
+    }
+  },
+  "schema_version": 1,
+  "scope": "ordinary_single_arm_comparison",
+  "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "trainer_delta": {
+    "generator_critic_read": "stall_reach"
+  }
+}
