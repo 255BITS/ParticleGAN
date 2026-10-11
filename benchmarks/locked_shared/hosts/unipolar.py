@@ -148,6 +148,13 @@ class ScaleCritic(nn.Module):
         return self.score(delta.float() / self.input_scale, scale)
 
 
+def _placed(reference: torch.Tensor, like: torch.Tensor) -> torch.Tensor:
+    """Move a frozen fixture onto ``like`` without drawing new values."""
+    if reference.device == like.device and reference.dtype == like.dtype:
+        return reference
+    return reference.detach().to(device=like.device, dtype=like.dtype)
+
+
 def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
     return vector.detach().unsqueeze(0).expand(rows, -1)
 
@@ -158,8 +165,8 @@ def _cos(a: torch.Tensor, b: torch.Tensor) -> float:
 
 def score_residual(student: FreeOriginResidual) -> dict:
     """Unipolar gates. They always read the true plus pole, never the training pole."""
-    plus = PLUS
-    off = OFF_AXIS
+    plus = _placed(PLUS, student.odd)
+    off = _placed(OFF_AXIS, student.odd)
     d1 = student.delta(1.0).detach()
     d0 = student.delta(0.0).detach()
     d_half = student.delta(0.5).detach()
@@ -384,12 +391,12 @@ def run_arm(
     )
     torch.manual_seed(recipe.seed)
     student = FreeOriginResidual(DIM)
-    target = recipe.polarity * PLUS
+    target = _placed(recipe.polarity * PLUS, student.odd)
     reg_used = None
     if arm == "mse_only":
         history = _fit_mse_only(student, target, steps=recipe.steps)
     else:
-        teacher = _batch(PLUS if recipe.polarity > 0 else -PLUS)
+        teacher = _batch(_placed(PLUS if recipe.polarity > 0 else -PLUS, student.odd))
         critic = ScaleCritic(DIM, teacher, hidden=CRITIC_HIDDEN)
         if noise_policy is not None:
             critic.noise_policy = noise_policy

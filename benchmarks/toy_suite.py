@@ -730,11 +730,15 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
               or any(abs(value) > 2 ** -0.5 + 1e-7 for row in weight for value in row)
               or any(abs(value) > 2 ** -0.5 + 1e-7 for value in bias)):
             raise ValueError(f"100-mode default affine receipt differs: {name}")
-        # Recreate the actual initialized tensors on the declared CPU stream.
-        # The saved hash and extrema alone cannot prove that the seeded draw
-        # produced the prior; random affine weights need the same replay.
-        if config["device"] != "cpu":
-            raise ValueError(f"100-mode affine initialization replay requires CPU: {name}")
+        # Recreate the initialized tensors with the recorded device and the
+        # same trainer build. The hash and extrema below are the check. A
+        # missing noise receipt is rejected; it is not skipped.
+        import torch
+        recorded = torch.device(str(config["device"]))
+        if recorded.type == "cuda" and not torch.cuda.is_available():
+            raise ValueError(
+                f"100-mode affine initialization replay requires the recorded device: {name}"
+            )
         _, replay_recipe = resolve_config(config)
         replay = make_trainer(config, replay_recipe)
         replay_prior = replay.prior.z.detach().cpu().contiguous()
@@ -861,6 +865,10 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
         raise ValueError(f"undeclared 100-mode network horizon receipt: {name}")
     elif "network_lr_floor" in summary:
         raise ValueError(f"undeclared 100-mode network floor receipt: {name}")
+    _check_toy100_learned_noise(
+        directory, summary, config, policy_archive_verified=True,
+    )
+    _check_toy100_output_rng(directory, summary, config)
     return sources
 
 
