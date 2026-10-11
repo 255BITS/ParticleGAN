@@ -229,7 +229,7 @@ class BehaviorComponents:
             raise CapabilityError(extension_blockers)
         self.recipe = self.context.recipe
         self.uses_recipe_prior = recipe_owned_prior(task)
-        self.prior_regularizer = self.recipe.make_prior_regularizer()
+        self.prior_regularizer = None  # Active reference-based penalties bind after public initialization.
         if candidate.get("claim_contract", {}).get("learning") == "clockfree":
             raise CapabilityError(["these scheduled public components do not implement a clock-free optimizer"])
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
@@ -257,7 +257,10 @@ class BehaviorComponents:
         """One recipe objective over this host's actual latent tables."""
         if not self.uses_recipe_prior:
             raise ValueError("legacy hosts retain their original prior objective")
-        rows = [prior.z for prior in priors if prior.z.requires_grad]
+        priors = tuple(prior for prior in priors if prior.z.requires_grad)
+        rows = [prior.z for prior in priors]
+        if self.recipe.prior_regularizer == "coulomb" and self.recipe.prior_reg > 0:
+            self.prior_regularizer = self.recipe.make_prior_regularizer(prior=priors)
         if rows and (self.recipe.prior_reg > 0 or self.recipe.prior_l2 > 0):
             loss = loss + self.recipe.prior_regularization(
                 rows[0] if len(rows) == 1 else torch.cat(rows), regularizer=self.prior_regularizer)
@@ -340,6 +343,7 @@ class BehaviorComponents:
             self.context.initialize(prior, component=name)
             self.recipe.apply_prior_policy(prior)
             self._sample_binding(prior, name)
+        self.prior_regularizer = self.recipe.make_prior_regularizer(reference=priors) if priors else None
         prior_parameters = [p for prior in priors for p in prior.parameters() if p.requires_grad] + list(direct_particles)
         if prior_parameters or priors:
             self.role_parameters["prior"] = prior_parameters
@@ -548,6 +552,7 @@ class BehaviorComponents:
                        for index, parameter in enumerate(parameters)]
                  for role, parameters in self.role_parameters.items()}
         return dict(models={name: model.state_dict() for name, model in self.models.items()},
+                    **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
                     role_parameters=roles,
                     optimizers={name: optimizer.state_dict() for name, optimizer in self.optimizers.items()},
                     streams=self.context.streams.state_dict(), applied=self.receipt(),

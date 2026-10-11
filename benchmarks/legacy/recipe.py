@@ -39,7 +39,7 @@ _ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
-    # The K3P-era critic these receipts were recorded with (the package default is KA2).
+    # The K3P-era critic these receipts were recorded with.
     name: str = "k3p"
     reg_anchor_decay: float = 0.999
     loss_type: str = "logistic"
@@ -100,7 +100,9 @@ class LegacyRecipe(Recipe):
 def get_recipe(name="gan", **overrides):
     """``particlegan.get_recipe`` returning a ``LegacyRecipe``."""
     from particlegan import get_recipe as current
-    base = current(name)
+    # Archived model families inherit KA2-era fields, independently of promotions.
+    models = ("gan", "mog", "ddgan", "ddgan_mog", "ae_gan", "vae_gan", "ae_ddgan")
+    base = current(name, trainer="ka2") if name in models else current(name)
     values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
     values.update(critic_formulation="k3p", reg_arm=base.reg_arm or "k3p")
     if values["name"] == "ka2":

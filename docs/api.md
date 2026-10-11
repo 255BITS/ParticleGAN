@@ -498,7 +498,14 @@ Schedule-free E22 and Atlas retain `total_steps=None`; pass `max_steps` to bound
 their execution without inserting a schedule. Their policy hooks use that
 external allowance without changing the formulation.
 
-`get_recipe()` constructs **KA2** ([details](ka2.md)): Rp logistic, the KA2
+`get_recipe()` constructs the selected **BCAP** research recipe: non-saturating
+loss, fixed capped critic gradients, DualNorm, direction blending and constant
+G/E, D and prior rates `.012`, `.018` and `.03`. `GANTrainer` binds sampled
+rows and the protected adversarial objective automatically. Additive training
+noise, EMA serving, prior regularization and KA2 interventions are disabled.
+See [the selected settings and evidence](#recipes-and-defaults).
+
+`get_recipe("ka2")` retains **KA2** ([details](ka2.md)): Rp logistic, the KA2
 critic penalty (coefficient 1, κ 1, EMA-critic anchor gated by the critic's Adam
 moment surprise), critic spike guard
 (ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
@@ -552,6 +559,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from particlegan import DDGAN, UCD, get_recipe, init, scale_learning_rates, ucd_loss
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 device = torch.device("cpu")
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
@@ -586,8 +594,7 @@ init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
 gan = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
-# Adam optimizers whose step() runs the recipe's regularization (KA2 today);
-# the EMA critic is ours to allocate.
+# Optimizers follow the shared trainer preset; BCAP uses DualNorm and direction blending.
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 penalty = recipe.make_critic_penalty(opt_d)
@@ -619,8 +626,11 @@ for step in range(recipe.total_steps):
     opt_g.zero_grad(set_to_none=True)
     fake_score = D(fake, labels, xt=xt, t=t)[0]
     real_score = D(x_prev, labels, xt=xt, t=t)[0].detach()
-    g_loss = gan.g_loss(fake_score, real_score) + spread(prior.z[indices.unique()])
-    g_loss.backward()
+    adversarial_g = gan.g_loss(fake_score, real_score)
+    g_loss = adversarial_g + spread(prior.z[indices.unique()])
+    if hasattr(opt_g, "set_sampled_rows"):
+        opt_g.set_sampled_rows(prior.z, indices)
+    constraint_geometry_backward(g_loss, opt_g, (adversarial_g,))
     opt_g.step()
     D.requires_grad_(True)
 
@@ -905,7 +915,7 @@ the K3P blend or critic EMA anchor. Optimizer, prior and noise settings remain
 explicit recipe choices; selecting BCap alone does not restore the full v0.7
 recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
 the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
-default is KA2. These choices are recorded in new source/formulation cohorts.
+restoration default is KA2. These choices are recorded in new source/formulation cohorts.
 
 `get_recipe("bcap")` selects fixed BCAP with zero-momentum `dualnorm`,
 `constraint_geometry_mode="direction_blend"`, and constant G/D/prior step sizes.
@@ -924,8 +934,9 @@ coefficient 1, cap 1, penalty every update, G/E step `.012`, D step `.018`
 Transport weights remain zero, `critic_step_mode="none"`, and
 `optimizer_svd_backend="native"`. Use
 `get_recipe("bcap", constraint_geometry_mode="none")` for the earlier winning
-DualNorm recipe. The dataclass `Recipe()` and other named presets retain their
-defaults; `get_recipe()` still selects KA2.
+DualNorm recipe. `get_recipe()` and the model-family factories inherit this
+BCAP preset. Explicit trainer presets remain fixed. The dataclass `Recipe()`
+retains its KA2 field defaults for saved-configuration restoration.
 Each setting can be overridden explicitly.
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and
@@ -1088,7 +1099,10 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ## Recipes and defaults
 
 ```python
+get_recipe(**overrides)        # Current default: the selected BCAP leader.
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
+get_recipe("ka2", **overrides) # Previous public trainer, explicitly pinned.
+get_recipe("ae_gan", trainer="ka2", **overrides) # Model with a pinned trainer.
 get_recipe("bcap", **overrides) # Fixed BCAP, direction blend, constant DualNorm rates.
 get_recipe("bcap_adam", **overrides) # Earlier fixed BCAP/native Adam control.
 get_recipe("halloween", **overrides) # Explicit historical optimizer/loss transfer.
@@ -1099,15 +1113,30 @@ recipe.to_dict()              # Restorable fields; compatible defaults stay impl
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
-`get_recipe(name="gan", **overrides)` selects components without constructing a
+`get_recipe(name="gan", *, trainer=None, **overrides)` selects components without constructing a
 training loop. Explicit keyword fields override the selected configuration.
-Model families share the default optimizer, loss, penalty and schedule. The
+
+To promote a future registered trainer preset, change this single line in
+[`particlegan/recipes.py`](../particlegan/recipes.py):
+
+```python
+DEFAULT_RECIPE = "bcap"
+```
+
+The selector affects `get_recipe()`, `get_recipe("gan")` and all model-family
+recipes. Explicit presets and `Recipe(**saved_fields)` remain independent of
+it. Save resolved recipes, rather than resolving the current default when
+resuming. The selected recipe matches the [current BCAP family](../reports/forge/families/bcap-pure.md);
+this owner-directed research promotion adds no calibration or robustness credit.
+
+Model families share the default optimizer, loss, penalty and schedule;
+`trainer="ka2"` pins an explicit trainer while retaining the selected model
+components. `trainer` applies only to model-family names. The
 `bcap` preset supplies fixed caps, zero-momentum DualNorm, direction blending
 and constant rates, with zero additive training noise. Its standard
 `GANTrainer` loop binds the protected adversarial loss automatically; component
 loops use the [protected-backward contract](#protected-backward-for-bcap-component-loops).
-The
-`e22` preset selects DV12 stationarity control with per-row evidence,
+The `e22` preset selects DV12 stationarity control with per-row evidence,
 critic-feature birth/death, learned output noise and served averaging; it
 requires no research JSON or training horizon.
 Unknown names
@@ -1193,31 +1222,33 @@ process = DDGAN(recipe.alpha_bar).to(device)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 ```
 
-| Shared field | Default |
+| Shared field | Current `get_recipe()` default |
 | --- | --- |
 | `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
 | `z_dim`, `num_particles` | `2`, `20_000` |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
-| `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
+| `lr`, `d_lr_mult`, `prior_lr_mult` | `.012`, `1.5`, `2.5` |
+| `optimizer_family`, `optimizer_momentum`, `optimizer_smoothing` | `dualnorm`, `0`, `.001` |
+| `optimizer_convolution`, `optimizer_svd_backend` | `per_offset`, `native` |
 | `betas`, `d_betas`, `prior_betas` | `(0, .999)`, `None`, `None` (role overrides inherit shared betas) |
 | `eps`, `d_eps`, `prior_eps` | `1e-8`, `None`, `None` (role overrides inherit shared epsilon) |
 | `adam_variant`, `loss_labels` | `pytorch`, `(0,1,1)` |
 | `lr_schedule` | `cosine` (also `constant`, `exponential`) |
 | `lr_decay_rate`, `lr_decay_steps`, `lr_decay_staircase` | `.96`, `50000`, `False` (exponential schedule only) |
-| `loss` | `relativistic` (also `non_saturating`, `hinge`, `wasserstein`, `least_squares`) |
-| `constraint_geometry_mode` | `none`; the named `bcap` preset selects `direction_blend` |
-| `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
+| `loss` | `non_saturating` (also `relativistic`, `hinge`, `wasserstein`, `least_squares`) |
+| `constraint_geometry_mode` | `direction_blend` |
+| `critic_formulation`, `reg_arm` | `bcap`, `b_cap` |
 | `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
-| `prior_reg`, `ema_decay` | `0`, `.995` |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
-| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule; `None` = full budget / `lr_floor`) |
-| `reg_anchor_min_decay`, `reg_anchor_weight`, `critic_r1_real` | `.9`, `1`, `True` (fastest EMA-critic decay; anchor weight; R1 on reals) |
-| `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
-| `latent_damping_max_rate` | `.5` (0 disables) |
+| `prior_update`, `prior_reg`, `prior_l2`, `ema_decay` | `learned`, `0`, `0`, `0` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `1` (constant prior rate) |
+| `network_lr_horizon_cap`, `network_lr_floor` | `None`, `1` (constant G/D rates) |
+| `reg_anchor_min_decay`, `reg_anchor_weight`, `critic_r1_real` | `.9`, `0`, `True` (inactive KA2 settings) |
+| `d_guard_ratio`, `d_guard_min_steps` | `0`, `200` (guard disabled) |
+| `latent_damping_max_rate`, `direct_particle_gain` | `0`, `False` |
 | `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |
-| `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
-| `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
+| `input_noise_std`, `input_noise_anneal_end` | `0`, `.1` (noise disabled) |
+| `output_noise_std`, `output_noise_warmup` | `0`, `0` |
 | `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
@@ -1228,17 +1259,19 @@ caller.
 | Optional factory | Result |
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
-| `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default RpGAN logistic) |
+| `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default non-saturating logistic) |
 | `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
-| `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
+| `recipe.make_prior_regularizer(prior=None, reference=None, **kwargs)` | Selected VICReg, Coulomb, SIGReg, moment tether or initial MMD penalty, with `weight=recipe.prior_reg` applied once. `prior` and `reference` are aliases for the same initialized prior or tuple of priors. |
+| `recipe.prior_regularizer_checkpoint(module)` | Optional state for an active stochastic prior regularizer |
+| `recipe.restore_prior_regularizer(module, state)` | Validate/restore regularizer state for exact caller-owned continuation |
 
 ### Regularization factories
 
 The recipe, not the caller, chooses the regularization formulation, and your
-loop stays plain PyTorch. The default KA2 recipe returns KA2 implementations
+loop stays plain PyTorch. The explicit `get_recipe("ka2")` recipe returns KA2 implementations
 (`particlegan.ka2.KA2CriticAdam` and `CriticPenalty`, with
 `particlegan.k3p.K3PGeneratorAdam`). Other recipes select their declared
 optimizers and penalties; the named BCAP component loop uses the
@@ -1246,7 +1279,8 @@ optimizers and penalties; the named BCAP component loop uses the
 The previous K3P critic replays through
 `benchmarks.legacy.recipe` ([K3P](k3p.md#replaying-k3p)).
 
-The following loop and Adam controller descriptions use the default KA2 recipe.
+The following loop and Adam controller descriptions use the explicit KA2 recipe.
+The default BCAP recipe uses the protected-backward contract below.
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))

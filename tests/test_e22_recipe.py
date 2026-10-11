@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from particlegan import Recipe, get_recipe, learning_rate_scales
+from particlegan import DEFAULT_RECIPE, Recipe, get_recipe, learning_rate_scales
 
 
 def test_e22_preset_matches_declared_policy_without_task_placeholders():
@@ -12,7 +12,7 @@ def test_e22_preset_matches_declared_policy_without_task_placeholders():
     fields.update(num_particles=20_000, z_dim=2, batch_size=2048)
     expected = Recipe(**fields).replace(name="e22")
     assert get_recipe("e22") == expected
-    assert get_recipe() == Recipe()
+    assert get_recipe() == get_recipe(DEFAULT_RECIPE)
 
 
 def test_e22_task_overrides_and_resolved_recipe_round_trip():
@@ -33,7 +33,7 @@ def test_e22_task_overrides_and_resolved_recipe_round_trip():
                                     dict(row_evidence_gate=True)])
 def test_conditional_rows_are_rejected_for_row_mechanisms(conditioning, controls):
     with pytest.raises(ValueError, match="independently sampled unconditional rows"):
-        get_recipe(conditioning=conditioning, num_classes=2,
+        get_recipe("e22", conditioning=conditioning, num_classes=2,
                    continuous_policy="dv12", total_steps=None,
                    lr_control="stationarity", **controls)
 

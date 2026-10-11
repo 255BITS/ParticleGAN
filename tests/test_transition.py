@@ -96,13 +96,13 @@ class TransitionTests(unittest.TestCase):
 
     def test_default_recipe_and_parameter_budgets(self):
         r = training_recipe(DEFAULTS).to_dict()
-        expected = get_recipe(prior_kind='mog', sigma_rel=0.025).to_dict()
+        expected = get_recipe(trainer='ka2', prior_kind='mog', sigma_rel=0.025).to_dict()
         for key in ("z_dim", "num_particles", "num_classes", "conditioning", "total_steps", "batch_size"):
             expected[key] = r[key]
         self.assertEqual(r, expected)
         self.assertEqual(r["num_particles"], 1024)
         self.assertNotIn("reg_arm", r)
-        self.assertEqual(get_recipe().critic_formulation, "ka2")
+        self.assertEqual(get_recipe("ka2").critic_formulation, "ka2")
         sizes = [sum(p.numel() for p in g.parameters()) for g in
                  (TransitionGenerator(), TransitionGenerator(32, "monolithic", 234))]
         self.assertLess(abs(sizes[0]/sizes[1]-1), .01)

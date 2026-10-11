@@ -1,0 +1,29 @@
+{
+  "base_candidate": "bcap-prior-coulomb-base-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 135000,
+    "candidate_budget_seconds": 45000,
+    "id": "bcap-prior-coulomb-search-v1",
+    "purpose": "Three global positive prior strengths, all six Tier1 tasks then all21 Tier2 if eligible; complete_current_tier. Seed0, public initializer, original task architecture/data/prior/capacity/sampling/updates/cadence/gates. Separate matched leader control. No scientific retries, seed variants, Tier3, per-task recipes or default adoption. GPU sharing is intentional; costs are not a speed ranking.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "prior_reg": [
+      0.001,
+      0.01,
+      0.1
+    ]
+  },
+  "guide": "reports/forge/bcap-prior-search/coulomb/spec.json",
+  "hypothesis": "Bounded repulsion resists latent crowding while initial confinement limits expansion; at least one current BCAP Tier2 failure becomes a sustained full-gate pass under one global recipe.",
+  "id": "bcap-prior-coulomb-search-v1",
+  "protocol": "screening",
+  "rationale": "Convert at least one matched-control Tier2 FAIL to a sustained full-gate PASS. Retain every loss of a prior passing gate and all blocked/unmeasured cells. Search evidence is tuning, not independent confirmation.",
+  "schema_version": 2,
+  "trainer_family": "bcap-dualnorm",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

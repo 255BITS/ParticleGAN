@@ -114,7 +114,7 @@ def one_thread():
 
 @pytest.mark.parametrize("name", OTHER_PRESETS)
 def test_other_named_presets_retain_actual_develop_fields(actual_develop, name):
-    recipe = get_recipe(name)
+    recipe = get_recipe(name, trainer="ka2" if name in ("gan", "mog", "ddgan", "ddgan_mog", "ae_gan", "vae_gan", "ae_ddgan") else None)
     assert json.loads(json.dumps(recipe.to_dict())) == json.loads(json.dumps(actual_develop["presets"][name]))
     assert recipe.constraint_geometry_mode == recipe.critic_step_mode == "none"
     assert recipe.optimizer_svd_backend == "native"

@@ -246,7 +246,7 @@ def _edit_scale():
 
 
 def _recipe(steps):
-    return get_recipe(total_steps=steps, batch_size=64)
+    return get_recipe(trainer="ka2", total_steps=steps, batch_size=64)
 
 
 def _gain_optimizer(recipe, beta):

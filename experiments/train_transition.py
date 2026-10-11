@@ -40,7 +40,7 @@ DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
 
 def training_recipe(cfg):
     # Preserve the public recipe's optimizer, losses, regularizers and LR schedule.
-    return get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+    return get_recipe(trainer="ka2", prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
                       conditioning="ucd" if cfg["d_conditioning"] == "ucd" else "conditional",
                       total_steps=cfg["steps"], batch_size=cfg["batch_size"])
 

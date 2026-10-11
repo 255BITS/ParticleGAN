@@ -1,0 +1,504 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011",
+  "archived_gate_rescoring": false,
+  "batches": [
+    {
+      "junit": {
+        "bytes": 48356,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-existing.xml",
+        "sha256": "4e4069e5f531d7e6292740501d0c22a5f319fc9979b4a9ee8fc03677b44a889d"
+      },
+      "passed": 345,
+      "stdout": {
+        "bytes": 421,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-existing.log",
+        "sha256": "e464265987ec71849b1d21071ce0a6c5319190406fea99f3e747fa6b08a340b1"
+      },
+      "suite": "combined-existing"
+    },
+    {
+      "junit": {
+        "bytes": 87023,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-hosts.xml",
+        "sha256": "69ac8c6f4b46db9053e7811e45bd6468fdcb8755242840c0068bcf843763aba0"
+      },
+      "passed": 547,
+      "stdout": {
+        "bytes": 661,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-hosts.log",
+        "sha256": "a19b12585c23f7400b870e652f958b9f81da115eb5f0a4da9d5c35fbbd1efd5b"
+      },
+      "suite": "combined-hosts"
+    },
+    {
+      "junit": {
+        "bytes": 6629,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-new.xml",
+        "sha256": "87a71f94787c09865b43006bee924c6498a7b860524ddd5a337bfc9ff3e0fed4"
+      },
+      "passed": 40,
+      "stdout": {
+        "bytes": 99,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-new.log",
+        "sha256": "d74b3fe9ae6830ee0a7556b1ad5b9be563dc968c13beb5977e2824a5922a8a5d"
+      },
+      "suite": "combined-new"
+    },
+    {
+      "junit": {
+        "bytes": 3075,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-strict.xml",
+        "sha256": "18c79f0d04238977e6384e41a0c9fcd57f7b538b5ac8b5afec9ad6a257f5c01f"
+      },
+      "passed": 18,
+      "stdout": {
+        "bytes": 114,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-strict.log",
+        "sha256": "a2b73bb5e4f00bb429d6b93680eb2e4739ff363ed9cf314f3f0e067efee3c194"
+      },
+      "suite": "combined-strict"
+    },
+    {
+      "junit": {
+        "bytes": 2572,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-final-assertions.xml",
+        "sha256": "39cd6789d0428ad3f46e8092c255dd97d041443c8a534a83aec0d05521c5b36b"
+      },
+      "passed": 15,
+      "stdout": {
+        "bytes": 114,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-final-assertions.log",
+        "sha256": "9c2c6a74d03aa21251777b86947e051f0851818457e6b5e7c39d152396abfbcf"
+      },
+      "suite": "combined-final-assertions"
+    },
+    {
+      "junit": {
+        "bytes": 4156,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-boundary.xml",
+        "sha256": "48ebf59b62a2dbe39f1f6f2a3ebf1d35a8bf03c4bafa9f11292f6f777ab612a7"
+      },
+      "passed": 26,
+      "stdout": {
+        "bytes": 114,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-boundary.log",
+        "sha256": "9c2151f03706c8af46ae0c0312f90da41f6d09101779e08a9bc79caa833718b2"
+      },
+      "suite": "combined-boundary"
+    }
+  ],
+  "canonical_selection_and_leaderboard_unchanged": [
+    "reports/forge/technique-inventory.json",
+    "reports/forge/technique-inventory.md",
+    "configs/forge/selections/family-current-v1.json"
+  ],
+  "corrected_software_fixture_attempt": {
+    "cause": "recipe_field_active task argument requires keyword",
+    "junit": {
+      "bytes": 7155,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-boundary-test-signature-error.xml",
+      "sha256": "d2f61311f2924d99b23cb4b218433eb45bbb28d492634f6601246e0b9f2419f5"
+    },
+    "stdout": {
+      "bytes": 3579,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/combined-boundary-test-signature-error.log",
+      "sha256": "439b371defb4dae729d5eb1515928affe8e597a9965c25a3be720428d3d760b3"
+    }
+  },
+  "current_source_metadata_only_tasks": [
+    "configs/forge/tasks/ae_gan_hold.json",
+    "configs/forge/tasks/cover_leftover.json",
+    "configs/forge/tasks/five_word_joint_acquisition.json",
+    "configs/forge/tasks/five_word_joint_hold.json",
+    "configs/forge/tasks/five_word_joint_smoke.json",
+    "configs/forge/tasks/mid_scale_identity.json",
+    "configs/forge/tasks/residual_student.json",
+    "configs/forge/tasks/trajectory.json",
+    "configs/forge/tasks/two_pole.json",
+    "configs/forge/tasks/unipolar.json",
+    "configs/forge/tasks/unused_token_hold.json"
+  ],
+  "default_adoption": false,
+  "develop": "0337bbbc2300fd351e77e9a222b92401137fd421",
+  "frozen_fixtures": {
+    "coulomb": {
+      "bytes": 374765,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/coulomb.pt",
+      "sha256": "4e28b386791a72745e0e0f1501608945b50d43e56ee629338d2dce45a08c7272"
+    },
+    "develop": {
+      "bytes": 2210447,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/develop.pt",
+      "sha256": "4a0b7ee9b1474901e0fdde71790b5b63200a94b8748c6ef9c17ae6ed283fc8e9"
+    },
+    "initial_mmd": {
+      "bytes": 377973,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/initial_mmd.pt",
+      "sha256": "ffcfc5283e7b1210f0b4588a50d3250cad52ed7973a4f04f347c0857c42cb1fc"
+    },
+    "moment_tether": {
+      "bytes": 378015,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/moment_tether.pt",
+      "sha256": "1356984aa9166c8cf3e25274dfe07eac02f35c5c27c511d8c4d9ea9828f63c87"
+    },
+    "proximal": {
+      "bytes": 373637,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/proximal.pt",
+      "sha256": "4e818a5f4d69431adb069640b4d1ff2413859813e52302ac59628d467b01a032"
+    },
+    "sigreg": {
+      "bytes": 384633,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/fixtures/sigreg.pt",
+      "sha256": "658440c6239b0c54787435a45371d32553e84983e8a374247f9897c9661eb15f"
+    }
+  },
+  "initial_union_before_compatibility_fixes": "f60609e9fa0b9a4e23cb636ec51ce683c4b45bd4",
+  "measurements": [
+    {
+      "name": "distinct_passing_software_tests",
+      "score": 939,
+      "target": 939
+    },
+    {
+      "name": "combined_compatibility_cases",
+      "score": 47,
+      "target": 47
+    },
+    {
+      "name": "current_task_contracts_unchanged",
+      "score": 11,
+      "target": 11
+    },
+    {
+      "name": "original_feature_publications_unchanged",
+      "score": 5,
+      "target": 5
+    }
+  ],
+  "new_queue_admissions": 0,
+  "new_scientific_experiments": 0,
+  "passing_executions_including_rechecks": 991,
+  "pre_fix_findings": [
+    {
+      "case": "old positive Coulomb checkpoint without SIGReg packet",
+      "exception": "ValueError: active prior regularizer requires checkpoint state"
+    },
+    {
+      "case": "positive global coefficient on non-sampled host without module",
+      "exception": "AttributeError: 'NoneType' object has no attribute 'state_dict'"
+    }
+  ],
+  "preserved_feature_publications": [
+    {
+      "feature": "proximal",
+      "paths": [
+        "reports/forge/bcap-prior-search/proximal",
+        "reports/forge/configuration-search/bcap-prior-proximal-search-v1.json",
+        "configs/forge/searches/bcap-prior-proximal-search-v1.json"
+      ],
+      "source": "59d46d57bbc78acdeb486fba8c796256ab8015b5",
+      "unchanged": true
+    },
+    {
+      "feature": "coulomb",
+      "paths": [
+        "reports/forge/bcap-prior-search/coulomb",
+        "reports/forge/configuration-search/bcap-prior-coulomb-search-v1.json",
+        "configs/forge/searches/bcap-prior-coulomb-search-v1.json"
+      ],
+      "source": "5719cf00b41043602cffa2ca550273ce9b7c3895",
+      "unchanged": true
+    },
+    {
+      "feature": "sigreg",
+      "paths": [
+        "reports/forge/bcap-prior-search/sigreg",
+        "reports/forge/configuration-search/bcap-prior-sigreg-search-v1.json",
+        "configs/forge/searches/bcap-prior-sigreg-search-v1.json"
+      ],
+      "source": "40acfafa8eacfe7a0a8168eefd7797f28fbb4635",
+      "unchanged": true
+    },
+    {
+      "feature": "moment_tether",
+      "paths": [
+        "reports/forge/bcap-prior-search/covariance",
+        "reports/forge/configuration-search/bcap-prior-covariance-search-v1.json",
+        "configs/forge/searches/bcap-prior-covariance-search-v1.json"
+      ],
+      "source": "67badefcab620f32a8982dd9cd144f04ddac2c5d",
+      "unchanged": true
+    },
+    {
+      "feature": "initial_mmd",
+      "paths": [
+        "reports/forge/bcap-prior-search/mmd",
+        "reports/forge/configuration-search/bcap-prior-mmd-search-v1.json",
+        "configs/forge/searches/bcap-prior-mmd-search-v1.json"
+      ],
+      "source": "dd677a69bf10887830a3af65582ecdfac934b22f",
+      "unchanged": true
+    }
+  ],
+  "preserved_qualification_automation_lifecycle": {
+    "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
+    "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
+    "qualification_refresh": {
+      "mode": "preserved_published_evidence",
+      "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+      "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+    }
+  },
+  "protocol_seed": 0,
+  "publication_checks": {
+    "compile-check": {
+      "bytes": 957,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/compile-check.log",
+      "sha256": "acda16ff45713df267d6f26275b5057d336b4e0cc51c5466306ebd66decb5280"
+    },
+    "compile-summaries-final": {
+      "bytes": 815,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/compile-summaries-final.log",
+      "sha256": "bfdd228b98a8fbd6be049c15ae36f986aaa927b1734d68c9a28671df796e19db"
+    },
+    "forge-validate-final": {
+      "bytes": 2661,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/prior-integration-review-20261011/logs/forge-validate-final.log",
+      "sha256": "3243dafaa3dd6e9dce2c3c3ead2c38d514cb8cf6dc39948d8fa7a27b42425503"
+    }
+  },
+  "recommendation": "safe_after_explicit_integration_fixes",
+  "remote_push_or_merge": false,
+  "reviewed_feature_heads": {
+    "coulomb": "5719cf00b41043602cffa2ca550273ce9b7c3895",
+    "develop": "0337bbbc2300fd351e77e9a222b92401137fd421",
+    "initial_mmd": "dd677a69bf10887830a3af65582ecdfac934b22f",
+    "moment_tether": "67badefcab620f32a8982dd9cd144f04ddac2c5d",
+    "proximal": "59d46d57bbc78acdeb486fba8c796256ab8015b5",
+    "sigreg": "40acfafa8eacfe7a0a8168eefd7797f28fbb4635"
+  },
+  "scope": "bounded public-API software compatibility; no scientific qualification",
+  "summaries_only_memory_status": "CURRENT",
+  "tested_source_files": {
+    "benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 11381,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/locked_shared/mode_hold.py",
+      "sha256": "d312aa76fd631fb2adb2b8de53b92b1dc3f486b9c0a845ab2a25e895e643e855"
+    },
+    "benchmarks/toy_audit/api_images.py": {
+      "bytes": 89295,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/api_images.py",
+      "sha256": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d"
+    },
+    "benchmarks/toy_audit/api_vectors.py": {
+      "bytes": 53963,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/api_vectors.py",
+      "sha256": "fcf44675661835e5b44d05232bad5e58ccbb5760d909559d5db64e9eaff1c155"
+    },
+    "benchmarks/toy_audit/prior_proximal_smoke.py": {
+      "bytes": 9917,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/benchmarks/toy_audit/prior_proximal_smoke.py",
+      "sha256": "e1f78fc72d6bcda99aa56e20dcf1e4ec327dda668308afb599d9b30e9903edd4"
+    },
+    "configs/forge/tasks/ae_gan_hold.json": {
+      "bytes": 6479,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/ae_gan_hold.json",
+      "sha256": "ce264d96685996b083d7415ac7a741bb1be82a9e67a709b34c07370d06bbb24a"
+    },
+    "configs/forge/tasks/cover_leftover.json": {
+      "bytes": 5864,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/cover_leftover.json",
+      "sha256": "7cbf6ad110aab092bd2059337f22cfeca0c715c61f3c3df1134d1a7587f80abd"
+    },
+    "configs/forge/tasks/five_word_joint_acquisition.json": {
+      "bytes": 8640,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/five_word_joint_acquisition.json",
+      "sha256": "555465029beb34b943734f0472e25382d49c474bdb424b4df4042a705ccb3e30"
+    },
+    "configs/forge/tasks/five_word_joint_hold.json": {
+      "bytes": 11988,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/five_word_joint_hold.json",
+      "sha256": "d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f"
+    },
+    "configs/forge/tasks/five_word_joint_smoke.json": {
+      "bytes": 11846,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/five_word_joint_smoke.json",
+      "sha256": "e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e"
+    },
+    "configs/forge/tasks/mid_scale_identity.json": {
+      "bytes": 6061,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/mid_scale_identity.json",
+      "sha256": "c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247"
+    },
+    "configs/forge/tasks/residual_student.json": {
+      "bytes": 5696,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/residual_student.json",
+      "sha256": "9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c"
+    },
+    "configs/forge/tasks/trajectory.json": {
+      "bytes": 5530,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/trajectory.json",
+      "sha256": "23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9"
+    },
+    "configs/forge/tasks/two_pole.json": {
+      "bytes": 5801,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/two_pole.json",
+      "sha256": "93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1"
+    },
+    "configs/forge/tasks/unipolar.json": {
+      "bytes": 5632,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/unipolar.json",
+      "sha256": "260db651d2076b67b9b9fba7b698c573f931eb8eba4e2cea463e27e50a247269"
+    },
+    "configs/forge/tasks/unused_token_hold.json": {
+      "bytes": 5832,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/configs/forge/tasks/unused_token_hold.json",
+      "sha256": "ca29d6ef598ee7a57af3717c72930a8679addcbe72c94aa767ad4a4a1d09144f"
+    },
+    "docs/api.md": {
+      "bytes": 86098,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/docs/api.md",
+      "sha256": "0790066b178d2403ee598c4ab3707445cab8617bd0c8b21513a90fd4c41d9e27"
+    },
+    "docs/forge-field-boundaries.md": {
+      "bytes": 8764,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/docs/forge-field-boundaries.md",
+      "sha256": "6275cca9e9950489fc35fc1a02cc45144ab93c579cd1c1e303e09e3a52da1803"
+    },
+    "docs/prior-proximal.md": {
+      "bytes": 5379,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/docs/prior-proximal.md",
+      "sha256": "3ed9093ad4d1b610f437812b1703dac1a8aa7a85af45518932c73d8d44d63db0"
+    },
+    "docs/recipe-owned-priors.md": {
+      "bytes": 7798,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/docs/recipe-owned-priors.md",
+      "sha256": "3b9b697b2ead7d40d5c56a2ec4c90982f24a7cc41d938b1af0c9862f8dbba33d"
+    },
+    "experiments/forge/behavior_adapters.py": {
+      "bytes": 41951,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/behavior_adapters.py",
+      "sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
+    },
+    "experiments/forge/boundaries.py": {
+      "bytes": 19474,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/boundaries.py",
+      "sha256": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814"
+    },
+    "experiments/forge/priors.py": {
+      "bytes": 7947,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/priors.py",
+      "sha256": "315ab55030a4ed5bc5895794c826d1f4561c640d80930e7f73f68316762e6f5c"
+    },
+    "experiments/forge/techniques.py": {
+      "bytes": 10498,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/techniques.py",
+      "sha256": "526c416f17c0b039788e3b557d158cc28362d528f4db7782f2db79f4c6cddc1c"
+    },
+    "experiments/forge/word_adapter.py": {
+      "bytes": 12189,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/word_adapter.py",
+      "sha256": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd"
+    },
+    "experiments/forge/word_tasks.py": {
+      "bytes": 23906,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/experiments/forge/word_tasks.py",
+      "sha256": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814"
+    },
+    "particlegan/__init__.py": {
+      "bytes": 2315,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/__init__.py",
+      "sha256": "14d709fcf95ee251255ab798d58bc0cd44385800dc7d752bdbccfe5005bde6cd"
+    },
+    "particlegan/coulomb_prior.py": {
+      "bytes": 5361,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/coulomb_prior.py",
+      "sha256": "cd4fed5a3b22510911bc098e7b48bfb794366ef5a9c8c983d1672172f15b10a3"
+    },
+    "particlegan/initial_mmd.py": {
+      "bytes": 6027,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/initial_mmd.py",
+      "sha256": "59b9573dd79ac9d846779f2198d5864f865d0ae8207101ed8b3f4da720260615"
+    },
+    "particlegan/moment_tether.py": {
+      "bytes": 4308,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/moment_tether.py",
+      "sha256": "16bc50edae9ca43464240c84ffd20cb93691194f2b285a1056b56ff3a98c0e5a"
+    },
+    "particlegan/optim/dualnorm.py": {
+      "bytes": 33619,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/optim/dualnorm.py",
+      "sha256": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa"
+    },
+    "particlegan/optim/prior_proximal.py": {
+      "bytes": 7404,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/optim/prior_proximal.py",
+      "sha256": "50b20c11f0e7f7cabb9496d4874136172f36ce9997baf6db8d5dce91e3ca32ea"
+    },
+    "particlegan/recipe_compat.py": {
+      "bytes": 1330,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/recipe_compat.py",
+      "sha256": "755a3347a5ce0a700f5b04d756dd1e6bca7bd01e0bb16620f1f48dd8acd2e562"
+    },
+    "particlegan/recipes.py": {
+      "bytes": 83464,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/recipes.py",
+      "sha256": "b9436859b15226bdf632ed1a17becef134ec3f364e00e819ace3e5164b23f4b9"
+    },
+    "particlegan/sigreg.py": {
+      "bytes": 4172,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/sigreg.py",
+      "sha256": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b"
+    },
+    "particlegan/training.py": {
+      "bytes": 44434,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/particlegan/training.py",
+      "sha256": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+    },
+    "reports/forge/prior-integration-review/probe.py": {
+      "bytes": 3217,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/reports/forge/prior-integration-review/probe.py",
+      "sha256": "795d3744e2d6fbf35e369537446c439a39493efeb11923d4140550bfdb6a7a64"
+    },
+    "reports/forge/prior-integration-review/reproduce.py": {
+      "bytes": 3267,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/reports/forge/prior-integration-review/reproduce.py",
+      "sha256": "7ce54c470aaf3b09ded37a89eac449707f610fb8d22535683c42f016e5c0168c"
+    },
+    "reports/forge/prior-integration-review/validate_receipt.py": {
+      "bytes": 7753,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/reports/forge/prior-integration-review/validate_receipt.py",
+      "sha256": "b7f4e8a5d30fa7d8d38167af7c2e0fc6b8a77ecacd191198ead272d39f0ecf3a"
+    },
+    "tests/test_coulomb_prior.py": {
+      "bytes": 12583,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_coulomb_prior.py",
+      "sha256": "65c92e99001de3550f9029cbec6d31dcf6210c4bf39d5a9b1971c3b836e71be8"
+    },
+    "tests/test_initial_mmd.py": {
+      "bytes": 10647,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_initial_mmd.py",
+      "sha256": "491051dbc8205106d5d0a14c96c4fae8a23b80f0641ecc5e9e41886375fb564f"
+    },
+    "tests/test_moment_tether.py": {
+      "bytes": 9325,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_moment_tether.py",
+      "sha256": "c87a56c01e4a359e14d355a20667c454de4c1030a6d35a07696a928543647c99"
+    },
+    "tests/test_prior_feature_integration.py": {
+      "bytes": 9775,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_prior_feature_integration.py",
+      "sha256": "2c9a0154b3a7c0ebdc9f8a5ce00f80b5aa282749004345f68b848dbfe0381d34"
+    },
+    "tests/test_prior_proximal.py": {
+      "bytes": 13512,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_prior_proximal.py",
+      "sha256": "ee8a2bc3d756bf2a0f77d914675b5cf777e08785dcc59e13cd9fcb88c6377e68"
+    },
+    "tests/test_sigreg.py": {
+      "bytes": 10304,
+      "path": "/home/martyn/dev/ParticleGAN-prior-integration-review/tests/test_sigreg.py",
+      "sha256": "d8268fd2d90e5a88908da6cea3f08d42444917181f793f74aa46aaf5e617031f"
+    }
+  }
+}

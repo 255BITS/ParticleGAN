@@ -230,7 +230,7 @@ def validate(cfg):
 
 def training_recipe(cfg):
     """The default recipe with this experiment's learning rates and horizon."""
-    return get_recipe('vae_gan', num_particles=cfg['num_particles'], sigma_rel=cfg['sigma_rel'],
+    return get_recipe('vae_gan', trainer="ka2", num_particles=cfg['num_particles'], sigma_rel=cfg['sigma_rel'],
                       batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
                       d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'])
 
