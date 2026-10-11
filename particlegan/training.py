@@ -67,7 +67,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_family": "formulation", "eps": 1e-8,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
-                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
+                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
+                        "generator_idle_se": None}
 
 
 class GANTrainer:
@@ -390,6 +391,9 @@ class GANTrainer:
             if len(real_g) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
+            if recipe.generator_idle_se is not None:
+                # self.loss stays unbound: probe evaluators re-score g_loss.
+                self.opt_g.record_critic_gap(real_logits, fake_logits)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             transport = (recipe.kinetic_transport_loss(fake_g, real_g)
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
@@ -434,6 +438,8 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if recipe.generator_idle_se is not None:
+            result["generator_idle"] = self.opt_g.last_idle
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:

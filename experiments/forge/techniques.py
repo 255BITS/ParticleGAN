@@ -88,6 +88,9 @@ def technique_signature(value):
             mechanisms["critic_beta2_changing"] = critic_changing
     if recipe.lr_schedule == "exponential":
         mechanisms["exponential_decay"] = recipe.lr_decay_rate < 1
+    if recipe.generator_idle_se is not None:
+        # The off default adds no key, so existing signatures are unchanged.
+        mechanisms["generator_idle"] = "paired_critic_gap_standard_error_v1"
     contract = {"schema_version": 1, "fixed_recipe_fields": fixed, "mechanisms": mechanisms}
     return {**contract, "digest": stable_hash(contract)}
 
@@ -120,6 +123,8 @@ def recipe_field_active(name, value, *, task=None):
         return False
     if name == "prior_regularizer" and not learned:
         return False
+    if name == "generator_idle_se":
+        return recipe.generator_idle_se is not None
     if name == "optimizer_momentum":
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
     if name == "optimizer_smoothing":

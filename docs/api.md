@@ -888,6 +888,25 @@ the scalar G loss: `mean(softplus(real))` for `non_saturating`, `mean(real)` for
 required. Ordinary scalar GANs continue to use `g_loss`, whose unpaired losses
 depend only on fake scores. The five-word joint fixture uses `joint_g_loss`.
 
+#### Opt-in generator idle rule
+
+`Recipe(generator_idle_se=k)` skips a generator step while the critic cannot
+yet tell real from fake: the batch mean of the paired gap `real - fake` lies
+within `k` standard errors of zero. A skipped step leaves G, the prior and
+the optimizer state unchanged. D keeps stepping. In your own loop, bind the
+loss to the generator optimizer so each `g_loss(fake, real)` records the gap:
+
+```python
+recipe = get_recipe("bcap", generator_idle_se=1.0)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+gan = recipe.make_loss(generator_optimizer=opt_g)  # g_loss now needs real scores
+```
+
+`GANTrainer` records the gap itself. `opt_g.idle_steps` counts the skipped
+steps and is saved in its checkpoint. If no gap was recorded, `opt_g.step()`
+raises. The default `None` builds the same optimizer and checkpoint format as
+before.
+
 ### Critic penalty
 
 ```python

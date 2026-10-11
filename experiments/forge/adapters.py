@@ -23,7 +23,7 @@ from .api import (CapabilityError, task_formulation_context, task_recipe_resourc
 from .artifacts import manifest_artifacts, save_provenance_checkpoint, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .initialization import task_initializer
-from .mechanisms import MechanismAudit, mechanism_blockers
+from .mechanisms import MechanismAudit, generator_idle_steps, mechanism_blockers
 from .priors import task_prior
 from .sampling import ENUMERATED_PRIOR_CLEAN, PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
@@ -256,9 +256,12 @@ class _Run:
             self.finite = self.finite and _finite_tree(state)
         # Count actual Adam state steps, rather than echoing the task budget.
         def updates(optimizer, parameters):
+            parameters = list(parameters)
             observed = [int(optimizer.state[p]["step"]) for p in parameters
                         if p in optimizer.state and "step" in optimizer.state[p]]
-            return min(observed) if observed else 0
+            owned = {id(p) for group in optimizer.param_groups for p in group["params"]}
+            idle = generator_idle_steps(optimizer) if any(id(p) in owned for p in parameters) else 0
+            return (min(observed) if observed else 0) + idle
         counts = {"generator": updates(trainer.opt_g, trainer.G.parameters()),
                   "discriminator": updates(trainer.opt_d, trainer.D.parameters()),
                   "prior": updates(trainer.opt_g, trainer.prior.parameters())}

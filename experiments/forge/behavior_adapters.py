@@ -31,7 +31,7 @@ from .contracts import file_hash
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json
 from .initialization import task_initializer
-from .mechanisms import MechanismAudit, mechanism_blockers
+from .mechanisms import MechanismAudit, generator_idle_steps, mechanism_blockers
 from .priors import task_prior, recipe_owned_prior
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
 from .taskrecipes import BEHAVIOR_HOST_FIELDS, adaptation_receipt, bind_task_candidate
@@ -117,6 +117,10 @@ class _OptimizerBundle:
         for table in self.enumerated_tables:
             optimizer.set_sampled_rows(table, torch.arange(len(table), device=table.device))
         optimizer.bind_protected_losses(losses, protected_evaluator=protected_evaluator)
+
+    def record_critic_gap(self, real_logits, fake_logits):
+        for optimizer in self.optimizers:
+            optimizer.record_critic_gap(real_logits, fake_logits)
 
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
@@ -394,7 +398,7 @@ class BehaviorComponents:
                 raise CapabilityError(["two-pole diagnostics require the existing single direct-coordinate optimizer"])
             self.diagnostic.bind(self, direct_particles[0], parts[0], public_d)
             self.penalty.diagnostic = self.diagnostic
-        return public_g, public_d, self.recipe.make_loss(), self.penalty
+        return public_g, public_d, self.recipe.make_loss(generator_optimizer=public_g), self.penalty
 
     def schedule_optimizer(self, optimizer, completed_updates):
         apply_optimizer_schedule(completed_updates, self.recipe, optimizer)
@@ -459,6 +463,9 @@ class BehaviorComponents:
         for role, params in self.role_parameters.items():
             observed = [int(all_state.get(p, {}).get("step", 0)) for p in params if p.requires_grad]
             steps[role] = min(observed) if observed else 0
+            if role != "discriminator" and observed:
+                # Deliberate idle G decisions complete an update without a step.
+                steps[role] += generator_idle_steps(self.optimizers["generator"])
         finite = all(torch.isfinite(p).all().item() and (p.grad is None or torch.isfinite(p.grad).all().item())
                      for params in self.role_parameters.values() for p in params)
         def finite_state(value):

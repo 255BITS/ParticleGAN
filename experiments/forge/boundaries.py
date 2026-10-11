@@ -29,6 +29,7 @@ TUNABLE_FIELDS = frozenset({
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
     "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
+    "generator_idle_se",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({

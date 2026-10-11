@@ -131,12 +131,12 @@
       "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "experiments/forge/word_adapter.py": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd",
-      "experiments/forge/word_tasks.py": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814",
+      "experiments/forge/word_adapter.py": "dee8e703a5bdd7fe3adfe2a241bfe137a40055cf2ed0c54b9d1b12ba734c92e2",
+      "experiments/forge/word_tasks.py": "f9a5939cfd9a0babb9434266533f1b52a366d49eadaadd98e7e1088e4f06210e",
       "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
+      "experiments/forge/behavior_adapters.py": "2d97cacd72a90a1f2374a76f904c108416f56e3971a13f2044ce179dd6d2a145"
     },
     "evaluator_revision": {
       "id": "combined-opt-in-prior-source-v1",

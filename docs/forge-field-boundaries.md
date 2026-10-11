@@ -62,6 +62,14 @@ The projection RNG is a private CPU stream with fixed seed 0, saved under
 structural idea; positive `prior_reg` values can be searched within that idea.
 VICReg-only target-std/eps knobs are inactive under SIGReg.
 
+`generator_idle_se` is a trainer hyperparameter. `None` (the default) adds no
+mechanism and leaves the technique signature unchanged. A number adds the
+`generator_idle` mechanism: the generator step is skipped while the critic's
+paired real-fake gap is within that many standard errors of zero. Turning it
+on is a structural idea; values can be searched only while it stays on.
+Receipts count idle decisions as completed updates and report them in the
+mechanism audit's `generator_idle` row (`applied` idle steps of `calls`).
+
 Legacy tasks without this contract retain task-owned `learnable` and original
 behavioral host penalties under their archived source identities.
 AE routing settings remain

@@ -232,7 +232,7 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
                capture_media=False, prerequisites=None, retain_scored_outputs=True):
     from benchmarks.toy_audit.api_images import WordFixture
     from .adapters import _event, _finite_tree, _host_receipt, _save_observer_outputs
-    from .mechanisms import MechanismAudit, mechanism_blockers
+    from .mechanisms import MechanismAudit, generator_idle_steps, mechanism_blockers
     from .views import task_fingerprint
     if torch.device(device).type != "cuda" or not torch.cuda.is_available():
         raise ValueError("word acquisition/hold requires CUDA; no CPU fallback")
@@ -243,6 +243,10 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
     output.mkdir(parents=True, exist_ok=True)
     fixture = WordFixture(device=device, seed=request["protocol"]["seed"], recipe_name=None,
                           max_steps=SMOKE_STEPS, components=context)
+    # The fixture's joint objective records the idle rule's critic gap when
+    # the recipe enables it; the default keeps the fixture's own plain loss.
+    if context.recipe.generator_idle_se is not None:
+        fixture.loss = context.recipe.make_loss(generator_optimizer=fixture.opt_g)
     host = _host_receipt(task["execution"]["host_definition"], None, fixture.G, fixture.D)
     host["models"]["encoder"] = {"class": type(fixture.E).__module__ + "." + type(fixture.E).__qualname__,
         "parameters": sum(p.numel() for p in fixture.E.parameters()),
@@ -330,7 +334,8 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
     finite = finite and _finite_tree(state)
     def count(optimizer, parameters):
         values = [int(optimizer.state[p]["step"]) for p in parameters if "step" in optimizer.state.get(p, {})]
-        return min(values) if values else 0
+        idle = generator_idle_steps(optimizer) if values else 0
+        return (min(values) if values else 0) + idle
     counts = {role: count(opt, module.parameters()) for role, opt, module in (
         ("generator", fixture.opt_g, fixture.G), ("encoder", fixture.opt_g, fixture.E),
         ("prior", fixture.opt_g, fixture.prior), ("discriminator", fixture.opt_d, fixture.D))}

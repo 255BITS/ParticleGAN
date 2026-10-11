@@ -242,8 +242,18 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+    # Opt-in generator idle rule: skip the G/prior step while the critic's
+    # paired real-fake gap is within this many standard errors of zero.
+    # None leaves the generator optimizer and its checkpoint format unchanged.
+    generator_idle_se: float | None = None
 
     def __post_init__(self):
+        if self.generator_idle_se is not None:
+            value = self.generator_idle_se
+            if (isinstance(value, bool) or type(value) not in (int, float)
+                    or not math.isfinite(value) or value < 0):
+                raise ValueError("generator_idle_se must be None or a finite nonnegative number")
+            object.__setattr__(self, "generator_idle_se", float(value))
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
         from .coulomb_prior import CoulombPriorRegularizer
@@ -653,10 +663,19 @@ class Recipe:
                                 hard=self.encoder_mode == "hard", **options)
         raise ValueError("this recipe has no encoder")
 
-    def make_loss(self):
-        """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
+    def make_loss(self, generator_optimizer=None):
+        """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``.
+
+        With ``generator_idle_se`` set, pass this recipe's ``opt_g`` so each
+        ``g_loss(fake, real)`` records the critic gap the idle rule reads; real
+        scores are then required. Otherwise the argument changes nothing.
+        """
         from .gan_loss import GANLoss
-        return GANLoss(self.loss, labels=self.loss_labels)
+        loss = GANLoss(self.loss, labels=self.loss_labels)
+        if generator_optimizer is None or self.generator_idle_se is None:
+            return loss
+        from .optim.generator_idle import IdleRecordingLoss
+        return IdleRecordingLoss(loss, generator_optimizer)
 
     def kinetic_transport_loss(self, fake, real):
         """Weighted empirical transport on caller-owned G-phase output batches.
@@ -790,6 +809,10 @@ class Recipe:
         base update (including direction blend). Initialize tables first.
         Checkpoints carry that independent reference and the spring settings.
         Direct generated coordinates and frozen tables receive no spring.
+
+        ``generator_idle_se`` wraps the result in the idle rule
+        (``particlegan.optim.generator_idle``): record the critic gap before
+        each ``step()``, e.g. via ``make_loss(generator_optimizer=opt_g)``.
         """
         from torch import nn
         if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
@@ -813,6 +836,12 @@ class Recipe:
                 owners.extend(module.buffers())
             _reject_table_storage_owners(latent_table, owners)
             latent_table = None
+        if self.generator_idle_se is not None:
+            from .optim.generator_idle import enable_generator_idle
+            recipe = replace(self, generator_idle_se=None)
+            return enable_generator_idle(recipe.make_generator_optimizer(
+                params, latent_table=latent_table, direct_particles=direct_particles, **adam_kwargs),
+                self.generator_idle_se)
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam

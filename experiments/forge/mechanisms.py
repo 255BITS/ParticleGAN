@@ -23,12 +23,31 @@ class _ScalarCritic(nn.Module):
         return values @ self.weight
 
 
+def generator_idle_steps(optimizer):
+    """Deliberate idle G decisions: completed updates without a parameter step."""
+    from particlegan.optim.generator_idle import generator_idle_counts
+    counts = generator_idle_counts(getattr(optimizer, "optimizers", None) or [optimizer])
+    return 0 if counts is None else counts[0]
+
+
 def _count(value):
     return int(value.detach().item()) if isinstance(value, torch.Tensor) else int(value)
 
 
 def _probe(recipe, name):
     """Run the declared recipe's real hook against a known activating state."""
+    if name == "generator_idle":
+        parameter = nn.Parameter(torch.zeros(4, 1, dtype=torch.float64))
+        optimizer = recipe.make_generator_optimizer([parameter])
+        before = parameter.detach().clone()
+        scores = torch.tensor([1., -1.], dtype=torch.float64)
+        optimizer.record_critic_gap(scores, scores)  # zero paired gap
+        parameter.grad = torch.ones_like(parameter)
+        optimizer.step()
+        applied = optimizer.idle_steps == 1 and torch.equal(parameter.detach(), before)
+        return {"status": "PASS" if applied else "FAIL", "kind": "synthetic_public_component",
+                "synthetic_state": True, "training_evidence": False,
+                "measurements": {"idle_branch_applied": applied, "optimizer_updates": 0}}
     if name in {"critic_guard", "critic_anchor"}:
         model = _ScalarCritic()
         optimizer = recipe.make_critic_optimizer(model, ema_critic=deepcopy(model))
@@ -107,6 +126,7 @@ class MechanismAudit:
     def __init__(self, recipe, critic_optimizer, generator_optimizers):
         self.recipe = recipe
         self.critic_optimizer = critic_optimizer
+        self.generator_optimizers = list(generator_optimizers)
         self.rows = {name: dict(requested=False, enabled=False, calls=0, eligible=0, applied=0)
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
@@ -164,6 +184,25 @@ class MechanismAudit:
         anchor["eligible"] += int(applied and stats.get("phase") in {"blend", "b"})
         anchor["applied"] += int(applied and anchor["requested"] and stats.get("prox", 0.) > 0)
 
+    def _generator_idle_row(self):
+        from particlegan.optim.generator_idle import generator_idle_counts
+        counts = generator_idle_counts(self.generator_optimizers)
+        idle, decisions = counts or (0, 0)
+        row = dict(requested=True, enabled=counts is not None, calls=decisions, eligible=decisions,
+                   applied=idle, idle_fraction=idle / decisions if decisions else None,
+                   standard_errors=self.recipe.generator_idle_se)
+        if idle:
+            row["reason"] = "actual G steps skipped while the critic gap was unresolved"
+        else:
+            row["reason"] = ("generator optimizer lacks the idle rule" if counts is None else
+                             "critic gap was always resolved; targeted component check required")
+            try:
+                row["probe"] = _probe(self.recipe, "generator_idle")
+            except (ValueError, RuntimeError) as error:
+                row["probe"] = {"status": "BLOCKED", "kind": "synthetic_public_component",
+                                "training_evidence": False, "error": str(error)}
+        return row
+
     def receipt(self):
         rows = deepcopy(self.rows)
         for name, row in rows.items():
@@ -181,6 +220,8 @@ class MechanismAudit:
                 except (ValueError, RuntimeError, OverflowError, ZeroDivisionError) as error:
                     row["probe"] = {"status": "BLOCKED", "kind": "synthetic_public_component",
                                     "training_evidence": False, "error": str(error)}
+        if getattr(self.recipe, "generator_idle_se", None) is not None:
+            rows["generator_idle"] = self._generator_idle_row()
         if self.recipe.critic_step_mode == 'finite_cap':
             stats = getattr(self.critic_optimizer, 'critic_cap_stats', {})
             steps = stats.get('steps', 0)
@@ -196,7 +237,7 @@ def mechanism_blockers(audit):
     if not isinstance(audit, dict) or not isinstance(audit.get("mechanisms"), dict):
         return ["missing per-mechanism activation evidence"]
     rows = audit["mechanisms"]
-    if set(rows) not in (set(NAMES), set(NAMES)|{'critic_step_damping'}):
+    if not set(NAMES) <= set(rows) or set(rows) - set(NAMES) - {'critic_step_damping', 'generator_idle'}:
         return ["incomplete per-mechanism activation evidence"]
     blockers = []
     for name, row in rows.items():
@@ -222,7 +263,8 @@ def mechanism_blockers(audit):
         actual = (name == "critic_guard" and type(measured.get("clipped_tensors")) is int and measured["clipped_tensors"] > 0
                   or name == "critic_anchor" and type(measured.get("prox")) in (int, float) and math.isfinite(measured["prox"]) and measured["prox"] > 0
                   or name == "a2" and measured.get("damping_branch_applied") is True
-                  or name == "direct_particle_gain" and type(measured.get("gain")) in (int, float) and math.isfinite(measured["gain"]) and measured["gain"] > 1.)
+                  or name == "direct_particle_gain" and type(measured.get("gain")) in (int, float) and math.isfinite(measured["gain"]) and measured["gain"] > 1.
+                  or name == "generator_idle" and measured.get("idle_branch_applied") is True)
         if not (probe.get("status") == "PASS" and probe.get("kind") == "synthetic_public_component"
                 and probe.get("synthetic_state") is True and probe.get("training_evidence") is False and actual):
             blockers.append(f"{name}: requested mechanism activation has not been demonstrated")

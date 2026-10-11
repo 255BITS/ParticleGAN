@@ -92,7 +92,7 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     """Bounded API execution. A reduced cap is only an explicit integration demo."""
     from benchmarks.toy_audit.api_images import WordFixture
     from .adapters import _event, _finite_tree, _host_receipt, _save_observer_outputs
-    from .mechanisms import MechanismAudit, mechanism_blockers
+    from .mechanisms import MechanismAudit, generator_idle_steps, mechanism_blockers
 
     context = word_context(request, task, device)
     if task["evaluation"]["kind"] in {"word_smoke", "word_hold"}:
@@ -107,6 +107,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     output.mkdir(parents=True, exist_ok=True)
     fixture = WordFixture(device=device, seed=request["protocol"]["seed"], recipe_name=None,
                           max_steps=steps, components=context)
+    if context.recipe.generator_idle_se is not None:
+        fixture.loss = context.recipe.make_loss(generator_optimizer=fixture.opt_g)
     host = _host_receipt(task["execution"]["host_definition"], None, fixture.G, fixture.D)
     host["models"]["encoder"] = {"class": type(fixture.E).__module__ + "." + type(fixture.E).__qualname__,
         "parameters": sum(parameter.numel() for parameter in fixture.E.parameters()),
@@ -164,7 +166,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     def count(optimizer, parameters):
         values = [int(optimizer.state[parameter]["step"]) for parameter in parameters
                   if "step" in optimizer.state.get(parameter, {})]
-        return min(values) if values else 0
+        idle = generator_idle_steps(optimizer) if values else 0
+        return (min(values) if values else 0) + idle
     counts = {role: count(optimizer, module.parameters()) for role, optimizer, module in
               (("generator", fixture.opt_g, fixture.G), ("encoder", fixture.opt_g, fixture.E),
                ("prior", fixture.opt_g, fixture.prior), ("discriminator", fixture.opt_d, fixture.D))}
