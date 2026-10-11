@@ -246,8 +246,8 @@ class Recipe:
         CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
                                confinement=self.prior_coulomb_confinement,
                                neighbors=self.prior_coulomb_neighbors)
-        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether"):
-            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg or moment_tether")
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether", "initial_mmd"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether or initial_mmd")
         for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
             if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
                 raise ValueError(f"{key} must be an integer >= {minimum}")
@@ -858,6 +858,12 @@ class Recipe:
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
     def make_prior_regularizer(self, *, prior=None, reference=None, **overrides):
+        if prior is not None and reference is not None and prior is not reference:
+            raise ValueError("prior and reference must identify the same initialized prior")
+        if prior is None:
+            prior = reference
+        if reference is None:
+            reference = prior
         if self.prior_regularizer == "coulomb":
             from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
             options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
@@ -888,6 +894,13 @@ class Recipe:
             options["weight"] = 0.
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
             options["weight"] = 0.
+        if self.prior_regularizer == "initial_mmd" and options["weight"] > 0:
+            from .initial_mmd import InitialMMDRegularizer
+            if prior is None:
+                raise ValueError("initial_mmd requires prior= after public initialization")
+            if set(overrides) - {"weight"}:
+                raise ValueError("initial_mmd has fixed panel/kernel scales; only weight can be overridden")
+            return InitialMMDRegularizer.from_priors(prior, weight=options["weight"])
         return ParticleRegularizer(**options)
 
     def prior_regularization(self, rows, *, regularizer=None, prior=None, reference=None):
