@@ -12,6 +12,12 @@ regularizer and its positive coefficient. The constructor draw, deterministic
 initializer, location capacity, MoG width, masses, sample IDs, architectures,
 training data, clocks and BCAP optimizer settings retain their task ownership.
 
+The [completed three-strength search](../bcap-prior-search/coulomb/readout.md)
+found **no Tier 2 repair**. The .001 arm lost Ring16 acquisition and was blocked
+from Tier 2; .01 and .1 each passed 8/21 Tier 2 gates against the leader
+control's 9/21, with different regressions. Full measurements, score/target
+tables and original saved training GIFs are linked from that report.
+
 ## Public API
 
 ```python
@@ -68,10 +74,13 @@ broken with noise or an arbitrary direction. A zero-radius initialized table
 uses the explicit `1e-6` denominator floor and retains this limitation.
 
 At most eight deterministic cyclic offsets are selected by default, evenly
-spaced over `1..n-1`; self pairs are excluded and each row participates. Memory
-is O(n*d) and arithmetic O(n*d*k), with a hard `1 <= k <= 64` bound. This is a
-bounded index-based pair graph, not a nearest-neighbor search or a complete
-Coulomb interaction. It consumes no RNG and introduces no new stream or cursor.
+spaced over `1..n-1`; self pairs are excluded and each row participates.
+Forward scratch memory is O(n*d); arithmetic and retained autograd tape can
+be O(n*d*k), with a hard `1 <= k <= 64` bound. The rule operates on the
+host-supplied rows: numeric offsets depend on that input row count. Above
+1,024 particles the trainer supplies unique G-phase sampled rows, so graph
+node IDs and offsets vary with the batch. These are index neighbors. No RNG,
+new stream or cursor is consumed.
 
 ## Software verification
 
@@ -132,9 +141,9 @@ retain their original bindings.
 Raw stdout and event streams stay in ignored `runs/prior-coulomb/`.
 Use `tail -F runs/prior-coulomb/software-demo-v2.log` for this execution.
 
-## Starting values and falsifier
+## Declared bracket and falsifier
 
-Search one global `prior_reg` value per candidate: **.001, .01, .1**, holding
+The completed search used one global `prior_reg` value per candidate: **.001, .01, .1**, holding
 softening .1, confinement .35 and eight offsets fixed. These are separate
 positive strengths of the same structural regularizer. The matched disabled
 leader is a separate control rather than an axis crossing mechanism activation.
@@ -153,7 +162,12 @@ These are force calculations on one fixed initialized table, not three training
 experiments or estimates of combined GAN motion. Pair averaging, initial
 radius, row count and GAN-force direction all change the effective scale. The
 .1 arm approaches the .030 row-step cap even before the GAN gradient is added;
-record actual sampled-row displacement and force ratios during the search.
+the combined GAN gradient sets the actual motion. In this leader the prior
+update is `-.030*g/sqrt(||g||²+.001²)` for each unique G-phase sampled row.
+Unsampled rows stay fixed, including when a full-table regularizer has dense
+gradients. This is smoothed normalization, and the coefficient-to-motion
+relationship is nonlinear. The search retained its ordinary receipts; it did
+not add per-update displacement instrumentation.
 
 A repair requires converting a matched failing Tier 2 task to its complete
 PASS gate while preserving all six Tier 1 gates. If spacing/spread improves

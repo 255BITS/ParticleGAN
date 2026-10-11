@@ -15,16 +15,17 @@ import math
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 from experiments.forge.configuration_search import (
     enqueue_search, materialize_search, plan_search, report_search,
 )
-from experiments.forge.contracts import atomic_json, atomic_text, file_hash, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, atomic_text, file_hash, file_lock, read_json, stable_hash
 from experiments.forge.decision_contracts import OUTCOMES
 from experiments.forge.planning import plan_summary, resolve_idea
-from experiments.forge.queue import Queue, drain
+from experiments.forge.queue import Queue, device_slots, drain
 from experiments.forge.studies import validate_study
 from experiments.forge.views import load_view
 from particlegan import get_recipe
@@ -159,6 +160,44 @@ def prepare(args):
                          full_reservation_seconds=output["full_reservation_seconds"])), flush=True)
 
 
+def drain_shared_pool(queue, pool, devices):
+    """Share physical admission across independent, source-specific queues.
+
+    Existing workers keep their leases, states and deadlines. New GPU jobs run
+    one per physical GPU so the unchanged tight word allowance is meaningful.
+    This changes scheduling only, never training updates or evaluation cadence.
+    """
+    with file_lock(queue.root / "coordinator.lock", blocking=False):
+        processes = []
+        while True:
+            processes = [p for p in processes if p.poll() is None]
+            queue.collect()
+            with file_lock(pool / "physical-admission.lock"):
+                busy = set()
+                for state_path in pool.glob("*/queue/queue/state.json"):
+                    for job in read_json(state_path)["jobs"].values():
+                        if job["status"] == "running":
+                            busy.add(str(job["worker"]["device"]))
+                slots = [slot for slot in device_slots(devices) if slot["device"] not in busy]
+                # claim([cpu]) treats CUDA requests as impossible allocations;
+                # occupied external GPU capacity must instead remain queued.
+                claim = queue.claim(slots) if any(s["device"] != "cpu" for s in slots) else None
+                if claim:
+                    try:
+                        processes.append(queue.launch(claim))
+                    except (OSError, RuntimeError) as error:
+                        atomic_json(Path(claim["worker"]["directory"]) / "terminal.json",
+                                    dict(schema_version=1, token=claim["worker"]["token"], attempt_status="error",
+                                         reason=f"worker launch failed: {error}", elapsed_seconds=0, result={}))
+                        queue.collect()
+            queue.flush_events()
+            state = queue.inspect()
+            if (not any(e["status"] in ("queued", "running") for e in state["submissions"].values())
+                    and not any(j["status"] == "running" for j in state["jobs"].values())):
+                break
+            time.sleep(2)
+
+
 def run(args):
     p = paths(args.name)
     require(head() == args.source_commit, "Run only the explicitly frozen committed source.")
@@ -188,8 +227,16 @@ def run(args):
         require(progress.exists(), "Drain needs prior explicit admission.")
         data = read_json(progress)
         require(data["source_commit"] == args.source_commit, "Admission source differs.")
-        drain(queue, args.gpus.split(","), workers_per_gpu=args.workers_per_gpu, allow_sharing=True, watch=False)
-        data["phase"] = "complete"
+        if args.shared_pool:
+            require(args.workers_per_gpu == 1, "The shared pool fixes one new GPU job per physical device.")
+            drain_shared_pool(queue, args.shared_pool.resolve(), args.gpus.split(","))
+        else:
+            drain(queue, args.gpus.split(","), workers_per_gpu=args.workers_per_gpu, allow_sharing=True, watch=False,
+                  poll_seconds=2)
+        state = queue.inspect()
+        unfinished = (any(e["status"] in ("queued", "running", "paused") for e in state["submissions"].values())
+                      or any(j["status"] == "running" for j in state["jobs"].values()))
+        data["phase"] = "paused" if unfinished else "complete"
         atomic_json(progress, data)
     print(json.dumps(dict(event="execution_state", name=args.name, progress=read_json(progress))), flush=True)
 
@@ -216,9 +263,21 @@ def metric_rows(metrics, thresholds):
     limits = {}
     for key, op, target in thresholds:
         limits.setdefault(key, []).append((op, target))
-    return [measurement(key, metrics.get(key), limits.get(key, ()))
-            for key in list(limits) + sorted(set(metrics) - set(limits))
-            if key in limits or not isinstance(metrics[key], (str, dict, list))]
+    rows = [measurement(key, metrics.get(key), bounds) for key, bounds in limits.items()]
+
+    def diagnostic(key, value):
+        if isinstance(value, dict):
+            for child, item in sorted(value.items()):
+                diagnostic(f"{key}.{child}", item)
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                diagnostic(f"{key}[{index}]", item)
+        elif value is None or isinstance(value, (int, float, bool)):
+            rows.append(measurement(key, value))
+
+    for key in sorted(set(metrics) - set(limits)):
+        diagnostic(key, metrics[key])
+    return rows
 
 
 def native_thresholds(card, n, *, accuracy=False):
@@ -242,17 +301,141 @@ def native_thresholds(card, n, *, accuracy=False):
 
 def compact_row(row):
     keep = ("task_id", "gate_status", "raw_status", "reason", "reasons", "metrics", "evaluator_result", "cost",
-            "compatibility_key", "recipe", "initialization", "initial_prior", "prior_policy", "sampling")
+            "compatibility_key", "recipe", "initializer", "initialization", "initial_prior", "prior", "prior_policy",
+            "field_ownership", "mechanism_applicability", "sampling", "receipt_binding")
     projected = {k: deepcopy(row[k]) for k in keep if k in row}
+    applied = row.get("applied", {})
+    for key in ("recipe", "initializer", "initialization", "initial_prior", "prior", "field_ownership", "mechanism_applicability"):
+        if key not in projected and key in applied:
+            projected[key] = deepcopy(applied[key])
     evaluator = projected.get("evaluator_result", {})
     terminal = evaluator.pop("terminal_checks", None)
     if terminal is not None:
         evaluator["terminal_summary"] = dict(checks=len(terminal), passing_checks=sum(bool(p.get("passed")) for p in terminal))
     evidence = row.get("evidence", {})
+    if "prior_policy" not in projected and "prior_policy" in evidence:
+        projected["prior_policy"] = deepcopy(evidence["prior_policy"])
+    raw = row.get("raw")
+    if isinstance(raw, dict):
+        scalars = {key: deepcopy(value) for key, value in raw.items()
+                   if key not in (row.get("metrics") or {})
+                   and (value is None or isinstance(value, (int, float, bool)))}
+        if scalars:
+            projected["raw_endpoint_diagnostics"] = scalars
     projected["provenance_checkpoint"] = deepcopy(evidence.get("provenance_checkpoint"))
     projected["sampling"] = {k: evidence.get(k) for k in ("sampling_contract_version", "sampling_law", "eval_output_noise")}
     projected["guards"] = deepcopy(evidence.get("guards", {}))
+    if "comparisons" in evidence:
+        projected["clock_parity"] = [dict(condition=point["condition"],
+            exact_state_equal=bool(point.get("changed_sha256") and point.get("changed_sha256") == point.get("reference_sha256")))
+            for point in evidence["comparisons"]]
     return projected
+
+
+def display_outcome(row, cell=None, trial=None):
+    """Retain prerequisite BLOCKED states without inventing a measured result."""
+    if row.get("gate_status"):
+        return row["gate_status"], row.get("reason")
+    cell, trial = cell or {}, trial or {}
+    if cell.get("gate_status") == "BLOCKED":
+        blockers = cell.get("blockers", []) + trial.get("submission_blockers", [])
+        reason = (cell.get("reason") or trial.get("submission_reason")
+                  or "; ".join(str(value) for value in blockers) or "Blocked by frozen prerequisites")
+        return "BLOCKED", reason
+    failed_tier1 = [task for task in trial.get("tasks", [])
+                    if task.get("qualification_tier") == 1 and task.get("importance") == "required"
+                    and task.get("attempt_id")
+                    and task.get("gate_status") in {"FAIL", "INVALID", "INCOMPLETE", "BLOCKED", "ERROR"}]
+    if (trial.get("submission_status") == "blocked" and cell.get("qualification_tier", 0) > 1
+            and failed_tier1):
+        reason = trial.get("submission_reason") or "; ".join(
+            f"{task['task']}: {task['gate_status']} {task.get('reason') or ''}".strip() for task in failed_tier1)
+        return "BLOCKED", reason
+    return "UNMEASURED", None
+
+
+def validated_submission_rows(state, entry, attempts):
+    """Use original certificates for the control as well as search trials.
+
+    Queue result projections alone cannot establish a matched-control grade.
+    This follows report_search's receipt/cohort checks and preserves observed
+    scores when provenance is invalid, without granting a PASS or repair.
+    """
+    from experiments.forge.views import grade_result
+    request = entry["request"]
+    rows = []
+    for definition in request["jobs"]:
+        result = state["jobs"][definition["compatibility_key"]].get("result")
+        if not result:
+            continue
+        original = attempts.get(result.get("attempt_id"))
+        valid = bool(original and original["valid_receipt"]
+                     and original["result_hash"] == stable_hash(result)
+                     and not original.get("superseded_by")
+                     and original["request"]["candidate_revision"] == request["candidate_revision"]
+                     and original["request"]["source"]["digest"] == request["source"]["digest"]
+                     and original["request"]["runtime"] == request["runtime"]
+                     and original["request"]["compute_profiles"] == request["compute_profiles"])
+        binding = dict(attempt_id=result.get("attempt_id"), result_hash=stable_hash(result),
+                       valid_receipt=valid, candidate_revision=request["candidate_revision"],
+                       source_digest=request["source"]["digest"])
+        if not valid:
+            binding["receipt_error"] = ((original or {}).get("receipt_error")
+                                        or "Missing, superseded or mismatched original receipt/cohort")
+        for row in result.get("task_results", []):
+            task_id = row["task_id"]
+            require(task_id in definition.get("task_ids", [definition["task_id"]]),
+                    "Queue result contains a task outside its frozen execution group.")
+            grade = grade_result(request["tasks"][task_id], row) if valid else {}
+            projected = {**deepcopy(row), **grade, "receipt_binding": deepcopy(binding)}
+            projected["gate_status"] = grade.get("gate_status", grade.get("status", "INVALID")) if valid else "INVALID"
+            if not valid:
+                projected["reason"] = binding["receipt_error"]
+            rows.append(projected)
+    return rows
+
+
+def word_hold_failure_witnesses(row, card):
+    """Summarize mandatory hold checks without publishing observation streams."""
+    if card["id"] != "five_word_joint_hold" or row.get("gate_status") != "FAIL":
+        return []
+    bounds = {}
+    for name, op, target in card["evaluation"]["thresholds"]:
+        bounds.setdefault(name, []).append((op, target))
+    evidence = row.get("evidence", {})
+    cohorts = [("primary", evidence.get("observations", []))]
+    confirmations = evidence.get("confirmations", [])
+    if confirmations and all(isinstance(point.get("metrics"), dict) for point in confirmations):
+        cohorts.append(("independent confirmation", confirmations))
+    summaries = []
+    for label, points in cohorts:
+        def values(point):
+            return point["metrics"] if label != "primary" else point
+
+        failed = [point for point in points if any(
+            measurement(name, values(point).get(name), limits)["status"] != "PASS"
+            for name, limits in bounds.items())]
+        if not failed:
+            continue
+        witnesses = []
+        for name, limits in bounds.items():
+            def badness(point):
+                score = values(point).get(name)
+                if score is None or (isinstance(score, float) and not math.isfinite(score)):
+                    return math.inf
+                return max(((target - score) if op in (">=", ">") else
+                            (score - target) if op in ("<=", "<") else abs(score - target))
+                           / (abs(target) or 1) for op, target in limits)
+
+            witness = max(points, key=badness)
+            metric = measurement(name, values(witness).get(name), limits)
+            metric.update(witness_step=witness["step"], witness_observation_sha256=stable_hash(witness))
+            witnesses.append(metric)
+        summaries.append(dict(name=f"Worst mandatory word-hold {label} checks (saved failure witnesses)",
+                              cohort=label, qualification_credit=False, observation_count=len(points),
+                              numerical_failed_checks=len(failed), original_observations_sha256=stable_hash(points),
+                              rows=witnesses))
+    return summaries
 
 
 def sections(row, card):
@@ -260,7 +443,11 @@ def sections(row, card):
     result = [dict(name="Recorded endpoint", rows=metric_rows(row.get("metrics", {}), evaluation.get("thresholds", [])))]
     temporal = []
     convergence = evaluator.get("convergence", {})
-    if evaluation["kind"] == "transfer_sustained":
+    if evaluation["kind"] == "clockfree_parity":
+        parity = {point["condition"]: point["exact_state_equal"] for point in row.get("clock_parity", [])}
+        temporal = [measurement(f"{condition}: exact learning-state parity", parity.get(condition), [("==", True)])
+                    for condition in evaluation["conditions"]]
+    elif evaluation["kind"] == "transfer_sustained":
         temporal = [measurement("terminal passing suffix", convergence.get("passing_suffix"), [(">=", evaluation["minimum_stable_checks"])]),
                     measurement("passing scheduled observations", convergence.get("passing_observations")),
                     measurement("complete declared execution", convergence.get("complete"), [("==", True)])]
@@ -311,6 +498,26 @@ def sections(row, card):
                            rows=metric_rows(coverage, native_thresholds(card, 100000))))
     if temporal:
         result.insert(0, dict(name="Sustained gate", rows=temporal))
+    result.extend(row.get("_word_hold_failure_witnesses", []))
+    if row.get("raw_endpoint_diagnostics"):
+        result.append(dict(name="Additional scalar endpoint diagnostics (no declared gate)",
+                           qualification_credit=False, rows=metric_rows(row["raw_endpoint_diagnostics"], [])))
+    # Keep compact evaluator counts and numerical diagnostics visible. Full
+    # terminal observation packets remain external; compact_row summarizes them.
+    omitted = {"terminal_checks"}
+    if card["adapter"] == "native100":
+        omitted |= {"final_metrics", "holdout_metrics", "holdout_ema_metrics", "oracle_metrics"}
+    diagnostics = metric_rows({key: value for key, value in evaluator.items() if key not in omitted}, [])
+    if diagnostics:
+        result.append(dict(name="Recorded evaluator diagnostics (no additional qualification credit)",
+                           qualification_credit=False, rows=diagnostics))
+    if card["adapter"] == "native100":
+        count = evaluation["holdout_samples"]
+        for key, label in (("holdout_ema_metrics", "EMA holdout"), ("oracle_metrics", "Oracle")):
+            if key in evaluator:
+                result.append(dict(name=f"{label} diagnostic cohort, {count} saved draws (no qualification credit)",
+                                   cohort=key, qualification_credit=False,
+                                   rows=metric_rows(evaluator[key] or {}, native_thresholds(card, count, accuracy=True))))
     return result
 
 
@@ -319,10 +526,17 @@ def publish(args):
     queue = Queue(args.archive / "queue", report_root=ROOT / "reports/forge", on_completion=None)
     progress = read_json(args.archive / "progress.json")
     require(progress["phase"] == "complete", "Finish the registered work before concluding it.")
+    state = queue.inspect()
+    require(not any(e["status"] in ("queued", "running", "paused") for e in state["submissions"].values())
+            and not any(j["status"] == "running" for j in state["jobs"].values()),
+            "A paused drain is not a completed scientific round.")
     summary = report_search(ROOT, queue.root, p["search"], queue=queue)
     state = queue.inspect()
+    from experiments.forge.knowledge import _attempts
+    originals, _ = _attempts(ROOT)
+    attempts = {attempt["attempt_id"]: attempt for attempt in originals}
     control_entry = state["submissions"][progress["control_request"]]
-    control_results = [compact_row(row) for row in queue._results(state, control_entry)]
+    control_results = [compact_row(row) for row in validated_submission_rows(state, control_entry, attempts)]
     control = {r["task_id"]: r for r in control_results}
     comparisons = []
     for trial in summary["trials"]:
@@ -343,26 +557,32 @@ def publish(args):
                                 preserves_recorded_control_passes=not (regressed or unresolved),
                                 qualification=trial["qualification"]))
     measured = []
+    trials_by_request = {trial["request_id"]: trial for trial in summary["trials"]}
     for role, request_id in [("control", progress["control_request"])] + [
             (str(trial["settings"]), trial["request_id"]) for trial in summary["trials"]]:
         entry = state["submissions"][request_id]
         for file in ("benchmarks/toy100/metrics.py", "benchmarks/toy100/problems.py"):
             require(file_hash(ROOT / file) == entry["request"]["source"]["files"][file], "Saved-only native scorer must match frozen source.")
-        raw_rows = {r["task_id"]: r for r in queue._results(state, entry)}
+        raw_rows = {r["task_id"]: r for r in validated_submission_rows(state, entry, attempts)}
+        trial = trials_by_request.get(request_id, {})
+        cells = {cell["task"]: cell for cell in trial.get("tasks", [])}
         for assignment in entry["request"]["view"]["assignments"]:
             if assignment["qualification_tier"] > 2:
                 continue
             name = assignment["task"]
             raw_row = raw_rows.get(name, {})
             projected = compact_row(raw_row)
+            projected["_word_hold_failure_witnesses"] = word_hold_failure_witnesses(
+                raw_row, entry["request"]["tasks"][name])
             evidence = raw_row.get("evidence", {})
             if (entry["request"]["tasks"][name]["adapter"] == "native100"
                     and evidence.get("artifact_root") and evidence.get("artifact_manifest")):
                 projected["_artifact_root"] = evidence["artifact_root"]
                 projected["_artifact_manifest"] = evidence["artifact_manifest"]
             rows = sections(projected, entry["request"]["tasks"][name])
+            status, reason = display_outcome(projected, cells.get(name), trial)
             measured.append(dict(role=role, task_id=name, tier=assignment["qualification_tier"],
-                                 status=projected.get("gate_status", "UNMEASURED"), measurements=rows))
+                                 status=status, reason=reason, measurements=rows))
     result = dict(schema_version=1, name=args.name, source_commit=progress["source_commit"],
                   source_digest=progress["source_digest"], scope="ordinary_tuning_comparison",
                   default_adoption=False, independent_confirmation="not_performed",
@@ -380,10 +600,19 @@ def publish(args):
     text += ["", "Every task metric and its frozen numerical gate are retained below and in [results.json](results.json). Unreached tasks remain unmeasured.", "", "The goal's [current leaderboard](../../technique-inventory.md) remains the sole generated leaderboard; this table is a source-bound experimental comparison.", ""]
     for task in measured:
         text += [f"## {task['role']}: {task['task_id']} — {task['status']}", ""]
+        if task.get("reason"):
+            text += [str(task["reason"]), ""]
         for section in task["measurements"]:
-            text += [section["name"], "", "| Measurement | Score | Target | Status |", "| --- | ---: | --- | --- |"]
+            text += [section["name"], ""]
+            witnesses = "original_observations_sha256" in section
+            if witnesses:
+                text += [f"{section['numerical_failed_checks']}/{section['observation_count']} mandatory checks failed numerical bounds. "
+                         f"Original cohort SHA256 `{section['original_observations_sha256']}`; no observations rescored for qualification.", ""]
+            text += ["| Measurement | Score | Target | Status |" + (" Witness step | Original observation SHA256 |" if witnesses else ""),
+                     "| --- | ---: | --- | --- |" + (" ---: | --- |" if witnesses else "")]
             for row in section["rows"]:
-                text.append(f"| {row['metric']} | {fmt(row['score'])} | {row['target']} | {row['status']} |")
+                text.append(f"| {row['metric']} | {fmt(row['score'])} | {row['target']} | {row['status']} |" +
+                            (f" {row['witness_step']} | `{row['witness_observation_sha256']}` |" if witnesses else ""))
             text.append("")
     atomic_text(p["report"] / "README.md", "\n".join(text))
     print(json.dumps(dict(event="published", name=args.name, comparisons=comparisons)), flush=True)
@@ -404,6 +633,7 @@ def main():
     parser.add_argument("--drain", action="store_true")
     parser.add_argument("--gpus", default="0,1")
     parser.add_argument("--workers-per-gpu", type=int, default=1)
+    parser.add_argument("--shared-pool", type=Path)
     args = parser.parse_args()
     args.archive = args.archive.resolve()
     if args.action == "prepare":
