@@ -103,7 +103,7 @@ The [objective and optimizer-memory readout](reports/forge/r1r2-objective-memory
 retains separately declared hypotheses and their evidence under those unchanged contracts.
 The subsequent [native score-law comparison](reports/forge/r1r2-score-law-repair/README.md)
 declares one loss-field contrast under the same task and protocol contracts.
-The separate [weaker-penalty comparison](reports/forge/r1r2-weak-penalty-repair/PLAN.md)
+The separate [weaker-penalty comparison](reports/forge/r1r2-weak-penalty-repair/README.md)
 retains the original task contracts and declares its constant-strength delta explicitly.
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live

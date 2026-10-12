@@ -1,0 +1,112 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 21,
+    "certified_cases": 21,
+    "exact_cached_cases": 14,
+    "independent_audit": "PASS",
+    "new_optimizer_updates": 0,
+    "new_paid_attempts": 7,
+    "new_paid_seconds": 181.08289201298612,
+    "new_sampling_draws": 0,
+    "shared_unique_paid_attempts": 217,
+    "shared_unique_paid_seconds": 6586.162437112915
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "covariance_bound_passes": 0,
+    "full_ring_passes": 0,
+    "max_absolute_difference": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "saved_observations": 96,
+    "terminal_suffix": 0
+  },
+  "execution_commit": "3cb46b91121f42f8b171a77f17776365aebad1d8",
+  "inputs_sha256": {
+    "reports/forge/r1r2-weak-penalty-repair/PLAN.md": "8c9d09f21797a90e33f24483e6125a04a7d5bf2a534154fa258aa0b563424686",
+    "reports/forge/r1r2-weak-penalty-repair/README.md": "a80a017cba799a8d5e03f829061b8484c432f42a522c80c20f67bea3b2a4e184",
+    "reports/forge/r1r2-weak-penalty-repair/audit_collection.py": "d8719a7f6b1917f1563ec7e3bd43c08355666d1bf6b2c653d0d5280938b8266d",
+    "reports/forge/r1r2-weak-penalty-repair/collection-audit-readout.md": "a4deeb29679393f7c1313d9e54c074739fdec20e89e922bc0013c3b8fe5093ae",
+    "reports/forge/r1r2-weak-penalty-repair/collection-audit.json": "f252d35de8ca405fa34f6017db4adb7786949099cd61c2812d8bf3a9fbc5ef33",
+    "reports/forge/r1r2-weak-penalty-repair/density-audit.json": "2f5fb3e0a1ee47163f558fad9ce4db251acde2320af65f912f1b8339b05c8601",
+    "reports/forge/r1r2-weak-penalty-repair/density-readout.md": "9e17b1d4dc24cd9a265a87a0c3e21ac6ec5a4b973fd655c31dbe4c2e1b9a53aa",
+    "reports/forge/r1r2-weak-penalty-repair/density_audit.py": "cc3f4e1aef1d3e450535abca004592a87d92df2d6ae3cfc7c96e7ab628859674",
+    "reports/forge/r1r2-weak-penalty-repair/manifest.json": "86cd7077b30c3f049b97c3f8c69aa6c7fc8a8cbd8fbd17ea61f9a010d9fe040d",
+    "reports/forge/r1r2-weak-penalty-repair/preflight-review.json": "d32a628b8c4cf29946087c5b8ee3a171e7f3c7841403e26533db9633031cc527",
+    "reports/forge/r1r2-weak-penalty-repair/publication/results.json": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+    "reports/forge/r1r2-weak-penalty-repair/registration-validation.json": "2436079b2f071b4eb592df313f1c6f58d7f5f9c797b64898158995bce523bc1b",
+    "reports/forge/r1r2-weak-penalty-repair/registration.json": "f321d5a9a38a767095a885601a162db08d76c0e2e72c151fb34ff4d9cf6efaf7",
+    "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md": "46063e613846b0b6b2a804b3193c86336d42c066677966d01f3422241726f13a",
+    "reports/forge/r1r2-weak-penalty-repair/research/weak-penalty.md": "44a0bdbd9c4e52ea5d09b43ae7d9c756d42667d033c35940f87d1bcbe002747a",
+    "reports/forge/r1r2-weak-penalty-repair/test_weak_penalty_workflow.py": "d8e38eb7a020c3f24aec52c3671b44822236c8213ef165caa21edab0da624bab",
+    "reports/forge/r1r2-weak-penalty-repair/workflow.py": "752f3aa7fe5ca3cc1e3d6ed03168ad9733c5c53125d89dad4f6912f1808f3c85",
+    "reports/forge/records/r1r2-weak-penalty-repair-20261012.json": "dcf8d03778f9337bd6a8a355ce7d66c77ea1b3e4d281a6199313fc36c0ed9d2a"
+  },
+  "local_log_sha256": {
+    "audit-collection.log": "477741981b244b5004678bb66a30af57df8f588e210dd0206e8d3bdb1f113692",
+    "collect.log": "97f8541c3dcc8baa12441b435f9e74eceb076c18121720a0e7667ba5dbe3edab",
+    "compile-readout.log": "10e043f4d29d33dc6727d4037d1e7ce75ed85d34826d53d6d34f933bde04b95f",
+    "density-audit.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "density-audit.stdout.log": "2f5fb3e0a1ee47163f558fad9ce4db251acde2320af65f912f1b8339b05c8601",
+    "prepare.log": "9506008dbe59cf6afc3dd5bc197f52c8f0a6b4f26e7de5883a7b6e6f0a7cf5fc",
+    "run.log": "f715d40a16498ef4365fb22fe15804e8137920e27b066e80c6e218fc27305286"
+  },
+  "memory_check": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012/compile-readout-check.log",
+    "log_sha256": "51beca62a9ba446dc97943a0159cd91a645bad0acbcf9190d90fe1d75eca1d3b",
+    "observed_status": "CURRENT",
+    "qualification_refresh_mode": "preserved_published_evidence",
+    "recall_record_count": 839
+  },
+  "outcome": {
+    "new_clock_status": "PASS",
+    "new_failures": [
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole"
+    ],
+    "new_ordinary_passes": 2,
+    "ordinary_required": 6,
+    "pole_endpoint_bounds_pass": true,
+    "pole_required_suffix": 5,
+    "pole_terminal_suffix": 2,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false,
+    "word_confirmation_opportunities": 24,
+    "word_confirmed_acquisitions": 0
+  },
+  "preserved_published_record_count": 513,
+  "preserved_snapshot_sha256": {
+    "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+    "reports/forge/leaderboards/adaptation.md": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+    "reports/forge/leaderboards/clockfree_continuous.md": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+    "reports/forge/leaderboards/formulation_comparison.md": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+    "reports/forge/leaderboards/host_profile_transfer.md": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+    "reports/forge/leaderboards/quality_coverage.md": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+    "reports/forge/technique-inventory.json": "711bfdcdf50b177614f5b242361c6798ea6ac3ba5e28c7df6915f5477955d034",
+    "reports/forge/technique-inventory.md": "6b65db36141a8dc19a58c19dc43f6c016346bc50732c354982ae4a0d8114038d"
+  },
+  "qualification_input": false,
+  "reproduction_scope": "Use the frozen execution commit for exact registered declarations and source. Later readouts add no training, sampling, metric changes or qualification.",
+  "runtime_fingerprint": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Closed single weaker positive R1/R2 penalty contrast; original grades retained, no qualification or adoption",
+  "software_test_scope": "422 workflow guards and 35 tier-report checks passed before execution; frozen reproduction and scientific sources unchanged for readout.",
+  "status": "PASS",
+  "stopping": "All seven new runs complete. Reject this closed gamma-only contrast. No automatic grid, retry, seed, task alteration, longer budget, Tier 2 or default change.",
+  "tier_report_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/tier-report-tests.log",
+    "log_sha256": "4551ddeb91e83ee099a9cfc900d0d6d0ca2fc91d59f0b1e2b3a0045f798fad63",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012/workflow-guards.log",
+    "log_sha256": "5cbb128f6734131109050b105aaefd8552aff6f0f13b8ddddb6e96cf1ea615aa",
+    "passed": 422
+  }
+}

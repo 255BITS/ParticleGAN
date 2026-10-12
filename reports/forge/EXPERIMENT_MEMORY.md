@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 838. Inventory coverage: complete. Unresolved import items: 7.
+Records: 839. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3990,6 +3990,22 @@ Constant policies repair clock dependence, but the bounded global search leaves 
 
 [Evidence](../../reports/forge/r1r2-tier1-search/round2-publication/results.json) · [Record](records/r1r2-tier1-search-final-20261012.json)
 
+### r1r2-constant-policy-v1 · r1r2-weak-penalty-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Tenfold weaker positive paired R1/R2 pressure on non-saturating AMSGrad m110 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `floor_constant`.
+
+
+
+Reject weaker gamma: only token and AE pass the ordinary suite; Gaussian, pole, Ring16 and words fail while own clock passes. Pole's passing endpoint does not satisfy its sustained gate. Exact metrics and limits remain in the report.
+
+**Next:** Preserve this closed regression and exact controls; any further paid hypothesis requires a distinct justified mechanism and separate finite registration under unchanged tasks and full budgets.
+
+[Evidence](../../reports/forge/r1r2-weak-penalty-repair/publication/results.json) · [Record](records/r1r2-weak-penalty-repair-20261012.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5367,4 +5383,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `5a88f4eb4743333de979f67cb021bf1eae31ed281740bc5ad7ab8271f958dd5c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `30a6de26ed9b67adadf7fae636c14817c07fa95b6d78ed7a905638ac7605f6fa`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

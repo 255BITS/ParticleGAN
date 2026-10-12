@@ -1,0 +1,1558 @@
+{
+  "actual_optimizer_groups": {
+    "baseline": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008546073800152157
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008546073800152157
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008507373051561022
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008507373051561022
+        }
+      }
+    },
+    "non_saturating": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    },
+    "weak_gamma": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    }
+  },
+  "actual_score_law_bindings": {
+    "baseline": {
+      "ae_gan_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "clockfree_audit_measurement_v1": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "five_word_joint_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": true,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "gaussian1d_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "ring16_acquisition": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "two_pole": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "unused_token_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": false,
+        "every": 1,
+        "gamma": 1.0,
+        "gamma_end": 0.1,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      }
+    },
+    "non_saturating": {
+      "ae_gan_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "clockfree_audit_measurement_v1": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "five_word_joint_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": true,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "gaussian1d_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "ring16_acquisition": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "two_pole": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "unused_token_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.1,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      }
+    },
+    "weak_gamma": {
+      "ae_gan_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "clockfree_audit_measurement_v1": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "five_word_joint_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": true,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "gaussian1d_smoke": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "ring16_acquisition": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "two_pole": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      },
+      "unused_token_hold": {
+        "binding": "immutable public factory/source, actual saved recipe and completed optimizer/penalty histories",
+        "constant_gamma": true,
+        "every": 1,
+        "gamma": 0.01,
+        "gamma_end": null,
+        "joint_encoder_reversed_real_stream": false,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "penalty_arm": "a_r1r2",
+        "proof_limit": "No stored per-update scores, real/fake pairings or paired-force decomposition is asserted."
+      }
+    }
+  },
+  "checks": {
+    "actual_AMSGrad_role_betas_maxima_and_full_optimizer_histories": "PASS",
+    "actual_initial_tensor_and_ordered_target_batch_receipts_match_parent": "PASS",
+    "all210_historical_charges_retained_seven_new217_aggregate": "PASS",
+    "all_named_stream_receipts_match_checkpoints": "PASS",
+    "both_exact_cached_controls": "PASS",
+    "complete_task_bound_recipe_delta_only_reg_coeff_point1_to_point01_on_all_seven_hosts": "PASS",
+    "native_NS_and_joint_encoder_reversed_stream_immutable_public_source": "PASS",
+    "new_point01_and_NS_parent_point1_both_R1_R2_constant_every_update_actual_penalty_histories": "PASS",
+    "no_scientific_retries": "PASS",
+    "original_certificates_grades_metrics_and_training_GIFs": "PASS",
+    "own_clock_branches": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 6586.162437112915,
+    "cached_new_paid_seconds": 0,
+    "new_paid_seconds": 181.08289201298612,
+    "prior_paid_seconds": 6405.0795450999285,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "coverage": {
+    "aggregate_unique_paid_attempts": 217,
+    "cases": 21,
+    "checkpoints": 18,
+    "clock_proofs": 3,
+    "clock_saved_snapshots": 78,
+    "clock_stream_states": 1092,
+    "exact_cached_control_cases": 14,
+    "gifs": 21,
+    "grades": 21,
+    "new_paid_attempts": 7,
+    "optimizer_groups": 51,
+    "ordinary_stream_states": 294,
+    "roles": 3,
+    "source_files": 1214
+  },
+  "imported_collection_helper_sha256": "596ba6cbefbfcea8dc059450ba0c157c7cc72980e9a8f5e384324d619f3bf384",
+  "inputs_sha256": {
+    "aggregate217_charge_index": "44d7b66b73cdbda72a971c5362eac5491a404fe06f2008e58534050d74dec784",
+    "audit_source": "d8719a7f6b1917f1563ec7e3bd43c08355666d1bf6b2c653d0d5280938b8266d",
+    "historical210_charge_index": "d8c647c845e93bbc58a6e018ac1229f1eecddc3c4988041a74a6cb3a399e70a7",
+    "previous_audit": "4c8256e19ede31cdfddcb6e2642ffa7e1e4d68c6a1ac75242d27e0542e0e90fc",
+    "previous_publication": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+    "progress": "535942d5c416e719a946491bc44e2c491cc610947329720419d1f6e0765d7248",
+    "publication": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+    "queue": "e0d16cc2a84a402807a1798ba1d4686e311b9cfffea8eda619b2d3c279d5f968",
+    "registration": "f321d5a9a38a767095a885601a162db08d76c0e2e72c151fb34ff4d9cf6efaf7"
+  },
+  "limits": "Original stored independent grades only. Loss/penalty binding uses actual complete saved recipes, optimizer/penalty counters and immutable public source, not saved per-update paired scores or forces. Initial tensors/data are verified receipt identities, not reconstructed. Clock keeps its own cohort. EMA first moments do not recover instantaneous G/D gradients or historical sampled-row ownership.",
+  "live_evaluators_or_rescoring": false,
+  "model_construction_training_sampling_and_random_draws_forbidden": true,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "independent_saved_weak_penalty_collection_audit",
+  "source_commit": "3cb46b91121f42f8b171a77f17776365aebad1d8",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS",
+  "task_bound_recipe_deltas": {
+    "ae_gan_hold": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "clockfree_audit_measurement_v1": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "five_word_joint_smoke": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "gaussian1d_smoke": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "ring16_acquisition": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "two_pole": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    },
+    "unused_token_hold": {
+      "after": 0.01,
+      "before": 0.1,
+      "changed_fields": [
+        "reg_coeff"
+      ]
+    }
+  }
+}
