@@ -6304,6 +6304,72 @@
       "trainer_family": "bcap-pure"
     },
     {
+      "candidate_id": "r1r2-tier1-half-rate-b99-g01-v1",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+        ],
+        "spec_hash": "6ce5784fef3526939c066d912ce448f97378366431d5536af90caf161027bd66"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-07b6e2bb134823e74708deab",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 181.7978494639392,
+        "new_paid_wall_seconds": 181.7978494639392,
+        "observed_attempts": 7,
+        "wall_seconds": 181.7978494639392
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g01-v1.json",
+        "sha256": "3ea9bd6cb4c8e06829a1d29e270171bcfbeb1f3054eab9d7b948c37d7fe16875"
+      },
+      "study_id": "r1r2-tier1-half-rate-b99-g01-v1",
+      "task_results": [],
+      "trainer_family": "r1r2",
+      "trial_ids": [
+        "r1r2--f74337cb986eaddf10a829c72e512d8c17762219c04d879f48c2584db4f54510"
+      ]
+    },
+    {
       "candidate_id": "bcap-pure--8f46c3756f9caf8ca8019453c5237354b424b05df272d79c95c01e1408e3b7c2",
       "candidate_revision": "054351d4c0bd7392852be09d9ae34fe5cce4b8fe5cb5d2d142c80eb2b45668f2",
       "claim_contract": {
@@ -9307,6 +9373,72 @@
         }
       ],
       "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "r1r2-tier1-half-rate-b90-g01-v1",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+        ],
+        "spec_hash": "c4b75cc8e9de3333ec4aa4cd1ac704ae626d5106abac72e4ce6284aa83622fd6"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-0d55de1f82f86f84a739f085",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 180.99791283998638,
+        "new_paid_wall_seconds": 180.99791283998638,
+        "observed_attempts": 7,
+        "wall_seconds": 180.99791283998638
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b90-g01-v1.json",
+        "sha256": "b48aa5085cfd76b03b33d3fb18484bcc0a8c2b49aac00a05bc3d826617e4d1ae"
+      },
+      "study_id": "r1r2-tier1-half-rate-b90-g01-v1",
+      "task_results": [],
+      "trainer_family": "r1r2",
+      "trial_ids": [
+        "r1r2--61a78f3bcf27139e3ea75163aecafd7e9fbc5489ed0b1dfe781328c4d8185a67"
+      ]
     },
     {
       "candidate_id": "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
@@ -47770,6 +47902,444 @@
       "trial_ids": [
         "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f"
       ]
+    },
+    {
+      "candidate_id": "r1r2--61a78f3bcf27139e3ea75163aecafd7e9fbc5489ed0b1dfe781328c4d8185a67",
+      "candidate_revision": "43bf78648823c007de4dea1425d23ea05684dd9ec842fd5bbf9392de09bdce18",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 2, 'PASS': 5, 'UNKNOWN': 23}. Failed requirements: two_pole, ring16_acquisition.",
+      "configuration_id": "61a78f3bcf27139e3ea75163aecafd7e9fbc5489ed0b1dfe781328c4d8185a67",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "1f3ad3dc563b4711a8f60d7ff3b7bc04",
+            "result_hash": "fd428cb5f2d67afa038a379c8bf21e8dc3faa5c494853045770c52b853dc7bfe",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "4544cdddd2fc43e5b6d135ddfc601dbe",
+            "result_hash": "fe8636e3f5a60a77e5b785cfde141a00af1f1bb07776e303af5baa79a9baa8c1",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "4a394399e76944f08f7e0790289c1965",
+            "result_hash": "e59d0f5b16ed213ee12e93cea6777dca277f61092831dd5d50ed51273de04200",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "66bc9e9916bb49afb1d191a03a12235a",
+            "result_hash": "6f0f31f1b311ccfbff0b1125c8de87a89104045432dbea987945999de80435aa",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "7386ba6edde748dd9348ac32131c8e90",
+            "result_hash": "d6e0def0e2ac979a2d3c55bdbabcf5188583dff7728e4f83f6d33de05069ca86",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "77f7801e193a42ce9eda3874e89fdd12",
+            "result_hash": "b9bb2dc3cbc2dd8a27c6883a110f18e42ebaa7f9085c3ec73175f939d13343ea",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "e288ce08fdfd4ff393a9e624ad2cc3b3",
+            "result_hash": "fcd40c2174b973edaed96958fca2d890afa1626bdd81bc9c0451c5cbfde69cd9",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "baa73902c8a05ccc5d6c0a41fa916198602bf21ff2bb80f6624a1eb94ecd4bde",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-3ef2146f5d079fb36ea0b0da",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 180.99791283998638,
+        "new_paid_wall_seconds": 180.99791283998638,
+        "wall_seconds": 180.99791283998638
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 23
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 21,
+            "statuses": {
+              "UNKNOWN": 21
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.00425
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b90-g01-v1.json",
+        "sha256": "b48aa5085cfd76b03b33d3fb18484bcc0a8c2b49aac00a05bc3d826617e4d1ae"
+      },
+      "status": "FAIL",
+      "study_id": "r1r2-tier1-half-rate-b90-g01-v1",
+      "task_results": [
+        {
+          "_attempt_id": "7386ba6edde748dd9348ac32131c8e90",
+          "compatibility_key": "5c071bd82bb31dbcafc0dbbccf7f75e49386a1c5638892a06a5eda4a3bb96e4d",
+          "cost": {
+            "wall_seconds": 13.581838230980793
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.22732742894387425,
+            "finite_fraction": 1.0,
+            "mean": 2.300789508211892,
+            "mean_error_sigma": 0.6015790164237842,
+            "sample_count": 4096,
+            "std": 0.5698425713570692,
+            "std_ratio": 1.1396851427141383,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "77f7801e193a42ce9eda3874e89fdd12",
+          "compatibility_key": "1630ac4eeab5dcd71b9e89b74db17c02337f75855c142cb8e2404d205e9a7bde",
+          "cost": {
+            "wall_seconds": 6.628336977009894
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.5032438635826111,
+            "mean_abs": 0.25478285551071167
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "e288ce08fdfd4ff393a9e624ad2cc3b3",
+          "compatibility_key": "bb1e695ece6a69ac71f571850e9a792ddff9b1b9dee0d2964b63a39746558a68",
+          "cost": {
+            "wall_seconds": 7.009509921015706
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.995790742044484,
+            "unused_hold": 0.9932484026066959
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "4a394399e76944f08f7e0790289c1965",
+          "compatibility_key": "7bc9657b3f3411f3eda0fdafa0ecb64eab04567372ec2b845b15d805959ebf94",
+          "cost": {
+            "wall_seconds": 8.17802023497643
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.042324285954236984,
+            "recon_mse": 0.012724073603749275
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "1f3ad3dc563b4711a8f60d7ff3b7bc04",
+          "compatibility_key": "dfa3b251eebac6b30dabf4bd56bc345fe9b0afeb2c0f8b5f8a5be870c9107f64",
+          "cost": {
+            "wall_seconds": 18.81530015199678
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 1.0501175448298454,
+            "component_core_min_eigen_ratio": 0.10143616050481796,
+            "component_covariance_error": 3.6033132448792458,
+            "component_min_eigen_ratio": 0.1170932874083519,
+            "covariance_error": 0.08420936018228531,
+            "hq": 0.63525390625,
+            "mass_tv": 0.042724609375,
+            "max_component_spill": 0.8860294222831726,
+            "mean_error": 0.027588816359639168,
+            "min_hq_mass_ratio": 0.12109375,
+            "min_mass_ratio": 0.875,
+            "modes": 14,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.039230907096422706,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "66bc9e9916bb49afb1d191a03a12235a",
+          "compatibility_key": "3dec4a23d76d1277e0e2d74e3151c946df15f3f1c73332a39fd5ca8cac10e1ab",
+          "cost": {
+            "wall_seconds": 119.8226060270099
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1875,
+            "mass_berry": 0.2080078125,
+            "mass_grape": 0.1982421875,
+            "mass_lemon": 0.1953125,
+            "mass_melon": 0.2109375,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.1465509682893753,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 0.08164950316985135,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "4544cdddd2fc43e5b6d135ddfc601dbe",
+          "compatibility_key": "316e3af4bd72a94cbf25089cc834e9629d2a8dfcb0340776cff55b7cb56aa4a6",
+          "cost": {
+            "wall_seconds": 6.962301296996884
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "r1r2"
     },
     {
       "candidate_id": "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f",
@@ -93890,6 +94460,72 @@
       ]
     },
     {
+      "candidate_id": "r1r2-tier1-half-rate-b99-g03-v1",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+        ],
+        "spec_hash": "7f5d6dd08d232e7d98bc9802e95dd4ad15eb737dc4e23f8cb3a0245ae0da354e"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-883a9ffd2e5cd6c14b9ec1a1",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 182.60069053497864,
+        "new_paid_wall_seconds": 182.60069053497864,
+        "observed_attempts": 7,
+        "wall_seconds": 182.60069053497864
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g03-v1.json",
+        "sha256": "d9ec3d02c79662520eb6db1c1411b0886e3bfb45702393640e00f7a8b40a8767"
+      },
+      "study_id": "r1r2-tier1-half-rate-b99-g03-v1",
+      "task_results": [],
+      "trainer_family": "r1r2",
+      "trial_ids": [
+        "r1r2--9295e3ea63154206a8873a3556e1a6349e5dbfee366efe253b64b3f1b1730c93"
+      ]
+    },
+    {
       "candidate_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
       "candidate_revision": null,
       "cohort": "policy-family-defaults-round3-v1--531021742ad2",
@@ -106192,6 +106828,444 @@
       "trainer_family": "r1r2"
     },
     {
+      "candidate_id": "r1r2--9295e3ea63154206a8873a3556e1a6349e5dbfee366efe253b64b3f1b1730c93",
+      "candidate_revision": "0550dee16f9e14737ffc3ea1850bcbb6746a78ed26c3bcd32b81a4c784611ad4",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 2, 'PASS': 5, 'UNKNOWN': 23}. Failed requirements: two_pole, ring16_acquisition.",
+      "configuration_id": "9295e3ea63154206a8873a3556e1a6349e5dbfee366efe253b64b3f1b1730c93",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "2973f012408d4ec7b7f6aea08012772a",
+            "result_hash": "ed81fdc75118e810e6577657d9aa395d9092bf1e3c8f5c67cfbdf55b5371e1a3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "4d15103b1d444342a48d309c56318082",
+            "result_hash": "3e0617a5cbe2e00156da1ed3f9c35ff05a9cb827bc34facc78151c7b3b3d1bd4",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "7163ae30551b409da4afe55442c4bfda",
+            "result_hash": "5d5e8f120067ccd28bad62c1ce10d52a24e199bd22ae997c8034d4ff4b168cb5",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "8a7a5b4bcab54b798faf825b0e491322",
+            "result_hash": "13b07574f578e203882464eef3a07c23b431d0b8ae7bd38da4bb41822916db5d",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9b1ab4543e77416b938625deca814b32",
+            "result_hash": "06dba24e485ed673c300b5e15415706348b8a40d303c6dca9dcf900f6812d15f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9dec0ab92b8447e9a6b30a3e57b389a9",
+            "result_hash": "daabd01e37a4a1aaee33970cb9270f30b42576496bd8f2f189882cb7f7efe214",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "db7e1ba734324c43b94ef1b1efef5d6e",
+            "result_hash": "dedd58a44cf95c781eb3188f003031ee5224c458d85c56616a0f0377f65ff444",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "0eaaf7d749de2054c5769b9e0327b1f23b8b900fc3043948e75174ed8b753298",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-9a140f96ab8a79be83710757",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 182.60069053497864,
+        "new_paid_wall_seconds": 182.60069053497864,
+        "wall_seconds": 182.60069053497864
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 23
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 21,
+            "statuses": {
+              "UNKNOWN": 21
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.00425
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g03-v1.json",
+        "sha256": "d9ec3d02c79662520eb6db1c1411b0886e3bfb45702393640e00f7a8b40a8767"
+      },
+      "status": "FAIL",
+      "study_id": "r1r2-tier1-half-rate-b99-g03-v1",
+      "task_results": [
+        {
+          "_attempt_id": "9b1ab4543e77416b938625deca814b32",
+          "compatibility_key": "eeb443d9c5aa6d9db0053a1cbeb540d3a62161864bce0ef1d543d50e5eebffae",
+          "cost": {
+            "wall_seconds": 13.656000946997665
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.04091297242145431,
+            "finite_fraction": 1.0,
+            "mean": 2.034759569549351,
+            "mean_error_sigma": 0.069519139098702,
+            "sample_count": 4096,
+            "std": 0.49669319592714023,
+            "std_ratio": 0.9933863918542805,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "9dec0ab92b8447e9a6b30a3e57b389a9",
+          "compatibility_key": "d7ab597ab5530ace49119610bc67d5ce12764b96c81478afa5dca47bc026d706",
+          "cost": {
+            "wall_seconds": 6.574846125004115
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.11082585155963898,
+            "mean_abs": 0.10902857780456543
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "8a7a5b4bcab54b798faf825b0e491322",
+          "compatibility_key": "a14dcac4adbcb6fb63b016b1fa8147341d0bebf75fc2bc5265717283116c8f48",
+          "cost": {
+            "wall_seconds": 7.389094415993895
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9872722426847425,
+            "unused_hold": 0.9960862970910966
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "7163ae30551b409da4afe55442c4bfda",
+          "compatibility_key": "8803bb4fb8171bed2885fb6de0559a1a6b33a5a0cbcf6a763935fe65fe980264",
+          "cost": {
+            "wall_seconds": 8.191721676994348
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.017899611964821815,
+            "recon_mse": 0.006512673571705818
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "4d15103b1d444342a48d309c56318082",
+          "compatibility_key": "1f5313ab617b57a8d273e9983e099a61feb1786ca8386df276e5858fb72623b1",
+          "cost": {
+            "wall_seconds": 18.897674096981063
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 1.0749501064419746,
+            "component_core_min_eigen_ratio": 0.26678165793418884,
+            "component_covariance_error": 2.1729801893234253,
+            "component_min_eigen_ratio": 0.2723110616207123,
+            "covariance_error": 0.057972501963377,
+            "hq": 0.830810546875,
+            "mass_tv": 0.037109375,
+            "max_component_spill": 0.4724409580230713,
+            "mean_error": 0.05170837789773941,
+            "min_hq_mass_ratio": 0.5234375,
+            "min_mass_ratio": 0.87890625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.03869233040551951,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "2973f012408d4ec7b7f6aea08012772a",
+          "compatibility_key": "c3176f3e26436c7eb914516d8303277d5d4f68732e41096bb7ee0356667e0019",
+          "cost": {
+            "wall_seconds": 120.97295706099248
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2080078125,
+            "mass_berry": 0.1875,
+            "mass_grape": 0.1982421875,
+            "mass_lemon": 0.2109375,
+            "mass_melon": 0.1953125,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9452838897705078,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 0.0021580444252709058,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "db7e1ba734324c43b94ef1b1efef5d6e",
+          "compatibility_key": "575ce0d80ccc632c1713e1f0ccea897a51134ad9432f305f24c9f135bb8f05a8",
+          "cost": {
+            "wall_seconds": 6.918396212015068
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "r1r2"
+    },
+    {
       "candidate_id": "bcap-tier2-search-v1--8",
       "conclusion": "Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -111302,6 +112376,444 @@
         }
       ],
       "trainer_family": "bcap-nsgda-layer"
+    },
+    {
+      "candidate_id": "r1r2--f74337cb986eaddf10a829c72e512d8c17762219c04d879f48c2584db4f54510",
+      "candidate_revision": "1181d08c61bd7484b7cd8f6bd809c658207a1f5c3550c2f3d4fa4d71c3356af3",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 2, 'PASS': 5, 'UNKNOWN': 23}. Failed requirements: two_pole, ring16_acquisition.",
+      "configuration_id": "f74337cb986eaddf10a829c72e512d8c17762219c04d879f48c2584db4f54510",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": null,
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "11d22e0dd45d4759bbc0c81d94a42ff2",
+            "result_hash": "668d4822ad6fcda9cee614949d5960cee50ea22c97d345719e1708fa262db560",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "36f9ba8f0f1d4b69b379f0189598f210",
+            "result_hash": "c1a82e3ca56feeddd55f3c09bf642205f57d1411eab93ee03edece42ffca0c59",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "77c98adbb5bd4959a0ca82e2acaad370",
+            "result_hash": "61a61da0f4a579189a913322ee714021a1b516d004ba253ba08694ed62cdbea3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b162954d671749eea4eced3b59f17422",
+            "result_hash": "8813e2f5a7b7ad223d18e4a9e03e1189f37acb8886722ec3a160afcbf3e3a452",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "bfeb0900572c41c198a4dc44f9531513",
+            "result_hash": "37db947c58a6c092eaf88aa620764d945493ee6e068cf5fcdbe3624acdc33856",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "c7392efe86094085832eeb94fb08747b",
+            "result_hash": "3e6e467f8e23cd8b966bfc3adb0fe20f665fd9276d4e6224ab0ddad864522240",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d20a559d75cc41c2b30b6b8da1c4f067",
+            "result_hash": "64d56eeb0dc660e4ed41d0bbea9dac6bc60d7927dc0c27b3de1e8c00e6d0ac78",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "09a03c18f31b3a3670f29e2462fceb051820ec80c23b630593a78a1ceb7e6f5e",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-a28fe2480df18eaf885bb18a",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 181.7978494639392,
+        "new_paid_wall_seconds": 181.7978494639392,
+        "wall_seconds": 181.7978494639392
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 23
+        },
+        "required_total": 29,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 21,
+            "statuses": {
+              "UNKNOWN": 21
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.00425
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g01-v1.json",
+        "sha256": "3ea9bd6cb4c8e06829a1d29e270171bcfbeb1f3054eab9d7b948c37d7fe16875"
+      },
+      "status": "FAIL",
+      "study_id": "r1r2-tier1-half-rate-b99-g01-v1",
+      "task_results": [
+        {
+          "_attempt_id": "bfeb0900572c41c198a4dc44f9531513",
+          "compatibility_key": "5d9ef504c94f8d04308c48d6a02993082da656f6e7f78c78bf9a4d71d09c8d5b",
+          "cost": {
+            "wall_seconds": 13.843993178976234
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "cdf_ks": 0.04789830604538814,
+            "finite_fraction": 1.0,
+            "mean": 1.9891357705637347,
+            "mean_error_sigma": 0.02172845887253061,
+            "sample_count": 4096,
+            "std": 0.43884897412453105,
+            "std_ratio": 0.8776979482490621,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "_attempt_id": "11d22e0dd45d4759bbc0c81d94a42ff2",
+          "compatibility_key": "30c90afebe0d5db488197b825d7b3c439dece014202a7c92b55b00d9e0014c21",
+          "cost": {
+            "wall_seconds": 6.636575746990275
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.6448718905448914,
+            "mean_abs": 0.3245820999145508
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "d20a559d75cc41c2b30b6b8da1c4f067",
+          "compatibility_key": "f4439418cc81d3343f1d4a7717b20b113e95ca2624ddaa941a0392fd88812fb2",
+          "cost": {
+            "wall_seconds": 7.334587028017268
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9970237098373715,
+            "unused_hold": 0.9919344875961542
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "77c98adbb5bd4959a0ca82e2acaad370",
+          "compatibility_key": "93d0b362639c0d1a5e30b14e90ace1440b42492b4d0bfb347f06e22238d4829e",
+          "cost": {
+            "wall_seconds": 8.17306668497622
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.025261089205741882,
+            "recon_mse": 0.00607627909630537
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "36f9ba8f0f1d4b69b379f0189598f210",
+          "compatibility_key": "6f37b16bf729cd4c6428077dc71197dece5cc66a4088f02250f7899507bced0d",
+          "cost": {
+            "wall_seconds": 18.981629991991213
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 1.0461906902492046,
+            "component_core_min_eigen_ratio": 0.14675328135490417,
+            "component_covariance_error": 1.409079160541296,
+            "component_min_eigen_ratio": 0.1579086184501648,
+            "covariance_error": 0.04072112217545509,
+            "hq": 0.904052734375,
+            "mass_tv": 0.052978515625,
+            "max_component_spill": 0.14418604969978333,
+            "mean_error": 0.03635578975081444,
+            "min_hq_mass_ratio": 0.69921875,
+            "min_mass_ratio": 0.78515625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.030451993648044802,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "c7392efe86094085832eeb94fb08747b",
+          "compatibility_key": "baa76bb58b19e8b8fa23c0c41ff337536671cb99a9862c1cca170d189129e8e8",
+          "cost": {
+            "wall_seconds": 119.79933759698179
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.2080078125,
+            "mass_berry": 0.1982421875,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.2109375,
+            "mass_melon": 0.1875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9980369210243225,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 0.00012157248765567408,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "any scheduled full joint pass plus independent same-state confirmation",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "_attempt_id": "b162954d671749eea4eced3b59f17422",
+          "compatibility_key": "d726773f5700ebbe7abe13d463330af821a4177e4d7f01024d6150dc9685628e",
+          "cost": {
+            "wall_seconds": 7.028659236006206
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "gaussian1d_stability"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "five_word_joint_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "r1r2"
     },
     {
       "candidate_id": "bcap-dualnorm--1c30be82a0f03d78ab0c8e538d2a05354b2cdeb20031a7c3d1b28d204cfeed20",

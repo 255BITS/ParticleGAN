@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 825. Inventory coverage: complete. Unresolved import items: 7.
+Records: 832. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3878,6 +3878,22 @@ The source-bound baseline preserves Ring16 density and external-clock failures. 
 
 [Evidence](../../reports/forge/r1r2-baseline/results.json) · [Record](records/r1r2-recorded-baseline-20261012.json)
 
+### r1r2-constant-policy-v1 · r1r2-tier1-search-final-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Halving a fixed global learning rate reduces late bursts enough to pass the unchanged whole Tier1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `constant_update_magnitude`.
+
+
+
+Constant policies repair clock dependence, but the bounded global search leaves Ring16 density and whole Tier1 unresolved. Detailed outcomes and provenance remain in the linked report.
+
+**Next:** Retain the recorded baseline and close this finite search; consult the saved-state diagnosis before proposing another global mechanism.
+
+[Evidence](../../reports/forge/r1r2-tier1-search/round2-publication/results.json) · [Record](records/r1r2-tier1-search-final-20261012.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5118,7 +5134,9 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 - **bcap-tier2-search-v1--7**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--7.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-global-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b99-g01-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g01-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b90-g01-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b90-g01-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **word-split-inventory-ka2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-ka2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-original-full19-retest**: Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-prefix5-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier1-refresh-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5176,6 +5194,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **k3p-global-tier1-v3**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-ka2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-ka2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b99-g03-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g03-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier2-search-v1--12**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--12.json) · [Board](../../reports/forge/technique-inventory.md)
 - **word-split-inventory-r1r2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-r1r2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-prior-sigreg-search-v1**: Concluded 3 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-prior-sigreg-search-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5252,4 +5271,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `754fef76f8c6baf65aa2fb6715932726c131a627ca6f96682b2280aa0962f91f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `9c092edabbd1d9de77dcc16b8316cc41a76d03a182cd435c5dac2976dd819ec3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

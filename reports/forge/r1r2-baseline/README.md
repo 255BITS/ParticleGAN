@@ -182,8 +182,9 @@ failure trajectory for retention. Any later repair needs an explicit global
 trainer delta under the fixed task suite. Clock independence requires its own
 mechanism change and qualification. Neither per-task recipe selection, a different
 seed, a looser gate nor a diagnostic pass establishes an ordinary replacement.
-No new experiment, calibration acceptance or public-default adoption follows
-from this reporting PR.
+This baseline audit launches no training and grants no calibration acceptance or
+public-default adoption. The subsequent [bounded R1/R2 repair search](../r1r2-tier1-search/README.md)
+records its separate hypotheses, matched comparisons and outcomes.
 
 ## Reproduce the report checks
 

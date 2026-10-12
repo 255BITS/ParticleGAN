@@ -1,0 +1,29 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "Global LR 0.0085 to 0.00425 on three exact constant-policy parents."
+  ],
+  "conclusion": "Constant policies repair clock dependence, but the bounded global search leaves Ring16 density and whole Tier1 unresolved. Detailed outcomes and provenance remain in the linked report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Halving a fixed global learning rate reduces late bursts enough to pass the unchanged whole Tier1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "constant_update_magnitude",
+  "next_action": "Retain the recorded baseline and close this finite search; consult the saved-state diagnosis before proposing another global mechanism.",
+  "provenance": {
+    "report": "reports/forge/r1r2-tier1-search/README.md",
+    "source_commit": "1853ac7a98c775e0df2914529ee702a6948c812d",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-tier1-search-final-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-tier1-search/round2-publication/results.json",
+    "sha256": "22fef2cdad46996729999f3b708851628db986a1d9745add5b66b72e89ebb0fa"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}
