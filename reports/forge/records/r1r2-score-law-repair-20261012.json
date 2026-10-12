@@ -1,0 +1,29 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "Only loss relativistic to non_saturating on exact AMSGrad m110; paired R1/R2 and global optimizer/prior policy unchanged"
+  ],
+  "conclusion": "No complete repair; native non-saturating preserves five ordinary acquisition/sustained passes and clock, but fails Ring16 density. Gaussian acquisition does not imply a passing endpoint. Detailed metrics and limits remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "A native non-saturating score law on exact AMSGrad m110 repairs the unchanged complete Tier 1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "native_score_law",
+  "next_action": "Reject the score-only repair, preserve controls and failures; any further paid hypothesis requires separate justification and finite registration under unchanged tasks and budgets.",
+  "provenance": {
+    "report": "reports/forge/r1r2-score-law-repair/README.md",
+    "source_commit": "517257ff3879516ae2da64009c375ffffe9b001a",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-score-law-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-score-law-repair/publication/results.json",
+    "sha256": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

@@ -53,9 +53,10 @@ ends with two modes, quality .395508 and failed inverse reconstruction. Its
 acquisition PASS remains valid, but does not establish retention. AMSGrad has
 24/24 confirmed passing checks and also passes the endpoint: five modes, quality
 1 and exact inverse reconstruction. This endpoint is useful evidence, not a
-separately executed Tier 2 word hold. Both Gaussian endpoints satisfy their
-numerical bounds; their smoke PASS likewise supplies acquisition rather than
-continuation qualification. Pole, token and AE retain their sustained passes.
+separately executed Tier 2 word hold. Global transport's Gaussian endpoint
+satisfies its bounds; AMSGrad's endpoint KS is .069604 against the .05 bound.
+Both original smoke grades are acquisition PASS, which supplies no continuation
+qualification. Pole, token and AE retain their sustained passes.
 
 ## Recipe, evidence and cost
 

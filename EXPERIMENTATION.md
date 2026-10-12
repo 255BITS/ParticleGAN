@@ -101,7 +101,7 @@ The subsequent [spectral-update comparison](reports/forge/r1r2-spectral-repair/R
 retains its source-bound readout under the same task contracts.
 The [objective and optimizer-memory readout](reports/forge/r1r2-objective-memory-repair/README.md)
 retains separately declared hypotheses and their evidence under those unchanged contracts.
-The subsequent [native score-law comparison](reports/forge/r1r2-score-law-repair/PLAN.md)
+The subsequent [native score-law comparison](reports/forge/r1r2-score-law-repair/README.md)
 declares one loss-field contrast under the same task and protocol contracts.
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 837. Inventory coverage: complete. Unresolved import items: 7.
+Records: 838. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3906,7 +3906,7 @@ Global quantile transport or optimizer maximum-denominator memory repairs the un
 
 No complete repair; both new recipes pass acquisition and clock but fail Ring16. Detailed outcomes remain in the source-bound report.
 
-**Next:** Preserve closed failures and controls; separately test the supported native non-saturating contrast on exact AMSGrad m110 under unchanged contracts.
+**Next:** Read the subsequent score-law readout; preserve closed failures and exact controls before designing another supported density mechanism.
 
 [Evidence](../../reports/forge/r1r2-objective-memory-repair/publication/results.json) · [Record](records/r1r2-objective-memory-repair-20261012.json)
 
@@ -3941,6 +3941,22 @@ No complete repair. All seven new recipes pass clock and fail Ring16; momentum p
 **Next:** Close this registration and preserve baseline; read saved gradient-direction and denominator analyses before any separate finite comparison.
 
 [Evidence](../../reports/forge/r1r2-role-repair/publication/results.json) · [Record](records/r1r2-role-repair-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-score-law-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+A native non-saturating score law on exact AMSGrad m110 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `native_score_law`.
+
+
+
+No complete repair; native non-saturating preserves five ordinary acquisition/sustained passes and clock, but fails Ring16 density. Gaussian acquisition does not imply a passing endpoint. Detailed metrics and limits remain in the report.
+
+**Next:** Reject the score-only repair, preserve controls and failures; any further paid hypothesis requires separate justification and finite registration under unchanged tasks and budgets.
+
+[Evidence](../../reports/forge/r1r2-score-law-repair/publication/results.json) · [Record](records/r1r2-score-law-repair-20261012.json)
 
 ### r1r2-constant-policy-v1 · r1r2-spectral-repair-20261012
 
@@ -5351,4 +5367,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `df893e2a8eb1987555982e98967dee4f540b5711543dbd477026482748aa2be1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `845b21441bb30b9e7558e01ce7bd2e0f32d8f3d967bf6e9131cadfcd36423bac`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

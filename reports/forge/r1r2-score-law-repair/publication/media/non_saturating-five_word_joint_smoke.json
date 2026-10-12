@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "6b45896f8ccd219cb733a250f6836b127f701d6df97a39de0b1e17ab7a814f54",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "a1b23f3518f1a0bfc1328ca11e77cab38d1b4b1f3cd06f831fd107eb7913f233",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-non-saturating-ams-m110-v1/5af4d1bfd1664ec0a3dadf5e32bee0f7/observed-records.pt": "7e738d5da45d2edcd31ff213520074f8c33c082498d4c4278e8e7b4855e662bd"
+  },
+  "task_id": "five_word_joint_smoke"
+}
