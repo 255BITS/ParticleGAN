@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "a60a7a2d08a976ed6c571e4e33bd07823e2c3e1b1e0aacd3fee6f0fea22670bc",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "45ec8c70bc0da5f152a7b02313c705f165ddb7cb74a485d95c55561b77f5b6d4",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/11d9c977377b487ca6e45e53c4e234ed/constraint_geometry-scored-outputs.pt": "7b6cacbee8c85757141e7f067cbae70aeb17e36fae229c8862c5b47053f8c429"
+  },
+  "task_id": "two_pole"
+}

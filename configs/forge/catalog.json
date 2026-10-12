@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11782,
+    "files": 11783,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -40,7 +40,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 85,
+      "forge_engine": 86,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -103,7 +103,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 404,
-      "engine_support": 85,
+      "engine_support": 86,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -123,8 +123,8 @@
     "missing": [],
     "stale": [],
     "unclassified": [],
-    "tracked_count": 11782,
-    "declared_count": 11782
+    "tracked_count": 11783,
+    "declared_count": 11783
   },
   "excluded_prefixes": [
     "configs/forge/",
@@ -7411,6 +7411,13 @@
     {
       "path": "experiments/forge/common26_comparison.py",
       "git_blob": "8f1c0afc34aaa22d4339e3d715d43ff8347c5516",
+      "family": "forge_engine",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "path": "experiments/forge/comparison_protocol.py",
+      "git_blob": "6f57fafd4ed62fc7582253416d357d90262abd9c",
       "family": "forge_engine",
       "role": "engine_support",
       "suggested_tiers": []

@@ -22,10 +22,10 @@
     },
     "passed": 109
   },
-  "note": "Logs remain ignored and local. Existing publication presentation failures are not repaired by this report. Generated experiment memory and its compilation hash are excluded from this PR at user request; this compact report retains the evidence.",
+  "note": "Logs remain ignored and local. Existing publication presentation failures are not repaired by this report. Generated experiment memory keeps short source-bound summaries and is refreshed with its compilation hashes.",
   "qualification_input": false,
   "report_links_and_unique_costs": "PASS",
-  "research_memory_freshness": "GENERATED_OUTPUTS_EXCLUDED_BY_REQUEST",
+  "research_memory_freshness": "CURRENT",
   "schema_version": 1,
   "scientific_publication_changes": false,
   "scope": "r1r2_baseline_reporting_validation",

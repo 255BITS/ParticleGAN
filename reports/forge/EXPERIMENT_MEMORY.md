@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 816. Inventory coverage: complete. Unresolved import items: 7.
+Records: 825. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3846,6 +3846,38 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### r1r2-constant-policy-v1 · r1r2-constant-tier1-round1-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Test fixed global R1/R2 laws under unchanged Tier1 task conditions.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `schedule_removal`.
+
+
+
+Constant policies repair external-clock dependence, but none passes the Ring16 density gate. Exact numerical outcomes, matched-input proofs, costs and training GIFs remain in the linked report.
+
+**Next:** Read the concluded whole-recipe comparison before any separately registered lower-rate hypothesis; preserve the original gates, learned prior and task budgets.
+
+[Evidence](../../reports/forge/r1r2-tier1-search/publication/results.json) · [Record](records/r1r2-constant-tier1-round1-20261012.json)
+
+### recipe-prior-refactor-r1r2-v1 · r1r2-recorded-baseline-20261012
+
+**Scope:** saved_evidence_baseline_readout; family_context; revision `594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a`.
+
+Establish the selected R1/R2 whole recipe as a source-bound reference baseline and explain its two failed Tier 1 view requirements.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+The source-bound baseline preserves Ring16 density and external-clock failures. Exact recipe, task metrics, diagnostic scope and costs remain in the linked report; this readout adds no training or sampling.
+
+**Next:** Use this whole recipe as the archived reference for separately registered global repairs; preserve its original source, prior, initialization, sampling and gate contracts.
+
+[Evidence](../../reports/forge/r1r2-baseline/results.json) · [Record](records/r1r2-recorded-baseline-20261012.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5187,6 +5219,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **release07-gan-v3-mog-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-adam-tier1-v1**: Concluded 5 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-adam-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-dualnorm-pacing-v2-c-4054018e4d6380ed**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-constant-search-v1**: Concluded 6 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-constant-search-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v4.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5219,4 +5252,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f78ed98b105aba5f59e8e0d2461871351df34effdb7c950b9578dac88ac85e59`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `754fef76f8c6baf65aa2fb6715932726c131a627ca6f96682b2280aa0962f91f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
