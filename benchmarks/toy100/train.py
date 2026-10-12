@@ -1008,6 +1008,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             "train_seconds": train_seconds, "eval_seconds": eval_seconds,
             "total_seconds": time.perf_counter() - start,
             "steps_per_second": budget / train_seconds,
+            "generator_idle": trainer._idle_accounting.public(),
         })
         if resolved.get("output_noise_learnable", False):
             summary["learnable_output_noise"].update({
@@ -1035,7 +1036,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             f"COMPLETE problem={resolved['problem']} steps={budget} "
             f"live_modes={final_metrics['live']['modes']}/100 "
             f"live_hq={final_metrics['live']['hq']:.4f} "
-            f"stable_pass={stable_pass['live']} total_seconds={summary['total_seconds']:.1f}"
+            f"stable_pass={stable_pass['live']} total_seconds={summary['total_seconds']:.1f} "
+            f"idle={summary['generator_idle']['idle_count']}/{summary['generator_idle']['decisions']}"
         )
         return summary
     except Exception as error:

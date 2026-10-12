@@ -35,7 +35,8 @@ _RECORDED_ORDER = (
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
 _ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
-          "constant_lr": False, "generator_idle_se": None}
+          "constant_lr": False, "generator_idle_se": None,
+          "generator_idle_mode": "batch"}
 
 
 @dataclass(frozen=True)

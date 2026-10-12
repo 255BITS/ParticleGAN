@@ -120,9 +120,11 @@ def declared_recipe(config: dict):
     recipe = gan_v3_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
     # These overlays are not historical global fields. Re-apply only when the
     # resolved recipe turned one on, so archived protocols keep their identity.
-    if built.constant_lr or built.generator_idle_se is not None:
+    if (built.constant_lr or built.generator_idle_se is not None
+            or built.generator_idle_mode != "batch"):
         recipe = recipe.replace(constant_lr=built.constant_lr,
-                                generator_idle_se=built.generator_idle_se)
+                                generator_idle_se=built.generator_idle_se,
+                                generator_idle_mode=built.generator_idle_mode)
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
@@ -373,7 +375,8 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
                   ema=observations[-1]["ema"], observations=observations,
                   actions=actions, losses=losses,
                   update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter() - started)
+                  seconds=time.perf_counter() - started,
+                  generator_idle=trainer._idle_accounting.public())
     result["convergence"] = sustained(observations, cfg["thresholds"],
                                        expected_steps=expected)
     return result, context
@@ -530,7 +533,8 @@ def run_image(spec, base, noise, *, model_policy=None):
                   ema=observations[-1]["ema"], observations=observations,
                   actions=actions, losses=losses,
                   update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter() - started)
+                  seconds=time.perf_counter() - started,
+                  generator_idle=trainer._idle_accounting.public())
     result["convergence"] = sustained(
         observations,
         [("modes", ">=", spec["thresholds"]["modes"]),
@@ -675,17 +679,22 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         raw = (json.dumps(record, sort_keys=True, allow_nan=False) + "\n").encode()
         artifact = f'episodes/{base.name}__{spec["name"]}.json.gz'
         (output / artifact).write_bytes(gzip.compress(raw, mtime=0))
+        idle = result.get("generator_idle") or {}
         records.append({k: v for k, v in record.items() if k not in ("result", "source_sha256")}
                        | dict(artifact=artifact,
                               uncompressed_sha256=hashlib.sha256(raw).hexdigest(),
                               live=result.get("live"), ema=result.get("ema"),
                               observations=len(result.get("observations", result.get("curve", []))),
-                              seconds=result["seconds"]))
+                              seconds=result["seconds"],
+                              generator_idle=idle))
         write(output / "index.json", dict(records=records))
         print(json.dumps(dict(event="DONE", task=spec["name"],
                               status=verdict["status"],
                               suffix=verdict.get("convergence", {}).get("passing_suffix"),
-                              live=result.get("live"), error=result.get("error"))), flush=True)
+                              live=result.get("live"), error=result.get("error"),
+                              idle_count=idle.get("idle_count"),
+                              idle_decisions=idle.get("decisions"),
+                              idle_fraction=idle.get("idle_fraction"))), flush=True)
     suite.verify_source(protocol)
     passed = sum(row["verdict"]["passed"] for row in records)
     complete_vector_screen = set(tasks) == set(VECTOR_NAMES)
@@ -709,7 +718,8 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                      observations=row["observations"], live_final=row["live"],
                      route=row["route"], noise_applied=row["noise_applied"],
                      noise_receipt=row["noise_receipt"],
-                     artifact=row["artifact"]) for row in records])
+                     artifact=row["artifact"],
+                     generator_idle=row.get("generator_idle") or {}) for row in records])
     if model_policy:
         summary["model_policy"] = model_policy
     write(output / "summary.json", summary)

@@ -77,3 +77,56 @@ floors and cap remain in the file. Logs are line-delimited JSON; `tail -f` the
 suite logs under the output directory and the probe stdout.
 
 **Not scored. No metric, no pass count, and no failure count exists for this rule.**
+
+## Smoothed gap
+
+`generator_idle_mode` selects `batch` (the default, unchanged se=1 and se=3 rule) or `ema`. The EMA keeps one decay, α = 2/11, the span-10 filter α = 2/(span+1). Its asymptotic effective number of batch-means is (2−α)/α = 10, so the smoothed gap is judged with that sample size and no second coefficient was searched. The threshold stays **se = 1**: idle when the absolute EMA of the batch-mean gap `real_logits - fake_logits` is within one standard error of that EMA. The first step stores the current batch, so it matches the batch rule; a non-finite batch or a batch shorter than 2 does not move the filter and is not idle.
+
+Each run writes `idle_count`, `decisions`, and `idle_fraction` on the probe evidence, the native `summary.json`, and the transfer episode index. The completion line is `idle=<count>/<decisions>`.
+
+```bash
+python3 - << 'PY'
+import json
+from pathlib import Path
+src = json.loads(Path("configs/toy100/constraints_simple_regularization.json").read_text())
+src["constant_lr"] = True
+src["generator_idle_se"] = 1.0
+src["generator_idle_mode"] = "ema"
+Path("/tmp/generator-idle-ema.json").write_text(json.dumps(src, indent=2) + "\n")
+PY
+
+CUDA_VISIBLE_DEVICES=0 python3 -u -m benchmarks.toy_suite run \
+  --device cuda \
+  --init batch_feature_zero \
+  --config /tmp/generator-idle-ema.json \
+  --output /tmp/generator-idle-ema-suite
+
+CUDA_VISIBLE_DEVICES=1 python3 -u -m benchmarks.toy100.continuous_probe \
+  --device cuda --mode constant --init batch_feature_zero \
+  --config /tmp/generator-idle-ema.json \
+  --steps 2400 --diagnostic-every 10 \
+  --output /tmp/generator-idle-ema-hold.json
+
+CUDA_VISIBLE_DEVICES=1 python3 -u -m benchmarks.toy100.continuous_probe \
+  --device cuda --mode constant --init batch_feature_zero \
+  --config /tmp/generator-idle-ema.json \
+  --steps 3600 --shift-step 2400 --freeze-after-shift \
+  --diagnostic-every 10 \
+  --output /tmp/generator-idle-ema-frozen.json
+
+CUDA_VISIBLE_DEVICES=1 python3 -u -m benchmarks.toy100.continuous_probe \
+  --device cuda --mode constant --init batch_feature_zero \
+  --config /tmp/generator-idle-ema.json \
+  --steps 3600 --shift-step 2400 --diagnostic-every 10 \
+  --frozen-control /tmp/generator-idle-ema-frozen.json \
+  --output /tmp/generator-idle-ema-shift.json
+```
+
+Native seed `1234` stays in the winner file. Transfer seed stays 0. Gates and budgets stay the published ones. Pin one GPU and keep at most 4 of these processes on one RTX A6000. `tail -f` the suite logs and the probe stdout; `generator_idle` is one JSON line per probe and `idle=<count>/<decisions>` is on the native completion line.
+
+## Notes from the ec00aa4 A6000 run
+
+Replay of the grid100 affine receipt was rebuilding the wrong prior. Training with `--init batch_feature_zero` replaces the prior at Adam construction, and the receipt hashes that replacement. Replay rebuilt only the earlier `uniform_(-5, 5)` draw, and it did so without the recorded device policy, so `ParticlePrior.normal_()` consumed the CPU generator and `uniform_()` then started at a different CUDA offset. The hash and extrema checks were not loosened. `public19/protocol.json` is written only for `--with-default-control`. The command above does not pass that flag, so the missing public v3 control is expected.
+
+`apply_device_policy` is process-global. On CUDA it sets the default device and routes device-less `torch.Generator()` onto that device, so every default-device draw moves onto the CUDA stream, not only the four hosts whose fixtures were pinned back to CPU. That is why overlap, anisotropic, stripes, blobs, bars, and unequal-mass moved while the CPU path of those four hosts stayed byte-identical to `9c9a220`.
+

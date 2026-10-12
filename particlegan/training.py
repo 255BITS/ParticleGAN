@@ -5,7 +5,7 @@ import math
 import torch
 from torch import nn
 
-from .generator_idle import gate_generator_update
+from .generator_idle import IdleAccounting, gate_generator_update
 from .particle_prior import MoGParticlePrior, ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
@@ -67,7 +67,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
                         "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
-                        "constant_lr": False, "generator_idle_se": None}
+                        "constant_lr": False, "generator_idle_se": None,
+                        "generator_idle_mode": "batch"}
 
 
 class GANTrainer:
@@ -122,6 +123,10 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        self._idle_accounting = IdleAccounting(
+            getattr(recipe, "generator_idle_mode", "batch"),
+            recipe.generator_idle_se,
+        )
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -391,7 +396,11 @@ class GANTrainer:
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             # None returns before the logits are read. An idle step clears
             # gradients, then step() still runs so hooks and the phase advance.
-            gate_generator_update(self.opt_g, real_logits, fake_logits, recipe.generator_idle_se)
+            gate_generator_update(
+                self.opt_g, real_logits, fake_logits, recipe.generator_idle_se,
+                mode=getattr(recipe, "generator_idle_mode", "batch"),
+                accounting=self._idle_accounting,
+            )
             self.opt_g.step()
             self.policy.after_generator_step()
         finally:

@@ -416,10 +416,14 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
                             network_lr_floor=network_floor):
         control = evaluate.FixedControl(schedule, spec["steps"])
         with bridge.control_host_schedules(control):
-            with generator_idle_scope(getattr(recipe, "generator_idle_se", None)):
+            with generator_idle_scope(
+                getattr(recipe, "generator_idle_se", None),
+                getattr(recipe, "generator_idle_mode", "batch"),
+            ) as idle_accounting:
                 result = baseline.run_toy(
                     spec["name"], candidate(recipe), noise_policy=policy,
                 )
+    result["generator_idle"] = idle_accounting.public()
     result["actions"] = control.trace
     result["seconds"] = time.perf_counter() - started
     receipt = policy.receipt()

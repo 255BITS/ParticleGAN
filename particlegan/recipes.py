@@ -204,6 +204,9 @@ class Recipe:
     # Standard errors of the critic's paired real−fake gap. None disables the
     # generator idle rule. 1 is the critic batch estimate's own noise floor.
     generator_idle_se: float | None = None
+    # ``batch`` is the per-step gap. ``ema`` smooths that gap with one fixed
+    # span-10 decay. Default ``batch`` leaves se=1 and se=3 runs unchanged.
+    generator_idle_mode: str = "batch"
 
     def __post_init__(self):
         from .gan_loss import GANLoss
@@ -265,6 +268,8 @@ class Recipe:
             raise ValueError("generator_idle_se must be None or a finite nonnegative number")
         if self.generator_idle_se is not None:
             object.__setattr__(self, "generator_idle_se", float(self.generator_idle_se))
+        if self.generator_idle_mode not in ("batch", "ema"):
+            raise ValueError("generator_idle_mode must be 'batch' or 'ema'")
         if self.constant_lr and self.lr_schedule != "cosine":
             raise ValueError("constant_lr overlays a cosine recipe; it is not a second schedule")
         if self.constant_lr and self.continuous_policy is not None:

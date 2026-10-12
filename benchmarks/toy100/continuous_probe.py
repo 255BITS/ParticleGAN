@@ -319,7 +319,10 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         control = evaluate.FixedControl(vector_tasks.fixed_policy("cosine"),
                                         noise_horizon)
         stack.enter_context(bridge.control_host_schedules(control))
-        stack.enter_context(generator_idle_scope(getattr(recipe, "generator_idle_se", None)))
+        idle_accounting = stack.enter_context(generator_idle_scope(
+            getattr(recipe, "generator_idle_se", None),
+            getattr(recipe, "generator_idle_mode", "batch"),
+        ))
         result = baseline.run_toy("mode_hold", candidate(recipe), noise_policy=policy)
     result["seconds"] = time.perf_counter() - started
     receipt = policy.receipt()
@@ -332,6 +335,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         rate_ranges=rate_ranges,
         post_checkpoint_rate_ranges=post_checkpoint_rate_ranges,
         expected_optimizer_accounting=expected_accounting,
+        generator_idle=idle_accounting.public(),
     )
     return result, context
 
@@ -486,6 +490,7 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
         rate_ranges=rate_ranges,
         post_checkpoint_rate_ranges=post_checkpoint_rate_ranges,
         seconds=result["seconds"],
+        generator_idle=context["generator_idle"],
         noise=dict(step_calls=receipt["step_calls"],
                    horizon=receipt["total_steps"],
                    input_nonzero_steps=receipt["input_nonzero_steps"],
@@ -589,6 +594,10 @@ def main() -> None:
         temporary.write_text(json.dumps(evidence, indent=2, sort_keys=True,
                                         allow_nan=False) + "\n")
         temporary.replace(args.output)
+    idle = evidence["generator_idle"]
+    log({"event": "generator_idle", "idle_count": idle["idle_count"],
+         "decisions": idle["decisions"], "idle_fraction": idle["idle_fraction"],
+         "mode": idle["mode"]})
     log({"event": "result", "status": evidence["status"],
          "final": evidence["final"], "seconds": evidence["seconds"],
          "output": str(args.output) if args.output else None})

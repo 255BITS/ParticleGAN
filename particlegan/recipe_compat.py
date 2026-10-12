@@ -8,6 +8,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
     "lr_decay_staircase": False,
     "constant_lr": False, "generator_idle_se": None,
+    "generator_idle_mode": "batch",
 }
 
 

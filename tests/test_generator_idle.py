@@ -86,12 +86,12 @@ class _Axis(nn.Module):
         return x[:, :1] + self.bias
 
 
-def _axis_trainer(real, idle):
+def _axis_trainer(real, idle, mode="batch"):
     torch.manual_seed(0)
     generator = nn.Linear(2, 2)
     critic = _Axis()
     recipe = get_recipe(num_particles=4, z_dim=2, batch_size=4, total_steps=2,
-                        generator_idle_se=idle)
+                        generator_idle_se=idle, generator_idle_mode=mode)
     trainer = GANTrainer(recipe, generator, critic)
     with torch.no_grad():
         generator.weight.zero_()
@@ -149,6 +149,7 @@ def test_constant_lr_overlay_is_default_off_and_forces_unit_multipliers():
                               network_lr_floor=0.01, constant_lr=True) == (1.0, 1.0)
     assert "constant_lr" not in get_recipe().to_dict()
     assert "generator_idle_se" not in get_recipe().to_dict()
+    assert "generator_idle_mode" not in get_recipe().to_dict()
     assert get_recipe().replace(constant_lr=True).to_dict()["constant_lr"] is True
     assert get_recipe().replace(generator_idle_se=1).to_dict()["generator_idle_se"] == 1.0
     packet = LegacyRecipe().to_dict()
@@ -160,9 +161,84 @@ def test_constant_lr_overlay_is_default_off_and_forces_unit_multipliers():
     winner = json.loads(Path("configs/toy100/constraints_simple_regularization.json").read_text())
     plain, _, _ = declared_recipe(winner)
     assert plain.constant_lr is False and plain.generator_idle_se is None
-    overlay = {**winner, "constant_lr": True, "generator_idle_se": 1}
+    assert plain.generator_idle_mode == "batch"
+    overlay = {**winner, "constant_lr": True, "generator_idle_se": 1,
+               "generator_idle_mode": "ema"}
     armed, _, _ = declared_recipe(overlay)
     assert armed.constant_lr is True and armed.generator_idle_se == 1.0
+    assert armed.generator_idle_mode == "ema"
+
+
+def _marked_run(standard_errors, mode="batch"):
+    torch.manual_seed(0)
+    recipe = get_recipe(num_particles=8, z_dim=2, batch_size=4, total_steps=4,
+                        generator_idle_se=standard_errors, generator_idle_mode=mode)
+    generator = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2))
+    critic = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 1))
+    trainer = GANTrainer(recipe, generator, critic)
+    real = torch.randn(4, 2)
+    for _ in range(3):
+        trainer.step(real)
+    return trainer
+
+
+def test_batch_mode_is_byte_identical_when_ema_is_off():
+    assert _fingerprint(_marked_run(1.0)) == _fingerprint(_marked_run(1.0, "batch"))
+    assert "generator_idle_mode" not in get_recipe().to_dict()
+    assert get_recipe().replace(generator_idle_mode="ema").to_dict()["generator_idle_mode"] == "ema"
+    report = _marked_run(1.0)._idle_accounting.public()
+    assert report["mode"] == "batch"
+    assert report["decisions"] == 3
+    assert report["idle_count"] <= report["decisions"]
+
+
+def test_ema_idles_on_a_matched_constant_gap_and_steps_on_a_resolved_gap():
+    zeros = torch.zeros(4, 2)
+    idle_trainer, idle_before = _axis_trainer(zeros, 1.0, "ema")
+    assert not _moved(idle_trainer, idle_before)
+    idle = idle_trainer._idle_accounting.public()
+    assert idle["mode"] == "ema"
+    assert idle["idle_count"] == 1 and idle["decisions"] == 1
+    assert idle["idle_fraction"] == 1.0
+
+    separated = torch.zeros(4, 2)
+    separated[:, 0] = 10
+    stepping, before = _axis_trainer(separated, 1.0, "ema")
+    assert _moved(stepping, before)
+    resolved = stepping._idle_accounting.public()
+    assert resolved["idle_count"] == 0 and resolved["decisions"] == 1
+    assert resolved["idle_fraction"] == 0.0
+
+
+def test_ema_first_step_matches_the_batch_rule_and_ignores_a_nonfinite_gap():
+    from particlegan.generator_idle import IdleAccounting
+    noisy = torch.tensor([0.1, -0.2, 0.05, 0.0])
+    zeros = torch.zeros(4)
+    batch = generator_is_idle(noisy, zeros, 1.0)
+    accounting = IdleAccounting("ema", 1.0)
+    assert accounting.decide(noisy, zeros, 1.0, "ema") is batch
+    poisoned = IdleAccounting("ema", 1.0)
+    assert poisoned.decide(torch.tensor([float("nan"), 0.0]), zeros[:2], 1.0, "ema") is False
+    assert poisoned._mean is None
+    assert poisoned.decide(zeros, zeros, 1.0, "ema") is True
+
+
+def test_suite_summary_records_idle_decisions(tmp_path):
+    from benchmarks.toy100.train import train
+    summary = train(dict(
+        model="gan", problem="grid100", device="cpu", seed=31, steps=2,
+        z_dim=2, num_particles=8, batch_size=4, d_hidden=4, n_hidden=1,
+        fourier=0, eval_samples=16, snapshot_samples=4, eval_interval=2,
+        snapshot_interval=2, log_interval=2, threads=1,
+        output_noise_std=0.0, input_noise_std=0.0,
+        generator_idle_se=1.0, generator_idle_mode="ema",
+    ), tmp_path)
+    idle = summary["generator_idle"]
+    assert idle["mode"] == "ema" and idle["standard_errors"] == 1.0
+    assert idle["decisions"] == 2
+    assert idle["idle_count"] <= idle["decisions"]
+    text = (tmp_path / "progress.log").read_text()
+    assert f"idle={idle['idle_count']}/{idle['decisions']}" in text
 
 
 def test_constant_lr_and_idle_threshold_reject_bad_values():
@@ -170,6 +246,8 @@ def test_constant_lr_and_idle_threshold_reject_bad_values():
         get_recipe(constant_lr=1)
     with pytest.raises(ValueError):
         get_recipe(generator_idle_se=-1)
+    with pytest.raises(ValueError):
+        get_recipe(generator_idle_mode="smooth")
     with pytest.raises(ValueError):
         get_recipe(constant_lr=True, lr_schedule="constant", network_lr_horizon_cap=None)
     with pytest.raises(ValueError):
