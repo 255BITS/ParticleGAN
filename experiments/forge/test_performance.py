@@ -113,15 +113,54 @@ def _receipt(inputs, row, source):
                   "original_file_sha256": {key: value.get("sha256") for key, value in provenance.get("original_files", {}).items()}}
         if summary.get("retry_of"):
             actual["retry_of"] = summary["retry_of"]
-        if (proof != actual or summary.get("certificate_validated") is not True
+        scoped = source.get("schema") == "forge_tier1_scoped_evidence_v1"
+        proof_matches = (source.get("receipt_result_hashes", {}).get(attempt) == actual["canonical_result_hash"]
+                         if scoped else proof == actual)
+        if (not proof_matches or summary.get("certificate_validated") is not True
                 or summary.get("candidate_id") != row["candidate_id"]
                 or summary.get("candidate_revision") != row.get("candidate_revision")
                 or provenance.get("source_digest") != row.get("bindings", {}).get("source_digest")):
             raise ValueError("test performance: receipt proof/recipe/source mismatch: " + attempt)
         summaries[attempt] = summary
     superseded = certified_retry_successors(summaries)
+    final = {item["task_id"]: item["attempt_id"] for item in source.get("final_measurements", [])
+             if item["candidate_id"] == row["candidate_id"]
+             and item.get("candidate_revision") == row.get("candidate_revision")}
+    for measured in source.get("final_measurements", []):
+        if measured["task_id"] not in final or final[measured["task_id"]] != measured["attempt_id"]:
+            continue
+        summary = summaries[measured["attempt_id"]]
+        results = [result for result in summary["task_results"] if result["task_id"] == measured["task_id"]]
+        if (len(results) != 1 or results[0]["gate_status"] != measured["status"]
+                or results[0]["compatibility_key"] != measured["compatibility_key"]
+                or summary["provenance"]["canonical_result_hash"] != measured["canonical_result_hash"]):
+            raise ValueError("test performance: scoped final measurement mismatch")
     return [(attempt, result) for attempt, summary in summaries.items() if attempt not in superseded
-            for result in summary.get("task_results", [])]
+            for result in summary.get("task_results", [])
+            if result["task_id"] not in final or final[result["task_id"]] == attempt]
+
+
+def _scoped_rows(inputs):
+    """Use existing scoped-publications contracts without loading their GIFs."""
+    from .scoped_publications import REGISTRY, SCHEMA
+    from .trainer_families import scientific_row_hash
+    if not (inputs.root / REGISTRY).is_file():
+        return []
+    registry = inputs.read(REGISTRY.as_posix())
+    if registry.get("schema") != SCHEMA or registry.get("qualification_input") is not False:
+        raise ValueError("test performance: invalid scoped publication registry")
+    rows = []
+    for entry in registry["cohorts"]:
+        document = inputs.read(entry["path"], sha256=entry["sha256"])
+        if (document.get("schema") != "forge_tier1_scoped_evidence_v1" or document.get("qualification_input") is not False
+                or document.get("parent_qualification_credit") is not False or document["view"] != entry["view"]):
+            raise ValueError("test performance: scoped evidence cannot grant parent credit")
+        for family, row in document["rows"].items():
+            if (row["trainer_family"] != family or scientific_row_hash(row) != document["scientific_rows_sha256"][family]
+                    or row["bindings"]["source_digest"] != document["source_digest"]):
+                raise ValueError("test performance: scoped scientific row drift")
+            rows.append((row, document, {"snapshot": entry["path"], "json_sha256": entry["sha256"]}))
+    return rows
 
 
 def build_report(root, *, publication=None):
@@ -170,12 +209,17 @@ def build_report(root, *, publication=None):
     rows = [(row, True) for row in publication.get("rows", [])]
     rows += [(row, False) for key in ("evidence_rows", "archived_evidence_rows", "configuration_rows", "historical_family_rows")
              for row in publication.get(key, []) if row.get("attempt_ids")]
+    scoped = _scoped_rows(inputs)
+    scoped_sources = {stable_hash(row): (document, pointer) for row, document, pointer in scoped}
+    rows += [(row, False) for row, _, _ in scoped]
     seen = set()
     for row, selected in rows:
         bindings = row.get("bindings", {})
         source = publication
         pointer = publication.get("evidence_sources", {}).get(row.get("publication_key"))
-        if pointer:
+        if stable_hash(row) in scoped_sources:
+            source, pointer = scoped_sources[stable_hash(row)]
+        elif pointer:
             name = pointer["snapshot"]
             if name not in sources:
                 sources[name] = inputs.read(name, sha256=pointer["json_sha256"])

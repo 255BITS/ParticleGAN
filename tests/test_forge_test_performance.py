@@ -274,3 +274,30 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
         assert document["qualification_input"] is document["qualification_reuse"] is False
         assert document["original_evidence"]["availability"] == "LOCAL_ONLY_NOT_PUBLISHED"
         assert portable(document) == document
+
+
+def test_existing_scoped_policy_registry_stays_separate_from_parent(evidence):
+    from experiments.forge.trainer_families import scientific_row_hash
+    root, publication, summary = evidence
+    row = deepcopy(publication["rows"][0])
+    row.update(candidate_id="scoped_recipe", candidate_revision="scoped_revision", trainer_family="method", attempt_ids=["scoped-attempt"])
+    row["bindings"]["source_digest"] = "scoped-source"
+    row["tasks"][0]["task_id"] = "test_a_policy"
+    row["bindings"]["task_contracts"] = {"test_a_policy": next(iter(publication["task_contracts"]))}
+    summary.update(candidate_id=row["candidate_id"], candidate_revision=row["candidate_revision"], attempt_id="scoped-attempt")
+    summary["provenance"].update(source_digest="scoped-source", canonical_result_hash="scoped-result")
+    summary["task_results"][0]["task_id"] = "test_a_policy"
+    atomic_json(root / "reports/forge/technique-receipts/scoped-attempt.json", summary)
+    document = {"schema": "forge_tier1_scoped_evidence_v1", "qualification_input": False, "parent_qualification_credit": False,
+                "view": "policy", "source_digest": "scoped-source", "rows": {"method": row},
+                "scientific_rows_sha256": {"method": scientific_row_hash(row)}, "receipt_result_hashes": {"scoped-attempt": "scoped-result"},
+                "task_contracts": publication["task_contracts"]}
+    path = root / "reports/forge/scoped-evidence.json"
+    atomic_json(path, document)
+    atomic_json(root / "reports/forge/scoped-publications.json", {"schema": "forge_scoped_publications_v1", "qualification_input": False,
+        "cohorts": [{"path": "reports/forge/scoped-evidence.json", "sha256": file_hash(path), "view": "policy"}]})
+    result = build_report(root, publication=publication)
+    scoped = next(test for test in result["tests"] if test["task_id"] == "test_a_policy")
+    assert scoped["coverage"]["optimizer_passes"] == 1
+    assert scoped["selected_coverage"]["optimizer_passes"] == 0
+    assert len(publication["rows"]) == 1

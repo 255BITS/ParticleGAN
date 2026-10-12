@@ -8,7 +8,7 @@ The table below shows selected recipes. The offline view also searches measured 
 
 PASS and FAIL retain the original complete gate; ERROR is execution failure (including pre-training errors); INCOMPLETE lacks the full protocol; NOT RUN has no compatible indexed result. BLOCKED, INVALID and other recorded statuses remain explicit. MIXED exposes conflicting outcomes instead of picking a favorable one. Click any cell for receipts and metrics.
 
-Indexed: **1111 test/protocol rows**, **428 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1118 test/protocol rows**, **430 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 | Recipe | Full identity |
 | --- | --- |

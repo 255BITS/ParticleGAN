@@ -33,6 +33,10 @@ archived gates; original receipt metric checks retain their thresholds.
 Measured history comes from the current inventory's registered evidence
 snapshots. Each snapshot's bytes and publication digest are checked. Compact
 receipt proofs bind original result/file hashes, candidate revision and source.
+The existing `scoped-publications.json` registry supplies separate Tier-1 policy
+cohorts too: pinned document/whole-row identities, receipt result hashes and
+final-measurement bindings are checked without loading media. Those source-bound
+rows supply no selected-parent qualification or borrowed passes.
 The existing certified retry projection removes superseded incomplete receipts
 from the active cell. Different unsuperseded outcomes display MIXED. PASS counts
 recipes with at least one compatible passing receipt, while MIXED preserves
