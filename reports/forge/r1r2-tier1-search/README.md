@@ -39,4 +39,4 @@ tail -f /mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/run.log
 
 The collector checks certified numerical gates, source/recipe/task bindings, actual initialization and consumed-batch equality, charged costs and saved-training GIF provenance. Rendering adds no training or sampling draws. The repository's single current generated technique inventory remains the leaderboard; this research report does not create a second generated leaderboard or adopt defaults.
 
-Results will be appended after the registered comparison concludes. Generated experiment memory and its compilation hash are excluded from this PR at the user's request.
+Results will be appended after the registered comparison concludes. Generated experiment memory retains a short summary and links to this report; its compilation hashes are refreshed after the readout.
