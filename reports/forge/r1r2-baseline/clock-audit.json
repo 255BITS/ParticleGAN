@@ -1,0 +1,87 @@
+{
+  "artifact_manifest": {
+    "file_count": 2,
+    "files": {
+      "comparisons.pt": {
+        "sha256": "2d263af3ffd594b0d49770a681319058aa9f41646f032f4f8a2454933dbce9fb",
+        "size": 1506353
+      },
+      "initial.pt": {
+        "sha256": "c906a6d886741dd414905f866d4391c7f56c7af3bc9939ad9ff78afbf3df100c",
+        "size": 61854
+      }
+    },
+    "schema_version": 1,
+    "sha256": "f1d5672ffb6f07ef3ee3aec860007c0b112f1c8692049c7c9ea8ac1962915301",
+    "total_bytes": 1568207
+  },
+  "attempt_id": "12bc543e8b564690953453bfaf8720cc",
+  "comparisons": [
+    {
+      "changed_sha256": "c2ddba4bf805fbb0c5f9fcebf1494191de3de2198e4010898559ee6843608670",
+      "condition": "step_label",
+      "permitted_state_sha256": "09a79a3ce408b93d9c84480b2e3b39937a427015e1fb3d0eb55ea42ea9f77295",
+      "reference_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "rng_state_sha256": "581e2cec8db8d1ae7fb17f15494776e60b8cca61b9ee0cbff1280ea658e3c241"
+    },
+    {
+      "changed_sha256": "03a5f38efa5da4bdb932b6b98ffc0cdd75a68eda8fc96252b5b22fd0f2ee97b4",
+      "condition": "horizon",
+      "permitted_state_sha256": "09a79a3ce408b93d9c84480b2e3b39937a427015e1fb3d0eb55ea42ea9f77295",
+      "reference_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "rng_state_sha256": "581e2cec8db8d1ae7fb17f15494776e60b8cca61b9ee0cbff1280ea658e3c241"
+    },
+    {
+      "changed_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "condition": "evaluation_cadence",
+      "permitted_state_sha256": "09a79a3ce408b93d9c84480b2e3b39937a427015e1fb3d0eb55ea42ea9f77295",
+      "reference_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "rng_state_sha256": "581e2cec8db8d1ae7fb17f15494776e60b8cca61b9ee0cbff1280ea658e3c241"
+    },
+    {
+      "changed_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "condition": "restart",
+      "permitted_state_sha256": "09a79a3ce408b93d9c84480b2e3b39937a427015e1fb3d0eb55ea42ea9f77295",
+      "reference_sha256": "b95274791bb6162243a1d3a686bd90c9543f3093eccca64e209005eb4ad71824",
+      "rng_state_sha256": "581e2cec8db8d1ae7fb17f15494776e60b8cca61b9ee0cbff1280ea658e3c241"
+    }
+  ],
+  "independent_grade": {
+    "gate_status": "FAIL",
+    "reasons": [
+      "step_label changed the update or common-prefix state"
+    ],
+    "status": "FAIL"
+  },
+  "original_result": {
+    "path": "reports/forge/attempts/12bc543e8b564690953453bfaf8720cc/result.json",
+    "sha256": "8d7d9cc3853c3ecec5a03b04863cf6d99d63961d58f5f7b15c58f18fce53dbea"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "source_audit": {
+    "allowed_state": [
+      "parameters_and_ema",
+      "optimizer_moments_and_bias_correction",
+      "observed_gradients_and_row_visit_history",
+      "named_training_rng"
+    ],
+    "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+    "source_sha256": {
+      "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+      "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+      "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/k3p.py": "45ceabdc067fb420e163d3d4ac5a4edb0bb47d154c38c73865f95dabeaefcad7",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+      "particlegan/recipes.py": "67accd75d6319194b2c17cf68da09209597c309538db391388048eb42eb32c0b",
+      "particlegan/training.py": "363aebba518c10348a095719ee874d8d0a5d60f9a3487839604aba815d363897"
+    },
+    "unexplained_clock_dependencies": [
+      "learning-rate annealing depends on completed steps and horizon"
+    ]
+  },
+  "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14"
+}

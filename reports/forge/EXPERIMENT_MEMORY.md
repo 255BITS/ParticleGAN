@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 816. Inventory coverage: complete. Unresolved import items: 7.
+Records: 817. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3846,6 +3846,22 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### recipe-prior-refactor-r1r2-v1 · r1r2-recorded-baseline-20261012
+
+**Scope:** saved_evidence_baseline_readout; family_context; revision `594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a`.
+
+Establish the selected R1/R2 whole recipe as a source-bound reference baseline and explain its two failed Tier 1 view requirements.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+R1/R2 passes 20/22 Tier 1 view requirements across seven distinct tasks: five PASS and two FAIL. Ordinary stability is 5/6 and qualification tier 0. Ring16 finds all 16 modes with mass TV 0.051514, but covariance error 2.066388 exceeds 0.85 and HQ 0.844238 falls below 0.85; zero of 96 observations passes the full gate. Clock step-label and horizon probes diverge, while cadence/restart match, consistent with the scheduled recipe. Word acquisition passes at update 2501 but its endpoint and separate hold fail. Separate Tier 2 diagnostics pass 9/21 and confer no ordinary qualification. Seven ordinary/clock attempts cost 179.668 seconds; full R1/R2 ownership measurements cost 852.587 seconds across 30 attempts, with overlapping costs counted once. This report adds zero training or sampling.
+
+**Next:** Keep recipe-prior-refactor-r1r2-v1 as the whole reference baseline with both failures visible. Inspect saved Ring16 component covariance/spill and prior-row mappings, plus word acquisition-to-failure state, before a separately declared global trainer change. Preserve task priors, source, protocol and gates; no seed study, automatic training, downstream qualification or default adoption.
+
+[Evidence](../../reports/forge/r1r2-baseline/results.json) · [Record](records/r1r2-recorded-baseline-20261012.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5219,4 +5235,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f78ed98b105aba5f59e8e0d2461871351df34effdb7c950b9578dac88ac85e59`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `6b02a190c00aa9a425e6c53f401062effb0cd9de4576c2a862e81e514630458c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

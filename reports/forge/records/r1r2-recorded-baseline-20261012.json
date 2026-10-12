@@ -1,0 +1,30 @@
+{
+  "candidate_id": "recipe-prior-refactor-r1r2-v1",
+  "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+  "changed_factors": [],
+  "conclusion": "R1/R2 passes 20/22 Tier 1 view requirements across seven distinct tasks: five PASS and two FAIL. Ordinary stability is 5/6 and qualification tier 0. Ring16 finds all 16 modes with mass TV 0.051514, but covariance error 2.066388 exceeds 0.85 and HQ 0.844238 falls below 0.85; zero of 96 observations passes the full gate. Clock step-label and horizon probes diverge, while cadence/restart match, consistent with the scheduled recipe. Word acquisition passes at update 2501 but its endpoint and separate hold fail. Separate Tier 2 diagnostics pass 9/21 and confer no ordinary qualification. Seven ordinary/clock attempts cost 179.668 seconds; full R1/R2 ownership measurements cost 852.587 seconds across 30 attempts, with overlapping costs counted once. This report adds zero training or sampling.",
+  "evidence_scope": "saved_evidence_baseline_readout",
+  "goal": "discriminator_stability",
+  "hypothesis": "Establish the selected R1/R2 whole recipe as a source-bound reference baseline and explain its two failed Tier 1 view requirements.",
+  "lifecycle": "concluded",
+  "mechanism_class": "saved_evidence_analysis",
+  "next_action": "Keep recipe-prior-refactor-r1r2-v1 as the whole reference baseline with both failures visible. Inspect saved Ring16 component covariance/spill and prior-row mappings, plus word acquisition-to-failure state, before a separately declared global trainer change. Preserve task priors, source, protocol and gates; no seed study, automatic training, downstream qualification or default adoption.",
+  "provenance": {
+    "report": "reports/forge/r1r2-baseline/README.md",
+    "sampling_draws_added": 0,
+    "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+    "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+    "training_updates_added": 0
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-recorded-baseline-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-baseline/results.json",
+    "sha256": "29ef8926634f453735238ed6385feb42c3a01b271944a4d8b04039a561ab1835"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

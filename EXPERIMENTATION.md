@@ -104,7 +104,10 @@ source and formulation identity.
 Run commands from the repository root in the project's Python environment.
 The [registered formulation comparison](reports/forge/studies/FORMULATION_COMPARISON_V1.md)
 compares fixed R1/R2, BCap and full released v0.7 GAN v3 with K3P on declared
-native hosts. `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
+native hosts. The [current R1/R2 baseline readout](reports/forge/r1r2-baseline/README.md)
+binds its selected recipe and explains the 20/22 Tier 1 view requirements, Ring16
+density failure and clock dependence; its deeper diagnostics remain separate.
+`Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`
 bind separate host identities and report their costs without entering smoke or

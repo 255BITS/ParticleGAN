@@ -1,0 +1,33 @@
+{
+  "base_commit": "6cdc209a3956aee44a2f42fac4a92bcaddab46a4",
+  "baseline_audit": "PASS",
+  "byte_exact_original_clock_result": "PASS",
+  "existing_failures_verified_on_unchanged_base": {
+    "failed": 2,
+    "log": {
+      "path": "runs/forge/r1r2-baseline-report/pytest-original-base.log",
+      "sha256": "47c6dd6c9f79e45b7f48bd558af274f91181c937dedbd7893900f64b48b209df"
+    },
+    "tests": [
+      "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+      "tests/test_forge_family_reports.py::test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_totals"
+    ]
+  },
+  "focused_tests": {
+    "command": "python -m pytest -q tests/test_forge_family_documentation.py tests/test_forge_family_reports.py",
+    "failed": 2,
+    "log": {
+      "path": "runs/forge/r1r2-baseline-report/pytest-final.log",
+      "sha256": "12a40f6bc083c1bb7badf9ff4ee5e44ca088f4f4ebce9f85ae02b673bfa47930"
+    },
+    "passed": 109
+  },
+  "note": "Logs remain ignored and local. Existing publication presentation failures are not repaired by this report.",
+  "qualification_input": false,
+  "report_links_and_unique_costs": "PASS",
+  "research_memory_freshness": "CURRENT",
+  "schema_version": 1,
+  "scientific_publication_changes": false,
+  "scope": "r1r2_baseline_reporting_validation",
+  "training_updates_added": 0
+}
