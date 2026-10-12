@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 815. Inventory coverage: complete. Unresolved import items: 7.
+Records: 816. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -629,6 +629,22 @@ Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FA
 **Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
+
+### pr261-routed-latent-noise-coverage · archive-pr261-routed-latent-noise-coverage-7943dda321c1
+
+**Scope:** historical; family_context; revision `7943dda321c1011dd3c86fc598a92b3493159a83`.
+
+Does growing the shared training noise support from 2 to 8 seeds improve unseen-noise conditional recovery when architecture, native game, initialization, updates and paired addresses are held fixed?
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `training_latent_support_coverage`.
+
+
+
+Yes, within the generated routed E22 FP32 fixture: growing shared training noise support from 2 to 8 seeds cut final held-out TEST RMSE 23.09%, 0.0533702454 to 0.0410462237, at 1,024 native updates per arm; all 11 preregistered gates passed. The eight-seed arm improved at all five fixed endpoints (896-1024), for every caption source and both held-out noise seeds, under both common frozen terminal critics; the TEST-minus-FIT MSE gap fell from 0.0005545459 to -0.0000674414, and zeroing its particle code raised RMSE to 0.0895439938. Both arms proposed 10 structural events and accepted zero, so this is a data-coverage effect, not a structural-controller mechanism. Limits: generated FP32 fixture with smaller dimensions than Supra; no Supra transfer tested; full-task LoRA RMSE 0.0633609846 still beats best particle 0.0679143351; no default adoption or Forge promotion. The variable is support size (228 vs 912 unique fit contexts), not a seed repeat.
+
+**Next:** If the routed or Supra latent-coverage question is picked up again, test expanded noise support on the actual frozen Supra teacher as one declared delta. Do not repeat the generated cohort and do not change defaults.
+
+[Evidence](../../reports/forge/continuous-baseline-20261003/OPEN_TOY_PR_REVIEW.md) · [Record](records/archive-pr261-routed-latent-noise-coverage-7943dda321c1.json)
 
 ### bcap-default-baseline-direction-v1 · bcap-default-baseline-concluded-context-v1
 
@@ -5203,4 +5219,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `60629b7b24cf1301af3b6ef65815cd0ebb3233877e52b106bcb1eaa5cfb786cd`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f78ed98b105aba5f59e8e0d2461871351df34effdb7c950b9578dac88ac85e59`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
