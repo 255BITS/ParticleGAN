@@ -1862,6 +1862,17 @@ def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
         markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
+        if (root / "reports/forge/bcap-prior-search/findings.md").is_file():
+            prior_link = os.path.relpath(root / "reports/forge/bcap-prior-search/README.md", path.parent)
+            findings_link = os.path.relpath(root / "reports/forge/bcap-prior-search/findings.md", path.parent)
+            prior_navigation = ("The [BCAP leader prior searches](" + prior_link + ") compare five opt-in mechanisms "
+                                "and fifteen global strengths, with every task measurement, score, target and source-bound "
+                                "repair or regression. Their [interpretation and recommendations](" + findings_link + ") "
+                                "explain the results. The selected family configuration and its recorded counts remain unchanged.\n\n")
+            markdown = markdown.replace("Family totals sum the view rows.", prior_navigation + "Family totals sum the view rows.", 1)
+        matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
+        markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
+                     "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
         pure = root / "reports/forge/pure-bcap"
         if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
             import importlib.util
@@ -2124,6 +2135,8 @@ def _shared_score_intro(root, result):
                "The [current family leaderboard](../technique-inventory.md) contains the generated "
                "family/view totals and links to each family's experiments, metrics and pass criteria. "
                "Refresh it with `python reports/forge/regenerate_technique_inventory.py`.\n\n")
+    leading += ("The [performance-by-test matrix](../test-performance.md) shows complete recipe cells, "
+                "zero-pass tests, execution errors and separately typed feasibility witnesses.\n\n")
     half_base = result.get("word_half_base_diagnostic")
     if half_base:
         accounting = half_base["accounting"]
@@ -2396,10 +2409,13 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
 
 
 def _family_pages(root, result):
+    from experiments.forge.test_performance import generated_reports
+    test_pages = generated_reports(root, publication=result)
     if not result.get("family_progress"):
-        return {}
+        return test_pages
     from experiments.forge.family_reports import generated_pages
     pages = generated_pages(root, result)
+    pages.update(test_pages)
     from experiments.forge.tier_report import REPORT_PATH, build_report, render_markdown as render_tiers
     # Registered tier navigation is prepared against the new in-memory
     # publication, so validation precedes writes and its hashes are fresh.

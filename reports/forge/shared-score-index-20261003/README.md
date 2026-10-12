@@ -2,6 +2,8 @@
 
 The [current family leaderboard](../technique-inventory.md) contains the generated family/view totals and links to each family's experiments, metrics and pass criteria. Refresh it with `python reports/forge/regenerate_technique_inventory.py`.
 
+The [performance-by-test matrix](../test-performance.md) shows complete recipe cells, zero-pass tests, execution errors and separately typed feasibility witnesses.
+
 ## Qualification and accounting
 
 Each model/configuration keeps its own source, law and declared denominator. Existing C6 diagnostics retain their 26-slot protocol; standalone API rows use their own task gates. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.

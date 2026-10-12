@@ -1,0 +1,22 @@
+{
+  "publications": [
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-location-screen.json",
+      "sha256": "8c7f5c8263efbf56419ce5ba2f5857c47cdd9fdb369709ae70c5591a3691f117"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/g-angle-width.json",
+      "sha256": "d0c99cc87d6445bcdc7392d854cccfaeafbfd747eb96ec29125b36252f24aa2f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/g-angle-anisotropic.json",
+      "sha256": "ba5d6673ad6e838b0186c5582fb758c41ca1271c8959711d1051b4ddd1bb893f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-location-confirmation.json",
+      "sha256": "0c79aca40f3f149778eb8739a511e3e192cfafb4291a5c5587b2e50e857cde2f"
+    }
+  ],
+  "qualification_input": false,
+  "schema": "forge_test_display_registry_v1"
+}
