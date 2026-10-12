@@ -1,0 +1,3551 @@
+{
+  "gradient_calls": 0,
+  "limitations": [
+    "Only terminal optimizer moments are saved. Plain Adam has no max-exp-avg history to recover an AMSGrad counterfactual.",
+    "Beta1=.5 stores EMA, not the last raw gradient. No raw-to-momentum contraction is measurable for m110.",
+    "AMSGrad same-moment last-step contraction is algebraic, not a matched feedback trajectory or observed causal effect.",
+    "Saved observation changes combine learned feedback with evaluation draws. They do not prove per-update instability.",
+    "Fixed word panels characterize saturation but do not replace sampled numerical acquisition gates.",
+    "A new ams_m110 changes only global amsgrad relative to m110; global flag cannot isolate denominator memory by role."
+  ],
+  "models_constructed": 0,
+  "optimizer_updates_added": 0,
+  "prospective_bindings": {
+    "all_seven_existing_public_bindings_PASS": true,
+    "bindings": [
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": [
+            0.0,
+            0.99
+          ]
+        },
+        "family": "adam",
+        "prior_binding": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_contract_sha256": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "task_id": "ae_gan_hold"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": [
+            0.0,
+            0.99
+          ]
+        },
+        "family": "adam",
+        "prior_binding": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "task_contract_sha256": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": [
+            0.0,
+            0.99
+          ]
+        },
+        "family": "adam",
+        "prior_binding": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_contract_sha256": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "task_id": "five_word_joint_smoke"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": [
+            0.0,
+            0.99
+          ]
+        },
+        "family": "adam",
+        "prior_binding": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_contract_sha256": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": [
+            0.0,
+            0.99
+          ]
+        },
+        "family": "adam",
+        "prior_binding": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "task_contract_sha256": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": "G beta1=.5, global AMSGrad; no prior beta override",
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": "not consumed"
+        },
+        "family": "adam",
+        "prior_binding": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_contract_sha256": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "task_id": "two_pole"
+      },
+      {
+        "adam_variant": "pytorch",
+        "amsgrad": true,
+        "blockers": [],
+        "direct_pole_binding": null,
+        "effective_betas": {
+          "D": [
+            0.5,
+            0.99
+          ],
+          "G_and_E": [
+            0.5,
+            0.99
+          ],
+          "P": "not consumed"
+        },
+        "family": "adam",
+        "prior_binding": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "task_contract_sha256": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd",
+        "task_id": "unused_token_hold"
+      }
+    ],
+    "identical_declared_recipe_matches": [],
+    "one_field_delta": {
+      "amsgrad": [
+        false,
+        true
+      ]
+    },
+    "parent_candidate": "r1r2-role-m110-v1",
+    "parent_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+    "prospective_only": true,
+    "validation_only_constructor_exception": "Exact parameter-free CoulombPriorRegularizer for Recipe inactive-option validation; no forward; all other modules blocked"
+  },
+  "python_and_torch_cpu_rng_unchanged": true,
+  "qualification_input": false,
+  "reproducer_sha256": "db0661473e33dbaa0cc872837103439f5b976f4243bd5a93699b0fa23be51d1f",
+  "results": [
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "41bbdf0c128145ec663f3001e4d4d0cc7d2730f9548c74fcc0de677d1d91ada2",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90/provenance",
+        "bytes": 205155,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+        "state_sha256": "27ed648b4924c40f626a16224f315007ae80906782df510e913737450eda3a2e"
+      },
+      "observations": {
+        "best_covariance_observation": {
+          "component_covariance_error": 2.0981290452182293,
+          "component_min_eigen_ratio": 0.19987168908119202,
+          "hq": 0.810302734375,
+          "mass_tv": 0.05517578125,
+          "modes": 16,
+          "step": 1217
+        },
+        "covariance_bound_passing_observations": 0,
+        "last16_covariance_mean": 3.624945323099382,
+        "last16_covariance_min_max": [
+          2.3009377792477608,
+          6.652769446372986
+        ],
+        "last16_covariance_std": 1.2556780164378376,
+        "last16_min_eigen_bound_failures": 0,
+        "last_five": [
+          {
+            "component_covariance_error": 2.610126120969653,
+            "component_min_eigen_ratio": 0.42479559779167175,
+            "hq": 0.731689453125,
+            "mass_tv": 0.06103515625,
+            "modes": 16,
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 2.678874995559454,
+            "component_min_eigen_ratio": 0.29140424728393555,
+            "hq": 0.8330078125,
+            "mass_tv": 0.06005859375,
+            "modes": 16,
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 4.854875795543194,
+            "component_min_eigen_ratio": 0.9837217330932617,
+            "hq": 0.326416015625,
+            "mass_tv": 0.07666015625,
+            "modes": 11,
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 2.6259391475468874,
+            "component_min_eigen_ratio": 0.3699113428592682,
+            "hq": 0.82421875,
+            "mass_tv": 0.05517578125,
+            "modes": 16,
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 2.3864271584898233,
+            "component_min_eigen_ratio": 0.43362143635749817,
+            "hq": 0.84228515625,
+            "mass_tv": 0.0634765625,
+            "modes": 16,
+            "step": 1600
+          }
+        ],
+        "saved_observations": 96
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.011663031394066417,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.13198777314531587,
+          "reconstructed_actual_displacement_l2": 0.12324872423115454,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.12324872423115454,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.028811180939063215,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.02203849004483405,
+          "reconstructed_actual_displacement_l2": 0.18233543917217676,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.18233543917217676,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.023671173910860033,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.10506327462296167,
+          "reconstructed_actual_displacement_l2": 0.31680828352767504,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.31680828352767504,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.008723879082978291
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "93a5ec8bea58b9c9192d6106185463e00faaef94b61cb844710b3e496986d0e7",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "component_core_covariance_error": 0.9984053559601307,
+        "component_core_min_eigen_ratio": 0.4321348965167999,
+        "component_covariance_error": 2.3864271584898233,
+        "component_min_eigen_ratio": 0.43362143635749817,
+        "covariance_error": 0.08412902802228928,
+        "hq": 0.84228515625,
+        "mass_tv": 0.0634765625,
+        "max_component_spill": 0.30383479595184326,
+        "mean_error": 0.0453452542424202,
+        "min_hq_mass_ratio": 0.5234375,
+        "min_mass_ratio": 0.66796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03822713249682795,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b4ce343dec0062815a6e67841ea93c71ba910c340a1ffc8998c199361208721f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/a1d5d58e4f754bbf87e2996d9da714b3/provenance",
+        "bytes": 99497,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "223ac9b2a61d4b9c2d271bd1c99efab4c3fb0168a61bb6b1ed61965335d1b962",
+        "state_sha256": "73bdd3586b4e9678ce2e697c631da154d3288d1f8537188e965fa101809171f5"
+      },
+      "observations": {
+        "best_cdf_observation": {
+          "cdf_ks": 0.02417727950346049,
+          "mean_error_sigma": 0.01906564921955578,
+          "std_ratio": 1.0923671975297504,
+          "step": 417
+        },
+        "endpoint": {
+          "cdf_ks": 0.1427394607371768,
+          "mean_error_sigma": 0.2592152999859536,
+          "std_ratio": 1.3023019568408505,
+          "step": 1000
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.0023462653850590113,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.0041194906121179275,
+          "reconstructed_actual_displacement_l2": 0.028708624608942995,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.028708624608942995,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.014352522933016547,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.00030975681260267217,
+          "reconstructed_actual_displacement_l2": 0.05625464632424549,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.05625464632424549,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.014274060620275872,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.014586255203553939,
+          "reconstructed_actual_displacement_l2": 0.09478716695733358,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.09478716695733358,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0234192037470726
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "abe9e08c5ae1f06b09ad0fc1aaa4bdd4633b62dc8d2e9e8d8037ce54a64f018b",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "PASS",
+      "recorded_metrics": {
+        "cdf_ks": 0.1427394607371768,
+        "finite_fraction": 1.0,
+        "mean": 2.129607649992977,
+        "mean_error_sigma": 0.2592152999859536,
+        "sample_count": 4096,
+        "std": 0.6511509784204252,
+        "std_ratio": 1.3023019568408505,
+        "step": 1000
+      },
+      "role": "m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "874bda8b592a14448c003ae7ee950c4306d5d5d81f92d48df4768009a251a713",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/fd19e04990e34421a25166d36f7ee319/provenance",
+        "bytes": 1952026,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "0f5b36a326aa412cc09095b054aa79a16f5aa59fb1b9bb9f280d3251b0929ea3",
+        "state_sha256": "8812d3a7e3ae787a2b2d08cfc65c2bec0ffbbffa2db0e9215ff40c03646df851"
+      },
+      "fixed_word_panel": {
+        "cohort": "fixed saved prior means and five canonical inputs; no draws or gate scoring",
+        "encoded_pair_distance_min": 0.31214945877739175,
+        "generated_by_saved_row": [
+          "grape_",
+          "grape_",
+          "apple_",
+          "grrpe_",
+          "apple_"
+        ],
+        "generated_decoder_logit_max_abs": 820.6288407696665,
+        "generator_parameter_l2": 74.16964730149996,
+        "prior_pair_distance_min": 0.31850454670710326,
+        "reconstructed_by_canonical_input": [
+          "apple_",
+          "grape_",
+          "grape_",
+          "apple_",
+          "apple_"
+        ],
+        "reconstruction_decoder_logit_max_abs": 568.5914795361424,
+        "reconstruction_min_correct_token_probability": 0.0
+      },
+      "observations": {
+        "endpoint": {
+          "completed_steps": 20001.0,
+          "mass_apple": 0.3955078125,
+          "mass_berry": 0.0,
+          "mass_grape": 0.40625,
+          "mass_lemon": 0.0,
+          "mass_melon": 0.0,
+          "mass_tv": 0.6,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 2,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 0.8017578125,
+          "reconstruction_exact": 0,
+          "reconstruction_nll": 13.815510557964274,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 20001
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 9.482662348196207e-17,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 3.131899505681325e-19,
+          "reconstructed_actual_displacement_l2": 4.075028822128035e-16,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 4.075028822128035e-16,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.5940564537503313
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.010229110271853512,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.014088699715317813,
+          "reconstructed_actual_displacement_l2": 0.11428828309178471,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "E",
+          "same_saved_moments_without_max_displacement_l2": 0.11428828309178471,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.0021222036572104913,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps_only_prior_eps_not_consumed",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.007033933100706526,
+          "reconstructed_actual_displacement_l2": 0.0033500894897698754,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 5,
+          "rows_with_nonzero_first_moment": 5,
+          "same_saved_moments_without_max_displacement_l2": 0.0033500894897698754,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.030534605599934334,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.41882165772146845,
+          "reconstructed_actual_displacement_l2": 1.0387730430485287,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 1.0387730430485287,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.004739521620812229
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "a84d4eeb659ce2ef7cb62e359718d17a14848a778ecd4e8374b37c923e7df6b2",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.3955078125,
+        "mass_berry": 0.0,
+        "mass_grape": 0.40625,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 0.6,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 2,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.8017578125,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 13.815510557964274,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "role": "m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "20aca4f16e8a4c31900b652e2c71ee3b",
+      "candidate_id": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "checkpoint": {
+        "artifact_manifest_sha256": "e04be343d98f28ff84837910dc4bb20200f67ff3ac28f1d86348ebd0c09b0a05",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-m110-v1/20aca4f16e8a4c31900b652e2c71ee3b/provenance",
+        "bytes": 205219,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "eb35c654ab41156d9fe009aed537eb281256b3ce9d09a09d002b29106029be0b",
+        "state_sha256": "cb0d0d8b23db45caa094cc4c18d146fa8a5043708a553960fcee97f3dd3e40d2"
+      },
+      "observations": {
+        "best_covariance_observation": {
+          "component_covariance_error": 0.9041927624493837,
+          "component_min_eigen_ratio": 0.15461362898349762,
+          "hq": 0.927734375,
+          "mass_tv": 0.057373046875,
+          "modes": 16,
+          "step": 1584
+        },
+        "covariance_bound_passing_observations": 0,
+        "last16_covariance_mean": 2.915329998009838,
+        "last16_covariance_min_max": [
+          0.9041927624493837,
+          16.59699136018753
+        ],
+        "last16_covariance_std": 3.9351752605860066,
+        "last16_min_eigen_bound_failures": 5,
+        "last_five": [
+          {
+            "component_covariance_error": 1.0503898113965988,
+            "component_min_eigen_ratio": 0.13579052686691284,
+            "hq": 0.92138671875,
+            "mass_tv": 0.0498046875,
+            "modes": 16,
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 1.011790469288826,
+            "component_min_eigen_ratio": 0.0873868465423584,
+            "hq": 0.92626953125,
+            "mass_tv": 0.054443359375,
+            "modes": 16,
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 1.0402450021356344,
+            "component_min_eigen_ratio": 0.14451782405376434,
+            "hq": 0.929443359375,
+            "mass_tv": 0.06396484375,
+            "modes": 16,
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 0.9041927624493837,
+            "component_min_eigen_ratio": 0.15461362898349762,
+            "hq": 0.927734375,
+            "mass_tv": 0.057373046875,
+            "modes": 16,
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 1.0839967355132103,
+            "component_min_eigen_ratio": 0.11172255873680115,
+            "hq": 0.92333984375,
+            "mass_tv": 0.068115234375,
+            "modes": 16,
+            "step": 1600
+          }
+        ],
+        "saved_observations": 96
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.009383575843043532,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.030763665775108872,
+          "reconstructed_actual_displacement_l2": 0.08570119670908366,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.08570119670908366,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.021369461443951052,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.008792178338017393,
+          "reconstructed_actual_displacement_l2": 0.12473186338971724,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.12473186338971724,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.013095030280019066,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.04975282530717034,
+          "reconstructed_actual_displacement_l2": 0.14712827693268118,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.14712827693268118,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.005072022722661797
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "ac6ce84e6af72254141fda2d1e8f9d859f9108ef827e386f5591555f4be0e240",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": [
+          0.0,
+          0.99
+        ],
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "component_core_covariance_error": 0.7644101567566395,
+        "component_core_min_eigen_ratio": 0.1091049313545227,
+        "component_covariance_error": 1.0839967355132103,
+        "component_min_eigen_ratio": 0.11172255873680115,
+        "covariance_error": 0.03260950371623039,
+        "hq": 0.92333984375,
+        "mass_tv": 0.068115234375,
+        "max_component_spill": 0.1473684161901474,
+        "mean_error": 0.036143235862255096,
+        "min_hq_mass_ratio": 0.55859375,
+        "min_mass_ratio": 0.63671875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.030337639359891488,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "m110",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "30c6675070d04882ae239235d7f20190",
+      "candidate_id": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "checkpoint": {
+        "artifact_manifest_sha256": "5ca03a5950c1202add012cb870d1f58253c6380f861a2a26b5f27ec5e6b10053",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-m110-v1/30c6675070d04882ae239235d7f20190/provenance",
+        "bytes": 99561,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "295e30713d191525e87e704747960c9164143b89b3ab54b843dab2157574eb99",
+        "state_sha256": "6f62c17cb1d4a21b2e2c8f6b6e82ea520f588db18754f7491191c466f257b015"
+      },
+      "observations": {
+        "best_cdf_observation": {
+          "cdf_ks": 0.04635816253797048,
+          "mean_error_sigma": 0.0031604544128640555,
+          "std_ratio": 1.125569975768434,
+          "step": 709
+        },
+        "endpoint": {
+          "cdf_ks": 0.17968573898055407,
+          "mean_error_sigma": 0.3519866354181431,
+          "std_ratio": 0.9396226196079142,
+          "step": 1000
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.005507949262867835,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.037118508956212604,
+          "reconstructed_actual_displacement_l2": 0.08695067639105548,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.08695067639105548,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.029221448570646995,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.001925991436432974,
+          "reconstructed_actual_displacement_l2": 0.12706474988766844,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.12706474988766844,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.021906542939461232,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.035399505440271366,
+          "reconstructed_actual_displacement_l2": 0.10369246473222687,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.10369246473222687,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.01405152224824356
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "8cade746af218c8c24a1a870175a571f526842a3cb73eebc86497589f4da8b58",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": [
+          0.0,
+          0.99
+        ],
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "cdf_ks": 0.17968573898055407,
+        "finite_fraction": 1.0,
+        "mean": 2.1759933177090716,
+        "mean_error_sigma": 0.3519866354181431,
+        "sample_count": 4096,
+        "std": 0.4698113098039571,
+        "std_ratio": 0.9396226196079142,
+        "step": 1000
+      },
+      "role": "m110",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "3a45cf3eabb64155a1263efabae653e5",
+      "candidate_id": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "checkpoint": {
+        "artifact_manifest_sha256": "d9a482726c3eb3c75dfe70b88528da3d8cb85564087a3a5bae9aebf2b230854c",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-m110-v1/3a45cf3eabb64155a1263efabae653e5/provenance",
+        "bytes": 1952026,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "1a8b0aa42ffb190b7e6740655a1d805ced64c851972bb083f4492a4bae4af999",
+        "state_sha256": "11ac69e96ff14eec54c4df2c3da3d3403788ffd4bf1954f048e44648c812f154"
+      },
+      "fixed_word_panel": {
+        "cohort": "fixed saved prior means and five canonical inputs; no draws or gate scoring",
+        "encoded_pair_distance_min": 0.019504602962530364,
+        "generated_by_saved_row": [
+          "melon_",
+          "grape_",
+          "grape_",
+          "lemon_",
+          "grape_"
+        ],
+        "generated_decoder_logit_max_abs": 419.8972868904526,
+        "generator_parameter_l2": 94.30631173119582,
+        "prior_pair_distance_min": 0.021834064562976856,
+        "reconstructed_by_canonical_input": [
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_"
+        ],
+        "reconstruction_decoder_logit_max_abs": 747.8031415350803,
+        "reconstruction_min_correct_token_probability": 2.199718267210679e-234
+      },
+      "observations": {
+        "endpoint": {
+          "completed_steps": 20001.0,
+          "mass_apple": 0.0,
+          "mass_berry": 0.0,
+          "mass_grape": 0.5908203125,
+          "mass_lemon": 0.1982421875,
+          "mass_melon": 0.2109375,
+          "mass_tv": 0.4017578125,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 3,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "reconstruction_nll": 17.475745289266516,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 20001
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 4.714644946134104e-15,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 1.9947170360744224e-18,
+          "reconstructed_actual_displacement_l2": 2.277921340950541e-14,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 2.277921340950541e-14,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.5560561887092499
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.026140393829180125,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.09188461426188034,
+          "reconstructed_actual_displacement_l2": 0.3771434842244368,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "E",
+          "same_saved_moments_without_max_displacement_l2": 0.3771434842244368,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.0028579168152405043,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps_only_prior_eps_not_consumed",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.04775337517866298,
+          "reconstructed_actual_displacement_l2": 0.005461110802292365,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 5,
+          "rows_with_nonzero_first_moment": 5,
+          "same_saved_moments_without_max_displacement_l2": 0.005461110802292365,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.021615066453035407,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.3050420489353298,
+          "reconstructed_actual_displacement_l2": 0.4580542296796843,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.4580542296796843,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0011327977500292965
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "bf253840a57646998ec6cdf7330a55e110b6401a988b7744c3877dae27c33a49",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": [
+          0.0,
+          0.99
+        ],
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.5908203125,
+        "mass_lemon": 0.1982421875,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.4017578125,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 3,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 17.475745289266516,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "role": "m110",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint": {
+        "artifact_manifest_sha256": "f9a521f2aee07d2b02d8c09310a97dcc931a380260a82fb966b859afc7e0d824",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-momentum-v1/a3991f4b7aeb452cb6a7caa299ad8ff2/provenance",
+        "bytes": 205155,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "960283604848cc26d48e7290f19d993a0aaa55d5ec24572de4decf1440836c42",
+        "state_sha256": "98027ea99ef5cf49553c7ae662c7c92f39e429b279fac1e0292873c34233b892"
+      },
+      "observations": {
+        "best_covariance_observation": {
+          "component_covariance_error": 1.0983507968485355,
+          "component_min_eigen_ratio": 0.11811929941177368,
+          "hq": 0.879150390625,
+          "mass_tv": 0.04931640625,
+          "modes": 16,
+          "step": 1584
+        },
+        "covariance_bound_passing_observations": 0,
+        "last16_covariance_mean": 1.956408881698735,
+        "last16_covariance_min_max": [
+          1.0983507968485355,
+          5.949634425342083
+        ],
+        "last16_covariance_std": 1.3837238424995701,
+        "last16_min_eigen_bound_failures": 4,
+        "last_five": [
+          {
+            "component_covariance_error": 1.293451800942421,
+            "component_min_eigen_ratio": 0.21341702342033386,
+            "hq": 0.91845703125,
+            "mass_tv": 0.043701171875,
+            "modes": 16,
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 1.5955240651965141,
+            "component_min_eigen_ratio": 0.1595274806022644,
+            "hq": 0.8603515625,
+            "mass_tv": 0.0693359375,
+            "modes": 16,
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 1.1453992165625095,
+            "component_min_eigen_ratio": 0.15314063429832458,
+            "hq": 0.85400390625,
+            "mass_tv": 0.04345703125,
+            "modes": 16,
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 1.0983507968485355,
+            "component_min_eigen_ratio": 0.11811929941177368,
+            "hq": 0.879150390625,
+            "mass_tv": 0.04931640625,
+            "modes": 16,
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 1.1855795439332724,
+            "component_min_eigen_ratio": 0.05281096696853638,
+            "hq": 0.9365234375,
+            "mass_tv": 0.0458984375,
+            "modes": 16,
+            "step": 1600
+          }
+        ],
+        "saved_observations": 96
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.004499779231133685,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.012529059674128111,
+          "reconstructed_actual_displacement_l2": 0.050817946457600086,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.050817946457600086,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.01174166709019291,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.004133356266752275,
+          "reconstructed_actual_displacement_l2": 0.0711011722739996,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 256,
+          "same_saved_moments_without_max_displacement_l2": 0.0711011722739996,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.023655581132063806,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.04948444336270039,
+          "reconstructed_actual_displacement_l2": 0.15287720965945975,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.15287720965945975,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0018259281801582471
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "bebe9000befa775f33f43655a7d37607d47cff8062506eedb5014799bb91c8ae",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "component_core_covariance_error": 0.7354972325265408,
+        "component_core_min_eigen_ratio": 0.04970431327819824,
+        "component_covariance_error": 1.1855795439332724,
+        "component_min_eigen_ratio": 0.05281096696853638,
+        "covariance_error": 0.025590907782316208,
+        "hq": 0.9365234375,
+        "mass_tv": 0.0458984375,
+        "max_component_spill": 0.14084507524967194,
+        "mean_error": 0.017026303336024284,
+        "min_hq_mass_ratio": 0.7265625,
+        "min_mass_ratio": 0.7421875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.018213817082522937,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "0dd7a211bb0c482e9930a8cc530be66c",
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint": {
+        "artifact_manifest_sha256": "e5b67e9f8778e5767e6d7369f88c8d39ab7116d79d95725e3295288ad90dbf5b",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-momentum-v1/0dd7a211bb0c482e9930a8cc530be66c/provenance",
+        "bytes": 99497,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "4cc804a0af9037e0c9e4965029ba31cfc448a4d4c8a0d723997c1b37152d3afa",
+        "state_sha256": "6c572cb0ed12fc17e643892e77e6ee996d70e82c25955c995300fd35fa8faec9"
+      },
+      "observations": {
+        "best_cdf_observation": {
+          "cdf_ks": 0.05307762260704918,
+          "mean_error_sigma": 0.060794250486651435,
+          "std_ratio": 0.893275276543427,
+          "step": 1000
+        },
+        "endpoint": {
+          "cdf_ks": 0.05307762260704918,
+          "mean_error_sigma": 0.060794250486651435,
+          "std_ratio": 0.893275276543427,
+          "step": 1000
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.013826002623532948,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.10583572033178353,
+          "reconstructed_actual_displacement_l2": 0.15051629995763044,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.15051629995763044,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.020651642931149544,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.0028392027254516426,
+          "reconstructed_actual_displacement_l2": 0.08756821829296038,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 256,
+          "same_saved_moments_without_max_displacement_l2": 0.08756821829296038,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.018739171300043364,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.04762748708390599,
+          "reconstructed_actual_displacement_l2": 0.0995277889524706,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.0995277889524706,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.00468384074941452
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "df63cae39ab21ff57243f1f28cfa227bcc153a43dcd223ec4213ee8762c6bb03",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "cdf_ks": 0.05307762260704918,
+        "finite_fraction": 1.0,
+        "mean": 1.9696028747566743,
+        "mean_error_sigma": 0.060794250486651435,
+        "sample_count": 4096,
+        "std": 0.4466376382717135,
+        "std_ratio": 0.893275276543427,
+        "step": 1000
+      },
+      "role": "m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "5083750114c24d6c909ea98e81aed972",
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint": {
+        "artifact_manifest_sha256": "87fb1fd18af2efd02cf2524bcee50f202d25f3cc0c883a5631d4af536cef2fbd",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-momentum-v1/5083750114c24d6c909ea98e81aed972/provenance",
+        "bytes": 1952026,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b93fb0615b5f9b6534182abdeec4283a18cb1db2d3cc80d920f3b4c4919ef782",
+        "state_sha256": "4a42dc771e5b47bc4c485467489a2e66f1c1971ccd05bfd9b4031483341a5c52"
+      },
+      "fixed_word_panel": {
+        "cohort": "fixed saved prior means and five canonical inputs; no draws or gate scoring",
+        "encoded_pair_distance_min": 0.014612369454042862,
+        "generated_by_saved_row": [
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_"
+        ],
+        "generated_decoder_logit_max_abs": 905.7329717533352,
+        "generator_parameter_l2": 75.78479560261292,
+        "prior_pair_distance_min": 0.06069947643261093,
+        "reconstructed_by_canonical_input": [
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_"
+        ],
+        "reconstruction_decoder_logit_max_abs": 720.1054203506224,
+        "reconstruction_min_correct_token_probability": 0.0
+      },
+      "observations": {
+        "endpoint": {
+          "completed_steps": 20001.0,
+          "mass_apple": 0.0,
+          "mass_berry": 0.0,
+          "mass_grape": 1.0,
+          "mass_lemon": 0.0,
+          "mass_melon": 0.0,
+          "mass_tv": 0.7999999999999999,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 1,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "reconstruction_nll": 17.499646706754746,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 20001
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 3.0440212808710596e-09,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 7.18141399545452e-13,
+          "reconstructed_actual_displacement_l2": 1.1574717436301503e-08,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 1.1574717436301503e-08,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6006162205141797
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.036379870514269316,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.1112072930260351,
+          "reconstructed_actual_displacement_l2": 0.3938862314684717,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "E",
+          "same_saved_moments_without_max_displacement_l2": 0.3938862314684717,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.010170805408128895,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps_only_prior_eps_not_consumed",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.041721892211504144,
+          "reconstructed_actual_displacement_l2": 0.02028569352013304,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "P",
+          "row_capacity": 5,
+          "rows_with_nonzero_first_moment": 5,
+          "same_saved_moments_without_max_displacement_l2": 0.02028569352013304,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "active_ratio_ge10_fraction": 0.0,
+          "active_ratio_ge2_fraction": 0.0,
+          "actual_displacement_max_abs": 0.02205954672220459,
+          "actual_over_no_max_displacement_l2": 1.0,
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.10039274026991232,
+          "reconstructed_actual_displacement_l2": 0.16352043336180547,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.16352043336180547,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0005208265517376076
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "a3b9e75e004ad43a4d9562a698e4c935a4aa96c066d8a0aa25dba62904c986bb",
+      "recipe_delta_fields": {
+        "amsgrad": false,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 1.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 0.7999999999999999,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 1,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 17.499646706754746,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "role": "m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "4f034971e59c4f62b8ce1444c4f58979",
+      "candidate_id": "r1r2-role-ams-m111-v1",
+      "candidate_revision": "c3dc3788301fe037e93533cf5e9df2462081de57a0e49a87123e3be04dfa28b9",
+      "checkpoint": {
+        "artifact_manifest_sha256": "303a839695b9aea20edc556b0a794c2448089ea1cc44e04bf513e4b0c93fd7a9",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-ams-m111-v1/4f034971e59c4f62b8ce1444c4f58979/provenance",
+        "bytes": 251249,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "bee4abf069fbbb3ef80edf69062efa064544882774c555a431f969d77d307fb8",
+        "state_sha256": "e2c03d4918741e07053c7c8cd59084bf278632d0cb485a6a46ae143f947fc9eb"
+      },
+      "observations": {
+        "best_covariance_observation": {
+          "component_covariance_error": 1.8163024932146072,
+          "component_min_eigen_ratio": 0.13581258058547974,
+          "hq": 0.83544921875,
+          "mass_tv": 0.056884765625,
+          "modes": 16,
+          "step": 1584
+        },
+        "covariance_bound_passing_observations": 0,
+        "last16_covariance_mean": 1.9661265204194933,
+        "last16_covariance_min_max": [
+          1.8163024932146072,
+          2.1576088964939117
+        ],
+        "last16_covariance_std": 0.10294482033473365,
+        "last16_min_eigen_bound_failures": 7,
+        "last_five": [
+          {
+            "component_covariance_error": 1.854804739356041,
+            "component_min_eigen_ratio": 0.1426708698272705,
+            "hq": 0.88037109375,
+            "mass_tv": 0.055908203125,
+            "modes": 16,
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 2.0906861387193203,
+            "component_min_eigen_ratio": 0.1535431444644928,
+            "hq": 0.8662109375,
+            "mass_tv": 0.04638671875,
+            "modes": 16,
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 2.0005598589777946,
+            "component_min_eigen_ratio": 0.14455631375312805,
+            "hq": 0.85693359375,
+            "mass_tv": 0.049560546875,
+            "modes": 16,
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 1.8163024932146072,
+            "component_min_eigen_ratio": 0.13581258058547974,
+            "hq": 0.83544921875,
+            "mass_tv": 0.056884765625,
+            "modes": 16,
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 2.0093866735696793,
+            "component_min_eigen_ratio": 0.17613136768341064,
+            "hq": 0.867431640625,
+            "mass_tv": 0.057373046875,
+            "modes": 16,
+            "step": 1600
+          }
+        ],
+        "saved_observations": 96
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.2521460722860986,
+            3.41543664787976,
+            6.563556838167645,
+            25.45174599352002,
+            696.1136794900501
+          ],
+          "active_ratio_ge10_fraction": 0.2806941431670282,
+          "active_ratio_ge2_fraction": 0.9932754880694143,
+          "actual_displacement_max_abs": 0.004320154037376673,
+          "actual_over_no_max_displacement_l2": 0.18352807885061223,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.05910766024827297,
+          "reconstructed_actual_displacement_l2": 0.06072313727784575,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.2521460722860986,
+            3.41543664787976,
+            6.563556838167645,
+            25.45174599352002,
+            696.1136794900501
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.3308656509572741,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            2.104570294706422,
+            3.7400658478400146,
+            6.957013914517747,
+            25.802028571985364,
+            124.50866371934441
+          ],
+          "active_ratio_ge10_fraction": 0.3193359375,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.01045354230343727,
+          "actual_over_no_max_displacement_l2": 0.19947412657991628,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.011573585407639104,
+          "reconstructed_actual_displacement_l2": 0.03315954987032947,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            2.104570294706422,
+            3.7400658478400146,
+            6.957013914517747,
+            25.802028571985364,
+            124.50866371934441
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 256,
+          "same_saved_moments_without_max_displacement_l2": 0.16623484177555528,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.1911494445110618,
+            4.498733066564317,
+            12.311797372681037,
+            53.94642708956132,
+            361.19643150490344
+          ],
+          "active_ratio_ge10_fraction": 0.5810920945395273,
+          "active_ratio_ge2_fraction": 0.9924612876935616,
+          "actual_displacement_max_abs": 0.008413284779141255,
+          "actual_over_no_max_displacement_l2": 0.1601108813693114,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.07318814753649253,
+          "reconstructed_actual_displacement_l2": 0.0503940949905834,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            4.49901525716708,
+            12.396577129765518,
+            54.73055878236716,
+            2807.94028980363
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.3147449727313942,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.00426049908703591
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "816d6b3a8174117a607e45571551d68a155c7c1ab820ed916cd6315600099cc7",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "component_core_covariance_error": 1.1335882358253002,
+        "component_core_min_eigen_ratio": 0.14457648992538452,
+        "component_covariance_error": 2.0093866735696793,
+        "component_min_eigen_ratio": 0.17613136768341064,
+        "covariance_error": 0.05628827586770058,
+        "hq": 0.867431640625,
+        "mass_tv": 0.057373046875,
+        "max_component_spill": 0.21671827137470245,
+        "mean_error": 0.045272842049598694,
+        "min_hq_mass_ratio": 0.65234375,
+        "min_mass_ratio": 0.76953125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03697384522662921,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "ams_m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "31a6cec01f6e4c398c35b57c329d19d7",
+      "candidate_id": "r1r2-role-ams-m111-v1",
+      "candidate_revision": "c3dc3788301fe037e93533cf5e9df2462081de57a0e49a87123e3be04dfa28b9",
+      "checkpoint": {
+        "artifact_manifest_sha256": "1e4ccc87c1f30940b593444a0e258b9451fc15748d18a5f76e0a79e2c7f854c1",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-ams-m111-v1/31a6cec01f6e4c398c35b57c329d19d7/provenance",
+        "bytes": 115256,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "6297f89fae64aee47edb22a8a1352dc03c911410b30c04d8a885b578aba73559",
+        "state_sha256": "208cc9179a39cc45155340216d9fc9e44119f1963d1f1dafa8a3f3549de66cde"
+      },
+      "observations": {
+        "best_cdf_observation": {
+          "cdf_ks": 0.02967587570662744,
+          "mean_error_sigma": 0.0213192715018522,
+          "std_ratio": 0.9997946626658988,
+          "step": 1000
+        },
+        "endpoint": {
+          "cdf_ks": 0.02967587570662744,
+          "mean_error_sigma": 0.0213192715018522,
+          "std_ratio": 0.9997946626658988,
+          "step": 1000
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            4.210576902064056,
+            11.78633725261186,
+            22.711720468506567,
+            51.7233062180065,
+            114.7079463487494
+          ],
+          "active_ratio_ge10_fraction": 0.9392405063291139,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.0013620605940094668,
+          "actual_over_no_max_displacement_l2": 0.05067094893991408,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.03413204067479304,
+          "reconstructed_actual_displacement_l2": 0.016530124255507688,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            4.210576902064056,
+            11.78633725261186,
+            22.711720468506567,
+            51.7233062180065,
+            114.7079463487494
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.32622488035716896,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.7962669513610827,
+            5.169361903375361,
+            11.971469466537634,
+            20.7518539057332,
+            45.65559564461522
+          ],
+          "active_ratio_ge10_fraction": 0.6171875,
+          "active_ratio_ge2_fraction": 0.99609375,
+          "actual_displacement_max_abs": 0.005339995330436441,
+          "actual_over_no_max_displacement_l2": 0.12219595457719742,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.0008338216406308066,
+          "reconstructed_actual_displacement_l2": 0.0148245687495652,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.7962669513610827,
+            5.169361903375361,
+            11.971469466537634,
+            20.7518539057332,
+            45.65559564461522
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 256,
+          "same_saved_moments_without_max_displacement_l2": 0.12131799944489785,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.2586291126106446,
+            9.532564493869451,
+            27.39472777728227,
+            61.57911510899931,
+            114.10281070089434
+          ],
+          "active_ratio_ge10_fraction": 0.8873015873015873,
+          "active_ratio_ge2_fraction": 0.9976190476190476,
+          "actual_displacement_max_abs": 0.006397174227296186,
+          "actual_over_no_max_displacement_l2": 0.08890356580470798,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.024467612662049363,
+          "reconstructed_actual_displacement_l2": 0.012021538436778077,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            9.533401954677837,
+            27.671378957720734,
+            64.00057506638572,
+            148.27020930603956
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.13521998052570197,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.01639344262295082
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "058a731bab62c395f542903a834e2d5b66b7dbf132f3e3e1b1ca3867d248a310",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "PASS",
+      "recorded_metrics": {
+        "cdf_ks": 0.02967587570662744,
+        "finite_fraction": 1.0,
+        "mean": 2.010659635750926,
+        "mean_error_sigma": 0.0213192715018522,
+        "sample_count": 4096,
+        "std": 0.4998973313329494,
+        "std_ratio": 0.9997946626658988,
+        "step": 1000
+      },
+      "role": "ams_m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "118b25d36cb74ce9b17cd146ae43b6dc",
+      "candidate_id": "r1r2-role-ams-m111-v1",
+      "candidate_revision": "c3dc3788301fe037e93533cf5e9df2462081de57a0e49a87123e3be04dfa28b9",
+      "checkpoint": {
+        "artifact_manifest_sha256": "1cfb3e87516467cc333f585d67acfcc78afe584d6ee983fcc7c5c9ca1e335873",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-ams-m111-v1/118b25d36cb74ce9b17cd146ae43b6dc/provenance",
+        "bytes": 2505567,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "b3829e8d22235074ecce0a82cabcf5e48c918fc03795f714dbabc03bde66ecb2",
+        "state_sha256": "8ba038567919ab41fda610d7ae342450a3fce32b464566a8f38bec3655555b8a"
+      },
+      "fixed_word_panel": {
+        "cohort": "fixed saved prior means and five canonical inputs; no draws or gate scoring",
+        "encoded_pair_distance_min": 0.6637588714740343,
+        "generated_by_saved_row": [
+          "berry_",
+          "apple_",
+          "lemon_",
+          "grape_",
+          "melon_"
+        ],
+        "generated_decoder_logit_max_abs": 31.71173320562509,
+        "generator_parameter_l2": 20.58984042794641,
+        "prior_pair_distance_min": 0.6930399224157021,
+        "reconstructed_by_canonical_input": [
+          "apple_",
+          "grape_",
+          "lemon_",
+          "melon_",
+          "berry_"
+        ],
+        "reconstruction_decoder_logit_max_abs": 30.76924269494451,
+        "reconstruction_min_correct_token_probability": 0.9989004020179753
+      },
+      "observations": {
+        "endpoint": {
+          "completed_steps": 20001.0,
+          "mass_apple": 0.1953125,
+          "mass_berry": 0.2109375,
+          "mass_grape": 0.1982421875,
+          "mass_lemon": 0.1875,
+          "mass_melon": 0.2080078125,
+          "mass_tv": 0.018945312500000006,
+          "minimum_reconstruction_token_probability": 0.998900294303894,
+          "modes": 5,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "reconstruction_nll": 0.00033955280575471286,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 20001
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            285.0925953296806,
+            1956.1108832907785,
+            7854.358442926708,
+            31528.474050968547,
+            781248.2726305728
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 5.0910801334956905e-06,
+          "actual_over_no_max_displacement_l2": 0.00012614644713476817,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 7.820253506383387e-06,
+          "reconstructed_actual_displacement_l2": 4.2566227038036306e-05,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            285.0925953296806,
+            1956.1108832907785,
+            7854.358442926708,
+            31528.474050968547,
+            781248.2726305728
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.337435005145732,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            26.480260987564524,
+            173.6441998667553,
+            907.6476099163872,
+            5444.8783906840845,
+            80881.21103998585
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.0004305711452060955,
+          "actual_over_no_max_displacement_l2": 0.004865270902381804,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.0023171354214322434,
+          "reconstructed_actual_displacement_l2": 0.0035901873644862436,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            2102.6323317699134,
+            80881.21103998585
+          ],
+          "role": "E",
+          "same_saved_moments_without_max_displacement_l2": 0.7379213689269922,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            83.17914492845455,
+            88.70262003442294,
+            158.14851889163498,
+            177.74040642916123,
+            180.23565234749543
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.00013734333063805703,
+          "actual_over_no_max_displacement_l2": 0.009165068018181245,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "eps_only_prior_eps_not_consumed",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.0006862302997326929,
+          "reconstructed_actual_displacement_l2": 0.00022664802765290671,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            83.17914492845455,
+            88.70262003442294,
+            158.14851889163498,
+            177.74040642916123,
+            180.23565234749543
+          ],
+          "role": "P",
+          "row_capacity": 5,
+          "rows_with_nonzero_first_moment": 5,
+          "same_saved_moments_without_max_displacement_l2": 0.024729552165165897,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.2623987837818298,
+            106.19859139294243,
+            1567.7589310754665,
+            9064.115530309475,
+            44887.09870458516
+          ],
+          "active_ratio_ge10_fraction": 0.9965699380502119,
+          "active_ratio_ge2_fraction": 0.9999347896967721,
+          "actual_displacement_max_abs": 0.0036071147501485295,
+          "actual_over_no_max_displacement_l2": 0.017460259214079003,
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "EMA; actual last raw gradient unavailable",
+          "first_moment_l2": 0.0116237518067575,
+          "reconstructed_actual_displacement_l2": 0.021953983080883407,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            106.352557795358,
+            1574.793535019297,
+            9121.072086689039,
+            529825.2356789616
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 1.2573686800240005,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0016406036379734638
+        }
+      ],
+      "publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+      "raw_result_sha256": "7df88c03e375bdd442b236ae03e461d0cec9d25de0fc8353e69b248cd3ce601c",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "PASS",
+      "recorded_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1953125,
+        "mass_berry": 0.2109375,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.1875,
+        "mass_melon": 0.2080078125,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.998900294303894,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.00033955280575471286,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "role": "ams_m111",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "1dda7bf5c88942368359f1ac207e9e93",
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "checkpoint": {
+        "artifact_manifest_sha256": "48888e4d1608aebc198a319bc0954b8fb9b62ec1ffc0577f41bfa929e44393c6",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-optimizer-v1/1dda7bf5c88942368359f1ac207e9e93/provenance",
+        "bytes": 251249,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "15adb31a4972fbd04e829805c2229f704a304b3e799c60b791e6844de42365d7",
+        "state_sha256": "47811b862dea5f723caad63f3f56a5b9e8a49e45e994b4d63a675fab794ff8ec"
+      },
+      "observations": {
+        "best_covariance_observation": {
+          "component_covariance_error": 2.416892658919096,
+          "component_min_eigen_ratio": 0.36500224471092224,
+          "hq": 0.830322265625,
+          "mass_tv": 0.045654296875,
+          "modes": 16,
+          "step": 1434
+        },
+        "covariance_bound_passing_observations": 0,
+        "last16_covariance_mean": 2.7434073933400214,
+        "last16_covariance_min_max": [
+          2.416892658919096,
+          3.211472574621439
+        ],
+        "last16_covariance_std": 0.2217596064500298,
+        "last16_min_eigen_bound_failures": 0,
+        "last_five": [
+          {
+            "component_covariance_error": 2.6851130574941635,
+            "component_min_eigen_ratio": 0.2776915431022644,
+            "hq": 0.815673828125,
+            "mass_tv": 0.04541015625,
+            "modes": 16,
+            "step": 1534
+          },
+          {
+            "component_covariance_error": 2.839506819844246,
+            "component_min_eigen_ratio": 0.2839549481868744,
+            "hq": 0.834228515625,
+            "mass_tv": 0.052978515625,
+            "modes": 16,
+            "step": 1550
+          },
+          {
+            "component_covariance_error": 2.575385196134448,
+            "component_min_eigen_ratio": 0.29259371757507324,
+            "hq": 0.84521484375,
+            "mass_tv": 0.048583984375,
+            "modes": 16,
+            "step": 1567
+          },
+          {
+            "component_covariance_error": 2.8215868417173624,
+            "component_min_eigen_ratio": 0.22064119577407837,
+            "hq": 0.79296875,
+            "mass_tv": 0.051025390625,
+            "modes": 16,
+            "step": 1584
+          },
+          {
+            "component_covariance_error": 2.96042443998158,
+            "component_min_eigen_ratio": 0.31060314178466797,
+            "hq": 0.83935546875,
+            "mass_tv": 0.05322265625,
+            "modes": 16,
+            "step": 1600
+          }
+        ],
+        "saved_observations": 96
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.1882694738785307,
+            3.5840613139002824,
+            7.7125304448478325,
+            29.102625829328844,
+            539.554428511764
+          ],
+          "active_ratio_ge10_fraction": 0.3776572668112798,
+          "active_ratio_ge2_fraction": 0.9924078091106291,
+          "actual_displacement_max_abs": 0.010449079175124745,
+          "actual_over_no_max_displacement_l2": 0.17342346023148852,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.07379073736390576,
+          "reconstructed_actual_displacement_l2": 0.07282548215195893,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.1882694738785307,
+            3.5840613139002824,
+            7.7125304448478325,
+            29.102625829328844,
+            539.554428511764
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.41992866509957916,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.6213654025765718,
+            3.086582904172814,
+            7.076802475799974,
+            28.583585692573898,
+            64.11018900001214
+          ],
+          "active_ratio_ge10_fraction": 0.36428571428571427,
+          "active_ratio_ge2_fraction": 0.9976190476190476,
+          "actual_displacement_max_abs": 0.011465793945800854,
+          "actual_over_no_max_displacement_l2": 0.2021675060747642,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.020721746655875506,
+          "reconstructed_actual_displacement_l2": 0.04683081044487192,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.6213654025765718,
+            3.100089075524443,
+            7.685740488540848,
+            27.43672542166634,
+            86.07085588285524
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.23164360759118863,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            1.041339817459604,
+            3.529452502650678,
+            9.910109988537304,
+            63.02126017214404,
+            580.12947629847
+          ],
+          "active_ratio_ge10_fraction": 0.49663882664493786,
+          "active_ratio_ge2_fraction": 0.976981055204726,
+          "actual_displacement_max_abs": 0.015894586041056105,
+          "actual_over_no_max_displacement_l2": 0.18634334798646385,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.17934167821760805,
+          "reconstructed_actual_displacement_l2": 0.11336885782920314,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            3.529452502650678,
+            9.965577941941735,
+            64.17915871541022,
+            2782.062591366215
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.6083869322635459,
+          "steps_min_max": [
+            1600,
+            1600
+          ],
+          "zero_first_moment_fraction": 0.004057618178129438
+        }
+      ],
+      "publication_sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+      "raw_result_sha256": "4c6e8db621874bf0197e562eecfc90411cb7d8068f44f94285588b62b7eba8e5",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "FAIL",
+      "recorded_metrics": {
+        "component_core_covariance_error": 1.214333850890398,
+        "component_core_min_eigen_ratio": 0.24788138270378113,
+        "component_covariance_error": 2.96042443998158,
+        "component_min_eigen_ratio": 0.31060314178466797,
+        "covariance_error": 0.03349290043115616,
+        "hq": 0.83935546875,
+        "mass_tv": 0.05322265625,
+        "max_component_spill": 0.2454545497894287,
+        "mean_error": 0.0520535409450531,
+        "min_hq_mass_ratio": 0.6484375,
+        "min_mass_ratio": 0.78125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.037692299798565754,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "ams_m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "8abfbcd5b406492bb8a4c3169ba2232a",
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "checkpoint": {
+        "artifact_manifest_sha256": "455070546d787a20b7bdd5024902fc15fa9f522b5cb99e0390e1e3af049a35aa",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-optimizer-v1/8abfbcd5b406492bb8a4c3169ba2232a/provenance",
+        "bytes": 115256,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "190dbd1fcd4c7d9b4dbe46cf493a3eb8bd406c2606af7ff45a62717fca9dc573",
+        "state_sha256": "a9b88580f998e7335652cfffbae354872e3f6b60b245db281a70922e581838fc"
+      },
+      "observations": {
+        "best_cdf_observation": {
+          "cdf_ks": 0.026274016980286585,
+          "mean_error_sigma": 0.015249369462253526,
+          "std_ratio": 1.0505820185176244,
+          "step": 125
+        },
+        "endpoint": {
+          "cdf_ks": 0.12690590088189613,
+          "mean_error_sigma": 0.32929610926657915,
+          "std_ratio": 0.9899013098324158,
+          "step": 1000
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            3.684225336931297,
+            13.2663194999639,
+            21.820490321925618,
+            34.92301415211245,
+            87.51242907136641
+          ],
+          "active_ratio_ge10_fraction": 0.9561181434599156,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.0024982339443654624,
+          "actual_over_no_max_displacement_l2": 0.05758170699364036,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.004546842350741046,
+          "reconstructed_actual_displacement_l2": 0.015147242897054295,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            3.684225336931297,
+            13.2663194999639,
+            21.820490321925618,
+            34.92301415211245,
+            87.51242907136641
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.26305651026856913,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            2.9745942893125186,
+            5.5046071116086495,
+            14.273751268590683,
+            31.27828361248297,
+            68.78061690530899
+          ],
+          "active_ratio_ge10_fraction": 0.6761904761904762,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.007734861074483348,
+          "actual_over_no_max_displacement_l2": 0.10484585292370227,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "prior_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.0006709587022424361,
+          "reconstructed_actual_displacement_l2": 0.02065299916243579,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            2.6928219916872957,
+            4.996523087561263,
+            14.383188859903271,
+            33.60735944894308,
+            78.25449062644233
+          ],
+          "role": "P",
+          "row_capacity": 256,
+          "rows_with_nonzero_first_moment": 105,
+          "same_saved_moments_without_max_displacement_l2": 0.19698441651731569,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            2.995481028729813,
+            8.398732736828952,
+            20.09975151094028,
+            66.20776524532046,
+            125.30509095783684
+          ],
+          "active_ratio_ge10_fraction": 0.8143426294820717,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.006456555992856063,
+          "actual_over_no_max_displacement_l2": 0.06980626142605044,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.015189363403663779,
+          "reconstructed_actual_displacement_l2": 0.026274778802913425,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            8.375218456980628,
+            20.529399105929993,
+            70.41024971751376,
+            149.84332055840864
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 0.37639573107274515,
+          "steps_min_max": [
+            1000,
+            1000
+          ],
+          "zero_first_moment_fraction": 0.02029664324746292
+        }
+      ],
+      "publication_sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+      "raw_result_sha256": "7cdb46d6ebccfc31cd8498b05d207b5df65ddf466185acaddb7a4fa2918b8b60",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "PASS",
+      "recorded_metrics": {
+        "cdf_ks": 0.12690590088189613,
+        "finite_fraction": 1.0,
+        "mean": 1.8353519453667104,
+        "mean_error_sigma": 0.32929610926657915,
+        "sample_count": 4096,
+        "std": 0.4949506549162079,
+        "std_ratio": 0.9899013098324158,
+        "step": 1000
+      },
+      "role": "ams_m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "4cbb7955142a4050a47bdcd044f2d335",
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "checkpoint": {
+        "artifact_manifest_sha256": "4f6e799d3ab807b01133885e3090444081f101ac9ff536523dc2e78f4e76b12b",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-optimizer-v1/4cbb7955142a4050a47bdcd044f2d335/provenance",
+        "bytes": 2505567,
+        "completed_steps": 20001,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "dc8a90c51c32b9579e28d5b45960190533e13c59441de3e539caa1e76a90b7d4",
+        "state_sha256": "8cd4bd61bbd61aa986c61b9c5e9acad350d842ed9eed1e975e43ed83934824e1"
+      },
+      "fixed_word_panel": {
+        "cohort": "fixed saved prior means and five canonical inputs; no draws or gate scoring",
+        "encoded_pair_distance_min": 0.9091084262340938,
+        "generated_by_saved_row": [
+          "lemon_",
+          "apple_",
+          "melon_",
+          "grape_",
+          "berry_"
+        ],
+        "generated_decoder_logit_max_abs": 41.50536445551303,
+        "generator_parameter_l2": 25.228924770494498,
+        "prior_pair_distance_min": 0.9258950996891153,
+        "reconstructed_by_canonical_input": [
+          "apple_",
+          "grape_",
+          "lemon_",
+          "melon_",
+          "berry_"
+        ],
+        "reconstruction_decoder_logit_max_abs": 40.2169080953313,
+        "reconstruction_min_correct_token_probability": 0.997843830609771
+      },
+      "observations": {
+        "endpoint": {
+          "completed_steps": 20001.0,
+          "mass_apple": 0.1953125,
+          "mass_berry": 0.2080078125,
+          "mass_grape": 0.1982421875,
+          "mass_lemon": 0.2109375,
+          "mass_melon": 0.1875,
+          "mass_tv": 0.018945312500000006,
+          "minimum_reconstruction_token_probability": 0.9978437423706055,
+          "modes": 5,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 0.0,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "reconstruction_nll": 0.00033268185973860294,
+          "sample_count": 1024,
+          "served_averaged": 0.0,
+          "step": 20001
+        },
+        "saved_observations": 24
+      },
+      "optimizer_roles": [
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            212.72128882757391,
+            1858.7537945176005,
+            9886.54568810745,
+            53590.71511516273,
+            1716737.1293679867
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 1.6225398892602978e-05,
+          "actual_over_no_max_displacement_l2": 0.0001715806143709776,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 1.3740495489747304e-05,
+          "reconstructed_actual_displacement_l2": 0.00011710425767096285,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            212.72128882757391,
+            1858.7537945176005,
+            9886.54568810745,
+            53590.71511516273,
+            1716737.1293679867
+          ],
+          "role": "G",
+          "same_saved_moments_without_max_displacement_l2": 0.6825028462584333,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            26.193055990817843,
+            237.95166877482126,
+            1194.061423768278,
+            7007.170656785233,
+            49826.30620278933
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.00023624742746824069,
+          "actual_over_no_max_displacement_l2": 0.002890038582648867,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.00041632957817989156,
+          "reconstructed_actual_displacement_l2": 0.0022292973842107716,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            2788.6298234221513,
+            49826.30620278933
+          ],
+          "role": "E",
+          "same_saved_moments_without_max_displacement_l2": 0.7713728797930122,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            306.0796429303229,
+            454.36335273743583,
+            1294.2380572200684,
+            2056.38602293331,
+            2544.986279876972
+          ],
+          "active_ratio_ge10_fraction": 1.0,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 3.6128463082811684e-05,
+          "actual_over_no_max_displacement_l2": 0.001481444467918456,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "eps_only_prior_eps_not_consumed",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.0001379046811988175,
+          "reconstructed_actual_displacement_l2": 4.418171044209062e-05,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            306.0796429303229,
+            454.36335273743583,
+            1294.2380572200684,
+            2056.38602293331,
+            2544.986279876972
+          ],
+          "role": "P",
+          "row_capacity": 5,
+          "rows_with_nonzero_first_moment": 5,
+          "same_saved_moments_without_max_displacement_l2": 0.029823399660852176,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "active_denominator_ratio_min_p10_median_p90_max": [
+            2.922926871968542,
+            117.1640765353729,
+            3028.3101145893224,
+            13849.311186378174,
+            134208.96422895498
+          ],
+          "active_ratio_ge10_fraction": 0.9978740886622409,
+          "active_ratio_ge2_fraction": 1.0,
+          "actual_displacement_max_abs": 0.0037336343964884016,
+          "actual_over_no_max_displacement_l2": 0.011716729119773544,
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "epsilon_binding": "d_eps_or_eps",
+          "first_moment_kind": "actual last gradient",
+          "first_moment_l2": 0.015165321856293332,
+          "reconstructed_actual_displacement_l2": 0.020600748538043678,
+          "retained_over_current_denominator_min_p10_median_p90_max": [
+            1.0,
+            117.46198284268397,
+            3039.7702304947265,
+            13921.124181221683,
+            727299.494983583
+          ],
+          "role": "D",
+          "same_saved_moments_without_max_displacement_l2": 1.7582337465903488,
+          "steps_min_max": [
+            20001,
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0016666449655603442
+        }
+      ],
+      "publication_sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+      "raw_result_sha256": "eeae2d057634c228f794c645cdac8b26318f46ccc8a580c56d6d5fb7958756ad",
+      "recipe_delta_fields": {
+        "amsgrad": true,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "lr": 0.0085,
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_reg": 0.0,
+        "prior_update": null,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1
+      },
+      "recorded_gate_status": "PASS",
+      "recorded_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1953125,
+        "mass_berry": 0.2080078125,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.2109375,
+        "mass_melon": 0.1875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9978437423706055,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.00033268185973860294,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "role": "ams_m000",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "verified_public_source_files": {
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "optimizer_family adam to dualnorm or dualnorm_D_only; full law explicitly changes sampled learned-prior updates"
+  ],
+  "conclusion": "No complete repair; both new spectral recipes fail Ring16 and words. Detailed metrics remain in the source-bound report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "A singular-value update constraint repairs original whole Tier1 density and acquisition.",
+  "lifecycle": "concluded",
+  "mechanism_class": "spectral_optimizer_law",
+  "next_action": "Close this comparison, preserve failures; separately test supported quantile-force and optimizer-memory hypotheses under unchanged tasks.",
+  "provenance": {
+    "report": "reports/forge/r1r2-spectral-repair/README.md",
+    "source_commit": "220d37827e910c4f39c0d1c7afb1f337627c53ab",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-spectral-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-spectral-repair/publication/results.json",
+    "sha256": "72ff8796f9a440e12f722bd28230cebc3f204810d31488cf16adababe27970c7"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

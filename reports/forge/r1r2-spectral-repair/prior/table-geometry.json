@@ -1,0 +1,1807 @@
+{
+  "crossed_saved_state_jacobian_diagnostics": [
+    {
+      "generator_endpoint": "m000",
+      "mapped_centers_outside_target_3sigma": 3,
+      "mean_jacobian_frobenius_squared": 3.163458444980187,
+      "table_endpoint": "m000"
+    },
+    {
+      "generator_endpoint": "m000",
+      "mapped_centers_outside_target_3sigma": 194,
+      "mean_jacobian_frobenius_squared": 4.777461438338671,
+      "table_endpoint": "m110"
+    },
+    {
+      "generator_endpoint": "m000",
+      "mapped_centers_outside_target_3sigma": 199,
+      "mean_jacobian_frobenius_squared": 4.309227253290246,
+      "table_endpoint": "spectral"
+    },
+    {
+      "generator_endpoint": "m000",
+      "mapped_centers_outside_target_3sigma": 181,
+      "mean_jacobian_frobenius_squared": 4.791942604261081,
+      "table_endpoint": "critic_spectral"
+    },
+    {
+      "generator_endpoint": "m110",
+      "mapped_centers_outside_target_3sigma": 185,
+      "mean_jacobian_frobenius_squared": 4.776680561388831,
+      "table_endpoint": "m000"
+    },
+    {
+      "generator_endpoint": "m110",
+      "mapped_centers_outside_target_3sigma": 1,
+      "mean_jacobian_frobenius_squared": 1.9881130771126663,
+      "table_endpoint": "m110"
+    },
+    {
+      "generator_endpoint": "m110",
+      "mapped_centers_outside_target_3sigma": 185,
+      "mean_jacobian_frobenius_squared": 4.72840514334052,
+      "table_endpoint": "spectral"
+    },
+    {
+      "generator_endpoint": "m110",
+      "mapped_centers_outside_target_3sigma": 187,
+      "mean_jacobian_frobenius_squared": 5.253733002542924,
+      "table_endpoint": "critic_spectral"
+    },
+    {
+      "generator_endpoint": "spectral",
+      "mapped_centers_outside_target_3sigma": 162,
+      "mean_jacobian_frobenius_squared": 3.8444540318766838,
+      "table_endpoint": "m000"
+    },
+    {
+      "generator_endpoint": "spectral",
+      "mapped_centers_outside_target_3sigma": 159,
+      "mean_jacobian_frobenius_squared": 4.04631936297546,
+      "table_endpoint": "m110"
+    },
+    {
+      "generator_endpoint": "spectral",
+      "mapped_centers_outside_target_3sigma": 0,
+      "mean_jacobian_frobenius_squared": 2.355675796012149,
+      "table_endpoint": "spectral"
+    },
+    {
+      "generator_endpoint": "spectral",
+      "mapped_centers_outside_target_3sigma": 160,
+      "mean_jacobian_frobenius_squared": 4.3695827684268576,
+      "table_endpoint": "critic_spectral"
+    },
+    {
+      "generator_endpoint": "critic_spectral",
+      "mapped_centers_outside_target_3sigma": 192,
+      "mean_jacobian_frobenius_squared": 4.817432424943079,
+      "table_endpoint": "m000"
+    },
+    {
+      "generator_endpoint": "critic_spectral",
+      "mapped_centers_outside_target_3sigma": 190,
+      "mean_jacobian_frobenius_squared": 5.182366308580615,
+      "table_endpoint": "m110"
+    },
+    {
+      "generator_endpoint": "critic_spectral",
+      "mapped_centers_outside_target_3sigma": 186,
+      "mean_jacobian_frobenius_squared": 4.706260516025036,
+      "table_endpoint": "spectral"
+    },
+    {
+      "generator_endpoint": "critic_spectral",
+      "mapped_centers_outside_target_3sigma": 13,
+      "mean_jacobian_frobenius_squared": 2.403674100641467,
+      "table_endpoint": "critic_spectral"
+    }
+  ],
+  "fixed_prior_component_sigma": 0.1,
+  "gate_helper_sha256": "82db99554cabc14c42ba564af6a0855af68193e650e279935de2473e2d774387",
+  "gradient_calls": 0,
+  "limitations": [
+    "Initial table values are unavailable; endpoint spread differences are not measured per-run expansion from initialization.",
+    "Local noise covariance is first-order at each saved row, not an exact finite-noise variance decomposition.",
+    "Saved sample row identities are unavailable; row weights and nearest-mode assignments need not match empirical sample weights.",
+    "Crossed saved G/table evaluations are functional diagnostics of untrained combinations, not qualified model samples or gate results.",
+    "Endpoint differences mix trained feedback trajectories; they cannot identify a unique causal prior policy."
+  ],
+  "models_constructed": 0,
+  "optimizer_updates": 0,
+  "python_rng_unchanged": true,
+  "reproducer_sha256": "09fb21efdd6476aae46c8ac2801f2fb6193291b44f0fc9ea961f9c9b0fd4051e",
+  "results": [
+    {
+      "actual_initial_prior_receipt": {
+        "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90",
+      "artifact_sha256": {
+        "graded-result.json": "185d4675c84b82a17749698f3388fe33f55817f645d3a6edf46bd1871e52c66c",
+        "observed-samples.pt": "6bc86f8e240d6f1898612f94681c1dcd5a2dbd42b125e8887a5b73607dbb89ea",
+        "provenance/provenance-state.pt": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+        "request.json": "4ad5f1b7149534e02494564354aef38e9137480dc6f15453c488a07674b11173"
+      },
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "component_unweighted": {
+        "latent_within_component_trace": {
+          "count": 16,
+          "max": 2.618557069075273,
+          "mean": 1.8358008193991584,
+          "min": 0.9483077893766405
+        },
+        "linear_proxy_residual_radial_variance_ratio": {
+          "count": 16,
+          "max": 3.903940680233376,
+          "mean": 0.21202426204598432,
+          "min": -1.056029720515017
+        },
+        "linear_proxy_residual_tangent_variance_ratio": {
+          "count": 16,
+          "max": 1.1183592647795928,
+          "mean": 0.22325931719683909,
+          "min": -0.4917210987668139
+        },
+        "local_noise_radial_variance_ratio": {
+          "count": 16,
+          "max": 1.0888809998252889,
+          "mean": 0.8530480526953313,
+          "min": 0.26342165065701373
+        },
+        "local_noise_tangent_variance_ratio": {
+          "count": 16,
+          "max": 3.8865426668038006,
+          "mean": 2.3345884815589226,
+          "min": 0.7499648805717237
+        },
+        "mapped_center_radial_variance_ratio": {
+          "count": 16,
+          "max": 11.550688580864602,
+          "mean": 1.1494647602783874,
+          "min": 0.11755866277219212
+        },
+        "mapped_center_tangent_variance_ratio": {
+          "count": 16,
+          "max": 4.017678799775213,
+          "mean": 0.7484769959725743,
+          "min": 0.05609178711240146
+        },
+        "noise_only_linear_proxy_covariance_error": {
+          "count": 16,
+          "max": 2.0435751567375267,
+          "mean": 1.0179161201768077,
+          "min": 0.33666634837389575
+        },
+        "noise_only_linear_proxy_min_eigen_ratio": {
+          "count": 16,
+          "max": 1.0675268286299704,
+          "mean": 0.8288279023035688,
+          "min": 0.26292845223555716
+        },
+        "observed_radial_variance_ratio": {
+          "count": 16,
+          "max": 16.484553079747737,
+          "mean": 2.2145370750197033,
+          "min": 0.43481558356709166
+        },
+        "observed_tangent_variance_ratio": {
+          "count": 16,
+          "max": 6.466722560549264,
+          "mean": 3.306324794728336,
+          "min": 1.2897345870787278
+        }
+      },
+      "components": [
+        {
+          "component": 0,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.500990351113022,
+          "linear_proxy_residual_radial_variance_ratio": 0.0004227578393751763,
+          "linear_proxy_residual_tangent_variance_ratio": 1.1183592647795928,
+          "local_noise_radial_variance_ratio": 0.5279289801631175,
+          "local_noise_tangent_variance_ratio": 2.965607335400014,
+          "mapped_center_radial_variance_ratio": 0.21684941230966423,
+          "mapped_center_tangent_variance_ratio": 0.6536430565480245,
+          "noise_only_linear_proxy_covariance_error": 1.4585190408784694,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.49392534596175186,
+          "observed_radial_variance_ratio": 0.745201150312157,
+          "observed_tangent_variance_ratio": 4.737609656727631,
+          "rows": 16,
+          "samples": 262
+        },
+        {
+          "component": 1,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.118983329656417,
+          "linear_proxy_residual_radial_variance_ratio": 0.04728870637199811,
+          "linear_proxy_residual_tangent_variance_ratio": 0.46242960829152335,
+          "local_noise_radial_variance_ratio": 0.26342165065701373,
+          "local_noise_tangent_variance_ratio": 1.9331683849525383,
+          "mapped_center_radial_variance_ratio": 0.12410522653807979,
+          "mapped_center_tangent_variance_ratio": 0.26928702372585916,
+          "noise_only_linear_proxy_covariance_error": 0.8411297220976993,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.26292845223555716,
+          "observed_radial_variance_ratio": 0.43481558356709166,
+          "observed_tangent_variance_ratio": 2.664885016969921,
+          "rows": 17,
+          "samples": 297
+        },
+        {
+          "component": 2,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.8604989880774006,
+          "linear_proxy_residual_radial_variance_ratio": -0.021293279652368102,
+          "linear_proxy_residual_tangent_variance_ratio": 0.4836779193946027,
+          "local_noise_radial_variance_ratio": 0.4232589677055004,
+          "local_noise_tangent_variance_ratio": 0.7499648805717237,
+          "mapped_center_radial_variance_ratio": 0.12323955242020028,
+          "mapped_center_tangent_variance_ratio": 0.05609178711240146,
+          "noise_only_linear_proxy_covariance_error": 0.4932304038261908,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.31756447480268796,
+          "observed_radial_variance_ratio": 0.5252052404733326,
+          "observed_tangent_variance_ratio": 1.2897345870787278,
+          "rows": 16,
+          "samples": 228
+        },
+        {
+          "component": 3,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.1236720018789663,
+          "linear_proxy_residual_radial_variance_ratio": 0.16811740000141395,
+          "linear_proxy_residual_tangent_variance_ratio": 0.13088928974176195,
+          "local_noise_radial_variance_ratio": 0.5611615093125298,
+          "local_noise_tangent_variance_ratio": 2.077659683733354,
+          "mapped_center_radial_variance_ratio": 0.15941248906774294,
+          "mapped_center_tangent_variance_ratio": 0.26829729800205493,
+          "noise_only_linear_proxy_covariance_error": 0.8243364305465907,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5594715058353046,
+          "observed_radial_variance_ratio": 0.8886913983816868,
+          "observed_tangent_variance_ratio": 2.476846271477171,
+          "rows": 16,
+          "samples": 256
+        },
+        {
+          "component": 4,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.618557069075273,
+          "linear_proxy_residual_radial_variance_ratio": -0.11583398518641341,
+          "linear_proxy_residual_tangent_variance_ratio": -0.4917210987668139,
+          "local_noise_radial_variance_ratio": 0.8401742489003421,
+          "local_noise_tangent_variance_ratio": 2.679353843506716,
+          "mapped_center_radial_variance_ratio": 0.13334641066060143,
+          "mapped_center_tangent_variance_ratio": 0.6727765005537737,
+          "noise_only_linear_proxy_covariance_error": 1.2198059270406043,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.8054658256561839,
+          "observed_radial_variance_ratio": 0.8576866743745302,
+          "observed_tangent_variance_ratio": 2.860409245293676,
+          "rows": 16,
+          "samples": 264
+        },
+        {
+          "component": 5,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7602121540362268,
+          "linear_proxy_residual_radial_variance_ratio": -0.19787813987132208,
+          "linear_proxy_residual_tangent_variance_ratio": 0.34301170204322906,
+          "local_noise_radial_variance_ratio": 1.0888809998252889,
+          "local_noise_tangent_variance_ratio": 1.4011014333206235,
+          "mapped_center_radial_variance_ratio": 0.11755866277219212,
+          "mapped_center_tangent_variance_ratio": 0.272661366795623,
+          "noise_only_linear_proxy_covariance_error": 0.33666634837389575,
+          "noise_only_linear_proxy_min_eigen_ratio": 1.01407232620338,
+          "observed_radial_variance_ratio": 1.0085615227261588,
+          "observed_tangent_variance_ratio": 2.0167745021594756,
+          "rows": 14,
+          "samples": 220
+        },
+        {
+          "component": 6,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7164788292705386,
+          "linear_proxy_residual_radial_variance_ratio": -1.056029720515017,
+          "linear_proxy_residual_tangent_variance_ratio": 0.06029137551442787,
+          "local_noise_radial_variance_ratio": 1.064267510444603,
+          "local_noise_tangent_variance_ratio": 2.0161612029793106,
+          "mapped_center_radial_variance_ratio": 4.120654297866216,
+          "mapped_center_tangent_variance_ratio": 0.42621551834313604,
+          "noise_only_linear_proxy_covariance_error": 0.7211979169683241,
+          "noise_only_linear_proxy_min_eigen_ratio": 1.062412217493497,
+          "observed_radial_variance_ratio": 4.128892087795802,
+          "observed_tangent_variance_ratio": 2.5026680968368744,
+          "rows": 19,
+          "samples": 292
+        },
+        {
+          "component": 7,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.0204165770539615,
+          "linear_proxy_residual_radial_variance_ratio": 0.04373466760791467,
+          "linear_proxy_residual_tangent_variance_ratio": 0.011506885107251286,
+          "local_noise_radial_variance_ratio": 1.0555408218571927,
+          "local_noise_tangent_variance_ratio": 2.9422695886516537,
+          "mapped_center_radial_variance_ratio": 0.25048549157530026,
+          "mapped_center_tangent_variance_ratio": 0.45257054968915794,
+          "noise_only_linear_proxy_covariance_error": 1.375923808415301,
+          "noise_only_linear_proxy_min_eigen_ratio": 1.052673353391634,
+          "observed_radial_variance_ratio": 1.3497609810404076,
+          "observed_tangent_variance_ratio": 3.406347023448063,
+          "rows": 15,
+          "samples": 237
+        },
+        {
+          "component": 8,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 0.9483077893766405,
+          "linear_proxy_residual_radial_variance_ratio": -0.01789242978061445,
+          "linear_proxy_residual_tangent_variance_ratio": 0.39582583759848866,
+          "local_noise_radial_variance_ratio": 0.9997137607812382,
+          "local_noise_tangent_variance_ratio": 2.036496847365913,
+          "mapped_center_radial_variance_ratio": 0.11772343796514138,
+          "mapped_center_tangent_variance_ratio": 0.6455604752170359,
+          "noise_only_linear_proxy_covariance_error": 0.7335901492054842,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.9987582131005424,
+          "observed_radial_variance_ratio": 1.0995447689657651,
+          "observed_tangent_variance_ratio": 3.0778831601814374,
+          "rows": 15,
+          "samples": 242
+        },
+        {
+          "component": 9,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.3627774966145825,
+          "linear_proxy_residual_radial_variance_ratio": 0.16447942122732684,
+          "linear_proxy_residual_tangent_variance_ratio": 0.4454853824234217,
+          "local_noise_radial_variance_ratio": 0.9537475126615726,
+          "local_noise_tangent_variance_ratio": 1.7942179950513035,
+          "mapped_center_radial_variance_ratio": 0.15264275546390463,
+          "mapped_center_tangent_variance_ratio": 0.9542009686628371,
+          "noise_only_linear_proxy_covariance_error": 0.579716082615296,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.9310294422526305,
+          "observed_radial_variance_ratio": 1.2708696893528042,
+          "observed_tangent_variance_ratio": 3.1939043461375625,
+          "rows": 17,
+          "samples": 273
+        },
+        {
+          "component": 10,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.1794640153051748,
+          "linear_proxy_residual_radial_variance_ratio": -0.06493812477859906,
+          "linear_proxy_residual_tangent_variance_ratio": -0.07405380795861882,
+          "local_noise_radial_variance_ratio": 0.8865448300606649,
+          "local_noise_tangent_variance_ratio": 3.8865426668038006,
+          "mapped_center_radial_variance_ratio": 0.34378066332510426,
+          "mapped_center_tangent_variance_ratio": 0.8163050175325894,
+          "noise_only_linear_proxy_covariance_error": 2.0435751567375267,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.8853123022793428,
+          "observed_radial_variance_ratio": 1.16538736860717,
+          "observed_tangent_variance_ratio": 4.628793876377771,
+          "rows": 15,
+          "samples": 238
+        },
+        {
+          "component": 11,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.6163746386869533,
+          "linear_proxy_residual_radial_variance_ratio": -0.0947277535457598,
+          "linear_proxy_residual_tangent_variance_ratio": -0.2672465443438745,
+          "local_noise_radial_variance_ratio": 1.0316252886223507,
+          "local_noise_tangent_variance_ratio": 3.0385670484939244,
+          "mapped_center_radial_variance_ratio": 0.24421134688507526,
+          "mapped_center_tangent_variance_ratio": 1.058611941812764,
+          "noise_only_linear_proxy_covariance_error": 1.491905961261005,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.9606850186334972,
+          "observed_radial_variance_ratio": 1.1811088819616662,
+          "observed_tangent_variance_ratio": 3.8299324459628137,
+          "rows": 11,
+          "samples": 171
+        },
+        {
+          "component": 12,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.5346880770018039,
+          "linear_proxy_residual_radial_variance_ratio": 0.4024247244740806,
+          "linear_proxy_residual_tangent_variance_ratio": 0.3559856619127175,
+          "local_noise_radial_variance_ratio": 1.0675368243697427,
+          "local_noise_tangent_variance_ratio": 2.677301904022571,
+          "mapped_center_radial_variance_ratio": 0.22520909650067675,
+          "mapped_center_tangent_variance_ratio": 0.22034493130936347,
+          "noise_only_linear_proxy_covariance_error": 1.1869993853556084,
+          "noise_only_linear_proxy_min_eigen_ratio": 1.0675268286299704,
+          "observed_radial_variance_ratio": 1.6951706453445001,
+          "observed_tangent_variance_ratio": 3.2536324972446518,
+          "rows": 12,
+          "samples": 196
+        },
+        {
+          "component": 13,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.182700171997189,
+          "linear_proxy_residual_radial_variance_ratio": 3.903940680233376,
+          "linear_proxy_residual_tangent_variance_ratio": -0.4083723497430811,
+          "local_noise_radial_variance_ratio": 1.0299238186497595,
+          "local_noise_tangent_variance_ratio": 2.8574161105171316,
+          "mapped_center_radial_variance_ratio": 11.550688580864602,
+          "mapped_center_tangent_variance_ratio": 4.017678799775213,
+          "noise_only_linear_proxy_covariance_error": 1.3238270853635137,
+          "noise_only_linear_proxy_min_eigen_ratio": 1.0152276401038176,
+          "observed_radial_variance_ratio": 16.484553079747737,
+          "observed_tangent_variance_ratio": 6.466722560549264,
+          "rows": 21,
+          "samples": 339
+        },
+        {
+          "component": 14,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.5644647521160655,
+          "linear_proxy_residual_radial_variance_ratio": -0.03865738844959865,
+          "linear_proxy_residual_tangent_variance_ratio": 0.7504601668209605,
+          "local_noise_radial_variance_ratio": 0.9890265843831388,
+          "local_noise_tangent_variance_ratio": 2.8322620967162204,
+          "mapped_center_radial_variance_ratio": 0.2400724327494174,
+          "mapped_center_tangent_variance_ratio": 0.7189072410333031,
+          "noise_only_linear_proxy_covariance_error": 1.296365645461237,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.9879901411027964,
+          "observed_radial_variance_ratio": 1.1904416286829576,
+          "observed_tangent_variance_ratio": 4.301629504570484,
+          "rows": 18,
+          "samples": 301
+        },
+        {
+          "component": 15,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.2642268691263199,
+          "linear_proxy_residual_radial_variance_ratio": 0.2692306567599567,
+          "linear_proxy_residual_tangent_variance_ratio": 0.2556197823338364,
+          "local_noise_radial_variance_ratio": 0.8660155347312459,
+          "local_noise_tangent_variance_ratio": 1.4653246828559652,
+          "mapped_center_radial_variance_ratio": 0.271456307490281,
+          "mapped_center_tangent_variance_ratio": 0.4724794594480525,
+          "noise_only_linear_proxy_covariance_error": 0.3598688586821748,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.8462033491745086,
+          "observed_radial_variance_ratio": 1.4067024989814836,
+          "observed_tangent_variance_ratio": 2.193423924637854,
+          "rows": 18,
+          "samples": 280
+        }
+      ],
+      "endpoint_metrics": {
+        "component_covariance_error": 2.3864271584898233,
+        "component_min_eigen_ratio": 0.43362143635749817,
+        "hq": 0.84228515625,
+        "mass_tv": 0.0634765625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "execution_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+      "gate_status": "FAIL",
+      "generator": {
+        "jacobian_singular_values_mean": [
+          1.5062323825972432,
+          0.8874319501658363
+        ],
+        "mean_jacobian_frobenius_squared": 3.163458444980187,
+        "weight_operator_norms": {
+          "net.0.weight": 2.201647002724247,
+          "net.2.weight": 6.111716580037951,
+          "net.4.weight": 0.8085438685452103
+        }
+      },
+      "initial_table_values": {
+        "reason": "Only initial hashes and parameter seeds are archived; no replay/draws authorized.",
+        "status": "UNAVAILABLE"
+      },
+      "prior_table": {
+        "global_population_covariance_eigenvalues": [
+          0.8671019242650218,
+          1.080960143781433,
+          1.4634115903994005,
+          1.5630288223378133
+        ],
+        "global_population_covariance_trace": 4.97450248078367,
+        "mean_squared_radius": 4.98052190966777,
+        "nearest_row_distance_min_median_max": [
+          0.025295026392088384,
+          0.49836600854463664,
+          1.942664740018627
+        ],
+        "within_component_covariance_trace_row_weighted": 1.8448353632479988
+      },
+      "recipe_prior_controls": {
+        "optimizer_family": "adam",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "terminal_passing_suffix": 0
+    },
+    {
+      "actual_initial_prior_receipt": {
+        "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-m110-v1/20aca4f16e8a4c31900b652e2c71ee3b",
+      "artifact_sha256": {
+        "graded-result.json": "a74b69ece727e00ab574342d3cd83e330e182e65f5b105f74347832f759ac9f7",
+        "observed-samples.pt": "30b893b1d8c1ea6e41ab08908f9bc545aa609d3469824916ffe4db47e36f09c2",
+        "provenance/provenance-state.pt": "eb35c654ab41156d9fe009aed537eb281256b3ce9d09a09d002b29106029be0b",
+        "request.json": "dcf66055da3466c7e84e8373b084bb676207b153b8b5c89d18b23bff25523de5"
+      },
+      "attempt_id": "20aca4f16e8a4c31900b652e2c71ee3b",
+      "candidate_id": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "component_unweighted": {
+        "latent_within_component_trace": {
+          "count": 16,
+          "max": 2.6718881546104516,
+          "mean": 1.7105339031077123,
+          "min": 0.8116235825370297
+        },
+        "linear_proxy_residual_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.1348824914854059,
+          "mean": 0.030232552988726305,
+          "min": -0.019524350135274426
+        },
+        "linear_proxy_residual_tangent_variance_ratio": {
+          "count": 16,
+          "max": 0.5380266404184644,
+          "mean": 0.17479644217162404,
+          "min": -0.18622812405500877
+        },
+        "local_noise_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.46855115759695953,
+          "mean": 0.25592025082144854,
+          "min": 0.026812082612368046
+        },
+        "local_noise_tangent_variance_ratio": {
+          "count": 16,
+          "max": 2.5206372164684208,
+          "mean": 1.7202772353745295,
+          "min": 1.0351633988548683
+        },
+        "mapped_center_radial_variance_ratio": {
+          "count": 16,
+          "max": 1.9800389857397431,
+          "mean": 0.2890871612866532,
+          "min": 0.07683434298720761
+        },
+        "mapped_center_tangent_variance_ratio": {
+          "count": 16,
+          "max": 1.288752591473273,
+          "mean": 0.43189225187975505,
+          "min": 0.12736057320148345
+        },
+        "noise_only_linear_proxy_covariance_error": {
+          "count": 16,
+          "max": 1.254488284088163,
+          "mean": 0.7742520450517917,
+          "min": 0.4642895288689378
+        },
+        "noise_only_linear_proxy_min_eigen_ratio": {
+          "count": 16,
+          "max": 0.45256473965298366,
+          "mean": 0.24380921339958056,
+          "min": 0.023077452229516588
+        },
+        "observed_radial_variance_ratio": {
+          "count": 16,
+          "max": 2.496154730907266,
+          "mean": 0.575239965096828,
+          "min": 0.13329044146866623
+        },
+        "observed_tangent_variance_ratio": {
+          "count": 16,
+          "max": 3.4660058392726505,
+          "mean": 2.3269659294259086,
+          "min": 1.599667223417369
+        }
+      },
+      "components": [
+        {
+          "component": 0,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7210713436479805,
+          "linear_proxy_residual_radial_variance_ratio": 0.007230290700304204,
+          "linear_proxy_residual_tangent_variance_ratio": 0.147381293154059,
+          "local_noise_radial_variance_ratio": 0.14139681180669406,
+          "local_noise_tangent_variance_ratio": 1.2777532061930437,
+          "mapped_center_radial_variance_ratio": 0.2495774493034,
+          "mapped_center_tangent_variance_ratio": 0.17453272407026635,
+          "noise_only_linear_proxy_covariance_error": 0.6519637560955853,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.12587126233994061,
+          "observed_radial_variance_ratio": 0.39820455181039827,
+          "observed_tangent_variance_ratio": 1.599667223417369,
+          "rows": 16,
+          "samples": 276
+        },
+        {
+          "component": 1,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7859983780217425,
+          "linear_proxy_residual_radial_variance_ratio": 0.06735948132424124,
+          "linear_proxy_residual_tangent_variance_ratio": 0.40607240835517966,
+          "local_noise_radial_variance_ratio": 0.14860685337188365,
+          "local_noise_tangent_variance_ratio": 1.2245223543492259,
+          "mapped_center_radial_variance_ratio": 0.20731788466204407,
+          "mapped_center_tangent_variance_ratio": 0.1601357737949613,
+          "noise_only_linear_proxy_covariance_error": 0.6288821564893942,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.1413572862302244,
+          "observed_radial_variance_ratio": 0.42328421935816896,
+          "observed_tangent_variance_ratio": 1.7907305364993669,
+          "rows": 16,
+          "samples": 243
+        },
+        {
+          "component": 2,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.1632710484948734,
+          "linear_proxy_residual_radial_variance_ratio": 0.015260777252731283,
+          "linear_proxy_residual_tangent_variance_ratio": -0.05230629886531424,
+          "local_noise_radial_variance_ratio": 0.1828592436544313,
+          "local_noise_tangent_variance_ratio": 1.707929842948368,
+          "mapped_center_radial_variance_ratio": 0.30164714669750825,
+          "mapped_center_tangent_variance_ratio": 0.2936666928339052,
+          "noise_only_linear_proxy_covariance_error": 0.7871283039831182,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.16016259602080335,
+          "observed_radial_variance_ratio": 0.4997671676046708,
+          "observed_tangent_variance_ratio": 1.949290236916959,
+          "rows": 19,
+          "samples": 325
+        },
+        {
+          "component": 3,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.4478767613167176,
+          "linear_proxy_residual_radial_variance_ratio": 0.1348824914854059,
+          "linear_proxy_residual_tangent_variance_ratio": 0.5040399211161097,
+          "local_noise_radial_variance_ratio": 0.24572893036144836,
+          "local_noise_tangent_variance_ratio": 2.2623919211603103,
+          "mapped_center_radial_variance_ratio": 0.21790621577619174,
+          "mapped_center_tangent_variance_ratio": 0.35169786022215344,
+          "noise_only_linear_proxy_covariance_error": 1.0400036318793426,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.24556607556132318,
+          "observed_radial_variance_ratio": 0.598517637623046,
+          "observed_tangent_variance_ratio": 3.1181297024985732,
+          "rows": 19,
+          "samples": 291
+        },
+        {
+          "component": 4,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.6073296709212221,
+          "linear_proxy_residual_radial_variance_ratio": 0.016074269251380502,
+          "linear_proxy_residual_tangent_variance_ratio": 0.413742198541718,
+          "local_noise_radial_variance_ratio": 0.34460321590627646,
+          "local_noise_tangent_variance_ratio": 1.0351633988548683,
+          "mapped_center_radial_variance_ratio": 0.07683434298720761,
+          "mapped_center_tangent_variance_ratio": 0.28839928827937605,
+          "noise_only_linear_proxy_covariance_error": 0.4642895288689378,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3443512486998652,
+          "observed_radial_variance_ratio": 0.43751182814486456,
+          "observed_tangent_variance_ratio": 1.7373048856759623,
+          "rows": 16,
+          "samples": 249
+        },
+        {
+          "component": 5,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.5651216744182683,
+          "linear_proxy_residual_radial_variance_ratio": 0.06336756346419442,
+          "linear_proxy_residual_tangent_variance_ratio": 0.07625632171586672,
+          "local_noise_radial_variance_ratio": 0.4262505052013827,
+          "local_noise_tangent_variance_ratio": 1.756283765149369,
+          "mapped_center_radial_variance_ratio": 0.14320669335154237,
+          "mapped_center_tangent_variance_ratio": 0.2603745942084057,
+          "noise_only_linear_proxy_covariance_error": 0.7049154877828652,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.39228490725177895,
+          "observed_radial_variance_ratio": 0.6328247620171195,
+          "observed_tangent_variance_ratio": 2.0929146810736414,
+          "rows": 17,
+          "samples": 279
+        },
+        {
+          "component": 6,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.185210502251696,
+          "linear_proxy_residual_radial_variance_ratio": 0.06432903034753729,
+          "linear_proxy_residual_tangent_variance_ratio": 0.04982727094422246,
+          "local_noise_radial_variance_ratio": 0.31261094002307194,
+          "local_noise_tangent_variance_ratio": 1.6184568518690805,
+          "mapped_center_radial_variance_ratio": 0.17218219030252832,
+          "mapped_center_tangent_variance_ratio": 0.42720504797483144,
+          "noise_only_linear_proxy_covariance_error": 0.6635834409658362,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3028461332739385,
+          "observed_radial_variance_ratio": 0.5491221606731376,
+          "observed_tangent_variance_ratio": 2.0954891707881345,
+          "rows": 16,
+          "samples": 247
+        },
+        {
+          "component": 7,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.5811279184667533,
+          "linear_proxy_residual_radial_variance_ratio": 0.047368817253521434,
+          "linear_proxy_residual_tangent_variance_ratio": 0.237179904543672,
+          "local_noise_radial_variance_ratio": 0.36566325231500646,
+          "local_noise_tangent_variance_ratio": 1.340194099416531,
+          "mapped_center_radial_variance_ratio": 0.07957296341305624,
+          "mapped_center_tangent_variance_ratio": 0.37148835558611437,
+          "noise_only_linear_proxy_covariance_error": 0.526798786861848,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3470759428925063,
+          "observed_radial_variance_ratio": 0.49260503298158415,
+          "observed_tangent_variance_ratio": 1.9488623595463173,
+          "rows": 16,
+          "samples": 248
+        },
+        {
+          "component": 8,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 0.8116235825370297,
+          "linear_proxy_residual_radial_variance_ratio": -0.004788168250582203,
+          "linear_proxy_residual_tangent_variance_ratio": 0.5380266404184644,
+          "local_noise_radial_variance_ratio": 0.46613272305970127,
+          "local_noise_tangent_variance_ratio": 1.6414485368481193,
+          "mapped_center_radial_variance_ratio": 0.11033818245507478,
+          "mapped_center_tangent_variance_ratio": 0.12736057320148345,
+          "noise_only_linear_proxy_covariance_error": 0.603627371015414,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.45256473965298366,
+          "observed_radial_variance_ratio": 0.5716827372641938,
+          "observed_tangent_variance_ratio": 2.306835750468067,
+          "rows": 13,
+          "samples": 214
+        },
+        {
+          "component": 9,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.340352591312458,
+          "linear_proxy_residual_radial_variance_ratio": 0.047564587570563366,
+          "linear_proxy_residual_tangent_variance_ratio": -0.16177894354386413,
+          "local_noise_radial_variance_ratio": 0.46855115759695953,
+          "local_noise_tangent_variance_ratio": 1.9473771081400608,
+          "mapped_center_radial_variance_ratio": 1.9800389857397431,
+          "mapped_center_tangent_variance_ratio": 1.288752591473273,
+          "noise_only_linear_proxy_covariance_error": 0.8087922144597182,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.4263659204787276,
+          "observed_radial_variance_ratio": 2.496154730907266,
+          "observed_tangent_variance_ratio": 3.0743507560694696,
+          "rows": 17,
+          "samples": 287
+        },
+        {
+          "component": 10,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.508178889839694,
+          "linear_proxy_residual_radial_variance_ratio": 0.005147217655143754,
+          "linear_proxy_residual_tangent_variance_ratio": 0.12126070227398866,
+          "local_noise_radial_variance_ratio": 0.3100647822349695,
+          "local_noise_tangent_variance_ratio": 1.6569149156980323,
+          "mapped_center_radial_variance_ratio": 0.2651801333837981,
+          "mapped_center_tangent_variance_ratio": 0.12970858380250935,
+          "noise_only_linear_proxy_covariance_error": 0.6770841763692268,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3066069958800565,
+          "observed_radial_variance_ratio": 0.5803921332739114,
+          "observed_tangent_variance_ratio": 1.9078842017745303,
+          "rows": 15,
+          "samples": 208
+        },
+        {
+          "component": 11,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.4174171860592004,
+          "linear_proxy_residual_radial_variance_ratio": -0.004696959070313617,
+          "linear_proxy_residual_tangent_variance_ratio": -0.023395736935770906,
+          "local_noise_radial_variance_ratio": 0.173965616371572,
+          "local_noise_tangent_variance_ratio": 2.0923367458411746,
+          "mapped_center_radial_variance_ratio": 0.22722054787361673,
+          "mapped_center_tangent_variance_ratio": 0.49839928591756877,
+          "noise_only_linear_proxy_covariance_error": 0.971484972417683,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.17083428184534302,
+          "observed_radial_variance_ratio": 0.3964892051748751,
+          "observed_tangent_variance_ratio": 2.5673402948229724,
+          "rows": 14,
+          "samples": 215
+        },
+        {
+          "component": 12,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.011196852558834,
+          "linear_proxy_residual_radial_variance_ratio": 0.034819505957711744,
+          "linear_proxy_residual_tangent_variance_ratio": 0.48168139910827734,
+          "local_noise_radial_variance_ratio": 0.09465934846827614,
+          "local_noise_tangent_variance_ratio": 1.3793596119824696,
+          "mapped_center_radial_variance_ratio": 0.26655537757802295,
+          "mapped_center_tangent_variance_ratio": 0.18629433977821078,
+          "noise_only_linear_proxy_covariance_error": 0.6966176773091033,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.09194190636337699,
+          "observed_radial_variance_ratio": 0.39603423200401083,
+          "observed_tangent_variance_ratio": 2.047335350868958,
+          "rows": 15,
+          "samples": 238
+        },
+        {
+          "component": 13,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.377385119375694,
+          "linear_proxy_residual_radial_variance_ratio": -0.019524350135274426,
+          "linear_proxy_residual_tangent_variance_ratio": -0.18622812405500877,
+          "local_noise_radial_variance_ratio": 0.26988448294283873,
+          "local_noise_tangent_variance_ratio": 2.0695890903323972,
+          "mapped_center_radial_variance_ratio": 0.15039554783582446,
+          "mapped_center_tangent_variance_ratio": 1.1951939440196293,
+          "noise_only_linear_proxy_covariance_error": 0.9209505517206127,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.26456313369778744,
+          "observed_radial_variance_ratio": 0.40075568064338873,
+          "observed_tangent_variance_ratio": 3.0785549102970178,
+          "rows": 19,
+          "samples": 328
+        },
+        {
+          "component": 14,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.6718881546104516,
+          "linear_proxy_residual_radial_variance_ratio": -0.0007339635811721562,
+          "linear_proxy_residual_tangent_variance_ratio": -0.03399184194275229,
+          "local_noise_radial_variance_ratio": 0.11693406721629618,
+          "local_noise_tangent_variance_ratio": 2.5206372164684208,
+          "mapped_center_radial_variance_ratio": 0.08100281696482188,
+          "mapped_center_tangent_variance_ratio": 0.9793604647469818,
+          "noise_only_linear_proxy_covariance_error": 1.254488284088163,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.10547753197511656,
+          "observed_radial_variance_ratio": 0.1972029205999459,
+          "observed_tangent_variance_ratio": 3.4660058392726505,
+          "rows": 17,
+          "samples": 285
+        },
+        {
+          "component": 15,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.173492775890782,
+          "linear_proxy_residual_radial_variance_ratio": 0.010060256594228115,
+          "linear_proxy_residual_tangent_variance_ratio": 0.2789759599171373,
+          "local_noise_radial_variance_ratio": 0.026812082612368046,
+          "local_noise_tangent_variance_ratio": 1.9940771007410012,
+          "mapped_center_radial_variance_ratio": 0.09641810226207007,
+          "mapped_center_tangent_variance_ratio": 0.1777059101664102,
+          "noise_only_linear_proxy_covariance_error": 0.987422380521819,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.023077452229516588,
+          "observed_radial_variance_ratio": 0.13329044146866623,
+          "observed_tangent_variance_ratio": 2.4507589708245487,
+          "rows": 11,
+          "samples": 163
+        }
+      ],
+      "endpoint_metrics": {
+        "component_covariance_error": 1.0839967355132103,
+        "component_min_eigen_ratio": 0.11172255873680115,
+        "hq": 0.92333984375,
+        "mass_tv": 0.068115234375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "execution_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+      "gate_status": "FAIL",
+      "generator": {
+        "jacobian_singular_values_mean": [
+          1.303827395789255,
+          0.4508350127455484
+        ],
+        "mean_jacobian_frobenius_squared": 1.9881130771126663,
+        "weight_operator_norms": {
+          "net.0.weight": 2.3919403372474215,
+          "net.2.weight": 7.1227029231983945,
+          "net.4.weight": 0.8071491192245325
+        }
+      },
+      "initial_table_values": {
+        "reason": "Only initial hashes and parameter seeds are archived; no replay/draws authorized.",
+        "status": "UNAVAILABLE"
+      },
+      "prior_table": {
+        "global_population_covariance_eigenvalues": [
+          0.8280153380256223,
+          0.9879807040249315,
+          1.7808803738402141,
+          1.8571891332753463
+        ],
+        "global_population_covariance_trace": 5.454065549166114,
+        "mean_squared_radius": 5.46166617296973,
+        "nearest_row_distance_min_median_max": [
+          0.06919232998933295,
+          0.4023869033252517,
+          1.6540408628033667
+        ],
+        "within_component_covariance_trace_row_weighted": 1.7335277174292791
+      },
+      "recipe_prior_controls": {
+        "optimizer_family": "adam",
+        "prior_betas": [
+          0.0,
+          0.99
+        ],
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "role": "m110",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "terminal_passing_suffix": 0
+    },
+    {
+      "actual_initial_prior_receipt": {
+        "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/queue/r1r2-dualnorm-repair-v1/893e5d28e2c14ec98f0c429ce374cdbd",
+      "artifact_sha256": {
+        "graded-result.json": "0e24f78e99a9d56073ca973a5cf52581e1190fde7dcadefce4160761a6f9e34b",
+        "observed-samples.pt": "eb3cc0c8e43981d5fdc472c228d1465b797a620ef09e9451a91685c21e334620",
+        "provenance/provenance-state.pt": "3c42824821f81bd18eeff2066bb931598a8ec4cba58d939e20dc41cb26a06e3f",
+        "request.json": "bc7e27d082772c14c5786f9545c99e0a389bc7559b88ecdac929328a31766d00"
+      },
+      "attempt_id": "893e5d28e2c14ec98f0c429ce374cdbd",
+      "candidate_id": "r1r2-dualnorm-repair-v1",
+      "candidate_revision": "a585e889ca4f42fa4a5ce2b7e4eebd3ce766f013933f06da124f931e67691abb",
+      "component_unweighted": {
+        "latent_within_component_trace": {
+          "count": 16,
+          "max": 4.138970849528473,
+          "mean": 2.0967783805068008,
+          "min": 1.1273467152674852
+        },
+        "linear_proxy_residual_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.21708538222711943,
+          "mean": 0.017919557785074203,
+          "min": -0.14853325146080856
+        },
+        "linear_proxy_residual_tangent_variance_ratio": {
+          "count": 16,
+          "max": 0.6379322993010255,
+          "mean": 0.11460195284658711,
+          "min": -0.35529612028315416
+        },
+        "local_noise_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.35257787983143374,
+          "mean": 0.19933935128867727,
+          "min": 0.07817254205727742
+        },
+        "local_noise_tangent_variance_ratio": {
+          "count": 16,
+          "max": 2.7490102596675285,
+          "mean": 2.1713434320450062,
+          "min": 1.5891478360834674
+        },
+        "mapped_center_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.7880521942524641,
+          "mean": 0.41733984064395335,
+          "min": 0.16720863055988275
+        },
+        "mapped_center_tangent_variance_ratio": {
+          "count": 16,
+          "max": 1.0703243791965302,
+          "mean": 0.30034037914843636,
+          "min": 0.157281835711029
+        },
+        "noise_only_linear_proxy_covariance_error": {
+          "count": 16,
+          "max": 1.3318332553878953,
+          "mean": 1.016446788196151,
+          "min": 0.7334705371538363
+        },
+        "noise_only_linear_proxy_min_eigen_ratio": {
+          "count": 16,
+          "max": 0.33558515901718083,
+          "mean": 0.19447346551640873,
+          "min": 0.0781684908788957
+        },
+        "observed_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.9732494334486311,
+          "mean": 0.6345987497177048,
+          "min": 0.3174242607110622
+        },
+        "observed_tangent_variance_ratio": {
+          "count": 16,
+          "max": 3.4640385185809044,
+          "mean": 2.5862857640400296,
+          "min": 1.9124808697685483
+        }
+      },
+      "components": [
+        {
+          "component": 0,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.8747092173210924,
+          "linear_proxy_residual_radial_variance_ratio": 0.05398602533133445,
+          "linear_proxy_residual_tangent_variance_ratio": -0.19555061211363078,
+          "local_noise_radial_variance_ratio": 0.07817254205727742,
+          "local_noise_tangent_variance_ratio": 2.267256913400821,
+          "mapped_center_radial_variance_ratio": 0.29264785866749027,
+          "mapped_center_tangent_variance_ratio": 0.17458870028828916,
+          "noise_only_linear_proxy_covariance_error": 1.1080892751837967,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.0781684908788957,
+          "observed_radial_variance_ratio": 0.42480642605610214,
+          "observed_tangent_variance_ratio": 2.2462950015754792,
+          "rows": 16,
+          "samples": 262
+        },
+        {
+          "component": 1,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.6838978005403762,
+          "linear_proxy_residual_radial_variance_ratio": 0.051654543910088904,
+          "linear_proxy_residual_tangent_variance_ratio": 0.6379322993010255,
+          "local_noise_radial_variance_ratio": 0.09856108624109057,
+          "local_noise_tangent_variance_ratio": 2.510153347275753,
+          "mapped_center_radial_variance_ratio": 0.16720863055988275,
+          "mapped_center_tangent_variance_ratio": 0.157281835711029,
+          "noise_only_linear_proxy_covariance_error": 1.2439510770734945,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.0982142041934213,
+          "observed_radial_variance_ratio": 0.3174242607110622,
+          "observed_tangent_variance_ratio": 3.3053674822878074,
+          "rows": 14,
+          "samples": 218
+        },
+        {
+          "component": 2,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.0717671562487054,
+          "linear_proxy_residual_radial_variance_ratio": -0.015066313000114379,
+          "linear_proxy_residual_tangent_variance_ratio": 0.13094287594831622,
+          "local_noise_radial_variance_ratio": 0.11086635220711352,
+          "local_noise_tangent_variance_ratio": 2.0530397739323227,
+          "mapped_center_radial_variance_ratio": 0.24505774867615232,
+          "mapped_center_tangent_variance_ratio": 0.15918010652078937,
+          "noise_only_linear_proxy_covariance_error": 0.9794700495925046,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.10591757524039012,
+          "observed_radial_variance_ratio": 0.34085778788315146,
+          "observed_tangent_variance_ratio": 2.343162756401428,
+          "rows": 15,
+          "samples": 236
+        },
+        {
+          "component": 3,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.8592621390492239,
+          "linear_proxy_residual_radial_variance_ratio": -0.14853325146080856,
+          "linear_proxy_residual_tangent_variance_ratio": 0.16601104583316717,
+          "local_noise_radial_variance_ratio": 0.16685151302746618,
+          "local_noise_tangent_variance_ratio": 2.554702751469542,
+          "mapped_center_radial_variance_ratio": 0.68279131013219,
+          "mapped_center_tangent_variance_ratio": 0.3081463085383335,
+          "noise_only_linear_proxy_covariance_error": 1.2502654261304926,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.16369589163707038,
+          "observed_radial_variance_ratio": 0.7011095716988476,
+          "observed_tangent_variance_ratio": 3.0288601058410425,
+          "rows": 14,
+          "samples": 237
+        },
+        {
+          "component": 4,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.4422735750459592,
+          "linear_proxy_residual_radial_variance_ratio": 0.07727887408341205,
+          "linear_proxy_residual_tangent_variance_ratio": -0.17409247351241675,
+          "local_noise_radial_variance_ratio": 0.22125986520619634,
+          "local_noise_tangent_variance_ratio": 2.3570338075639548,
+          "mapped_center_radial_variance_ratio": 0.48334803092956047,
+          "mapped_center_tangent_variance_ratio": 0.5588546778283391,
+          "noise_only_linear_proxy_covariance_error": 1.1120164109232098,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.21538028579270424,
+          "observed_radial_variance_ratio": 0.7818867702191689,
+          "observed_tangent_variance_ratio": 2.741796011879877,
+          "rows": 16,
+          "samples": 241
+        },
+        {
+          "component": 5,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7418207027212835,
+          "linear_proxy_residual_radial_variance_ratio": 0.014073322902484614,
+          "linear_proxy_residual_tangent_variance_ratio": 0.10324689511449936,
+          "local_noise_radial_variance_ratio": 0.15562911171433105,
+          "local_noise_tangent_variance_ratio": 1.5891478360834674,
+          "mapped_center_radial_variance_ratio": 0.3984077024240591,
+          "mapped_center_tangent_variance_ratio": 0.22008613857058146,
+          "noise_only_linear_proxy_covariance_error": 0.7334705371538363,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.1501043696304436,
+          "observed_radial_variance_ratio": 0.5681101370408748,
+          "observed_tangent_variance_ratio": 1.9124808697685483,
+          "rows": 18,
+          "samples": 281
+        },
+        {
+          "component": 6,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.853795374201753,
+          "linear_proxy_residual_radial_variance_ratio": 0.10656785128987353,
+          "linear_proxy_residual_tangent_variance_ratio": 0.33313722484775177,
+          "local_noise_radial_variance_ratio": 0.13931022205416352,
+          "local_noise_tangent_variance_ratio": 2.472511480948348,
+          "mapped_center_radial_variance_ratio": 0.4510579741418404,
+          "mapped_center_tangent_variance_ratio": 0.35569572791968485,
+          "noise_only_linear_proxy_covariance_error": 1.2098048206914707,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.13542110139572938,
+          "observed_radial_variance_ratio": 0.6969360474858775,
+          "observed_tangent_variance_ratio": 3.1613444337157848,
+          "rows": 18,
+          "samples": 261
+        },
+        {
+          "component": 7,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.393771676278379,
+          "linear_proxy_residual_radial_variance_ratio": -0.024383858705116807,
+          "linear_proxy_residual_tangent_variance_ratio": 0.28394411612891357,
+          "local_noise_radial_variance_ratio": 0.15560330901846883,
+          "local_noise_tangent_variance_ratio": 1.9610839129548148,
+          "mapped_center_radial_variance_ratio": 0.4610055649380964,
+          "mapped_center_tangent_variance_ratio": 0.24385537871843932,
+          "noise_only_linear_proxy_covariance_error": 0.9231020319673144,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.13708719473803635,
+          "observed_radial_variance_ratio": 0.5922250152514484,
+          "observed_tangent_variance_ratio": 2.4888834078021675,
+          "rows": 14,
+          "samples": 229
+        },
+        {
+          "component": 8,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.1273467152674852,
+          "linear_proxy_residual_radial_variance_ratio": 0.03694672217168091,
+          "linear_proxy_residual_tangent_variance_ratio": 0.2916786714921855,
+          "local_noise_radial_variance_ratio": 0.23342812395062898,
+          "local_noise_tangent_variance_ratio": 2.01856292105099,
+          "mapped_center_radial_variance_ratio": 0.23233260922661084,
+          "mapped_center_tangent_variance_ratio": 0.17231096209469562,
+          "noise_only_linear_proxy_covariance_error": 0.9154905651160437,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.21921655101644544,
+          "observed_radial_variance_ratio": 0.5027074553489207,
+          "observed_tangent_variance_ratio": 2.482552554637871,
+          "rows": 17,
+          "samples": 284
+        },
+        {
+          "component": 9,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.493201337246962,
+          "linear_proxy_residual_radial_variance_ratio": -0.022700150299093058,
+          "linear_proxy_residual_tangent_variance_ratio": -0.35529612028315416,
+          "local_noise_radial_variance_ratio": 0.30534639438295713,
+          "local_noise_tangent_variance_ratio": 2.7490102596675285,
+          "mapped_center_radial_variance_ratio": 0.5821052023962232,
+          "mapped_center_tangent_variance_ratio": 1.0703243791965302,
+          "noise_only_linear_proxy_covariance_error": 1.3318332553878953,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3041236137470573,
+          "observed_radial_variance_ratio": 0.8647514464800873,
+          "observed_tangent_variance_ratio": 3.4640385185809044,
+          "rows": 14,
+          "samples": 227
+        },
+        {
+          "component": 10,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.2917571319844472,
+          "linear_proxy_residual_radial_variance_ratio": -0.015873110022861986,
+          "linear_proxy_residual_tangent_variance_ratio": 0.21142720563678385,
+          "local_noise_radial_variance_ratio": 0.21827653735174726,
+          "local_noise_tangent_variance_ratio": 1.900121229758369,
+          "mapped_center_radial_variance_ratio": 0.4930541772082453,
+          "mapped_center_tangent_variance_ratio": 0.16226839904583365,
+          "noise_only_linear_proxy_covariance_error": 0.8435815672611255,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.21769703993938788,
+          "observed_radial_variance_ratio": 0.6954576045371306,
+          "observed_tangent_variance_ratio": 2.2738168344409866,
+          "rows": 17,
+          "samples": 260
+        },
+        {
+          "component": 11,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 4.138970849528473,
+          "linear_proxy_residual_radial_variance_ratio": 0.0029575859397799054,
+          "linear_proxy_residual_tangent_variance_ratio": 0.0022215867664217015,
+          "local_noise_radial_variance_ratio": 0.32471299594437686,
+          "local_noise_tangent_variance_ratio": 2.1184141191873826,
+          "mapped_center_radial_variance_ratio": 0.5728115548888038,
+          "mapped_center_tangent_variance_ratio": 0.19376295640761126,
+          "noise_only_linear_proxy_covariance_error": 0.9246335120036552,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.3238683300643828,
+          "observed_radial_variance_ratio": 0.9004821367729605,
+          "observed_tangent_variance_ratio": 2.3143986623614157,
+          "rows": 14,
+          "samples": 223
+        },
+        {
+          "component": 12,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.364320817208534,
+          "linear_proxy_residual_radial_variance_ratio": -0.031350255453708564,
+          "linear_proxy_residual_tangent_variance_ratio": -0.20787016562753835,
+          "local_noise_radial_variance_ratio": 0.35257787983143374,
+          "local_noise_tangent_variance_ratio": 2.0410795076946666,
+          "mapped_center_radial_variance_ratio": 0.31271810130306993,
+          "mapped_center_tangent_variance_ratio": 0.1941614056262149,
+          "noise_only_linear_proxy_covariance_error": 0.8834489010859813,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.33558515901718083,
+          "observed_radial_variance_ratio": 0.6339457256807951,
+          "observed_tangent_variance_ratio": 2.027370747693343,
+          "rows": 16,
+          "samples": 252
+        },
+        {
+          "component": 13,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 3.1537620296175395,
+          "linear_proxy_residual_radial_variance_ratio": -0.004606986083093179,
+          "linear_proxy_residual_tangent_variance_ratio": 0.19213826619954366,
+          "local_noise_radial_variance_ratio": 0.32150927978744687,
+          "local_noise_tangent_variance_ratio": 2.1075015624870166,
+          "mapped_center_radial_variance_ratio": 0.22435309502928752,
+          "mapped_center_tangent_variance_ratio": 0.23227294291239411,
+          "noise_only_linear_proxy_covariance_error": 0.918499334558305,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.32140494980895656,
+          "observed_radial_variance_ratio": 0.5412553887336412,
+          "observed_tangent_variance_ratio": 2.5319127715989542,
+          "rows": 17,
+          "samples": 297
+        },
+        {
+          "component": 14,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.9973524982852748,
+          "linear_proxy_residual_radial_variance_ratio": -0.011323458269790032,
+          "linear_proxy_residual_tangent_variance_ratio": -0.05409180294805083,
+          "local_noise_radial_variance_ratio": 0.19652069746595707,
+          "local_noise_tangent_variance_ratio": 2.1663454172136927,
+          "mapped_center_radial_variance_ratio": 0.7880521942524641,
+          "mapped_center_tangent_variance_ratio": 0.4026894539291551,
+          "noise_only_linear_proxy_covariance_error": 1.0024086258964373,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.19558058410870902,
+          "observed_radial_variance_ratio": 0.9732494334486311,
+          "observed_tangent_variance_ratio": 2.514943068194797,
+          "rows": 18,
+          "samples": 276
+        },
+        {
+          "component": 15,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.0604450675633204,
+          "linear_proxy_residual_radial_variance_ratio": 0.21708538222711943,
+          "linear_proxy_residual_tangent_variance_ratio": 0.4678522327615764,
+          "local_noise_radial_variance_ratio": 0.11080371037818111,
+          "local_noise_tangent_variance_ratio": 1.875530072031431,
+          "mapped_center_radial_variance_ratio": 0.29048569552927717,
+          "mapped_center_tangent_variance_ratio": 0.1999666930670615,
+          "noise_only_linear_proxy_covariance_error": 0.8830832211128513,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.11011010705372866,
+          "observed_radial_variance_ratio": 0.6183747881345777,
+          "observed_tangent_variance_ratio": 2.5433489978600687,
+          "rows": 18,
+          "samples": 312
+        }
+      ],
+      "endpoint_metrics": {
+        "component_covariance_error": 1.1805430725216866,
+        "component_min_eigen_ratio": 0.288719117641449,
+        "hq": 0.8974609375,
+        "mass_tv": 0.045166015625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "execution_commit": "220d37827e910c4f39c0d1c7afb1f337627c53ab",
+      "gate_status": "FAIL",
+      "generator": {
+        "jacobian_singular_values_mean": [
+          1.4466696428454544,
+          0.36707653618586356
+        ],
+        "mean_jacobian_frobenius_squared": 2.355675796012149,
+        "weight_operator_norms": {
+          "net.0.weight": 4.494067059309721,
+          "net.2.weight": 2.8507652468440887,
+          "net.4.weight": 1.256619356156949
+        }
+      },
+      "initial_table_values": {
+        "reason": "Only initial hashes and parameter seeds are archived; no replay/draws authorized.",
+        "status": "UNAVAILABLE"
+      },
+      "prior_table": {
+        "global_population_covariance_eigenvalues": [
+          0.9416796162550294,
+          1.219375374279,
+          1.3952014435301465,
+          1.5460263712318136
+        ],
+        "global_population_covariance_trace": 5.10228280529599,
+        "mean_squared_radius": 5.111197461574998,
+        "nearest_row_distance_min_median_max": [
+          0.085165345832385,
+          0.6134131989349473,
+          1.9146050420538419
+        ],
+        "within_component_covariance_trace_row_weighted": 2.072050718010227
+      },
+      "recipe_prior_controls": {
+        "optimizer_family": "dualnorm",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "role": "spectral",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "terminal_passing_suffix": 0
+    },
+    {
+      "actual_initial_prior_receipt": {
+        "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/queue/r1r2-dualnorm-critic-only-v1/338b697f9f24453f8b3407d218a694d6",
+      "artifact_sha256": {
+        "graded-result.json": "3c5e915360a2e1d46713643ffa3c6d94082833e142142af1b48224217cbbe0a5",
+        "observed-samples.pt": "cb7036e39db6a7589f9943e4a6f4be0690f1ebe576a50e9a8459dc348237f9f5",
+        "provenance/provenance-state.pt": "f6d4726206d93aba824e13c69e5b47a9a6d3aaf550200e8879b3ae49782fe3b7",
+        "request.json": "e1a3ab4f1eca289db3fdeaea5bce04563c1e410c76ec7b5bcb783a180be01b03"
+      },
+      "attempt_id": "338b697f9f24453f8b3407d218a694d6",
+      "candidate_id": "r1r2-dualnorm-critic-only-v1",
+      "candidate_revision": "2cc83fcb52aaf21acbb6f4557c0e066c450798b7118129093fbf4b839068f0d7",
+      "component_unweighted": {
+        "latent_within_component_trace": {
+          "count": 16,
+          "max": 2.6255912385005846,
+          "mean": 1.7062689830905864,
+          "min": 1.0115984500932458
+        },
+        "linear_proxy_residual_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.20978838454916549,
+          "mean": 0.018893942694406626,
+          "min": -0.22460990365311212
+        },
+        "linear_proxy_residual_tangent_variance_ratio": {
+          "count": 16,
+          "max": 2.82125442565989,
+          "mean": 0.36912033165019914,
+          "min": -0.42640962795840864
+        },
+        "local_noise_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.766010314382803,
+          "mean": 0.48149834295480015,
+          "min": 0.06775732233375178
+        },
+        "local_noise_tangent_variance_ratio": {
+          "count": 16,
+          "max": 2.853240089494098,
+          "mean": 1.9274031252540167,
+          "min": 1.0186648190889023
+        },
+        "mapped_center_radial_variance_ratio": {
+          "count": 16,
+          "max": 0.3500103909371722,
+          "mean": 0.12231081490372868,
+          "min": 0.042666756146745165
+        },
+        "mapped_center_tangent_variance_ratio": {
+          "count": 16,
+          "max": 1.0557535665248368,
+          "mean": 0.3293127684141654,
+          "min": 0.06949857151925398
+        },
+        "noise_only_linear_proxy_covariance_error": {
+          "count": 16,
+          "max": 1.4145587924212812,
+          "mean": 0.8018862667682519,
+          "min": 0.21260418362302066
+        },
+        "noise_only_linear_proxy_min_eigen_ratio": {
+          "count": 16,
+          "max": 0.7090090655210821,
+          "mean": 0.4604886559455313,
+          "min": 0.05102599207744357
+        },
+        "observed_radial_variance_ratio": {
+          "count": 16,
+          "max": 1.2202681904131045,
+          "mean": 0.6227031005529354,
+          "min": 0.14665107218444973
+        },
+        "observed_tangent_variance_ratio": {
+          "count": 16,
+          "max": 4.962213544393547,
+          "mean": 2.6258362253183813,
+          "min": 1.2527924328840632
+        }
+      },
+      "components": [
+        {
+          "component": 0,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.0438161298738804,
+          "linear_proxy_residual_radial_variance_ratio": 0.12571398301812214,
+          "linear_proxy_residual_tangent_variance_ratio": 2.82125442565989,
+          "local_noise_radial_variance_ratio": 0.38471507518060694,
+          "local_noise_tangent_variance_ratio": 1.6963810279361757,
+          "mapped_center_radial_variance_ratio": 0.22953133736407128,
+          "mapped_center_tangent_variance_ratio": 0.4445780907974814,
+          "noise_only_linear_proxy_covariance_error": 0.6597095600793194,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.38208578295458817,
+          "observed_radial_variance_ratio": 0.7399603955628004,
+          "observed_tangent_variance_ratio": 4.962213544393547,
+          "rows": 18,
+          "samples": 320
+        },
+        {
+          "component": 1,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.1583690311652672,
+          "linear_proxy_residual_radial_variance_ratio": -0.02053231838447775,
+          "linear_proxy_residual_tangent_variance_ratio": 0.9647536564985217,
+          "local_noise_radial_variance_ratio": 0.22470801473701565,
+          "local_noise_tangent_variance_ratio": 2.5715912582393865,
+          "mapped_center_radial_variance_ratio": 0.11294328884965499,
+          "mapped_center_tangent_variance_ratio": 0.9309470628819734,
+          "noise_only_linear_proxy_covariance_error": 1.2489510045917138,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.21436102409367178,
+          "observed_radial_variance_ratio": 0.3171189852021929,
+          "observed_tangent_variance_ratio": 4.467291977619881,
+          "rows": 15,
+          "samples": 239
+        },
+        {
+          "component": 2,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.4126641247915623,
+          "linear_proxy_residual_radial_variance_ratio": 0.006445342347829772,
+          "linear_proxy_residual_tangent_variance_ratio": 0.8684742144844615,
+          "local_noise_radial_variance_ratio": 0.06775732233375178,
+          "local_noise_tangent_variance_ratio": 1.856554936864873,
+          "mapped_center_radial_variance_ratio": 0.07244840750286817,
+          "mapped_center_tangent_variance_ratio": 0.39569053168285,
+          "noise_only_linear_proxy_covariance_error": 0.9119157230948064,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.05102599207744357,
+          "observed_radial_variance_ratio": 0.14665107218444973,
+          "observed_tangent_variance_ratio": 3.1207196830321844,
+          "rows": 16,
+          "samples": 269
+        },
+        {
+          "component": 3,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.3462441299729084,
+          "linear_proxy_residual_radial_variance_ratio": -0.002597453166208935,
+          "linear_proxy_residual_tangent_variance_ratio": 0.2834318137370928,
+          "local_noise_radial_variance_ratio": 0.13779270525478757,
+          "local_noise_tangent_variance_ratio": 1.6124943735194903,
+          "mapped_center_radial_variance_ratio": 0.07585839428853132,
+          "mapped_center_tangent_variance_ratio": 0.14904527969690542,
+          "noise_only_linear_proxy_covariance_error": 0.7950165800589314,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.08999245404634382,
+          "observed_radial_variance_ratio": 0.21105364637710997,
+          "observed_tangent_variance_ratio": 2.0449714669534886,
+          "rows": 16,
+          "samples": 280
+        },
+        {
+          "component": 4,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.8469320658223563,
+          "linear_proxy_residual_radial_variance_ratio": -0.008779210105917812,
+          "linear_proxy_residual_tangent_variance_ratio": 0.10385140488840072,
+          "local_noise_radial_variance_ratio": 0.41294982986368856,
+          "local_noise_tangent_variance_ratio": 1.253636816930358,
+          "mapped_center_radial_variance_ratio": 0.3500103909371722,
+          "mapped_center_tangent_variance_ratio": 0.06949857151925398,
+          "noise_only_linear_proxy_covariance_error": 0.4567082290770745,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.40809773254181686,
+          "observed_radial_variance_ratio": 0.7541810106949429,
+          "observed_tangent_variance_ratio": 1.4269867933380127,
+          "rows": 17,
+          "samples": 251
+        },
+        {
+          "component": 5,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.2317379891517932,
+          "linear_proxy_residual_radial_variance_ratio": 0.049725120704071646,
+          "linear_proxy_residual_tangent_variance_ratio": 0.1629139664908832,
+          "local_noise_radial_variance_ratio": 0.5388949587878259,
+          "local_noise_tangent_variance_ratio": 1.5036432344681758,
+          "mapped_center_radial_variance_ratio": 0.05471248745893395,
+          "mapped_center_tangent_variance_ratio": 0.08778838703040726,
+          "noise_only_linear_proxy_covariance_error": 0.4831253582806673,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5386121404547244,
+          "observed_radial_variance_ratio": 0.6433325669508315,
+          "observed_tangent_variance_ratio": 1.7543455879894663,
+          "rows": 17,
+          "samples": 267
+        },
+        {
+          "component": 6,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.6255912385005846,
+          "linear_proxy_residual_radial_variance_ratio": 0.05835897338917767,
+          "linear_proxy_residual_tangent_variance_ratio": -0.11938025811685327,
+          "local_noise_radial_variance_ratio": 0.4656616136855551,
+          "local_noise_tangent_variance_ratio": 2.5769343147404657,
+          "mapped_center_radial_variance_ratio": 0.047830787756740316,
+          "mapped_center_tangent_variance_ratio": 0.1171486071357013,
+          "noise_only_linear_proxy_covariance_error": 1.1881710016397324,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.453590718922928,
+          "observed_radial_variance_ratio": 0.5718513748314731,
+          "observed_tangent_variance_ratio": 2.5747026637593136,
+          "rows": 17,
+          "samples": 280
+        },
+        {
+          "component": 7,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.9794227442072303,
+          "linear_proxy_residual_radial_variance_ratio": 0.03922831085666589,
+          "linear_proxy_residual_tangent_variance_ratio": 0.5057543067844672,
+          "local_noise_radial_variance_ratio": 0.5041342374794582,
+          "local_noise_tangent_variance_ratio": 2.853240089494098,
+          "mapped_center_radial_variance_ratio": 0.05549990396669897,
+          "mapped_center_tangent_variance_ratio": 0.2548371199749832,
+          "noise_only_linear_proxy_covariance_error": 1.4145587924212812,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.4375746338043874,
+          "observed_radial_variance_ratio": 0.5988624523028231,
+          "observed_tangent_variance_ratio": 3.613831516253548,
+          "rows": 16,
+          "samples": 250
+        },
+        {
+          "component": 8,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.8924719447597362,
+          "linear_proxy_residual_radial_variance_ratio": -0.07991909593170221,
+          "linear_proxy_residual_tangent_variance_ratio": 0.08161267671978445,
+          "local_noise_radial_variance_ratio": 0.6838301290801082,
+          "local_noise_tangent_variance_ratio": 2.4398712733083907,
+          "mapped_center_radial_variance_ratio": 0.08503953926037364,
+          "mapped_center_tangent_variance_ratio": 0.5421711396766349,
+          "noise_only_linear_proxy_covariance_error": 1.0753897440919808,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.6449063783121312,
+          "observed_radial_variance_ratio": 0.6889505724087797,
+          "observed_tangent_variance_ratio": 3.06365508970481,
+          "rows": 16,
+          "samples": 253
+        },
+        {
+          "component": 9,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.6510482519742256,
+          "linear_proxy_residual_radial_variance_ratio": -0.05256521227252359,
+          "linear_proxy_residual_tangent_variance_ratio": 0.1646343649874873,
+          "local_noise_radial_variance_ratio": 0.5346842834990947,
+          "local_noise_tangent_variance_ratio": 2.215002720410862,
+          "mapped_center_radial_variance_ratio": 0.042666756146745165,
+          "mapped_center_tangent_variance_ratio": 0.21712245005277184,
+          "noise_only_linear_proxy_covariance_error": 0.9416353155831194,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5110325176560697,
+          "observed_radial_variance_ratio": 0.5247858273733162,
+          "observed_tangent_variance_ratio": 2.5967595354511213,
+          "rows": 14,
+          "samples": 222
+        },
+        {
+          "component": 10,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.771714974006413,
+          "linear_proxy_residual_radial_variance_ratio": 0.02511942954570079,
+          "linear_proxy_residual_tangent_variance_ratio": 0.1559108420267521,
+          "local_noise_radial_variance_ratio": 0.5375998176260961,
+          "local_noise_tangent_variance_ratio": 1.7128264146622714,
+          "mapped_center_radial_variance_ratio": 0.05054959536598391,
+          "mapped_center_tangent_variance_ratio": 0.349776919703624,
+          "noise_only_linear_proxy_covariance_error": 0.6014078854285593,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5369843169502696,
+          "observed_radial_variance_ratio": 0.6132688425377808,
+          "observed_tangent_variance_ratio": 2.2185141763926475,
+          "rows": 15,
+          "samples": 234
+        },
+        {
+          "component": 11,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.4262666486113087,
+          "linear_proxy_residual_radial_variance_ratio": -0.02341860252877026,
+          "linear_proxy_residual_tangent_variance_ratio": 0.12081601046666712,
+          "local_noise_radial_variance_ratio": 0.6556031814126115,
+          "local_noise_tangent_variance_ratio": 2.114434663804499,
+          "mapped_center_radial_variance_ratio": 0.0940380746472351,
+          "mapped_center_tangent_variance_ratio": 0.32854329823697476,
+          "noise_only_linear_proxy_covariance_error": 0.8251836455296715,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.6551638150132285,
+          "observed_radial_variance_ratio": 0.7262226535310764,
+          "observed_tangent_variance_ratio": 2.563793972508141,
+          "rows": 16,
+          "samples": 279
+        },
+        {
+          "component": 12,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.0115984500932458,
+          "linear_proxy_residual_radial_variance_ratio": 0.17186675469510282,
+          "linear_proxy_residual_tangent_variance_ratio": 0.13567833502272486,
+          "local_noise_radial_variance_ratio": 0.766010314382803,
+          "local_noise_tangent_variance_ratio": 1.0186648190889023,
+          "mapped_center_radial_variance_ratio": 0.05614907206067197,
+          "mapped_center_tangent_variance_ratio": 0.098449278772436,
+          "noise_only_linear_proxy_covariance_error": 0.21260418362302066,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.7090090655210821,
+          "observed_radial_variance_ratio": 0.9940261411385778,
+          "observed_tangent_variance_ratio": 1.2527924328840632,
+          "rows": 14,
+          "samples": 206
+        },
+        {
+          "component": 13,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 2.0110104571597254,
+          "linear_proxy_residual_radial_variance_ratio": 0.20978838454916549,
+          "linear_proxy_residual_tangent_variance_ratio": -0.10605931655044532,
+          "local_noise_radial_variance_ratio": 0.6901443268887026,
+          "local_noise_tangent_variance_ratio": 1.8470277929105556,
+          "mapped_center_radial_variance_ratio": 0.32033547897523645,
+          "mapped_center_tangent_variance_ratio": 0.11953046258714242,
+          "noise_only_linear_proxy_covariance_error": 0.6550960263847775,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.6710809702035516,
+          "observed_radial_variance_ratio": 1.2202681904131045,
+          "observed_tangent_variance_ratio": 1.8604989389472528,
+          "rows": 16,
+          "samples": 240
+        },
+        {
+          "component": 14,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.1808123783170372,
+          "linear_proxy_residual_radial_variance_ratio": 0.028478580047382462,
+          "linear_proxy_residual_tangent_variance_ratio": 0.18868849126176013,
+          "local_noise_radial_variance_ratio": 0.5903524456170083,
+          "local_noise_tangent_variance_ratio": 1.2729782624600134,
+          "mapped_center_radial_variance_ratio": 0.12352558530194174,
+          "mapped_center_tangent_variance_ratio": 0.10812352835266985,
+          "noise_only_linear_proxy_covariance_error": 0.38250099684489475,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5553179231336935,
+          "observed_radial_variance_ratio": 0.7423566109663324,
+          "observed_tangent_variance_ratio": 1.5697902820744434,
+          "rows": 17,
+          "samples": 268
+        },
+        {
+          "component": 15,
+          "geometry_status": "AVAILABLE",
+          "latent_within_component_trace": 1.7106031710421088,
+          "linear_proxy_residual_radial_variance_ratio": -0.22460990365311212,
+          "linear_proxy_residual_tangent_variance_ratio": -0.42640962795840864,
+          "local_noise_radial_variance_ratio": 0.5091352314476887,
+          "local_noise_tangent_variance_ratio": 2.2931680052257484,
+          "mapped_center_radial_variance_ratio": 0.18583393857679964,
+          "mapped_center_tangent_variance_ratio": 1.0557535665248368,
+          "noise_only_linear_proxy_covariance_error": 0.9782062215624802,
+          "noise_only_linear_proxy_min_eigen_ratio": 0.5089830294425706,
+          "observed_radial_variance_ratio": 0.4703592663713762,
+          "observed_tangent_variance_ratio": 2.9225119437921765,
+          "rows": 16,
+          "samples": 238
+        }
+      ],
+      "endpoint_metrics": {
+        "component_covariance_error": 1.212485651485622,
+        "component_min_eigen_ratio": 0.14426273107528687,
+        "hq": 0.830322265625,
+        "mass_tv": 0.041748046875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "execution_commit": "220d37827e910c4f39c0d1c7afb1f337627c53ab",
+      "gate_status": "FAIL",
+      "generator": {
+        "jacobian_singular_values_mean": [
+          1.3740140500173113,
+          0.6360477190643652
+        ],
+        "mean_jacobian_frobenius_squared": 2.403674100641467,
+        "weight_operator_norms": {
+          "net.0.weight": 2.475801285298965,
+          "net.2.weight": 7.189891316165819,
+          "net.4.weight": 0.8088104046296156
+        }
+      },
+      "initial_table_values": {
+        "reason": "Only initial hashes and parameter seeds are archived; no replay/draws authorized.",
+        "status": "UNAVAILABLE"
+      },
+      "prior_table": {
+        "global_population_covariance_eigenvalues": [
+          0.8755930825273545,
+          1.121191978758873,
+          1.3585173294739958,
+          1.7832998092280539
+        ],
+        "global_population_covariance_trace": 5.138602199988275,
+        "mean_squared_radius": 5.144029409603208,
+        "nearest_row_distance_min_median_max": [
+          0.027010143531685304,
+          0.37277133676931673,
+          2.0580804584798464
+        ],
+        "within_component_covariance_trace_row_weighted": 1.7051647976305588
+      },
+      "recipe_prior_controls": {
+        "optimizer_family": "dualnorm_D_only",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "role": "critic_spectral",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "terminal_passing_suffix": 0
+    }
+  ],
+  "retained_prior_rate_negative": {
+    "attempt_id": "ed5c0491f733440f845806e3e59ec96a",
+    "candidate_id": "r1r2-prior-slow-v1",
+    "candidate_revision": "74d167d7ba3f592637c0701a5aac327270b537673cdfcadfb1376f92811d1a61",
+    "checkpoint_sha256": "48e0419ea9e7773af3abd0ea4387f750bed07a01af6673bf6b8639b34729344e",
+    "delta": "prior_lr_mult 1 -> .25",
+    "endpoint_metrics": {
+      "component_covariance_error": 3.17512895911932,
+      "component_min_eigen_ratio": 0.09849241375923157,
+      "hq": 0.475341796875,
+      "mass_tv": 0.030517578125,
+      "modes": 12,
+      "sample_count": 4096
+    },
+    "gate_status": "FAIL",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+    "source_report": "reports/forge/r1r2-five-track-repair/publication/results.json",
+    "task_id": "ring16_acquisition"
+  },
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "saved_endpoint_table_and_generator_diagnosis",
+  "target_component_sigma": 0.1,
+  "torch_cpu_rng_unchanged": true
+}

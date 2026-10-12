@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 835. Inventory coverage: complete. Unresolved import items: 7.
+Records: 836. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3926,6 +3926,22 @@ No complete repair. All seven new recipes pass clock and fail Ring16; momentum p
 
 [Evidence](../../reports/forge/r1r2-role-repair/publication/results.json) · [Record](records/r1r2-role-repair-20261012.json)
 
+### r1r2-constant-policy-v1 · r1r2-spectral-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+A singular-value update constraint repairs original whole Tier1 density and acquisition.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `spectral_optimizer_law`.
+
+
+
+No complete repair; both new spectral recipes fail Ring16 and words. Detailed metrics remain in the source-bound report.
+
+**Next:** Close this comparison, preserve failures; separately test supported quantile-force and optimizer-memory hypotheses under unchanged tasks.
+
+[Evidence](../../reports/forge/r1r2-spectral-repair/publication/results.json) · [Record](records/r1r2-spectral-repair-20261012.json)
+
 ### r1r2-constant-policy-v1 · r1r2-tier1-search-final-20261012
 
 **Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
@@ -5319,4 +5335,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `0fb1ccae085a1165a4bd065d40f1cff9b8daed749ca7458a5977944bf078820f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `c050bebf65aafecda1ef75f53547864f7ca5dbec35735cf87b71d2b73a7b9e1e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

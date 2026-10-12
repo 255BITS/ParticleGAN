@@ -1,0 +1,99 @@
+{
+  "candidate_declared": false,
+  "hypothetical_in_memory_bindings": [
+    {
+      "consumer": null,
+      "execution_path": "public_trainer",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "consumer": "output_marginal_v1",
+      "execution_path": "public_components",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "two_pole"
+    },
+    {
+      "consumer": "output_marginal_v1",
+      "execution_path": "public_components",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "consumer": "output_marginal_v1",
+      "execution_path": "public_components",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "consumer": null,
+      "execution_path": "public_trainer",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "consumer": "output_marginal_v1",
+      "execution_path": "public_components",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "consumer": null,
+      "execution_path": "public_trainer",
+      "global_weight": 1.0,
+      "local_weight": 0.0,
+      "reg_arm": "a_r1r2",
+      "reg_every": 1,
+      "task": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "measurement": "CPU float32 functional saved decoder at all five uniform zero-sigma prior rows versus retained five-word target bank",
+  "queue_work": false,
+  "rng_states_unchanged": true,
+  "rows": [
+    {
+      "attempt_archive_path": "r1r2-tier1-constant-search-v1/fd19e04990e34421a25166d36f7ee319",
+      "checkpoint_sha256": "0f5b36a326aa412cc09095b054aa79a16f5aa59fb1b9bb9f280d3251b0929ea3",
+      "logits_gradient_l2": 1.2950856658013047e-19,
+      "maximum_logit": 820.628662109375,
+      "minimum_logit": -412.3431701660156,
+      "output_gradient_l2": 1.1907055377960205,
+      "retained_records_sha256": "45abfbb71a07f6e45d818387c3c7750bb7aabb623245abfdc2bdfb9de89c1bd5",
+      "role": "constant_parent",
+      "unit_global_loss": 1.0926694869995117
+    },
+    {
+      "attempt_archive_path": "r1r2-role-m110-v1/3a45cf3eabb64155a1263efabae653e5",
+      "checkpoint_sha256": "1a8b0aa42ffb190b7e6740655a1d805ced64c851972bb083f4492a4bae4af999",
+      "logits_gradient_l2": 1.5222911128133954e-19,
+      "maximum_logit": 419.8973083496094,
+      "minimum_logit": -270.5569763183594,
+      "output_gradient_l2": 0.9084444642066956,
+      "retained_records_sha256": "9428e4f5c7ec28f876dadc848734f555f64f2306407c331d472e684b4cb56909",
+      "role": "m110",
+      "unit_global_loss": 0.6754204630851746
+    }
+  ],
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "endpoint population-panel output/logit sensitivity; not actual G-phase minibatch force or a prospective from-initialization experiment",
+  "training_updates": 0
+}

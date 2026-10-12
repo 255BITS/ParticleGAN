@@ -31,7 +31,7 @@ from particlegan import GANTrainer, MoGParticlePrior, ParticlePrior
 from reports.forge.regenerate_technique_inventory import project_receipt
 
 PYTHON = "/home/martyn/dev/ParticleGAN/.venv/bin/python"
-EXECUTION = None  # Root supplies the committed execution identity before collection.
+EXECUTION = "220d37827e910c4f39c0d1c7afb1f337627c53ab"
 ARCHIVE = Path("/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012")
 ORIGINAL = Path("/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012")
 CAMPAIGN = "r1r2-spectral-repair-v1"

@@ -1,0 +1,76 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-role-ams-m110-v1"
+  },
+  "candidate": "r1r2-role-ams-m110-v1",
+  "competing_explanation": "Both prior AMSGrad recipes widened Ring density despite acquisition repair; memory may damp useful motion. Confidence in the density interaction is weak. Any original required or own clock gate failure rejects the complete recipe.",
+  "control": {
+    "candidate_id": "r1r2-role-m110-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Maximum native Adam second-moment memory on exactm110 damps moment feedback and prevents decoder saturation while retaining its closer Ring density. All six original ordinary gates and own clock must pass under this one global recipe.",
+  "id": "r1r2-role-ams-m110-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "20aca4f16e8a4c31900b652e2c71ee3b",
+        "candidate_id": "r1r2-role-m110-v1",
+        "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-role-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        60
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "118b25d36cb74ce9b17cd146ae43b6dc",
+        "candidate_id": "r1r2-role-ams-m111-v1",
+        "candidate_revision": "c3dc3788301fe037e93533cf5e9df2462081de57a0e49a87123e3be04dfa28b9",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "five_word_joint_smoke"
+      },
+      "path": "reports/forge/r1r2-role-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        5
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
