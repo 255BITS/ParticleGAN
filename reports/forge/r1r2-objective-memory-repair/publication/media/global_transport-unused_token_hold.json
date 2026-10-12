@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "3a703b08ef53a4f182f2ead489ca5f1d1123e21b2f8d15a0863c05f1790e0656",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "40535c7ff3dd41efa6ac3404a531757a174da19d8192de129d8518d9525266ee",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-global-transport-v1/a79073e9c25f40368c4873787241d4a6/constraint_geometry-scored-outputs.pt": "6147dcff1a8eb79a57e1fa06524c52b8ad970f326c13d2b12f94d558fbef73f3"
+  },
+  "task_id": "unused_token_hold"
+}

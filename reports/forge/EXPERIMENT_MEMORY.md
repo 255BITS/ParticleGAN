@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 836. Inventory coverage: complete. Unresolved import items: 7.
+Records: 837. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3894,6 +3894,22 @@ Five new global recipes pass clock but fail Ring16; AMSGrad reaches 5/6 ordinary
 
 [Evidence](../../reports/forge/r1r2-five-track-repair/publication/results.json) · [Record](records/r1r2-five-track-repair-20261012.json)
 
+### r1r2-constant-policy-v1 · r1r2-objective-memory-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Global quantile transport or optimizer maximum-denominator memory repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `global_transport_or_optimizer_memory`.
+
+
+
+No complete repair; both new recipes pass acquisition and clock but fail Ring16. Detailed outcomes remain in the source-bound report.
+
+**Next:** Close the comparison, preserve failures and acquisition controls; require a distinct supported mechanism before further paid work.
+
+[Evidence](../../reports/forge/r1r2-objective-memory-repair/publication/results.json) · [Record](records/r1r2-objective-memory-repair-20261012.json)
+
 ### recipe-prior-refactor-r1r2-v1 · r1r2-recorded-baseline-20261012
 
 **Scope:** saved_evidence_baseline_readout; family_context; revision `594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a`.
@@ -5335,4 +5351,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `c050bebf65aafecda1ef75f53547864f7ca5dbec35735cf87b71d2b73a7b9e1e`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `cd1e42383d2fa7c5173850ffa97795a9321b302705fcd3749a9adc7f723f73ed`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

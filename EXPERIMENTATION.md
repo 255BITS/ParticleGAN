@@ -99,8 +99,8 @@ and [gradient-direction/critic-denominator readout](reports/forge/r1r2-direction
 retain their own finite registrations and source-bound readouts.
 The subsequent [spectral-update comparison](reports/forge/r1r2-spectral-repair/README.md)
 retains its source-bound readout under the same task contracts.
-The [objective and optimizer-memory comparison](reports/forge/r1r2-objective-memory-repair/PLAN.md)
-tests separately declared hypotheses under those unchanged contracts.
+The [objective and optimizer-memory readout](reports/forge/r1r2-objective-memory-repair/README.md)
+retains separately declared hypotheses and their evidence under those unchanged contracts.
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`
