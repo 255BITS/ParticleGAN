@@ -24,13 +24,29 @@ def source_audit(recipe, extensions):
     dependencies = []
     if recipe.get("continuous_policy") is not None:
         dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
-    elif recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
-        dependencies.append("learning-rate annealing depends on completed steps and horizon")
+    else:
+        lr_schedule = recipe.get("lr_schedule", "cosine")
+        if lr_schedule == "cosine" and (
+                recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1)):
+            dependencies.append("learning-rate annealing depends on completed steps and horizon")
+        elif lr_schedule == "exponential" and recipe.get("lr_decay_rate", .96) != 1:
+            dependencies.append("exponential learning-rate decay depends on completed steps")
+    beta2_end = recipe.get("beta2_end")
+    if beta2_end is not None:
+        betas = recipe["betas"]
+        starts = [betas[1], (recipe.get("d_betas") or betas)[1]]
+        if recipe.get("prior_update", "learned") != "frozen":
+            starts.append((recipe.get("prior_betas") or betas)[1])
+        if any(start != beta2_end for start in starts):
+            dependencies.append("Adam beta2 annealing depends on completed steps and horizon")
+    reg_coeff_end = recipe.get("reg_coeff_end")
+    if reg_coeff_end is not None and reg_coeff_end != recipe["reg_coeff"]:
+        dependencies.append("critic penalty coefficient annealing depends on completed steps and horizon")
     if recipe["input_noise_std"]:
         dependencies.append("input-noise annealing depends on completed steps and horizon")
     if recipe["output_noise_std"] and recipe["output_noise_warmup"]:
         dependencies.append("output-noise warmup depends on completed steps and horizon")
-    if recipe["reg_coeff"] and recipe["reg_every"] != 1:
+    if (recipe["reg_coeff"] or reg_coeff_end) and recipe["reg_every"] != 1:
         dependencies.append("lazy critic penalty uses a periodic update counter")
     if recipe["reg_coeff"] and recipe.get("reg_arm") is None and recipe.get("critic_formulation", "ka2") == "ka2":
         dependencies.append("KA2 switches from pure A to blended penalty at call 800")
@@ -41,6 +57,7 @@ def source_audit(recipe, extensions):
     root = Path(__file__).resolve().parents[2]
     files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/k3p.py", "particlegan/ka2.py",
              "particlegan/policy.py", "particlegan/continuous.py",
+             "particlegan/recipe_schedules.py",
              "particlegan/grad_regularizers.py", "experiments/forge/clockfree.py",
              "experiments/forge/api.py", "experiments/forge/rng.py"]
     return {"source_sha256": {name: file_hash(root / name) for name in files},
