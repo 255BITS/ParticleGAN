@@ -17,6 +17,7 @@
   "paid_cap_seconds": 3600,
   "round": 1,
   "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
   "searches": [
     {
       "id": "r1r2-tier1-constant-search-v1"

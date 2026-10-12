@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+from types import SimpleNamespace
 
 import pytest
 
@@ -34,6 +35,14 @@ def test_second_round_requires_prior_readout_and_lower_recipe_ceiling():
         workflow.validate_manifest(value)
     value.update(previous_registration="round1-registration.json", previous_results="round1-results.json")
     assert workflow.validate_manifest(value) == value
+
+
+def test_wrong_python_is_rejected_before_preparation_or_admission(monkeypatch):
+    value = manifest()
+    value["scientific_python_executable"] = "/different/scientific/python"
+    monkeypatch.setattr(workflow, "read_json", lambda _path: value)
+    with pytest.raises(ValueError, match="scientific Python interpreter"):
+        workflow.prepare(SimpleNamespace(manifest="unused"))
 
 
 def row(role):

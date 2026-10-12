@@ -22,13 +22,15 @@ Artifacts remain outside Git under `/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-sear
 
 ## Reproduction
 
-Use the repository Python environment from the repository root. Materialize the immutable finite cards, prepare the registration, and commit every scientific input before admission:
+Use the declared project interpreter `/home/martyn/dev/ParticleGAN/.venv/bin/python` (Python 3.12.13, Torch 2.14.0) from this checkout root. Preparation and execution must use that same interpreter; the manifest and registration freeze its runtime. Materialize the immutable finite cards, prepare the registration, and commit every scientific input before admission:
 
 ```sh
-python -c 'from pathlib import Path; from experiments.forge.configuration_search import materialize_search; materialize_search(Path.cwd(), "r1r2-tier1-constant-search-v1")'
-python reports/forge/r1r2-tier1-search/workflow.py prepare
-python reports/forge/r1r2-tier1-search/workflow.py run --source-commit COMMITTED_SHA --submit --drain
-python reports/forge/r1r2-tier1-search/workflow.py collect --media
+export PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+/home/martyn/dev/ParticleGAN/.venv/bin/python -c 'from pathlib import Path; from experiments.forge.configuration_search import materialize_search; materialize_search(Path.cwd(), "r1r2-tier1-constant-search-v1")'
+/home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/r1r2-tier1-search/workflow.py prepare
+/home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/r1r2-tier1-search/workflow.py run --source-commit COMMITTED_SHA --submit --drain
+/home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/r1r2-tier1-search/workflow.py collect --media
 ```
 
 Tail execution with:

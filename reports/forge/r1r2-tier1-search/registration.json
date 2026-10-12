@@ -14,9 +14,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "679b6f17c38a57bfb44827a092ef2332ee9490477d29343098b72841df9d33cb",
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -28,13 +28,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "5d21ec32a30d97684bb8689267e3c6a6e6ce1ac4b60bb9f50e52f4a37eef4c2b",
-        "clockfree_audit_measurement_v1": "8f786cf6e570d8f66e37e92f02c997db49b37536b402d547e00a8acb7d4845e8",
-        "five_word_joint_smoke": "88290e3f24d1852c76f55b2f93093d1f156818265135690c5882436e5fee7856",
-        "gaussian1d_smoke": "728ee6785d477c5b997ba67a0e5a8f488e62fbf39f0f178f063febe9bf5d42ee",
-        "ring16_acquisition": "fad2781a6bfb52ad0966f852883c4fe20058f8fa191dde1e681cb36f397d9ddc",
-        "two_pole": "1b3cc01222155d54be62ec2e2dc6c2c837ae7429dc98519d2e3fa428f6d45e51",
-        "unused_token_hold": "ff7e63bc2d70ef6881833558ee1bc0d07d5cbc3707d88a734ecc6db59d10c199"
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -51,9 +51,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "d80a9c8d76abf6ab8a4229c9e79f5997120fb1fff2d1f2118932299a070d1d39",
+      "jobs_sha256": "ab33e9c092f07ed8d68d2034439bbbc4c761187a9ae5696329ca96eeedae7a82",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -65,13 +65,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "acb8ad785c2b1ea4fdd2d81ec0e1c1b2203232adff0d669193ea13454a4fe479",
-        "clockfree_audit_measurement_v1": "75c2fb0504dd50261190e7db41f42c776ecea30991b32563ace4c84153c8fc5e",
-        "five_word_joint_smoke": "6f46ae7ca3bc70195958bbc82986bfac5982de7e97b2d7e1433265a33015f431",
-        "gaussian1d_smoke": "35bebb52aa7947d2ad90dcfca8d56fedb17f3cba1d214cda22beb1d704acd723",
-        "ring16_acquisition": "a6b7b0ad3ff1257f74a6e72a5b6c97fc2585805ce8f248d28a34a72399790a33",
-        "two_pole": "5c0b547c7ffaac4b049706ff2eafec6ca466f284dc50e2139ad712e32eee0acd",
-        "unused_token_hold": "070bb050d3cc1ba38ba6b514db909fc9e1ec84f456859e96204f758c1d680d01"
+        "ae_gan_hold": "80ee2029ac7c137409816819d3b43814947923c77ea3bcb8db085c6600d87e9e",
+        "clockfree_audit_measurement_v1": "0619cdbaa260f7eeb88dad9fd3ae6fe8e08f1cad4946adfc9df0b77e5a62c84a",
+        "five_word_joint_smoke": "8ed8b9b15592f911dc5bff63740b7cf9a85e875506a0ce0e98528274b89ea872",
+        "gaussian1d_smoke": "2d47d1e7e656dc85139cbd5a8c91cce06ed3dce3a2c2662e6467e6605478cfa7",
+        "ring16_acquisition": "9d7eeb9cfb47266e9970e67bac60ab6f02e68992d7ea5ec95fafaaac9dde829a",
+        "two_pole": "a2677e58e36d10a5b3994794327292bc387fd985d3f80fbcd84c96013cd2b85e",
+        "unused_token_hold": "54572c40a93c46aae921502a9ae77e249d544eb219b3edd9073ad7387e07b4eb"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -88,9 +88,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "4c124f745f4faae070ddbbe01afd10c4a9aa3d9624b816ff5c007bf1aab7e25c",
+      "jobs_sha256": "af3d261e16c8d2ef88050d2731687ac679280f65a7810d64c14869f42edf1e4b",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -102,13 +102,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "28dae533fdf301a2b39dc90dccaf6bafb46515cca2e35bdab17d28d82ee31d84",
-        "clockfree_audit_measurement_v1": "57113b524ae0ec6aa19a047c7f9a4fda7e93f9a68495eb84143c68ecbdc1ed18",
-        "five_word_joint_smoke": "5292c9bc53c1bf50083431f4473e7bbe0484a7e43a280cfe18d7dcb2bd3f85c0",
-        "gaussian1d_smoke": "6ebef66691d82ec4308cbca84bb66f6a6081596c48e46177910a3f96d2ff043c",
-        "ring16_acquisition": "145c619d2a40285d9bba67a5701d935a585f2888a6137e4dd79f920a51659923",
-        "two_pole": "d7f00bea3a90a3a60d7ad9d279d952d891a31eb9154ac7f923118c331a2ef692",
-        "unused_token_hold": "ac26da7e24158009b2777b38f23977187048d28b7b1759c1caf543967d17f9c9"
+        "ae_gan_hold": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+        "clockfree_audit_measurement_v1": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+        "five_word_joint_smoke": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+        "gaussian1d_smoke": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+        "ring16_acquisition": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+        "two_pole": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+        "unused_token_hold": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -125,9 +125,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "9334fe02e749b0f0a9b532ce79573c77bb251b22b07457607347a2f8dde58231",
+      "jobs_sha256": "3bcb79d953c1e9b59da5a7758de12849464a497f1de45af6079e51668d53a6b5",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -139,13 +139,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "5adb4e371527fabdbfe289e05ce7af7b16a21da5b85b404b94ae1cb26cd5f634",
-        "clockfree_audit_measurement_v1": "650bceb60161ba8403b8936a6ce1beb537b62e80e658182b0f5d82be38210a40",
-        "five_word_joint_smoke": "13c391c915c6233d7a9cd8863cd632d05e99f3dc6368fef95b296c8e8658b4e7",
-        "gaussian1d_smoke": "199cff1f0db72bff1735ebf75c85fb14082510a992703099004686c04edf08e2",
-        "ring16_acquisition": "158962b269b37c443459dd16fc483748fbf865e092740dd0927bbbe6c3c55c53",
-        "two_pole": "a7262bfa5b5eea063da5485b9f3d7357663b8add7170d6ee4363df92ed6577de",
-        "unused_token_hold": "230c8c0785da11c05a0fa9b72d0d8cab679186a9bd203424970e93840efa9850"
+        "ae_gan_hold": "ace578add2298fade80ecef03c33ad1b83adbfe41e5e0f1a8ad7b7f87d3dcbdb",
+        "clockfree_audit_measurement_v1": "46e3f3c1126a3ed46867032023d454d23c8b065d750f695d1c7c46061c95d3d2",
+        "five_word_joint_smoke": "df32d6d9da5a51fad8fa975fca9c823f1cd27fe7a192e82a115f9dc0172a09cf",
+        "gaussian1d_smoke": "44e687470e107b30bc8150cde5e7b96ac03ae6f508587bd1997fc9245bc92f35",
+        "ring16_acquisition": "760a641c0b9e651b281bba374f4d1bc96df20a460f6021884ca4298e1a20ff91",
+        "two_pole": "f5f5e6dc1400a7cc84acda9e89166bbe2fed7eeb241aeefdb3b33446c748e798",
+        "unused_token_hold": "ae6400ffaf84d9918d7cfb80111d015609759b21fb69f56171ed6cfe0ea8d911"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -162,9 +162,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "a18b8125624db9609acc05e11c2af05b0f95f3caac592711139169092bf828f8",
+      "jobs_sha256": "838a15ab2686227560b976df612d6bb5e4fef0550ffbc0848c3594caee6e98be",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -176,13 +176,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "c2ae7809595ce998d80b28e615d2ffc5a848c98ed7469db346df59b08af4d1e1",
-        "clockfree_audit_measurement_v1": "4b30f25411c30616f550c321060fbf4bfdafd0fd388ee793c78c800571ab4618",
-        "five_word_joint_smoke": "cd7c5bdd4b16f817b2bd53e38441e0a8972686a89e1f4b0df0a522bff4465747",
-        "gaussian1d_smoke": "ff3fc3c92cd98dd7b964dd72ee523b3b86fb4590fb3b52bed72e36b775739f7d",
-        "ring16_acquisition": "8e5d849b9c4ed95132829a89f4a445810499eed4188927d0c226770d419799a0",
-        "two_pole": "1b305d961ff50859341783d3451bf1f27db7eceb7b538003997d695847c7f1fc",
-        "unused_token_hold": "93029a0589249544e99382c2b0c20d4b611b8ab900beecb9772d2ddaf7feed0f"
+        "ae_gan_hold": "6e87192fcfe882a813bf5106d6ce2b7b43e0b1e3bd8447fa2aaffca4dcc42f09",
+        "clockfree_audit_measurement_v1": "c9de647b85236ab76589aea9e526e96c38fceac1b6d8a0851c959f97948a0f21",
+        "five_word_joint_smoke": "d909993b181c951702e3e0254193ffd59c7b8e4abddd5463c1a0058c931d90b7",
+        "gaussian1d_smoke": "e76c3b53ddf89849d1bb7309b6c6242022a37d9f72ae6b59b3a5a9e5ea805ad1",
+        "ring16_acquisition": "2fcd0f4ade706635d8f19a5cc074bfdd8cdccd090193087d16ad58e4ec0ab841",
+        "two_pole": "b09039e0d25f60f8471bcc877de2efe2d06e779ac8dbfd44fa37df36dd6e0f3c",
+        "unused_token_hold": "a66c9ccf9f48208c8b81256a5d8e352db589c7d83bca000fb9a6e5297e288ced"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -199,9 +199,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "c5b4be1fb0395883345a873e83d363fc1d2d4d618680e00c3dc099150517e070",
+      "jobs_sha256": "dfa701a387fdfa3005469e13da06b131f1d12c34918fb865a95e15c0ac6712ee",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -213,13 +213,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "30f4f70e3328ab7a4f6b14f4e71800fdd36d1a0ec2d1048b92e84e20650dfb3c",
-        "clockfree_audit_measurement_v1": "c84d6f0a7c2bf9b0ce387214363b051afb088bd70da22f7504089d3b2c877121",
-        "five_word_joint_smoke": "673d8ef17226bac9f846585e6bcc7a0f987edf21e4fee3ec8587f7adc9b8c752",
-        "gaussian1d_smoke": "213cc42f4c632b6e58a101742a5dd16f3d0b64c110d121607d320e791b3787ce",
-        "ring16_acquisition": "795ef017610b81527d181fd96183ca08205965d4e8dd932079988194224a574a",
-        "two_pole": "6dca4613a685d81e7b96893462fb26ccd371389cc7b67c18579bee686636ba3a",
-        "unused_token_hold": "e28d23473b4fe1ac9672ccb038fa9a4848f6d90f038a4a45369fa69904b5e204"
+        "ae_gan_hold": "ea4b8df9d7afc5ec6551076d356661d69e1282b64bf66fcd99b62381d44e51c1",
+        "clockfree_audit_measurement_v1": "b60e0c425506de4fd95c51e2272df7418a33f5092c5d5b196e4fe6baf747373f",
+        "five_word_joint_smoke": "76d4ad0e60563ac7b34bf8186071fe8ae48e5d006d228dd4c701be76c03d0e6a",
+        "gaussian1d_smoke": "f0dfd91527dd85e0bd054ef67d9b9fe3e7b0b94069f907c324abfb84f531666f",
+        "ring16_acquisition": "1dbdcb9155134320f671244f8d52ab9e2c8c4e4349c00f6b856b9090e3145996",
+        "two_pole": "e62c9c42e74b43ba64fda49fa849f9547bfddf0dea7d6507abadebde05115461",
+        "unused_token_hold": "d8a3adcbea8a3b16d493eb5f35d693ebf002cff44f9f931316f93991c02b38ce"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     },
@@ -236,9 +236,9 @@
         "schema_version": 1
       },
       "full_allowance_seconds": 2520,
-      "jobs_sha256": "f87b2197a734dd69e06f6b6039beff9fddc1f366e2d70e9671782bd2faeef9d8",
+      "jobs_sha256": "bb63c7e50544aad0041b6dcc5e8fbb96550d1ad2db60f728f4b72d6ccfe9300f",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "runtime_sha256": "f1687b37f1942c67869a7d60a7e1cfc4b275f83f7491d2bc0ff2c267c145b773",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
       "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
       "task_contracts": {
         "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
@@ -250,13 +250,13 @@
         "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
       },
       "task_keys": {
-        "ae_gan_hold": "11176e0272407ba1aa77231c928c9876f3e29885b68b0eb608fe0593dbcf199f",
-        "clockfree_audit_measurement_v1": "93f0fd250369052b98a790987e20c10be2915fe9447303983ee804c99c597d54",
-        "five_word_joint_smoke": "7a79325ac61ebe57bf11c2c936249021f189a86fbfc98b1f419a81de44b74c0c",
-        "gaussian1d_smoke": "b8090551673b3a4c4a8c7a3cea0d1f6f7dfc310b6e91678344ece27ac47e1600",
-        "ring16_acquisition": "c5ea39c3719351f2e090307725a2a8bc73d2be50ac9d5c50d0f8b7d862ff4f1c",
-        "two_pole": "87401161e85c97af1fb700c3b04a44d0598490ddac3562da13b2852ba0434a39",
-        "unused_token_hold": "85914c829f8be2e472e272f8f1df1a500cae61140c5962552f299476d5262950"
+        "ae_gan_hold": "eaa2edc7c12e840025004e33b01a39cbc2bf0b7f4d740c9a5dbf64441f475fed",
+        "clockfree_audit_measurement_v1": "c89fffe8eb83bab01586669ad27ce5670187f84642aa9477cbcdcb73b3e1776a",
+        "five_word_joint_smoke": "3187862428ee5055e6ba38ed97af1f04a03a48b1166deb85f486948fb66082be",
+        "gaussian1d_smoke": "0cd17b0a539fc43812e6f2867754d2461a38617e978228ce3f0a973ab44a12ec",
+        "ring16_acquisition": "b785b4404e124b386d6d6c9085a61e66c7f916fe290f6b35a8ec738d2a5b6dfd",
+        "two_pole": "c9b99f0a2f09b13e6d8ecf6680da2da8d15ff5ac1190e1fc9e770a1340cc7779",
+        "unused_token_hold": "cdcd21522af7654b28d0e13b61e75170392faf48d71d83bd4afb45e6b84984b3"
       },
       "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
     }
@@ -289,11 +289,11 @@
     "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
     "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
     "reports/forge/r1r2-baseline/results.json": "29ef8926634f453735238ed6385feb42c3a01b271944a4d8b04039a561ab1835",
-    "reports/forge/r1r2-tier1-search/README.md": "6e628199f8eb5de2157f24345079e8292d95eb0b7fd0ec96d90fdac56c42cac9",
+    "reports/forge/r1r2-tier1-search/README.md": "ef07043744c35eb7903ecfa4c93d951c805b2b1d61d348dac7b7b1e4cd3d6704",
     "reports/forge/r1r2-tier1-search/evidence-diagnosis.md": "056aee3a26cbc2a0669b3d04dcbb9fb54bea18ac8849dda692c34c0e901de67d",
-    "reports/forge/r1r2-tier1-search/phase1.json": "166c637cf5fb09d939b239507f439b838c1a606fad07e6fab65d5646efc276da",
+    "reports/forge/r1r2-tier1-search/phase1.json": "280d41e3be50deb47a7ff6efc96deec79da7468aa415cfdfcaa888d5e145d5bf",
     "reports/forge/r1r2-tier1-search/protocol-source-bindings.json": "2c60e6094c26c8d1905f636c25559d27f1f54b02a7e501902e2f51d941ef0f04",
-    "reports/forge/r1r2-tier1-search/workflow.py": "06b4e61751135636001971ddfac0fa384e5cb58b43c6b14c6138cb552f770cd6"
+    "reports/forge/r1r2-tier1-search/workflow.py": "11071e5ab4730d55c6845ba655b7a85bf911ec0726bcc7d98a4c496322fad68c"
   },
   "manifest": {
     "baseline_role": "baseline",
@@ -314,6 +314,7 @@
     "paid_cap_seconds": 3600,
     "round": 1,
     "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
     "searches": [
       {
         "id": "r1r2-tier1-constant-search-v1"
@@ -335,7 +336,7 @@
       "configs/forge/tasks/unused_token_hold.json"
     ]
   },
-  "manifest_sha256": "166c637cf5fb09d939b239507f439b838c1a606fad07e6fab65d5646efc276da",
+  "manifest_sha256": "280d41e3be50deb47a7ff6efc96deec79da7468aa415cfdfcaa888d5e145d5bf",
   "paid_cap_seconds": 3600,
   "qualification_input": false,
   "required_tasks": [

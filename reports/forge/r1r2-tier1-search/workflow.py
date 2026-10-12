@@ -164,6 +164,8 @@ def declaration_paths(root, manifest, resolved):
 
 def prepare(args):
     manifest = validate_manifest(read_json(args.manifest))
+    require(sys.executable == manifest.get("scientific_python_executable", sys.executable),
+            "Prepare with the manifest's scientific Python interpreter")
     require(not (args.artifacts / f'{manifest["id"]}-progress.json').exists(), "Admitted rounds are immutable")
     resolved, searches = requests(args.repository, args.artifacts / "queue", manifest)
     paths = declaration_paths(args.repository, manifest, resolved) | {str(args.manifest.relative_to(args.repository))}
@@ -218,6 +220,8 @@ def run(args):
     registration = read_json(args.registration)
     require(file_hash(args.manifest) == registration["manifest_sha256"], "Manifest changed")
     manifest = validate_manifest(registration["manifest"])
+    require(sys.executable == manifest.get("scientific_python_executable", sys.executable),
+            "Run with the same declared scientific Python used for preparation")
     resolved, _ = requests(root, archive / "queue", manifest)
     for role, item in resolved.items():
         require(dict(card=item["card"], **item["projection"]) == registration["candidates"][role], "Prepared bindings changed")
