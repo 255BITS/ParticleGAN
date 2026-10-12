@@ -30,6 +30,7 @@ from .api import CapabilityError, task_formulation_context, task_policy_blockers
 from .contracts import file_hash
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json
+from .comparison_protocol import ComparisonProtocol
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .priors import task_prior, recipe_owned_prior
@@ -133,16 +134,19 @@ class _ConditionedScore(nn.Module):
 
 class _PenaltyBinding:
     """Adapt old host call syntax to Recipe.make_critic_penalty's public API."""
-    def __init__(self, recipe, optimizer, audit):
+    def __init__(self, recipe, optimizer, audit, comparison_protocol=None):
         self.bound = recipe.make_critic_penalty(optimizer, collect_stats=True)
         self.arm, self.coeff, self.kappa = recipe.reg_arm or recipe.critic_formulation, recipe.reg_coeff, recipe.reg_kappa
         self.norm, self.lazy_k, self.target_anneal = "rms", recipe.reg_every, "none"
         self.calls = 0
         self.audit = audit
         self.coefficient_observations = {}
+        self.comparison_protocol = comparison_protocol
 
     def penalty(self, critic, real, fake, step=None, **kwargs):
         self.calls += 1
+        if self.comparison_protocol is not None:
+            self.comparison_protocol.record("critic", real)
         value = self.bound(critic, real, fake)
         if getattr(self, "diagnostic", None) is not None:
             self.diagnostic.penalty_gradient(value)
@@ -239,6 +243,7 @@ class BehaviorComponents:
         self.diagnostic, self.diagnostic_observations = None, []
         self.penalty = None
         self.schedule_observations = {}
+        self.comparison_protocol = None
         self.noise = _NamedNoise(self)
         self.bound = False
 
@@ -344,6 +349,8 @@ class BehaviorComponents:
             self.recipe.apply_prior_policy(prior)
             self._sample_binding(prior, name)
         self.prior_regularizer = self.recipe.make_prior_regularizer(reference=priors) if priors else None
+        self.comparison_protocol = ComparisonProtocol(self.context.streams, {
+            **self.models, **({"direct_particles": list(direct_particles)} if direct_particles else {})})
         prior_parameters = [p for prior in priors for p in prior.parameters() if p.requires_grad] + list(direct_particles)
         if prior_parameters or priors:
             self.role_parameters["prior"] = prior_parameters
@@ -381,7 +388,7 @@ class BehaviorComponents:
             self.base_rates[id(optimizer)] = [group["lr"] for group in optimizer.param_groups]
             self.initial_group_betas[id(optimizer)] = [tuple(group["betas"]) for group in optimizer.param_groups]
         self.mechanism_audit = MechanismAudit(self.recipe, public_d, parts)
-        self.penalty = _PenaltyBinding(self.recipe, public_d, self.mechanism_audit)
+        self.penalty = _PenaltyBinding(self.recipe, public_d, self.mechanism_audit, self.comparison_protocol)
         # Host constructors may seed global RNG for fixed fixtures. Training
         # starts on the independent data stream after construction is complete.
         data = self.context.streams.generator("data", component="host", purpose="batches")
@@ -441,6 +448,7 @@ class BehaviorComponents:
 
     def add_transport_loss(self, total, fake, real, *, conditioning=None):
         """Only a declared variant consumes marginal output transport."""
+        self.comparison_protocol.record("generator", real)
         if self.context.component_transport is None or not (
                 self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
             return total
@@ -654,6 +662,7 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
                       scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device=str(device), applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
+        result["evidence"]["comparison_protocol"] = components.comparison_protocol.receipt(components.context.streams)
         if components.uses_recipe_prior:
             from .priors import prior_policy_receipt
             result["evidence"]["prior_policy"] = prior_policy_receipt(components.recipe,

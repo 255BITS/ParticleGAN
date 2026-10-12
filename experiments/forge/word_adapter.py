@@ -16,6 +16,7 @@ import torch
 from .api import CapabilityError, task_formulation_context
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json, file_hash
+from .comparison_protocol import ComparisonProtocol
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
 from .priors import recipe_owned_prior
 from .state import state_digest
@@ -113,6 +114,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
         "parameter_shapes": {name: list(parameter.shape) for name, parameter in fixture.E.named_parameters()},
         "initial_state_sha256": state_digest(fixture.E.state_dict())}
     host["initial_prior_sha256"] = state_digest(fixture.prior.state_dict())
+    comparison = ComparisonProtocol(context.streams, {"generator": fixture.G, "discriminator": fixture.D,
+        "encoder": fixture.E, "prior": fixture.prior})
     audit = MechanismAudit(context.recipe, fixture.opt_d, [fixture.opt_g])
     timing, observations, records, rng_audits = PhaseTimer(), [], [], []
     generated = context.streams.generator("eval", component="live", purpose="generated_words")
@@ -125,7 +128,7 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     started, finite = time.monotonic(), True
     for step in range(steps + 1):
         if step:
-            with timing.measure("training_updates"):
+            with timing.measure("training_updates"), comparison.word_step(fixture):
                 update = fixture.step()
             finite = finite and _finite_tree(update)
             audit.observe_penalty(fixture.penalty.last_stats)
@@ -175,6 +178,7 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
               "unintended_rng_deviations": sum(row["unintended_rng_deviations"] for row in rng_audits)}
     receipt = {**context.receipt(), "api_components": list(fixture.api_components),
         "evidence": {"observations": observations, "live": observations[-1], "host": host,
+            "comparison_protocol": comparison.receipt(context.streams),
             "scoring_weights": "live", "guards": guards, "rng_audits": rng_audits,
             **executed_receipt(JOINT_WORDS_CLEAN, eval_output_noise="clean")},
         "cost": {"optimizer_updates": counts, "completed_steps": fixture.completed_steps,
