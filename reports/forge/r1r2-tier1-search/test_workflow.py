@@ -128,3 +128,66 @@ def test_source_binding_refresh_preserves_every_scientific_task_field():
         current["evaluation"].pop("sources")
         assert previous == current
         assert workflow.stable_hash(current) == task["before_scientific_law_sha256"] == task["after_scientific_law_sha256"]
+
+
+def charged_attempt(aid, request, seconds):
+    return dict(attempt_id=aid, seconds=seconds, owner=dict(request=request, campaign=request, revision="recipe"))
+
+
+def test_cached_prior_round_attempt_is_validated_without_a_second_charge():
+    state = dict(charges=[charged_attempt("baseline", "round1", 12), charged_attempt("new", "round2", 18)])
+    charges = workflow.paid_charge_index(state)
+    old = workflow.attempt_cost(charges, {"round2"}, "baseline", 300,
+                               dict(task_results=[dict(cost=dict(wall_seconds=12))]))
+    new = workflow.attempt_cost(charges, {"round2"}, "new", 300,
+                               dict(task_results=[dict(cost=dict(wall_seconds=18))]))
+    assert old["reused"] is True and old["seconds"] == 0
+    assert old["original_paid_seconds"] == 12 and old["original_charge_owner"]["request"] == "round1"
+    assert new["reused"] is False and new["seconds"] == 18
+    assert sum(charge["seconds"] for charge in charges.values()) == 30
+    assert sum(cost["seconds"] for cost in (old, new)) == 18
+
+
+def test_cached_attempt_still_requires_exact_original_paid_receipt():
+    charges = workflow.paid_charge_index(dict(charges=[charged_attempt("baseline", "round1", 12)]))
+    with pytest.raises(ValueError, match="Paid accounting mismatch"):
+        workflow.attempt_cost(charges, {"round2"}, "baseline", 300,
+                              dict(task_results=[dict(cost=dict(wall_seconds=13))]))
+
+
+def test_aggregate_accounting_rejects_duplicate_charges_outside_current_round():
+    charge = charged_attempt("baseline", "round1", 12)
+    with pytest.raises(ValueError, match="Duplicate paid charge"):
+        workflow.paid_charge_index(dict(charges=[charge, charge]))
+
+
+def test_external_certified_reuse_has_no_local_charge():
+    cost = workflow.attempt_cost({}, {"round2"}, "external", 300,
+                                 dict(task_results=[dict(cost=dict(wall_seconds=12))]))
+    assert cost["reused"] is True and cost["seconds"] == 0
+    assert cost["original_paid_seconds"] is None and cost["original_charge_owner"] is None
+
+
+def test_round2_children_change_only_global_learning_rate():
+    value = workflow.read_json(Path(__file__).with_name("phase2.json"))
+    assert value["max_candidates"] == 4 and len(value["searches"]) == 3
+    for search in value["searches"]:
+        sid = search["id"]
+        spec = workflow.read_json(workflow.ROOT / f"configs/forge/searches/{sid}.json")
+        assert spec["schema_version"] == 2 and spec["grid"] == {"lr": [.00425]}
+        parent = workflow.read_json(workflow.ROOT / f'configs/forge/configurations/{spec["base_candidate"]}.json')
+        child = next(c for c in workflow.read_json(Path(__file__).with_name("round2-registration.json"))["candidates"].values()
+                     if c["card"].get("search") == sid)
+        card = workflow.read_json(workflow.ROOT / f'configs/forge/configurations/{child["candidate"]}.json')
+        before, after = parent["resolved_configuration_recipe"], card["resolved_configuration_recipe"]
+        assert {key for key in before if before[key] != after[key] and key != "name"} == {"lr"}
+        assert before["lr"] == .0085 and after["lr"] == .00425
+
+
+def test_round2_cached_baseline_keeps_exact_scientific_and_job_identity():
+    prior = workflow.read_json(Path(__file__).with_name("registration.json"))
+    followup = workflow.read_json(Path(__file__).with_name("round2-registration.json"))
+    before, after = prior["candidates"]["baseline"], followup["candidates"]["baseline"]
+    assert {key: val for key, val in before.items() if key != "card"} == {
+        key: val for key, val in after.items() if key != "card"}
+    assert followup["source_digest"] == prior["source_digest"]

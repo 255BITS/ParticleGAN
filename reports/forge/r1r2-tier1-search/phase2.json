@@ -1,0 +1,40 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 10080,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-round2-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-tier1-round2-cached-baseline-v1"
+    }
+  ],
+  "id": "r1r2-tier1-round2-v1",
+  "max_candidates": 4,
+  "paid_cap_seconds": 5400,
+  "previous_registration": "reports/forge/r1r2-tier1-search/registration.json",
+  "previous_results": "reports/forge/r1r2-tier1-search/publication/results.json",
+  "round": 2,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [
+    {
+      "id": "r1r2-tier1-half-rate-b99-g01-v1"
+    },
+    {
+      "id": "r1r2-tier1-half-rate-b99-g03-v1"
+    },
+    {
+      "id": "r1r2-tier1-half-rate-b90-g01-v1"
+    }
+  ],
+  "supporting_inputs": [
+    "reports/forge/r1r2-tier1-search/round1-readout.md",
+    "reports/forge/r1r2-tier1-search/round2-plan.md",
+    "reports/forge/r1r2-tier1-search/registration.json",
+    "reports/forge/r1r2-tier1-search/publication/results.json"
+  ]
+}

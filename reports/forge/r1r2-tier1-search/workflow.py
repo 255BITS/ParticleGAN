@@ -360,12 +360,37 @@ def clock_retained_media(entry, output, root):
     return receipt
 
 
+def paid_charge_index(state):
+    """One original charge per attempt across the shared finite-round queue."""
+    indexed = {}
+    for charge in state.get("charges", []):
+        aid = charge["attempt_id"]
+        require(aid not in indexed, "Duplicate paid charge")
+        indexed[aid] = charge
+    return indexed
+
+
+def attempt_cost(charges, request_ids, aid, allowance, result):
+    """Attribute cost to its original request while validating reused receipts."""
+    charge = charges.get(aid)
+    if charge:
+        actual = sum(row.get("cost", {}).get("wall_seconds", 0) for row in result["task_results"])
+        require(math.isclose(actual, charge["seconds"], abs_tol=1e-7), "Paid accounting mismatch")
+    owned = bool(charge and charge["owner"]["request"] in request_ids)
+    return dict(seconds=charge["seconds"] if owned else 0, reused=not owned,
+                original_paid_seconds=charge["seconds"] if charge else None,
+                original_charge_owner=deepcopy(charge["owner"]) if charge else None,
+                full_allowance_seconds=allowance)
+
+
 def collect(args):
     registration = read_json(args.registration)
     manifest = registration["manifest"]
     progress = read_json(args.artifacts / f'{manifest["id"]}-progress.json')
     require(progress["phase"] == "complete", "Collect a terminal finite round")
     state = read_json(args.artifacts / "queue/queue/state.json")
+    charges = paid_charge_index(state)
+    current_request_ids = set(progress["requests"].values())
     helper = module(args.repository / "reports/forge/recipe-prior-refactor/workflow.py", "r1r2_saved_helper")
     publisher = helper.load_publisher(args.repository)
     renderer = publisher._saved_renderer(args.repository) if args.media else None
@@ -389,15 +414,8 @@ def collect(args):
             require(attempt["request"]["source"]["digest"] == plan["source_digest"]
                     and attempt["request"]["candidate_revision"] == plan["candidate_revision"], "Certified source/recipe mismatch")
             grade = helper.saved_grading(attempt)
-            charges = [c for c in state.get("charges", []) if c["attempt_id"] == aid]
-            # Compatible reuse can originate before this local queue. It remains
-            # certified evidence but is not charged again to the present round.
-            require(len(charges) <= 1, "Duplicate paid charge")
-            costs[aid] = dict(seconds=charges[0]["seconds"] if charges else 0,
-                             reused=not charges, full_allowance_seconds=definition["budget_seconds"])
-            if charges:
-                actual = sum(r.get("cost", {}).get("wall_seconds", 0) for r in attempt["result"]["task_results"])
-                require(math.isclose(actual, charges[0]["seconds"], abs_tol=1e-7), "Paid accounting mismatch")
+            costs[aid] = attempt_cost(charges, current_request_ids, aid,
+                                      definition["budget_seconds"], attempt["result"])
             receipts[aid] = {n: file_hash(args.repository / f"reports/forge/attempts/{aid}/{n}.json")
                             for n in ("request", "result", "evidence")}
             for row in attempt["result"]["task_results"]:
@@ -438,6 +456,8 @@ def collect(args):
         archive=str(args.artifacts), task_cells=cells, recipes=standings, certified_results=rows,
         exact_certificate_hashes=receipts, comparison_audit=audits, media=exports,
         costs=costs, total_paid_seconds=sum(c["seconds"] for c in costs.values()),
+        aggregate_total_paid_seconds=sum(c["seconds"] for c in charges.values()),
+        aggregate_paid_attempts=len(charges), aggregate_charge_attempt_ids=sorted(charges),
         full_reservation_seconds=registration["reservation_seconds"], paid_cap_seconds=registration["paid_cap_seconds"],
         optimizer_updates_added_by_collection=0, sampling_draws_added_by_collection=0,
         selection_or_defaults_changed=False)
