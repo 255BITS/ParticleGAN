@@ -1,0 +1,61 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-five-track-ttur-v1-study"
+  },
+  "candidate": "r1r2-five-track-ttur-v1",
+  "competing_explanation": "Faster critic fitting may improve only mode coverage or transient endpoint metrics, or amplify bursts and destroy word inversion/pole transport. Full sustained Ring16 and pole gates plus independently confirmed acquisition across all peers determine repair; the auxiliary final covariance signature alone grants no qualification.",
+  "control": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "A fixed critic/generator LR ratio of 2, applied as one global R1/R2 recipe, improves Ring16 component covariance to the unchanged bound within 1600 updates while retaining Gaussian, pole, token, AE and word gates plus clock independence.",
+  "id": "r1r2-five-track-ttur-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+        "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+        "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+      "selector": [
+        "certified_results",
+        18
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

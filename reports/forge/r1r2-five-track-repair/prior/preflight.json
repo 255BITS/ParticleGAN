@@ -1,0 +1,159 @@
+{
+  "candidate": "r1r2-prior-slow-v1",
+  "candidate_revision": "74d167d7ba3f592637c0701a5aac327270b537673cdfcadfb1376f92811d1a61",
+  "files_sha256": {
+    "configs/forge/ideas/r1r2-prior-slow-v1.json": "78ff00b9a9d568b4f14f3b57c6b99d967d7aa187e49d3ddd33ae4a969d522d49",
+    "configs/forge/studies/r1r2-five-track-prior-v1.json": "242cb1beaac2e2f72314f0e32ba949ada069bb7290541a6e716d4a36da763d66",
+    "reports/forge/r1r2-tier1-search/density-diagnosis.json": "898bc4b70778733c857ffc2122478b53f023b96baddb0c456a5a497c6ce96424",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/records/readout-b42a8f277178ec58808d6b5c.json": "ff5124026553b4815ba636be295c32b93e46b6ce53aeecf44722ccd15d29f2b9",
+    "reports/forge/records/readout-da2ac34b1675880ab8ace248.json": "f34c82b385c53224426a172bc218b0b78669485e18ac2646fcc5d640349e2e29"
+  },
+  "full_reservation_seconds": 2520,
+  "jobs": [
+    {
+      "budget_seconds": 120,
+      "compatibility_key": "d1b158188cc80db3d34ebe0be5c341dc10d846c1a80a175b48f2856eba0ffea8",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "budget_seconds": 300,
+      "compatibility_key": "023a15e672544fbd65a8560902173a2d2da87ce4d48bb570199dd8ba03079f9d",
+      "task_id": "two_pole"
+    },
+    {
+      "budget_seconds": 300,
+      "compatibility_key": "afb331878f41fc4c5d0772dce4875658e795f8a0f9ee796dad25d7f50bc8e1c5",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "budget_seconds": 300,
+      "compatibility_key": "329f9210a81a5f0994925fa0d541e6220d21b4660b966b6c2e2927fc8e7cc693",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "budget_seconds": 300,
+      "compatibility_key": "e0b1b08b62d4a0c55d798a356cd9d76bedde4e139ac8bcd00561936f9a35e17f",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "budget_seconds": 900,
+      "compatibility_key": "ac9534528614732ee9710017b6bcaa9244e4d61229125d05722d2cf6c5caa1ad",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "budget_seconds": 300,
+      "compatibility_key": "6da535cfe4237c4ac677b9e6d375cf9a1521afd805b9a42d5de7bb7082f27d50",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "new_sampling_draws": 0,
+  "new_training_updates": 0,
+  "preflight_blockers": [],
+  "prior_controls": {
+    "ae_gan_hold": {
+      "base_betas": "Recipe.prior_betas or Recipe.betas",
+      "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+      "latent_table_controls": true,
+      "lr_schedule": "prior",
+      "representation": "latent_prior_locations"
+    },
+    "clockfree_audit_measurement_v1": {
+      "base_betas": "Recipe.prior_betas or Recipe.betas",
+      "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+      "latent_table_controls": true,
+      "lr_schedule": "prior",
+      "representation": "latent_prior_locations"
+    },
+    "five_word_joint_smoke": {
+      "base_betas": "Recipe.prior_betas or Recipe.betas",
+      "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+      "latent_table_controls": true,
+      "lr_schedule": "prior",
+      "representation": "latent_prior_locations"
+    },
+    "gaussian1d_smoke": {
+      "base_betas": "Recipe.prior_betas or Recipe.betas",
+      "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+      "latent_table_controls": true,
+      "lr_schedule": "prior",
+      "representation": "latent_prior_locations"
+    },
+    "ring16_acquisition": {
+      "base_betas": "Recipe.prior_betas or Recipe.betas",
+      "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+      "latent_table_controls": true,
+      "lr_schedule": "prior",
+      "representation": "latent_prior_locations"
+    },
+    "two_pole": {
+      "base_betas": "Recipe.betas",
+      "base_lr": "Recipe.lr",
+      "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+      "latent_table_controls": false,
+      "lr_schedule": "prior",
+      "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+      "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+      "representation": "direct_sample_coordinates"
+    },
+    "unused_token_hold": {
+      "construction": "no sampled latent prior or prior optimizer group",
+      "latent_table_controls": false,
+      "representation": "not_sampled"
+    }
+  },
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scope": "Read-only declaration/planning preflight; zero training and no qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "READY",
+  "study": "r1r2-five-track-prior-v1",
+  "study_blockers": [],
+  "substantive_delta": [
+    {
+      "after": 0.25,
+      "before": 1.0,
+      "path": [
+        "recipe",
+        "ae_gan_hold",
+        "prior_lr_mult"
+      ]
+    },
+    {
+      "after": 0.25,
+      "before": 1.0,
+      "path": [
+        "recipe",
+        "clockfree_audit_measurement_v1",
+        "prior_lr_mult"
+      ]
+    },
+    {
+      "after": 0.25,
+      "before": 1.0,
+      "path": [
+        "recipe",
+        "five_word_joint_smoke",
+        "prior_lr_mult"
+      ]
+    },
+    {
+      "after": 0.25,
+      "before": 1.0,
+      "path": [
+        "recipe",
+        "gaussian1d_smoke",
+        "prior_lr_mult"
+      ]
+    },
+    {
+      "after": 0.25,
+      "before": 1.0,
+      "path": [
+        "recipe",
+        "ring16_acquisition",
+        "prior_lr_mult"
+      ]
+    }
+  ]
+}

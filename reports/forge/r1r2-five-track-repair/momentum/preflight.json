@@ -1,0 +1,151 @@
+{
+  "caller_cpu_rng_restored": true,
+  "candidate": "r1r2-five-track-momentum-v1",
+  "constructor_cohort": "explicit isolated ownership diagnostic; no scientific task execution or qualification",
+  "direct_particle_betas_inactive_reason": "Native Adam returns before the formulation direct-particle response; Recipe.betas owns the direct-coordinate group.",
+  "preflight_blockers": [],
+  "projection": {
+    "candidate": "r1r2-five-track-momentum-v1",
+    "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+    "execution_policy": {
+      "mode": "complete_current_tier",
+      "schema_version": 1
+    },
+    "full_allowance_seconds": 2520,
+    "jobs_sha256": "a1ee2b9a4d5195edc2ae3648461a1776ed467ff5b3f54084eac3330534f87b4d",
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+    "task_contracts": {
+      "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+      "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+      "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+      "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+      "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+      "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+      "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+    },
+    "task_keys": {
+      "ae_gan_hold": "2f2a93f2e67de8e8be67a42e5686e05cf45274246a74bbd413acfe4ffa6c89af",
+      "clockfree_audit_measurement_v1": "1d8edd9e9dbf4118bb1cbcfb76d7b4960dbdde38ee9de3109b0fef4737b22d80",
+      "five_word_joint_smoke": "4a7520e8fb991b81bc80700d021827289d7382ee7b30f6dd2b48970342c51774",
+      "gaussian1d_smoke": "ffcff8b116923897a7cfb5d2406aa41de64eb35a67a6a695d423ef6c330d26ee",
+      "ring16_acquisition": "bb36a32816e35fa59acb49f1f3b7b22abbef3d4b785fbf7b73148ad25f483904",
+      "two_pole": "421d5fad00267eec86265246cffb35edc02e40964d88620429f49fef9ac9e83d",
+      "unused_token_hold": "0f8a9cd2dbb1b6799c9b05e1e5758ffa253287c9b828916271aa210164744451"
+    },
+    "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+  },
+  "public_constructor_ownership": [
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "Adam",
+      "role": "word_G"
+    },
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "Adam",
+      "role": "word_E"
+    },
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "Adam",
+      "role": "word_prior"
+    },
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "_OptimizerBundle",
+      "owned_parameter_shapes": [
+        [
+          12,
+          1
+        ]
+      ],
+      "role": "two_pole_direct_generated_coordinates"
+    },
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "Adam",
+      "owned_parameter_shapes": [
+        [
+          32,
+          1
+        ],
+        [
+          32
+        ],
+        [
+          1,
+          32
+        ],
+        [
+          1
+        ]
+      ],
+      "role": "two_pole_critic"
+    },
+    {
+      "amsgrad": false,
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "lr": 0.0085,
+      "optimizer_class": "Adam",
+      "owned_parameter_shapes": [
+        [
+          256,
+          170
+        ],
+        [
+          256
+        ],
+        [
+          128,
+          256
+        ],
+        [
+          128
+        ],
+        [
+          1,
+          128
+        ],
+        [
+          1
+        ]
+      ],
+      "role": "word_D"
+    }
+  ],
+  "schema_version": 1,
+  "status": "READY",
+  "study": "r1r2-five-track-momentum-v1",
+  "training_or_evaluation_sampling_draws": 0,
+  "training_updates": 0
+}

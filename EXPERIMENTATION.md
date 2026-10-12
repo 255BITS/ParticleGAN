@@ -92,7 +92,8 @@ compares fixed R1/R2, BCap and full released v0.7 GAN v3 with K3P on declared
 native hosts. The [R1/R2 baseline readout](reports/forge/r1r2-baseline/README.md)
 binds the reference recipe and its source evidence. Results and recommendations
 belong in the corresponding reports, including the
-[bounded R1/R2 repair search](reports/forge/r1r2-tier1-search/README.md).
+[bounded R1/R2 repair search](reports/forge/r1r2-tier1-search/README.md) and the
+separately registered [five-track repair campaign](reports/forge/r1r2-five-track-repair/README.md).
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`

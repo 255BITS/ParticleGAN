@@ -1,0 +1,360 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012",
+  "candidates": {
+    "baseline": {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "card": {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "momentum": {
+      "candidate": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "card": {
+        "candidate": "r1r2-five-track-momentum-v1",
+        "role": "momentum",
+        "study": "r1r2-five-track-momentum-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "a1ee2b9a4d5195edc2ae3648461a1776ed467ff5b3f54084eac3330534f87b4d",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "2f2a93f2e67de8e8be67a42e5686e05cf45274246a74bbd413acfe4ffa6c89af",
+        "clockfree_audit_measurement_v1": "1d8edd9e9dbf4118bb1cbcfb76d7b4960dbdde38ee9de3109b0fef4737b22d80",
+        "five_word_joint_smoke": "4a7520e8fb991b81bc80700d021827289d7382ee7b30f6dd2b48970342c51774",
+        "gaussian1d_smoke": "ffcff8b116923897a7cfb5d2406aa41de64eb35a67a6a695d423ef6c330d26ee",
+        "ring16_acquisition": "bb36a32816e35fa59acb49f1f3b7b22abbef3d4b785fbf7b73148ad25f483904",
+        "two_pole": "421d5fad00267eec86265246cffb35edc02e40964d88620429f49fef9ac9e83d",
+        "unused_token_hold": "0f8a9cd2dbb1b6799c9b05e1e5758ffa253287c9b828916271aa210164744451"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "optimizer": {
+      "candidate": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "card": {
+        "candidate": "r1r2-amsgrad-repair-v1",
+        "role": "optimizer",
+        "study": "r1r2-five-track-optimizer-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "0cac67a5616f59674ea920620f532c5d923604ad2e6b3f51c9d2d66223e2ef53",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "0a6c4a3bb25f8927a8f265783bd3b90993cfad3999ac152622d371d5be180e9a",
+        "clockfree_audit_measurement_v1": "1adb83782e02e328d2bf4bd365cff53216e38071cd927106fb68b8ff1984f357",
+        "five_word_joint_smoke": "a55f5a5db1a7bfb7362185d5562d8403c12cbd50b4f04412fe9b39e88ebb3e12",
+        "gaussian1d_smoke": "2459f5d7c1d6b77970eaaca198b0f7a41875cf556392636c3b6bdcbc5f3bfc7b",
+        "ring16_acquisition": "f1b6fe1c92f8a8371eba5d3f05022715dc4d80ba2d3662c424e5fe9a93a19a2f",
+        "two_pole": "932229d385b338aad6580294b002100712d62e1779b46c96bbea991813de4f3b",
+        "unused_token_hold": "03bcb473d086a2b803d171c0a8633dacbade25194d25061befedebf8bd80c54f"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "prior": {
+      "candidate": "r1r2-prior-slow-v1",
+      "candidate_revision": "74d167d7ba3f592637c0701a5aac327270b537673cdfcadfb1376f92811d1a61",
+      "card": {
+        "candidate": "r1r2-prior-slow-v1",
+        "role": "prior",
+        "study": "r1r2-five-track-prior-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "835a332c04e563abb8d64d546b67d3dd2d4b8c4ad82dd69dcf164220011b52e1",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "329f9210a81a5f0994925fa0d541e6220d21b4660b966b6c2e2927fc8e7cc693",
+        "clockfree_audit_measurement_v1": "6da535cfe4237c4ac677b9e6d375cf9a1521afd805b9a42d5de7bb7082f27d50",
+        "five_word_joint_smoke": "ac9534528614732ee9710017b6bcaa9244e4d61229125d05722d2cf6c5caa1ad",
+        "gaussian1d_smoke": "d1b158188cc80db3d34ebe0be5c341dc10d846c1a80a175b48f2856eba0ffea8",
+        "ring16_acquisition": "e0b1b08b62d4a0c55d798a356cd9d76bedde4e139ac8bcd00561936f9a35e17f",
+        "two_pole": "023a15e672544fbd65a8560902173a2d2da87ce4d48bb570199dd8ba03079f9d",
+        "unused_token_hold": "afb331878f41fc4c5d0772dce4875658e795f8a0f9ee796dad25d7f50bc8e1c5"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "transport": {
+      "candidate": "r1r2-five-track-transport-v1",
+      "candidate_revision": "9b9da470ce25ed29d481dec0f1cc49c36119d6323397705dad58acd1bbd6152d",
+      "card": {
+        "candidate": "r1r2-five-track-transport-v1",
+        "role": "transport",
+        "study": "r1r2-five-track-transport-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "937102f33506336f0e42a4facccec1cb88a029d99002d3c2bce8ce9b44ec8b51",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "d6bfe04121e0f07b4d6b884f0b4595046bafb1769db196731132be0f39bc60b8",
+        "clockfree_audit_measurement_v1": "1287f9e18ce809c211a0f4e01dbb9d2915b6fe2794b75ad5d1a42e85e4ccbf16",
+        "five_word_joint_smoke": "44237dbe92752ac915c0e8d7f171da8e796e93514b5c8f4ea1d8eaf5c2df4cd0",
+        "gaussian1d_smoke": "66726df2f780f69ff024c21d993cebc0da7b560342346ffaa15b5bd511ad754f",
+        "ring16_acquisition": "4537e6fc2284d89166ad663ce04f4c86a5579b94d5a35507bf172695d00b4f36",
+        "two_pole": "f470c3765f681016b2b7438f7b7b0c313ea96bcb72c02830d2389a6f284165a9",
+        "unused_token_hold": "910b2aefdb3ba4b684f4e8e0d057c6b214faf21fbf433da66c8f649cab7d0afc"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "ttur": {
+      "candidate": "r1r2-five-track-ttur-v1",
+      "candidate_revision": "bcbbb6d461c144288367dfe017e183d125ea120b30805c6094fd57fbf4e54972",
+      "card": {
+        "candidate": "r1r2-five-track-ttur-v1",
+        "role": "ttur",
+        "study": "r1r2-five-track-ttur-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "3558d0339445e2f8caa7596df62535b6792de585563534d147dc8ec5fc2c0d3b",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "08b19e1371dc5a2a4acd9ea31e4af5c7bcfed4bd8b2e50a177a02b40b9830046",
+        "clockfree_audit_measurement_v1": "3a3d14ecd42aa43933b5c70d4125c0fbc15d2a6789ad619e24c3aced4a9dc203",
+        "five_word_joint_smoke": "eb1eb2d24362fbd431878fabeb24df0cc1792a2ecb29f0d6018a6f3d2a5e6ebb",
+        "gaussian1d_smoke": "5642b9dd489682aac05c8eef5ebe34d3d69505bd0d43fb407e0b6d0ea3d8006a",
+        "ring16_acquisition": "4d345a1c246cebe90a2590c112f6390b8e3c35b08cc617b515342aa05336047e",
+        "two_pole": "9d86e8220561100552d7da574c936291f1da44f9844f664c9e1bb01d407972e8",
+        "unused_token_hold": "47eb5d50b03c85e8e590eabb5cafe48ff42b1fc93f7ae71e2ff7db979f1e20c7"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/ideas/r1r2-amsgrad-repair-v1.json": "b03eb0d56ff7461522204cd015981d697763cf17e4b8f5431b9a746d3eeb462b",
+    "configs/forge/ideas/r1r2-five-track-momentum-v1.json": "9872635a01449e4dee5e3dc66bbd4ae5fb73aaee3804f77abb4d3d8330638a43",
+    "configs/forge/ideas/r1r2-five-track-transport-v1.json": "c0fe3e0eb5f76dc341faa8b6e504c8ffb9ff25315e3445249199615cbd73e401",
+    "configs/forge/ideas/r1r2-five-track-ttur-v1.json": "948ef0e44077f8e44ffe6670c42cba5818138fb8e6724f3907b3b5ede9a311dd",
+    "configs/forge/ideas/r1r2-prior-slow-v1.json": "78ff00b9a9d568b4f14f3b57c6b99d967d7aa187e49d3ddd33ae4a969d522d49",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-five-track-momentum-v1.json": "8992952d8e9c06e04b6105a4f368be2f521c4156814e31bbc616d6f89335bfa5",
+    "configs/forge/studies/r1r2-five-track-optimizer-v1.json": "4f0422a1a498a618af41dce9f4ce42df323895b0d1e0b003d58982ceda5ccc4c",
+    "configs/forge/studies/r1r2-five-track-prior-v1.json": "242cb1beaac2e2f72314f0e32ba949ada069bb7290541a6e716d4a36da763d66",
+    "configs/forge/studies/r1r2-five-track-transport-v1.json": "120da0d98cda7f1f8c333057fe6c4495452b2174ac024e5a5549d0ef854ccf38",
+    "configs/forge/studies/r1r2-five-track-ttur-v1-study.json": "ae15811e4706591bfba1522d29f10f168d982af871ea0e87e46a1a3bd449edc3",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/bcap-tier1-stability/results.json": "432f4b8184ec4e82bbc831bd6e7c8e2a0154fa63367c1192cc7df28573fb17b1",
+    "reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json": "9618361150d379d3488d7d3d73929f05a39d282319f7c35500107db55ad6eab1",
+    "reports/forge/r1r2-five-track-repair/PLAN.md": "52f09a3908be045087574d12d5b4f8d883b3833cce394478ac412a29de2279b5",
+    "reports/forge/r1r2-five-track-repair/manifest.json": "da29c38f4eba179ce00427d6f043cbb1971d4c06f42779ee3baa2a432d0500c7",
+    "reports/forge/r1r2-five-track-repair/momentum/preflight.json": "c251a217039de350879cd226bd154691b38b6370e13841e41b16aace436224f3",
+    "reports/forge/r1r2-five-track-repair/momentum/preflight.py": "fb226b78d9a943f7c153cef920b672db8249b355be63210114105b3abdd0614c",
+    "reports/forge/r1r2-five-track-repair/momentum/proposal.md": "418427208380050aeea254a5b72bbf5d383b3106592dd2f86ec05d072bb42591",
+    "reports/forge/r1r2-five-track-repair/optimizer/README.md": "3d837f4d06a81a9551ed3eec235c5c150a927b06872bc1fea8fc2dba480dcde4",
+    "reports/forge/r1r2-five-track-repair/optimizer/preflight.json": "fd3b339c387c102b97ab906c9b56c2159a064aebbadd1c8cea702ccc5297b24c",
+    "reports/forge/r1r2-five-track-repair/prior/README.md": "f9658e4b8a53e79ca6c8822963bd4b73aaa176998c0222e18a4fb23655e329e6",
+    "reports/forge/r1r2-five-track-repair/prior/preflight.json": "cde6c1b64900c3cadf331fcbc06e93417a3ad084a60636fde557c8ab53196320",
+    "reports/forge/r1r2-five-track-repair/test_five_track_workflow.py": "59d8abbe67d25ab6b54caeb1a5eca7843754eaaccc9576d4e26c76f6bca33a8b",
+    "reports/forge/r1r2-five-track-repair/transport/preflight.json": "c7236ff724a42f3379ef814facec7406d7d22591bb6f4db4b3a678842edddd17",
+    "reports/forge/r1r2-five-track-repair/transport/proposal.md": "1c9c2147c5bed3d42777ffa5ff819feb6fe9b9e0d03ab5382f9bafc2ee792b48",
+    "reports/forge/r1r2-five-track-repair/ttur/README.md": "14c695873b6086fe9398dcc9247a6e1f0ea3455c7fb4e35d073242e69933b9cf",
+    "reports/forge/r1r2-five-track-repair/ttur/review.json": "d0b13f78c3dd35f93be60378ec53e0cb3a7799b2116621e8587561d52b837271",
+    "reports/forge/r1r2-five-track-repair/workflow.py": "bc8416b0fe8de0c10f721424fbb80c6cea7698e936b021b20612ee06d159724b",
+    "reports/forge/r1r2-tier1-search/README.md": "30109be2cc5ce4a39adc1b2445a6a2b757ea1f1bab2f01763bfbf944495bd656",
+    "reports/forge/r1r2-tier1-search/density-diagnosis.json": "898bc4b70778733c857ffc2122478b53f023b96baddb0c456a5a497c6ce96424",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/round2-publication/results.json": "22fef2cdad46996729999f3b708851628db986a1d9745add5b66b72e89ebb0fa",
+    "reports/forge/r1r2-tier1-search/round2-registration.json": "b354a5490a88a6a28c3eb0011fa5f2febc0aa52a5dc55915a318e08cf70026e4",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066",
+    "reports/forge/records/history-context-lrfree-evidence-e3fd3da87d09.json": "bffa7ef234240f292d411359a45b0f04ced9d69f6069e90f375cc83014b06239",
+    "reports/forge/records/readout-b42a8f277178ec58808d6b5c.json": "ff5124026553b4815ba636be295c32b93e46b6ce53aeecf44722ccd15d29f2b9",
+    "reports/forge/records/readout-da2ac34b1675880ab8ace248.json": "f34c82b385c53224426a172bc218b0b78669485e18ac2646fcc5d640349e2e29"
+  },
+  "manifest": {
+    "baseline_role": "baseline",
+    "campaign": {
+      "budget_seconds": 15120,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-five-track-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      {
+        "candidate": "r1r2-five-track-ttur-v1",
+        "role": "ttur",
+        "study": "r1r2-five-track-ttur-v1-study"
+      },
+      {
+        "candidate": "r1r2-prior-slow-v1",
+        "role": "prior",
+        "study": "r1r2-five-track-prior-v1"
+      },
+      {
+        "candidate": "r1r2-amsgrad-repair-v1",
+        "role": "optimizer",
+        "study": "r1r2-five-track-optimizer-v1"
+      },
+      {
+        "candidate": "r1r2-five-track-transport-v1",
+        "role": "transport",
+        "study": "r1r2-five-track-transport-v1"
+      },
+      {
+        "candidate": "r1r2-five-track-momentum-v1",
+        "role": "momentum",
+        "study": "r1r2-five-track-momentum-v1"
+      }
+    ],
+    "id": "r1r2-five-track-repair-v1",
+    "max_candidates": 6,
+    "paid_cap_seconds": 5400,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "supporting_inputs": [
+      "reports/forge/r1r2-five-track-repair/workflow.py",
+      "reports/forge/r1r2-five-track-repair/PLAN.md",
+      "reports/forge/r1r2-tier1-search/README.md",
+      "reports/forge/r1r2-tier1-search/density-diagnosis.json",
+      "reports/forge/r1r2-tier1-search/round2-publication/results.json",
+      "reports/forge/r1r2-five-track-repair/ttur/README.md",
+      "reports/forge/r1r2-five-track-repair/prior/README.md",
+      "reports/forge/r1r2-five-track-repair/optimizer/README.md",
+      "reports/forge/r1r2-five-track-repair/transport/proposal.md",
+      "reports/forge/r1r2-five-track-repair/momentum/proposal.md",
+      "reports/forge/r1r2-five-track-repair/test_five_track_workflow.py",
+      "reports/forge/r1r2-five-track-repair/optimizer/preflight.json",
+      "reports/forge/r1r2-five-track-repair/prior/preflight.json",
+      "reports/forge/r1r2-tier1-search/round2-registration.json",
+      "reports/forge/r1r2-five-track-repair/ttur/review.json",
+      "reports/forge/r1r2-five-track-repair/momentum/preflight.py",
+      "reports/forge/r1r2-five-track-repair/momentum/preflight.json",
+      "reports/forge/r1r2-five-track-repair/transport/preflight.json"
+    ]
+  },
+  "manifest_sha256": "da29c38f4eba179ce00427d6f043cbb1971d4c06f42779ee3baa2a432d0500c7",
+  "paid_cap_seconds": 5400,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 15120,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

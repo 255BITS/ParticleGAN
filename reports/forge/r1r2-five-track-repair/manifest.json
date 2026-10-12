@@ -1,0 +1,67 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 15120,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-five-track-repair-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-five-track-cached-baseline-v1"
+    },
+    {
+      "candidate": "r1r2-five-track-ttur-v1",
+      "role": "ttur",
+      "study": "r1r2-five-track-ttur-v1-study"
+    },
+    {
+      "candidate": "r1r2-prior-slow-v1",
+      "role": "prior",
+      "study": "r1r2-five-track-prior-v1"
+    },
+    {
+      "candidate": "r1r2-amsgrad-repair-v1",
+      "role": "optimizer",
+      "study": "r1r2-five-track-optimizer-v1"
+    },
+    {
+      "candidate": "r1r2-five-track-transport-v1",
+      "role": "transport",
+      "study": "r1r2-five-track-transport-v1"
+    },
+    {
+      "candidate": "r1r2-five-track-momentum-v1",
+      "role": "momentum",
+      "study": "r1r2-five-track-momentum-v1"
+    }
+  ],
+  "id": "r1r2-five-track-repair-v1",
+  "max_candidates": 6,
+  "paid_cap_seconds": 5400,
+  "round": 1,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [],
+  "supporting_inputs": [
+    "reports/forge/r1r2-five-track-repair/workflow.py",
+    "reports/forge/r1r2-five-track-repair/PLAN.md",
+    "reports/forge/r1r2-tier1-search/README.md",
+    "reports/forge/r1r2-tier1-search/density-diagnosis.json",
+    "reports/forge/r1r2-tier1-search/round2-publication/results.json",
+    "reports/forge/r1r2-five-track-repair/ttur/README.md",
+    "reports/forge/r1r2-five-track-repair/prior/README.md",
+    "reports/forge/r1r2-five-track-repair/optimizer/README.md",
+    "reports/forge/r1r2-five-track-repair/transport/proposal.md",
+    "reports/forge/r1r2-five-track-repair/momentum/proposal.md",
+    "reports/forge/r1r2-five-track-repair/test_five_track_workflow.py",
+    "reports/forge/r1r2-five-track-repair/optimizer/preflight.json",
+    "reports/forge/r1r2-five-track-repair/prior/preflight.json",
+    "reports/forge/r1r2-tier1-search/round2-registration.json",
+    "reports/forge/r1r2-five-track-repair/ttur/review.json",
+    "reports/forge/r1r2-five-track-repair/momentum/preflight.py",
+    "reports/forge/r1r2-five-track-repair/momentum/preflight.json",
+    "reports/forge/r1r2-five-track-repair/transport/preflight.json"
+  ]
+}

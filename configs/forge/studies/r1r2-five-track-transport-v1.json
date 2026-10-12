@@ -1,0 +1,82 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-five-track-transport-v1"
+  },
+  "candidate": "r1r2-five-track-transport-v1",
+  "competing_explanation": "Data-dependent finite kernel features can improve anchor occupancy while retaining bad full covariance, shrinking radial spread, biasing self-anchor mass or perturbing the critic distribution. Prior BCAP local-weight1 evidence has late pole slope failure; weight0.1 does not prove absence of that effect. No endpoint improvement certifies a full gate; all six ordinary gates plus clock must pass on one global recipe.",
+  "control": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Adding only local-v2 output-kernel matching at global weight 0.1 to the constant beta2=.99/gamma=.1/LR=.0085 R1/R2 parent repairs Ring16 full density while preserving every ordinary Tier1 gate and clock independence. The finite local empirical signal uses only existing G-phase batches; it is an R1/R2+local transport recipe, not the unchanged pure generator objective.",
+  "id": "r1r2-five-track-transport-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+      },
+      "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "artifacts_sha256": {
+          "observed-samples.pt": "d938da2a44530c2c337cb6600964988f6c9e2483fc37b86289300910b7b84ccb",
+          "provenance/provenance-state.pt": "46eb431722fe1a1b13fbfc994ef20618efaba176b71adecb95d15c323dd52309"
+        },
+        "attempt_archive_path": "queue/r1r2-tier1-half-rate-b99-g01-v1/36f9ba8f0f1d4b69b379f0189598f210"
+      },
+      "path": "reports/forge/r1r2-tier1-search/density-diagnosis.json",
+      "selector": [
+        "half_rate_b99_g01_endpoint_geometry"
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "digest": "f8ab30ab879c32f9e53e8ca6294762574c43a4138b7fa45b6a288c88c0b149e4",
+        "origin_commit": "d70c2c3d985c4c75f2dbe615c8494f2991add3b6"
+      },
+      "path": "reports/forge/bcap-tier1-stability/results.json",
+      "selector": [
+        "rows",
+        0,
+        "source"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
