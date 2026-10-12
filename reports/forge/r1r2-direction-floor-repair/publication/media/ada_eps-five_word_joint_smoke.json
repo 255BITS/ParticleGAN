@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "e8e632f5331d945d1578353dc6172f131e75138f1ac8cfd621cc16ab674ad0f8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "a6c4f69245f7d387dc32aae1f232655a16d759fff19a0048baf77bd957287a72",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-direction-floor-ada-eps-v1/417d8df626444b8e8f1b35406a3447c7/observed-records.pt": "b015b91c463934d4c7d55a66560bf91c121d67ec9540b7706dcad9aaad3be0a8"
+  },
+  "task_id": "five_word_joint_smoke"
+}

@@ -1,0 +1,856 @@
+{
+  "blockers": [],
+  "cached_cells": [
+    {
+      "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 8.06148013699567,
+      "result_sha256": "99072ed60c17e331532cba9b5d81628a49c69c8928755595986823a35dff2832",
+      "role": "baseline",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "2e4e295a6ca846f88d15435f733e772b",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.814647177001461,
+      "result_sha256": "689eb01b765793a8abf9bd6dda6c31f3a5f02971174a10d33c9475a9d6dddca7",
+      "role": "baseline",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 900,
+      "job_key": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 119.51356138498522,
+      "result_sha256": "dd31fda2f08f670453f3523512fbf8b951efd26aa14f2c675381858fa06f58d2",
+      "role": "baseline",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 120,
+      "job_key": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 13.925102654990042,
+      "result_sha256": "3dbb81eeba46a03cfd35347ab00e4801a727a15907c400fb2dca45527167c041",
+      "role": "baseline",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "a68d67bc0972421ab60984bbda398532",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 18.71034477901412,
+      "result_sha256": "200cfdd68c3e6264ff73ee2a6af29499676fd92894942467af513b7994370a1a",
+      "role": "baseline",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.593850100005511,
+      "result_sha256": "3c215bc0363708502d9e72db5f05751075b4bafa0cc8b219e54eafb7e0456df7",
+      "role": "baseline",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 7.086462726001628,
+      "result_sha256": "7eb0f7e23ec0ad3e9e115dbea79dc44d77d7203d050b44ecff9ee6ac1b48a3c7",
+      "role": "baseline",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "bd0e618165b7481a8f54318488bbb6f5",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 8.034603377978783,
+      "result_sha256": "8b0629fae1bc3a0c751ea3c5113b2f0e4f4b1f804fba2cc6d8b88ef32af61d4e",
+      "role": "adam",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "7f98995a39564e648f338432eb4d3ed4",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.943630980007583,
+      "result_sha256": "0bfd258ace257d59583f90660fb29d07eac93b1587273cb9b58a97c9ae8538b7",
+      "role": "adam",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 900,
+      "job_key": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 118.7868495650182,
+      "result_sha256": "84a0285e61214910b1a6ea4175aba57b3fbec44418fc278a3420c6a2f894d329",
+      "role": "adam",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 120,
+      "job_key": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 13.613040277006803,
+      "result_sha256": "a86527933f97362257ae6d917d69d536383539859da4d2bec7f9c0961dacbde5",
+      "role": "adam",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 18.848083574004704,
+      "result_sha256": "3c9434af33bc89c4572750c7add58ca31af586838dec8c522781b21a512d5467",
+      "role": "adam",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "d215b1648cf5462db90757c8834a681f",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.524512680014595,
+      "result_sha256": "e23c74ee8a84e092bc0c6e5739344bc951c0721cec14e6ece4275efa7459d35e",
+      "role": "adam",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "1616b4bc93414bb2a2e1006a9c6cc3e5",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892",
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 7.171320408000611,
+      "result_sha256": "0639d23dcbd3b34f6d481c9b90295cc1771bce7f4af7cb4c4d2b48fd78e16733",
+      "role": "adam",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "de156880ec814d0da6ecceb9805ec43d",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "74f52276bbfe2251b5d81e144db7c5386397510ff9caa8738c718df1ef449843",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 8.422600383986719,
+      "result_sha256": "3a6193083899670e031859ae6dc106da2b52f3f8b2cd33116e47f230bf063145",
+      "role": "ada",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "dfcb88fba61d4638ad8273e166a47c17",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "a76213fcb69f2452b0729330ff79a23eea4148c4c6e7544b52fc8c32c44450f6",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 6.936631899996428,
+      "result_sha256": "d597eb790a700af60e069c2cb4c963b0f1473a49dbd6319efe18165299e8626c",
+      "role": "ada",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "24d4200992d042649b401e8d5082350a",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 900,
+      "job_key": "2512505a35ff19fb5c4eef19812d58e1e1c20209cec958757721be31f2b52ec7",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 140.92297709098784,
+      "result_sha256": "60ba72fd2efef756baa2f61b439c5dd013f846c6fffbb2e3d97aff3d50f203e1",
+      "role": "ada",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "f82ad47741c947fda1bcc5783cbe44ba",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 120,
+      "job_key": "e26dc64a485694c647da10badd9c942871840da77bf3aaa036d82f2c9c306ae6",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 14.272166543989442,
+      "result_sha256": "bcddba3f9ec0a7f49097e8e8e4cb2809f06972a2d32e733c2ea6e21084f1d824",
+      "role": "ada",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "186ec6aad1b64c2196c6c462a9e8542d",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "e68bd26dd4cc89ddfa6295ed64e0aa86ae260953d41f519b0e890017ea470bce",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 20.289293119014474,
+      "result_sha256": "f081751ba298b5124ec42817903eaabbbc1e3b82fffabb1e500b8d4abc54ebc0",
+      "role": "ada",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "46d7903e9d3c493391e1038823c652d1",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "960296de0529cc1aacb45be2b091288133e4ca5fdbc9a127f323bd2d590de6ae",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 6.722408666013507,
+      "result_sha256": "a7a5b7da16153d4b02da5935d7bbfa5321328e40f026e8c47e6238b8b8c21ad8",
+      "role": "ada",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "46b2bec3cf244f8c97bc7816ba9baa7a",
+      "campaign_paid_seconds": 0,
+      "full_allowance_seconds": 300,
+      "job_key": "5a99615d4c2cd00f72f5253dcd93de41b03bec865d0fdd6c7645ba46d70965e1",
+      "original_charge_owner": {
+        "campaign": "r1r2-direction-floor-ada-v1",
+        "request": "851187782c5ca7e94af817e8",
+        "revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea"
+      },
+      "original_paid_seconds": 7.279479454999091,
+      "result_sha256": "196b5120acb5e5569a559b42728089c35ae618bab63b34a5254588af0a353d5c",
+      "role": "ada",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "consumed_optimizer_laws": {
+    "contrast_limit": "Full-vs-D-only bundles G/E and sampled-prior law changes; cannot identify G alone",
+    "critic_spectral": "D uses the polar law; G/E and sampled prior remain native Adam at .0085, betas (0,.99), epsilon 1e-8 because optimizer_adam_lr is null.",
+    "direct_pole": "12x1 generator-owned matrix. Full polar scale sqrt(12) gives mean absolute travel <=.0085 per update and <=.68 over 80 updates; the .3 gate is feasible but remains unproven. Critic-only remains native generator Adam.",
+    "inactive_prior": "Pole/token have no sampled prior. E follows generator ownership. Beta2 is inactive in normalized groups but retained in native Adam groups.",
+    "prior_policy": "prior_update stays learned; regularization stays zero; distribution, capacity and sampling stay fixed. Full DualNorm explicitly changes the sampled-prior row update law.",
+    "spectral": "G/E/D matrix gradients use dimension-scaled polar updates; vector biases use L2 normalized updates; sampled learned prior rows use row normalization only for observed generator-phase draws"
+  },
+  "cost": {
+    "all_previous_charge_owners_preserved": true,
+    "cached_campaign_paid_seconds": 0,
+    "full_reservation_seconds": 12600,
+    "new_task_cells": 14,
+    "paid_cap_seconds": 8000,
+    "prior_paid_attempts": 175,
+    "prior_paid_seconds": 4587.580182052945,
+    "remaining_paid_headroom_seconds": 3412.419817947055,
+    "reused_task_cells": 21
+  },
+  "effective_bindings": {
+    "ada": {
+      "candidate_id": "r1r2-direction-floor-ada-v1",
+      "candidate_revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea",
+      "exact_declared_delta": {
+        "optimizer_family": "ada_nsgda"
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "13513af7aefca2b98f20af08d983d3a1e696b48a31bf496f52e6229e606968e8",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "86f6c05ad3cb9e38092ca82f6926eac3c3f56c5f03b94a35cea8b54131f7ae65",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "7e45de6d167713537e176f3885fdb060e11d537b221705d7730c3ce719688c3d",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "603a59440d93b73035badeb4a2491c03fa1a997e99451e66e98b0eb9b2d1f2fe",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "7c5ccf5a0643febae6488f2096a4b6be2d9f84a8326102ec6f3a5a4231587f58",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "2cb41e6e95ae9043d89b402f2a2010f150ab1dfdd70367ff4951bd6b5daafc06",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "ba13038c3b0ae4d4c4fdf36f957875473e204d277013253c90db638f1b83bbaa",
+          "family": "ada_nsgda",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "adam": {
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "exact_declared_delta": {},
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "b5b564cafda5f4b5b1662f0ceb71e2878ed6522d08f67272fc715d9f6ec2ad1d",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "2661dcead72ab6697d972d2a2085f2e13f4de4da51b5df3d0cffe5100e148fe4",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "8a28ad855388124203121efd8ec738233b5880ea496bfb1ec18a2f870923caf9",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "c40a76ab93d359399ef93f3cb18abd382749e116c9005d4a0a9ad0deb9050463",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "49148d724404ec5c03b36104754678fc3542035227b0f015dd92d5b498104e76",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "f39b221079da5a965b004bd26b56fa846d26ed97b5ade6cfd66579ebfe24e22f",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [],
+          "effective_recipe_sha256": "3f4679830a236342062f61207cce7b4f4f26131b4dcb9a4f149d13a810e4ac4b",
+          "family": "adam",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "critic_spectral": {
+      "candidate_id": "r1r2-dualnorm-critic-only-v1",
+      "candidate_revision": "2cc83fcb52aaf21acbb6f4557c0e066c450798b7118129093fbf4b839068f0d7",
+      "exact_declared_delta": {
+        "optimizer_family": "dualnorm_D_only"
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "84113541ebe7db9928d96df482ad0aa57f87797af9aa3f6b82cd76dc3206303a",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "21623e90c70cd680cb516bc2ad5b3008ef5d5188248eadc676363317d15f7c75",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "f0697ff2812f69b0fe5899b33930b40f9cf5917da271ecc22400e1c3a82e8de5",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "cd5b7e620c2ad181e6e4d6c332590a4c1b24fcae9eab9e7974ae1539772f8d1c",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "9bf6980e8606773c2ae662c883978e74da80375eaaf4cd6da5953e4a5fa8f02f",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "a052b3fe3526dcda74e7d3d94526c4aa6c8cb522af8556c216f02569b3c27b90",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "42e9d25d5947af09baeb9bb9995d777876c11c61f14770bba8cd088bb2e703df",
+          "family": "dualnorm_D_only",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "spectral": {
+      "candidate_id": "r1r2-dualnorm-repair-v1",
+      "candidate_revision": "a585e889ca4f42fa4a5ce2b7e4eebd3ce766f013933f06da124f931e67691abb",
+      "exact_declared_delta": {
+        "optimizer_family": "dualnorm"
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "b20c2ba659e7f1765390484df45a5f341eb66d8b8a8dda5d421b4ef31051ee31",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "4333a60eddfd77d9340dce2307c3e3ba10c6b209b239f9d6407585f3523aa0ca",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "63048f6721462e5b0b240ae9cfa23785e844391534f5addc3e038bbb4d9a2ae5",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "1b549a826b7ab7a4449e144bf0fe9d1b6c68bb159e6f2c29958d2ec242cb52bd",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "b0c3c152e84e58102e15e0cb573da2187783bcc1f7ae839963f81bff150816cc",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": 0.0085,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "7604ac502014d1cd6a26417ecebcd13bc4ee50172a72e4f5bedb57082ade6d9c",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_lr": 0.0085,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "8c7fe2a34c099202481e557faca0a02da8a5d4ea89e910dffedf31a6656c71e4",
+          "family": "dualnorm",
+          "generator_encoder_lr": 0.0085,
+          "sampled_prior_lr": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    }
+  },
+  "inputs_sha256": {
+    "completed_predecessor_publication": "24ecdc0cbeb6a848598b752906ac156107970769d40cdeaa10d4442fac974d3c",
+    "manifest": "15e1b2b2845778a84bc9a4dd1cbf3e8bffbf934b494c2d19a870add94c438ea8",
+    "predecessor_collection_audit": "b5d9450cd3e9a272219ce4429c72060519daf2cb7676f81ca5f8cab0ee3aadbf",
+    "registration": "df0c0cbc829a5c5439981ca90dde97eb6075b68b9965d037cee8fed775b02e1a",
+    "spectral_note": "55eaad48aa018bc9a614b5e8b388fc9dd4904737af2606acd918b394d13c919c",
+    "workflow": "01e665e9b67a677c8e7b4001cfc0a1e4c93cbcfc21d71759c0e77c764eca4fb0"
+  },
+  "limits": [
+    "Prospective public binding review proves configuration support,not trained numerical success",
+    "Actual draw/batch/RNG/media/clock equivalence and cached zero current cost must be audited during collection"
+  ],
+  "new_cells": [
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "576a70e3a114e2819f3df9c6b5bb75784b8342afd4c807c460465cda964ee91e",
+      "role": "spectral",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "aa1adf4fcf47b93429a4e4599a325e1b14648a43012e1bfeea5192e5ab45bad3",
+      "role": "spectral",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "full_allowance_seconds": 900,
+      "job_key": "0fd34a4f6dbfe4bb59146ebc9f709ff8cfb8134cb424c555512ef1f51f152cc6",
+      "role": "spectral",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "full_allowance_seconds": 120,
+      "job_key": "9a49fb6577065a956308b59dbfdc6c749341114ab001e6914ef339e0a8181a47",
+      "role": "spectral",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "a8dcdfc6f02dbd400cd6c183aba7012af1f9b6ef47bdf775782e90044caf8107",
+      "role": "spectral",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "b120070311159ea3a084eb08786df5f6885fae3c105675f1a9650b39c25811cf",
+      "role": "spectral",
+      "task_id": "two_pole"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "13cf8d67157e21eb56222483e200086b207b2883ce534c7d8552d67aae0cc366",
+      "role": "spectral",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "0eba59e9546755cb5543a6079a372d48179056aacadbd2e968c0006ff70f1c1e",
+      "role": "critic_spectral",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "585cce5c1a79bfcd3518ad3a42d3931bb0033d5a61fa69e8b9c4b6a7038218a1",
+      "role": "critic_spectral",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "full_allowance_seconds": 900,
+      "job_key": "2ba15373f15b7c98af6f014b680e62cce8dd770f72e8d6222b7fa9a6286a8370",
+      "role": "critic_spectral",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "full_allowance_seconds": 120,
+      "job_key": "4575ffd6145208dc3c5e1329bdcfebd42a7a6a97007199aa6a3452af998d0f54",
+      "role": "critic_spectral",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "495008da9e324183d7e1511827e87c0c36fc83dfdd7ba2ec3f2fb36d09bcf186",
+      "role": "critic_spectral",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "905eb8dfb8acc8a518e2d304c392f8a1e2f9d0976599e682c14dfd9511b0d0a2",
+      "role": "critic_spectral",
+      "task_id": "two_pole"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "f0d6b86de2f249b6c1ce19dacd722e5783e537670262cd767acb8cce03a5e3ea",
+      "role": "critic_spectral",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "queue_mutations": 0,
+  "queue_snapshot_sha256": "448697f91a61a7b18e3d9ef123f79cd8c3971ca3b6ff768e57ba76d32bd3d430",
+  "reviewed_at": "2026-10-12T22:09:11.950+00:00",
+  "run_guards": [
+    "Explicit source-commit must equal execution HEAD",
+    "All frozen scientific source, declarations, registration committed and unchanged against HEAD",
+    "Prepared source/runtime/protocol/task/job projections must match at run and source freeze",
+    "Completed predecessor and exact independent audit are mandatory",
+    "Three controls retain 21 single-attempt results and original charge owners; never rerun",
+    "A new committed admission source changes request identity while preserving cached scientific job keys",
+    "Paid accounting includes 175 prior charges and every concurrent full-task reservation",
+    "One admission,one finite round, no retries, seeds, Tier2, default promotion"
+  ],
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scientific_paths_unchanged_from": "a2b021",
+  "scope": "Independent prospective review of prepared spectral registration; no admission or qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_files_verified": 1214,
+  "status": "PASS",
+  "storage": {
+    "archives": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012": {
+        "bytes": 4543,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21228716032,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": {
+        "bytes": 5477,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21228716032,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": {
+        "bytes": 2512,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21228716032,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012": {
+        "bytes": 2113,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21228716032,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": {
+        "bytes": 2658335245,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21228716032,
+        "minimum_free_bytes": 5368709120
+      }
+    }
+  },
+  "task_contracts": {
+    "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+    "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+    "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+    "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+    "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+    "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+    "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+  },
+  "unchanged_gates": {
+    "clock_diagnostic": "clockfree_audit_measurement_v1",
+    "execution_policy": "complete_current_tier",
+    "initializer": "Public deterministic initialization plus explicitly scoped fixed fixtures; no substitutions",
+    "ordinary_required": [
+      "ae_gan_hold",
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole",
+      "unused_token_hold"
+    ],
+    "protocol_seed": 0,
+    "rng": "Same isolated constructor/data/training/evaluation contract; consumed-stream checkpoint checks remain collection work",
+    "task_definition": "Exact common source,task/protocol/view bytes preserve architecture,data law,ordered batches,initial prior distribution/capacity,sampling,updates,evaluation cadence,and original gate thresholds",
+    "through_tier": 1
+  },
+  "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+}

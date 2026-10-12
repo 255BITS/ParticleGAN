@@ -95,8 +95,10 @@ belong in the corresponding reports, including the
 [bounded R1/R2 repair search](reports/forge/r1r2-tier1-search/README.md) and the
 separately registered [five-track repair campaign](reports/forge/r1r2-five-track-repair/README.md).
 Subsequent [optimizer-role comparison](reports/forge/r1r2-role-repair/README.md)
-and [gradient-direction/critic-denominator plan](reports/forge/r1r2-direction-floor-repair/PLAN.md)
+and [gradient-direction/critic-denominator readout](reports/forge/r1r2-direction-floor-repair/README.md)
 retain their own finite registrations and source-bound readouts.
+The subsequent [spectral-update comparison](reports/forge/r1r2-spectral-repair/PLAN.md)
+tests a distinct supported optimizer law under the same task contracts.
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`

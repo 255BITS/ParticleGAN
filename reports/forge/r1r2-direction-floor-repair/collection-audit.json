@@ -1,0 +1,1579 @@
+{
+  "actual_optimizer_groups": {
+    "ada": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      }
+    },
+    "ada_eps": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "ada_nsgda",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "ada_nsgda",
+          "history_fields": [
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      }
+    },
+    "adam": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      }
+    },
+    "adam_eps": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 0.0001,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      }
+    },
+    "baseline": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "E": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "P": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        },
+        "G": {
+          "algorithm": "adam",
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ]
+        }
+      }
+    }
+  },
+  "checks": {
+    "21_new_charge_owners_and175_unique_aggregate": "PASS",
+    "actual_D_G_E_sampled_P_Adam_Ada_families_epsilon_and_histories": "PASS",
+    "all154_old_charge_ids_owners_values_retained": "PASS",
+    "all_consumed_named_stream_receipts_match_saved_states": "PASS",
+    "artifact_bytes_and_actual_training_gif_sidecars": "PASS",
+    "certified_projection_and_stored_original_independent_grades": "PASS",
+    "direct_pole_uses_G_moments_prior_factor_inapplicable": "PASS",
+    "fixed_actual_initial_tensors_and_ordered_target_batches": "PASS",
+    "no_scientific_retries": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS",
+    "two_exact_cached_controls": "PASS",
+    "unsampled_token_prior_factor_inapplicable": "PASS"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 4587.580182052945,
+    "cached_new_paid_seconds": 0,
+    "new_paid_seconds": 586.6006355709687,
+    "prior_paid_seconds": 4000.9795464819763,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "coverage": {
+    "aggregate_unique_paid_attempts": 175,
+    "cases": 35,
+    "checkpoints": 30,
+    "clock_proofs": 5,
+    "clock_saved_snapshots": 130,
+    "clock_stream_states": 1820,
+    "exact_cached_control_cases": 14,
+    "gifs": 35,
+    "grades": 35,
+    "new_paid_attempts": 21,
+    "optimizer_groups": 85,
+    "ordinary_stream_states": 490,
+    "roles": 5,
+    "source_files": 1214
+  },
+  "inputs_sha256": {
+    "aggregate175_charge_index": "d26b0dd94ae45abef5d33fda2c67fd3e9f9a3c7920333678df476de3c9fa6f2c",
+    "audit_source": "df64efb6e7085377335c54fee1f72f5a43be6c7d3fa120faea9f9fab8b80afc5",
+    "historical154_charge_index": "a17977e537785fbee63c216f8cbda0e11663f0fcecf69ad936ea94c2f85b49a0",
+    "old_first_publication": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "old_role_audit": "48568124373ae9876c7249e672e67bd37019eb12e61db64346e25990db50bc22",
+    "old_role_publication": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "progress": "8b290ef1f43e43c18fa7388d8d57884e8b1c2ad8fea57a5772bd6ba6b1bc8045",
+    "publication": "24ecdc0cbeb6a848598b752906ac156107970769d40cdeaa10d4442fac974d3c",
+    "queue": "448697f91a61a7b18e3d9ef123f79cd8c3971ca3b6ff768e57ba76d32bd3d430",
+    "registration": "7f9fbe619b0e453a1b620c72fa7dac7b46f618b4ab5d112520579cb85f0c5f5b"
+  },
+  "limits": "Stored original independent grades only; no gates recomputed. Clock proofs retain each own cohort. Optimizer family, betas, epsilon and history fields come from actual saved groups; direct-pole counters remain labelled prior but consume G moments. Caller-global metadata is not compared across candidates.",
+  "live_evaluators_or_rescoring": false,
+  "method_helpers_sha256": {
+    "experiments/forge/artifacts.py": "d282269ef2c0a45d27fc105121529e952affe0e6328545cc6a43c6333d59187b",
+    "experiments/forge/contracts.py": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5",
+    "reports/forge/regenerate_technique_inventory.py": "bb4551d2461ae025d35a95146bd932ca0fc4e28975ee3f88c480e77d3eaec8d0"
+  },
+  "model_construction_training_sampling_and_random_draws_forbidden": true,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "independent_read_only_r1r2_direction_floor_collection_audit",
+  "source_commit": "a7f141c9c73d7aead972f2d7a382b2f52a59ac69",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS"
+}
