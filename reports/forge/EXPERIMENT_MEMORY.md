@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 833. Inventory coverage: complete. Unresolved import items: 7.
+Records: 834. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3894,6 +3894,22 @@ The source-bound baseline preserves Ring16 density and external-clock failures. 
 
 [Evidence](../../reports/forge/r1r2-baseline/results.json) · [Record](records/r1r2-recorded-baseline-20261012.json)
 
+### r1r2-constant-policy-v1 · r1r2-role-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Separating first momentum by global optimizer role and testing its interaction with AMSGrad repairs unchanged Tier1 density without acquisition or clock regressions.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `optimizer_role_momentum_factorial`.
+
+
+
+No complete repair. All seven new recipes pass clock and fail Ring16; momentum plus AMSGrad passes 5/6 ordinary tasks. D/G momentum with zero prior momentum is the best density lead but fails acquisition; detailed metrics remain in the report.
+
+**Next:** Close this registration and preserve baseline; read saved gradient-direction and denominator analyses before any separate finite comparison.
+
+[Evidence](../../reports/forge/r1r2-role-repair/publication/results.json) · [Record](records/r1r2-role-repair-20261012.json)
+
 ### r1r2-constant-policy-v1 · r1r2-tier1-search-final-20261012
 
 **Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
@@ -5287,4 +5303,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `c377c653edefde1ef3d09824ede2e6c75ccc56181e2b577ef20e7056ad856565`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a7530125648d3bc18f12bacdacac7d767e476cd94af6f2b992089c86638c6c1c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

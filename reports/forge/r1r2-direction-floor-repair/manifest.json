@@ -1,0 +1,54 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 12600,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-direction-floor-repair-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-five-track-cached-baseline-v1"
+    },
+    {
+      "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "role": "adam",
+      "study": "r1r2-role-cached-zero-v1-study"
+    },
+    {
+      "candidate": "r1r2-direction-floor-adam-eps-v1",
+      "role": "adam_eps",
+      "study": "r1r2-direction-floor-adam-eps-v1-study"
+    },
+    {
+      "candidate": "r1r2-direction-floor-ada-v1",
+      "role": "ada",
+      "study": "r1r2-direction-floor-ada-v1-study"
+    },
+    {
+      "candidate": "r1r2-direction-floor-ada-eps-v1",
+      "role": "ada_eps",
+      "study": "r1r2-direction-floor-ada-eps-v1-study"
+    }
+  ],
+  "id": "r1r2-direction-floor-repair-v1",
+  "max_candidates": 5,
+  "paid_cap_seconds": 8000,
+  "round": 1,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [],
+  "supporting_inputs": [
+    "reports/forge/r1r2-direction-floor-repair/workflow.py",
+    "reports/forge/r1r2-direction-floor-repair/PLAN.md",
+    "reports/forge/r1r2-direction-floor-repair/optimizer-preflight.json",
+    "reports/forge/r1r2-role-repair/registration.json",
+    "reports/forge/r1r2-role-repair/publication/results.json",
+    "reports/forge/r1r2-role-repair/density-audit.json",
+    "reports/forge/r1r2-role-repair/optimizer/normalization.json",
+    "reports/forge/r1r2-role-repair/prior/denominator-analysis.json",
+    "reports/forge/r1r2-tier1-search/registration.json",
+    "reports/forge/r1r2-five-track-repair/registration.json"
+  ]
+}

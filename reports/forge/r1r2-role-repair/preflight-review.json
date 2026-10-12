@@ -1,0 +1,713 @@
+{
+  "all10roles_source_runtime_protocol_view_task_laws_match": true,
+  "all_declaration_hashes_and_frozen_request_projections_match": true,
+  "all_frozen_paths_committed_and_unchanged_against_execution_HEAD": true,
+  "blockers": [],
+  "budget": {
+    "aggregate_paid_ceiling_seconds": 8000,
+    "cached_job_keys": 21,
+    "cached_new_paid_seconds": 0,
+    "campaign_full_reservation_seconds": 25200,
+    "new_headroom_at_admission_seconds": 5268.297117342096,
+    "new_job_keys": 49,
+    "new_status_counts": {
+      "pending": 37,
+      "running": 2,
+      "terminal": 10
+    },
+    "per_recipe_full_reservation_seconds": 2520,
+    "prior_paid_seconds": 2731.7028826579044,
+    "prior_unique_attempts": 105,
+    "snapshot_active_reserved_seconds": 1200,
+    "snapshot_current_paid_seconds": 2830.6751157479302
+  },
+  "comparison_reference_commit": "a2b021063b0cb62aa450b8dfc61032a80919481f",
+  "control_jobs": [
+    {
+      "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+      "compatibility_key": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 8.06148013699567,
+      "role": "baseline",
+      "task_id": "ae_gan_hold",
+      "terminal_result_sha256": "6d58447f3d08dedd0ff70e0ad0979644b08a8c3de2d37cbd96b42ce3bdc1a114"
+    },
+    {
+      "attempt_id": "2e4e295a6ca846f88d15435f733e772b",
+      "compatibility_key": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.814647177001461,
+      "role": "baseline",
+      "task_id": "clockfree_audit_measurement_v1",
+      "terminal_result_sha256": "56a5c8afff53fce9d52e6262b8a856a5f7dbf3bb256a8baea090b441869413f0"
+    },
+    {
+      "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+      "compatibility_key": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 119.51356138498522,
+      "role": "baseline",
+      "task_id": "five_word_joint_smoke",
+      "terminal_result_sha256": "c049616e311078f1b2332435e59c13a512c1d48d7f1da83c4d487e829f799655"
+    },
+    {
+      "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+      "compatibility_key": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 13.925102654990042,
+      "role": "baseline",
+      "task_id": "gaussian1d_smoke",
+      "terminal_result_sha256": "3bc7a419ebf8b363abed89268a2d95ad028a30b077907f1247bc5823ad1cc478"
+    },
+    {
+      "attempt_id": "a68d67bc0972421ab60984bbda398532",
+      "compatibility_key": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 18.71034477901412,
+      "role": "baseline",
+      "task_id": "ring16_acquisition",
+      "terminal_result_sha256": "7b4799e24b5e9e9e5d1dcc1413b216ad870f2c71ddb7376b2d20025dcaf950d0"
+    },
+    {
+      "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+      "compatibility_key": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.593850100005511,
+      "role": "baseline",
+      "task_id": "two_pole",
+      "terminal_result_sha256": "37fd97c7bddbdab0b84b03a1ac15348edcd5651da80065bcd088c01a37f009c7"
+    },
+    {
+      "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+      "compatibility_key": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 7.086462726001628,
+      "role": "baseline",
+      "task_id": "unused_token_hold",
+      "terminal_result_sha256": "46f0e80e17bc9febddbbe5e7fadec322e9371dbeef96313749fbb65b88170061"
+    },
+    {
+      "attempt_id": "bd0e618165b7481a8f54318488bbb6f5",
+      "compatibility_key": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 8.034603377978783,
+      "role": "m000",
+      "task_id": "ae_gan_hold",
+      "terminal_result_sha256": "a9dce37d00e29e058378eac04be98e220f9a37aa63d5cf3dc6a6156e5a69bb89"
+    },
+    {
+      "attempt_id": "7f98995a39564e648f338432eb4d3ed4",
+      "compatibility_key": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.943630980007583,
+      "role": "m000",
+      "task_id": "clockfree_audit_measurement_v1",
+      "terminal_result_sha256": "751d887e6a5da524fa94d2e292b4051a90b18edd82220ccb2ac2baf22f1fec05"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "compatibility_key": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 118.7868495650182,
+      "role": "m000",
+      "task_id": "five_word_joint_smoke",
+      "terminal_result_sha256": "34167056802b87996d4389c3f237d69f8d879864b36e309bed684561133f402e"
+    },
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "compatibility_key": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 13.613040277006803,
+      "role": "m000",
+      "task_id": "gaussian1d_smoke",
+      "terminal_result_sha256": "15a52d8fcc76d6712ef0461c27aed2384ef7a2710d832faa18b3403e6ac7d4fe"
+    },
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "compatibility_key": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 18.848083574004704,
+      "role": "m000",
+      "task_id": "ring16_acquisition",
+      "terminal_result_sha256": "51921129997c065aa3a30331903643b0462ce44e8c376ae553165badc0cda7bf"
+    },
+    {
+      "attempt_id": "d215b1648cf5462db90757c8834a681f",
+      "compatibility_key": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.524512680014595,
+      "role": "m000",
+      "task_id": "two_pole",
+      "terminal_result_sha256": "0988838088b04c0a8f64521b066e25187a1494b041bde134a98060d06e0e2565"
+    },
+    {
+      "attempt_id": "1616b4bc93414bb2a2e1006a9c6cc3e5",
+      "compatibility_key": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 7.171320408000611,
+      "role": "m000",
+      "task_id": "unused_token_hold",
+      "terminal_result_sha256": "48f244a3fa986d9c6ac92724336cf3c6cc4d8820984fa50e0fb4ee853d508c0f"
+    },
+    {
+      "attempt_id": "f6c3684cf48542fb82f316a763b6158f",
+      "compatibility_key": "2f2a93f2e67de8e8be67a42e5686e05cf45274246a74bbd413acfe4ffa6c89af",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 8.111114700004691,
+      "role": "m111",
+      "task_id": "ae_gan_hold",
+      "terminal_result_sha256": "ed9b9993460cc4e96b5acde255214ebe7bd7574e9e9cf61ed717e1fdb8b8eb77"
+    },
+    {
+      "attempt_id": "c8e3da8ed01c44518946b0bf0fc575a2",
+      "compatibility_key": "1d8edd9e9dbf4118bb1cbcfb76d7b4960dbdde38ee9de3109b0fef4737b22d80",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 7.086760454985779,
+      "role": "m111",
+      "task_id": "clockfree_audit_measurement_v1",
+      "terminal_result_sha256": "72d54c6c002a5b54767b9b0d6aa0796c68c317dd2c9909098e2e352d0695c578"
+    },
+    {
+      "attempt_id": "5083750114c24d6c909ea98e81aed972",
+      "compatibility_key": "4a7520e8fb991b81bc80700d021827289d7382ee7b30f6dd2b48970342c51774",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 117.06453806499485,
+      "role": "m111",
+      "task_id": "five_word_joint_smoke",
+      "terminal_result_sha256": "cc08fa44604f9cb6972b486ae1e25ff212779064462593e8883ae4b28bcdefb1"
+    },
+    {
+      "attempt_id": "0dd7a211bb0c482e9930a8cc530be66c",
+      "compatibility_key": "ffcff8b116923897a7cfb5d2406aa41de64eb35a67a6a695d423ef6c330d26ee",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 13.808244871994248,
+      "role": "m111",
+      "task_id": "gaussian1d_smoke",
+      "terminal_result_sha256": "726e915a4beec050c60aa07c01014f3582d981333443c2fd590a340ecb5e7536"
+    },
+    {
+      "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "compatibility_key": "bb36a32816e35fa59acb49f1f3b7b22abbef3d4b785fbf7b73148ad25f483904",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 18.75906453700736,
+      "role": "m111",
+      "task_id": "ring16_acquisition",
+      "terminal_result_sha256": "dbd16cd25a56cdb2d1c7579e64f6a4f94e643a76fc87eeb982f1bdf65135a0c2"
+    },
+    {
+      "attempt_id": "0dc6127d203342039753a4cc9429e0cc",
+      "compatibility_key": "421d5fad00267eec86265246cffb35edc02e40964d88620429f49fef9ac9e83d",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 6.558976169995731,
+      "role": "m111",
+      "task_id": "two_pole",
+      "terminal_result_sha256": "756856db75f9a932d8269de89b90a3dc7177476da9e0bebdf6f294e9072a5fce"
+    },
+    {
+      "attempt_id": "b210b3067595495e9e358294ef67ad6d",
+      "compatibility_key": "0f8a9cd2dbb1b6799c9b05e1e5758ffa253287c9b828916271aa210164744451",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-five-track-momentum-v1",
+        "request": "a90e874d7c7bf6d5c59a8d6d",
+        "revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa"
+      },
+      "original_paid_seconds": 7.11492441399605,
+      "role": "m111",
+      "task_id": "unused_token_hold",
+      "terminal_result_sha256": "71cdf33de0977637d408984dd0845b90e17c5bd24029d713dd6ef6622d24c0a6"
+    }
+  ],
+  "core_tasks_protocol_view_changed_paths": [],
+  "execution_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+  "gate_and_budget_invariants": {
+    "R1_R2": "paired gamma=.1 every update for all8constantfactorial recipes and AMS child; scheduled baseline remains exact archived control",
+    "execution_policy": "complete_current_tier",
+    "protocol_seed": 0,
+    "required_ordinary": [
+      "ae_gan_hold",
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole",
+      "unused_token_hold"
+    ],
+    "scope_through_tier": 1,
+    "tasks": [
+      "ae_gan_hold",
+      "clockfree_audit_measurement_v1",
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole",
+      "unused_token_hold"
+    ],
+    "update_limits_evaluation_cadence_initial_priors_sampling_and_gates": "unchanged exact task/protocol/view bytes"
+  },
+  "limits": [
+    "Actual initialized tensors, consumed data streams, checkpointed RNG and trained gates remain collection-stage checks; this review validates declarations and cached identities.",
+    "P-inactive fixtures do not independently test the P factor; repeated numerical trajectories may follow from distinct whole global recipes.",
+    "Review captured after root admission and does not amend its frozen declarations or registration."
+  ],
+  "manifest_sha256": "4eb4d6090724204fe7581ab405ab0384c83411157c4fc09f4f847ee20c7311f5",
+  "new_sampling_draws_by_review": 0,
+  "new_training_updates_by_review": 0,
+  "old_registration_projection_guards": "Scheduled reference and all-zero/all-.5 controls exactly match their original registration projections, including all job keys.",
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "queue_mutations_by_review": 0,
+  "recipes": {
+    "ams_m111": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": true,
+      "candidate_id": "r1r2-role-ams-m111-v1",
+      "candidate_revision": "c3dc3788301fe037e93533cf5e9df2462081de57a0e49a87123e3be04dfa28b9",
+      "effective_beta1_D_G_E_P": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "effective_delta_from_parent": {
+        "amsgrad": {
+          "after": true,
+          "before": false
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m000": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "effective_beta1_D_G_E_P": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "effective_delta_from_parent": {},
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m001": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m001-v1",
+      "candidate_revision": "b135ced8981428601ad56aa2e054d3ed69fcd1c1013a413a557893316f7081f2",
+      "effective_beta1_D_G_E_P": [
+        0,
+        0,
+        0,
+        0.5
+      ],
+      "effective_delta_from_parent": {
+        "prior_betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m010": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m010-v1",
+      "candidate_revision": "bbfaf513facda09503e64709a435977650afee20cdab97b890904a7916e21b3b",
+      "effective_beta1_D_G_E_P": [
+        0,
+        0.5,
+        0.5,
+        0
+      ],
+      "effective_delta_from_parent": {
+        "betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": [
+            0.0,
+            0.99
+          ]
+        },
+        "d_betas": {
+          "after": [
+            0.0,
+            0.99
+          ],
+          "before": null
+        },
+        "prior_betas": {
+          "after": [
+            0.0,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m011": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m011-v1",
+      "candidate_revision": "83f9879c7f3a64a151de0787e1174427db5c27ef95d358bc9916ad59203ab165",
+      "effective_beta1_D_G_E_P": [
+        0,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "effective_delta_from_parent": {
+        "betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": [
+            0.0,
+            0.99
+          ]
+        },
+        "d_betas": {
+          "after": [
+            0.0,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m100": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m100-v1",
+      "candidate_revision": "db1e4d680a40a8c5db1f8ecf71fc7b445bdfc6a0103da5a9a04e8920a8d6a7e2",
+      "effective_beta1_D_G_E_P": [
+        0.5,
+        0,
+        0,
+        0
+      ],
+      "effective_delta_from_parent": {
+        "d_betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m101": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m101-v1",
+      "candidate_revision": "c2566ade877cb638262784e6ccdaa64eb7f3628845399f56de06635f5d10e936",
+      "effective_beta1_D_G_E_P": [
+        0.5,
+        0,
+        0,
+        0.5
+      ],
+      "effective_delta_from_parent": {
+        "d_betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": null
+        },
+        "prior_betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m110": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "effective_beta1_D_G_E_P": [
+        0.5,
+        0.5,
+        0.5,
+        0
+      ],
+      "effective_delta_from_parent": {
+        "betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": [
+            0.0,
+            0.99
+          ]
+        },
+        "prior_betas": {
+          "after": [
+            0.0,
+            0.99
+          ],
+          "before": null
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    "m111": {
+      "all_effective_beta2": 0.99,
+      "amsgrad": false,
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "effective_beta1_D_G_E_P": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "effective_delta_from_parent": {
+        "betas": {
+          "after": [
+            0.5,
+            0.99
+          ],
+          "before": [
+            0.0,
+            0.99
+          ]
+        }
+      },
+      "public_binding_status": "PASS",
+      "resolved_task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    }
+  },
+  "registration_sha256": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794",
+  "reviewed_at": "2026-10-12T21:16:53.075+00:00",
+  "role_interpretation": {
+    "D": "d_betas or betas through Recipe.make_critic_optimizer",
+    "G_E": "Recipe.betas; encoder parameters share native generator optimizer law",
+    "P": "prior_betas or betas on sampled learned latent-table groups",
+    "direct_particle_betas": "Inactive intervention setting because optimizer_family=adam and direct_particle_gain=false; no alternate pole beta law.",
+    "two_pole": "Direct sample-coordinate native optimizer consumes G beta; forge_role=prior only labels the constant prior rate schedule. prior_betas and prior_lr_mult are inactive.",
+    "unused_token_hold": "No sampled learned prior; P factor inactive."
+  },
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scope": "Independent read-only review after admission; training owned by root, no new qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS",
+  "storage": {
+    "archives": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": {
+        "bytes": 5477,
+        "cap_bytes": 8589934592,
+        "free_bytes": 22147137536,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": {
+        "bytes": 1703,
+        "cap_bytes": 8589934592,
+        "free_bytes": 22147137536,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": {
+        "bytes": 1742703632,
+        "cap_bytes": 8589934592,
+        "free_bytes": 22147137536,
+        "minimum_free_bytes": 5368709120
+      }
+    }
+  }
+}

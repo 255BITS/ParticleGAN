@@ -1,0 +1,658 @@
+{
+  "all28constant_role_task_bindings_verified": true,
+  "all5roles_fixed_source_runtime_protocol_view_task_laws_match": true,
+  "all_five_request_projections_match_registration": true,
+  "all_prepared_declaration_hashes_match": true,
+  "axis_activity": {
+    "ada_epsilon_interaction": "Critic epsilon enters both elementwise Adam denominator and gradient-norm denominator; epsilon1e-4 also attenuates the norm graft on tiny-gradient tensors.",
+    "d_eps": "Every critic factory consumes d_eps rather than global epsilon, including joint word and behavioral hosts; G/E/P epsilon stays1e-8. No inactive critic-epsilon cell.",
+    "direction_scope": "AdaNSGDA preserves each nonzero parameter tensor gradient direction; not the direction of a concatenated whole-player update.",
+    "optimizer_family": "Public G/E, sampled latent-prior and critic factories select Adam or AdaNSGDA on all7 tasks; direct pole coordinates belong to G. The unsampled token fixture has no P group.",
+    "prior": "Learning stays enabled, zero added prior regularization/proximal spring; initial task prior law/capacity/sampling unchanged."
+  },
+  "blockers": [],
+  "cached_control_jobs": [
+    {
+      "attempt_id": "bd0e618165b7481a8f54318488bbb6f5",
+      "compatibility_key": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 8.034603377978783,
+      "original_result_sha256": "a9dce37d00e29e058378eac04be98e220f9a37aa63d5cf3dc6a6156e5a69bb89",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "7f98995a39564e648f338432eb4d3ed4",
+      "compatibility_key": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.943630980007583,
+      "original_result_sha256": "751d887e6a5da524fa94d2e292b4051a90b18edd82220ccb2ac2baf22f1fec05",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "compatibility_key": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 118.7868495650182,
+      "original_result_sha256": "34167056802b87996d4389c3f237d69f8d879864b36e309bed684561133f402e",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "compatibility_key": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 13.613040277006803,
+      "original_result_sha256": "15a52d8fcc76d6712ef0461c27aed2384ef7a2710d832faa18b3403e6ac7d4fe",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "compatibility_key": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 18.848083574004704,
+      "original_result_sha256": "51921129997c065aa3a30331903643b0462ce44e8c376ae553165badc0cda7bf",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "d215b1648cf5462db90757c8834a681f",
+      "compatibility_key": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 6.524512680014595,
+      "original_result_sha256": "0988838088b04c0a8f64521b066e25187a1494b041bde134a98060d06e0e2565",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "1616b4bc93414bb2a2e1006a9c6cc3e5",
+      "compatibility_key": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-constant-search-v1",
+        "request": "885ed680ffc14e5dbdb421bc",
+        "revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775"
+      },
+      "original_paid_seconds": 7.171320408000611,
+      "original_result_sha256": "48f244a3fa986d9c6ac92724336cf3c6cc4d8820984fa50e0fb4ee853d508c0f",
+      "original_status_preserved": true,
+      "role": "adam",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+      "compatibility_key": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 8.06148013699567,
+      "original_result_sha256": "6d58447f3d08dedd0ff70e0ad0979644b08a8c3de2d37cbd96b42ce3bdc1a114",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "2e4e295a6ca846f88d15435f733e772b",
+      "compatibility_key": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.814647177001461,
+      "original_result_sha256": "56a5c8afff53fce9d52e6262b8a856a5f7dbf3bb256a8baea090b441869413f0",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+      "compatibility_key": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 119.51356138498522,
+      "original_result_sha256": "c049616e311078f1b2332435e59c13a512c1d48d7f1da83c4d487e829f799655",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+      "compatibility_key": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 13.925102654990042,
+      "original_result_sha256": "3bc7a419ebf8b363abed89268a2d95ad028a30b077907f1247bc5823ad1cc478",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "a68d67bc0972421ab60984bbda398532",
+      "compatibility_key": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 18.71034477901412,
+      "original_result_sha256": "7b4799e24b5e9e9e5d1dcc1413b216ad870f2c71ddb7376b2d20025dcaf950d0",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+      "compatibility_key": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.593850100005511,
+      "original_result_sha256": "37fd97c7bddbdab0b84b03a1ac15348edcd5651da80065bcd088c01a37f009c7",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+      "compatibility_key": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 7.086462726001628,
+      "original_result_sha256": "46f0e80e17bc9febddbbe5e7fadec322e9371dbeef96313749fbb65b88170061",
+      "original_status_preserved": true,
+      "role": "baseline",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "cached_control_projection_equality": "Exact candidate/source/runtime/protocol/task/job identities match original closed first-round registration.",
+  "comparison_reference_commit": "a2b021063b0cb62aa450b8dfc61032a80919481f",
+  "core_tasks_protocol_and_view_changed_paths": [],
+  "execution_commit": "Root must commit all frozen inputs and registration before admission; not assigned by this review.",
+  "issues_resolved": [
+    "PLAN reproduction run CLI corrected before preparation to supported source-commit/submit/drain/gpus flags."
+  ],
+  "limitations": [
+    "Training outcome and actual initial-tensor/consumed-target/RNG parity await root execution and collection.",
+    "Prospective source support and fixed laws do not establish a Ring16 or whole-suite scientific pass."
+  ],
+  "manifest_sha256": "f3141839b47ed6f3ed21dc9d6594c678b63dcb39c58e2791d747f25c4bf14b4b",
+  "new_sampling_draws_by_review": 0,
+  "new_training_updates_by_review": 0,
+  "optimizer_preflight_sha256": "1db3872231c12ec0d5b1f97c368737365bbba5e37ed11bae8cd69fefaa707671",
+  "paid_budget": {
+    "active_prior_reservations_seconds": 0,
+    "aggregate_paid_ceiling_seconds": 8000,
+    "cached_job_keys": 14,
+    "cached_new_paid_seconds": 0,
+    "full_reservation_seconds": 12600,
+    "new_headroom_seconds": 3999.0204535180237,
+    "new_job_keys": 21,
+    "per_recipe_full_reservation_seconds": 2520,
+    "previous_attempts": 154,
+    "previous_paid_seconds": 4000.9795464819763
+  },
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "queue_mutations_by_review": 0,
+  "registration_sha256": "7f9fbe619b0e453a1b620c72fa7dac7b46f618b4ab5d112520579cb85f0c5f5b",
+  "review_checkout_head": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+  "reviewed_at": "2026-10-12T21:42:23.313+00:00",
+  "roles": {
+    "ada": {
+      "candidate_id": "r1r2-direction-floor-ada-v1",
+      "candidate_revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea",
+      "exact_declared_delta": {
+        "optimizer_family": "ada_nsgda"
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "13513af7aefca2b98f20af08d983d3a1e696b48a31bf496f52e6229e606968e8",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "86f6c05ad3cb9e38092ca82f6926eac3c3f56c5f03b94a35cea8b54131f7ae65",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "7e45de6d167713537e176f3885fdb060e11d537b221705d7730c3ce719688c3d",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "603a59440d93b73035badeb4a2491c03fa1a997e99451e66e98b0eb9b2d1f2fe",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "7c5ccf5a0643febae6488f2096a4b6be2d9f84a8326102ec6f3a5a4231587f58",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "2cb41e6e95ae9043d89b402f2a2010f150ab1dfdd70367ff4951bd6b5daafc06",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "ba13038c3b0ae4d4c4fdf36f957875473e204d277013253c90db638f1b83bbaa",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "ada_eps": {
+      "candidate_id": "r1r2-direction-floor-ada-eps-v1",
+      "candidate_revision": "053adb61eb9bcdf220116196f499ca340ff7faa47699d72e2cb282615636d379",
+      "exact_declared_delta": {
+        "d_eps": 0.0001,
+        "optimizer_family": "ada_nsgda"
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "f09ef2af9745d3d554018434408b0ec77c3f4848216c70940b923b0dea06be20",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "ec12dc6ac6338fc45ac10002f2cc78756460236f1f1c46e43b9704c6bf8ab9fc",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "b6c99da545fea28f646f0530e9e28253f33b7d5fc0b1915fe85ff9ba58a09252",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "75b437376777e32258eccd53dcd81d4e41e5b2cf0e1a558c1712d2f6012ecf02",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "2647d5b5ac8457607ecc7e7c3d3b2cd9de4e665354f080b0e07550b96ef92fca",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "6202378a6b62b2ee5de2b330d75855c0dc184a61e356d9a26d565df67f31fcb6",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps",
+            "optimizer_family"
+          ],
+          "effective_recipe_sha256": "f7252cc5965e3ae13e195d569579fb63fe230a312f2c11d97eb9a44fa0f035d6",
+          "family": "ada_nsgda",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "adam": {
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "exact_declared_delta": {},
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "b5b564cafda5f4b5b1662f0ceb71e2878ed6522d08f67272fc715d9f6ec2ad1d",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "2661dcead72ab6697d972d2a2085f2e13f4de4da51b5df3d0cffe5100e148fe4",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "8a28ad855388124203121efd8ec738233b5880ea496bfb1ec18a2f870923caf9",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "c40a76ab93d359399ef93f3cb18abd382749e116c9005d4a0a9ad0deb9050463",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "49148d724404ec5c03b36104754678fc3542035227b0f015dd92d5b498104e76",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "f39b221079da5a965b004bd26b56fa846d26ed97b5ade6cfd66579ebfe24e22f",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_epsilon": 1e-08,
+          "delta_keys": [],
+          "effective_recipe_sha256": "3f4679830a236342062f61207cce7b4f4f26131b4dcb9a4f149d13a810e4ac4b",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    "adam_eps": {
+      "candidate_id": "r1r2-direction-floor-adam-eps-v1",
+      "candidate_revision": "7278048f77d4b8656e4f113799f4266abe9f963dd692c5bf75a1e4f4ab866658",
+      "exact_declared_delta": {
+        "d_eps": 0.0001
+      },
+      "public_binding_status": "PASS",
+      "task_bindings": [
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "99c064484dcc990042277d3f8f807fd4f4a91d8999580153d9fa39827b2ac050",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "d72b1b5f753f6d7c0a8689c2e3872898b6ea6aeb1eb36f9e76c563cd12193705",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "ef4f325853b8536eff24a5c2766af4816bb23d79cd3278d78509cc6e670388b3",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "254a70b5d016eecc2f2a9261eb5d4b88758a7941fe26dac758212839cc0753e0",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "eb8749998589a68cc5cf452a56c3630a072924fe1f7a4de660ec71f79b81d302",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": 1e-08,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "914e6261bff9c271359431661536e6d09ab5561cf9117009cf65dcd6d5ec18a5",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "two_pole"
+        },
+        {
+          "critic_epsilon": 0.0001,
+          "delta_keys": [
+            "d_eps"
+          ],
+          "effective_recipe_sha256": "e02ef49ba722e23e13f8509c9926e623b66b7b672fac0cfb5a7f78a0879b1bad",
+          "family": "adam",
+          "generator_encoder_epsilon": 1e-08,
+          "sampled_prior_epsilon": null,
+          "task_id": "unused_token_hold"
+        }
+      ]
+    }
+  },
+  "run_guards": [
+    "Explicit source-commit must equal execution HEAD",
+    "All frozen declarations/source/registration committed and unchanged against HEAD",
+    "Frozen source requests must match prepared projections",
+    "Both cached controls require seven retained single-attempt results",
+    "Paid accounting includes prior154charges and every concurrent full reservation",
+    "No extra rounds/retries/Tier2/default adoption"
+  ],
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scope": "Independent prospective review of prepared direction/critic-floor registration; no admission or qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS",
+  "storage": {
+    "archives": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012": {
+        "bytes": 2032,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21548699648,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": {
+        "bytes": 5477,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21548699648,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": {
+        "bytes": 2512,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21548699648,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": {
+        "bytes": 2339395047,
+        "cap_bytes": 8589934592,
+        "free_bytes": 21548699648,
+        "minimum_free_bytes": 5368709120
+      }
+    }
+  },
+  "unchanged_gates": {
+    "clock_diagnostic": "clockfree_audit_measurement_v1",
+    "execution_policy": "complete_current_tier",
+    "initializer": "public deterministic initialization plus explicitly scoped fixed-fixture cohorts",
+    "ordinary_required": [
+      "ae_gan_hold",
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole",
+      "unused_token_hold"
+    ],
+    "protocol_seed": 0,
+    "task_definition": "Exact task/protocol/view bytes preserve architecture,data,initial prior,sampling,update/evaluation allowance and all thresholds.",
+    "through_tier": 1
+  }
+}

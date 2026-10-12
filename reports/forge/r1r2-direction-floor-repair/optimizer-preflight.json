@@ -1,0 +1,932 @@
+{
+  "cached_controls": [
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "d215b1648cf5462db90757c8834a681f",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "1616b4bc93414bb2a2e1006a9c6cc3e5",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "bd0e618165b7481a8f54318488bbb6f5",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "FAIL",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "7f98995a39564e648f338432eb4d3ed4",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "compatibility_key": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "m000",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "a68d67bc0972421ab60984bbda398532",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "PASS",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "2e4e295a6ca846f88d15435f733e772b",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "compatibility_key": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+      "new_paid_seconds": 0,
+      "original_status_preserved": true,
+      "role": "baseline",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "cached_controls_publication_sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+  "consumption_checks": {
+    "ada_epsilon_interaction": "Ada uses D epsilon in both sqrt(v_hat)+eps and ||g||+eps. D epsilon1e-4 additionally attenuates the norm graft by ||g||/(||g||+1e-4).",
+    "behavior_hosts": "BehaviorComponents.bind calls public G/prior and D factories; original host objectives/fixtures are preserved.",
+    "clock": "The measurement host builds the same public trainer. Source audit reports zero additional external-step/horizon dependencies. The actual trained gate remains required.",
+    "d_epsilon_ownership": "Only D consumes d_eps; G/E and prior retain effective epsilon1e-8 in all4 cells.",
+    "public_trainer": "GANTrainer calls Recipe.make_optimizers; the selected family and critic epsilon reach the same public factories.",
+    "word_host": {
+      "critic": "WordFixture calls Recipe.make_critic_optimizer(self.D) without epsilon kwargs. d_eps is consumed by D.",
+      "ge": "Recipe.make_generator_optimizer applies the selected family to separate homogeneous G/E groups with unchanged settings.",
+      "objectives": "Original joint adversarial and paired inverse objectives remain unchanged.",
+      "prior": "Recipe.make_generator_optimizer(...,latent_table=prior.z) binds the original learned five-row table, beta1=0 and zero extra regularization.",
+      "recipe_selection": "WordFixture uses components.recipe, bypassing its standalone default.",
+      "source": "benchmarks/toy_audit/api_images.py"
+    }
+  },
+  "counts": {
+    "cached_controls": 2,
+    "clock_tasks_per_cell": 1,
+    "expected_cached_jobs": 14,
+    "expected_new_jobs": 21,
+    "factorial_cells": 4,
+    "new_recipes": 3,
+    "ordinary_tasks_per_cell": 6,
+    "public_task_preflight_bindings": 28
+  },
+  "direct_pole": {
+    "ada": "Per tensor g/(||g||+1e-8) times ||g/(sqrt(v_hat)+1e-8)|| times LR.0085; no fixed unit-L2 ceiling.",
+    "adam": "Native Adam uses betas(0,.99), epsilon1e-8 and LR.0085 on coordinates. d_eps affects critic only; latent prior betas/multiplier are inapplicable.",
+    "fixture": "Original twelve direct generated coordinates initialized to zero; stored critic and target panel unchanged.",
+    "mean_abs_gate": 0.3,
+    "no_normalized_travel_blocker": true,
+    "ownership": "Generator player; Recipe.make_generator_optimizer(direct_particles=...) overrides forge_role=prior. No sampled latent table exists.",
+    "saved_direction_receipt": "reports/forge/r1r2-role-repair/optimizer/normalization.json",
+    "updates": 80
+  },
+  "guards": {
+    "all_module_forward_calls_forbidden": true,
+    "network_prior_trainer_construction_forbidden": true,
+    "optimizer_updates_added": 0,
+    "parameter_free_recipe_validator_exception": "Recipe.__post_init__ constructs the exact CoulombPriorRegularizer with center/radius=None solely to validate inactive options; no parameters, tensors, forward call or draw.",
+    "parameter_free_validator_constructions": 416,
+    "public_optimizers_constructed": 0,
+    "python_and_torch_rng_unchanged": true,
+    "qualification_input": false,
+    "sampling_draws_added": 0,
+    "source_task_candidate_queue_changes": 0
+  },
+  "inspected_source_sha256": {
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "experiments/forge/adapters.py": "54740115ea523cb5479ab8d45189a56cd7a49e0ac59017d07894ccac06341a08",
+    "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "experiments/forge/boundaries.py": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814",
+    "experiments/forge/clockfree.py": "d313b79537a392e5242b16efffd3f37047ad1b411928307c4a88ba2c1348f65c",
+    "experiments/forge/preflight.py": "22b69480187d5a5595490ea356deb63f44e14039389c576984b6d4217aafa90e",
+    "experiments/forge/taskrecipes.py": "18c5a910bde37c39e1aee70f51829e6644edfc552efd417494cf4891dd3841a2",
+    "experiments/forge/word_adapter.py": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+    "particlegan/coulomb_prior.py": "cd4fed5a3b22510911bc098e7b48bfb794366ef5a9c8c983d1672172f15b10a3",
+    "particlegan/optim/dualnorm.py": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa",
+    "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+    "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+  },
+  "limits": [
+    "Prospective support check only; final hashes, READY declarations and frozen queue requests require central validation.",
+    "No optimizer steps, accelerator execution, trained outcomes or qualification are asserted.",
+    "Cached controls retain original declarations/job identities and verdicts. Null d_eps is the original effective1e-8 default."
+  ],
+  "parent": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+    "declaration_path": "configs/forge/configurations/r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9.json",
+    "declaration_sha256": "f6eb97e3fd889888b857a77bf00daf8cecc77c567e97b86b92d9c7d2fa9b08d6",
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "registration_sha256": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794",
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+    "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+  },
+  "procedure": [
+    "Load certified constant-parent request and original declaration; verify every frozen source file and runtime hash.",
+    "Use experiments.forge.preflight.task_preflight on in-memory task/candidate copies and task_formulation_context for every prospective binding.",
+    "Assert effective recipe differs from the same task-bound parent only in the declared family/critic-epsilon fields.",
+    "Check original task contracts and fourteen cached certificate identities without invoking training, sampling or evaluators."
+  ],
+  "results": [
+    {
+      "actual_delta": {},
+      "all_effective_task_deltas_match_declared": true,
+      "cached": true,
+      "declared_delta": {},
+      "role": "adam_default",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "b5b564cafda5f4b5b1662f0ceb71e2878ed6522d08f67272fc715d9f6ec2ad1d",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "2661dcead72ab6697d972d2a2085f2e13f4de4da51b5df3d0cffe5100e148fe4",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "8a28ad855388124203121efd8ec738233b5880ea496bfb1ec18a2f870923caf9",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "c40a76ab93d359399ef93f3cb18abd382749e116c9005d4a0a9ad0deb9050463",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "49148d724404ec5c03b36104754678fc3542035227b0f015dd92d5b498104e76",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "f39b221079da5a965b004bd26b56fa846d26ed97b5ade6cfd66579ebfe24e22f",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "3f4679830a236342062f61207cce7b4f4f26131b4dcb9a4f149d13a810e4ac4b",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "actual_delta": {
+        "optimizer_family": {
+          "after": "ada_nsgda",
+          "before": "adam"
+        }
+      },
+      "all_effective_task_deltas_match_declared": true,
+      "cached": false,
+      "declared_delta": {
+        "optimizer_family": "ada_nsgda"
+      },
+      "role": "ada_default",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "13513af7aefca2b98f20af08d983d3a1e696b48a31bf496f52e6229e606968e8",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "86f6c05ad3cb9e38092ca82f6926eac3c3f56c5f03b94a35cea8b54131f7ae65",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "7e45de6d167713537e176f3885fdb060e11d537b221705d7730c3ce719688c3d",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "603a59440d93b73035badeb4a2491c03fa1a997e99451e66e98b0eb9b2d1f2fe",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "7c5ccf5a0643febae6488f2096a4b6be2d9f84a8326102ec6f3a5a4231587f58",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "2cb41e6e95ae9043d89b402f2a2010f150ab1dfdd70367ff4951bd6b5daafc06",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 1e-08,
+          "effective_recipe_sha256": "ba13038c3b0ae4d4c4fdf36f957875473e204d277013253c90db638f1b83bbaa",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "actual_delta": {
+        "d_eps": {
+          "after": 0.0001,
+          "before": null
+        }
+      },
+      "all_effective_task_deltas_match_declared": true,
+      "cached": false,
+      "declared_delta": {
+        "d_eps": 0.0001
+      },
+      "role": "adam_floor",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "99c064484dcc990042277d3f8f807fd4f4a91d8999580153d9fa39827b2ac050",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "d72b1b5f753f6d7c0a8689c2e3872898b6ea6aeb1eb36f9e76c563cd12193705",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "ef4f325853b8536eff24a5c2766af4816bb23d79cd3278d78509cc6e670388b3",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "254a70b5d016eecc2f2a9261eb5d4b88758a7941fe26dac758212839cc0753e0",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "eb8749998589a68cc5cf452a56c3630a072924fe1f7a4de660ec71f79b81d302",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "914e6261bff9c271359431661536e6d09ab5561cf9117009cf65dcd6d5ec18a5",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "e02ef49ba722e23e13f8509c9926e623b66b7b672fac0cfb5a7f78a0879b1bad",
+          "optimizer_family": "adam",
+          "status": "PASS",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "actual_delta": {
+        "d_eps": {
+          "after": 0.0001,
+          "before": null
+        },
+        "optimizer_family": {
+          "after": "ada_nsgda",
+          "before": "adam"
+        }
+      },
+      "all_effective_task_deltas_match_declared": true,
+      "cached": false,
+      "declared_delta": {
+        "d_eps": 0.0001,
+        "optimizer_family": "ada_nsgda"
+      },
+      "role": "ada_floor",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "f09ef2af9745d3d554018434408b0ec77c3f4848216c70940b923b0dea06be20",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "ec12dc6ac6338fc45ac10002f2cc78756460236f1f1c46e43b9704c6bf8ab9fc",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "b6c99da545fea28f646f0530e9e28253f33b7d5fc0b1915fe85ff9ba58a09252",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "75b437376777e32258eccd53dcd81d4e41e5b2cf0e1a558c1712d2f6012ecf02",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "2647d5b5ac8457607ecc7e7c3d3b2cd9de4e665354f080b0e07550b96ef92fca",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "6202378a6b62b2ee5de2b330d75855c0dc184a61e356d9a26d565df67f31fcb6",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_d_epsilon": 0.0001,
+          "effective_recipe_sha256": "f7252cc5965e3ae13e195d569579fb63fe230a312f2c11d97eb9a44fa0f035d6",
+          "optimizer_family": "ada_nsgda",
+          "status": "PASS",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Independent prospective in-memory public API preflight; final declaration/source freeze/budget admission remains centrally owned.",
+  "source_mismatches": [],
+  "status": "PASS",
+  "unchanged_task_bindings": [
+    {
+      "adapter": "transfer_behavior",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "mog_prior",
+        "named_rng",
+        "public_components",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_components",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "adapter": "clockfree_audit",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "mog_prior",
+        "named_rng",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_trainer",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "adapter": "word_joint",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "named_rng",
+        "particle_cloud",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_components",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "adapter": "transfer_vector",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "mog_prior",
+        "named_rng",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_trainer",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "adapter": "transfer_vector",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "mog_prior",
+        "named_rng",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_trainer",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "adapter": "transfer_behavior",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "named_rng",
+        "particle_cloud",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_components",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+      "task_id": "two_pole"
+    },
+    {
+      "adapter": "transfer_behavior",
+      "available_capabilities": [
+        "checkpoint",
+        "fixed_prior_width",
+        "learned_locations",
+        "live_sampling",
+        "named_rng",
+        "particle_cloud",
+        "public_components",
+        "public_trainer",
+        "scalar_gan",
+        "uniform_masses"
+      ],
+      "clock_source_dependency_blockers": [],
+      "effective_d_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_ge_epsilon": 1e-08,
+      "effective_prior_betas": [
+        0.0,
+        0.99
+      ],
+      "effective_prior_epsilon": 1e-08,
+      "execution_path": "public_components",
+      "fixed_penalty": {
+        "arm": "a_r1r2",
+        "coefficient": 0.1,
+        "every": 1
+      },
+      "fixed_prior_controls": {
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_regularizer": "vicreg",
+        "prior_update": "learned"
+      },
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "prior_contract": "recipe_owned_v1",
+      "task_contract_sha256": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "verified_current_frozen_source_files": 1214
+}

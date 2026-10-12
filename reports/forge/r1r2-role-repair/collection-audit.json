@@ -1,0 +1,1071 @@
+{
+  "actual_optimizer_betas": {
+    "ams_m111": {
+      "ae_gan_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "baseline": {
+      "ae_gan_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.0,
+          0.9030153240524368
+        ],
+        "G": [
+          0.0,
+          0.9030153240524368
+        ],
+        "P": [
+          0.0,
+          0.9030153240524368
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      }
+    },
+    "m000": {
+      "ae_gan_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      }
+    },
+    "m001": {
+      "ae_gan_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      }
+    },
+    "m010": {
+      "ae_gan_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "m011": {
+      "ae_gan_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "m100": {
+      "ae_gan_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      }
+    },
+    "m101": {
+      "ae_gan_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.0,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.0,
+          0.99
+        ]
+      }
+    },
+    "m110": {
+      "ae_gan_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "m111": {
+      "ae_gan_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "E": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ],
+        "P": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D": [
+          0.5,
+          0.99
+        ],
+        "G": [
+          0.5,
+          0.99
+        ]
+      }
+    }
+  },
+  "checks": {
+    "49_new_charge_owners_and154_unique_aggregate": "PASS",
+    "actual_D_G_E_sampled_P_betas_and_AMSGrad_histories": "PASS",
+    "all105_old_charge_ids_owners_values_retained": "PASS",
+    "all_consumed_named_stream_receipts_match_saved_states": "PASS",
+    "artifact_bytes_and_actual_training_gif_sidecars": "PASS",
+    "certified_projection_and_stored_original_independent_grades": "PASS",
+    "direct_pole_uses_G_moments_prior_factor_inapplicable": "PASS",
+    "fixed_actual_initial_tensors_and_ordered_target_batches": "PASS",
+    "no_scientific_retries": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS",
+    "three_exact_cached_controls": "PASS",
+    "unsampled_token_prior_factor_inapplicable": "PASS"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 4000.9795464819763,
+    "cached_new_paid_seconds": 0,
+    "new_paid_seconds": 1269.2766638240719,
+    "prior_paid_seconds": 2731.7028826579044,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "coverage": {
+    "aggregate_unique_paid_attempts": 154,
+    "cases": 70,
+    "checkpoints": 60,
+    "clock_proofs": 10,
+    "clock_saved_snapshots": 260,
+    "clock_stream_states": 3640,
+    "exact_cached_control_cases": 21,
+    "gifs": 70,
+    "grades": 70,
+    "new_paid_attempts": 49,
+    "optimizer_groups": 170,
+    "ordinary_stream_states": 980,
+    "roles": 10,
+    "source_files": 1214
+  },
+  "inputs_sha256": {
+    "aggregate154_charge_index": "a17977e537785fbee63c216f8cbda0e11663f0fcecf69ad936ea94c2f85b49a0",
+    "audit_source": "c10df2e61d8ddceeca58f61f30cc6ecb8d6033bd6d980bae5e98a36d83c2c964",
+    "historical105_charge_index": "65d0cb4889a2afb36672cf4b142a07bdbd93b21fd06ac252b78ff420e6d3f521",
+    "old_first_publication": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "old_five_track_audit": "b3b492376b502f96f816fabaef6dfec09ff2c0c7c72174ad908e4789386775cc",
+    "old_five_track_publication": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+    "progress": "b5a8039c0b415e636b9cf0ad55848d76442949d9d88c93f4d39866937b68c1d2",
+    "publication": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "queue": "918e67286113492aa952b677e4f20c7e26b97e537141a1fbbb76f9881c7b3ed2",
+    "registration": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794"
+  },
+  "limits": "Stored original independent grades only; no gates recomputed. Clock proofs retain each own cohort. Beta tuples come from actual saved optimizer groups; direct-pole counters remain labelled prior but consume G moments. Caller-global metadata is not compared across candidates.",
+  "live_evaluators_or_rescoring": false,
+  "method_helpers_sha256": {
+    "experiments/forge/artifacts.py": "d282269ef2c0a45d27fc105121529e952affe0e6328545cc6a43c6333d59187b",
+    "experiments/forge/contracts.py": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5",
+    "reports/forge/regenerate_technique_inventory.py": "bb4551d2461ae025d35a95146bd932ca0fc4e28975ee3f88c480e77d3eaec8d0"
+  },
+  "model_construction_training_sampling_and_random_draws_forbidden": true,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "independent_read_only_r1r2_role_collection_audit",
+  "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS"
+}

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "c501ae0e9ff6e80a9f4c14a9738e17b7a55bfc085d3a7e3ff75c97b09461388d",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6453323ae8ff0b0708b1021665309d682f86b769262aaac20f6b37ddfa4c876c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-ams-m111-v1/2f157086342743cf98f46bc63b16b621/constraint_geometry-scored-outputs.pt": "f5a5c5eca01c597f68fc9eca5ffb6fcee68976de836af3281b2a6adf82135314"
+  },
+  "task_id": "unused_token_hold"
+}

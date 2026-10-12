@@ -1,0 +1,30 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "beta1 0/.5 by D,G+E,sampled-prior role; beta2 .99 fixed",
+    "AMSGrad on all-.5 momentum"
+  ],
+  "conclusion": "No complete repair. All seven new recipes pass clock and fail Ring16; momentum plus AMSGrad passes 5/6 ordinary tasks. D/G momentum with zero prior momentum is the best density lead but fails acquisition; detailed metrics remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Separating first momentum by global optimizer role and testing its interaction with AMSGrad repairs unchanged Tier1 density without acquisition or clock regressions.",
+  "lifecycle": "concluded",
+  "mechanism_class": "optimizer_role_momentum_factorial",
+  "next_action": "Close this registration and preserve baseline; read saved gradient-direction and denominator analyses before any separate finite comparison.",
+  "provenance": {
+    "report": "reports/forge/r1r2-role-repair/README.md",
+    "source_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-role-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-role-repair/publication/results.json",
+    "sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}
