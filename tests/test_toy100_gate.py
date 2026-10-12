@@ -9,7 +9,7 @@ import torch
 
 from benchmarks.toy100 import metrics, problems
 from benchmarks.toy100.config import resolve_problem_config
-from benchmarks.toy100.gate import evaluate_suite, score_run
+from benchmarks.toy100.gate import _manifest_expected, evaluate_suite, score_run
 from benchmarks.toy100.train import resolve_config
 from experiments import leaderboard as legacy_leaderboard
 
@@ -200,6 +200,71 @@ def test_manifest_binds_each_executed_config_and_all_three_selected_runs(tmp_pat
     scoped = evaluate_suite(tmp_path, write=False)
     assert scoped["status"] == "FAIL"
     assert all(row["status"] == "INVALID" for row in scoped["problems"].values())
+
+
+def _idle_manifest(output, *, mode=None, se=1.0, init="batch_feature_zero"):
+    """Recipe-file idle fields plus the CLI init stamp, written like ``_run``."""
+    declared = {"name": "toy100_receipt_test", "steps": 1000, "seed": 1234,
+                "snapshot_samples": 2, "constant_lr": True, "generator_idle_se": se,
+                "problem_overrides": {"staggered100": {"batch_size": 1024}}}
+    if mode is not None:
+        declared["generator_idle_mode"] = mode
+    contents = json.dumps(declared) + "\n"
+    output.mkdir(parents=True, exist_ok=True)
+    flats = {name: resolve_problem_config(declared, name, device="cpu")
+             for name in problems.PROBLEM_NAMES}
+    command = {"steps": None, "device": "cpu"}
+    if init is not None:
+        flats = {name: {**config, "deterministic_init": init} for name, config in flats.items()}
+        command["deterministic_init"] = init
+    receipt = {"config_path": str(output / "recipe.json"),
+               "config_sha256": hashlib.sha256(contents.encode()).hexdigest(),
+               "config_contents": contents, "declared_manifest": declared,
+               "resolved_problem_configs": flats,
+               "selected_problems": list(problems.PROBLEM_NAMES),
+               "command_overrides": command}
+    (output / "run_manifest.json").write_text(json.dumps(receipt))
+    return receipt
+
+
+def test_idle_fields_and_init_stamp_reconstruct_and_reject_tampering(tmp_path):
+    _idle_manifest(tmp_path / "ema", mode="ema")
+    ema = _manifest_expected(tmp_path / "ema", problems.PROBLEM_NAMES)
+    assert ema["grid100"]["constant_lr"] is True
+    assert ema["grid100"]["generator_idle_se"] == 1.0
+    assert ema["grid100"]["generator_idle_mode"] == "ema"
+    assert ema["grid100"]["deterministic_init"] == "batch_feature_zero"
+    for name in problems.PROBLEM_NAMES:
+        assert ema[name]["generator_idle_mode"] == "ema"
+
+    _idle_manifest(tmp_path / "omitted")
+    _idle_manifest(tmp_path / "explicit", mode="batch")
+    omitted = _manifest_expected(tmp_path / "omitted", problems.PROBLEM_NAMES)
+    explicit = _manifest_expected(tmp_path / "explicit", problems.PROBLEM_NAMES)
+    assert omitted == explicit
+    assert "generator_idle_mode" not in omitted["grid100"]
+    assert omitted["rotated100"]["generator_idle_se"] == 1.0
+    assert omitted["staggered100"]["constant_lr"] is True
+
+    # The init lives only on the resolved configs unless command_overrides
+    # records it. That is a different config, not a field to ignore.
+    stale = _idle_manifest(tmp_path / "stale", mode="ema")
+    del stale["command_overrides"]["deterministic_init"]
+    (tmp_path / "stale" / "run_manifest.json").write_text(json.dumps(stale))
+    stale_gate = evaluate_suite(tmp_path / "stale", write=False)
+    assert "resolved config differs" in stale_gate["problems"]["grid100"]["reason"]
+
+    for label, edit in (
+            ("mode", lambda config: config.__setitem__("generator_idle_mode", "batch")),
+            ("se", lambda config: config.__setitem__("generator_idle_se", 3.0)),
+    ):
+        receipt = _idle_manifest(tmp_path / label, mode="ema")
+        edit(receipt["resolved_problem_configs"]["grid100"])
+        (tmp_path / label / "run_manifest.json").write_text(json.dumps(receipt))
+        result = evaluate_suite(tmp_path / label, write=False)
+        assert result["problems"]["grid100"]["status"] == "INVALID"
+        assert "resolved config differs for grid100" in result["problems"]["grid100"]["reason"]
+        assert "resolved config differs for rotated100" not in result["problems"]["rotated100"]["reason"]
 
 
 def test_manifest_source_hash_and_resolved_declaration_are_verified(tmp_path):

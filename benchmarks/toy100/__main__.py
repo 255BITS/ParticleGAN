@@ -90,14 +90,20 @@ def _run(args):
         folder = args.output / name
         if (folder / "summary.json").exists() or (folder / "events.jsonl").exists():
             raise FileExistsError(f"existing run evidence at {folder}; choose a new output directory")
+    command_overrides = {"steps": args.steps, "device": device_override}
+    if eval_output_noise is not None:
+        command_overrides["eval_output_noise"] = eval_output_noise
+    # The init is not in the recipe file. The resolved configs carry it, so
+    # the manifest override has to carry it too or the gate rebuilds a
+    # different config.
+    if chosen_init is not None:
+        command_overrides["deterministic_init"] = chosen_init
     declaration = {"config_path": str(args.config),
                    "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
                    "config_contents": config_bytes.decode("utf-8"),
                    "declared_manifest": manifest, "resolved_problem_configs": configs,
-                   "command_overrides": {"steps": args.steps, "device": device_override},
+                   "command_overrides": command_overrides,
                    "selected_problems": names}
-    if eval_output_noise is not None:
-        declaration["command_overrides"]["eval_output_noise"] = eval_output_noise
     if policy_source_hashes is not None:
         declaration["policy_source_sha256"] = policy_source_hashes
         declaration["policy_source_scope"] = policy_source_receipt["source_archive_scope"]
