@@ -69,7 +69,7 @@ RUN_DEFAULTS = {
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
-    "eval_output_noise",
+    "eval_output_noise", "deterministic_init",
 }
 AFFINE_MODEL_POLICIES = {
     "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
@@ -240,6 +240,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not math.isfinite(value) or not 0 <= value <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
+    if "deterministic_init" in run:
+        init_name = run["deterministic_init"]
+        if type(init_name) is not str or not init_name:
+            raise ValueError("deterministic_init must be a registered init name")
+        from benchmarks.init_research.init_registry import names as init_names
+        if init_name not in init_names():
+            raise ValueError(f"unknown deterministic_init {init_name!r}")
     # Noise and network-horizon keys are benchmark-run fields: the benchmark
     # applies them through its own wrappers and hooks, so the trainer recipe
     # keeps their pre-K3P neutral values (see benchmarks.gan_v3).

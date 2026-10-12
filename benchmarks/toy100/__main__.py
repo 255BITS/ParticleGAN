@@ -61,7 +61,7 @@ def _run(args):
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
     from benchmarks.init_research.init_registry import use_init
-    use_init(getattr(args, "init", None))
+    chosen_init = use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)
     # Preflight every declared problem, even for an individual deep dive. An
@@ -71,6 +71,11 @@ def _run(args):
     eval_output_noise = getattr(args, "eval_output_noise", None)
     if eval_output_noise is not None:
         configs = {name: {**config, "eval_output_noise": eval_output_noise}
+                   for name, config in configs.items()}
+    # The initializer is process-wide and runs before the affine receipt.
+    # Recording the name is what lets regrade rebuild that same prior.
+    if chosen_init is not None:
+        configs = {name: {**config, "deterministic_init": chosen_init}
                    for name, config in configs.items()}
     policy_source_hashes = None
     policy_source_receipt = None

@@ -20,6 +20,7 @@ ortho-search init. Family F's other prior names still use family F's arm.
 """
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import os
 
@@ -89,6 +90,97 @@ def use_init(name: str | None) -> str | None:
     if not chosen:
         return None
     return install(chosen)
+
+
+@contextlib.contextmanager
+def replay(name: str | None):
+    """Install ``name`` for one trainer rebuild, then restore the previous hooks.
+
+    The affine receipt is taken after Adam construction. ``batch_feature_zero``
+    replaces the prior at that moment, so a rebuild that skips the initializer
+    hashes a different tensor. ``None`` does not change any hook.
+    """
+    if name is None:
+        yield
+        return
+    try:
+        family, installer = _INSTALLERS[name]
+    except KeyError:
+        raise ValueError(f"unknown init {name!r}; {len(NAMES)} names are registered") from None
+    restore = _replay_restore(family)
+    installer(name)
+    try:
+        yield
+    finally:
+        restore()
+
+
+def _replay_restore(family: str):
+    """Return a callable that puts ``family`` back how it was before ``install``."""
+    if family == "batch_feature_zero":
+        was_installed = bool(batch_feature_init._originals)
+        def restore() -> None:
+            if not was_installed:
+                batch_feature_init.uninstall()
+        return restore
+    if family == "A":
+        previous = det_init_a.active()
+        def restore() -> None:
+            if previous is None:
+                det_init_a.uninstall()
+            else:
+                det_init_a.install(previous)
+        return restore
+    if family == "B":
+        previous = structured_init._state.get("name")
+        def restore() -> None:
+            if previous is None:
+                structured_init.deactivate()
+            else:
+                structured_init.configure(previous)
+        return restore
+    if family == "C":
+        previous = deterministic_init.active_kind()
+        def restore() -> None:
+            if previous is not None:
+                deterministic_init.install(previous)
+        return restore
+    if family == "D":
+        previous = det_init_d.active()
+        def restore() -> None:
+            if previous is None:
+                det_init_d.uninstall()
+            else:
+                det_init_d.install(previous)
+        return restore
+    if family == "E":
+        previous = family_e_init.active()
+        was_patched = family_e_init._PATCHED
+        def restore() -> None:
+            if not was_patched:
+                family_e_init.uninstall()
+            elif previous is None:
+                family_e_init.uninstall()
+            else:
+                family_e_init.install(previous)
+        return restore
+    if family == "F":
+        previous = det_init_f._STATE.get("name")
+        def restore() -> None:
+            if previous is None:
+                det_init_f.uninstall()
+            else:
+                det_init_f.install(previous)
+        return restore
+    if family == "qr_bz_pq":
+        # The QR hooks have no uninstall. A replay that finds them already
+        # installed only restarts the optimizer index, which ``install`` does.
+        was_patched = qr_bz_pq_init._PATCHED
+        def restore() -> None:
+            if was_patched:
+                qr_bz_pq_init.install(qr_bz_pq_init.VARIANT)
+        return restore
+    raise RuntimeError(f"init family {family!r} has no replay restore")
 
 
 def add_init_argument(parser) -> None:

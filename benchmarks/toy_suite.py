@@ -731,16 +731,26 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
               or any(abs(value) > 2 ** -0.5 + 1e-7 for value in bias)):
             raise ValueError(f"100-mode default affine receipt differs: {name}")
         # Recreate the initialized tensors with the recorded device and the
-        # same trainer build. The hash and extrema below are the check. A
-        # missing noise receipt is rejected; it is not skipped.
+        # same trainer build. ParticlePrior.normal_() follows the default
+        # device and advances that generator before uniform_(). Training
+        # selects the device first, so replay has to as well; otherwise
+        # uniform_() starts at a different CUDA offset. A recorded
+        # deterministic init then replaces the prior at Adam construction,
+        # and the receipt is that replacement. The hash and extrema below
+        # are the check. A missing noise receipt is rejected; it is not skipped.
         import torch
+        from benchmarks.init_research.init_registry import replay as replay_init
+        from benchmarks.toy100.device import apply_device_policy, device_policy_scope
         recorded = torch.device(str(config["device"]))
         if recorded.type == "cuda" and not torch.cuda.is_available():
             raise ValueError(
                 f"100-mode affine initialization replay requires the recorded device: {name}"
             )
-        _, replay_recipe = resolve_config(config)
-        replay = make_trainer(config, replay_recipe)
+        with device_policy_scope():
+            apply_device_policy(str(recorded))
+            with replay_init(config.get("deterministic_init")):
+                _, replay_recipe = resolve_config(config)
+                replay = make_trainer(config, replay_recipe)
         replay_prior = replay.prior.z.detach().cpu().contiguous()
         replay_generator = (replay.G.model if config["output_noise_std"] else replay.G)
         if (card["prior_initial_sha256"] != hashlib.sha256(
