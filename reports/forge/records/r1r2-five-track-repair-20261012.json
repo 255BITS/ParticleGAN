@@ -1,0 +1,33 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "d_lr_mult 1 to 2",
+    "prior_lr_mult 1 to .25",
+    "amsgrad false to true",
+    "kinetic_transport_local_weight 0 to .1",
+    "beta1 0 to .5; beta2 remains .99"
+  ],
+  "conclusion": "Five new global recipes pass clock but fail Ring16; AMSGrad reaches 5/6 ordinary passes. Momentum improves the best covariance error to 1.098351, still above 0.85; detailed failures and geometry remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Five evidence-motivated changes to critic rate, prior rate, optimizer denominator memory, local transport or first momentum can repair the unchanged whole Tier1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "five_distinct_global_recipe_deltas",
+  "next_action": "Retain the baseline and close this finite campaign; investigate saved geometry or optimizer-role dynamics before any separately registered comparison.",
+  "provenance": {
+    "report": "reports/forge/r1r2-five-track-repair/README.md",
+    "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-five-track-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-five-track-repair/publication/results.json",
+    "sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "9c092edabbd1d9de77dcc16b8316cc41a76d03a182cd435c5dac2976dd819ec3",
+  "input_digest": "c377c653edefde1ef3d09824ede2e6c75ccc56181e2b577ef20e7056ad856565",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -669,8 +669,13 @@
     "configs/forge/ideas/k3p.json": "8830c96552458a1f16973016bb0f5519d875811ce519be08e5652ac325dabe97",
     "configs/forge/ideas/ka2-global-repair-v1.json": "c2cbdbfcb068c16b637b33a385889b847905bdc3f4507b879cfe1e0bb61f01ab",
     "configs/forge/ideas/ka2.json": "bafc216a39aea2453241a01a6bd3b12e4b2d0b516a5f96601e1cbcd7bfebc09c",
+    "configs/forge/ideas/r1r2-amsgrad-repair-v1.json": "b03eb0d56ff7461522204cd015981d697763cf17e4b8f5431b9a746d3eeb462b",
     "configs/forge/ideas/r1r2-constant-policy-v1.json": "983855c557e6beb3413641f7f9e57bdcd1595415357a160a96c6ba80fbb9e315",
+    "configs/forge/ideas/r1r2-five-track-momentum-v1.json": "9872635a01449e4dee5e3dc66bbd4ae5fb73aaee3804f77abb4d3d8330638a43",
+    "configs/forge/ideas/r1r2-five-track-transport-v1.json": "c0fe3e0eb5f76dc341faa8b6e504c8ffb9ff25315e3445249199615cbd73e401",
+    "configs/forge/ideas/r1r2-five-track-ttur-v1.json": "948ef0e44077f8e44ffe6670c42cba5818138fb8e6724f3907b3b5ede9a311dd",
     "configs/forge/ideas/r1r2-global-repair-v1.json": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add",
+    "configs/forge/ideas/r1r2-prior-slow-v1.json": "78ff00b9a9d568b4f14f3b57c6b99d967d7aa187e49d3ddd33ae4a969d522d49",
     "configs/forge/ideas/r3gan-stacked-training-toy-v1.json": "aa695486c643018f66c6d843cb346b48b0b929efaeb99d0439142b4e4ca991d0",
     "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json": "88e229a18bd66149d192a94f9fb39f7c36758c5b2cee7f8e5201c0163ed57c2e",
     "configs/forge/ideas/recipe-prior-refactor-k3p-v1.json": "debf168d57b695c7ea49762478a0714336ca7e41a305e88d77e423661a16a04d",
@@ -866,6 +871,12 @@
     "configs/forge/studies/bcap-tier1-stability-transport-study-v1.json": "3c0ae8724acce5a7ee9f137e14e8dc00961f612a79abdf7e5c73c3a5f874e4e1",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-five-track-momentum-v1.json": "8992952d8e9c06e04b6105a4f368be2f521c4156814e31bbc616d6f89335bfa5",
+    "configs/forge/studies/r1r2-five-track-optimizer-v1.json": "4f0422a1a498a618af41dce9f4ce42df323895b0d1e0b003d58982ceda5ccc4c",
+    "configs/forge/studies/r1r2-five-track-prior-v1.json": "242cb1beaac2e2f72314f0e32ba949ada069bb7290541a6e716d4a36da763d66",
+    "configs/forge/studies/r1r2-five-track-transport-v1.json": "120da0d98cda7f1f8c333057fe6c4495452b2174ac024e5a5549d0ef854ccf38",
+    "configs/forge/studies/r1r2-five-track-ttur-v1-study.json": "ae15811e4706591bfba1522d29f10f168d982af871ea0e87e46a1a3bd449edc3",
     "configs/forge/studies/r1r2-tier1-matched-baseline-v1.json": "52d9e7384bc8db76b0a5d6e45093bd52516c71f909723d3278e1fd5d2789dc1c",
     "configs/forge/studies/r1r2-tier1-round2-cached-baseline-v1.json": "1ab813fb194f9c3f52e708f1e2d705c91a0180df5d561f9183ddf7c446d5b71c",
     "configs/forge/studies/recipe-prior-refactor-atlas-v1-ordinary-study.json": "bc815b459e8cd904ec95196f899145fa2d4d4dbfa4fa7341de8b36819b418894",
@@ -1478,6 +1489,7 @@
     "reports/forge/records/pr342-343-bcap-gate-margin-context-v1.json": "b4fe4ecae23b2d9c8433af59318f8466a19090c0b91ccdaa16f673000e94496e",
     "reports/forge/records/pr344-smoothed-dualnorm-1e-4-context-v1.json": "a02be8342c7eb7b4e2203f8c62c9484b5cf7641bca3bdf69b99d9a76dcfb34b4",
     "reports/forge/records/r1r2-constant-tier1-round1-20261012.json": "efa920147b69287d6f1c856ef2e960bbe2db87686696bd281afb475a6ee1848d",
+    "reports/forge/records/r1r2-five-track-repair-20261012.json": "a06dd14a8b72eedbd6e84c70e334f8ae892a2e5f0aecb1c78a45a6f3d277d6f6",
     "reports/forge/records/r1r2-recorded-baseline-20261012.json": "58405c5ee9b84dfd5afaedad99c154730bd184842ce9e97c896f6713eb399e96",
     "reports/forge/records/r1r2-tier1-search-final-20261012.json": "a907bf84dad5fec5153ad28773c72cac9c0ceb1e47a181ebaad560ebb31dd7d7",
     "reports/forge/records/readout-0297c36f9f2d9c5feb45b3cb.json": "fb68bde488b1e8850b863a88c2334e145b713885d69f78e129c4b1613d0f74c7",
@@ -3887,7 +3899,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "120f1896003bf43e08632868bb1aab60d9026da4adb5347879087e3ac2ad5a12",
+    "reports/forge/EXPERIMENT_MEMORY.md": "9873b49fa2b1a30e4d3cd51ae316528d11c328cf735a405ee8120b6608a499eb",
     "reports/forge/publication-records.json": "1dde7845c644f4d735b70ac2cdc6b667c927d1ac21165657eacd6458d3cfff94"
   },
   "pending_readout": [
@@ -3901,7 +3913,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 832,
+  "record_count": 833,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"

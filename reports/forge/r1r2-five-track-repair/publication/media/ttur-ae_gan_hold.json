@@ -1,0 +1,59 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "e667c88ec9bf15832e9e9353e2269b3b9cad6b078d31565359b68d3a5928274a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "940a8ad38ec51a3c665bee41d98692c62f0be152f04404aef752e5e86d748086",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "saved_record_selection": {
+    "added_observations": 0,
+    "kind": "exact_scored_subset_of_retained_views",
+    "retained_records": 31,
+    "source_record_indices": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      22,
+      23,
+      25,
+      26,
+      27,
+      28,
+      29
+    ]
+  },
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-ttur-v1-study/2e52705f1ab0455099e515b0b0c9ac5e/constraint_geometry-scored-outputs.pt": "bc71e89de43f8ba8ba72e885c56cf12fadd8be633028e4ac7f9b7150eb44eb8f"
+  },
+  "task_id": "ae_gan_hold"
+}

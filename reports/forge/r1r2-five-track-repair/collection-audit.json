@@ -1,0 +1,75 @@
+{
+  "checks": {
+    "actual_training_gif_source_inputs_receipts_hashes_and_frames": "PASS",
+    "admitted_source_runtime_protocol_view_tasks_and_job_keys": "PASS",
+    "all_named_rng_receipts_match_saved_checkpoint_states": "PASS",
+    "cached_baseline_rows_byte_object_equal_to_round1_publication": "PASS",
+    "checkpoint_artifact_manifest_bytes_and_state_hashes": "PASS",
+    "exact_certified_metrics_and_stored_independent_grades": "PASS",
+    "global_amsgrad_flags_match_saved_optimizer_groups": "PASS",
+    "no_scientific_retries": "PASS",
+    "original_and_new_charge_ownership": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS",
+    "six_ordinary_actual_initial_tensor_and_ordered_target_batch_comparisons": "PASS"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 2731.7028826579044,
+    "cached_baseline_new_paid_seconds": 0,
+    "full_reservation_seconds": 15120,
+    "historical_charge_owners_and_values_unchanged": true,
+    "new_paid_seconds": 927.1709415850346,
+    "prior_paid_seconds": 1804.5319410728698,
+    "shared_paid_ceiling_seconds": 5400
+  },
+  "coverage": {
+    "aggregate_unique_paid_attempts": 105,
+    "cached_baseline_attempts": 7,
+    "clock_proofs": 6,
+    "clock_saved_stream_snapshots_verified": 156,
+    "gifs_and_sidecars_verified": 42,
+    "new_paid_attempts": 35,
+    "ordinary_named_stream_states_verified": 588,
+    "prior_unique_paid_attempts": 70,
+    "provenance_checkpoints": 36,
+    "roles": 6,
+    "saved_independent_grades": 42,
+    "source_files_verified": 1214,
+    "task_cells": 42,
+    "unique_comparison_attempts": 42
+  },
+  "inputs_sha256": {
+    "charge_index": "65d0cb4889a2afb36672cf4b142a07bdbd93b21fd06ac252b78ff420e6d3f521",
+    "exact_certificate_hashes": "306917d88d277562736492bda5639a1bd5380fdcde4133b098d9b3fc7fe468cd",
+    "execution_progress": "a893debcf2287e99572045b3dbba72df6a196f87b83713baec08ee628acaf820",
+    "publication": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+    "registration": "5beeb44fb5cfd3162b7743aa62bcf060815424cb4f74fa67269dbb21f99f8549",
+    "shared_queue_state": "e893871ece048e5dfe316231937a6e3ff3aafcbcf89462341eb962c1f20ed3fd"
+  },
+  "legacy_cost_schema": "Round1 predates original_charge_owner/original_paid_seconds fields. Its exact published result hashes and retained original cost-owner/charged-wall records recover those identities without changing the original publication.",
+  "limits": "Validates original saved grades and evidence identity; grants no new qualification. Clock proofs retain their separate own-state cohort. Caller-global execution RNG and source-origin metadata are not compared across candidates; named consumed stream snapshots are verified.",
+  "live_evaluators_or_rescoring": false,
+  "method_helpers_sha256": {
+    "reports/forge/bcap-develop-integration/publish.py": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+    "reports/forge/gaussian-smoke-inventory/export_media.py": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066",
+    "reports/forge/recipe-prior-refactor/workflow.py": "a622228fe9a2148c0b65a9c630ad6055bf97984fb8fe4df99580e68027c2c0dc"
+  },
+  "model_construction_training_and_sampling_forbidden": true,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "saved_optimizer_group_counts_by_role": {
+    "baseline": 17,
+    "momentum": 17,
+    "optimizer": 17,
+    "prior": 17,
+    "transport": 17,
+    "ttur": 17
+  },
+  "schema_version": 1,
+  "scope": "read_only_five_track_collection_audit",
+  "source_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS"
+}
