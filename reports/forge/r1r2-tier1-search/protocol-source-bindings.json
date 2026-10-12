@@ -1,0 +1,191 @@
+{
+  "archived_legacy_task_cards_modified": false,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "metadata_only_passive_protocol_recording_source_refresh",
+  "source_commit_before_refresh": "3ca93c2a9cb2494c453c19bd7be8527aca3d1512",
+  "task_law_projection": "remove evaluation.sources only; retain every other declaration field including evaluator revision",
+  "tasks": [
+    {
+      "after_file_sha256": "c905fe22a56718dd83cc4f554e393756859cf4d92a712ce28ead098e3a12a145",
+      "after_scientific_law_sha256": "513d59411708d53e72f389387f0bc04e70d8d9e269809009042705ee082dc896",
+      "before_file_sha256": "ce264d96685996b083d7415ac7a741bb1be82a9e67a709b34c07370d06bbb24a",
+      "before_scientific_law_sha256": "513d59411708d53e72f389387f0bc04e70d8d9e269809009042705ee082dc896",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/ae_gan_hold.json",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "after_file_sha256": "cab2083bfba490896f588f9d8ad91db505578072755059fb04714fef5c37a0c1",
+      "after_scientific_law_sha256": "1356214b59925974cbecde8e1b119a1850d7558673e2329a8845542bbebebd36",
+      "before_file_sha256": "7cbf6ad110aab092bd2059337f22cfeca0c715c61f3c3df1134d1a7587f80abd",
+      "before_scientific_law_sha256": "1356214b59925974cbecde8e1b119a1850d7558673e2329a8845542bbebebd36",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/cover_leftover.json",
+      "task_id": "cover_leftover"
+    },
+    {
+      "after_file_sha256": "cbb6e968ca5d26d5e0616db3b7ebc6189c1618b30c367edc63af1daa88e86753",
+      "after_scientific_law_sha256": "6137f68742e90d710b5e43875e885675bcf6b888f5dde3d9e725737e61e8de67",
+      "before_file_sha256": "d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f",
+      "before_scientific_law_sha256": "6137f68742e90d710b5e43875e885675bcf6b888f5dde3d9e725737e61e8de67",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        },
+        {
+          "after_sha256": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+          "before_sha256": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd",
+          "path": "experiments/forge/word_adapter.py"
+        },
+        {
+          "after_sha256": "9b0e6c6cc16a1b4bd51dfef83e86b6a3d5d18999fc114e8b45e2cf75843f6878",
+          "before_sha256": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814",
+          "path": "experiments/forge/word_tasks.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/five_word_joint_hold.json",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "after_file_sha256": "b801109b109200e44488041f7ad27fb13e01a4a0178e319a84079600da2ede7e",
+      "after_scientific_law_sha256": "4884dfa8f2713b77e64a438a24fed1ac3ce289f1ee8c70c6127cba6a9d5cbc8d",
+      "before_file_sha256": "e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e",
+      "before_scientific_law_sha256": "4884dfa8f2713b77e64a438a24fed1ac3ce289f1ee8c70c6127cba6a9d5cbc8d",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        },
+        {
+          "after_sha256": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+          "before_sha256": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd",
+          "path": "experiments/forge/word_adapter.py"
+        },
+        {
+          "after_sha256": "9b0e6c6cc16a1b4bd51dfef83e86b6a3d5d18999fc114e8b45e2cf75843f6878",
+          "before_sha256": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814",
+          "path": "experiments/forge/word_tasks.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/five_word_joint_smoke.json",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "after_file_sha256": "d2dc464c0c315c261376e8074ea9dbfa559e21d3d6996436e6ca8141bb9decd2",
+      "after_scientific_law_sha256": "4cbc9d1f6e273d4b5fe5e9f4e782ee9b133d96cbcd4415794a541ff01ce723a5",
+      "before_file_sha256": "c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247",
+      "before_scientific_law_sha256": "4cbc9d1f6e273d4b5fe5e9f4e782ee9b133d96cbcd4415794a541ff01ce723a5",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/mid_scale_identity.json",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "after_file_sha256": "3631725ccc30ef91fb7cca7f020e7fcffdbbd8935907fb587050f6f85ac09279",
+      "after_scientific_law_sha256": "8fd05cbdb48cfbc3f2d7269d5a2bbb0a502661d3b279d317d6077bea3c29a348",
+      "before_file_sha256": "9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c",
+      "before_scientific_law_sha256": "8fd05cbdb48cfbc3f2d7269d5a2bbb0a502661d3b279d317d6077bea3c29a348",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/residual_student.json",
+      "task_id": "residual_student"
+    },
+    {
+      "after_file_sha256": "4ae3c891f10a4c200d3215d9f4af0eab408e57aec5c60af8527bff7ee8b33dc8",
+      "after_scientific_law_sha256": "b07a7eaa6e3c59b9ed448fc7c58e5ba1fd9ed82570847f15696540be8886f8e5",
+      "before_file_sha256": "23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9",
+      "before_scientific_law_sha256": "b07a7eaa6e3c59b9ed448fc7c58e5ba1fd9ed82570847f15696540be8886f8e5",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/trajectory.json",
+      "task_id": "trajectory"
+    },
+    {
+      "after_file_sha256": "04701f0a779bbccdde7977a89a6ed0cc4bc32e95d2269c0aaa91d5b8d33704dd",
+      "after_scientific_law_sha256": "fd6d0ec24a8c6bacf2967b5882d8441db893624e21c789fce0086673c5a570cc",
+      "before_file_sha256": "93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1",
+      "before_scientific_law_sha256": "fd6d0ec24a8c6bacf2967b5882d8441db893624e21c789fce0086673c5a570cc",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/two_pole.json",
+      "task_id": "two_pole"
+    },
+    {
+      "after_file_sha256": "c43dd9070f12bba5a0b50901161288478f0baa1ce6b92787229d0ea60112507b",
+      "after_scientific_law_sha256": "567b9fcd3e1e5f49c3aafe7b8b2568c23f42e6b5bbab3209ec9f94499fdba83a",
+      "before_file_sha256": "260db651d2076b67b9b9fba7b698c573f931eb8eba4e2cea463e27e50a247269",
+      "before_scientific_law_sha256": "567b9fcd3e1e5f49c3aafe7b8b2568c23f42e6b5bbab3209ec9f94499fdba83a",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/unipolar.json",
+      "task_id": "unipolar"
+    },
+    {
+      "after_file_sha256": "08840286ba3e3a39afb3fd554adb85f795f87a1b76992b336e64033336b7ff8a",
+      "after_scientific_law_sha256": "206826a18668747dbb5820d73e8e1ba735ea6af5449ef46a04df0db9b0c88555",
+      "before_file_sha256": "ca29d6ef598ee7a57af3717c72930a8679addcbe72c94aa767ad4a4a1d09144f",
+      "before_scientific_law_sha256": "206826a18668747dbb5820d73e8e1ba735ea6af5449ef46a04df0db9b0c88555",
+      "bindings": [
+        {
+          "after_sha256": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+          "before_sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "path": "experiments/forge/behavior_adapters.py"
+        }
+      ],
+      "evaluator_revision_unchanged": true,
+      "path": "configs/forge/tasks/unused_token_hold.json",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "training_or_sampling_added": false
+}

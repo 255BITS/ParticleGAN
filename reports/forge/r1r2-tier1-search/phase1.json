@@ -1,0 +1,40 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 17640,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-round1-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-tier1-matched-baseline-v1"
+    }
+  ],
+  "id": "r1r2-tier1-round1-v1",
+  "max_candidates": 8,
+  "paid_cap_seconds": 3600,
+  "round": 1,
+  "schema_version": 1,
+  "searches": [
+    {
+      "id": "r1r2-tier1-constant-search-v1"
+    }
+  ],
+  "supporting_inputs": [
+    "reports/forge/r1r2-tier1-search/README.md",
+    "reports/forge/r1r2-tier1-search/evidence-diagnosis.md",
+    "reports/forge/r1r2-tier1-search/protocol-source-bindings.json",
+    "configs/forge/tasks/ae_gan_hold.json",
+    "configs/forge/tasks/cover_leftover.json",
+    "configs/forge/tasks/five_word_joint_hold.json",
+    "configs/forge/tasks/five_word_joint_smoke.json",
+    "configs/forge/tasks/mid_scale_identity.json",
+    "configs/forge/tasks/residual_student.json",
+    "configs/forge/tasks/trajectory.json",
+    "configs/forge/tasks/two_pole.json",
+    "configs/forge/tasks/unipolar.json",
+    "configs/forge/tasks/unused_token_hold.json"
+  ]
+}
