@@ -1,0 +1,21 @@
+{
+  "control_candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+  "control_worst_case_seconds": 43020,
+  "preparation_commit": "37e3668b5d103e2df40c918863dbe7c27122348f",
+  "search_worst_case_seconds": 43020,
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "spec_sha256": "4025a6a49480adddfafc9e77add2f93fd9b84e317de91e7b77ea523416a639fe",
+  "trials": [
+    {
+      "candidate_id": "bcap-dualnorm--4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+      "configuration_id": "4698574ce42c0074fb0d140a65b1d4b7f733ee54288670668c06ac8ed8441d19",
+      "declared_worst_case_seconds": 43020,
+      "settings": {
+        "generator_idle_se": 1.0
+      },
+      "submission_blockers": [],
+      "submission_status": "READY"
+    }
+  ]
+}
