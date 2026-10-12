@@ -27,7 +27,7 @@
   "execution_commit": "2b0ad9ec7c5b2c1e91ab0d70751da0b7e36a7b42",
   "inputs_sha256": {
     "reports/forge/r1r2-objective-memory-repair/PLAN.md": "1b49c73a910d17cd2eedededf1d29bd1721e6066c2f958ccbb4e97497daa7d4f",
-    "reports/forge/r1r2-objective-memory-repair/README.md": "e3360e8c0ab62b1961518483b788cd0f427cd20c7e6d9724e26c44c102d680c5",
+    "reports/forge/r1r2-objective-memory-repair/README.md": "8d26b638e1b7779c3b2a3a51823475954ee062bfd0bb3b1a5bccb6a30add9c6c",
     "reports/forge/r1r2-objective-memory-repair/audit_collection.py": "596ba6cbefbfcea8dc059450ba0c157c7cc72980e9a8f5e384324d619f3bf384",
     "reports/forge/r1r2-objective-memory-repair/collection-audit-readout.md": "48da15252cee7df35f16502a8dfedf0d10944a3b7f6d954de536c81b7781cb2e",
     "reports/forge/r1r2-objective-memory-repair/collection-audit.json": "ea5331d78213a89cf47d7cf0b8a05cf6a643e4f41812f3b759fa18e998ba03bb",
@@ -42,7 +42,7 @@
     "reports/forge/r1r2-objective-memory-repair/research/jacobian-conditioning.md": "83532d1d36dda860e29c263cf3f446379dceaffaa54c5a6b33e65b3101b8f826",
     "reports/forge/r1r2-objective-memory-repair/test_objective_memory_workflow.py": "8800578ab1b5e701d622461e3830c08da9eabdbde1465e69ccbce00516c0e2c5",
     "reports/forge/r1r2-objective-memory-repair/workflow.py": "bac0e46dfcc036204e84027c3ab141402662898421412b2b85012a8474bb7f76",
-    "reports/forge/records/r1r2-objective-memory-repair-20261012.json": "212bd75a2ee7f7fd2b290d94b4b8efe9d4fa47562bd421af572ce2c3de58cfea"
+    "reports/forge/records/r1r2-objective-memory-repair-20261012.json": "5d8d05f078520d97762c521f03aefe2e46c95f0811f6440fc5fc621500a64ffa"
   },
   "local_log_sha256": {
     "collect.log": "8da47431f0d722d0de188403a8cf951b0108d9ecacde63668cbdf405753d7e71",
@@ -51,7 +51,7 @@
     "run.log": "622a103c53a58874c897c2b32b87734592bfc020bfe49fdd4d635033da4f5c5f"
   },
   "memory_check": {
-    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012/compile-readout-check.log",
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012/compile-registration-check.log",
     "log_sha256": "efa9aae186ae677c9f1a5ef90a168ee8352f30f2ea8c97c1e63d0d1aa2ad3f2c",
     "observed_status": "CURRENT",
     "qualification_refresh_mode": "preserved_published_evidence",

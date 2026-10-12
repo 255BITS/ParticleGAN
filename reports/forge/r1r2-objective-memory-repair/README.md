@@ -103,3 +103,10 @@ The [Jacobian-conditioning review](research/jacobian-conditioning.md) identifies
 unresolved dimensional, discrete-host, scale and API requirements; it supplies no
 ready global recipe or justified clamp coefficient. No automatic refinement,
 longer training, seed study, Tier 2 or new round follows this registration.
+
+The subsequent [score-law diagnostic](research/score-law/README.md) supports a
+weak-confidence, from-initialization native logistic contrast on exact AMSGrad
+m110. Its separately bounded [plan](../r1r2-score-law-repair/PLAN.md) retains all
+task contracts and the shared paid ceiling. This does not revise the closed
+results or claim an endpoint gradient-starvation repair. The
+[full-transport review](research/full-transport.md) selects no additional arm.

@@ -3906,7 +3906,7 @@ Global quantile transport or optimizer maximum-denominator memory repairs the un
 
 No complete repair; both new recipes pass acquisition and clock but fail Ring16. Detailed outcomes remain in the source-bound report.
 
-**Next:** Close the comparison, preserve failures and acquisition controls; require a distinct supported mechanism before further paid work.
+**Next:** Preserve closed failures and controls; separately test the supported native non-saturating contrast on exact AMSGrad m110 under unchanged contracts.
 
 [Evidence](../../reports/forge/r1r2-objective-memory-repair/publication/results.json) · [Record](records/r1r2-objective-memory-repair-20261012.json)
 
@@ -5351,4 +5351,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `cd1e42383d2fa7c5173850ffa97795a9321b302705fcd3749a9adc7f723f73ed`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `df893e2a8eb1987555982e98967dee4f540b5711543dbd477026482748aa2be1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "cd1e42383d2fa7c5173850ffa97795a9321b302705fcd3749a9adc7f723f73ed",
+  "input_digest": "df893e2a8eb1987555982e98967dee4f540b5711543dbd477026482748aa2be1",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -681,6 +681,7 @@
     "configs/forge/ideas/r1r2-five-track-ttur-v1.json": "948ef0e44077f8e44ffe6670c42cba5818138fb8e6724f3907b3b5ede9a311dd",
     "configs/forge/ideas/r1r2-global-repair-v1.json": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add",
     "configs/forge/ideas/r1r2-global-transport-v1.json": "5eb58823b8b38ddf5cef03daa3f86099d433820c04d99f95edbc2fddf1d1ab70",
+    "configs/forge/ideas/r1r2-non-saturating-ams-m110-v1.json": "1f55db50347ed7adc5ebe54a9d38fdaa8de42b99eed091be793a086790f4030d",
     "configs/forge/ideas/r1r2-prior-slow-v1.json": "78ff00b9a9d568b4f14f3b57c6b99d967d7aa187e49d3ddd33ae4a969d522d49",
     "configs/forge/ideas/r1r2-role-ams-m110-v1.json": "b9668118b75289c016639bcf7973ff093a6bfb9ce7ae4c1922660c2c088fcc12",
     "configs/forge/ideas/r1r2-role-ams-m111-v1.json": "c016542f6738072f3ced2affd93bbec73c4b5743417c59f731c9ad03e22839fa",
@@ -898,6 +899,7 @@
     "configs/forge/studies/r1r2-five-track-transport-v1.json": "120da0d98cda7f1f8c333057fe6c4495452b2174ac024e5a5549d0ef854ccf38",
     "configs/forge/studies/r1r2-five-track-ttur-v1-study.json": "ae15811e4706591bfba1522d29f10f168d982af871ea0e87e46a1a3bd449edc3",
     "configs/forge/studies/r1r2-global-transport-v1-study.json": "afff07fdc40b649becd2c5eb0a35e5a60c2116f304616514139b34fed0a8fddb",
+    "configs/forge/studies/r1r2-non-saturating-ams-m110-v1-study.json": "3988145706daba89eaf089bed9f3b786870138461b9c2d1d387a67e6b4e4f74e",
     "configs/forge/studies/r1r2-role-ams-m110-v1-study.json": "61058d9d001b31af05353e735a262d197a473d2753dd7efdef5c53dfca78ff29",
     "configs/forge/studies/r1r2-role-ams-m111-v1-study.json": "c4d1d022aef32c6174a66701b85e1ee6aca6ba948793bb44b3e13d9ad7d1bb7a",
     "configs/forge/studies/r1r2-role-cached-zero-v1-study.json": "55d2cda41095f8fe2ba49a4efe1175981b4c6563d994daa1ff52364480147f1b",
@@ -1521,7 +1523,7 @@
     "reports/forge/records/r1r2-constant-tier1-round1-20261012.json": "efa920147b69287d6f1c856ef2e960bbe2db87686696bd281afb475a6ee1848d",
     "reports/forge/records/r1r2-direction-floor-repair-20261012.json": "8ea3352fcaa659b4a1e3546c7c76d300fb3f424f78328f1396b8bd38330907e3",
     "reports/forge/records/r1r2-five-track-repair-20261012.json": "a06dd14a8b72eedbd6e84c70e334f8ae892a2e5f0aecb1c78a45a6f3d277d6f6",
-    "reports/forge/records/r1r2-objective-memory-repair-20261012.json": "212bd75a2ee7f7fd2b290d94b4b8efe9d4fa47562bd421af572ce2c3de58cfea",
+    "reports/forge/records/r1r2-objective-memory-repair-20261012.json": "5d8d05f078520d97762c521f03aefe2e46c95f0811f6440fc5fc621500a64ffa",
     "reports/forge/records/r1r2-recorded-baseline-20261012.json": "58405c5ee9b84dfd5afaedad99c154730bd184842ce9e97c896f6713eb399e96",
     "reports/forge/records/r1r2-role-repair-20261012.json": "a7c779a3e5562ee92dd666abc86156462f757f4aa575004587fa0728f8a9f2aa",
     "reports/forge/records/r1r2-spectral-repair-20261012.json": "a1b6d2f30019e03ad95e8dc69f9fc7edb19088be76406e374958ad568370f8b6",
@@ -3933,7 +3935,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "e9110b2418b7bf9f689411e3ac91e41fbfab3f5273e40a5e56773b49c4a2fb1d",
+    "reports/forge/EXPERIMENT_MEMORY.md": "e33f43171c7a47da1ad4fbd689090c90ebd454d5fca79f27ed15c0e2fab57899",
     "reports/forge/publication-records.json": "1dde7845c644f4d735b70ac2cdc6b667c927d1ac21165657eacd6458d3cfff94"
   },
   "pending_readout": [
