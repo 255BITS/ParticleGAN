@@ -1,0 +1,76 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-role-m010-v1"
+  },
+  "candidate": "r1r2-role-m010-v1",
+  "competing_explanation": "The observed density improvement may require interacting player histories, not one role; delayed moments may also impair acquisition or compress radial spread. Any original task or clock failure rejects the entire recipe.",
+  "control": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Global optimizer-role beta1 pattern D/G+E/prior=010 preserves Ring16 density improvements while removing unrelated acquisition or minimum-spread regressions; the original whole suite and clock must pass.",
+  "id": "r1r2-role-m010-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+        "candidate_id": "r1r2-five-track-momentum-v1",
+        "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-five-track-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        11
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "1dda7bf5c88942368359f1ac207e9e93",
+        "candidate_id": "r1r2-amsgrad-repair-v1",
+        "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-five-track-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        18
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

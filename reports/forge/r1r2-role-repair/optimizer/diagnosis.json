@@ -1,0 +1,790 @@
+{
+  "limits": "Endpoint role snapshots only. Beta1=0 exp_avg is the actual final parameter gradient; beta1=.5 exp_avg is its EMA, not a recovered raw gradient. Input derivatives are float64 functional recomputations on retained generated samples, not recorded training-time gradients. Restoring slopes are within-component descriptive covariances, not causal effects. Reconstructed Adam displacements approximate last native updates without float32 kernel rounding.",
+  "optimizer_updates_added": 0,
+  "python_and_torch_rng_unchanged": true,
+  "qualification_input": false,
+  "results": [
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "41bbdf0c128145ec663f3001e4d4d0cc7d2730f9548c74fcc0de677d1d91ada2",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90/provenance",
+        "bytes": 205155,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+        "state_sha256": "27ed648b4924c40f626a16224f315007ae80906782df510e913737450eda3a2e"
+      },
+      "optimizer_groups": [
+        {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.13198777314531587,
+          "lr": 0.0085,
+          "parameter_count": 4610,
+          "reconstructed_last_native_adam_displacement_l2": 0.12324872423115454,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4610,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "generator",
+          "second_moment_total": 0.12153502053509409
+        },
+        {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.02203849004483405,
+          "lr": 0.0085,
+          "parameter_count": 1024,
+          "reconstructed_last_native_adam_displacement_l2": 0.18233543917217676,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 1024,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "prior",
+          "row_displacement_norm": {
+            "count": 256,
+            "max": 0.04670081542028836,
+            "mean": 0.006343981304458183,
+            "median": 0.0,
+            "min": 0.0,
+            "p90": 0.020335006527514157
+          },
+          "rows_with_nonzero_moment_displacement": 105,
+          "second_moment_total": 0.0009284909400122388
+        },
+        {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.10506327462296167,
+          "lr": 0.0085,
+          "parameter_count": 4929,
+          "reconstructed_last_native_adam_displacement_l2": 0.31680828352767504,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4929,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "critic",
+          "second_moment_total": 0.02918048327246276
+        }
+      ],
+      "publication_sha256": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+      "recorded_endpoint_metrics": {
+        "component_core_covariance_error": 0.9984053559601307,
+        "component_core_min_eigen_ratio": 0.4321348965167999,
+        "component_covariance_error": 2.3864271584898233,
+        "component_min_eigen_ratio": 0.43362143635749817,
+        "covariance_error": 0.08412902802228928,
+        "hq": 0.84228515625,
+        "mass_tv": 0.0634765625,
+        "max_component_spill": 0.30383479595184326,
+        "mean_error": 0.0453452542424202,
+        "min_hq_mass_ratio": 0.5234375,
+        "min_mass_ratio": 0.66796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03822713249682795,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "constant",
+      "saved_critic_functional_input_gradient": {
+        "analytic_vs_functional_autograd_max_abs_error": 5.551115123125783e-17,
+        "components": [
+          {
+            "component": 0,
+            "count": 262,
+            "radial_gradient_rms": 0.10437270171557597,
+            "radial_restoring_slope": 0.6416425715315699,
+            "tangent_gradient_rms": 0.3434117999193286,
+            "tangent_restoring_slope": 1.2992238314198659
+          },
+          {
+            "component": 1,
+            "count": 297,
+            "radial_gradient_rms": 0.08244153414069959,
+            "radial_restoring_slope": 0.8392086486784442,
+            "tangent_gradient_rms": 0.16399467606369228,
+            "tangent_restoring_slope": 0.9578239777288056
+          },
+          {
+            "component": 2,
+            "count": 228,
+            "radial_gradient_rms": 0.10060158154791245,
+            "radial_restoring_slope": 0.9657009136856729,
+            "tangent_gradient_rms": 0.14462515534949613,
+            "tangent_restoring_slope": 1.0853956422361635
+          },
+          {
+            "component": 3,
+            "count": 256,
+            "radial_gradient_rms": 0.09453917205283695,
+            "radial_restoring_slope": 0.30182694751047123,
+            "tangent_gradient_rms": 0.13154525557659558,
+            "tangent_restoring_slope": 0.5240703336195076
+          },
+          {
+            "component": 4,
+            "count": 264,
+            "radial_gradient_rms": 0.12602379250872228,
+            "radial_restoring_slope": 1.0513001754804328,
+            "tangent_gradient_rms": 0.23366578218335493,
+            "tangent_restoring_slope": 1.2349052919236951
+          },
+          {
+            "component": 5,
+            "count": 220,
+            "radial_gradient_rms": 0.12297681460429563,
+            "radial_restoring_slope": 0.7701473293600518,
+            "tangent_gradient_rms": 0.18255321705841335,
+            "tangent_restoring_slope": 1.1311956595926929
+          },
+          {
+            "component": 6,
+            "count": 292,
+            "radial_gradient_rms": 0.14494501619826783,
+            "radial_restoring_slope": 0.24257170305344644,
+            "tangent_gradient_rms": 0.19176746151684482,
+            "tangent_restoring_slope": 0.9512713667361956
+          },
+          {
+            "component": 7,
+            "count": 237,
+            "radial_gradient_rms": 0.1279271500487162,
+            "radial_restoring_slope": 0.5689713849215894,
+            "tangent_gradient_rms": 0.225254143682698,
+            "tangent_restoring_slope": 1.079618917162132
+          },
+          {
+            "component": 8,
+            "count": 242,
+            "radial_gradient_rms": 0.14518845060967855,
+            "radial_restoring_slope": 0.8064110206676846,
+            "tangent_gradient_rms": 0.29272087054432816,
+            "tangent_restoring_slope": 1.4076774929443097
+          },
+          {
+            "component": 9,
+            "count": 273,
+            "radial_gradient_rms": 0.10638216849450269,
+            "radial_restoring_slope": 0.08139460901488897,
+            "tangent_gradient_rms": 0.30185043441431525,
+            "tangent_restoring_slope": 1.4166973610932498
+          },
+          {
+            "component": 10,
+            "count": 238,
+            "radial_gradient_rms": 0.2045619363247907,
+            "radial_restoring_slope": 1.4191572655306528,
+            "tangent_gradient_rms": 0.3103568109435368,
+            "tangent_restoring_slope": 1.2591923911646226
+          },
+          {
+            "component": 11,
+            "count": 171,
+            "radial_gradient_rms": 0.22937277566605868,
+            "radial_restoring_slope": 1.2133569108273383,
+            "tangent_gradient_rms": 0.2714772104606034,
+            "tangent_restoring_slope": 1.1685426715637375
+          },
+          {
+            "component": 12,
+            "count": 196,
+            "radial_gradient_rms": 0.29267823101029916,
+            "radial_restoring_slope": 1.798693203013132,
+            "tangent_gradient_rms": 0.3099269700962136,
+            "tangent_restoring_slope": 1.5316070234049413
+          },
+          {
+            "component": 13,
+            "count": 339,
+            "radial_gradient_rms": 0.21122826995203492,
+            "radial_restoring_slope": -0.05484000360514815,
+            "tangent_gradient_rms": 0.1541381538572346,
+            "tangent_restoring_slope": 0.2904881912443038
+          },
+          {
+            "component": 14,
+            "count": 301,
+            "radial_gradient_rms": 0.2121433074287551,
+            "radial_restoring_slope": 1.5218523779976494,
+            "tangent_gradient_rms": 0.27638459058653403,
+            "tangent_restoring_slope": 1.185551857615717
+          },
+          {
+            "component": 15,
+            "count": 280,
+            "radial_gradient_rms": 0.09326859656316691,
+            "radial_restoring_slope": 0.5280941728948698,
+            "tangent_gradient_rms": 0.2239399281927669,
+            "tangent_restoring_slope": 1.184633450173567
+          }
+        ],
+        "input_gradient_norm": {
+          "count": 4096,
+          "max": 0.7357703322460954,
+          "mean": 0.25824406779331555,
+          "median": 0.2531885186885586,
+          "min": 0.005994239802350252,
+          "p90": 0.44141593226494225
+        },
+        "positive_radial_restoring_components": 15,
+        "positive_tangent_restoring_components": 16
+      },
+      "saved_sample_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90/observed-samples.pt": "6bc86f8e240d6f1898612f94681c1dcd5a2dbd42b125e8887a5b73607dbb89ea"
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    },
+    {
+      "attempt_id": "1dda7bf5c88942368359f1ac207e9e93",
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "checkpoint": {
+        "artifact_manifest_sha256": "48888e4d1608aebc198a319bc0954b8fb9b62ec1ffc0577f41bfa929e44393c6",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-optimizer-v1/1dda7bf5c88942368359f1ac207e9e93/provenance",
+        "bytes": 251249,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "15adb31a4972fbd04e829805c2229f704a304b3e799c60b791e6844de42365d7",
+        "state_sha256": "47811b862dea5f723caad63f3f56a5b9e8a49e45e994b4d63a675fab794ff8ec"
+      },
+      "optimizer_groups": [
+        {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.07379073736390576,
+          "lr": 0.0085,
+          "parameter_count": 4610,
+          "reconstructed_last_native_adam_displacement_l2": 0.07282548215195893,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4610,
+            "max": 539.5544281914794,
+            "mean": 14.597705215206705,
+            "median": 7.710910253253841,
+            "min": 1.1882694738780553,
+            "p90": 29.10262582875385
+          },
+          "role": "generator",
+          "second_moment_total": 0.015882889420479277
+        },
+        {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.020721746655875506,
+          "lr": 0.0085,
+          "parameter_count": 1024,
+          "reconstructed_last_native_adam_displacement_l2": 0.04683081044487192,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 1024,
+            "max": 86.0708558799631,
+            "mean": 12.16314418451213,
+            "median": 7.683232735566625,
+            "min": 1.6213654025763917,
+            "p90": 27.436725421292284
+          },
+          "role": "prior",
+          "row_displacement_norm": {
+            "count": 256,
+            "max": 0.015388161108473236,
+            "mean": 0.0014912273971201882,
+            "median": 0.0,
+            "min": 0.0,
+            "p90": 0.005370160765591631
+          },
+          "rows_with_nonzero_moment_displacement": 105,
+          "second_moment_total": 0.0005394326168710745
+        },
+        {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_l2": 0.17934167821760805,
+          "lr": 0.0085,
+          "parameter_count": 4929,
+          "reconstructed_last_native_adam_displacement_l2": 0.11336885782920314,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4929,
+            "max": 2782.062585488121,
+            "mean": 30.600550424877476,
+            "median": 9.965577941469327,
+            "min": 1.0,
+            "p90": 64.17915871210901
+          },
+          "role": "critic",
+          "second_moment_total": 0.014814252442999044
+        }
+      ],
+      "publication_sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+      "recorded_endpoint_metrics": {
+        "component_core_covariance_error": 1.214333850890398,
+        "component_core_min_eigen_ratio": 0.24788138270378113,
+        "component_covariance_error": 2.96042443998158,
+        "component_min_eigen_ratio": 0.31060314178466797,
+        "covariance_error": 0.03349290043115616,
+        "hq": 0.83935546875,
+        "mass_tv": 0.05322265625,
+        "max_component_spill": 0.2454545497894287,
+        "mean_error": 0.0520535409450531,
+        "min_hq_mass_ratio": 0.6484375,
+        "min_mass_ratio": 0.78125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.037692299798565754,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "amsgrad",
+      "saved_critic_functional_input_gradient": {
+        "analytic_vs_functional_autograd_max_abs_error": 5.551115123125783e-17,
+        "components": [
+          {
+            "component": 0,
+            "count": 252,
+            "radial_gradient_rms": 0.030262329950796096,
+            "radial_restoring_slope": 0.13899437528166278,
+            "tangent_gradient_rms": 0.19702970800060823,
+            "tangent_restoring_slope": 0.7706241465302155
+          },
+          {
+            "component": 1,
+            "count": 325,
+            "radial_gradient_rms": 0.04766262192645614,
+            "radial_restoring_slope": 0.026136950444499485,
+            "tangent_gradient_rms": 0.23846969697123813,
+            "tangent_restoring_slope": 1.1934658216989957
+          },
+          {
+            "component": 2,
+            "count": 305,
+            "radial_gradient_rms": 0.05908999883327717,
+            "radial_restoring_slope": 0.22566185528862143,
+            "tangent_gradient_rms": 0.20884931062988604,
+            "tangent_restoring_slope": 0.791699740480141
+          },
+          {
+            "component": 3,
+            "count": 232,
+            "radial_gradient_rms": 0.04256921048298598,
+            "radial_restoring_slope": 0.35316185163424874,
+            "tangent_gradient_rms": 0.19953285901509668,
+            "tangent_restoring_slope": 1.052166861530155
+          },
+          {
+            "component": 4,
+            "count": 275,
+            "radial_gradient_rms": 0.03835472056987796,
+            "radial_restoring_slope": 0.03280765641088842,
+            "tangent_gradient_rms": 0.1792711363784621,
+            "tangent_restoring_slope": 0.7836134545269847
+          },
+          {
+            "component": 5,
+            "count": 267,
+            "radial_gradient_rms": 0.045077195765330584,
+            "radial_restoring_slope": 0.13085052386728518,
+            "tangent_gradient_rms": 0.11321182969854053,
+            "tangent_restoring_slope": 0.8252287707805187
+          },
+          {
+            "component": 6,
+            "count": 287,
+            "radial_gradient_rms": 0.08821407156917185,
+            "radial_restoring_slope": 0.6338925848692911,
+            "tangent_gradient_rms": 0.1801630247946261,
+            "tangent_restoring_slope": 0.7573162463894062
+          },
+          {
+            "component": 7,
+            "count": 200,
+            "radial_gradient_rms": 0.08683989166400465,
+            "radial_restoring_slope": 0.2728516399194594,
+            "tangent_gradient_rms": 0.29237095634986804,
+            "tangent_restoring_slope": 1.4139129066925442
+          },
+          {
+            "component": 8,
+            "count": 226,
+            "radial_gradient_rms": 0.06959245045182591,
+            "radial_restoring_slope": 0.09494926108161503,
+            "tangent_gradient_rms": 0.22365035496980448,
+            "tangent_restoring_slope": 0.8928821359832351
+          },
+          {
+            "component": 9,
+            "count": 267,
+            "radial_gradient_rms": 0.04945430365465913,
+            "radial_restoring_slope": 0.021353449522470532,
+            "tangent_gradient_rms": 0.19306216768400886,
+            "tangent_restoring_slope": 0.9829820514502147
+          },
+          {
+            "component": 10,
+            "count": 262,
+            "radial_gradient_rms": 0.0744482568772202,
+            "radial_restoring_slope": 0.41745396836580373,
+            "tangent_gradient_rms": 0.18486672560808093,
+            "tangent_restoring_slope": 0.7594869101798911
+          },
+          {
+            "component": 11,
+            "count": 220,
+            "radial_gradient_rms": 0.08332817123766274,
+            "radial_restoring_slope": 0.9684700359551863,
+            "tangent_gradient_rms": 0.20853255019149144,
+            "tangent_restoring_slope": 1.0104978308319628
+          },
+          {
+            "component": 12,
+            "count": 220,
+            "radial_gradient_rms": 0.08852296498892928,
+            "radial_restoring_slope": -0.021789853522724764,
+            "tangent_gradient_rms": 0.2832466742011984,
+            "tangent_restoring_slope": 1.0666087962009956
+          },
+          {
+            "component": 13,
+            "count": 233,
+            "radial_gradient_rms": 0.04628776802578136,
+            "radial_restoring_slope": 0.2974743432938216,
+            "tangent_gradient_rms": 0.2533360863986095,
+            "tangent_restoring_slope": 0.9978427340217746
+          },
+          {
+            "component": 14,
+            "count": 278,
+            "radial_gradient_rms": 0.06144197568740634,
+            "radial_restoring_slope": 0.13778165308571627,
+            "tangent_gradient_rms": 0.2195878878333046,
+            "tangent_restoring_slope": 0.6629728328981501
+          },
+          {
+            "component": 15,
+            "count": 247,
+            "radial_gradient_rms": 0.06760223005277556,
+            "radial_restoring_slope": 0.025878742244969444,
+            "tangent_gradient_rms": 0.3115445549492873,
+            "tangent_restoring_slope": 1.1980519206966498
+          }
+        ],
+        "input_gradient_norm": {
+          "count": 4096,
+          "max": 0.6035315363612134,
+          "mean": 0.20601360811427347,
+          "median": 0.20992644428313254,
+          "min": 0.0018199315254710075,
+          "p90": 0.32467462384404855
+        },
+        "positive_radial_restoring_components": 15,
+        "positive_tangent_restoring_components": 16
+      },
+      "saved_sample_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-optimizer-v1/1dda7bf5c88942368359f1ac207e9e93/observed-samples.pt": "9e3c2cf43dc47d141a1bce342f057d9eaaf0ce9dcf15a4108c7d69913ed3e67c"
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    },
+    {
+      "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint": {
+        "artifact_manifest_sha256": "f9a521f2aee07d2b02d8c09310a97dcc931a380260a82fb966b859afc7e0d824",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-momentum-v1/a3991f4b7aeb452cb6a7caa299ad8ff2/provenance",
+        "bytes": 205155,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "960283604848cc26d48e7290f19d993a0aaa55d5ec24572de4decf1440836c42",
+        "state_sha256": "98027ea99ef5cf49553c7ae662c7c92f39e429b279fac1e0292873c34233b892"
+      },
+      "optimizer_groups": [
+        {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_l2": 0.012529059674128111,
+          "lr": 0.0085,
+          "parameter_count": 4610,
+          "reconstructed_last_native_adam_displacement_l2": 0.050817946457600086,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4610,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "generator",
+          "second_moment_total": 0.027910533302865893
+        },
+        {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_l2": 0.004133356266752275,
+          "lr": 0.0085,
+          "parameter_count": 1024,
+          "reconstructed_last_native_adam_displacement_l2": 0.0711011722739996,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 1024,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "prior",
+          "row_displacement_norm": {
+            "count": 256,
+            "max": 0.01915580184524823,
+            "mean": 0.0030775257453175995,
+            "median": 0.0021233462585928168,
+            "min": 1.2106734848469744e-06,
+            "p90": 0.007304458405403292
+          },
+          "rows_with_nonzero_moment_displacement": 256,
+          "second_moment_total": 0.00021056825092680143
+        },
+        {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_l2": 0.04948444336270039,
+          "lr": 0.0085,
+          "parameter_count": 4929,
+          "reconstructed_last_native_adam_displacement_l2": 0.15287720965945975,
+          "retained_max_vs_current_denominator_ratio": {
+            "count": 4929,
+            "max": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "p90": 1.0
+          },
+          "role": "critic",
+          "second_moment_total": 0.02013978480755707
+        }
+      ],
+      "publication_sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+      "recorded_endpoint_metrics": {
+        "component_core_covariance_error": 0.7354972325265408,
+        "component_core_min_eigen_ratio": 0.04970431327819824,
+        "component_covariance_error": 1.1855795439332724,
+        "component_min_eigen_ratio": 0.05281096696853638,
+        "covariance_error": 0.025590907782316208,
+        "hq": 0.9365234375,
+        "mass_tv": 0.0458984375,
+        "max_component_spill": 0.14084507524967194,
+        "mean_error": 0.017026303336024284,
+        "min_hq_mass_ratio": 0.7265625,
+        "min_mass_ratio": 0.7421875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.018213817082522937,
+        "target_scale": 3.0029242038726807
+      },
+      "role": "momentum",
+      "saved_critic_functional_input_gradient": {
+        "analytic_vs_functional_autograd_max_abs_error": 2.7755575615628914e-17,
+        "components": [
+          {
+            "component": 0,
+            "count": 265,
+            "radial_gradient_rms": 0.021053648671415914,
+            "radial_restoring_slope": 0.17317700383983925,
+            "tangent_gradient_rms": 0.12661665291616267,
+            "tangent_restoring_slope": 0.9108807727513308
+          },
+          {
+            "component": 1,
+            "count": 239,
+            "radial_gradient_rms": 0.027251732084904317,
+            "radial_restoring_slope": 0.6470955929627573,
+            "tangent_gradient_rms": 0.08537216461719511,
+            "tangent_restoring_slope": 0.6029086069764635
+          },
+          {
+            "component": 2,
+            "count": 287,
+            "radial_gradient_rms": 0.03727091382429634,
+            "radial_restoring_slope": 0.3217093807001196,
+            "tangent_gradient_rms": 0.08187020071695626,
+            "tangent_restoring_slope": 0.5367824058235454
+          },
+          {
+            "component": 3,
+            "count": 276,
+            "radial_gradient_rms": 0.04561748204042379,
+            "radial_restoring_slope": 0.07620061745521385,
+            "tangent_gradient_rms": 0.05805472367224599,
+            "tangent_restoring_slope": 0.35619969774572263
+          },
+          {
+            "component": 4,
+            "count": 268,
+            "radial_gradient_rms": 0.029156687385406034,
+            "radial_restoring_slope": 0.24758717023205426,
+            "tangent_gradient_rms": 0.07150015508191299,
+            "tangent_restoring_slope": 0.2399484334844864
+          },
+          {
+            "component": 5,
+            "count": 243,
+            "radial_gradient_rms": 0.03580589604995308,
+            "radial_restoring_slope": 0.22938097699523496,
+            "tangent_gradient_rms": 0.05671654590683257,
+            "tangent_restoring_slope": 0.47317234622709264
+          },
+          {
+            "component": 6,
+            "count": 275,
+            "radial_gradient_rms": 0.0427321215007226,
+            "radial_restoring_slope": 0.06712887249430512,
+            "tangent_gradient_rms": 0.09057535969853393,
+            "tangent_restoring_slope": 0.27098530557510075
+          },
+          {
+            "component": 7,
+            "count": 238,
+            "radial_gradient_rms": 0.03955882297040787,
+            "radial_restoring_slope": 0.3548703017021128,
+            "tangent_gradient_rms": 0.11158982903337206,
+            "tangent_restoring_slope": 0.6787369140021138
+          },
+          {
+            "component": 8,
+            "count": 239,
+            "radial_gradient_rms": 0.06371646777597705,
+            "radial_restoring_slope": 0.3948635680953802,
+            "tangent_gradient_rms": 0.1558417896029528,
+            "tangent_restoring_slope": 1.0665434111946128
+          },
+          {
+            "component": 9,
+            "count": 305,
+            "radial_gradient_rms": 0.025961036705047513,
+            "radial_restoring_slope": 0.02774366966410107,
+            "tangent_gradient_rms": 0.08739839357637816,
+            "tangent_restoring_slope": 0.547336685772446
+          },
+          {
+            "component": 10,
+            "count": 272,
+            "radial_gradient_rms": 0.09076892395661496,
+            "radial_restoring_slope": 0.39055118309453707,
+            "tangent_gradient_rms": 0.16642778000469247,
+            "tangent_restoring_slope": 0.9401730592584825
+          },
+          {
+            "component": 11,
+            "count": 190,
+            "radial_gradient_rms": 0.03891087884875109,
+            "radial_restoring_slope": 0.3941310449989258,
+            "tangent_gradient_rms": 0.11831858435213609,
+            "tangent_restoring_slope": 0.7907466646684292
+          },
+          {
+            "component": 12,
+            "count": 236,
+            "radial_gradient_rms": 0.03793231290660817,
+            "radial_restoring_slope": 0.1809982469677165,
+            "tangent_gradient_rms": 0.05920880696178316,
+            "tangent_restoring_slope": 0.3580760003871404
+          },
+          {
+            "component": 13,
+            "count": 260,
+            "radial_gradient_rms": 0.03535152262383693,
+            "radial_restoring_slope": 0.30308192216595886,
+            "tangent_gradient_rms": 0.10787967712689019,
+            "tangent_restoring_slope": 0.5124822800863718
+          },
+          {
+            "component": 14,
+            "count": 219,
+            "radial_gradient_rms": 0.059322404013466286,
+            "radial_restoring_slope": 0.17116532652822183,
+            "tangent_gradient_rms": 0.12495447850018863,
+            "tangent_restoring_slope": 0.5067864402072085
+          },
+          {
+            "component": 15,
+            "count": 284,
+            "radial_gradient_rms": 0.027437015310525368,
+            "radial_restoring_slope": 0.01541889831475008,
+            "tangent_gradient_rms": 0.10799778818045375,
+            "tangent_restoring_slope": 0.24537363542816532
+          }
+        ],
+        "input_gradient_norm": {
+          "count": 4096,
+          "max": 0.3418490038770706,
+          "mean": 0.09726452567027964,
+          "median": 0.08307809474582128,
+          "min": 0.0002550181753108814,
+          "p90": 0.18336630120149394
+        },
+        "positive_radial_restoring_components": 16,
+        "positive_tangent_restoring_components": 16
+      },
+      "saved_sample_inputs": {
+        "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-five-track-momentum-v1/a3991f4b7aeb452cb6a7caa299ad8ff2/observed-samples.pt": "ecbac37e58534cd4e48f4d8615de6610d2e8c6d545064e608ce3adeac83541ae"
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1
+}

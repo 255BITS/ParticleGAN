@@ -1,0 +1,74 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 25200,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-role-repair-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-five-track-cached-baseline-v1"
+    },
+    {
+      "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "role": "m000",
+      "study": "r1r2-role-cached-zero-v1-study"
+    },
+    {
+      "candidate": "r1r2-five-track-momentum-v1",
+      "role": "m111",
+      "study": "r1r2-five-track-momentum-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m100-v1",
+      "role": "m100",
+      "study": "r1r2-role-m100-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m010-v1",
+      "role": "m010",
+      "study": "r1r2-role-m010-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m001-v1",
+      "role": "m001",
+      "study": "r1r2-role-m001-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m110-v1",
+      "role": "m110",
+      "study": "r1r2-role-m110-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m101-v1",
+      "role": "m101",
+      "study": "r1r2-role-m101-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-m011-v1",
+      "role": "m011",
+      "study": "r1r2-role-m011-v1-study"
+    },
+    {
+      "candidate": "r1r2-role-ams-m111-v1",
+      "role": "ams_m111",
+      "study": "r1r2-role-ams-m111-v1-study"
+    }
+  ],
+  "id": "r1r2-role-repair-v1",
+  "max_candidates": 10,
+  "paid_cap_seconds": 8000,
+  "round": 1,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [],
+  "supporting_inputs": [
+    "reports/forge/r1r2-role-repair/workflow.py",
+    "reports/forge/r1r2-role-repair/PLAN.md",
+    "reports/forge/r1r2-five-track-repair/registration.json",
+    "reports/forge/r1r2-tier1-search/registration.json",
+    "reports/forge/r1r2-five-track-repair/density-readout.json"
+  ]
+}
