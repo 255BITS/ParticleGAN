@@ -1,0 +1,107 @@
+{
+  "evidence_type": "separate_saved_critic_gradient_fixture",
+  "helper_sha256": "9e39de0c1b045962370383d224c47ad1f60e0e5157f083f78ba794418e59d1d0",
+  "limitations": "Target centers omit target Gaussian noise; saved fake panels are evaluation outputs. Raw parameter gradients are not native AMSGrad updates or historical forces. Endpoint balance cannot identify a useful gamma or explain earlier trajectory/shape. Pair expectation differs from a realized same-size training pairing; no grade or task law changes.",
+  "probe_sha256": "fd08affe7a86c3038b31fee90581569916ea238694ae720cf5da606a38241f3b",
+  "publication_sha256": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+  "python_numpy_torch_cpu_rng_unchanged": true,
+  "qualification_input": false,
+  "records": [
+    {
+      "artifacts_sha256": {
+        "checkpoint": "1660f528c4fbf8de4c7ced49517a6a0bcff8491d82182313cb4558537bf5d257",
+        "panels": "0fed70eab2b8d4d98a33defff2114e219233ec6dda1ce6519c88a8358e3facb4",
+        "raw_result": "0a7f154f1b45299fd9224f19830c59afbe9f06b120fa09997b75355b5f92d280"
+      },
+      "attempt_id": "6403eb2c98224c1f8b788c1d26d5c1d7",
+      "candidate_id": "r1r2-role-ams-m110-v1",
+      "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+      "fixture_counts": {
+        "real_centers": 16,
+        "saved_fake_outputs": 4096
+      },
+      "gamma": 0.1,
+      "loss": "relativistic",
+      "losses": {
+        "classification": 0.6804063111816505,
+        "gamma_weighted_penalty": 0.002530253498533884,
+        "raw_r1": 0.0034602803981223654,
+        "raw_r2": 0.021842254587216475
+      },
+      "parameter_gradient_check": {
+        "absolute_error_bound": 5e-07,
+        "central_difference_coordinates": 11,
+        "epsilon": 1e-07,
+        "maximum_absolute_error": 7.510314864586295e-10,
+        "objective_derivative_checks": 33
+      },
+      "parameter_gradients": {
+        "classification_norm": 0.08787770755354284,
+        "classification_penalty_cosine": -0.6423843914245244,
+        "gamma_weighted_penalty_norm": 0.03334721721368964,
+        "parameter_count": 4929,
+        "r1_r2_cosine": 0.5069632100439858,
+        "raw_r1_norm": 0.09132628352338866,
+        "raw_r2_norm": 0.27774846619203014,
+        "total_norm": 0.0712007233790427,
+        "weighted_penalty_over_classification": 0.37947299880770763
+      },
+      "penalty_input_gradients": {
+        "fake_mean_squared": 0.04368450917443295,
+        "real_mean_squared": 0.006920560796244731
+      },
+      "role": "ams_m110",
+      "scientific_source_files_verified": 1214
+    },
+    {
+      "artifacts_sha256": {
+        "checkpoint": "6ecaf68edff0c348d799105df612dbdc474793e77d823286c329536d2f07638c",
+        "panels": "2db2838d479c63cb7903c27253542dc5814a12a277393b6c4fbb0d526a2b6ebe",
+        "raw_result": "0071562f95333c16eafe7ccb9761fa3a140e99ae695e05b6d3ac4b13108243c4"
+      },
+      "attempt_id": "fca1f1c665354d3089066abe90f291ad",
+      "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+      "fixture_counts": {
+        "real_centers": 16,
+        "saved_fake_outputs": 4096
+      },
+      "gamma": 0.1,
+      "loss": "non_saturating",
+      "losses": {
+        "classification": 1.3746730553273685,
+        "gamma_weighted_penalty": 0.0020170339578955776,
+        "raw_r1": 0.002404323301651745,
+        "raw_r2": 0.01776601627730403
+      },
+      "parameter_gradient_check": {
+        "absolute_error_bound": 5e-07,
+        "central_difference_coordinates": 11,
+        "epsilon": 1e-07,
+        "maximum_absolute_error": 1.4893041890874648e-09,
+        "objective_derivative_checks": 33
+      },
+      "parameter_gradients": {
+        "classification_norm": 0.10490315980945446,
+        "classification_penalty_cosine": -0.7459306027617447,
+        "gamma_weighted_penalty_norm": 0.03198497731933728,
+        "parameter_count": 4929,
+        "r1_r2_cosine": 0.25773614135206907,
+        "raw_r1_norm": 0.08433791637451823,
+        "raw_r2_norm": 0.28755821690042943,
+        "total_norm": 0.0837975669896142,
+        "weighted_penalty_over_classification": 0.30490003711455993
+      },
+      "penalty_input_gradients": {
+        "fake_mean_squared": 0.03553203255460806,
+        "real_mean_squared": 0.00480864660330349
+      },
+      "role": "non_saturating",
+      "scientific_source_files_verified": 1214
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "updates_added": 0
+}

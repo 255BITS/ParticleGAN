@@ -27,7 +27,7 @@
   "execution_commit": "517257ff3879516ae2da64009c375ffffe9b001a",
   "inputs_sha256": {
     "reports/forge/r1r2-score-law-repair/PLAN.md": "2f53af4ef8250971f7a20c194d1d6968db054621cdfc788990c01b747eba3613",
-    "reports/forge/r1r2-score-law-repair/README.md": "60ec0ff22ce3bff14a2d902601f1fe6878e7e8869753c6810735ddceae96efa8",
+    "reports/forge/r1r2-score-law-repair/README.md": "4382b523a96f60a49cf6f0cc2c97cf542fc097c452da245511ddb0a9ebb9da6d",
     "reports/forge/r1r2-score-law-repair/audit_collection.py": "08461a472df8cb61fbceb05c6d2af58983be3229ca12a8ee41b538c8c19d9127",
     "reports/forge/r1r2-score-law-repair/collection-audit-readout.md": "7804d767cbe421d5bae33a64c329793252606ff878173e5c68c1ba3c54ce3774",
     "reports/forge/r1r2-score-law-repair/collection-audit.json": "4c8256e19ede31cdfddcb6e2642ffa7e1e4d68c6a1ac75242d27e0542e0e90fc",
@@ -39,9 +39,12 @@
     "reports/forge/r1r2-score-law-repair/publication/results.json": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
     "reports/forge/r1r2-score-law-repair/registration-validation.json": "611222e2ccca500a771ce3251264ce2d5a8b660b570bbadf8ccaa3e30e9df295",
     "reports/forge/r1r2-score-law-repair/registration.json": "98abadd32c1e4f719cc9d7aaaff0353ca9954aa8a39e2d83e0d529d9435950a8",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/README.md": "a1711da890415c91c68691cd2673284893a6590fc87369ec66398792ef65a2c1",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/diagnosis.json": "d2b02452ccd037c88cefb8bb062dd838922f1cedc72ff83b7fe81e026897bec9",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/probe.py": "fd08affe7a86c3038b31fee90581569916ea238694ae720cf5da606a38241f3b",
     "reports/forge/r1r2-score-law-repair/test_score_law_workflow.py": "6e7aada685e1708165a3618fb10a2ed87227f760d392f81fe579703dc6698bcc",
     "reports/forge/r1r2-score-law-repair/workflow.py": "3268f26cd4417a840d023b9e6b86d90b4686eb662c2402f7059f78b89e35ebbb",
-    "reports/forge/records/r1r2-score-law-repair-20261012.json": "1c1a88b5ad652d702ad5b95c4f6162ffa530bcb7dcf5326a748b03696a6850da"
+    "reports/forge/records/r1r2-score-law-repair-20261012.json": "030dcd2d3ecb2b84ffab5bf337a625930eacba71c5792eea493825005aa13886"
   },
   "local_log_sha256": {
     "audit-collection.log": "7a0a7ae00c02965acc6fa3ea5819231bd8edce044b26cefcc0e25f96bb62b9ae",
@@ -53,7 +56,7 @@
     "run.log": "2771032b7d096e726fc18a24e45527ab7a15093be749425903016ec7c0bdc879"
   },
   "memory_check": {
-    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012/compile-readout-check.log",
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012/compile-registration-check.log",
     "log_sha256": "970678ab38456646cea03abae340cbf6f43bc96275bfa0bcece5c8cbe7e7954f",
     "observed_status": "CURRENT",
     "qualification_refresh_mode": "preserved_published_evidence",

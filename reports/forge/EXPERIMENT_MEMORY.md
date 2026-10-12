@@ -3954,7 +3954,7 @@ A native non-saturating score law on exact AMSGrad m110 repairs the unchanged co
 
 No complete repair; native non-saturating preserves five ordinary acquisition/sustained passes and clock, but fails Ring16 density. Gaussian acquisition does not imply a passing endpoint. Detailed metrics and limits remain in the report.
 
-**Next:** Reject the score-only repair, preserve controls and failures; any further paid hypothesis requires separate justification and finite registration under unchanged tasks and budgets.
+**Next:** Preserve this closed failure and exact controls; read the separately registered tenfold weaker positive penalty contrast under unchanged tasks and full budgets.
 
 [Evidence](../../reports/forge/r1r2-score-law-repair/publication/results.json) · [Record](records/r1r2-score-law-repair-20261012.json)
 
@@ -5367,4 +5367,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `845b21441bb30b9e7558e01ce7bd2e0f32d8f3d967bf6e9131cadfcd36423bac`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `5a88f4eb4743333de979f67cb021bf1eae31ed281740bc5ad7ab8271f958dd5c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

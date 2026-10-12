@@ -1,0 +1,91 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-non-saturating-weak-gamma-v1"
+  },
+  "candidate": "r1r2-non-saturating-weak-gamma-v1",
+  "competing_explanation": "No endpoint diagnostic establishes over-smoothing or an optimum. Less gradient damping can worsen instability, spread, word inverse learning or pole gradients. Historical .1-to-.01 scheduled evidence fails pole gradient, under its original cohort.",
+  "control": {
+    "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "A tenfold smaller positive constant R1/R2 coefficient on exact native non-saturating AMSGrad m110 permits finer component-shape discrimination and passes all six original ordinary tasks plus its own clock.",
+  "id": "r1r2-non-saturating-weak-gamma-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "3b1a441d1e2243ffa46d9e93840fbb66",
+        "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+        "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "two_pole"
+      },
+      "path": "reports/forge/r1r2-score-law-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        15
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "fca1f1c665354d3089066abe90f291ad",
+        "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+        "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-score-law-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        18
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "5af4d1bfd1664ec0a3dadf5e32bee0f7",
+        "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+        "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "five_word_joint_smoke"
+      },
+      "path": "reports/forge/r1r2-score-law-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        19
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -96,3 +96,9 @@ the original full suite. No automatic loss grid, seed study, longer training,
 added budget, Tier 2 or default change follows this result. The
 [full-transport review](../r1r2-objective-memory-repair/research/full-transport.md)
 selects no additional arm.
+
+The [saved regularizer-balance fixture](research/regularizer-balance/README.md)
+adds separate endpoint parameter-gradient evidence without training or qualification.
+A [separately registered weaker-penalty contrast](../r1r2-weak-penalty-repair/PLAN.md)
+retains all original tasks; its low-confidence hypothesis is distinct from this
+closed loss-field comparison.
