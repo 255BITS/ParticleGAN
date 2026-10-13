@@ -1,0 +1,327 @@
+# Performance by test
+
+Use the matrix to answer **which complete recipes pass this exact test**, which
+fail, and where evidence is missing. Each protocol stays separate; nothing here
+selects a different recipe for every task or changes the scientific leaderboard.
+
+## Start here
+
+1. Generate the offline view with `python -m experiments.forge.test_performance`.
+2. Open `reports/forge/test-performance.html` in a browser. It needs no server.
+3. Choose **Selected Forge recipes** for the suite view, or **Research diagnostics**
+   and a cohort for the 228 indexed research runs. Filter by a test or source ID.
+4. Click a result for its gate, completion and costs. Click a recipe for its full
+   configuration; exact IDs and source/protocol bindings are always retained.
+
+[Readable Markdown matrix](../reports/forge/test-performance.md) ·
+[Family leaderboard](../reports/forge/technique-inventory.md) ·
+[Status guide](#status-guide) · [Interpretation examples](#interpretation-examples) ·
+[Prominent limitations](#prominent-limitations) · [Full contract and receipts](#full-contract-and-evidence-timeline)
+
+## Findings at a glance
+
+- The source-specific research ledger contains **228 full runs: 112 PASS and
+  116 FAIL**, across 79 recipe IDs, 93 revisions and 12 source cohorts. **No global
+  winner** is established. These are ledger counts across separate protocols.
+- All twelve Astra hypotheses fail the full unequal-mass gate. Three final
+  covariance submetrics pass, but their 1/5 terminal suffixes still fail the
+  required sustained gate.
+- The complete index has 1,154 protocol rows and 537 recipe identities. The
+  default selected view has 166 rows, including 150 with zero optimizer passes.
+  Many are unmeasured or blocked; zero passing evidence is not proof of impossibility.
+
+## Status guide
+
+| Cell | What it tells you |
+| --- | --- |
+| PASS | The original full scientific gate passes. |
+| FAIL | The original full gate fails, including sustained checks. |
+| NOT RUN | No compatible indexed run exists; this is missing evidence. |
+| ERROR | Execution failed, possibly before training began. |
+| INCOMPLETE | The full required protocol has not been completed. |
+| BLOCKED / INVALID | The original admission or contract failure remains recorded. |
+| MIXED | Compatible receipts disagree; every receipt remains available. |
+
+A row marked **No graded result** has no complete PASS/FAIL evidence. A row marked
+**Failures only** has completed gates that failed. Oracle and representational
+witnesses have their own counters and never replace an optimizer result.
+
+## Interpretation examples
+
+- **Anisotropic components, seed 0, 1,200 updates, source `f90962a5b351`:** four
+  aggregate recipes PASS and the per-kernel control FAIL. That is 4/5 passing
+  recipe identities under this protocol, not four independent seeds or a suite win.
+- **Temporary lookahead on unequal masses:** the final covariance metric PASS
+  does not override a 1/5 terminal suffix. The full result remains FAIL. Its 1,200
+  temporary predictor evaluations are separate from 1,200 accepted updates and
+  already included in the recorded cost.
+- **NOT RUN:** an older protocol's PASS never fills this row. Inspect the source,
+  budget and original gates before comparing otherwise similar names.
+
+## Prominent limitations
+
+**No qualification or default change.** Six mode-hold transfers lack saved sample
+panels and retain logged-metric FAIL regrades. Bulk source, samples, tensors and
+traces remain local-only; full-run CUDA packets and causal gradient/reference
+histories were not retained. Some preparation-error times remain unknown, not zero.
+No oracle or representational feasibility witness is currently registered.
+
+Existing GitHub Actions workflows target **master only**. This PR targets develop,
+so it has no remote CI checks. Local software, browser, regeneration and link
+checks are reported explicitly. The inactive workflow proposal cannot be enabled
+with the available credential's scope; no protection or credential change is made.
+
+## Full contract and evidence timeline
+
+<details>
+<summary>Generation commands, identity contract and complete evidence timeline</summary>
+
+
+[The generated matrix](../reports/forge/test-performance.md) is another view of
+the existing Forge publications, not another leaderboard. Its offline HTML view
+sorts and filters test/protocol rows, searches full recipe and source identities,
+and opens every cell's receipt, original gates, metrics, costs and completion
+evidence. The family leaderboard still selects whole configurations across the
+suite. No per-test selection or sum across protocols becomes a new score.
+
+Run `python -m experiments.forge.test_performance` from the repository root.
+The existing `python reports/forge/regenerate_technique_inventory.py` workflow
+generates the same view alongside the family pages. Use `--check` on the module
+command to verify generated bytes. The Markdown projection is committed;
+HTML and JSON duplicate existing compact publications and stay generated.
+The proposed [read-only reporting workflow](ci/forge-test-performance.yml)
+checks the exact PR head and attaches offline HTML, JSON and inspected desktop
+and mobile renders. It is reviewable here but is not activated: the available
+GitHub credential cannot add workflow files without `workflow` scope. Existing
+repository Actions workflows run only on master. Local published-head
+verification runs the same software and browser commands. Open the generated
+HTML locally; it requires no server, network, account or deployment.
+
+## Identity and evidence
+
+Forge rows join by the exact task contract, protocol, RNG fingerprint,
+initializer, executed source and runtime. Recipe columns preserve candidate
+revision, complete recipe, prior policy, claim/serving law and source. Missing
+bindings isolate a row rather than imply equivalence. Original execution and
+evaluation fingerprints stay visible even when the full original task card is
+unavailable. Current declarations are comparison context and never replace
+archived gates; original receipt metric checks retain their thresholds.
+
+Measured history comes from the current inventory's registered evidence
+snapshots. Each snapshot's bytes and publication digest are checked. Compact
+receipt proofs bind original result/file hashes, candidate revision and source.
+The existing `scoped-publications.json` registry supplies separate Tier-1 policy
+cohorts too: pinned document/whole-row identities, receipt result hashes and
+final-measurement bindings are checked without loading media. Those source-bound
+rows supply no selected-parent qualification or borrowed passes.
+The existing certified retry projection removes superseded incomplete receipts
+from the active cell. Different unsuperseded outcomes display MIXED. PASS counts
+recipes with at least one compatible passing receipt, while MIXED preserves
+their failures too; it is not a consistency or robustness claim.
+
+Public-API cases reuse the publications already indexed by the tier report.
+Their complete recipes, original case definitions, seed, budget, cadence,
+sampling, source identity and runtime stay in separate rows. An instantaneous
+PASS without `default_protocol_complete: true` is INCOMPLETE here, with the
+original verdict retained in the drill-down. No API name match fills a Forge
+cell. Supplemental diagnostic receipts follow the same explicit identity rule.
+
+PASS and FAIL mean original scientific gates. ERROR is an execution failure,
+including pre-training errors whose scientific grade may be BLOCKED. INCOMPLETE
+lacks the full protocol. NOT RUN means no compatible indexed result, including
+new declarations. BLOCKED, INVALID and other recorded statuses retain their
+original reasons. A terminal threshold pass cannot override a sustained FAIL.
+
+Coverage counts recipe identities with evidence under each exact row, not
+independent trials, shared execution groups or summed view requirements. The
+filters recompute counts over all matching recipe columns, including columns
+outside the displayed page. “Zero optimizer passes” and “no indexed witness”
+use those same filtered identities. Source/runtime revisions remain separate.
+
+## Feasibility witnesses
+
+Zero passing recipes is a smell, not proof that a test is impossible. Oracle
+and representational feasibility witnesses have separate counters and never
+change optimizer grades, family selection or qualification. No feasibility
+witness has yet been registered for an exact row in this index; feasibility
+evidence elsewhere remains unknown to this projection.
+
+To index reviewed evidence, add optional `reports/forge/test-witnesses.json`
+with schema `forge_test_witnesses_v1` and a `witnesses` list. Each entry supplies
+`id`, `task_id`, `kind` (`oracle` or `representational`), the **exact unchanged
+`conditions` object from the row**, `scope`, `evidence` (`path` and SHA256 of a
+committed JSON publication), and an RFC6901 `status_pointer` to its original
+PASS/FAIL/INCOMPLETE/ERROR verdict. The pin is verified and mismatched conditions
+fail closed. A feasibility witness using another protocol belongs in its own
+row, not this one's count. An implementation-readiness check or an analytic
+argument without a numerical gate is not a passing witness.
+
+## Recent diagnostic evidence and limits
+
+The small `reports/forge/test-performance-evidence/` registry binds reviewed
+display-only projections of the supplied local results. Original report,
+protocol, result and audit hashes are preserved, with original availability
+marked LOCAL ONLY. No local paths, raw checkpoints, tensors, per-update streams
+or private authorization records are published. The registry cannot grant
+qualification, change experiments or launch training.
+
+- Atlas proposed-location recovery: matched seed-0 80-update two-pole control
+  FAIL and treatment PASS under the original movement/slope and terminal-suffix
+  gates. The first attempt ERROR before either arm started remains separate.
+  Recovery paid 24.076841857 seconds; combined 29.991474262/60. All final rows
+  are negative: the screening win supplies no balanced-density or suite claim.
+- Atlas registered seed confirmation: all four original 80-update cells
+  completed. Seed 1 control/treatment FAIL; seed 2 control/treatment PASS.
+  The all-seed treatment acceptance is **rejected**, and seed 2 already passes
+  under control. These rows preserve the seed-0 screen separately; no robust
+  recipe success is inferred. The new confirmation charge is 50.997994116/120
+  seconds, separate from seed 0; the saved-state audit reports 608/608 checks.
+- G-angle unequal width: full 1,200-update passes at seeds 0 and 1, each with
+  an 8/5 terminal suffix, under the historical executed source. Seeds remain
+  separate. The identity includes external G-only recruitment/support hooks,
+  native prior policy and persistent state; the base recipe alone is insufficient.
+- G-angle anisotropic: full 1,200-update seed-0 FAIL, 0/24 passing observations.
+  Original gates and the saved-score audit remain bound. This is a different
+  complete recipe/source from the width runs, not an isolated-angle causal test.
+- Non-Atlas cell-moment diagnostics: 45 unique completed seed-0 runs under nine
+  exact task/source protocols. Four global aggregate objectives produce 35/36
+  PASS outcomes; nine fresh per-kernel controls produce 5/9. The first two rounds
+  cover anisotropic, unequal-width, unequal-mass, broad, overlap and spiral
+  cases; all four aggregate variants pass those scoped gates. Acquisition adds
+  Gaussian smoke, ring acquisition and published-discriminator unequal width.
+  Bures ring FAIL remains visible. The round table and byte-pinned compact
+  receipts appear in both inventories; filter the offline matrix's
+  Forge history by recipe `Cell moment` to inspect all outcomes.
+  These are disjoint execution-ledger counts, not a pooled score or independent
+  controls for every aggregate comparison. Metric regressions remain visible;
+  no objective is declared universally superior.
+- Finite-realization paired prefix: two fresh 64-update staggered100 arms show
+  the recorded mechanism check, while both quality cells remain **INCOMPLETE**
+  against the original 7,000-update native gates. Four earlier full FAILs and
+  the failed CPU preparation check stay explicit exclusions. The prefix paid
+  20.104729663 child seconds; the three full rounds paid 2,223.081716294.
+  Their disjoint total is 2,243.186445957 seconds, with no continuation or
+  qualification inferred from the prefix.
+
+The non-Atlas receipts preserve each declared global recipe's 110 fields and
+each run's 110 effective fields. Task-owned dimensions, capacity, batch size,
+prior binding and budget replace only their declared resource fields; ownership
+and original request/result/terminal hashes remain in each cell. Recipe-dependent
+ownership metadata is kept with the execution record, so it does not split the
+same evaluation question into one row per objective. Candidate revisions and
+the two distinct executed source digests remain separate identities. The frozen
+source catalogs record their declared base commit and file hashes; no missing
+origin commit is invented. Original source archives and states are local-only.
+
+Gaussian acquisition requires any scheduled full pass plus an independent
+same-state confirmation draw; it is not the sustained Gaussian stability gate.
+Ring acquisition ran 1,600 updates and 96 observations while retaining its
+original 400-update schedule horizon. The published-discriminator width test
+has its own ID. Five Gaussian receipts lack a standalone initial-prior summary;
+that absence stays null while their task prior law and initial-state hashes are
+retained. Full-run audits pair source, initial states, named streams and
+training-only reference statistics. They did not retain every consumed CUDA
+batch or latent packet, so the projection makes no packet-for-packet replay
+claim. The separate 64-update mechanism receipt does retain matching packet
+hashes. Preparation/audit errors are recorded as exclusions rather than invented
+scientific executions. Inclusive Popen-to-exit charge and narrower runner time
+are distinct fields.
+
+The subsequent reconciled packet extends these 45 rows once to **204 full runs**:
+66 recipe IDs, 75 source-bound revisions and seven source cohorts. Its 107 PASS
+and 97 FAIL outcomes are an execution ledger across separate protocols, with no
+global survivor. The existing registry adds 159 full cells and 12 separately
+bound startup ERROR cells; it retains the two bounded prefix cells without
+duplicating them. Every original failure, grade, cost and task/source identity
+remains visible. The later frozen recipes contain 110–112 fields, including
+`cell_gaussian_objective`, `cell_reference_policy`, `cell_cubature_rule`,
+`optimizer_role_families` and `optimizer_signal_roles`. Header annotations and
+drill-down distinguish mixed G/D/prior laws and attenuation from the base
+`optimizer_family`. These private source implementations are diagnostic evidence;
+this report does not declare a public API release or adopted default.
+
+The original cumulative recipes, twelve memory corrections and twelve mixed-role
+recipes fail the unchanged full Gaussian stability gate. Twelve quadrature recipes
+fail mode retention. Five of twelve attenuation recipes pass full Gaussian
+stability, but all five fail essential heterogeneous transfer gates. The three
+transfer cohorts pass 2/12, 3/12 and 3/12 independently. Original endpoint metrics
+and every failed stationary/reacquisition/hold check remain authoritative; a
+passing final check does not override the full FAIL.
+
+Each 6,000-step Gaussian continuation names its own 1,000-step producer's attempt,
+candidate revision, source and checkpoint hashes. It records **5,000 new updates**
+and only the new attempt charge; producer updates/cost are already counted in
+their original run. The reconciled full runs contain 434,400 new updates and
+20,994.261548214 charged attempt wall seconds. Twelve pre-runtime hardware-guard
+errors consumed zero training updates and 30.168105392 supervisor seconds. The
+two finite prefixes retain 20.104729663 seconds. Their disjoint total is
+21,044.534383269 seconds; this is conservative attempt wall time, not exclusive
+CUDA device time. CPU preflight and probe charges remain separate fields and
+are never added silently to this total.
+
+Three nonfinite SGDA CPU preflight rejections retain their declared candidate
+cards, completed prefix steps, failure pins and CPU costs as diagnostic exclusions.
+They are not full task executions. Semantic dedup exclusions and failed preparation
+or audit revisions stay recorded. The CPU-only frozen-gradient probe retains its
+REJECT decision, four state/request bindings, 104 gradient evaluations, 8,192
+diagnostic draws and 1.641172 CPU seconds. It supplies no optimizer, oracle or
+representational passing cell; this import does not execute that probe or launch
+its proposed follow-up.
+
+The amended handoff also retains the completed CPU reference ablation and quota
+confirmation. The primary covariance hypothesis remains **REJECT**; the secondary,
+posthoc quota diagnostic records **SUPPORT**, with its original registration and
+transparent errata. It adds zero trained rows or qualified recipes. The two probes
+and read-only quota receipts record 4.349590721 timed CPU seconds, separately from
+the attempt ledger. Secondary directional agreement was not measured, and an
+incorrect copied quota description remains disclosed. No diagnostic SUPPORT is
+converted into a passing task, feasibility witness or causal training conclusion.
+
+Six mode-hold transfer executions lack saved sample panels. They remain original
+full FAIL cells with an explicit **logged-metric gate regrade** audit warning;
+score-history GIFs are not sample trajectories. The other 384 sample observations
+per transfer cohort independently regrade in the supplied audits. Original
+full-run CUDA packets and contemporaneous parameter-matched causal gradient/reference
+histories were not retained. Exact source and artifact byte hashes were verified
+without decoding tensors or rescoring metrics. Bulk archives remain local-only.
+Shared provenance catalogs are stored once in the generated JSON and resolved
+from each cell's hash in its drill-down, keeping the growing offline matrix small.
+
+The quota-transition/Astra cumulative packet adds **24 unique full runs**: eight
+predecessor runs and sixteen Astra runs. Its six interim Astra receipts occur once.
+The resulting family ledger has 228 full runs and 470,400 new accepted updates.
+All twelve Astra candidate hypotheses and four fresh source-bound controls FAIL
+the full unequal-mass gate. Five predecessor Gaussian/mode-retention outcomes
+PASS; the predecessor unequal-mass cells remain FAIL. Swap, slower covariance
+memory and temporary lookahead pass the final covariance submetric, but each has
+only a 1/5 terminal suffix. The drill-down states that distinction explicitly;
+the original full FAIL is preserved.
+
+The 24 runs add 36,000 accepted updates and 1,200 temporary predictor evaluations.
+The predictor is an additional evaluation within the accepted step, not another
+optimizer update; its work is already included in the recorded cost. The five
+new source cohorts retain complete recipes with 113–120 fields, original task
+horizons, quota and transport policies, shape/distribution objectives, projection
+and covariance-memory settings. Fractional transport labels are row argmaxes of
+the soft plan; their counts need not equal integer quotas. Exact soft row/column
+capacities and the separate integer controls were verified from archived traces.
+Raw per-update traces remain local-only; only pins and compact counters are saved.
+
+These 24 executions charge 1,157.135688828 queue seconds and 1,206.481903937
+inclusive supervisor wall seconds. The clocks are distinct and never added to
+one another. Astra's sixteen runs contribute 694.237484350 queue seconds and
+726.332711413 supervisor seconds; predecessor charges and inherited budgets are
+counted once. The earlier 204-run display snapshot remains unchanged. Failed
+predecessor audits retain their recorded 4.900864411 CPU seconds; four Astra
+preparation failures retain pins with unavailable elapsed times explicitly null.
+The supplied audits certify model equality for controls; this importer verifies
+their metadata and artifact bytes without decoding model tensors. No new research
+execution, gate change, regression/confirmation run or qualification follows.
+
+These runs do not qualify the current suite. G-angle's handoff still lacks
+registered cross-host extension/restore support and six-task Tier-1 evidence.
+Original raw archives are not hosted by this PR. Further local evidence and
+feasibility witnesses require reviewed, exact public identities before indexing;
+missing evidence never authorizes a new experiment.
+
+</details>
