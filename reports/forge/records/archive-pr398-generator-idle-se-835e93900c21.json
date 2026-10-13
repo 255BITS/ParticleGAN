@@ -1,0 +1,97 @@
+{
+  "candidate_id": "bcap-generator-idle-base-v1",
+  "candidate_revision": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+  "conclusion": "Falsified at Tier 1. Against its matched BCAP leader control (source digest 2ffc95c341a7, seed 0, deterministic_orthogonal, revision 9), generator_idle_se=1.0 loses ring16_acquisition PASS->FAIL (terminal suffix 0/5, final component_covariance_error 3.09991 vs limit .85; control .496567, suffix 26) after skipping only 5/1600 G steps, so all 21 Tier 2 cells are BLOCKED. The control's five_word_joint_smoke was INCOMPLETE (19168/20001 updates at the 900 s allowance under shared-GPU contention; no retry). Idle fraction: gaussian1d_smoke 42.9%, ae_gan_hold 25.6%, five_word_joint_smoke 54.6%, two_pole 1.2%, unused_token_hold 0%, ring16 0.3%. Off-ladder diagnostic (separate cohort, no credit): gaussian1d_stability improves (stationary 2->14/72, shifted hold 0->6/24, std_ratio .662->.865, cdf_ks .321->.127) but mean_error_sigma worsens .255->.312 and the gate stays FAIL; mode_hold is unchanged FAIL because the rule never idles (0/1200). PR #398 was closed unmerged; the option and its tests are not on develop.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Closed PR #366 generator idle rule rebuilt on the recipe factories (opt-in generator_idle_se=1.0): skipping the G/prior step while the critic's paired real-fake gap is within one standard error of zero stops the constant-rate BCAP leader drifting during holds, repairing gaussian1d_stability and mode_hold without losing any control pass.",
+  "lifecycle": "concluded",
+  "mechanism_class": "generator_step_idle_gate",
+  "next_action": "Do not sweep the threshold or re-run this rule. A successor must change the idle signal (it never fires on mode_hold and fires about half the time on easy holds), registered as a new structural idea with a fresh matched control.",
+  "provenance": {
+    "archive_status": "recall_only_unmerged_branch",
+    "control_candidate_revision": "69c64fabe39c5cb47ceb407cc7e250b8f4eb569f96312c5303806ce51100eb54",
+    "default_adoption": false,
+    "documents": {
+      "audit.json": {
+        "path": "reports/forge/bcap-generator-idle/audit.json",
+        "sha256": "ab73751f3b2dab74d5cd03726f9a4d8a8b86199b00d642cb4ae2948b10a3f02f",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/audit.json"
+      },
+      "measurements.md": {
+        "committed_on_develop": false,
+        "path": "reports/forge/bcap-generator-idle/measurements.md",
+        "sha256": "eaf3c073bc820ac50f53ca98c0e79fbc55fe9221f69bb0ca063e921de05a1556",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/measurements.md"
+      },
+      "prior_evidence.json": {
+        "path": "reports/forge/bcap-generator-idle/prior_evidence.json",
+        "sha256": "3dfbe1c03722de2480d5fc8e539a1290544d889905ac45ca7266107f4e5c8a7c",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/prior_evidence.json"
+      },
+      "registration.json": {
+        "path": "reports/forge/bcap-generator-idle/registration.json",
+        "sha256": "eebc1c3f7cad929c681310c4794c369d72c698b443082c4229b43ffddf30c142",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/registration.json"
+      },
+      "results.json": {
+        "committed_on_develop": false,
+        "path": "reports/forge/bcap-generator-idle/results.json",
+        "sha256": "42aca75a27f128f6184f0aa367b65450c8a5726b399422f1aa400ca6b0b2e30c",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/results.json"
+      },
+      "spec.json": {
+        "path": "reports/forge/bcap-generator-idle/spec.json",
+        "sha256": "e73b6edd94ad138d9ff1ee7e8e5633f3c13427e0611d7a5c8d862c70c5fa3b2a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/spec.json"
+      }
+    },
+    "initializer": "deterministic_orthogonal",
+    "motivating_prs": [
+      {
+        "head_sha": "9c9a220d82396d1b3e10e9524188517b9f3a1678",
+        "number": 366,
+        "state": "CLOSED",
+        "url": "https://github.com/255BITS/ParticleGAN/pull/366"
+      },
+      {
+        "head_sha": "09de76e5cb744ebd71d94e260e237f5a049ff5bb",
+        "number": 279,
+        "state": "CLOSED",
+        "url": "https://github.com/255BITS/ParticleGAN/pull/279"
+      }
+    ],
+    "original_readouts": {
+      "control": "readout-4ded766c74ffb9d7575aab9c",
+      "trial": "readout-7439f587a72a406b15097acd"
+    },
+    "protocol_seed": 0,
+    "raw_location": "git-ignored bulk archive outside the checkout (local, not in Git)",
+    "reuse_eligible": false,
+    "source_branch": "research/g-step-idle-rule",
+    "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+    "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+    "source_head": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+    "source_pr": 398,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/398",
+    "trial_candidate_revision": "c42558eebdc2e84059e789f5cccbd6c70dd9396cea355e96162e6aab33a33241",
+    "unavailable_on_develop": "particlegan/optim/generator_idle.py, tests/test_generator_idle.py, configs/forge/ideas/bcap-generator-idle-*.json, the configuration/search/study cards, the original Forge readout records, results.json, measurements.md, media and workflow scripts exist only on the PR branch; read them at source_head.",
+    "verified_by_forge": false,
+    "view": "discriminator_stability@9"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr398-generator-idle-se-835e93900c21",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-generator-idle/README.md",
+    "sha256": "837619b39d7a466cb761be0bfab8cecc980907f5c26ef7be0e0aeee878ccd4e1",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/README.md"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Metrics are from PR #398 head 835e9390 on its own frozen source; this record carries no qualification and fills no Forge task cell.",
+  "trainer_family": "bcap-dualnorm"
+}

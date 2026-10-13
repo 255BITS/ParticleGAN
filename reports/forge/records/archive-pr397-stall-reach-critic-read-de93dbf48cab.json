@@ -1,0 +1,80 @@
+{
+  "candidate_id": "bcap-stall-reach-base-v1",
+  "candidate_revision": "de93dbf48cabe6bb2913b3eccf93029655da5db9",
+  "conclusion": "Falsified at Tier 1. Against its fresh matched leader control (same source cbba593bb98d, seed 0, deterministic_orthogonal, revision 9), stall_reach passes 4/6 Tier 1 versus 5/6: ring16_acquisition is lost (terminal suffix 0/5, 14/16 modes, HQ .530 versus control suffix 26, 16 modes, HQ .961, first pass 1184). Under BCAP the critic's input slope sits near its cap, so the saturation-only stall rule (PR #107's G trust factor has no current counterpart) latches: 1545/1600 ring16 updates are stalled and the wide read is on for 1597/1600, pinning the width at .5. Both arms' five_word_joint_smoke are INCOMPLETE at the 900 s allowance (control 17501/20001 updates under host CPU contention; stall_reach 10834, about 1.6x per-update cost from the 341-point read). All 21 Tier 2 tasks are BLOCKED for both arms; mode_hold is unmeasured. Public-API ring8 toy (after the review fix making its particle table deterministic): off path PASS (7 modes, HQ .917), stall_reach FAIL (6 modes, HQ .747, 1093/1200 stalled); both arms oscillate, so the toy only supports the ring16 result. PR #397 was closed unmerged; the option, its tests and the toy code are not on develop.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Closed PR #107 stall reach rebuilt on the BCAP direction-blend leader (opt-in generator_critic_read=\"stall_reach\"): the generator reads the critic through a 2d+1 axis stencil of width max(.15,.5 min(u,1/u))/kappa, .5/kappa after 50 consecutive u>=.6 critic updates, converting mode_hold FAIL to a sustained PASS while keeping all six Tier 1 gates.",
+  "lifecycle": "concluded",
+  "mechanism_class": "generator_critic_read_stencil",
+  "next_action": "Do not re-run or tune this rule (widths, windows). A successor needs a stall signal that is selective under BCAP's saturated slope and a constant-cost read (a few random or antithetic directions, not every axis); register it as a new idea with a fresh control and screen it on ring8/ring16 toys first.",
+  "provenance": {
+    "archive_status": "recall_only_unmerged_branch",
+    "default_adoption": false,
+    "documents": {
+      "measurements.md": {
+        "committed_on_develop": false,
+        "path": "reports/forge/stall-reach/measurements.md",
+        "sha256": "e0e6f78d85021771a0e5ec79c9138ee9a89e7c5b8f03b551edfc4dd33123d2c2",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/measurements.md"
+      },
+      "registration.json": {
+        "path": "reports/forge/stall-reach/registration.json",
+        "sha256": "cdbd461a01773639cbb85cf55118f454dcf77877b09202eb3083e287f30cb4d0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/registration.json"
+      },
+      "results.json": {
+        "path": "reports/forge/stall-reach/results.json",
+        "sha256": "6e8ba32577ce1fcd37b873cd322f559ac28cae80725bb71b1f9f17f190e227f1",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/results.json"
+      },
+      "spec.json": {
+        "path": "reports/forge/stall-reach/spec.json",
+        "sha256": "a3fa774bed932125e9278d86c258ebcd5df6dce5670edc4d97ff3cb6f7005295",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/spec.json"
+      },
+      "toy_README.md": {
+        "committed_on_develop": false,
+        "path": "reports/toy_audit/api_contract/stall_reach/README.md",
+        "sha256": "9e1716a71db69548205dcfb351b2f1b5aa28cbd0da3880019a6cac127f44f9d1",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/toy_audit/api_contract/stall_reach/README.md"
+      }
+    },
+    "initializer": "deterministic_orthogonal",
+    "motivating_prs": [
+      {
+        "number": 107,
+        "state": "CLOSED",
+        "url": "https://github.com/255BITS/ParticleGAN/pull/107"
+      }
+    ],
+    "protocol_seed": 0,
+    "publication_commit": "6991ed0dba49cdda712fbd4215ab8832633c91c2",
+    "raw_location": "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011/ (local, not in Git)",
+    "reuse_eligible": false,
+    "source_branch": "research/stall-reach-critic-width",
+    "source_commit": "ee0d05728ded8d912f577f206a2a874e82759e21",
+    "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+    "source_head": "de93dbf48cabe6bb2913b3eccf93029655da5db9",
+    "source_pr": 397,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/397",
+    "unavailable_on_develop": "particlegan/critic_read.py, tests/test_generator_critic_read.py, benchmarks/toy_audit/stall_reach_ring8.py, configs/forge/ideas/bcap-stall-reach-*.json, the task-card host pins, measurements.md, media and workflow scripts exist only on the PR branch; read them at source_head.",
+    "verified_by_forge": false,
+    "view": "discriminator_stability@9"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr397-stall-reach-critic-read-de93dbf48cab",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/stall-reach/README.md",
+    "sha256": "d25c4c9ab6d6c2ac566c82e1b32460805d428de324bc8d3d457110e4eead7b48",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/README.md"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Metrics are from PR #397 head de93dbf4 on its own frozen source; this record carries no qualification and fills no Forge task cell.",
+  "trainer_family": "bcap-dualnorm"
+}
