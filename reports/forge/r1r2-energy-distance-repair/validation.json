@@ -1,0 +1,173 @@
+{
+  "administrative_coordinator_commit": "21e207ef6c72d74ecc2f684fba8188851b060a15",
+  "archived_logs": {
+    "administrative-check.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/administrative-check.log",
+      "sha256": "17154b58bdd99a348d60d28f6cb2db520a62bedf799daf1f7e097318a89aa481"
+    },
+    "administrative-drain.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/administrative-drain.log",
+      "sha256": "3989977cd20f3d311f4d94c9eea872361599ca580d05a65d975146162d6a37e2"
+    },
+    "collect.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/collect.log",
+      "sha256": "ec0325217c695758c3f35a7efd3d0b5eed73f63d3331ea1b1cbe6c8ca190807a"
+    },
+    "collection-audit.stderr.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/collection-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "collection-audit.stdout.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/collection-audit.stdout.log",
+      "sha256": "6823b43b350ea3372372313c93427205f24b8ed882d68db6a30113f950f81b8f"
+    },
+    "compile-final-check.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/compile-final-check.log",
+      "sha256": "f97b971e2c9f8cf0410ea112d2da97ac70ef1214106c1d6b9baf982898ed3873"
+    },
+    "compile-final.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/compile-final.log",
+      "sha256": "e367c798876c3c7c672829d99946236cc29bdad080accb030b1871d720ddaab5"
+    },
+    "density-audit.stderr.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/density-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "density-audit.stdout.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/density-audit.stdout.log",
+      "sha256": "e5f17a3bcd50cc8c05e2551dc9d634024b23bd3e9f84d4fc6498a3308d8ea31f"
+    },
+    "run.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/run.log",
+      "sha256": "10de46231333ab752ebccfbb257cdd640bdaa48c69414082d75a2fce4bf9a698"
+    },
+    "test-administrative-drain.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012/test-administrative-drain.log",
+      "sha256": "b6e0f6bdd4f17cd948fdf599463d637be8d5460713da1c13fe3583295acbc629"
+    }
+  },
+  "checks": {
+    "actual_AMSGrad_role_betas_maxima_and_full_optimizer_histories": "PASS",
+    "actual_initial_tensor_and_ordered_target_batch_receipts_match_parent": "PASS",
+    "all217_historical_charges_retained_fourteen_new231_aggregate": "PASS",
+    "all_36_registered_inputs_unchanged": "PASS",
+    "all_fresh_source_files_committed_under_execution_SHA": "PASS",
+    "all_named_stream_receipts_match_checkpoints": "PASS",
+    "both_fresh_recipes_positive_R1_R2_point1_every_update_actual_penalty_histories": "PASS",
+    "bulk_logs_checkpoints_and_metric_streams_outside_git": true,
+    "complete_task_bound_recipe_delta_only_raw_energy_weight_zero_to_one_on_all_seven_hosts": "PASS",
+    "density_all_six_original_metrics_exact_on_both_new_ring_roles": "PASS",
+    "generated_memory_check": "CURRENT",
+    "historical_generated_snapshots_byte_identical": 8,
+    "historical_publication_records_exact": 513,
+    "native_NS_and_joint_encoder_reversed_stream_immutable_public_source": "PASS",
+    "nine_archives_original_combined_cap_and_free_space_floor": "PASS",
+    "no_scientific_retries": "PASS",
+    "original_certificates_grades_metrics_and_training_GIFs": "PASS",
+    "original_fixed_task_evaluator_pins_and_frozen_supporting_inputs": "PASS",
+    "own_clock_branches": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS",
+    "separate_finite_signed_energy_state_and_weight_zero_omission": "PASS",
+    "zero_cache_fourteen_fresh_source_controls_and_treatments": "PASS"
+  },
+  "compiled_memory": {
+    "input_digest": "f990064ad74b0bc54076a53625fddd7bf799b8ce3d716a4066edbb86092e6485",
+    "inventory_coverage_valid": true,
+    "publication_record_count": 513,
+    "record_count": 840
+  },
+  "coordinator_exception": {
+    "higher_tier_and_foreign_jobs_untouched": true,
+    "initial_error": "Scoped collector exposed 14 authorized keys while Queue._results required all58planned bookkeeping keys",
+    "only_original_14_tier1_claims_authorized": true,
+    "paid_claims_before_error": 0,
+    "paid_retries": 0,
+    "receipt_sha256": "e6220051a06110a5a89c3fbc8b9a1293cba05123331bacc4b9d90f4b4ea49a64",
+    "science_requests_and_bindings_unchanged": true
+  },
+  "costs": {
+    "aggregate_paid_seconds": 6970.914169566939,
+    "cached_new_paid_seconds": 0,
+    "new_paid_seconds": 384.751732454024,
+    "prior_paid_seconds": 6586.162437112915,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "coverage": {
+    "actual_training_gifs": 14,
+    "density_panels": 192,
+    "exact_cached_cases": 0,
+    "fresh_certified_cases": 14,
+    "frozen_declarations": 36,
+    "frozen_scientific_files": 1216,
+    "ordinary_final_checkpoints": 12,
+    "original_evaluation_pins": 19,
+    "own_clock_proofs": 2,
+    "saved_clock_states": 52
+  },
+  "execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "inputs_sha256": {
+    "reports/forge/compilation.json": "df096e33d8cb617748d177df54222e2b1545f962c2e565c847a65a3a24cae960",
+    "reports/forge/r1r2-energy-distance-repair/collection-audit.json": "10c95598b5d1acbeeb61fdf7844e3f7d12529867cd4288e883c346574030f5e8",
+    "reports/forge/r1r2-energy-distance-repair/density-audit.json": "e5f17a3bcd50cc8c05e2551dc9d634024b23bd3e9f84d4fc6498a3308d8ea31f",
+    "reports/forge/r1r2-energy-distance-repair/density-readout.md": "68fedee398d571eb6a2f06f0da96107a0008ae863ec753d6c6d0cb1d67a31e04",
+    "reports/forge/r1r2-energy-distance-repair/publication/results.json": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+    "reports/forge/r1r2-energy-distance-repair/registration.json": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c"
+  },
+  "limits": "Scientific objective remains unmet: no complete Tier1 global recipe. Saved geometry/constructor receipts are not reconstructed historical paired forces or a pre-warmup tensor copy. No coefficient grid, extra budget, task change or qualification reuse.",
+  "qualification_input": false,
+  "recipe_outcomes": [
+    {
+      "all_seven_pass": false,
+      "candidate_id": "r1r2-non-saturating-energy-u-v1",
+      "clock_status": "PASS",
+      "required_tier1": {
+        "FAIL": 1,
+        "PASS": 5
+      },
+      "role": "energy_u"
+    },
+    {
+      "all_seven_pass": false,
+      "candidate_id": "r1r2-non-saturating-ams-m110-v1",
+      "clock_status": "PASS",
+      "required_tier1": {
+        "FAIL": 1,
+        "PASS": 5
+      },
+      "role": "non_saturating"
+    }
+  ],
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "scientific_success": false,
+  "scope": "closed_energy_u_research_readout_and_software_validation",
+  "selection_or_defaults_changed": false,
+  "software_validation": {
+    "adjacent_checks": 133,
+    "administrative_checks": 12,
+    "auditor_fixtures": 70,
+    "focused_checks": 108,
+    "meaning": "software evidence only; trained qualification comes from saved certified gates",
+    "receipt_sha256": "8fb2573fc7834747d3637060287b813023c90d3584d00961ee1455dceb652a8d",
+    "workflow_checks_recorded_across_two_stages": 191
+  },
+  "status": "PASS",
+  "storage": {
+    "archives_bytes": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012": 4543,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012": 6106444,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": 5477,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012": 7776,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": 2512,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012": 46457,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012": 3855,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": 3556713109,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012": 51473849
+    },
+    "combined_bytes": 3614364022,
+    "combined_cap_bytes": 8589934592,
+    "free_bytes": 20250427392,
+    "minimum_free_bytes": 5368709120
+  }
+}

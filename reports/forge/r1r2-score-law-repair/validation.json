@@ -1,0 +1,114 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 21,
+    "certified_cases": 21,
+    "exact_cached_cases": 14,
+    "independent_audit": "PASS",
+    "new_optimizer_updates": 0,
+    "new_paid_attempts": 7,
+    "new_paid_seconds": 182.87967788797687,
+    "new_sampling_draws": 0,
+    "shared_unique_paid_attempts": 210,
+    "shared_unique_paid_seconds": 6405.0795450999285
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "covariance_bound_passes": 0,
+    "full_ring_passes": 0,
+    "max_absolute_difference": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "saved_observations": 96,
+    "terminal_suffix": 0
+  },
+  "execution_commit": "517257ff3879516ae2da64009c375ffffe9b001a",
+  "inputs_sha256": {
+    "reports/forge/r1r2-score-law-repair/PLAN.md": "2f53af4ef8250971f7a20c194d1d6968db054621cdfc788990c01b747eba3613",
+    "reports/forge/r1r2-score-law-repair/README.md": "4382b523a96f60a49cf6f0cc2c97cf542fc097c452da245511ddb0a9ebb9da6d",
+    "reports/forge/r1r2-score-law-repair/audit_collection.py": "08461a472df8cb61fbceb05c6d2af58983be3229ca12a8ee41b538c8c19d9127",
+    "reports/forge/r1r2-score-law-repair/collection-audit-readout.md": "7804d767cbe421d5bae33a64c329793252606ff878173e5c68c1ba3c54ce3774",
+    "reports/forge/r1r2-score-law-repair/collection-audit.json": "4c8256e19ede31cdfddcb6e2642ffa7e1e4d68c6a1ac75242d27e0542e0e90fc",
+    "reports/forge/r1r2-score-law-repair/density-audit.json": "23245b6ba14945523455d58b16aa142ac7b9e5e3a1644548bca3072105e0bb34",
+    "reports/forge/r1r2-score-law-repair/density-readout.md": "ae57d45583d55be5a0d239a114afdead3c80f1f85013434ce8cc4fe0ffdf7ae3",
+    "reports/forge/r1r2-score-law-repair/density_audit.py": "9d183844ade584d62599a48e84c3f8ab66ad09257872189adec9ee3c10ce92e4",
+    "reports/forge/r1r2-score-law-repair/manifest.json": "60272486ef8762aa33894b2ea6427ec3ca1835891a3e926e357a8d6224dd4b04",
+    "reports/forge/r1r2-score-law-repair/preflight-review.json": "671e7266dc039cee9e7c048b107ddd9922c2dd0c680ec612e0710b9a6f626699",
+    "reports/forge/r1r2-score-law-repair/publication/results.json": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+    "reports/forge/r1r2-score-law-repair/registration-validation.json": "611222e2ccca500a771ce3251264ce2d5a8b660b570bbadf8ccaa3e30e9df295",
+    "reports/forge/r1r2-score-law-repair/registration.json": "98abadd32c1e4f719cc9d7aaaff0353ca9954aa8a39e2d83e0d529d9435950a8",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/README.md": "a1711da890415c91c68691cd2673284893a6590fc87369ec66398792ef65a2c1",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/diagnosis.json": "d2b02452ccd037c88cefb8bb062dd838922f1cedc72ff83b7fe81e026897bec9",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/probe.py": "fd08affe7a86c3038b31fee90581569916ea238694ae720cf5da606a38241f3b",
+    "reports/forge/r1r2-score-law-repair/test_score_law_workflow.py": "6e7aada685e1708165a3618fb10a2ed87227f760d392f81fe579703dc6698bcc",
+    "reports/forge/r1r2-score-law-repair/workflow.py": "3268f26cd4417a840d023b9e6b86d90b4686eb662c2402f7059f78b89e35ebbb",
+    "reports/forge/records/r1r2-score-law-repair-20261012.json": "030dcd2d3ecb2b84ffab5bf337a625930eacba71c5792eea493825005aa13886"
+  },
+  "local_log_sha256": {
+    "audit-collection.log": "7a0a7ae00c02965acc6fa3ea5819231bd8edce044b26cefcc0e25f96bb62b9ae",
+    "collect.log": "e3f6bf62c012a2dd2ecbc5626a09938bc3c349210bcadb681fe2a21db67350aa",
+    "compile-readout.log": "134d890be232298f923f3cfcc15e2ff2ff6ae0e6dc0e50cd27e26e46c8a94685",
+    "density-audit.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "density-audit.stdout.log": "23245b6ba14945523455d58b16aa142ac7b9e5e3a1644548bca3072105e0bb34",
+    "prepare.log": "c596b26e19a726a2f34743b7721fa794eefb10f5878d29bf450035e448e3de8c",
+    "run.log": "2771032b7d096e726fc18a24e45527ab7a15093be749425903016ec7c0bdc879"
+  },
+  "memory_check": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012/compile-registration-check.log",
+    "log_sha256": "970678ab38456646cea03abae340cbf6f43bc96275bfa0bcece5c8cbe7e7954f",
+    "observed_status": "CURRENT",
+    "qualification_refresh_mode": "preserved_published_evidence",
+    "recall_record_count": 838
+  },
+  "outcome": {
+    "gaussian_acquisition_pass_endpoint_fail": true,
+    "new_clock_status": "PASS",
+    "new_failures": [
+      "ring16_acquisition"
+    ],
+    "new_ordinary_passes": 5,
+    "ordinary_required": 6,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false,
+    "word_acquisition_and_endpoint_pass": true
+  },
+  "preserved_published_record_count": 513,
+  "preserved_snapshot_sha256": {
+    "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+    "reports/forge/leaderboards/adaptation.md": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+    "reports/forge/leaderboards/clockfree_continuous.md": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+    "reports/forge/leaderboards/formulation_comparison.md": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+    "reports/forge/leaderboards/host_profile_transfer.md": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+    "reports/forge/leaderboards/quality_coverage.md": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+    "reports/forge/technique-inventory.json": "711bfdcdf50b177614f5b242361c6798ea6ac3ba5e28c7df6915f5477955d034",
+    "reports/forge/technique-inventory.md": "6b65db36141a8dc19a58c19dc43f6c016346bc50732c354982ae4a0d8114038d"
+  },
+  "qualification_input": false,
+  "reporting_correction": {
+    "acquisition_gate_status": "PASS",
+    "corrected_endpoint_ks": 0.0696042948712019,
+    "endpoint_ks_bound": 0.05,
+    "original_readout_blob": "57ff977d51e1c52c06e2d32d480f8cc36fbcd38f",
+    "original_readout_commit": "517257ff3879516ae2da64009c375ffffe9b001a",
+    "scope": "Gaussian endpoint sentence only; original acquisition grade/metrics/certificates unchanged"
+  },
+  "reproduction_scope": "Use the frozen execution commit for exact registered inputs. The subsequent Gaussian endpoint prose correction retains its original commit/blob; no task grade, metric, certificate or scientific source is changed.",
+  "runtime_fingerprint": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Closed native score-law comparison; original grades retained, no qualification/adoption",
+  "software_test_scope": "288 workflow guards and 35 tier-report checks passed before execution; frozen reproduction and scientific sources unchanged for readout.",
+  "stopping": "Seven new runs complete; reject this closed single-field contrast. No automatic grid, retry, seed, task alteration, longer budget, Tier 2 or default change.",
+  "tier_report_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/tier-report-tests.log",
+    "log_sha256": "4551ddeb91e83ee099a9cfc900d0d6d0ca2fc91d59f0b1e2b3a0045f798fad63",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012/workflow-guards.log",
+    "log_sha256": "0cc6bd86a46efddedd9a69a73be9d90d882569689ed0fee67c5d0dd3b569e9c7",
+    "passed": 288
+  }
+}

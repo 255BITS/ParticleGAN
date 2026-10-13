@@ -1,0 +1,269 @@
+{
+  "absolute_score_anchoring": {
+    "interpretation": "A distinct restoring curvature is present under non_saturating; this does not establish a harmful score-offset drift or a future density repair.",
+    "non_saturating_center_fixture_common_shift_curvature": 0.4980013533690826,
+    "non_saturating_center_fixture_common_shift_gradient": 0.02766689775855591,
+    "paired_common_shift_curvature": 0.0,
+    "paired_common_shift_gradient": 0.0,
+    "saved_critic_output_bias_first_second_and_max_second_moments_all_zero": true
+  },
+  "all_center_pair_generator_weights": {
+    "max": 0.602218722328274,
+    "mean": 0.507976562966481,
+    "min": 0.4147710472191102,
+    "population_std": 0.03971719277222011
+  },
+  "analytic_critic_input_gradient_norm": {
+    "max": 0.5871916605193132,
+    "mean": 0.1872530165365731,
+    "min": 0.008355394103300957,
+    "population_std": 0.09284835471017672
+  },
+  "analytic_derivative_finite_difference_max_errors": [
+    1.4622393851304594e-09,
+    1.979095193282987e-09
+  ],
+  "attempt_id": "6403eb2c98224c1f8b788c1d26d5c1d7",
+  "candidate_id": "r1r2-role-ams-m110-v1",
+  "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+  "checkpoint_sha256": "1660f528c4fbf8de4c7ced49517a6a0bcff8491d82182313cb4558537bf5d257",
+  "complete_state_sha256": "cd44e1cf1ebc7bc637f5110c9fd8886edf2dfb473ede628c1c280be74886d2b7",
+  "decision": "reject_endpoint_generator_starvation_repair; one_native_non_saturating_critic_anchoring_contrast_is_defensible_at_low_confidence",
+  "density_audit_sha256": "1cf10ea8424f14595c39c76b1c8273d5c1c02a00eea2e81180882663f086666f",
+  "execution_commit": "2b0ad9ec7c5b2c1e91ab0d70751da0b7e36a7b42",
+  "fixture": "All 16 declared target centers, uniformly averaged for paired weights; no sampled target data.",
+  "generator_weights": {
+    "least_squares": {
+      "input_force_shape_proxy": {
+        "mean_radial_variance_drift": -0.0010440310576295974,
+        "mean_tangent_variance_drift": -0.05517343351979822,
+        "radial_expanding_components": 4,
+        "radial_variance_drift": [
+          -0.002043950905576789,
+          0.00011119250520647702,
+          -0.0023110729499110356,
+          -0.004503649346482767,
+          -0.0012326794688378847,
+          -0.0020577084946462334,
+          -0.0020212826143707835,
+          -0.0031940037178254917,
+          -0.0012343151882545818,
+          -0.0004734367571731889,
+          -0.0014680209897266958,
+          0.004687641364420907,
+          0.000915079242555565,
+          1.5357943974467633e-05,
+          -0.0006829017215773967,
+          -0.0012107458238481258
+        ],
+        "tangent_contracting_components": 16,
+        "tangent_variance_drift": [
+          -0.050675734050185405,
+          -0.04008847262280577,
+          -0.03911909274261763,
+          -0.030304842349442855,
+          -0.02947073645917185,
+          -0.08515122144142057,
+          -0.051574137624349536,
+          -0.048847477560116384,
+          -0.07334771857760129,
+          -0.083681134552704,
+          -0.08114428126874088,
+          -0.10329680238161791,
+          -0.05288916304559491,
+          -0.0375425584510918,
+          -0.033247093943245876,
+          -0.04239446924606484
+        ]
+      },
+      "max": 1.1602544960664682,
+      "mean": 0.9604830210811534,
+      "min": 0.742669469682633,
+      "negative_count": 0,
+      "population_std": 0.11449504927140083
+    },
+    "non_saturating": {
+      "input_force_shape_proxy": {
+        "mean_radial_variance_drift": -0.0005527236357038962,
+        "mean_tangent_variance_drift": -0.027901791993482247,
+        "radial_expanding_components": 4,
+        "radial_variance_drift": [
+          -0.0011548287589322394,
+          5.6404335970677085e-05,
+          -0.0013242786881408628,
+          -0.002297268218697708,
+          -0.0006148273004588465,
+          -0.0011003842892358213,
+          -0.0009763122283035688,
+          -0.001524958938319226,
+          -0.0005987260766184853,
+          -0.00023875337684723345,
+          -0.0007570101725843847,
+          0.002281795893911705,
+          0.00043549425495418003,
+          4.2959903001356074e-06,
+          -0.00035559270600060325,
+          -0.0006786278922600583
+        ],
+        "tangent_contracting_components": 16,
+        "tangent_variance_drift": [
+          -0.02789936868565017,
+          -0.022530421223294704,
+          -0.02215003066843988,
+          -0.015501162372632753,
+          -0.014216324014076473,
+          -0.04378947284656977,
+          -0.024663516210197953,
+          -0.023118478012746115,
+          -0.035642061614960495,
+          -0.0410642982625037,
+          -0.040280815519212504,
+          -0.05021422303056676,
+          -0.02527404599340953,
+          -0.0190422639479784,
+          -0.01749320682913342,
+          -0.023548982664343295
+        ]
+      },
+      "max": 0.5399781024670361,
+      "mean": 0.4901658556809424,
+      "min": 0.4360200358291833,
+      "negative_count": 0,
+      "population_std": 0.02854144324207696
+    },
+    "paired_uniform_center_fixture": {
+      "input_force_shape_proxy": {
+        "mean_radial_variance_drift": -0.0005735538353048932,
+        "mean_tangent_variance_drift": -0.028906194515920604,
+        "radial_expanding_components": 4,
+        "radial_variance_drift": [
+          -0.0012008143997800336,
+          5.846333141193483e-05,
+          -0.0013775178812989893,
+          -0.0023809810128853116,
+          -0.0006367197169689843,
+          -0.0011423599778021469,
+          -0.0010097134822169918,
+          -0.001576343663365785,
+          -0.0006193203513940592,
+          -0.0002473529593114651,
+          -0.0007849365109961441,
+          0.002360614062320536,
+          0.0004501016277844368,
+          4.320074348132259e-06,
+          -0.0003688223148715385,
+          -0.0007054781898518804
+        ],
+        "tangent_contracting_components": 16,
+        "tangent_variance_drift": [
+          -0.02898865675560743,
+          -0.023424011795101764,
+          -0.023033086867303414,
+          -0.016067627129047624,
+          -0.014701898544374833,
+          -0.04539743200382149,
+          -0.025496297881923476,
+          -0.02388814076853226,
+          -0.03687056210937956,
+          -0.04249685357504433,
+          -0.041705131208250014,
+          -0.05194582764277028,
+          -0.02612660980550739,
+          -0.0197319999763464,
+          -0.01815034397219565,
+          -0.02447463221952374
+        ]
+      },
+      "max": 0.5575254203427553,
+      "mean": 0.507976562966481,
+      "min": 0.453837975671461,
+      "negative_count": 0,
+      "population_std": 0.028479189751220574
+    }
+  },
+  "historical_proof_limit": "No saved contemporaneous training scores/real-fake pairings or instantaneous G/D gradients. Endpoint EMA moments average history. Input forces exclude the generator Jacobian, Adam preconditioning and later critic refitting; they do not predict trained parameter updates or qualification.",
+  "new_draws": 0,
+  "new_grades": 0,
+  "new_updates": 0,
+  "non_saturating_paired_fixture_weight_cosine": 0.9999976683067882,
+  "non_saturating_to_paired_fixture_weight_ratio": {
+    "max": 0.968526425458894,
+    "mean": 0.9648179573578616,
+    "min": 0.960739425086859,
+    "population_std": 0.0021400175711197528
+  },
+  "numerical_diagnostic_dtype": "float64 using exact saved float32 tensors converted without initialization",
+  "observation_step": 1600,
+  "proposed_recipe_delta": {
+    "after": "non_saturating",
+    "before": "relativistic",
+    "complete_recipe_changed_fields": [
+      "loss"
+    ],
+    "execution": "prospective_shared_initialization_not_checkpoint_continuation",
+    "field": "loss"
+  },
+  "publication_sha256": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+  "reproduction_source_sha256": "9e39de0c1b045962370383d224c47ad1f60e0e5157f083f78ba794418e59d1d0",
+  "rng_states_unchanged": true,
+  "sample_count": 4096,
+  "saved_critic_output_bias": 0.01259614061564207,
+  "saved_fake_scores": {
+    "max": 0.257330530317367,
+    "mean": 0.039516978918846576,
+    "min": -0.1602544960664683,
+    "population_std": 0.11449504927140082
+  },
+  "saved_first_moments": [
+    {
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "instantaneous_gradient_recoverable": false,
+      "norm": 0.033327609656697454,
+      "role": "G"
+    },
+    {
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "instantaneous_gradient_recoverable": true,
+      "norm": 0.01615386259482764,
+      "role": "prior"
+    },
+    {
+      "betas": [
+        0.5,
+        0.99
+      ],
+      "instantaneous_gradient_recoverable": false,
+      "norm": 0.07161638722251679,
+      "role": "D"
+    }
+  ],
+  "saved_panels_sha256": "0fed70eab2b8d4d98a33defff2114e219233ec6dda1ce6519c88a8358e3facb4",
+  "schema_version": 1,
+  "scope": "saved_endpoint_score_law_diagnosis_not_training_or_qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_sha256": {
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "a962cececa641f39d61ae067d38c3c979af73173be10dee3f27feb66fc02e492",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "090abe6d153ab10cf0e0102e6d2fdcf7f40b9dd63f3b9191e640d7f6a7e2446c",
+    "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "experiments/forge/clockfree.py": "d313b79537a392e5242b16efffd3f37047ad1b411928307c4a88ba2c1348f65c",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+    "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+  },
+  "target_center_fixture_scores": {
+    "max": 0.2544639087462093,
+    "mean": 0.07161582920554359,
+    "min": -0.086945938079417,
+    "population_std": 0.1113551729845442
+  }
+}

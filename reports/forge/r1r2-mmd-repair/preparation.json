@@ -1,0 +1,198 @@
+{
+  "aggregate238_charge_index_sha256": "21f77389c07b000aac495e5f5c5809db0aa02db91eb7d79a875bdc1d94fa35ef",
+  "budget_audit_sha256": "6b967ce20c84be235fa5a5bcbf0dbb33e25afe298548562433cb314292f98a26",
+  "budget_change_authorized": false,
+  "candidates": {
+    "mmd_u": {
+      "candidate": "r1r2-non-saturating-output-mmd-u-v1",
+      "candidate_revision": "e3261895697dc8dc230e8c357c4d89455367ca66a883314055f73d8b60c04f08",
+      "draft_blockers": [
+        "study is draft: review actual bindings, prior evidence, finite scope and numerical signatures, then set status=ready"
+      ],
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "afa2179f4101aa8c0e1b102f13a893d202bf35b8c0f3374e84a43e3285cef17d",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "3bd74636dbbb374cae4f94378f3b076cd7cbe19fe85dd7c5d9bc04765ff8d06b",
+        "clockfree_audit_measurement_v1": "4dae623364d3b8927a13171a2f1813b91f7e93dc5bbfe37ba21260b083d7a31f",
+        "five_word_joint_smoke": "12e47160ecfabc4eacce2acb85c35d82365d89e28dbb90ede72262e5ef36560b",
+        "gaussian1d_smoke": "84deeec42676879b7ab669d7243e0b27a55809e3e45f3c14b60c82c7e00dc520",
+        "ring16_acquisition": "830c742c3ed70385fc42760bd6b7d18c7bccea46d4b60d3bd7ed832e1272008a",
+        "two_pole": "96fc10c834961b4e58a15593a28a6e2eb70a8e97084b3cf29616de4c25d33568",
+        "unused_token_hold": "320d97077be2a5de2ee0ea519ca84a5ce9561712b574b1308afe8d57324a9b42"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "81601abad49c9b401df8ca1adb44f9e7252ab73ec52393d78318446031636f34",
+      "draft_blockers": [
+        "study is draft: review actual bindings, prior evidence, finite scope and numerical signatures, then set status=ready"
+      ],
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "3ce7481040eb1b9ac0d25ab738420b2b508e5993a14cca226c96d93276024df2",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "4e40c0e10e5b7641f4babc309e3038ddb36f1c63b86249c733b0367720fdb7af",
+        "clockfree_audit_measurement_v1": "bffca66b2392e877db09e21ba0294de88b02811b457c598872916f8360a3e9e5",
+        "five_word_joint_smoke": "86898c4abe38fc11e8caf957376d4c2ed0d4325af3b91390314945850c1decbb",
+        "gaussian1d_smoke": "76603e3b2d6ab8a65ad64f0923a9051c627a02a454298c0d5bb62f1bc4199449",
+        "ring16_acquisition": "91fa04802b99eb7cda5f843fa2c3eef683e4d6b9771f0a3864ef192a514bd2f7",
+        "two_pole": "6b4252b74e25f196cce5fa94fc3e2efc2186be6976b17beed63e12332e3e8444",
+        "unused_token_hold": "7938a98c56b2b7405dc5aef73109c7963fe6dba01440e11d92875c2024afe5da"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "current_aggregate_cap_seconds": 8000,
+  "global_and_host_delta": {
+    "ae_gan_hold": [
+      "output_mmd_weight"
+    ],
+    "clockfree_audit_measurement_v1": [
+      "output_mmd_weight"
+    ],
+    "five_word_joint_smoke": [
+      "output_mmd_weight"
+    ],
+    "gaussian1d_smoke": [
+      "output_mmd_weight"
+    ],
+    "global": [
+      "output_mmd_weight"
+    ],
+    "ring16_acquisition": [
+      "output_mmd_weight"
+    ],
+    "two_pole": [
+      "output_mmd_weight"
+    ],
+    "unused_token_hold": [
+      "output_mmd_weight"
+    ]
+  },
+  "historical_paid_seconds": 7168.248061007995,
+  "manifest_sha256": "1193830ddc81e8b241633d7c0abbfbb8a1b9fdfe5287deebfe87727d5ea28e95",
+  "models_constructed": 0,
+  "new_optimizer_updates": 0,
+  "new_sampling_draws": 0,
+  "original_host_pins": {
+    "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "a962cececa641f39d61ae067d38c3c979af73173be10dee3f27feb66fc02e492",
+    "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
+    "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+    "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+    "configs/forge/tasks/clockfree_audit.json": "70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619",
+    "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a",
+    "experiments/forge/word_adapter.py": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+    "experiments/forge/word_tasks.py": "9b0e6c6cc16a1b4bd51dfef83e86b6a3d5d18999fc114e8b45e2cf75843f6878",
+    "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+    "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+    "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e"
+  },
+  "paid_admission_authorized": false,
+  "proposed_aggregate_cap_seconds": 12209,
+  "proposed_full_comparison_seconds": 5040,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "queue_claims": 0,
+  "queue_sha256": "95e0f10aeb4f1835b932a3302de6837c9334c06eaed0c727bb9acfe1b620abe7",
+  "schema_version": 1,
+  "scientific_success": false,
+  "scope": "software_preparation_only",
+  "source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "source_file_count": 1218,
+  "source_files_sha256": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "source_snapshots_created": 0,
+  "status": "PASS",
+  "unchanged_closed_declarations": {
+    "configs/forge/ideas/r1r2-non-saturating-ams-m110-v1.json": "1f55db50347ed7adc5ebe54a9d38fdaa8de42b99eed091be793a086790f4030d",
+    "configs/forge/ideas/r1r2-non-saturating-energy-u-frozen-prior-v1.json": "9266d5c37b18df9342ef3f1fdd67527d5e9b7681d4008ca055ea11c390e4ff9c",
+    "configs/forge/ideas/r1r2-non-saturating-energy-u-v1.json": "099b73c32aaab46a56f0db60793ea4332815119717feae8793b8ab4d90decf6b",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-energy-u-cached-prior-control-v1-study.json": "00aaec993182826cc869aca96f641c5f00e2df051538cd052dec26d6bc689720",
+    "configs/forge/studies/r1r2-energy-u-fresh-control-v1-study.json": "b4c5e6b64d6e7d1a7e688e7e5fa26b7572fe54f83fbc36ec74b9e4409a271f8b",
+    "configs/forge/studies/r1r2-non-saturating-energy-u-frozen-prior-v1-study.json": "e7838eb277333151eeb7313dfbd38677153a4c1b6875b0ff3a105c83ba0243e4",
+    "configs/forge/studies/r1r2-non-saturating-energy-u-v1-study.json": "bc32fe2938e15da553c0dec95c289fd55ec7abb1cef5f609db707039719a2588",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-energy-distance-repair/API.md": "2f8a9032f28431a60ebdf284a7c9e4010ea7e67abaf97436c4ef311618c0e30f",
+    "reports/forge/r1r2-energy-distance-repair/PLAN.md": "7317e73548b621caf877f8d95aec180ab220b1ed34c99a0802e5a503cb12870d",
+    "reports/forge/r1r2-energy-distance-repair/README.md": "679ef4b9370fa9c5df16d798df024e693c2ad5a3833ad2d1fde5be8130e64092",
+    "reports/forge/r1r2-energy-distance-repair/audit_collection.py": "c94f9d3e78e74c99a5a51c1facde1b0a998b2a56593fb2a333480a2932ecbdb2",
+    "reports/forge/r1r2-energy-distance-repair/collection-audit.json": "10c95598b5d1acbeeb61fdf7844e3f7d12529867cd4288e883c346574030f5e8",
+    "reports/forge/r1r2-energy-distance-repair/density-audit.json": "e5f17a3bcd50cc8c05e2551dc9d634024b23bd3e9f84d4fc6498a3308d8ea31f",
+    "reports/forge/r1r2-energy-distance-repair/density-readout.md": "68fedee398d571eb6a2f06f0da96107a0008ae863ec753d6c6d0cb1d67a31e04",
+    "reports/forge/r1r2-energy-distance-repair/density_audit.py": "6d631030496633f960ecaa3572fd34c465e0adb7e93117c0ac1c5ac3662b534b",
+    "reports/forge/r1r2-energy-distance-repair/manifest.json": "b9147d2fe0a5a249a10ad85c582449656c75f551b6aa55c9a9a2911e10e97a9e",
+    "reports/forge/r1r2-energy-distance-repair/publication/results.json": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+    "reports/forge/r1r2-energy-distance-repair/registration.json": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+    "reports/forge/r1r2-energy-distance-repair/research/README.md": "1180e9400361ce8f8e57a96afaa75dbeeb78728708c70ea675a127a1e302236e",
+    "reports/forge/r1r2-energy-distance-repair/research/diagnosis.json": "996a0ca07d27c51b4b24ae5a2c44d567a0e85fa6a83fb2aff1e2e3dd4d69d363",
+    "reports/forge/r1r2-energy-distance-repair/research/saved_shape.py": "55eb8f71e7af4f79f2e2816ae263295613569922eb99b308501a8ab68c6c05e1",
+    "reports/forge/r1r2-energy-distance-repair/software-validation.json": "8fb2573fc7834747d3637060287b813023c90d3584d00961ee1455dceb652a8d",
+    "reports/forge/r1r2-energy-distance-repair/software_audit_probe.py": "460652e77401f92a17670cda4b87ebfd452feb47e2e9dc73661fe4ef0ae306e4",
+    "reports/forge/r1r2-energy-distance-repair/test_energy_distance_workflow.py": "73aa178ff8c1da5b137b9d35e3ca56affac6e311074d728c79df07a45d319f0e",
+    "reports/forge/r1r2-energy-distance-repair/workflow.py": "991e573c137327b8dd00c129f8ac916dff1f95f790171ea78bc77ee94b189b96",
+    "reports/forge/r1r2-energy-prior-freeze-repair/PLAN.md": "058a421201dd67ee9234ace09524607b986a66380cbc3467d2d641f4de7a4e18",
+    "reports/forge/r1r2-energy-prior-freeze-repair/audit_collection.py": "afbfd70d5e1bcb9f6a3389ae38ca40aef182196a0b050512dc8f6ac812fc5556",
+    "reports/forge/r1r2-energy-prior-freeze-repair/density_audit.py": "a1cc1da716782f136d99262af11205fa64b435aa9f3fd4b2fdcf8be0d34e81b1",
+    "reports/forge/r1r2-energy-prior-freeze-repair/manifest.json": "d1e21d9b82953bcaaa5073e4e89b3baac9fc8b758d4db497964ac5611ac867c8",
+    "reports/forge/r1r2-energy-prior-freeze-repair/preflight-review.json": "b9f08bf4d8916b6780ff7553237b29ceb4c90988c25903ba7f298fcedc1e5738",
+    "reports/forge/r1r2-energy-prior-freeze-repair/readiness-validation.json": "9a2980805fd7599a17fb9ac5abfaa86e40ccfdaaf8ebb63ce08663e0f58ad03f",
+    "reports/forge/r1r2-energy-prior-freeze-repair/software-validation.json": "ba0452ca75137de0864fe6b7bec495842c37ab5e721b5975a6609c51d7d8a3fe",
+    "reports/forge/r1r2-energy-prior-freeze-repair/software_audit_probe.py": "fd801b2cbac96bfd1b211ba211b4937f32d5793db0e635b2a2eb0fd94e857452",
+    "reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_bindings.py": "0c7cc6b575ec8bbd5593218256464b0ba03cad30ea37ccc409729b14e20091ec",
+    "reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_workflow.py": "9bf9f0e8d81e83710ecba24f874bbcf613c4d325f7c924a6ee7165d3b58a92a6",
+    "reports/forge/r1r2-energy-prior-freeze-repair/workflow.py": "1e54e19d0171bebc5d25d48969be20231ff18483fe34487bbe9d11bd2f24b584",
+    "reports/forge/r1r2-score-law-repair/publication/results.json": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066",
+    "reports/forge/r1r2-weak-penalty-repair/README.md": "52511024040637db423e857b63ccea896dbeb27233b591e25a8e848c4340a4d6",
+    "reports/forge/r1r2-weak-penalty-repair/collection-audit.json": "f252d35de8ca405fa34f6017db4adb7786949099cd61c2812d8bf3a9fbc5ef33",
+    "reports/forge/r1r2-weak-penalty-repair/density-audit.json": "2f5fb3e0a1ee47163f558fad9ce4db251acde2320af65f912f1b8339b05c8601",
+    "reports/forge/r1r2-weak-penalty-repair/publication/results.json": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-api-plan.md": "f7afcca218d8a6066d4f2b2990b4780ddf0869cdf4c9d7ab34df7bef059a3336",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/README.md": "6e13586deafa571f966f55b836dd9be999bcc350d4c5a7f5de8e105488414de1",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/diagnosis.json": "a0b6f6c5b74d826a4cc2f478ceb988466ceb9e057795bf8a8e6528a6101aaec5",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/probe.py": "319af6fedb2471bdf18ff3ea2e4c2de27ebe44932de63270dfcbd48797f4e754",
+    "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md": "4d36cbe7b3c9f643025034dd8b40b6a5d1b845ae13a0088932d93778cf8a1c9b",
+    "tests/conftest.py": "0ad701c939839a02c282d4998ddcdf47c22b97cdda6d3515d50f3c90e9265241",
+    "tests/test_energy_bindings.py": "137eea61c670fd6bda85d7c44c65d69b893d55fb06ff8c7d33955314e0a0a13b",
+    "tests/test_energy_distance.py": "4aaa7de91fe82a7be9957b7bb9ecfc132728295abed32925383f6c07fb069090"
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012",
+  "candidates": {
+    "adam": {
+      "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "card": {
+        "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+        "role": "adam",
+        "study": "r1r2-role-cached-zero-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "af3d261e16c8d2ef88050d2731687ac679280f65a7810d64c14869f42edf1e4b",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+        "clockfree_audit_measurement_v1": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+        "five_word_joint_smoke": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+        "gaussian1d_smoke": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+        "ring16_acquisition": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+        "two_pole": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+        "unused_token_hold": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "ams_m110": {
+      "candidate": "r1r2-role-ams-m110-v1",
+      "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+      "card": {
+        "candidate": "r1r2-role-ams-m110-v1",
+        "role": "ams_m110",
+        "study": "r1r2-role-ams-m110-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "03ee207ac9032192ef4b0cbf24d5584ef55359014768b56570444891b7dd118f",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "7f1123d2e3b866679ffee57a9c1989c317d49cfc05b5ad48bc99de7285d1dd8c",
+        "clockfree_audit_measurement_v1": "49e469e662efd6015e96f7e7c7e43cce24f85f58072f3d22c281e284e14b9e0c",
+        "five_word_joint_smoke": "1f614e9b930791e3585b43e4a21ada0ff0c77dab813bcbf96dd681f6ec463f1d",
+        "gaussian1d_smoke": "d3805319eecfdbd7d5b605fad41ab600f78fdcb06a0e2f05a940853e67c1d1e4",
+        "ring16_acquisition": "c79176c9df6666e2b57622c1a69125349e25fe34f5406b3372293578a36dd359",
+        "two_pole": "ab788b0442f4601a3a82454ff214aeed5b93e36328e12de1dc4e3db4970fd1f9",
+        "unused_token_hold": "74b546317a59d3615d40e4de73862d7490621695c661d61b572184463adf7bc7"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "baseline": {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "card": {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "global_transport": {
+      "candidate": "r1r2-global-transport-v1",
+      "candidate_revision": "632093965dae886541fe415257f0c19218df51021eb75b779ad7f44996a0c3e4",
+      "card": {
+        "candidate": "r1r2-global-transport-v1",
+        "role": "global_transport",
+        "study": "r1r2-global-transport-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "0bd1cce8854c69297a24110a421ec5e164ee0fefd5e1305a4f73734b01324de9",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "a235cdf55a1a8ab7fd84e4f84a0d454c4412f6c60bf799c60c897e13bd8a120c",
+        "clockfree_audit_measurement_v1": "58532d370228950d3cd5a6c8a02df6e3719a204cbdd14489a4535fc444772a66",
+        "five_word_joint_smoke": "4fb39335439b682349536706efcf16c61ec12eb51e5d498702489a9f4fc7d03b",
+        "gaussian1d_smoke": "162a69736156518b1f79456116c72ceffca3d2aaa02e6e2ba6a174869f59032a",
+        "ring16_acquisition": "ea4e167134306fa899e039b82662720012d197430890fbf89d3e205f15c1f31b",
+        "two_pole": "b522209f71a04747116a4d212f7ccda1d732a41e8ecaf8d53c1a3b71504f09b2",
+        "unused_token_hold": "01be7ba741feec56ea493f709040333ade5d44fbdae5db34f1e88e8d7db3a4e2"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "m110": {
+      "candidate": "r1r2-role-m110-v1",
+      "candidate_revision": "555692af38701e21f5fce7fa5b976702761ecea51f4a525ed8ab308b20439b2a",
+      "card": {
+        "candidate": "r1r2-role-m110-v1",
+        "role": "m110",
+        "study": "r1r2-role-m110-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "4b72c79dd742db37656242cee1de0fb0d8a6977762b7a1f4967c063c49ba5a44",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "7f13ab9dfec7c0313a55a5ab4c309cc9919d5ded3dce24ef71857ee1a2b9b6fd",
+        "clockfree_audit_measurement_v1": "a07a0cf8947969ab62cce9684040ffa39d11a4d9f5c903d9fbdf8a20fac23c65",
+        "five_word_joint_smoke": "feca7f6f180955184b49a92f0377c4c5d6b4a7f33f06a680e4f689143d6c5360",
+        "gaussian1d_smoke": "5b555b6d707c8fc8bf5ec6eb19bb16f49cbdd70d23ed86554f795eab638a6bf2",
+        "ring16_acquisition": "ad6834740d3c613a6dd8be08416ded652cbe2c4168c8446c46ed4e31bb074a78",
+        "two_pole": "bbe94a50d0a32f1a999b5f5109fd8884b9a11552d9420bc18e352beb505d6c32",
+        "unused_token_hold": "d33cf9c3c06e6879e9d06e21b972032761657733239ef7d143dc7846888db920"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/configurations/r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9.json": "f6eb97e3fd889888b857a77bf00daf8cecc77c567e97b86b92d9c7d2fa9b08d6",
+    "configs/forge/ideas/r1r2-global-transport-v1.json": "5eb58823b8b38ddf5cef03daa3f86099d433820c04d99f95edbc2fddf1d1ab70",
+    "configs/forge/ideas/r1r2-role-ams-m110-v1.json": "b9668118b75289c016639bcf7973ff093a6bfb9ce7ae4c1922660c2c088fcc12",
+    "configs/forge/ideas/r1r2-role-m110-v1.json": "8678a0ce76c1483cfb262c67475b66198bf84762e625420555bbd415a3e7f005",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-global-transport-v1-study.json": "afff07fdc40b649becd2c5eb0a35e5a60c2116f304616514139b34fed0a8fddb",
+    "configs/forge/studies/r1r2-role-ams-m110-v1-study.json": "61058d9d001b31af05353e735a262d197a473d2753dd7efdef5c53dfca78ff29",
+    "configs/forge/studies/r1r2-role-cached-zero-v1-study.json": "55d2cda41095f8fe2ba49a4efe1175981b4c6563d994daa1ff52364480147f1b",
+    "configs/forge/studies/r1r2-role-m110-v1-study.json": "ea053c5968d3aea7683f758a0dea03cf1fec221ba2678aea52c235fdbc14a199",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-direction-floor-repair/transport/global-sliced-review.md": "bfeb091e5f426700f763f6f3da4273f20ce3eb53878dc46158e1609691164134",
+    "reports/forge/r1r2-direction-floor-repair/transport/global-word-diagnostic.json": "d0cc6772b956c09d3a310486cb43d9af3c428b30ed39e458678a8d24808f7144",
+    "reports/forge/r1r2-five-track-repair/publication/results.json": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+    "reports/forge/r1r2-objective-memory-repair/PLAN.md": "1b49c73a910d17cd2eedededf1d29bd1721e6066c2f958ccbb4e97497daa7d4f",
+    "reports/forge/r1r2-objective-memory-repair/manifest.json": "74df8379d19bfcb1b5af6cc5639d8a389e462c8eeba5965fb9529d9302c62725",
+    "reports/forge/r1r2-objective-memory-repair/workflow.py": "bac0e46dfcc036204e84027c3ab141402662898421412b2b85012a8474bb7f76",
+    "reports/forge/r1r2-role-repair/publication/results.json": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "reports/forge/r1r2-role-repair/registration.json": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794",
+    "reports/forge/r1r2-spectral-repair/README.md": "be3bf1d094d2885f238770956beff02c88bfeebd2f32bdac6934834938e47302",
+    "reports/forge/r1r2-spectral-repair/collection-audit.json": "621c25339ce82aedb8f80facf0cb985a4692125bc5228e1808e7f6823077c383",
+    "reports/forge/r1r2-spectral-repair/density-audit.json": "247478eb34ea9e2ab9c09a649818fe51839a110c2e0873143714767af18dd085",
+    "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.json": "28f27a8094cf0a7a8c4f8f101b098bec37c6cb95cc2733f0bd1f7e152015e713",
+    "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.md": "6c174feec894f5151b1d7daadf1a7fd2149ddaae8765568ab9dda5328a853e0c",
+    "reports/forge/r1r2-spectral-repair/publication/results.json": "72ff8796f9a440e12f722bd28230cebc3f204810d31488cf16adababe27970c7",
+    "reports/forge/r1r2-spectral-repair/registration.json": "df0c0cbc829a5c5439981ca90dde97eb6075b68b9965d037cee8fed775b02e1a",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/registration.json": "14fa62ab85d1318cbdc4d7d03b01028ea9b0218ec8e76a6d9c81cc2a2ba593f8",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066"
+  },
+  "manifest": {
+    "baseline_role": "baseline",
+    "campaign": {
+      "budget_seconds": 12600,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-objective-memory-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      {
+        "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+        "role": "adam",
+        "study": "r1r2-role-cached-zero-v1-study"
+      },
+      {
+        "candidate": "r1r2-role-m110-v1",
+        "role": "m110",
+        "study": "r1r2-role-m110-v1-study"
+      },
+      {
+        "candidate": "r1r2-global-transport-v1",
+        "role": "global_transport",
+        "study": "r1r2-global-transport-v1-study"
+      },
+      {
+        "candidate": "r1r2-role-ams-m110-v1",
+        "role": "ams_m110",
+        "study": "r1r2-role-ams-m110-v1-study"
+      }
+    ],
+    "id": "r1r2-objective-memory-repair-v1",
+    "max_candidates": 5,
+    "paid_cap_seconds": 8000,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "supporting_inputs": [
+      "reports/forge/r1r2-objective-memory-repair/workflow.py",
+      "reports/forge/r1r2-objective-memory-repair/PLAN.md",
+      "reports/forge/r1r2-direction-floor-repair/transport/global-sliced-review.md",
+      "reports/forge/r1r2-direction-floor-repair/transport/global-word-diagnostic.json",
+      "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.md",
+      "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.json",
+      "reports/forge/r1r2-spectral-repair/README.md",
+      "reports/forge/r1r2-spectral-repair/registration.json",
+      "reports/forge/r1r2-spectral-repair/publication/results.json",
+      "reports/forge/r1r2-spectral-repair/collection-audit.json",
+      "reports/forge/r1r2-spectral-repair/density-audit.json",
+      "reports/forge/r1r2-role-repair/registration.json",
+      "reports/forge/r1r2-tier1-search/registration.json"
+    ]
+  },
+  "manifest_sha256": "74df8379d19bfcb1b5af6cc5639d8a389e462c8eeba5965fb9529d9302c62725",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 12600,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

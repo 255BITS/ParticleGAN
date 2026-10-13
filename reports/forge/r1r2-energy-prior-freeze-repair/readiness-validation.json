@@ -1,0 +1,60 @@
+{
+  "actual_software_updates": 14,
+  "checks": {
+    "CPU_public_integration": {
+      "actual_software_updates_all_branches": 14,
+      "full_CUDA_word_ladder_unchanged": true,
+      "log_sha256": "da6905f6e0a134a88b14dfef3635be34df86e9f32657261f7a6c54126e8e028a",
+      "original_hold_status": "INCOMPLETE",
+      "passed": 8,
+      "receipt": "reports/forge/r1r2-energy-prior-freeze-repair/software-validation.json",
+      "receipt_sha256": "ba0452ca75137de0864fe6b7bec495842c37ab5e721b5975a6609c51d7d8a3fe",
+      "rerun_by_reviewer": false,
+      "seconds": 3.03,
+      "word_prefix_and_continuation": "1 actual prefix +2 actual resumed +2 actual reference updates; synthetic834/836 counters and producer metrics"
+    },
+    "actual_readonly_resolution": {
+      "cached_cases": 7,
+      "new_keys": 7,
+      "public_bindings": 8,
+      "source_files": 1216,
+      "status": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/independent-readiness-final.stdout.log",
+      "stdout_sha256": "c6725def0771fab16b34a3066519c4a8d46783c451a6c7c38216c805e4836b02"
+    },
+    "auditor_pure_fixtures": {
+      "archived_grades_used": 0,
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/r1r2-energy-prior-freeze-repair/software_audit_probe.py",
+      "draws_updates_constructors": 0,
+      "passed": 107,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/auditor-software-probe-final.stdout.log",
+      "stdout_sha256": "a9a0ee69a7deb983643bca88e5e031a94b1060d50a9f7322fbd7119f975a6953"
+    },
+    "workflow_guards": {
+      "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/test-workflow.log",
+      "log_sha256": "4d354bbe07efc664608d3f4a3655b16d937bb8c83221cf4a1cc8402699511025",
+      "passed": 67,
+      "rerun_by_reviewer": false,
+      "seconds": 10.13,
+      "source": "reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_workflow.py"
+    }
+  },
+  "immutable_registration_review": "Required separately before paid admission.",
+  "manifest_change_after_review": "Only append this readiness receipt and the independent review receipt as frozen supporting inputs; actual immutable registration is independently reviewed before admission.",
+  "original_manifest_reviewed_sha256": "bdb84a2a0ed17a1831ff1fa264534749813ab7df89116f4d4233993024978122",
+  "paid_jobs_added": 0,
+  "qualification_input": false,
+  "quality_credit": false,
+  "review_receipt": "reports/forge/r1r2-energy-prior-freeze-repair/preflight-review.json",
+  "review_receipt_sha256": "b9f08bf4d8916b6780ff7553237b29ceb4c90988c25903ba7f298fcedc1e5738",
+  "schema_version": 1,
+  "scientific_success": null,
+  "scope": "declaration_and_software_readiness_only",
+  "software_fixture_receipt": "reports/forge/r1r2-energy-prior-freeze-repair/software-validation.json",
+  "software_fixture_receipt_sha256": "ba0452ca75137de0864fe6b7bec495842c37ab5e721b5975a6609c51d7d8a3fe",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files": 1216,
+  "status": "PASS"
+}

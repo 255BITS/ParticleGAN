@@ -75,6 +75,47 @@ def test_source_audit_keeps_unknown_extensions_and_periodic_releases_visible():
     assert len(audit["unexplained_clock_dependencies"]) == 2
 
 
+def _constant_adam_recipe(**overrides):
+    from particlegan import get_recipe
+    return get_recipe("bcap_adam", **{"critic_formulation": "k3p", "reg_arm": "a_r1r2", "betas": (0., .99),
+        "lr_schedule": "constant", "lr_floor": .1, "network_lr_floor": .1,
+        "input_noise_std": 0, "output_noise_std": 0, "d_guard_ratio": 0,
+        "reg_every": 1, **overrides}).to_dict()
+
+
+@pytest.mark.parametrize("schedule,rate,expected", [
+    ("constant", .96, False), ("exponential", 1., False),
+    ("exponential", .96, True), ("cosine", .96, True)])
+def test_source_audit_interprets_actual_lr_policy_before_unused_floor_fields(schedule, rate, expected):
+    recipe = _constant_adam_recipe(lr_schedule=schedule, lr_decay_rate=rate)
+    audit = source_audit(recipe, {})
+    assert bool(audit["unexplained_clock_dependencies"]) is expected
+    assert "particlegan/recipe_schedules.py" in audit["source_sha256"]
+    assert not source_audit(_constant_adam_recipe(
+        lr_schedule="cosine", lr_floor=1., network_lr_floor=None), {})["unexplained_clock_dependencies"]
+
+
+@pytest.mark.parametrize("overrides,expected", [
+    ({"beta2_end": .9}, True),
+    ({"beta2_end": .99}, False),
+    ({"beta2_end": .99, "d_betas": (0., .9)}, True),
+    ({"beta2_end": .99, "prior_betas": (0., .9)}, True),
+    ({"beta2_end": .99, "prior_betas": (0., .9), "prior_update": "frozen"}, False),
+    ({"reg_coeff_end": .1}, True),
+    ({"reg_coeff_end": 1.}, False),
+    ({"beta2_end": None, "reg_coeff_end": None}, False)])
+def test_source_audit_retains_only_changing_moment_or_penalty_schedules(overrides, expected):
+    dependencies = source_audit(_constant_adam_recipe(**overrides), {})["unexplained_clock_dependencies"]
+    assert bool(dependencies) is expected
+
+
+def test_source_audit_does_not_hide_lazy_penalty_that_turns_on_later():
+    dependencies = source_audit(_constant_adam_recipe(
+        reg_coeff=0., reg_coeff_end=1., reg_every=2), {})["unexplained_clock_dependencies"]
+    assert len(dependencies) == 2
+    assert any("periodic update counter" in value for value in dependencies)
+
+
 def test_clock_audit_recipe_cannot_hide_a_measured_delayed_guard(probe, tmp_path):
     from experiments.forge.artifacts import manifest_artifacts
     task, request = probe

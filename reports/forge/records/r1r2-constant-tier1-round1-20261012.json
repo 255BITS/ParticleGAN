@@ -1,0 +1,29 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "Remove LR, beta2 and penalty annealing; finite positive penalty/beta2 settings."
+  ],
+  "conclusion": "Constant policies repair external-clock dependence, but none passes the Ring16 density gate. Exact numerical outcomes, matched-input proofs, costs and training GIFs remain in the linked report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Test fixed global R1/R2 laws under unchanged Tier1 task conditions.",
+  "lifecycle": "concluded",
+  "mechanism_class": "schedule_removal",
+  "next_action": "Read the concluded whole-recipe comparison before any separately registered lower-rate hypothesis; preserve the original gates, learned prior and task budgets.",
+  "provenance": {
+    "report": "reports/forge/r1r2-tier1-search/round1-readout.md",
+    "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-constant-tier1-round1-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+    "sha256": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

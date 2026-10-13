@@ -1,0 +1,1748 @@
+{
+  "actual_parent_relative_deltas": {
+    "ae_gan_hold": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "clockfree_audit_measurement_v1": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "five_word_joint_smoke": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "gaussian1d_smoke": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "global": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "ring16_acquisition": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "two_pole": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    },
+    "unused_token_hold": {
+      "loss": [
+        "relativistic",
+        "non_saturating"
+      ]
+    }
+  },
+  "cached_cells": [
+    {
+      "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+      "full_allowance_seconds": 300,
+      "job_key": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 8.06148013699567,
+      "role": "baseline",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "2e4e295a6ca846f88d15435f733e772b",
+      "full_allowance_seconds": 300,
+      "job_key": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.814647177001461,
+      "role": "baseline",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+      "full_allowance_seconds": 900,
+      "job_key": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 119.51356138498522,
+      "role": "baseline",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+      "full_allowance_seconds": 120,
+      "job_key": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 13.925102654990042,
+      "role": "baseline",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "a68d67bc0972421ab60984bbda398532",
+      "full_allowance_seconds": 300,
+      "job_key": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 18.71034477901412,
+      "role": "baseline",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+      "full_allowance_seconds": 300,
+      "job_key": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 6.593850100005511,
+      "role": "baseline",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+      "full_allowance_seconds": 300,
+      "job_key": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-tier1-matched-baseline-v1",
+        "request": "e9e5184b5dff8ef291be2d5b",
+        "revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87"
+      },
+      "original_paid_seconds": 7.086462726001628,
+      "role": "baseline",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "eb8620ca5b694be4b104c4ef94e8c8d0",
+      "full_allowance_seconds": 300,
+      "job_key": "7f1123d2e3b866679ffee57a9c1989c317d49cfc05b5ad48bc99de7285d1dd8c",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 8.25295614200877,
+      "role": "ams_m110",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "5c57005f320644f987203e15e3ec36a4",
+      "full_allowance_seconds": 300,
+      "job_key": "49e469e662efd6015e96f7e7c7e43cce24f85f58072f3d22c281e284e14b9e0c",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 7.274127761978889,
+      "role": "ams_m110",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "17de1b09f49040769144cf511206b165",
+      "full_allowance_seconds": 900,
+      "job_key": "1f614e9b930791e3585b43e4a21ada0ff0c77dab813bcbf96dd681f6ec463f1d",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 120.27030557001126,
+      "role": "ams_m110",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "c3b9edee3dd54c068c04ac08bd67afb6",
+      "full_allowance_seconds": 120,
+      "job_key": "d3805319eecfdbd7d5b605fad41ab600f78fdcb06a0e2f05a940853e67c1d1e4",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 13.666936472000089,
+      "role": "ams_m110",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "6403eb2c98224c1f8b788c1d26d5c1d7",
+      "full_allowance_seconds": 300,
+      "job_key": "c79176c9df6666e2b57622c1a69125349e25fe34f5406b3372293578a36dd359",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 19.248237812018488,
+      "role": "ams_m110",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "0fa2f159ae53421e8a0ce1170bd1d3eb",
+      "full_allowance_seconds": 300,
+      "job_key": "ab788b0442f4601a3a82454ff214aeed5b93e36328e12de1dc4e3db4970fd1f9",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 6.811077124002622,
+      "role": "ams_m110",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "32bc16ff1a6c46d78c708a718136c7d5",
+      "full_allowance_seconds": 300,
+      "job_key": "74b546317a59d3615d40e4de73862d7490621695c661d61b572184463adf7bc7",
+      "new_paid_seconds": 0,
+      "original_charge_owner": {
+        "campaign": "r1r2-role-ams-m110-v1",
+        "request": "07caf70eea19d45d5b1f6f12",
+        "revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4"
+      },
+      "original_paid_seconds": 7.664223424013471,
+      "role": "ams_m110",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "charges": {
+    "aggregate_historical_attempts": 203,
+    "aggregate_historical_paid_seconds": 6222.199867211952,
+    "aggregate_paid_ceiling_seconds": 8000,
+    "current_reserved_seconds": 0,
+    "declared_campaign_reservation_seconds": 7560,
+    "full_candidate_allowance_seconds": 2520,
+    "full_word_allowance_seconds": 900,
+    "historical_charge_index_sha256": "4f34d686ca202bdebf4f17434f416ea537ac23083fdccb210cb438fa4115b390",
+    "no_cost_or_source_waiver": true,
+    "remaining_unreserved_headroom_seconds": 1777.8001327880484
+  },
+  "checks": {
+    "all1214_source_files_equal_archived_parent": "PASS",
+    "all203_charge_IDs_owners_values_and_result_histories": "PASS",
+    "all21_actual_public_recipe_bindings": "PASS",
+    "all_original_task_protocol_initializer_prior_sampling_gate_budget_and_cadence_contracts": "PASS",
+    "exact14_cached_controls_and7_distinct_fresh_jobs": "PASS",
+    "full_allowances_aggregate_paid_cap_and_combined_storage_cap": "PASS",
+    "global_and_all7_parent_delta_only_loss": "PASS",
+    "native_AMS_Adam_role_betas_and_positive_real_fake_R1R2_every_update": "PASS",
+    "original_word_joint_reverse_encoder_path": "PASS",
+    "queue_and_Python_NumPy_Torch_CPU_RNG_unchanged": "PASS",
+    "ready_studies_and_immutable_registration": "PASS",
+    "unchanged_scalar_generator_target_batch_consumption": "PASS"
+  },
+  "coverage": {
+    "actual_task_bound_recipes": 21,
+    "aggregate_historical_paid_attempts": 203,
+    "exact_cached_cells": 14,
+    "new_jobs": 7,
+    "ordinary_required": 6,
+    "own_clock_diagnostic": 1,
+    "roles": 3
+  },
+  "effective_task_bindings": {
+    "ams_m110": [
+      {
+        "effective_recipe_sha256": "37b0cd0f3d01792ebfdaa72616983858d335a4f492b41ed87ee43736d5443c7d",
+        "evaluation_contract_sha256": "f6c4103fe125d31aeb211a88da5cae4c167c54d4e3b7894f3afd531a02cb706a",
+        "execution_steps": 250,
+        "field_ownership_sha256": "ecfb0e684b3629ca80b68f9ce4e829af91103b02b849e82980bc93afc07d8b18",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 250
+        },
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ae_gan_hold"
+      },
+      {
+        "effective_recipe_sha256": "f9256602478be4c952f54e947a7116447a751217ee96fbe0de9f359f2c07b737",
+        "evaluation_contract_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+        "execution_steps": 24,
+        "field_ownership_sha256": "92a21ae3063edb9b3036d3d3e17b508e701fd99644a18c6854ef2630e2b7d63e",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 128
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      {
+        "effective_recipe_sha256": "2d756c1baa73bf94053cd4f5a23d2d0f093d1636c7c11e913f99facf7dba2a4a",
+        "evaluation_contract_sha256": "920da3ac948bcde7e7036643d0027e75acc40a302324cc8ac523d9c9dbc16123",
+        "execution_steps": 20001,
+        "field_ownership_sha256": "db06b42eee80275afe1512f39f6392c664c4f6cdd088228ebb7b0b015902c201",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 900,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 20000
+        },
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "score_binding": "joint_g_loss with reversed encoded-real E term",
+        "task_id": "five_word_joint_smoke"
+      },
+      {
+        "effective_recipe_sha256": "06f473442d802153494b10065cb9bac1b68e49e69951b4d84de4dcf15a924f62",
+        "evaluation_contract_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+        "execution_steps": 1000,
+        "field_ownership_sha256": "ec2e994fa3060b0b05ca1011758755acc73e76111a2bf7a01c9ce2db1cdc03be",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 120,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 1000
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "effective_recipe_sha256": "7cbb90a52c7b931dfae740d6d3264c265e1c88deffbe8897187da9be8d8b9b10",
+        "evaluation_contract_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+        "execution_steps": 1600,
+        "field_ownership_sha256": "a5455c3f3ec356e3a5ae0f7f09972656f9162dc8b552662eeda0a9ad25982a83",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 400
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "effective_recipe_sha256": "c759cd038423d88433bd06f64bb4a6e8c84fbd8a6f0745445f3351acefb05e0e",
+        "evaluation_contract_sha256": "43d40f70892a2bc3e0135da5ca895ed665a6d9772eccd78ebf9293ff31fe34ef",
+        "execution_steps": 80,
+        "field_ownership_sha256": "50a2945f6ba4fb8a09e1aee45bcf2f1c4a1c691ee3bfca6cdb02f5bb3db2f0e3",
+        "fixed_initialization": {
+          "critic": "stored_host_weights",
+          "particles": "zeros"
+        },
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 80
+        },
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "score_binding": "original host g_loss",
+        "task_id": "two_pole"
+      },
+      {
+        "effective_recipe_sha256": "8ea46025eb7d4ed331dc6748c294c77d8b7e64f61c9aa5b6546031577b4c0554",
+        "evaluation_contract_sha256": "4a64e7dac684aabf4631d4eda401fa0d4ad8d19263b14fd257596a965266d68a",
+        "execution_steps": 200,
+        "field_ownership_sha256": "8f101cace176cb781264d393e785b9bd6876c9ee00983d58aedeea2ed56ac5a8",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": "not_sampled",
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 200
+        },
+        "sampling_law": "learned_parameter_measurement",
+        "score_binding": "original host g_loss",
+        "task_id": "unused_token_hold"
+      }
+    ],
+    "baseline": [
+      {
+        "effective_recipe_sha256": "a34abcfa486e9ff8b6703ad5828430adf4154b7937a86fac18718075fe48e192",
+        "evaluation_contract_sha256": "f6c4103fe125d31aeb211a88da5cae4c167c54d4e3b7894f3afd531a02cb706a",
+        "execution_steps": 250,
+        "field_ownership_sha256": "f18c32535a80d55fa9db99b12ce84a8a845f8562e9faaf24a20892d2a0b83a9c",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 250
+        },
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ae_gan_hold"
+      },
+      {
+        "effective_recipe_sha256": "76e33433c8f2c3bdd769a42cd1c07d3aafb04aeef215eee0dde5cdbe91dc1258",
+        "evaluation_contract_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+        "execution_steps": 24,
+        "field_ownership_sha256": "55b2e06024269fa2f764cca99ab836479777496c73724a4a67bd3ff6afc0dc97",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 128
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      {
+        "effective_recipe_sha256": "dc68855f42cdd6061c0da8128ff8f33136c39c50992a5bd3efafa9668b558416",
+        "evaluation_contract_sha256": "920da3ac948bcde7e7036643d0027e75acc40a302324cc8ac523d9c9dbc16123",
+        "execution_steps": 20001,
+        "field_ownership_sha256": "0028dfed0339c576a41ef52041afbbb80fa3b065b0bf7e71d2e6e59c50f26aa6",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 900,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 20000
+        },
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "score_binding": "joint_g_loss with reversed encoded-real E term",
+        "task_id": "five_word_joint_smoke"
+      },
+      {
+        "effective_recipe_sha256": "80cb0841ab84a6f3856f0570e5a8d9bdf3d35cc0ea61d29f934ecdf52fe5ed1e",
+        "evaluation_contract_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+        "execution_steps": 1000,
+        "field_ownership_sha256": "ccc2778811b72a1fbd393329a8d2f2af2cbc113ec102c841e18ca82919577640",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 120,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 1000
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "effective_recipe_sha256": "0aa1ae792eb05b98650059f77a3d4d19abe4d82679492cd37f57a8e784d0f1a3",
+        "evaluation_contract_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+        "execution_steps": 1600,
+        "field_ownership_sha256": "98a03ad90cd6a416c235e434c903b59cc6c4385fc54b6590e6caa7e15532ceac",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 400
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "effective_recipe_sha256": "2ab027a79917492a1bedfac9d3debfa55b30b3568aee581be9ab6f518d36328f",
+        "evaluation_contract_sha256": "43d40f70892a2bc3e0135da5ca895ed665a6d9772eccd78ebf9293ff31fe34ef",
+        "execution_steps": 80,
+        "field_ownership_sha256": "6c458b9b65b61048bbb4e729e79d1c0a8c42b013f7f718741182edf64d404b15",
+        "fixed_initialization": {
+          "critic": "stored_host_weights",
+          "particles": "zeros"
+        },
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 80
+        },
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "score_binding": "original host g_loss",
+        "task_id": "two_pole"
+      },
+      {
+        "effective_recipe_sha256": "0f596a334e77bc7a7df429a28f4af08dec10f891fc30b2a97a0d334bbc5f4dd0",
+        "evaluation_contract_sha256": "4a64e7dac684aabf4631d4eda401fa0d4ad8d19263b14fd257596a965266d68a",
+        "execution_steps": 200,
+        "field_ownership_sha256": "e18f63e7ab2695b7a195050169dab35c2988a89e7cbe9f94d8b7fe2d29600fa6",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": "not_sampled",
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": false,
+          "beta2_end": 0.99,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "relativistic",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "cosine",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": null,
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1,
+          "reg_every": 1,
+          "total_steps": 200
+        },
+        "sampling_law": "learned_parameter_measurement",
+        "score_binding": "original host g_loss",
+        "task_id": "unused_token_hold"
+      }
+    ],
+    "non_saturating": [
+      {
+        "effective_recipe_sha256": "95be8db9c3f8b3f43552ba6a9e478d1c2ba12dcdeb6691fc028ca7f97e8f12d2",
+        "evaluation_contract_sha256": "f6c4103fe125d31aeb211a88da5cae4c167c54d4e3b7894f3afd531a02cb706a",
+        "execution_steps": 250,
+        "field_ownership_sha256": "18236c0f5dcc38610e118eac1d7eba0ecda042132c20f31e07d4971116d6de20",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 250
+        },
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ae_gan_hold"
+      },
+      {
+        "effective_recipe_sha256": "efc43fa33b7ec884080d8e15402d5af8316c22605c82888237207fe81b8cab8c",
+        "evaluation_contract_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+        "execution_steps": 24,
+        "field_ownership_sha256": "5e638f4af1c58706b4f3b8e44d3649ce54d3730c016290f998a4e5cfe518ec38",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 128
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      {
+        "effective_recipe_sha256": "4cc4357ea986e59e48937263aa054de3d594d5734947d70d1da3b70a0978f541",
+        "evaluation_contract_sha256": "920da3ac948bcde7e7036643d0027e75acc40a302324cc8ac523d9c9dbc16123",
+        "execution_steps": 20001,
+        "field_ownership_sha256": "6af6ad07fafd63b0561b59b44589783036b480593d93352055939f020080598f",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 900,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 20000
+        },
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "score_binding": "joint_g_loss with reversed encoded-real E term",
+        "task_id": "five_word_joint_smoke"
+      },
+      {
+        "effective_recipe_sha256": "0edf48b50b81cebef260263e1cb0f50b40db7a34174ebcda8686960ec19211c9",
+        "evaluation_contract_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+        "execution_steps": 1000,
+        "field_ownership_sha256": "9136beb273bf1a7db6b344ed30b8a9ccf04923644e3c4f09aaf40fae09a30779",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 120,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 1000
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "gaussian1d_smoke"
+      },
+      {
+        "effective_recipe_sha256": "9eb41a613c4e23d5f832594f5a5871eaa7f417b6dba8eaa8f9c9d1f218a55543",
+        "evaluation_contract_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+        "execution_steps": 1600,
+        "field_ownership_sha256": "3291b0af3359e3d1fb2e20b79c84ecbe90a84526d28b2cdb5d7efb86cd91087b",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 400
+        },
+        "sampling_law": "public_prior_without_output_noise",
+        "score_binding": "original host g_loss",
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "effective_recipe_sha256": "6d46779c4f4d6f7d89b6ed5ce30caea25fa26862d88f7bba5336789416c7d3f3",
+        "evaluation_contract_sha256": "43d40f70892a2bc3e0135da5ca895ed665a6d9772eccd78ebf9293ff31fe34ef",
+        "execution_steps": 80,
+        "field_ownership_sha256": "0a4056e199c0a2af008a614ec10b2fd706a631c37edd8e1f03f43dde4ef9eb22",
+        "fixed_initialization": {
+          "critic": "stored_host_weights",
+          "particles": "zeros"
+        },
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": null,
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 80
+        },
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "score_binding": "original host g_loss",
+        "task_id": "two_pole"
+      },
+      {
+        "effective_recipe_sha256": "0d6867f362bc445784bb49274d12585e2580fea085bbbf69fbee2eb190c97de1",
+        "evaluation_contract_sha256": "4a64e7dac684aabf4631d4eda401fa0d4ad8d19263b14fd257596a965266d68a",
+        "execution_steps": 200,
+        "field_ownership_sha256": "85342ce46fd58fd3dfcbd788bd649da45116465ae7fdf48a4ec2f64e0dfd9349",
+        "fixed_initialization": null,
+        "full_allowance_seconds": 300,
+        "initial_declared_named_streams_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "initial_prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "initializer": "deterministic_orthogonal",
+        "prior_applicability": "not_sampled",
+        "recipe": {
+          "adam_variant": "pytorch",
+          "amsgrad": true,
+          "beta2_end": null,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "critic_r1_real": true,
+          "d_betas": null,
+          "d_eps": null,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.0,
+          "eps": 1e-08,
+          "input_noise_std": 0.0,
+          "kinetic_transport_local_weight": 0.0,
+          "kinetic_transport_weight": 0.0,
+          "loss": "non_saturating",
+          "loss_labels": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "lr": 0.0085,
+          "lr_schedule": "constant",
+          "optimizer_family": "adam",
+          "output_noise_std": 0.0,
+          "prior_betas": [
+            0.0,
+            0.99
+          ],
+          "prior_eps": null,
+          "prior_l2": 0.0,
+          "prior_lr_mult": 1.0,
+          "prior_reg": 0.0,
+          "prior_update": "learned",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "total_steps": 200
+        },
+        "sampling_law": "learned_parameter_measurement",
+        "score_binding": "original host g_loss",
+        "task_id": "unused_token_hold"
+      }
+    ]
+  },
+  "execution_contract": {
+    "GPUs": [
+      0,
+      1
+    ],
+    "TF32": false,
+    "cpu_threads_per_worker": 1,
+    "cudnn_benchmark": false,
+    "deterministic_algorithms": true,
+    "direct_pole": "Original stored critic/zero coordinates; native G Adam betas(.5,.99), not inactive direct_particle_betas",
+    "loss_penalty_protocol_sources": {
+      "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+      "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+      "experiments/forge/comparison_protocol.py": "dfdfd4111261cbf6ebc766ed7132bc33c3b73204f151ad46d639cf687026978c",
+      "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+      "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+      "experiments/forge/word_adapter.py": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+      "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd",
+      "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+      "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+    },
+    "protocol_seed": 0,
+    "rng": "Candidate-independent forge-rng-v1; constructor/data/prior/training-noise/evaluation streams isolated and checkpointed",
+    "token": "Original unsampled parameter cohort; no sampled prior",
+    "words": "Original five-row zero-width exception, per-character softmax and reverse-real E term",
+    "workers_per_GPU": 1
+  },
+  "inputs_sha256": {
+    "aggregate203_charge_index": "4f34d686ca202bdebf4f17434f416ea537ac23083fdccb210cb438fa4115b390",
+    "completed_objective_memory_publication": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+    "manifest": "60272486ef8762aa33894b2ea6427ec3ca1835891a3e926e357a8d6224dd4b04",
+    "objective_memory_collection_audit": "ea5331d78213a89cf47d7cf0b8a05cf6a643e4f41812f3b759fa18e998ba03bb",
+    "objective_memory_density_audit": "1cf10ea8424f14595c39c76b1c8273d5c1c02a00eea2e81180882663f086666f",
+    "parent_ring_request": "afa0f40bae4fdbd833e55833a7fd563616c76a7f4198096d992859ca7b15dde8",
+    "registration": "98abadd32c1e4f719cc9d7aaaff0353ca9954aa8a39e2d83e0d529d9435950a8",
+    "workflow": "3268f26cd4417a840d023b9e6b86d90b4686eb662c2402f7059f78b89e35ebbb"
+  },
+  "limits": [
+    "Prospective binding support is not trained numerical success or admission",
+    "No model/optimizer construction, forward, backward, sample, evaluator or experiment performed; Recipe/context resolution declares streams without consuming them",
+    "Fresh actual initial tensors, ordered target batches, all consumed named-stream states, gates, own-clock branches and media require independent post-training collection audit",
+    "Caller-global RNG and source metadata excluded from scientific between-candidate state comparisons; this review preserved Python/NumPy/Torch CPU global RNG"
+  ],
+  "new_cells": [
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "2941a676d023de77f3daee44d27b9078dbc9fd311e01db146e03e927648ae45b",
+      "role": "non_saturating",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "fc0bb98f251470dc13fdb47c7df1d52211772c5674f338dff655297a7121acce",
+      "role": "non_saturating",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "full_allowance_seconds": 900,
+      "job_key": "88e80c2efb1cdff7cf854ee64cfa077bf316fc8ba7ee6631f1a5e086dbdfee9e",
+      "role": "non_saturating",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "full_allowance_seconds": 120,
+      "job_key": "08d0117f24516070a334cc51fd811ecc3939205e19a827598f3fa160dda287d2",
+      "role": "non_saturating",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "7660e95c6ca6e2892d404b5d20fb6456ec5ca1b447d4becd0ac9aaebdb76aae5",
+      "role": "non_saturating",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "079c6a3a12ade34132eefb9a0b7439f200ac31836d256588413e0da4fca930f0",
+      "role": "non_saturating",
+      "task_id": "two_pole"
+    },
+    {
+      "full_allowance_seconds": 300,
+      "job_key": "d551ab059369f01896fdcce94637760054149676218535ea92d9af0a2dcbaac4",
+      "role": "non_saturating",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "optimizer_updates_added": 0,
+  "predecessor_closure": {
+    "certified_cases": 35,
+    "collection_audit": "PASS",
+    "max_metric_difference": 0,
+    "saved_ring_panels": 192,
+    "training_gifs": 35
+  },
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "queue_mutations": 0,
+  "queue_snapshot_sha256": "08235119a442004091f62a03e55cc43c93bc0278c0f047e496957632984a2076",
+  "review_head": "ad74ecec1fc22809e7afeea84d3991c8a66b4a2a",
+  "reviewed_at": "2026-10-12T23:18:06.370+00:00",
+  "run_guards": [
+    "Commit all frozen scientific source, declarations, registration and this independent receipt before admission; supplied execution SHA must equal HEAD",
+    "Recompute prepared projections and declaration/source hashes before admission",
+    "One finite admission; 14 exact controls retain original one-attempt identities and seven fresh jobs retain full allowances",
+    "All concurrent full reservations plus all historical charges count against 8000 seconds; no shorter timeouts or scientific budgets",
+    "Preserve archived source/init/seed and grades; independently audit fresh actual initialization, ordered target batches and consumed stream checkpoints after training",
+    "No retries, seed studies, continuation, Tier2, default promotion or automatic further arm"
+  ],
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scientific_paths_unchanged_from": "2b0ad9ec7c5b2c1e91ab0d70751da0b7e36a7b42",
+  "scope": "Independent prospective review of actual prepared score-law registration; no admission or qualification",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_files_verified": 1214,
+  "status": "PASS",
+  "storage": {
+    "archives": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012": {
+        "bytes": 4543,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": {
+        "bytes": 5477,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012": {
+        "bytes": 7776,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": {
+        "bytes": 2512,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012": {
+        "bytes": 3278,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012": {
+        "bytes": 3855,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      },
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": {
+        "bytes": 3101486738,
+        "cap_bytes": 8589934592,
+        "free_bytes": 20784177152,
+        "minimum_free_bytes": 5368709120
+      }
+    },
+    "combined_bytes": 3101514179,
+    "combined_cap_bytes": 8589934592
+  },
+  "task_contracts": {
+    "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+    "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+    "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+    "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+    "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+    "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+    "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+  },
+  "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+}

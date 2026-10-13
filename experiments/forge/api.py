@@ -29,7 +29,7 @@ TRAINER_STREAM_BINDINGS = {
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
-    "policy_controls", "policy_serving", "served_sampling",
+    "policy_controls", "policy_serving", "served_sampling", "output_marginal_v1",
 )
 COMPONENT_OBJECTIVE_HOSTS = frozenset({
     "two_pole", "unused_token_hold", "ae_gan_hold", "trajectory",
@@ -202,6 +202,21 @@ def task_policy_blockers(task, candidate):
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
+    if recipe.energy_distance_weight and task.get("execution", {}).get("execution_path") == "public_components":
+        contract = task.get("execution", {}).get("transport_contract", {})
+        if (consumer != "output_marginal_v1" or task["execution"].get("host") == "trajectory" or not contract
+                or any(contract.get(key) is not False for key in
+                       ("conditioning_in_distance", "new_paired_supervision", "new_forward_passes", "new_random_draws"))):
+            return [f"{task.get('id', '<task>')}: energy U requires the declared output-marginal contract"]
+    if recipe.output_mmd_weight and task.get("execution", {}).get("execution_path") == "public_components":
+        if recipe.energy_distance_weight:
+            return [f"{task.get('id', '<task>')}: simultaneous energy U and output MMD are unsupported "
+                    "by the public_components bindings; the native public trainer may compose them"]
+        contract = task.get("execution", {}).get("transport_contract", {})
+        if (consumer != "output_marginal_v1" or task["execution"].get("host") == "trajectory" or not contract
+                or any(contract.get(key) is not False for key in
+                       ("conditioning_in_distance", "new_paired_supervision", "new_forward_passes", "new_random_draws"))):
+            return [f"{task.get('id', '<task>')}: output MMD requires the declared output-marginal contract"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -380,6 +395,14 @@ class FormulationContext:
         if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight) and component_transport is None:
             raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "
                                    "the current Forge host bindings do not support it"])
+        if execution_path == "public_components" and self.recipe.energy_distance_weight and component_transport != "output_marginal_v1":
+            raise CapabilityError(["public_components must explicitly consume Recipe energy U on output panels"])
+        if execution_path == "public_components" and self.recipe.output_mmd_weight:
+            if self.recipe.energy_distance_weight:
+                raise CapabilityError(["public_components cannot compose energy U and output MMD; "
+                                       "use the native public trainer for composition"])
+            if component_transport != "output_marginal_v1":
+                raise CapabilityError(["public_components must explicitly consume Recipe output MMD on output panels"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (
@@ -429,6 +452,7 @@ class FormulationContext:
                 "a2": a2, "checkpoint": True, "named_rng": True,
                 "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
                 "policy_controls": policy_controls(self.recipe),
+                "output_marginal_v1": scalar or self.component_transport == "output_marginal_v1",
                 "policy_serving": self.recipe.serve_average > 0,
                 "served_sampling": bool(self.policy_task) and policy_controls(self.recipe),
                 **{name: True for name in self.extension_values}}

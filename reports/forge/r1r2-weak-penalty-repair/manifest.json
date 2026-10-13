@@ -1,0 +1,48 @@
+{
+  "baseline_role": "baseline",
+  "campaign": {
+    "budget_seconds": 7560,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-weak-penalty-repair-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "role": "baseline",
+      "study": "r1r2-five-track-cached-baseline-v1"
+    },
+    {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "role": "non_saturating",
+      "study": "r1r2-non-saturating-ams-m110-v1-study"
+    },
+    {
+      "candidate": "r1r2-non-saturating-weak-gamma-v1",
+      "role": "weak_gamma",
+      "study": "r1r2-non-saturating-weak-gamma-v1-study"
+    }
+  ],
+  "id": "r1r2-weak-penalty-repair-v1",
+  "max_candidates": 3,
+  "paid_cap_seconds": 8000,
+  "round": 1,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [],
+  "supporting_inputs": [
+    "reports/forge/r1r2-weak-penalty-repair/workflow.py",
+    "reports/forge/r1r2-weak-penalty-repair/PLAN.md",
+    "reports/forge/r1r2-weak-penalty-repair/audit_collection.py",
+    "reports/forge/r1r2-weak-penalty-repair/density_audit.py",
+    "reports/forge/r1r2-weak-penalty-repair/test_weak_penalty_workflow.py",
+    "reports/forge/r1r2-weak-penalty-repair/research/weak-penalty.md",
+    "reports/forge/r1r2-score-law-repair/README.md",
+    "reports/forge/r1r2-score-law-repair/registration.json",
+    "reports/forge/r1r2-score-law-repair/publication/results.json",
+    "reports/forge/r1r2-score-law-repair/collection-audit.json",
+    "reports/forge/r1r2-score-law-repair/density-audit.json",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/probe.py",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/diagnosis.json",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/README.md"
+  ]
+}

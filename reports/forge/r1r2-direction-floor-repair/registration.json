@@ -1,0 +1,296 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012",
+  "candidates": {
+    "ada": {
+      "candidate": "r1r2-direction-floor-ada-v1",
+      "candidate_revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea",
+      "card": {
+        "candidate": "r1r2-direction-floor-ada-v1",
+        "role": "ada",
+        "study": "r1r2-direction-floor-ada-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "7110e2a2d5863f24db12ac5080abca1519e993a7f19293545659830f97ddafd7",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "74f52276bbfe2251b5d81e144db7c5386397510ff9caa8738c718df1ef449843",
+        "clockfree_audit_measurement_v1": "a76213fcb69f2452b0729330ff79a23eea4148c4c6e7544b52fc8c32c44450f6",
+        "five_word_joint_smoke": "2512505a35ff19fb5c4eef19812d58e1e1c20209cec958757721be31f2b52ec7",
+        "gaussian1d_smoke": "e26dc64a485694c647da10badd9c942871840da77bf3aaa036d82f2c9c306ae6",
+        "ring16_acquisition": "e68bd26dd4cc89ddfa6295ed64e0aa86ae260953d41f519b0e890017ea470bce",
+        "two_pole": "960296de0529cc1aacb45be2b091288133e4ca5fdbc9a127f323bd2d590de6ae",
+        "unused_token_hold": "5a99615d4c2cd00f72f5253dcd93de41b03bec865d0fdd6c7645ba46d70965e1"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "ada_eps": {
+      "candidate": "r1r2-direction-floor-ada-eps-v1",
+      "candidate_revision": "053adb61eb9bcdf220116196f499ca340ff7faa47699d72e2cb282615636d379",
+      "card": {
+        "candidate": "r1r2-direction-floor-ada-eps-v1",
+        "role": "ada_eps",
+        "study": "r1r2-direction-floor-ada-eps-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d3b14ff1779a0c0eaf0c944288900b856d7b0f0113ea185e55494ad2dfebbcf4",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "19008c06bd4b186e80ba4c1ab5fd548c82b68544a736ae9a940da6384fa7018a",
+        "clockfree_audit_measurement_v1": "854b64425b4756471d8df079dfbb1792a84613aa2c51ece2b9613ad593f8073b",
+        "five_word_joint_smoke": "f4aed76353ee258f747558bca3ce2c1db862c7b0e4f89de9275dcf7c57b56e8e",
+        "gaussian1d_smoke": "50e98f1e1cc13a70985e884f57646b7033e2d2f9d6de5b78b929629b6fae2dfb",
+        "ring16_acquisition": "7142ce6a3c01682c752faf968ac1888941b6d559a67b2601f02f7b37053af6bc",
+        "two_pole": "60cdd407ddb247ac15d406f27d2b8f4ee96a11760a156d9ebd72c331f049235b",
+        "unused_token_hold": "af76dd054d8a42e9a64a55ef47dc6cad213dbc4f4726db77a5ae37f050be466a"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "adam": {
+      "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "card": {
+        "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+        "role": "adam",
+        "study": "r1r2-role-cached-zero-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "af3d261e16c8d2ef88050d2731687ac679280f65a7810d64c14869f42edf1e4b",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "96f87e12c83fc5857403be8d787d44e6a53934f8138483453d27bf605bb4cf89",
+        "clockfree_audit_measurement_v1": "012371f583f241e8a7bed5744ec4542bb7ab8fec505153ed1d0e414efc09190e",
+        "five_word_joint_smoke": "3f99d9c43fa7d634c5d1e161e7e21b197bf64f07555d3b165b4b8c4bac1683de",
+        "gaussian1d_smoke": "52a52dd2d671f7e224d7db6d180935708cbec206170949ff5136901b18d7597e",
+        "ring16_acquisition": "dc5d24748ab3e9108881fad6d364f726f1f998bcbed2ef61f48e5154f1f64321",
+        "two_pole": "25dea99a20751fa4d04183edf9cc00ce1bbd078aee846044985ae348d177be75",
+        "unused_token_hold": "5fdd3127af9aa7de0b604e7ab3e701c9be1494e02ee5e0101e9d6f3109096892"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "adam_eps": {
+      "candidate": "r1r2-direction-floor-adam-eps-v1",
+      "candidate_revision": "7278048f77d4b8656e4f113799f4266abe9f963dd692c5bf75a1e4f4ab866658",
+      "card": {
+        "candidate": "r1r2-direction-floor-adam-eps-v1",
+        "role": "adam_eps",
+        "study": "r1r2-direction-floor-adam-eps-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "cdb74a854484dff875b5eb4020c8cd2465afdbc6fb065dd6653b020d096c76d2",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "9b1689b8ce47ec5805e04ece106c9a91631e3bcc0eb261ec5cf72bb403c9f2b1",
+        "clockfree_audit_measurement_v1": "e0584864512e8a3941fb9d0a178c2474e2710ac7e432332992f94d6228b10418",
+        "five_word_joint_smoke": "d68254d08eb45b1a5d56a9b8aa3dbc0e06fa50429c0e09035ef3eb2f5063781b",
+        "gaussian1d_smoke": "bffe9d6dd20d7c233b6e3ceb30da2a2a354c59713be5f62026a4dc8ded967341",
+        "ring16_acquisition": "9d82de3013f6ada2aa86cef14146210f97543855061afaa1e649cc22b4ba66c0",
+        "two_pole": "6dade65cde7ddc47f4e9406018e3f27dd8a17343918468d296d3e98012f638c5",
+        "unused_token_hold": "d03cd607e7fefd40bfd69a5cb4ad27272c15feea178935662d0c4a1670aa9ead"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "baseline": {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "card": {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/configurations/r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9.json": "f6eb97e3fd889888b857a77bf00daf8cecc77c567e97b86b92d9c7d2fa9b08d6",
+    "configs/forge/ideas/r1r2-direction-floor-ada-eps-v1.json": "30fa2fa192e1b3803f2a87f384c76d2ddc260243312907dde0d8eaf792d632f6",
+    "configs/forge/ideas/r1r2-direction-floor-ada-v1.json": "9c0fce60f4125efab76275c2e5e3773be4d3c7a0a1f4a5ba13c5916fe269c57d",
+    "configs/forge/ideas/r1r2-direction-floor-adam-eps-v1.json": "e2d47bcf5df051e790b3ce77d7d66a18c54d6621055f06eb65413940ec278d35",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-direction-floor-ada-eps-v1-study.json": "f3511485b641f12a2d17b55b83b494c335c2f69e6cf486d7ba7b26098d2bc265",
+    "configs/forge/studies/r1r2-direction-floor-ada-v1-study.json": "98b2b9abfc311a3610958cac0ecd475317345c9727c6be0ced23e6442e2ee16a",
+    "configs/forge/studies/r1r2-direction-floor-adam-eps-v1-study.json": "4b7028fd9cad14bf3f721d25d2449673a0781fd872896ebc41cc931666ada453",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-role-cached-zero-v1-study.json": "55d2cda41095f8fe2ba49a4efe1175981b4c6563d994daa1ff52364480147f1b",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-direction-floor-repair/PLAN.md": "084d553b0312cbd9b798b60dd847b2b49bc8ae5dfd6b05651c30bd6369541b5f",
+    "reports/forge/r1r2-direction-floor-repair/manifest.json": "f3141839b47ed6f3ed21dc9d6594c678b63dcb39c58e2791d747f25c4bf14b4b",
+    "reports/forge/r1r2-direction-floor-repair/optimizer-preflight.json": "1db3872231c12ec0d5b1f97c368737365bbba5e37ed11bae8cd69fefaa707671",
+    "reports/forge/r1r2-direction-floor-repair/workflow.py": "498e247779721c6691077b43b873a3220918fe8333250eb6e0d4b74341f107dd",
+    "reports/forge/r1r2-five-track-repair/publication/results.json": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+    "reports/forge/r1r2-five-track-repair/registration.json": "5beeb44fb5cfd3162b7743aa62bcf060815424cb4f74fa67269dbb21f99f8549",
+    "reports/forge/r1r2-role-repair/density-audit.json": "00971c4526107d97b8008ee3cb073dd071388003e3c3d9c64f5411ef88de5f0c",
+    "reports/forge/r1r2-role-repair/optimizer/normalization.json": "2d25898a09c2bfc4d619bd4b8d5fc49a751b36610263347153cbb0b333425e37",
+    "reports/forge/r1r2-role-repair/prior/denominator-analysis.json": "72292785de9fbe634fcc954ea088d1f5620f532906402f91e0523a92534bf9bd",
+    "reports/forge/r1r2-role-repair/publication/results.json": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "reports/forge/r1r2-role-repair/registration.json": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/registration.json": "14fa62ab85d1318cbdc4d7d03b01028ea9b0218ec8e76a6d9c81cc2a2ba593f8",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066"
+  },
+  "manifest": {
+    "baseline_role": "baseline",
+    "campaign": {
+      "budget_seconds": 12600,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-direction-floor-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      {
+        "candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+        "role": "adam",
+        "study": "r1r2-role-cached-zero-v1-study"
+      },
+      {
+        "candidate": "r1r2-direction-floor-adam-eps-v1",
+        "role": "adam_eps",
+        "study": "r1r2-direction-floor-adam-eps-v1-study"
+      },
+      {
+        "candidate": "r1r2-direction-floor-ada-v1",
+        "role": "ada",
+        "study": "r1r2-direction-floor-ada-v1-study"
+      },
+      {
+        "candidate": "r1r2-direction-floor-ada-eps-v1",
+        "role": "ada_eps",
+        "study": "r1r2-direction-floor-ada-eps-v1-study"
+      }
+    ],
+    "id": "r1r2-direction-floor-repair-v1",
+    "max_candidates": 5,
+    "paid_cap_seconds": 8000,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "supporting_inputs": [
+      "reports/forge/r1r2-direction-floor-repair/workflow.py",
+      "reports/forge/r1r2-direction-floor-repair/PLAN.md",
+      "reports/forge/r1r2-direction-floor-repair/optimizer-preflight.json",
+      "reports/forge/r1r2-role-repair/registration.json",
+      "reports/forge/r1r2-role-repair/publication/results.json",
+      "reports/forge/r1r2-role-repair/density-audit.json",
+      "reports/forge/r1r2-role-repair/optimizer/normalization.json",
+      "reports/forge/r1r2-role-repair/prior/denominator-analysis.json",
+      "reports/forge/r1r2-tier1-search/registration.json",
+      "reports/forge/r1r2-five-track-repair/registration.json"
+    ]
+  },
+  "manifest_sha256": "f3141839b47ed6f3ed21dc9d6594c678b63dcb39c58e2791d747f25c4bf14b4b",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 12600,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

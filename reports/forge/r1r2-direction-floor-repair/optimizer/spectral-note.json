@@ -1,0 +1,841 @@
+{
+  "assessment": "A bounded full-vs-D-only comparison is justified as a distinct spectral-update question, with weak success expectation from prior negatives. Ada failure does not identify its cause or imply a polar repair.",
+  "bounds_if_centrally_registered": {
+    "continuation": "None; require current campaign closure first and explicit central registration/admission.",
+    "full_allowance_seconds_each": 2520,
+    "full_new_reservation_seconds": 5040,
+    "new_global_recipes": 2,
+    "new_task_jobs": 14,
+    "rate_points": 1,
+    "seed": 0
+  },
+  "checkpoint": {
+    "artifact_manifest_sha256": "41bbdf0c128145ec663f3001e4d4d0cc7d2730f9548c74fcc0de677d1d91ada2",
+    "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90/provenance",
+    "bytes": 205155,
+    "completed_steps": 1600,
+    "path": "provenance-state.pt",
+    "prerequisite_eligible": false,
+    "purpose": "provenance_only",
+    "sha256": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+    "state_sha256": "27ed648b4924c40f626a16224f315007ae80906782df510e913737450eda3a2e"
+  },
+  "current_direction_floor_evidence": [
+    {
+      "attempt_id": "c9d083e48fc74b6ebb356ddf0dc9990c",
+      "candidate_id": "r1r2-direction-floor-adam-eps-v1",
+      "candidate_revision": "7278048f77d4b8656e4f113799f4266abe9f963dd692c5bf75a1e4f4ab866658",
+      "certificate_result_sha256": "baa43e7d20e3706358d28e54e9e134b14e019e84cbad8f9363c7ba4a00f64012",
+      "cohort_status": "Individual completed certified queue result; whole campaign not yet closed/collected at this readout.",
+      "recorded_endpoint_metrics": {
+        "component_covariance_error": 2.635453863069415,
+        "component_min_eigen_ratio": 0.2971327602863312,
+        "hq": 0.84619140625,
+        "mass_tv": 0.039306640625,
+        "modes": 16,
+        "step": 1600
+      },
+      "recorded_gate_status": "FAIL",
+      "request_sha256": "0115c65b27621d5b34aff6da535d92e20182d7d9df71b53f950d5a2c1ba355f2",
+      "result_sha256": "a8e603b85be1776655c0c2c2624b6bb6c01cbee708f62143c67ed183a6be5b4a",
+      "role": "adam_eps",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    },
+    {
+      "attempt_id": "186ec6aad1b64c2196c6c462a9e8542d",
+      "candidate_id": "r1r2-direction-floor-ada-v1",
+      "candidate_revision": "d464bd5bbf6f5fe60396e352f667f8934720b412e781fb6d719a70fdc6eb89ea",
+      "certificate_result_sha256": "70ffbc9a934de978141402d8c493568c66716408018594fa167d691011407c56",
+      "cohort_status": "Individual completed certified queue result; whole campaign not yet closed/collected at this readout.",
+      "recorded_endpoint_metrics": {
+        "component_covariance_error": 4.57022750377655,
+        "component_min_eigen_ratio": 0.6975019574165344,
+        "hq": 0.432861328125,
+        "mass_tv": 0.07421875,
+        "modes": 14,
+        "step": 1600
+      },
+      "recorded_gate_status": "FAIL",
+      "request_sha256": "2b6d989d2d4ba8eababd9d891f046ee6ada69318be256c287cc4ed64fdc324fb",
+      "result_sha256": "f081751ba298b5124ec42817903eaabbbc1e3b82fffabb1e500b8d4abc54ebc0",
+      "role": "ada",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    },
+    {
+      "attempt_id": "68385836fd124dccb2c2e17415aaf025",
+      "candidate_id": "r1r2-direction-floor-ada-eps-v1",
+      "candidate_revision": "053adb61eb9bcdf220116196f499ca340ff7faa47699d72e2cb282615636d379",
+      "certificate_result_sha256": "159149009816677923d44eb65a12d9d2f2d6ccf5de485be8a8cc5257807f27e0",
+      "cohort_status": "Individual completed certified queue result; whole campaign not yet closed/collected at this readout.",
+      "recorded_endpoint_metrics": {
+        "component_covariance_error": 7.055577322840691,
+        "component_min_eigen_ratio": 1.1291272640228271,
+        "hq": 0.258056640625,
+        "mass_tv": 0.0615234375,
+        "modes": 6,
+        "step": 1600
+      },
+      "recorded_gate_status": "FAIL",
+      "request_sha256": "12215d9cc1b3ca6209c9b09fd21c3a627f48f5ebf6d083b2073eb49ee93398db",
+      "result_sha256": "50c99087f43132aa06de460b6829ce376d5c79ac3edc5c69c86186f62e9b9e9d",
+      "role": "ada_eps",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    }
+  ],
+  "falsifier": "All original six ordinary gates and clock must pass under a single whole recipe. Full-covariance/eigen spread/HQ/coverage/mass/terminal suffix remain unchanged; better spectra, lower norms or a better endpoint alone give no qualification.",
+  "guards": {
+    "all_module_forward_calls_forbidden": true,
+    "network_prior_trainer_construction_forbidden": true,
+    "optimizer_updates_added": 0,
+    "parameter_free_recipe_validator_constructions": 268,
+    "parameter_free_validator_only_exception": true,
+    "public_optimizers_constructed": 0,
+    "python_and_torch_rng_unchanged": true,
+    "qualification_input": false,
+    "sampling_draws_added": 0,
+    "source_task_candidate_queue_changes": 0
+  },
+  "host_applicability": {
+    "clock": "Both families expose checkpointed counters/moments/pending row IDs. Inert external clock labels do not add schedules; actual clock gate is required.",
+    "ordinary": "Original six hosts use supported dense/vector parameters; AE12-row MoG uses original width. No convolution/SVD backend adaptation is added.",
+    "word": "G/E/joint-D are dense2D weights plus1D biases; original joint objective, clean generation and inverse remain. Factories consume selected family without task-specific fallback."
+  },
+  "limits": "Conditional spectral arithmetic on exact native-parent endpoint gradients/moments. Float32 CPU helper may differ in rounding from GPU execution. Jacobian geometry is descriptive at stored centers and not a causal effect or exact sampling covariance.",
+  "mechanism": {
+    "ada": "A scalar multiplier of each raw gradient preserves its singular-value ratios and concentration, retaining native tensor norm up to epsilon.",
+    "comparison_limit": "Full-vs-D-only holds critic update rule fixed while jointly changing G/E and learned-prior update rules. It does not separate generator spectral effects from prior row normalization or infer causality from endpoint norms.",
+    "jacobian_claim_limit": "Controls update matrices, not existing weight matrices, full-network Lipschitz constants or learned Jacobian condition numbers. Small singular directions can be amplified, and density can regress.",
+    "polar": "Retained raw-gradient singular values replaced by1. Matrix update operator norm is lr*sqrt(max(1,out/in)), within numerical rounding. Values at/below max(shape)*dtype_eps*s_max are discarded."
+  },
+  "parent": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+    "current_verified_source_files": 1214,
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc"
+  },
+  "parent_attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+  "pole_bounds": {
+    "coordinates": 12,
+    "critic_grad_median_max": 1.0,
+    "d_only": "Coordinate update remains native Adam, with no fixed unit-L2 normalized travel bound; critic feedback changes its future trajectory.",
+    "first_step_where_bound_permits_mean_abs_point3": 36,
+    "full_mean_absolute_displacement_upper_bound_per_step": 0.0085,
+    "full_mean_absolute_endpoint_upper_bound": 0.68,
+    "full_nonzero_step_l2": 0.029444863728670913,
+    "gate_mean_abs_min": 0.3,
+    "initial_coordinates": "all original zeros",
+    "last_five_mean_absolute_upper_bounds": [
+      0.5695,
+      0.5950000000000001,
+      0.629,
+      0.6545000000000001,
+      0.68
+    ],
+    "last_five_observation_steps": [
+      67,
+      70,
+      74,
+      77,
+      80
+    ],
+    "lr": 0.0085,
+    "proof": "Polar12x1 has unitL2; fan-out factor sqrt12 gives update norm lr*sqrt12. L1/12<=L2/sqrt12 and triangle inequality give E|coordinate|<=step_count*lr. The upper bound permits, but does not establish, the sustained gate.",
+    "shape": [
+      12,
+      1
+    ],
+    "steps": 80
+  },
+  "prior_bcap_evidence": [
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json",
+      "sha256": "7af00be693e902199ebe65702c24afb6cf9151eb7cbf89af59581bc62c2d1594",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "trials": [
+        {
+          "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+          "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.03,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 1.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+          "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.01,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 3.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "PASS",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--9bd14ef912f8eb82e2dfd1a2c3be9449c6522e783c6372b970029f18faf26afd",
+          "candidate_revision": "faef6785d37578c322e09978ec51cbb1b987b71d0cf6601849d1112fa0abb040",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.003,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 10.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "FAIL",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "PASS",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--f195eee9cc636a0db466b10192705a4f2f82484bf617abd0d4b567bad99c5b5e",
+          "candidate_revision": "7941d9dba1ee6c10b608856d90aab5efaaf4d4a06a53a605a8fac6cd1022819e",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.1,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 0.3
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "FAIL",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "FAIL"
+          }
+        }
+      ]
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-d-only-tier1-v1.json",
+      "sha256": "63045a16e76d4760a10705ef532912e0497426b75aa428a878bfce27ab2520e9",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "trials": [
+        {
+          "candidate_id": "bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+          "candidate_revision": "f02bd4cbfe6c9b6f720ed99b1c628eb785aa23a06cd33dc1d80d0f8844c69e62",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.1,
+            "optimizer_adam_lr": 0.00425,
+            "optimizer_family": "dualnorm_D_only",
+            "optimizer_momentum": 0.5,
+            "prior_lr_mult": 2.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm-d-only--d0e7f03963ecb85678d3319f54f6ab31fbd4ac4ad7e77e5394ecca6bfd12af4a",
+          "candidate_revision": "e938b51e9a1e9e7869c81870b18194a132bcc0f777b87c33820f3dd46d518d1e",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.03,
+            "optimizer_adam_lr": 0.00425,
+            "optimizer_family": "dualnorm_D_only",
+            "optimizer_momentum": 0.5,
+            "prior_lr_mult": 2.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm-d-only--d3d5a2efb99e4946fbad23c361d86c7779b089269b3913059af97d837f9180bc",
+          "candidate_revision": "5d67bce12f05b134e70e249f2d644a23915b1cda500280b7eba0a7f6f5217575",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.01,
+            "optimizer_adam_lr": 0.00425,
+            "optimizer_family": "dualnorm_D_only",
+            "optimizer_momentum": 0.5,
+            "prior_lr_mult": 2.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS"
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm-d-only--ef8fd85100fad0bbebaa0362be3ab81445c46c885050ad9568428225f0636085",
+          "candidate_revision": "009bd8eaf463327de922eddd713dc49a35972d64d99cbb067892183bccd05da1",
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.003,
+            "optimizer_adam_lr": 0.00425,
+            "optimizer_family": "dualnorm_D_only",
+            "optimizer_momentum": 0.5,
+            "prior_lr_mult": 2.0
+          },
+          "recorded_statuses": {
+            "ae_gan_hold": "PASS",
+            "clockfree_audit_measurement_v1": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          }
+        }
+      ]
+    }
+  ],
+  "prior_evidence_limits": "All four original unsmoothed full and four D-only BCAP points fail Ring/Gaussian. D-only used momentum.5 and pinned Adam rate.00425/prior multiplier2; full used D multiplier1.5 and prior pacing changes. Different source/formulation/task budgets grant no current R1/R2 credit and are not repeated complete recipes.",
+  "prospective_delta": [
+    {
+      "optimizer_family": "dualnorm",
+      "other_recipe_fields": "Exact m000 parent unchanged."
+    },
+    {
+      "optimizer_family": "dualnorm_D_only",
+      "other_recipe_fields": "Exact m000 parent unchanged; optimizer_adam_lr remains null."
+    }
+  ],
+  "prospective_public_preflight": [
+    {
+      "family": "dualnorm",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "b20c2ba659e7f1765390484df45a5f341eb66d8b8a8dda5d421b4ef31051ee31",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "4333a60eddfd77d9340dce2307c3e3ba10c6b209b239f9d6407585f3523aa0ca",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "63048f6721462e5b0b240ae9cfa23785e844391534f5addc3e038bbb4d9a2ae5",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "1b549a826b7ab7a4449e144bf0fe9d1b6c68bb159e6f2c29958d2ec242cb52bd",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "b0c3c152e84e58102e15e0cb573da2187783bcc1f7ae839963f81bff150816cc",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "7604ac502014d1cd6a26417ecebcd13bc4ee50172a72e4f5bedb57082ade6d9c",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm",
+          "effective_recipe_sha256": "8c7fe2a34c099202481e557faca0a02da8a5d4ea89e910dffedf31a6656c71e4",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "family": "dualnorm_D_only",
+      "task_bindings": [
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "84113541ebe7db9928d96df482ad0aa57f87797af9aa3f6b82cd76dc3206303a",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "21623e90c70cd680cb516bc2ad5b3008ef5d5188248eadc676363317d15f7c75",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "f0697ff2812f69b0fe5899b33930b40f9cf5917da271ecc22400e1c3a82e8de5",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+          "task_id": "five_word_joint_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "cd5b7e620c2ad181e6e4d6c332590a4c1b24fcae9eab9e7974ae1539772f8d1c",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+          "task_id": "gaussian1d_smoke"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "9bf6980e8606773c2ae662c883978e74da80375eaaf4cd6da5953e4a5fa8f02f",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "a052b3fe3526dcda74e7d3d94526c4aa6c8cb522af8556c216f02569b3c27b90",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+          "task_id": "two_pole"
+        },
+        {
+          "blockers": [],
+          "effective_family": "dualnorm_D_only",
+          "effective_recipe_sha256": "42e9d25d5947af09baeb9bb9995d777876c11c61f14770bba8cd088bb2e703df",
+          "only_changed_effective_field": "optimizer_family",
+          "prior_contract": "recipe_owned_v1",
+          "status": "PASS",
+          "task_contract_sha256": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    }
+  ],
+  "role_laws": {
+    "d_only": {
+      "d": "Raw-gradient polar matrix updates; L2-normalized vectors; zero momentum.",
+      "direct_pole": "Native Adam generator law unchanged at parent settings.",
+      "ge": "Native Adam(0,.99) at parent LR.0085/epsilon1e-8.",
+      "prior": "Native Adam(0,.99) at parent LR.0085/epsilon1e-8; learned distribution/capacity retained."
+    },
+    "full": {
+      "d": "Identical polar/vector law to D-only.",
+      "direct_pole": "Generator-owned12x1 matrix polar; no sampled latent table.",
+      "ge": "Raw-gradient polar matrix updates; L2-normalized vectors; zero momentum.",
+      "prior": "Per actual generator-sampled unique row, -lr*g_row/(||g_row||+eps); no prior momentum; unsampled rows fixed."
+    }
+  },
+  "sampled_prior_contract": {
+    "ae": "Behavior binding records generator-side prior sample IDs. Unsampled rows remain fixed even if original auxiliary objectives create their gradients.",
+    "rows": "Exact actual generator-side sampled IDs; set_sampled_rows uses torch.unique, cleared after stepping. Not inferred from nonzero gradients, all-table auxiliary losses or evaluation draws.",
+    "sampling_law_change": "Sampler/index law, width, initialized prior and capacity stay fixed. The optimizer changes the future learned locations through its declared family delta; full prior normalization is an explicit update-law change.",
+    "scalar_ring": "GANTrainer passes generator-side IDs through policy.generate; target batches, latent indices and Gaussian width-noise RNG streams remain original.",
+    "word": "WordFixture samples latent rows for each original branch; policy.generate records rows only during generator phase. Five rows are not silently enumerated or assumed all visited."
+  },
+  "saved_generator_jacobian": {
+    "condition_number": {
+      "max": 3.089421811236481,
+      "mean": 1.7501861867282238,
+      "median": 1.6652344031980246,
+      "min": 1.1618908145576288,
+      "p90": 2.4381370030776073
+    },
+    "largest_singular_value": {
+      "max": 2.258938436157589,
+      "mean": 1.5062323825972432,
+      "median": 1.5081443331999298,
+      "min": 0.8771412195530097,
+      "p90": 1.8744308444922433
+    },
+    "local_noise_radial_variance_ratio": {
+      "max": 1.6067356540203024,
+      "mean": 0.848055239699978,
+      "median": 0.9342118067808062,
+      "min": 0.22059271716069595,
+      "p90": 1.0906926707451468
+    },
+    "local_noise_tangent_variance_ratio": {
+      "max": 4.81394624314485,
+      "mean": 2.315403205280209,
+      "median": 2.2540533859933083,
+      "min": 0.671626179593307,
+      "p90": 3.4908616993142134
+    },
+    "method": "Float64 analytic saved two-hidden-layer LeakyReLU(.2) G Jacobian at the original256 learned MoG means; original sigma/target variance. No new output draws or metric scoring.",
+    "rows": 256,
+    "smallest_singular_value": {
+      "max": 1.2013437762996144,
+      "mean": 0.8874319501658363,
+      "median": 0.9515841724995424,
+      "min": 0.4695160139786232,
+      "p90": 1.0284193329656635
+    }
+  },
+  "saved_matrix_spectra": [
+    {
+      "ada_update": {
+        "frobenius_l2": 0.05744761552686064,
+        "leading_squared_fraction": 0.509031355381012,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 4.953939914703369,
+        "retained_rank": 4,
+        "retained_smallest": 0.00827358290553093,
+        "spectral_norm": 0.04098683223128319
+      },
+      "declared_spectral_budget": 0.034,
+      "dualnorm_update": {
+        "frobenius_l2": 0.06800000535110631,
+        "leading_squared_fraction": 0.25000008940696716,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0000001192092896,
+        "retained_rank": 4,
+        "retained_smallest": 0.03400000184774399,
+        "spectral_norm": 0.034000005573034286
+      },
+      "gradient": {
+        "frobenius_l2": 0.0411569358813429,
+        "leading_squared_fraction": 0.5090312957763672,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 4.953938961029053,
+        "retained_rank": 4,
+        "retained_smallest": 0.005927405320107937,
+        "spectral_norm": 0.029364004731178284
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.05744762993993328,
+        "leading_squared_fraction": 0.5321493148803711,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 4.576355457305908,
+        "retained_rank": 4,
+        "retained_smallest": 0.009157335385680199,
+        "spectral_norm": 0.04190722107887268
+      },
+      "parameter_id": 0,
+      "role": "generator",
+      "shape": [
+        64,
+        4
+      ]
+    },
+    {
+      "ada_update": {
+        "frobenius_l2": 0.10351304368215127,
+        "leading_squared_fraction": 0.593636155128479,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 118693.59375,
+        "retained_rank": 44,
+        "retained_smallest": 6.719361067553109e-07,
+        "spectral_norm": 0.07975450903177261
+      },
+      "declared_spectral_budget": 0.0085,
+      "dualnorm_update": {
+        "frobenius_l2": 0.05638262928368555,
+        "leading_squared_fraction": 0.02272728458046913,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0000007152557373,
+        "retained_rank": 44,
+        "retained_smallest": 0.008499997667968273,
+        "spectral_norm": 0.008500004187226295
+      },
+      "gradient": {
+        "frobenius_l2": 0.0314471881052111,
+        "leading_squared_fraction": 0.593636155128479,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 118712.8515625,
+        "retained_rank": 44,
+        "retained_smallest": 2.041006155195646e-07,
+        "spectral_norm": 0.024229366332292557
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.10351309048016041,
+        "leading_squared_fraction": 0.5004920363426208,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 93009.171875,
+        "retained_rank": 64,
+        "retained_smallest": 7.873504728195257e-07,
+        "spectral_norm": 0.0732308179140091
+      },
+      "parameter_id": 2,
+      "role": "generator",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "ada_update": {
+        "frobenius_l2": 0.024887250627503053,
+        "leading_squared_fraction": 0.8532280921936035,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 2.4110772609710693,
+        "retained_rank": 2,
+        "retained_smallest": 0.009534510783851147,
+        "spectral_norm": 0.022988442331552505
+      },
+      "declared_spectral_budget": 0.0085,
+      "dualnorm_update": {
+        "frobenius_l2": 0.012020816584084291,
+        "leading_squared_fraction": 0.5,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0,
+        "retained_rank": 2,
+        "retained_smallest": 0.008500000461935997,
+        "spectral_norm": 0.008500000461935997
+      },
+      "gradient": {
+        "frobenius_l2": 0.11380112964559425,
+        "leading_squared_fraction": 0.8532280325889587,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 2.411076068878174,
+        "retained_rank": 2,
+        "retained_smallest": 0.04359816387295723,
+        "spectral_norm": 0.10511849075555801
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.024887250374997123,
+        "leading_squared_fraction": 0.8320601582527161,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 2.2258737087249756,
+        "retained_rank": 2,
+        "retained_smallest": 0.010198910720646381,
+        "spectral_norm": 0.022701486945152283
+      },
+      "parameter_id": 4,
+      "role": "generator",
+      "shape": [
+        2,
+        64
+      ]
+    },
+    {
+      "ada_update": {
+        "frobenius_l2": 0.12578305064442555,
+        "leading_squared_fraction": 0.6805588603019714,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 30.038450241088867,
+        "retained_rank": 10,
+        "retained_smallest": 0.003454438177868724,
+        "spectral_norm": 0.10376597195863724
+      },
+      "declared_spectral_budget": 0.02150348808914498,
+      "dualnorm_update": {
+        "frobenius_l2": 0.06799999827602222,
+        "leading_squared_fraction": 0.10000007599592209,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0000004768371582,
+        "retained_rank": 10,
+        "retained_smallest": 0.02150348387658596,
+        "spectral_norm": 0.021503495052456856
+      },
+      "gradient": {
+        "frobenius_l2": 0.03270457127365494,
+        "leading_squared_fraction": 0.6805587410926819,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 30.038463592529297,
+        "retained_rank": 10,
+        "retained_smallest": 0.0008981803548522294,
+        "spectral_norm": 0.02697995863854885
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.12578309978413363,
+        "leading_squared_fraction": 0.5774782299995422,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 14.777032852172852,
+        "retained_rank": 10,
+        "retained_smallest": 0.006468489300459623,
+        "spectral_norm": 0.09558507800102234
+      },
+      "parameter_id": 0,
+      "role": "critic",
+      "shape": [
+        64,
+        10
+      ]
+    },
+    {
+      "ada_update": {
+        "frobenius_l2": 0.28499639238189683,
+        "leading_squared_fraction": 0.8870835900306702,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 41478.8671875,
+        "retained_rank": 23,
+        "retained_smallest": 6.471347205661004e-06,
+        "spectral_norm": 0.2684241533279419
+      },
+      "declared_spectral_budget": 0.0085,
+      "dualnorm_update": {
+        "frobenius_l2": 0.04076457827434666,
+        "leading_squared_fraction": 0.04347829148173332,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0000007152557373,
+        "retained_rank": 23,
+        "retained_smallest": 0.008499998599290848,
+        "spectral_norm": 0.00850000511854887
+      },
+      "gradient": {
+        "frobenius_l2": 0.021520052479943635,
+        "leading_squared_fraction": 0.8870835900306702,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 41478.41796875,
+        "retained_rank": 23,
+        "retained_smallest": 4.886562692263396e-07,
+        "spectral_norm": 0.020268689841032028
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.28499650165982404,
+        "leading_squared_fraction": 0.8688032031059265,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 111010.1484375,
+        "retained_rank": 63,
+        "retained_smallest": 2.392971282461076e-06,
+        "spectral_norm": 0.2656441032886505
+      },
+      "parameter_id": 2,
+      "role": "critic",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "ada_update": {
+        "frobenius_l2": 0.04243704382739287,
+        "leading_squared_fraction": 1.0,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0,
+        "retained_rank": 1,
+        "retained_smallest": 0.04243704304099083,
+        "spectral_norm": 0.04243704304099083
+      },
+      "declared_spectral_budget": 0.0085,
+      "dualnorm_update": {
+        "frobenius_l2": 0.008500001476665325,
+        "leading_squared_fraction": 1.0,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0,
+        "retained_rank": 1,
+        "retained_smallest": 0.008500001393258572,
+        "spectral_norm": 0.008500001393258572
+      },
+      "gradient": {
+        "frobenius_l2": 0.09738405827958926,
+        "leading_squared_fraction": 1.0,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0,
+        "retained_rank": 1,
+        "retained_smallest": 0.09738405793905258,
+        "spectral_norm": 0.09738405793905258
+      },
+      "native_adam_update": {
+        "frobenius_l2": 0.04243704603411597,
+        "leading_squared_fraction": 1.0,
+        "relative_cutoff": 7.62939453125e-06,
+        "retained_condition": 1.0,
+        "retained_rank": 1,
+        "retained_smallest": 0.04243704676628113,
+        "spectral_norm": 0.04243704676628113
+      },
+      "parameter_id": 4,
+      "role": "critic",
+      "shape": [
+        1,
+        64
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Prospective spectral hypothesis, no admission before direction/floor campaign closure. No candidate or queue changes.",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_files": {
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "a962cececa641f39d61ae067d38c3c979af73173be10dee3f27feb66fc02e492",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "090abe6d153ab10cf0e0102e6d2fdcf7f40b9dd63f3b9191e640d7f6a7e2446c",
+    "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "particlegan/optim/dualnorm.py": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa",
+    "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+    "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+  },
+  "supporting_inputs": {
+    "reports/forge/dualnorm-pacing-v2/DEFAULT_SELECTION.md": "3ad6446fcf6ab72bf2c0bac58469a878275ef7c5f0434a26706c6074045e17f7",
+    "reports/forge/dualnorm-tier1/README.md": "3f28de1b926637241e4c3efc6b61ad73bf874498a340ba89a25d260172558b57",
+    "reports/forge/r1r2-five-track-repair/density-readout.json": "a6dc1cae1ccda74539a31fb06b381029e5fd866b5a813f2d0cc264c09458ae18",
+    "reports/forge/r1r2-role-repair/optimizer/normalization.json": "2d25898a09c2bfc4d619bd4b8d5fc49a751b36610263347153cbb0b333425e37"
+  }
+}

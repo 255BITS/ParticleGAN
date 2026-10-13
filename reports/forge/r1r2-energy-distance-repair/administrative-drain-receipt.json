@@ -1,0 +1,36 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012",
+  "bulk_logs_in_git": false,
+  "coordinator_commit": "Recorded separately by the committed driver at runtime; must descend from scientific execution commit and change only these administrative files.",
+  "independent_code_review": "PASS",
+  "initial_drain_failure": "Frozen collection view retained only14authorized jobs, but Queue._results requires all58planned bookkeeping entries. Failure preceded every worker claim.",
+  "inputs_sha256": {
+    "reports/forge/r1r2-energy-distance-repair/administrative_drain.py": "36659f5fbeff4b1ab8ed1d53df4af1a3ca7d78fde761dc27f2ab7e58da51d7a9",
+    "reports/forge/r1r2-energy-distance-repair/test_administrative_drain.py": "10b6cca2102d7654bdd7436a52d112e84e05182d1dc4ee06076f92aad24f1d5b"
+  },
+  "local_log_sha256": {
+    "administrative-queue-readonly-final.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "administrative-queue-readonly-final.stdout.log": "079ed64f852fa6513734fa3495eff94940d1536a5dffbc65a1b72806e8ec5a4d",
+    "run.log": "10de46231333ab752ebccfbb257cdd640bdaa48c69414082d75a2fce4bf9a698",
+    "test-administrative-drain.log": "b6e0f6bdd4f17cd948fdf599463d637be8d5460713da1c13fe3583295acbc629"
+  },
+  "new_paid_attempts_at_repair": 0,
+  "original_admissions": {
+    "energy_u": "5e165fc7ac28e8791e044bee",
+    "non_saturating": "a7918d6e2a6a708d8316364b"
+  },
+  "original_workflow_sha256": "991e573c137327b8dd00c129f8ac916dff1f95f790171ea78bc77ee94b189b96",
+  "preserved_historical_paid_attempts": 217,
+  "preserved_historical_paid_seconds": 6586.162437112915,
+  "qualification_input": false,
+  "registration_sha256": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+  "repair": "Expose all58planned records only during collection; leave original14-only claims/fullpaid and storage constraints unchanged. Higher44 records must stay pending, unsubscribed and unattempted. Preserve original registration/admissions/source snapshot, scientific sourceB, and immutable progress fields; retain ordinary phase completion.",
+  "reproduction": "Run administrative_drain.py check then drain with the explicit reviewed administrative commit. It resumes the existing admissions, without preparation, submission, recipe/source/task changes or scientific retries.",
+  "schema_version": 1,
+  "scientific_execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "scientific_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "scope": "preexecution_administrative_collection_repair",
+  "software_guards_passed": 12,
+  "software_scope": "Memory-only copies of actual29-job requests; originalKeyError reproduced,58-key collection succeeds, foreign/higher-tier isolation and B/C source provenance verified.",
+  "status": "PASS"
+}

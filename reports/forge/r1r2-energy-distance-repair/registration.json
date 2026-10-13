@@ -1,0 +1,184 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012",
+  "candidates": {
+    "energy_u": {
+      "candidate": "r1r2-non-saturating-energy-u-v1",
+      "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+      "card": {
+        "candidate": "r1r2-non-saturating-energy-u-v1",
+        "role": "energy_u",
+        "study": "r1r2-non-saturating-energy-u-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "29e5b1d34e6da8a5c10555b77a9683e9b1c14e01cc61df9a19f1b59d6ef0d27f",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "ca068f9a2b22445f9676ef5c1a4b1b71b5b9a0180c03b5923e5a09345965ba73",
+        "clockfree_audit_measurement_v1": "ead417a0ae73454e6b44a17a4c74a42681545ff9da021c8c42c7f17bcd5da9ae",
+        "five_word_joint_smoke": "4e5707105b25366ca98f8271bf579ec60569bf590581e91af6ad084df187d305",
+        "gaussian1d_smoke": "4f60096605c85b8ea9216f306f3eb5ffcc188170c4672bf35db71e366eaed634",
+        "ring16_acquisition": "beb563164b85282df76d065a2b9702e0d1bfec0748c19e3387b7f14525a3ae0a",
+        "two_pole": "74af4f84468f1eff869a635dc8989ca401b20c8e3f5848d4a30460483c9cf8d9",
+        "unused_token_hold": "7ab4f0b279e6ea52f52da4506c2aa5c0eb6c2bcb1899c744a2f8e7bb1066e264"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+      "card": {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-energy-u-fresh-control-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "0c9fb8605a20087519195015767de2e8f50e2bdec16b17fcb457d5cbe372c106",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "463147e06c73ed68de587bae065320d8b1da23c564b5ac415a726873392f4fe0",
+        "clockfree_audit_measurement_v1": "23c0ce2850a6e1522e7a3f820b74f87086a4c938126d563a6f9fc5bdffac9997",
+        "five_word_joint_smoke": "727b770332185edee5dd5ceaf9c99a2c34b178fff3083567b6edb0d251e118a7",
+        "gaussian1d_smoke": "f8ebbe713b469f27a4a8939e4839080945bc201c7bdf6029fbec93c989357c7a",
+        "ring16_acquisition": "0132a56d113241a19e5077445318f07efb2a27a437521ed612075bb8f71ff838",
+        "two_pole": "687cbbde47bbf22ce4d2afbe47d3b2d8b8ced868e662ae9a0724b5e8ffaf0817",
+        "unused_token_hold": "20a480390275dca5b74922b5455d3b5d83212b3581d89fe010a59b55c472dfc4"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/ideas/r1r2-non-saturating-ams-m110-v1.json": "1f55db50347ed7adc5ebe54a9d38fdaa8de42b99eed091be793a086790f4030d",
+    "configs/forge/ideas/r1r2-non-saturating-energy-u-v1.json": "099b73c32aaab46a56f0db60793ea4332815119717feae8793b8ab4d90decf6b",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-energy-u-fresh-control-v1-study.json": "b4c5e6b64d6e7d1a7e688e7e5fa26b7572fe54f83fbc36ec74b9e4409a271f8b",
+    "configs/forge/studies/r1r2-non-saturating-energy-u-v1-study.json": "bc32fe2938e15da553c0dec95c289fd55ec7abb1cef5f609db707039719a2588",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-energy-distance-repair/API.md": "2f8a9032f28431a60ebdf284a7c9e4010ea7e67abaf97436c4ef311618c0e30f",
+    "reports/forge/r1r2-energy-distance-repair/PLAN.md": "7317e73548b621caf877f8d95aec180ab220b1ed34c99a0802e5a503cb12870d",
+    "reports/forge/r1r2-energy-distance-repair/audit_collection.py": "c94f9d3e78e74c99a5a51c1facde1b0a998b2a56593fb2a333480a2932ecbdb2",
+    "reports/forge/r1r2-energy-distance-repair/density_audit.py": "6d631030496633f960ecaa3572fd34c465e0adb7e93117c0ac1c5ac3662b534b",
+    "reports/forge/r1r2-energy-distance-repair/manifest.json": "b9147d2fe0a5a249a10ad85c582449656c75f551b6aa55c9a9a2911e10e97a9e",
+    "reports/forge/r1r2-energy-distance-repair/software-validation.json": "8fb2573fc7834747d3637060287b813023c90d3584d00961ee1455dceb652a8d",
+    "reports/forge/r1r2-energy-distance-repair/software_audit_probe.py": "460652e77401f92a17670cda4b87ebfd452feb47e2e9dc73661fe4ef0ae306e4",
+    "reports/forge/r1r2-energy-distance-repair/test_energy_distance_workflow.py": "73aa178ff8c1da5b137b9d35e3ca56affac6e311074d728c79df07a45d319f0e",
+    "reports/forge/r1r2-energy-distance-repair/workflow.py": "991e573c137327b8dd00c129f8ac916dff1f95f790171ea78bc77ee94b189b96",
+    "reports/forge/r1r2-score-law-repair/publication/results.json": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066",
+    "reports/forge/r1r2-weak-penalty-repair/README.md": "52511024040637db423e857b63ccea896dbeb27233b591e25a8e848c4340a4d6",
+    "reports/forge/r1r2-weak-penalty-repair/collection-audit.json": "f252d35de8ca405fa34f6017db4adb7786949099cd61c2812d8bf3a9fbc5ef33",
+    "reports/forge/r1r2-weak-penalty-repair/density-audit.json": "2f5fb3e0a1ee47163f558fad9ce4db251acde2320af65f912f1b8339b05c8601",
+    "reports/forge/r1r2-weak-penalty-repair/publication/results.json": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-api-plan.md": "f7afcca218d8a6066d4f2b2990b4780ddf0869cdf4c9d7ab34df7bef059a3336",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/README.md": "6e13586deafa571f966f55b836dd9be999bcc350d4c5a7f5de8e105488414de1",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/diagnosis.json": "a0b6f6c5b74d826a4cc2f478ceb988466ceb9e057795bf8a8e6528a6101aaec5",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/probe.py": "319af6fedb2471bdf18ff3ea2e4c2de27ebe44932de63270dfcbd48797f4e754",
+    "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md": "4d36cbe7b3c9f643025034dd8b40b6a5d1b845ae13a0088932d93778cf8a1c9b",
+    "tests/conftest.py": "0ad701c939839a02c282d4998ddcdf47c22b97cdda6d3515d50f3c90e9265241",
+    "tests/test_energy_bindings.py": "137eea61c670fd6bda85d7c44c65d69b893d55fb06ff8c7d33955314e0a0a13b",
+    "tests/test_energy_distance.py": "4aaa7de91fe82a7be9957b7bb9ecfc132728295abed32925383f6c07fb069090"
+  },
+  "manifest": {
+    "baseline_role": "non_saturating",
+    "campaign": {
+      "budget_seconds": 5040,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-energy-distance-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-energy-u-fresh-control-v1-study"
+      },
+      {
+        "candidate": "r1r2-non-saturating-energy-u-v1",
+        "role": "energy_u",
+        "study": "r1r2-non-saturating-energy-u-v1-study"
+      }
+    ],
+    "id": "r1r2-energy-distance-repair-v1",
+    "max_candidates": 2,
+    "paid_cap_seconds": 8000,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+    "supporting_inputs": [
+      "reports/forge/r1r2-energy-distance-repair/workflow.py",
+      "reports/forge/r1r2-energy-distance-repair/PLAN.md",
+      "reports/forge/r1r2-energy-distance-repair/audit_collection.py",
+      "reports/forge/r1r2-energy-distance-repair/density_audit.py",
+      "reports/forge/r1r2-energy-distance-repair/test_energy_distance_workflow.py",
+      "reports/forge/r1r2-weak-penalty-repair/README.md",
+      "reports/forge/r1r2-weak-penalty-repair/publication/results.json",
+      "reports/forge/r1r2-weak-penalty-repair/collection-audit.json",
+      "reports/forge/r1r2-weak-penalty-repair/density-audit.json",
+      "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md",
+      "reports/forge/r1r2-weak-penalty-repair/research/energy-api-plan.md",
+      "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/probe.py",
+      "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/diagnosis.json",
+      "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/README.md",
+      "reports/forge/r1r2-energy-distance-repair/software_audit_probe.py",
+      "reports/forge/r1r2-energy-distance-repair/software-validation.json",
+      "tests/test_energy_distance.py",
+      "tests/test_energy_bindings.py",
+      "tests/conftest.py",
+      "reports/forge/r1r2-energy-distance-repair/API.md"
+    ]
+  },
+  "manifest_sha256": "b9147d2fe0a5a249a10ad85c582449656c75f551b6aa55c9a9a2911e10e97a9e",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 5040,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

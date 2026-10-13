@@ -1,0 +1,61 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-round2-cached-baseline-v1"
+  },
+  "candidate": "recipe-prior-refactor-r1r2-v1",
+  "competing_explanation": "The late bursts may reflect unresolved critic/prior geometry rather than step magnitude. Preserved covariance, transport, inverse and clock gates distinguish smaller bursts from a complete global solution; exact cache reuse adds no baseline training.",
+  "control": {
+    "candidate_id": "r1r2--545108daeebeb0729b63c1371fcde9d695b866e78c981c63ae2e906a8ecd7f96",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "The exact cached scheduled baseline remains the same source/runtime/task-bound reference; its saved terminal Ring16 component covariance error remains above0.85 while three global LR-only constant children test the late-burst explanation.",
+  "id": "r1r2-tier1-round2-cached-baseline-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "a68d67bc0972421ab60984bbda398532",
+        "candidate_id": "recipe-prior-refactor-r1r2-v1",
+        "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+      "selector": [
+        "certified_results",
+        4
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

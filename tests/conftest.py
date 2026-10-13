@@ -3,12 +3,26 @@
 from contextlib import contextmanager
 import hashlib
 import importlib.util
+import inspect
 import json
 from pathlib import Path
 
 import pytest
 
 from benchmarks.toy100.device import device_policy_scope
+
+
+def _check_inactive_ownership(name, default, ownership, prior_binding):
+    """Check added default metadata, including explicit task inapplicability."""
+    if ownership.get("status") == "not_applicable":
+        assert name == "prior_proximal_strength" and default == 0.0
+        assert prior_binding["latent_table_controls"] is False
+        assert ownership == dict(value=None, owner="hyperparameter",
+            source="task prior-control applicability", status="not_applicable",
+            reference_recipe_value=default, representation=prior_binding["representation"])
+    else:
+        assert ownership["value"] == default
+        assert ownership["source"].startswith("public Recipe ")
 
 
 @contextmanager
@@ -27,9 +41,29 @@ def _archived_inactive_comparison_scope(module, directory):
     # The original comparator still checks every numerical/statistic assertion.
     helper.INACTIVE_DEFAULTS = {**helper.INACTIVE_DEFAULTS,
         "prior_update": "learned", "prior_regularizer": "vicreg",
-        "prior_reg_target_std": 1.0, "prior_reg_eps": 1e-4, "prior_l2": 0.0}
+        "prior_reg_target_std": 1.0, "prior_reg_eps": 1e-4, "prior_l2": 0.0,
+        "prior_coulomb_softening": .1, "prior_coulomb_confinement": .35,
+        "prior_coulomb_neighbors": 8, "prior_proximal_strength": 0.0,
+        "prior_sigreg_projections": 32, "prior_sigreg_knots": 17,
+        "energy_distance_weight": 0.0}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
+    # The frozen probe predates null ownership for nonsampled direct-coordinate
+    # hosts. Check that exact task contract before omitting its added default;
+    # every tensor/update/stream comparison remains the original comparator.
+    metadata_assertions = ('                assert ownership["value"] == default\n'
+                           '                assert ownership["source"].startswith("public Recipe ")\n')
+    source = adapted.decode()
+    assert source.count(metadata_assertions) == 1
+    source = source.replace(metadata_assertions,
+        '                _check_inactive_ownership(name, default, ownership,\n'
+        '                    state["applied"]["field_ownership"]["task_contract"]["prior"]["control_binding"])\n')
+    source = inspect.getsource(_check_inactive_ownership) + "\n" + source
+    adapted = source.encode()
+    import difflib
+    diff = "".join(difflib.unified_diff(original.decode().splitlines(keepends=True),
+        source.splitlines(keepends=True), fromfile=helper.INACTIVE,
+        tofile="outside-Git/test_bcap_integration_compatibility_adapted.py"))
     from particlegan import Recipe
     recipe = Recipe()
     for name, default in helper.INACTIVE_DEFAULTS.items():
@@ -43,7 +77,8 @@ def _archived_inactive_comparison_scope(module, directory):
         "original_sha256": hashlib.sha256(original).hexdigest(),
         "adapted_sha256": hashlib.sha256(adapted).hexdigest(),
         "checked_inactive_defaults": helper.INACTIVE_DEFAULTS,
-        "assertions_unchanged": True,
+        "numerical_statistical_assertions_unchanged": True,
+        "metadata_assertion_extension": "exact default or explicit nonsampled prior_proximal_strength ownership",
         "task_question_source_commit": module.DEVELOP,
         "qualification_input": False,
     }, indent=2) + "\n")

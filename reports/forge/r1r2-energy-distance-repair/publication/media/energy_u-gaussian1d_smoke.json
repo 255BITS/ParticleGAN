@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "1dee21a6d156d4b264eaa63d3a7dd48efc98c65c1001e3181d5f85ef8146019c",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "ecc072cba247a765a7537fd26b55cdbc998440e61bdf544cfafe72534eeb542c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-distance-repair-v1/56676fa4cf49455baaf9114bca5190c7/evaluator/observed-samples.pt": "bf7dd286009abf6e1f5c29478f530e10a1951236a984c70b0773cd26f8419f47"
+  },
+  "task_id": "gaussian1d_smoke"
+}

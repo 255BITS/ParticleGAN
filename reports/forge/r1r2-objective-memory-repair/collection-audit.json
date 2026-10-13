@@ -1,0 +1,1924 @@
+{
+  "actual_optimizer_groups": {
+    "adam": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    },
+    "ams_m110": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": true,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "max_exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    },
+    "baseline": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008504718807576485
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9030153240524368
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500294931158753
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008500000000000001
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008546073800152157
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008546073800152157
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008507373051561022
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0008507373051561022
+        }
+      }
+    },
+    "global_transport": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    },
+    "m110": {
+      "ae_gan_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "five_word_joint_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "E": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "gaussian1d_smoke": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "ring16_acquisition": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "P": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "two_pole": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      },
+      "unused_token_hold": {
+        "D": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        },
+        "G": {
+          "algorithm": "adam",
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "eps": 1e-08,
+          "family": "adam",
+          "history_fields": [
+            "exp_avg",
+            "exp_avg_sq",
+            "step"
+          ],
+          "lr": 0.0085
+        }
+      }
+    }
+  },
+  "actual_transport_receipts": {
+    "ae_gan_hold": {
+      "active_calls": 250,
+      "calls": 250,
+      "conditioning_used_in_distance": false,
+      "consumer": "output_marginal_v1",
+      "global_weight": 1,
+      "kind": "actual_output_marginal_consumer",
+      "local_weight": 0,
+      "loss_sum": 55.958018658682704,
+      "maximum_loss": 0.7335406541824341,
+      "projections": 32,
+      "schema_version": 1
+    },
+    "five_word_joint_smoke": {
+      "active_calls": 20001,
+      "calls": 20001,
+      "conditioning_used_in_distance": false,
+      "consumer": "output_marginal_v1",
+      "global_weight": 1,
+      "kind": "actual_output_marginal_consumer",
+      "local_weight": 0,
+      "loss_sum": 9667.578017170541,
+      "maximum_loss": 1.3883249759674072,
+      "projections": 32,
+      "schema_version": 1
+    },
+    "gaussian1d_smoke": {
+      "completed_steps": 1000,
+      "global_weight": 1,
+      "kind": "frozen_public_G_phase_same_batch_source_and_actual_batch_receipt",
+      "local_weight": 0,
+      "projections": 32,
+      "scalar_counter_available": false
+    },
+    "ring16_acquisition": {
+      "completed_steps": 1600,
+      "global_weight": 1,
+      "kind": "frozen_public_G_phase_same_batch_source_and_actual_batch_receipt",
+      "local_weight": 0,
+      "projections": 32,
+      "scalar_counter_available": false
+    },
+    "two_pole": {
+      "active_calls": 80,
+      "calls": 80,
+      "conditioning_used_in_distance": false,
+      "consumer": "output_marginal_v1",
+      "global_weight": 1,
+      "kind": "actual_output_marginal_consumer",
+      "local_weight": 0,
+      "loss_sum": 39.971593394875526,
+      "maximum_loss": 1.0,
+      "projections": 32,
+      "schema_version": 1
+    },
+    "unused_token_hold": {
+      "active_calls": 200,
+      "calls": 200,
+      "conditioning_used_in_distance": false,
+      "consumer": "output_marginal_v1",
+      "global_weight": 1,
+      "kind": "actual_output_marginal_consumer",
+      "local_weight": 0,
+      "loss_sum": 102843768.68597412,
+      "maximum_loss": 4194304.0,
+      "projections": 32,
+      "schema_version": 1
+    }
+  },
+  "checks": {
+    "14_new_charge_owners_and203_unique_aggregate": "PASS",
+    "actual_D_G_E_P_betas_native_Adam_and_global_AMSGrad_maximum_histories": "PASS",
+    "all189_old_charge_ids_owners_values_retained": "PASS",
+    "all_consumed_named_stream_receipts_match_saved_states": "PASS",
+    "artifact_bytes_and_actual_training_gif_sidecars": "PASS",
+    "certified_projection_and_stored_original_independent_grades": "PASS",
+    "direct_pole_consumes_G_betas_sampled_prior_inapplicable": "PASS",
+    "fixed_actual_initial_tensors_and_ordered_target_batches": "PASS",
+    "global_unit_transport_local_zero_same_batch_frozen_public_law_and_actual_consumers": "PASS",
+    "no_scientific_retries": "PASS",
+    "python_numpy_torch_cpu_rng_unchanged": "PASS",
+    "three_exact_cached_controls": "PASS",
+    "unsampled_token_prior_factor_inapplicable": "PASS"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 6222.199867211952,
+    "cached_new_paid_seconds": 0,
+    "new_paid_seconds": 379.57483000901993,
+    "prior_paid_seconds": 5842.625037202932,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "coverage": {
+    "aggregate_unique_paid_attempts": 203,
+    "cases": 35,
+    "checkpoints": 30,
+    "clock_proofs": 5,
+    "clock_saved_snapshots": 130,
+    "clock_stream_states": 1820,
+    "exact_cached_control_cases": 21,
+    "gifs": 35,
+    "grades": 35,
+    "new_paid_attempts": 14,
+    "optimizer_groups": 85,
+    "ordinary_stream_states": 490,
+    "roles": 5,
+    "source_files": 1214
+  },
+  "inputs_sha256": {
+    "aggregate203_charge_index": "4f34d686ca202bdebf4f17434f416ea537ac23083fdccb210cb438fa4115b390",
+    "audit_source": "596ba6cbefbfcea8dc059450ba0c157c7cc72980e9a8f5e384324d619f3bf384",
+    "historical189_charge_index": "ccb67141284c3e9f42cde99cd6950380570f9dae3e952b86795f4715cd0476c0",
+    "old_first_publication": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "old_role_publication": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "old_spectral_audit": "621c25339ce82aedb8f80facf0cb985a4692125bc5228e1808e7f6823077c383",
+    "old_spectral_publication": "72ff8796f9a440e12f722bd28230cebc3f204810d31488cf16adababe27970c7",
+    "progress": "f2d33c14bdfcaa026c6f9f4de91b2e9a3e615cfbc40c4fcf3b50e7bde55287b7",
+    "publication": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+    "queue": "08235119a442004091f62a03e55cc43c93bc0278c0f047e496957632984a2076",
+    "registration": "f649a1d94109068d8283a739141fe8cd83323f5f5f53f8978603a8387bbbf288"
+  },
+  "limits": "Stored original independent grades only; no gates recomputed. Clock proofs retain each own cohort. Optimizer family, betas, epsilon and history fields come from actual saved groups; direct-pole counters remain labelled prior but consume the G algorithm. All active AMSGrad groups retain actual elementwise maximum second-moment tensors. Same-batch transport is bound to actual fixed recipe and original batch digests plus frozen public update source; component hosts also retain per-update consumer counters. Scalar trainer has no separate transport-call counter or retained paired-force values; no fresh force calculation is performed. Caller-global metadata is not compared across candidates.",
+  "live_evaluators_or_rescoring": false,
+  "method_helpers_sha256": {
+    "experiments/forge/artifacts.py": "d282269ef2c0a45d27fc105121529e952affe0e6328545cc6a43c6333d59187b",
+    "experiments/forge/contracts.py": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5",
+    "reports/forge/regenerate_technique_inventory.py": "bb4551d2461ae025d35a95146bd932ca0fc4e28975ee3f88c480e77d3eaec8d0"
+  },
+  "model_construction_training_sampling_and_random_draws_forbidden": true,
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "independent_read_only_r1r2_objective_memory_collection_audit",
+  "source_commit": "2b0ad9ec7c5b2c1e91ab0d70751da0b7e36a7b42",
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "status": "PASS"
+}

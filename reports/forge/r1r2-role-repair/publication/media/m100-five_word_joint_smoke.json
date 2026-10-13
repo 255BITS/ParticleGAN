@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "2b96b3b1261fe2b3a050214ea89ad24c1771679e38322dd35de249ab397e3531",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "fc605ac507a5dbcdf4cce64479b872d306992f64f85921055d57c789381f8851",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-role-m100-v1/ba203bda8c9b42a181db3d7379b67c06/observed-records.pt": "28b8d393ecf026d7a771986d10d9c84d208d94ebc75e575201d76357b37e0353"
+  },
+  "task_id": "five_word_joint_smoke"
+}

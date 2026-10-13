@@ -1,0 +1,1417 @@
+{
+  "limits": "Conditional last-step direction comparison from certified native-Adam endpoint gradients and moments. No counterfactual trajectory, optimizer construction, training, draws or rescoring. CPU float32 SVD uses the actual polar helper; GPU rounding can differ. All directions are descent-direction magnitudes with sign suppressed equally. Native/Ada formulas approximate native float32 kernel rounding. Ada graft preserves tensor norm up to gradient-norm epsilon. Prior rownorm uses nonzero-gradient rows; native final sampled IDs are unavailable and no ownership receipt is synthesized.",
+  "optimizer_updates_added": 0,
+  "prior_art": [
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-ada-nsgda-tier1-v1.json",
+      "scope": "different BCAP formulation and original task bindings; no R1/R2 credit or repeat",
+      "sha256": "ee23c5dfcf30096e0aae7cbfc118e330276f8a7e0361093e330a1546836d299d",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "trials": [
+        {
+          "candidate_id": "bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+          "candidate_revision": "dad44084a46fcf106d17815c75b70e80b09f4600c9386908a486ad1577631feb",
+          "ordinary_statuses": {
+            "ae_gan_hold": "FAIL",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS"
+          },
+          "recipe_overrides": {
+            "lr": 0.016,
+            "optimizer_family": "ada_nsgda"
+          }
+        },
+        {
+          "candidate_id": "bcap-ada-nsgda--628f53f4f05a987ec17de0f5b2e780b2a43ec37a7e9bc13a92f9fcf529498ece",
+          "candidate_revision": "89d1ad5fde2fc9a01a3fe697607e25751dcebd877e05c11f072b7016c7dd7325",
+          "ordinary_statuses": {
+            "ae_gan_hold": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          },
+          "recipe_overrides": {
+            "lr": 0.00425,
+            "optimizer_family": "ada_nsgda"
+          }
+        },
+        {
+          "candidate_id": "bcap-ada-nsgda--85e094213523086f45b393ee1dbb31f4d2786bfb648fa6343db420ead0089cf6",
+          "candidate_revision": "72be5be05fe3cf0a86affcd7b9cd556d30c4aced0b5a40a2a11c7854a61698f1",
+          "ordinary_statuses": {
+            "ae_gan_hold": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          },
+          "recipe_overrides": {
+            "lr": 0.001,
+            "optimizer_family": "ada_nsgda"
+          }
+        },
+        {
+          "candidate_id": "bcap-ada-nsgda--ecd97e3001a4e027dee7fb01f7e5b355a18314a17cc15b157514d2b6af27188e",
+          "candidate_revision": "74c03293f947f1b2f35969728532a335156decddec6309e61e00879868bff857",
+          "ordinary_statuses": {
+            "ae_gan_hold": "PASS",
+            "five_word_joint_acquisition": "PASS",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          },
+          "recipe_overrides": {
+            "lr": 0.00025,
+            "optimizer_family": "ada_nsgda"
+          }
+        }
+      ]
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json",
+      "scope": "different BCAP formulation and original task bindings; no R1/R2 credit or repeat",
+      "sha256": "7af00be693e902199ebe65702c24afb6cf9151eb7cbf89af59581bc62c2d1594",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "trials": [
+        {
+          "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+          "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+          "ordinary_statuses": {
+            "ae_gan_hold": "PASS",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "PASS"
+          },
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.03,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 1.0
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+          "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+          "ordinary_statuses": {
+            "ae_gan_hold": "PASS",
+            "five_word_joint_acquisition": "PASS",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "PASS"
+          },
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.01,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 3.0
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--9bd14ef912f8eb82e2dfd1a2c3be9449c6522e783c6372b970029f18faf26afd",
+          "candidate_revision": "faef6785d37578c322e09978ec51cbb1b987b71d0cf6601849d1112fa0abb040",
+          "ordinary_statuses": {
+            "ae_gan_hold": "FAIL",
+            "five_word_joint_acquisition": "PASS",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "FAIL",
+            "unused_token_hold": "FAIL"
+          },
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.003,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 10.0
+          }
+        },
+        {
+          "candidate_id": "bcap-dualnorm--f195eee9cc636a0db466b10192705a4f2f82484bf617abd0d4b567bad99c5b5e",
+          "candidate_revision": "7941d9dba1ee6c10b608856d90aab5efaaf4d4a06a53a605a8fac6cd1022819e",
+          "ordinary_statuses": {
+            "ae_gan_hold": "FAIL",
+            "five_word_joint_acquisition": "FAIL",
+            "gaussian1d_acquisition": "FAIL",
+            "ring16_acquisition": "FAIL",
+            "two_pole": "PASS",
+            "unused_token_hold": "FAIL"
+          },
+          "recipe_overrides": {
+            "d_lr_mult": 1.5,
+            "lr": 0.1,
+            "optimizer_family": "dualnorm",
+            "prior_lr_mult": 0.3
+          }
+        }
+      ]
+    }
+  ],
+  "publication_sha256": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+  "python_and_torch_rng_unchanged": true,
+  "qualification_input": false,
+  "results": [
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "41bbdf0c128145ec663f3001e4d4d0cc7d2730f9548c74fcc0de677d1d91ada2",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/27c75f3d768e4b789a488a3fdc5a2e90/provenance",
+        "bytes": 205155,
+        "completed_steps": 1600,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+        "state_sha256": "27ed648b4924c40f626a16224f315007ae80906782df510e913737450eda3a2e"
+      },
+      "optimizer_groups": [
+        {
+          "ada_nsgda": {
+            "l2": 0.12324868151530484,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.6779612728226204,
+            "raw_gradient_angle_degrees": 55.424997831321065,
+            "raw_gradient_cosine": 0.5674845611797554
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.09035624748799642,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8356636700400869,
+            "raw_gradient_angle_degrees": 66.08479619115394,
+            "raw_gradient_cosine": 0.40538417576406843
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.12324873022588431,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8236621214445702,
+            "raw_gradient_angle_degrees": 65.17008186402207,
+            "raw_gradient_cosine": 0.4199260393872114
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.05744761552686064,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "ada_vs_native_norm_ratio": 0.9999997491093601,
+              "dualnorm": {
+                "l2": 0.06800000535110631,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.2152201768666342,
+                "raw_gradient_angle_degrees": 27.64023787225969,
+                "raw_gradient_cosine": 0.8858779956254506
+              },
+              "native_adam": {
+                "l2": 0.05744762993993328,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3250407111311656,
+                "raw_gradient_angle_degrees": 34.758832476127075,
+                "raw_gradient_cosine": 0.8215590598787371
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.0411569358813429,
+              "shape": [
+                64,
+                4
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.017235797722782456,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.5543122344752192e-15,
+                "raw_gradient_angle_degrees": 2.2588727439225506e-06,
+                "raw_gradient_cosine": 0.9999999999999992
+              },
+              "ada_vs_native_norm_ratio": 0.9999994218077359,
+              "dualnorm": {
+                "l2": 0.008499996384430965,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+                "raw_gradient_angle_degrees": 2.091309789151873e-06,
+                "raw_gradient_cosine": 0.9999999999999993
+              },
+              "native_adam": {
+                "l2": 0.017235807688393126,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.28143552209242684,
+                "raw_gradient_angle_degrees": 32.03957989675048,
+                "raw_gradient_cosine": 0.8476818258683934
+              },
+              "parameter_id": 1,
+              "raw_gradient_l2": 0.02059530981635525,
+              "shape": [
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.10351304368215127,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+                "raw_gradient_angle_degrees": 2.091309789151873e-06,
+                "raw_gradient_cosine": 0.9999999999999993
+              },
+              "ada_vs_native_norm_ratio": 0.9999995479025027,
+              "dualnorm": {
+                "l2": 0.05638262928368555,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.9220237106571659,
+                "raw_gradient_angle_degrees": 73.78500907041672,
+                "raw_gradient_cosine": 0.2792423487632813
+              },
+              "native_adam": {
+                "l2": 0.10351309048016041,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.6237092454761286,
+                "raw_gradient_angle_degrees": 52.162402099507574,
+                "raw_gradient_cosine": 0.6134254270275006
+              },
+              "parameter_id": 2,
+              "raw_gradient_l2": 0.0314471881052111,
+              "shape": [
+                64,
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.01519528872851738,
+                "orthogonal_to_raw_gradient_squared_fraction": 8.881784197001252e-16,
+                "raw_gradient_angle_degrees": 1.7075472925031877e-06,
+                "raw_gradient_cosine": 0.9999999999999996
+              },
+              "ada_vs_native_norm_ratio": 0.9999993199925622,
+              "dualnorm": {
+                "l2": 0.00849999487507991,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.9984014443252818e-15,
+                "raw_gradient_angle_degrees": 2.561320938754782e-06,
+                "raw_gradient_cosine": 0.999999999999999
+              },
+              "native_adam": {
+                "l2": 0.015195299061433762,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.28135332346819897,
+                "raw_gradient_angle_degrees": 32.03434323946851,
+                "raw_gradient_cosine": 0.847730308843444
+              },
+              "parameter_id": 3,
+              "raw_gradient_l2": 0.016509727128749988,
+              "shape": [
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.024887250627503053,
+                "orthogonal_to_raw_gradient_squared_fraction": 2.220446049250313e-15,
+                "raw_gradient_angle_degrees": 2.699869328381916e-06,
+                "raw_gradient_cosine": 0.9999999999999989
+              },
+              "ada_vs_native_norm_ratio": 1.0000000101459954,
+              "dualnorm": {
+                "l2": 0.012020816584084291,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.14612155606674126,
+                "raw_gradient_angle_degrees": 22.473649303125594,
+                "raw_gradient_cosine": 0.9240554333660177
+              },
+              "native_adam": {
+                "l2": 0.024887250374997123,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3942102637040321,
+                "raw_gradient_angle_degrees": 38.89253527640669,
+                "raw_gradient_cosine": 0.7783249554626704
+              },
+              "parameter_id": 4,
+              "raw_gradient_l2": 0.11380112964559425,
+              "shape": [
+                2,
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.005264407537059909,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0,
+                "raw_gradient_angle_degrees": 0.0,
+                "raw_gradient_cosine": 1.0
+              },
+              "ada_vs_native_norm_ratio": 0.9999996817188811,
+              "dualnorm": {
+                "l2": 0.008499997921183803,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0,
+                "raw_gradient_angle_degrees": 0.0,
+                "raw_gradient_cosine": 1.0000000000000002
+              },
+              "native_adam": {
+                "l2": 0.005264409212621964,
+                "orthogonal_to_raw_gradient_squared_fraction": 9.821544195054432e-05,
+                "raw_gradient_angle_degrees": 0.5678316939666389,
+                "raw_gradient_cosine": 0.9999508910731814
+              },
+              "parameter_id": 5,
+              "raw_gradient_l2": 0.03302299598890254,
+              "shape": [
+                2
+              ],
+              "step": 1600
+            }
+          ],
+          "raw_gradient_l2": 0.13198777314531587,
+          "role": "generator"
+        },
+        {
+          "ada_nsgda": {
+            "l2": 0.1823353630822604,
+            "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+            "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+            "raw_gradient_cosine": 0.9999999999999998
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.08709816937329966,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.3051420946769373,
+            "raw_gradient_angle_degrees": 33.531591265883094,
+            "raw_gradient_cosine": 0.8335813729463145
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.1823354452822544,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.1320521830546839,
+            "raw_gradient_angle_degrees": 21.30852486509307,
+            "raw_gradient_cosine": 0.9316371702252525
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.1823353630822604,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.9999995491825855,
+              "dualnorm": {
+                "l2": 0.08709816937329966,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3051420946769373,
+                "raw_gradient_angle_degrees": 33.531591265883094,
+                "raw_gradient_cosine": 0.8335813729463145
+              },
+              "native_adam": {
+                "l2": 0.1823354452822544,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.1320521830546839,
+                "raw_gradient_angle_degrees": 21.30852486509307,
+                "raw_gradient_cosine": 0.9316371702252525
+              },
+              "parameter_id": 6,
+              "raw_gradient_l2": 0.02203849004483405,
+              "rows_with_nonzero_final_gradient": 105,
+              "rowwise_native_gradient_cosine": {
+                "count": 105,
+                "maximum": 0.9881720161333912,
+                "median": 0.9562317267760919,
+                "minimum": 0.8377927949588115,
+                "p90": 0.978600839334912
+              },
+              "shape": [
+                256,
+                4
+              ],
+              "step": 1600
+            }
+          ],
+          "raw_gradient_l2": 0.02203849004483405,
+          "role": "prior"
+        },
+        {
+          "ada_nsgda": {
+            "l2": 0.3168081623519976,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8088051655523943,
+            "raw_gradient_angle_degrees": 64.07091870954824,
+            "raw_gradient_cosine": 0.4372583154699355
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.08063807728282209,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8926808802903546,
+            "raw_gradient_angle_degrees": 70.87707454021037,
+            "raw_gradient_cosine": 0.3275959702280316
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.31680829809720557,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.9200633171895396,
+            "raw_gradient_angle_degrees": 73.57674715732928,
+            "raw_gradient_cosine": 0.2827307602834548
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.12578305064442555,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+                "raw_gradient_angle_degrees": 2.091309789151873e-06,
+                "raw_gradient_cosine": 0.9999999999999993
+              },
+              "ada_vs_native_norm_ratio": 0.9999996093298054,
+              "dualnorm": {
+                "l2": 0.06799999827602222,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.5035405849603752,
+                "raw_gradient_angle_degrees": 45.202862270613785,
+                "raw_gradient_cosine": 0.7045987617358015
+              },
+              "native_adam": {
+                "l2": 0.12578309978413363,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3912506626330632,
+                "raw_gradient_angle_degrees": 38.7189197623175,
+                "raw_gradient_cosine": 0.7802239020735886
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.03270457127365494,
+              "shape": [
+                64,
+                10
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.02999431876536161,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.9999977117130223,
+              "dualnorm": {
+                "l2": 0.008499981215449641,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "native_adam": {
+                "l2": 0.029994387401127705,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.35130551866696635,
+                "raw_gradient_angle_degrees": 36.34957726662884,
+                "raw_gradient_cosine": 0.8054157195715972
+              },
+              "parameter_id": 1,
+              "raw_gradient_l2": 0.004324111064356365,
+              "shape": [
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.28499639238189683,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.7763568394002505e-15,
+                "raw_gradient_angle_degrees": 2.4148365394514667e-06,
+                "raw_gradient_cosine": 0.9999999999999991
+              },
+              "ada_vs_native_norm_ratio": 0.9999996165639699,
+              "dualnorm": {
+                "l2": 0.04076457827434666,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.8596508262509148,
+                "raw_gradient_angle_degrees": 67.99842681813287,
+                "raw_gradient_cosine": 0.3746320511503055
+              },
+              "native_adam": {
+                "l2": 0.28499650165982404,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.7077140929965906,
+                "raw_gradient_angle_degrees": 57.2731421434137,
+                "raw_gradient_cosine": 0.5406347260428332
+              },
+              "parameter_id": 2,
+              "raw_gradient_l2": 0.021520052479943635,
+              "shape": [
+                64,
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.02495055882599289,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "ada_vs_native_norm_ratio": 0.9999943326907261,
+              "dualnorm": {
+                "l2": 0.00849995262808621,
+                "orthogonal_to_raw_gradient_squared_fraction": 8.881784197001252e-16,
+                "raw_gradient_angle_degrees": 1.7075472925031877e-06,
+                "raw_gradient_cosine": 0.9999999999999996
+              },
+              "native_adam": {
+                "l2": 0.024950700229327688,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.2796107873896744,
+                "raw_gradient_angle_degrees": 31.92322086129669,
+                "raw_gradient_cosine": 0.8487574521677708
+              },
+              "parameter_id": 3,
+              "raw_gradient_l2": 0.0017992470834846818,
+              "shape": [
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.04243704382739287,
+                "orthogonal_to_raw_gradient_squared_fraction": 8.881784197001252e-16,
+                "raw_gradient_angle_degrees": 1.7075472925031877e-06,
+                "raw_gradient_cosine": 0.9999999999999996
+              },
+              "ada_vs_native_norm_ratio": 0.9999999480000775,
+              "dualnorm": {
+                "l2": 0.008500001476665325,
+                "orthogonal_to_raw_gradient_squared_fraction": 2.6645352591003757e-15,
+                "raw_gradient_angle_degrees": 2.9575586669421963e-06,
+                "raw_gradient_cosine": 0.9999999999999987
+              },
+              "native_adam": {
+                "l2": 0.04243704603411597,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.5595484451707962,
+                "raw_gradient_angle_degrees": 48.41999221674144,
+                "raw_gradient_cosine": 0.6636652430474297
+              },
+              "parameter_id": 4,
+              "raw_gradient_l2": 0.09738405827958926,
+              "shape": [
+                1,
+                64
+              ],
+              "step": 1600
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "ada_vs_native_norm_ratio": null,
+              "dualnorm": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "native_adam": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "parameter_id": 5,
+              "raw_gradient_l2": 0.0,
+              "shape": [
+                1
+              ],
+              "step": 1600
+            }
+          ],
+          "raw_gradient_l2": 0.10506327462296167,
+          "role": "critic"
+        }
+      ],
+      "recorded_gate_status": "FAIL",
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "autograd_multithreading_enabled": false,
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "b4ce343dec0062815a6e67841ea93c71ba910c340a1ffc8998c199361208721f",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/a1d5d58e4f754bbf87e2996d9da714b3/provenance",
+        "bytes": 99497,
+        "completed_steps": 1000,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "223ac9b2a61d4b9c2d271bd1c99efab4c3fb0168a61bb6b1ed61965335d1b962",
+        "state_sha256": "73bdd3586b4e9678ce2e697c631da154d3288d1f8537188e965fa101809171f5"
+      },
+      "optimizer_groups": [
+        {
+          "ada_nsgda": {
+            "l2": 0.028708360084406213,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.6897429122034455,
+            "raw_gradient_angle_degrees": 56.150918539572494,
+            "raw_gradient_cosine": 0.5570072600932185
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.05764975294482207,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8638920890189948,
+            "raw_gradient_angle_degrees": 68.35047705445459,
+            "raw_gradient_cosine": 0.368928056646557
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.028708626372792256,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.8263091562140786,
+            "raw_gradient_angle_degrees": 65.36965176882589,
+            "raw_gradient_cosine": 0.4167623348935474
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.007656687188942428,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.1102230246251565e-15,
+                "raw_gradient_angle_degrees": 1.9090959104164224e-06,
+                "raw_gradient_cosine": 0.9999999999999994
+              },
+              "ada_vs_native_norm_ratio": 0.9999838817492896,
+              "dualnorm": {
+                "l2": 0.048083263071320194,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.1688701624460217,
+                "raw_gradient_angle_degrees": 24.26378149956794,
+                "raw_gradient_cosine": 0.9116632259524228
+              },
+              "native_adam": {
+                "l2": 0.007656810603335375,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.32004028105862914,
+                "raw_gradient_angle_degrees": 34.45237574379184,
+                "raw_gradient_cosine": 0.8245967007824921
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.0006226182680123261,
+              "shape": [
+                32,
+                2
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.005778180001628769,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "ada_vs_native_norm_ratio": 0.9999870348299796,
+              "dualnorm": {
+                "l2": 0.00849989026814054,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "native_adam": {
+                "l2": 0.005778254917686198,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.31221345543006973,
+                "raw_gradient_angle_degrees": 33.97013116568535,
+                "raw_gradient_cosine": 0.8293289724650468
+              },
+              "parameter_id": 1,
+              "raw_gradient_l2": 0.0007669235434474241,
+              "shape": [
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.02585222784839422,
+                "orthogonal_to_raw_gradient_squared_fraction": 8.881784197001252e-16,
+                "raw_gradient_angle_degrees": 1.7075472925031877e-06,
+                "raw_gradient_cosine": 0.9999999999999996
+              },
+              "ada_vs_native_norm_ratio": 0.9999914800325945,
+              "dualnorm": {
+                "l2": 0.026879364413960938,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.8879162633359428,
+                "raw_gradient_angle_degrees": 70.44028669863839,
+                "raw_gradient_cosine": 0.33478909280927477
+              },
+              "native_adam": {
+                "l2": 0.025852448110409473,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.5472718523352279,
+                "raw_gradient_angle_degrees": 47.71252890540357,
+                "raw_gradient_cosine": 0.6728507618073803
+              },
+              "parameter_id": 2,
+              "raw_gradient_l2": 0.0011558465105427293,
+              "shape": [
+                32,
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.004622827341307948,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.5543122344752192e-15,
+                "raw_gradient_angle_degrees": 2.2588727439225506e-06,
+                "raw_gradient_cosine": 0.9999999999999992
+              },
+              "ada_vs_native_norm_ratio": 0.9999789541568418,
+              "dualnorm": {
+                "l2": 0.008499821621961423,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.7763568394002505e-15,
+                "raw_gradient_angle_degrees": 2.4148365394514667e-06,
+                "raw_gradient_cosine": 0.9999999999999991
+              },
+              "native_adam": {
+                "l2": 0.0046229246346547416,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.36412415407430543,
+                "raw_gradient_angle_degrees": 37.11573532713924,
+                "raw_gradient_cosine": 0.7974182377684214
+              },
+              "parameter_id": 3,
+              "raw_gradient_l2": 0.00047592626339734977,
+              "shape": [
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.006450977456144583,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.9984014443252818e-15,
+                "raw_gradient_angle_degrees": 2.561320938754782e-06,
+                "raw_gradient_cosine": 0.999999999999999
+              },
+              "ada_vs_native_norm_ratio": 0.9999972589911884,
+              "dualnorm": {
+                "l2": 0.008500000329220657,
+                "orthogonal_to_raw_gradient_squared_fraction": 7.771561172376096e-15,
+                "raw_gradient_angle_degrees": 5.0509930079323e-06,
+                "raw_gradient_cosine": 0.9999999999999961
+              },
+              "native_adam": {
+                "l2": 0.006450995138379101,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3618399741529803,
+                "raw_gradient_angle_degrees": 36.97965196177295,
+                "raw_gradient_cosine": 0.7988491884248363
+              },
+              "parameter_id": 4,
+              "raw_gradient_l2": 0.003677509498193864,
+              "shape": [
+                1,
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.0009134486317634583,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0,
+                "raw_gradient_angle_degrees": 0.0,
+                "raw_gradient_cosine": 1.0
+              },
+              "ada_vs_native_norm_ratio": 0.9999894858202905,
+              "dualnorm": {
+                "l2": 0.008499911054968834,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0,
+                "raw_gradient_angle_degrees": 0.0,
+                "raw_gradient_cosine": 1.0
+              },
+              "native_adam": {
+                "l2": 0.000913458236027509,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0,
+                "raw_gradient_angle_degrees": 0.0,
+                "raw_gradient_cosine": 1.0
+              },
+              "parameter_id": 5,
+              "raw_gradient_l2": 0.0009527930524200201,
+              "shape": [
+                1
+              ],
+              "step": 1000
+            }
+          ],
+          "raw_gradient_l2": 0.0041194906121179275,
+          "role": "generator"
+        },
+        {
+          "ada_nsgda": {
+            "l2": 0.05625283008317287,
+            "orthogonal_to_raw_gradient_squared_fraction": 1.1102230246251565e-15,
+            "raw_gradient_angle_degrees": 1.9090959104164224e-06,
+            "raw_gradient_cosine": 0.9999999999999994
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.08701154475669282,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.33369130195611674,
+            "raw_gradient_angle_degrees": 35.28614100232161,
+            "raw_gradient_cosine": 0.8162773413760076
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.056254648996250975,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.3581027045133125,
+            "raw_gradient_angle_degrees": 36.756595518143904,
+            "raw_gradient_cosine": 0.8011849321390708
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.05625283008317287,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.1102230246251565e-15,
+                "raw_gradient_angle_degrees": 1.9090959104164224e-06,
+                "raw_gradient_cosine": 0.9999999999999994
+              },
+              "ada_vs_native_norm_ratio": 0.999967666439831,
+              "dualnorm": {
+                "l2": 0.08701154475669282,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.33369130195611674,
+                "raw_gradient_angle_degrees": 35.28614100232161,
+                "raw_gradient_cosine": 0.8162773413760076
+              },
+              "native_adam": {
+                "l2": 0.056254648996250975,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3581027045133125,
+                "raw_gradient_angle_degrees": 36.756595518143904,
+                "raw_gradient_cosine": 0.8011849321390708
+              },
+              "parameter_id": 6,
+              "raw_gradient_l2": 0.00030975681260267217,
+              "rows_with_nonzero_final_gradient": 105,
+              "rowwise_native_gradient_cosine": {
+                "count": 105,
+                "maximum": 0.9999973294027578,
+                "median": 0.9781325781177866,
+                "minimum": 0.7440404524743058,
+                "p90": 0.9986046342373298
+              },
+              "shape": [
+                256,
+                2
+              ],
+              "step": 1000
+            }
+          ],
+          "raw_gradient_l2": 0.00030975681260267217,
+          "role": "prior"
+        },
+        {
+          "ada_nsgda": {
+            "l2": 0.09478661654989132,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.850383239065096,
+            "raw_gradient_angle_degrees": 67.24426552033657,
+            "raw_gradient_cosine": 0.38680325869219867
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.05239745152136878,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.9137112490799517,
+            "raw_gradient_angle_degrees": 72.91743475552786,
+            "raw_gradient_cosine": 0.2937494696506672
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.09478717308028854,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.9136410521118692,
+            "raw_gradient_angle_degrees": 72.91027415483343,
+            "raw_gradient_cosine": 0.29386892977674733
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.03426541752338023,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.1102230246251565e-15,
+                "raw_gradient_angle_degrees": 1.9090959104164224e-06,
+                "raw_gradient_cosine": 0.9999999999999994
+              },
+              "ada_vs_native_norm_ratio": 0.9999961789662419,
+              "dualnorm": {
+                "l2": 0.0480832610161787,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.6099362500611809,
+                "raw_gradient_angle_degrees": 51.350772213141234,
+                "raw_gradient_cosine": 0.6245508385542519
+              },
+              "native_adam": {
+                "l2": 0.034265548453197604,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.4039548617807732,
+                "raw_gradient_angle_degrees": 39.46260223095709,
+                "raw_gradient_cosine": 0.7720395962767886
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.002645737651421538,
+              "shape": [
+                32,
+                5
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.010753165062356206,
+                "orthogonal_to_raw_gradient_squared_fraction": 2.220446049250313e-16,
+                "raw_gradient_angle_degrees": 8.537736462515939e-07,
+                "raw_gradient_cosine": 0.9999999999999999
+              },
+              "ada_vs_native_norm_ratio": 0.9999797115905553,
+              "dualnorm": {
+                "l2": 0.00849982760965045,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "native_adam": {
+                "l2": 0.01075338323139812,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.14482930179429154,
+                "raw_gradient_angle_degrees": 22.36865046504488,
+                "raw_gradient_cosine": 0.9247543988571822
+              },
+              "parameter_id": 1,
+              "raw_gradient_l2": 0.000491012207340182,
+              "shape": [
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.08500427906302388,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.999993760431607,
+              "dualnorm": {
+                "l2": 0.014722437444741079,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.4730123323549402,
+                "raw_gradient_angle_degrees": 43.452968753540574,
+                "raw_gradient_cosine": 0.7259391624957698
+              },
+              "native_adam": {
+                "l2": 0.08500480945634621,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.5987365841221239,
+                "raw_gradient_angle_degrees": 50.69461777184767,
+                "raw_gradient_cosine": 0.6334535625267854
+              },
+              "parameter_id": 2,
+              "raw_gradient_l2": 0.0015860546000044007,
+              "shape": [
+                32,
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.004202964001209117,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "ada_vs_native_norm_ratio": 0.9999702476528819,
+              "dualnorm": {
+                "l2": 0.008499747387294023,
+                "orthogonal_to_raw_gradient_squared_fraction": 2.220446049250313e-16,
+                "raw_gradient_angle_degrees": 8.537736462515939e-07,
+                "raw_gradient_cosine": 0.9999999999999999
+              },
+              "native_adam": {
+                "l2": 0.004203089052973589,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3651015497902951,
+                "raw_gradient_angle_degrees": 37.17390919777449,
+                "raw_gradient_cosine": 0.7968051519723658
+              },
+              "parameter_id": 3,
+              "raw_gradient_l2": 0.00033612673994865895,
+              "shape": [
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.021245256285730724,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.9999993177423568,
+              "dualnorm": {
+                "l2": 0.008499999801665702,
+                "orthogonal_to_raw_gradient_squared_fraction": 3.774758283725532e-15,
+                "raw_gradient_angle_degrees": 3.52019892386405e-06,
+                "raw_gradient_cosine": 0.9999999999999981
+              },
+              "native_adam": {
+                "l2": 0.021245270780479095,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.3450883942361487,
+                "raw_gradient_angle_degrees": 35.975711638413756,
+                "raw_gradient_cosine": 0.8092660908278879
+              },
+              "parameter_id": 4,
+              "raw_gradient_l2": 0.014243920449644265,
+              "shape": [
+                1,
+                32
+              ],
+              "step": 1000
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "ada_vs_native_norm_ratio": null,
+              "dualnorm": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "native_adam": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "parameter_id": 5,
+              "raw_gradient_l2": 0.0,
+              "shape": [
+                1
+              ],
+              "step": 1000
+            }
+          ],
+          "raw_gradient_l2": 0.014586255203553939,
+          "role": "critic"
+        }
+      ],
+      "recorded_gate_status": "PASS",
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "autograd_multithreading_enabled": false,
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "d215b1648cf5462db90757c8834a681f",
+      "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint": {
+        "artifact_manifest_sha256": "f31293707565ac16c5c72af89a9b04ba1b65ea89cbabc7ba12e34c136a5b9c81",
+        "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/d215b1648cf5462db90757c8834a681f/provenance",
+        "bytes": 57929,
+        "completed_steps": 80,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sha256": "3caa36eed51be387723f9bdd420f241555f0819ab32efd4368c74a3c50d86b03",
+        "state_sha256": "1ab56af197c4c7ceab021e2deac56a8d6b847b9448b6c42f0bb96c85f0f64200"
+      },
+      "optimizer_groups": [
+        {
+          "ada_nsgda": {
+            "l2": 0.024240117972652863,
+            "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+            "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+            "raw_gradient_cosine": 0.9999999999999998
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.02944486205512687,
+            "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+            "raw_gradient_angle_degrees": 2.091309789151873e-06,
+            "raw_gradient_cosine": 0.9999999999999993
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.024240119237621916,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.0034003034871332716,
+            "raw_gradient_angle_degrees": 3.3429347704744967,
+            "raw_gradient_cosine": 0.9982984005360656
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.024240117972652863,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.9999999478150647,
+              "dualnorm": {
+                "l2": 0.02944486205512687,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+                "raw_gradient_angle_degrees": 2.091309789151873e-06,
+                "raw_gradient_cosine": 0.9999999999999993
+              },
+              "native_adam": {
+                "l2": 0.024240119237621916,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.0034003034871332716,
+                "raw_gradient_angle_degrees": 3.3429347704744967,
+                "raw_gradient_cosine": 0.9982984005360656
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.06784666702100668,
+              "shape": [
+                12,
+                1
+              ],
+              "step": 80
+            }
+          ],
+          "raw_gradient_l2": 0.06784666702100668,
+          "role": "direct_generator"
+        },
+        {
+          "ada_nsgda": {
+            "l2": 0.07946452772405252,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.3407870174326968,
+            "raw_gradient_angle_degrees": 35.716119696452914,
+            "raw_gradient_cosine": 0.8119193202328069
+          },
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "dualnorm": {
+            "l2": 0.0495630943812104,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.7260180497187744,
+            "raw_gradient_angle_degrees": 58.43719660316526,
+            "raw_gradient_cosine": 0.5234328517405319
+          },
+          "eps": 1e-08,
+          "lr": 0.0085,
+          "native_adam": {
+            "l2": 0.07946456306835292,
+            "orthogonal_to_raw_gradient_squared_fraction": 0.5329132499498498,
+            "raw_gradient_angle_degrees": 46.88715486978693,
+            "raw_gradient_cosine": 0.6834374514541548
+          },
+          "parameters": [
+            {
+              "ada_nsgda": {
+                "l2": 0.04076056902174834,
+                "orthogonal_to_raw_gradient_squared_fraction": 8.881784197001252e-16,
+                "raw_gradient_angle_degrees": 1.7075472925031877e-06,
+                "raw_gradient_cosine": 0.9999999999999996
+              },
+              "ada_vs_native_norm_ratio": 0.9999996771933207,
+              "dualnorm": {
+                "l2": 0.048083265861539104,
+                "orthogonal_to_raw_gradient_squared_fraction": 6.661338147750939e-16,
+                "raw_gradient_angle_degrees": 1.4787793334710982e-06,
+                "raw_gradient_cosine": 0.9999999999999997
+              },
+              "native_adam": {
+                "l2": 0.04076058217953652,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.15447790783898163,
+                "raw_gradient_angle_degrees": 23.14358897874733,
+                "raw_gradient_cosine": 0.9195227523889871
+              },
+              "parameter_id": 0,
+              "raw_gradient_l2": 0.03798500101674417,
+              "shape": [
+                32,
+                1
+              ],
+              "step": 80
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.04757954179138917,
+                "orthogonal_to_raw_gradient_squared_fraction": 4.440892098500626e-16,
+                "raw_gradient_angle_degrees": 1.2074182697257333e-06,
+                "raw_gradient_cosine": 0.9999999999999998
+              },
+              "ada_vs_native_norm_ratio": 0.9999989622395493,
+              "dualnorm": {
+                "l2": 0.00849999187222334,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.3322676295501878e-15,
+                "raw_gradient_angle_degrees": 2.091309789151873e-06,
+                "raw_gradient_cosine": 0.9999999999999993
+              },
+              "native_adam": {
+                "l2": 0.04757959116760715,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.5000314161132149,
+                "raw_gradient_angle_degrees": 45.0018000106971,
+                "raw_gradient_cosine": 0.7070845662908964
+              },
+              "parameter_id": 1,
+              "raw_gradient_l2": 0.010032134193038396,
+              "shape": [
+                32
+              ],
+              "step": 80
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.04888122729997121,
+                "orthogonal_to_raw_gradient_squared_fraction": 1.7763568394002505e-15,
+                "raw_gradient_angle_degrees": 2.4148365394514667e-06,
+                "raw_gradient_cosine": 0.9999999999999991
+              },
+              "ada_vs_native_norm_ratio": 1.0000000322257179,
+              "dualnorm": {
+                "l2": 0.008500000405967949,
+                "orthogonal_to_raw_gradient_squared_fraction": 2.4424906541753444e-15,
+                "raw_gradient_angle_degrees": 2.831646840510158e-06,
+                "raw_gradient_cosine": 0.9999999999999988
+              },
+              "native_adam": {
+                "l2": 0.04888122572473862,
+                "orthogonal_to_raw_gradient_squared_fraction": 0.31096309385444176,
+                "raw_gradient_angle_degrees": 33.89278945557265,
+                "raw_gradient_cosine": 0.8300824694845436
+              },
+              "parameter_id": 2,
+              "raw_gradient_l2": 0.09836019119977657,
+              "shape": [
+                1,
+                32
+              ],
+              "step": 80
+            },
+            {
+              "ada_nsgda": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "ada_vs_native_norm_ratio": null,
+              "dualnorm": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "native_adam": {
+                "l2": 0.0,
+                "orthogonal_to_raw_gradient_squared_fraction": null,
+                "raw_gradient_angle_degrees": null,
+                "raw_gradient_cosine": null
+              },
+              "parameter_id": 3,
+              "raw_gradient_l2": 0.0,
+              "shape": [
+                1
+              ],
+              "step": 80
+            }
+          ],
+          "raw_gradient_l2": 0.105916151891795,
+          "role": "critic"
+        }
+      ],
+      "recorded_gate_status": "PASS",
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "autograd_multithreading_enabled": false,
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "two_pole"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "source_files": {
+    "particlegan/optim/dualnorm.py": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+  }
+}

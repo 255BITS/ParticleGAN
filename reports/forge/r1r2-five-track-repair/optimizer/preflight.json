@@ -1,0 +1,86 @@
+{
+  "blockers": [],
+  "candidate_id": "r1r2-amsgrad-repair-v1",
+  "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+  "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m experiments.forge plan r1r2-amsgrad-repair-v1 --study r1r2-five-track-optimizer-v1 --device cuda --show-boundaries",
+  "execution_policy": {
+    "mode": "complete_current_tier",
+    "schema_version": 1
+  },
+  "note": "Read-only preflight. Root freezes the full shared source/runtime/queue registration before execution.",
+  "optimizer_updates": 0,
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scientific_qualification": false,
+  "study_blockers": [],
+  "study_id": "r1r2-five-track-optimizer-v1",
+  "study_status": "READY",
+  "substantive_delta": [
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "ae_gan_hold",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "clockfree_audit_measurement_v1",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "five_word_joint_smoke",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "gaussian1d_smoke",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "ring16_acquisition",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "two_pole",
+        "amsgrad"
+      ]
+    },
+    {
+      "after": true,
+      "before": false,
+      "path": [
+        "recipe",
+        "unused_token_hold",
+        "amsgrad"
+      ]
+    }
+  ],
+  "task_count": 7,
+  "through_tier": 1,
+  "worst_case_seconds": 2520
+}

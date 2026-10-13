@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 816. Inventory coverage: complete. Unresolved import items: 7.
+Records: 842. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3846,6 +3846,214 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### r1r2-constant-policy-v1 · r1r2-constant-tier1-round1-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Test fixed global R1/R2 laws under unchanged Tier1 task conditions.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `schedule_removal`.
+
+
+
+Constant policies repair external-clock dependence, but none passes the Ring16 density gate. Exact numerical outcomes, matched-input proofs, costs and training GIFs remain in the linked report.
+
+**Next:** Read the concluded whole-recipe comparison before any separately registered lower-rate hypothesis; preserve the original gates, learned prior and task budgets.
+
+[Evidence](../../reports/forge/r1r2-tier1-search/publication/results.json) · [Record](records/r1r2-constant-tier1-round1-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-direction-floor-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Per-tensor gradient-direction preservation and critic-only epsilon damping repair the unchanged whole Tier1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `gradient_direction_and_critic_denominator_factorial`.
+
+
+
+No complete repair. All three new recipes pass 4/6 ordinary tasks plus clock and fail Ring16 and words; direction preservation is insufficient and its epsilon combination worsens density. Detailed metrics remain in the report.
+
+**Next:** Close this registration, preserve baseline and failures; examine the saved update singular-value spectrum before a separate finite comparison.
+
+[Evidence](../../reports/forge/r1r2-direction-floor-repair/publication/results.json) · [Record](records/r1r2-direction-floor-repair-20261012.json)
+
+### r1r2-non-saturating-energy-u-v1 · r1r2-energy-distance-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Raw signed energy-U added globally to positive paired R1/R2 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Reject this energy repair: both fresh global recipes pass five ordinary tasks and own clock but fail Ring16. Energy restores spread while worsening covariance and HQ. Exact metrics and limits remain in the report.
+
+**Next:** Preserve this closed contrast and baseline; use saved geometry to justify any distinct separately registered global mechanism under unchanged tasks and remaining paid cap.
+
+[Evidence](../../reports/forge/r1r2-energy-distance-repair/publication/results.json) · [Record](records/r1r2-energy-distance-repair-20261012.json)
+
+### r1r2-non-saturating-energy-u-frozen-prior-v1 · r1r2-energy-prior-freeze-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `408a066fe78ee9f770a1b53dbdbcb2d2db3f01ff0dd9bd50363b1015970fc1cc`.
+
+Freezing the initialized prior on the exact positive-energy R1/R2 recipe repairs unchanged Tier 1.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Reject this prior-freeze repair: both global recipes pass five ordinary tasks and own clock but fail Ring16. Freezing worsens high-quality mass; full word acquisition still passes. Exact results remain in the report.
+
+**Next:** Preserve both energy negatives and stronger non-saturating control. No further complete comparison fits the remaining unchanged paid cap.
+
+[Evidence](../../reports/forge/r1r2-energy-prior-freeze-repair/publication/results.json) · [Record](records/r1r2-energy-prior-freeze-repair-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-five-track-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Five evidence-motivated changes to critic rate, prior rate, optimizer denominator memory, local transport or first momentum can repair the unchanged whole Tier1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `five_distinct_global_recipe_deltas`.
+
+
+
+Five new global recipes pass clock but fail Ring16; AMSGrad reaches 5/6 ordinary passes. Momentum improves the best covariance error to 1.098351, still above 0.85; detailed failures and geometry remain in the report.
+
+**Next:** Retain the baseline and close this finite campaign; investigate saved geometry or optimizer-role dynamics before any separately registered comparison.
+
+[Evidence](../../reports/forge/r1r2-five-track-repair/publication/results.json) · [Record](records/r1r2-five-track-repair-20261012.json)
+
+### context:r1r2-next-mechanism-review · r1r2-next-mechanism-research-20261012
+
+**Scope:** saved_only_mechanism_research; family_context; revision `unknown`.
+
+A fixed finite output length scale supplies a distinct density-restoring prerequisite after raw energy and prior freezing fail.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Fixed-scale MMD supplies modest restoring-force evidence on one overwide saved law; least squares lacks stronger from-init density evidence. Prepare one finite hypothesis separately. Exact diagnostics and limits remain in the report.
+
+**Next:** Review public software and fresh-source controls, then resolve the declared aggregate-budget shortfall before any paid admission.
+
+[Evidence](../../reports/forge/r1r2-next-repair-research/README.md) · [Record](records/r1r2-next-mechanism-research-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-objective-memory-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Global quantile transport or optimizer maximum-denominator memory repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `global_transport_or_optimizer_memory`.
+
+
+
+No complete repair; both new recipes pass acquisition and clock but fail Ring16. Detailed outcomes remain in the source-bound report.
+
+**Next:** Read the subsequent score-law readout; preserve closed failures and exact controls before designing another supported density mechanism.
+
+[Evidence](../../reports/forge/r1r2-objective-memory-repair/publication/results.json) · [Record](records/r1r2-objective-memory-repair-20261012.json)
+
+### recipe-prior-refactor-r1r2-v1 · r1r2-recorded-baseline-20261012
+
+**Scope:** saved_evidence_baseline_readout; family_context; revision `594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a`.
+
+Establish the selected R1/R2 whole recipe as a source-bound reference baseline and explain its two failed Tier 1 view requirements.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_evidence_analysis`.
+
+
+
+The source-bound baseline preserves Ring16 density and external-clock failures. Exact recipe, task metrics, diagnostic scope and costs remain in the linked report; this readout adds no training or sampling.
+
+**Next:** Use this whole recipe as the archived reference for separately registered global repairs; preserve its original source, prior, initialization, sampling and gate contracts.
+
+[Evidence](../../reports/forge/r1r2-baseline/results.json) · [Record](records/r1r2-recorded-baseline-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-role-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Separating first momentum by global optimizer role and testing its interaction with AMSGrad repairs unchanged Tier1 density without acquisition or clock regressions.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `optimizer_role_momentum_factorial`.
+
+
+
+No complete repair. All seven new recipes pass clock and fail Ring16; momentum plus AMSGrad passes 5/6 ordinary tasks. D/G momentum with zero prior momentum is the best density lead but fails acquisition; detailed metrics remain in the report.
+
+**Next:** Close this registration and preserve baseline; read saved gradient-direction and denominator analyses before any separate finite comparison.
+
+[Evidence](../../reports/forge/r1r2-role-repair/publication/results.json) · [Record](records/r1r2-role-repair-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-score-law-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+A native non-saturating score law on exact AMSGrad m110 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `native_score_law`.
+
+
+
+No complete repair; native non-saturating preserves five ordinary acquisition/sustained passes and clock, but fails Ring16 density. Gaussian acquisition does not imply a passing endpoint. Detailed metrics and limits remain in the report.
+
+**Next:** Preserve this closed failure and exact controls; read the separately registered tenfold weaker positive penalty contrast under unchanged tasks and full budgets.
+
+[Evidence](../../reports/forge/r1r2-score-law-repair/publication/results.json) · [Record](records/r1r2-score-law-repair-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-spectral-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+A singular-value update constraint repairs original whole Tier1 density and acquisition.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `spectral_optimizer_law`.
+
+
+
+No complete repair; both new spectral recipes fail Ring16 and words. Detailed metrics remain in the source-bound report.
+
+**Next:** Close this comparison, preserve failures; separately test supported quantile-force and optimizer-memory hypotheses under unchanged tasks.
+
+[Evidence](../../reports/forge/r1r2-spectral-repair/publication/results.json) · [Record](records/r1r2-spectral-repair-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-tier1-search-final-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Halving a fixed global learning rate reduces late bursts enough to pass the unchanged whole Tier1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `constant_update_magnitude`.
+
+
+
+Constant policies repair clock dependence, but the bounded global search leaves Ring16 density and whole Tier1 unresolved. Detailed outcomes and provenance remain in the linked report.
+
+**Next:** Retain the recorded baseline and close this finite search; consult the saved-state diagnosis before proposing another global mechanism.
+
+[Evidence](../../reports/forge/r1r2-tier1-search/round2-publication/results.json) · [Record](records/r1r2-tier1-search-final-20261012.json)
+
+### r1r2-constant-policy-v1 · r1r2-weak-penalty-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Tenfold weaker positive paired R1/R2 pressure on non-saturating AMSGrad m110 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `floor_constant`.
+
+
+
+Reject weaker gamma: only token and AE pass the ordinary suite; Gaussian, pole, Ring16 and words fail while own clock passes. Pole's passing endpoint does not satisfy its sustained gate. Exact metrics and limits remain in the report.
+
+**Next:** Preserve this closed regression and exact controls; any further paid hypothesis requires a distinct justified mechanism and separate finite registration under unchanged tasks and full budgets.
+
+[Evidence](../../reports/forge/r1r2-weak-penalty-repair/publication/results.json) · [Record](records/r1r2-weak-penalty-repair-20261012.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5086,7 +5294,9 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 - **bcap-tier2-search-v1--7**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--7.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-global-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-global-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b99-g01-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g01-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-particle-rownorm-only-v5**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-particle-rownorm-only-v5.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b90-g01-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b90-g01-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **word-split-inventory-ka2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-ka2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-original-full19-retest**: Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-prefix5-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier1-refresh-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5144,6 +5354,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **k3p-global-tier1-v3**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **tier1-completion-v1-ka2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-ka2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-r1r2-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-r1r2-v6.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-half-rate-b99-g03-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-half-rate-b99-g03-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-tier2-search-v1--12**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-tier2-search-v1--12.json) · [Board](../../reports/forge/technique-inventory.md)
 - **word-split-inventory-r1r2-v1**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/word-split-inventory-r1r2-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-prior-sigreg-search-v1**: Concluded 3 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-prior-sigreg-search-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5187,6 +5398,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **release07-gan-v3-mog-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-adam-tier1-v1**: Concluded 5 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-adam-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-dualnorm-pacing-v2-c-4054018e4d6380ed**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-dualnorm-pacing-v2-c-4054018e4d6380ed.json) · [Board](../../reports/forge/technique-inventory.md)
+- **r1r2-tier1-constant-search-v1**: Concluded 6 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-constant-search-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-nsgda-layer-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-nsgda-layer-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-ka2-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-ka2-v4.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5219,4 +5431,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f78ed98b105aba5f59e8e0d2461871351df34effdb7c950b9578dac88ac85e59`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `490a77fe7b5d5a8a324e6c186bb421948701b654b1dd2d2ebbaf7d70475e6cb5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

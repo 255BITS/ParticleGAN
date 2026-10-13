@@ -1,0 +1,27 @@
+{
+  "base_candidate": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-half-rate-b99-g01-v1",
+    "purpose": "One global LR-only child through the unchanged six required Tier1 tasks and separate clock probe. Full budgets, seed0/public initializer, learned prior, target batches, sampling and cadence remain fixed. No retries, Tier2 or automatic follow-up; aggregate charged work including round1 capped at5400 seconds.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.00425
+    ]
+  },
+  "guide": "reports/forge/r1r2-tier1-search/round2-plan.md",
+  "hypothesis": "Halving the fixed global LR from0.0085 to0.00425 reduces late acquisition bursts sufficiently to meet the unchanged sustained Ring16 density gate while preserving the remaining ordinary gates and clock measurement.",
+  "id": "r1r2-tier1-half-rate-b99-g01-v1",
+  "protocol": "screening",
+  "rationale": "This child holds its phase1 beta2=0.99/gamma=0.1 recipe fixed and changes only Recipe.lr. The concluded round1 numerical diagnostics motivate the smaller constant magnitude; no task winners are combined.",
+  "schema_version": 2,
+  "trainer_family": "r1r2",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

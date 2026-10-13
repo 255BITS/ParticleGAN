@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "3e64cae1721958db39c33ee24f30dea80820794d2e665117fa81514806643ba8",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "3f1958b8799de5d4c28c31b0dae19def61d854465aa047b9f3863dcf22e17e28",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-constant-search-v1/cec5ca3cc454467da13fe60517d29060/evaluator/observed-samples.pt": "b84356616ad3b5ea0b1af9ff979949936b42dcd5a7ba499469863c4aa3c2cb7c"
+  },
+  "task_id": "gaussian1d_smoke"
+}

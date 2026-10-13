@@ -35,6 +35,8 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "optimizer_svd_backend",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
+    "energy_distance_weight",
+    "output_mmd_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",
@@ -48,6 +50,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
+    "output_mmd_bandwidths",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
     "reg_anchor_min_decay", "reg_anchor_weight", "d_guard_ratio", "d_guard_min_steps",
     "latent_damping_max_rate", "direct_particle_betas", "input_noise_std",

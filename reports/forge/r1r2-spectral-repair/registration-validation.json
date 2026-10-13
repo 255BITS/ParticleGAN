@@ -1,0 +1,44 @@
+{
+  "admission_requires_committed_source": true,
+  "bulk_files_in_git": false,
+  "complete_required_cells": 35,
+  "current_technique_inventory_unchanged": true,
+  "exact_cached_cells": 21,
+  "existing_paid_attempts": 175,
+  "existing_paid_seconds": 4587.580182052945,
+  "full_task_reservation_seconds": 12600,
+  "independent_preflight": "PASS",
+  "inputs_sha256": {
+    "reports/forge/r1r2-spectral-repair/PLAN.md": "e404765206de1a343e145b6580d2c9b1a0557d57ce84c7c3b4ae664f42b69512",
+    "reports/forge/r1r2-spectral-repair/manifest.json": "15e1b2b2845778a84bc9a4dd1cbf3e8bffbf934b494c2d19a870add94c438ea8",
+    "reports/forge/r1r2-spectral-repair/preflight-review.json": "be264af9f6acb3c2c440318e8694dff072a460f96bec87d25ec7398cbe202353",
+    "reports/forge/r1r2-spectral-repair/registration.json": "df0c0cbc829a5c5439981ca90dde97eb6075b68b9965d037cee8fed775b02e1a",
+    "reports/forge/r1r2-spectral-repair/test_spectral_workflow.py": "de33e1e55774f93c15b99b73503069cdafc35ce2bc0c1b518895e2c22c76e6bc",
+    "reports/forge/r1r2-spectral-repair/workflow.py": "01e665e9b67a677c8e7b4001cfc0a1e4c93cbcfc21d71759c0e77c764eca4fb0"
+  },
+  "memory_check": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/compile-registration-check.log",
+    "log_sha256": "bf58e558f84eae8932051ff0f240eab91c1d28531636f09db718f31ab70f0807",
+    "observed_status": "CURRENT",
+    "preserved_published_record_count": 513
+  },
+  "new_paid_cells": 14,
+  "qualification_input": false,
+  "recipe_delta": "Only optimizer_family: full DualNorm includes sampled learned-prior row-normalized updates; critic-only keeps native Adam G/E/P at parent .0085. No task or protocol changes.",
+  "runtime_fingerprint": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Frozen spectral-update comparison registration; no outcome or qualification claim",
+  "shared_paid_cap_seconds": 8000,
+  "status": "PASS",
+  "tier_report_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012/tier-report-tests.log",
+    "log_sha256": "ab63e873f0d0acb17bfc7fe9180a8b18208be9cf210b5ffc77f578ea67d218ed",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/preflight-tests.log",
+    "log_sha256": "c44c54bed6b06cb5ea6d71e44cea72ce89435af50550d00131d5b354d5b46644",
+    "passed": 118
+  }
+}

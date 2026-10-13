@@ -1,0 +1,30 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "kinetic_transport_weight 0 to 1 on exact constant Adam parent",
+    "amsgrad false to true on exact m110 parent"
+  ],
+  "conclusion": "No complete repair; both new recipes pass acquisition and clock but fail Ring16. Detailed outcomes remain in the source-bound report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Global quantile transport or optimizer maximum-denominator memory repairs the unchanged complete Tier 1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "global_transport_or_optimizer_memory",
+  "next_action": "Read the subsequent score-law readout; preserve closed failures and exact controls before designing another supported density mechanism.",
+  "provenance": {
+    "report": "reports/forge/r1r2-objective-memory-repair/README.md",
+    "source_commit": "2b0ad9ec7c5b2c1e91ab0d70751da0b7e36a7b42",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-objective-memory-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-objective-memory-repair/publication/results.json",
+    "sha256": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

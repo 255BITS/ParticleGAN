@@ -1,0 +1,100 @@
+{
+  "actual_software_updates_all_branches": 14,
+  "bulk_state_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/software-fixture-state",
+  "command": "PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_bindings.py --basetemp=/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/software-fixture-state",
+  "corruption_rejections_before_native_restore": [
+    "missing active energy state",
+    "wrong weight",
+    "nonfinite signed loss_sum",
+    "calls inconsistent with acquisition prefix"
+  ],
+  "current_and_frozen_snapshot_bytes_match": true,
+  "native_scalar": {
+    "G_D_updates": 3,
+    "actual_updates": {
+      "frozen_energy": 3,
+      "frozen_energy_resumed": 1,
+      "learned_energy_parent": 3
+    },
+    "changed_policy_checkpoint_rejected": true,
+    "checkpoint_prefix_actual_updates": 2,
+    "frozen_locations_unchanged": true,
+    "host": "gaussian1d_smoke public architecture and task-bound initialization/prior",
+    "locations_are_buffers_and_have_no_optimizer_group": true,
+    "matched_G_D_forward_counts": true,
+    "matched_initial_G_D_prior_tensors_and_initialization_receipts": true,
+    "matched_ordered_target_batches_and_all_consumed_named_streams": true,
+    "prior_updates": 0,
+    "quality_metrics_or_grade_computed": false,
+    "resume_actual_updates": 1,
+    "resumed_complete_state_exact": true
+  },
+  "new_source_or_task_edits": false,
+  "paid_jobs_added": 0,
+  "qualification_input": false,
+  "queue_mutations": 0,
+  "saved_only_research": {
+    "optimizer_updates": 0,
+    "receipt": "reports/forge/r1r2-energy-distance-repair/research/diagnosis.json",
+    "receipt_sha256": "996a0ca07d27c51b4b24ae5a2c44d567a0e85fa6a83fb2aff1e2e3dd4d69d363",
+    "reproduction_source_sha256": "55eb8f71e7af4f79f2e2816ae263295613569922eb99b308501a8ab68c6c05e1",
+    "sampling_draws": 0,
+    "scope": "Saved endpoint geometry and read-only seven-host binding; separate from the real-update software fixtures above."
+  },
+  "schema_version": 1,
+  "scope": "Separate bounded CPU software fixtures, not scientific acquisition, qualification or paid execution.",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files_checked": 1216,
+  "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "status": "PASS",
+  "tests": {
+    "failed": 0,
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/software-fixture.log",
+    "log_sha256": "da6905f6e0a134a88b14dfef3635be34df86e9f32657261f7a6c54126e8e028a",
+    "passed": 8,
+    "seconds": 3.03,
+    "source": "reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_bindings.py",
+    "source_sha256": "0c7cc6b575ec8bbd5593218256464b0ba03cad30ea37ccc409729b14e20091ec"
+  },
+  "word_constructor_and_consumption": {
+    "G_E_D_updates": 1,
+    "actual_updates": {
+      "frozen_energy": 1,
+      "learned_energy_parent": 1
+    },
+    "component_energy_calls": 1,
+    "frozen_location_buffer_unchanged": true,
+    "host": "EnergyWordFixture inherits unchanged WordFixture.step/observe",
+    "joint_optimizer_owns_G_E_only": true,
+    "matched_consumed_named_streams": true,
+    "matched_initial_G_E_D_prior_tensors_and_receipts": true,
+    "prior_updates": 0,
+    "quality_grade_computed": false
+  },
+  "word_strict_restore": {
+    "G_E_D_cumulative_counters": 836,
+    "actual_updates": {
+      "prefix": 1,
+      "restored_continuation": 2,
+      "uninterrupted_reference_continuation": 2
+    },
+    "artifact_manifest_unchanged": true,
+    "component_energy_cumulative_calls": 836,
+    "device": "cpu",
+    "frozen_location_buffer_unchanged": true,
+    "hold_executed_updates": 2,
+    "hold_original_budget": 4000,
+    "original_CUDA_only_ladder_guard_unchanged": true,
+    "original_hold_reducer_status": "INCOMPLETE",
+    "prior_counter": 0,
+    "producer_metrics_and_full_20001_update_labels": "Explicitly synthetic checkpoint/reducer prerequisite, never acquired-quality evidence.",
+    "restored_fixture_and_every_named_stream_exact": true,
+    "separate_signed_energy_state_exact": true,
+    "synthetic_final_counter": 836,
+    "synthetic_prefix_counter": 834,
+    "synthetic_producer_reducer_status": "PASS",
+    "two_continuations_end_in_identical_complete_state": true,
+    "uses_actual_inherited_fixture_step": true,
+    "uses_original_native_restore_parent": true
+  }
+}

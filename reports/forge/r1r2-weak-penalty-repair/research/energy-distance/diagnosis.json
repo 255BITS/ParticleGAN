@@ -1,0 +1,379 @@
+{
+  "evidence_type": "deterministic_software_prerequisite",
+  "finite_difference": {
+    "absolute_error_bound": 2e-09,
+    "coordinates": 8,
+    "epsilon": 1e-06,
+    "max_absolute_error": 2.827882095157719e-10,
+    "permutation_value_and_gradient_equivariance": true,
+    "positive_linear_scale_homogeneity": true,
+    "rigid_motion_invariance": true,
+    "targets_detached": true,
+    "unequal_batch_sizes_supported": true
+  },
+  "fixtures": {
+    "anisotropic_fixture": {
+      "d_loss_d_scales": [
+        -0.0951553608864519,
+        0.2834303836938168
+      ],
+      "limit": "Deterministic circular atoms, not Gaussian modes or evidence of optimizer/training repair.",
+      "radial_scale": 0.5,
+      "tangent_scale": 2.0
+    },
+    "clamped": false,
+    "duplicate_rows": {
+      "zero_subgradient_max": 0.0
+    },
+    "duplicate_token": {
+      "limit": "Unused slot has no direct gradient; shared parameters can still move unused output. Keep hold.",
+      "rows": 8,
+      "shared_gradient": [
+        0.0,
+        -2.0
+      ],
+      "slot_gradients": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -2.0
+        ]
+      ]
+    },
+    "signed_equal_empirical_samples_u": -0.06451612903225801,
+    "squared_distance_control": {
+      "different_widths": true,
+      "equal_means": true,
+      "limit": "Squared energy population discrepancy only identifies means; V is a labeled control, not selected U.",
+      "nonsquared_signed_u": 0.9523809523809526,
+      "squared_population_V_on_empirical_laws": 0.0
+    },
+    "symmetric_zero_pole": {
+      "energy_gradient_max": 6.938893903907228e-18,
+      "limit": "This term alone cannot break the exact zero/symmetric state.",
+      "particles": 12,
+      "target": "actual fixed balanced +/-1 with +/- .05 spread"
+    },
+    "width_fixtures": [
+      {
+        "d_loss_d_scale": -1.0158730158730158,
+        "scale": 0.3,
+        "signed_energy_u": 0.6793650793650796
+      },
+      {
+        "d_loss_d_scale": 0.9841269841269842,
+        "scale": 2.0,
+        "signed_energy_u": 0.9523809523809526
+      }
+    ]
+  },
+  "limits": [
+    "Finite signed U can be negative and has minibatch variance; no rectification or bandwidth selection.",
+    "Under independent iid real/fake rows U is unbiased for population energy, not for a gate or optimizer trajectory.",
+    "Raw Euclidean energy has units of output length; global coefficient and coordinate scale remain unselected.",
+    "Repeated fixture rows and saved evaluation prefixes are not independent training minibatches.",
+    "Word marginal energy excludes latent coordinates and supplies no paired inverse-E reconstruction objective.",
+    "Only first derivatives are checked; this probe establishes no public API binding or higher-order contract."
+  ],
+  "model_recipe_optimizer_constructions": 0,
+  "new_sampling_draws": 0,
+  "optimizer_updates_added": 0,
+  "probe_sha256": "319af6fedb2471bdf18ff3ea2e4c2de27ebe44932de63270dfcbd48797f4e754",
+  "python_numpy_torch_cpu_and_all_cuda_rng_states_unchanged": true,
+  "qualification_input": false,
+  "queue_snapshot_sha256": "e0d16cc2a84a402807a1798ba1d4686e311b9cfffea8eda619b2d3c279d5f968",
+  "queue_unchanged": true,
+  "real_targets_detached": true,
+  "resources": {
+    "atomic_GPU_checks": {
+      "dtype": "float32",
+      "exact_duplicate_gradient_max": 0.0,
+      "symmetric_zero_pole_gradient_max": 0.0,
+      "symmetric_zero_pole_rows_have_identical_gradient": true
+    },
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA RTX A6000",
+    "records": [
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.4812830011360347,
+        "elapsed_ms_min": 0.45129298814572394,
+        "fake_shape": [
+          12,
+          1
+        ],
+        "forward_and_fake_backward_ms_median": 0.46535301953554153,
+        "host": "pole",
+        "incremental_peak_allocated_bytes": 9728,
+        "peak_allocated_bytes": 11264,
+        "real_shape": [
+          12,
+          1
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.48407301073893905,
+        "elapsed_ms_min": 0.4460729833226651,
+        "fake_shape": [
+          8,
+          2
+        ],
+        "forward_and_fake_backward_ms_median": 0.4572329926304519,
+        "host": "token",
+        "incremental_peak_allocated_bytes": 6144,
+        "peak_allocated_bytes": 7680,
+        "real_shape": [
+          8,
+          2
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.4539829969871789,
+        "elapsed_ms_min": 0.442552991444245,
+        "fake_shape": [
+          8,
+          2
+        ],
+        "forward_and_fake_backward_ms_median": 0.45211301767267287,
+        "host": "clock",
+        "incremental_peak_allocated_bytes": 6144,
+        "peak_allocated_bytes": 7680,
+        "real_shape": [
+          8,
+          2
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.4656730161514133,
+        "elapsed_ms_min": 0.4455129965208471,
+        "fake_shape": [
+          64,
+          2
+        ],
+        "forward_and_fake_backward_ms_median": 0.4547529970295727,
+        "host": "ae",
+        "incremental_peak_allocated_bytes": 137216,
+        "peak_allocated_bytes": 138752,
+        "real_shape": [
+          64,
+          2
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.46147199464030564,
+        "elapsed_ms_min": 0.44695299584418535,
+        "fake_shape": [
+          128,
+          1
+        ],
+        "forward_and_fake_backward_ms_median": 0.4540130030363798,
+        "host": "gaussian",
+        "incremental_peak_allocated_bytes": 477184,
+        "peak_allocated_bytes": 478720,
+        "real_shape": [
+          128,
+          1
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 0.509773992234841,
+        "elapsed_ms_min": 0.4476530011743307,
+        "fake_shape": [
+          128,
+          2
+        ],
+        "forward_and_fake_backward_ms_median": 0.4540630034171045,
+        "host": "ring",
+        "incremental_peak_allocated_bytes": 543744,
+        "peak_allocated_bytes": 546816,
+        "real_shape": [
+          128,
+          2
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      },
+      {
+        "dtype": "float32",
+        "elapsed_ms_max": 1.1215370032005012,
+        "elapsed_ms_min": 1.1153569794259965,
+        "fake_shape": [
+          256,
+          168
+        ],
+        "forward_and_fake_backward_ms_median": 1.1176170082762837,
+        "host": "words",
+        "incremental_peak_allocated_bytes": 46023680,
+        "peak_allocated_bytes": 46539776,
+        "real_shape": [
+          256,
+          168
+        ],
+        "repetitions": 5,
+        "warmups": 2
+      }
+    ],
+    "scope": "Pure deterministic synthetic array forward+input backward, includes real/real constant; no model training or performance guarantee.",
+    "torch_version": "2.14.0+cu130"
+  },
+  "saved_ring": {
+    "density_audit_sha256": "2f5fb3e0a1ee47163f558fad9ce4db251acde2320af65f912f1b8339b05c8601",
+    "limit": "Ordered prefixes and deterministic target atoms are diagnostics; output-space force is not G/prior/AMS update.",
+    "publication_sha256": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+    "records": [
+      {
+        "artifacts_sha256": {
+          "checkpoint": "6ecaf68edff0c348d799105df612dbdc474793e77d823286c329536d2f07638c",
+          "panels": "2db2838d479c63cb7903c27253542dc5814a12a277393b6c4fbb0d526a2b6ebe",
+          "request": "6ad7cda6493e95136579c2d7470a8c95617d40e11f1d7a3baf432ac28502712f"
+        },
+        "attempt_id": "fca1f1c665354d3089066abe90f291ad",
+        "available_drift_components": 16,
+        "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+        "checkpoint_state_sha256": "a1e11a5d100d900dabde87c2fb651c94d2570fe2ace4c4563d253aea0586efc0",
+        "execution_origin": "517257ff3879516ae2da64009c375ffffe9b001a",
+        "fixture": "first128 ordered endpoint evaluation outputs vs128 deterministic circle atoms at declared centers",
+        "mean_radial_variance_derivative": 6.292556984151135e-06,
+        "mean_tangent_variance_derivative": -1.7455533054629945e-07,
+        "original_gate_metrics": {
+          "component_core_covariance_error": 1.0512358620762825,
+          "component_core_min_eigen_ratio": 0.07926595211029053,
+          "component_covariance_error": 1.5565460547804832,
+          "component_min_eigen_ratio": 0.09407460689544678,
+          "covariance_error": 0.08417172729969025,
+          "hq": 0.888671875,
+          "mass_tv": 0.0498046875,
+          "max_component_spill": 0.1764705926179886,
+          "mean_error": 0.018157009035348892,
+          "min_hq_mass_ratio": 0.7109375,
+          "min_mass_ratio": 0.80078125,
+          "modes": 16,
+          "resolved_core_covariance_error": 0.0,
+          "resolved_core_min_eigen_ratio": 1.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "step": 1600,
+          "sw1_normalized": 0.028199601224341668,
+          "target_scale": 3.0029242038726807
+        },
+        "output_gradient_norm": 0.01154005517122972,
+        "publication_gate_status": "FAIL",
+        "radial_expanding_components": 12,
+        "role": "non_saturating",
+        "saved_panels": 96,
+        "signed_energy_u": -0.03398135612512876,
+        "tangent_contracting_components": 9,
+        "target_is_actual_gaussian_or_seen_training_batch": false
+      },
+      {
+        "artifacts_sha256": {
+          "checkpoint": "7fb6e44a2ef9c4bf7f4e575392ca26bf2ce55d317c4b5a6e963c29c0713ff894",
+          "panels": "6979188516d5db07f625eeab366c9a5682eb74d4f8656d284a1bdd7d0b1ed444",
+          "request": "2f87512dd572199d16e88423071bc9f9ba2178adc329be9b66de035213d4ee06"
+        },
+        "attempt_id": "dc9341994b694c8bad549b1c09192c82",
+        "available_drift_components": 16,
+        "candidate_revision": "cfebacb33eb81492f3800cf772c723393bde0e272e35dae538c573fbf3702926",
+        "checkpoint_state_sha256": "0c6716b41be2600c5cbf93b860bac3b26628a04cec97408aa4b65b74834c3fa7",
+        "execution_origin": "3cb46b91121f42f8b171a77f17776365aebad1d8",
+        "fixture": "first128 ordered endpoint evaluation outputs vs128 deterministic circle atoms at declared centers",
+        "mean_radial_variance_derivative": -5.0705460949501425e-05,
+        "mean_tangent_variance_derivative": -2.255248451984055e-05,
+        "original_gate_metrics": {
+          "component_core_covariance_error": 1.0213067159056664,
+          "component_core_min_eigen_ratio": 0.11039683222770691,
+          "component_covariance_error": 4.625255521386862,
+          "component_min_eigen_ratio": 0.18926739692687988,
+          "covariance_error": 0.12446748465299606,
+          "hq": 0.89990234375,
+          "mass_tv": 0.1806640625,
+          "max_component_spill": 0.4457831382751465,
+          "mean_error": 0.2708089053630829,
+          "min_hq_mass_ratio": 0.1796875,
+          "min_mass_ratio": 0.32421875,
+          "modes": 15,
+          "resolved_core_covariance_error": 0.0,
+          "resolved_core_min_eigen_ratio": 1.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "step": 1600,
+          "sw1_normalized": 0.1693135991657759,
+          "target_scale": 3.0029242038726807
+        },
+        "output_gradient_norm": 0.03848271200070614,
+        "publication_gate_status": "FAIL",
+        "radial_expanding_components": 9,
+        "role": "weak_gamma",
+        "saved_panels": 96,
+        "signed_energy_u": 0.23233527171239343,
+        "tangent_contracting_components": 8,
+        "target_is_actual_gaussian_or_seen_training_batch": false
+      }
+    ]
+  },
+  "schema_version": 1,
+  "scientific_source_unchanged": true,
+  "selected_candidate": null,
+  "selected_coefficient": null,
+  "selected_scale": null,
+  "signed_U_unclamped": true,
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_files_verified": 1214,
+  "statistic": "2 mean Euclidean cross - ordered off-diagonal fake/fake mean - ordered off-diagonal real/real mean",
+  "word_softmax_limit": {
+    "actual_host_output": "per-character softmax, flattened 6x28 = 168; latent coordinates excluded",
+    "fixture": "20 deterministic repeated canonical rows, collapsed apple logits; not actual sampled words",
+    "limit": "Bounded output-space directions need not rescue saturated logits or inverse E reconstruction.",
+    "records": [
+      {
+        "energy_u": 2.0887211737353804,
+        "logit_gap": 2.0,
+        "logit_gradient_norm": 0.029117597151347197,
+        "output_gradient_norm": 0.2528943019094683
+      },
+      {
+        "energy_u": 2.4314567119152146,
+        "logit_gap": 8.0,
+        "logit_gradient_norm": 0.0016107334717507355,
+        "output_gradient_norm": 0.2288763733879433
+      },
+      {
+        "energy_u": 2.4453504956690484,
+        "logit_gap": 20.0,
+        "logit_gradient_norm": 1.01302665163352e-08,
+        "output_gradient_norm": 0.2291434276160746
+      },
+      {
+        "energy_u": 2.4453505822901027,
+        "logit_gap": 40.0,
+        "logit_gradient_norm": 5.430227405552701e-18,
+        "output_gradient_norm": 0.2927893899481683
+      },
+      {
+        "energy_u": 2.4453505822901027,
+        "logit_gap": 80.0,
+        "logit_gradient_norm": 2.306952970558087e-35,
+        "output_gradient_norm": 0.2927893899481682
+      }
+    ]
+  },
+  "zero_subgradient_at_duplicate_rows": true
+}

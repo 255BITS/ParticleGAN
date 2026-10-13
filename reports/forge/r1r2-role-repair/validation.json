@@ -1,0 +1,92 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 70,
+    "certified_cases": 70,
+    "clock_cohort": "Ten separate original saved-state proofs, scheduled baseline FAIL and all nine constant recipes PASS",
+    "exact_cached_cases": 21,
+    "independent_audit": "PASS",
+    "new_optimizer_updates": 0,
+    "new_paid_attempts": 49,
+    "new_paid_seconds": 1269.2766638240719,
+    "new_sampling_draws": 0,
+    "ordinary_comparison": "All six PASS actual initialized tensors and ordered consumed target batches; every consumed named stream checkpointed",
+    "shared_unique_paid_attempts": 154,
+    "shared_unique_paid_seconds": 4000.9795464819763
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "covariance_bound_passes_each": 0,
+    "full_ring_passes_each": 0,
+    "max_absolute_difference": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "saved_observations": 672,
+    "terminal_suffix_each": 0
+  },
+  "execution_commit": "6f634cec5c3ec6e0dcda7c1508a2eafaf9fb2bfd",
+  "inputs_sha256": {
+    "reports/forge/r1r2-role-repair/README.md": "67cfcb1f3c65b9d72ebef520001a26247f9bc612fdf164310126dcb764589075",
+    "reports/forge/r1r2-role-repair/audit_collection.py": "c10df2e61d8ddceeca58f61f30cc6ecb8d6033bd6d980bae5e98a36d83c2c964",
+    "reports/forge/r1r2-role-repair/collection-audit.json": "48568124373ae9876c7249e672e67bd37019eb12e61db64346e25990db50bc22",
+    "reports/forge/r1r2-role-repair/density-audit.json": "00971c4526107d97b8008ee3cb073dd071388003e3c3d9c64f5411ef88de5f0c",
+    "reports/forge/r1r2-role-repair/density-readout.md": "993b140de140bd0eb539284d4be97e1dd9c09f9639951b0393354dd5bdd9e935",
+    "reports/forge/r1r2-role-repair/density_audit.py": "1e18cd3ee3b982bf5c5c8a52dc6f03f9883e5af244e280477f4f13dbbfa3fa97",
+    "reports/forge/r1r2-role-repair/manifest.json": "4eb4d6090724204fe7581ab405ab0384c83411157c4fc09f4f847ee20c7311f5",
+    "reports/forge/r1r2-role-repair/optimizer/normalization.json": "2d25898a09c2bfc4d619bd4b8d5fc49a751b36610263347153cbb0b333425e37",
+    "reports/forge/r1r2-role-repair/optimizer/normalization.md": "05e1eb712c5f4fb02f2e0dd357fd71f83c0e3d529e429142a29c47cd18fdfaf9",
+    "reports/forge/r1r2-role-repair/optimizer/normalization_analyze.py": "451d1f3cf48101eff934d3137709509672f0b2aa5a7ef1221cf0cdda23344925",
+    "reports/forge/r1r2-role-repair/preflight-review.json": "f46097c96304d4d40cd398a4b91ba362b839f66d592fafd407e4046713e2ba30",
+    "reports/forge/r1r2-role-repair/prior/analyze_denominators.py": "c836f4645f0e3b1402c19ba7f271e4bb2401c044266d0ce2789de8e90273a8a1",
+    "reports/forge/r1r2-role-repair/prior/denominator-analysis.json": "72292785de9fbe634fcc954ea088d1f5620f532906402f91e0523a92534bf9bd",
+    "reports/forge/r1r2-role-repair/prior/denominator-readme.md": "11bc0e5b38378986770b285a2c21298086c2dad8c3ee49fd3d282575678a1267",
+    "reports/forge/r1r2-role-repair/publication/results.json": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "reports/forge/r1r2-role-repair/registration.json": "0cb87d50fcb36407e47554edf0b4a15386c7893a830b3cea11eb0cf3388e5794",
+    "reports/forge/r1r2-role-repair/test_role_workflow.py": "92986dbf809630fabebb60987d933155c5907a8c69f4bc912621839b0ff23ed0",
+    "reports/forge/r1r2-role-repair/workflow.py": "7e3776a5fef4d83060d0901a8e7d5017b5b3766c4d4af694e14d0fd4f0d1391e"
+  },
+  "local_log_sha256": {
+    "collect.log": "aadd4e3542c179a295a79982b1d43908760b7352dd4dcd0e1c1c6b6b0026525b",
+    "preflight-tests.log": "037b80239cc30275d241697ce5651af816eb834cdd43af73589c6979efe111bf",
+    "prepare.log": "8e0fc1ce2201802adea6f2ff01d858721cefa4cdd6b31b8ae36512b949217f9b",
+    "run.log": "5f5cb3eab7c84cf251ab98c1d48c06421f3dfe25fb33009e99ca417c9e739f8b",
+    "tier-report-tests.log": "0df4b90b3b7941121f9766cc7384c6109742ed7a7581f3abd81946d161b7b0a4"
+  },
+  "memory_check": {
+    "command": "project Python -m experiments.forge compile --check",
+    "log_sha256": "e2a4f25a413ceefe39ac776430e00c31fe0d38e28d801151f4a17ff06a27edb2",
+    "observed_status": "CURRENT",
+    "qualification_refresh_mode": "preserved_published_evidence",
+    "required_status": "CURRENT"
+  },
+  "outcome": {
+    "best_covariance_error": 0.9041927624493837,
+    "best_density_recipe": "r1r2-role-m110-v1",
+    "best_whole_new_recipe": "r1r2-role-ams-m111-v1",
+    "clock_status": "PASS",
+    "ordinary_passes": 5,
+    "ordinary_required": 6,
+    "original_covariance_bound": 0.85,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false
+  },
+  "preexisting_test_failures": "reports/forge/r1r2-baseline/validation.json; two family-publication failures reproduced on unchanged original base",
+  "preserved_published_record_count": 513,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Closed optimizer-role campaign verification; compact provenance only",
+  "stopping": "All49 new runs complete; close this immutable campaign with failures visible. No automatic refinement, scientific retries, seed variation or Tier2.",
+  "tier_report_tests": {
+    "command": "project Python -m pytest -q tests/test_forge_tier_report.py",
+    "log": "tier-report-tests.log",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "command": "project Python -m pytest -q role/test_role_workflow.py five-track/test_five_track_workflow.py tier1-search/test_workflow.py",
+    "log": "preflight-tests.log",
+    "passed": 41
+  }
+}

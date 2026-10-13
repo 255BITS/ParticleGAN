@@ -1,0 +1,61 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-matched-baseline-v1"
+  },
+  "candidate": "recipe-prior-refactor-r1r2-v1",
+  "competing_explanation": "Differences can reflect source/runtime changes rather than trainer policy; compare actual initialized tensors and consumed real batch sequences across every candidate.",
+  "control": {
+    "candidate_id": "r1r2-constant-policy-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "The selected scheduled whole recipe remains the source-bound matched reference when passive init/data/RNG receipts and a complete clock source audit are added. Archived evidence remains distinct.",
+  "id": "r1r2-tier1-matched-baseline-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+        "frozen_source": {
+          "commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+          "qualifies_latest_checkout": false,
+          "source_digests": [
+            "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14"
+          ]
+        }
+      },
+      "path": "reports/forge/r1r2-baseline/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -1,0 +1,756 @@
+{
+  "analysis": "six saved endpoint role/moment and deterministic function probes",
+  "inspected_source_hashes": {
+    "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd",
+    "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+  },
+  "limitations": "Endpoint moments describe different trained states, not isolated role causality. Reconstructed moment displacement is a float64 formula estimate, not independently captured pre/post displacement. Fixed means/word panels are diagnostic cohorts and do not substitute task sampling or gates.",
+  "limits_of_stream_proof": "Training stream cursors match; instantaneous sampled row IDs and gradient support are not separately stored.",
+  "paired_final_training_stream_cursor_equality": {
+    "five_word_joint_smoke": {
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": true,
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": true,
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": true,
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": true,
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": true
+    },
+    "gaussian1d_smoke": {
+      "[\"data\",\"target\",\"training\",\"cpu\"]": true,
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": true,
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": true,
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": true,
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": true,
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": true
+    },
+    "ring16_acquisition": {
+      "[\"data\",\"target\",\"training\",\"cpu\"]": true,
+      "[\"data\",\"target\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": true,
+      "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": true,
+      "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": true,
+      "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": true,
+      "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": true,
+      "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": true
+    }
+  },
+  "python_rng_unchanged": true,
+  "rows": [
+    {
+      "attempt_id": "a1d5d58e4f754bbf87e2996d9da714b3",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint_sha256": "223ac9b2a61d4b9c2d271bd1c99efab4c3fb0168a61bb6b1ed61965335d1b962",
+      "endpoint_metrics": {
+        "cdf_ks": 0.1427394607371768,
+        "finite_fraction": 1.0,
+        "mean": 2.129607649992977,
+        "mean_error_sigma": 0.2592152999859536,
+        "sample_count": 4096,
+        "std": 0.6511509784204252,
+        "std_ratio": 1.3023019568408505,
+        "step": 1000
+      },
+      "gate_status": "PASS",
+      "gaussian_best_cdf_observation": {
+        "cdf_ks": 0.02417727950346049,
+        "finite_fraction": 1.0,
+        "mean": 1.990467175390222,
+        "mean_error_sigma": 0.01906564921955578,
+        "sample_count": 4096,
+        "std": 0.5461835987648752,
+        "std_ratio": 1.0923671975297504,
+        "step": 417
+      },
+      "gaussian_best_observed_cdf_ks": 0.02417727950346049,
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.0041194906121179275,
+          "lr": 0.0085,
+          "parameter_count": 1185,
+          "role": "G",
+          "saved_moment_displacement_l2": 0.028708624608942995,
+          "saved_moment_displacement_over_endpoint_weight": 0.0049302184231747445,
+          "second_moment_rms": 0.000804539658463259,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.00030975681260267217,
+          "lr": 0.0085,
+          "parameter_count": 512,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.0562546463242455,
+          "saved_moment_displacement_over_endpoint_weight": 0.0024593750987316715,
+          "second_moment_rms": 0.00011742778674344986,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.014586255203553939,
+          "lr": 0.0085,
+          "parameter_count": 1281,
+          "role": "D",
+          "saved_moment_displacement_l2": 0.09478716695733361,
+          "saved_moment_displacement_over_endpoint_weight": 0.022223167775449356,
+          "second_moment_rms": 0.0010072992350621491,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0234192037470726
+        }
+      ],
+      "raw_result_sha256": "abe9e08c5ae1f06b09ad0fc1aaa4bdd4633b62dc8d2e9e8d8037ce54a64f018b",
+      "recipe": "parent",
+      "request_sha256": "2fb92170b47faf355131505ab7b9d251114328630ded177c0daa545f0d96b40e",
+      "sample_sha256": "ac288637139eb03b7420e5c101bb58c618cae5f952e2f1f16a260cc3f6b50d94",
+      "saved_output_critic_gradient": {
+        "input_gradient_norm_max": 0.0485979620902819,
+        "input_gradient_norm_mean": 0.008399706359615261,
+        "panel_size": 4096,
+        "zero_gradient_rows": 0
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "27c75f3d768e4b789a488a3fdc5a2e90",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint_sha256": "59c834de57da354b0bfaafd8cb73188ce68a4d0257d4783cb6520ff4a14a9c37",
+      "endpoint_metrics": {
+        "component_core_covariance_error": 0.9984053559601307,
+        "component_core_min_eigen_ratio": 0.4321348965167999,
+        "component_covariance_error": 2.3864271584898233,
+        "component_min_eigen_ratio": 0.43362143635749817,
+        "covariance_error": 0.08412902802228928,
+        "hq": 0.84228515625,
+        "mass_tv": 0.0634765625,
+        "max_component_spill": 0.30383479595184326,
+        "mean_error": 0.0453452542424202,
+        "min_hq_mass_ratio": 0.5234375,
+        "min_mass_ratio": 0.66796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03822713249682795,
+        "target_scale": 3.0029242038726807
+      },
+      "gate_status": "FAIL",
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.13198777314531585,
+          "lr": 0.0085,
+          "parameter_count": 4610,
+          "role": "G",
+          "saved_moment_displacement_l2": 0.12324872423115456,
+          "saved_moment_displacement_over_endpoint_weight": 0.011347766165646193,
+          "second_moment_rms": 0.005134524809411149,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.022038490044834054,
+          "lr": 0.0085,
+          "parameter_count": 1024,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.18233543917217673,
+          "saved_moment_displacement_over_endpoint_weight": 0.005106386429945628,
+          "second_moment_rms": 0.0009522234158041388,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.58984375
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.10506327462296165,
+          "lr": 0.0085,
+          "parameter_count": 4929,
+          "role": "D",
+          "saved_moment_displacement_l2": 0.316808283527675,
+          "saved_moment_displacement_over_endpoint_weight": 0.03036820237396292,
+          "second_moment_rms": 0.0024331385017395423,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.008723879082978291
+        }
+      ],
+      "raw_result_sha256": "93a5ec8bea58b9c9192d6106185463e00faaef94b61cb844710b3e496986d0e7",
+      "recipe": "parent",
+      "request_sha256": "4ad5f1b7149534e02494564354aef38e9137480dc6f15453c488a07674b11173",
+      "sample_sha256": "6bc86f8e240d6f1898612f94681c1dcd5a2dbd42b125e8887a5b73607dbb89ea",
+      "saved_output_critic_gradient": {
+        "input_gradient_norm_max": 0.7357703322460954,
+        "input_gradient_norm_mean": 0.25824406779331555,
+        "panel_size": 4096,
+        "zero_gradient_rows": 0
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "fd19e04990e34421a25166d36f7ee319",
+      "candidate_revision": "35ebed78fe69b8923ead8335ea38bda209eb53ecc910b5e57ce5bac1c4b2f775",
+      "checkpoint_sha256": "0f5b36a326aa412cc09095b054aa79a16f5aa59fb1b9bb9f280d3251b0929ea3",
+      "endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.3955078125,
+        "mass_berry": 0.0,
+        "mass_grape": 0.40625,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 0.6,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 2,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.8017578125,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 13.815510557964274,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "fixed_panel": {
+        "cohort": "fixed five canonical inputs and saved prior means; no sampling or grading",
+        "encoded_pair_distance_min": 0.31214945877739175,
+        "fake_joint_critic": {
+          "input_gradient_norm_max": 0.9757212357850323,
+          "input_gradient_norm_mean": 0.7181514007539603,
+          "panel_size": 5,
+          "zero_gradient_rows": 0
+        },
+        "generated_by_saved_row": [
+          "grape_",
+          "grape_",
+          "apple_",
+          "grrpe_",
+          "apple_"
+        ],
+        "generated_min_token_max_probability": 1.0,
+        "prior_pair_distance_max": 1.5753247083159978,
+        "prior_pair_distance_min": 0.31850454670710326,
+        "real_joint_critic": {
+          "input_gradient_norm_max": 1.3782694941954936,
+          "input_gradient_norm_mean": 0.95851876866198,
+          "panel_size": 5,
+          "zero_gradient_rows": 0
+        },
+        "reconstructed_by_canonical_input": [
+          "apple_",
+          "grape_",
+          "grape_",
+          "apple_",
+          "apple_"
+        ]
+      },
+      "gate_status": "FAIL",
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 3.1318995056813215e-19,
+          "lr": 0.0085,
+          "parameter_count": 30184,
+          "role": "G",
+          "saved_moment_displacement_l2": 4.075028822128035e-16,
+          "saved_moment_displacement_over_endpoint_weight": 5.4942000810156525e-18,
+          "second_moment_rms": 0.00013577109590405333,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.5940564537503313
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.014088699715317813,
+          "lr": 0.0085,
+          "parameter_count": 30018,
+          "role": "E",
+          "saved_moment_displacement_l2": 0.11428828309178465,
+          "saved_moment_displacement_over_endpoint_weight": 0.003362208288698303,
+          "second_moment_rms": 0.0009314315512069408,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.007033933100706526,
+          "lr": 0.0085,
+          "parameter_count": 10,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.003350089489769875,
+          "saved_moment_displacement_over_endpoint_weight": 0.001989219403858632,
+          "second_moment_rms": 0.03521496311723129,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "first_moment_kind": "instantaneous last training gradient",
+          "first_moment_l2": 0.41882165772146845,
+          "lr": 0.0085,
+          "parameter_count": 76801,
+          "role": "D",
+          "saved_moment_displacement_l2": 1.0387730430485294,
+          "saved_moment_displacement_over_endpoint_weight": 0.014601723251737283,
+          "second_moment_rms": 0.002168886244952733,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.004739521620812229
+        }
+      ],
+      "raw_result_sha256": "a84d4eeb659ce2ef7cb62e359718d17a14848a778ecd4e8374b37c923e7df6b2",
+      "recipe": "parent",
+      "request_sha256": "823935d2d7915467ff4fb68dfdce284f68b9a7635873cf209146956b0c4d5033",
+      "selected_word_observations": [
+        {
+          "mass_tv": 0.7999999999999999,
+          "modes": 1,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "step": 834
+        },
+        {
+          "mass_tv": 0.6,
+          "modes": 2,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "step": 15001
+        },
+        {
+          "mass_tv": 0.6,
+          "modes": 2,
+          "quality_fraction": 0.8017578125,
+          "reconstruction_exact": 0,
+          "step": 20001
+        }
+      ],
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "0dd7a211bb0c482e9930a8cc530be66c",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint_sha256": "4cc804a0af9037e0c9e4965029ba31cfc448a4d4c8a0d723997c1b37152d3afa",
+      "endpoint_metrics": {
+        "cdf_ks": 0.05307762260704918,
+        "finite_fraction": 1.0,
+        "mean": 1.9696028747566743,
+        "mean_error_sigma": 0.060794250486651435,
+        "sample_count": 4096,
+        "std": 0.4466376382717135,
+        "std_ratio": 0.893275276543427,
+        "step": 1000
+      },
+      "gate_status": "FAIL",
+      "gaussian_best_cdf_observation": {
+        "cdf_ks": 0.05307762260704918,
+        "finite_fraction": 1.0,
+        "mean": 1.9696028747566743,
+        "mean_error_sigma": 0.060794250486651435,
+        "sample_count": 4096,
+        "std": 0.4466376382717135,
+        "std_ratio": 0.893275276543427,
+        "step": 1000
+      },
+      "gaussian_best_observed_cdf_ks": 0.05307762260704918,
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.10583572033178353,
+          "lr": 0.0085,
+          "parameter_count": 1185,
+          "role": "G",
+          "saved_moment_displacement_l2": 0.15051629995763038,
+          "saved_moment_displacement_over_endpoint_weight": 0.026970205846831824,
+          "second_moment_rms": 0.0041848173019108795,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.002839202725451643,
+          "lr": 0.0085,
+          "parameter_count": 512,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.08756821829296038,
+          "saved_moment_displacement_over_endpoint_weight": 0.0040609037820079396,
+          "second_moment_rms": 0.00025987082292707077,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.04762748708390599,
+          "lr": 0.0085,
+          "parameter_count": 1281,
+          "role": "D",
+          "saved_moment_displacement_l2": 0.0995277889524706,
+          "saved_moment_displacement_over_endpoint_weight": 0.02107317884030648,
+          "second_moment_rms": 0.003161151857452177,
+          "steps": [
+            1000
+          ],
+          "zero_first_moment_fraction": 0.00468384074941452
+        }
+      ],
+      "raw_result_sha256": "df63cae39ab21ff57243f1f28cfa227bcc153a43dcd223ec4213ee8762c6bb03",
+      "recipe": "momentum",
+      "request_sha256": "000ebb8d4373b31b6ae6f143188bd5cf01c9fc1c5793b9ffb7d4ab9c5ba17fd7",
+      "sample_sha256": "2de9857c7d550103828768d7801962791850b1271c21ab7293af6b15f39aef19",
+      "saved_output_critic_gradient": {
+        "input_gradient_norm_max": 0.269716930816364,
+        "input_gradient_norm_mean": 0.1029704561518273,
+        "panel_size": 4096,
+        "zero_gradient_rows": 0
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint_sha256": "960283604848cc26d48e7290f19d993a0aaa55d5ec24572de4decf1440836c42",
+      "endpoint_metrics": {
+        "component_core_covariance_error": 0.7354972325265408,
+        "component_core_min_eigen_ratio": 0.04970431327819824,
+        "component_covariance_error": 1.1855795439332724,
+        "component_min_eigen_ratio": 0.05281096696853638,
+        "covariance_error": 0.025590907782316208,
+        "hq": 0.9365234375,
+        "mass_tv": 0.0458984375,
+        "max_component_spill": 0.14084507524967194,
+        "mean_error": 0.017026303336024284,
+        "min_hq_mass_ratio": 0.7265625,
+        "min_mass_ratio": 0.7421875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.018213817082522937,
+        "target_scale": 3.0029242038726807
+      },
+      "gate_status": "FAIL",
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.01252905967412811,
+          "lr": 0.0085,
+          "parameter_count": 4610,
+          "role": "G",
+          "saved_moment_displacement_l2": 0.05081794645760007,
+          "saved_moment_displacement_over_endpoint_weight": 0.004376537646255944,
+          "second_moment_rms": 0.002460557989327406,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.004133356266752276,
+          "lr": 0.0085,
+          "parameter_count": 1024,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.07110117227399962,
+          "saved_moment_displacement_over_endpoint_weight": 0.001870836781131415,
+          "second_moment_rms": 0.000453467813130882,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.049484443362700394,
+          "lr": 0.0085,
+          "parameter_count": 4929,
+          "role": "D",
+          "saved_moment_displacement_l2": 0.15287720965945975,
+          "saved_moment_displacement_over_endpoint_weight": 0.015278092483493856,
+          "second_moment_rms": 0.0020213801836710316,
+          "steps": [
+            1600
+          ],
+          "zero_first_moment_fraction": 0.0018259281801582471
+        }
+      ],
+      "raw_result_sha256": "bebe9000befa775f33f43655a7d37607d47cff8062506eedb5014799bb91c8ae",
+      "recipe": "momentum",
+      "request_sha256": "50efff20bd9b1738ba9aa7d1a122bff9f27b76857cf053d3cdce691782a23082",
+      "sample_sha256": "ecbac37e58534cd4e48f4d8615de6610d2e8c6d545064e608ce3adeac83541ae",
+      "saved_output_critic_gradient": {
+        "input_gradient_norm_max": 0.34184900387707057,
+        "input_gradient_norm_mean": 0.09726452567027964,
+        "panel_size": 4096,
+        "zero_gradient_rows": 0
+      },
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5083750114c24d6c909ea98e81aed972",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "checkpoint_sha256": "b93fb0615b5f9b6534182abdeec4283a18cb1db2d3cc80d920f3b4c4919ef782",
+      "endpoint_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 1.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 0.7999999999999999,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 1,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 17.499646706754746,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "fixed_panel": {
+        "cohort": "fixed five canonical inputs and saved prior means; no sampling or grading",
+        "encoded_pair_distance_min": 0.014612369454042862,
+        "fake_joint_critic": {
+          "input_gradient_norm_max": 0.791705609038225,
+          "input_gradient_norm_mean": 0.5268016917683522,
+          "panel_size": 5,
+          "zero_gradient_rows": 0
+        },
+        "generated_by_saved_row": [
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_"
+        ],
+        "generated_min_token_max_probability": 0.9999999999999496,
+        "prior_pair_distance_max": 1.7148320336689988,
+        "prior_pair_distance_min": 0.06069947643261093,
+        "real_joint_critic": {
+          "input_gradient_norm_max": 1.0678783731517294,
+          "input_gradient_norm_mean": 0.894341597695534,
+          "panel_size": 5,
+          "zero_gradient_rows": 0
+        },
+        "reconstructed_by_canonical_input": [
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_",
+          "grape_"
+        ]
+      },
+      "gate_status": "FAIL",
+      "instantaneous_training_gradient_history": "UNAVAILABLE: no optimizer-diagnostics trace or stored parameter gradients; beta1=.5 first moments are history averages",
+      "optimizer_moments": [
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 7.181413995454522e-13,
+          "lr": 0.0085,
+          "parameter_count": 30184,
+          "role": "G",
+          "saved_moment_displacement_l2": 1.1574717436301503e-08,
+          "saved_moment_displacement_over_endpoint_weight": 1.5273139347099364e-10,
+          "second_moment_rms": 1.6287448997307638e-05,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6006162205141797
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.11120729302603508,
+          "lr": 0.0085,
+          "parameter_count": 30018,
+          "role": "E",
+          "saved_moment_displacement_l2": 0.39388623146847146,
+          "saved_moment_displacement_over_endpoint_weight": 0.01125364005787791,
+          "second_moment_rms": 0.0034808808489003315,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.6268239056566061
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.041721892211504144,
+          "lr": 0.0085,
+          "parameter_count": 10,
+          "role": "prior",
+          "saved_moment_displacement_l2": 0.020285693520133045,
+          "saved_moment_displacement_over_endpoint_weight": 0.004656354210872246,
+          "second_moment_rms": 0.01641843615853213,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0
+        },
+        {
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "first_moment_kind": "exponentially averaged training gradients; instantaneous gradient unavailable",
+          "first_moment_l2": 0.10039274026991231,
+          "lr": 0.0085,
+          "parameter_count": 76801,
+          "role": "D",
+          "saved_moment_displacement_l2": 0.16352043336180536,
+          "saved_moment_displacement_over_endpoint_weight": 0.003415119511291632,
+          "second_moment_rms": 0.011604181425620034,
+          "steps": [
+            20001
+          ],
+          "zero_first_moment_fraction": 0.0005208265517376076
+        }
+      ],
+      "raw_result_sha256": "a3b9e75e004ad43a4d9562a698e4c935a4aa96c066d8a0aa25dba62904c986bb",
+      "recipe": "momentum",
+      "request_sha256": "0f4994b588a1c03e069a072e41e139c35df4d5aad3f2964eaba3cabb23afd386",
+      "selected_word_observations": [
+        {
+          "mass_tv": 0.7999999999999999,
+          "modes": 1,
+          "quality_fraction": 0.416015625,
+          "reconstruction_exact": 0,
+          "step": 834
+        },
+        {
+          "mass_tv": 0.6,
+          "modes": 2,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "step": 1667
+        },
+        {
+          "mass_tv": 0.7999999999999999,
+          "modes": 1,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 0,
+          "step": 20001
+        }
+      ],
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_id": "five_word_joint_smoke"
+    }
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "torch_cpu_rng_unchanged": true,
+  "training_updates_added": 0
+}

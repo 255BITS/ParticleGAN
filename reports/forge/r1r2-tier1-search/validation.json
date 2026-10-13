@@ -1,0 +1,55 @@
+{
+  "actual_inputs_matched_recipes_per_ordinary_task": 10,
+  "aggregate_unique_paid_seconds": 1804.5319410728698,
+  "all_named_streams_checkpointed": true,
+  "archived_vs_fresh_learning_protocol": "PASS",
+  "bulk_logs_in_git": false,
+  "collection_optimizer_updates": 0,
+  "collection_sampling_draws": 0,
+  "compilation_check": "PASS",
+  "compilation_mode": "preserved_published_evidence",
+  "current_leaderboard_unchanged": true,
+  "guide_and_report_links": "PASS",
+  "inputs_sha256": {
+    "reports/forge/r1r2-tier1-search/density-diagnosis.json": "898bc4b70778733c857ffc2122478b53f023b96baddb0c456a5a497c6ce96424",
+    "reports/forge/r1r2-tier1-search/density_diagnosis.py": "c171e428718531e9d88546c772c4b805618d97f7d01bc4f60e68bc5ebcf0bcbf",
+    "reports/forge/r1r2-tier1-search/protocol-validation.json": "ef41b2df7ffd3bd07852b00c8b25e592f123d5fabae70d4b2e4080bcd514d6d3",
+    "reports/forge/r1r2-tier1-search/protocol_audit.py": "d7a3df3518f14d12d331e900494c3e30a4c2db00c32d2fcd81c4f61ac560f004",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/round2-publication/results.json": "22fef2cdad46996729999f3b708851628db986a1d9745add5b66b72e89ebb0fa"
+  },
+  "inventory_coverage": "PASS",
+  "media_exports_verified": 77,
+  "old_publication_records_preserved": 500,
+  "ordinary_and_clock_results_complete": true,
+  "paid_cap_seconds": 5400,
+  "preexisting_family_test_failures": "reports/forge/r1r2-baseline/validation.json",
+  "protocol_software_validation": "reports/forge/r1r2-tier1-search/protocol-validation.json",
+  "qualification_input": false,
+  "readout_gate_links_verified": 70,
+  "research_memory_freshness": "CURRENT",
+  "round1_paid_seconds": 1259.1354882339656,
+  "round2_cached_baseline_attempts": 7,
+  "round2_new_paid_attempts": 21,
+  "round2_new_paid_seconds": 545.3964528389042,
+  "schema_version": 1,
+  "scope": "r1r2_bounded_search_validation",
+  "software_validation": [
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q reports/forge/r1r2-tier1-search/test_workflow.py",
+      "implementation_commit": "12fd88bc0189d172c9b30c0dc33ab6805cf63fb4",
+      "log_sha256": null,
+      "output_storage": "tool_output_only",
+      "passed": 21,
+      "seconds": 1.07
+    }
+  ],
+  "source_bound_ring_density_diagnosis": "PASS",
+  "status": "PASS",
+  "unique_attempts": 70,
+  "validation_log_sha256": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/baseline-validation-final.log": "ee017d19b13fa5ebcc2643ef85af0a63dcf7ae89a4efa9af5a014992288675b0",
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/compile-check-final.log": "80b5afd7f6a89657f6f950cbdb836c4c182477d323f33fa19135e90257f5d23b"
+  },
+  "whole_recipe_repairs": 0
+}

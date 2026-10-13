@@ -1,0 +1,46 @@
+{
+  "admission_requires_committed_source": true,
+  "bulk_files_in_git": false,
+  "complete_required_cells": 35,
+  "current_technique_inventory_unchanged": true,
+  "exact_cached_cells": 21,
+  "existing_paid_attempts": 189,
+  "existing_paid_seconds": 5842.625037202932,
+  "full_task_reservation_seconds": 12600,
+  "independent_preflight": "PASS",
+  "inputs_sha256": {
+    "reports/forge/r1r2-objective-memory-repair/PLAN.md": "1b49c73a910d17cd2eedededf1d29bd1721e6066c2f958ccbb4e97497daa7d4f",
+    "reports/forge/r1r2-objective-memory-repair/audit_collection.py": "596ba6cbefbfcea8dc059450ba0c157c7cc72980e9a8f5e384324d619f3bf384",
+    "reports/forge/r1r2-objective-memory-repair/density_audit.py": "1107399d5003887ceb26ef821ba631fe638390bd865d6d696fa11c74b3c3a0e3",
+    "reports/forge/r1r2-objective-memory-repair/manifest.json": "74df8379d19bfcb1b5af6cc5639d8a389e462c8eeba5965fb9529d9302c62725",
+    "reports/forge/r1r2-objective-memory-repair/preflight-review.json": "5126d1878e00de2b7459af44d30b2c8dda2f3fbdd42d940a3f3b9a05ac3ee5ae",
+    "reports/forge/r1r2-objective-memory-repair/registration.json": "f649a1d94109068d8283a739141fe8cd83323f5f5f53f8978603a8387bbbf288",
+    "reports/forge/r1r2-objective-memory-repair/test_objective_memory_workflow.py": "8800578ab1b5e701d622461e3830c08da9eabdbde1465e69ccbce00516c0e2c5",
+    "reports/forge/r1r2-objective-memory-repair/workflow.py": "bac0e46dfcc036204e84027c3ab141402662898421412b2b85012a8474bb7f76"
+  },
+  "memory_check": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012/compile-registration-check.log",
+    "log_sha256": "553a49efa0fd8a99fc4f9991e611b404562f1dc646a5329db08df4f46f401164",
+    "observed_status": "CURRENT",
+    "preserved_published_record_count": 513
+  },
+  "new_paid_cells": 14,
+  "qualification_input": false,
+  "recipe_deltas": "Only global transport weight0 to1 on exactconstantparent, or only amsgrad false totrue on exactm110; two distinct globally owned hypotheses, all tasks/protocols/gates unchanged.",
+  "runtime_fingerprint": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Frozen objective/memory comparison registration; no outcome or qualification",
+  "shared_paid_cap_seconds": 8000,
+  "status": "PASS",
+  "tier_report_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/tier-report-tests.log",
+    "log_sha256": "4551ddeb91e83ee099a9cfc900d0d6d0ca2fc91d59f0b1e2b3a0045f798fad63",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/preflight-next-tests.log",
+    "log_sha256": "9126469c2ac9c702403d9e23350decda8307009ccc3f9ad2e5a68e8aa237d353",
+    "passed": 169
+  }
+}

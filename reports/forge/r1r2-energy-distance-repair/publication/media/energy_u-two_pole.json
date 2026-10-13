@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "15fa48d8fb316780b4a71fee46d68369a7aa7b5e83488d017e36d9f24d87e886",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f4edcfc797ba6930ed852c3faef0becf83d6e9f5c1eafd04357110e50f8811f0",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-distance-repair-v1/d755b9a641ca47d981fa02df565d44ba/constraint_geometry-scored-outputs.pt": "c2351d876ed698ad1cc1538c7c3753c4d6bbbaf0ceea4f06b43f43ac44dcaf50"
+  },
+  "task_id": "two_pole"
+}

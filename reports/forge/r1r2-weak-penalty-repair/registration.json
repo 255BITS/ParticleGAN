@@ -1,0 +1,216 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012",
+  "candidates": {
+    "baseline": {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "card": {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+      "card": {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-non-saturating-ams-m110-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "b68a8c6d6012463813e62edabfc9e699ab0a7fcd1e494dbcf879b519c1fc9261",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "2941a676d023de77f3daee44d27b9078dbc9fd311e01db146e03e927648ae45b",
+        "clockfree_audit_measurement_v1": "fc0bb98f251470dc13fdb47c7df1d52211772c5674f338dff655297a7121acce",
+        "five_word_joint_smoke": "88e80c2efb1cdff7cf854ee64cfa077bf316fc8ba7ee6631f1a5e086dbdfee9e",
+        "gaussian1d_smoke": "08d0117f24516070a334cc51fd811ecc3939205e19a827598f3fa160dda287d2",
+        "ring16_acquisition": "7660e95c6ca6e2892d404b5d20fb6456ec5ca1b447d4becd0ac9aaebdb76aae5",
+        "two_pole": "079c6a3a12ade34132eefb9a0b7439f200ac31836d256588413e0da4fca930f0",
+        "unused_token_hold": "d551ab059369f01896fdcce94637760054149676218535ea92d9af0a2dcbaac4"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "weak_gamma": {
+      "candidate": "r1r2-non-saturating-weak-gamma-v1",
+      "candidate_revision": "cfebacb33eb81492f3800cf772c723393bde0e272e35dae538c573fbf3702926",
+      "card": {
+        "candidate": "r1r2-non-saturating-weak-gamma-v1",
+        "role": "weak_gamma",
+        "study": "r1r2-non-saturating-weak-gamma-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "298d8469f73523908faad2d5edf653c9cf6af401846b6fdf30a63720bb1c38d6",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "549c8648e412b87432c6e9149ed509b48318cc935cdd5925669d3589a2380360",
+        "clockfree_audit_measurement_v1": "0b2efd059a4f74bc6f2d56b8d6f6d7281abea685aed9358a2754fbb1565ed903",
+        "five_word_joint_smoke": "e16fb3cbf9c3ab2c38a62ec11f6bc680a6bff91af55e62431a05409f5c5f8af0",
+        "gaussian1d_smoke": "0c26741ea40d79c480b2137a1ca0f478e8d228c5eb82a42a5b4a6add0ab82139",
+        "ring16_acquisition": "1b14f77ce688e4d721c7b5abe01131f21b141eb09892e7e4c55faf1c64ddf0b7",
+        "two_pole": "6a25f31e58230b208e8a4f5c11320a19c0bd27ee122bbeffc9297fe52588b19c",
+        "unused_token_hold": "b1908fb99659247fd5bd35f3f78f5e258029d21018f1ff14205c11ef34075d63"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/ideas/r1r2-non-saturating-ams-m110-v1.json": "1f55db50347ed7adc5ebe54a9d38fdaa8de42b99eed091be793a086790f4030d",
+    "configs/forge/ideas/r1r2-non-saturating-weak-gamma-v1.json": "22e3928a7a408a7a4baf68ee7d63f6eb4893f98cd1cb9d143e92555f96340fbf",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-non-saturating-ams-m110-v1-study.json": "3988145706daba89eaf089bed9f3b786870138461b9c2d1d387a67e6b4e4f74e",
+    "configs/forge/studies/r1r2-non-saturating-weak-gamma-v1-study.json": "01fc3219829907c8a9491be79563f291cda0282c39e7f4b8262bbb87d3c26aa7",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-objective-memory-repair/publication/results.json": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+    "reports/forge/r1r2-score-law-repair/README.md": "4382b523a96f60a49cf6f0cc2c97cf542fc097c452da245511ddb0a9ebb9da6d",
+    "reports/forge/r1r2-score-law-repair/collection-audit.json": "4c8256e19ede31cdfddcb6e2642ffa7e1e4d68c6a1ac75242d27e0542e0e90fc",
+    "reports/forge/r1r2-score-law-repair/density-audit.json": "23245b6ba14945523455d58b16aa142ac7b9e5e3a1644548bca3072105e0bb34",
+    "reports/forge/r1r2-score-law-repair/publication/results.json": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+    "reports/forge/r1r2-score-law-repair/registration.json": "98abadd32c1e4f719cc9d7aaaff0353ca9954aa8a39e2d83e0d529d9435950a8",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/README.md": "a1711da890415c91c68691cd2673284893a6590fc87369ec66398792ef65a2c1",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/diagnosis.json": "d2b02452ccd037c88cefb8bb062dd838922f1cedc72ff83b7fe81e026897bec9",
+    "reports/forge/r1r2-score-law-repair/research/regularizer-balance/probe.py": "fd08affe7a86c3038b31fee90581569916ea238694ae720cf5da606a38241f3b",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066",
+    "reports/forge/r1r2-weak-penalty-repair/PLAN.md": "8c9d09f21797a90e33f24483e6125a04a7d5bf2a534154fa258aa0b563424686",
+    "reports/forge/r1r2-weak-penalty-repair/audit_collection.py": "d8719a7f6b1917f1563ec7e3bd43c08355666d1bf6b2c653d0d5280938b8266d",
+    "reports/forge/r1r2-weak-penalty-repair/density_audit.py": "cc3f4e1aef1d3e450535abca004592a87d92df2d6ae3cfc7c96e7ab628859674",
+    "reports/forge/r1r2-weak-penalty-repair/manifest.json": "86cd7077b30c3f049b97c3f8c69aa6c7fc8a8cbd8fbd17ea61f9a010d9fe040d",
+    "reports/forge/r1r2-weak-penalty-repair/research/weak-penalty.md": "44a0bdbd9c4e52ea5d09b43ae7d9c756d42667d033c35940f87d1bcbe002747a",
+    "reports/forge/r1r2-weak-penalty-repair/test_weak_penalty_workflow.py": "d8e38eb7a020c3f24aec52c3671b44822236c8213ef165caa21edab0da624bab",
+    "reports/forge/r1r2-weak-penalty-repair/workflow.py": "752f3aa7fe5ca3cc1e3d6ed03168ad9733c5c53125d89dad4f6912f1808f3c85"
+  },
+  "manifest": {
+    "baseline_role": "baseline",
+    "campaign": {
+      "budget_seconds": 7560,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-weak-penalty-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-non-saturating-ams-m110-v1-study"
+      },
+      {
+        "candidate": "r1r2-non-saturating-weak-gamma-v1",
+        "role": "weak_gamma",
+        "study": "r1r2-non-saturating-weak-gamma-v1-study"
+      }
+    ],
+    "id": "r1r2-weak-penalty-repair-v1",
+    "max_candidates": 3,
+    "paid_cap_seconds": 8000,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "supporting_inputs": [
+      "reports/forge/r1r2-weak-penalty-repair/workflow.py",
+      "reports/forge/r1r2-weak-penalty-repair/PLAN.md",
+      "reports/forge/r1r2-weak-penalty-repair/audit_collection.py",
+      "reports/forge/r1r2-weak-penalty-repair/density_audit.py",
+      "reports/forge/r1r2-weak-penalty-repair/test_weak_penalty_workflow.py",
+      "reports/forge/r1r2-weak-penalty-repair/research/weak-penalty.md",
+      "reports/forge/r1r2-score-law-repair/README.md",
+      "reports/forge/r1r2-score-law-repair/registration.json",
+      "reports/forge/r1r2-score-law-repair/publication/results.json",
+      "reports/forge/r1r2-score-law-repair/collection-audit.json",
+      "reports/forge/r1r2-score-law-repair/density-audit.json",
+      "reports/forge/r1r2-score-law-repair/research/regularizer-balance/probe.py",
+      "reports/forge/r1r2-score-law-repair/research/regularizer-balance/diagnosis.json",
+      "reports/forge/r1r2-score-law-repair/research/regularizer-balance/README.md"
+    ]
+  },
+  "manifest_sha256": "86cd7077b30c3f049b97c3f8c69aa6c7fc8a8cbd8fbd17ea61f9a010d9fe040d",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 7560,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

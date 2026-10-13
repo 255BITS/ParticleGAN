@@ -1,0 +1,40 @@
+{
+  "aggregate_paid_cap_seconds": 8000,
+  "all_513_published_qualification_records_unchanged": true,
+  "cached_global_recipes": 2,
+  "current_technique_inventory_unchanged": true,
+  "exact_cached_jobs": 14,
+  "final_cells": 35,
+  "full_reservation_seconds": 12600,
+  "inputs_sha256": {
+    "reports/forge/r1r2-direction-floor-repair/PLAN.md": "084d553b0312cbd9b798b60dd847b2b49bc8ae5dfd6b05651c30bd6369541b5f",
+    "reports/forge/r1r2-direction-floor-repair/manifest.json": "f3141839b47ed6f3ed21dc9d6594c678b63dcb39c58e2791d747f25c4bf14b4b",
+    "reports/forge/r1r2-direction-floor-repair/optimizer-preflight.json": "1db3872231c12ec0d5b1f97c368737365bbba5e37ed11bae8cd69fefaa707671",
+    "reports/forge/r1r2-direction-floor-repair/preflight-review.json": "a7c872a5c2549f35d1ff6e6a307f578e5fa04d3a364f2a4605b9eea1486bd79b",
+    "reports/forge/r1r2-direction-floor-repair/registration.json": "7f9fbe619b0e453a1b620c72fa7dac7b46f618b4ab5d112520579cb85f0c5f5b",
+    "reports/forge/r1r2-direction-floor-repair/test_direction_floor_workflow.py": "54fcea5538c59e2481d1f4f0283103b679d4d2cb0260447ad548d2f1ebff699e",
+    "reports/forge/r1r2-direction-floor-repair/workflow.py": "498e247779721c6691077b43b873a3220918fe8333250eb6e0d4b74341f107dd"
+  },
+  "memory_check": {
+    "log_sha256": "e2a4f25a413ceefe39ac776430e00c31fe0d38e28d801151f4a17ff06a27edb2",
+    "observed_status": "CURRENT"
+  },
+  "new_global_recipes": 3,
+  "new_job_keys": 21,
+  "no_execution_yet": true,
+  "previous_paid_seconds": 4000.9795464819763,
+  "previous_unique_paid_attempts": 154,
+  "qualification_input": false,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Pre-admission software, scientific binding and storage checks; no qualification",
+  "source_tasks_protocol_views_unchanged": true,
+  "status": "PASS",
+  "tests": {
+    "command": "project Python -m pytest -q direction-floor/test_direction_floor_workflow.py role/test_role_workflow.py five-track/test_five_track_workflow.py tier1-search/test_workflow.py",
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012/preflight-tests.log",
+    "log_sha256": "d5b69c41f205dbd264e9abd54dcbef824d01228d1facc39ee83df9d9c2faf714",
+    "passed": 71
+  }
+}

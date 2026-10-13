@@ -1,0 +1,169 @@
+{
+  "checks": {
+    "1216_science_and_all_declarations_committed_under_reviewed_A": "PASS",
+    "actual_initializer_data_stream_and_own_warmed_clock_requirements_frozen": "PASS",
+    "actual_prepared_projections_equal_registration": "PASS",
+    "all_217_original_charges_owners_one_attempt_histories": "PASS",
+    "both_ready_studies_share_full_5040_2520_campaign": "PASS",
+    "fourteen_fresh_keys_no_old_source_cache": "PASS",
+    "full_word_budget_shared_cap_serialization": "PASS",
+    "memory_current_valid_catalog_513_records_eight_snapshots_preserved": "PASS",
+    "no_queue_frozen_input_mutation_training_or_draws": "PASS",
+    "original_task_protocol_prior_initializer_sampling_budget_cadence_gates_and_19_pins_fixed": "PASS",
+    "positive_every_update_R1R2_point1_NS_native_AMS_role_configuration_held": "PASS",
+    "raw_energy_0_to_1_only_global_and_seven_hosts": "PASS",
+    "scoped_new_claims_collection_and_frozen_signed_receipt_guards": "PASS"
+  },
+  "committed_supporting_declarations": 36,
+  "costs": {
+    "campaign_full_allowance_seconds": 5040,
+    "currently_reserved_seconds": 0.0,
+    "historical_seconds": 6586.162437112915,
+    "insufficient_later_full_reservation_requires_incomplete_unknown": true,
+    "per_recipe_full_allowance_seconds": 2520,
+    "remaining_shared_paid_seconds": 1413.8375628870854,
+    "shared_paid_ceiling_seconds": 8000,
+    "two_concurrent_word_reservations_fit": false,
+    "word_full_allowance_seconds": 900,
+    "word_updates": 20001
+  },
+  "inputs_sha256": {
+    "audit_collection": "c94f9d3e78e74c99a5a51c1facde1b0a998b2a56593fb2a333480a2932ecbdb2",
+    "catalog": "0c2dc234f89a3ac244f52a0fd52d4f31862edda082d67888c8d3e2edd8568d7a",
+    "density_audit": "6d631030496633f960ecaa3572fd34c465e0adb7e93117c0ac1c5ac3662b534b",
+    "historical217_charge_index": "44d7b66b73cdbda72a971c5362eac5491a404fe06f2008e58534050d74dec784",
+    "manifest": "b9147d2fe0a5a249a10ad85c582449656c75f551b6aa55c9a9a2911e10e97a9e",
+    "memory_before": "642fb4ddae42388dc66a5bde6b14570bb9dd3e68ac3dc304474dba1969865df9",
+    "memory_check": "a73475b802a35960d6879fb3dd79655206434947929868d11bbc71646f960404",
+    "queue": "e0d16cc2a84a402807a1798ba1d4686e311b9cfffea8eda619b2d3c279d5f968",
+    "registration": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+    "software-validation": "8fb2573fc7834747d3637060287b813023c90d3584d00961ee1455dceb652a8d",
+    "software_audit_probe": "460652e77401f92a17670cda4b87ebfd452feb47e2e9dc73661fe4ef0ae306e4",
+    "workflow": "991e573c137327b8dd00c129f8ac916dff1f95f790171ea78bc77ee94b189b96"
+  },
+  "memory_prerequisite": {
+    "inventory_coverage": {
+      "declared_count": 11784,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11784,
+      "unclassified": [],
+      "valid": true
+    },
+    "published_records": 513,
+    "recall_records": 839,
+    "status": "CURRENT",
+    "unchanged_qualification_snapshots": 8
+  },
+  "model_optimizer_construction_training_draws": 0,
+  "original_evaluation_source_pins": 19,
+  "paid_admission": false,
+  "pending_execution_evidence": "Fresh trained grades and actual initializer/batch/stream comparisons remain unmeasured. Frozen audits require them, including both 96-panel Ring diagnoses, before a complete result.",
+  "qualification_input": false,
+  "queue_mutations": 0,
+  "recipe_deltas": {
+    "ae_gan_hold": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "clockfree_audit_measurement_v1": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "five_word_joint_smoke": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "gaussian1d_smoke": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "global": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "ring16_acquisition": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "two_pole": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    },
+    "unused_token_hold": {
+      "after": 1.0,
+      "before": 0.0,
+      "fields": [
+        "energy_distance_weight"
+      ]
+    }
+  },
+  "registered_roles": {
+    "energy_u": {
+      "candidate": "r1r2-non-saturating-energy-u-v1",
+      "readiness": "READY",
+      "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+      "study": "r1r2-non-saturating-energy-u-v1-study"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "readiness": "READY",
+      "revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+      "study": "r1r2-energy-u-fresh-control-v1-study"
+    }
+  },
+  "registration_commit_status": "Prepared registration hash-pinned; root commits it and this receipt before admission. Later B preserves exact scientific/declaration bytes reviewed under A.",
+  "reviewed_commit": "79a16bc7c5b0cd2eedfb9a17a0f0095c39cb2d40",
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "scientific_source_files": 1216,
+  "scope": "independent_read_only_preflight_not_paid_admission",
+  "scope_counts": {
+    "cached_grades": 0,
+    "fresh_jobs": 14,
+    "historical_attempts": 217,
+    "ordinary_hosts_per_recipe": 6,
+    "own_clocks": 2,
+    "whole_recipes": 2
+  },
+  "status": "PASS",
+  "storage": {
+    "archives_bytes": {
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012": 4543,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012": 6097216,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012": 5477,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012": 7776,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-role-repair-20261012": 2512,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012": 46457,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012": 3855,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012": 3331506684,
+      "/mnt/ml7tb/ParticleGAN-forge/r1r2-weak-penalty-repair-20261012": 51473849
+    },
+    "combined_bytes": 3389148369,
+    "combined_cap_bytes": 8589934592,
+    "free_bytes": 20480491520,
+    "minimum_free_bytes": 5368709120
+  }
+}

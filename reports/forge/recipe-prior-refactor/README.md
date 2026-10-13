@@ -7,6 +7,10 @@ are 11/21, 10/21, 9/21 and 9/21. Atlas/E22 remain explicitly blocked with zero
 spend. [The completed report](publication/README.md) contains exact metrics and
 143 training illustrations from 148 physical attempts costing 7,202.084 seconds.
 
+The [R1/R2 baseline readout](../r1r2-baseline/README.md) freezes the selected
+R1/R2 reference recipe and explains its Ring16 and clock failures, acquisition
+passes and separate deeper diagnostic limits.
+
 This completed campaign remeasured the seven selected recipe leaders under
 `execution.prior_contract=recipe_owned_v1`. It keeps their pre-refactor global
 settings, initial prior laws, deterministic seed-0 initialization, declared data-stream laws,

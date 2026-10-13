@@ -1,0 +1,90 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-five-track-prior-v1"
+  },
+  "candidate": "r1r2-prior-slow-v1",
+  "competing_explanation": "The saved component variance is dominated by a local generator-noise Jacobian estimate, so slowing prior locations may leave stretch unchanged or make center acquisition worse. The endpoint diagnosis is not a causal decomposition. Direct pole coordinates do not consume prior_lr_mult; source/runtime/data differences must be excluded before attributing changes to the recipe.",
+  "control": {
+    "candidate_id": "r1r2--169e9539b2dcfaab6b51e17f02907f28ea5b894f77155f7e688ab07a789de2b9",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Changing only learned-prior LR multiplier from1 to.25 on the constant beta2=.99/gamma=.1/LR=.0085 parent permits G/D to correct Ring16 local density without losing its pole movement margin, and improves word acquisition under the unchanged full Tier1 suite.",
+  "id": "r1r2-five-track-prior-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "complete": true,
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+      },
+      "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "artifacts_sha256": {
+          "observed-samples.pt": "d938da2a44530c2c337cb6600964988f6c9e2483fc37b86289300910b7b84ccb",
+          "provenance/provenance-state.pt": "46eb431722fe1a1b13fbfc994ef20618efaba176b71adecb95d15c323dd52309"
+        },
+        "attempt_archive_path": "queue/r1r2-tier1-half-rate-b99-g01-v1/36f9ba8f0f1d4b69b379f0189598f210"
+      },
+      "path": "reports/forge/r1r2-tier1-search/density-diagnosis.json",
+      "selector": [
+        "half_rate_b99_g01_endpoint_geometry"
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_id": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+        "candidate_revision": "98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc",
+        "record_id": "readout-b42a8f277178ec58808d6b5c"
+      },
+      "path": "reports/forge/records/readout-b42a8f277178ec58808d6b5c.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_id": "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+        "candidate_revision": "ecd7497dc47ac901328a0e28a32d2657cf2ce0601db5690c629b1f33a6626d45",
+        "record_id": "readout-da2ac34b1675880ab8ace248"
+      },
+      "path": "reports/forge/records/readout-da2ac34b1675880ab8ace248.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

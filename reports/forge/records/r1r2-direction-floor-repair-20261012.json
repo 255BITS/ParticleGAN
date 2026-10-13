@@ -1,0 +1,30 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "optimizer_family adam to ada_nsgda",
+    "d_eps null to 1e-4"
+  ],
+  "conclusion": "No complete repair. All three new recipes pass 4/6 ordinary tasks plus clock and fail Ring16 and words; direction preservation is insufficient and its epsilon combination worsens density. Detailed metrics remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Per-tensor gradient-direction preservation and critic-only epsilon damping repair the unchanged whole Tier1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "gradient_direction_and_critic_denominator_factorial",
+  "next_action": "Close this registration, preserve baseline and failures; examine the saved update singular-value spectrum before a separate finite comparison.",
+  "provenance": {
+    "report": "reports/forge/r1r2-direction-floor-repair/README.md",
+    "source_commit": "a7f141c9c73d7aead972f2d7a382b2f52a59ac69",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-direction-floor-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-direction-floor-repair/publication/results.json",
+    "sha256": "24ecdc0cbeb6a848598b752906ac156107970769d40cdeaa10d4442fac974d3c"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

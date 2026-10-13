@@ -1,0 +1,97 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-direction-floor-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 35,
+    "certified_cases": 35,
+    "clock_cohort": "Five separate original saved-state proofs; scheduled reference FAIL and all four constant recipes PASS",
+    "exact_cached_cases": 14,
+    "independent_audit": "PASS",
+    "new_optimizer_updates": 0,
+    "new_paid_attempts": 21,
+    "new_paid_seconds": 586.6006355709687,
+    "new_sampling_draws": 0,
+    "ordinary_comparison": "All six PASS captured initial tensor and ordered target-batch equality, every consumed named stream checkpointed",
+    "shared_unique_paid_attempts": 175,
+    "shared_unique_paid_seconds": 4587.580182052945
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "covariance_bound_passes_each": 0,
+    "full_ring_passes_each": 0,
+    "max_absolute_difference": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "saved_observations": 288,
+    "terminal_suffix_each": 0
+  },
+  "execution_commit": "a7f141c9c73d7aead972f2d7a382b2f52a59ac69",
+  "inputs_sha256": {
+    "reports/forge/r1r2-direction-floor-repair/README.md": "9a60d099d5e939654d1a30d1292a11eed4766fea01018ddf54248c196a6f549e",
+    "reports/forge/r1r2-direction-floor-repair/audit_collection.py": "df64efb6e7085377335c54fee1f72f5a43be6c7d3fa120faea9f9fab8b80afc5",
+    "reports/forge/r1r2-direction-floor-repair/collection-audit.json": "b5d9450cd3e9a272219ce4429c72060519daf2cb7676f81ca5f8cab0ee3aadbf",
+    "reports/forge/r1r2-direction-floor-repair/density-audit.json": "7b60dede1699bd6f0bcc2f0e6419a07a5df336a2ab2ffce7c989d6679717e748",
+    "reports/forge/r1r2-direction-floor-repair/density-readout.md": "1fbf82ebf30bf46535ab12555e9a06b9c7d96e2221becf2d2da69fbf41a08207",
+    "reports/forge/r1r2-direction-floor-repair/density_audit.py": "d3a2eeee4b2d84106f3c067c684295bc4a99229d3e10b18daf4ad8a6affe6358",
+    "reports/forge/r1r2-direction-floor-repair/manifest.json": "f3141839b47ed6f3ed21dc9d6594c678b63dcb39c58e2791d747f25c4bf14b4b",
+    "reports/forge/r1r2-direction-floor-repair/optimizer-preflight.json": "1db3872231c12ec0d5b1f97c368737365bbba5e37ed11bae8cd69fefaa707671",
+    "reports/forge/r1r2-direction-floor-repair/optimizer/spectral-note.json": "55eaad48aa018bc9a614b5e8b388fc9dd4904737af2606acd918b394d13c919c",
+    "reports/forge/r1r2-direction-floor-repair/optimizer/spectral-note.md": "7c349cba9ef5e606ca9965cc9917d21242c6f09fc25010e83a93c3e6b2250946",
+    "reports/forge/r1r2-direction-floor-repair/preflight-review.json": "a7c872a5c2549f35d1ff6e6a307f578e5fa04d3a364f2a4605b9eea1486bd79b",
+    "reports/forge/r1r2-direction-floor-repair/publication/results.json": "24ecdc0cbeb6a848598b752906ac156107970769d40cdeaa10d4442fac974d3c",
+    "reports/forge/r1r2-direction-floor-repair/registration-validation.json": "52a73f15f5b36e338801175d5adf4adc8428be8fb7d0d5e8b4132f28a64e36ae",
+    "reports/forge/r1r2-direction-floor-repair/registration.json": "7f9fbe619b0e453a1b620c72fa7dac7b46f618b4ab5d112520579cb85f0c5f5b",
+    "reports/forge/r1r2-direction-floor-repair/test_direction_floor_workflow.py": "54fcea5538c59e2481d1f4f0283103b679d4d2cb0260447ad548d2f1ebff699e",
+    "reports/forge/r1r2-direction-floor-repair/transport/next-hypothesis.md": "dd42dcf7fe3fecc9a5fc11adb8cdd787e5a18bb1d9de34349fb8a2ce54b5827a",
+    "reports/forge/r1r2-direction-floor-repair/workflow.py": "498e247779721c6691077b43b873a3220918fe8333250eb6e0d4b74341f107dd"
+  },
+  "local_log_sha256": {
+    "collect.log": "a0b4f8af670f75795fcb30cc7376083e77e072b757a855ee25ff68ef350ca4b8",
+    "preflight-tests.log": "d5b69c41f205dbd264e9abd54dcbef824d01228d1facc39ee83df9d9c2faf714",
+    "prepare.log": "47813a4d42158249d74e38a52d308fd2b9f7a871f7da77b521a430e692a1283e",
+    "run.log": "37521d1bb21f2f0056f112cbe52823c901be44094714cd4676d087be1687f044"
+  },
+  "memory_check": {
+    "command": "project Python -m experiments.forge compile --check",
+    "fresh": true,
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/compile-registration-check.log",
+    "log_sha256": "bf58e558f84eae8932051ff0f240eab91c1d28531636f09db718f31ab70f0807",
+    "memory_current": true,
+    "observed_status": "CURRENT",
+    "publication_record_count": 513,
+    "qualification_refresh_mode": "preserved_published_evidence",
+    "required_status": "CURRENT"
+  },
+  "outcome": {
+    "all_new_clock_status": "PASS",
+    "all_new_failures": [
+      "ring16_acquisition",
+      "five_word_joint_smoke"
+    ],
+    "all_new_ordinary_passes": 4,
+    "best_new_covariance_error": 2.2944372333586216,
+    "best_new_density_recipe": "r1r2-direction-floor-adam-eps-v1",
+    "ordinary_required": 6,
+    "original_covariance_bound": 0.85,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false
+  },
+  "preexisting_test_failures": "reports/forge/r1r2-baseline/validation.json; two family-publication failures reproduced on unchanged original base",
+  "preserved_published_record_count": 513,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Closed direction/floor campaign verification; compact provenance only",
+  "stopping": "All21 new runs complete; close this immutable campaign with failures visible. No automatic refinement, scientific retries, seed variation or Tier2.",
+  "tier_report_tests": {
+    "log": "tier-report-tests.log",
+    "log_sha256": "ab63e873f0d0acb17bfc7fe9180a8b18208be9cf210b5ffc77f578ea67d218ed",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "preflight-tests.log",
+    "log_sha256": "d5b69c41f205dbd264e9abd54dcbef824d01228d1facc39ee83df9d9c2faf714",
+    "passed": 71
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "admissions_added": 0,
+  "all_rng_states_unchanged": true,
+  "archive_bytes": 3620367343,
+  "cached_parent_cases": [
+    {
+      "attempt_id": "56676fa4cf49455baaf9114bca5190c7",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 14.682920930004911,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "d755b9a641ca47d981fa02df565d44ba",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 6.688944992987672,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "da890dc8ee524c76ae49bad09cbb09e7",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 7.299600052996539,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "881af7d0f3724d55a1a220a0a49020ac",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 8.002995162998559,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "219c852ff8c345768d5cd16407b04236",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 19.914212464995217,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "a0893523c6564367ad59aab106e44cd1",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 140.84132748498814,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "68a98c1f20454c9bbebbc107a4b3d87e",
+      "charge_owner": {
+        "campaign": "r1r2-energy-distance-repair-v1",
+        "request": "5e165fc7ac28e8791e044bee",
+        "revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee"
+      },
+      "seconds": 6.840864224010147,
+      "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "candidate_allowance_seconds": 2520,
+  "candidate_revisions": {
+    "energy_u": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+    "frozen_prior": "408a066fe78ee9f770a1b53dbdbcb2d2db3f01ff0dd9bd50363b1015970fc1cc"
+  },
+  "checks": {
+    "E_HEAD_and_registration_exact_sha": "PASS",
+    "actual_both_READY_requests_equal_registration": "PASS",
+    "all1216_scientific_files_exact_B_E_and_live": "PASS",
+    "all231_original_charges_owners_one_attempt_results": "PASS",
+    "all34_new_frozen_declarations_current_and_committed_E": "PASS",
+    "all36_original_energy_declarations_unchanged_B_to_E": "PASS",
+    "claim_only_six_nonword_then_word_policy_frozen_with67_guard_receipt": "PASS",
+    "full5040_2520_and900_word_reservations_shared8000_cap": "PASS",
+    "global_and_seven_host_only_prior_update_delta": "PASS",
+    "original_B_source_snapshot_verified": "PASS",
+    "original_source_runtime_seed_init_data_prior_sampling_updates_cadence_gates": "PASS",
+    "seven_cached_B_certificates_and_original_paid_owners": "PASS",
+    "seven_new_keys_unclaimed_no_campaign_admission": "PASS",
+    "ten_archive8GiB_and_free5GiB": "PASS"
+  },
+  "execution_commit": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+  "frozen_declarations_changed": 0,
+  "full_comparison_reservation_seconds": 5040,
+  "full_word_reservation_seconds": 900,
+  "global_reserved_seconds": 0.0,
+  "historical_charge_index_sha256": "750c1a23d57454c8fd5977427d941465178f273997683451188d3500a85898e4",
+  "historical_paid_attempts": 231,
+  "historical_paid_seconds": 6970.914169566939,
+  "minimum_archive_free_bytes": 20244320256,
+  "models_constructed": 0,
+  "new_unclaimed_task_keys": {
+    "ae_gan_hold": "fc0b60c8a3156c2057a02d76abb3bb2c3a47244dc7fa736b2ee31c3e0b81ffbc",
+    "clockfree_audit_measurement_v1": "339732490bd073168ae68860a74545e11f279f7ff4f1e6b90508dd854c4f9b66",
+    "five_word_joint_smoke": "ab42377a617e41dd888ba0656ddb3857275d92e6b0658fbf758af9ebda2e5c45",
+    "gaussian1d_smoke": "7b62203569577105d986e1b4de3fc33a13e2278d2014b8ff96c4fcdf9dc387a8",
+    "ring16_acquisition": "8a801d12924f66de0d539cfb94d127f09fffc007df914d19174db1a14b214a1b",
+    "two_pole": "884d38dda167dee22b945792f820f0c4b15c40998bb1e364ef3a2d60b7b549ee",
+    "unused_token_hold": "c052f83a2e8f85ca60d731a3d35ace8f7858c761c8b83ea7e614116e2e2d4cd9"
+  },
+  "optimizer_updates_added": 0,
+  "original_cached_execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "queue_sha256_after": "1df9fbd06c07e295dcddfa7ac48a69e4bd1eb770b25589cbd35341e69384effc",
+  "queue_sha256_before": "1df9fbd06c07e295dcddfa7ac48a69e4bd1eb770b25589cbd35341e69384effc",
+  "registration_frozen_declaration_count": 34,
+  "registration_frozen_declarations_sha256": "894eaab48b45bb895478260a895be06d86925b8d1c3717340f029901ed3b5f43",
+  "registration_sha256": "7553c76a4ed5c6c1b131bc508999667cf4e68d9a55f34bb102c9a626937f090d",
+  "remaining_paid_seconds": 1029.0858304330613,
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scientific_file_map_sha256": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "scientific_success": null,
+  "scope": "independent_actual_committed_registration_review_before_admission",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files": 1216,
+  "status": "PASS"
+}

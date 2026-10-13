@@ -1,0 +1,2144 @@
+{
+  "archive_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012",
+  "diagnosis_rng_states_unchanged": true,
+  "evidence_type": "saved_observation_diagnosis_not_new_experiment",
+  "execution_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+  "manifest_sha256": "da29c38f4eba179ce00427d6f043cbb1971d4c06f42779ee3baa2a432d0500c7",
+  "new_optimizer_updates": 0,
+  "new_sampling_draws": 0,
+  "recipe_count": 5,
+  "recomputed_metrics": [
+    "sample_count",
+    "modes",
+    "mass_tv",
+    "hq",
+    "component_covariance_error",
+    "component_min_eigen_ratio"
+  ],
+  "recomputed_saved_observations": 480,
+  "reference_draws_avoided": "Only the pinned six gate equations are evaluated; target reference/global-moment/SW1 branches are excluded.",
+  "registration_sha256": "5beeb44fb5cfd3162b7743aa62bcf060815424cb4f74fa67269dbb21f99f8549",
+  "reproduction_source_sha256": "82db99554cabc14c42ba564af6a0855af68193e650e279935de2473e2d774387",
+  "rings": [
+    {
+      "artifacts_sha256": {
+        "graded-result.json": "91f89ce1a5ad777bacf25b3a0126f7728771a0c1a0783eb643f4ea83f3059b2d",
+        "observed-samples.pt": "9131aa6c53c9fafa2af692161b2e416bef1663adfedbcc4eb5b653613abf77e5",
+        "provenance/provenance-state.pt": "1417f4f199724bf7bf62b3c20ed28dff82a9de242fae19732cc0700053c8effd",
+        "raw-result.json": "7291259a6db2e63b9271f027b8d84848827c836398fac28077b08694cec165a0",
+        "request.json": "feb1bc97ee4908ced360b4bc3d443b29fcce790a1b7462a23b9942659abfa244"
+      },
+      "attempt_archive_path": "queue/r1r2-five-track-ttur-v1-study/2a2c63e32e6540cea41dd635343960cb",
+      "best_covariance_observation": {
+        "component_covariance_error": 2.8734206557273865,
+        "component_min_eigen_ratio": 0.19627448916435242,
+        "hq": 0.772216796875,
+        "mass_tv": 0.0703125,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1534
+      },
+      "candidate_id": "r1r2-five-track-ttur-v1",
+      "candidate_revision": "bcbbb6d461c144288367dfe017e183d125ea120b30805c6094fd57fbf4e54972",
+      "covariance_bound_passing_observations": 0,
+      "endpoint": {
+        "component_covariance_error": 3.6091855503618717,
+        "component_min_eigen_ratio": 0.19706329703330994,
+        "hq": 0.63671875,
+        "mass_tv": 0.0615234375,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1600
+      },
+      "endpoint_failed_bounds": [
+        "hq",
+        "component_covariance_error"
+      ],
+      "endpoint_geometry": {
+        "components": [
+          {
+            "between_center_trace_ratio": 0.6526082185987809,
+            "center_geometry_status": "AVAILABLE",
+            "component": 0,
+            "local_linear_noise_trace_ratio": 3.4616604785926257,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.5565076090639208,
+            "sample_count": 252,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.069248945587732
+          },
+          {
+            "between_center_trace_ratio": 0.459475297082027,
+            "center_geometry_status": "AVAILABLE",
+            "component": 1,
+            "local_linear_noise_trace_ratio": 2.0200989578457977,
+            "prior_center_count": 20,
+            "radial_variance_ratio": 0.19716559678229895,
+            "sample_count": 344,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.3366973596306906
+          },
+          {
+            "between_center_trace_ratio": 0.41386164843350587,
+            "center_geometry_status": "AVAILABLE",
+            "component": 2,
+            "local_linear_noise_trace_ratio": 2.1871742575976403,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.4116841704052863,
+            "sample_count": 254,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.652587255012272
+          },
+          {
+            "between_center_trace_ratio": 0.2993885340255216,
+            "center_geometry_status": "AVAILABLE",
+            "component": 3,
+            "local_linear_noise_trace_ratio": 1.7388928047373846,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 1.304370998949215,
+            "sample_count": 263,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.9103658184834247
+          },
+          {
+            "between_center_trace_ratio": 6.195644612168617,
+            "center_geometry_status": "AVAILABLE",
+            "component": 4,
+            "local_linear_noise_trace_ratio": 4.232347776357122,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 5.025135354286885,
+            "sample_count": 232,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.406429091956473
+          },
+          {
+            "between_center_trace_ratio": 4.081463008641358,
+            "center_geometry_status": "AVAILABLE",
+            "component": 5,
+            "local_linear_noise_trace_ratio": 3.1261597544171082,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 2.9252077100208336,
+            "sample_count": 265,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.578045071149368
+          },
+          {
+            "between_center_trace_ratio": 1.5412408425891546,
+            "center_geometry_status": "AVAILABLE",
+            "component": 6,
+            "local_linear_noise_trace_ratio": 4.046466145237888,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 1.9861363949585913,
+            "sample_count": 239,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.2785938125237735
+          },
+          {
+            "between_center_trace_ratio": 0.6048689877481972,
+            "center_geometry_status": "AVAILABLE",
+            "component": 7,
+            "local_linear_noise_trace_ratio": 4.955273876510329,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 2.016269705062064,
+            "sample_count": 247,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.0038121951003465
+          },
+          {
+            "between_center_trace_ratio": 0.46322644134586116,
+            "center_geometry_status": "AVAILABLE",
+            "component": 8,
+            "local_linear_noise_trace_ratio": 4.180229019864427,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 2.1102558638711573,
+            "sample_count": 221,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.352919852111727
+          },
+          {
+            "between_center_trace_ratio": 0.609105035663291,
+            "center_geometry_status": "AVAILABLE",
+            "component": 9,
+            "local_linear_noise_trace_ratio": 5.157462047568117,
+            "prior_center_count": 13,
+            "radial_variance_ratio": 2.0860896690409128,
+            "sample_count": 192,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.766435356488846
+          },
+          {
+            "between_center_trace_ratio": 0.8767779048829794,
+            "center_geometry_status": "AVAILABLE",
+            "component": 10,
+            "local_linear_noise_trace_ratio": 4.384650666080042,
+            "prior_center_count": 20,
+            "radial_variance_ratio": 5.627636244593391,
+            "sample_count": 361,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.3880407626097897
+          },
+          {
+            "between_center_trace_ratio": 18.7851643836382,
+            "center_geometry_status": "AVAILABLE",
+            "component": 11,
+            "local_linear_noise_trace_ratio": 4.057366796616002,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 7.75345285292189,
+            "sample_count": 271,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.31888516520731
+          },
+          {
+            "between_center_trace_ratio": 4.895030044182484,
+            "center_geometry_status": "AVAILABLE",
+            "component": 12,
+            "local_linear_noise_trace_ratio": 4.604330283372188,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 5.0129578104864825,
+            "sample_count": 225,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 7.426244087661509
+          },
+          {
+            "between_center_trace_ratio": 27.571073345773744,
+            "center_geometry_status": "AVAILABLE",
+            "component": 13,
+            "local_linear_noise_trace_ratio": 5.235673292546007,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 9.664145759117503,
+            "sample_count": 284,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 9.423911394534596
+          },
+          {
+            "between_center_trace_ratio": 5.362630827607573,
+            "center_geometry_status": "AVAILABLE",
+            "component": 14,
+            "local_linear_noise_trace_ratio": 3.581225936572499,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 14.868115221465944,
+            "sample_count": 228,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 7.527463500596765
+          },
+          {
+            "between_center_trace_ratio": 1.1905225311721708,
+            "center_geometry_status": "AVAILABLE",
+            "component": 15,
+            "local_linear_noise_trace_ratio": 5.143127726259153,
+            "prior_center_count": 13,
+            "radial_variance_ratio": 3.054620959844095,
+            "sample_count": 218,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.182442308976214
+          }
+        ],
+        "limitations": "Jacobians are first order at row centers, not an exact sample variance partition. Noise can cross activations or mode assignments. Unavailable component geometry is excluded with its denominator declared, never substituted into a gate. No causal attribution to prior motion, R1/R2 alone or a unique repair follows.",
+        "method": "Original float32 scorer's sample assignments; float64 population moments and mapped-center assignments; functional saved two-hidden-layer LeakyReLU(0.2) forward/Jacobian.",
+        "prior_centers_outside_3sigma": 49,
+        "prior_centers_outside_4sigma": 15,
+        "prior_rows": 256,
+        "radial_variance_ratio": {
+          "count": 16,
+          "max": 14.868115221465944,
+          "mean": 4.037484495054405,
+          "min": 0.19716559678229895
+        },
+        "reconstructed_float64_full_component_covariance_error": 3.6091851460869013,
+        "status": "AVAILABLE",
+        "tangent_variance_ratio": {
+          "count": 16,
+          "max": 9.423911394534596,
+          "mean": 4.4138826236019275,
+          "min": 1.9103658184834247
+        },
+        "target_component_variance": 0.01,
+        "target_trace_in_variance_units": 2.0,
+        "unweighted_between_center_trace_ratio": {
+          "count": 16,
+          "max": 27.571073345773744,
+          "mean": 4.625130103972092,
+          "min": 0.2993885340255216
+        },
+        "unweighted_local_linear_noise_trace_ratio": {
+          "count": 16,
+          "max": 5.235673292546007,
+          "mean": 3.882008738760896,
+          "min": 1.7388928047373846
+        }
+      },
+      "failures_by_bound": {
+        "component_covariance_error": 96,
+        "component_min_eigen_ratio": 1,
+        "hq": 96,
+        "mass_tv": 4,
+        "modes": 68,
+        "sample_count": 0
+      },
+      "full_passing_observations": 0,
+      "full_passing_windows": [],
+      "full_terminal_passing_suffix": 0,
+      "gate_status": "FAIL",
+      "last_five_observations": [
+        {
+          "component_covariance_error": 2.8734206557273865,
+          "component_min_eigen_ratio": 0.19627448916435242,
+          "hq": 0.772216796875,
+          "mass_tv": 0.0703125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1534
+        },
+        {
+          "component_covariance_error": 3.335805393755436,
+          "component_min_eigen_ratio": 0.5579413771629333,
+          "hq": 0.56201171875,
+          "mass_tv": 0.054443359375,
+          "modes": 14,
+          "sample_count": 4096,
+          "step": 1550
+        },
+        {
+          "component_covariance_error": 3.5995877385139465,
+          "component_min_eigen_ratio": 0.3290357291698456,
+          "hq": 0.73828125,
+          "mass_tv": 0.06201171875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1567
+        },
+        {
+          "component_covariance_error": 3.2832817509770393,
+          "component_min_eigen_ratio": 0.22129562497138977,
+          "hq": 0.7919921875,
+          "mass_tv": 0.0517578125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1584
+        },
+        {
+          "component_covariance_error": 3.6091855503618717,
+          "component_min_eigen_ratio": 0.19706329703330994,
+          "hq": 0.63671875,
+          "mass_tv": 0.0615234375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "max_absolute_gate_metric_difference": {
+        "component_covariance_error": 0.0,
+        "component_min_eigen_ratio": 0.0,
+        "hq": 0.0,
+        "mass_tv": 0.0,
+        "modes": 0.0,
+        "sample_count": 0.0
+      },
+      "milestones": [
+        {
+          "component_covariance_error": 6.839378535747528,
+          "component_min_eigen_ratio": 0.557995617389679,
+          "hq": 0.26318359375,
+          "mass_tv": 0.08984375,
+          "modes": 8,
+          "sample_count": 4096,
+          "step": 400
+        },
+        {
+          "component_covariance_error": 5.019430622458458,
+          "component_min_eigen_ratio": 0.6190668940544128,
+          "hq": 0.58837890625,
+          "mass_tv": 0.062255859375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 800
+        },
+        {
+          "component_covariance_error": 6.762322202324867,
+          "component_min_eigen_ratio": 1.925361156463623,
+          "hq": 0.44775390625,
+          "mass_tv": 0.0947265625,
+          "modes": 15,
+          "sample_count": 4096,
+          "step": 1200
+        },
+        {
+          "component_covariance_error": 3.6091855503618717,
+          "component_min_eigen_ratio": 0.19706329703330994,
+          "hq": 0.63671875,
+          "mass_tv": 0.0615234375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "minimum_stable_checks": 5,
+      "recipe_controls": {
+        "amsgrad": false,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "d_lr_mult": 2.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_weight": 0.0,
+        "lr": 0.0085,
+        "lr_schedule": "constant",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "prior_update": "learned",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_coeff_end": null,
+        "reg_every": 1
+      },
+      "recomputed_observations": 96,
+      "resolved_recipe_canonical_sha256": "20395de120cb661324f47526362b3ac639fe4692e16b1aa2e0450bf834ef3d3c",
+      "role": "ttur",
+      "runtime_canonical_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "source_origin_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "study": "r1r2-five-track-ttur-v1-study",
+      "task_evaluation_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "artifacts_sha256": {
+        "graded-result.json": "9e150096b50f76d5b7c260b12777c6bc6e8d25a5703d82989aa9c1786f525d67",
+        "observed-samples.pt": "ffa4e8a24c65ca77736893c291240f8772dddcdb1ba565f37b8308e186cb0e46",
+        "provenance/provenance-state.pt": "48e0419ea9e7773af3abd0ea4387f750bed07a01af6673bf6b8639b34729344e",
+        "raw-result.json": "85c4fc77dccc3f7b41f8d3c716b1f1013f592f8991e22c741ebaf18c77eead41",
+        "request.json": "bf4617e91de3d28645605335ac61d58e6986f4481c8e478bdaad18f3a98d2d2e"
+      },
+      "attempt_archive_path": "queue/r1r2-five-track-prior-v1/ed5c0491f733440f845806e3e59ec96a",
+      "best_covariance_observation": {
+        "component_covariance_error": 2.9120189771056175,
+        "component_min_eigen_ratio": 0.26435571908950806,
+        "hq": 0.6982421875,
+        "mass_tv": 0.043212890625,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1534
+      },
+      "candidate_id": "r1r2-prior-slow-v1",
+      "candidate_revision": "74d167d7ba3f592637c0701a5aac327270b537673cdfcadfb1376f92811d1a61",
+      "covariance_bound_passing_observations": 0,
+      "endpoint": {
+        "component_covariance_error": 3.17512895911932,
+        "component_min_eigen_ratio": 0.09849241375923157,
+        "hq": 0.475341796875,
+        "mass_tv": 0.030517578125,
+        "modes": 12,
+        "sample_count": 4096,
+        "step": 1600
+      },
+      "endpoint_failed_bounds": [
+        "modes",
+        "hq",
+        "component_covariance_error",
+        "component_min_eigen_ratio"
+      ],
+      "endpoint_geometry": {
+        "components": [
+          {
+            "between_center_trace_ratio": 0.5866618676033846,
+            "center_geometry_status": "AVAILABLE",
+            "component": 0,
+            "local_linear_noise_trace_ratio": 9.351529188088065,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.2503682199975532,
+            "sample_count": 240,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 7.505597103084814
+          },
+          {
+            "between_center_trace_ratio": 2.8957069597272724,
+            "center_geometry_status": "AVAILABLE",
+            "component": 1,
+            "local_linear_noise_trace_ratio": 8.60158300415824,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 1.0813738629079912,
+            "sample_count": 292,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.7380467818104
+          },
+          {
+            "between_center_trace_ratio": 2.225504114665531,
+            "center_geometry_status": "AVAILABLE",
+            "component": 2,
+            "local_linear_noise_trace_ratio": 8.360768007093998,
+            "prior_center_count": 19,
+            "radial_variance_ratio": 1.0581688520064636,
+            "sample_count": 303,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.862009976373873
+          },
+          {
+            "between_center_trace_ratio": 2.338039681988532,
+            "center_geometry_status": "AVAILABLE",
+            "component": 3,
+            "local_linear_noise_trace_ratio": 5.811583108840015,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.92747338840384,
+            "sample_count": 254,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 6.7942997429790175
+          },
+          {
+            "between_center_trace_ratio": 8.98370121123046,
+            "center_geometry_status": "AVAILABLE",
+            "component": 4,
+            "local_linear_noise_trace_ratio": 9.365622779376881,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 1.0784543872774717,
+            "sample_count": 257,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 7.776775250527028
+          },
+          {
+            "between_center_trace_ratio": 3.9290351124493297,
+            "center_geometry_status": "AVAILABLE",
+            "component": 5,
+            "local_linear_noise_trace_ratio": 5.903917447236056,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.2622372445136962,
+            "sample_count": 247,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 6.111738845963683
+          },
+          {
+            "between_center_trace_ratio": 5.481567405185983,
+            "center_geometry_status": "AVAILABLE",
+            "component": 6,
+            "local_linear_noise_trace_ratio": 1.6647603983506027,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 3.7847878890025735,
+            "sample_count": 256,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.058932592685839
+          },
+          {
+            "between_center_trace_ratio": 1.118930850943108,
+            "center_geometry_status": "AVAILABLE",
+            "component": 7,
+            "local_linear_noise_trace_ratio": 1.9766447564894436,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 1.435462939976812,
+            "sample_count": 261,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.9631819078033113
+          },
+          {
+            "between_center_trace_ratio": 1.9215600531598143,
+            "center_geometry_status": "AVAILABLE",
+            "component": 8,
+            "local_linear_noise_trace_ratio": 4.439527370847478,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 1.7785993252167918,
+            "sample_count": 246,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.775055922339984
+          },
+          {
+            "between_center_trace_ratio": 1.0937586708064273,
+            "center_geometry_status": "AVAILABLE",
+            "component": 9,
+            "local_linear_noise_trace_ratio": 4.764186609454585,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 1.0768392455040137,
+            "sample_count": 221,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.428520063330241
+          },
+          {
+            "between_center_trace_ratio": 0.9690201512142688,
+            "center_geometry_status": "AVAILABLE",
+            "component": 10,
+            "local_linear_noise_trace_ratio": 4.198634440716624,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.5527664435671292,
+            "sample_count": 238,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.9172877436501095
+          },
+          {
+            "between_center_trace_ratio": 0.616845115180916,
+            "center_geometry_status": "AVAILABLE",
+            "component": 11,
+            "local_linear_noise_trace_ratio": 2.368800295021718,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.1066331142753875,
+            "sample_count": 255,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.718157256880526
+          },
+          {
+            "between_center_trace_ratio": 0.7117430234713664,
+            "center_geometry_status": "AVAILABLE",
+            "component": 12,
+            "local_linear_noise_trace_ratio": 2.814815623585251,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.374465215143103,
+            "sample_count": 230,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.699125645554641
+          },
+          {
+            "between_center_trace_ratio": 1.6659285574961935,
+            "center_geometry_status": "AVAILABLE",
+            "component": 13,
+            "local_linear_noise_trace_ratio": 4.7051459708861625,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.3125213754561336,
+            "sample_count": 291,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.2343585110952375
+          },
+          {
+            "between_center_trace_ratio": 3.286684123862053,
+            "center_geometry_status": "AVAILABLE",
+            "component": 14,
+            "local_linear_noise_trace_ratio": 8.332237662709218,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 1.1423830657759495,
+            "sample_count": 257,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.914994184328031
+          },
+          {
+            "between_center_trace_ratio": 2.453180686588701,
+            "center_geometry_status": "AVAILABLE",
+            "component": 15,
+            "local_linear_noise_trace_ratio": 5.6990186882533695,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.3423011800525101,
+            "sample_count": 248,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.933980303475364
+          }
+        ],
+        "limitations": "Jacobians are first order at row centers, not an exact sample variance partition. Noise can cross activations or mode assignments. Unavailable component geometry is excluded with its denominator declared, never substituted into a gate. No causal attribution to prior motion, R1/R2 alone or a unique repair follows.",
+        "method": "Original float32 scorer's sample assignments; float64 population moments and mapped-center assignments; functional saved two-hidden-layer LeakyReLU(0.2) forward/Jacobian.",
+        "prior_centers_outside_3sigma": 104,
+        "prior_centers_outside_4sigma": 31,
+        "prior_rows": 256,
+        "radial_variance_ratio": {
+          "count": 16,
+          "max": 3.7847878890025735,
+          "mean": 1.0353022343173388,
+          "min": 0.1066331142753875
+        },
+        "reconstructed_float64_full_component_covariance_error": 3.1751291696151904,
+        "status": "AVAILABLE",
+        "tangent_variance_ratio": {
+          "count": 16,
+          "max": 7.776775250527028,
+          "mean": 5.339503864492631,
+          "min": 2.699125645554641
+        },
+        "target_component_variance": 0.01,
+        "target_trace_in_variance_units": 2.0,
+        "unweighted_between_center_trace_ratio": {
+          "count": 16,
+          "max": 8.98370121123046,
+          "mean": 2.5173667240983337,
+          "min": 0.5866618676033846
+        },
+        "unweighted_local_linear_noise_trace_ratio": {
+          "count": 16,
+          "max": 9.365622779376881,
+          "mean": 5.522423459444232,
+          "min": 1.6647603983506027
+        }
+      },
+      "failures_by_bound": {
+        "component_covariance_error": 96,
+        "component_min_eigen_ratio": 5,
+        "hq": 96,
+        "mass_tv": 3,
+        "modes": 76,
+        "sample_count": 0
+      },
+      "full_passing_observations": 0,
+      "full_passing_windows": [],
+      "full_terminal_passing_suffix": 0,
+      "gate_status": "FAIL",
+      "last_five_observations": [
+        {
+          "component_covariance_error": 2.9120189771056175,
+          "component_min_eigen_ratio": 0.26435571908950806,
+          "hq": 0.6982421875,
+          "mass_tv": 0.043212890625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1534
+        },
+        {
+          "component_covariance_error": 3.0365250036120415,
+          "component_min_eigen_ratio": 0.31567442417144775,
+          "hq": 0.75,
+          "mass_tv": 0.03564453125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1550
+        },
+        {
+          "component_covariance_error": 3.3377021364867687,
+          "component_min_eigen_ratio": 0.0966261625289917,
+          "hq": 0.751220703125,
+          "mass_tv": 0.041015625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1567
+        },
+        {
+          "component_covariance_error": 3.597309410572052,
+          "component_min_eigen_ratio": 0.22023648023605347,
+          "hq": 0.638916015625,
+          "mass_tv": 0.029296875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1584
+        },
+        {
+          "component_covariance_error": 3.17512895911932,
+          "component_min_eigen_ratio": 0.09849241375923157,
+          "hq": 0.475341796875,
+          "mass_tv": 0.030517578125,
+          "modes": 12,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "max_absolute_gate_metric_difference": {
+        "component_covariance_error": 0.0,
+        "component_min_eigen_ratio": 0.0,
+        "hq": 0.0,
+        "mass_tv": 0.0,
+        "modes": 0.0,
+        "sample_count": 0.0
+      },
+      "milestones": [
+        {
+          "component_covariance_error": 6.025125041604042,
+          "component_min_eigen_ratio": 1.9149482250213623,
+          "hq": 0.363037109375,
+          "mass_tv": 0.063720703125,
+          "modes": 13,
+          "sample_count": 4096,
+          "step": 400
+        },
+        {
+          "component_covariance_error": 4.642924472689629,
+          "component_min_eigen_ratio": 0.7653127908706665,
+          "hq": 0.331298828125,
+          "mass_tv": 0.03955078125,
+          "modes": 10,
+          "sample_count": 4096,
+          "step": 800
+        },
+        {
+          "component_covariance_error": 3.698751538991928,
+          "component_min_eigen_ratio": 0.2324187457561493,
+          "hq": 0.498046875,
+          "mass_tv": 0.048095703125,
+          "modes": 14,
+          "sample_count": 4096,
+          "step": 1200
+        },
+        {
+          "component_covariance_error": 3.17512895911932,
+          "component_min_eigen_ratio": 0.09849241375923157,
+          "hq": 0.475341796875,
+          "mass_tv": 0.030517578125,
+          "modes": 12,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "minimum_stable_checks": 5,
+      "recipe_controls": {
+        "amsgrad": false,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "d_lr_mult": 1.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_weight": 0.0,
+        "lr": 0.0085,
+        "lr_schedule": "constant",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 0.25,
+        "prior_reg": 0.0,
+        "prior_update": "learned",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_coeff_end": null,
+        "reg_every": 1
+      },
+      "recomputed_observations": 96,
+      "resolved_recipe_canonical_sha256": "9186f159ea95a1c742815008e99d47c682fcf27a466c4fb28aa8606fe945a59a",
+      "role": "prior",
+      "runtime_canonical_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "source_origin_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "study": "r1r2-five-track-prior-v1",
+      "task_evaluation_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "artifacts_sha256": {
+        "graded-result.json": "9ef8af3529289b21f1bf6df16eabe1fffcc40320eaa40af18c8f4a68a5abd9f5",
+        "observed-samples.pt": "9e3c2cf43dc47d141a1bce342f057d9eaaf0ce9dcf15a4108c7d69913ed3e67c",
+        "provenance/provenance-state.pt": "15adb31a4972fbd04e829805c2229f704a304b3e799c60b791e6844de42365d7",
+        "raw-result.json": "4c6e8db621874bf0197e562eecfc90411cb7d8068f44f94285588b62b7eba8e5",
+        "request.json": "e4194dcd35f7b142d87b34ac35244e301ef6d0e6ea0d441e6e282c4881bc8e35"
+      },
+      "attempt_archive_path": "queue/r1r2-five-track-optimizer-v1/1dda7bf5c88942368359f1ac207e9e93",
+      "best_covariance_observation": {
+        "component_covariance_error": 2.416892658919096,
+        "component_min_eigen_ratio": 0.36500224471092224,
+        "hq": 0.830322265625,
+        "mass_tv": 0.045654296875,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1434
+      },
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "covariance_bound_passing_observations": 0,
+      "endpoint": {
+        "component_covariance_error": 2.96042443998158,
+        "component_min_eigen_ratio": 0.31060314178466797,
+        "hq": 0.83935546875,
+        "mass_tv": 0.05322265625,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1600
+      },
+      "endpoint_failed_bounds": [
+        "hq",
+        "component_covariance_error"
+      ],
+      "endpoint_geometry": {
+        "components": [
+          {
+            "between_center_trace_ratio": 0.7781635450446346,
+            "center_geometry_status": "AVAILABLE",
+            "component": 0,
+            "local_linear_noise_trace_ratio": 3.3514074831294973,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.7379847479419139,
+            "sample_count": 252,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.868347034966412
+          },
+          {
+            "between_center_trace_ratio": 1.4278399358807952,
+            "center_geometry_status": "AVAILABLE",
+            "component": 1,
+            "local_linear_noise_trace_ratio": 3.400721342152867,
+            "prior_center_count": 19,
+            "radial_variance_ratio": 1.2412178968197165,
+            "sample_count": 325,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.219858578768035
+          },
+          {
+            "between_center_trace_ratio": 0.8600045162288329,
+            "center_geometry_status": "AVAILABLE",
+            "component": 2,
+            "local_linear_noise_trace_ratio": 3.814060565486233,
+            "prior_center_count": 19,
+            "radial_variance_ratio": 0.7257200851748913,
+            "sample_count": 305,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.123575651116676
+          },
+          {
+            "between_center_trace_ratio": 0.19217062672304436,
+            "center_geometry_status": "AVAILABLE",
+            "component": 3,
+            "local_linear_noise_trace_ratio": 2.42963399123191,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.3443090492596861,
+            "sample_count": 232,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.7583350793396755
+          },
+          {
+            "between_center_trace_ratio": 7.800493833319851,
+            "center_geometry_status": "AVAILABLE",
+            "component": 4,
+            "local_linear_noise_trace_ratio": 3.2638784287165046,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 9.240899701909624,
+            "sample_count": 275,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.2494707451239453
+          },
+          {
+            "between_center_trace_ratio": 0.07125802225340394,
+            "center_geometry_status": "AVAILABLE",
+            "component": 5,
+            "local_linear_noise_trace_ratio": 1.906417736211087,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.8162373450596085,
+            "sample_count": 267,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.620611978486582
+          },
+          {
+            "between_center_trace_ratio": 0.17903641584971727,
+            "center_geometry_status": "AVAILABLE",
+            "component": 6,
+            "local_linear_noise_trace_ratio": 4.287486713248449,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.801469684857003,
+            "sample_count": 287,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.7066458018084787
+          },
+          {
+            "between_center_trace_ratio": 0.1809772015706051,
+            "center_geometry_status": "AVAILABLE",
+            "component": 7,
+            "local_linear_noise_trace_ratio": 4.332807385274611,
+            "prior_center_count": 13,
+            "radial_variance_ratio": 1.1602631289863539,
+            "sample_count": 200,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.650661058915081
+          },
+          {
+            "between_center_trace_ratio": 0.18129016346052085,
+            "center_geometry_status": "AVAILABLE",
+            "component": 8,
+            "local_linear_noise_trace_ratio": 4.861278235884712,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.0321978478554052,
+            "sample_count": 226,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.4433717992057895
+          },
+          {
+            "between_center_trace_ratio": 0.0829229456027708,
+            "center_geometry_status": "AVAILABLE",
+            "component": 9,
+            "local_linear_noise_trace_ratio": 3.2865942096661214,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 1.1292465685310442,
+            "sample_count": 267,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.7721801846208383
+          },
+          {
+            "between_center_trace_ratio": 0.2208933980549256,
+            "center_geometry_status": "AVAILABLE",
+            "component": 10,
+            "local_linear_noise_trace_ratio": 3.496847586262951,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.6750911616541833,
+            "sample_count": 262,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.413271439277685
+          },
+          {
+            "between_center_trace_ratio": 0.07158762407301862,
+            "center_geometry_status": "AVAILABLE",
+            "component": 11,
+            "local_linear_noise_trace_ratio": 2.8145394727111834,
+            "prior_center_count": 13,
+            "radial_variance_ratio": 0.3743066450946507,
+            "sample_count": 220,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.1977808474269063
+          },
+          {
+            "between_center_trace_ratio": 16.259762273886444,
+            "center_geometry_status": "AVAILABLE",
+            "component": 12,
+            "local_linear_noise_trace_ratio": 3.242475910132963,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 20.754923331189136,
+            "sample_count": 220,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.5144675784919315
+          },
+          {
+            "between_center_trace_ratio": 0.7045273494835694,
+            "center_geometry_status": "AVAILABLE",
+            "component": 13,
+            "local_linear_noise_trace_ratio": 4.281955892739674,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.48851703187605694,
+            "sample_count": 233,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.742409488437744
+          },
+          {
+            "between_center_trace_ratio": 0.4962225155607125,
+            "center_geometry_status": "AVAILABLE",
+            "component": 14,
+            "local_linear_noise_trace_ratio": 4.690460429791406,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 0.526741520499502,
+            "sample_count": 278,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.149220558009872
+          },
+          {
+            "between_center_trace_ratio": 1.3004534828083483,
+            "center_geometry_status": "AVAILABLE",
+            "component": 15,
+            "local_linear_noise_trace_ratio": 4.49711142631831,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.3623488198448772,
+            "sample_count": 247,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.832160076043162
+          }
+        ],
+        "limitations": "Jacobians are first order at row centers, not an exact sample variance partition. Noise can cross activations or mode assignments. Unavailable component geometry is excluded with its denominator declared, never substituted into a gate. No causal attribution to prior motion, R1/R2 alone or a unique repair follows.",
+        "method": "Original float32 scorer's sample assignments; float64 population moments and mapped-center assignments; functional saved two-hidden-layer LeakyReLU(0.2) forward/Jacobian.",
+        "prior_centers_outside_3sigma": 3,
+        "prior_centers_outside_4sigma": 2,
+        "prior_rows": 256,
+        "radial_variance_ratio": {
+          "count": 16,
+          "max": 20.754923331189136,
+          "mean": 2.588217160409603,
+          "min": 0.3443090492596861
+        },
+        "reconstructed_float64_full_component_covariance_error": 2.9604240183436508,
+        "status": "AVAILABLE",
+        "tangent_variance_ratio": {
+          "count": 16,
+          "max": 5.149220558009872,
+          "mean": 3.6413979937524257,
+          "min": 1.620611978486582
+        },
+        "target_component_variance": 0.01,
+        "target_trace_in_variance_units": 2.0,
+        "unweighted_between_center_trace_ratio": {
+          "count": 16,
+          "max": 16.259762273886444,
+          "mean": 1.9254752406125746,
+          "min": 0.07125802225340394
+        },
+        "unweighted_local_linear_noise_trace_ratio": {
+          "count": 16,
+          "max": 4.861278235884712,
+          "mean": 3.622354800559905,
+          "min": 1.906417736211087
+        }
+      },
+      "failures_by_bound": {
+        "component_covariance_error": 96,
+        "component_min_eigen_ratio": 0,
+        "hq": 96,
+        "mass_tv": 4,
+        "modes": 31,
+        "sample_count": 0
+      },
+      "full_passing_observations": 0,
+      "full_passing_windows": [],
+      "full_terminal_passing_suffix": 0,
+      "gate_status": "FAIL",
+      "last_five_observations": [
+        {
+          "component_covariance_error": 2.6851130574941635,
+          "component_min_eigen_ratio": 0.2776915431022644,
+          "hq": 0.815673828125,
+          "mass_tv": 0.04541015625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1534
+        },
+        {
+          "component_covariance_error": 2.839506819844246,
+          "component_min_eigen_ratio": 0.2839549481868744,
+          "hq": 0.834228515625,
+          "mass_tv": 0.052978515625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1550
+        },
+        {
+          "component_covariance_error": 2.575385196134448,
+          "component_min_eigen_ratio": 0.29259371757507324,
+          "hq": 0.84521484375,
+          "mass_tv": 0.048583984375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1567
+        },
+        {
+          "component_covariance_error": 2.8215868417173624,
+          "component_min_eigen_ratio": 0.22064119577407837,
+          "hq": 0.79296875,
+          "mass_tv": 0.051025390625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1584
+        },
+        {
+          "component_covariance_error": 2.96042443998158,
+          "component_min_eigen_ratio": 0.31060314178466797,
+          "hq": 0.83935546875,
+          "mass_tv": 0.05322265625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "max_absolute_gate_metric_difference": {
+        "component_covariance_error": 0.0,
+        "component_min_eigen_ratio": 0.0,
+        "hq": 0.0,
+        "mass_tv": 0.0,
+        "modes": 0.0,
+        "sample_count": 0.0
+      },
+      "milestones": [
+        {
+          "component_covariance_error": 6.487202063202858,
+          "component_min_eigen_ratio": 0.8837109804153442,
+          "hq": 0.316162109375,
+          "mass_tv": 0.070556640625,
+          "modes": 9,
+          "sample_count": 4096,
+          "step": 400
+        },
+        {
+          "component_covariance_error": 3.3635481633245945,
+          "component_min_eigen_ratio": 0.2913486659526825,
+          "hq": 0.744140625,
+          "mass_tv": 0.068603515625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 800
+        },
+        {
+          "component_covariance_error": 2.8164526484906673,
+          "component_min_eigen_ratio": 0.3296471834182739,
+          "hq": 0.78076171875,
+          "mass_tv": 0.05029296875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1200
+        },
+        {
+          "component_covariance_error": 2.96042443998158,
+          "component_min_eigen_ratio": 0.31060314178466797,
+          "hq": 0.83935546875,
+          "mass_tv": 0.05322265625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "minimum_stable_checks": 5,
+      "recipe_controls": {
+        "amsgrad": true,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "d_lr_mult": 1.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_weight": 0.0,
+        "lr": 0.0085,
+        "lr_schedule": "constant",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "prior_update": "learned",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_coeff_end": null,
+        "reg_every": 1
+      },
+      "recomputed_observations": 96,
+      "resolved_recipe_canonical_sha256": "5af52ef5e509b5c1381477694ee5646a727f8109c9c0ecb7235f429e217b248f",
+      "role": "optimizer",
+      "runtime_canonical_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "source_origin_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "study": "r1r2-five-track-optimizer-v1",
+      "task_evaluation_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "artifacts_sha256": {
+        "graded-result.json": "3ae6d5090ed957f5e597904948f9c1beac9390ef3f740071db8ded39922d2df2",
+        "observed-samples.pt": "e54e03d556077533b4342385517c88e3da652351fe91108a2ead25794cc4dc41",
+        "provenance/provenance-state.pt": "ceb00d980cb19a59a3df32864ff8a044a0a27b4f2fdfff9b47dff3a2ca783412",
+        "raw-result.json": "e133653ac89e61f45b3e5d45077a5430605c0a4a946726195581d2d7cef5d284",
+        "request.json": "1ee44d6e1d66fe99994307b38f36693345bb0e5e1442c80da4d1cdb7658eec5b"
+      },
+      "attempt_archive_path": "queue/r1r2-five-track-transport-v1/bee8d56a487f4337a6e74fd9ca92e50e",
+      "best_covariance_observation": {
+        "component_covariance_error": 3.268188964575529,
+        "component_min_eigen_ratio": 0.48871180415153503,
+        "hq": 0.732421875,
+        "mass_tv": 0.044677734375,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1584
+      },
+      "candidate_id": "r1r2-five-track-transport-v1",
+      "candidate_revision": "9b9da470ce25ed29d481dec0f1cc49c36119d6323397705dad58acd1bbd6152d",
+      "covariance_bound_passing_observations": 0,
+      "endpoint": {
+        "component_covariance_error": 4.653696473687887,
+        "component_min_eigen_ratio": 0.7778428792953491,
+        "hq": 0.5576171875,
+        "mass_tv": 0.04150390625,
+        "modes": 12,
+        "sample_count": 4096,
+        "step": 1600
+      },
+      "endpoint_failed_bounds": [
+        "modes",
+        "hq",
+        "component_covariance_error"
+      ],
+      "endpoint_geometry": {
+        "components": [
+          {
+            "between_center_trace_ratio": 16.784842360996223,
+            "center_geometry_status": "AVAILABLE",
+            "component": 0,
+            "local_linear_noise_trace_ratio": 3.3993274168582652,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 21.03025968186777,
+            "sample_count": 295,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.2676070541746634
+          },
+          {
+            "between_center_trace_ratio": 1.8871843928043113,
+            "center_geometry_status": "AVAILABLE",
+            "component": 1,
+            "local_linear_noise_trace_ratio": 4.605371200409312,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 1.0914337027086927,
+            "sample_count": 284,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.2209193689381745
+          },
+          {
+            "between_center_trace_ratio": 0.8253812846630275,
+            "center_geometry_status": "AVAILABLE",
+            "component": 2,
+            "local_linear_noise_trace_ratio": 3.1318785195409466,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.9057338796432578,
+            "sample_count": 280,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.552901380483543
+          },
+          {
+            "between_center_trace_ratio": 1.2195159921047782,
+            "center_geometry_status": "AVAILABLE",
+            "component": 3,
+            "local_linear_noise_trace_ratio": 2.665019667967753,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.8895964884982243,
+            "sample_count": 261,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.570199016481037
+          },
+          {
+            "between_center_trace_ratio": 0.7764124055474544,
+            "center_geometry_status": "AVAILABLE",
+            "component": 4,
+            "local_linear_noise_trace_ratio": 2.388038827349864,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.8606459030290158,
+            "sample_count": 243,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 3.0988002385227382
+          },
+          {
+            "between_center_trace_ratio": 1.4012163387571959,
+            "center_geometry_status": "AVAILABLE",
+            "component": 5,
+            "local_linear_noise_trace_ratio": 3.943349591242525,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.8621376398775452,
+            "sample_count": 266,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.382013942582999
+          },
+          {
+            "between_center_trace_ratio": 1.082370443660452,
+            "center_geometry_status": "AVAILABLE",
+            "component": 6,
+            "local_linear_noise_trace_ratio": 2.533025122368086,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 2.0292594866497535,
+            "sample_count": 253,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.03190548089879
+          },
+          {
+            "between_center_trace_ratio": 0.33928883274131294,
+            "center_geometry_status": "AVAILABLE",
+            "component": 7,
+            "local_linear_noise_trace_ratio": 3.0275424886893822,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 1.5814024890657103,
+            "sample_count": 293,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.9521760260381191
+          },
+          {
+            "between_center_trace_ratio": 0.792166681621942,
+            "center_geometry_status": "AVAILABLE",
+            "component": 8,
+            "local_linear_noise_trace_ratio": 4.7599155070768475,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 2.2568500500073108,
+            "sample_count": 244,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.121625733248515
+          },
+          {
+            "between_center_trace_ratio": 0.4820195325291397,
+            "center_geometry_status": "AVAILABLE",
+            "component": 9,
+            "local_linear_noise_trace_ratio": 3.7049396477388723,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 1.914562961247668,
+            "sample_count": 229,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.509852659871997
+          },
+          {
+            "between_center_trace_ratio": 11.178024439761167,
+            "center_geometry_status": "AVAILABLE",
+            "component": 10,
+            "local_linear_noise_trace_ratio": 3.884293483613714,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 15.732211127178013,
+            "sample_count": 269,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.339103468363653
+          },
+          {
+            "between_center_trace_ratio": 11.776731572364076,
+            "center_geometry_status": "AVAILABLE",
+            "component": 11,
+            "local_linear_noise_trace_ratio": 4.250610159033029,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 8.370104911666127,
+            "sample_count": 242,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.8911786068047363
+          },
+          {
+            "between_center_trace_ratio": 24.96055519504337,
+            "center_geometry_status": "AVAILABLE",
+            "component": 12,
+            "local_linear_noise_trace_ratio": 4.524324565843371,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 15.38686020681851,
+            "sample_count": 239,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 5.9122860539250315
+          },
+          {
+            "between_center_trace_ratio": 3.124779446644998,
+            "center_geometry_status": "AVAILABLE",
+            "component": 13,
+            "local_linear_noise_trace_ratio": 4.974224297271207,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 7.252852367972387,
+            "sample_count": 194,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 7.948890121186497
+          },
+          {
+            "between_center_trace_ratio": 1.4258240440848937,
+            "center_geometry_status": "AVAILABLE",
+            "component": 14,
+            "local_linear_noise_trace_ratio": 6.06048793968213,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.8201518615085017,
+            "sample_count": 270,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 8.734840386224514
+          },
+          {
+            "between_center_trace_ratio": 0.9172906385177185,
+            "center_geometry_status": "AVAILABLE",
+            "component": 15,
+            "local_linear_noise_trace_ratio": 3.377907743507977,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.5392440387429827,
+            "sample_count": 234,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 6.381948543586817
+          }
+        ],
+        "limitations": "Jacobians are first order at row centers, not an exact sample variance partition. Noise can cross activations or mode assignments. Unavailable component geometry is excluded with its denominator declared, never substituted into a gate. No causal attribution to prior motion, R1/R2 alone or a unique repair follows.",
+        "method": "Original float32 scorer's sample assignments; float64 population moments and mapped-center assignments; functional saved two-hidden-layer LeakyReLU(0.2) forward/Jacobian.",
+        "prior_centers_outside_3sigma": 86,
+        "prior_centers_outside_4sigma": 41,
+        "prior_rows": 256,
+        "radial_variance_ratio": {
+          "count": 16,
+          "max": 21.03025968186777,
+          "mean": 5.2202066747800915,
+          "min": 0.8606459030290158
+        },
+        "reconstructed_float64_full_component_covariance_error": 4.653696304217293,
+        "status": "AVAILABLE",
+        "tangent_variance_ratio": {
+          "count": 16,
+          "max": 8.734840386224514,
+          "mean": 4.244765505083239,
+          "min": 1.9521760260381191
+        },
+        "target_component_variance": 0.01,
+        "target_trace_in_variance_units": 2.0,
+        "unweighted_between_center_trace_ratio": {
+          "count": 16,
+          "max": 24.96055519504337,
+          "mean": 4.935850225115129,
+          "min": 0.33928883274131294
+        },
+        "unweighted_local_linear_noise_trace_ratio": {
+          "count": 16,
+          "max": 6.06048793968213,
+          "mean": 3.8268910111370804,
+          "min": 2.388038827349864
+        }
+      },
+      "failures_by_bound": {
+        "component_covariance_error": 96,
+        "component_min_eigen_ratio": 0,
+        "hq": 96,
+        "mass_tv": 4,
+        "modes": 58,
+        "sample_count": 0
+      },
+      "full_passing_observations": 0,
+      "full_passing_windows": [],
+      "full_terminal_passing_suffix": 0,
+      "gate_status": "FAIL",
+      "last_five_observations": [
+        {
+          "component_covariance_error": 3.4473746344447136,
+          "component_min_eigen_ratio": 0.3032248914241791,
+          "hq": 0.711181640625,
+          "mass_tv": 0.037841796875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1534
+        },
+        {
+          "component_covariance_error": 3.9026290867477655,
+          "component_min_eigen_ratio": 0.525779664516449,
+          "hq": 0.78759765625,
+          "mass_tv": 0.038330078125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1550
+        },
+        {
+          "component_covariance_error": 3.3731753155589104,
+          "component_min_eigen_ratio": 0.43772557377815247,
+          "hq": 0.657958984375,
+          "mass_tv": 0.05224609375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1567
+        },
+        {
+          "component_covariance_error": 3.268188964575529,
+          "component_min_eigen_ratio": 0.48871180415153503,
+          "hq": 0.732421875,
+          "mass_tv": 0.044677734375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1584
+        },
+        {
+          "component_covariance_error": 4.653696473687887,
+          "component_min_eigen_ratio": 0.7778428792953491,
+          "hq": 0.5576171875,
+          "mass_tv": 0.04150390625,
+          "modes": 12,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "max_absolute_gate_metric_difference": {
+        "component_covariance_error": 0.0,
+        "component_min_eigen_ratio": 0.0,
+        "hq": 0.0,
+        "mass_tv": 0.0,
+        "modes": 0.0,
+        "sample_count": 0.0
+      },
+      "milestones": [
+        {
+          "component_covariance_error": 7.448441728949547,
+          "component_min_eigen_ratio": 1.2225756645202637,
+          "hq": 0.489990234375,
+          "mass_tv": 0.06884765625,
+          "modes": 15,
+          "sample_count": 4096,
+          "step": 400
+        },
+        {
+          "component_covariance_error": 4.0180776715278625,
+          "component_min_eigen_ratio": 0.4981405735015869,
+          "hq": 0.522705078125,
+          "mass_tv": 0.05078125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 800
+        },
+        {
+          "component_covariance_error": 4.911247618496418,
+          "component_min_eigen_ratio": 0.5711922645568848,
+          "hq": 0.519775390625,
+          "mass_tv": 0.0517578125,
+          "modes": 12,
+          "sample_count": 4096,
+          "step": 1200
+        },
+        {
+          "component_covariance_error": 4.653696473687887,
+          "component_min_eigen_ratio": 0.7778428792953491,
+          "hq": 0.5576171875,
+          "mass_tv": 0.04150390625,
+          "modes": 12,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "minimum_stable_checks": 5,
+      "recipe_controls": {
+        "amsgrad": false,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_betas": null,
+        "d_lr_mult": 1.0,
+        "kinetic_transport_local_weight": 0.1,
+        "kinetic_transport_weight": 0.0,
+        "lr": 0.0085,
+        "lr_schedule": "constant",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "prior_update": "learned",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_coeff_end": null,
+        "reg_every": 1
+      },
+      "recomputed_observations": 96,
+      "resolved_recipe_canonical_sha256": "d1de7861f3e2ec3ffbcadce3f1e9d04a15fe11a67c67b5357a5e8997805d73e8",
+      "role": "transport",
+      "runtime_canonical_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "source_origin_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "study": "r1r2-five-track-transport-v1",
+      "task_evaluation_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "artifacts_sha256": {
+        "graded-result.json": "c5d7e26ba4c6d35202e26dc39d4e462915bf59fdb8880a76f6443e0066248326",
+        "observed-samples.pt": "ecbac37e58534cd4e48f4d8615de6610d2e8c6d545064e608ce3adeac83541ae",
+        "provenance/provenance-state.pt": "960283604848cc26d48e7290f19d993a0aaa55d5ec24572de4decf1440836c42",
+        "raw-result.json": "bebe9000befa775f33f43655a7d37607d47cff8062506eedb5014799bb91c8ae",
+        "request.json": "50efff20bd9b1738ba9aa7d1a122bff9f27b76857cf053d3cdce691782a23082"
+      },
+      "attempt_archive_path": "queue/r1r2-five-track-momentum-v1/a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "best_covariance_observation": {
+        "component_covariance_error": 1.0983507968485355,
+        "component_min_eigen_ratio": 0.11811929941177368,
+        "hq": 0.879150390625,
+        "mass_tv": 0.04931640625,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1584
+      },
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "covariance_bound_passing_observations": 0,
+      "endpoint": {
+        "component_covariance_error": 1.1855795439332724,
+        "component_min_eigen_ratio": 0.05281096696853638,
+        "hq": 0.9365234375,
+        "mass_tv": 0.0458984375,
+        "modes": 16,
+        "sample_count": 4096,
+        "step": 1600
+      },
+      "endpoint_failed_bounds": [
+        "component_covariance_error",
+        "component_min_eigen_ratio"
+      ],
+      "endpoint_geometry": {
+        "components": [
+          {
+            "between_center_trace_ratio": 0.18899053268097485,
+            "center_geometry_status": "AVAILABLE",
+            "component": 0,
+            "local_linear_noise_trace_ratio": 1.7433860342785459,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.2547038800354578,
+            "sample_count": 265,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.602711299237811
+          },
+          {
+            "between_center_trace_ratio": 0.16036297779821973,
+            "center_geometry_status": "AVAILABLE",
+            "component": 1,
+            "local_linear_noise_trace_ratio": 1.6038344768719237,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.1288672811972176,
+            "sample_count": 239,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.771527171981218
+          },
+          {
+            "between_center_trace_ratio": 0.20028423502724094,
+            "center_geometry_status": "AVAILABLE",
+            "component": 2,
+            "local_linear_noise_trace_ratio": 1.5251291203308044,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 0.05411537617373224,
+            "sample_count": 287,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.633096564083678
+          },
+          {
+            "between_center_trace_ratio": 0.3733558300627578,
+            "center_geometry_status": "AVAILABLE",
+            "component": 3,
+            "local_linear_noise_trace_ratio": 1.4247698861516849,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 0.2610660233020276,
+            "sample_count": 276,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.9229919937948494
+          },
+          {
+            "between_center_trace_ratio": 0.5381006388182485,
+            "center_geometry_status": "AVAILABLE",
+            "component": 4,
+            "local_linear_noise_trace_ratio": 2.376844193443083,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 0.39455165933067476,
+            "sample_count": 268,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.9851717550419967
+          },
+          {
+            "between_center_trace_ratio": 0.3146828824433712,
+            "center_geometry_status": "AVAILABLE",
+            "component": 5,
+            "local_linear_noise_trace_ratio": 1.4308282127208267,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.44056245371377867,
+            "sample_count": 243,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.3641835741243806
+          },
+          {
+            "between_center_trace_ratio": 4.739146267509126,
+            "center_geometry_status": "AVAILABLE",
+            "component": 6,
+            "local_linear_noise_trace_ratio": 1.5167372222859576,
+            "prior_center_count": 18,
+            "radial_variance_ratio": 2.8090816534341077,
+            "sample_count": 275,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.8935157875285937
+          },
+          {
+            "between_center_trace_ratio": 0.09057660404784298,
+            "center_geometry_status": "AVAILABLE",
+            "component": 7,
+            "local_linear_noise_trace_ratio": 2.3765482916580702,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 0.6270378507361016,
+            "sample_count": 238,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.1207358745755105
+          },
+          {
+            "between_center_trace_ratio": 0.2872037211469601,
+            "center_geometry_status": "AVAILABLE",
+            "component": 8,
+            "local_linear_noise_trace_ratio": 2.7997075547704147,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 1.1274622762200563,
+            "sample_count": 239,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.7946903963140564
+          },
+          {
+            "between_center_trace_ratio": 0.21445283055076628,
+            "center_geometry_status": "AVAILABLE",
+            "component": 9,
+            "local_linear_noise_trace_ratio": 2.5214125909835876,
+            "prior_center_count": 19,
+            "radial_variance_ratio": 0.7972254386579274,
+            "sample_count": 305,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.004645999296407
+          },
+          {
+            "between_center_trace_ratio": 1.966208745614624,
+            "center_geometry_status": "AVAILABLE",
+            "component": 10,
+            "local_linear_noise_trace_ratio": 2.5662815423501475,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 2.193364152391873,
+            "sample_count": 272,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.419997130679341
+          },
+          {
+            "between_center_trace_ratio": 0.20301254078038183,
+            "center_geometry_status": "AVAILABLE",
+            "component": 11,
+            "local_linear_noise_trace_ratio": 2.35087868284141,
+            "prior_center_count": 12,
+            "radial_variance_ratio": 0.5316668321615778,
+            "sample_count": 190,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.8727653523238983
+          },
+          {
+            "between_center_trace_ratio": 0.21874439439384508,
+            "center_geometry_status": "AVAILABLE",
+            "component": 12,
+            "local_linear_noise_trace_ratio": 1.3903354759523567,
+            "prior_center_count": 15,
+            "radial_variance_ratio": 0.48185308381271175,
+            "sample_count": 236,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 1.7548048499770432
+          },
+          {
+            "between_center_trace_ratio": 0.3061714228548946,
+            "center_geometry_status": "AVAILABLE",
+            "component": 13,
+            "local_linear_noise_trace_ratio": 3.0711433018049417,
+            "prior_center_count": 16,
+            "radial_variance_ratio": 0.6069708643068678,
+            "sample_count": 260,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.8228440513286235
+          },
+          {
+            "between_center_trace_ratio": 6.375835236271043,
+            "center_geometry_status": "AVAILABLE",
+            "component": 14,
+            "local_linear_noise_trace_ratio": 2.3428461944295713,
+            "prior_center_count": 14,
+            "radial_variance_ratio": 1.4447669788351782,
+            "sample_count": 219,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 2.9112636790092554
+          },
+          {
+            "between_center_trace_ratio": 0.43714584797327094,
+            "center_geometry_status": "AVAILABLE",
+            "component": 15,
+            "local_linear_noise_trace_ratio": 2.5343562164156936,
+            "prior_center_count": 17,
+            "radial_variance_ratio": 2.842620751387389,
+            "sample_count": 284,
+            "shape_status": "AVAILABLE",
+            "tangent_variance_ratio": 4.1755307341112795
+          }
+        ],
+        "limitations": "Jacobians are first order at row centers, not an exact sample variance partition. Noise can cross activations or mode assignments. Unavailable component geometry is excluded with its denominator declared, never substituted into a gate. No causal attribution to prior motion, R1/R2 alone or a unique repair follows.",
+        "method": "Original float32 scorer's sample assignments; float64 population moments and mapped-center assignments; functional saved two-hidden-layer LeakyReLU(0.2) forward/Jacobian.",
+        "prior_centers_outside_3sigma": 3,
+        "prior_centers_outside_4sigma": 3,
+        "prior_rows": 256,
+        "radial_variance_ratio": {
+          "count": 16,
+          "max": 2.842620751387389,
+          "mean": 0.9372447847310424,
+          "min": 0.05411537617373224
+        },
+        "reconstructed_float64_full_component_covariance_error": 1.1855795562235876,
+        "status": "AVAILABLE",
+        "tangent_variance_ratio": {
+          "count": 16,
+          "max": 4.1755307341112795,
+          "mean": 2.2531547633379962,
+          "min": 1.3641835741243806
+        },
+        "target_component_variance": 0.01,
+        "target_trace_in_variance_units": 2.0,
+        "unweighted_between_center_trace_ratio": {
+          "count": 16,
+          "max": 6.375835236271043,
+          "mean": 1.038392169248348,
+          "min": 0.09057660404784298
+        },
+        "unweighted_local_linear_noise_trace_ratio": {
+          "count": 16,
+          "max": 3.0711433018049417,
+          "mean": 2.0984399373305638,
+          "min": 1.3903354759523567
+        }
+      },
+      "failures_by_bound": {
+        "component_covariance_error": 96,
+        "component_min_eigen_ratio": 11,
+        "hq": 80,
+        "mass_tv": 7,
+        "modes": 30,
+        "sample_count": 0
+      },
+      "full_passing_observations": 0,
+      "full_passing_windows": [],
+      "full_terminal_passing_suffix": 0,
+      "gate_status": "FAIL",
+      "last_five_observations": [
+        {
+          "component_covariance_error": 1.293451800942421,
+          "component_min_eigen_ratio": 0.21341702342033386,
+          "hq": 0.91845703125,
+          "mass_tv": 0.043701171875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1534
+        },
+        {
+          "component_covariance_error": 1.5955240651965141,
+          "component_min_eigen_ratio": 0.1595274806022644,
+          "hq": 0.8603515625,
+          "mass_tv": 0.0693359375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1550
+        },
+        {
+          "component_covariance_error": 1.1453992165625095,
+          "component_min_eigen_ratio": 0.15314063429832458,
+          "hq": 0.85400390625,
+          "mass_tv": 0.04345703125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1567
+        },
+        {
+          "component_covariance_error": 1.0983507968485355,
+          "component_min_eigen_ratio": 0.11811929941177368,
+          "hq": 0.879150390625,
+          "mass_tv": 0.04931640625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1584
+        },
+        {
+          "component_covariance_error": 1.1855795439332724,
+          "component_min_eigen_ratio": 0.05281096696853638,
+          "hq": 0.9365234375,
+          "mass_tv": 0.0458984375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "max_absolute_gate_metric_difference": {
+        "component_covariance_error": 0.0,
+        "component_min_eigen_ratio": 0.0,
+        "hq": 0.0,
+        "mass_tv": 0.0,
+        "modes": 0.0,
+        "sample_count": 0.0
+      },
+      "milestones": [
+        {
+          "component_covariance_error": 4.341392315924168,
+          "component_min_eigen_ratio": 0.5892521739006042,
+          "hq": 0.614501953125,
+          "mass_tv": 0.068359375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 400
+        },
+        {
+          "component_covariance_error": 4.10575620085001,
+          "component_min_eigen_ratio": 0.16841135919094086,
+          "hq": 0.7314453125,
+          "mass_tv": 0.0517578125,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 800
+        },
+        {
+          "component_covariance_error": 1.8843601383268833,
+          "component_min_eigen_ratio": 0.15757164359092712,
+          "hq": 0.822509765625,
+          "mass_tv": 0.04833984375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1200
+        },
+        {
+          "component_covariance_error": 1.1855795439332724,
+          "component_min_eigen_ratio": 0.05281096696853638,
+          "hq": 0.9365234375,
+          "mass_tv": 0.0458984375,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 1600
+        }
+      ],
+      "minimum_stable_checks": 5,
+      "recipe_controls": {
+        "amsgrad": false,
+        "beta2_end": null,
+        "betas": [
+          0.5,
+          0.99
+        ],
+        "d_betas": null,
+        "d_lr_mult": 1.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_weight": 0.0,
+        "lr": 0.0085,
+        "lr_schedule": "constant",
+        "prior_betas": null,
+        "prior_l2": 0.0,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "prior_update": "learned",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_coeff_end": null,
+        "reg_every": 1
+      },
+      "recomputed_observations": 96,
+      "resolved_recipe_canonical_sha256": "5878485390fd713d1f88ebcc71d8c18a18bfc1144ddef748b628b19b9f8fad6d",
+      "role": "momentum",
+      "runtime_canonical_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "source_origin_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "study": "r1r2-five-track-momentum-v1",
+      "task_evaluation_sources_sha256": {
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Five new global R1/R2 recipes; all96 saved Ring16 panels per recipe; endpoint saved-state geometry."
+}

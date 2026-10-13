@@ -6,21 +6,20 @@ candidate revisions through goal-specific leaderboards.
 
 Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
-For BCAP repair ideas, also read the completed
-[five-theory comparison](reports/forge/bcap-physics/README.md), including its
-source-bound readouts and unresolved gates.
-The subsequent [round-two readout](reports/forge/bcap-physics/round2/README.md)
-records a scoped sustained unequal-mass repair and remaining failures.
-The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
-sustained conditional identity repairs while preserving the remaining failures.
-The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
-smaller conditional repair and measures composition, finite overshoot and tails.
-The [round-five readout](reports/forge/bcap-physics/round5/README.md) measures a
-combined conditional/rare repair and a width repair with rare/native regressions.
+Keep numerical results, coverage counts, measured costs, selected recipe settings
+and source hashes in their source-bound reports and generated publications.
+This guide defines the workflow; consult the linked readouts for each revision's
+conclusions, limitations and stopping decisions before proposing further work.
+For BCAP repair ideas, also read the
+[five-theory comparison](reports/forge/bcap-physics/README.md) and subsequent
+[round two](reports/forge/bcap-physics/round2/README.md),
+[round three](reports/forge/bcap-physics/round3/README.md),
+[round four](reports/forge/bcap-physics/round4/README.md) and
+[round five](reports/forge/bcap-physics/round5/README.md) readouts.
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 The [Forge preparation review map](docs/forge-integration-review-map.md) records
-the six agent-research changes and their software acceptance. Use its linked
+the integration changes and their software acceptance. Use its linked
 operating guides for recall, bounded decisions, policy execution and artifact
 retrieval; scientific calibration and release qualification remain separate.
 For a new research question or host, follow the
@@ -34,41 +33,30 @@ view. Historical receipts and pinned view revisions keep their original results.
 
 For the combined E22/Atlas/Forge API, read
 [the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
-external budgets and policy serving remain explicit; current Forge task
-definitions block E22/Atlas policy cohorts before reservation until separate
-policy-aware tasks are frozen. Keep bulk execution logs outside Git as required
+external budgets and policy serving remain explicit; E22/Atlas policy cohorts
+require separately frozen policy-aware tasks and supported preflight bindings
+before reservation. Keep bulk execution logs outside Git as required
 by [`AGENTS.md`](AGENTS.md).
 
 ## Readiness and scope
 
-**The framework is ready to use.** The
-[final readiness audit](reports/forge/FRAMEWORK_READINESS_AUDIT.md) verifies the
-requested engineering scope. [Full CI](https://github.com/255BITS/ParticleGAN/actions/runs/36677816874)
-passed 1,807 tests and 18 subtests; the [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
-and [fresh-checkout walkthrough](reports/forge/FRESH_CHECKOUT.md) verified the
-queue, recovery, cancellation, reuse, logs and readout workflow. Use the public
+For engineering scope and verification, read the
+[readiness audit](reports/forge/FRAMEWORK_READINESS_AUDIT.md), its
+[pinned CI run](https://github.com/255BITS/ParticleGAN/actions/runs/36677816874),
+the [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
+and [fresh-checkout walkthrough](reports/forge/FRESH_CHECKOUT.md). Use the public
 API and learned MoG defaults; particle-cloud exceptions must be explicit in the
 task. Do not run seed-only experiments.
 
-**Screening profiles remain provisional; scientific default adoption requires
-calibration.** Framework delivery does not require finding a winning formulation.
-The [current control readout](reports/forge/CONTROL_MODE_READOUT.md) records 7/57
-measured cells, 50 unknown, one true rejection and no complete positive reference.
-All three declared lineages fail smoke, so this exact profile cannot meet both
-the frozen positive-reference minimum and zero false rejections. Stop filling it
-solely for adoption. A new justified screen/profile and its bounded calibration
-are required; the controls' independent references and false-reject rate remain
-unknown. [Migration status](reports/forge/MIGRATION.md) retains the earlier
-studies, metrics, costs, source cohorts and future research/adoption work.
-
-The [2026-09-30 bounded reference study](reports/forge/SCIENTIFIC_CALIBRATION_20260930_READOUT.md)
-adds one substantive training-output-noise-removal lineage while preserving all
-three host-profile smoke gates, 16 independent references and frozen criteria.
-Its sole full 7k native diagnostic failed for 93.747 new paid seconds. Shape
-improved but terminal quality and sustained coverage failed. The new profile has
-8/76 measured cells and is also infeasible: every lineage is smoke-negative or
-reference-negative. Stop filling both failed profiles; no robustness or promotion
-run is eligible. Original evidence and the concluded failed revision remain in
+**A screening profile remains provisional until its calibration criteria pass.**
+Framework delivery does not require finding a winning formulation. Consult the
+[control readout](reports/forge/CONTROL_MODE_READOUT.md),
+[bounded reference-study readout](reports/forge/SCIENTIFIC_CALIBRATION_20260930_READOUT.md)
+and [migration status](reports/forge/MIGRATION.md) for source-specific outcomes,
+coverage, costs and stopping decisions. Do not fill a profile concluded infeasible
+solely for adoption; a new justified screen/profile and bounded calibration are
+required. Robustness and promotion need passing prerequisite evidence and
+accepted calibration. Preserve original evidence and concluded revisions in
 compiled memory.
 
 Task declarations describe intended coverage. Preflight and execution check the
@@ -83,45 +71,59 @@ lane described below and confer no ordinary qualification.
 Historical cards preserve successes, failures, raw errors, negative controls and
 missing evidence under their original protocols. [Initial](reports/forge/calibration/initial.md)
 and [alternate](reports/forge/calibration/quick-discriminator.md) historical
-screens also remain blocked under the [frozen criteria](configs/forge/calibration/criteria-v1.json).
+screen readouts bind their outcomes to the
+[frozen criteria](configs/forge/calibration/criteria-v1.json).
 Historical cloud, noisy served-model or EMA passes cannot fill a current MoG/clean-live
-cell. The [newer #155 archive](reports/forge/supplemental/pr155-current-archive-v1/README.md)
-adds 31 native arms and six context families, preserving noisy/clean scoring,
-failed ideas, host refusals and OOM attempts in the compiled memory. The
-[newer #155 audit](reports/forge/calibration/pr155-current-followup-source-audit.md)
-still leaves the exact dt075 14k, EMA .995 D-tracking and centre-sensitivity
-experimental receipts [unbound](reports/forge/import-gaps.json); a later written
-sensitivity assertion is separately preserved. That research is still developing;
-import its receipts when available using the existing framework.
+cell. Consult the [#155 archive](reports/forge/supplemental/pr155-current-archive-v1/README.md),
+its [source audit](reports/forge/calibration/pr155-current-followup-source-audit.md)
+and [import gaps](reports/forge/import-gaps.json) for source bindings, scoring
+cohorts and unavailable receipts. Import original receipts when available;
+preserve written assertions separately from experimental evidence.
 
-Incoming E22/KA2 changes the public API and model of record. Its inspected
-positives use particle clouds and noisy state-selected serving. Follow the
+For E22/KA2 integration, follow the
 [pinned compatibility checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
-when that API lands in develop, preserving MoG support, named streams, external
+and preserve MoG support, named streams, external
 budgets and complete policy checkpoints. Current receipts retain their frozen
 source and formulation identity.
 
 Run commands from the repository root in the project's Python environment.
 The [registered formulation comparison](reports/forge/studies/FORMULATION_COMPARISON_V1.md)
 compares fixed R1/R2, BCap and full released v0.7 GAN v3 with K3P on declared
-native hosts. `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
+native hosts. The [R1/R2 baseline readout](reports/forge/r1r2-baseline/README.md)
+binds the reference recipe and its source evidence. Results and recommendations
+belong in the corresponding reports, including the
+[bounded R1/R2 repair search](reports/forge/r1r2-tier1-search/README.md) and the
+separately registered [five-track repair campaign](reports/forge/r1r2-five-track-repair/README.md).
+Subsequent [optimizer-role comparison](reports/forge/r1r2-role-repair/README.md)
+and [gradient-direction/critic-denominator readout](reports/forge/r1r2-direction-floor-repair/README.md)
+retain their own finite registrations and source-bound readouts.
+The subsequent [spectral-update comparison](reports/forge/r1r2-spectral-repair/README.md)
+retains its source-bound readout under the same task contracts.
+The [objective and optimizer-memory readout](reports/forge/r1r2-objective-memory-repair/README.md)
+retains separately declared hypotheses and their evidence under those unchanged contracts.
+The subsequent [native score-law comparison](reports/forge/r1r2-score-law-repair/README.md)
+declares one loss-field contrast under the same task and protocol contracts.
+The separate [weaker-penalty comparison](reports/forge/r1r2-weak-penalty-repair/README.md)
+retains the original task contracts and declares its constant-strength delta explicitly.
+The subsequent [raw energy-distance comparison](reports/forge/r1r2-energy-distance-repair/README.md)
+binds an opt-in structural objective and fresh-source controls to those same contracts.
+`Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`
 bind separate host identities and report their costs without entering smoke or
 reference decisions. Existing profiles without this field retain their semantics.
 
-The [completed formulation comparison](reports/forge/FORMULATION_COMPARISON_READOUT.md)
-records all five full 7k native runs as FAIL for 408.765 new paid seconds.
-Independent audits pass, and the K3P control exactly reproduces the previous
-clean-MoG trajectory and named training streams. BCap improves centering but
-contracts further; R1/R2 improves shape but loses centering/coverage. Released
-GAN v3's matched MoG adaptation improves shape but still fails the full gates;
-its separate named-cloud host also fails and supplies no MoG reference credit.
-The profile has 4/95 ordinary calibration cells measured (91 unknown), plus
-1/5 separate diagnostic cells (4 unknown); acceptance remains blocked.
-Stop these exact experimental revisions. Inspect saved critic gradients and
-per-mode moments before another supported, bounded training hypothesis. No
-automatic matrix filling, tuning, seed study, continuation or promotion follows.
+The [energy prior-policy comparison](reports/forge/r1r2-energy-prior-freeze-repair/README.md)
+keeps its finite declarations, evidence receipts and conclusions in its report.
+The subsequent [saved-evidence mechanism review](reports/forge/r1r2-next-repair-research/README.md)
+and [output-kernel preparation](reports/forge/r1r2-mmd-repair/PLAN.md)
+retain their hypothesis, software prerequisites and admission limits separately.
+
+The [formulation-comparison readout](reports/forge/FORMULATION_COMPARISON_READOUT.md)
+owns its measured outcomes, control checks, costs, coverage and stopping decisions.
+Inspect saved critic gradients and per-mode moments before proposing another
+supported, bounded training hypothesis. A readout does not authorize automatic
+matrix filling, tuning, seed studies, continuation or promotion.
 
 The history, recall, compile, validate, and board commands launch no training.
 Recall includes source-bound concluded configuration and policy publications as
@@ -285,7 +287,7 @@ Scheduling policy changes request identity, but does not enter scientific job
 compatibility or grant qualification. Reuse still requires the exact recipe,
 task, source, prior, initialization, sampling and runtime bindings.
 
-The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
+The revision-8 six-task Tier 1 reserves up to 2,220 seconds: the 120-second
 scalar Gaussian can-it-pass smoke, three existing 300-second behavior tasks,
 the 300-second ring acquisition and the 900-second confirmed word smoke.
 The explicit `tier1-word-smoke-v1` campaign caps required-smoke campaign and
@@ -304,7 +306,7 @@ unchanged. The original sustained `five_word_joint_acquisition` declaration and
 its evidence remain historical. See the [split readout](reports/forge/five-word-tier-split/README.md).
 Revision 8 has required counts 6/21/2; its full through-Tier-2 reservation is
 42,720 seconds per candidate (43,020 including the optional 300-second clock
-audit diagnostic). The new default `technique-inventory-word-split-v1` campaign
+audit diagnostic). The `technique-inventory-word-split-v1` campaign declaration
 reserves 46,620 seconds per family through Tier 3, including the diagnostic,
 and 326,340 seconds for the seven selected families. Historical campaigns,
 including `tier1-gaussian-smoke-v1` and `tier1-acquisition-v2`, remain unchanged. Revision 3's `tier1-acquisition-v1` retains its
@@ -409,16 +411,18 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 8) | Purpose |
+| Qualification tier | Stability profile (revision 8) | Purpose |
 | --- | --- | --- |
 | 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
 | 2: quality | 21 hosts, including own-checkpoint Gaussian stability, five-word hold and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
 | 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
 
-The current required denominator is 6/21/2. Revision 7's 6/20/2, revision 3's 5/19/2 and revision 2's
-published 3/19/2 results remain historical evidence; adding acquisition requirements
-does not regrade them or transfer API demonstrations into Forge qualification.
-The expanded smoke profile needs calibration before scientific adoption.
+Revision 8 declares required counts 6/21/2. Consult the
+[experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) for active view
+revisions and denominators. Published older revisions retain their original
+results; adding acquisition requirements does not regrade them or transfer API
+demonstrations into Forge qualification. A changed smoke profile needs calibration
+before scientific adoption.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop higher-tier spending after
@@ -506,9 +510,8 @@ Diagnostic-only views and historical/API studies are separate from the totals.
 One refresh rebuilds the leaderboard, family pages and experiments-by-tier
 report; the older shared score index links here instead of copying the table.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
-adds one measured successor with all 24 integration preflights ready. Its
-frozen legacy request's required smoke failure stopped the remaining tasks; the original native
-recipe cards and their blockers remain frozen.
+records its source-bound integration preflights, execution outcomes and stopping
+decisions. Original native recipe cards and their recorded blockers remain frozen.
 Numerical source snapshots and receipt proofs remain in
 `reports/forge/technique-evidence/` as provenance, without separate leaderboard
 tables. Regeneration launches no training and needs no raw-log hydration;
@@ -524,7 +527,7 @@ and applicability rather than bespoke optimizer settings. A changed formulation
 needs a new family. Structural control changes within an existing formulation
 need ordinary idea cards and explicit deltas; they must not bypass the stricter
 same-signature configuration-search validator. A new configured family standard
-requires all six required Tier 1 tasks to PASS from that one candidate and
+requires every required Tier 1 task to PASS from that one candidate and
 compatible evidence cohort. A failure leaves the recorded incumbent selected
 and the attempted replacement visible as an unranked alternative. Retaining an
 incumbent does not claim it beats a candidate from another source or runtime.
@@ -534,8 +537,9 @@ its original family/cohort rows.
 
 The ordinary `inventory` execution command uses one explicitly selected current
 configuration per visible solution family from
-`configs/forge/selections/family-current-v1.json`. BCAP uses the winning DualNorm
-configuration selected by `current_configuration_family` in the family registry.
+`configs/forge/selections/family-current-v1.json`. The family registry's
+`current_configuration_family` binds configuration selections; consult that
+registry and the published family page for the selected recipe and optimizer.
 Optimizer variants, ablations and previous runtime cohorts remain archived
 comparisons; they do not expand the default benchmark roster. The current
 leaderboard displays this same whole configuration per family. Historical
@@ -560,22 +564,20 @@ python reports/forge/regenerate_technique_inventory.py
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
-The [expanded Tier 1 readout](reports/forge/tier1-refresh/README.md) evaluates
-all 15 existing ideas and 32 saved configurations under revision 3, then refreshes
-whole-configuration selections. Its frozen roster, five finite studies and
-shared campaign preserve the exact configuration recipes. `inventory` alone
-includes only ideas; use the readout's reproduction wrapper to include saved
-configurations through their registered studies. Those frozen historical
+The [expanded Tier 1 readout](reports/forge/tier1-refresh/README.md) records its
+frozen roster, studies, shared campaign, outcomes and whole-configuration
+selections. Use that readout's reproduction wrapper to reproduce its historical
+idea/configuration roster through the registered studies. Those frozen historical
 requests stop remaining work after failed prerequisites, including later tasks
 within Tier 1; new complete-tier requests finish independent Tier 1 measurements.
 
-The [word-task root-cause readout](reports/forge/word-root-cause/README.md) shows
-full task-only K3P, KA2 and R1/R2 passes with explicit existing-control settings.
+The [word-task root-cause readout](reports/forge/word-root-cause/README.md) binds
+its task-only results, controls and software repairs to their original evidence.
 Before blaming a formulation on a new host, verify effective G/E/D/prior rates
 and schedule horizons, whether output noise is added after a categorical softmax,
 and the penalty's units over the full joint input. Record active controllers as
-well as nominal rates. The word study repaired exact-equality grading and prior
-optimizer beta binding; it preserves old evidence and ordinary qualification.
+well as nominal rates. Grading or optimizer-binding repairs must preserve
+original evidence and its qualification identity.
 Clean/full noise and horizon ablations can cross technique activation boundaries,
 so register reusable structural idea candidates instead of calling them ordinary
 same-signature configuration searches. The task-only study and recipe export
@@ -598,17 +600,16 @@ the declared view is newer than the registered evidence policy. The explicit
 flag remains available; advancing qualification still requires the source and
 policy options above.
 
-The original default inventory campaign has explicit reservation ceilings for
-its 12-technique roster. New techniques require checking the expanded plan and
-a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
-its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
+Inventory campaign declarations bind their roster and explicit reservation
+ceilings. New techniques require checking the expanded plan and a new immutable
+campaign ID with adequate budgets; do not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/21/2
-for the current revision-8 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 7 (6/20/2) until
-ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
-retain their original outcomes in its companion JSON and immutable snapshots.
+techniques reserve no training resources. Required denominators include unknown
+and blocked cells. The [published inventory](reports/forge/technique-inventory.md)
+and its companion JSON bind the displayed view revision and original cohorts;
+ordinary evidence must explicitly advance a recorded policy. Earlier cohorts
+retain their original outcomes and denominators in immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
 Unreached acquisition tasks remain unknown. New compatible evidence updates
 the same published leaderboard.
@@ -641,9 +642,9 @@ trainer states. Its source audit also blocks known delayed releases that a short
 probe can miss. Native 14k tasks restore the candidate's certified 7k checkpoint,
 keeping the original schedule and named RNG streams. Paired adaptation compares
 an active continuation with a frozen copy of the same pre-shift state.
-These adapters have bounded software verification; no full-budget current
-clock-free or adaptation qualification has been recorded. Monotonicity is a
-future view and has no active gate.
+Consult the corresponding published view for measured adapter verification and
+full-budget qualification evidence. Only declared active gates grant eligibility;
+a future view such as monotonicity adds none until its policy is registered.
 
 Change tier placement through view policy, preserving task/evaluator definitions:
 

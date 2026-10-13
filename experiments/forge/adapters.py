@@ -22,6 +22,7 @@ from .api import (CapabilityError, task_formulation_context, task_recipe_resourc
                   task_policy_blockers)
 from .artifacts import manifest_artifacts, save_provenance_checkpoint, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
+from .comparison_protocol import ComparisonProtocol
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .priors import task_prior
@@ -171,6 +172,8 @@ class _Run:
         self.output, self.task = Path(output), task
         self.output.mkdir(parents=True, exist_ok=True)
         self.started = time.monotonic()
+        self.comparison_protocol = ComparisonProtocol(context.streams, {
+            "generator": trainer.G, "discriminator": trainer.D, "prior": trainer.prior})
         self.finite = True
         self.rng_audits = []
         self.last_update = {}
@@ -200,6 +203,8 @@ class _Run:
 
     def step(self, real):
         before = self.trainer.completed_steps
+        # The shipped scalar adapter supplies the same real batch to both roles.
+        self.comparison_protocol.record_pair(real, real)
         with self.timing.measure("training_updates"):
             self.last_update = self.trainer.step(real, collect_stats=True)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
@@ -273,6 +278,7 @@ class _Run:
                   "hooks_exercised": hooks, "mechanism_audit": mechanisms,
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
+                    "comparison_protocol": self.comparison_protocol.receipt(self.context.streams),
                     **self.sampling_policy}
         if self.optimizer_diagnostics is not None:
             evidence["optimizer_diagnostics"] = self.optimizer_diagnostics.receipt()
@@ -586,7 +592,14 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
     if adapter == "word_joint":
-        from .word_adapter import run_word
+        from .api import resolve_public_recipe
+        recipe = resolve_public_recipe(request["candidate"])
+        if recipe.output_mmd_weight:
+            from .mmd_adapters import run_word
+        elif recipe.energy_distance_weight:
+            from .energy_adapters import run_word
+        else:
+            from .word_adapter import run_word
         return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
     if adapter == "transfer_behavior":
         if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
@@ -594,7 +607,14 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
             return run_behavior(request, task, output_dir, device)
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
-        from .behavior_adapters import run_behavior
+        from .api import resolve_public_recipe
+        recipe = resolve_public_recipe(request["candidate"])
+        if recipe.output_mmd_weight:
+            from .mmd_adapters import run_behavior
+        elif recipe.energy_distance_weight:
+            from .energy_adapters import run_behavior
+        else:
+            from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:

@@ -1,0 +1,522 @@
+{
+  "limitations": [
+    "Algebraic inverse of a float32 Adam displacement is approximate, not a saved pre-update checkpoint.",
+    "Terminal moments reveal the last applied displacement, not a future gradient or step.",
+    "Local Jacobians at row centers omit finite-noise activation crossings and sample-to-mode reassignment.",
+    "State trajectories differ; comparisons establish descriptive associations, not a causal role effect.",
+    "No consumed row indices are reconstructed; off-batch motion uses batch128 as a strict upper bound."
+  ],
+  "python_rng_unchanged": true,
+  "registered_role_bindings": {
+    "r1r2-role-m001-v1": {
+      "ae_gan_hold": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.betas",
+          "base_lr": "Recipe.lr",
+          "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+          "latent_table_controls": false,
+          "lr_schedule": "prior",
+          "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+          "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+          "representation": "direct_sample_coordinates"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D_betas": [
+          0.0,
+          0.99
+        ],
+        "G_E_betas": [
+          0.0,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "construction": "no sampled latent prior or prior optimizer group",
+          "latent_table_controls": false,
+          "representation": "not_sampled"
+        },
+        "sampled_prior_betas": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "r1r2-role-m110-v1": {
+      "ae_gan_hold": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "clockfree_audit_measurement_v1": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "five_word_joint_smoke": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "gaussian1d_smoke": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "ring16_acquisition": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.prior_betas or Recipe.betas",
+          "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+          "latent_table_controls": true,
+          "lr_schedule": "prior",
+          "representation": "latent_prior_locations"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "two_pole": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "base_betas": "Recipe.betas",
+          "base_lr": "Recipe.lr",
+          "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+          "latent_table_controls": false,
+          "lr_schedule": "prior",
+          "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+          "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+          "representation": "direct_sample_coordinates"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      },
+      "unused_token_hold": {
+        "D_betas": [
+          0.5,
+          0.99
+        ],
+        "G_E_betas": [
+          0.5,
+          0.99
+        ],
+        "amsgrad": false,
+        "prior_binding": {
+          "construction": "no sampled latent prior or prior optimizer group",
+          "latent_table_controls": false,
+          "representation": "not_sampled"
+        },
+        "sampled_prior_betas": [
+          0.0,
+          0.99
+        ]
+      }
+    }
+  },
+  "reproducer_sha256": "93eb7d96ea7e882a288dafe6515b4eecd37a7f19e6c4e2d548b31a9bc4be03ca",
+  "results": [
+    {
+      "algebraic_last_step": {
+        "cosine_valid_rows": 256,
+        "g_center_displacement_mean_norm": 0.024692175675007547,
+        "local_shape_256_row_weighted": {
+          "after_g": {
+            "mean_radial_local_variance_ratio": 0.37285486991886935,
+            "mean_tangent_local_variance_ratio": 1.718178445645271
+          },
+          "after_prior": {
+            "mean_radial_local_variance_ratio": 0.3724927675191302,
+            "mean_tangent_local_variance_ratio": 1.7214942677260097
+          },
+          "before_algebraic": {
+            "mean_radial_local_variance_ratio": 0.3778439134794847,
+            "mean_tangent_local_variance_ratio": 1.7306712217772016
+          }
+        },
+        "mean_center_displacement_cosine": 0.08411791745880873,
+        "opposing_center_displacement_rows": 117,
+        "prior_center_displacement_mean_norm": 0.003555639588735687,
+        "prior_only_activation_pattern_changed_rows": 9,
+        "total_center_displacement_mean_norm": 0.02578246502109157
+      },
+      "artifact": "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012/queue/r1r2-five-track-momentum-v1/a3991f4b7aeb452cb6a7caa299ad8ff2/provenance/provenance-state.pt",
+      "artifact_sha256": "960283604848cc26d48e7290f19d993a0aaa55d5ec24572de4decf1440836c42",
+      "attempt_id": "a3991f4b7aeb452cb6a7caa299ad8ff2",
+      "candidate_id": "r1r2-five-track-momentum-v1",
+      "candidate_revision": "3c9bfbf1cb961eaef0aa32e076f906d97ff2305f066ff83dc04d3d77423f34fa",
+      "completed_steps": 1600,
+      "execution_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "label": "momentum",
+      "optimizer_roles": {
+        "D": {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "coordinates": 4929,
+          "last_displacement_l2": 0.15287720965945975,
+          "lr": 0.0085,
+          "moving_coordinates": 4920
+        },
+        "G": {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "coordinates": 4610,
+          "last_displacement_l2": 0.050817946457600086,
+          "lr": 0.0085,
+          "moving_coordinates": 4610
+        },
+        "prior": {
+          "amsgrad": false,
+          "betas": [
+            0.5,
+            0.99
+          ],
+          "coordinates": 1024,
+          "last_displacement_l2": 0.0711011722739996,
+          "lr": 0.0085,
+          "moving_coordinates": 1024,
+          "moving_rows": 256,
+          "row_displacement_min_median_p90_max": [
+            1.2106734848469744e-06,
+            0.002132021788385353,
+            0.007304458405403292,
+            0.01915580184524823
+          ],
+          "rows": 256
+        }
+      },
+      "prior_covariance_eigenvalues": [
+        0.9420356638859771,
+        1.183809014919279,
+        1.690568626618393,
+        1.836487201815689
+      ],
+      "prior_rows_moved_outside_last_g_batch_lower_bound": 128,
+      "request_sha256": "50efff20bd9b1738ba9aa7d1a122bff9f27b76857cf053d3cdce691782a23082",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    },
+    {
+      "algebraic_last_step": {
+        "cosine_valid_rows": 105,
+        "g_center_displacement_mean_norm": 0.06310842534714034,
+        "local_shape_256_row_weighted": {
+          "after_g": {
+            "mean_radial_local_variance_ratio": 0.4556659288851818,
+            "mean_tangent_local_variance_ratio": 3.1686729540668663
+          },
+          "after_prior": {
+            "mean_radial_local_variance_ratio": 0.4559339686635396,
+            "mean_tangent_local_variance_ratio": 3.1660122227249903
+          },
+          "before_algebraic": {
+            "mean_radial_local_variance_ratio": 0.44076915043953935,
+            "mean_tangent_local_variance_ratio": 3.1405469219213593
+          }
+        },
+        "mean_center_displacement_cosine": 0.10320483224513773,
+        "opposing_center_displacement_rows": 48,
+        "prior_center_displacement_mean_norm": 0.0027125049626996107,
+        "prior_only_activation_pattern_changed_rows": 3,
+        "total_center_displacement_mean_norm": 0.06368431420885828
+      },
+      "artifact": "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012/queue/r1r2-five-track-optimizer-v1/1dda7bf5c88942368359f1ac207e9e93/provenance/provenance-state.pt",
+      "artifact_sha256": "15adb31a4972fbd04e829805c2229f704a304b3e799c60b791e6844de42365d7",
+      "attempt_id": "1dda7bf5c88942368359f1ac207e9e93",
+      "candidate_id": "r1r2-amsgrad-repair-v1",
+      "candidate_revision": "5cb62c57a1c48ef668c2eb393fd05d255f3a4a776f95fe1ed94711d56ef78799",
+      "completed_steps": 1600,
+      "execution_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+      "label": "amsgrad",
+      "optimizer_roles": {
+        "D": {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "coordinates": 4929,
+          "last_displacement_l2": 0.11336885782920314,
+          "lr": 0.0085,
+          "moving_coordinates": 4909,
+          "same_moment_amsgrad_step_ratio_min_median_p90_max": [
+            0.0017237531290092754,
+            0.10090705362066282,
+            0.2833303414150122,
+            0.9603013187755997
+          ]
+        },
+        "G": {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "coordinates": 4610,
+          "last_displacement_l2": 0.07282548215195893,
+          "lr": 0.0085,
+          "moving_coordinates": 4610,
+          "same_moment_amsgrad_step_ratio_min_median_p90_max": [
+            0.001853381136650604,
+            0.12965913733261686,
+            0.27901308578510486,
+            0.8415599508215792
+          ]
+        },
+        "prior": {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "coordinates": 1024,
+          "last_displacement_l2": 0.04683081044487192,
+          "lr": 0.0085,
+          "moving_coordinates": 420,
+          "moving_rows": 105,
+          "row_displacement_min_median_p90_max": [
+            0.0,
+            0.0,
+            0.005370160765591631,
+            0.015388161108473236
+          ],
+          "rows": 256,
+          "same_moment_amsgrad_step_ratio_min_median_p90_max": [
+            0.015598144625650857,
+            0.14131088168659112,
+            0.32398397982702315,
+            0.6167641164729819
+          ]
+        }
+      },
+      "prior_covariance_eigenvalues": [
+        0.9266764516091692,
+        1.0908503733901023,
+        1.2039315678026707,
+        1.2316303611140733
+      ],
+      "prior_rows_moved_outside_last_g_batch_lower_bound": 0,
+      "request_sha256": "e4194dcd35f7b142d87b34ac35244e301ef6d0e6ea0d441e6e282c4881bc8e35",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+    }
+  ],
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "saved_terminal_state_only",
+  "torch_cpu_rng_unchanged": true,
+  "training_updates": 0
+}

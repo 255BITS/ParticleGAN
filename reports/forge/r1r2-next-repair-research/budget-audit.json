@@ -1,0 +1,175 @@
+{
+  "audit_status": "PASS",
+  "authoritative_queue": {
+    "active_jobs": 0,
+    "aggregate_charge_index_sha256": "21f77389c07b000aac495e5f5c5809db0aa02db91eb7d79a875bdc1d94fa35ef",
+    "all_original_charge_owners_and_attempts_preserved": true,
+    "paid_seconds": 7168.248061007995,
+    "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/queue/state.json",
+    "pending_topology_jobs": 748,
+    "reserved_seconds": 0.0,
+    "sha256": "95e0f10aeb4f1835b932a3302de6837c9334c06eaed0c727bb9acfe1b620abe7",
+    "terminal_jobs": 238,
+    "unchanged_during_audit": true,
+    "unique_attempts": 238
+  },
+  "budget": {
+    "basis": "Full unchanged allowances, not recent measured runtimes. The 5040 ceiling covers all fourteen tasks at their declared maxima; quality success is not implied.",
+    "blocking_full_reservation_seconds": 900,
+    "blocking_task": "five_word_joint_smoke",
+    "complete_new_recipe_fits_current_cap": false,
+    "current_aggregate_cap_seconds": 8000,
+    "exact_cached_parent_plus_seven_new_tasks_full_allowance_seconds": 2520,
+    "new_source_comparison": {
+      "cached_tasks": 0,
+      "candidate_allowance_seconds": 2520,
+      "fresh_tasks": 14,
+      "minimum_aggregate_cap_seconds": 12208.248061007995,
+      "minimum_extra_aggregate_cap_seconds": 4208.248061007995,
+      "recipes": 2,
+      "shared_full_allowance_seconds": 5040,
+      "whole_second_aggregate_cap_seconds": 12209,
+      "whole_second_extra_seconds": 4209
+    },
+    "remaining_seconds": 831.7519389920053,
+    "shortfall_even_for_word_alone_seconds": 68.24806100799469,
+    "that_case_extra_cap_seconds": 1688.2480610079947,
+    "that_case_minimum_cap_seconds": 9688.248061007995,
+    "word_alone_shortfall_is_not_a_complete_comparison_budget": true
+  },
+  "checked_at_utc": "2026-10-13T02:01:55.095806+00:00",
+  "checks": {
+    "aggregate238_charge_index_matches_frozen_collection_audit": true,
+    "all_34_registered_declaration_hashes_unchanged": true,
+    "committed_latest_reports_match_worktree": true,
+    "new_sampling_draws": 0,
+    "new_training_updates": 0,
+    "no_cross_recipe_or_old_source_pass_pooling": true,
+    "no_queue_source_cap_declaration_or_old_report_mutation": true,
+    "no_task_budget_update_cadence_gate_or_reservation_guard_changes": true
+  },
+  "exact_cache": {
+    "all_21_original_certificates_verified": true,
+    "complete_new_global_recipe_from_existing_cache": false,
+    "current_source_measured_recipes": [
+      {
+        "candidate": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "cases": 7,
+        "clock_status": "PASS",
+        "ordinary_failures": [
+          "ring16_acquisition"
+        ],
+        "ordinary_passes": 5,
+        "ring_attempt_id": "219c852ff8c345768d5cd16407b04236",
+        "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+        "whole_recipe_pass": false,
+        "word_attempt_id": "a0893523c6564367ad59aab106e44cd1"
+      },
+      {
+        "candidate": "r1r2-non-saturating-energy-u-frozen-prior-v1",
+        "candidate_revision": "408a066fe78ee9f770a1b53dbdbcb2d2db3f01ff0dd9bd50363b1015970fc1cc",
+        "cases": 7,
+        "clock_status": "PASS",
+        "ordinary_failures": [
+          "ring16_acquisition"
+        ],
+        "ordinary_passes": 5,
+        "ring_attempt_id": "c168f1c417b04e1a9938d68b04b0556c",
+        "source_origin_commit": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+        "whole_recipe_pass": false,
+        "word_attempt_id": "4a95d918d94845baa2ae42c3b3c70dba"
+      },
+      {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "candidate_revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+        "cases": 7,
+        "clock_status": "PASS",
+        "ordinary_failures": [
+          "ring16_acquisition"
+        ],
+        "ordinary_passes": 5,
+        "ring_attempt_id": "3e1e55b0f89d4a8c8cedd706dbd4e021",
+        "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+        "whole_recipe_pass": false,
+        "word_attempt_id": "ed789ea04d304ddfb75c67bbcd4d042d"
+      }
+    ],
+    "existing_recipe_relabeling_can_reuse_exact_identity_but_adds_no_new_science": true,
+    "new_global_recipe_changes_candidate_revision_and_all_seven_job_keys": true,
+    "new_scientific_source_comparison_cache_cases": 0,
+    "reason": "Candidate revision hashes actual source plus resolved formulation; every execution-group key hashes that revision and fixed task/protocol/RNG/runtime conditions. Matching an inactive field, mathematical behavior, or an older source does not certify exact cache equivalence."
+  },
+  "goal": {
+    "complete": false,
+    "complete_passing_global_recipes": 0,
+    "latest_both_clock_status": "PASS",
+    "latest_both_ordinary_passes": 5,
+    "latest_both_ordinary_total": 6,
+    "measured_complete_seven_case_cohorts": 34,
+    "measured_revisions": 34,
+    "original_ordinary_tasks": [
+      "ae_gan_hold",
+      "five_word_joint_smoke",
+      "gaussian1d_smoke",
+      "ring16_acquisition",
+      "two_pole",
+      "unused_token_hold"
+    ],
+    "own_clock": "clockfree_audit_measurement_v1",
+    "ring_failures": 34,
+    "ring_passes": 0,
+    "unresolved_original_gate": "ring16_acquisition"
+  },
+  "input_file_sha256": {
+    "experiments/forge/planning.py": "59984dc970ce5dc9e9977f3f0f21e0f2aa967c880092b0928ce258821234a170",
+    "experiments/forge/queue.py": "f0babd722f9fec4e21a5705125a3e006f6793ca6d262c21c683de62326a5d6f1",
+    "reports/forge/r1r2-energy-distance-repair/publication/results.json": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+    "reports/forge/r1r2-energy-distance-repair/registration.json": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+    "reports/forge/r1r2-energy-prior-freeze-repair/collection-audit.json": "3afa7bdd6f96eee72efbbd783c100c2a9639dbf563466cef3db6f8600b28afaa",
+    "reports/forge/r1r2-energy-prior-freeze-repair/density-audit.json": "e790df5eb9cbbaa2ebacb66b18af449a43692e894ff937c8c2890912f4048644",
+    "reports/forge/r1r2-energy-prior-freeze-repair/manifest.json": "d1e21d9b82953bcaaa5073e4e89b3baac9fc8b758d4db497964ac5611ac867c8",
+    "reports/forge/r1r2-energy-prior-freeze-repair/publication/results.json": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207",
+    "reports/forge/r1r2-energy-prior-freeze-repair/registration.json": "7553c76a4ed5c6c1b131bc508999667cf4e68d9a55f34bb102c9a626937f090d",
+    "reports/forge/r1r2-energy-prior-freeze-repair/workflow.py": "1e54e19d0171bebc5d25d48969be20231ff18483fe34487bbe9d11bd2f24b584",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066"
+  },
+  "pr": {
+    "local_head": "59256e21fd9372d0a837a74808dc811518d4ffd4",
+    "number": 401,
+    "observed_remote_head": "59256e21fd9372d0a837a74808dc811518d4ffd4",
+    "remote_head_matches_local": true,
+    "state": "OPEN",
+    "url": "https://github.com/255BITS/ParticleGAN/pull/401"
+  },
+  "recommendation": "Continue saved-evidence and mathematical/software research. A complete new-source paid comparison requires a separately authorized aggregate-cap increase of at least 4208.248061007995 seconds (4209 whole seconds, total 12209), then a concrete justified recipe, unchanged tasks, full original reservations and independent registration review. This audit requests no budget change and authorizes no paid work.",
+  "schema_version": 1,
+  "scientific_contract": {
+    "all_1216_live_and_HEAD_B_E_scientific_blobs_match": true,
+    "all_seven_task_conditions_and_gates_match": true,
+    "candidate_full_allowance_seconds": 2520,
+    "execution_origins_preserved": [
+      "67920d9090727bd74adbd331187f0e6f22533e48",
+      "3203c4e419cb7c2a4cd2021d2c48638980579901"
+    ],
+    "full_task_allowances_seconds": {
+      "ae_gan_hold": 300,
+      "clockfree_audit_measurement_v1": 300,
+      "five_word_joint_smoke": 900,
+      "gaussian1d_smoke": 120,
+      "ring16_acquisition": 300,
+      "two_pole": 300,
+      "unused_token_hold": 300
+    },
+    "protocol_seed": 0,
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "public_initializer": "deterministic_orthogonal",
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+    "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+    "source_files": 1216,
+    "task_contracts_sha256": "b5d97993f8384338379d8fa0f1cd5153288c03be26a6cf40244b7dd263936c72",
+    "two_recipe_full_allowance_seconds": 5040,
+    "word_updates": 20001
+  },
+  "scope": "Read-only shared-queue, committed-PR completeness and full-allowance budget audit; no experiment selected or admitted."
+}

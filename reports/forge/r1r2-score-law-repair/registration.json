@@ -1,0 +1,216 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-score-law-repair-20261012",
+  "candidates": {
+    "ams_m110": {
+      "candidate": "r1r2-role-ams-m110-v1",
+      "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+      "card": {
+        "candidate": "r1r2-role-ams-m110-v1",
+        "role": "ams_m110",
+        "study": "r1r2-role-ams-m110-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "03ee207ac9032192ef4b0cbf24d5584ef55359014768b56570444891b7dd118f",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "7f1123d2e3b866679ffee57a9c1989c317d49cfc05b5ad48bc99de7285d1dd8c",
+        "clockfree_audit_measurement_v1": "49e469e662efd6015e96f7e7c7e43cce24f85f58072f3d22c281e284e14b9e0c",
+        "five_word_joint_smoke": "1f614e9b930791e3585b43e4a21ada0ff0c77dab813bcbf96dd681f6ec463f1d",
+        "gaussian1d_smoke": "d3805319eecfdbd7d5b605fad41ab600f78fdcb06a0e2f05a940853e67c1d1e4",
+        "ring16_acquisition": "c79176c9df6666e2b57622c1a69125349e25fe34f5406b3372293578a36dd359",
+        "two_pole": "ab788b0442f4601a3a82454ff214aeed5b93e36328e12de1dc4e3db4970fd1f9",
+        "unused_token_hold": "74b546317a59d3615d40e4de73862d7490621695c661d61b572184463adf7bc7"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "baseline": {
+      "candidate": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "559f9c7b4117dfb5a3000afcf2acbb7fb701cb541c9bca95c6ce8c1a7fbd0d87",
+      "card": {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "d4982c2930d0d1f5d1f3c567833afe95b4101c8d18bd4ac753d21b3ad1444cae",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "39da4449184290afb6a9c945c7efbedcac79b018a059bf25182e70145681c4a1",
+        "clockfree_audit_measurement_v1": "61eb72c10558dae85977c48428486b9e39f032f84ee04610e95cb2eaa0edb422",
+        "five_word_joint_smoke": "b1f98c14ab2f95ffeb877882918abf059f2ecc429ccebf746231f6caf381a063",
+        "gaussian1d_smoke": "7d4ced25d65ea9f38586983dfd8e651ecbe7936a71ea3de86f04fac3f0f052cd",
+        "ring16_acquisition": "1f29f53a514a3e1bc0001892b320b316f912583eb67900b9868594a7fdfe6177",
+        "two_pole": "5605d8c2272437780ece410829beab7a1711722099df95b065b884b3ad48d764",
+        "unused_token_hold": "0b76cc31369c550b5f21374d36f5e9e7c453d7287caa659e878604aaf10ed4dd"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "3d02499f9ad5be09db7ba59e1ba83c5de287330a687f88a09a2468a654d83ad1",
+      "card": {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-non-saturating-ams-m110-v1-study"
+      },
+      "execution_policy": {
+        "mode": "complete_current_tier",
+        "schema_version": 1
+      },
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "b68a8c6d6012463813e62edabfc9e699ab0a7fcd1e494dbcf879b519c1fc9261",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "2941a676d023de77f3daee44d27b9078dbc9fd311e01db146e03e927648ae45b",
+        "clockfree_audit_measurement_v1": "fc0bb98f251470dc13fdb47c7df1d52211772c5674f338dff655297a7121acce",
+        "five_word_joint_smoke": "88e80c2efb1cdff7cf854ee64cfa077bf316fc8ba7ee6631f1a5e086dbdfee9e",
+        "gaussian1d_smoke": "08d0117f24516070a334cc51fd811ecc3939205e19a827598f3fa160dda287d2",
+        "ring16_acquisition": "7660e95c6ca6e2892d404b5d20fb6456ec5ca1b447d4becd0ac9aaebdb76aae5",
+        "two_pole": "079c6a3a12ade34132eefb9a0b7439f200ac31836d256588413e0da4fca930f0",
+        "unused_token_hold": "d551ab059369f01896fdcce94637760054149676218535ea92d9af0a2dcbaac4"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "clock_diagnostic": "clockfree_audit_measurement_v1",
+  "declarations": {
+    "configs/forge/ideas/r1r2-non-saturating-ams-m110-v1.json": "1f55db50347ed7adc5ebe54a9d38fdaa8de42b99eed091be793a086790f4030d",
+    "configs/forge/ideas/r1r2-role-ams-m110-v1.json": "b9668118b75289c016639bcf7973ff093a6bfb9ce7ae4c1922660c2c088fcc12",
+    "configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/studies/r1r2-five-track-cached-baseline-v1.json": "be6b1f1bcabc908b34225708c90953d7f8e07b46faece6e5db7173e3be4071dd",
+    "configs/forge/studies/r1r2-non-saturating-ams-m110-v1-study.json": "3988145706daba89eaf089bed9f3b786870138461b9c2d1d387a67e6b4e4f74e",
+    "configs/forge/studies/r1r2-role-ams-m110-v1-study.json": "61058d9d001b31af05353e735a262d197a473d2753dd7efdef5c53dfca78ff29",
+    "configs/forge/tasks/ae_gan_hold.json": "d2eb2e438e89835ca58503910a9dfc0bb2c168000728304720a6bc1b84ef1d15",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978",
+    "configs/forge/tasks/five_word_joint_smoke.json": "1d6ea3f41300fe78b706dd08a9e88b15be0c58d91d9f2a5c2c16d59a2b3ec278",
+    "configs/forge/tasks/gaussian1d_smoke.json": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+    "configs/forge/tasks/ring16_acquisition.json": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "configs/forge/tasks/two_pole.json": "30840ce42c146d881b4f88fd1cdfdbaceb554ea5138e62832f1636b3777613fe",
+    "configs/forge/tasks/unused_token_hold.json": "6d777fae58eb6f90e392471d87c56d7e93fc719914d83eac70a408143ff0ca1c",
+    "configs/forge/views/discriminator_stability.json": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+    "reports/forge/r1r2-objective-memory-repair/README.md": "8d26b638e1b7779c3b2a3a51823475954ee062bfd0bb3b1a5bccb6a30add9c6c",
+    "reports/forge/r1r2-objective-memory-repair/collection-audit.json": "ea5331d78213a89cf47d7cf0b8a05cf6a643e4f41812f3b759fa18e998ba03bb",
+    "reports/forge/r1r2-objective-memory-repair/density-audit.json": "1cf10ea8424f14595c39c76b1c8273d5c1c02a00eea2e81180882663f086666f",
+    "reports/forge/r1r2-objective-memory-repair/publication/results.json": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+    "reports/forge/r1r2-objective-memory-repair/registration.json": "f649a1d94109068d8283a739141fe8cd83323f5f5f53f8978603a8387bbbf288",
+    "reports/forge/r1r2-objective-memory-repair/research/full-transport.md": "ed54cb7831b85de3fee1a7c90eaff99cf4dbfa39d6e20058336f7b52b2ff3167",
+    "reports/forge/r1r2-objective-memory-repair/research/score-law-literature.md": "39bd2ce97c5214b83a8aa75d31ceb631ff9d706d66982fb9f7849809649d6196",
+    "reports/forge/r1r2-objective-memory-repair/research/score-law/diagnosis.json": "23a69727bbfb5a805e6bdab2eae448f6e17540dee03641d09cb7bf81f5fc4b99",
+    "reports/forge/r1r2-objective-memory-repair/research/score-law/probe.py": "9e39de0c1b045962370383d224c47ad1f60e0e5157f083f78ba794418e59d1d0",
+    "reports/forge/r1r2-role-repair/publication/results.json": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+    "reports/forge/r1r2-score-law-repair/PLAN.md": "2f53af4ef8250971f7a20c194d1d6968db054621cdfc788990c01b747eba3613",
+    "reports/forge/r1r2-score-law-repair/audit_collection.py": "08461a472df8cb61fbceb05c6d2af58983be3229ca12a8ee41b538c8c19d9127",
+    "reports/forge/r1r2-score-law-repair/density_audit.py": "9d183844ade584d62599a48e84c3f8ab66ad09257872189adec9ee3c10ce92e4",
+    "reports/forge/r1r2-score-law-repair/manifest.json": "60272486ef8762aa33894b2ea6427ec3ca1835891a3e926e357a8d6224dd4b04",
+    "reports/forge/r1r2-score-law-repair/test_score_law_workflow.py": "6e7aada685e1708165a3618fb10a2ed87227f760d392f81fe579703dc6698bcc",
+    "reports/forge/r1r2-score-law-repair/workflow.py": "3268f26cd4417a840d023b9e6b86d90b4686eb662c2402f7059f78b89e35ebbb",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/workflow.py": "6357353a6494f1a66409e3f0f8093bfe2e776f57afb9f21416aafa16d56cf066"
+  },
+  "manifest": {
+    "baseline_role": "baseline",
+    "campaign": {
+      "budget_seconds": 7560,
+      "candidate_budget_seconds": 2520,
+      "id": "r1r2-score-law-repair-v1"
+    },
+    "candidates": [
+      {
+        "candidate": "recipe-prior-refactor-r1r2-v1",
+        "role": "baseline",
+        "study": "r1r2-five-track-cached-baseline-v1"
+      },
+      {
+        "candidate": "r1r2-role-ams-m110-v1",
+        "role": "ams_m110",
+        "study": "r1r2-role-ams-m110-v1-study"
+      },
+      {
+        "candidate": "r1r2-non-saturating-ams-m110-v1",
+        "role": "non_saturating",
+        "study": "r1r2-non-saturating-ams-m110-v1-study"
+      }
+    ],
+    "id": "r1r2-score-law-repair-v1",
+    "max_candidates": 3,
+    "paid_cap_seconds": 8000,
+    "round": 1,
+    "schema_version": 1,
+    "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "searches": [],
+    "supporting_inputs": [
+      "reports/forge/r1r2-score-law-repair/workflow.py",
+      "reports/forge/r1r2-score-law-repair/PLAN.md",
+      "reports/forge/r1r2-objective-memory-repair/README.md",
+      "reports/forge/r1r2-objective-memory-repair/registration.json",
+      "reports/forge/r1r2-objective-memory-repair/publication/results.json",
+      "reports/forge/r1r2-objective-memory-repair/collection-audit.json",
+      "reports/forge/r1r2-objective-memory-repair/density-audit.json",
+      "reports/forge/r1r2-objective-memory-repair/research/score-law-literature.md",
+      "reports/forge/r1r2-objective-memory-repair/research/score-law/diagnosis.json",
+      "reports/forge/r1r2-objective-memory-repair/research/score-law/probe.py",
+      "reports/forge/r1r2-objective-memory-repair/research/full-transport.md",
+      "reports/forge/r1r2-score-law-repair/audit_collection.py",
+      "reports/forge/r1r2-score-law-repair/density_audit.py",
+      "reports/forge/r1r2-score-law-repair/test_score_law_workflow.py"
+    ]
+  },
+  "manifest_sha256": "60272486ef8762aa33894b2ea6427ec3ca1835891a3e926e357a8d6224dd4b04",
+  "paid_cap_seconds": 8000,
+  "qualification_input": false,
+  "required_tasks": [
+    "ae_gan_hold",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "reservation_seconds": 7560,
+  "schema_version": 1,
+  "search_spec_hashes": {},
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "stop": "One explicit finite round; complete runnable Tier1 peers within full reservations and paid/storage caps. No automatic next round, retry, Tier2 or selection/default change."
+}

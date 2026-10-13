@@ -1,0 +1,39 @@
+{
+  "base_candidate": "r1r2-constant-policy-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 15120,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-tier1-constant-search-v1",
+    "purpose": "Six global constant R1/R2 policies through all six ordinary Tier1 tasks plus own clock proof. Seed0/public initializer and fixed tasks, prior distribution/capacity, seen batches, sampling, updates and cadence. Complete current tier; no scientific retry, Tier2, seed variant or default adoption. Aggregate paid work capped separately at3600 seconds including fresh matched baseline.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "betas": [
+      [
+        0.0,
+        0.9
+      ],
+      [
+        0.0,
+        0.99
+      ]
+    ],
+    "reg_coeff": [
+      0.1,
+      0.3,
+      1.0
+    ]
+  },
+  "guide": "reports/forge/r1r2-tier1-search/README.md",
+  "hypothesis": "Removing all external schedules resolves clock dependence; at least one fixed penalty/beta2 pair reduces Ring16 within-component spread enough to meet its sustained full gate while retaining all five other ordinary passes.",
+  "id": "r1r2-tier1-constant-search-v1",
+  "protocol": "screening",
+  "rationale": "The saved endpoint has every mode but excessive tangential variance, centered prior rows, and no full-gate passing observation. Test gamma0.1/0.3/1 and beta2 0.9/0.99 globally; do not mix task winners. Distinguish a clock repair from full Tier1 passage.",
+  "schema_version": 2,
+  "trainer_family": "r1r2",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

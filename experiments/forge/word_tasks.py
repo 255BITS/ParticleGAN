@@ -258,6 +258,9 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         continuity = restore_parent(request, task, prerequisites, fixture, context)
     prefix = fixture.completed_steps
     fixture.max_steps = prefix + updates
+    from .comparison_protocol import ComparisonProtocol
+    comparison = ComparisonProtocol(context.streams, {"generator": fixture.G, "discriminator": fixture.D,
+        "encoder": fixture.E, "prior": fixture.prior})
     audit = MechanismAudit(context.recipe, fixture.opt_d, [fixture.opt_g])
     timing, observations, confirmations, records, rng_audits = PhaseTimer(), [], [], [], []
     checks = set(schedule(updates))
@@ -315,7 +318,7 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         with context.streams.preserve():
             observe(0)
     for offset in range(1, updates + 1):
-        with timing.measure("training_updates"):
+        with timing.measure("training_updates"), comparison.word_step(fixture):
             update = fixture.step()
         finite = finite and _finite_tree(update)
         audit.observe_penalty(fixture.penalty.last_stats)
@@ -339,6 +342,7 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         hooks_exercised=fixture.opt_d.record.observed_steps == fixture.completed_steps and not mechanism_blockers(mechanisms),
         mechanism_audit=mechanisms, unintended_rng_deviations=sum(r["unintended_rng_deviations"] for r in rng_audits))
     evidence = dict(observations=observations, confirmations=confirmations, live=observations[-1], host=host,
+        comparison_protocol=comparison.receipt(context.streams),
         scoring_weights="live", completed_steps=fixture.completed_steps, executed_updates=updates,
         guards=guards, rng_audits=rng_audits, continuity=continuity,
         **executed_receipt(JOINT_WORDS_CLEAN, eval_output_noise="clean"))

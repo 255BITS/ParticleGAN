@@ -1,0 +1,29 @@
+{
+  "candidate_id": "r1r2-constant-policy-v1",
+  "changed_factors": [
+    "Only reg_coeff .1 to .01 on exact non-saturating AMSGrad m110; both positive every-update R1/R2 terms and all other optimizer/prior fields retained"
+  ],
+  "conclusion": "Reject weaker gamma: only token and AE pass the ordinary suite; Gaussian, pole, Ring16 and words fail while own clock passes. Pole's passing endpoint does not satisfy its sustained gate. Exact metrics and limits remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Tenfold weaker positive paired R1/R2 pressure on non-saturating AMSGrad m110 repairs the unchanged complete Tier 1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Preserve this closed regression and exact controls; any further paid hypothesis requires a distinct justified mechanism and separate finite registration under unchanged tasks and full budgets.",
+  "provenance": {
+    "report": "reports/forge/r1r2-weak-penalty-repair/README.md",
+    "source_commit": "3cb46b91121f42f8b171a77f17776365aebad1d8",
+    "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-weak-penalty-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-weak-penalty-repair/publication/results.json",
+    "sha256": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

@@ -1,0 +1,89 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 35,
+    "certified_cases": 35,
+    "exact_cached_cases": 21,
+    "independent_audit": "PASS",
+    "new_optimizer_updates": 0,
+    "new_paid_attempts": 14,
+    "new_paid_seconds": 1255.0448551499867,
+    "new_sampling_draws": 0,
+    "shared_unique_paid_attempts": 189,
+    "shared_unique_paid_seconds": 5842.625037202932
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "covariance_bound_passes_each": 0,
+    "full_ring_passes_each": 0,
+    "max_absolute_difference": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "saved_observations": 192,
+    "terminal_suffix_each": 0
+  },
+  "execution_commit": "220d37827e910c4f39c0d1c7afb1f337627c53ab",
+  "inputs_sha256": {
+    "reports/forge/r1r2-spectral-repair/PLAN.md": "e404765206de1a343e145b6580d2c9b1a0557d57ce84c7c3b4ae664f42b69512",
+    "reports/forge/r1r2-spectral-repair/README.md": "be3bf1d094d2885f238770956beff02c88bfeebd2f32bdac6934834938e47302",
+    "reports/forge/r1r2-spectral-repair/audit_collection.py": "fe07a247ea525ee3c66a855a2aec45479fa56d5f8a94be396d3d90e090af07f9",
+    "reports/forge/r1r2-spectral-repair/collection-audit.json": "621c25339ce82aedb8f80facf0cb985a4692125bc5228e1808e7f6823077c383",
+    "reports/forge/r1r2-spectral-repair/density-audit.json": "247478eb34ea9e2ab9c09a649818fe51839a110c2e0873143714767af18dd085",
+    "reports/forge/r1r2-spectral-repair/density-readout.md": "ff79e131282eb4780acbf55580c9845bf45c43f339e670c34aeccb661470368c",
+    "reports/forge/r1r2-spectral-repair/density_audit.py": "027aae137e0b86823ac5d475eaf6ece380bfc6b3882309b95f72544d0f23b312",
+    "reports/forge/r1r2-spectral-repair/manifest.json": "15e1b2b2845778a84bc9a4dd1cbf3e8bffbf934b494c2d19a870add94c438ea8",
+    "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.json": "28f27a8094cf0a7a8c4f8f101b098bec37c6cb95cc2733f0bd1f7e152015e713",
+    "reports/forge/r1r2-spectral-repair/optimizer/ams-role-note.md": "6c174feec894f5151b1d7daadf1a7fd2149ddaae8765568ab9dda5328a853e0c",
+    "reports/forge/r1r2-spectral-repair/optimizer/ams_role_analyze.py": "db0661473e33dbaa0cc872837103439f5b976f4243bd5a93699b0fa23be51d1f",
+    "reports/forge/r1r2-spectral-repair/preflight-review.json": "be264af9f6acb3c2c440318e8694dff072a460f96bec87d25ec7398cbe202353",
+    "reports/forge/r1r2-spectral-repair/prior/README.md": "3a835e529a68cd0e7fc57730b840f78b5ab3fe35309ca2ccb8bc3206c7f4611d",
+    "reports/forge/r1r2-spectral-repair/prior/table-geometry.json": "e022bd99aee4f44083b82aa02c464debc22f1f9290dd46c5b3e915357c203489",
+    "reports/forge/r1r2-spectral-repair/prior/table_geometry.py": "09fb21efdd6476aae46c8ac2801f2fb6193291b44f0fc9ea961f9c9b0fd4051e",
+    "reports/forge/r1r2-spectral-repair/publication/results.json": "72ff8796f9a440e12f722bd28230cebc3f204810d31488cf16adababe27970c7",
+    "reports/forge/r1r2-spectral-repair/registration-validation.json": "80110f7d4e1c0c20cb9c731587971bf4026eafcea22d296127f733e62b4eadbf",
+    "reports/forge/r1r2-spectral-repair/registration.json": "df0c0cbc829a5c5439981ca90dde97eb6075b68b9965d037cee8fed775b02e1a",
+    "reports/forge/r1r2-spectral-repair/test_spectral_workflow.py": "de33e1e55774f93c15b99b73503069cdafc35ce2bc0c1b518895e2c22c76e6bc",
+    "reports/forge/r1r2-spectral-repair/workflow.py": "01e665e9b67a677c8e7b4001cfc0a1e4c93cbcfc21d71759c0e77c764eca4fb0"
+  },
+  "local_log_sha256": {
+    "collect.log": "d4f7a4b934694005ceaff1b81309d4f308a2b486702d98fbc3117af430330f4d",
+    "prepare.log": "936cff8e366e13e535e1fad8fab1978674b96759d9f2540ad4c7270d6a9787aa",
+    "run.log": "bde98abfa4d9b79eeca26f4524443d55fca79c6a8281f8b8a28d90996f109a37"
+  },
+  "memory_check": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-objective-memory-repair-20261012/compile-registration-check.log",
+    "log_sha256": "553a49efa0fd8a99fc4f9991e611b404562f1dc646a5329db08df4f46f401164",
+    "observed_status": "CURRENT",
+    "qualification_refresh_mode": "preserved_published_evidence"
+  },
+  "outcome": {
+    "all_new_clock_status": "PASS",
+    "all_new_failures": [
+      "ring16_acquisition",
+      "five_word_joint_smoke"
+    ],
+    "all_new_ordinary_passes": 4,
+    "ordinary_required": 6,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false
+  },
+  "preexisting_test_failures": "reports/forge/r1r2-baseline/validation.json; two family-publication failures reproduced on unchanged original base",
+  "preserved_published_record_count": 513,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Closed spectral-update campaign verification; no qualification or adoption",
+  "stopping": "All14 new runs complete; close this immutable comparison with failures visible. No automatic refinement, retries, seeds, Tier2 or longer task budgets.",
+  "tier_report_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/tier-report-tests.log",
+    "log_sha256": "4551ddeb91e83ee099a9cfc900d0d6d0ca2fc91d59f0b1e2b3a0045f798fad63",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-spectral-repair-20261012/preflight-next-tests.log",
+    "log_sha256": "9126469c2ac9c702403d9e23350decda8307009ccc3f9ad2e5a68e8aa237d353",
+    "passed": 169
+  }
+}

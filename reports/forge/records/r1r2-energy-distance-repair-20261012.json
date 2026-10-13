@@ -1,0 +1,30 @@
+{
+  "candidate_id": "r1r2-non-saturating-energy-u-v1",
+  "changed_factors": [
+    "Only energy_distance_weight 0 to 1 on exact non-saturating AMSGrad m110 gamma .1; fresh-source controls and all original task/protocol settings retained"
+  ],
+  "conclusion": "Reject this energy repair: both fresh global recipes pass five ordinary tasks and own clock but fail Ring16. Energy restores spread while worsening covariance and HQ. Exact metrics and limits remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Raw signed energy-U added globally to positive paired R1/R2 repairs the unchanged complete Tier 1 suite.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Preserve this closed contrast and baseline; use saved geometry to justify any distinct separately registered global mechanism under unchanged tasks and remaining paid cap.",
+  "provenance": {
+    "administrative_coordinator_commit": "21e207ef6c72d74ecc2f684fba8188851b060a15",
+    "report": "reports/forge/r1r2-energy-distance-repair/README.md",
+    "source_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+    "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-energy-distance-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+    "sha256": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

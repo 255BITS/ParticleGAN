@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "9a9cf1e9fcd61cfe079cbbbe6e85ae1833e8a17490d80fff29f502eacce59301",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f35923a09f5778fb4c3e20454a3222b9d0316400a6289ac88f83530167752dc4",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-non-saturating-weak-gamma-v1/d7ebed2184644a20b084c2843b8b5535/observed-records.pt": "f7f8398d284cfae7c405fdda890b12f1cdd5809649598356b95fa6cc55bcb65c"
+  },
+  "task_id": "five_word_joint_smoke"
+}

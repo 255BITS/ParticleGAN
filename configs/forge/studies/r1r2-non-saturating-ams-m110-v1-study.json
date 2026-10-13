@@ -1,0 +1,76 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-non-saturating-ams-m110-v1"
+  },
+  "candidate": "r1r2-non-saturating-ams-m110-v1",
+  "competing_explanation": "Current endpoint score-law forces are nearly collinear and not starved; centered-score local curvature is similar and R3GAN favors paired coverage in its different cohort. Offset anchoring may be irrelevant or regress acquisition. The loss field also changes G/E weighting, so any repair cannot be attributed solely to D anchoring.",
+  "control": {
+    "candidate_id": "r1r2-role-ams-m110-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "One global non-saturating R1/R2 score law on the exact measured AMSGrad m110 parent changes early critic score anchoring and subsequent component-shape acquisition enough to pass all six original ordinary tasks and its own clock.",
+  "id": "r1r2-non-saturating-ams-m110-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "6403eb2c98224c1f8b788c1d26d5c1d7",
+        "candidate_id": "r1r2-role-ams-m110-v1",
+        "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-objective-memory-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        11
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "17de1b09f49040769144cf511206b165",
+        "candidate_id": "r1r2-role-ams-m110-v1",
+        "candidate_revision": "42d6df3eadaea8c88f227dc91f6f108324b25b8978cdf0a9efa3a3935a50cab4",
+        "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+        "task_id": "five_word_joint_smoke"
+      },
+      "path": "reports/forge/r1r2-objective-memory-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        12
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

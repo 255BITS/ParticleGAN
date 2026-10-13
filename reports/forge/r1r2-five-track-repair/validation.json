@@ -1,0 +1,82 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-five-track-repair-20261012",
+  "bulk_files_in_git": false,
+  "collection": {
+    "actual_training_gifs": 42,
+    "cached_baseline_cases": 7,
+    "cached_baseline_compact_rows_exactly_equal_to_round1": true,
+    "cached_baseline_new_paid_seconds": 0,
+    "certified_cases": 42,
+    "clock_cohort": "Six separate saved-state proofs; baseline FAIL and five candidates PASS",
+    "comparison_protocol_ordinary_tasks": "All six PASS actual initialized tensor and ordered target-batch equality, every consumed named stream checkpointed",
+    "new_optimizer_updates_from_collection": 0,
+    "new_paid_attempts": 35,
+    "new_paid_seconds": 927.1709415850346,
+    "new_sampling_draws_from_collection": 0,
+    "shared_unique_paid_attempts": 105,
+    "shared_unique_paid_seconds": 2731.7028826579044
+  },
+  "current_technique_inventory_unchanged": true,
+  "density_reconstruction": {
+    "all_metrics_max_absolute_difference": 0,
+    "covariance_bound_passes_each": 0,
+    "full_ring_passes_each": 0,
+    "metric_count": 6,
+    "new_draws": 0,
+    "new_updates": 0,
+    "rng_unchanged": true,
+    "saved_observations": 480,
+    "terminal_suffix_each": 0
+  },
+  "execution_commit": "9ad31157b8327044f9364b5fc458659cced0c8f0",
+  "inputs_sha256": {
+    "reports/forge/r1r2-five-track-repair/README.md": "635e7d5447bea745669badb5257669ed60b902800d5ccee9fe34c04eb6791792",
+    "reports/forge/r1r2-five-track-repair/collection-audit.json": "b3b492376b502f96f816fabaef6dfec09ff2c0c7c72174ad908e4789386775cc",
+    "reports/forge/r1r2-five-track-repair/density-readout.json": "a6dc1cae1ccda74539a31fb06b381029e5fd866b5a813f2d0cc264c09458ae18",
+    "reports/forge/r1r2-five-track-repair/density_readout.py": "82db99554cabc14c42ba564af6a0855af68193e650e279935de2473e2d774387",
+    "reports/forge/r1r2-five-track-repair/manifest.json": "da29c38f4eba179ce00427d6f043cbb1971d4c06f42779ee3baa2a432d0500c7",
+    "reports/forge/r1r2-five-track-repair/publication/results.json": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+    "reports/forge/r1r2-five-track-repair/registration.json": "5beeb44fb5cfd3162b7743aa62bcf060815424cb4f74fa67269dbb21f99f8549",
+    "reports/forge/r1r2-five-track-repair/test_five_track_workflow.py": "59d8abbe67d25ab6b54caeb1a5eca7843754eaaccc9576d4e26c76f6bca33a8b",
+    "reports/forge/r1r2-five-track-repair/workflow.py": "bc8416b0fe8de0c10f721424fbb80c6cea7698e936b021b20612ee06d159724b"
+  },
+  "local_log_sha256": {
+    "collect.log": "73adf22802caf3e6550caf72179922f9fe3fac6791c72fbbc7f08043afe5b6ad",
+    "prepare.log": "b8f65dbac4813a1e2f4e060ae15bf2d7356691a0d3cd421aada47952068efe05",
+    "run.log": "e8da466d905895f2b9234e9269eb5e70fba6811598144eb2260943c6ccea464c",
+    "validation-tests-with-cache-guard.log": "57f7ff93075db7d8da7d44bbb2682e3c7be7aaad78d1039563bb95b247ed6deb"
+  },
+  "memory_check": {
+    "command": "project Python -m experiments.forge compile --check",
+    "qualification_refresh_mode": "preserved_published_evidence",
+    "required_status": "CURRENT"
+  },
+  "outcome": {
+    "best_covariance_error": 1.0983507968485355,
+    "best_observed_density_recipe": "r1r2-five-track-momentum-v1",
+    "best_whole_new_recipe": "r1r2-amsgrad-repair-v1",
+    "clock_status": "PASS",
+    "ordinary_passes": 5,
+    "ordinary_required": 6,
+    "qualified_new_repair": false,
+    "selection_or_defaults_changed": false
+  },
+  "preexisting_test_failures": "reports/forge/r1r2-baseline/validation.json; two family-publication failures reproduced on unchanged original base",
+  "preserved_published_record_count": 513,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scientific_source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "scope": "Final five-track campaign validation; compact provenance only",
+  "stopping": "All35 new runs complete; close this single registered campaign without automatic refinement, scientific retries, seed variation or Tier2.",
+  "tier_report_tests": {
+    "command": "project Python -m pytest -q tests/test_forge_tier_report.py",
+    "log": "tier-report-tests.log",
+    "log_sha256": "8c8d265627bfd380dda771c500853001f9bc115f54259f40f0f60a09a716aeb0",
+    "passed": 35
+  },
+  "workflow_tests": {
+    "command": "project Python -m pytest -q reports/forge/r1r2-five-track-repair/test_five_track_workflow.py reports/forge/r1r2-tier1-search/test_workflow.py",
+    "log": "validation-tests-with-cache-guard.log",
+    "passed": 30
+  }
+}

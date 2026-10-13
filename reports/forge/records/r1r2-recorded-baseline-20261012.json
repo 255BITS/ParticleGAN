@@ -1,0 +1,30 @@
+{
+  "candidate_id": "recipe-prior-refactor-r1r2-v1",
+  "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+  "changed_factors": [],
+  "conclusion": "The source-bound baseline preserves Ring16 density and external-clock failures. Exact recipe, task metrics, diagnostic scope and costs remain in the linked report; this readout adds no training or sampling.",
+  "evidence_scope": "saved_evidence_baseline_readout",
+  "goal": "discriminator_stability",
+  "hypothesis": "Establish the selected R1/R2 whole recipe as a source-bound reference baseline and explain its two failed Tier 1 view requirements.",
+  "lifecycle": "concluded",
+  "mechanism_class": "saved_evidence_analysis",
+  "next_action": "Use this whole recipe as the archived reference for separately registered global repairs; preserve its original source, prior, initialization, sampling and gate contracts.",
+  "provenance": {
+    "report": "reports/forge/r1r2-baseline/README.md",
+    "sampling_draws_added": 0,
+    "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+    "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+    "training_updates_added": 0
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-recorded-baseline-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-baseline/results.json",
+    "sha256": "29ef8926634f453735238ed6385feb42c3a01b271944a4d8b04039a561ab1835"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

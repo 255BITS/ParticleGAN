@@ -40,6 +40,8 @@ def _normalized_recipe(recipe):
     construction-time ``initialization`` (superseded by saved weights) dropped."""
     from .recipe_compat import without_default_additions
     recipe = without_default_additions({**_ADDED_RECIPE_FIELDS, **recipe})
+    if recipe.get("output_mmd_weight", 0) and any(key in recipe for key in _REMOVED_RECIPE_FIELDS):
+        raise ValueError("active output MMD checkpoint recipe cannot contain legacy objective aliases")
     for name in ("d_betas", "loss_labels"):
         if name in recipe and isinstance(recipe[name], (list, tuple)):
             recipe[name] = tuple(recipe[name])
@@ -395,6 +397,10 @@ class GANTrainer:
                          if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
             transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
                                if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
+            if recipe.energy_distance_weight:
+                energy = recipe.energy_distance_loss(fake_g, real_g)
+            if recipe.output_mmd_weight:
+                output_mmd = recipe.output_mmd_loss(fake_g, real_g)
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
                 # Keep the historical unweighted diagnostic, even at weight 0.
@@ -408,6 +414,10 @@ class GANTrainer:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
                 loss_g = loss_g + transport_local
+            if recipe.energy_distance_weight:
+                loss_g = loss_g + energy
+            if recipe.output_mmd_weight:
+                loss_g = loss_g + output_mmd
             self.opt_g.zero_grad()
             protected_evaluator = None
             if recipe.constraint_geometry_mode == "strict_progress":
@@ -438,6 +448,10 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if recipe.energy_distance_weight:
+            result["energy_distance"] = energy.detach()
+        if recipe.output_mmd_weight:
+            result["output_mmd"] = output_mmd.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

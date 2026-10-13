@@ -1,0 +1,759 @@
+{
+  "audit_source_sha256": "d7a3df3518f14d12d331e900494c3e30a4c2db00c32d2fcd81c4f61ac560f004",
+  "clock_scope": "Existing certified own-state clock probes are separate; this audit compares six ordinary tasks.",
+  "comparisons": [
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/361479682c4a40289d84aeef4f7e1c38/provenance/provenance-state.pt",
+          "sha256": "cf7b9849cc711a5d0d962438db30c712d20044cb93dcef9b6c83b1f75b0ce784",
+          "state_sha256": "d47cc505de21c0cd00ac4d1221e3ab38a24dd996717ba8dbab22ccefc421b3af"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/d05dc88e90194d58a117df4544cf1163/provenance/provenance-state.pt",
+          "sha256": "49e742cd0368a8c8570d7cd172d645273f75be07d2fd7f6182bd1281bbf8f5c8",
+          "state_sha256": "ca4a6621668807ff2c6863d4f307f413a625d53f17afbc0fa51c46ee720f535c"
+        }
+      ],
+      "curve_sha256": {
+        "confirmation_metrics": "cdc30d565af59d51c25ac8b609123579f9aec4dd82c6293715bd4a342c74a651",
+        "live": "b0daeb2de36b902659eeb3867b8cee0b681869845c335030803a37e29f4d29f4",
+        "observations": "0028d026b7b1dd8fa9097d71bc02835f6f2e76d0e444819dfcae1dcd891fabd4"
+      },
+      "fresh": {
+        "attempt_id": "d05dc88e90194d58a117df4544cf1163",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/d05dc88e90194d58a117df4544cf1163/result.json",
+        "result_sha256": "3dbb81eeba46a03cfd35347ab00e4801a727a15907c400fb2dca45527167c041",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "named_streams": "d9f9802c84c290326df96424a8870caec8773d0236d4b9c80ad937efa2359f0e",
+        "trainer.models": "bd3910e449efd37a30018bb809c5969d1dc2058451aae959dfa82969772bd9d4",
+        "trainer.optimizers": "faab2ada1396bfa51acf7c4417093a41ba12014c4d58db4ecc73044bac4679e5",
+        "trainer.streams": "7ba9d747cc8bed02b918fb685f51f352a7bba2e00dd192eb205e3035e11ec5d0"
+      },
+      "observations": 24,
+      "original": {
+        "attempt_id": "361479682c4a40289d84aeef4f7e1c38",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "37a0a0258e309b13da1eda6239ad5229b1e753853b1e93d278e36b7514e72fbe",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "4e625982285df9222a9f5c8dfee38b8ddf6d01011274b1273f5435648eb58f2b",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/361479682c4a40289d84aeef4f7e1c38/result.json",
+        "result_sha256": "d0bfde3e9cabe699db4bd6553337af1839e2bd085e387b9091e4c4337ccaf1a2",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/f9becf6fada64aad9c1f2dbf4851d510/provenance/provenance-state.pt",
+          "sha256": "28323bb733e7ef0acf93037ea7174c93a46d77b52e464688b89a70b7d489487d",
+          "state_sha256": "9f6c450cc5247a209f11c26e93afe4f4bdd9a699e183edfb13e014a0a1b9f64d"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/5601723f57894df3ad35c7b4d37f7f69/provenance/provenance-state.pt",
+          "sha256": "34e4bf3d9430760b1800214ad7b86f6017e084f15788e81f5eff046ce5b301d6",
+          "state_sha256": "63cdb4a35e5107599b67849d25a7110bad71a417876f512875e46e45e523f1ac"
+        }
+      ],
+      "curve_sha256": {
+        "live": "3cd36bdd3e53601c3f92a52888118ebbf66c4a5af18e7b8fe37e225727ad8132",
+        "observations": "17f7831fdd81a35795bdf755798e63253f09f9893db6526883c18b275412c5c2"
+      },
+      "fresh": {
+        "attempt_id": "5601723f57894df3ad35c7b4d37f7f69",
+        "initialization": {},
+        "initialization_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/5601723f57894df3ad35c7b4d37f7f69/result.json",
+        "result_sha256": "3c215bc0363708502d9e72db5f05751075b4bafa0cc8b219e54eafb7e0456df7",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "models": "0fc332d849f72a41cd386448ce04a545daf6ec1ed531b0d002294d385a56f369",
+        "named_streams": "a2dfee25184c1d5e481c886a66bc832385d5eec3d2d8773d6b0940e53e25609a",
+        "optimizers": "074b838530ae0a1a3e9a89884d571cac97b17ed68a70873e676b8e058d2d9e0a",
+        "role_parameters": "7b0d8bc3e9a869147bcddf0854321e6e8f38b2f1824c776ead54b32154d2b540"
+      },
+      "observations": 24,
+      "original": {
+        "attempt_id": "f9becf6fada64aad9c1f2dbf4851d510",
+        "initialization": {},
+        "initialization_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/f9becf6fada64aad9c1f2dbf4851d510/result.json",
+        "result_sha256": "498f0f21e517061797ec7fe2e0e0afb4575ba8d9c876a57e0131fdf5e42c64f4",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/3744477eabd649c4b83a5f9f1e72dbdd/provenance/provenance-state.pt",
+          "sha256": "b877b5bf0fc1def4916872ba3d014730df6a1287512687bef93a5c45afb56e26",
+          "state_sha256": "cbbecabfa8f8ac4986850d319e947b4a08d181f5a23ff68607d7245046bc312d"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/ff4d171b6640447b9e7722b89ed455a7/provenance/provenance-state.pt",
+          "sha256": "3ccb42fad416782adf90767ace4d18c295e5e90bb4a820e51611185ac62bf4c4",
+          "state_sha256": "3035dffc58471df8eb5a2f022d81467470b3e1fda58e56747758f93a6f1e2c3a"
+        }
+      ],
+      "curve_sha256": {
+        "live": "6eb8d2f9d83381582202f68d8abdc72b7006bc8e5da388fbbdc155451e32e661",
+        "observations": "508ad0cab86a8a543dedcca14a53f771c46e29f95a394020c83355a7210276fa"
+      },
+      "fresh": {
+        "attempt_id": "ff4d171b6640447b9e7722b89ed455a7",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "6e6a69eedaf92e761f281edc6aa930cf04539a3cd62c7624d194d714486f8dad",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "hidden.0.bias": 556331387636943557,
+              "hidden.0.weight": 3047412445553360516,
+              "out.bias": 880153337828461051,
+              "out.weight": 10801514932414499
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "cb9b7b6be58debfc1d6c09b19c219123eae7c0c6bb21a91a46010b55df8f2a67",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "shared": 1129233036063082101,
+              "slot": 7072425667909462635
+            }
+          }
+        },
+        "initialization_sha256": "594dc897ea5e062005cb7a95f15f55215239f22442a76e50196d7d438838a601",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/ff4d171b6640447b9e7722b89ed455a7/result.json",
+        "result_sha256": "7eb0f7e23ec0ad3e9e115dbea79dc44d77d7203d050b44ecff9ee6ac1b48a3c7",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "models": "090bf461da99ddf57161b854a7f21e2850dcd8afb75dc7c312fb296be286079b",
+        "named_streams": "a2dfee25184c1d5e481c886a66bc832385d5eec3d2d8773d6b0940e53e25609a",
+        "optimizers": "f257db8407d2818ffb7d7ee5abe74cb00a62e03c2b2b6408d79b7faa9343a2d3",
+        "role_parameters": "e4fbd9e5781ebc0f045895a0a30d5072f916b9fb32626d5065e72b281959dfb4"
+      },
+      "observations": 24,
+      "original": {
+        "attempt_id": "3744477eabd649c4b83a5f9f1e72dbdd",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "6e6a69eedaf92e761f281edc6aa930cf04539a3cd62c7624d194d714486f8dad",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "hidden.0.bias": 556331387636943557,
+              "hidden.0.weight": 3047412445553360516,
+              "out.bias": 880153337828461051,
+              "out.weight": 10801514932414499
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "cb9b7b6be58debfc1d6c09b19c219123eae7c0c6bb21a91a46010b55df8f2a67",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "shared": 1129233036063082101,
+              "slot": 7072425667909462635
+            }
+          }
+        },
+        "initialization_sha256": "594dc897ea5e062005cb7a95f15f55215239f22442a76e50196d7d438838a601",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/3744477eabd649c4b83a5f9f1e72dbdd/result.json",
+        "result_sha256": "a7dfc1475619c6c8e3f96f3f8ea3550c9e2daafb62b43d305039cb4bd00ee7fc",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/a3ba7157a9104cf5a68644751cc33df9/provenance/provenance-state.pt",
+          "sha256": "c7d13675da95f68f22bbb7da8b4b7cb0c3a8ea7f1da09f11156aaba4364928e6",
+          "state_sha256": "2b4752c4d38e5903bffa741b4889d5020c90b28d489d7522c2597fe1c9a4a151"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/ba0f25b3508d439a9f78a911f6af20c5/provenance/provenance-state.pt",
+          "sha256": "5dc3de992fe30b3e73e5b7e92162c137961c3eb44e067d07d2245460e6f045f1",
+          "state_sha256": "50d4e218b5d0879cee40b1ccafbc9973c6327fb1f995ffcefca8069fd031b4ca"
+        }
+      ],
+      "curve_sha256": {
+        "live": "5ce841d2d19777ade3041dc9ef78af7f2c53d5c737ea8c4b880cd66ee0ed15c3",
+        "observations": "e164a868379a89b4e422bd245a58c793b931ace85a149bcd88ace7c7dc0f5558"
+      },
+      "fresh": {
+        "attempt_id": "ba0f25b3508d439a9f78a911f6af20c5",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "7281efedf02c12fe07930be30a5d5f5e5d7b2986f15925dd4665f18bd3511356",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347
+            }
+          },
+          "encoder": {
+            "initial_state_sha256": "64ae1e148f6325b34f51508670150abcbd7c46cbfe866134ca770587ca5ac38f",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 7250271583351850290,
+              "net.0.weight": 2630799228840046270,
+              "net.2.bias": 2283876804217070468,
+              "net.2.weight": 5984377460925960125
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "41d1c2565cfed1d149660c9244e6f7bbd22d945204d3f714ad8ca964472c398f",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566
+            }
+          },
+          "prior0": {
+            "initial_state_sha256": "588ff794f009a003e91a52883500f88464730822f4f3357d494f05ba45f15104",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 8173524255829019375
+            }
+          }
+        },
+        "initialization_sha256": "2978d65c5bc44507899644b880dd38dd5f07749a08a3c24f89f5ea04880ce9fe",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/ba0f25b3508d439a9f78a911f6af20c5/result.json",
+        "result_sha256": "99072ed60c17e331532cba9b5d81628a49c69c8928755595986823a35dff2832",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "models": "24f82a0aa57f3223516cad8a55a39adafcde8f93e64384960834ecb23b56d6be",
+        "named_streams": "e17e28cd6d72f0587e8d0995a2ea842eb712cb84db7d75f7d1e0cd516951b9d9",
+        "optimizers": "620d3616133e825bb2a2ee870c03e89f18804d0d0cb25a48e72c83221be2bd2f",
+        "role_parameters": "c92ee7c207550549f9bef32837b2759bde7e2f4da6517083555e653b56492944"
+      },
+      "observations": 24,
+      "original": {
+        "attempt_id": "a3ba7157a9104cf5a68644751cc33df9",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "7281efedf02c12fe07930be30a5d5f5e5d7b2986f15925dd4665f18bd3511356",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347
+            }
+          },
+          "encoder": {
+            "initial_state_sha256": "64ae1e148f6325b34f51508670150abcbd7c46cbfe866134ca770587ca5ac38f",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 7250271583351850290,
+              "net.0.weight": 2630799228840046270,
+              "net.2.bias": 2283876804217070468,
+              "net.2.weight": 5984377460925960125
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "41d1c2565cfed1d149660c9244e6f7bbd22d945204d3f714ad8ca964472c398f",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566
+            }
+          },
+          "prior0": {
+            "initial_state_sha256": "588ff794f009a003e91a52883500f88464730822f4f3357d494f05ba45f15104",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 8173524255829019375
+            }
+          }
+        },
+        "initialization_sha256": "2978d65c5bc44507899644b880dd38dd5f07749a08a3c24f89f5ea04880ce9fe",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/a3ba7157a9104cf5a68644751cc33df9/result.json",
+        "result_sha256": "3ee056ba3cfa3d16a60132f287664c1bcde6d253c4331dba245ac02b1ed893eb",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/a54bc96e82f34c9e98e7fa1f1d268a33/provenance/provenance-state.pt",
+          "sha256": "8897396157ecb7e0daf6e9899c93c840a873a73ca0ed527312196bab2ba799cd",
+          "state_sha256": "f967571408fb174544bf1ef5f9a064df6ea8ab125e457bde9776ae0d5ebd4b35"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/a68d67bc0972421ab60984bbda398532/provenance/provenance-state.pt",
+          "sha256": "92855d8328a0478a7e6aac2c95836c305632c2833572e5a87ee8177a078cc4b0",
+          "state_sha256": "be96a3cd93bff980c7cee5d5de5e1cdcdac10d60595d29c15c5e45f2507101a4"
+        }
+      ],
+      "curve_sha256": {
+        "live": "0a334114645109b9b103c3cfc161eb3a2e2fa3c203874b332ae506c0000b0722",
+        "observations": "e4dc16551de2654775e2bcf790d531ceef3f2bee706d747544a94f854a97b024"
+      },
+      "fresh": {
+        "attempt_id": "a68d67bc0972421ab60984bbda398532",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "86998b1a4d87241669818c3629f3c7bbbacb0d7df87c49b8c39610bf080fdabb",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/a68d67bc0972421ab60984bbda398532/result.json",
+        "result_sha256": "200cfdd68c3e6264ff73ee2a6af29499676fd92894942467af513b7994370a1a",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "named_streams": "aa2a4dd5d9446c3c882ff28731dc3e493843bcc4c9328f44f9f5aedd995d33cd",
+        "trainer.models": "4076eb541f1759db216474a7a566b1c3491b96f4049ca012e1676dc211eaa08a",
+        "trainer.optimizers": "2a7ee5605abda2f983a9e7c24cef4f9bb91d1d189b382aef4f451c7071d47bc9",
+        "trainer.streams": "2752e848414fc974998ea34408fa884f40edf23c21bc5d9fe8fcbd30eada9a5c"
+      },
+      "observations": 96,
+      "original": {
+        "attempt_id": "a54bc96e82f34c9e98e7fa1f1d268a33",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "86998b1a4d87241669818c3629f3c7bbbacb0d7df87c49b8c39610bf080fdabb",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.1,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/a54bc96e82f34c9e98e7fa1f1d268a33/result.json",
+        "result_sha256": "d5c5ce3efc347b47552afd75535d9ea8e06acdf358edb7b6e0d235a9ecdd2df2",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "checkpoints": [
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/8432785e8a6645378778b83f1f457819/provenance/provenance-state.pt",
+          "sha256": "3c9008a1109f7409383f8dc0a8c3fa1b87a37be08278ae89e20a5d82f6c7874e",
+          "state_sha256": "f13f1f60aa899093cecb912dea8ad106578cae4f4b1a322701bd62cedfad9781"
+        },
+        {
+          "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/cda4f0b9471849b5b8ca12960800399b/provenance/provenance-state.pt",
+          "sha256": "db5c79cdd585b4c444a1d06f6523b5341a858c2d105843c6fc290898ad6d1953",
+          "state_sha256": "f2fcc5dfe5ed2775acd53e4ef0f3a63f1c9a48e62214ed058c28902acea5bb7f"
+        }
+      ],
+      "curve_sha256": {
+        "confirmation_metrics": "df20a556a3207c11c64748bd55261ef83577c806fc4ee771b768c153f8c998ee",
+        "live": "cdaeff527c3b92121470c2787f1ba59e6e3693ce6950a5bfbdcd47777504f44a",
+        "observations": "8ffcdaee012ab028418c8cb62d9b9892a66d9874004ff15d6b8937d80ba6c64b"
+      },
+      "fresh": {
+        "attempt_id": "cda4f0b9471849b5b8ca12960800399b",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "encoder": {
+            "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.1.bias": 8635568878908975799,
+              "net.1.weight": 2352436766040047569,
+              "net.3.bias": 4684962440974121638,
+              "net.3.weight": 1013739058699418041,
+              "net.5.bias": 1863516330406637661,
+              "net.5.weight": 4393974776920474204
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "e1c414a38b310627c16750641f94ce3d51a2650d2929a3142141c9b1ebec2eac",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-tier1-matched-baseline-v1/cda4f0b9471849b5b8ca12960800399b/result.json",
+        "result_sha256": "dd31fda2f08f670453f3523512fbf8b951efd26aa14f2c675381858fa06f58d2",
+        "source_commit": "078f3897e672bfae29504d40019d99c7c5c91ba9"
+      },
+      "learning_components_sha256": {
+        "fixture.api_state.averaged_table": "d0e61324959e11e347ae2167685e8ad24ffc3138b3105fd01596da560033f790",
+        "fixture.api_state.averages": "ea48c4e76cb9b86c0201f2080ae0ae5ae059fb0fb08a724516a30871ec1d6932",
+        "fixture.api_state.models": "e4fe45c0020c73357bcc45ddfc54b815390ae0cd41b0e8e40ea903bdeb99fcfb",
+        "fixture.api_state.optimizers": "e169dcb06d4feae0763cfaf140f6b1310e0ca16f9d3dd8193f2d822870d5219f",
+        "fixture.api_state.streams": "c226432aed3d66e4c9da2180f286ed736633e1281677d7afdc74996316b3ef57",
+        "fixture.api_state.table": "d0e61324959e11e347ae2167685e8ad24ffc3138b3105fd01596da560033f790",
+        "fixture.data_generator": "4d641dc779c9d6568c4a3f24c77cf360b632deeb40dc526f7d6935bf2e4c9545",
+        "named_streams": "b580607e2f28f37d16a5b4ebd8ae434ee437bb6dddd0245c11f987471bc6f90d"
+      },
+      "observations": 24,
+      "original": {
+        "attempt_id": "8432785e8a6645378778b83f1f457819",
+        "initialization": {
+          "discriminator": {
+            "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 3734295931346225499,
+              "net.0.weight": 8910211641772985932,
+              "net.2.bias": 1656871869629328331,
+              "net.2.weight": 9070382962554913347,
+              "net.4.bias": 333772184539410714,
+              "net.4.weight": 3220091654461954378
+            }
+          },
+          "encoder": {
+            "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.1.bias": 8635568878908975799,
+              "net.1.weight": 2352436766040047569,
+              "net.3.bias": 4684962440974121638,
+              "net.3.weight": 1013739058699418041,
+              "net.5.bias": 1863516330406637661,
+              "net.5.weight": 4393974776920474204
+            }
+          },
+          "generator": {
+            "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "net.0.bias": 2669906441505372968,
+              "net.0.weight": 3213176745718584912,
+              "net.2.bias": 265576875384124118,
+              "net.2.weight": 5825468874490035566,
+              "net.4.bias": 6418902638380629685,
+              "net.4.weight": 3028787476376713866
+            }
+          },
+          "prior": {
+            "initial_state_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+            "initializer": "deterministic_orthogonal_named_parameters_v1",
+            "parameter_seeds": {
+              "z": 6640234621280078221
+            }
+          }
+        },
+        "initialization_sha256": "e1c414a38b310627c16750641f94ce3d51a2650d2929a3142141c9b1ebec2eac",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "result_path": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/8432785e8a6645378778b83f1f457819/result.json",
+        "result_sha256": "1b8e62c8522f13cc757ccf5fed00a6d2df387a2c7bbb146d641355edc861a277",
+        "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+      },
+      "status": "PASS",
+      "task_id": "five_word_joint_smoke"
+    }
+  ],
+  "excluded": [
+    "caller-global cpu_rng/cuda_rng",
+    "source/ownership/applied receipt metadata"
+  ],
+  "input_sha256": {
+    "reports/forge/r1r2-baseline/results.json": "29ef8926634f453735238ed6385feb42c3a01b271944a4d8b04039a561ab1835",
+    "reports/forge/r1r2-tier1-search/publication/results.json": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+    "reports/forge/r1r2-tier1-search/registration.json": "14fa62ab85d1318cbdc4d7d03b01028ea9b0218ec8e76a6d9c81cc2a2ba593f8",
+    "reports/forge/r1r2-tier1-search/round2-registration.json": "b354a5490a88a6a28c3eb0011fa5f2febc0aa52a5dc55915a318e08cf70026e4"
+  },
+  "previous_software_validation": [
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_comparison_protocol.py tests/test_forge_adapters.py tests/test_forge_behavior_adapters.py",
+      "implementation_commit": "e4bdfcf4c",
+      "log_sha256": null,
+      "output_storage": "tool_output_only",
+      "passed": 63,
+      "seconds": 9.55
+    },
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_word_joint.py tests/test_forge_word_smoke_hold.py tests/test_forge_word_provenance_cuda.py tests/test_forge_gaussian_smoke.py",
+      "implementation_commit": "e4bdfcf4c",
+      "log_sha256": null,
+      "output_storage": "tool_output_only",
+      "passed": 60,
+      "seconds": 5.36
+    },
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q --tb=short tests/test_forge_clockfree.py tests/test_forge_policy_integration.py tests/test_forge_tier1_policy_coverage.py",
+      "existing_tests_passed": 43,
+      "log_sha256": null,
+      "new_tests_fixture_errors": 13,
+      "output_storage": "tool_output_only",
+      "seconds": 14.96
+    },
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q --tb=short tests/test_forge_clockfree.py -k source_audit",
+      "deselected": 7,
+      "implementation_commit": "c3194c303",
+      "log_sha256": null,
+      "note": "After correcting the new pure-test recipe fixture; includes 13 newly added tests and one existing test.",
+      "output_storage": "tool_output_only",
+      "passed": 14,
+      "seconds": 0.12
+    }
+  ],
+  "qualification_input": false,
+  "round2_scope": "Declared scientific source/protocol/runtime/tasks and cached baseline identity match; final round2 observations require its collector.",
+  "rounds_declared_contracts_match": true,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "read_only_archived_vs_fresh_protocol_validation",
+  "software_validation_counts": {
+    "clock_policy_union_passes": 56,
+    "clock_union_method": "43 existing passes plus 13 corrected new tests; not a fabricated single-suite rerun",
+    "instrumentation_passes": 123
+  },
+  "source_digest": "25b483a604e58ca6a6e4b949896de88c6309bce7d0ef8267799a084dc8843507",
+  "source_file_sha256": {
+    "experiments/forge/adapters.py": "54740115ea523cb5479ab8d45189a56cd7a49e0ac59017d07894ccac06341a08",
+    "experiments/forge/behavior_adapters.py": "1e0074de76b5491d62a170dcc7b373a7630a970884e696c47bfc7e4386fa36a5",
+    "experiments/forge/clockfree.py": "d313b79537a392e5242b16efffd3f37047ad1b411928307c4a88ba2c1348f65c",
+    "experiments/forge/comparison_protocol.py": "dfdfd4111261cbf6ebc766ed7132bc33c3b73204f151ad46d639cf687026978c",
+    "experiments/forge/word_adapter.py": "5b73c065abe993fc2f9143ef21678796d774f727670fa560c9637f2ebf453b33",
+    "experiments/forge/word_tasks.py": "9b0e6c6cc16a1b4bd51dfef83e86b6a3d5d18999fc114e8b45e2cf75843f6878",
+    "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd"
+  },
+  "status": "PASS",
+  "training_updates_added": 0
+}
