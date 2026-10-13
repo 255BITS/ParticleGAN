@@ -257,7 +257,7 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 228
+    assert len(cells) == 252
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"
@@ -482,6 +482,95 @@ def test_reconciled_summary_rejects_repinning_incorrect_identity_or_charge(recon
     pin["sha256"] = file_hash(root / pin["path"])
     atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
     with pytest.raises(ValueError, match="test discoveries:"):
+        render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
+
+
+@pytest.fixture
+def astra(reconciled):
+    from pathlib import Path
+    root, publication, _, registry = reconciled
+    name = "reports/forge/test-performance-evidence/astra-cumulative-24.json"
+    document = json.loads((Path(__file__).resolve().parents[1] / name).read_text())
+    atomic_json(root / name, document)
+    registry["publications"].append({"path": name, "sha256": file_hash(root / name)})
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    return root, publication, document, registry
+
+
+def test_astra_cumulative_rows_and_paid_controls_are_counted_once(astra):
+    from collections import Counter
+    root, publication, document, _ = astra
+    report = build_report(root, publication=publication)
+    records = [r for r in report["records"].values() if r.get("cell_id", "").startswith("astra-")]
+    assert len(records) == len({r["result"]["attempt_id"] for r in records}) == 24
+    assert Counter(r["status"] for r in records) == {"PASS": 5, "FAIL": 19}
+    interim = document["discovery_summary"]["interim_attempts_reused_once"]
+    assert len(interim) == 6
+    assert all(sum(r["result"]["attempt_id"] == key for r in records) == 1 for key in interim)
+    candidates = [r for r in records if r["result"]["round"].startswith("astra-") and r["result"]["role"] == "candidate"]
+    controls = [r for r in records if r["result"]["round"].startswith("astra-") and r["result"]["role"] == "control"]
+    assert len(candidates) == 12 and len(controls) == 4
+    assert all(r["status"] == "FAIL" and r["full_protocol_complete"] is True for r in candidates + controls)
+    assert len({r["candidate_revision"] for r in controls}) == 4
+    assert sum(r["result"]["new_optimizer_updates"] for r in records) == 36000
+    assert sum(r["result"]["actual_Popen_to_exit_seconds"] for r in records) == pytest.approx(1206.4819039370632)
+    assert sum(r["result"]["queue_charged_seconds"] for r in records) == pytest.approx(1157.1356888279988)
+
+
+def test_astra_submetric_passes_and_predictor_work_never_override_full_gate(astra):
+    root, publication, document, _ = astra
+    report = build_report(root, publication=publication)
+    records = [r for r in report["records"].values() if r.get("cell_id", "").startswith("astra-")]
+    submetric_pass = []
+    for cell in document["cells"]:
+        grade = cell["result"]["original_grade"]["evaluator_result"]
+        if cell["task_id"] != "vector_unequal_mass": continue
+        assert cell["status"] == "FAIL"
+        metric = next(m for m in grade["metrics"] if m["metric"] == "component_covariance_error")
+        if metric["status"] == "PASS":
+            submetric_pass.append(cell["candidate_id"])
+            assert grade["convergence"]["passing_suffix"] == 1
+            assert grade["convergence"]["minimum_stable_checks"] == 5
+    assert set(submetric_pass) == {"cell-quota-aggregate-swap-v1", "cell-slow-covariance-v1", "cell-extragradient-map-v1"}
+    lookahead = next(r for r in records if r["result"]["effective_recipe"].get("cell_extragradient_map"))
+    assert lookahead["result"]["new_optimizer_updates"] == 1200
+    assert lookahead["result"]["additional_temporary_predictor_evaluations"] == 1200
+    assert lookahead["result"]["optimizer_updates_total_clock"] == {"generator": 1200, "discriminator": 1200, "prior": 1200}
+    assert sum(r["result"]["additional_temporary_predictor_evaluations"] for r in records) == 1200
+    fractional = next(r for r in records if r["result"]["effective_recipe"].get("cell_transport_policy") == "fractional_exact")
+    assert fractional["result"]["assignment_label_semantics"] == "transport_row_argmax_not_hard_quota"
+    assert fractional["result"]["trace_counters"]["fractional_steps"] == 1193
+    assert all(f["elapsed_seconds"] is None and f["new_training_updates"] == 0
+               for f in document["discovery_summary"]["preparation_failures"])
+
+
+def test_duplicate_interim_attempt_is_rejected_even_with_a_new_cell_id(astra):
+    root, publication, document, registry = astra
+    duplicate = deepcopy(document)
+    duplicate["cells"] = [deepcopy(document["cells"][-1])]
+    duplicate["cells"][0]["id"] = "interim-copy-with-another-cell-id"
+    path = "reports/forge/test-performance-evidence/duplicate-interim.json"
+    atomic_json(root / path, duplicate)
+    registry["publications"].append({"path": path, "sha256": file_hash(root / path)})
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    with pytest.raises(ValueError, match="duplicate diagnostic attempt/task"):
+        build_report(root, publication=publication)
+
+
+@pytest.mark.parametrize("field,value", [("family_full_runs", 234), ("additional_temporary_predictor_evaluations", 0),
+                                        ("all_24_supervisor_wall_seconds", 0)])
+def test_astra_summary_checks_cumulative_counts_predictors_and_separate_clocks(astra, field, value):
+    from experiments.forge.test_performance_render import render_discovery_navigation
+    root, _, document, registry = astra
+    text = render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
+    assert "228 full runs" in text and "470,400 new accepted updates" in text
+    assert "12 Astra hypotheses FAIL" in text and "1,200 temporary predictor evaluations" in text
+    document["discovery_summary"][field] = value
+    pin = registry["publications"][-1]
+    atomic_json(root / pin["path"], document)
+    pin["sha256"] = file_hash(root / pin["path"])
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    with pytest.raises(ValueError, match="Astra cumulative"):
         render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
 
 

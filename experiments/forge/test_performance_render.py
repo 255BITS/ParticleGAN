@@ -17,17 +17,21 @@ def render_discovery_navigation(root, page):
     registry = inputs.read(SUPPLEMENTAL)
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test discoveries: invalid display registry")
-    full = prefix = reconciled = None
+    full = prefix = reconciled = astra = None
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         summary = document.get("discovery_summary", {})
-        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013"}:
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013"}:
             continue
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
                 or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
                 or summary.get("promotion") is not False or portable(document) != document):
             raise ValueError("test discoveries: scoped evidence cannot promote or leak local references")
-        if summary["id"] == "nonatlas-reconciled-204-20261013":
+        if summary["id"] == "astra-cumulative-24-20261013":
+            if astra is not None:
+                raise ValueError("test discoveries: duplicate Astra cumulative summary")
+            astra = pin, document
+        elif summary["id"] == "nonatlas-reconciled-204-20261013":
             if reconciled is not None:
                 raise ValueError("test discoveries: duplicate reconciled summary")
             reconciled = pin, document
@@ -70,7 +74,10 @@ def render_discovery_navigation(root, page):
     def link(name):
         return relpath(str(Path(root) / name), str(base))
     if reconciled:
-        return _render_reconciled(reconciled, full, prefix, registry, inputs, link)
+        text = _render_reconciled(reconciled, full, prefix, registry, inputs, link)
+        if astra:
+            text += _render_astra(astra, reconciled, link)
+        return text
     pin, summary = full
     lines = ["", "## Scoped non-Atlas discoveries", "",
              f"[Verified complete recipes, exact protocols and all outcomes]({link(pin['path'])}): "
@@ -187,6 +194,70 @@ def _render_reconciled(reconciled, original, prefix, registry, inputs, link):
               "gradient/reference histories were not retained. Source/artifact hashes were verified; bulk archives remain local-only.", "",
               "Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; "
               "selected family rows, qualification, experiments and training code remain unchanged.", "", ""]
+    return "\n".join(lines)
+
+
+def _render_astra(astra, previous, link):
+    """Keep the cumulative packet and paid controls separate from the earlier ledger."""
+    pin, document = astra
+    summary = document["discovery_summary"]
+    cells = document["cells"]
+    old = previous[1]["discovery_summary"]
+    candidates = [c for c in cells if c["result"]["round"].startswith("astra-") and c["result"]["role"] == "candidate"]
+    controls = [c for c in cells if c["result"]["round"].startswith("astra-") and c["result"]["role"] == "control"]
+    attempts = {c["result"]["attempt_id"] for c in cells}
+    predictor_evals = sum(c["result"]["additional_temporary_predictor_evaluations"] for c in cells)
+    updates = sum(c["result"]["new_optimizer_updates"] for c in cells)
+    queue = sum(c["result"]["queue_charged_seconds"] for c in cells)
+    wall = sum(c["result"]["actual_Popen_to_exit_seconds"] for c in cells)
+    sources = {document["condition_contracts"][c["conditions_sha256"]]["source_digest"] for c in cells}
+    identities = {(c["candidate_id"], c["candidate_revision"], document["condition_contracts"][c["conditions_sha256"]]["source_digest"])
+                  for c in cells}
+    if (len(cells) != summary["full_runs"] or len(attempts) != len(cells)
+            or not all(c["full_protocol_complete"] is True for c in cells)
+            or dict(Counter(c["status"] for c in cells)) != summary["status_counts"]
+            or len(candidates) != summary["candidate_hypotheses"] or len(controls) != summary["fresh_astra_controls"]
+            or any(c["status"] != "FAIL" for c in candidates)
+            or set(summary["interim_attempts_reused_once"]) - attempts
+            or predictor_evals != summary["additional_temporary_predictor_evaluations"]
+            or updates != summary["new_updates"]
+            or len(sources) != summary["source_cohorts"] or len(identities) != summary["source_bound_revisions"]
+            or summary["family_full_runs"] != old["full_run_count"] + len(cells)
+            or summary["family_new_updates"] != old["new_full_updates"] + updates
+            or abs(queue - summary["all_24_queue_charge_seconds"]) > 1e-7
+            or abs(wall - summary["all_24_supervisor_wall_seconds"]) > 1e-7
+            or summary["global_survivor"] is not False):
+        raise ValueError("test discoveries: Astra cumulative counts or costs differ from original cells")
+    for round in summary["rounds"]:
+        rows = [c for c in cells if c["result"]["round"] == round["id"]]
+        if (len(rows) != round["runs"] or dict(Counter(c["status"] for c in rows)) != round["status_counts"]
+                or abs(sum(c["result"]["actual_Popen_to_exit_seconds"] for c in rows) - round["supervisor_wall_seconds"]) > 1e-7
+                or abs(sum(c["result"]["queue_charged_seconds"] for c in rows) - round["queue_charge_seconds"]) > 1e-7):
+            raise ValueError("test discoveries: Astra round differs from original cells")
+    lines = ["", "## Quota-transition and Astra portfolio follow-up", "",
+             f"[Verified cumulative receipts and original submetrics]({link(pin['path'])}): **{len(cells)} additional full runs**, "
+             f"{summary['predecessor_runs']} predecessor quota runs plus {summary['astra_runs']} Astra runs. "
+             f"The six interim Astra receipts occur once. Family execution ledger: **{summary['family_full_runs']} full runs** "
+             f"and **{summary['family_new_updates']:,} new accepted updates**; no global survivor.", "",
+             "| Round | Full PASS / FAIL | Source | Queue seconds | Supervisor wall seconds |",
+             "| --- | ---: | --- | ---: | ---: |"]
+    for round in summary["rounds"]:
+        lines.append(f"| {_text(round['id'])} | {round['status_counts'].get('PASS',0)} / {round['status_counts'].get('FAIL',0)} | "
+                     f"{', '.join('`'+s[:12]+'`' for s in round['source_digests'])} | {round['queue_charge_seconds']:.9f} | {round['supervisor_wall_seconds']:.9f} |")
+    lines += ["", "All **12 Astra hypotheses FAIL** the unchanged full unequal-mass gate. Four fresh source-bound controls "
+              "are separate paid runs. Swap, slow covariance and lookahead pass the final covariance submetric, but each "
+              "ends with a one-check suffix against five required checks; their full verdict stays FAIL. "
+              "The predecessor minimum-change recipe passes Gaussian acquisition/stability and mode retention, but fails unequal mass.", "",
+              f"Added work: **{updates:,} accepted updates** plus **{predictor_evals:,} temporary predictor evaluations**. "
+              "Lookahead's temporary predictor is not another accepted optimizer update; its work is already included in both clocks. "
+              "Original horizons, budgets, quotas, assignment/transport semantics, reference policies and covariance-memory changes remain bound.", "",
+              f"The 24-run queue charge is **{queue:.9f} seconds**; inclusive supervisor wall charge is **{wall:.9f} seconds**. "
+              "These clocks are distinct and are not added together. Inherited budgets and earlier charges are not counted again. "
+              "Preparation errors and predecessor failed-audit CPU costs remain diagnostic exclusions; unavailable preparation elapsed times stay null.", "",
+              f"{len(sources)} additional source cohorts and all saved-output/state/trace pins were verified. Fractional transport uses "
+              "row-argmax labels with exact soft capacities; integer assignment counts are not substituted for those labels. "
+              "Controls' model equality is certified by the supplied audits. Raw arrays, tensor states and traces stay local-only; "
+              "the import runs no research code, training or metric rescore and grants no qualification.", "", ""]
     return "\n".join(lines)
 
 
@@ -318,13 +389,14 @@ function counts(test,recipes){const c={passing:0,graded:0};recipes.forEach(r=>{c
 function protocolLabel(t){const c=t.conditions;if(c.no_recorded_protocol)return 'No recorded execution protocol';const seed=c.seed??c.protocol?.seed??'unbound',steps=c.budget?.steps??t.contract?.steps??'unbound';return 'Seed '+seed+' · '+steps+' updates · source '+String(c.source_digest||c.source_identity||'unbound').slice(0,10);}
 function hasWitness(test){return test.witnesses.some(w=>w.status==='PASS');}
 function jsonBlock(title,value,parent){const d=el('details'),summary=el('summary',title);d.append(summary,el('pre',JSON.stringify(value,null,2)));parent.append(d);}
-function recipeHints(r){const v=r.recipe?.declared_global_recipe||r.recipe?.native_recipe||r.recipe?.complete_recipe||r.recipe||{},parts=[v.optimizer_family||r.lane];for(const [key,label] of [['cell_gaussian_objective','objective'],['cell_reference_policy','reference'],['cell_cubature_rule','cubature']])if(v[key])parts.push(label+': '+v[key]);if(v.optimizer_role_families)parts.push('roles: '+Object.entries(v.optimizer_role_families).map(([k,v])=>k+'='+v).join(', '));if(v.optimizer_signal_roles?.length)parts.push('attenuated: '+v.optimizer_signal_roles.join(', '));return parts;}
+function recipeHints(r){const v=r.recipe?.declared_global_recipe||r.recipe?.native_recipe||r.recipe?.complete_recipe||r.recipe||{},parts=[v.optimizer_family||r.lane];for(const [key,label] of [['cell_gaussian_objective','objective'],['cell_reference_policy','reference'],['cell_cubature_rule','cubature'],['cell_quota_policy','quota'],['cell_transport_policy','transport'],['cell_distribution_shape','shape'],['cell_covariance_memory','covariance memory'],['cell_assignment_refinement','assignment']])if(v[key]&&!['none','unchanged'].includes(v[key]))parts.push(label+': '+v[key]);if(v.cell_shape_weighting&&v.cell_shape_weighting!=='mass')parts.push('shape weighting: '+v.cell_shape_weighting);if(v.cell_gradient_projection)parts.push('projected cell gradients');if(v.cell_extragradient_map)parts.push('temporary predictor: 1 / accepted step');if(v.optimizer_role_families)parts.push('roles: '+Object.entries(v.optimizer_role_families).map(([k,v])=>k+'='+v).join(', '));if(v.optimizer_signal_roles?.length)parts.push('attenuated: '+v.optimizer_signal_roles.join(', '));return parts;}
 function link(label,path,parent){if(!path||path.startsWith('/')||path.includes('..')||path.includes(':')||path.includes('\\'))return;const a=el('a',label);a.href='../../'+path;parent.append(a);}
+function terminalNote(rec){const e=rec.result?.original_grade?.evaluator_result,c=e?.convergence,m=Array.isArray(e?.metrics)?e.metrics.find(x=>x.metric==='component_covariance_error'):null;return rec.status==='FAIL'&&m?.status==='PASS'&&c&&c.passing_suffix<c.minimum_stable_checks?'Final covariance submetric passes; terminal suffix '+c.passing_suffix+'/'+c.minimum_stable_checks+'. Full result: FAIL.':null;}
 function showRecipe(id){const r=byRecipe.get(id);if(!r)return;const body=$('detailBody');body.replaceChildren(el('h2',r.label),el('p','This whole recipe/source/runtime identity is preserved across test rows. No test-specific winner is selected.'));jsonBlock('Full recipe',r.recipe,body);jsonBlock('Recipe identity and executed source',r.identity,body);$('detail').showModal();}
 function showCell(testId,recipeId){const t=byTest.get(testId),r=byRecipe.get(recipeId);if(!t)return;const body=$('detailBody');body.replaceChildren(el('h2',t.task_id),el('p',r?r.label+' · '+status(t,r.id):'Exact test protocol'));
 const links=el('div',undefined,'links');link('Current declaration (may differ)',t.definition,links);body.append(links);body.append(el('p','Definition: '+t.definition_match+'. Original recorded conditions remain authoritative.'));
 if(r){jsonBlock('Complete recipe',r.recipe,body);jsonBlock('Recipe/source/runtime identity',r.identity,body);const list=records(t,r.id);if(!list.length)body.append(el('p','NOT RUN — no compatible indexed evidence for this recipe and exact protocol.'));
-list.forEach((rec,i)=>{body.append(el('h3','Evidence '+(i+1)+' · '+rec.status));const ls=el('div',undefined,'links');link('Pinned compact receipt',rec.receipt,ls);link('Original publication',rec.publication,ls);body.append(ls);if(rec.result?.audit_scope?.sample_panels_available===false)body.append(el('p','Audit gap: saved sample panels unavailable. This full gate retains the original logged-metric regrade; score-history GIFs are not sample trajectories.','warning'));jsonBlock('Original gates, metrics, completion, errors and receipt hashes',rec,body);const catalog=report.evidence_catalogs?.[rec.original_evidence?.catalog_sha256];if(catalog)jsonBlock('Pinned source catalogs, receipt hashes and audit limitations',catalog,body);});}
+list.forEach((rec,i)=>{body.append(el('h3','Evidence '+(i+1)+' · '+rec.status));const ls=el('div',undefined,'links');link('Pinned compact receipt',rec.receipt,ls);link('Original publication',rec.publication,ls);body.append(ls);const note=terminalNote(rec);if(note)body.append(el('p',note,'warning'));if(rec.result?.audit_scope?.sample_panels_available===false)body.append(el('p','Audit gap: saved sample panels unavailable. This full gate retains the original logged-metric regrade; score-history GIFs are not sample trajectories.','warning'));jsonBlock('Original gates, metrics, completion, errors and receipt hashes',rec,body);const catalog=report.evidence_catalogs?.[rec.original_evidence?.catalog_sha256];if(catalog)jsonBlock('Pinned source catalogs, receipt hashes and audit limitations',catalog,body);});}
 jsonBlock('Exact protocol, seed/RNG and source bindings',t.conditions,body);jsonBlock('Recorded task contract (original evaluator fingerprint and budget)',t.contract,body);
 jsonBlock('Oracle and representational feasibility witnesses',t.witnesses,body);body.append(el('p','No indexed witness is an evidence gap. It is not proof of impossibility. Oracle/representation passes cannot replace an optimizer run.'));$('detail').showModal();}
 function render(){

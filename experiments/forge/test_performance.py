@@ -372,7 +372,7 @@ def _add_supplemental(inputs, add_recipe, add_test, add_record):
     registry = inputs.read(SUPPLEMENTAL)
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test performance: invalid supplemental registry")
-    seen = set()
+    seen, attempts = set(), set()
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
@@ -382,6 +382,12 @@ def _add_supplemental(inputs, add_recipe, add_test, add_record):
             if cell["id"] in seen:
                 raise ValueError("test performance: duplicate diagnostic cell")
             seen.add(cell["id"])
+            attempt = cell["result"].get("attempt_id")
+            if attempt is not None:
+                attempt_key = cell["task_id"], attempt
+                if attempt_key in attempts:
+                    raise ValueError("test performance: duplicate diagnostic attempt/task")
+                attempts.add(attempt_key)
             recipe = cell.get("complete_recipe", document.get("recipe_contracts", {}).get(cell["recipe_sha256"]))
             if not isinstance(recipe, dict) or not recipe or stable_hash(recipe) != cell["recipe_sha256"]:
                 raise ValueError("test performance: diagnostic full recipe digest mismatch")

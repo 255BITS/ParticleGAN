@@ -210,6 +210,37 @@ without decoding tensors or rescoring metrics. Bulk archives remain local-only.
 Shared provenance catalogs are stored once in the generated JSON and resolved
 from each cell's hash in its drill-down, keeping the growing offline matrix small.
 
+The quota-transition/Astra cumulative packet adds **24 unique full runs**: eight
+predecessor runs and sixteen Astra runs. Its six interim Astra receipts occur once.
+The resulting family ledger has 228 full runs and 470,400 new accepted updates.
+All twelve Astra candidate hypotheses and four fresh source-bound controls FAIL
+the full unequal-mass gate. Five predecessor Gaussian/mode-retention outcomes
+PASS; the predecessor unequal-mass cells remain FAIL. Swap, slower covariance
+memory and temporary lookahead pass the final covariance submetric, but each has
+only a 1/5 terminal suffix. The drill-down states that distinction explicitly;
+the original full FAIL is preserved.
+
+The 24 runs add 36,000 accepted updates and 1,200 temporary predictor evaluations.
+The predictor is an additional evaluation within the accepted step, not another
+optimizer update; its work is already included in the recorded cost. The five
+new source cohorts retain complete recipes with 113–120 fields, original task
+horizons, quota and transport policies, shape/distribution objectives, projection
+and covariance-memory settings. Fractional transport labels are row argmaxes of
+the soft plan; their counts need not equal integer quotas. Exact soft row/column
+capacities and the separate integer controls were verified from archived traces.
+Raw per-update traces remain local-only; only pins and compact counters are saved.
+
+These 24 executions charge 1,157.135688828 queue seconds and 1,206.481903937
+inclusive supervisor wall seconds. The clocks are distinct and never added to
+one another. Astra's sixteen runs contribute 694.237484350 queue seconds and
+726.332711413 supervisor seconds; predecessor charges and inherited budgets are
+counted once. The earlier 204-run display snapshot remains unchanged. Failed
+predecessor audits retain their recorded 4.900864411 CPU seconds; four Astra
+preparation failures retain pins with unavailable elapsed times explicitly null.
+The supplied audits certify model equality for controls; this importer verifies
+their metadata and artifact bytes without decoding model tensors. No new research
+execution, gate change, regression/confirmation run or qualification follows.
+
 These runs do not qualify the current suite. G-angle's handoff still lacks
 registered cross-host extension/restore support and six-task Tier-1 evidence.
 Original raw archives are not hosted by this PR. Further local evidence and

@@ -27,6 +27,10 @@
     {
       "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
       "sha256": "c6d10e4cc07a1b3fb00de5d88b8b0a1e1e992359983256f2907f25b336d0979c"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/astra-cumulative-24.json",
+      "sha256": "cffcbd7be99971b38881320564c034701cd6fd4a8387a0c6c55bb22cd70ca0b9"
     }
   ],
   "qualification_input": false,
