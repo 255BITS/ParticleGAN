@@ -16,5 +16,13 @@
   "older_native_cap_GIFs": 2,
   "relative_report_links_valid": true,
   "registry_verified": true,
-  "qualification_input": false
+  "qualification_input": false,
+  "software_tests": {
+    "initial_result": "141 passed, 1 failed, 57 subtests passed",
+    "initial_failure": "Committed research memory stale after three receipt additions; summaries-only metadata recompilation performed without code/test changes.",
+    "freshness_rerun": "IN_PROGRESS",
+    "full_suite_not_claimed": true
+  },
+  "summaries_only_memory_refresh": true,
+  "unchanged_publication_memory_records": 816
 }
