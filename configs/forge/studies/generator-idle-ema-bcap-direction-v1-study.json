@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "id": "generator-idle-ema-bcap-direction-v1-20261013",
+    "candidate_budget_seconds": 2220,
+    "budget_seconds": 4440
+  },
+  "candidate": "generator-idle-ema-bcap-direction-v1",
+  "competing_explanation": "Omitting an update can reduce learning or destabilize a later required task; isolated two-pole diagnostic passes and earlier BCAP grades cannot substitute for this complete current-source paired result.",
+  "control": {
+    "candidate_id": "bcap-default-baseline-direction-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "task_id": "two_pole",
+    "metric": "mean_abs",
+    "op": "<",
+    "threshold": 0.3,
+    "phase": "final"
+  },
+  "hypothesis": "At seed 0 and all six original Tier1 horizons, the fixed generator-idle EMA preserves or improves the BCAP direction recipe grade without changing any original gate; both arms run at the same source and cohort.",
+  "id": "generator-idle-ema-bcap-direction-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "task_id": "two_pole",
+    "metric": "mean_abs",
+    "op": ">=",
+    "threshold": 0.3,
+    "phase": "final"
+  },
+  "prior_evidence": [
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+      "selector": [],
+      "identity": {
+        "schema": "forge_test_display_evidence_v1",
+        "qualification_input": false,
+        "qualification_reuse": false
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "view": "generator_idle_ema_original_tier1_v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

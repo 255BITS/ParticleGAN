@@ -1,0 +1,42 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Enable generator idle at 1.0 paired-gap standard error with fixed span-10 EMA; preserve all thirteen BCAP direction recipe overrides and original task protocols"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/toy100/generator-idle-constant-lr.md",
+  "id": "generator-idle-ema-bcap-direction-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "A generator update is omitted only when the current paired critic-score gap is unresolved by the fixed EMA standard-error rule. Critic, encoder, prior policy, task sampling and original quality gates retain their declared behavior.",
+  "parent": "bcap-default-baseline-direction-v1",
+  "recipe_overrides": {
+    "constraint_geometry_mode": "direction_blend",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "generator_idle_se": 1.0,
+    "generator_idle_mode": "ema"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-dualnorm"
+}
