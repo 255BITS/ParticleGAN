@@ -1,0 +1,41 @@
+{
+  "candidate_id": "bcap-runtime-margin-pr342-pr343",
+  "candidate_revision": "ba593aab5c0e150da1c36005aece17816f074c7b",
+  "conclusion": "BCAP gate margins are thin. On Gaussian smoke (PR342), disabling autograd multithreading (serial scheduling) flips PASS to FAIL for both polar rules (KS .0692/.0646 vs limit .05); truncation alone does not. On five-word hold (PR343), serial scheduling alone and rank truncation alone each flip the historical PASS to FAIL; together they reproduce V6 FAIL. All word arms still acquire; the regression is retention. Closed unmerged in PR triage 2026-10-10; superseded by develop's smoothing=1e-5 + direction_blend 22/22 Tier 1 pass.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Did serial autograd scheduling and/or numerical rank truncation cause the BCAP Gaussian-smoke and five-word-hold regressions?",
+  "lifecycle": "concluded",
+  "mechanism_class": "runtime_scheduling_and_rank_truncation_sensitivity",
+  "next_action": "Treat runtime scheduling and polar truncation as confounders when attributing BCAP gate changes; compare under matched runtime before crediting a formulation change.",
+  "provenance": {
+    "branch_retained": true,
+    "default_adoption": false,
+    "input_evidence_scope": "closed_pr_report",
+    "pr343_head_commit": "62c2fe807061b3a11c32bb4c0a3e7b71af86c8af",
+    "pr343_report": "https://github.com/255BITS/ParticleGAN/blob/62c2fe807061b3a11c32bb4c0a3e7b71af86c8af/reports/forge/bcap-word-regression/README.md",
+    "pr343_report_sha256": "571fd84c261cca9380ce7e1a56f07df2a94650f2596f55e99096108f0cc56890",
+    "protocol_seed": 0,
+    "pull_requests": [
+      "https://github.com/255BITS/ParticleGAN/pull/342",
+      "https://github.com/255BITS/ParticleGAN/pull/343"
+    ],
+    "qualification_reuse": false,
+    "recorded_by": "PR triage 2026-10-10",
+    "source_commit": "ba593aab5c0e150da1c36005aece17816f074c7b"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "pr342-343-bcap-gate-margin-context-v1",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-gaussian-regression/README.md",
+    "sha256": "2dc9bdd7c349d200a46b09e47e23ffab0e3e7c3b3a343b5bb9834a8e47abb13f",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/ba593aab5c0e150da1c36005aece17816f074c7b/reports/forge/bcap-gaussian-regression/README.md"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

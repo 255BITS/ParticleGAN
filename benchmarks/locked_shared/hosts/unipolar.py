@@ -15,6 +15,7 @@ from dataclasses import dataclass
 
 from ..observation import checkpoint, schedule_optimizer
 from particlegan.generator_idle import release_generator_step
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -321,6 +322,7 @@ def _fit_rpgan(
             real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
         paired_real = []
         paired_fake = []
+        transport_panel = []
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
@@ -330,12 +332,32 @@ def _fit_rpgan(
             paired_fake.append(fake_logits)
             g_term = gan.g_loss(fake_logits, real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
-        g_loss.backward()
+            transport_panel.append(fake[0])
+        protected_adversarial = g_loss
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, torch.stack(transport_panel),
+                torch.stack([real[scale][0] for scale in SCALES]),
+                conditioning=real[0.0].new_tensor(SCALES).unsqueeze(1))
+        def protected_evaluator():
+            adversarial = student.odd.new_zeros(())
+            for scale in SCALES:
+                current = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
+                adversarial = adversarial + 0.5 * gan.g_loss(critic(current, scale), real_scores[scale])
+            return (adversarial,)
+        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
+                                     protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         release_generator_step(opt_g, paired_real, paired_fake)
         opt_g.step()
         critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_residual(student))
+        def observe_student():
+            metrics = score_residual(student)
+            if components is not None:
+                components.constraint_geometry_capture(step + 1,
+                    torch.stack([real[scale][0] for scale in SCALES]),
+                    torch.stack([student.delta(scale) for scale in SCALES]), metrics, kind="line")
+            return metrics
+        checkpoint(step + 1, observe_student)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
             row = score_residual(student)

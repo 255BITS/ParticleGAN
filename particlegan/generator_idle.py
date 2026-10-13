@@ -1,7 +1,7 @@
 """Opt-in generator idle gate. Off unless a caller sets the threshold.
 
-The published trainer never consults this rule. A threshold of ``None`` returns
-before any score is read, so the disabled step is the ordinary generator step.
+The trainer consults this rule only when its recipe enables it. A threshold of
+``None`` returns before any score is read, preserving the ordinary update.
 
 ``generator_idle_mode`` selects the batch gap or a span-10 EMA of that gap.
 The default is ``batch``, which is the original rule.
@@ -16,6 +16,15 @@ import torch
 # batch-means is (2-alpha)/alpha = 10. One decay, not a searched coefficient.
 EMA_DECAY = 2.0 / 11.0
 
+
+def _finite_number(value):
+    if type(value) not in (int, float):
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
 # Legacy hosts do not see the Recipe inside their update loop. GANTrainer reads
 # the recipe field itself and does not consult this variable.
 _CURRENT: ContextVar["IdleAccounting | None"] = ContextVar("generator_idle", default=None)
@@ -25,6 +34,11 @@ class IdleAccounting:
     """Idle decisions for one run, plus the EMA state when that mode is on."""
 
     def __init__(self, mode: str = "batch", standard_errors: float | None = None):
+        if mode not in ("batch", "ema"):
+            raise ValueError("generator_idle_mode must be 'batch' or 'ema'")
+        if standard_errors is not None and (
+                not _finite_number(standard_errors) or standard_errors < 0):
+            raise ValueError("generator_idle_se must be None or a finite nonnegative number")
         self.mode = mode
         self.standard_errors = standard_errors
         self.decisions = 0
@@ -32,6 +46,40 @@ class IdleAccounting:
         self._mean: float | None = None
         self._variance: float | None = None
         self._weight_sq = 0.0
+
+    def state_dict(self) -> dict:
+        return dict(schema_version=1, mode=self.mode, standard_errors=self.standard_errors,
+                    ema_alpha=EMA_DECAY if self.mode == "ema" else None,
+                    decisions=self.decisions, idle_count=self.idle_count,
+                    mean=self._mean, variance=self._variance, weight_sq=self._weight_sq)
+
+    def validate_state_dict(self, state) -> None:
+        expected = self.state_dict()
+        if (not isinstance(state, dict) or set(state) != set(expected)
+                or type(state["schema_version"]) is not int or state["schema_version"] != 1
+                or state["mode"] != self.mode
+                or state["standard_errors"] != self.standard_errors
+                or (state["standard_errors"] is not None
+                    and not _finite_number(state["standard_errors"]))
+                or state["ema_alpha"] != expected["ema_alpha"]
+                or any(type(state[key]) is not int or state[key] < 0
+                       for key in ("decisions", "idle_count"))
+                or state["idle_count"] > state["decisions"]
+                or not _finite_number(state["weight_sq"])):
+            raise ValueError("invalid generator idle checkpoint")
+        empty = state["mean"] is None and state["variance"] is None and state["weight_sq"] == 0
+        initialized = (self.mode == "ema" and state["decisions"] > 0
+                       and _finite_number(state["mean"]) and _finite_number(state["variance"])
+                       and state["variance"] >= 0 and 0 < state["weight_sq"] <= 1)
+        if (not (empty or initialized) or (self.standard_errors is None
+                and (state["decisions"] != 0 or state["idle_count"] != 0 or not empty))
+                or (self.mode == "ema" and empty and state["idle_count"] != 0)):
+            raise ValueError("invalid generator idle filter state")
+
+    def load_state_dict(self, state) -> None:
+        self.validate_state_dict(state)
+        self.decisions, self.idle_count = state["decisions"], state["idle_count"]
+        self._mean, self._variance, self._weight_sq = state["mean"], state["variance"], state["weight_sq"]
 
     def public(self) -> dict:
         fraction = None if self.decisions == 0 else self.idle_count / self.decisions
@@ -44,6 +92,8 @@ class IdleAccounting:
         }
 
     def decide(self, real_logits, fake_logits, standard_errors: float, mode: str) -> bool:
+        if mode != self.mode or standard_errors != self.standard_errors:
+            raise ValueError("generator idle decision differs from its bound recipe")
         if mode == "ema":
             idle = self._ema_idle(real_logits, fake_logits, standard_errors)
         elif mode == "batch":

@@ -14,7 +14,7 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - KA2 gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
+  - KA2 gradient penalty on D (pinned preset, recipe.make_critic_penalty): R1 on
     reals + a fake cap, then an even blend with a real/fake cap plus EMA-critic
     gradient proximity gated by the critic's Adam statistics; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
@@ -206,7 +206,7 @@ def train(
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
 
-    recipe = get_recipe(
+    recipe = get_recipe(trainer="ka2",
         num_particles=NUM_PARTICLES, z_dim=Z_DIM, batch_size=batch_size,
         total_steps=total_steps, lr=lr, d_lr_mult=d_lr_mult, betas=(beta1, 0.999),
         reg_coeff=reg_coeff,
@@ -240,7 +240,7 @@ def train(
 
     optimizers = (opt_GE, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
-    # KA2 gradient penalty (the default), paired with opt_D (EMA critic, controller).
+    # KA2 gradient penalty (the pinned preset), paired with opt_D (EMA critic, controller).
     penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)

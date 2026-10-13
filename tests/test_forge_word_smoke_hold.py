@@ -39,7 +39,11 @@ def evidence(kind="smoke"):
 
 
 def task(kind="smoke"):
-    return load_tasks(ROOT)["five_word_joint_" + kind]
+    value = load_tasks(ROOT)["five_word_joint_" + kind]
+    # Synthetic numerical reducer fixture under the explicit legacy contract.
+    value["execution"].pop("prior_contract", None)
+    value["execution"]["prior"]["learnable"] = True
+    return value
 
 
 def test_one_confirmed_joint_hit_passes_smoke_despite_later_collapse():

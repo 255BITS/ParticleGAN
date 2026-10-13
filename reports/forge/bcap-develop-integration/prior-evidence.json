@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "research_publication_commit": "fed122eed540a100a83d0b2614895f35d6c9e5c9",
+  "research_measured_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+  "research_source_digest": "4ac4f8f1eea473cdbea3924461f1162744717b8e74ecda5ea628743a3c253380",
+  "report": "https://github.com/255BITS/ParticleGAN/blob/fed122eed540a100a83d0b2614895f35d6c9e5c9/reports/forge/bcap-physics/conditional_integration/round5/README.md",
+  "measured_union": "6 PASS /1FAIL across Gaussian smoke/retention, explicit trajectory/residual/mid-scale, unequal mass and broad; Gaussian retention still FAIL. Different hosts need explicit support.",
+  "original_winner_source": "753f28a5ee778fdf7a0d979e6206b1024d9daab3",
+  "original_winner_tier_counts": {
+    "tier1_pass": 6,
+    "tier1_required": 6,
+    "tier2_pass": 7,
+    "tier2_required": 21
+  }
+}

@@ -27,11 +27,12 @@ from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
 from .api import CapabilityError, task_formulation_context, task_policy_blockers
+from .contracts import file_hash
 from .artifacts import save_provenance_checkpoint
 from .contracts import atomic_json
 from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
-from .priors import task_prior
+from .priors import task_prior, recipe_owned_prior
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
 from .taskrecipes import BEHAVIOR_HOST_FIELDS, adaptation_receipt, bind_task_candidate
 
@@ -55,7 +56,8 @@ def behavior_preflight(task: dict, candidate: dict) -> list[str]:
         candidate = bind_task_candidate(candidate, task)
     except ValueError as error:
         return [str(error)]
-    fields = set(candidate.get("recipe_overrides", {})) & FROZEN_HOST_RECIPE_FIELDS
+    frozen_fields = FROZEN_HOST_RECIPE_FIELDS - ({"prior_reg"} if recipe_owned_prior(task) else set())
+    fields = set(candidate.get("recipe_overrides", {})) & frozen_fields
     host = task["execution"].get("host", task["id"])
     if host != "ae_gan_hold":
         fields |= set(candidate.get("recipe_overrides", {})) & {"routing_temperature", "distance_reduction"}
@@ -103,6 +105,18 @@ class _OptimizerBundle:
                         # of sampling. Ownership is exactly every table row.
                         setter(table, torch.arange(table.shape[0], device=table.device))
             optimizer.step(*args, **kwargs)
+
+    def bind_protected_losses(self, losses, *, protected_evaluator=None):
+        enabled = [optimizer for optimizer in self.optimizers
+                   if hasattr(optimizer, "bind_protected_losses")]
+        if not enabled:
+            return
+        if len(enabled) != 1 or len(self.optimizers) != 1:
+            raise CapabilityError(["constraint_geometry requires a single joint generator/prior optimizer"])
+        optimizer = enabled[0]
+        for table in self.enumerated_tables:
+            optimizer.set_sampled_rows(table, torch.arange(len(table), device=table.device))
+        optimizer.bind_protected_losses(losses, protected_evaluator=protected_evaluator)
 
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
@@ -214,10 +228,15 @@ class BehaviorComponents:
         if extension_blockers:
             raise CapabilityError(extension_blockers)
         self.recipe = self.context.recipe
+        from particlegan.generator_idle import IdleAccounting
+        self.idle_accounting = IdleAccounting(self.recipe.generator_idle_mode, self.recipe.generator_idle_se)
+        self.uses_recipe_prior = recipe_owned_prior(task)
+        self.prior_regularizer = None  # Active reference-based penalties bind after public initialization.
         if candidate.get("claim_contract", {}).get("learning") == "clockfree":
             raise CapabilityError(["these scheduled public components do not implement a clock-free optimizer"])
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
         self.direct_particle_ids, self.initial_group_betas = set(), {}
+        self.sampled_prior_rows = {}
         self.rng_audits, self.observations = [], []
         self.diagnostic, self.diagnostic_observations = None, []
         self.penalty = None
@@ -231,11 +250,23 @@ class BehaviorComponents:
         return self.recipe
 
     def make_prior(self, recipe):
-        prior = recipe.make_prior(sigma=self.context.prior_config["sigma"],
-                                  learnable=self.context.prior_config["learnable"],
+        prior = recipe.replace(prior_update="learned").make_prior(sigma=self.context.prior_config["sigma"],
                                   init_std=self.context.prior_config.get("init_std", 1.),
                                   generator=self.context.streams.generator("init", component="prior", purpose="locations"))
         return prior
+
+    def add_prior_regularization(self, loss, *priors):
+        """One recipe objective over this host's actual latent tables."""
+        if not self.uses_recipe_prior:
+            raise ValueError("legacy hosts retain their original prior objective")
+        priors = tuple(prior for prior in priors if prior.z.requires_grad)
+        rows = [prior.z for prior in priors]
+        if self.recipe.prior_regularizer == "coulomb" and self.recipe.prior_reg > 0:
+            self.prior_regularizer = self.recipe.make_prior_regularizer(prior=priors)
+        if rows and (self.recipe.prior_reg > 0 or self.recipe.prior_l2 > 0):
+            loss = loss + self.recipe.prior_regularization(
+                rows[0] if len(rows) == 1 else torch.cat(rows), regularizer=self.prior_regularizer)
+        return loss
 
     @staticmethod
     def critic_copy(critic):
@@ -258,6 +289,7 @@ class BehaviorComponents:
                 kwargs["noise_generator"] = streams.generator(family, component=component, purpose="width")
             result = original(count, *args, **kwargs)
             if family != "eval":
+                self.sampled_prior_rows[prior.z] = result[1]
                 # Row-normalized tables must use the actual sampled rows.
                 # Auxiliary all-table losses can create gradients elsewhere,
                 # so a nonzero-gradient mask is not an equivalent contract.
@@ -273,7 +305,13 @@ class BehaviorComponents:
                             # occur after sampling, so replace earlier D rows
                             # here instead of clearing them at zero_grad.
                             optimizer.clear_sampled_rows()
-                            setter(prior.z, result[1])
+                            # An active joint optimizer may own multiple
+                            # priors. Replacing this table's D draw with its
+                            # G draw must retain the other table's actual rows.
+                            for table, rows in self.sampled_prior_rows.items():
+                                if any(parameter is table for group in optimizer.param_groups
+                                       for parameter in group["params"]):
+                                    setter(table, rows)
             return result
         prior.sample = sample
 
@@ -285,6 +323,8 @@ class BehaviorComponents:
             actual = prior_capabilities(prior)
             expected = {"kind": declared["kind"], "sigma": declared["sigma"],
                         "standardize": declared["standardize"], "learned_locations": declared["learnable"]}
+            if self.uses_recipe_prior:
+                expected.pop("learned_locations")  # Policy binds after identical initialization.
             if actual["kind"] == "mog":
                 expected["sigma"] = float(prior.sigma.new_tensor(declared["sigma"]))
             if any(actual[key] != value for key, value in expected.items()):
@@ -303,17 +343,22 @@ class BehaviorComponents:
             name = f"prior{index}"
             self.models[name] = prior
             self.context.initialize(prior, component=name)
+            self.recipe.apply_prior_policy(prior)
             self._sample_binding(prior, name)
-        prior_parameters = [p for prior in priors for p in prior.parameters()] + list(direct_particles)
-        if prior_parameters:
+        self.prior_regularizer = self.recipe.make_prior_regularizer(reference=priors) if priors else None
+        prior_parameters = [p for prior in priors for p in prior.parameters() if p.requires_grad] + list(direct_particles)
+        if prior_parameters or priors:
             self.role_parameters["prior"] = prior_parameters
         parts = []
         g_parameters = self.role_parameters.get("generator", []) + self.role_parameters.get("encoder", [])
         if g_parameters:
             parts.append(self.recipe.make_generator_optimizer(g_parameters))
         for prior in priors:
+            parameters = [p for p in prior.parameters() if p.requires_grad]
+            if not parameters:
+                continue
             parts.append(self.recipe.make_generator_optimizer(
-                [{"params": list(prior.parameters()), "lr": self.recipe.lr * self.recipe.prior_lr_mult,
+                [{"params": parameters, "lr": self.recipe.lr * self.recipe.prior_lr_mult,
                   "betas": self.recipe.prior_betas or self.recipe.betas, "forge_role": "prior",
                   **({"eps": self.recipe.prior_eps} if self.recipe.prior_eps is not None else {})}], latent_table=prior.z))
         if direct_particles:
@@ -323,6 +368,13 @@ class BehaviorComponents:
                 direct_particles=list(direct_particles)))
         if not parts:
             raise CapabilityError(["host exposes no trainable generator-side component"])
+        if self.recipe.constraint_geometry_mode != "none" and len(parts) > 1:
+            # Zero-momentum full DualNorm has independent per-group histories.
+            # Joining their groups changes no base direction, rate or ownership;
+            # it permits one projection of the actual combined displacement.
+            groups = [{key: value for key, value in group.items() if key != "algorithm"}
+                      for optimizer in parts for group in optimizer.param_groups]
+            parts = [self.recipe.make_generator_optimizer(groups)]
         full_table = self.task["execution"].get("host", self.task["id"]) in {"trajectory", "residual_student"}
         public_g = _OptimizerBundle(parts, enumerated_tables=[prior.z for prior in priors] if full_table else ())
         public_d = self.recipe.make_critic_optimizer(critic, ema_critic=self.critic_copy(critic))
@@ -372,6 +424,33 @@ class BehaviorComponents:
         print(json.dumps(dict(event="observation" if step in expected else "diagnostic_observation", task=self.task["id"], step=step,
                               budget=budget, metrics=values), allow_nan=False), flush=True)
 
+    def constraint_geometry_capture(self, step, target, prediction, metrics, *, kind="image"):
+        """Save the already scored deterministic panel; no additional sampling."""
+        records = getattr(self, "constraint_geometry_outputs", [])
+        self.constraint_geometry_outputs = records
+        thresholds = self.task["evaluation"]["thresholds"]
+        passed = all((metrics[name] <= value if op == "<=" else
+                      metrics[name] >= value if op == ">=" else metrics[name] == value)
+                     for name, op, value in thresholds)
+        failures = [] if passed else [name for name, op, value in thresholds
+                                       if not (metrics[name] <= value if op == "<=" else
+                                               metrics[name] >= value if op == ">=" else metrics[name] == value)]
+        records.append(dict(step=step, metrics=dict(metrics), passed=passed, failed_bounds=failures,
+                            views=[dict(kind=kind, title="Declared paired target and actual trained prediction",
+                                        target=target.detach().cpu(), samples=prediction.detach().cpu(),
+                                        caption="Same scored state and pairing; fixed target, no replay training.",
+                                        vmin=-1.5, vmax=1.5)]))
+
+    def add_transport_loss(self, total, fake, real, *, conditioning=None):
+        """Only a declared variant consumes marginal output transport."""
+        if self.context.component_transport is None or not (
+                self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight):
+            return total
+        if not hasattr(self, 'transport_consumer'):
+            from particlegan.conditional_transport import OutputMarginalTransport
+            self.transport_consumer = OutputMarginalTransport(self.recipe)
+        return self.transport_consumer.add(total, fake.flatten(1), real.flatten(1), conditioning=conditioning)
+
     def guards(self):
         steps = {}
         all_state = {}
@@ -393,9 +472,17 @@ class BehaviorComponents:
                 return all(finite_state(v) for v in value)
             return math.isfinite(value) if type(value) in (int, float) else True
         finite = finite and all(finite_state(optimizer.state_dict()) for optimizer in self.optimizers.values())
+        if self.uses_recipe_prior:
+            finite = finite and all(finite_state(model.state_dict()) for model in self.models.values())
         mechanisms = self.mechanism_audit.receipt()
+        transport_requested = bool(self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight)
+        transport_calls = self.transport_consumer.active_calls if hasattr(self, 'transport_consumer') else 0
+        transport_exercised = not transport_requested or transport_calls == steps.get('generator', steps.get('prior', 0))
         return dict(all_finite=finite, optimizer_updates=steps,
-                    hooks_exercised=not mechanism_blockers(mechanisms), mechanism_audit=mechanisms,
+                    hooks_exercised=not mechanism_blockers(mechanisms) and transport_exercised,
+                    mechanism_audit=mechanisms,
+                    component_transport_requested=transport_requested,
+                    component_transport_active_calls=transport_calls,
                     unintended_rng_deviations=sum(a["unintended_rng_deviations"] for a in self.rng_audits))
 
     def optimizer_group_bindings(self):
@@ -429,6 +516,8 @@ class BehaviorComponents:
     def receipt(self):
         from .boundaries import ownership_receipt
         return dict(execution_path="public_components", recipe=asdict(self.recipe),
+                    **({"generator_idle": self.idle_accounting.state_dict()}
+                       if self.recipe.generator_idle_se is not None else {}),
                     initializer=self.context.initializer, initialization=deepcopy(self.context.initialization),
                     field_ownership=ownership_receipt(self.reference_candidate, self.task, asdict(self.recipe),
                         self.protocol, self.context.initializer,
@@ -449,7 +538,9 @@ class BehaviorComponents:
                                                "installed on prior tables; activation is recorded in mechanism_audit" if any(n.startswith("prior") for n in self.models)
                                                else "not applicable: host has no latent-table optimizer"),
                                              "critic_guard": "disabled" if self.recipe.d_guard_ratio == 0 else
-                                             "inactive before its declared minimum steps; see targeted component check" if self.task["execution"]["steps"] <= self.recipe.d_guard_min_steps else "installed; see measured activation counters"})
+                                             "inactive before its declared minimum steps; see targeted component check" if self.task["execution"]["steps"] <= self.recipe.d_guard_min_steps else "installed; see measured activation counters"},
+                    component_transport=(self.transport_consumer.state_dict()
+                        if hasattr(self, 'transport_consumer') else None))
 
     def provenance_state(self):
         """Include standalone coordinates omitted by model/optimizer tables."""
@@ -465,9 +556,12 @@ class BehaviorComponents:
                        for index, parameter in enumerate(parameters)]
                  for role, parameters in self.role_parameters.items()}
         return dict(models={name: model.state_dict() for name, model in self.models.items()},
+                    **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
                     role_parameters=roles,
                     optimizers={name: optimizer.state_dict() for name, optimizer in self.optimizers.items()},
-                    streams=self.context.streams.state_dict(), applied=self.receipt())
+                    streams=self.context.streams.state_dict(), applied=self.receipt(),
+                    component_transport=(self.transport_consumer.state_dict()
+                        if hasattr(self, 'transport_consumer') else None))
 
 
 def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu") -> dict:
@@ -510,6 +604,9 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
         # visible GPU. Restore every affected caller stream, even on exceptions.
         devices = list(range(torch.cuda.device_count())) if torch.cuda.is_available() else []
         with torch.random.fork_rng(devices=devices), torch.device(device), components.context.streams.fork("data", component="host", purpose="batches"), ExitStack() as stack:
+            from particlegan.generator_idle import generator_idle_scope
+            components.idle_accounting = stack.enter_context(generator_idle_scope(
+                components.recipe.generator_idle_se, components.recipe.generator_idle_mode))
             # Frozen tensor fixtures were created at module import on CPU.
             # Move their exact values alongside the host, without redrawing.
             for key, value in vars(module).copy().items():
@@ -519,6 +616,11 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
             stack.enter_context(patch.object(module, "schedule_optimizer", components.schedule_optimizer))
             if hasattr(module, "PROTOCOL"):
                 overrides = {k: v for k, v in dict(steps=steps, seed=seed).items() if k in module.PROTOCOL}
+                if components.uses_recipe_prior:
+                    overrides.update({key: value for key, value in {
+                        "particle_l2": components.recipe.prior_l2,
+                        "vicreg_weight": components.recipe.prior_reg,
+                        "vicreg_std": components.recipe.prior_reg_target_std}.items() if key in module.PROTOCOL})
                 stack.enter_context(patch.dict(module.PROTOCOL, overrides))
             # These existing host scorers can run outside checkpoint callbacks.
             # Isolate every call, including AE's extra progress measurements.
@@ -559,10 +661,24 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
                       scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device=str(device), applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
+        if components.uses_recipe_prior:
+            from .priors import prior_policy_receipt
+            result["evidence"]["prior_policy"] = prior_policy_receipt(components.recipe,
+                *(model for name, model in components.models.items() if name.startswith("prior")))
+            for name, field in (("particle_l2", "prior_l2"), ("vicreg_weight", "prior_reg"),
+                                ("vicreg_std", "prior_reg_target_std")):
+                if name in raw:
+                    raw[name] = getattr(components.recipe, field)
+        outputs = getattr(components, "constraint_geometry_outputs", None)
+        if outputs:
+            path = output_dir / "constraint_geometry-scored-outputs.pt"
+            torch.save(outputs, path)
+            result["evidence"]["saved_observer_outputs"] = dict(path=path.name, bytes=path.stat().st_size,
+                                                                  sha256=file_hash(path))
         result["evidence"]["provenance_checkpoint"] = save_provenance_checkpoint(
             output_dir, checkpoint,
             completed_steps=min(count for role, count in result["evidence"]["guards"]["optimizer_updates"].items()
-                                if any(parameter.requires_grad for parameter in components.role_parameters[role])))
+                                if any(parameter.requires_grad for parameter in components.role_parameters.get(role, ()))))
         if components.diagnostic is not None:
             result["evidence"].update(diagnostic_observations=components.diagnostic_observations,
                                      horizon_diagnostic=components.diagnostic.finish())

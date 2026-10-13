@@ -1,0 +1,102 @@
+{
+  "artifacts": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/logs",
+  "changed_test_paths": [
+    "tests/archived_forge_contracts.py",
+    "tests/fixtures/archived-forge-contracts.json",
+    "tests/fixtures/develop-software-regressions.json",
+    "tests/test_archived_forge_contracts.py",
+    "tests/test_dualnorm_pacing_study.py",
+    "tests/test_toy_canonical_selection.py"
+  ],
+  "compiled_summaries_only": true,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "MPLBACKEND": "Agg",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "TMPDIR": "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/logs/final-full-tmp"
+  },
+  "exact_develop_regression": {
+    "failed": 2,
+    "passed": 1,
+    "production_defect_new_to_integration": false,
+    "pytest_seconds": 2.53,
+    "source_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+    "source_receipt_sha256": "5f376d26530c965424553f9b57872996448e973965c4c39d407ea1419717603d"
+  },
+  "final_file_counts": {
+    "production": 2014,
+    "tests": 380
+  },
+  "final_manifest_hashes": {
+    "production": "aec02a81bac5680f52c3bef315198f9c97181b0dd2c3b642caddd2a167478731",
+    "tests": "3c1933ff22c70ef50a381317498309dab1e656b9222e1fb06562680cf7e06682"
+  },
+  "focused_followup": {
+    "all_original_failed_controls_resolved_with_test_only_changes": true,
+    "failed": 0,
+    "junit_sha256": "bfd5c792f05d9501c5bd2cbc3a0f143b10826258e41e8d3bce9a7cab2f5c11fd",
+    "log_sha256": "0dd1d98931bbdf6ac38dba1af403d4843ee9a154428513515e82c6de7aff4242",
+    "new_full_suite_rerun": false,
+    "passed": 17,
+    "pytest_seconds": 19.52,
+    "scope": "ordered pacing leak producer before scalar control; two report tests; direct-script metadata CLI; all archive destructive guards",
+    "tested_commit": "dd19e190248bbee899ba207cc0fc99c3993120f9"
+  },
+  "full_suite": {
+    "collected_node_ids": 6133,
+    "exit_code": 1,
+    "failed": 4,
+    "ignore": "tests/test_e22_routed_caption_late_phase_renderer.py",
+    "input_manifest_hashes": {
+      "production": "aec02a81bac5680f52c3bef315198f9c97181b0dd2c3b642caddd2a167478731",
+      "tests": "e9f494da31484c24caf481c4f4e0a3d890c4624ee578630dca590949d49b7e4e"
+    },
+    "interrupted": false,
+    "junit_completed_node_ids": 6133,
+    "junit_seconds": 1145.788,
+    "junit_sha256": "dade5cc2df2fa8ec6d21b916dae27409455646a9c3c7619ef1dbeda62ecc3b59",
+    "limit_seconds": 1200,
+    "log_sha256": "aa8dd031afc59fbe23aa8b1706008992f623ae0c138a2a6fa6b89918d074a781",
+    "original_fixture_failures": [
+      {
+        "classname": "tests.test_forge_family_reports",
+        "name": "test_committed_pages_and_every_drilldown_link_match_the_generator"
+      },
+      {
+        "classname": "tests.test_forge_tier1_policy_coverage",
+        "name": "test_scalar_policy_software_control_retains_selected_observation"
+      },
+      {
+        "classname": "tests.test_forge_tier_report",
+        "name": "test_committed_tier_report_matches_current_declarations_and_artifacts"
+      },
+      {
+        "classname": "tests.test_toy_canonical_selection",
+        "name": "test_standalone_listing_does_not_import_training_stack"
+      }
+    ],
+    "passed": 5835,
+    "pytest_seconds": 1146.06,
+    "skipped": 293,
+    "subtests_passed": 131,
+    "tested_commit": "48d69930a340c9b033cd2e3a91168306cf4b3bdf",
+    "unvisited_node_ids": [],
+    "xfailed": 1
+  },
+  "measured_source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+  "measured_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+  "package_import_became_torch_free": false,
+  "parent_main_commit_at_check": "a85eeca15d3514c8cdb175d9c33bf0b987746d1b",
+  "parent_main_pre_fixture_manifest_matches": true,
+  "production_manifest_unchanged": true,
+  "protected_archived_file_count": 2449,
+  "protected_archived_files_unchanged_after_compile_and_tests": true,
+  "qualification_input": false,
+  "schema": "bcap_final_cpu_software_verification_v1",
+  "uncommitted_recall_outputs": [
+    "reports/forge/EXPERIMENT_MEMORY.md",
+    "reports/forge/compilation.json"
+  ]
+}

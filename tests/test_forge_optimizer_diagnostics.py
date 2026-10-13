@@ -21,6 +21,7 @@ def trainer_for(family):
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(0)
         recipe = get_recipe("bcap", loss="relativistic", optimizer_smoothing=0.,
+                            constraint_geometry_mode="none",
                             optimizer_convolution="none", optimizer_family=family,
                             optimizer_momentum=.5 if family == "dualnorm" else 0.,
                             lr=.01, d_lr_mult=1.5, prior_lr_mult=3.,
@@ -106,7 +107,8 @@ def test_six_actual_api_updates_preserve_models_optimizer_and_every_rng_with_dia
 
 def test_prior_measurements_use_actual_unique_sampled_indices_before_the_optimizer_clears_them(tmp_path):
     recipe = get_recipe("bcap", optimizer_family="dualnorm", lr=.02,
-                        prior_lr_mult=3., z_dim=2, num_particles=5, standardize=False)
+                        prior_lr_mult=3., z_dim=2, num_particles=5, standardize=False,
+                        constraint_geometry_mode="none")
     generator, encoder, critic = nn.Linear(2, 2), nn.Linear(2, 2), nn.Linear(2, 1)
     prior = recipe.make_prior()
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, encoder=encoder)

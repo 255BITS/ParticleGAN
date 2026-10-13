@@ -1,0 +1,15 @@
+{
+  "analyzed_snapshots": 6,
+  "gradient_path_additivity_pass": true,
+  "loaded_checkpoint_and_model_states_unchanged": true,
+  "missing_links": [],
+  "optimizer_updates_added": 0,
+  "original_failure_cohorts": 4,
+  "qualification_input": false,
+  "relative_links_checked": 7,
+  "reproducer_sha256": "c7724714c3c92714af534cf76ada4bbcfba0b48a152060a540a67c7b3b864552",
+  "results_sha256": "af55590f4bdb8f1e1403de5d6960809330cb14536735bd2c258b929eb9cb06b3",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "status": "PASS"
+}

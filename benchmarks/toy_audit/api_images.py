@@ -790,7 +790,7 @@ class ImageFixture:
                 self.opt_g, self.opt_d = self.recipe.make_optimizers(self.G, self.D, self.prior,
                                                                    ema_critic=deepcopy(self.D))
                 self.loss = self.recipe.make_loss()
-                self.spread = self.recipe.make_prior_regularizer(weight=1.)
+                self.spread = self.recipe.make_prior_regularizer(prior=self.prior, reference=self.prior)
                 self.penalty = self.recipe.make_critic_penalty(self.opt_d)
                 self._context = None
                 self.policy = UpdatePolicy(self.recipe, self.G, self.D, prior=self.prior,
@@ -854,8 +854,8 @@ class ImageFixture:
             latent, rows = self.prior.sample(len(real), generator=self.policy.latent_generator)
             generated = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
             loss_gan = self.loss.g_loss(self.noisy_critic(generated, context), self.noisy_critic(real, context))
-            prior_reg = self.spread(self.prior.z)
-            loss_g = loss_gan + self.recipe.prior_reg * prior_reg
+            prior_reg = self.recipe.prior_regularization(self.prior.z, regularizer=self.spread)
+            loss_g = loss_gan + prior_reg
             self.opt_g.zero_grad(set_to_none=True)
             self.policy.before_generator_backward()
             loss_g.backward()
@@ -926,6 +926,7 @@ class ImageFixture:
                     recipe=self.recipe.to_dict(), max_steps=self.max_steps,
                     data_generator=self.data_generator.get_state().clone(),
                     api_components=self.api_components,
+                    **(self.recipe.prior_regularizer_checkpoint(self.spread) if self.trainer is None else {}),
                     api_state=(self.trainer.state_dict() if self.trainer is not None else self.policy.state_dict()))
 
 
@@ -1063,6 +1064,14 @@ class WordFixture:
         if recipe_name not in ("atlas", "e22", "e22_routed"):
             overrides["total_steps"] = self.case["recipe_schedule_horizon"]
         self.recipe = get_recipe(recipe_name, **overrides) if components is None else components.recipe
+        from particlegan.generator_idle import IdleAccounting
+        self.idle_accounting = IdleAccounting(self.recipe.generator_idle_mode, self.recipe.generator_idle_se)
+        self.transport = None
+        if self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight:
+            if components is None or components.component_transport != 'output_marginal_v1':
+                raise ValueError('joint word transport requires an explicit output_marginal_v1 consumer')
+            from particlegan.conditional_transport import OutputMarginalTransport
+            self.transport = OutputMarginalTransport(self.recipe)
         if (self.recipe.model != "gan" or self.recipe.conditioning != "scalar"
                 or self.recipe.encoder_mode != "none"
                 or (self.recipe.num_particles, self.recipe.z_dim, self.recipe.batch_size) != (5, 2, 256)):
@@ -1083,17 +1092,21 @@ class WordFixture:
                 for module, role in ((self.G, "generator"), (self.D, "discriminator"), (self.E, "encoder")):
                     components.initialize(module, component=role)
                 self.prior = components.build_prior()
+            self.recipe.apply_prior_policy(self.prior)
             # Homogeneous roles are required by the public policy. This splits
             # the old G/E group without changing its optimizer settings.
-            self.opt_g = self.recipe.make_generator_optimizer([
+            self.recipe.apply_prior_policy(self.prior)
+            groups = [
                 dict(params=list(self.G.parameters()), lr=self.recipe.lr),
-                dict(params=list(self.E.parameters()), lr=self.recipe.lr),
-                dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
-                     betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas)],
-                latent_table=self.prior.z)
+                dict(params=list(self.E.parameters()), lr=self.recipe.lr)]
+            if self.prior.z.requires_grad:
+                groups.append(dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
+                    betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas))
+            self.opt_g = self.recipe.make_generator_optimizer(groups,
+                latent_table=self.prior.z if self.prior.z.requires_grad else None)
             self.opt_d = self.recipe.make_critic_optimizer(self.D, ema_critic=deepcopy(self.D))
             self.loss = self.recipe.make_loss()
-            self.spread = self.recipe.make_prior_regularizer(weight=1.)
+            self.spread = self.recipe.make_prior_regularizer(prior=self.prior, reference=self.prior)
             self.penalty = self.recipe.make_critic_penalty(self.opt_d, collect_stats=components is not None)
             policy_streams = None if components is None else {
                 "latent_generator": components.streams.generator("prior", component="latent", purpose="indices"),
@@ -1148,13 +1161,29 @@ class WordFixture:
             encoded = self.E(real_words)
             latent, rows = self.prior.sample(len(real_words), generator=self.policy.latent_generator)
             fake_words = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
-            loss_gan = self.loss.joint_g_loss(self.noisy_critic(_join_words(fake_words, latent)),
-                                              self.noisy_critic(_join_words(real_words, encoded)))
-            loss_g = loss_gan + self.recipe.prior_reg * self.spread(self.prior.z)
+            fake_scores = self.noisy_critic(_join_words(fake_words, latent))
+            real_scores = self.noisy_critic(_join_words(real_words, encoded))
+            loss_gan = self.loss.joint_g_loss(fake_scores, real_scores)
+            loss_g = loss_gan + self.recipe.prior_regularization(self.prior.z, regularizer=self.spread)
+            if self.transport is not None:
+                # Categorical probability coordinates only. The joint latent
+                # coordinates and inverse encoder retain their original loss.
+                loss_g = self.transport.add(loss_g, fake_words.flatten(1), real_words.flatten(1))
             self.opt_g.zero_grad(set_to_none=True)
             self.policy.before_generator_backward()
-            loss_g.backward()
+            if self.recipe.constraint_geometry_mode == 'strict_progress':
+                width_noise = (latent - self.prior.z[rows]).detach()
+            def protected_evaluator():
+                current_latent = self.prior.z[rows] + width_noise
+                return (self.loss.joint_g_loss(self.noisy_critic(_join_words(self.G(current_latent), current_latent)),
+                    self.noisy_critic(_join_words(real_words, self.E(real_words)))),)
+            from particlegan.optim.constraint_geometry import constraint_geometry_backward
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                         protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(loss_gan=loss_gan.detach(), loss_critic=adversarial_d.detach())
+            from particlegan.generator_idle import gate_generator_update
+            gate_generator_update(self.opt_g, real_scores, fake_scores, self.recipe.generator_idle_se,
+                                  mode=self.recipe.generator_idle_mode, accounting=self.idle_accounting)
             self.opt_g.step()
             self.policy.after_generator_step()
             self.policy.finish_step()
@@ -1201,4 +1230,34 @@ class WordFixture:
     def state_dict(self):
         return dict(version=VERSION, case=deepcopy(self.case), seed=self.seed, recipe=self.recipe.to_dict(),
                     max_steps=self.max_steps, data_generator=self.data_generator.get_state().clone(),
-                    api_components=self.api_components, api_state=self.policy.state_dict())
+                    **({"generator_idle": self.idle_accounting.state_dict()}
+                       if self.recipe.generator_idle_se is not None else {}),
+                    **self.recipe.prior_regularizer_checkpoint(self.spread),
+                    api_components=self.api_components, api_state=self.policy.state_dict(),
+                    **({"component_transport": self.transport.state_dict()} if self.transport is not None else {}))
+
+    def restore_generator_idle(self, state, *, completed_steps=None, validate_only=False):
+        if self.recipe.generator_idle_se is None:
+            if state is not None:
+                raise ValueError("inactive word fixture cannot restore generator idle state")
+            return
+        self.idle_accounting.validate_state_dict(state)
+        steps = self.completed_steps if completed_steps is None else completed_steps
+        if state["decisions"] != steps:
+            raise ValueError("word generator idle decisions differ from completed updates")
+        if not validate_only:
+            self.idle_accounting.load_state_dict(state)
+
+    def restore_component_transport(self, state):
+        """Restore optional consumer counters alongside the existing policy.
+
+        Old inactive fixtures omit this field and require no new mechanism.
+        Active fixtures must retain their own consumer evidence on resume.
+        """
+        if self.transport is None:
+            if state is not None:
+                raise ValueError('inactive word fixture cannot restore active transport')
+        elif state is None:
+            raise ValueError('active word fixture is missing transport checkpoint')
+        else:
+            self.transport.load_state_dict(state)

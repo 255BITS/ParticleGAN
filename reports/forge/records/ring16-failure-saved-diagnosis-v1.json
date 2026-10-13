@@ -1,0 +1,33 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50",
+  "changed_factors": [],
+  "conclusion": "The archived restored 1600-update PASS and current uninterrupted 1600-update FAIL share recipe, prior, initializer, 91 scientific files and all 14 final named RNG states. All 24 prefix observations through 400 match exactly; the first differing saved observation is 417. All 96 v3/v4 samples and metrics match. Current covariance error 2.22027 fails with zero full passes: 21 of 4096 outputs exceed 20 target sigmas, all assigned to component 11, which contributes 82.3% of the summed covariance errors. The other 15 components average 0.41875. The current roster records 22 numerical FAIL and one API BLOCKED. The exact first differing optimizer update and causal mechanism remain unresolved; original grades are preserved.",
+  "evidence_scope": "saved_output_and_checkpoint_diagnosis",
+  "goal": "discriminator_stability",
+  "hypothesis": "Explain why the adopted 1600-update Ring16 conditions retain an archived continuation PASS but fail current uninterrupted training before proposing another solution.",
+  "lifecycle": "concluded",
+  "mechanism_class": "saved_evidence_analysis",
+  "next_action": "Declare a bounded CUDA diagnostic comparing continuation of a shared live prefix with restoration of its checkpoint before tuning. Then attribute far outputs to sampled prior rows and local generator mappings. A pass-once rule cannot repair zero full passing observations. This report adds no training, qualification or policy change.",
+  "provenance": {
+    "current_attempt": "b2d55fb3d5434002aa2b443522a83b79",
+    "historical_source_commit": "b4d1f95a074ffa64ac8f64e12aa0a049f836c0af",
+    "model_forwards_added": 0,
+    "report": "reports/forge/ring16-failure/README.md",
+    "sampling_draws_added": 0,
+    "source_commit": "79fdf16d2ed880a9db1873245f150375e3be31b0",
+    "source_digest": "d276c5a7344fab6ec5de7b314d3982af5b0ef8027c8b89c01376ae366844a9cb",
+    "training_updates_added": 0
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "ring16-failure-saved-diagnosis-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-failure/results.json",
+    "sha256": "9f4008f7d0d79e0ffc4ce56b87ecd15f3c4c4fdaf11b9549155f2ec22d20ace8"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

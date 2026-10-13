@@ -4,17 +4,19 @@ Recorded passes / required experiments, grouped by family and view. Click a fami
 
 A family is the high-level implementation and formulation. Optimizers, learning rates, momentum and other configuration choices stay within that family. Current benchmarks use the explicit family selection; BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain their separate evidence on the detail pages. Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.
 
+The [BCAP leader prior searches](bcap-prior-search/README.md) compare five opt-in mechanisms and fifteen global strengths, with every task measurement, score, target and source-bound repair or regression. Their [interpretation and recommendations](bcap-prior-search/findings.md) explain the results. The selected family configuration and its recorded counts remain unchanged.
+
 Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| **[BCAP](families/bcap-pure.md)** | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[37/116](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0(*)/14](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[59(*)/152](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
-| ↳ [adaptation](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [6/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [9(*)/23](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) |
-| ↳ [clockfree_continuous](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [6/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [10(*)/30](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| ↳ [discriminator_stability](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [7/21](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [13(*)/29](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
-| ↳ [formulation_comparison](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [6/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [9(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
-| ↳ [host_profile_transfer](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [6/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [9(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
-| ↳ [quality_coverage](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [6/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [9/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
+| **[BCAP](families/bcap-pure.md)** | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/116](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0(*)/14](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71(*)/152](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
+| ↳ [adaptation](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11(*)/23](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) |
+| ↳ [clockfree_continuous](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12(*)/30](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
+| ↳ [discriminator_stability](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15(*)/29](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| ↳ [formulation_comparison](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
+| ↳ [host_profile_transfer](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
+| ↳ [quality_coverage](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [11/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 | **[Atlas](families/atlas.md)** | **[0(*)/22](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0(*)/116](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0(*)/14](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0(*)/152](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) | [0(*)/3](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0(*)/23](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0(*)/4](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0(*)/30](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -90,23 +92,24 @@ Trains a generator against a critic; task-owned auxiliary objectives may also ap
 - [Atlas](families/atlas.md)
 - [BCAP](families/bcap-pure.md)
 - [BCAP](families/bcap-pure-configuration.md)
-- [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
+- [BCAP ada_nsgda](families/bcap-ada-nsgda.md) (historical cohort)
 - [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
-- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
-- [BCAP nsgda_global](families/bcap-nsgda-global.md)
-- [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
-- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md)
-- [BCAP sgda](families/bcap-sgda.md)
-- [BCAP with K3P](families/bcap.md)
+- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md) (historical cohort)
+- [BCAP nsgda_global](families/bcap-nsgda-global.md) (historical cohort)
+- [BCAP nsgda_layer](families/bcap-nsgda-layer.md) (historical cohort)
+- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
+- [BCAP sgda](families/bcap-sgda.md) (historical cohort)
+- [BCAP with K3P](families/bcap.md) (historical cohort)
 - [E22](families/e22.md)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
 - [GAN v3 release 0.7 (cloud)](families/release07-gan-v3-cloud.md) (historical cohort)
+- [Halloween optimizer/loss transfer](families/halloween.md) (historical cohort)
 - [K3P](families/k3p.md)
-- [K3P without A2](families/k3p-no-a2.md)
-- [K3P without critic anchor](families/k3p-no-anchor.md)
-- [K3P without critic penalty](families/k3p-no-penalty.md)
-- [K3P without training output noise](families/k3p-no-training-noise.md)
+- [K3P without A2](families/k3p-no-a2.md) (historical cohort)
+- [K3P without critic anchor](families/k3p-no-anchor.md) (historical cohort)
+- [K3P without critic penalty](families/k3p-no-penalty.md) (historical cohort)
+- [K3P without training output noise](families/k3p-no-training-noise.md) (historical cohort)
 - [KA2](families/ka2.md)
 - [R1/R2](families/r1r2.md)
 
@@ -118,17 +121,25 @@ Penalizes critic input-gradient norms above a threshold on real and generated in
 
 - [BCAP](families/bcap-pure.md)
 - [BCAP](families/bcap-pure-configuration.md)
-- [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
+- [BCAP ada_nsgda](families/bcap-ada-nsgda.md) (historical cohort)
 - [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
-- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
-- [BCAP nsgda_global](families/bcap-nsgda-global.md)
-- [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
-- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md)
-- [BCAP sgda](families/bcap-sgda.md)
-- [BCAP with K3P](families/bcap.md)
+- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md) (historical cohort)
+- [BCAP nsgda_global](families/bcap-nsgda-global.md) (historical cohort)
+- [BCAP nsgda_layer](families/bcap-nsgda-layer.md) (historical cohort)
+- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
+- [BCAP sgda](families/bcap-sgda.md) (historical cohort)
+- [BCAP with K3P](families/bcap.md) (historical cohort)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
 - [GAN v3 release 0.7 (cloud)](families/release07-gan-v3-cloud.md) (historical cohort)
+
+<a name="tag-constant-learning-rate"></a>
+
+### `constant-learning-rate`
+
+Declared baseline uses constant learning rates; resolved per-role rates remain configuration-specific.
+
+- [Halloween optimizer/loss transfer](families/halloween.md) (historical cohort)
 
 <a name="tag-critic-gradient-penalty"></a>
 
@@ -139,22 +150,22 @@ Uses a penalty on critic input gradients; its formula and strength are configura
 - [Atlas](families/atlas.md)
 - [BCAP](families/bcap-pure.md)
 - [BCAP](families/bcap-pure-configuration.md)
-- [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
+- [BCAP ada_nsgda](families/bcap-ada-nsgda.md) (historical cohort)
 - [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
-- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
-- [BCAP nsgda_global](families/bcap-nsgda-global.md)
-- [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
-- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md)
-- [BCAP sgda](families/bcap-sgda.md)
-- [BCAP with K3P](families/bcap.md)
+- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md) (historical cohort)
+- [BCAP nsgda_global](families/bcap-nsgda-global.md) (historical cohort)
+- [BCAP nsgda_layer](families/bcap-nsgda-layer.md) (historical cohort)
+- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
+- [BCAP sgda](families/bcap-sgda.md) (historical cohort)
+- [BCAP with K3P](families/bcap.md) (historical cohort)
 - [E22](families/e22.md)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
 - [GAN v3 release 0.7 (cloud)](families/release07-gan-v3-cloud.md) (historical cohort)
 - [K3P](families/k3p.md)
-- [K3P without A2](families/k3p-no-a2.md)
-- [K3P without critic anchor](families/k3p-no-anchor.md)
-- [K3P without training output noise](families/k3p-no-training-noise.md)
+- [K3P without A2](families/k3p-no-a2.md) (historical cohort)
+- [K3P without critic anchor](families/k3p-no-anchor.md) (historical cohort)
+- [K3P without training output noise](families/k3p-no-training-noise.md) (historical cohort)
 - [KA2](families/ka2.md)
 - [R1/R2](families/r1r2.md)
 
@@ -184,20 +195,20 @@ Declared baseline decreases learning rates during training; horizons and floors 
 Includes formulation-specific interventions around optimizer steps; availability depends on the host and resolved recipe.
 
 - [Atlas](families/atlas.md)
-- [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
+- [BCAP ada_nsgda](families/bcap-ada-nsgda.md) (historical cohort)
 - [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
-- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
-- [BCAP nsgda_global](families/bcap-nsgda-global.md)
-- [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
-- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md)
-- [BCAP sgda](families/bcap-sgda.md)
-- [BCAP with K3P](families/bcap.md)
+- [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md) (historical cohort)
+- [BCAP nsgda_global](families/bcap-nsgda-global.md) (historical cohort)
+- [BCAP nsgda_layer](families/bcap-nsgda-layer.md) (historical cohort)
+- [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
+- [BCAP sgda](families/bcap-sgda.md) (historical cohort)
+- [BCAP with K3P](families/bcap.md) (historical cohort)
 - [E22](families/e22.md)
 - [K3P](families/k3p.md)
-- [K3P without A2](families/k3p-no-a2.md)
-- [K3P without critic anchor](families/k3p-no-anchor.md)
-- [K3P without critic penalty](families/k3p-no-penalty.md)
-- [K3P without training output noise](families/k3p-no-training-noise.md)
+- [K3P without A2](families/k3p-no-a2.md) (historical cohort)
+- [K3P without critic anchor](families/k3p-no-anchor.md) (historical cohort)
+- [K3P without critic penalty](families/k3p-no-penalty.md) (historical cohort)
+- [K3P without training output noise](families/k3p-no-training-noise.md) (historical cohort)
 - [KA2](families/ka2.md)
 
 <a name="tag-selectable-loss"></a>
@@ -215,10 +226,18 @@ The family explicitly supports multiple adversarial loss formulations.
 
 Removes a named mechanism from a parent technique and retains a separate evidence identity.
 
-- [K3P without A2](families/k3p-no-a2.md)
-- [K3P without critic anchor](families/k3p-no-anchor.md)
-- [K3P without critic penalty](families/k3p-no-penalty.md)
-- [K3P without training output noise](families/k3p-no-training-noise.md)
+- [K3P without A2](families/k3p-no-a2.md) (historical cohort)
+- [K3P without critic anchor](families/k3p-no-anchor.md) (historical cohort)
+- [K3P without critic penalty](families/k3p-no-penalty.md) (historical cohort)
+- [K3P without training output noise](families/k3p-no-training-noise.md) (historical cohort)
+
+<a name="tag-tensorflow-v1-adam"></a>
+
+### `tensorflow-v1-adam`
+
+Uses the declared dense TensorFlow-v1 Adam update law with checkpointed application clocks and epsilon before second-moment bias correction.
+
+- [Halloween optimizer/loss transfer](families/halloween.md) (historical cohort)
 
 ## Refresh
 
@@ -230,6 +249,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `f7b0246f2df20a3224985578a352657352788677fbf4c6f20a66f80ad24dd8a3`.
-
+Publication input digest `3cc0aeaa3d3bb5aaf0c0fd5f73168b3311c39ff4ff99ba96c1d1c78289030102`.
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

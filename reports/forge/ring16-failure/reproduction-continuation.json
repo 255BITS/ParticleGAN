@@ -1,0 +1,26 @@
+{
+  "always_short_probe": "restored_untraced",
+  "completed_live_updates_preserved": 1600,
+  "conditional_short_probes": [
+    "restored_stats",
+    "restored_twice",
+    "restored_runtime"
+  ],
+  "id": "ring16-restart-diagnostic-v1-receipt-repair",
+  "original_source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+  "parent_protocol_sha256": "024db034ce1f5196b67e71209965e58851fd726a7f0c30ec7864c5c1278f8e06",
+  "remaining_max_new_updates": 2464,
+  "remaining_primary_arms": [
+    "restart",
+    "archive-replay"
+  ],
+  "remaining_reserved_seconds": 720,
+  "repair": "Materialize named data/eval stream objects before initial receipt; no draw added. All existing training, tracing, scoring, model or optimizer expressions unchanged.",
+  "repeated_updates": 0,
+  "same_whole_campaign_max_updates": 4064,
+  "same_whole_campaign_reserved_seconds": 1020,
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "metadata_repair_continuation",
+  "stopping_rule": "Do not rerun live or expand the original diagnostic budget."
+}

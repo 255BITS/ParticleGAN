@@ -1,0 +1,654 @@
+{
+  "schema_version": 1,
+  "record_id": "bcap-three-phase-concluded-context-v1",
+  "record_type": "family_context",
+  "candidate_id": "bcap-three-phase-concluded-research",
+  "goal": "discriminator_stability",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "research_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "reuse": false,
+  "cross_cohort_pooling": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Repair BCAP globally while preserving all six Tier 1 gates and the original task budgets, priors, deterministic initializer, sampling laws, gates and own-checkpoint continuation.",
+  "mechanism_class": "source_bound_global_trainer_research",
+  "conclusion": "Direction-only projection (PR383, constraint_geometry_mode=direction_blend) is the measured research baseline: 6/6 Tier 1 and 3/10 selected Tier 2 versus control 6/6 and 1/10. Trajectory and residual student fully repair with identity MSE .000258480/.000249089 and terminal suffixes 19/21; own word hold remains PASS. All 16 complete consumed-state pairs match and 11 inactive model/prior tensor comparisons pass. Only 12/400 trajectory and 55/400 residual steps blend, with no stalls; the stored derivative maximum is floored at zero and does not prove finite-step descent. Seven studied Tier 2 gates remain FAIL, eleven original Tier 2 questions are unmeasured. Five moonshots have no eligible replacement: optimism 3/6 + 0/10, anisotropic geometry 4/6 + 1/10, entropic transport 4/6 + 2/10, bounded secant 4/6 + 0/10, confidence transport 4/6 + 2/10. Entropic/confidence each repair anisotropic density but regress pole and unused token. Aggregate moments, mass allocation and core shape can improve while full component density fails. Secant ring global covariance .098413 coexists with full component error 57.418460. Secant word is INCOMPLETE at its original 900-second limit; own hold BLOCKED. Anisotropic/entropic valid word holds use unequal own prefixes, so consumed-state pairing is unverified. Confidence alpha scales losses before the normalized optimizer, not displacement or calibrated confidence; it retains a software allowance violation (at least 2279.158 seconds against 300). The entropic constant-panel normalization amplifies squared error by 4194304; zero residual alone establishes no useful force. Five pairs charge 44305.65891298147 seconds including 18 user-authorized infrastructure predecessors; projection separately charges 3541.1636059249986 seconds with zero retries. Costs are not pooled speed comparisons. All six independent audits pass with 188 actual-training GIFs. These source-bound diagnostics grant no ordinary qualification, default adoption or automatic merge.",
+  "next_action": "Base future BCAP research on the exact PR383 direction-only recipe; stop all five exact moonshot revisions and retain their negative evidence. Inspect saved equal-clock full/core density, mass allocation, spill and controller evidence before composition; keep unavailable gradient-force measurements explicit. Any next global trainer comparison should isolate one causal mechanism with a fixed backend and numerical falsifier, measure force scaling and actual displacement, and preserve all six Tier 1 gates, trajectory, residual and word hold. A common-clock word hold would be a separately declared new cohort; never regrade these original own-prefix results.",
+  "source": {
+    "path": "reports/forge/bcap-three-phase/README.md",
+    "sha256": "41fce4cda50b0947719904634bb0d9e24700ec35ba67acffd49f5a5585750ce7",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/README.md"
+  },
+  "provenance": {
+    "input_evidence_scope": "published_summary",
+    "qualification_reuse": false,
+    "publication_commit": "b235112dee4dd6d06a4e3eca7c1e31918a6a8b51",
+    "protocol_seed": 0,
+    "binding_validation": "Exact Git publication bytes, result/source/registration identities and independent audit hashes checked at construction. Compiler does not recursively certify these provenance pins.",
+    "comparison": {
+      "path": "reports/forge/bcap-three-phase/phase3-comparison.json",
+      "sha256": "2ed2183c8190d482f90718f1edbd81a4d312470430d955d775a8ac2b1581e336",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-comparison.json"
+    },
+    "comparison_source": {
+      "path": "reports/forge/bcap-three-phase/compare_saved.py",
+      "sha256": "1db7065b338ede8ceb9f49da63cab0a2df15f2d3cbdaeafa4372974ea5f5fa11",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/compare_saved.py"
+    },
+    "projection_comparison": {
+      "path": "reports/forge/bcap-three-phase/projection-comparison.json",
+      "sha256": "05b4cd615952c2b1d05dff8e5219304c022925ff7026b9e7559f466e925d1bf0",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/projection-comparison.json"
+    },
+    "selected_baseline_recipe": {
+      "path": "reports/forge/bcap-three-phase/research-baseline.json",
+      "sha256": "098985ecdd4e14bb2c3fabb06383c0f4017a0907580b15dc1780814cfb125387",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/research-baseline.json"
+    },
+    "tracks": [
+      {
+        "track": "optimistic",
+        "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+        "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+        "registration_sha256": "10809962b1af0d03b0e9a2b3f2983c73f810740b424b58a36d76dbc1d8b00f57",
+        "publication_commit": "05f64359d599b78f21310ef53888d1c914c5dfbb",
+        "pr": "https://github.com/255BITS/ParticleGAN/pull/378",
+        "result": {
+          "path": "reports/forge/bcap-moonshot-optimistic/phase3-results.json",
+          "sha256": "e8936340b8f266d2c85027d81c9f37fd3e634333d381f79adfc8540627cc85c0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/05f64359d599b78f21310ef53888d1c914c5dfbb/reports/forge/bcap-moonshot-optimistic/phase3-results.json"
+        },
+        "readout": {
+          "path": "reports/forge/bcap-moonshot-optimistic/README.md",
+          "sha256": "c012091d659639c19887a3608b74579047de9f0fb73647f388e26b397cb45bc5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/05f64359d599b78f21310ef53888d1c914c5dfbb/reports/forge/bcap-moonshot-optimistic/README.md"
+        },
+        "saved_audit": {
+          "path": "reports/forge/bcap-moonshot-optimistic/phase3-audit.json",
+          "sha256": "337ff0b83c93ff6279b348364616db0b80798fb58acc847aaf456a31fe401fd5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/05f64359d599b78f21310ef53888d1c914c5dfbb/reports/forge/bcap-moonshot-optimistic/phase3-audit.json"
+        },
+        "media_index": {
+          "path": "reports/forge/bcap-moonshot-optimistic/media/index.json",
+          "sha256": "14ae82a082bddaf3c7838aa86bb03b872e8b3ef5e41d101eca23a61539a7639c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/05f64359d599b78f21310ef53888d1c914c5dfbb/reports/forge/bcap-moonshot-optimistic/media/index.json"
+        },
+        "independent_audit": {
+          "path": "reports/forge/bcap-three-phase/phase3-optimistic-independent-audit.json",
+          "sha256": "9693f9a1d222a4ef0d08e3823c1e1b66cb4bcac70669d1a0aa84fbd370dfcef9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-optimistic-independent-audit.json"
+        },
+        "arms": [
+          {
+            "role": "baseline",
+            "candidate_id": "bcap-moonshot-optimistic-baseline-v1",
+            "candidate_revision": "c68c4bb3080cf0d3768d1e02b23912fe5d439361d9fedea5058948a30a2a7b9a",
+            "study_id": "bcap-moonshot-optimistic-baseline-v1-study"
+          },
+          {
+            "role": "candidate",
+            "candidate_id": "bcap-moonshot-optimistic-candidate-v1",
+            "candidate_revision": "d6d120c4394535a72fb6efc765d4648e4e05528393398c2e47e0d93c5ec88157",
+            "study_id": "bcap-moonshot-optimistic-candidate-v1-study"
+          }
+        ],
+        "certified_gate_counts": {
+          "baseline": {
+            "1": {
+              "PASS": 6,
+              "FAIL": 0,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          },
+          "candidate": {
+            "1": {
+              "PASS": 3,
+              "FAIL": 3,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 0,
+              "FAIL": 8,
+              "unresolved": 2
+            }
+          }
+        },
+        "verified_consumption_pairs": 14,
+        "unverified_consumption_tasks": [
+          {
+            "task_id": "five_word_joint_hold",
+            "original_tier": 2,
+            "baseline": "PASS",
+            "candidate": "BLOCKED",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 4834
+            },
+            "own_prefix_steps": {
+              "baseline": 834
+            },
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          },
+          {
+            "task_id": "gaussian1d_stability",
+            "original_tier": 2,
+            "baseline": "FAIL",
+            "candidate": "BLOCKED",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 6000
+            },
+            "own_prefix_steps": {
+              "baseline": 1000
+            },
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          }
+        ],
+        "complete_verified_tier2_repairs": [],
+        "paid_seconds_including_predecessors": 7947.115454701318,
+        "execution_retries": 2,
+        "actual_training_gifs": 30,
+        "qualification_input": false
+      },
+      {
+        "track": "anisotropic",
+        "source_commit": "ad29d3b475ec724a7f4b3c668ad54b814a00736f",
+        "source_digest": "883c2cde79f5565b8449cc3571004e50f73bfc565f2bb86d6c032c234f7917a1",
+        "registration_sha256": "9ba02cba4eb281a630a65c1109605d01c5da4ce0249c8c5cfcb4fa9c543820f1",
+        "publication_commit": "d1537d597fa063228d7fc7af59f91573642bd461",
+        "pr": "https://github.com/255BITS/ParticleGAN/pull/380",
+        "result": {
+          "path": "reports/forge/bcap-moonshot-anisotropic/phase3-results.json",
+          "sha256": "5486cc407a2069cacf195a5fe6e4db436e51b9f457f715bd31fd6ecc56dac476",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/d1537d597fa063228d7fc7af59f91573642bd461/reports/forge/bcap-moonshot-anisotropic/phase3-results.json"
+        },
+        "readout": {
+          "path": "reports/forge/bcap-moonshot-anisotropic/README.md",
+          "sha256": "3a326667042469243fe1557eb70394d699e2aa4d49ea3c255627ff584d0eac0c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/d1537d597fa063228d7fc7af59f91573642bd461/reports/forge/bcap-moonshot-anisotropic/README.md"
+        },
+        "saved_audit": {
+          "path": "reports/forge/bcap-moonshot-anisotropic/phase3-audit.json",
+          "sha256": "157a481b217790e2ca01e892821c2da4f7491904473ba0238a19aea1cea555c6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/d1537d597fa063228d7fc7af59f91573642bd461/reports/forge/bcap-moonshot-anisotropic/phase3-audit.json"
+        },
+        "media_index": {
+          "path": "reports/forge/bcap-moonshot-anisotropic/media/index.json",
+          "sha256": "f036b0f049ddf30d38d497e87f355ea0ddabd8d2b7feaae3262f70111762847f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/d1537d597fa063228d7fc7af59f91573642bd461/reports/forge/bcap-moonshot-anisotropic/media/index.json"
+        },
+        "independent_audit": {
+          "path": "reports/forge/bcap-three-phase/phase3-anisotropic-independent-audit.json",
+          "sha256": "5c7984eff4e287deb8a10755fe68217942d6239741425f68060d57f079149491",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-anisotropic-independent-audit.json"
+        },
+        "arms": [
+          {
+            "role": "baseline",
+            "candidate_id": "bcap-moonshot-anisotropic-v1-baseline",
+            "candidate_revision": "2a263210f0b31bb739bcb4bb840e46220355fd0e336bdc57c92602c732afd43b",
+            "study_id": "bcap-moonshot-anisotropic-v1-baseline-study"
+          },
+          {
+            "role": "candidate",
+            "candidate_id": "bcap-moonshot-anisotropic-v1-candidate",
+            "candidate_revision": "9f7b33b37644bdc1722b760c7b584b079db1d0ac6c96f5b91a7ae9f9df0895a2",
+            "study_id": "bcap-moonshot-anisotropic-v1-candidate-study"
+          }
+        ],
+        "certified_gate_counts": {
+          "baseline": {
+            "1": {
+              "PASS": 6,
+              "FAIL": 0,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          },
+          "candidate": {
+            "1": {
+              "PASS": 4,
+              "FAIL": 2,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          }
+        },
+        "verified_consumption_pairs": 15,
+        "unverified_consumption_tasks": [
+          {
+            "task_id": "five_word_joint_hold",
+            "original_tier": 2,
+            "baseline": "PASS",
+            "candidate": "PASS",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 4834,
+              "candidate": 5667
+            },
+            "own_prefix_steps": {
+              "baseline": 834,
+              "candidate": 1667
+            },
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          }
+        ],
+        "complete_verified_tier2_repairs": [],
+        "paid_seconds_including_predecessors": 11215.33839058653,
+        "execution_retries": 6,
+        "actual_training_gifs": 32,
+        "qualification_input": false
+      },
+      {
+        "track": "sinkhorn",
+        "source_commit": "80d165fc3550625e08cfb7e696cf7e86adfa91ec",
+        "source_digest": "1f494ad8975b2b26fe53519c04144ce154840e376c49d92a9c714ca13172b668",
+        "registration_sha256": "28fb6dffa02ac3e520228a720dfc5fd0f93876d2f458e0fc6a1f5b6f9dec3c4c",
+        "publication_commit": "9888d4524f0dfae755d692cf7e82b83cc487ec6e",
+        "pr": "https://github.com/255BITS/ParticleGAN/pull/379",
+        "result": {
+          "path": "reports/forge/bcap-moonshot-sinkhorn/phase3-results.json",
+          "sha256": "27a3b22941bd7a87f4c261e119a567ed780f6c515b2eed7cf14237d872337f1e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/9888d4524f0dfae755d692cf7e82b83cc487ec6e/reports/forge/bcap-moonshot-sinkhorn/phase3-results.json"
+        },
+        "readout": {
+          "path": "reports/forge/bcap-moonshot-sinkhorn/README.md",
+          "sha256": "691c0e19f035def45e2ab4ff5e0b39dd3e324678001573057bd85e04c8909762",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/9888d4524f0dfae755d692cf7e82b83cc487ec6e/reports/forge/bcap-moonshot-sinkhorn/README.md"
+        },
+        "saved_audit": {
+          "path": "reports/forge/bcap-moonshot-sinkhorn/phase3-audit.json",
+          "sha256": "5428d40679de58b512e4df9b32b8ae7692c31b04c390de00ab5a46e792d13339",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/9888d4524f0dfae755d692cf7e82b83cc487ec6e/reports/forge/bcap-moonshot-sinkhorn/phase3-audit.json"
+        },
+        "media_index": {
+          "path": "reports/forge/bcap-moonshot-sinkhorn/media/index.json",
+          "sha256": "cec72a048bb817a2feee76201079b0cb590f921a6a554a423bcd3d8ecf2dbe1f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/9888d4524f0dfae755d692cf7e82b83cc487ec6e/reports/forge/bcap-moonshot-sinkhorn/media/index.json"
+        },
+        "independent_audit": {
+          "path": "reports/forge/bcap-three-phase/phase3-sinkhorn-independent-audit.json",
+          "sha256": "a16b68a74558cc8c67ff85401798734bef3e84957cb3274d3516de1c80b28aa5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-sinkhorn-independent-audit.json"
+        },
+        "arms": [
+          {
+            "role": "baseline",
+            "candidate_id": "bcap-moonshot-sinkhorn-baseline-v1",
+            "candidate_revision": "f274afae2482c66430f970d5b7c60747b9b5934e159ddc9b662313f78e41e282",
+            "study_id": "bcap-moonshot-sinkhorn-baseline-v1-study"
+          },
+          {
+            "role": "candidate",
+            "candidate_id": "bcap-moonshot-sinkhorn-candidate-v1",
+            "candidate_revision": "3cd446d18eb95ed58b9ff33ac9c675d6fac82bc2ec076eedf220d87df7cf950b",
+            "study_id": "bcap-moonshot-sinkhorn-candidate-v1-study"
+          }
+        ],
+        "certified_gate_counts": {
+          "baseline": {
+            "1": {
+              "PASS": 6,
+              "FAIL": 0,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          },
+          "candidate": {
+            "1": {
+              "PASS": 4,
+              "FAIL": 2,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 2,
+              "FAIL": 8,
+              "unresolved": 0
+            }
+          }
+        },
+        "verified_consumption_pairs": 15,
+        "unverified_consumption_tasks": [
+          {
+            "task_id": "five_word_joint_hold",
+            "original_tier": 2,
+            "baseline": "PASS",
+            "candidate": "PASS",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 4834,
+              "candidate": 6501
+            },
+            "own_prefix_steps": {
+              "baseline": 834,
+              "candidate": 2501
+            },
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          }
+        ],
+        "complete_verified_tier2_repairs": [
+          "vector_anisotropic"
+        ],
+        "paid_seconds_including_predecessors": 11763.451632810375,
+        "execution_retries": 3,
+        "actual_training_gifs": 32,
+        "qualification_input": false
+      },
+      {
+        "track": "secant",
+        "source_commit": "ea194a7354c1dd2f1c86f08612cf592be9ced12a",
+        "source_digest": "f9f8aba19a0ba70c6f78735e2c5b7964c5570cc36ef5c0452885593c9176ebe3",
+        "registration_sha256": "f20ade8889a9c2b9e83ca7e7fd6e6d059519f7a9dcd4b2621c9f172c88efe275",
+        "publication_commit": "c2768b63f17118527ff477b842ca3f2b42f9820a",
+        "pr": "https://github.com/255BITS/ParticleGAN/pull/381",
+        "result": {
+          "path": "reports/forge/bcap-moonshot-secant/phase3-results.json",
+          "sha256": "6623fe7ca198880660645ab32e1d50f2562e252ae89eaf8430b359dc62cad612",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/c2768b63f17118527ff477b842ca3f2b42f9820a/reports/forge/bcap-moonshot-secant/phase3-results.json"
+        },
+        "readout": {
+          "path": "reports/forge/bcap-moonshot-secant/README.md",
+          "sha256": "1da326b7984b03a0ab8e9d13941f90eb55cbdf5af56255929bcef64bba633f76",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/c2768b63f17118527ff477b842ca3f2b42f9820a/reports/forge/bcap-moonshot-secant/README.md"
+        },
+        "saved_audit": {
+          "path": "reports/forge/bcap-moonshot-secant/phase3-audit.json",
+          "sha256": "807bcf4941f1dae27bf70e4cc4143129abf18f505c68e83b81fe6c3d1b3d985e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/c2768b63f17118527ff477b842ca3f2b42f9820a/reports/forge/bcap-moonshot-secant/phase3-audit.json"
+        },
+        "media_index": {
+          "path": "reports/forge/bcap-moonshot-secant/media/index.json",
+          "sha256": "ae02deb362e45e9bb3f699bf7f92ce7440ebf7bcf3fd9c68452f4a5a1db3b059",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/c2768b63f17118527ff477b842ca3f2b42f9820a/reports/forge/bcap-moonshot-secant/media/index.json"
+        },
+        "independent_audit": {
+          "path": "reports/forge/bcap-three-phase/phase3-secant-independent-audit.json",
+          "sha256": "8d22910ffcd937eee457bd1cf1f335f4100502f1eac29384bc736668821da720",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-secant-independent-audit.json"
+        },
+        "arms": [
+          {
+            "role": "baseline",
+            "candidate_id": "bcap-moonshot-secant-baseline-v1",
+            "candidate_revision": "828d4bd5aaf129a5a9fb177221348687bfbfb745465d6df392f03d9654ec9db2",
+            "study_id": "bcap-moonshot-secant-baseline-v1-study"
+          },
+          {
+            "role": "candidate",
+            "candidate_id": "bcap-moonshot-secant-candidate-v1",
+            "candidate_revision": "9e2f90eba8f22ba000392f3395f5ab70f9ab2bbdcc4f13738141af5fcf4671ad",
+            "study_id": "bcap-moonshot-secant-candidate-v1-study"
+          }
+        ],
+        "certified_gate_counts": {
+          "baseline": {
+            "1": {
+              "PASS": 6,
+              "FAIL": 0,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          },
+          "candidate": {
+            "1": {
+              "PASS": 4,
+              "FAIL": 1,
+              "unresolved": 1
+            },
+            "2": {
+              "PASS": 0,
+              "FAIL": 9,
+              "unresolved": 1
+            }
+          }
+        },
+        "verified_consumption_pairs": 14,
+        "unverified_consumption_tasks": [
+          {
+            "task_id": "five_word_joint_hold",
+            "original_tier": 2,
+            "baseline": "PASS",
+            "candidate": "BLOCKED",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 4834
+            },
+            "own_prefix_steps": {
+              "baseline": 834
+            },
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          },
+          {
+            "task_id": "five_word_joint_smoke",
+            "original_tier": 1,
+            "baseline": "PASS",
+            "candidate": "INCOMPLETE",
+            "consumed_stream_pair_status": "UNVERIFIED",
+            "completed_steps": {
+              "baseline": 20001
+            },
+            "own_prefix_steps": {},
+            "reason": "Only available complete states; missing arms/different completed budgets remain unverified"
+          }
+        ],
+        "complete_verified_tier2_repairs": [],
+        "paid_seconds_including_predecessors": 10127.952190165248,
+        "execution_retries": 7,
+        "actual_training_gifs": 30,
+        "qualification_input": false
+      },
+      {
+        "track": "confidence",
+        "source_commit": "4bf7d44e6a88faca6e132d19d4755370474ec1dd",
+        "source_digest": "cd167606890d8d30a78df130e5ef1e6c399b35cf87a3dfda2775eec7cda3bf77",
+        "registration_sha256": "5327ccb6703a8fb0d21c8f7530dc8270bd809a7b800931eee8875fa18e1e8a4b",
+        "publication_commit": "4a8796d4c08a29c0ce4628434fb7c0fa3c201570",
+        "pr": "https://github.com/255BITS/ParticleGAN/pull/382",
+        "result": {
+          "path": "reports/forge/bcap-moonshot-confidence/publication/phase3-results.json",
+          "sha256": "92c053d7d25d6fcdced3c7505b7e9e7bccb460a9f2f60ed92e45cbcc064aa6b6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/4a8796d4c08a29c0ce4628434fb7c0fa3c201570/reports/forge/bcap-moonshot-confidence/publication/phase3-results.json"
+        },
+        "readout": {
+          "path": "reports/forge/bcap-moonshot-confidence/publication/README.md",
+          "sha256": "0d83350cba098ee13b811a66a2c9269d59e5f8ea4db254abb90534e2ad092619",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/4a8796d4c08a29c0ce4628434fb7c0fa3c201570/reports/forge/bcap-moonshot-confidence/publication/README.md"
+        },
+        "saved_audit": {
+          "path": "reports/forge/bcap-moonshot-confidence/publication/phase3-audit.json",
+          "sha256": "dfd00b22c3fd054018f0bbfb099a7c3d6f223a578b84b306e107834a71c0cbe0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/4a8796d4c08a29c0ce4628434fb7c0fa3c201570/reports/forge/bcap-moonshot-confidence/publication/phase3-audit.json"
+        },
+        "media_index": {
+          "path": "reports/forge/bcap-moonshot-confidence/publication/media/index.json",
+          "sha256": "213d835db6cc4588dde987823eac595ff963445e88703d14264b8c582556edad",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/4a8796d4c08a29c0ce4628434fb7c0fa3c201570/reports/forge/bcap-moonshot-confidence/publication/media/index.json"
+        },
+        "independent_audit": {
+          "path": "reports/forge/bcap-three-phase/phase3-confidence-independent-audit.json",
+          "sha256": "df2edfa5f6e19f1ceea1cfb3c66ee15eea20a7abbae9757920e1b6aa84c34d9c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/phase3-confidence-independent-audit.json"
+        },
+        "arms": [
+          {
+            "role": "baseline",
+            "candidate_id": "bcap-moonshot-confidence-baseline-v1",
+            "candidate_revision": "b64ec35fee8ca0cef9bea6ba45f7f3c59f6e663af3f25855be2576332ab23264",
+            "study_id": "bcap-moonshot-confidence-baseline-v1-study"
+          },
+          {
+            "role": "candidate",
+            "candidate_id": "bcap-moonshot-confidence-candidate-v1",
+            "candidate_revision": "0b57ab295234b2816b38cdc5cd5da5f04b307143e0f18c72ec71cd2aedb068da",
+            "study_id": "bcap-moonshot-confidence-candidate-v1-study"
+          }
+        ],
+        "certified_gate_counts": {
+          "baseline": {
+            "1": {
+              "PASS": 6,
+              "FAIL": 0,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 1,
+              "FAIL": 9,
+              "unresolved": 0
+            }
+          },
+          "candidate": {
+            "1": {
+              "PASS": 4,
+              "FAIL": 2,
+              "unresolved": 0
+            },
+            "2": {
+              "PASS": 2,
+              "FAIL": 8,
+              "unresolved": 0
+            }
+          }
+        },
+        "verified_consumption_pairs": 16,
+        "unverified_consumption_tasks": [],
+        "complete_verified_tier2_repairs": [
+          "vector_anisotropic"
+        ],
+        "paid_seconds_including_predecessors": 3251.801244717999,
+        "execution_retries": 0,
+        "actual_training_gifs": 32,
+        "qualification_input": false
+      }
+    ],
+    "projection_followup": {
+      "track": "projection",
+      "source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "registration_sha256": "91e303bf4422f80cd07cc94d8bec021bcdea0c3ee6c80d0102f514b830e1ad1b",
+      "publication_commit": "babfe7b83d5eff2cf865bbf6c05cbf9241091adf",
+      "pr": "https://github.com/255BITS/ParticleGAN/pull/383",
+      "result": {
+        "path": "reports/forge/bcap-projection-baseline-review/phase3-results.json",
+        "sha256": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/phase3-results.json"
+      },
+      "readout": {
+        "path": "reports/forge/bcap-projection-baseline-review/README.md",
+        "sha256": "0f2dd7dacce99a06e3169dcb449f35fa8def1982b73b148fbd61c57daeefe474",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/README.md"
+      },
+      "saved_audit": {
+        "path": "reports/forge/bcap-projection-baseline-review/phase3-audit.json",
+        "sha256": "f899ae8ca16e7e2e64af882b539dc3ea38920f7ccb25c82ec501635df36da80d",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/phase3-audit.json"
+      },
+      "media_index": {
+        "path": "reports/forge/bcap-projection-baseline-review/media/index.json",
+        "sha256": "d4cb571e97fdb3cd58096af3c3cd7f8af4f804066571ca6a96506d9aa9f6c9e4",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/media/index.json"
+      },
+      "independent_audit": {
+        "path": "reports/forge/bcap-three-phase/projection-independent-audit.json",
+        "sha256": "d83f24a388771aac36cb8af962895d97860aa00d191e99c582eb73b277581393",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/projection-independent-audit.json"
+      },
+      "arms": [
+        {
+          "role": "baseline",
+          "candidate_id": "bcap-projection-baseline-review-baseline-v1",
+          "candidate_revision": "209e00269e2bf265f4f8b761721000a653572dc712ef8bea8c9dd5808c464a47",
+          "study_id": "bcap-projection-baseline-review-baseline-v1-study"
+        },
+        {
+          "role": "candidate",
+          "candidate_id": "bcap-projection-baseline-review-direction-v1",
+          "candidate_revision": "a70ab6f1b5ae46fc21cb8ddf6521ce3e928696aca7873852b7b40c356dd25a8b",
+          "study_id": "bcap-projection-baseline-review-direction-v1-study"
+        }
+      ],
+      "certified_gate_counts": {
+        "baseline": {
+          "1": {
+            "PASS": 6,
+            "FAIL": 0,
+            "unresolved": 0
+          },
+          "2": {
+            "PASS": 1,
+            "FAIL": 9,
+            "unresolved": 0
+          }
+        },
+        "candidate": {
+          "1": {
+            "PASS": 6,
+            "FAIL": 0,
+            "unresolved": 0
+          },
+          "2": {
+            "PASS": 3,
+            "FAIL": 7,
+            "unresolved": 0
+          }
+        }
+      },
+      "verified_consumption_pairs": 16,
+      "unverified_consumption_tasks": [],
+      "complete_verified_tier2_repairs": [
+        "residual_student",
+        "trajectory"
+      ],
+      "paid_seconds_including_predecessors": 3541.1636059249986,
+      "execution_retries": 0,
+      "actual_training_gifs": 32,
+      "qualification_input": false,
+      "counter_proof": {
+        "path": "reports/forge/bcap-projection-baseline-review/counter-proof.json",
+        "sha256": "23f458cf4b38e38980638723f48a4536c443ac3bdd53bcf1de545fcd113d5b75",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/counter-proof.json"
+      },
+      "reporting_helper_history": {
+        "path": "reports/forge/bcap-projection-baseline-review/counter-proof-history.json",
+        "sha256": "bb826d985da3f4b56fc8c5ef370f3e442eda1355499a1ec5a6bdf19098c4985d",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/counter-proof-history.json"
+      }
+    },
+    "historical_memory_archive": {
+      "reports/forge/EXPERIMENT_MEMORY.md": {
+        "path": "reports/forge/EXPERIMENT_MEMORY.md",
+        "sha256": "023cb146b194680c97b915e4a6711dd22869dbd7b0a6bb8638bc64bed2410764",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/EXPERIMENT_MEMORY.md",
+        "git_blob": "3d65d65a1dbadf14fa2e9a04c0b2efa59b319985"
+      },
+      "reports/forge/compilation.json": {
+        "path": "reports/forge/compilation.json",
+        "sha256": "88571665ac0d66add6edada9806d2ff4fc61836813ae5c1caab404f0f30e55e0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/compilation.json",
+        "git_blob": "4e3436852b76bb4e8e490c55f67eb406ea6cb396"
+      }
+    }
+  },
+  "task_results": []
+}

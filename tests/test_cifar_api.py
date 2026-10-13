@@ -35,6 +35,7 @@ def test_cifar_optimizer_factory_matches_historical_groups_and_updates(kind):
     import copy
     cfg = {**DEFAULTS, 'z_dim': 3, 'num_particles': 8, 'prior': kind, 'prior_reg': .3}
     recipe = training_recipe(cfg)
+    assert recipe.prior_update == ('learned' if kind == 'learned' else 'frozen')
     g, d = torch.nn.Linear(3, 2), torch.nn.Linear(2, 1)
     d.bias.requires_grad_(False)
     prior = DrawSource(kind, 8, 3, 101, 'cpu')
@@ -58,9 +59,12 @@ def test_cifar_optimizer_factory_matches_historical_groups_and_updates(kind):
     for current, old in zip((g, d, prior), (old_g, old_d, old_prior)):
         for p, q in zip(current.parameters(), old.parameters()):
             torch.testing.assert_close(p, q, rtol=0, atol=0)
-    z = torch.randn(6, 3, requires_grad=True)
-    expected = cfg['prior_reg'] * ParticleRegularizer()(z)
+    z = torch.randn(6, 3, requires_grad=kind == 'learned')
     actual = recipe.make_prior_regularizer()(z)
+    if kind != 'learned':
+        assert actual.item() == 0 and not actual.requires_grad
+        return
+    expected = cfg['prior_reg'] * ParticleRegularizer()(z)
     torch.testing.assert_close(actual, expected, rtol=0, atol=0)
     torch.testing.assert_close(torch.autograd.grad(actual, z)[0], torch.autograd.grad(expected, z)[0], rtol=0, atol=0)
 

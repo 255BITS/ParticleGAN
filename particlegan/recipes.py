@@ -2,14 +2,31 @@
 import math
 from dataclasses import asdict, dataclass, replace
 
+# Promote a registered trainer preset here; model-family factories inherit it.
+DEFAULT_RECIPE = "bcap"
+
+
+def _reject_table_storage_owners(table, tensors):
+    """A frozen sampled table needs storage independent of mutable owners."""
+    import torch
+    if not table.numel() or table.layout != torch.strided:
+        return
+    address = table.untyped_storage().data_ptr()
+    for tensor in tensors:
+        if (isinstance(tensor, torch.Tensor) and tensor.numel()
+                and tensor.layout == torch.strided and tensor.device == table.device
+                and tensor.untyped_storage().data_ptr() == address):
+            raise ValueError("frozen prior must not share storage with networks or optimizer parameters")
+
 
 @dataclass(frozen=True)
 class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
 
     Fields are validated at construction; ``replace`` returns a modified copy.
-    Two fields exist only for ablations; their defaults are the shipped
-    formulation:
+    Use ``get_recipe()`` for the current default. Dataclass field defaults retain
+    the KA2 restoration contract for older saved configurations.
+    Two fields expose KA2 ablations; their defaults retain that formulation:
 
     * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
       which ties the critic's input gradient to its parameter EMA once the
@@ -46,7 +63,24 @@ class Recipe:
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
+    # Optional finite same-training-panel critic step guard; none preserves history.
+    critic_step_mode: str = "none"
     prior_reg: float = 0.0
+    # The recipe owns learning/freezing and every latent-prior penalty. Tasks
+    # supply the initial distribution, capacity and sampling law.
+    prior_update: str = "learned"
+    prior_regularizer: str = "vicreg"
+    prior_reg_target_std: float = 1.0
+    prior_reg_eps: float = 1e-4
+    prior_l2: float = 0.0
+    # Post-optimizer proximal spring to the initial latent table; zero is exact
+    # baseline behavior. Unlike a gradient penalty, restoration retains size.
+    prior_proximal_strength: float = 0.0
+    prior_coulomb_softening: float = .1
+    prior_coulomb_confinement: float = .35
+    prior_coulomb_neighbors: int = 8
+    prior_sigreg_projections: int = 32
+    prior_sigreg_knots: int = 17
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -78,6 +112,10 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Opt-in label-free transport signal on the same G-phase target batch.
+    kinetic_transport_weight: float = 0.0
+    kinetic_transport_local_weight: float = 0.0
+    kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -177,6 +215,12 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
+    # Native retains the original computation and archived checkpoint identity.
+    optimizer_svd_backend: str = "native"
+    # Opt-in protection of existing G/encoder/prior objectives. Component
+    # callers bind their protected losses before backward only when enabled.
+    constraint_geometry_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -209,6 +253,34 @@ class Recipe:
     generator_idle_mode: str = "batch"
 
     def __post_init__(self):
+        if self.prior_update not in ("learned", "frozen"):
+            raise ValueError("prior_update must be learned or frozen")
+        from .coulomb_prior import CoulombPriorRegularizer
+        CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
+                               confinement=self.prior_coulomb_confinement,
+                               neighbors=self.prior_coulomb_neighbors)
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether", "initial_mmd"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether or initial_mmd")
+        for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
+            if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
+                raise ValueError(f"{key} must be an integer >= {minimum}")
+        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
+            value = getattr(self, key)
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        if self.prior_reg_eps == 0:
+            raise ValueError("prior_reg_eps must be positive")
+        if self.prior_regularizer == "none" and self.prior_reg != 0:
+            raise ValueError("prior_regularizer='none' requires prior_reg=0")
+        if self.prior_update == "frozen" and (self.row_evidence_gate or self.particle_birth_death):
+            raise ValueError("frozen priors require row evidence and birth/death disabled")
+        if self.prior_proximal_strength and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode not in ("none", "direction_blend")
+                or self.continuous_policy is not None or self.lr_control != "mobility"
+                or self.row_evidence_gate or self.particle_birth_death):
+            raise ValueError("prior_proximal_strength requires zero-momentum full DualNorm, "
+                             "geometry none/direction_blend and no adaptive prior policies")
         from .gan_loss import GANLoss
         objective = GANLoss(self.loss, labels=self.loss_labels)
         object.__setattr__(self, "loss_labels", objective.labels)
@@ -224,10 +296,25 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress", "direction_blend"):
+            raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
+        if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
+            raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if self.critic_step_mode not in ("none", "finite_cap"):
+            raise ValueError("critic_step_mode must be none or finite_cap")
+        if self.critic_step_mode == "finite_cap" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.effective_critic_formulation != "bcap" or self.reg_every != 1
+                or self.input_noise_std or self.output_noise_std):
+            raise ValueError("finite_cap requires zero-momentum full DualNorm, every-update BCAP, and zero input/output noise")
         if self.optimizer_convolution not in ("none", "per_offset"):
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if self.optimizer_svd_backend not in ("native", "cpu"):
+            raise ValueError("optimizer_svd_backend must be native or cpu")
+        if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
+            raise ValueError("optimizer_svd_backend requires optimizer_family='dualnorm'")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -384,6 +471,14 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if (type(self.kinetic_transport_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
+            raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+        if (type(self.kinetic_transport_local_weight) not in (int, float)
+                or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
+            raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
+        if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
+            raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -532,6 +627,9 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
+        ``prior_update`` owns learning/freezing. A conflicting ``learnable``
+        override is rejected; change the recipe explicitly instead.
+
         Learnable tables take the ordinary random draw; use
         ``particlegan.init.deterministic_orthogonal_(prior)`` for R2 points (it
         recalibrates MoG spacing). MoG recipes calibrate spacing on the
@@ -540,7 +638,10 @@ class Recipe:
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
-                   "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
+                   "sigma_rel": self.sigma_rel, "standardize": self.standardize,
+                   "learnable": self.prior_update == "learned", **overrides}
+        if options["learnable"] != (self.prior_update == "learned"):
+            raise ValueError("learnable override contradicts Recipe.prior_update")
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
@@ -583,6 +684,26 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
+
+    def kinetic_transport_loss(self, fake, real):
+        """Weighted empirical transport on caller-owned G-phase output batches.
+
+        Enabling this objective requires a host consumer. It draws no samples,
+        detaches real targets and retains gradients through fake outputs. Hosts
+        with zero weight retain their original objective without calling it.
+        """
+        from .kinetic_transport import kinetic_transport_loss
+        return self.kinetic_transport_weight * kinetic_transport_loss(
+            fake, real, projections=self.kinetic_transport_projections)
+
+    def kinetic_transport_local_loss(self, fake, real):
+        """Weighted local-v2 residual on the same caller-owned output batches.
+
+        Anchors, bandwidths and normalizers come from detached real targets.
+        This auxiliary term does not become a protected projection objective.
+        """
+        from .kinetic_transport import kinetic_transport_local_loss
+        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
@@ -683,11 +804,42 @@ class Recipe:
         A supplied module binds Conv2d/ConvTranspose2d weights automatically when
         ``optimizer_convolution='per_offset'``. Bare high-rank tensor iterables
         lack this layout contract and are rejected by DualNorm.
+
+        With ``constraint_geometry_mode != 'none'``, call
+        ``particlegan.optim.constraint_geometry.constraint_geometry_backward``
+        before ``step()`` with the host's existing protected scalar losses.
+        Protection must cover the joint generator/encoder/prior optimizer.
+        The default mode requires no protected-loss hook and retains the
+        original optimizer type and checkpoint format.
+
+        ``prior_proximal_strength > 0`` restores only update-owned latent rows
+        toward their positions at optimizer construction, after the complete
+        base update (including direction blend). Initialize tables first.
+        Checkpoints carry that independent reference and the spring settings.
+        Direct generated coordinates and frozen tables receive no spring.
         """
         from torch import nn
+        if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
+            raise ValueError("trainable latent_table contradicts Recipe.prior_update='frozen'")
         module = params if isinstance(params, nn.Module) else None
         if module is not None:
             params = [p for p in module.parameters() if p.requires_grad]
+        if latent_table is not None and self.prior_update == "frozen":
+            # Materialize each iterator once; optimizer construction must retain
+            # every supplied parameter/group after ownership validation.
+            params = list(params)
+            owners = []
+            for index, value in enumerate(params):
+                if isinstance(value, dict):
+                    group = {**value, "params": list(value["params"])}
+                    params[index] = group
+                    owners.extend(group["params"])
+                else:
+                    owners.append(value)
+            if module is not None:
+                owners.extend(module.buffers())
+            _reject_table_storage_owners(latent_table, owners)
+            latent_table = None
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
@@ -736,9 +888,127 @@ class Recipe:
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
-    def make_prior_regularizer(self, **overrides):
+    def make_prior_regularizer(self, *, prior=None, reference=None, **overrides):
+        if prior is not None and reference is not None and prior is not reference:
+            raise ValueError("prior and reference must identify the same initialized prior")
+        if prior is None:
+            prior = reference
+        if reference is None:
+            reference = prior
+        if self.prior_regularizer == "coulomb":
+            from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
+            options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
+                       "confinement": self.prior_coulomb_confinement,
+                       "neighbors": self.prior_coulomb_neighbors, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            if prior is not None and options["weight"] > 0:
+                options["center"], options["radius"] = coulomb_reference(prior)
+            return CoulombPriorRegularizer(**options)
         from .vicreg_loss import ParticleRegularizer
-        return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
+        if self.prior_regularizer == "sigreg":
+            from .sigreg import SIGReg
+            options = {"weight": self.prior_reg, "projections": self.prior_sigreg_projections,
+                       "knots": self.prior_sigreg_knots, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            return SIGReg(**options)
+        options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
+                   "eps": self.prior_reg_eps, **overrides}
+        if self.prior_regularizer == "moment_tether":
+            unknown = set(options) - {"weight", "target_std", "eps"}
+            if unknown:
+                raise TypeError(f"unsupported moment_tether options: {sorted(unknown)}")
+            if self.prior_update == "learned" and self.prior_reg > 0:
+                from .moment_tether import MomentTetherRegularizer
+                return MomentTetherRegularizer(reference, weight=options["weight"], eps=options["eps"])
+            options["weight"] = 0.
+        if self.prior_regularizer == "none" or self.prior_update == "frozen":
+            options["weight"] = 0.
+        if self.prior_regularizer == "initial_mmd" and options["weight"] > 0:
+            from .initial_mmd import InitialMMDRegularizer
+            if prior is None:
+                raise ValueError("initial_mmd requires prior= after public initialization")
+            if set(overrides) - {"weight"}:
+                raise ValueError("initial_mmd has fixed panel/kernel scales; only weight can be overridden")
+            return InitialMMDRegularizer.from_priors(prior, weight=options["weight"])
+        return ParticleRegularizer(**options)
+
+    def prior_regularization(self, rows, *, regularizer=None, prior=None, reference=None):
+        """Return the complete weighted latent-prior objective, once.
+
+        Callers select rows using their declared sampling law. Frozen rows and
+        disabled coefficients do no variance/covariance work or optimizer work.
+        The factory is the extension point for future regularizer families.
+        """
+        if self.prior_update == "frozen" or not rows.requires_grad:
+            return rows.new_zeros(())
+        # Empty rows preserve a zero gradient without reading nonfinite values
+        # or doing any variance/covariance work for disabled penalties.
+        result = rows[:0].sum()
+        if self.prior_reg > 0:
+            result = (self.make_prior_regularizer(prior=prior, reference=reference) if regularizer is None else regularizer)(rows)
+        if self.prior_l2 > 0:
+            result = result + self.prior_l2 * rows.square().mean()
+        return result
+
+    def prior_regularizer_checkpoint(self, regularizer):
+        """Optional state for active stochastic families; old checkpoints stay flat."""
+        if (self.prior_regularizer == "sigreg" and self.prior_update == "learned"
+                and self.prior_reg > 0 and regularizer is not None):
+            state = regularizer.state_dict()
+            if state:
+                return {"prior_regularizer": state}
+        return {}
+
+    def restore_prior_regularizer(self, regularizer, state, *, validate_only=False):
+        """Validate an optional regularizer checkpoint before restoring its draws."""
+        from copy import deepcopy
+        expected = self.prior_regularizer_checkpoint(regularizer)
+        if not expected:
+            if state is not None:
+                raise ValueError("inactive prior regularizer cannot restore active state")
+            return
+        if not isinstance(state, dict):
+            raise ValueError("active prior regularizer requires checkpoint state")
+        deepcopy(regularizer).load_state_dict(state)
+        if not validate_only:
+            regularizer.load_state_dict(state)
+
+    def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
+        """Reject aliases before freezing, including already-frozen buffers."""
+        if self.prior_update != "frozen" or not hasattr(prior, "z"):
+            return
+        for module in modules:
+            if module is not None:
+                _reject_table_storage_owners(prior.z, (*module.parameters(), *module.buffers()))
+        for optimizer in optimizers:
+            _reject_table_storage_owners(prior.z,
+                (p for group in optimizer.param_groups for p in group["params"]))
+
+    def apply_prior_policy(self, prior):
+        """Bind the prior policy after initialization, before making optimizers.
+
+        Initializing a trainable table first lets learned/frozen comparisons use
+        identical deterministic locations and consume identical init streams.
+        Freezing registers locations as a buffer, keeping sampling/state keys.
+        """
+        if not hasattr(prior, "z"):
+            return prior  # Gaussian priors have no trainable location table.
+        if self.prior_update == "learned":
+            if not prior.z.requires_grad:
+                raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
+            if self.prior_regularizer == "moment_tether" and self.prior_reg > 0:
+                from .moment_tether import capture_initial_moments
+                capture_initial_moments(prior)
+        elif prior.z.requires_grad:
+            rows = prior.z.detach()
+            del prior.z
+            prior.register_buffer("z", rows)
+        if self.prior_regularizer == "coulomb" and self.prior_update == "learned" and self.prior_reg > 0:
+            from .coulomb_prior import capture_coulomb_reference
+            capture_coulomb_reference(prior)
+        return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
                         require_latent_damping=False, **adam_kwargs):
@@ -773,6 +1043,9 @@ class Recipe:
         groups and ``lr`` for normalized groups (the same role multipliers).
         """
         from .capabilities import prior_mechanisms
+        if prior is not None:
+            self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
+            self.apply_prior_policy(prior)
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
@@ -802,7 +1075,7 @@ class Recipe:
                            **({"role": "prior"} if normalized else {}),
                            **({"eps": self.prior_eps} if self.prior_eps is not None else {})})
         mechanisms = prior_mechanisms(prior,
-            latent_damping_max_rate=self.latent_damping_max_rate,
+            latent_damping_max_rate=self.latent_damping_max_rate if self.prior_update == "learned" else 0.,
             prior_beta1=(self.prior_betas or self.betas)[0])
         if require_latent_damping and not mechanisms["a2"]["enabled"]:
             raise ValueError("required A2 latent damping unavailable: " + mechanisms["a2"]["reason"])
@@ -816,10 +1089,13 @@ class Recipe:
 
 
 
-def get_recipe(name="gan", **overrides):
+def get_recipe(name="gan", *, trainer=None, **overrides):
     """Select a model family or a policy preset with explicit overrides.
 
-    Model families share the default KA2 formulation. ``"e22"`` selects the
+    Model families share the trainer preset selected by ``DEFAULT_RECIPE``.
+    ``trainer="ka2"`` pins a model family to an explicit trainer preset.
+    Explicit trainer presets remain independent of that selector.
+    ``"e22"`` selects the
     schedule-free DV12/stationarity policy, row evidence, critic-feature
     birth/death, learned output noise and served averaging. Its default
     dimensions are the native 100-Gaussian task's 20,000 particles, latent
@@ -830,12 +1106,15 @@ def get_recipe(name="gan", **overrides):
     binding, paired observations and separate guard contexts. Its evidence
     and restructuring law differ from the independent-row formulation.
     ``"atlas"`` adds automatic feature-cell selection (128 cells) and the
-    settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
+    settled optimizer-reopen guard to E22. ``"ka2"`` retains the KA2 recipe;
     ``"k3p"`` explicitly selects the earlier critic formulation.
     ``"bcap"`` selects zero-momentum dualnorm with G/E step .012, D step
     .018 and sampled-prior row step .03, non-saturating loss, smoothing .001,
-    per-offset convolution updates, fixed real/fake input-gradient caps
-    and constant rates. ``"bcap_adam"`` retains the earlier native-Adam
+    per-offset convolution updates, fixed real/fake input-gradient caps,
+    direction blending for conflicting task-owned objectives and constant
+    rates. This is the selected research recipe, not a calibrated robustness
+    claim. Set ``constraint_geometry_mode="none"`` for the earlier DualNorm
+    recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
     No research configuration file is read at runtime.
@@ -843,8 +1122,22 @@ def get_recipe(name="gan", **overrides):
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
     ``recipe.replace(name=...)`` for custom report labels.
     """
-    families = {
+    models = {
         "gan": {},
+        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
+        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
+                          prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
+                       num_particles=400, z_dim=2),
+        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
+                        num_particles=400, z_dim=2),
+        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
+                         sigma_rel=.025, num_particles=1024, z_dim=64,
+                         batch_size=64, routing_temperature=.125,
+                         distance_reduction="mean"),
+    }
+    presets = {
         "ka2": {},
         "k3p": dict(critic_formulation="k3p"),
         "bcap_adam": dict(critic_formulation="bcap", optimizer_family="adam", reg_arm="b_cap",
@@ -864,31 +1157,20 @@ def get_recipe(name="gan", **overrides):
                     birth_death_isolation=True, row_evidence_null="scaled",
                     serve_average=4.0, reopen_signal="optimizer",
                     reopen_anchor="release"),
-        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
-        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
-        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
-                          prior_kind="mog", sigma_rel=.025, num_particles=400),
-        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
-                       num_particles=400, z_dim=2),
-        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
-                        num_particles=400, z_dim=2),
-        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
-                         sigma_rel=.025, num_particles=1024, z_dim=64,
-                         batch_size=64, routing_temperature=.125,
-                         distance_reduction="mean"),
     }
-    families["bcap"] = {
-        **families["bcap_adam"], "optimizer_family": "dualnorm",
+    presets["bcap"] = {
+        **presets["bcap_adam"], "optimizer_family": "dualnorm",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5,
         "optimizer_momentum": 0.,
         "loss": "non_saturating", "optimizer_smoothing": .001,
         "optimizer_convolution": "per_offset",
+        "constraint_geometry_mode": "direction_blend",
     }
-    families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
+    presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
-    families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
-    families["halloween"] = {
-        **families["bcap_adam"], "reg_coeff": 0.0,
+    presets["e22_routed"] = {**presets["e22"], "row_policy": "routed_paired"}
+    presets["halloween"] = {
+        **presets["bcap_adam"], "reg_coeff": 0.0,
         "lr": 0.008020980209802098, "d_lr_mult": 0.4922016232592352,
         "betas": (0.6119661196611966, 0.5612256122561226),
         "d_betas": (0.1051710517105171, 0.7203172031720317),
@@ -897,11 +1179,20 @@ def get_recipe(name="gan", **overrides):
         "adam_variant": "tensorflow_v1", "loss": "least_squares",
         "loss_labels": (-1.0, 1.0, 1.0), "lr_schedule": "constant",
     }
-    if name not in families:
-        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
-    options = families[name]
+    if name in models:
+        selected = DEFAULT_RECIPE if trainer is None else trainer
+        if selected not in presets:
+            owner = "DEFAULT_RECIPE" if trainer is None else "trainer"
+            raise ValueError(f"{owner} must name a trainer preset, got {selected!r}")
+        options = {"name": selected, **presets[selected], **models[name]}
+    elif name in presets:
+        if trainer is not None:
+            raise ValueError("trainer is only supported with a model-family name")
+        options = presets[name]
+    else:
+        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join((*models, *presets))}")
     if name != "gan":
-        options = {"name": name, **options}
+        options = {**options, "name": name}
     return Recipe(**{**options, **overrides})
 
 

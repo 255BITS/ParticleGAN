@@ -13,7 +13,8 @@ import pytest
 import torch
 from benchmarks.toy_audit import api_contract, api_family_search, api_run
 from experiments.forge.policy_execution import PolicyCoordinator
-from legacy_toy_comparisons import CURRENT_DISCOVERY, archived_cases
+from legacy_toy_comparisons import (CURRENT_DISCOVERY, archived_cases,
+                                   archived_discovery_bytes, archived_runner_source)
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("generator_step_runner_tests", ROOT / "reports/forge/generator-step-20261003/run_generator_step.py")
@@ -37,8 +38,17 @@ def one_cpu_thread(monkeypatch):
 
 
 @pytest.fixture
-def cases(monkeypatch):
+def cases(monkeypatch, tmp_path):
+    archived_runner_source(runner, tmp_path, monkeypatch)
     return archived_cases([name for name, _, _ in runner.CASE_ROWS], monkeypatch)
+
+
+def test_changed_archived_discovery_bytes_are_rejected_before_queue(tmp_path, cases, monkeypatch):
+    monkeypatch.setattr(PolicyCoordinator, "__init__", lambda *a, **k: pytest.fail("drift reached queue"))
+    path = runner.ROOT / next(iter(runner.DISCOVERY_INPUTS))
+    path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(ValueError, match="original public discovery data changed"):
+        runner.source(cases)
 
 
 def test_new_comparison_contract_blocks_archived_study_before_queue(tmp_path, monkeypatch):
@@ -288,7 +298,8 @@ def test_copied_delegated_helper_drift_cannot_enter_an_unchanged_source_snapshot
     for relative in paths:
         destination = copied / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes((ROOT / relative).read_bytes())
+        destination.write_bytes(archived_discovery_bytes(relative, runner.DISCOVERY_INPUTS[relative])
+            if relative in runner.DISCOVERY_INPUTS else (ROOT / relative).read_bytes())
     # Small synthetic source inventory; all real file-byte/snapshot guards stay active.
     monkeypatch.setattr(runner, "ROOT", copied)
     monkeypatch.setattr(api_family_search, "_source", lambda cases: {"commit": "0" * 40, "files_sha256": {}})

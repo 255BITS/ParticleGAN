@@ -1,0 +1,54 @@
+{
+  "candidate_id": "pr261-routed-latent-noise-coverage",
+  "candidate_revision": "7943dda321c1011dd3c86fc598a92b3493159a83",
+  "conclusion": "Yes, within the generated routed E22 FP32 fixture: growing shared training noise support from 2 to 8 seeds cut final held-out TEST RMSE 23.09%, 0.0533702454 to 0.0410462237, at 1,024 native updates per arm; all 11 preregistered gates passed. The eight-seed arm improved at all five fixed endpoints (896-1024), for every caption source and both held-out noise seeds, under both common frozen terminal critics; the TEST-minus-FIT MSE gap fell from 0.0005545459 to -0.0000674414, and zeroing its particle code raised RMSE to 0.0895439938. Both arms proposed 10 structural events and accepted zero, so this is a data-coverage effect, not a structural-controller mechanism. Limits: generated FP32 fixture with smaller dimensions than Supra; no Supra transfer tested; full-task LoRA RMSE 0.0633609846 still beats best particle 0.0679143351; no default adoption or Forge promotion. The variable is support size (228 vs 912 unique fit contexts), not a seed repeat.",
+  "evidence_scope": "historical",
+  "goal": "quality_coverage",
+  "hypothesis": "Does growing the shared training noise support from 2 to 8 seeds improve unseen-noise conditional recovery when architecture, native game, initialization, updates and paired addresses are held fixed?",
+  "lifecycle": "concluded",
+  "mechanism_class": "training_latent_support_coverage",
+  "next_action": "If the routed or Supra latent-coverage question is picked up again, test expanded noise support on the actual frozen Supra teacher as one declared delta. Do not repeat the generated cohort and do not change defaults.",
+  "prior": {
+    "kind": "particles",
+    "scope": "generated routed E22 fixture; not the Forge MoG cohort"
+  },
+  "provenance": {
+    "audit_files": [
+      {
+        "path": "reports/forge/continuous-baseline-20261003/open-toy-pr-review.json",
+        "sha256": "36f40663156c129aedd1b99326b7574e739140431b063615231945fbb75526d1"
+      }
+    ],
+    "gpu_wall_cap_seconds": 300,
+    "gpu_wall_seconds": 228.241,
+    "importer_version": "pr261-coverage-context-v1",
+    "producer_report_sha256": "b3e926090f7eef219bbcba015dc819b57ef30d21d6b86505f35dc15b9b8317b7",
+    "protocol": {
+      "path": "docs/e22_routed_latent_coverage_v2.json",
+      "sha256": "edbf56db270d378234be899cb022aa94c882cba686819eaa243301dbb43a6567"
+    },
+    "raw_location": "runs/latent-coverage-science-v2 (local, not in Git)",
+    "raw_observations_sha256": "4da8f30dc1c9aad5cdfe574e0d7c7c11c12ed87e92844842e34c332bced4e61f",
+    "reader_assertions": 1984,
+    "readout": {
+      "path": "docs/e22_routed_latent_coverage_readout_v2.md",
+      "sha256": "81574f8ca88490881efdea708d4ff4d04c0675a13ce1f68607e712748e48eba3"
+    },
+    "reuse_eligible": false,
+    "source_head": "7943dda321c1011dd3c86fc598a92b3493159a83",
+    "source_pr": 261,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/261",
+    "verified_by_forge": false
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr261-routed-latent-noise-coverage-7943dda321c1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/continuous-baseline-20261003/OPEN_TOY_PR_REVIEW.md",
+    "sha256": "dcd0fb52db21d7b89c9d6793249544e41e848aa81cb0d8a48f3b441eaaceb295"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Metrics are from the generated routed E22 fixture at PR261 head 7943dda3; this record carries no qualification and fills no Forge task cell."
+}

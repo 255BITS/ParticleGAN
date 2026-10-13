@@ -1,0 +1,618 @@
+{
+  "forward_points": 48,
+  "frozen_runtime_files": {
+    "benchmarks/toy_audit/api_images.py": "c1573e6e34c05302db8608982ff03819447a38b4a310a91aaf1832508c3e4336",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+    "experiments/forge/api.py": "de01ee2c64a90baf6965c7339b37d69a14acb5c7296a3690ec6c38cc9ea5aecd",
+    "experiments/forge/word_adapter.py": "e5a4a4bd6fefa5ab7d51738b13e5145003564e7fea0b51846bd69253f81f6948",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/k3p.py": "63936d55a20b5c8f67606c402203e8fc7dbac7941ae949acaee236e931221808",
+    "particlegan/optim/dualnorm.py": "89d9fec995cff6ccabb9b73f039177f41e03aceca446c3837a3f1009658f831d",
+    "particlegan/policy.py": "c9816a0a86a63ad05f43245bc93246ca3d591983003f230d75531c9ca922e6e0",
+    "particlegan/recipes.py": "1f1d8485d8af94631107ee4e478decf07e723900ed48f1f7b22bb1182f10e375"
+  },
+  "model_updates": 0,
+  "original_raw_readout_sha256": "ce2e42cdf5c3f63bbfdb5848b13cc539ea5fa837fac05cd30faca723795805e0",
+  "protocol_id": "fivewords-latent-line-supplement-v1",
+  "protocol_sha256": "50c33af0d26c347b4565c787229007a08a60a0d409a6849d7b20fa1d35629b1b",
+  "qualification_input": false,
+  "records": [
+    {
+      "arm": "truncated-serial",
+      "cohort": "unsmoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": true,
+      "joint_loss_change_t1_minus_t0": -3.7670135498046875e-05,
+      "original_exact_goal_pass": true,
+      "points": [
+        {
+          "d_adversarial": 0.6931995153427124,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933866739273071,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.6932032704353333,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933828592300415,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.6932089328765869,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933771967887878,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.6932182908058167,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933677792549133,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.6932276487350464,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933583617210388,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.6932370066642761,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933490037918091,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "full-serial",
+      "cohort": "unsmoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": false,
+      "joint_loss_change_t1_minus_t0": -0.0017671585083007812,
+      "original_exact_goal_pass": false,
+      "points": [
+        {
+          "d_adversarial": 0.5975505113601685,
+          "d_penalty": 0.000436059373896569,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0196055173873901,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.5976422429084778,
+          "d_penalty": 0.000436059373896569,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0194364786148071,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.5977848768234253,
+          "d_penalty": 0.0005029290332458913,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0191751718521118,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.5980232357978821,
+          "d_penalty": 0.0005029290332458913,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0187355279922485,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.5982693433761597,
+          "d_penalty": 0.0005029290332458913,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0182888507843018,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.5985210537910461,
+          "d_penalty": 0.0005029290332458913,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0178383588790894,
+          "minimum_reconstruction_token_probability": 0.0,
+          "reconstruction_exact": false,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "truncated-threaded",
+      "cohort": "unsmoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": true,
+      "joint_loss_change_t1_minus_t0": -0.00012028217315673828,
+      "original_exact_goal_pass": true,
+      "points": [
+        {
+          "d_adversarial": 0.6930610537528992,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933119297027588,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.6930730938911438,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932999491691589,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.6930912137031555,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932818293571472,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.6931213140487671,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932517886161804,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.6931514739990234,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932217478752136,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.693181574344635,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.693191647529602,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "full-threaded",
+      "cohort": "unsmoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": true,
+      "joint_loss_change_t1_minus_t0": -0.00023436546325683594,
+      "original_exact_goal_pass": true,
+      "points": [
+        {
+          "d_adversarial": 0.6938042044639587,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933292150497437,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.6938272714614868,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6933057904243469,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.6938619613647461,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932706236839294,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.6939196586608887,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6932119727134705,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.6939774751663208,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.693153440952301,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.6940352320671082,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6930948495864868,
+          "minimum_reconstruction_token_probability": 1.0,
+          "reconstruction_exact": true,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "truncated-serial",
+      "cohort": "smoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": false,
+      "joint_loss_change_t1_minus_t0": -0.0004239082336425781,
+      "original_exact_goal_pass": false,
+      "points": [
+        {
+          "d_adversarial": 0.6955510377883911,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6934905052185059,
+          "minimum_reconstruction_token_probability": 0.0006752923945896327,
+          "reconstruction_exact": false,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.6955944895744324,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6934481859207153,
+          "minimum_reconstruction_token_probability": 0.00026741038891486824,
+          "reconstruction_exact": false,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.6956594586372375,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6933845281600952,
+          "minimum_reconstruction_token_probability": 6.692508031846955e-05,
+          "reconstruction_exact": false,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.6957679390907288,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6932784914970398,
+          "minimum_reconstruction_token_probability": 6.6984125624003354e-06,
+          "reconstruction_exact": false,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.69587641954422,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6931725740432739,
+          "minimum_reconstruction_token_probability": 6.570668347194442e-07,
+          "reconstruction_exact": false,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.695984959602356,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6930665969848633,
+          "minimum_reconstruction_token_probability": 6.452374634591251e-08,
+          "reconstruction_exact": false,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "full-serial",
+      "cohort": "smoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": false,
+      "joint_loss_change_t1_minus_t0": -0.0010944604873657227,
+      "original_exact_goal_pass": false,
+      "points": [
+        {
+          "d_adversarial": 0.45572683215141296,
+          "d_penalty": 0.009315123781561852,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.289736270904541,
+          "minimum_reconstruction_token_probability": 7.3892663143318465e-34,
+          "reconstruction_exact": false,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.45576152205467224,
+          "d_penalty": 0.009315123781561852,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.2896337509155273,
+          "minimum_reconstruction_token_probability": 5.013923298283653e-34,
+          "reconstruction_exact": false,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.4558136761188507,
+          "d_penalty": 0.009315123781561852,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.2894798517227173,
+          "minimum_reconstruction_token_probability": 2.8024460314500095e-34,
+          "reconstruction_exact": false,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.4559003412723541,
+          "d_penalty": 0.009315123781561852,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.2892237901687622,
+          "minimum_reconstruction_token_probability": 1.0629016218508161e-34,
+          "reconstruction_exact": false,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.4559902846813202,
+          "d_penalty": 0.009305479004979134,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.2889330387115479,
+          "minimum_reconstruction_token_probability": 4.329151117621e-35,
+          "reconstruction_exact": false,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.4560767114162445,
+          "d_penalty": 0.009305479004979134,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.2886418104171753,
+          "minimum_reconstruction_token_probability": 1.7737951466575374e-35,
+          "reconstruction_exact": false,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "truncated-threaded",
+      "cohort": "smoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": false,
+      "joint_loss_change_t1_minus_t0": -0.0008634328842163086,
+      "original_exact_goal_pass": true,
+      "points": [
+        {
+          "d_adversarial": 0.6938104033470154,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6940920948982239,
+          "minimum_reconstruction_token_probability": 0.9994922876358032,
+          "reconstruction_exact": true,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.6938970685005188,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6940057277679443,
+          "minimum_reconstruction_token_probability": 0.998507559299469,
+          "reconstruction_exact": true,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.6940271854400635,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": true,
+          "joint_loss": 0.6938761472702026,
+          "minimum_reconstruction_token_probability": 0.9925111532211304,
+          "reconstruction_exact": true,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.6942440867424011,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6936602592468262,
+          "minimum_reconstruction_token_probability": 0.8992061614990234,
+          "reconstruction_exact": true,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.6944609880447388,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6934444308280945,
+          "minimum_reconstruction_token_probability": 0.3752037584781647,
+          "reconstruction_exact": false,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.6946779489517212,
+          "d_penalty": 0.0,
+          "full_exact_law_pass": false,
+          "joint_loss": 0.6932286620140076,
+          "minimum_reconstruction_token_probability": 0.03885195404291153,
+          "reconstruction_exact": false,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    },
+    {
+      "arm": "full-threaded",
+      "cohort": "smoothed",
+      "endpoint_probability_errors": {
+        "t0": 0.0,
+        "t1": 0.0
+      },
+      "first_E_only_exact_goal_pass": false,
+      "joint_loss_change_t1_minus_t0": -0.0012052059173583984,
+      "original_exact_goal_pass": false,
+      "points": [
+        {
+          "d_adversarial": 0.5562257766723633,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.100250244140625,
+          "minimum_reconstruction_token_probability": 0.9999990463256836,
+          "reconstruction_exact": true,
+          "t": 0
+        },
+        {
+          "d_adversarial": 0.5563166737556458,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.1001296043395996,
+          "minimum_reconstruction_token_probability": 0.9999985694885254,
+          "reconstruction_exact": true,
+          "t": 0.1
+        },
+        {
+          "d_adversarial": 0.5564531087875366,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.099948763847351,
+          "minimum_reconstruction_token_probability": 0.9999969005584717,
+          "reconstruction_exact": true,
+          "t": 0.25
+        },
+        {
+          "d_adversarial": 0.5566805005073547,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0996475219726562,
+          "minimum_reconstruction_token_probability": 0.9999896287918091,
+          "reconstruction_exact": true,
+          "t": 0.5
+        },
+        {
+          "d_adversarial": 0.5569079518318176,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0993462800979614,
+          "minimum_reconstruction_token_probability": 0.9999648332595825,
+          "reconstruction_exact": true,
+          "t": 0.75
+        },
+        {
+          "d_adversarial": 0.5571355223655701,
+          "d_penalty": 0.00142007099930197,
+          "full_exact_law_pass": false,
+          "joint_loss": 1.0990450382232666,
+          "minimum_reconstruction_token_probability": 0.9998810291290283,
+          "reconstruction_exact": true,
+          "t": 1
+        }
+      ],
+      "restore_checks": {
+        "data_stream": true,
+        "models": true,
+        "named_streams": true,
+        "optimizers": true,
+        "streams": true
+      }
+    }
+  ],
+  "sampling_draws": 0,
+  "script_commit": "7307f9e46249bf62c0a4a8ed9304f6d29482ee08",
+  "source_sha256": "f415d37ed8aa92b88f59cd26535f1570f1f6e6dfd309e8da6322773325e05c7f",
+  "wall_seconds": 0.8057546380441636
+}

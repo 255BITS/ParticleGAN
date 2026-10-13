@@ -213,15 +213,17 @@ def native_profile_blockers(task, candidate, *, root=None, explicit_initializer=
             return []
         release = _profile_id(task) == RELEASE_PROFILE_ID
         from .priors import task_prior
+        from .priors import recipe_owned_prior
         prior = task_prior(task)
+        learned_ok = recipe_owned_prior(task) or prior.get("learnable") is True
         if release:
             if (prior.get("kind") != "particle_cloud" or prior.get("sigma") != 0
-                    or prior.get("standardize") is not False or prior.get("learnable") is not True
+                    or prior.get("standardize") is not False or not learned_ok
                     or not isinstance(prior.get("exception_reason"), str) or not prior["exception_reason"].strip()
                     or set(prior) - {"kind", "sigma", "standardize", "learnable", "exception_reason"}):
                 raise ValueError("release host requires its explicit unstandardized learned particle-cloud exception")
         elif (not isinstance(prior, dict) or prior.get("kind") != "mog" or not _positive(prior.get("sigma")) or prior.get("standardize") is not False
-                or prior.get("learnable") is not True or set(prior) - {"kind", "sigma", "standardize", "learnable", "init_std"}):
+                or not learned_ok or set(prior) - {"kind", "sigma", "standardize", "learnable", "init_std"}):
             raise ValueError("native affine profile requires learned MoG locations, positive explicit width, no standardization and uniform masses")
         resolve_host_initialization(native_host_initialization(task, root=root), initializer=initializer, prior=prior)
         fixed = {**spec["resources"], "total_steps": 7000}

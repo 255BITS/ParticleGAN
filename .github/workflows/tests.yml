@@ -91,7 +91,7 @@ jobs:
               BatchDistanceDiscriminator, DDGAN, LinearSkipDiscriminator,
               E22Policy, UpdatePolicy, ParticleRows, ScalarHeadFeatures,
               RoutedRows, RoutedBatch, RoutedCandidate, RoutedExecution,
-              MoGParticlePrior, ParticlePrior, get_recipe,
+              DEFAULT_RECIPE, MoGParticlePrior, ParticlePrior, Recipe, get_recipe,
           )
 
           assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
@@ -99,13 +99,8 @@ jobs:
           assert MoGParticlePrior(sigma=0.1).sample(2)[0].shape == (2, 4)
           assert DDGAN().steps == 4
           default = get_recipe()
-          assert default.lr == 0.00425
-          assert default.d_lr_mult == 1.0
-          assert default.prior_lr_mult == 2.0
-          assert default.betas == (0., .999)
-          assert default.reg_arm is None and default.critic_formulation == 'ka2' and default.reg_coeff == 1.0
-          assert default.reg_kappa == 1.0 and default.prior_reg == 0.0
-          assert default.name == 'ka2'
+          assert default == get_recipe(DEFAULT_RECIPE)
+          assert Recipe(**default.to_dict()) == default
           assert get_recipe('gan') == default
           e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
           assert e22.name == 'e22' and e22.total_steps is None

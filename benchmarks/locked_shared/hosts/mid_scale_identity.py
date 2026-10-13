@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from ..observation import checkpoint, schedule_optimizer
 from particlegan.generator_idle import release_generator_step
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 
 
@@ -502,6 +504,7 @@ def _fit(
             real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
         paired_real = []
         paired_fake = []
+        transport_panel = []
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
@@ -510,17 +513,38 @@ def _fit(
             paired_real.append(real_scores[scale])
             paired_fake.append(fake_logits)
             g_loss = g_loss + gan.g_loss(fake_logits, real_scores[scale]) / n_scales
+            transport_panel.append(fake[0])
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
+        protected_adversarial = g_loss
         g_loss = g_loss + cover_w * cover / n_scales
-        g_loss.backward()
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, torch.stack(transport_panel), cloud,
+                conditioning=cloud.new_tensor(EVAL_SCALES).unsqueeze(1))
+        def protected_evaluator():
+            adversarial = student.odd.new_zeros(())
+            paired_cover = student.odd.new_zeros(())
+            for scale in EVAL_SCALES:
+                current = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
+                adversarial = adversarial + gan.g_loss(critic(current, scale), real_scores[scale]) / n_scales
+                paired_cover = paired_cover + F.mse_loss(student.state(scale), targets[scale])
+            return adversarial, paired_cover
+        constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover),
+                                     protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         release_generator_step(opt_g, paired_real, paired_fake)
         opt_g.step()
         critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),
-                   pairing="stranger" if arm == "stranger" else "matched", teacher=teacher))
+        def observe_midscale():
+            metrics = score_hold(student, scales=_eval_scales(arm),
+                                 pairing="stranger" if arm == "stranger" else "matched", teacher=teacher)
+            if components is not None:
+                target = torch.stack([targets[scale] for scale in EVAL_SCALES])
+                prediction = torch.stack([student.state(scale) for scale in EVAL_SCALES])
+                components.constraint_geometry_capture(step + 1, target, prediction, metrics)
+            return metrics
+        checkpoint(step + 1, observe_midscale)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(steps):
             preview_scales = _eval_scales(arm)

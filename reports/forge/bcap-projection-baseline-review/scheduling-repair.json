@@ -1,0 +1,18 @@
+{
+  "adapter_sha256": "79c4e2b132840f6962711df6e6faf0c3cfe0e28650613baab023f56a2f97fc5c",
+  "before_snapshot_sha256": "fe63293e05a958258889c3936f25ad8bb33635203371668f2750d0621a11a17b",
+  "cancelled_administrative_request_ids": [
+    "a5f2ec42f0db82c641202ca3"
+  ],
+  "intermediate_snapshot_sha256": "9d9f362a8d536187c1d09e68917500a2f8d24af74b3c34e0e2911c10d64078a0",
+  "paid_attempts": 0,
+  "paid_seconds": 0,
+  "reason": "Empty scheduling devices caused a resource block before work. Public cancel/submit restored original IDs; an accidental enqueue retaining request_id was cancelled with zero work. The repaired adapter waits before allocation.",
+  "requests": {
+    "baseline": "42be3241dc92477d81894f0d",
+    "candidate": "78f5baa199d801aa95db8400"
+  },
+  "schema_version": 1,
+  "scientific_source_changed": false,
+  "time": "2026-10-10T04:52:50.688+00:00"
+}

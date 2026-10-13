@@ -48,9 +48,17 @@
     "deadline_checks": 81,
     "minimum_frozen_passing": 0,
     "sources": {
-      "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541"
+      "benchmarks/toy100/continuous_probe.py": "07c7737d9ec1653cdabd8f6f855bd6bde12cfb904688cbab081dbd614af7792f"
     },
-    "requires_pair_artifacts": true
+    "requires_pair_artifacts": true,
+    "evaluator_revision": {
+      "id": "pr399-opt-in-idle-source-v1",
+      "change": "Source-binding-only update for reconciled default-off generator-idle consumption and replay. Architecture, target/data/prior laws, sampling, budgets, cadence and all numerical gates are unchanged. Original source-bound and archived declarations keep their original identities.",
+      "previous_source_sha256": {
+        "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541"
+      },
+      "previous_revision": null
+    }
   },
   "resources": {
     "gpus": 1,

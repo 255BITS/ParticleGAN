@@ -5,16 +5,48 @@ from copy import deepcopy
 import inspect
 import io
 import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
 import tarfile
 
 import pytest
 import torch
 
-from benchmarks.locked_shared import mode_hold, trajectory
+from benchmarks.locked_shared import trajectory
 from reports.toy100.extra_adam_scratch import (
     ExtraAdamRecorder, HOSTS, transformed_function,
 )
 from reports.toy100.extra_adam_probe import _verify_transform
+
+
+@pytest.fixture
+def archived_host(task, monkeypatch):
+    # This transformer belongs to the archived ExtraAdam experiment, whose
+    # inverse must still recover its exact original host, not a later port.
+    directory = Path(__file__).parent / "fixtures/extra-adam-hosts"
+    provenance = json.loads((directory / "provenance.json").read_text())
+    report = json.loads((directory.parents[2] / "reports/toy100/extra-adam-screen.json").read_text())
+    assert provenance["source_commit"] == report["source_commit"]
+    record = provenance["files"][task]
+    path = directory / f"{task}.py"
+    data = path.read_bytes()
+    assert hashlib.sha256(data).hexdigest() == record["sha256"]
+    assert hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest() == record["git_blob"]
+    name = f"benchmarks.locked_shared._extra_adam_archived_{task}"
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, name, module)
+    # Only define the host for source inspection; its training body and old
+    # package imports are never executed by this structural software control.
+    tree = ast.parse(data)
+    host = next(node for node in tree.body
+                if isinstance(node, ast.FunctionDef) and node.name == HOSTS[task])
+    definition = ast.Module(body=[tree.body[1], host], type_ignores=[])
+    assert isinstance(tree.body[1], ast.ImportFrom) and tree.body[1].module == "__future__"
+    exec(compile(definition, str(path), "exec"), module.__dict__)
+    return module
 
 
 @pytest.mark.parametrize("method,evaluations", [("extra_adam", 2), ("sim_adam", 1)])
@@ -57,8 +89,9 @@ def test_bilinear_joint_gradients_and_exact_moment_formula(method, evaluations):
         assert row["rates"] == [[row["groups"][0]["lr"]]] * (5 * evaluations)
 
 
-@pytest.mark.parametrize("task,module", [("mode_hold", mode_hold), ("trajectory", trajectory)])
-def test_transform_wraps_only_gradients_and_is_repeatable(task, module):
+@pytest.mark.parametrize("task", ["mode_hold", "trajectory"])
+def test_transform_wraps_only_gradients_and_is_repeatable(task, archived_host):
+    module = archived_host
     before = inspect.getsource(getattr(module, HOSTS[task]))
     tree, source, original_sha = transformed_function(module, task)
     assert inspect.getsource(getattr(module, HOSTS[task])) == before
@@ -72,6 +105,11 @@ def test_transform_wraps_only_gradients_and_is_repeatable(task, module):
     assert "noise_policy.set_step" not in calls
     assert len([node for node in ast.walk(loop) if isinstance(node, ast.If)
                 and ast.unparse(node.test) == "_extra_phase == 0"]) == 2
+
+
+def test_archived_transform_rejects_schema_aware_live_trajectory():
+    with pytest.raises(ValueError, match="frozen gradient block changed: g_loss.backward"):
+        transformed_function(trajectory, "trajectory")
 
 
 def test_unexpected_parameter_mutation_is_rejected():
@@ -108,8 +146,9 @@ def test_optimizer_state_preserves_both_moment_evaluations():
     assert restored.state_dict()["state"][0]["step"] == 2
 
 
-@pytest.mark.parametrize("task,module", [("mode_hold", mode_hold), ("trajectory", trajectory)])
-def test_archived_transform_regrade_rejects_rehashed_extra_assignment(tmp_path, task, module):
+@pytest.mark.parametrize("task", ["mode_hold", "trajectory"])
+def test_archived_transform_regrade_rejects_rehashed_extra_assignment(tmp_path, task, archived_host):
+    module = archived_host
     _, source, _ = transformed_function(module, task)
     path = tmp_path / "generated_host.py"
     path.write_text(source)

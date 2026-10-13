@@ -77,6 +77,7 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     cfg = {**trainer.DEFAULTS, **read_config(Path(__file__).parents[1] / config)}
     # These controls share existing tensors; only the optimizer is under test.
     recipe = trainer.training_recipe(cfg)
+    assert recipe.prior_update == ("learned" if cfg["prior"] in ("learned", "mog") else "frozen")
     g, d = torch.nn.Linear(4, 2), torch.nn.Linear(2, 1)
     prior = DrawSource(cfg["prior"], 8, 4, cfg["seed"], "cpu")
     noise = DrawSource(cfg["noise"], 8, 2, cfg["seed"] + 1, "cpu")
@@ -103,14 +104,17 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
                 assert new_group["lr"] == old_group["lr"]
                 for p, q in zip(new_group["params"], old_group["params"]):
                     torch.testing.assert_close(p, q, rtol=0, atol=0)
-    rows = prior.table[:4].detach().requires_grad_()
+    rows = prior.table[:4].detach().requires_grad_(recipe.prior_update == "learned")
     actual = recipe.make_prior_regularizer()(rows)
+    if recipe.prior_update == "frozen":
+        assert actual.item() == 0 and not actual.requires_grad
+        return
     expected = cfg["prior_reg"] * ParticleRegularizer()(rows)
     torch.testing.assert_close(actual, expected, rtol=0, atol=0)
     torch.testing.assert_close(torch.autograd.grad(actual, rows)[0],
                                torch.autograd.grad(expected, rows)[0], rtol=0, atol=0)
-    # Every trainer follows the recipe's default penalty and LR schedule.
-    assert recipe.reg_anchor_weight == get_recipe().reg_anchor_weight
+    # Every trainer follows the study's pinned penalty and LR schedule.
+    assert recipe.reg_anchor_weight == get_recipe("ka2").reg_anchor_weight
     if trainer is train_trajectory:
         assert (recipe.lr_floor, recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (
-            get_recipe().lr_floor, get_recipe().network_lr_floor, get_recipe().network_lr_horizon_cap)
+            get_recipe("ka2").lr_floor, get_recipe("ka2").network_lr_floor, get_recipe("ka2").network_lr_horizon_cap)

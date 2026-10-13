@@ -1,5 +1,6 @@
 """Published vector host selection and constructor parity with zero updates."""
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 
@@ -42,7 +43,13 @@ def test_materialization_preserves_current_prior_gates_data_resources_and_base(n
     raw = json.loads(original)
     before = deepcopy(raw)
     variant = task_from_profile(raw, name + "_published")
-    assert variant == read_task(name + "_published")
+    # Published profile cards retain the original task-owned prior cohort.
+    archive = ROOT / "reports/forge/recipe-prior-refactor"
+    legacy_bytes = (archive / "legacy-task-cards" / f"{name}.json").read_bytes()
+    baseline = json.loads((archive / "baseline.json").read_text())
+    assert hashlib.sha256(legacy_bytes).hexdigest() == baseline["task_cards"][name]["sha256"]
+    assert task_from_profile(json.loads(legacy_bytes), name + "_published") == read_task(name + "_published")
+    assert variant["execution"]["prior_contract"] == "recipe_owned_v1"
     assert raw == before and path.read_bytes() == original
     assert profile_source_files(raw) == {}
     assert profile_source_files(variant) == PROFILE_SOURCES
@@ -57,12 +64,13 @@ def test_materialization_preserves_current_prior_gates_data_resources_and_base(n
         k: v for k, v in raw.items() if k not in {"id", "execution"}}
     assert {k: v for k, v in variant["execution"].items() if k not in {"vector_profile", "host_definition"}} == {
         k: v for k, v in raw["execution"].items() if k != "host_definition"}
-    assert variant["execution"]["prior"] == {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
+    assert variant["execution"]["prior"] == {"kind": "mog", "sigma": .025, "standardize": False}
     # Current named location initialization remains exactly the raw task's. No
     # archived finite prior or init_std=.5 is imported by the architecture profile.
     a, b = context(raw), context(variant)
     prior_a, prior_b = a.build_prior(), b.build_prior()
     same_state(prior_a, prior_b)
+    assert prior_a.z.requires_grad and prior_b.z.requires_grad
     assert prior_b.z.std().item() > .8
     assert float(prior_b.sigma) == pytest.approx(.025)
     assert a.streams.audit() == b.streams.audit()

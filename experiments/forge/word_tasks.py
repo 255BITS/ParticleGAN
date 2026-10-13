@@ -88,6 +88,10 @@ def _validate_confirmation(row, step):
 def grade(task, evidence):
     """Require the whole budget; reconstruct acquisition/hold from actual curves."""
     validate_task(task)
+    from .priors import validate_prior_policy
+    prior_grade = validate_prior_policy(task, evidence)
+    if prior_grade is not None:
+        return _verdict(prior_grade["status"], prior_grade["reason"])
     kind = task["evaluation"]["kind"]
     total = SMOKE_STEPS if kind == SMOKE_KIND else HOLD_STEPS
     if evidence.get("executed_updates") != total:
@@ -100,7 +104,9 @@ def grade(task, evidence):
     if evidence.get("completed_steps") != prefix + total:
         return _verdict("INCOMPLETE", "word completed-step labels differ from executed updates")
     counts = evidence.get("guards", {}).get("optimizer_updates", {})
-    if any(type(counts.get(role)) is not int or counts[role] != prefix + total
+    from .priors import expected_prior_updates
+    if any(type(counts.get(role)) is not int or counts[role] != (
+            expected_prior_updates(task, evidence, prefix + total) if role == "prior" else prefix + total)
            for role in ("generator", "encoder", "prior", "discriminator")):
         return _verdict("INCOMPLETE", "all four actual optimizer histories must cover every cumulative update")
     rows, confirmations = evidence.get("observations"), evidence.get("confirmations")
@@ -195,9 +201,12 @@ def restore_parent(request, task, prerequisites, fixture, context):
     optimizers = frozen_fixture["api_state"]["optimizers"]
     if len(optimizers) != 2:
         raise ValueError("word checkpoint must retain both optimizer histories")
-    for optimizer in optimizers:
+    idle = frozen_fixture.get("generator_idle")
+    fixture.restore_generator_idle(idle, completed_steps=prefix, validate_only=True)
+    for index, optimizer in enumerate(optimizers):
+        expected_updates = prefix - idle["idle_count"] if index == 0 and idle is not None else prefix
         counters = [value["step"] for value in optimizer["state"].values() if "step" in value]
-        if not counters or any(float(value) != prefix for value in counters):
+        if (not counters and expected_updates != 0) or any(float(value) != expected_updates for value in counters):
             raise ValueError("word checkpoint optimizer histories differ from its acquired step")
     if (state_digest(saved) != checkpoint["state_sha256"] or saved["fixture"]["api_state"]["completed_steps"] != prefix
             or saved["parent_task_fingerprint"] != task_fingerprint(parent_task)
@@ -205,8 +214,12 @@ def restore_parent(request, task, prerequisites, fixture, context):
             or saved["fixture"]["recipe"] != fixture.recipe.to_dict()
             or saved["fixture"]["seed"] != request["protocol"]["seed"]):
         raise ValueError("word saved state differs from its recipe/task/candidate/prefix binding")
+    fixture.recipe.restore_prior_regularizer(fixture.spread, saved["fixture"].get("prior_regularizer"), validate_only=True)
     context.streams.load_state_dict(saved["streams"])
     fixture.policy.load_state_dict(saved["fixture"]["api_state"])
+    fixture.recipe.restore_prior_regularizer(fixture.spread, saved["fixture"].get("prior_regularizer"))
+    fixture.restore_component_transport(saved["fixture"].get("component_transport"))
+    fixture.restore_generator_idle(saved["fixture"].get("generator_idle"))
     fixture.data_generator.set_state(saved["fixture"]["data_generator"].cpu())
     fixture.max_steps = saved["fixture"]["max_steps"]
     if state_digest(fixture.state_dict()) != state_digest(saved["fixture"]):
@@ -333,6 +346,11 @@ def run_ladder(request, task, output, device, *, context, execution_limit=None,
         scoring_weights="live", completed_steps=fixture.completed_steps, executed_updates=updates,
         guards=guards, rng_audits=rng_audits, continuity=continuity,
         **executed_receipt(JOINT_WORDS_CLEAN, eval_output_noise="clean"))
+    from .priors import recipe_owned_prior, prior_policy_receipt
+    if recipe_owned_prior(task):
+        evidence["prior_policy"] = prior_policy_receipt(context.recipe, fixture.prior)
+    if fixture.transport is not None:
+        evidence["component_transport"] = fixture.transport.state_dict()
     if checkpoint is not None:
         evidence.update(checkpoint=checkpoint, artifact_root=str((output / "acquisition").resolve()),
                         artifact_manifest=manifest_artifacts(output / "acquisition"))

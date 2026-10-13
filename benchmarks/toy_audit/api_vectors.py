@@ -625,7 +625,7 @@ class VectorFixture:
         self.opt_g, self.opt_d = self.recipe.make_optimizers(generator, critic, prior, ema_critic=self.ema_critic, foreach=False, fused=False)
         self.loss = self.recipe.make_loss()
         self.penalty = self.recipe.make_critic_penalty(self.opt_d)
-        self.regularizer = self.recipe.make_prior_regularizer()
+        self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
         self.latent_rng = torch.Generator(device=self.device).manual_seed(self.seed + 1)
         self.base_rates = [[group["lr"] for group in optimizer.param_groups] for optimizer in (self.opt_g, self.opt_d)]
         self.update_counts = dict(g=0, d=0)
@@ -660,7 +660,8 @@ class VectorFixture:
             try:
                 self.opt_g.zero_grad(set_to_none=True)
                 fake = self.generator(self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)[0])
-                value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.regularizer(self.prior.z)
+                value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.recipe.prior_regularization(
+                    self.prior.z, regularizer=self.regularizer)
                 value.backward(); self.opt_g.step(); self.update_counts["g"] += 1
             finally:
                 self.critic.requires_grad_(True)
@@ -746,6 +747,7 @@ class VectorFixture:
                      phase_receipts=deepcopy(self.phase_receipts))
         if self.metadata.get("caller_owned"):
             state["caller"] = deepcopy(dict(generator=self.generator.state_dict(), critic=self.critic.state_dict(), prior=self.prior.state_dict(),
+                                              **self.recipe.prior_regularizer_checkpoint(self.regularizer),
                                               ema_critic=self.ema_critic.state_dict(), opt_g=self.opt_g.state_dict(), opt_d=self.opt_d.state_dict(),
                                               latent_rng=self.latent_rng.get_state(), update_counts=self.update_counts))
         else:
@@ -772,8 +774,10 @@ class VectorFixture:
         elif state["trainer"]["completed_steps"] != steps:
             raise ValueError("checkpoint trainer differs from its phase clock")
         if self.metadata.get("caller_owned"):
+            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"), validate_only=True)
             for key in ("generator", "critic", "prior", "ema_critic", "opt_g", "opt_d"):
                 getattr(self, key).load_state_dict(state["caller"][key])
+            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"))
             self.latent_rng.set_state(state["caller"]["latent_rng"])
             self.update_counts = deepcopy(state["caller"]["update_counts"])
         else:

@@ -15,6 +15,7 @@ from dataclasses import dataclass
 
 from ..observation import checkpoint, schedule_optimizer
 from particlegan.generator_idle import release_generator_step
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -407,7 +408,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         lazy_k=1,
         target_anneal="none",
     )
-    spread = ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight"))
+    spread = (None if components is not None and components.uses_recipe_prior
+              else ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight")))
     lr = float(recipe.knob("lr"))
     betas = (float(recipe.knob("beta1")), float(recipe.knob("beta2")))
     if noise_policy is not None:
@@ -497,21 +499,48 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         fake_logits = critic(fake)
         real_logits = critic(real.detach())
         g_loss = gan.g_loss(fake_logits, real_logits)
+        protected_adversarial = g_loss
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
-        g_loss = g_loss + spread(parts)
-        if particle_l2 > 0.0:
-            g_loss = g_loss + particle_l2 * parts.pow(2).mean()
+        if components is not None and components.uses_recipe_prior:
+            g_loss = components.add_prior_regularization(g_loss, prior_p, prior_m)
+        else:
+            g_loss = g_loss + spread(parts)
+            if particle_l2 > 0.0:
+                g_loss = g_loss + particle_l2 * parts.pow(2).mean()
         if cover_w > 0.0:
             cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
             cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
             g_loss = g_loss + cover_w * cover
+        if components is not None:
+            g_loss = components.add_transport_loss(g_loss, fake, real)
+        def protected_evaluator():
+            current_p = neu + residual.delta(1.0) + prior_p.z[rows_p] + jitter_p
+            current_m = neu + residual.delta(-1.0) + prior_m.z[rows_m] + jitter_m
+            adversarial = gan.g_loss(critic(torch.cat([current_p, current_m])), critic(real.detach()))
+            paired = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
+            paired = paired + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
+            return (adversarial, paired) if cover_w > 0.0 else (adversarial,)
+        if components is not None and components.recipe.constraint_geometry_mode == "strict_progress":
+            # Reuse the exact consumed row indices and jitter, while allowing
+            # both learned tables to move during a finite replay.
+            rows_p = components.sampled_prior_rows[prior_p.z]
+            rows_m = components.sampled_prior_rows[prior_m.z]
+            jitter_p = (fake_p - neu - residual.delta(1.0) - prior_p.z[rows_p]).detach()
+            jitter_m = (fake_m - neu - residual.delta(-1.0) - prior_m.z[rows_m]).detach()
         opt_g.zero_grad()
-        g_loss.backward()
+        protected = (protected_adversarial, cover) if cover_w > 0.0 else (protected_adversarial,)
+        constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
         schedule_optimizer(opt_g, step)
         release_generator_step(opt_g, real_logits, fake_logits)
         opt_g.step()
         ema.update(generator_params)
-        checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
+        def observe_geometry():
+            metrics = score_geometry(residual, field, poles_p, poles_m, neu)
+            if components is not None:
+                components.constraint_geometry_capture(step + 1, torch.stack([poles_p, poles_m]),
+                    torch.stack([neu + residual.delta(1.0), neu + residual.delta(-1.0)]), metrics, kind="line")
+            return metrics
+        checkpoint(step + 1, observe_geometry)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:
             live = score_geometry(residual, field, poles_p, poles_m, neu)

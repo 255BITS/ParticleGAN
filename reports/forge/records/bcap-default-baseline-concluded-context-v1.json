@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "record_id": "bcap-default-baseline-concluded-context-v1",
+  "record_type": "family_context",
+  "candidate_id": "bcap-default-baseline-direction-v1",
+  "goal": "discriminator_stability",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "historical",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "reuse": false,
+  "cross_cohort_pooling": false,
+  "lifecycle": "concluded",
+  "hypothesis": "A single global direction-blend delta preserves all six ordinary Tier 1 gates and strictly extends the matched incumbent Tier 2 pass set under the seed-0 public initializer and original task budgets, priors and sampling laws.",
+  "mechanism_class": "protected_actual_parameter_direction",
+  "conclusion": "Completed ordinary matched comparison: direction_blend passes 6/6 Tier 1 and 9/21 Tier 2 versus none at 6/6 and 7/21, with no lost passes. Trajectory identity MSE improves from .239861891 to .000258480; residual improves from .061036013 to .000249089, with sustained suffixes 19/21 repairing their gates. Own word hold remains PASS from matched 834-step prefixes through local step 4834. All 27 required final consumed-state pairs verify; all 21 zero-activation task pairs have byte-identical actual trained tensors for every applicable role. Six tasks activate 337 blends with zero stalls. All 12 remaining Tier 2 failures are inactive and have unchanged final metrics; direction protection does not establish missing mass/density forces. Both requested Tier 3 tasks remain BLOCKED with no spend. The 56 paid attempts charge 4187.683586815016 seconds with zero retries; 56 actual-training GIFs come from saved events. The owner selected the whole measured BCAP research pin and named preset; calibration remains provisional and default_adoption=false. The full CPU run with 5938 passes and 24 failures is preserved; narrowly corrected compatibility metadata checks resolve its exact 24 failures without changing comparator bytes or numerical assertions. Reporting reconstruction restores exact admitted study authority and Git-pinned motivation, leaving numerical task statuses and original receipts unchanged. This context supplies no qualification or cross-cohort pooling.",
+  "next_action": "Use the exact direction-blend research baseline. Investigate one globally configured mass/density mechanism with an explicit numerical falsifier and measurements of actual force/displacement; preserve all six Tier 1 gates, trajectory, residual and own word hold. Inspect full/core component density, allocation and spill on the 12 remaining failures. Retain negative moonshot evidence and unavailable fields; do not rerun unchanged experiments for a merge or perform seed-only experiments.",
+  "source": {
+    "path": "reports/forge/bcap-default-baseline/README.md",
+    "sha256": "6902a0d5bec3dff89efba9c81ff8f2ff081d73de2aa6ac922a3209cd7d1f3cf8",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/README.md"
+  },
+  "provenance": {
+    "input_evidence_scope": "ordinary_source_bound_publication",
+    "publication_commit": "0f5aa322a17f74ddcc08411d98fe71c9674230f5",
+    "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+    "source_digest": "6a225fcdd6922cdad37c9c947e163fb6f164f6ad4390293a3d3091b8f741ce44",
+    "protocol_seed": 0,
+    "default_adoption": false,
+    "qualification_reuse": false,
+    "binding_validation": "Exact publication Git bytes checked at construction; original qualification remains bound to the execution source. Compiler does not recursively certify these provenance pins.",
+    "documents": {
+      "results.json": {
+        "path": "reports/forge/bcap-default-baseline/results.json",
+        "sha256": "2961692f17e0f1fc09c44749c7de99bc3e13e900a75f352efd9f5e8267ae5fef",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/results.json"
+      },
+      "audit.json": {
+        "path": "reports/forge/bcap-default-baseline/audit.json",
+        "sha256": "70bab6fd6423f2338358158143598988ed6d3d21cf31fc98c70a0b1db1a001f8",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/audit.json"
+      },
+      "independent-audit.json": {
+        "path": "reports/forge/bcap-default-baseline/independent-audit.json",
+        "sha256": "1da1e5843ba93113d5f1ecb240d25257a949d293e2b46819aa2101c97aae0989",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/independent-audit.json"
+      },
+      "selection-change.json": {
+        "path": "reports/forge/bcap-default-baseline/selection-change.json",
+        "sha256": "ed2cb57476d0598e2f0be466efa9c5ea19605b066dfe31b66fd2e8ef531c54a9",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/selection-change.json"
+      },
+      "DEFAULT_SELECTION.md": {
+        "path": "reports/forge/bcap-default-baseline/DEFAULT_SELECTION.md",
+        "sha256": "6279780d76fa8fe0d0971ca65096f5e614d087e90ed0e127fbca333911da6de4",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/DEFAULT_SELECTION.md"
+      },
+      "saved-counters.json": {
+        "path": "reports/forge/bcap-default-baseline/saved-counters.json",
+        "sha256": "5a37d7b9372d6dd65f375b9cda26a94976c3a6794c2664cb3eecda868be2e104",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/saved-counters.json"
+      },
+      "saved-counter-summary.json": {
+        "path": "reports/forge/bcap-default-baseline/saved-counter-summary.json",
+        "sha256": "a08e8d70cd93226e66d3e07a6433b606c7d5766b30a94c104260ad52a6a8779f",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/saved-counter-summary.json"
+      },
+      "counter-proof-repair.json": {
+        "path": "reports/forge/bcap-default-baseline/counter-proof-repair.json",
+        "sha256": "a08d8fda0cddeb22f363fcb5ad0a21d7acf445724e7a2a0bac174731e91a7814",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/counter-proof-repair.json"
+      },
+      "software-provenance.json": {
+        "path": "reports/forge/bcap-default-baseline/software-provenance.json",
+        "sha256": "1729802d5976f2d43df2cd81eb567ab9c7c3c671d5d86dc32dca3e043872cc6a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/software-provenance.json"
+      },
+      "post-selection-software.json": {
+        "path": "reports/forge/bcap-default-baseline/post-selection-software.json",
+        "sha256": "ffd5387128338d88e940600b36aea2254f2b4187625946ec4dc77d64e2f614e0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/post-selection-software.json"
+      },
+      "reporting-repair.json": {
+        "path": "reports/forge/bcap-default-baseline/reporting-repair.json",
+        "sha256": "0ad1f808757ea511f9e8564d241924c976a776134ae4390e7b836f293c5f8c51",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/reporting-repair.json"
+      },
+      "retained-pin-publication.json": {
+        "path": "reports/forge/bcap-default-baseline/retained-pin-publication.json",
+        "sha256": "d193703040762ab4afa14dd5095d7fa24896bd13a9bbe39e85880bc32483846f",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/retained-pin-publication.json"
+      },
+      "family-documentation-repair.json": {
+        "path": "reports/forge/bcap-default-baseline/family-documentation-repair.json",
+        "sha256": "ddc4d80fa7ea11d86943225daafa85850c87738d15414dd651592b421465c923",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/family-documentation-repair.json"
+      },
+      "media/index.json": {
+        "path": "reports/forge/bcap-default-baseline/media/index.json",
+        "sha256": "52ff9428b5425e2d23b81779787a91885fde40f7bde03e88a1342185aa6f65ae",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/0f5aa322a17f74ddcc08411d98fe71c9674230f5/reports/forge/bcap-default-baseline/media/index.json"
+      }
+    },
+    "selection_evidence": {
+      "candidate_tier2_passes": [
+        "cover_leftover",
+        "five_word_joint_hold",
+        "img_stripes2",
+        "mid_scale_identity",
+        "residual_student",
+        "trajectory",
+        "unipolar",
+        "vector_spiral",
+        "vector_two_broad"
+      ],
+      "control_tier2_passes": [
+        "cover_leftover",
+        "five_word_joint_hold",
+        "img_stripes2",
+        "mid_scale_identity",
+        "unipolar",
+        "vector_spiral",
+        "vector_two_broad"
+      ],
+      "regressed_tier2_tasks": [],
+      "repaired_tier2_tasks": [
+        "residual_student",
+        "trajectory"
+      ],
+      "saved_state_comparisons_sha256": "1ee762e09d570241160c9d9dc2b482643b9aecc424708f981e1d79698d7e6902",
+      "tier3": "Retain exact recorded gates; ordinary veto remains effective.",
+      "unresolved_tier1_tier2_tasks": [],
+      "verified_final_consumed_state_pairs": 27
+    }
+  },
+  "task_results": []
+}

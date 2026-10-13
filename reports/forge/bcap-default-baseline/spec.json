@@ -1,0 +1,464 @@
+{
+  "adoption_scope": "Best-observed named bcap preset and benchmark family standard only. View calibration remains provisional; no scientific calibrated-default or robustness claim.",
+  "campaign_id": "bcap-default-baseline-v1",
+  "candidate_budget_seconds": 48000,
+  "fixed13_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "full_reservation_seconds": 93240,
+  "historical_evidence_use": "Motivation only; no diagnostic reuse or historical7/21 causal baseline.",
+  "paid_ceiling_seconds": 96000,
+  "per_arm_full_reservation_seconds": 46620,
+  "protocol_seed": 0,
+  "qualification_claim": false,
+  "recipe_delta": {
+    "constraint_geometry_mode": {
+      "candidate": "direction_blend",
+      "control": "none"
+    }
+  },
+  "requirements": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 2,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 2,
+      "task": "five_word_joint_hold"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 2,
+      "task": "trajectory"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 2,
+      "task": "residual_student"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 2,
+      "task": "unipolar"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 2,
+      "task": "cover_leftover"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 2,
+      "task": "mid_scale_identity"
+    },
+    {
+      "importance": "required",
+      "order": 7,
+      "qualification_tier": 2,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "required",
+      "order": 8,
+      "qualification_tier": 2,
+      "task": "vector_two_broad"
+    },
+    {
+      "importance": "required",
+      "order": 9,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "required",
+      "order": 10,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "required",
+      "order": 11,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "required",
+      "order": 12,
+      "qualification_tier": 2,
+      "task": "vector_overlap"
+    },
+    {
+      "importance": "required",
+      "order": 13,
+      "qualification_tier": 2,
+      "task": "vector_spiral"
+    },
+    {
+      "importance": "required",
+      "order": 14,
+      "qualification_tier": 2,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "required",
+      "order": 15,
+      "qualification_tier": 2,
+      "task": "img_bars4"
+    },
+    {
+      "importance": "required",
+      "order": 16,
+      "qualification_tier": 2,
+      "task": "img_blobs4"
+    },
+    {
+      "importance": "required",
+      "order": 17,
+      "qualification_tier": 2,
+      "task": "img_intensity2"
+    },
+    {
+      "importance": "required",
+      "order": 18,
+      "qualification_tier": 2,
+      "task": "grid100"
+    },
+    {
+      "importance": "required",
+      "order": 19,
+      "qualification_tier": 2,
+      "task": "rotated100"
+    },
+    {
+      "importance": "required",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "staggered100"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 3,
+      "task": "ring_hold"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 3,
+      "task": "ring_extension"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 100,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "resolved_recipes": {
+    "candidate": {
+      "adam_variant": "pytorch",
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 2048,
+      "beta2_anneal_end": 0.2,
+      "beta2_end": null,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "knn",
+      "birth_death_cells": 64,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "constraint_geometry_mode": "direction_blend",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "critic_step_mode": "none",
+      "d_betas": null,
+      "d_eps": null,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 0.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "ema_decay": 0.0,
+      "encoder_mode": "none",
+      "eps": 1e-08,
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "kinetic_transport_local_weight": 0.0,
+      "kinetic_transport_projections": 32,
+      "kinetic_transport_weight": 0.0,
+      "latent_damping_max_rate": 0.0,
+      "loss": "non_saturating",
+      "loss_labels": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lr": 0.012,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_decay_rate": 0.96,
+      "lr_decay_staircase": false,
+      "lr_decay_steps": 50000,
+      "lr_floor": 1.0,
+      "lr_schedule": "cosine",
+      "model": "gan",
+      "name": "bcap",
+      "network_lr_floor": 1.0,
+      "network_lr_horizon_cap": null,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "optimizer_adam_lr": null,
+      "optimizer_convolution": "per_offset",
+      "optimizer_family": "dualnorm",
+      "optimizer_momentum": 0.0,
+      "optimizer_smoothing": 0.001,
+      "optimizer_svd_backend": "native",
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_eps": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 0.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_coeff_anneal_end": 0.2,
+      "reg_coeff_end": null,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "any",
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "control": {
+      "adam_variant": "pytorch",
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 2048,
+      "beta2_anneal_end": 0.2,
+      "beta2_end": null,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "knn",
+      "birth_death_cells": 64,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "constraint_geometry_mode": "none",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "critic_step_mode": "none",
+      "d_betas": null,
+      "d_eps": null,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 0.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "ema_decay": 0.0,
+      "encoder_mode": "none",
+      "eps": 1e-08,
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "kinetic_transport_local_weight": 0.0,
+      "kinetic_transport_projections": 32,
+      "kinetic_transport_weight": 0.0,
+      "latent_damping_max_rate": 0.0,
+      "loss": "non_saturating",
+      "loss_labels": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "lr": 0.012,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_decay_rate": 0.96,
+      "lr_decay_staircase": false,
+      "lr_decay_steps": 50000,
+      "lr_floor": 1.0,
+      "lr_schedule": "cosine",
+      "model": "gan",
+      "name": "bcap",
+      "network_lr_floor": 1.0,
+      "network_lr_horizon_cap": null,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "optimizer_adam_lr": null,
+      "optimizer_convolution": "per_offset",
+      "optimizer_family": "dualnorm",
+      "optimizer_momentum": 0.0,
+      "optimizer_smoothing": 0.001,
+      "optimizer_svd_backend": "native",
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_eps": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 0.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_coeff_anneal_end": 0.2,
+      "reg_coeff_end": null,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "any",
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    }
+  },
+  "schema_version": 1,
+  "scope": "ordinary_best_observed_bcap_preset_comparison",
+  "selection_rule": {
+    "both_roles_tier1_passes": 6,
+    "complete_tier2_tasks_per_role": 21,
+    "exact_source_task_runtime_initialization_rng_proof": true,
+    "minimum_additional_tier2_passes": 1,
+    "own_prefixes": "Own exact producers; unequal prefixes stay unverified, never silently matched.",
+    "preserve_all_matched_control_tier2_passes": true,
+    "tier3": "Ordinary prerequisite veto; unavailable cells remain BLOCKED and do not claim endurance."
+  },
+  "software_allowance_seconds": 1800,
+  "stopping": "Complete independent current-tier peers; required non-PASS blocks higher tiers. No tuning, seed change, scientific retry or deeper diagnostic bypass.",
+  "through_tier": 3,
+  "view": "discriminator_stability",
+  "view_revision": 8
+}

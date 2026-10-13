@@ -11,6 +11,7 @@ from torch import nn
 
 from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scales
 from particlegan.init import deterministic_orthogonal_
+from particlegan.optim.direction_blend import DirectionBlendOptimizer
 from particlegan.optim.dualnorm import NormalizedOptimizer
 
 
@@ -19,6 +20,7 @@ def test_bcap_public_preset_contains_only_requested_training_mechanisms():
     assert recipe.critic_formulation == recipe.effective_critic_formulation == "bcap"
     assert recipe.optimizer_family == "dualnorm"
     assert recipe.optimizer_momentum == 0. and recipe.optimizer_adam_lr is None
+    assert recipe.constraint_geometry_mode == "direction_blend"
     assert recipe.loss == "non_saturating"
     assert recipe.optimizer_smoothing == .001 and recipe.optimizer_convolution == "per_offset"
     assert (recipe.reg_arm, recipe.reg_coeff, recipe.reg_kappa, recipe.reg_every) == ("b_cap", 1., 1., 1)
@@ -38,17 +40,21 @@ def test_bcap_adam_retains_the_exact_historical_preset_under_an_explicit_name():
     # explicitly selected loss, smoothing and convolution configuration.
     assert recipe.replace(name="bcap", optimizer_family="dualnorm", lr=.012,
                           d_lr_mult=1.5, prior_lr_mult=2.5, loss="non_saturating",
-                          optimizer_smoothing=.001, optimizer_convolution="per_offset") == get_recipe("bcap")
+                          optimizer_smoothing=.001, optimizer_convolution="per_offset",
+                          constraint_geometry_mode="direction_blend") == get_recipe("bcap")
     assert Recipe(**recipe.to_dict()) == recipe
 
 
-@pytest.mark.parametrize("preset,optimizer_type", [("bcap", NormalizedOptimizer), ("bcap_adam", torch.optim.Adam)])
-def test_bcap_factories_return_declared_optimizer_and_exact_fixed_cap_gradient(preset, optimizer_type):
+@pytest.mark.parametrize("preset,generator_type,critic_type", [
+    ("bcap", DirectionBlendOptimizer, NormalizedOptimizer),
+    ("bcap_adam", torch.optim.Adam, torch.optim.Adam),
+])
+def test_bcap_factories_return_declared_optimizer_and_exact_fixed_cap_gradient(preset, generator_type, critic_type):
     recipe = get_recipe(preset, loss="hinge", num_particles=8)
     generator, critic = nn.Linear(2, 2), nn.Linear(2, 1, bias=False)
     prior = recipe.make_prior()
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior)
-    assert type(opt_g) is type(opt_d) is optimizer_type
+    assert type(opt_g) is generator_type and type(opt_d) is critic_type
     assert opt_g.latent_damping is opt_g.direct_response is opt_d.guard is opt_d.anchor is opt_d.ema_critic is None
     assert opt_g.prior_mechanisms["a2"]["enabled"] is False
     assert [group["lr"] for group in opt_g.param_groups] == pytest.approx([recipe.lr, recipe.lr * recipe.prior_lr_mult])
@@ -166,7 +172,10 @@ def test_public_dualnorm_default_rejects_incompatible_optimizer_state_atomically
 
 @pytest.mark.parametrize("historical_recipe", [
     get_recipe("bcap_adam").replace(name="bcap"),
-    get_recipe("bcap", loss="relativistic", optimizer_smoothing=0., optimizer_convolution="none"),
+    # Preserve the two named laws shipped before direction-only adoption.
+    get_recipe("bcap", constraint_geometry_mode="none"),
+    get_recipe("bcap", constraint_geometry_mode="none", loss="relativistic",
+               optimizer_smoothing=0., optimizer_convolution="none"),
 ])
 def test_historical_bcap_checkpoint_reconstructs_saved_recipe_and_cannot_load_as_new_default(historical_recipe):
     historical = _trainer(historical_recipe)

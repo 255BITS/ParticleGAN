@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "scientific_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+  "incumbent_attempt": "f80ae62046f14be8b0ad459cfbd1c9ee",
+  "combined_attempt": "aa76d8f268014f84a7a553e0b47482b0",
+  "originals": [
+    {
+      "role": "winner",
+      "attempt_id": "f80ae62046f14be8b0ad459cfbd1c9ee",
+      "source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+      "certified_result_sha256": "c4090ae943b256cd6c3e2cba59d360c25ad71b250022b31e37e2ff0198beff65",
+      "checkpoint_sha256": "d5c849531eaf787c01f772cb6d9d8faa59a2a6d75f7f2308e2317667a28b29bc",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "observed_curve": {
+        "bounds": [
+          {
+            "bound": 0.3,
+            "endpoint_margin": 0.6585024714469909,
+            "endpoint_value": 0.958502471446991,
+            "metric": "mean_abs",
+            "negative_margin_checks": 7,
+            "observed_checks": 24,
+            "op": ">=",
+            "worst_margin": -0.25208504796028136,
+            "worst_step": 4,
+            "worst_value": 0.04791495203971863
+          },
+          {
+            "bound": 1.0,
+            "endpoint_margin": 0.04765427112579346,
+            "endpoint_value": 0.9523457288742065,
+            "metric": "grad_med",
+            "negative_margin_checks": 0,
+            "observed_checks": 24,
+            "op": "<=",
+            "worst_margin": 0.016741394996643066,
+            "worst_step": 74,
+            "worst_value": 0.9832586050033569
+          }
+        ],
+        "first_step": 4,
+        "last_step": 80,
+        "recorded_points": 24
+      },
+      "mechanism_stats": {}
+    },
+    {
+      "role": "combined",
+      "attempt_id": "aa76d8f268014f84a7a553e0b47482b0",
+      "source_commit": "beb7b1df56a51b1119053d6b4a03b6acb119e394",
+      "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+      "certified_result_sha256": "0881f3399f2044f74a024de9cdfd04defa8a401d11566467bd3c277223c5040d",
+      "checkpoint_sha256": "a4e8e801a6faeeed63b07faa8bd5031d48e2b35e7d63352fba1f9a02561200e3",
+      "metrics": {
+        "grad_med": 0.9851563572883606,
+        "mean_abs": 0.9287881255149841
+      },
+      "observed_curve": {
+        "bounds": [
+          {
+            "bound": 0.3,
+            "endpoint_margin": 0.6287881255149841,
+            "endpoint_value": 0.9287881255149841,
+            "metric": "mean_abs",
+            "negative_margin_checks": 7,
+            "observed_checks": 24,
+            "op": ">=",
+            "worst_margin": -0.2520502984523773,
+            "worst_step": 4,
+            "worst_value": 0.04794970154762268
+          },
+          {
+            "bound": 1.0,
+            "endpoint_margin": 0.014843642711639404,
+            "endpoint_value": 0.9851563572883606,
+            "metric": "grad_med",
+            "negative_margin_checks": 11,
+            "observed_checks": 24,
+            "op": "<=",
+            "worst_margin": -0.09586536884307861,
+            "worst_step": 47,
+            "worst_value": 1.0958653688430786
+          }
+        ],
+        "first_step": 4,
+        "last_step": 80,
+        "recorded_points": 24
+      },
+      "mechanism_stats": {
+        "state.applied.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.component_transport": {
+          "active_calls": 80,
+          "calls": 80,
+          "conditioning_used_in_distance": false,
+          "consumer": "output_marginal_v1",
+          "loss_sum": 91.85665209591389,
+          "maximum_loss": 1.996155023574829,
+          "schema_version": 1
+        },
+        "state.optimizers.generator[0].constraint_geometry": {
+          "max_derivative_after": 0.0,
+          "max_derivative_before": 0.0,
+          "projected_steps": 0,
+          "steps": 80
+        },
+        "state.optimizers.generator[0].direction_blend": {
+          "blended_steps": 0,
+          "conflict_steps": 0,
+          "max_retained_norm_ratio": 0.0,
+          "pareto_stalls": 0,
+          "retained_norm_ratio_sum": 0.0
+        }
+      }
+    }
+  ],
+  "analysis_training_calls": 0,
+  "analysis_sampling_draws": 0,
+  "analysis_scorer_calls": 0
+}

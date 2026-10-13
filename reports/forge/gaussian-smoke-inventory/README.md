@@ -232,3 +232,10 @@ passes another 68 metadata checks, including canonical ordering and destructive
 unmeasured-display controls. Saved rendering explicitly prohibits neural
 execution. Raw stdout, JSONL, JUnit, checkpoints and tensor dumps remain ignored
 or archived, outside Git.
+
+## Follow-up: Ring16 failure
+
+The [Ring16 saved-evidence investigation](../ring16-failure/README.md) compares
+the historical longer-training PASS with this inventory's uninterrupted FAIL.
+It adds final named-RNG parity and a numerical decomposition of the far tail,
+without new training or changes to this campaign's qualification results.

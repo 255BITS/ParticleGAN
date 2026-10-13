@@ -35,6 +35,11 @@ def packet(tmp_path):
                 destination = tmp_path / source
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / source, destination)
+    from tests.archived_forge_contracts import restore_archived_contracts
+    restore_archived_contracts(tmp_path, "tier1_completion")
+    # The executed eleven-family registry predates maintained family prose and
+    # tag declarations. Do not combine it with later editorial contracts.
+    shutil.rmtree(tmp_path / "configs/forge/family-documentation")
     # This fixture represents the concluded eleven-family round. Later family
     # registrations must not silently expand its immutable scientific roster.
     frozen = read_json(tmp_path / publication.ROUND)
@@ -107,8 +112,14 @@ def packet(tmp_path):
         return {"view": view["id"], "policy_fingerprint": stable_hash(view), "publication_scope": "frozen_source",
                 "frozen_source": {"commit": COMMIT}, "rows": rows, "task_contracts": catalog,
                 "provenance": {"input_digest": "fixture-only"}}
-    return tmp_path, {"id": "tier1-completion-v1", "candidate_roster": roster}, {
-        "round": "tier1-completion-v1", "candidates": results}, report(main, main_rows), report(load_view(tmp_path, publication.POLICY_VIEW), policy_rows)
+    packet = (tmp_path, {"id": "tier1-completion-v1", "candidate_roster": roster},
+              {"round": "tier1-completion-v1", "candidates": results},
+              report(main, main_rows), report(load_view(tmp_path, publication.POLICY_VIEW), policy_rows))
+    # Synthetic rows need their own exact private pins; archived real evidence
+    # must never be presented as the identity of these mocked measurements.
+    card, _, _, _, _ = publication.prepare_selection(*packet)
+    atomic_json(tmp_path / CURRENT_SELECTION, card)
+    return packet
 
 
 def select(packet):
@@ -265,8 +276,10 @@ def install_staged(packet, staged):
 
 def display_fixture(packet):
     _, _, _, main, _ = packet
-    families = [pin["trainer_family"] for pin in read_json(packet[0] / CURRENT_SELECTION)["selections"]]
-    for family, row in zip(families, main["rows"]):
+    families = {pin["candidate_id"]: pin["trainer_family"]
+                for pin in read_json(packet[0] / CURRENT_SELECTION)["selections"]}
+    for row in main["rows"]:
+        family = families[row["candidate_id"]]
         row.update(trainer_family=family, technique=family)
     return {**main, "view_revision": load_view(packet[0], publication.MAIN_VIEW)["revision"]}
 
@@ -353,6 +366,12 @@ def test_final_attempt_owns_metrics_when_earlier_retry_receipts_are_retained(pac
                                            for task in current["task_results"]]}
     atomic_json(root / "reports/forge/technique-receipts/bcap-earlier.json", earlier)
     row["attempt_ids"].append("bcap-earlier")
+    # This control intentionally extends the mocked provenance roster. Bind
+    # the private display pin to that exact row before testing final ownership.
+    choices = read_json(root / CURRENT_SELECTION)
+    pin = next(pin for pin in choices["selections"] if pin["trainer_family"] == "bcap")
+    pin["scientific_row_sha256"] = scientific_row_hash(row)
+    atomic_json(root / CURRENT_SELECTION, choices)
     display["family_progress"] = build_progress(root, display)
     cohort = next(family for family in display["family_progress"]["families"] if family["id"] == "bcap")["cohorts"][0]
     assert cohort["tasks"]["gaussian1d_acquisition"]["metrics"]["gate_status"] == "FAIL"

@@ -1,0 +1,151 @@
+{
+  "commands": [
+    {
+      "cwd": "/tmp/particlegan-ring16-runtime",
+      "head_commit": "862e4b4a1c532bd702d54ab349133f17f265f849",
+      "pr_create_argv": [
+        "gh",
+        "pr",
+        "create",
+        "--repo",
+        "255BITS/ParticleGAN",
+        "--base",
+        "develop",
+        "--head",
+        "research/ring16-runtime-rounding",
+        "--title",
+        "Investigate Ring16 runtime rounding at the step 400 boundary",
+        "--body-file",
+        "/tmp/particlegan-ring16-runtime/reports/forge/ring16-runtime-rounding/PR.md"
+      ],
+      "precondition": "Committed branch is clean and remote state has been refreshed; this publication confers no quality qualification.",
+      "push_argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "research/ring16-runtime-rounding"
+      ],
+      "status": "PENDING_NETWORK",
+      "track": "runtime_rounding"
+    },
+    {
+      "cwd": "/tmp/particlegan-ring16-damping",
+      "head_commit": "996fcaa581ef145650acff96824a77b704e71dc3",
+      "pr_create_argv": [
+        "gh",
+        "pr",
+        "create",
+        "--repo",
+        "255BITS/ParticleGAN",
+        "--base",
+        "develop",
+        "--head",
+        "research/ring16-spectral-damping",
+        "--title",
+        "Prepare Ring16 smooth spectral damping comparison",
+        "--body-file",
+        "/tmp/particlegan-ring16-damping/reports/forge/ring16-damping/PR.md"
+      ],
+      "precondition": "Committed branch is clean and remote state has been refreshed; this publication confers no quality qualification.",
+      "push_argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "research/ring16-spectral-damping"
+      ],
+      "status": "PENDING_NETWORK",
+      "track": "spectral_damping"
+    },
+    {
+      "cwd": "/tmp/particlegan-ring16-truncation",
+      "head_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+      "pr_create_argv": [
+        "gh",
+        "pr",
+        "create",
+        "--repo",
+        "255BITS/ParticleGAN",
+        "--base",
+        "develop",
+        "--head",
+        "research/ring16-spectral-truncation",
+        "--title",
+        "Prepare Ring16 weak singular direction truncation comparison",
+        "--body-file",
+        "/tmp/particlegan-ring16-truncation/reports/forge/ring16-truncation/PR.md"
+      ],
+      "precondition": "Committed branch is clean and remote state has been refreshed; this publication confers no quality qualification.",
+      "push_argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "research/ring16-spectral-truncation"
+      ],
+      "status": "PENDING_NETWORK",
+      "track": "spectral_truncation"
+    },
+    {
+      "cwd": "/tmp/particlegan-ring16-noise",
+      "head_commit": "1ca28014bf7102975376efadc691f3e103535f41",
+      "pr_create_argv": [
+        "gh",
+        "pr",
+        "create",
+        "--repo",
+        "255BITS/ParticleGAN",
+        "--base",
+        "develop",
+        "--head",
+        "research/ring16-tiny-noise",
+        "--title",
+        "Prepare Ring16 tiny weak-gradient noise comparison",
+        "--body-file",
+        "/tmp/particlegan-ring16-noise/reports/forge/ring16-noise/PR.md"
+      ],
+      "precondition": "Committed branch is clean and remote state has been refreshed; this publication confers no quality qualification.",
+      "push_argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "research/ring16-tiny-noise"
+      ],
+      "status": "PENDING_NETWORK",
+      "track": "tiny_noise"
+    },
+    {
+      "cwd": "/tmp/particlegan-ring16-flips",
+      "head_commit": "79291dad8a15e742bc86a55c56cafc0d26539292",
+      "pr_create_argv": [
+        "gh",
+        "pr",
+        "create",
+        "--repo",
+        "255BITS/ParticleGAN",
+        "--base",
+        "develop",
+        "--head",
+        "research/ring16-small-sign-flips",
+        "--title",
+        "Prepare Ring16 weak singular sign-flip comparison",
+        "--body-file",
+        "/tmp/particlegan-ring16-flips/reports/forge/ring16-sign-flips/PR.md"
+      ],
+      "precondition": "Committed branch is clean and remote state has been refreshed; this publication confers no quality qualification.",
+      "push_argv": [
+        "git",
+        "push",
+        "-u",
+        "origin",
+        "research/ring16-small-sign-flips"
+      ],
+      "status": "PENDING_NETWORK",
+      "track": "small_sign_flips"
+    }
+  ],
+  "executed": false,
+  "schema_version": 1
+}

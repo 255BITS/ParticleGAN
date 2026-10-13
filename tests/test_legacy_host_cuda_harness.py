@@ -240,7 +240,7 @@ def test_replay_rejects_tampered_seed_device_config_or_noise(tmp_path):
 
 
 def test_candidate_episode_rejects_a_missing_noise_receipt(tmp_path, monkeypatch):
-    from tests.test_toy_suite import _write_candidate_episode
+    from test_toy_suite import _write_candidate_episode
     import benchmarks.toy_suite as toy_suite
 
     monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(

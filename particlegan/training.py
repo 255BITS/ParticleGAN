@@ -2,6 +2,8 @@
 from copy import deepcopy
 import math
 
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
 import torch
 from torch import nn
 
@@ -127,6 +129,12 @@ class GANTrainer:
             getattr(recipe, "generator_idle_mode", "batch"),
             recipe.generator_idle_se,
         )
+        if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
+            raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
+        if recipe.constraint_geometry_mode == "strict_progress" and any(
+                isinstance(module, (torch.nn.modules.batchnorm._BatchNorm, torch.nn.modules.dropout._DropoutNd))
+                for module in self.G.modules()):
+            raise ValueError("strict_progress requires generator forwards without stochastic layers or running buffers")
         if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
             raise ValueError("max_steps must be a positive integer or None")
         self.max_steps = recipe.total_steps if max_steps is None else max_steps
@@ -158,6 +166,8 @@ class GANTrainer:
                 if id(parameter) in seen:
                     raise ValueError("generator, discriminator and prior must not share parameters")
                 seen.add(id(parameter))
+        recipe._validate_frozen_prior_ownership(self.prior, self.G, self.D)
+        recipe.apply_prior_policy(self.prior)
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
         if require_latent_damping is None:
@@ -171,7 +181,9 @@ class GANTrainer:
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
-        self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
+        self.prior_regularizer = recipe.make_prior_regularizer(
+            weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
+            prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
@@ -376,7 +388,8 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -385,13 +398,36 @@ class GANTrainer:
                 raise ValueError("RpGAN generator_real must match the real batch size")
             real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
+            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+                         if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+                               if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
             prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad:
+            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
+                # Keep the historical unweighted diagnostic, even at weight 0.
+                # Its contribution to the training objective is recipe.prior_reg.
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if self.prior.z.requires_grad and recipe.prior_l2 > 0:
+                loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
+            if recipe.kinetic_transport_weight:
+                loss_g = loss_g + transport
+            if recipe.kinetic_transport_local_weight:
+                loss_g = loss_g + transport_local
             self.opt_g.zero_grad()
-            loss_g.backward()
+            protected_evaluator = None
+            if recipe.constraint_geometry_mode == "strict_progress":
+                # Same sampled indices and fixed within-component perturbation;
+                # probes never call a sampler or draw training/output noise.
+                locations = self.prior.z.detach().clone()
+                sampled_latent = latent.detach().clone()
+                def protected_evaluator():
+                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    return (self.loss.g_loss(logits, real_logits),)
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                         protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             # None returns before the logits are read. An idle step clears
@@ -412,6 +448,10 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if recipe.kinetic_transport_weight:
+            result["kinetic_transport"] = transport.detach()
+        if recipe.kinetic_transport_local_weight:
+            result["kinetic_transport_local"] = transport_local.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
@@ -477,6 +517,9 @@ class GANTrainer:
             "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
+            **({"generator_idle": self._idle_accounting.state_dict()}
+               if self.recipe.generator_idle_se is not None else {}),
+            **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict() for name in names},
@@ -542,8 +585,14 @@ class GANTrainer:
                 or set(state) not in (set(expected), set(expected) - {"policy"})):
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if (isinstance(saved_recipe, dict) and "prior_update" not in saved_recipe
+                and state.get("requires_grad", {}).get("prior") == {}):
+            # Historical frozen tables were buffers; their saved parameter map
+            # is an actual policy witness, never a candidate default inference.
+            saved_recipe = {**saved_recipe, "prior_update": "frozen"}
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
+        self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"), validate_only=True)
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
@@ -554,6 +603,10 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
+        if self.recipe.generator_idle_se is not None:
+            self._idle_accounting.validate_state_dict(state["generator_idle"])
+            if state["generator_idle"]["decisions"] != steps:
+                raise ValueError("generator idle checkpoint decisions differ from completed updates")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -575,6 +628,14 @@ class GANTrainer:
                         raise ValueError(f"checkpoint model {name} has incompatible tensors")
                 elif saved != value:
                     raise ValueError(f"checkpoint model {name} has incompatible state")
+        if self.recipe.prior_regularizer == "coulomb" and self.recipe.prior_reg > 0 and self.recipe.prior_update == "learned":
+            from .coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
+            for name in ("prior", "ema_prior"):
+                reference = state["models"][name]
+                if (not torch.isfinite(reference[CENTER_BUFFER]).all()
+                        or not torch.isfinite(reference[RADIUS_BUFFER])
+                        or reference[RADIUS_BUFFER] < 0):
+                    raise ValueError("invalid checkpoint Coulomb initial reference")
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")
         try:
@@ -651,6 +712,9 @@ class GANTrainer:
             self.policy._feature_selection.commit_restore(prepared)
         for name, values in state["models"].items():
             getattr(self, name).load_state_dict(values)
+        self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"))
+        if self.recipe.generator_idle_se is not None:
+            self._idle_accounting.load_state_dict(state["generator_idle"])
         if self.log_output_sigma is not None:
             with torch.no_grad():
                 self.log_output_sigma.copy_(state["output_noise"]["log_sigma"])

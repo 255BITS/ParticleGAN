@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "6b3fb5f7ef3a0faa4a6a0fb5db5be18298f66f25ff7f071af0ccb974c1857565",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "82a9d284c42b2bb033b5acb131b8259f3150e99a96fb68e918b0f2b3070b7a05",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/9ab1b8aab44c4acc9c4eb9a26c6b21eb/constraint_geometry-scored-outputs.pt": "057aeb459a70efa69b967a703b95e75d4b9f62450ae67553a2721db3e6f8e10b"
+  },
+  "task_id": "unipolar"
+}

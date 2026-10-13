@@ -1,0 +1,179 @@
+{
+  "additional_predictions": [
+    {
+      "metric": "identity_mse",
+      "op": "<=",
+      "phase": "every_terminal_check",
+      "task_id": "residual_student",
+      "threshold": 0.02
+    },
+    {
+      "metric": "success_rate",
+      "op": ">=",
+      "phase": "every_terminal_check",
+      "task_id": "residual_student",
+      "threshold": 1.0
+    },
+    {
+      "metric": "wrong_pad_rate",
+      "op": "<=",
+      "phase": "every_terminal_check",
+      "task_id": "residual_student",
+      "threshold": 0.0
+    }
+  ],
+  "arms": [
+    {
+      "candidate_id": "bcap-projection-baseline-review-baseline-v1",
+      "changed_factors": [
+        "Exact selected incumbent, unchanged, on the paired common source"
+      ],
+      "competing_explanation": "Host contention or source/consumer incompatibility can invalidate the control; historical task grades cannot substitute for fresh complete measurements.",
+      "control": "bcap-projection-baseline-review-direction-v1",
+      "falsifier": {
+        "metric": "grad_med",
+        "op": ">",
+        "phase": "final",
+        "task_id": "two_pole",
+        "threshold": 1.0
+      },
+      "hypothesis": "The unchanged incumbent preserves all six original Tier1 gates and exposes source-bound conditional Tier2 failures without a transport/backend/cap change.",
+      "mechanism_rationale": "Source-specific original global BCAP control; all sixteen task conditions and own passing producer dependencies retained.",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "prediction": {
+        "metric": "grad_med",
+        "op": "<=",
+        "phase": "final",
+        "task_id": "two_pole",
+        "threshold": 1.0
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "scope": "phase2_fresh_ordinary_tier1",
+            "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "path": "reports/forge/bcap-three-phase/phase2-results.json",
+          "selector": [],
+          "use": "motivation_only"
+        },
+        {
+          "identity": {
+            "evidence_scope": "research_diagnostic",
+            "paid_attempts": 6
+          },
+          "path": "reports/forge/bcap-tier1-stability/results.json",
+          "selector": [],
+          "use": "motivation_only"
+        },
+        {
+          "identity": {
+            "archive_publication_commit": "fed122eed540a100a83d0b2614895f35d6c9e5c9",
+            "measured_source_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+            "original_result_sha256": "58164399b3ffb3ae712046a40d04be2f4e1bbf6ba24766eae24628cc8f2902fa"
+          },
+          "path": "reports/forge/bcap-projection-baseline-review/prior-evidence.json",
+          "selector": [],
+          "use": "motivation_only"
+        }
+      ],
+      "recipe_overrides": {},
+      "role": "baseline"
+    },
+    {
+      "candidate_id": "bcap-projection-baseline-review-direction-v1",
+      "changed_factors": [
+        "Only constraint_geometry_mode: none -> direction_blend, globally; native SVD and every other resolved recipe field identical to control"
+      ],
+      "competing_explanation": "Conditional failures may reflect finite-step curvature, critic dynamics, prior geometry, or inconsistent host contracts rather than local loss conflict; protected-gradient overhead may violate the unchanged word timeout.",
+      "control": "bcap-projection-baseline-review-baseline-v1",
+      "falsifier": {
+        "metric": "identity_mse",
+        "op": ">",
+        "phase": "final",
+        "task_id": "trajectory",
+        "threshold": 0.02
+      },
+      "hypothesis": "Direction blend alone preserves six of six original Tier1 gates and repairs the complete original trajectory and residual sustained identity gates, while retaining every paired baseline Tier2 PASS.",
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Protect existing adversarial/paired signals against full DualNorm displacement from conflicting original cover/spread/hold objectives. Apply existing common-descent blend only when actual rounded displacement has positive protected-gradient dot product; no finite-loss probes, transport, new supervision, backend or cap changes.",
+      "parent": "bcap-three-phase-incumbent-v1",
+      "prediction": {
+        "metric": "identity_mse",
+        "op": "<=",
+        "phase": "final",
+        "task_id": "trajectory",
+        "threshold": 0.02
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "scope": "phase2_fresh_ordinary_tier1",
+            "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+          },
+          "path": "reports/forge/bcap-three-phase/phase2-results.json",
+          "selector": [],
+          "use": "motivation_only"
+        },
+        {
+          "identity": {
+            "evidence_scope": "research_diagnostic",
+            "paid_attempts": 6
+          },
+          "path": "reports/forge/bcap-tier1-stability/results.json",
+          "selector": [],
+          "use": "motivation_only"
+        },
+        {
+          "identity": {
+            "archive_publication_commit": "fed122eed540a100a83d0b2614895f35d6c9e5c9",
+            "measured_source_commit": "593748efef6d1760315723beba46f1e95ffaa75b",
+            "original_result_sha256": "58164399b3ffb3ae712046a40d04be2f4e1bbf6ba24766eae24628cc8f2902fa"
+          },
+          "path": "reports/forge/bcap-projection-baseline-review/prior-evidence.json",
+          "selector": [],
+          "use": "motivation_only"
+        }
+      ],
+      "recipe_overrides": {
+        "constraint_geometry_mode": "direction_blend"
+      },
+      "role": "candidate"
+    }
+  ],
+  "artifacts": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection",
+  "campaign_id": "bcap-projection-baseline-repair-v1",
+  "candidate_budget_seconds": 24000,
+  "complete_replacement_rule": {
+    "full_sustained_gates_required": true,
+    "minimum_complete_paired_tier2_failure_repairs": 1,
+    "no_unresolved_paired_comparisons": true,
+    "preserve_every_baseline_tier2_pass": true,
+    "qualification_input": false,
+    "required_tier1_passes": 6
+  },
+  "execution_condition": "Root explicitly confirms that all five Phase3 studies are ineligible under the declared replacement rule before admission. A completed original Tier1 non-PASS establishes ineligibility; every study must still finish remaining work and publish its complete evidence. Completed scientific failures need no retry; only separately authorized execution repairs may retry incomplete/error attempts. Root alone schedules/admit this pair.",
+  "paid_ceiling_seconds": 48000,
+  "review_status": "approved_conditional_admission",
+  "schema_version": 1,
+  "software_allowance_seconds": 300,
+  "task_ids": [
+    "gaussian1d_smoke",
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "ring16_acquisition",
+    "five_word_joint_smoke",
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "view_id": "bcap-projection-baseline-repair-diagnostic-v1"
+}

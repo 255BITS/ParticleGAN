@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/phase3-scaffold/logs",
+    "sha256": {
+      "final-tests-junit.xml": "36129c0e22a4a6fe7e9b83737ff79311d1803d1ed63a71f8ae3c5b4185d0de8c",
+      "final-tests.log": "4548a0b492cff5238c8d3058749e38cf7ad9388a06d93b034ee27a7e78ab838c",
+      "own-producer-junit.xml": "dd8ec86c5d19c3d40ef2b59c1b3a144ee564a3f6d193d52e900aa99f646b5e88",
+      "own-producer-tests.log": "8974477f12955fb5716fa75ee5cd0aed649b3e987cff66ff54f41f209bde2072",
+      "review-tests-junit.xml": "82215ee497e0b936a29418522d2c87e2c56fab977e159a09b48b0bf2bdd94ab7",
+      "review-tests.log": "d2e3243ad3e571f35ce84691b409d0d86a413b6023b861998d75e2143c91f361"
+    }
+  },
+  "base_commit": "0f9787fa3",
+  "contracts": {
+    "candidate_ceiling_seconds": 24000,
+    "candidate_schema": 3,
+    "diagnostic_assignments": 16,
+    "original_initializer": "deterministic_orthogonal",
+    "paid_ceiling_seconds": 48000,
+    "paired_reservation_seconds": 45840,
+    "per_arm_reservation_seconds": 22920,
+    "protocol_seed": 0,
+    "required_original_tier1": 6,
+    "selected_original_tier2": 10,
+    "study_admission": "READY computed by actual Forge resolver",
+    "study_schema": 1
+  },
+  "controls": [
+    "Real preflight resolves both16-task arms READY without queue or worker",
+    "Unrelated Gaussian shallow card bytes remain exact under selected-source rebinding",
+    "Numerical gate change and missing own producer task fail closed",
+    "ExactHEAD and committed source/spec/registration/declaration guards before admission",
+    "Substantive global baseline/candidate pairing and fixed budgets",
+    "Swapped arm identities, omitted frozen tasks and altered source attribution reject",
+    "Ordinary or active attempts rejected from diagnostic publisher",
+    "Synthetic saved-only software control verifies diagnostic-importance GIF selection, blocked holds and incomplete research outcome",
+    "Borrowed baseline, foreign revision and failed own producer reject before checkpoint load",
+    "Actual target-batch digest mismatch rejects paired saved-state audit"
+  ],
+  "limitation": "No actual research spec, selected baseline, hypothesis, paid admission, trained gate, or scientific media is created. Synthetic tiny GIFs test publisher wiring only; actual research media will derive from certified saved training observations.",
+  "optimizer_updates": 0,
+  "paid_training_seconds": 0,
+  "production_changes": 0,
+  "qualification_input": false,
+  "reproduction": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= PYTHONPATH=. python -m pytest tests/test_bcap_phase3_orchestration.py tests/test_bcap_phase2_orchestration.py -q",
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "phase3_scaffold_software_verification",
+  "source_sha256": {
+    "reports/forge/bcap-three-phase/phase3-spec-template.json": "267c6ced72643725792b9f17b0f5bc99988d626ee9d2c55046382b3c4bd657a6",
+    "reports/forge/bcap-three-phase/phase3-workflow.md": "8c66ff1c928e35195364a883e1881de296312b6474031cefc1e85d626ad938dc",
+    "reports/forge/bcap-three-phase/phase3.py": "6b7f0a3bf7bbf5eae65a93c0026e066969cd24a4e5725e7949bec45851bf8db7",
+    "tests/test_bcap_phase3_orchestration.py": "890e0f7ada3f80a389ae46d2af0ce17ad5ca268eda234ad2f365f82709f51749"
+  },
+  "verified": {
+    "additional_own_producer_passes": 3,
+    "additional_seconds": 0.14,
+    "earlier_combined_seconds": 12.61,
+    "earlier_combined_tests": 14,
+    "existing_phase2_passes": 4,
+    "final_phase3_tests": 16,
+    "main_passes": 13,
+    "main_seconds": 11.09,
+    "registered_software_allowance_per_track_seconds": 300,
+    "total_software_execution_conservative_upper_bound_seconds": 45
+  },
+  "workers_started": 0
+}

@@ -39,7 +39,7 @@ class ConfigTests(unittest.TestCase):
             self.assertEqual(set(defaults) - set(supplied),
                              {key for key, value in defaults.items() if value is None})
             self.assertEqual(defaults, load_config(ROOT / "configs" / name / "default.toml", defaults))
-            recipe = get_recipe()
+            recipe = get_recipe("ka2")
             self.assertEqual(defaults["lr"], recipe.lr)
             self.assertEqual(defaults["batch_size"], recipe.batch_size)
             self.assertEqual(defaults["z_dim"], recipe.z_dim)

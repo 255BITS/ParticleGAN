@@ -1,0 +1,40 @@
+{
+  "candidate_id": "bcap-moment-tradeoff-saved-diagnostic-v1",
+  "candidate_revision": "98625b0dfc8b82176cc3b05e7c44a3637aa26664d9c4f55db91d0e745eb0ca2f",
+  "changed_factors": [
+    "Zero-update inspection of six original leader/moment-tether acquisition/final checkpoints and four original failing word cohorts.",
+    "Fixed deterministic row enumeration/symmetric-axis diagnostic panels; original gates and qualification unchanged."
+  ],
+  "conclusion": "Mode repair improves the sustained quality suffix 3 to 7 against >=5. Word failure at5167 loses melon generation while paired reconstruction remains confident; at6167 generation passes while apple fourth-character reconstruction probability .796768 misses >=.9. All actual direction-blend counters remain zero. Fixed-panel tether/adversarial prior force ratio is .010873 at mode endpoint, .074770 at own word acquisition and .341457 at word endpoint. At word endpoint the direct joint-latent gradient norm is about403 times the decoder path. No historical failure-window checkpoint or gradient exists, so these endpoint diagnostics do not identify one causal explanation.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "What distinguishes the moment-tether mode_hold repair from its five-word-hold regression?",
+  "lifecycle": "concluded",
+  "mechanism_class": "saved_prior_force_and_word_path_diagnosis",
+  "next_action": "Investigate one global relative-force limit on the covariance tether, with actual gradients/applied displacements at discriminating windows and original word hold plus all incumbent passes as controls. Hypothesis unexecuted; no default adoption or automatic continuation.",
+  "provenance": {
+    "analysis_device": "cpu",
+    "diagnostic_forward_and_autograd": true,
+    "executed_science_commit": "18e2aa1018f25de8c447a59287025df6f6aded3e",
+    "new_model_sampling": 0,
+    "new_model_updates": 0,
+    "report": "reports/forge/bcap-moment-tradeoff/README.md",
+    "reproducer_sha256": "c7724714c3c92714af534cf76ada4bbcfba0b48a152060a540a67c7b3b864552",
+    "source_digest": "c63305181b75bbfae337143b6836397aa998cadbf172581859031a01c90892c2",
+    "word_own_prefixes": {
+      "control": 834,
+      "moment_tether": 4167
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "bcap-moment-tradeoff-saved-diagnostic-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bcap-moment-tradeoff/results.json",
+    "sha256": "af55590f4bdb8f1e1403de5d6960809330cb14536735bd2c258b929eb9cb06b3"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

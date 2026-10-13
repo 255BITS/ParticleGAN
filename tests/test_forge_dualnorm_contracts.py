@@ -63,6 +63,7 @@ def test_forge_v1_bcap_remains_adam_while_public_bcap_selects_the_new_starter():
     assert get_recipe("bcap").lr == .012
     assert get_recipe("bcap").d_lr_mult == 1.5
     assert get_recipe("bcap").prior_lr_mult == 2.5
+    assert get_recipe("bcap").constraint_geometry_mode == "direction_blend"
     assert candidate["recipe_overrides"] == {}
 
 
@@ -72,7 +73,9 @@ def test_forge_bcap_binding_respects_explicit_winner_and_name_overrides():
         "loss": "non_saturating", "optimizer_smoothing": .001, "optimizer_convolution": "per_offset",
         "lr": .012, "d_lr_mult": 1.5, "prior_lr_mult": 2.5}}
     resolved = resolve_public_recipe(candidate, name="report-label")
-    assert asdict(resolved) == asdict(get_recipe("bcap").replace(name="report-label"))
+    # This historical winner declaration has no projection override. Forge v1
+    # keeps its original resolved recipe despite the current public preset.
+    assert asdict(resolved) == asdict(get_recipe("bcap", constraint_geometry_mode="none").replace(name="report-label"))
     assert resolve_public_recipe(candidate).name == "frozen-label"
     assert candidate["recipe_overrides"]["name"] == "frozen-label"
 
@@ -86,7 +89,8 @@ def test_optimizer_controls_have_explicit_ownership_and_momentum_boundary():
     assert recipe_field_owner("optimizer_family") == "technique"
     for name in ("optimizer_momentum", "optimizer_adam_lr"):
         assert recipe_field_owner(name) == "hyperparameter"
-    base = get_recipe("bcap", optimizer_family="dualnorm", optimizer_momentum=.5)
+    base = get_recipe("bcap", optimizer_family="dualnorm", optimizer_momentum=.5,
+                      constraint_geometry_mode="none")
     validate_same_technique(base, base.replace(optimizer_momentum=.9, lr=.03))
     with pytest.raises(ValueError, match="dualnorm_momentum"):
         validate_same_technique(base, base.replace(optimizer_momentum=0))

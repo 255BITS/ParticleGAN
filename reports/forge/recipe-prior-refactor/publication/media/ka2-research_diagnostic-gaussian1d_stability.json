@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "9677332c7f4c5ff72af0aab7fff2f1ff7abb9c48046a42aab9344b226a2476e4",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "4fcfd3942adfc569eaea84f19365359584a2f3a5f4d7818af1b55319c9d8d948",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/bec7eee472f349ca80d85ab132dc994a/evaluator/observed-samples.pt": "74bb65d49e8f640945a90be88455753be901fb4112cb576f6adad24d3574b739"
+  },
+  "task_id": "gaussian1d_stability"
+}

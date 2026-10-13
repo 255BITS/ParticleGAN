@@ -329,9 +329,12 @@ def _guards(task, evidence):
         count = guards.get("optimizer_updates", {}).get(role)
         if type(count) is not int or count < 0:
             return _verdict("INCOMPLETE", f"missing valid {role} optimizer update count")
-        if count == 0:
+        from .priors import expected_prior_updates
+        expected_count = (expected_prior_updates(task, evidence, task["execution"]["steps"])
+                          if role == "prior" else task["execution"]["steps"])
+        if count == 0 and expected_count != 0:
             return _verdict("FAIL", f"{role} did not perform an intended optimizer update")
-        if expected.get("exact_optimizer_updates") and count != task["execution"]["steps"]:
+        if (expected.get("exact_optimizer_updates") or expected_count == 0) and count != expected_count:
             return _verdict("INCOMPLETE", f"{role} optimizer updates do not complete the declared task budget")
     if expected.get("mechanism_exercised"):
         from .mechanisms import mechanism_blockers
@@ -565,6 +568,11 @@ def grade_result(task: dict, result: dict | None) -> dict:
     evidence = result.get("evidence", result.get("metrics"))
     if not isinstance(evidence, dict):
         return _verdict("INCOMPLETE", "missing raw evaluator evidence; status stamps cannot qualify")
+    from .priors import validate_prior_policy
+    applied = result.get("applied", result)
+    prior_grade = validate_prior_policy(task, evidence, applied.get("recipe", {}) if isinstance(applied, dict) else None)
+    if prior_grade is not None:
+        return _verdict(prior_grade["status"], prior_grade["reason"])
     if evidence.get("scoring_weights", "live") != task["evaluation"].get("scoring_weights", "live"):
         return _verdict("INVALID", "live/EMA scoring policies differ")
     sampling = grade_sampling(task, evidence)

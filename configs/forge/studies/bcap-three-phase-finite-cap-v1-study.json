@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 7560,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-three-phase-tier1-v1"
+  },
+  "candidate": "bcap-three-phase-finite-cap-v1",
+  "competing_explanation": "Cap changes can reduce useful critic response, and CPU-vs-CUDA SVD rounding can alter paths. Transport plus cap and backend are a compound repair, not an isolated quality attribution.",
+  "control": {
+    "candidate_id": "bcap-three-phase-incumbent-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "Structural same-training-panel finite critic displacement guard; explicit CPU full-SVD numerical backend provides measured word runtime headroom. Predict all six full original Tier1 gates pass, including sustained two-pole suffix>=5 and completed20001-update words within900seconds.",
+  "id": "bcap-three-phase-finite-cap-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "evidence_scope": "research_diagnostic",
+        "paid_attempts": 6
+      },
+      "path": "reports/forge/bcap-tier1-stability/results.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

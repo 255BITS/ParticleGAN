@@ -66,7 +66,7 @@ def training_recipe(cfg):
     image-scale cost; laziness changes only its frequency, not the technique.
     """
     family = dict(name='ae_ddgan', alpha_bar=cfg['alpha_bar']) if cfg['model'] == 'ddgan' else dict(name='ae_gan')
-    return get_recipe(**family, z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+    return get_recipe(trainer="ka2", **family, z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
                       sigma_rel=cfg['sigma_rel'], routing_temperature=cfg['temperature'],
                       batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
                       d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'],
