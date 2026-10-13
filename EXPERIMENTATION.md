@@ -113,6 +113,9 @@ grade and grant no extra reference credit. Optional calibration `diagnostic_task
 bind separate host identities and report their costs without entering smoke or
 reference decisions. Existing profiles without this field retain their semantics.
 
+The [energy prior-policy comparison](reports/forge/r1r2-energy-prior-freeze-repair/README.md)
+keeps its finite declarations, evidence receipts and conclusions in its report.
+
 The [formulation-comparison readout](reports/forge/FORMULATION_COMPARISON_READOUT.md)
 owns its measured outcomes, control checks, costs, coverage and stopping decisions.
 Inspect saved critic gradients and per-mode moments before proposing another

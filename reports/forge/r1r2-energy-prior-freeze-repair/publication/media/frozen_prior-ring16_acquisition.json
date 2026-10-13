@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "7a5dd116b27278d41d346d6d193898317186d8b36f831cb6c0c515e19ac9f5df",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "0e6dbf3810f414d074a204363d788a8e21bc8e1d33a2b4f1e12dce9bda15c6b9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-prior-freeze-repair-v1/c168f1c417b04e1a9938d68b04b0556c/observed-samples.pt": "a71ca74e390eb980597c440b726fdbf184adf0b3311f0576b64ff49db963f862"
+  },
+  "task_id": "ring16_acquisition"
+}

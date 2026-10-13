@@ -1,0 +1,198 @@
+{
+  "actual_software_fixture_updates": 14,
+  "archive_logs": {
+    "auditor-software-probe-final.stderr.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/auditor-software-probe-final.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "auditor-software-probe-final.stdout.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/auditor-software-probe-final.stdout.log",
+      "sha256": "a9a0ee69a7deb983643bca88e5e031a94b1060d50a9f7322fbd7119f975a6953"
+    },
+    "collect.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/collect.log",
+      "sha256": "f9e42cc60d5366cd3f8677240fb54c751c810fc08ac1463d2dca30810097b039"
+    },
+    "collection-audit.stderr.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/collection-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "collection-audit.stdout.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/collection-audit.stdout.log",
+      "sha256": "9206e622617832e4384de5658a1e1c5156bbb4526ea3f7bd2b7b4311ecafd531"
+    },
+    "compile-final-revision-check.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/compile-final-revision-check.log",
+      "sha256": "c2944a70b1e771f045c086bc402c5d9dd1c923c14a1d917b72dce77842ee6895"
+    },
+    "compile-final-revision.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/compile-final-revision.log",
+      "sha256": "1335bd85ab3f082d7998f757b05cc9390dc8a62f4afd1671b34084b74cbb8fd2"
+    },
+    "density-audit.stderr.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/density-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "density-audit.stdout.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/density-audit.stdout.log",
+      "sha256": "e790df5eb9cbbaa2ebacb66b18af449a43692e894ff937c8c2890912f4048644"
+    },
+    "prepare.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/prepare.log",
+      "sha256": "d33dc44fe05021b5b1fe1dcea89e06cacbefb8c812da931ee2a423c4ede10592"
+    },
+    "run.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/run.log",
+      "sha256": "418a85e22649ca36f37fcf1b9a27ea89de842ee4529c80fb3051cd9391c16b8a"
+    },
+    "software-fixture.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/software-fixture.log",
+      "sha256": "da6905f6e0a134a88b14dfef3635be34df86e9f32657261f7a6c54126e8e028a"
+    },
+    "test-workflow.log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/test-workflow.log",
+      "sha256": "4d354bbe07efc664608d3f4a3655b16d937bb8c83221cf4a1cc8402699511025"
+    }
+  },
+  "bulk_artifacts_in_git": false,
+  "cached_parent_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "compilation": {
+    "input_digest": "551f72a9ee0c6d3a3307fb85856e273055e6a87435e6420bfea921e6db1f6e03",
+    "manifest_sha256": "265246dfd20aab6ef3895719c7f0091ce8d074ea0127f66ad19c9ac7432c2e8d",
+    "memory_sha256": "66582ea14445a64a2796e7f1edec1bf63c6fdfdb7a3cb475442c7a4c4f2ce812",
+    "records": 841,
+    "status": "CURRENT"
+  },
+  "costs": {
+    "aggregate_paid_seconds": 7168.248061007995,
+    "cached_new_paid_seconds": 0,
+    "complete_next_word_reservation_fits": false,
+    "new_paid_seconds": 197.33389144105604,
+    "prior_paid_seconds": 6970.914169566939,
+    "remaining_paid_seconds": 831.7519389920053,
+    "shared_paid_ceiling_seconds": 8000
+  },
+  "density_audit": {
+    "max_absolute_difference": 0,
+    "new_draws": 0,
+    "new_updates": 0,
+    "recomputed_metrics": 6,
+    "recomputed_saved_observations": 192,
+    "successful_original_assertions": true
+  },
+  "execution_commit": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+  "fixture_quality_credit": false,
+  "frozen_declarations_preserved": 34,
+  "historical_preservation": {
+    "generated_snapshots": {
+      "reports/forge/automation.json": "a7091dde4feab6f0d226b0cd52177a042255ffbbe55f25938e30cbcb1bc7faf4",
+      "reports/forge/leaderboards/adaptation.md": "2969e98b45e3389f4f03c8ac4bf43caff2a8c3fa45a5a298a6dfef6eebbc0d24",
+      "reports/forge/leaderboards/clockfree_continuous.md": "31e9db7f984745e821c27d49aaa047892f66c3bf9f86639461b0bba60d2d3847",
+      "reports/forge/leaderboards/formulation_comparison.md": "b9418d0b8be5047240398690bf3fc97f28e6596c23ee17a03d5a29558a00068c",
+      "reports/forge/leaderboards/host_profile_transfer.md": "8a7a51f5de8e58493c7d14eac7112c1b0b127978155a40d04382cda0de8f98ea",
+      "reports/forge/leaderboards/quality_coverage.md": "ca984b8dbee8c244c68be0e526dcef259c1b748e7861d792d62374bf14e3c7e1",
+      "reports/forge/technique-inventory.json": "711bfdcdf50b177614f5b242361c6798ea6ac3ba5e28c7df6915f5477955d034",
+      "reports/forge/technique-inventory.md": "6b65db36141a8dc19a58c19dc43f6c016346bc50732c354982ae4a0d8114038d"
+    },
+    "published_records": 513,
+    "published_records_unchanged": true
+  },
+  "inputs_sha256": {
+    "README.md": "6c412c876a6edce1a6951cbf8ce4c2cada8defac4314c965d8af6db5a5ed0e04",
+    "collection-audit.json": "3afa7bdd6f96eee72efbbd783c100c2a9639dbf563466cef3db6f8600b28afaa",
+    "density-audit.json": "e790df5eb9cbbaa2ebacb66b18af449a43692e894ff937c8c2890912f4048644",
+    "density-readout.md": "7c667b3c144ee0a691a0a3f4dc14f7b10f22eaaff7978ef7cd29094d5ddbfee4",
+    "preflight-review.json": "b9f08bf4d8916b6780ff7553237b29ceb4c90988c25903ba7f298fcedc1e5738",
+    "publication/results.json": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207",
+    "readiness-validation.json": "9a2980805fd7599a17fb9ac5abfaa86e40ccfdaaf8ebb63ce08663e0f58ad03f",
+    "registration-review.json": "029fd527663147a2298cb353437405379f09dded12d36d64472184d6f7b06177",
+    "registration.json": "7553c76a4ed5c6c1b131bc508999667cf4e68d9a55f34bb102c9a626937f090d",
+    "software-validation.json": "ba0452ca75137de0864fe6b7bec495842c37ab5e721b5975a6609c51d7d8a3fe"
+  },
+  "new_local_markdown_links_checked": 52,
+  "previous_frozen_declarations_preserved": 36,
+  "qualification_input": false,
+  "result": {
+    "energy_u": {
+      "clock": "PASS",
+      "ordinary_pass": 5,
+      "ordinary_total": 6,
+      "remaining_failure": [
+        "ring16_acquisition"
+      ]
+    },
+    "frozen_prior": {
+      "clock": "PASS",
+      "ordinary_pass": 5,
+      "ordinary_total": 6,
+      "remaining_failure": [
+        "ring16_acquisition"
+      ]
+    }
+  },
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "saved_audit_coverage": {
+    "aggregate_unique_paid_attempts": 238,
+    "cases": 14,
+    "checkpoints": 12,
+    "clock_proofs": 2,
+    "clock_saved_snapshots": 52,
+    "clock_stream_states": 728,
+    "exact_cached_control_cases": 7,
+    "gifs": 14,
+    "grades": 14,
+    "new_paid_attempts": 7,
+    "optimizer_groups": 30,
+    "ordinary_stream_states": 196,
+    "roles": 2,
+    "source_files": 1216
+  },
+  "schema_version": 1,
+  "scientific_success": false,
+  "scope": "complete_fixed_task_prior_policy_contrast_validation",
+  "software_checks": {
+    "CPU_public_integration": {
+      "actual_software_updates_all_branches": 14,
+      "full_CUDA_word_ladder_unchanged": true,
+      "log_sha256": "da6905f6e0a134a88b14dfef3635be34df86e9f32657261f7a6c54126e8e028a",
+      "original_hold_status": "INCOMPLETE",
+      "passed": 8,
+      "receipt": "reports/forge/r1r2-energy-prior-freeze-repair/software-validation.json",
+      "receipt_sha256": "ba0452ca75137de0864fe6b7bec495842c37ab5e721b5975a6609c51d7d8a3fe",
+      "rerun_by_reviewer": false,
+      "seconds": 3.03,
+      "word_prefix_and_continuation": "1 actual prefix +2 actual resumed +2 actual reference updates; synthetic834/836 counters and producer metrics"
+    },
+    "actual_readonly_resolution": {
+      "cached_cases": 7,
+      "new_keys": 7,
+      "public_bindings": 8,
+      "source_files": 1216,
+      "status": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/independent-readiness-final.stdout.log",
+      "stdout_sha256": "c6725def0771fab16b34a3066519c4a8d46783c451a6c7c38216c805e4836b02"
+    },
+    "auditor_pure_fixtures": {
+      "archived_grades_used": 0,
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/martyn/dev/ParticleGAN/.venv/bin/python reports/forge/r1r2-energy-prior-freeze-repair/software_audit_probe.py",
+      "draws_updates_constructors": 0,
+      "passed": 107,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/auditor-software-probe-final.stdout.log",
+      "stdout_sha256": "a9a0ee69a7deb983643bca88e5e031a94b1060d50a9f7322fbd7119f975a6953"
+    },
+    "workflow_guards": {
+      "log": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/test-workflow.log",
+      "log_sha256": "4d354bbe07efc664608d3f4a3655b16d937bb8c83221cf4a1cc8402699511025",
+      "passed": 67,
+      "rerun_by_reviewer": false,
+      "seconds": 10.13,
+      "source": "reports/forge/r1r2-energy-prior-freeze-repair/test_energy_prior_freeze_workflow.py"
+    }
+  },
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files_checked": 1216,
+  "status": "PASS",
+  "stopping": "Finite comparison complete. Ring remains FAIL; no further complete comparison fits unchanged cap. No automatic arm, retry, budget increase or qualification."
+}

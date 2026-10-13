@@ -1,0 +1,31 @@
+{
+  "candidate_id": "r1r2-non-saturating-energy-u-frozen-prior-v1",
+  "candidate_revision": "408a066fe78ee9f770a1b53dbdbcb2d2db3f01ff0dd9bd50363b1015970fc1cc",
+  "changed_factors": [
+    "Only prior_update learned to frozen; exact same-source cached parent, original tasks and protocols retained."
+  ],
+  "conclusion": "Reject this prior-freeze repair: both global recipes pass five ordinary tasks and own clock but fail Ring16. Freezing worsens high-quality mass; full word acquisition still passes. Exact results remain in the report.",
+  "evidence_scope": "bounded_global_tier1_search",
+  "goal": "discriminator_stability",
+  "hypothesis": "Freezing the initialized prior on the exact positive-energy R1/R2 recipe repairs unchanged Tier 1.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Preserve both energy negatives and stronger non-saturating control. No further complete comparison fits the remaining unchanged paid cap.",
+  "provenance": {
+    "cached_parent_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+    "report": "reports/forge/r1r2-energy-prior-freeze-repair/README.md",
+    "source_commit": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+    "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "r1r2-energy-prior-freeze-repair-20261012",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/r1r2-energy-prior-freeze-repair/publication/results.json",
+    "sha256": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207"
+  },
+  "task_results": [],
+  "trainer_family": "r1r2"
+}

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "1e5245939488351946b8958594270548dca918b54ae472ef6984bbf51c94f5f9",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "9a76f45834ca170fe873c7ba65ba29b12b3ef502d3bd7dc7553ebded4e95d28a",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-distance-repair-v1/219c852ff8c345768d5cd16407b04236/observed-samples.pt": "6eaf89d0bddcac23caa0d1dbabc9d9df62b69fb6141184bfad18a64842560872"
+  },
+  "task_id": "ring16_acquisition"
+}

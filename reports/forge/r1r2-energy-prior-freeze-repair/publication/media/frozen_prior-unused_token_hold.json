@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "cfe0f17ad889b767d5d45d0f69a6975159d4cfcc4c720b094e5713fc30412bde",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "a797b27ab740e03db2a1365a1b1bab9bfcec5a6de22222302aef3c9c4f34ec34",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-prior-freeze-repair-v1/a796a7f3867449af82ae66f3b39c383c/constraint_geometry-scored-outputs.pt": "4402bd7f67c5af391938060c338d50002330d02c1c05775bc1cd6fca71d06a47"
+  },
+  "task_id": "unused_token_hold"
+}
