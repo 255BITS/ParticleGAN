@@ -154,6 +154,48 @@ A later tier change gets a new view
 revision; changed task budgets, gates or sampling laws need a new protocol
 identity with the original evidence preserved.
 
+Revision 10 of `discriminator_stability` assigns `gaussian1d_stability` and
+`five_word_joint_hold` to required Tier 3 after the two ring endurance tasks.
+They continue their own acquired state through stationary retention, drift
+recovery or all-check joint generation/inverse retention. Required tier counts
+are **6/19/4**. `target_shift_recovery` already remains required Tier 3 in the
+`adaptation` and `clockfree_continuous` views, with a matched frozen control.
+The exact [revision 9 declaration](../configs/forge/view-history/discriminator_stability-v9.json)
+retains its **6/21/2** denominator and original assignments. Recorded grades,
+original combined tests, thresholds, evaluators, budgets and cohort identities
+remain unchanged. The frozen Gaussian rationale still says `Tier2continuous
+learning` as part of its original evaluation identity.
+
+The [stage contracts](../configs/forge/test-stages.json) and generated
+[stage report](../reports/forge/test-stages.md) separate Tier 2 fixed-target
+quality from Tier 3 continued retention/adaptation within each question.
+Gaussian quality uses the confirmed final stationary smoke state; stationary
+retention keeps all 72 original post-smoke checks, and shift recovery keeps the
+original deadline and all 24 shifted hold checks. Five-word quality uses the
+earliest independently confirmed joint state; retention keeps all 25 checks of
+the unchanged 4,000-update continuation, including the restored state.
+
+For each 100G target, quality uses the independent 100,000-draw final live
+holdout with the original coverage and fidelity bounds. Retention separately
+requires all five original 20,000-draw terminal checks within the 7,000-update
+budget. This short within-run window does not establish long continuation.
+`rotated100` is a fixed rotated target, not an event during training. Rotation
+recovery remains explicitly **UNMEASURED** until an own-checkpoint event,
+matched control, deadline, cadence and continuation budget are frozen.
+
+Stages share original runs and add no updates or costs. They are independent
+measurement/reporting contracts, not new ordinary qualification or scientific
+calibration. Source-bound, sufficient audited submetrics can fill a stage;
+an old aggregate PASS cannot fill missing submetrics. Missing or incompatible
+evidence stays **UNMEASURED**, preserving each recipe/source/protocol/runtime
+cohort. Combined-task qualification rows keep their recorded revision and
+denominators rather than being silently replaced by stage cells.
+
+`mode_hold` remains a fresh fit with terminal quality checks, despite its name.
+`unipolar`, `cover_leftover` and `mid_scale_identity` impose neutral/content/
+identity constraints across conditioning inputs, without a later target event
+or own-checkpoint continuation. They are outside this temporal separation.
+
 ## 5. Validate, inspect cost, then freeze
 
 Run from the checkout root in the project Python environment. Check the rendering

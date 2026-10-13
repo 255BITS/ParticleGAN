@@ -1873,6 +1873,10 @@ def _current_markdown(result, root, path):
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
+        if (root / "configs/forge/test-stages.json").is_file():
+            stages_link = os.path.relpath(root / "reports/forge/test-stages.md", path.parent)
+            markdown += ("\n[Separate quality and retention/adaptation stages](" + stages_link +
+                         "): source-bound submetrics; missing stage evidence remains unmeasured.\n")
         from experiments.forge.test_performance_render import render_discovery_navigation
         markdown += render_discovery_navigation(root, path)
         pure = root / "reports/forge/pure-bcap"
@@ -2415,6 +2419,10 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
 def _family_pages(root, result):
     from experiments.forge.test_performance import generated_reports
     test_pages = generated_reports(root, publication=result)
+    from experiments.forge.test_stages import REGISTRY as STAGE_REGISTRY, generated_reports as stage_reports
+    if (root / STAGE_REGISTRY).is_file():
+        performance = json.loads(test_pages[root / "reports/forge/test-performance.json"])
+        test_pages.update(stage_reports(root, performance=performance))
     if not result.get("family_progress"):
         return test_pages
     from experiments.forge.family_reports import generated_pages

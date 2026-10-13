@@ -76,11 +76,11 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 9
+    assert stability["revision"] == 10
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "clockfree_audit_measurement_v1"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
+                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 19, 4]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -124,6 +124,37 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     # The tier cap permits both acquisitions and excludes every quality task.
     assert all(not row["permitted_by_tier_cap"] for row in plan["tasks"]
                if row["qualification_tier"] > 1)
+
+
+def test_gaussian_drift_retiering_preserves_revision9_and_scientific_contract():
+    from experiments.forge.planning import plan_summary, resolve_idea
+
+    path = ROOT / "configs/forge/view-history/discriminator_stability-v9.json"
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3"
+    historical = json.loads(path.read_text())
+    tasks = load_tasks(ROOT)
+    validate_view(historical, tasks)
+    current = load_view(ROOT, "discriminator_stability")
+    expected = deepcopy(historical)
+    expected["revision"] = 10
+    expected["policy_change_reason"] = current["policy_change_reason"]
+    next(a for a in expected["assignments"] if a["task"] == "gaussian1d_stability").update(
+        qualification_tier=3, order=2)
+    next(a for a in expected["assignments"] if a["task"] == "five_word_joint_hold").update(
+        qualification_tier=3, order=3)
+    assert current == expected
+    task_path = ROOT / "configs/forge/tasks/gaussian1d_stability.json"
+    assert hashlib.sha256(task_path.read_bytes()).hexdigest() == "c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c"
+    for cap in (2, 3):
+        request = resolve_idea(ROOT, "k3p", through_tier=cap, execution_backend="cpu")
+        planned = {row["task"]: row for row in plan_summary(request)["tasks"]}
+        assert planned["gaussian1d_stability"]["qualification_tier"] == 3
+        assert planned["gaussian1d_stability"]["importance"] == "required"
+        assert planned["gaussian1d_stability"]["permitted_by_tier_cap"] is (cap == 3)
+        assert planned["gaussian1d_smoke"]["permitted_by_tier_cap"]
+    for name in ("adaptation", "clockfree_continuous"):
+        assert next(a for a in load_view(ROOT, name)["assignments"]
+                    if a["task"] == "target_shift_recovery")["qualification_tier"] == 3
 
 
 def test_uninterrupted_execution_group_cannot_cross_tier_caps():

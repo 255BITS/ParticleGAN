@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "id": "quality-retention-stages",
+  "revision": 1,
+  "qualification_input": false,
+  "execution_policy": "shared_original_runs_no_additional_updates",
+  "sources": {
+    "five_word_joint_hold": {
+      "path": "configs/forge/tasks/five_word_joint_hold.json",
+      "sha256": "d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f",
+      "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64",
+      "evaluation_sha256": "91336619edb16f3713b1abc77227c3085642839156563e0412b128b02aca6102"
+    },
+    "five_word_joint_smoke": {
+      "path": "configs/forge/tasks/five_word_joint_smoke.json",
+      "sha256": "e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e",
+      "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b",
+      "evaluation_sha256": "85c75c40791f099a4f92bd05e4da387c8dcd8987e81ce190fcd43212cffe8abd"
+    },
+    "gaussian1d_smoke": {
+      "path": "configs/forge/tasks/gaussian1d_smoke.json",
+      "sha256": "2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149",
+      "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb",
+      "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da"
+    },
+    "gaussian1d_stability": {
+      "path": "configs/forge/tasks/gaussian1d_stability.json",
+      "sha256": "c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c",
+      "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4",
+      "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958"
+    },
+    "grid100": {
+      "path": "configs/forge/tasks/grid100.json",
+      "sha256": "1b9743eda347a88cd4aff70afb58066ca73e1239bf2b77cb5adb2fd1703fcbb6",
+      "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63",
+      "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652"
+    },
+    "rotated100": {
+      "path": "configs/forge/tasks/rotated100.json",
+      "sha256": "fc8a431673c81b919a530f38c8d13a8888bbf82fe12a822ada97fef0b257331a",
+      "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0",
+      "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652"
+    },
+    "staggered100": {
+      "path": "configs/forge/tasks/staggered100.json",
+      "sha256": "61110ffcafe2de0a1972006bb7bae0c15a33d4fbe1196128093f0e9ed9453352",
+      "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8",
+      "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652"
+    }
+  },
+  "stages": [
+    {
+      "id": "gaussian_quality",
+      "qualification_tier": 2,
+      "source_tasks": [
+        "gaussian1d_smoke"
+      ],
+      "kind": "gaussian_endpoint",
+      "title": "Gaussian fixed-target quality",
+      "criteria": "Final update 1,000: all original distribution bounds plus independent same-state confirmation.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "gaussian_stationary_retention",
+      "qualification_tier": 3,
+      "source_tasks": [
+        "gaussian1d_stability"
+      ],
+      "kind": "gaussian_stationary",
+      "title": "Gaussian stationary retention",
+      "criteria": "All 72 original observations from the candidate's own smoke state through update 4,000 must pass.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "gaussian_shift_recovery",
+      "qualification_tier": 3,
+      "source_tasks": [
+        "gaussian1d_stability"
+      ],
+      "kind": "gaussian_shift",
+      "title": "Gaussian shift recovery and hold",
+      "criteria": "Original mean shift 2 to 3; five passing deadline-terminal checks by update 5,000 and all 24 subsequent checks. Original matched frozen control remains diagnostic.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "native100_quality",
+      "qualification_tier": 2,
+      "source_tasks": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "kind": "native_holdout",
+      "title": "100G fixed-target distribution quality",
+      "criteria": "Original independent 100,000-draw final live holdout: complete coverage and all four fidelity limits, with a valid target oracle.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "native100_terminal_retention",
+      "qualification_tier": 3,
+      "source_tasks": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "kind": "native_terminal",
+      "title": "100G terminal retention",
+      "criteria": "All five original 20,000-draw terminal coverage/fidelity checks at updates 6,000, 6,250, 6,500, 6,750 and 7,000. This is a limited within-run window, not a new long continuation.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "word_quality",
+      "qualification_tier": 2,
+      "source_tasks": [
+        "five_word_joint_smoke"
+      ],
+      "kind": "word_confirmed",
+      "title": "Five-word confirmed joint quality",
+      "criteria": "An independently confirmed scheduled state satisfies every original generation and inverse bound; report the earliest confirmed state.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "word_retention",
+      "qualification_tier": 3,
+      "source_tasks": [
+        "five_word_joint_hold"
+      ],
+      "kind": "word_hold",
+      "title": "Five-word own-checkpoint retention",
+      "criteria": "Original 4,000-update continuation: all 25 primary/confirmation pairs, including the exact restored acquired state, satisfy every original joint bound.",
+      "protocol_status": "defined"
+    },
+    {
+      "id": "native100_rotation_recovery",
+      "qualification_tier": 3,
+      "source_tasks": [],
+      "kind": "needs_protocol",
+      "title": "100G rotation recovery",
+      "criteria": "Unmeasured: rotated100 is a fixed rotated target, not a target-change event. Freeze an own-checkpoint rotation event, paired control, recovery deadline, observation cadence and continuation budget before admission.",
+      "protocol_status": "needs_definition"
+    }
+  ]
+}

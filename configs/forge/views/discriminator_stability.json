@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 9,
+  "revision": 10,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -42,15 +42,15 @@
     },
     {
       "task": "gaussian1d_stability",
-      "qualification_tier": 2,
+      "qualification_tier": 3,
       "importance": "required",
-      "order": 0
+      "order": 2
     },
     {
       "task": "five_word_joint_hold",
-      "qualification_tier": 2,
+      "qualification_tier": 3,
       "importance": "required",
-      "order": 1
+      "order": 3
     },
     {
       "importance": "required",
@@ -195,5 +195,5 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Recipe-owned prior policy and regularization: tasks preserve initial prior law/capacity/sampling, architecture/data, initialization, budgets and numerical gates. New execution.prior_contract recipe_owned_v1 binds learning/freezing and all latent-prior penalties to one global recipe. Archived revisions retain their original semantics."
+  "policy_change_reason": "Separate fixed-target quality from continued retention and adaptation in source-bound stage reports. Classify Gaussian stationary retention/drift/reacquisition and five-word own-checkpoint continuation as required Tier 3. Revision 9 and its original assignments/grades remain archived. Original combined tasks, evaluators, thresholds, budgets and scientific evidence are unchanged; stage reports confer no new qualification."
 }

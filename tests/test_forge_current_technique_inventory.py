@@ -626,6 +626,26 @@ def test_default_cli_refreshes_later_view_without_advancing_recorded_qualificati
     assert "0(*)/4" in Path(metadata["report"]).read_text()
 
 
+def test_current_drift_view_retains_recorded_revision9_qualification():
+    from experiments.forge.views import view_fingerprint
+
+    current = read_json(ROOT / publication.CURRENT_PREFIX.with_suffix(".json"))
+    historical = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v9.json")
+    assert current["view_revision"] == historical["revision"] == 9
+    assert current["policy_fingerprint"] == view_fingerprint(historical)
+    assert [len(current["tier_requirements"][tier]) for tier in ("1", "2", "3")] == [6, 21, 2]
+    assert "gaussian1d_stability" in current["tier_requirements"]["2"]
+    assert "gaussian1d_stability" not in current["tier_requirements"]["3"]
+    declared = current["declared_view"]
+    assert declared["revision"] == 10
+    assert [len(declared["tier_requirements"][tier]) for tier in ("1", "2", "3")] == [6, 19, 4]
+    assert "gaussian1d_stability" not in declared["tier_requirements"]["2"]
+    assert "gaussian1d_stability" in declared["tier_requirements"]["3"]
+    assert current["family_progress"]["qualification_input"] is False
+    assert current["publication_refresh"] == {
+        "scientific_rows_preserved": True, "qualification_regraded": False, "training_launched": False}
+
+
 def test_standalone_scalar_display_binds_actual_receipt_and_never_changes_qualification():
     scores = publication._standalone_api_scores(ROOT)
     score = next(score for score in scores if score["case"]["id"] == "api-gaussian1d-acquisition")

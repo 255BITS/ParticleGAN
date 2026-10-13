@@ -81,7 +81,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation) | [0(*)/3](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0(*)/1](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [0(*)/23](halloween.md#cohort-cuda-c195899a64af-adaptation) |
 | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0(*)/4](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0(*)/7](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [0(*)/30](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous) |
-| [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability) | [0(*)/6](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0(*)/21](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0(*)/2](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [0(*)/29](halloween.md#cohort-cuda-c195899a64af-discriminator_stability) |
+| [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability) | [0(*)/6](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0(*)/4](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [0(*)/29](halloween.md#cohort-cuda-c195899a64af-discriminator_stability) |
 | [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison) | [0(*)/3](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) | [0(*)/2](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) | [0(*)/24](halloween.md#cohort-cuda-c195899a64af-formulation_comparison) |
 | [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer) | [0(*)/3](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) | [0(*)/2](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | [0(*)/24](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer) |
 | [quality_coverage](halloween.md#cohort-cuda-c195899a64af-quality_coverage) | [0(*)/3](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | [0(*)/19](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | [0/0](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-3) | [0(*)/22](halloween.md#cohort-cuda-c195899a64af-quality_coverage) |
@@ -119,8 +119,6 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](halloween.md#cohort-cuda-c195899a64af-experiment-cover_leftover) | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | UNKNOWN | changed since run |
-| [five_word_joint_hold](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold) | [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
-| [gaussian1d_stability](halloween.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability) | [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | UNKNOWN | changed since run |
 | [grid100](halloween.md#cohort-cuda-c195899a64af-experiment-grid100) | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [img_bars4](halloween.md#cohort-cuda-c195899a64af-experiment-img_bars4) | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [img_blobs4](halloween.md#cohort-cuda-c195899a64af-experiment-img_blobs4) | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage](halloween.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | UNKNOWN | changed since run |
@@ -149,6 +147,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [clockfree_audit](halloween.md#cohort-cuda-c195899a64af-experiment-clockfree_audit) | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold) | [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_stability](halloween.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability) | [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | UNKNOWN | changed since run |
 | [grid100_14k](halloween.md#cohort-cuda-c195899a64af-experiment-grid100_14k) | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 | [ring_extension](halloween.md#cohort-cuda-c195899a64af-experiment-ring_extension) | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | UNKNOWN | changed since run |
 | [ring_hold](halloween.md#cohort-cuda-c195899a64af-experiment-ring_hold) | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3), [discriminator_stability](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3), [formulation_comparison](halloween.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3), [host_profile_transfer](halloween.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | UNKNOWN | changed since run |
@@ -470,9 +470,9 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 9**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 10**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 21 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 19 / 4**.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -496,8 +496,6 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_stability](halloween.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability) | required | UNKNOWN | changed since run |
-| [five_word_joint_hold](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold) | required | UNKNOWN | recorded definition unavailable |
 | [trajectory](halloween.md#cohort-cuda-c195899a64af-experiment-trajectory) | required | UNKNOWN | changed since run |
 | [residual_student](halloween.md#cohort-cuda-c195899a64af-experiment-residual_student) | required | UNKNOWN | changed since run |
 | [unipolar](halloween.md#cohort-cuda-c195899a64af-experiment-unipolar) | required | UNKNOWN | changed since run |
@@ -526,6 +524,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [ring_hold](halloween.md#cohort-cuda-c195899a64af-experiment-ring_hold) | required | UNKNOWN | changed since run |
 | [ring_extension](halloween.md#cohort-cuda-c195899a64af-experiment-ring_extension) | required | UNKNOWN | changed since run |
+| [gaussian1d_stability](halloween.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability) | required | UNKNOWN | changed since run |
+| [five_word_joint_hold](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-c195899a64af-formulation_comparison"></a>
 
@@ -1199,7 +1199,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 3](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1330,7 +1330,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 3](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
