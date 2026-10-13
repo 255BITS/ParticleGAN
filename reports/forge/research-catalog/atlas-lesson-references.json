@@ -1,0 +1,80 @@
+{
+  "schema": "external_atlas_lesson_references_v1",
+  "source_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/LESSON-INDEX.json",
+  "source_sha256": "b3a6b6927c1b5331f6ad606c0ba1a0a233d9183b8ff5fa143813ab57d7b99a64",
+  "qualification_input": false,
+  "new_catalog_training_attempts": 0,
+  "later_attempts_are_outside_frozen285": true,
+  "entries": [
+    {
+      "id": "restore-before-transfer",
+      "cohort": "native_ra14_restoration_continuation_20261010",
+      "lesson": "Full learned state, optimizer/controller and named RNG restoration plus exact continuation is necessary before attributing host failures to a recipe change. Literal timer-only differences remain recorded.",
+      "evidence": "historical/REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/REPORT.md"
+    },
+    {
+      "id": "shape-gains-and-preservation-gap",
+      "cohort": "adapted_ra14_fast_panel_20261010_11",
+      "lesson": "Unequal-width/anisotropic shape gains are real within this adapted 11-case source cohort; image regressions and missing fifth Ring check prevent a generic improvement claim. Count those two transfers once.",
+      "evidence": "historical/FAST_PANEL_REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/FAST_PANEL_REPORT.md"
+    },
+    {
+      "id": "retained-does-not-imply-fresh",
+      "cohort": "ring_retained_fresh_and_transport_20261010_11",
+      "lesson": "A retained-state residual fix gained the fifth clean check but fresh training exposed thin radial modes; test fresh acquisition separately.",
+      "evidence": "historical/EARLY_RESIDUAL_REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/EARLY_RESIDUAL_REPORT.md"
+    },
+    {
+      "id": "locality-contract-before-transport",
+      "cohort": "ring_retained_fresh_and_transport_20261010_11",
+      "lesson": "Native neighbor refresh moves protected outputs; failed feasibility closes this transport candidate and does not identify the initial training cause.",
+      "evidence": "historical/RING_TRUST_CORRECTED_REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/RING_TRUST_CORRECTED_REPORT.md"
+    },
+    {
+      "id": "width-hq-tradeoff",
+      "cohort": "clean100_settling_and_quarterG_20261010_11",
+      "lesson": "Additional particle settling improved conditional width while worsening LIVE HQ; scalar loss plateau does not establish equilibrium or warrant more budget.",
+      "evidence": "historical/CLEAN100_SETTLING_DECOMPOSITION_REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/CLEAN100_SETTLING_DECOMPOSITION_REPORT.md"
+    },
+    {
+      "id": "prefix-is-not-retention",
+      "cohort": "clean100_settling_and_quarterG_20261010_11",
+      "lesson": "Quarter-G step1050 dip prevention did not survive the original full1200 retention gate. Preserve full terminal negatives.",
+      "evidence": "historical/MODE_HOLD_QUARTER_TERMINAL_REPORT.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/MODE_HOLD_QUARTER_TERMINAL_REPORT.md"
+    },
+    {
+      "id": "native-r1-control",
+      "cohort": "native_atlas_real_KA2A_RMS_cap_seed0_80x24_20261013",
+      "lesson": "A real-gradient RMS cap passes an early direct-table native Atlas interaction while R1 ON collapses; keep lambda3 and all controls, and measure call800/transfer separately.",
+      "evidence": "historical/native-real-cap/README.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/README.md"
+    },
+    {
+      "id": "export-is-part-of-completion",
+      "cohort": "unchanged_develop_selected_cloud_20261013",
+      "lesson": "1000/1600 updates and complete metric curves do not qualify a run whose complete checkpoint export ended ERROR. Repair serialization in a separately authorized software task; keep original errors.",
+      "evidence": "README.md",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/README.md"
+    },
+    {
+      "id": "clock-state-evidence",
+      "cohort": "unchanged_develop_selected_cloud_20261013",
+      "lesson": "Matching horizon/evaluation-cadence probes does not offset differing step-label/restart digests or the call800/guard clock dependencies.",
+      "evidence": "clock-comparisons.json",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/clock-comparisons.json"
+    },
+    {
+      "id": "host-boundaries-are-not-negative-quality",
+      "cohort": "unchanged_develop_selected_cloud_20261013",
+      "lesson": "Unsupported component transport and routed/encoder ownership are BLOCKED before start, not numerical FAILs; raw cloud variants cannot silently replace original MoG laws.",
+      "evidence": "scoped-evidence.json",
+      "evidence_url": "https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/scoped-evidence.json"
+    }
+  ]
+}

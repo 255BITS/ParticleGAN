@@ -1,0 +1,342 @@
+[
+  {
+    "identity": "fbcdc6d40ed14081bee54b926c3056ec",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-forward-kl-rolling8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "66cf0d1623cc23ec56d1ded7cc32439bbbcd10d40c4758ed45f20f7ce5ddf8fd",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.8869188140015467,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "e9bb904a48c17a58a94383719f66611b7dde47b5f7bfe8b72bc1d272630e622e"
+  },
+  {
+    "identity": "42a1495420b84d12a00e5f687bc0e18b",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-forward-kl-block8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "697b33b250f4a991abef7f5331c0aa1eba459d60b9eb3e40c76ed1cdc52489ec",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.6207105510038673,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "63502bf03bc5030de491b9a7d1aa21dd0b7bb0ade7f367ffefadea4830437b08"
+  },
+  {
+    "identity": "ef26cf04c4be4202a3fa41acb1391511",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-forward-kl-exponential8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "101f6b93695d6170ee318aa434bba7c6f63f2bd6312a55eadf06eacd38b596ce",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.3011917929979973,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "c5095df201fd64f9e56f059c1405148a95fe8b90ef9b8c58bdcfe13c891d0cd2"
+  },
+  {
+    "identity": "e9ee34daf12443fe90d7e5feed649777",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-forward-kl-evidence_reset-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "fd352af1d2d3832e1dbeb4d3fbf996a7f291fe33d5871377a6f02b23f71341d0",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 1.9884289480032749,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "055e750885ae14a7bb7172677b123acb7bfa7e7889c9830737be767c75a8c874"
+  },
+  {
+    "identity": "889e7bc2583e45b8b57efcc1e7e2cfde",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-reverse-kl-rolling8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "a6e69c99c2f15c47f78cee7702cd967f0c12342658470413f766b684571b3fe6",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 1.950629208004102,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "a062b8609fcd58787945c8b6fa3423a9cf75c3f79c4b3941a1ff737ff4cdbb91"
+  },
+  {
+    "identity": "f4fe93bde1cc47d0819182283fd80b60",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-reverse-kl-block8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "f9607f4cbf4f6037657dcab9dfd02bfb6b63ad60955d0748b19dfdcca5cb468b",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 1.718256931999349,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "0cd74d0f78e2a1e8b810659297bf7527e5b26e634116eb293e8ce664831b6549"
+  },
+  {
+    "identity": "c0e9117c310049b8ac71e988957768b4",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-reverse-kl-exponential8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "1d18a1d26c4b77f64dfc910986b9644854899f4cd5854c30fa306a74540354f5",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.8705251770006726,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "2dc25ac1933efebc2a2f7ae2f3db2e1b73365d5c34f499b3e75a0995d8f01af9"
+  },
+  {
+    "identity": "ae0f7b63d53c4d89975d3a96c5165b68",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-reverse-kl-evidence_reset-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "72b1225f095a71a79bad0fcbb1ae1ea598a3973e317e7fa6b9e6952ad74a1b65",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.597209022002062,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "8e726b482a98c75d5488954aa038c47953a53f14cb288a7b0a05138043e3fed5"
+  },
+  {
+    "identity": "2d1383dfe7dd4d5b90ebe397771dc807",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-moment-rolling8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "df8095f08fe71ee69e1de83edb7310107ae99df4b363a93c3da99f45fecc3d32",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.785308870996232,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "87d6593a8ac686abfd9a610af7bd37b242e12bdfef2ec70ddfd2aa0c459edd5c"
+  },
+  {
+    "identity": "26504b9c902b4b0e86c52671f64143c8",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-moment-block8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "8e1c146e2ac967927f7188b5e82e74f08b188c33462dbb68f3bc5f6ede3167a9",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.5698187000016333,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "e88b1610fe79a50e0231afd616fa7a7d22d09d2d0e460ad2229fd5258b60e64c"
+  },
+  {
+    "identity": "d65ab3c69ef645f1a0023fe63bd42f7e",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-moment-exponential8-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "8c8f001574747b3beacf779407a8474190d05254b862f5f4821e92253be62993",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 3.0562389219994657,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "8c33ee5596d71c5bc907854c1aa6c49447863bf23755f05b0f120e44a0195dff"
+  },
+  {
+    "identity": "f26e624526c04b57a18eb6a63524d401",
+    "identity_kind": "canonical attempt ID",
+    "record_kind": "invalid_pre_runtime_execution",
+    "candidate": "cell-memory-moment-evidence_reset-v1",
+    "task": "gaussian1d_smoke",
+    "source_digest": "47b8aff9e9efbe969d45a70de276cffe6b951dc7f3ec046b6709aed19fbc6eee",
+    "candidate_revision": "1860450d14d94d09d0b8ddcd392acc775611006ba15d343d3afdf0bfb1736ab0",
+    "original_status": "ERROR",
+    "full_protocol_complete": false,
+    "scientific_utility_credited": false,
+    "reason": "Pre-runtime execution failure; not a completed numerical recipe result",
+    "new_optimizer_updates": 0,
+    "preserved_error_fields": {
+      "actual_Popen_to_exit_seconds": 2.8228684540008544,
+      "raw_status": "error"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+    "conditions_sha256": "a7554f6cfd1fa3ccd2dca3e21339d2817e693de1896f5c6d6e3ebae805b21aea",
+    "recipe_sha256": "df54c319a60c48663ba4a55289649ffb13dea232756c0e404f6939fc8a3fd04e"
+  },
+  {
+    "identity": "cell-optimizer-forward-kl-sgda-v1",
+    "identity_kind": "original candidate/preparation identity; no GPU attempt UUID",
+    "record_kind": "cpu_preflight_rejection",
+    "original_status": "CPU_PREFLIGHT_NONFINITE_REJECTION",
+    "reason": "finite-parameter assertion failed",
+    "GPU_children": 0,
+    "CPU_completed_steps": 4,
+    "CPU_child_seconds": 3.335460956004681,
+    "scientific_full_run": false,
+    "scientific_utility_credited": false,
+    "artifact_pin": {
+      "bytes": 1067,
+      "file": "cell-optimizer-round/preflight--aggregate_forward_kl--sgda--failure.json",
+      "sha256": "f42dcd4a83d6449aff5856533ebf56b32b2337d16df7e8087a96bf71bb86f7f2"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json"
+  },
+  {
+    "identity": "cell-optimizer-reverse-kl-sgda-v1",
+    "identity_kind": "original candidate/preparation identity; no GPU attempt UUID",
+    "record_kind": "cpu_preflight_rejection",
+    "original_status": "CPU_PREFLIGHT_NONFINITE_REJECTION",
+    "reason": "finite-parameter assertion failed",
+    "GPU_children": 0,
+    "CPU_completed_steps": 4,
+    "CPU_child_seconds": 3.1980127899951185,
+    "scientific_full_run": false,
+    "scientific_utility_credited": false,
+    "artifact_pin": {
+      "bytes": 1066,
+      "file": "cell-optimizer-round/preflight--aggregate_reverse_kl--sgda--failure.json",
+      "sha256": "1bef5614b343dead7783ef2f290b1739eb4ee22bdcc9758dd8a823f31ee7a359"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json"
+  },
+  {
+    "identity": "cell-optimizer-moment-sgda-v1",
+    "identity_kind": "original candidate/preparation identity; no GPU attempt UUID",
+    "record_kind": "cpu_preflight_rejection",
+    "original_status": "CPU_PREFLIGHT_NONFINITE_REJECTION",
+    "reason": "finite-parameter assertion failed",
+    "GPU_children": 0,
+    "CPU_completed_steps": 4,
+    "CPU_child_seconds": 3.166253033996327,
+    "scientific_full_run": false,
+    "scientific_utility_credited": false,
+    "artifact_pin": {
+      "bytes": 1063,
+      "file": "cell-optimizer-round/preflight--aggregate_moment--sgda--failure.json",
+      "sha256": "a30dbd0c0877027bbcbe61173dc184f540a9336af4e20c5d20fb064d72f355f6"
+    },
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-reconciled-204.json"
+  },
+  {
+    "identity": "nonatlas-finite-realization-64-control",
+    "identity_kind": "original prefix display identity; not reconstructed as a full-run UUID",
+    "record_kind": "bounded_mechanism_prefix",
+    "candidate": "task96-current-staggered-half-mobility-v1",
+    "task": "staggered100",
+    "source_digest": "806e857bb6d1192a984b77c7685ce8d8bcb2b851782db9ba670a3bc55e0187d8",
+    "original_status": "INCOMPLETE",
+    "full_protocol_complete": false,
+    "caller_prefix_updates": 64,
+    "original_full_horizon": 7000,
+    "scientific_utility_credited": false,
+    "operational_scope": "Finite-realization prerequisite evidence only; no full-quality PASS credited",
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-finite-realization-prefix64.json",
+    "conditions_sha256": "454a7179c35f40bdea53468db8583f49cf8eb496a0cebe524f0eab087c9437de",
+    "recipe_sha256": "2cd5f55779a00325f61f7856ffa3e050bb5e4dd22ba1fe7c01118354290ca6c9"
+  },
+  {
+    "identity": "nonatlas-finite-realization-64-candidate",
+    "identity_kind": "original prefix display identity; not reconstructed as a full-run UUID",
+    "record_kind": "bounded_mechanism_prefix",
+    "candidate": "task96-always-on-finite-realization-v1",
+    "task": "staggered100",
+    "source_digest": "806e857bb6d1192a984b77c7685ce8d8bcb2b851782db9ba670a3bc55e0187d8",
+    "original_status": "INCOMPLETE",
+    "full_protocol_complete": false,
+    "caller_prefix_updates": 64,
+    "original_full_horizon": 7000,
+    "scientific_utility_credited": false,
+    "operational_scope": "Finite-realization prerequisite evidence only; no full-quality PASS credited",
+    "publication_url": "https://github.com/255BITS/ParticleGAN/blob/dacf96749a4effc0648a7a0945266d508804110e/reports/forge/test-performance-evidence/nonatlas-finite-realization-prefix64.json",
+    "conditions_sha256": "454a7179c35f40bdea53468db8583f49cf8eb496a0cebe524f0eab087c9437de",
+    "recipe_sha256": "da4cbe921e1db161824d536a1181f3596a0cc08f736f1851fa7fd18aad2e5d0a"
+  }
+]

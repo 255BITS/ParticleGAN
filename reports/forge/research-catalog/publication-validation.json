@@ -1,0 +1,23 @@
+{
+  "schema": "research_catalog_publication_validation_v1",
+  "base_commit": "dacf96749a4effc0648a7a0945266d508804110e",
+  "canonical_recent_attempt_ids": 285,
+  "older_study_records": 312,
+  "original_arm_records": 65,
+  "original_existing_comparison_status_metrics_gates_and_matching_flags_preserved": true,
+  "recent_source_and_recipe_revisions_match_actual_requests": true,
+  "archive_files_hash_verified": 1852,
+  "unavailable_archive_pins": 6,
+  "duplicate_recent_ids": 0,
+  "unrun_scientific_utility_claims": 0,
+  "incomplete_scientific_utility_claims": 0,
+  "new_experiments": 0,
+  "scientific_sources_tasks_gates_and_selections_changed": false,
+  "deterministic_regeneration_check": "passed",
+  "atlas_index": "b3a6b6927c1b5331f6ad606c0ba1a0a233d9183b8ff5fa143813ab57d7b99a64",
+  "source_ledger_sha256": "45215af49554a15362b6c491a5bd444841c5e7d526569d12ec572caa7cda96e8",
+  "scope": "Frozen 285-ID register plus distinct older study/arm projections. Subsequent Atlas three starts referenced via PR404, outside285.",
+  "external_Atlas_evidence_links_verified": 10,
+  "local_entrypoint_links_verified": true,
+  "separate_operational_records": 17
+}

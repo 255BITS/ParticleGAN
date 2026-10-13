@@ -1,5 +1,7 @@
 # ParticleGAN
 
+[Research attempt catalog](reports/forge/research-catalog/README.md): source-bound results, reusable lessons, failures and publication links.
+
 **GANs with a learnable particle prior, for PyTorch.**
 
 **Running experiments / proposing ideas:** start with
