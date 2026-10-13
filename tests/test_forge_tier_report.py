@@ -294,6 +294,16 @@ def test_current_catalog_coverage_and_uninterrupted_extension_are_explicit():
     assert extension["uninterrupted"] is True
     assert extension["execution_group"] == "ring_endurance"
     assert extension["dependencies"] == [{"task": "ring_hold", "kind": "checkpoint"}]
+    assert view(result, "discriminator_stability")["revision"] == 10
+    assert [tier(result, "discriminator_stability", number)["counts"]["required"]
+            for number in (1, 2, 3)] == [6, 19, 4]
+    assert "gaussian1d_stability" not in {
+        item["id"] for item in tier(result, "discriminator_stability", 2)["tasks"]}
+    drift = next(item for item in tier(result, "discriminator_stability", 3)["tasks"]
+                 if item["id"] == "gaussian1d_stability")
+    assert drift["importance"] == "required" and drift["order"] == 2
+    assert drift["steps"] == 6000 and drift["timeout_seconds"] == 600
+    assert drift["dependencies"] == [{"task": "gaussian1d_smoke", "kind": "checkpoint"}]
 
 
 def test_prior_inventory_includes_unassigned_and_nonsampled_tasks(inventory):

@@ -60,11 +60,16 @@ def execute(path: Path) -> int:
                 threads=job.get("resources", {}).get("cpu_threads", 1)) != expected_compute:
             raise ValueError("compute backend/hardware changed since submission; resolve a compatible request")
         lease_fd = int(os.environ["FORGE_LEASE_FD"])
+        inherited = (lease_fd,)
+        if "FORGE_SHARED_SLOT_FD" in os.environ:
+            shared_fd = int(os.environ["FORGE_SHARED_SLOT_FD"])
+            os.fstat(shared_fd)
+            inherited += (shared_fd,)
         # The runner inherits the lease too: SIGKILL of this supervisor cannot
         # convince recovery that a still-running training descendant has died.
         phase, phase_started = "runner", time.monotonic()
         child = subprocess.Popen([sys.executable, "-u", "-m", "experiments.forge.runtime", str(path)],
-                                 start_new_session=True, pass_fds=(lease_fd,))
+                                 start_new_session=True, pass_fds=inherited)
         atomic_json(directory / "child.json", {"pid": child.pid, "process_identity": process_identity(child.pid),
                     "supervisor_pid": os.getpid(), "token": worker["token"]})
         deadline = started + job["budget_seconds"]
@@ -97,7 +102,7 @@ def execute(path: Path) -> int:
             verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
             phase, phase_started = "grading", time.monotonic()
             child = subprocess.Popen([sys.executable, "-u", "-m", "experiments.forge.evaluate", str(path)],
-                                     start_new_session=True, pass_fds=(lease_fd,))
+                                     start_new_session=True, pass_fds=inherited)
             atomic_json(directory / "child.json", {"pid": child.pid, "process_identity": process_identity(child.pid),
                         "supervisor_pid": os.getpid(), "token": worker["token"], "phase": "evaluation"})
             while child.poll() is None:

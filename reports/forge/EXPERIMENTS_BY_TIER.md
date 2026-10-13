@@ -39,7 +39,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [bcap-tier1-stability-repairs-diagnostic-v1](../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | provisional |
 | [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 3 | 4 required | 19 required | 7 required | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 9 | 6 required, 1 diagnostic | 21 required | 2 required | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 10 | 6 required, 1 diagnostic | 19 required | 4 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
@@ -365,7 +365,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 9; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 10; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
@@ -389,12 +389,10 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 
 ### Tier 2: quality
 
-21 required.
+19 required.
 
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
-| [five_word_joint_hold](../../configs/forge/tasks/five_word_joint_hold.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_hold | 4000 | 300 | [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) (checkpoint) |
 | [trajectory](../../configs/forge/tasks/trajectory.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-trajectory) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
 | [residual_student](../../configs/forge/tasks/residual_student.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-residual-student) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
 | [unipolar](../../configs/forge/tasks/unipolar.json) | required | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-unipolar) | transfer_behavior / transfer_sustained | 400 | 1800 | — |
@@ -417,12 +415,14 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 
 ### Tier 3: endurance
 
-2 required.
+4 required.
 
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+| [gaussian1d_stability](../../configs/forge/tasks/gaussian1d_stability.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_smoke](../../configs/forge/tasks/gaussian1d_smoke.json) (checkpoint) |
+| [five_word_joint_hold](../../configs/forge/tasks/five_word_joint_hold.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_hold | 4000 | 300 | [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) (checkpoint) |
 
 ## formulation_comparison
 
@@ -947,7 +947,7 @@ Task variants share a guide when their declarations name the same host or proble
 
 ### Experiment: ae-gan-hold
 
-Checks reconstruction/identity and an acquired adversarial edit during the declared hold.
+Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors
 
 Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json), [ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json), [recipe-prior-refactor-legacy-ae_gan_hold](../../configs/forge/tasks/recipe-prior-refactor-legacy-ae_gan_hold.json).
 
@@ -1011,11 +1011,11 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1094,7 +1094,7 @@ No related published API training GIF. This task retains its own declared numeri
 
 ### Experiment: cover-leftover
 
-Checks target coverage plus the separate unwanted-remainder/content constraints.
+Cover both signed poles while preserving content and removing the guarded leak
 
 Forge declarations: [cover_leftover](../../configs/forge/tasks/cover_leftover.json), [recipe-prior-refactor-legacy-cover_leftover](../../configs/forge/tasks/recipe-prior-refactor-legacy-cover_leftover.json).
 
@@ -1146,7 +1146,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| cover_leftover | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| cover_leftover | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1292,12 +1292,12 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1461,7 +1461,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: grid100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [grid100_release07_cloud_named_v1](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json), [recipe-prior-refactor-legacy-grid100](../../configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json).
 
@@ -1571,7 +1571,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-bars4
 
-Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.
+Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.
 
 Forge declarations: [img_bars4](../../configs/forge/tasks/img_bars4.json), [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json), [recipe-prior-refactor-legacy-img_bars4](../../configs/forge/tasks/recipe-prior-refactor-legacy-img_bars4.json).
 
@@ -1626,7 +1626,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-blobs4
 
-Healthy location transfer: four small corner patches test localized quality and coverage.
+Recover four localized 2x2 corner patches with correct position, pixel fidelity and balanced output mass.
 
 Forge declarations: [img_blobs4](../../configs/forge/tasks/img_blobs4.json), [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json), [recipe-prior-refactor-legacy-img_blobs4](../../configs/forge/tasks/recipe-prior-refactor-legacy-img_blobs4.json).
 
@@ -1681,7 +1681,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-intensity2
 
-Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.
+Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.
 
 Forge declarations: [img_intensity2](../../configs/forge/tasks/img_intensity2.json), [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json), [recipe-prior-refactor-legacy-img_intensity2](../../configs/forge/tasks/recipe-prior-refactor-legacy-img_intensity2.json).
 
@@ -1736,7 +1736,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: img-stripes2
 
-Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.
+Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass.
 
 Forge declarations: [img_stripes2](../../configs/forge/tasks/img_stripes2.json), [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json), [recipe-prior-refactor-legacy-img_stripes2](../../configs/forge/tasks/recipe-prior-refactor-legacy-img_stripes2.json).
 
@@ -1791,7 +1791,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mid-scale-identity
 
-Checks identity preservation and target edit magnitude at intermediate control strength.
+Retain identity at half strength in addition to correct neutral and signed poles
 
 Forge declarations: [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json), [recipe-prior-refactor-legacy-mid_scale_identity](../../configs/forge/tasks/recipe-prior-refactor-legacy-mid_scale_identity.json).
 
@@ -1847,7 +1847,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| mid_scale_identity | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| mid_scale_identity | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1857,7 +1857,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: mode-hold
 
-Checks all eight ring modes and HQ through the sampled terminal hold; not within-mode density fidelity.
+Acquire all eight equal-weight radius-three, sigma-.07 Gaussian modes, including their within-mode law.
 
 Forge declarations: [mode_hold](../../configs/forge/tasks/mode_hold.json), [recipe-prior-refactor-legacy-mode_hold](../../configs/forge/tasks/recipe-prior-refactor-legacy-mode_hold.json), [recipe-prior-refactor-legacy-ring_extension](../../configs/forge/tasks/recipe-prior-refactor-legacy-ring_extension.json), [recipe-prior-refactor-legacy-ring_hold](../../configs/forge/tasks/recipe-prior-refactor-legacy-ring_hold.json), [ring_extension](../../configs/forge/tasks/ring_extension.json), [ring_hold](../../configs/forge/tasks/ring_hold.json), [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json).
 
@@ -2025,7 +2025,7 @@ No related published API training GIF. This task retains its own declared numeri
 
 ### Experiment: residual-student
 
-Checks whether the intended residual moves toward the correct paired target.
+Recover the fast trajectory with a residual head and reject a correct marginal with wrong identities
 
 Forge declarations: [recipe-prior-refactor-legacy-residual_student](../../configs/forge/tasks/recipe-prior-refactor-legacy-residual_student.json), [residual_student](../../configs/forge/tasks/residual_student.json).
 
@@ -2071,7 +2071,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| residual_student | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| residual_student | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2168,7 +2168,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: rotated100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [recipe-prior-refactor-legacy-rotated100](../../configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json), [rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json).
 
@@ -2248,7 +2248,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: staggered100
 
-Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
+Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.
 
 Forge declarations: [recipe-prior-refactor-legacy-staggered100](../../configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json), [staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json).
 
@@ -2328,7 +2328,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: trajectory
 
-Checks the extracted trajectory edit while preserving identity in finite paired rows.
+Change angular speed while preserving each trajectory's radius and starting phase
 
 Forge declarations: [recipe-prior-refactor-legacy-trajectory](../../configs/forge/tasks/recipe-prior-refactor-legacy-trajectory.json), [trajectory](../../configs/forge/tasks/trajectory.json).
 
@@ -2370,7 +2370,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| trajectory | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| trajectory | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2446,11 +2446,11 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2460,7 +2460,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unipolar
 
-Checks an intended edit with preservation of unrelated content.
+Make the positive 4D edit while holding the free scale-zero origin
 
 Forge declarations: [recipe-prior-refactor-legacy-unipolar](../../configs/forge/tasks/recipe-prior-refactor-legacy-unipolar.json), [unipolar](../../configs/forge/tasks/unipolar.json).
 
@@ -2506,7 +2506,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unipolar | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| unipolar | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2516,7 +2516,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: unused-token-hold
 
-Checks that active controls move and unused controls remain unchanged.
+Move the concept slot on its target axis while keeping the unused slot fixed
 
 Forge declarations: [recipe-prior-refactor-legacy-unused_token_hold](../../configs/forge/tasks/recipe-prior-refactor-legacy-unused_token_hold.json), [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json), [unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
@@ -2580,11 +2580,11 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [GAN v3 release 0.7](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 1accaa098064 | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2956,6 +2956,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `950067eff761e6770dc746dcb70de15b42b22d3cb537efcca029f316d743cb22`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `8838cd53ca305a98f9d739587e4b92e5e90d818964e39c6ffec366fe2b637242`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `a579d8b555c123f1d68d16c4cf010dce087616d4f19e46a10086c9af4b59dcc1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `3e15d7c6326ce4e51b345c0c4e645c5c3236672f4f0d63f00cf86645442d3db4`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

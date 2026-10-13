@@ -1,0 +1,42 @@
+{
+  "CLI_version": "codex-cli 0.161.0",
+  "model": "gpt-6.1-sol",
+  "supported_reasoning_levels": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+    "ultra"
+  ],
+  "selected_reasoning_effort": "xhigh",
+  "selected_speed": "Standard",
+  "service_tier_override": "default",
+  "standard_policy": "explicit service_tier=\"default\"; installed CLI config parser accepted; generated installed schema identifies default as Standard; no-daemon ephemeral workspace-write approval review",
+  "installed_schema_standard_description": "Override the service tier only when this request starts a new turn. Use \"default\" for standard speed. Omitted or null inherits the thread's tier. Does not change the thread's tier or a turn being steered.",
+  "bundled_catalog_sha256": "262dc36e0e7beb290aef8196bd59f42acf51647b8f7b68dafa533ae7742019e6",
+  "CLI_generation_calls": 0,
+  "official_docs": [
+    "https://learn.chatgpt.com/docs/non-interactive-mode",
+    "https://learn.chatgpt.com/docs/config-file/config-reference"
+  ],
+  "strict_config_probe": {
+    "status": "unsupported for debug",
+    "generation_sessions": 0
+  },
+  "config_parse_validation": {
+    "command": [
+      "codex",
+      "--no-daemon",
+      "-c",
+      "service_tier=\"default\"",
+      "-c",
+      "model_reasoning_effort=\"xhigh\"",
+      "debug",
+      "models",
+      "--bundled"
+    ],
+    "exit_code": 0,
+    "generation_sessions": 0
+  }
+}

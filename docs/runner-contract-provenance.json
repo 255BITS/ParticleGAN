@@ -1,0 +1,57 @@
+{
+  "source_PR": "https://github.com/255BITS/ParticleGAN/pull/403",
+  "source_head": "cfd5072dddf49e4d2e3cd8a8940dbfae0e64981b",
+  "develop_base": "dacf96749a4effc0648a7a0945266d508804110e",
+  "copied_declarations_and_stage_reader": [
+    {
+      "path": "configs/forge/test-stages.json",
+      "source_blob": "420ba7c99228012f2899e2aff67c9dc92ea524d5",
+      "sha256": "00543d39a0eba940ecf77fbd1ef6f8fd2e887f51d384805531032d2ddc047eca"
+    },
+    {
+      "path": "configs/forge/view-history/discriminator_stability-v9.json",
+      "source_blob": "f68252d3d1c8941b68f2d38c08b9e343b0dee0d0",
+      "sha256": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3"
+    },
+    {
+      "path": "configs/forge/views/discriminator_stability.json",
+      "source_blob": "03a65214ebe4a97bd2b5a56318d5e0f97119574c",
+      "sha256": "7eb503042a1e003dd2a3eadf2676dd61a01fd782a44389291d8fcec968464a8d"
+    },
+    {
+      "path": "experiments/forge/test_stages.py",
+      "source_blob": "cc09338a6a951c453fdb71df7506650f34f32678",
+      "sha256": "e9ccb6bee7d015e9e625c376f973569a726dce9ddf33a2d19c305ad434883d08"
+    },
+    {
+      "path": "tests/test_forge_test_stages.py",
+      "source_blob": "bc1eadfa35d7b9feab06e51770b9f4afc982d9f7",
+      "sha256": "0875411ecd5cabc9b338ee346ff15c7e84a8369bfa0765bfbf39d680fb19b1f8"
+    },
+    {
+      "path": "tests/test_forge_views.py",
+      "source_blob": "e96beb9209acebb64860f97f891613a9cca727b5",
+      "sha256": "f6895f5c1cf4d8828f9609521112b935ba61c340643be7ab51c77198dbb07e3b"
+    },
+    {
+      "path": "tests/test_forge_tier_report.py",
+      "source_blob": "5d91b2d545e1362d5a15d38a5d4c9ffc98303291",
+      "sha256": "f636cc2d248d147a0508ec32792e9c04951daf54175262e1937d81e98441e8cc"
+    }
+  ],
+  "revision9_archive_exact": true,
+  "historical_results_regraded": false,
+  "training_task_files_changed": false,
+  "numerical_gate_changes": false,
+  "revision9_tier_readout_archive": {
+    "path": "reports/forge/view-history/discriminator-stability-v9-tier-report.md",
+    "sha256": "9ba627cd01d62bc4d3a84f78cbf1d767994e149f555a5467691a59a8f17df93e",
+    "original_blob": "0c36a472a0070d7866d1c5ddc74aea79493a019b"
+  },
+  "current_catalogues_generated_from_existing_receipts": [
+    "reports/forge/EXPERIMENTS_BY_TIER.md",
+    "reports/forge/test-stages.json",
+    "reports/forge/test-stages.md"
+  ],
+  "new_training_updates": 0
+}

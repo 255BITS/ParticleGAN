@@ -479,7 +479,7 @@ class Queue:
         from .decision_contracts import available_round_budget
         return available_round_budget(state, request, seconds if new_round_reservation else 0, job_key=job_key)
 
-    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None) -> dict | None:
+    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None, request_filter=None) -> dict | None:
         """Called only by the drain owner; reservation is atomic with submissions."""
         with self.state() as state:
             self._refresh(state)
@@ -500,6 +500,8 @@ class Queue:
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:
+                if request_filter is not None and request_id != request_filter:
+                    continue
                 request = entry["request"]
                 if entry["status"] not in {"queued", "running"}:
                     continue
@@ -596,7 +598,7 @@ class Queue:
                     return resolved
             return None
 
-    def launch(self, resolved: dict, *, module="experiments.forge.worker") -> subprocess.Popen:
+    def launch(self, resolved: dict, *, module="experiments.forge.worker", shared_slot_fd=None) -> subprocess.Popen:
         worker = resolved["worker"]
         directory = Path(worker["directory"])
         # launch + registration remain under queue lock. Recovery also checks the
@@ -612,10 +614,16 @@ class Queue:
                                    CUBLAS_WORKSPACE_CONFIG=":4096:8", FORGE_LEASE_FD=str(lease.fileno()))
                 environment["CUDA_VISIBLE_DEVICES"] = "" if worker["device"] == "cpu" else str(worker["device"])
                 environment["PYTHONPATH"] = resolved["request"]["source"]["snapshot_path"]
+                inherited = (lease.fileno(),)
+                environment.pop("FORGE_SHARED_SLOT_FD", None)
+                if shared_slot_fd is not None:
+                    os.fstat(shared_slot_fd)  # fail before process creation on a stale descriptor
+                    environment["FORGE_SHARED_SLOT_FD"] = str(shared_slot_fd)
+                    inherited += (shared_slot_fd,)
                 with (directory / "run.log").open("ab", buffering=0) as log:
                     process = subprocess.Popen([sys.executable, "-u", "-m", module, str(directory / "request.json")],
                         cwd=resolved["request"]["source"]["snapshot_path"], env=environment,
-                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=(lease.fileno(),))
+                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=inherited)
                 job["worker"].update(pid=process.pid, process_identity=process_identity(process.pid))
                 atomic_json(directory / "process.json", job["worker"])
                 return process
