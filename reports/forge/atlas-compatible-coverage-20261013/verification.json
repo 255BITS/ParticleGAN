@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "byte_deterministic_regeneration": true,
+  "unchanged_scientific_rows": 8,
+  "main_Atlas_selected_source_unchanged": true,
+  "source_trainer_adapter_evaluator_task_test_changes": 0,
+  "tier_assignments_changed": false,
+  "existing_scoped_cohorts_preserved": true,
+  "new_scoped_counts": {
+    "BLOCKED": 4,
+    "FAIL": 1,
+    "INCOMPLETE": 2
+  },
+  "new_GPU_attempts": 3,
+  "actual_training_GIFs": 3,
+  "older_native_cap_GIFs": 2,
+  "relative_report_links_valid": true,
+  "registry_verified": true,
+  "qualification_input": false
+}

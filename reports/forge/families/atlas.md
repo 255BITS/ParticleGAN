@@ -164,13 +164,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | BLOCKED | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
 | [ring16_acquisition](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-2"></a>
 
@@ -180,21 +180,21 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | changed since run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | matches recorded run |
 | [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_stripes2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_anisotropic](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [vector_overlap](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [vector_spiral](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
@@ -234,9 +234,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-2"></a>
 
@@ -244,11 +244,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -290,11 +290,11 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
@@ -339,15 +339,15 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | BLOCKED | changed since run |
 | [ring16_acquisition](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | changed since run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_width](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | BLOCKED | matches recorded run |
 | [vector_anisotropic](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | BLOCKED | matches recorded run |
@@ -383,7 +383,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-2"></a>
 
@@ -413,7 +413,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-2"></a>
 
@@ -483,9 +483,9 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2"></a>
@@ -494,11 +494,11 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -545,11 +545,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | BLOCKED | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 | [ring16_acquisition](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | BLOCKED | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | BLOCKED | changed since run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -559,12 +559,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | required | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -605,9 +605,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2"></a>
 
@@ -615,11 +615,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -675,9 +675,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2"></a>
 
@@ -685,11 +685,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -774,9 +774,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | matches recorded run |
-| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
-| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | BLOCKED | changed since run |
+| [unused_token_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | BLOCKED | changed since run |
+| [ae_gan_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-2"></a>
 
@@ -784,11 +784,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
@@ -826,15 +826,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
@@ -878,15 +878,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
@@ -930,15 +930,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
@@ -982,15 +982,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | BLOCKED | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | BLOCKED | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | BLOCKED | matches recorded run |
-| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | matches recorded run |
-| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | matches recorded run |
-| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | matches recorded run |
-| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | matches recorded run |
-| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | matches recorded run |
-| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | matches recorded run |
+| [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | BLOCKED | changed since run |
+| [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | BLOCKED | matches recorded run |
 | [vector_two_broad](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
@@ -1068,7 +1068,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -1190,7 +1190,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -1257,7 +1257,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -1292,7 +1292,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 **five_word_joint_smoke: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -1843,7 +1843,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -1905,7 +1905,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2327,7 +2327,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2354,7 +2354,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2470,7 +2470,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2499,7 +2499,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 

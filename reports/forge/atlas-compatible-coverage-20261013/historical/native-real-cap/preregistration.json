@@ -1,0 +1,329 @@
+{
+  "schema_version": 2,
+  "status": "PREREGISTERED_NOT_ADMITTED",
+  "created_unix": 1791867812.220217,
+  "owner_confirmation_received": true,
+  "source": {
+    "baseline_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source",
+    "baseline_digest": "928ed4e6d5613954cc8298e21c77edea1eebeefa4d2971e2e50ac53e12d59750",
+    "baseline_recipe_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-review/BASELINE-RECIPE.json",
+    "baseline_recipe_sha256": "07f53ce67a4dd2c3005d7da1c6ab28280732521b5cf01e95c0a6e54f142bb8a5",
+    "bound_task_sha256": "7b0279f2333d210134d7a5b680326426a3419db4a1beee2694ae70953e5b52f8",
+    "treatment_source_digest": "5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff",
+    "treatment_implemented": true,
+    "source_root": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/source",
+    "ordinary_admission_binding": "Byte-identical original card archived at experiments/forge/task_parents; operational catalog card carries the existing Atlas binding. Training and evaluator code unchanged by this binding."
+  },
+  "formulation": {
+    "material_training_change": true,
+    "baseline_A": "mean(||g_r||^2/d) + mean(relu(||g_f||/sqrt(d)-kappa)^2)",
+    "treatment_A": "mean(relu(||g_r||/sqrt(d)-kappa)^2) + mean(relu(||g_f||/sqrt(d)-kappa)^2)",
+    "effective_penalty": "lambda/2*A for applied calls1..799; lambda/2*(0.5*A+0.5*B) from800; substitute A only.",
+    "lambda_": 3,
+    "kappa": 1,
+    "existing_norm_epsilon": 1e-12,
+    "late_B_unchanged": true,
+    "critic_r1_real": true,
+    "future_proposed_API_option": "critic_real_penalty_mode=rms_cap; default squared; reject cap combined with critic_r1_real=False",
+    "proposal_guard_used": false,
+    "change_evaluator": false,
+    "change_optimizer": false,
+    "change_task_horizon": false
+  },
+  "pilot": {
+    "cells": [
+      {
+        "cell_id": "seed0-native_atlas",
+        "seed": 0,
+        "arm": "native_atlas",
+        "task": "two_pole",
+        "updates": 80,
+        "timeout_seconds": 300,
+        "supervisor_allowance_seconds": 20
+      },
+      {
+        "cell_id": "seed0-native_atlas_real_rms_cap",
+        "seed": 0,
+        "arm": "native_atlas_real_rms_cap",
+        "task": "two_pole",
+        "updates": 80,
+        "timeout_seconds": 300,
+        "supervisor_allowance_seconds": 20
+      }
+    ],
+    "total_updates": 160,
+    "full_task_reservation_seconds": 600,
+    "full_supervisor_wall_reservation_seconds": 640,
+    "max_concurrent": 2,
+    "gpu_memory_mb_per_cell": 512,
+    "cpu_threads_per_cell": 1,
+    "paid_retries": 0,
+    "source_controls": "Same new frozen source, same initial tensor hashes and within-seed named stream paths; only penalty mode differs. Fresh initialization, no checkpoint warm start.",
+    "seed_status": "Fixed screening seed0; existing history acknowledged; no cross-seed robustness claim.",
+    "inspected_seed_files": [
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-D-realR1-diagnostic-20261012/PROTOCOL.json",
+        "sha256": "7685a583744cad0921d8227a2af5f24cf2f38bec16dec756b9eb7c022b5b3add",
+        "explicit_top_level_seeds": null,
+        "explicit_top_level_seed": null
+      },
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-comparison-20261012/PROTOCOL.json",
+        "sha256": "2394feaf4d5409a06b9d2b19d5a70ea41d231e8b0fee28b6f2ed5a04d4932a93",
+        "explicit_top_level_seeds": null,
+        "explicit_top_level_seed": null
+      },
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-recovery-20261012/PROTOCOL.json",
+        "sha256": "2394feaf4d5409a06b9d2b19d5a70ea41d231e8b0fee28b6f2ed5a04d4932a93",
+        "explicit_top_level_seeds": null,
+        "explicit_top_level_seed": null
+      },
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/REGISTRATION.json",
+        "sha256": "70b45d34a4f43bda96d4559373da351ad5cac5ff4656419eb41b1beca3ec1dad",
+        "explicit_top_level_seeds": [
+          1,
+          2
+        ],
+        "explicit_top_level_seed": null
+      },
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-realR1-saved-diagnosis-20261012/PROTOCOL.json",
+        "sha256": "c1a154acd79eb2386aecf703240064794400cdba2294d54df0abfacb311331a0",
+        "explicit_top_level_seeds": null,
+        "explicit_top_level_seed": null
+      },
+      {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-realR1-screening-comparison-20261012/PROTOCOL.json",
+        "sha256": "6ac5cd689098b0b667932f68a0e265c77c27f259354d0b1c2b566e6da0fa8e18",
+        "explicit_top_level_seeds": null,
+        "explicit_top_level_seed": null
+      }
+    ],
+    "old_120_second_proposal_superseded": "No120-second reservation is used. The two ordinary300-second jobs require600 queue-seconds and640 supervisor-wall seconds."
+  },
+  "decision": {
+    "local_repair": "Both seed0 cells complete and finite; treatment passes the unchanged full gate.",
+    "reject": "Treatment full FAIL rejects local repair; errors are invalid or inconclusive.",
+    "run_completion": "Finish both seed0 cells despite numerical failure; stop only source/state/finite/admission/budget errors and preserve every attempt.",
+    "no_best_seed": true,
+    "no_retuning": true,
+    "no_threshold_changes": true,
+    "no_family_qualification": true,
+    "superiority": "Treatment full PASS and paired native full FAIL supports local improvement only.",
+    "no_advantage": "Both full PASS implies no demonstrated local advantage; no robustness claim."
+  },
+  "expansion": {
+    "condition": "Local treatment full PASS with control full FAIL, complete original-task bindings and sufficient actual budget; freeze before any further tests.",
+    "cells": 12,
+    "arms": 2,
+    "seed": 0,
+    "task_ids": [
+      "gaussian1d_smoke",
+      "two_pole",
+      "unused_token_hold",
+      "ae_gan_hold",
+      "ring16_acquisition",
+      "five_word_joint_smoke"
+    ],
+    "full_task_updates": 46262,
+    "full_task_reservation_seconds": 4440,
+    "full_supervisor_wall_reservation_seconds": 4680,
+    "source_status": "Only original two-pole binding accepted in inspected closure; five other tasks remain blocked.",
+    "reservation_status": "NONE",
+    "existing_control_reuse": "Only exact compatible source/runtime/task/recipe/initialization/protocol receipts, with no interim-prefix duplication.",
+    "scheduling_order": [
+      "ring16_acquisition",
+      "gaussian1d_smoke",
+      "two_pole",
+      "unused_token_hold",
+      "ae_gan_hold",
+      "five_word_joint_smoke"
+    ],
+    "negative_transfer_rationale": "Six historical K3P cap recipes all failed both ring tasks; unchanged Ring16 pair is the first funded transfer block."
+  },
+  "budget": {
+    "current_remaining_queue_seconds": 6275.500788840014,
+    "current_remaining_supervisor_wall_seconds": 4747.1662061969255,
+    "pilot_plus_full_expansion_queue": 5040,
+    "pilot_plus_full_expansion_wall": 5320,
+    "simultaneous_full_wall_reservation_shortfall": 572.8337938030745,
+    "max_pilot_actual_wall_to_allow_whole_12_cell_reservation": 67.16620619692549,
+    "no_new_funds_authorized": true,
+    "reservation_made": false
+  },
+  "preserved_historical_files": [
+    "source/particlegan/ka2.py",
+    "source/particlegan/k3p.py",
+    "source/particlegan/recipes.py",
+    "source/particlegan/policy.py",
+    "source/experiments/forge/atlas_task_binding.py",
+    "source/experiments/forge/policy_behavior_adapters.py",
+    "source/benchmarks/locked_shared/two_pole.py",
+    "source/benchmarks/transfer_suite/protocol.py",
+    "source/configs/forge/ideas/atlas.json",
+    "REPORT.md",
+    "HANDOFF.json",
+    "REGISTRATION.json",
+    "COSTS.json"
+  ],
+  "work": {
+    "model_or_trainer_constructions": 0,
+    "optimizer_constructions": 0,
+    "training_updates": 0,
+    "GPU_calls": 0,
+    "validation_module_constructions": {
+      "particlegan.coulomb_prior.CoulombPriorRegularizer": 1060
+    },
+    "successful_preparation_CPU_seconds": 1.4644241630012402,
+    "failed_preparation_logs": [
+      "preparation-validation-module-error.log",
+      "preparation-missing-word-source.log"
+    ],
+    "failed_preparation_wall": "unmeasured",
+    "historical_source_modified": false,
+    "new_CPU_validation": {
+      "status": "PASS",
+      "CPU_seconds": 6.3772899659961695,
+      "mathematical_cases": [
+        {
+          "dimension": 1,
+          "prior_applied_calls": 0,
+          "mode": "squared",
+          "loss": 1.3144444444444445
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 0,
+          "mode": "rms_cap",
+          "loss": 0.045000000000115385
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 798,
+          "mode": "squared",
+          "loss": 1.3144444444444445
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 798,
+          "mode": "rms_cap",
+          "loss": 0.045000000000115385
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 799,
+          "mode": "squared",
+          "loss": 0.67972222222228
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 799,
+          "mode": "rms_cap",
+          "loss": 0.045000000000115385
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 800,
+          "mode": "squared",
+          "loss": 0.67972222222228
+        },
+        {
+          "dimension": 1,
+          "prior_applied_calls": 800,
+          "mode": "rms_cap",
+          "loss": 0.045000000000115385
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 0,
+          "mode": "squared",
+          "loss": 17.035694099216524
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 0,
+          "mode": "rms_cap",
+          "loss": 9.915211315908774
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 798,
+          "mode": "squared",
+          "loss": 17.035694099216524
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 798,
+          "mode": "rms_cap",
+          "loss": 9.915211315908774
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 799,
+          "mode": "squared",
+          "loss": 37.72396348520547
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 799,
+          "mode": "rms_cap",
+          "loss": 34.16372209355159
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 800,
+          "mode": "squared",
+          "loss": 37.72396348520547
+        },
+        {
+          "dimension": 4,
+          "prior_applied_calls": 800,
+          "mode": "rms_cap",
+          "loss": 34.16372209355159
+        }
+      ],
+      "native_full_policy_and_named_stream_parity": true,
+      "all_restore_next_steps_exact": true,
+      "late_B_AST_unchanged": true,
+      "API_update_calls": 15,
+      "evaluation_calls": 0,
+      "GPU_calls": 0,
+      "boundary_fixture_is_not_an_800_update_training_claim": true
+    }
+  },
+  "created_utc": "2026-10-13T04:53:41.688211+00:00",
+  "supersedes": "The unadmitted seed3/4 proposal is preserved in ../astra-atlas-cap; normal screening forbids nonzero seeds without promotion.",
+  "history": {
+    "report": "D-REGULARIZER-HISTORY.md",
+    "manifest": "HISTORY-RECOVERY.json",
+    "supplement": "HISTORY-SUPPLEMENT.json",
+    "known_prior_exact_real_cap_expression": true,
+    "known_prior_atlas_full_L2_symmetric_cap": true,
+    "novelty_claim": false,
+    "global_exact_run_dedup_complete": false,
+    "owner_registry_reconciliation_required": true,
+    "public_gauntlet_raw_results_recovered": false
+  },
+  "next_unallocated_candidate": {
+    "id": "native_atlas_paired_score_center_1",
+    "status": "FORMULA_PREPARED_NOT_IMPLEMENTED_NOT_REGISTERED_NOT_FUNDED",
+    "objective_delta": "mean((D(real)+D(fake))/2)^2 added to D objective, coefficient1",
+    "source_commit": "aa92ddf4149996e0cffe16fdbbdabbfd5cea8b8d",
+    "keep_native_real_R1": true,
+    "combine_with_real_cap": false,
+    "extra_noisy_critic_calls": 0,
+    "policy_loss_input": "Keep native adversarial input; report score penalty separately.",
+    "task_seed_allocation": null,
+    "new_budget_authorized": false,
+    "requires": "Fresh complete registration/source/dedup/ledger before any admission; exact compatible controls may be reused only with receipts."
+  },
+  "id": "astra-atlas-cap-seed0-20261013",
+  "queue_cap": 6275.500788840014,
+  "physical_cap": 4747.1662061969255,
+  "primary_full_physical_total": 640,
+  "max_concurrent": 2,
+  "paid_retries": 0,
+  "parent": "atlas"
+}
