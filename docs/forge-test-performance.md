@@ -150,6 +150,66 @@ hashes. Preparation/audit errors are recorded as exclusions rather than invented
 scientific executions. Inclusive Popen-to-exit charge and narrower runner time
 are distinct fields.
 
+The subsequent reconciled packet extends these 45 rows once to **204 full runs**:
+66 recipe IDs, 75 source-bound revisions and seven source cohorts. Its 107 PASS
+and 97 FAIL outcomes are an execution ledger across separate protocols, with no
+global survivor. The existing registry adds 159 full cells and 12 separately
+bound startup ERROR cells; it retains the two bounded prefix cells without
+duplicating them. Every original failure, grade, cost and task/source identity
+remains visible. The later frozen recipes contain 110–112 fields, including
+`cell_gaussian_objective`, `cell_reference_policy`, `cell_cubature_rule`,
+`optimizer_role_families` and `optimizer_signal_roles`. Header annotations and
+drill-down distinguish mixed G/D/prior laws and attenuation from the base
+`optimizer_family`. These private source implementations are diagnostic evidence;
+this report does not declare a public API release or adopted default.
+
+The original cumulative recipes, twelve memory corrections and twelve mixed-role
+recipes fail the unchanged full Gaussian stability gate. Twelve quadrature recipes
+fail mode retention. Five of twelve attenuation recipes pass full Gaussian
+stability, but all five fail essential heterogeneous transfer gates. The three
+transfer cohorts pass 2/12, 3/12 and 3/12 independently. Original endpoint metrics
+and every failed stationary/reacquisition/hold check remain authoritative; a
+passing final check does not override the full FAIL.
+
+Each 6,000-step Gaussian continuation names its own 1,000-step producer's attempt,
+candidate revision, source and checkpoint hashes. It records **5,000 new updates**
+and only the new attempt charge; producer updates/cost are already counted in
+their original run. The reconciled full runs contain 434,400 new updates and
+20,994.261548214 charged attempt wall seconds. Twelve pre-runtime hardware-guard
+errors consumed zero training updates and 30.168105392 supervisor seconds. The
+two finite prefixes retain 20.104729663 seconds. Their disjoint total is
+21,044.534383269 seconds; this is conservative attempt wall time, not exclusive
+CUDA device time. CPU preflight and probe charges remain separate fields and
+are never added silently to this total.
+
+Three nonfinite SGDA CPU preflight rejections retain their declared candidate
+cards, completed prefix steps, failure pins and CPU costs as diagnostic exclusions.
+They are not full task executions. Semantic dedup exclusions and failed preparation
+or audit revisions stay recorded. The CPU-only frozen-gradient probe retains its
+REJECT decision, four state/request bindings, 104 gradient evaluations, 8,192
+diagnostic draws and 1.641172 CPU seconds. It supplies no optimizer, oracle or
+representational passing cell; this import does not execute that probe or launch
+its proposed follow-up.
+
+The amended handoff also retains the completed CPU reference ablation and quota
+confirmation. The primary covariance hypothesis remains **REJECT**; the secondary,
+posthoc quota diagnostic records **SUPPORT**, with its original registration and
+transparent errata. It adds zero trained rows or qualified recipes. The two probes
+and read-only quota receipts record 4.349590721 timed CPU seconds, separately from
+the attempt ledger. Secondary directional agreement was not measured, and an
+incorrect copied quota description remains disclosed. No diagnostic SUPPORT is
+converted into a passing task, feasibility witness or causal training conclusion.
+
+Six mode-hold transfer executions lack saved sample panels. They remain original
+full FAIL cells with an explicit **logged-metric gate regrade** audit warning;
+score-history GIFs are not sample trajectories. The other 384 sample observations
+per transfer cohort independently regrade in the supplied audits. Original
+full-run CUDA packets and contemporaneous parameter-matched causal gradient/reference
+histories were not retained. Exact source and artifact byte hashes were verified
+without decoding tensors or rescoring metrics. Bulk archives remain local-only.
+Shared provenance catalogs are stored once in the generated JSON and resolved
+from each cell's hash in its drill-down, keeping the growing offline matrix small.
+
 These runs do not qualify the current suite. G-angle's handoff still lacks
 registered cross-host extension/restore support and six-task Tier-1 evidence.
 Original raw archives are not hosted by this PR. Further local evidence and

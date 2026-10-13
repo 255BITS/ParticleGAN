@@ -257,7 +257,7 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 57
+    assert len(cells) == 228
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"
@@ -380,6 +380,109 @@ def test_nonatlas_rejects_repinned_executed_recipe_change(nonatlas):
     atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
     with pytest.raises(ValueError, match="executed diagnostic recipe"):
         build_report(root, publication=publication)
+
+
+@pytest.fixture
+def reconciled(nonatlas):
+    from pathlib import Path
+    root, publication, _, registry = nonatlas
+    name = "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json"
+    document = json.loads((Path(__file__).resolve().parents[1] / name).read_text())
+    atomic_json(root / name, document)
+    registry["publications"].append({"path": name, "sha256": file_hash(root / name)})
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    return root, publication, document, registry
+
+
+def test_reconciled_packet_keeps_every_full_outcome_without_duplicate_producers(reconciled):
+    from collections import Counter
+    root, publication, document, _ = reconciled
+    report = build_report(root, publication=publication)
+    rows = [r for r in report["records"].values() if r.get("cell_id", "").startswith("nonatlas-")]
+    full = [r for r in rows if r["full_protocol_complete"] is True]
+    assert len(full) == len({r["result"]["attempt_id"] for r in full}) == 204
+    assert Counter(r["status"] for r in full) == {"PASS": 107, "FAIL": 97}
+    assert sum(r["result"].get("new_optimizer_updates", r["result"]["completed_steps"]) for r in full) == 434400
+    continued = [r for r in full if r["result"].get("continuity")]
+    assert len(continued) == 51
+    by_attempt = {r["result"]["attempt_id"]:r for r in full}
+    for row in continued:
+        value = row["result"]
+        assert value["completed_steps"] == 6000 and value["new_optimizer_updates"] == 5000
+        dependency = value["producer_dependency"]
+        parent = by_attempt[dependency["attempt_id"]]
+        assert dependency["candidate_revision"] == parent["candidate_revision"]
+        assert parent["status"] == "PASS" and parent["result"]["completed_steps"] == 1000
+        assert dependency["cost_counted_in_original_producer_only"] is True
+    assert all(r["result"]["ordinary_qualification"] is False for r in full)
+    assert document["discovery_summary"]["global_survivor"] is False
+
+
+def test_reconciled_errors_and_cpu_diagnostics_cannot_fill_full_quality(reconciled):
+    root, publication, document, _ = reconciled
+    report = build_report(root, publication=publication)
+    errors = [r for r in report["records"].values() if r.get("cell_id", "").startswith("nonatlas-pre-runtime-error-")]
+    assert len(errors) == 12
+    for record in errors:
+        result = record["result"]
+        assert record["status"] == "ERROR" and record["full_protocol_complete"] is False
+        assert result["original_grade"]["gate_status"] == "INCOMPLETE"
+        assert result["raw_status"] == "error" and result["started_training"] is False
+        assert result["new_optimizer_updates"] == 0
+    assert sum(r["result"]["actual_Popen_to_exit_seconds"] for r in errors) == pytest.approx(30.168105392011057)
+    summary = document["discovery_summary"]
+    assert len(summary["cpu_preflight_rejections"]) == 3
+    assert all(r["scientific_full_run"] is False and r["GPU_children"] == 0 for r in summary["cpu_preflight_rejections"])
+    assert summary["frozen_gradient_probe"]["decision"] == "REJECT"
+    assert summary["frozen_gradient_probe"]["new_training_updates"] == 0
+    followup = summary["cpu_reference_followup"]
+    assert followup["reference_ablation"]["decision"] == "REJECT"
+    assert followup["quota_confirmation"]["decision"] == "SUPPORT"
+    assert followup["reference_summary"]["global_qualification"] is False
+    assert followup["reference_summary"]["timed_CPU_wall_seconds"] == pytest.approx(4.349590721001732)
+    assert followup["quota_errata"]["original_registration_preserved"] is True
+    assert not any("probe" in r.get("cell_id", "") for r in report["records"].values())
+
+
+def test_reconciled_sample_gaps_and_complete_role_recipes_are_visible(reconciled):
+    root, publication, document, _ = reconciled
+    report = build_report(root, publication=publication)
+    gaps = [r for r in report["records"].values() if r["result"].get("audit_scope", {}).get("sample_panels_available") is False]
+    assert len(gaps) == 6
+    assert all(r["status"] == "FAIL" and r["full_protocol_complete"] is True
+               and r["result"]["saved_outputs_sha256"] is None for r in gaps)
+    assert all(r["result"]["audit_scope"]["grade_basis"] == "ORIGINAL_LOGGED_METRICS_REGRADING" for r in gaps)
+    recipes = [r["recipe"].get("declared_global_recipe", {}) for r in report["recipes"]]
+    assert any(r.get("optimizer_role_families") for r in recipes)
+    assert any(r.get("optimizer_signal_roles") for r in recipes)
+    assert any(r.get("cell_cubature_rule") == "sobol128" for r in recipes)
+    for record in report["records"].values():
+        if "original_evidence" not in record: continue
+        pin = record["original_evidence"]
+        catalog = report["evidence_catalogs"][pin["catalog_sha256"]]
+        assert stable_hash(catalog) == pin["catalog_sha256"]
+        assert catalog["availability"] == "LOCAL_ONLY_NOT_PUBLISHED"
+    assert len(report["evidence_catalogs"]) == 3
+    html = render_html(report)
+    assert "Audit gap: saved sample panels unavailable" in html
+    assert "Pinned source catalogs, receipt hashes and audit limitations" in html
+
+
+@pytest.mark.parametrize("field,value", [("unique_recipe_ids", 204), ("source_bound_revisions", 66),
+                                          ("total_charged_attempt_wall_seconds", 0), ("global_survivor", True)])
+def test_reconciled_summary_rejects_repinning_incorrect_identity_or_charge(reconciled, field, value):
+    from experiments.forge.test_performance_render import render_discovery_navigation
+    root, _, document, registry = reconciled
+    text = render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
+    assert "204 full runs" in text and "75 source-bound revisions" in text and "7 source cohorts" in text
+    assert "21044.534383269" in text and "Six mode-hold" in text
+    document["discovery_summary"][field] = value
+    pin = registry["publications"][-1]
+    atomic_json(root / pin["path"], document)
+    pin["sha256"] = file_hash(root / pin["path"])
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    with pytest.raises(ValueError, match="test discoveries:"):
+        render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
 
 
 def test_existing_scoped_policy_registry_stays_separate_from_parent(evidence):

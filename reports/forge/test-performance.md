@@ -8,7 +8,7 @@ The table below shows selected recipes. The offline view also searches measured 
 
 PASS and FAIL retain the original complete gate; ERROR is execution failure (including pre-training errors); INCOMPLETE lacks the full protocol; NOT RUN has no compatible indexed result. BLOCKED, INVALID and other recorded statuses remain explicit. MIXED exposes conflicting outcomes instead of picking a favorable one. Click any cell for receipts and metrics.
 
-Indexed: **1128 test/protocol rows**, **442 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1146 test/protocol rows**, **519 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 | Recipe | Full identity |
 | --- | --- |
@@ -196,18 +196,123 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 
 | Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
 | --- | --- | ---: | ---: | --- | --- |
+| gaussian1d_smoke | cell-memory-forward-kl-rolling8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-block8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-exponential8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-evidence_reset-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-rolling8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-block8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-exponential8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-evidence_reset-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-rolling8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-block8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-exponential8-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-evidence_reset-v1 · startup ERROR | 0 | 1000 | ERROR | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-forward-kl-exponential8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-moment-rolling8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-reverse-kl-rolling8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-forward-kl-block8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-reverse-kl-evidence_reset-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-reverse-kl-block8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-forward-kl-rolling8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-reverse-kl-exponential8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-forward-kl-evidence_reset-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-moment-evidence_reset-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-moment-exponential8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-memory-moment-block8-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-moment-adam-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-reverse-kl-adam-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-forward-kl-nsgda-global-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-reverse-kl-ada-nsgda-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-forward-kl-adam-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-moment-nsgda-global-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-reverse-kl-nsgda-layer-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-forward-kl-ada-nsgda-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-reverse-kl-nsgda-global-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-moment-ada-nsgda-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-forward-kl-nsgda-layer-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-optimizer-moment-nsgda-layer-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-ana-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-nan-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-naa-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-aan-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-nan-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-ann-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-nna-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-naa-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-aan-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-ann-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-moment-ana-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-mixed-forward-kl-nna-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | Cell moment aggregate forward kl | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | Cell moment aggregate reverse kl | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | Cell moment aggregate moment | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-moment-per-kernel-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-moment-aggregate-moment-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-moment-aggregate-forward-kl-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-moment-aggregate-reverse-kl-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-reverse-kl-tensor3-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-moment-sobol128-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-forward-kl-tensor3-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-moment-tensor3-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-reverse-kl-axis_union-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-reverse-kl-stroud5-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-forward-kl-stroud5-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-moment-stroud5-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-moment-axis_union-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-forward-kl-axis_union-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-reverse-kl-sobol128-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| mode_hold | cell-quadrature-forward-kl-sobol128-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-forward-kl-g-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| ring16_acquisition | cell-gradient-signal-moment-gp-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | staggered100 | Finite realization control · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
 | staggered100 | Finite realization candidate · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
 | two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
 | two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | vector_anisotropic | G-angle anisotropic · full1200 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/g-angle-anisotropic.json) |
+| vector_unequal_width | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_width | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_width | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_width | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_width | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_width | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | two_pole | Atlas location control · screening | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
 | two_pole | Atlas location treatment · screening | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| vector_anisotropic_published | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_unequal_mass | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | G-angle unequal-width · full1200 | 1 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
 | vector_unequal_width | G-angle unequal-width · full1200 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
 | two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| vector_anisotropic_published | cell-moment-aggregate-forward-kl-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-moment-aggregate-moment-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-moment-per-kernel-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_anisotropic_published | cell-moment-aggregate-reverse-kl-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-moment-aggregate-reverse-kl-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-moment-aggregate-forward-kl-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-moment-aggregate-moment-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-moment-per-kernel-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | gaussian1d_smoke | Cell moment aggregate bures | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | gaussian1d_smoke | Cell moment aggregate forward kl | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | gaussian1d_smoke | Cell moment per kernel | 0 | 1000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
@@ -233,6 +338,18 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | vector_spiral | Cell moment per kernel | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_spiral | Cell moment aggregate moment | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_spiral | Cell moment aggregate reverse kl | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| gaussian1d_stability | cell-gradient-signal-forward-kl-p-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-reverse-kl-p-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-forward-kl-gp-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-moment-g-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-reverse-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-bures-p-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-bures-gp-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-forward-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-moment-gp-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-moment-p-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_stability | cell-gradient-signal-bures-g-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_two_broad | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_two_broad | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_two_broad | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
@@ -253,6 +370,60 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | vector_unequal_width_published | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_unequal_width_published | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 | vector_unequal_width_published | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap_published | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| vector_overlap_published | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-naa-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-nan-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-aan-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-ann-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-nna-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-nan-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-aan-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-nna-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-ann-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-moment-ana-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-naa-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-mixed-forward-kl-ana-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-moment-p-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-bures-gp-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-forward-kl-p-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-forward-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-bures-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-moment-gp-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-moment-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-reverse-kl-p-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-bures-p-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-rolling8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-exponential8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-evidence_reset-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-rolling8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-evidence_reset-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-block8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-block8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-exponential8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-reverse-kl-block8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-moment-evidence_reset-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-exponential8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-memory-forward-kl-rolling8-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-reverse-kl-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-forward-kl-ada-nsgda-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-reverse-kl-ada-nsgda-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-reverse-kl-nsgda-global-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-moment-nsgda-global-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-reverse-kl-adam-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-moment-adam-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-moment-ada-nsgda-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-forward-kl-adam-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-global-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+| gaussian1d_smoke | cell-optimizer-moment-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 
 Regenerate with `python -m experiments.forge.test_performance` or the existing `python reports/forge/regenerate_technique_inventory.py` workflow. `python -m experiments.forge.test_performance --check` verifies deterministic generated bytes without writing or training.
 

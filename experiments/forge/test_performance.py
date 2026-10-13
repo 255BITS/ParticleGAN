@@ -172,7 +172,7 @@ def build_report(root, *, publication=None):
         wire = json.dumps(publication, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
         inputs.hashes[PUBLICATION] = hashlib.sha256(wire.encode()).hexdigest()
     _digest_check(publication)
-    recipes, tests, records = {}, {}, {}
+    recipes, tests, records, evidence_catalogs = {}, {}, {}, {}
     declarations = {}
     for path in sorted([*(inputs.root / "configs/forge/tasks").glob("*.json"),
                         *(inputs.root / "configs/forge/task-variants").glob("*/*.json")]):
@@ -199,6 +199,11 @@ def build_report(root, *, publication=None):
 
     def add_record(test, recipe, record):
         record = portable(record)
+        if "original_evidence" in record:
+            original = record["original_evidence"]
+            digest = stable_hash(original)
+            evidence_catalogs[digest] = original
+            record["original_evidence"] = {"catalog_sha256": digest, "availability": original["availability"]}
         key = stable_hash(record)
         records[key] = record
         cell = test["cells"].setdefault(recipe, [])
@@ -293,7 +298,7 @@ def build_report(root, *, publication=None):
     result = {"schema": "forge_test_performance_v1", "qualification_input": False, "qualification_reuse": False,
               "training_launched": False, "source_publication_digest": publication["provenance"]["input_digest"],
               "recipes": ordered_recipes, "tests": sorted(tests.values(), key=lambda row: (row["coverage"]["optimizer_passes"], row["task_id"], row["id"])),
-              "records": records, "inputs": dict(sorted(inputs.hashes.items())),
+              "records": records, "evidence_catalogs": evidence_catalogs, "inputs": dict(sorted(inputs.hashes.items())),
               "provenance": {"projector_sha256": file_hash(Path(__file__)),
                              "renderer_sha256": file_hash(Path(__file__).with_name("test_performance_render.py"))},
               "witness_scope": "Explicit byte-pinned witnesses only; unindexed evidence is unknown, not disproven.",

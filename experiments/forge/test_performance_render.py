@@ -17,17 +17,21 @@ def render_discovery_navigation(root, page):
     registry = inputs.read(SUPPLEMENTAL)
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test discoveries: invalid display registry")
-    full = prefix = None
+    full = prefix = reconciled = None
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         summary = document.get("discovery_summary", {})
-        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64"}:
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013"}:
             continue
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
                 or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
                 or summary.get("promotion") is not False or portable(document) != document):
             raise ValueError("test discoveries: scoped evidence cannot promote or leak local references")
-        if summary["id"] == "nonatlas-cell-moment-seed0-20261012":
+        if summary["id"] == "nonatlas-reconciled-204-20261013":
+            if reconciled is not None:
+                raise ValueError("test discoveries: duplicate reconciled summary")
+            reconciled = pin, document
+        elif summary["id"] == "nonatlas-cell-moment-seed0-20261012":
             if full is not None:
                 raise ValueError("test discoveries: duplicate full-run summary")
             for round in summary["rounds"]:
@@ -65,6 +69,8 @@ def render_discovery_navigation(root, page):
     base = Path(page).parent
     def link(name):
         return relpath(str(Path(root) / name), str(base))
+    if reconciled:
+        return _render_reconciled(reconciled, full, prefix, registry, inputs, link)
     pin, summary = full
     lines = ["", "## Scoped non-Atlas discoveries", "",
              f"[Verified complete recipes, exact protocols and all outcomes]({link(pin['path'])}): "
@@ -93,6 +99,95 @@ def render_discovery_navigation(root, page):
               "and checkpoints remain local-only; individual consumed CUDA packets were not separately retained. "
               "These discoveries change display coverage only. Selected family rows, ordinary qualification and defaults remain unchanged.", ""]
     return "\n".join(lines) + "\n"
+
+
+def _render_reconciled(reconciled, original, prefix, registry, inputs, link):
+    """Reconcile ledger summaries against every registered original cell."""
+    pin, document = reconciled
+    summary = document["discovery_summary"]
+    cells = [cell for entry in registry["publications"]
+             for cell in inputs.read(entry["path"], sha256=entry["sha256"])["cells"]
+             if cell["id"].startswith("nonatlas-")]
+    full = [cell for cell in cells if cell["full_protocol_complete"] is True]
+    errors = [cell for cell in document["cells"] if cell["status"] == "ERROR"]
+    known_attempts = {cell["result"]["attempt_id"] for cell in full}
+    scopes = {entry["id"] for entry in summary["rounds"]}
+    if (len(full) != summary["full_run_count"] or len(known_attempts) != len(full)
+            or len({cell["candidate_id"] for cell in full}) != summary["unique_recipe_ids"]
+            or dict(Counter(cell["status"] for cell in full)) != summary["full_run_status_counts"]
+            or summary["global_survivor"] is not False
+            or {cell["result"]["round"] for cell in full} != scopes
+            or len(errors) != summary["startup_error_count"]):
+        raise ValueError("test discoveries: reconciled ledger differs from registered cells")
+    conditions = {key: value for entry in registry["publications"]
+                  for key, value in inputs.read(entry["path"], sha256=entry["sha256"]).get("condition_contracts", {}).items()}
+    identities = {(cell["candidate_id"], cell["candidate_revision"], conditions[cell["conditions_sha256"]]["source_digest"])
+                  for cell in full}
+    sources = {identity[2] for identity in identities}
+    if len(identities) != summary["source_bound_revisions"] or len(sources) != summary["source_cohorts"]:
+        raise ValueError("test discoveries: source or revision coverage differs from cells")
+    for round in summary["rounds"]:
+        rows = [cell for cell in full if cell["result"]["round"] == round["id"]]
+        if (len(rows) != round["full_runs"] or dict(Counter(cell["status"] for cell in rows)) != round["counts"]
+                or sorted({conditions[cell["conditions_sha256"]]["source_digest"] for cell in rows}) != round["source_digests"]
+                or abs(sum(cell["result"]["actual_Popen_to_exit_seconds"] for cell in rows)
+                       - round["Popen_to_exit_seconds"]) > 1e-7):
+            raise ValueError("test discoveries: round counts or charge differ from cells")
+    charge = sum(cell["result"]["actual_Popen_to_exit_seconds"] for cell in full)
+    failed_charge = sum(cell["result"]["actual_Popen_to_exit_seconds"] for cell in errors)
+    if (abs(charge - summary["full_round_charge_seconds"]) > 1e-7
+            or abs(failed_charge - summary["startup_error_charge_seconds"]) > 1e-7
+            or prefix is None or abs(charge + failed_charge + prefix[1]["paired_charge_seconds"]
+                                    - summary["total_charged_attempt_wall_seconds"]) > 1e-7):
+        raise ValueError("test discoveries: reconciled disjoint charge differs from cells")
+    counts = summary["full_run_status_counts"]
+    followup = summary["cpu_reference_followup"]
+    cpu = followup["reference_summary"]
+    if (cpu["global_qualification"] is not False or cpu["new_training_updates"] != 0 or cpu["new_GPU_children"] != 0
+            or cpu["primary_decision"] != followup["reference_ablation"]["decision"]
+            or cpu["secondary_posthoc_decision"] != followup["quota_confirmation"]["decision"]
+            or abs(cpu["timed_CPU_wall_seconds"] - sum(followup[key]["CPU_wall_seconds"]
+                   for key in ("reference_ablation", "quota_confirmation", "quota_receipts"))) > 1e-7):
+        raise ValueError("test discoveries: CPU diagnostic summary differs from original receipts")
+    lines = ["", "## Scoped non-Atlas discoveries", "",
+             f"[Verified reconciled receipts, complete recipes and audit gaps]({link(pin['path'])}): "
+             f"**{len(full)} full runs** across **{summary['unique_recipe_ids']} recipe IDs**, "
+             f"**{len(identities)} source-bound revisions** and **{len(sources)} source cohorts**. "
+             f"Recorded outcomes are **{counts.get('PASS', 0)} PASS / {counts.get('FAIL', 0)} FAIL**. "
+             "These are disjoint ledger counts across exact protocols; **no global survivor or pooled score** is established.", "",
+             "| Round | Full PASS / FAIL | Source cohorts | Inclusive attempt wall seconds | Audit |",
+             "| --- | ---: | --- | ---: | --- |"]
+    for round in summary["rounds"]:
+        lines.append(f"| {_text(round['id'])} | {round['counts'].get('PASS', 0)} / {round['counts'].get('FAIL', 0)} | "
+                     f"{', '.join('`'+source[:12]+'`' for source in round['source_digests'])} | "
+                     f"{round['Popen_to_exit_seconds']:.9f} | {_text(round['audit_status'])} |")
+    lines += ["", "The original 45 geometry/transfer/acquisition runs remain indexed once: aggregate 35/36 PASS and "
+              "five of nine fresh controls PASS, with Bures ring FAIL retained. All cumulative representatives, all 12 memory "
+              "corrections and all 12 mixed-role recipes fail full Gaussian stability; all 12 quadrature recipes fail mode retention. "
+              "Gradient attenuation passes five of 12 full Gaussian runs, but all five passing recipes fail essential transfer gates. "
+              "Forward, reverse and moment transfer cohorts pass 2/12, 3/12 and 3/12; these cannot fill one another's protocols.", "",
+              "Gaussian continuations retain the complete 6,000-step clock and their own pinned 1,000-step producers: "
+              "only 5,000 new updates and the new attempt charge are counted. Complete recipes expose objective, reference policy, "
+              "cubature, optimizer, G/D/prior role assignments and signal attenuation. Published/base architectures and source revisions remain separate.", "",
+              f"**{len(errors)} pre-runtime ERROR cells** cost **{failed_charge:.9f} seconds**, with zero training updates. "
+              "Three CPU-nonfinite SGDA rejections, semantic dedup exclusions, preparation/audit failures and the CPU gradient "
+              "probe remain separate diagnostics. The probe's REJECT decision supplies no optimizer or feasibility PASS.", "",
+              f"The amended CPU reference ablation keeps primary **{cpu['primary_decision']}** and secondary posthoc quota "
+              f"**{cpu['secondary_posthoc_decision']}** separate, "
+              "with original registrations and transparent quota/directional-measurement errata. These add zero trained rows "
+              f"and no qualified recipe or feasibility witness; {cpu['timed_CPU_wall_seconds']:.9f} timed CPU seconds "
+              "remain separate from attempt charges.", "",
+              f"[Two paired64 cells]({link(prefix[0]['path'])}) remain **INCOMPLETE** against original 7,000-step staggered100 gates. "
+              f"Full-run wall charge **{charge:.9f} seconds**; prefix **{prefix[1]['paired_charge_seconds']:.9f} seconds**; "
+              f"disjoint full/prefix/failed-supervisor total **{summary['total_charged_attempt_wall_seconds']:.9f} seconds**. "
+              "CPU preparation/probe costs are recorded separately; no exclusive CUDA-time or cross-protocol speed ranking is claimed.", "",
+              "**Six mode-hold transfer jobs have unavailable saved sample panels**. Their cells explicitly retain original "
+              "logged-metric gate regrades; score-history GIFs are not sample trajectories. The other 384 saved sample observations "
+              "per transfer cohort regrade exactly in the supplied audits. Full-run CUDA packets and contemporaneous causal "
+              "gradient/reference histories were not retained. Source/artifact hashes were verified; bulk archives remain local-only.", "",
+              "Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; "
+              "selected family rows, qualification, experiments and training code remain unchanged.", "", ""]
+    return "\n".join(lines)
 
 
 def _text(value):
@@ -223,12 +318,13 @@ function counts(test,recipes){const c={passing:0,graded:0};recipes.forEach(r=>{c
 function protocolLabel(t){const c=t.conditions;if(c.no_recorded_protocol)return 'No recorded execution protocol';const seed=c.seed??c.protocol?.seed??'unbound',steps=c.budget?.steps??t.contract?.steps??'unbound';return 'Seed '+seed+' · '+steps+' updates · source '+String(c.source_digest||c.source_identity||'unbound').slice(0,10);}
 function hasWitness(test){return test.witnesses.some(w=>w.status==='PASS');}
 function jsonBlock(title,value,parent){const d=el('details'),summary=el('summary',title);d.append(summary,el('pre',JSON.stringify(value,null,2)));parent.append(d);}
+function recipeHints(r){const v=r.recipe?.declared_global_recipe||r.recipe?.native_recipe||r.recipe?.complete_recipe||r.recipe||{},parts=[v.optimizer_family||r.lane];for(const [key,label] of [['cell_gaussian_objective','objective'],['cell_reference_policy','reference'],['cell_cubature_rule','cubature']])if(v[key])parts.push(label+': '+v[key]);if(v.optimizer_role_families)parts.push('roles: '+Object.entries(v.optimizer_role_families).map(([k,v])=>k+'='+v).join(', '));if(v.optimizer_signal_roles?.length)parts.push('attenuated: '+v.optimizer_signal_roles.join(', '));return parts;}
 function link(label,path,parent){if(!path||path.startsWith('/')||path.includes('..')||path.includes(':')||path.includes('\\'))return;const a=el('a',label);a.href='../../'+path;parent.append(a);}
 function showRecipe(id){const r=byRecipe.get(id);if(!r)return;const body=$('detailBody');body.replaceChildren(el('h2',r.label),el('p','This whole recipe/source/runtime identity is preserved across test rows. No test-specific winner is selected.'));jsonBlock('Full recipe',r.recipe,body);jsonBlock('Recipe identity and executed source',r.identity,body);$('detail').showModal();}
 function showCell(testId,recipeId){const t=byTest.get(testId),r=byRecipe.get(recipeId);if(!t)return;const body=$('detailBody');body.replaceChildren(el('h2',t.task_id),el('p',r?r.label+' · '+status(t,r.id):'Exact test protocol'));
 const links=el('div',undefined,'links');link('Current declaration (may differ)',t.definition,links);body.append(links);body.append(el('p','Definition: '+t.definition_match+'. Original recorded conditions remain authoritative.'));
 if(r){jsonBlock('Complete recipe',r.recipe,body);jsonBlock('Recipe/source/runtime identity',r.identity,body);const list=records(t,r.id);if(!list.length)body.append(el('p','NOT RUN — no compatible indexed evidence for this recipe and exact protocol.'));
-list.forEach((rec,i)=>{body.append(el('h3','Evidence '+(i+1)+' · '+rec.status));const ls=el('div',undefined,'links');link('Pinned compact receipt',rec.receipt,ls);link('Original publication',rec.publication,ls);body.append(ls);jsonBlock('Original gates, metrics, completion, errors and receipt hashes',rec,body);});}
+list.forEach((rec,i)=>{body.append(el('h3','Evidence '+(i+1)+' · '+rec.status));const ls=el('div',undefined,'links');link('Pinned compact receipt',rec.receipt,ls);link('Original publication',rec.publication,ls);body.append(ls);if(rec.result?.audit_scope?.sample_panels_available===false)body.append(el('p','Audit gap: saved sample panels unavailable. This full gate retains the original logged-metric regrade; score-history GIFs are not sample trajectories.','warning'));jsonBlock('Original gates, metrics, completion, errors and receipt hashes',rec,body);const catalog=report.evidence_catalogs?.[rec.original_evidence?.catalog_sha256];if(catalog)jsonBlock('Pinned source catalogs, receipt hashes and audit limitations',catalog,body);});}
 jsonBlock('Exact protocol, seed/RNG and source bindings',t.conditions,body);jsonBlock('Recorded task contract (original evaluator fingerprint and budget)',t.contract,body);
 jsonBlock('Oracle and representational feasibility witnesses',t.witnesses,body);body.append(el('p','No indexed witness is an evidence gap. It is not proof of impossibility. Oracle/representation passes cannot replace an optimizer run.'));$('detail').showModal();}
 function render(){
@@ -239,7 +335,7 @@ ts.sort((a,b)=>{let d=sort.value==='passes'?a.c.passing-b.c.passing:sort.value==
 rowPage=Math.min(rowPage,Math.max(0,Math.ceil(ts.length/rowSize)-1));colPage=Math.min(colPage,Math.max(0,Math.ceil(rs.length/colSize)-1));
 const stats=$('stats');stats.replaceChildren();for(const [n,label] of [[ts.length,'test / protocol rows'],[rs.length,'recipe identities'],[ts.filter(x=>!x.c.passing).length,'zero optimizer passes'],[ts.filter(x=>!x.c.passing&&!hasWitness(x.t)).length,'no indexed witness']]){const div=el('div',undefined,'stat');div.append(el('b',n),el('span',label));stats.append(div);}
 const cols=rs.slice(colPage*colSize,(colPage+1)*colSize),thead=$('matrix').querySelector('thead'),tbody=$('matrix').querySelector('tbody');thead.replaceChildren();tbody.replaceChildren();const head=el('tr');head.append(el('th','Test / exact protocol'),el('th','PASS / recipes'),el('th','Coverage & witnesses'));
-cols.forEach(r=>{const th=el('th'),btn=el('button',r.label);btn.title='Open complete recipe '+r.id;btn.onclick=()=>showRecipe(r.id);th.append(btn,el('small',r.id.slice(0,10)),el('small',String(r.recipe?.optimizer_family||r.recipe?.native_recipe?.optimizer_family||r.recipe?.complete_recipe?.optimizer_family||r.recipe?.declared_global_recipe?.optimizer_family||r.lane)));head.append(th);});thead.append(head);
+cols.forEach(r=>{const th=el('th'),btn=el('button',r.label);btn.title='Open complete recipe '+r.id;btn.onclick=()=>showRecipe(r.id);th.append(btn,el('small',r.id.slice(0,10)));recipeHints(r).forEach(hint=>th.append(el('small',hint)));head.append(th);});thead.append(head);
 ts.slice(rowPage*rowSize,(rowPage+1)*rowSize).forEach(({t,c})=>{const tr=el('tr',undefined,c.passing?'':'zero'),th=el('th'),btn=el('button',t.task_id);btn.onclick=()=>showCell(t.id);th.append(btn,el('small',t.lane+' · '+t.id.slice(0,12)),el('small',protocolLabel(t)),el('small','Definition: '+t.definition_match));tr.append(th,el('td',c.passing+' / '+rs.length));const cov=el('td');cov.append(el('small',c.graded+' graded · '+(c.ERROR||0)+' errors · '+(c.INCOMPLETE||0)+' incomplete'),el('small',(c['NOT RUN']||0)+' not run · '+(c.BLOCKED||0)+' blocked · '+(c.INVALID||0)+' invalid'));
 const witnesses=t.witnesses.filter(w=>w.status==='PASS');cov.append(el('small','Oracle '+witnesses.filter(w=>w.kind==='oracle').length+' · representation '+witnesses.filter(w=>w.kind==='representational').length));if(!c.passing&&!witnesses.length)cov.append(el('small','NO INDEXED WITNESS','warning'));tr.append(cov);
 cols.forEach(r=>{const td=el('td'),btn=el('button',undefined,'detail');btn.setAttribute('aria-label',t.task_id+' · '+r.label+' · '+status(t,r.id)+' · evidence');btn.append(badge(status(t,r.id)));btn.onclick=()=>showCell(t.id,r.id);td.append(btn);tr.append(td);});tbody.append(tr);});

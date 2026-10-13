@@ -7,19 +7,37 @@ The [performance-by-test matrix](../test-performance.md) shows complete recipe c
 
 ## Scoped non-Atlas discoveries
 
-[Verified complete recipes, exact protocols and all outcomes](../test-performance-evidence/nonatlas-cell-moment-full-runs.json): **45 unique full runs** in three separately scoped seed-0 rounds. Aggregate outcomes are **35/36 PASS**; the **9 unique controls** are **5/9 PASS**. These are execution-ledger counts, not a pooled score, independent control repetitions or an ordinary whole-suite winner.
+[Verified reconciled receipts, complete recipes and audit gaps](../test-performance-evidence/nonatlas-reconciled-204.json): **204 full runs** across **66 recipe IDs**, **75 source-bound revisions** and **7 source cohorts**. Recorded outcomes are **107 PASS / 97 FAIL**. These are disjoint ledger counts across exact protocols; **no global survivor or pooled score** is established.
 
-| Registered round / task IDs | Executed source | Aggregate PASS / total | Control PASS / total | Inclusive child seconds |
-| --- | --- | ---: | ---: | ---: |
-| cell-moment-round<br>`vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic` | `f90962a5b351` · seed 0 | 12/12 | 2/3 | 746.970010416 |
-| cell-moment-transfer-round<br>`vector_spiral`, `vector_two_broad`, `vector_overlap` | `f90962a5b351` · seed 0 | 12/12 | 1/3 | 730.446546641 |
-| cell-moment-acquisition-round<br>`vector_unequal_width_published`, `gaussian1d_smoke`, `ring16_acquisition` | `a21587094267` · seed 0 | 11/12 | 2/3 | 745.665159237 |
+| Round | Full PASS / FAIL | Source cohorts | Inclusive attempt wall seconds | Audit |
+| --- | ---: | --- | ---: | --- |
+| cell-moment-round | 14 / 1 | `f90962a5b351` | 746.970010416 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-moment-transfer-round | 13 / 2 | `f90962a5b351` | 730.446546641 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-moment-acquisition-round | 13 / 2 | `a21587094267` | 745.665159237 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| gaussian-stability-round | 0 / 3 | `a21587094267` | 386.763673001 | PASS_INDEPENDENT_SAVED_OUTPUT_CONTINUITY_AND_BINDING_AUDIT |
+| cell-moment-retention-architecture-round | 6 / 6 | `421df4e58168` | 1083.554060910 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-memory-round | 12 / 12 | `47b8aff9e9ef` | 2487.138272296 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-quadrature-round | 0 / 12 | `8220bfed22b6` | 3554.116458337 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-optimizer-round | 12 / 12 | `47b8aff9e9ef` | 2950.390634309 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-mixed-role-round | 12 / 12 | `d6b7ca5a0d78` | 2919.869744607 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-gradient-signal-round | 17 / 7 | `11cf56e3462e` | 3236.489829691 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-signal-transfer-round | 2 / 10 | `11cf56e3462e` | 708.227286190 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
+| cell-signal-reverse-transfer-round | 3 / 9 | `11cf56e3462e` | 730.770430319 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
+| cell-signal-moment-transfer-round | 3 / 9 | `11cf56e3462e` | 713.859442260 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
 
-All four aggregate objectives pass the anisotropic, unequal-width, unequal-mass, broad, overlap and spiral scoped cases in the first two rounds. Acquisition preserves **Bures ring FAIL**. The Gaussian acquisition smoke uses any scheduled full pass plus an independent same-state draw; ring executes 1,600 updates with 96 observations and its original 400-update schedule horizon. Published-discriminator width is a distinct task ID. Metric regressions remain visible; no objective is declared universally superior.
+The original 45 geometry/transfer/acquisition runs remain indexed once: aggregate 35/36 PASS and five of nine fresh controls PASS, with Bures ring FAIL retained. All cumulative representatives, all 12 memory corrections and all 12 mixed-role recipes fail full Gaussian stability; all 12 quadrature recipes fail mode retention. Gradient attenuation passes five of 12 full Gaussian runs, but all five passing recipes fail essential transfer gates. Forward, reverse and moment transfer cohorts pass 2/12, 3/12 and 3/12; these cannot fill one another's protocols.
 
-[Paired finite-realization mechanism prefix](../test-performance-evidence/nonatlas-finite-realization-prefix64.json): two 64-update arms, both **INCOMPLETE** against the original 7,000-update staggered100 quality gates. Prefix charge **20.104729663 seconds**; disjoint charge including the three full rounds **2243.186445957 seconds**. No prefix PASS is imported into full quality.
+Gaussian continuations retain the complete 6,000-step clock and their own pinned 1,000-step producers: only 5,000 new updates and the new attempt charge are counted. Complete recipes expose objective, reference policy, cubature, optimizer, G/D/prior role assignments and signal attenuation. Published/base architectures and source revisions remain separate.
 
-Preparation/audit errors and exclusions are retained in the pinned receipts. Original source, generated arrays and checkpoints remain local-only; individual consumed CUDA packets were not separately retained. These discoveries change display coverage only. Selected family rows, ordinary qualification and defaults remain unchanged.
+**12 pre-runtime ERROR cells** cost **30.168105392 seconds**, with zero training updates. Three CPU-nonfinite SGDA rejections, semantic dedup exclusions, preparation/audit failures and the CPU gradient probe remain separate diagnostics. The probe's REJECT decision supplies no optimizer or feasibility PASS.
+
+The amended CPU reference ablation keeps primary **REJECT** and secondary posthoc quota **SUPPORT** separate, with original registrations and transparent quota/directional-measurement errata. These add zero trained rows and no qualified recipe or feasibility witness; 4.349590721 timed CPU seconds remain separate from attempt charges.
+
+[Two paired64 cells](../test-performance-evidence/nonatlas-finite-realization-prefix64.json) remain **INCOMPLETE** against original 7,000-step staggered100 gates. Full-run wall charge **20994.261548214 seconds**; prefix **20.104729663 seconds**; disjoint full/prefix/failed-supervisor total **21044.534383269 seconds**. CPU preparation/probe costs are recorded separately; no exclusive CUDA-time or cross-protocol speed ranking is claimed.
+
+**Six mode-hold transfer jobs have unavailable saved sample panels**. Their cells explicitly retain original logged-metric gate regrades; score-history GIFs are not sample trajectories. The other 384 saved sample observations per transfer cohort regrade exactly in the supplied audits. Full-run CUDA packets and contemporaneous causal gradient/reference histories were not retained. Source/artifact hashes were verified; bulk archives remain local-only.
+
+Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; selected family rows, qualification, experiments and training code remain unchanged.
 
 ## Qualification and accounting
 
