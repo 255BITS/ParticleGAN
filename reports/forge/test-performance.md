@@ -28,7 +28,7 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1154 test/protocol rows**, **537 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1169 test/protocol rows**, **542 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
 <summary>Open all 166 selected-protocol rows and their exact recipe identities</summary>
@@ -218,6 +218,21 @@ Indexed: **1154 test/protocol rows**, **537 complete recipe/source/runtime ident
 ## Research cohorts
 
 Use the offline view's cohort menu to inspect one study at a time. Each row below keeps its original source, seed, budget and gate; these diagnostic passes grant no suite qualification.
+
+<details>
+<summary>Gaussian confidence corrections and retention · 7 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| gaussian1d_smoke | confidence-lr-finite-cap-gaussian-v1 | 0 | 1000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/pr399-gaussian-finite-cap-1.json) |
+| gaussian1d_stability | signed-confidence-lr-gaussian-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/pr399-signed-confidence-2.json) |
+| gaussian1d_stability | confidence-lr-critic-orientation-gaussian-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/pr399-critic-orientation-2.json) |
+| gaussian1d_stability | positive-evidence-lr-gaussian-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/pr399-positive-evidence-2.json) |
+| gaussian1d_smoke | confidence-lr-critic-orientation-gaussian-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-critic-orientation-2.json) |
+| gaussian1d_smoke | signed-confidence-lr-gaussian-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-signed-confidence-2.json) |
+| gaussian1d_smoke | positive-evidence-lr-gaussian-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-positive-evidence-2.json) |
+
+</details>
 
 <details>
 <summary>Cell objectives, memory and transfer · 216 evidence records</summary>
@@ -440,6 +455,22 @@ Use the offline view's cohort menu to inspect one study at a time. Each row belo
 | gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-global-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | gaussian1d_smoke | cell-optimizer-moment-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+
+</details>
+
+<details>
+<summary>Confidence LR: acquisition and own retention · 8 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| gaussian1d_stability | generator-confidence-lr-bcap-direction-v1 | 0 | 6000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-own-retention-2.json) |
+| ae_gan_hold | generator-confidence-lr-bcap-direction-v1 | 0 | 250 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
+| five_word_joint_hold | generator-confidence-lr-bcap-direction-v1 | 0 | 4000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-own-retention-2.json) |
+| five_word_joint_smoke | generator-confidence-lr-bcap-direction-v1 | 0 | 20001 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
+| gaussian1d_smoke | generator-confidence-lr-bcap-direction-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
+| ring16_acquisition | generator-confidence-lr-bcap-direction-v1 | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
+| two_pole | generator-confidence-lr-bcap-direction-v1 | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
+| unused_token_hold | generator-confidence-lr-bcap-direction-v1 | 0 | 200 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-confidence-lr-tier1-6.json) |
 
 </details>
 

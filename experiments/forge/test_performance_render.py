@@ -18,16 +18,23 @@ def render_discovery_navigation(root, page):
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test discoveries: invalid display registry")
     full = prefix = reconciled = astra = None
+    confidence_packets = {}
+    confidence_ids = {'pr399-confidence-lr-tier1-6-20261013': 'screen', 'pr399-confidence-lr-own-retention-2-20261013': 'retention', 'pr399-gaussian-finite-cap-1-20261013': 'finite_cap', 'pr399-critic-orientation-2-20261013': 'orientation', 'pr399-signed-confidence-2-20261013': 'signed', 'pr399-positive-evidence-2-20261013': 'positive'}
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         summary = document.get("discovery_summary", {})
-        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013"}:
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013"} | set(confidence_ids):
             continue
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
                 or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
                 or summary.get("promotion") is not False or portable(document) != document):
             raise ValueError("test discoveries: scoped evidence cannot promote or leak local references")
-        if summary["id"] == "astra-cumulative-24-20261013":
+        if summary["id"] in confidence_ids:
+            key = confidence_ids[summary["id"]]
+            if key in confidence_packets:
+                raise ValueError("test discoveries: duplicate confidence summary")
+            confidence_packets[key] = pin, document
+        elif summary["id"] == "astra-cumulative-24-20261013":
             if astra is not None:
                 raise ValueError("test discoveries: duplicate Astra cumulative summary")
             astra = pin, document
@@ -77,6 +84,7 @@ def render_discovery_navigation(root, page):
         text = _render_reconciled(reconciled, full, prefix, registry, inputs, link)
         if astra:
             text += _render_astra(astra, reconciled, link)
+        text += _render_confidence_packets(confidence_packets, link)
         return text
     pin, summary = full
     lines = ["", "## Scoped non-Atlas discoveries", "",
@@ -105,7 +113,7 @@ def render_discovery_navigation(root, page):
     lines += ["Preparation/audit errors and exclusions are retained in the pinned receipts. Original source, generated arrays "
               "and checkpoints remain local-only; individual consumed CUDA packets were not separately retained. "
               "These discoveries change display coverage only. Selected family rows, ordinary qualification and defaults remain unchanged.", ""]
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines) + "\n" + _render_confidence_packets(confidence_packets, link)
 
 
 def _render_reconciled(reconciled, original, prefix, registry, inputs, link):
@@ -267,6 +275,141 @@ def _render_astra(astra, previous, link):
     return "\n".join(lines)
 
 
+def _render_confidence_packets(packets, link):
+    if not packets:
+        return ""
+    if set(packets) != {"screen", "retention", "finite_cap", "orientation", "signed", "positive"}:
+        raise ValueError("test discoveries: complete confidence publication requires all six packets")
+    return (_render_confidence_followup(packets["screen"], packets["retention"], link)
+            + _render_corrective_gaussian(packets["finite_cap"], packets["orientation"], link)
+            + _render_response_variants(packets["signed"], packets["positive"], link))
+
+
+def _render_confidence_followup(confidence, retention, link):
+    """Report the complete six-task screen and its own retention failure separately."""
+    if confidence is None or retention is None:
+        raise ValueError("test discoveries: confidence-LR screen and retention receipts must be indexed together")
+    for item, count, statuses, screen_pass in (
+            (confidence, 6, {"PASS": 6}, True),
+            (retention, 2, {"PASS": 1, "FAIL": 1}, False)):
+        document = item[1]
+        cells = document["cells"]
+        summary = document["discovery_summary"]
+        if (len(cells) != count or summary["attempts"] != count
+                or dict(Counter(c["status"] for c in cells)) != statuses
+                or summary["status_counts"] != statuses
+                or summary["original_six_task_tier1_screen_pass"] is not screen_pass
+                or summary["global_survivor"] is not False
+                or len({c["result"]["attempt_id"] for c in cells}) != count
+                or any(c["full_protocol_complete"] is not True for c in cells)
+                or summary["source_packet_sha256"] != document["original_evidence"]["packet_sha256"]):
+            raise ValueError("test discoveries: confidence-LR packet differs from original cells")
+    all_cells = confidence[1]["cells"] + retention[1]["cells"]
+    sources = {item[1]["condition_contracts"][c["conditions_sha256"]]["source_digest"]
+               for item in (confidence, retention) for c in item[1]["cells"]}
+    if (len({c["result"]["attempt_id"] for c in all_cells}) != 8
+            or len(sources) != 1
+            or len({c["candidate_revision"] for c in all_cells}) != 1):
+        raise ValueError("test discoveries: confidence-LR attempts or source bindings overlap")
+    return "\n".join(["", "## Confidence-LR correction: six-task screen and own retention", "",
+        f"[Six original required Tier 1 attempts]({link(confidence[0]['path'])}) are **6/6 PASS** with complete actual "
+        "optimizer histories. The positive confidence-scaled learning-rate response preserves generator, encoder "
+        "and prior updates. This passes only the frozen six-task screening view; earlier hard-EMA and control "
+        "attempts retain their separate source identities and are not relabelled as current-source controls.", "",
+        f"[Two own-checkpoint continuations]({link(retention[0]['path'])}) keep the contrast: "
+        "original word hold **PASS 25/25**, but Gaussian retention **FAIL** with 8/72 stationary checks, "
+        "0/24 shifted-hold checks and failed reacquisition. An acquisition pass is not sustained retention. "
+        "The measured recipe has no broader Tier 2, full Martyn, robustness or release qualification.", "",
+        "The cumulative packet now has **74 unique attempts**: 66 earlier identities and eight new confidence-LR runs, "
+        "**32 PASS / 35 FAIL / 7 INCOMPLETE**. The earlier rows and failed gates are byte-unchanged. "
+        "This is a source-scoped attempt ledger, not a pooled score or an addition to the 249-run non-Atlas total. "
+        "Exact cumulative updates remain unavailable because the older timed-out word control has only a lower bound. "
+        "No default, qualification or release promotion follows.", ""])
+
+
+def _render_corrective_gaussian(finite_cap, orientation, link):
+    """Keep a failed acquisition and a failed own retention as separate outcomes."""
+    if finite_cap is None or orientation is None:
+        raise ValueError("test discoveries: both corrective Gaussian packets are required")
+    for item, count, statuses in ((finite_cap, 1, {"FAIL": 1}),
+                                  (orientation, 2, {"PASS": 1, "FAIL": 1})):
+        document = item[1]
+        cells = document["cells"]
+        summary = document["discovery_summary"]
+        if (len(cells) != count or summary["attempts"] != count
+                or dict(Counter(c["status"] for c in cells)) != statuses
+                or summary["status_counts"] != statuses
+                or summary["global_survivor"] is not False
+                or summary["original_six_task_tier1_screen_pass"] is not False
+                or len({c["result"]["attempt_id"] for c in cells}) != count
+                or any(c["full_protocol_complete"] is not True for c in cells)
+                or summary["source_packet_sha256"] != document["original_evidence"]["packet_sha256"]):
+            raise ValueError("test discoveries: corrective Gaussian cells differ from original packet")
+    blocked = finite_cap[1]["discovery_summary"].get("unstarted_retention", {})
+    if (blocked.get("status") != "BLOCKED_UNSTARTED" or blocked.get("attempts") != 0
+            or blocked.get("new_updates") != 0 or blocked.get("charges") != 0
+            or {c["task_id"] for c in finite_cap[1]["cells"]} != {"gaussian1d_smoke"}
+            or {c["task_id"] for c in orientation[1]["cells"]} != {"gaussian1d_smoke", "gaussian1d_stability"}
+            or len({c["result"]["attempt_id"] for item in (finite_cap, orientation)
+                    for c in item[1]["cells"]}) != 3):
+        raise ValueError("test discoveries: unstarted retention was promoted or correction attempts overlap")
+    return "\n".join(["", "## Later Gaussian corrections: one failed acquisition, one failed retention", "",
+        f"[Finite critic cap]({link(finite_cap[0]['path'])}) completes the original Gaussian acquisition task "
+        "but **FAILS** its any-scheduled-pass-with-independent-confirmation gate. Own Gaussian retention is "
+        "**BLOCKED/UNSTARTED**: zero attempts, updates and charge; there is no synthetic retention result.", "",
+        f"[Critic orientation correction]({link(orientation[0]['path'])}) **PASSes** original Gaussian acquisition "
+        "at its distinct source/revision, then **FAILS** the original own-state retention continuation: "
+        "5/72 stationary, 1/24 shifted and 0/48 frozen checks, with failed reacquisition. Its remaining five "
+        "required Tier 1 tasks were not run at this source. It cannot inherit the earlier confidence-LR "
+        "six-task screen as current-source qualification.", "",
+        "The cumulative ledger has **77 unique attempts: 33 PASS / 37 FAIL / 7 INCOMPLETE**. All earlier "
+        "74 rows retain their exact grades and identities; these three attempts are added once. Neither correction "
+        "establishes Gaussian retention, full six-task superiority, broad Tier 2 or release eligibility.", ""])
+
+
+def _render_response_variants(signed, positive, link):
+    """Preserve two acquisition passes and their separate full retention failures."""
+    if signed is None or positive is None:
+        raise ValueError("test discoveries: both response-variant packets are required")
+    sources = set()
+    revisions = set()
+    attempts = set()
+    for item, stationary, shifted in ((signed, 7, 0), (positive, 14, 2)):
+        document = item[1]
+        cells = document["cells"]
+        summary = document["discovery_summary"]
+        checks = summary.get("retention_checks", {})
+        if (len(cells) != 2 or summary["attempts"] != 2
+                or dict(Counter(c["status"] for c in cells)) != {"PASS": 1, "FAIL": 1}
+                or summary["status_counts"] != {"PASS": 1, "FAIL": 1}
+                or summary["global_survivor"] is not False
+                or summary["original_six_task_tier1_screen_pass"] is not False
+                or checks != {"stationary_passes": stationary, "stationary_checks": 72,
+                              "shift_hold_passes": shifted, "shift_hold_checks": 24,
+                              "frozen_passes": 0, "frozen_checks": 48, "reacquisition_status": "FAIL"}
+                or {c["task_id"] for c in cells} != {"gaussian1d_smoke", "gaussian1d_stability"}
+                or any(c["full_protocol_complete"] is not True for c in cells)
+                or summary["source_packet_sha256"] != document["original_evidence"]["packet_sha256"]):
+            raise ValueError("test discoveries: response-variant packet differs from original cells")
+        sources.update(document["condition_contracts"][c["conditions_sha256"]]["source_digest"] for c in cells)
+        revisions.update(c["candidate_revision"] for c in cells)
+        attempts.update(c["result"]["attempt_id"] for c in cells)
+    if len(sources) != 2 or len(revisions) != 2 or len(attempts) != 4:
+        raise ValueError("test discoveries: response variants merged source identities or attempts")
+    return "\n".join(["", "## Signed and positive-evidence responses: retention remains unsolved", "",
+        f"[Signed-confidence response]({link(signed[0]['path'])}) **PASSes** original Gaussian acquisition, "
+        "then **FAILs** own-checkpoint retention: 7/72 stationary, 0/24 shifted, 0/48 frozen and deadline "
+        "reacquisition FAIL. The signed gap is a confidence proxy, not a restoring-gradient certificate.", "",
+        f"[Positive-evidence response]({link(positive[0]['path'])}) also **PASSes** acquisition and **FAILs** "
+        "full retention: 14/72 stationary, 2/24 shifted, 0/48 frozen and deadline reacquisition FAIL. "
+        "Its final mean, width ratio and CDF KS meet numerical endpoint bounds, which do not replace the "
+        "unchanged sustained gate. Neutral zero-gain proposals still advance real optimizer moment histories.", "",
+        "These are two distinct source/revision cohorts; neither inherits the earlier six-task screen. "
+        "The cumulative packet has **81 unique attempts: 35 PASS / 39 FAIL / 7 INCOMPLETE**, retaining all "
+        "77 earlier rows exactly and adding four attempts once. No Gaussian-retention winner, full Martyn "
+        "superiority, default or release qualification follows.", ""])
+
+
 def _text(value):
     return str(value).replace("|", "\\|").replace("\n", " ").replace("<", "&lt;")
 
@@ -295,6 +438,10 @@ def campaign_overview(report):
 
 
 def diagnostic_group(receipt):
+    if "pr399-confidence-lr-" in receipt:
+        return "Confidence LR: acquisition and own retention"
+    if any(name in receipt for name in ("pr399-gaussian-finite-cap-", "pr399-critic-orientation-", "pr399-signed-confidence-", "pr399-positive-evidence-")):
+        return "Gaussian confidence corrections and retention"
     name = Path(receipt or "").name
     if name.startswith("astra-"):
         return "Quota transition and Astra portfolio"

@@ -31,6 +31,30 @@
     {
       "path": "reports/forge/test-performance-evidence/astra-cumulative-24.json",
       "sha256": "cffcbd7be99971b38881320564c034701cd6fd4a8387a0c6c55bb22cd70ca0b9"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-tier1-6.json",
+      "sha256": "394fb58001a45f50cc517bd3af69da11cf8e5fb62be49e8e112dbb1a7fddca26"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-own-retention-2.json",
+      "sha256": "33b3b907a0d9c61b7afa14dfd6ee4809fa504e992064d32df1e33221e08947a6"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-gaussian-finite-cap-1.json",
+      "sha256": "a6604b7eb2b0bc9eb8e2942780eed32e5e5c85753d2ac0a08f6375da545317ee"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-critic-orientation-2.json",
+      "sha256": "7f46d7e86984d41fda73de7d6c4bac393cd0efcb65e8193a4cc5ac59d5520ce3"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-signed-confidence-2.json",
+      "sha256": "f0daa9efbc7e89291e881f9ed046cf12a5741a6d2a9407247ce64ea5c587e20e"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-positive-evidence-2.json",
+      "sha256": "bdf2cee710a11685ea194a4fc2e3f8783e354250b8a7cb2f6684af12e020fbff"
     }
   ],
   "qualification_input": false,

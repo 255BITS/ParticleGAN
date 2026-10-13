@@ -322,4 +322,28 @@ The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall
 </details>
 
 
+## Confidence-LR correction: six-task screen and own retention
+
+[Six original required Tier 1 attempts](test-performance-evidence/pr399-confidence-lr-tier1-6.json) are **6/6 PASS** with complete actual optimizer histories. The positive confidence-scaled learning-rate response preserves generator, encoder and prior updates. This passes only the frozen six-task screening view; earlier hard-EMA and control attempts retain their separate source identities and are not relabelled as current-source controls.
+
+[Two own-checkpoint continuations](test-performance-evidence/pr399-confidence-lr-own-retention-2.json) keep the contrast: original word hold **PASS 25/25**, but Gaussian retention **FAIL** with 8/72 stationary checks, 0/24 shifted-hold checks and failed reacquisition. An acquisition pass is not sustained retention. The measured recipe has no broader Tier 2, full Martyn, robustness or release qualification.
+
+The cumulative packet now has **74 unique attempts**: 66 earlier identities and eight new confidence-LR runs, **32 PASS / 35 FAIL / 7 INCOMPLETE**. The earlier rows and failed gates are byte-unchanged. This is a source-scoped attempt ledger, not a pooled score or an addition to the 249-run non-Atlas total. Exact cumulative updates remain unavailable because the older timed-out word control has only a lower bound. No default, qualification or release promotion follows.
+
+## Later Gaussian corrections: one failed acquisition, one failed retention
+
+[Finite critic cap](test-performance-evidence/pr399-gaussian-finite-cap-1.json) completes the original Gaussian acquisition task but **FAILS** its any-scheduled-pass-with-independent-confirmation gate. Own Gaussian retention is **BLOCKED/UNSTARTED**: zero attempts, updates and charge; there is no synthetic retention result.
+
+[Critic orientation correction](test-performance-evidence/pr399-critic-orientation-2.json) **PASSes** original Gaussian acquisition at its distinct source/revision, then **FAILS** the original own-state retention continuation: 5/72 stationary, 1/24 shifted and 0/48 frozen checks, with failed reacquisition. Its remaining five required Tier 1 tasks were not run at this source. It cannot inherit the earlier confidence-LR six-task screen as current-source qualification.
+
+The cumulative ledger has **77 unique attempts: 33 PASS / 37 FAIL / 7 INCOMPLETE**. All earlier 74 rows retain their exact grades and identities; these three attempts are added once. Neither correction establishes Gaussian retention, full six-task superiority, broad Tier 2 or release eligibility.
+
+## Signed and positive-evidence responses: retention remains unsolved
+
+[Signed-confidence response](test-performance-evidence/pr399-signed-confidence-2.json) **PASSes** original Gaussian acquisition, then **FAILs** own-checkpoint retention: 7/72 stationary, 0/24 shifted, 0/48 frozen and deadline reacquisition FAIL. The signed gap is a confidence proxy, not a restoring-gradient certificate.
+
+[Positive-evidence response](test-performance-evidence/pr399-positive-evidence-2.json) also **PASSes** acquisition and **FAILs** full retention: 14/72 stationary, 2/24 shifted, 0/48 frozen and deadline reacquisition FAIL. Its final mean, width ratio and CDF KS meet numerical endpoint bounds, which do not replace the unchanged sustained gate. Neutral zero-gain proposals still advance real optimizer moment histories.
+
+These are two distinct source/revision cohorts; neither inherits the earlier six-task screen. The cumulative packet has **81 unique attempts: 35 PASS / 39 FAIL / 7 INCOMPLETE**, retaining all 77 earlier rows exactly and adding four attempts once. No Gaussian-retention winner, full Martyn superiority, default or release qualification follows.
+
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
