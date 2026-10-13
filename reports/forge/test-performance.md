@@ -28,7 +28,7 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1181 test/protocol rows**, **550 complete recipe/source/runtime identities**; below: **169 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1199 test/protocol rows**, **554 complete recipe/source/runtime identities**; below: **169 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
 <summary>Open all 169 selected-protocol rows and their exact recipe identities</summary>
@@ -223,6 +223,26 @@ Indexed: **1181 test/protocol rows**, **550 complete recipe/source/runtime ident
 Use the offline view's cohort menu to inspect one study at a time. Each row below keeps its original source, seed, budget and gate; these diagnostic passes grant no suite qualification.
 
 <details>
+<summary>PR399 paired original Tier 1 · 12 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| five_word_joint_smoke | generator-idle-ema-bcap-direction-v1 | 0 | 20001 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| five_word_joint_smoke | bcap-default-baseline-direction-v1 | 0 | 20001 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| gaussian1d_smoke | generator-idle-ema-bcap-direction-v1 | 0 | 1000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| ae_gan_hold | generator-idle-ema-bcap-direction-v1 | 0 | 250 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| ae_gan_hold | bcap-default-baseline-direction-v1 | 0 | 250 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| gaussian1d_smoke | bcap-default-baseline-direction-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| ring16_acquisition | generator-idle-ema-bcap-direction-v1 | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| ring16_acquisition | bcap-default-baseline-direction-v1 | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| two_pole | bcap-default-baseline-direction-v1 | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| two_pole | generator-idle-ema-bcap-direction-v1 | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| unused_token_hold | generator-idle-ema-bcap-direction-v1 | 0 | 200 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+| unused_token_hold | bcap-default-baseline-direction-v1 | 0 | 200 | PASS | [full recipe, gates and original pins](test-performance-evidence/pr399-paired-tier1-12.json) |
+
+</details>
+
+<details>
 <summary>Verified successor non-Atlas research · 21 evidence records</summary>
 
 | Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
@@ -248,6 +268,30 @@ Use the offline view's cohort menu to inspect one study at a time. Each row belo
 | vector_unequal_mass | kinetic-local-dualnorm-g-history-reference8-u-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/successor-nonatlas-21.json) |
 | vector_unequal_mass | kinetic-local-dualnorm-g-history-reference8-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/successor-nonatlas-21.json) |
 | vector_unequal_mass | kinetic_transport_local_v2 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/successor-nonatlas-21.json) |
+
+</details>
+
+<details>
+<summary>Atlas diagnostics · 16 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| gaussian1d_smoke | sol-atlas-dynamics-rms-cap | 0 | 1000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| gaussian1d_smoke | sol-atlas-dynamics-squared | 0 | 1000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| ring16_acquisition | sol-atlas-dynamics-rms-cap | 0 | 1600 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| ring16_acquisition | sol-atlas-dynamics-squared | 0 | 1600 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | sol-atlas-paired-score-center-one | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
+| two_pole | sol-atlas-dynamics-squared | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | astra-atlas-squared | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
+| two_pole | Atlas location control · screening | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | Atlas location treatment · screening | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | sol-atlas-dynamics-rms-cap | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-dynamics-6.json) |
+| two_pole | astra-atlas-rms-cap | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
+| two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 
 </details>
 
@@ -482,24 +526,6 @@ Use the offline view's cohort menu to inspect one study at a time. Each row belo
 | --- | --- | ---: | ---: | --- | --- |
 | staggered100 | Finite realization control · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
 | staggered100 | Finite realization candidate · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
-
-</details>
-
-<details>
-<summary>Atlas diagnostics · 10 evidence records</summary>
-
-| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
-| --- | --- | ---: | ---: | --- | --- |
-| two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
-| two_pole | sol-atlas-paired-score-center-one | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
-| two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| two_pole | astra-atlas-squared | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
-| two_pole | Atlas location control · screening | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
-| two_pole | Atlas location treatment · screening | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
-| two_pole | astra-atlas-rms-cap | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-seed0-diagnostics-3.json) |
-| two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 
 </details>
 

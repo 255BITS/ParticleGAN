@@ -330,5 +330,12 @@ The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall
 
 The saved request, raw result, original grade and terminal pins were checked against the local packet. Bulk states and observations remain local-only. Earlier 24 packet attempts already indexed by Astra are counted once.
 
+## PR399 paired Tier 1 and separate Atlas dynamics
+
+[Twelve paired original Tier 1 attempts](test-performance-evidence/pr399-paired-tier1-12.json) retain **9 PASS / 3 INCOMPLETE**: control 5/6, EMA-idle candidate 4/6. Candidate Gaussian skips 54 generator/prior updates; candidate word skips 7,388 generator/encoder/prior updates. Both are INCOMPLETE under the unchanged optimizer-history gates. Control word times out at its original 900-second limit with no final scored archive. Neither global recipe qualifies; matching zero-idle cells are not evidence of an improvement.
+
+[Six distinct Atlas dynamics attempts](test-performance-evidence/atlas-dynamics-6.json) retain **1 PASS / 1 FAIL / 4 INCOMPLETE**. Only the two-pole arms have complete grades; Gaussian and Ring attempts do not establish a full pass. Their source and recipe identities remain separate from PR399 and the 249-run non-Atlas ledger.
+
+The cumulative packet contains **66 unique attempts**: 48 unchanged historical, these six dynamics attempts and the twelve PR399 attempts. Its 25 PASS / 34 FAIL / 7 INCOMPLETE counts are an attempt ledger, not a pooled winner. Exact cumulative optimizer updates are unavailable because the timed-out control word has only a verified lower bound. The pinned saved outputs, grades and terminals were audited without new training or regrading; no qualification, default or release promotion follows.
 
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

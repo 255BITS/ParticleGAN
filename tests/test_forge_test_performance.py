@@ -257,8 +257,8 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 276
-    assert sum(not name.startswith(("successor-nonatlas-", "atlas-seed0-"))
+    assert len(cells) == 294
+    assert sum(not name.startswith(("successor-nonatlas-", "atlas-seed0-", "pr399-paired-", "atlas-dynamics-"))
                for name in cells) == 252
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
@@ -637,7 +637,7 @@ def test_successor_packet_adds_only_new_attempts_and_keeps_atlas_diagnostic():
                       lambda task, recipe, record: records.append(record))
     successor = [row for row in records if row["receipt"].endswith(
         ("successor-nonatlas-21.json", "atlas-seed0-diagnostics-3.json"))]
-    assert len(records) == 276 and len(successor) == 24
+    assert len(records) == 294 and len(successor) == 24
     assert Counter(row["status"] for row in successor) == {"PASS": 10, "FAIL": 14}
     assert len({(row["result"]["attempt_id"], row["cell_id"]) for row in successor}) == 24
     assert all(row["result"]["ordinary_qualification"] is False for row in successor)
@@ -645,3 +645,31 @@ def test_successor_packet_adds_only_new_attempts_and_keeps_atlas_diagnostic():
     assert "249 non-Atlas full runs" in rendered
     assert "Three separate Atlas two-pole diagnostics" in rendered
     assert "no global survivor" in rendered
+
+
+def test_pr399_round_preserves_original_incomplete_gates_and_disjoint_attempts():
+    from collections import Counter
+    from pathlib import Path
+    from experiments.forge.test_performance import _add_supplemental
+    from experiments.forge.test_performance_render import render_discovery_navigation
+
+    root = Path(__file__).resolve().parents[1]
+    records = []
+    _add_supplemental(Inputs(root),
+                      lambda identity, label, selected, lane, recipe: label,
+                      lambda task, conditions, lane, contract, match: task,
+                      lambda task, recipe, record: records.append(record))
+    pair = [r for r in records if r["cell_id"].startswith("pr399-paired-")]
+    dynamics = [r for r in records if r["cell_id"].startswith("atlas-dynamics-")]
+    assert len(pair) == 12 and len(dynamics) == 6
+    assert Counter(r["status"] for r in pair) == {"PASS": 9, "INCOMPLETE": 3}
+    assert Counter(r["status"] for r in dynamics) == {"PASS": 1, "FAIL": 1, "INCOMPLETE": 4}
+    assert len({r["result"]["attempt_id"] for r in pair + dynamics}) == 18
+    assert all(r["result"]["ordinary_qualification"] is False for r in pair + dynamics)
+    assert all(r["full_protocol_complete"] is (r["status"] in {"PASS", "FAIL"}) for r in pair + dynamics)
+    candidate = {r["result"]["original_grade"]["gate_status"] for r in pair
+                 if r["candidate_revision"] and r["result"]["generator_idle"]}
+    assert "INCOMPLETE" in candidate
+    rendered = render_discovery_navigation(root, root / "reports/forge/test-performance.md")
+    assert "control 5/6, EMA-idle candidate 4/6" in rendered
+    assert "66 unique attempts" in rendered

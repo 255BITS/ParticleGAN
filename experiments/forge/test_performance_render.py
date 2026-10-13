@@ -17,11 +17,11 @@ def render_discovery_navigation(root, page):
     registry = inputs.read(SUPPLEMENTAL)
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test discoveries: invalid display registry")
-    full = prefix = reconciled = astra = successor = atlas_diagnostics = None
+    full = prefix = reconciled = astra = successor = atlas_diagnostics = paired = dynamics = None
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         summary = document.get("discovery_summary", {})
-        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013", "successor-nonatlas-21-20261013", "atlas-seed0-diagnostics-3-20261013"}:
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013", "successor-nonatlas-21-20261013", "atlas-seed0-diagnostics-3-20261013", "pr399-paired-tier1-12-20261013", "atlas-dynamics-6-20261013"}:
             continue
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
                 or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
@@ -39,6 +39,14 @@ def render_discovery_navigation(root, page):
             if atlas_diagnostics is not None:
                 raise ValueError("test discoveries: duplicate Atlas diagnostics summary")
             atlas_diagnostics = pin, document
+        elif summary["id"] == "pr399-paired-tier1-12-20261013":
+            if paired is not None:
+                raise ValueError("test discoveries: duplicate PR399 paired summary")
+            paired = pin, document
+        elif summary["id"] == "atlas-dynamics-6-20261013":
+            if dynamics is not None:
+                raise ValueError("test discoveries: duplicate Atlas dynamics summary")
+            dynamics = pin, document
         elif summary["id"] == "nonatlas-reconciled-204-20261013":
             if reconciled is not None:
                 raise ValueError("test discoveries: duplicate reconciled summary")
@@ -87,6 +95,8 @@ def render_discovery_navigation(root, page):
             text += _render_astra(astra, reconciled, link)
         if successor or atlas_diagnostics:
             text += _render_successor(successor, atlas_diagnostics, astra, link)
+        if paired or dynamics:
+            text += _render_pr399_round(paired, dynamics, link)
         return text
     pin, summary = full
     lines = ["", "## Scoped non-Atlas discoveries", "",
@@ -313,6 +323,42 @@ def _render_successor(nonatlas, atlas, prior, link):
         "Bulk states and observations remain local-only. Earlier 24 packet attempts already indexed by Astra are counted once.", ""])
 
 
+def _render_pr399_round(paired, dynamics, link):
+    """Keep paired PR399 grades and separate Atlas dynamics attempts in their original scopes."""
+    if paired is None or dynamics is None:
+        raise ValueError("test discoveries: PR399 round packets must be indexed together")
+    for item, count, statuses in ((paired, 12, {"PASS": 9, "INCOMPLETE": 3}),
+                                  (dynamics, 6, {"PASS": 1, "FAIL": 1, "INCOMPLETE": 4})):
+        document = item[1]
+        cells = document["cells"]
+        summary = document["discovery_summary"]
+        if (len(cells) != count or summary["attempts"] != count
+                or dict(Counter(c["status"] for c in cells)) != statuses
+                or summary["status_counts"] != statuses
+                or len({c["result"]["attempt_id"] for c in cells}) != count
+                or any(c["full_protocol_complete"] != (c["status"] in {"PASS", "FAIL"}) for c in cells)
+                or summary["source_packet_sha256"] != document["original_evidence"]["packet_sha256"]
+                or summary["global_survivor"] is not False):
+            raise ValueError("test discoveries: PR399 round differs from original packet")
+    if {c["result"]["attempt_id"] for c in paired[1]["cells"]} & {
+            c["result"]["attempt_id"] for c in dynamics[1]["cells"]}:
+        raise ValueError("test discoveries: PR399 and dynamics attempts overlap")
+    return "\n".join(["", "## PR399 paired Tier 1 and separate Atlas dynamics", "",
+        f"[Twelve paired original Tier 1 attempts]({link(paired[0]['path'])}) retain **9 PASS / 3 INCOMPLETE**: "
+        "control 5/6, EMA-idle candidate 4/6. Candidate Gaussian skips 54 generator/prior updates; "
+        "candidate word skips 7,388 generator/encoder/prior updates. Both are INCOMPLETE under the unchanged "
+        "optimizer-history gates. Control word times out at its original 900-second limit with no final scored archive. "
+        "Neither global recipe qualifies; matching zero-idle cells are not evidence of an improvement.", "",
+        f"[Six distinct Atlas dynamics attempts]({link(dynamics[0]['path'])}) retain **1 PASS / 1 FAIL / 4 INCOMPLETE**. "
+        "Only the two-pole arms have complete grades; Gaussian and Ring attempts do not establish a full pass. "
+        "Their source and recipe identities remain separate from PR399 and the 249-run non-Atlas ledger.", "",
+        "The cumulative packet contains **66 unique attempts**: 48 unchanged historical, these six dynamics attempts "
+        "and the twelve PR399 attempts. Its 25 PASS / 34 FAIL / 7 INCOMPLETE counts are an attempt ledger, not a "
+        "pooled winner. Exact cumulative optimizer updates are unavailable because the timed-out control word has "
+        "only a verified lower bound. The pinned saved outputs, grades and terminals were audited without new training "
+        "or regrading; no qualification, default or release promotion follows.", ""])
+
+
 def _text(value):
     return str(value).replace("|", "\\|").replace("\n", " ").replace("<", "&lt;")
 
@@ -347,6 +393,8 @@ def diagnostic_group(receipt):
         return "Quota transition and Astra portfolio"
     if name.startswith("successor-nonatlas-"):
         return "Verified successor non-Atlas research"
+    if name.startswith("pr399-paired-"):
+        return "PR399 paired original Tier 1"
     if name.startswith("nonatlas-finite"):
         return "Bounded mechanism prefixes"
     if name.startswith("nonatlas-"):

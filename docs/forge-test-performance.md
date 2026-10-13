@@ -21,12 +21,13 @@ selects a different recipe for every task or changes the scientific leaderboard.
 ## Findings at a glance
 
 - The source-specific non-Atlas research ledger contains **249 full runs: 121 PASS
-  and 128 FAIL**. Three new Atlas seed-0 diagnostics remain separate. **No global
+  and 128 FAIL**. The three earlier Atlas seed-0 diagnostics, six later Atlas
+  dynamics attempts, and twelve PR399 paired attempts remain separate. **No global
   winner** is established. These are ledger counts across separate protocols.
 - All twelve Astra hypotheses fail the full unequal-mass gate. Three final
   covariance submetrics pass, but their 1/5 terminal suffixes still fail the
   required sustained gate.
-- The complete index has 1,181 protocol rows and 550 recipe identities. The
+- The complete index has 1,199 protocol rows and 554 recipe identities. The
   default selected view has 169 rows, including 153 with zero optimizer passes.
   Many are unmeasured or blocked; zero passing evidence is not proof of impossibility.
 
@@ -332,6 +333,27 @@ observations each. Those 240 updates and distinct source identities stay outside
 the 249-run non-Atlas ledger. None establishes current MoG, held-out transfer,
 robustness or release qualification. The original evidence remains local-only;
 the display was regenerated without training or regrading.
+
+The [PR399 paired Tier 1 publication](../reports/forge/test-performance-evidence/pr399-paired-tier1-12.json)
+adds twelve distinct attempts under the original six required tasks. The control
+has **5 PASS / 1 INCOMPLETE** and the EMA-idle candidate has **4 PASS / 2
+INCOMPLETE**. Candidate Gaussian completes its 1,000-step lifecycle with only
+946 actual generator/prior updates; candidate word completes 20,001 lifecycle
+steps with only 12,613 generator/encoder/prior updates. Both retain the original
+optimizer-history INCOMPLETE gates. Control word times out at its unchanged
+900-second allowance before a final scored archive; its exact terminal update
+total is unknown. Neither whole recipe qualifies, and the matching zero-idle
+cells establish no advantage.
+
+The separate [six Atlas dynamics attempts](../reports/forge/test-performance-evidence/atlas-dynamics-6.json)
+have **1 PASS / 1 FAIL / 4 INCOMPLETE**. Their only complete grades are two-pole;
+Gaussian and Ring remain incomplete. The verified cumulative packet contains 66
+unique attempts: 48 unchanged historical attempts, these six and the twelve
+PR399 attempts, with **25 PASS / 34 FAIL / 7 INCOMPLETE**. It is an attempt
+ledger, not an additive update to the 249-run non-Atlas total. The timed-out
+word control prevents an exact cumulative optimizer-update count. Pins to the
+original requests, terminals, saved outputs and grades are retained; no extra
+training, metric regrade, gate change or qualification reuse was introduced.
 
 These runs do not qualify the current suite. G-angle's handoff still lacks
 registered cross-host extension/restore support and six-task Tier-1 evidence.

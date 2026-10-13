@@ -39,6 +39,14 @@
     {
       "path": "reports/forge/test-performance-evidence/atlas-seed0-diagnostics-3.json",
       "sha256": "0fde5927e4225eaba30aa25ff034f5a49166203f7a544b2528373ed267c9237a"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-paired-tier1-12.json",
+      "sha256": "e4d409d36acc5dc6b989c4f1007e5d67d8268a5db9117ec93a6839dcfb439f82"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-dynamics-6.json",
+      "sha256": "4e4ccfdf6749c9e596e84d72b0673c267062f14b22cf5bf62493bbf8c3686a0c"
     }
   ],
   "qualification_input": false,
