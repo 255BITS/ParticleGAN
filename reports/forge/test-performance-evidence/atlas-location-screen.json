@@ -1,0 +1,3274 @@
+{
+  "cells": [
+    {
+      "candidate_id": "matched_R1off_bypass",
+      "conditions_sha256": "cc0af1bb7db23f6487843256dc45ed02c5b4661dda8ffc2e6d477c8935a3123f",
+      "full_protocol_complete": true,
+      "id": "atlas-location-control-seed0",
+      "label": "Atlas location control \u00b7 screening",
+      "recipe_sha256": "0ece11066c7f434aadd52ce6070446f55cce5a0d5e4baf944099b1754a6807d4",
+      "result": {
+        "audit_checks": 326,
+        "combined_cost_seconds": 29.991474262002157,
+        "density_limit": "All 12 final particles negative; no balanced two-mode density claim",
+        "endpoint": {
+          "grad_med": 1.0156316757202148,
+          "mean_abs": 0.5696253776550293,
+          "step": 80
+        },
+        "original_grade": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 54,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 7,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.2696253776550293,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.3,
+              "value": 0.5696253776550293
+            },
+            {
+              "margin": -0.015631675720214844,
+              "metric": "grad_med",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 1.0,
+              "value": 1.0156316757202148
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.007815837860107422,
+          "status": "FAIL"
+        },
+        "pair_cost_seconds": 24.076841857000545,
+        "runtime_checks": 15
+      },
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "candidate_id": "R1off_proposed_training_packet_filter",
+      "conditions_sha256": "cc0af1bb7db23f6487843256dc45ed02c5b4661dda8ffc2e6d477c8935a3123f",
+      "full_protocol_complete": true,
+      "id": "atlas-location-treatment-seed0",
+      "label": "Atlas location treatment \u00b7 screening",
+      "recipe_sha256": "cbfc24bdb74bcdc77dcfbbc06433c0cca1f5f6b9dde4dc62fdc90919320c570e",
+      "result": {
+        "audit_checks": 326,
+        "combined_cost_seconds": 29.991474262002157,
+        "density_limit": "All 12 final particles negative; no balanced two-mode density claim",
+        "endpoint": {
+          "grad_med": 0.9706482291221619,
+          "mean_abs": 0.49150773882865906,
+          "step": 80
+        },
+        "original_grade": {
+          "attempted": true,
+          "confirmation_fraction": 0.8375,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 67,
+            "first_pass_step": 54,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 9,
+            "passing_suffix": 9,
+            "stable_from_seconds": null,
+            "stable_from_step": 54
+          },
+          "metrics": [
+            {
+              "margin": 0.19150773882865907,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.3,
+              "value": 0.49150773882865906
+            },
+            {
+              "margin": 0.029351770877838135,
+              "metric": "grad_med",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 0.9706482291221619
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "pair_cost_seconds": 24.076841857000545,
+        "runtime_checks": 15
+      },
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "candidate_id": "atlas-location-pair-startup",
+      "conditions_sha256": "4bbe54e6ed933f6e9344a6d971859716d045beabb49eea8dc7b9a74f9bc778a5",
+      "full_protocol_complete": false,
+      "id": "atlas-location-first-error",
+      "label": "Atlas location first attempt \u00b7 ERROR",
+      "recipe_sha256": "dfa96d389161319e1d40c0f7c53ee4794fe092bf1c9b20f037f79470fba70200",
+      "result": {
+        "error": "AssertionError('complete_native_recipe:cold_original_zero_table')",
+        "paid_seconds": 5.914632405001612,
+        "recovery_does_not_erase_error": true,
+        "work": {
+          "arms_completed": 0,
+          "arms_started": 0,
+          "native_D_entries": 0,
+          "native_G_entries": 0,
+          "new_GAN_updates": 0,
+          "scratch_actual_generations": 0,
+          "scratch_fixture_constructions": 1,
+          "scratch_optimizer_calls": 0,
+          "scratch_replay_generations": 0
+        }
+      },
+      "status": "ERROR",
+      "task_id": "two_pole"
+    }
+  ],
+  "condition_contracts": {
+    "4bbe54e6ed933f6e9344a6d971859716d045beabb49eea8dc7b9a74f9bc778a5": {
+      "budget": {
+        "minimum_terminal_checks": 5,
+        "observations": 24,
+        "original_pair_cap_seconds": 60,
+        "steps": 80,
+        "whole_attempt_seconds": 60
+      },
+      "execution_stage": "startup before either scientific arm",
+      "initialization": {
+        "CPU_checkpoint_used_as_GPU_initialization": false,
+        "D": "original stored97-parameter HostCritic",
+        "G": "parameterless Identity",
+        "fresh_for_both_arms": true,
+        "prior": "original zero12x1 raw unstandardized ParticlePrior",
+        "protocol_seed": 0,
+        "real": "unchanged deterministic balanced original12-row panel from real_batch",
+        "rows": "enumerate original12 rows"
+      },
+      "original_gates": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ],
+      "runtime": {
+        "actual_device": "cuda",
+        "audit": "15 runtime checks and matched generation/RNG accepted",
+        "declared": "Existing matched-env Python3.12.13/Torch2.13.0+cu126 for any later GPU child, current source/runtime fingerprints mandatory"
+      },
+      "sampling": {
+        "cadence": "unchanged task _checkpoints",
+        "evaluator": "unchanged original _grad_median and existing protocol verdict, byte-bound in source freeze",
+        "grad_med_population": "12 real plus12 clean live table coordinates, lower absolute median",
+        "metrics": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "minimum_terminal_passing_checks": 5,
+        "native_task_card": "[local reference omitted]",
+        "observation_count": 24,
+        "steps": 80,
+        "task_path": "[local reference omitted]",
+        "task_sha256": "2c6871048b211a51e152ae19fa85b679f67500e1a284edffffd32f668d013f3d",
+        "training_access": "Evaluation readouts only after native completed steps; no evaluation value/callable passed to filter or used for schedule/selection.",
+        "weights": "clean live parameter measurement as originally declared, no latent or output noise draw"
+      },
+      "screening_only": true,
+      "seed": 0,
+      "source_digest": "c946e5114ada5c747f7f6d179a71644f20ed8bac205ae37f0a9b3f84eb9550f2",
+      "task": {
+        "adapter": "transfer_behavior",
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+            "id": "combined-opt-in-prior-source-v1",
+            "previous_revision": {
+              "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+              "id": "opt-in-coulomb-prior-reference-v1",
+              "previous_revision": {
+                "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                "id": "opt-in-component-objective-hooks-v1",
+                "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                "original_task_path": "configs/forge/tasks/two_pole.json",
+                "previous_revision": {
+                  "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                  "id": "explicit-equality-and-word-prior-betas-v3",
+                  "previous_revision": null,
+                  "previous_source_sha256": {
+                    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                  }
+                },
+                "previous_source_sha256": {}
+              },
+              "previous_source_sha256": {
+                "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+              }
+            },
+            "previous_source_sha256": {
+              "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "policy_observation": {
+            "diagnostic_credit": false,
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "output_noise": false,
+            "parameter_measurement": "live_table_and_current_critic_gradient",
+            "row_selection": "original_task_strategy",
+            "sampler": "live_snapshot",
+            "schema_version": 1,
+            "weight_selector": "live"
+          },
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+            "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+            "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "execution": {
+          "device": "cuda",
+          "execution_path": "public_components",
+          "fixed_initialization": {
+            "critic": "stored_host_weights",
+            "particles": "zeros"
+          },
+          "host": "two_pole",
+          "host_definition": {
+            "family": "existing_behavior",
+            "phase": "fit",
+            "runner": "legacy",
+            "split": "development",
+            "steps": 80
+          },
+          "host_source": "benchmarks/locked_shared/baseline.py",
+          "initializer": "deterministic_orthogonal",
+          "policy_contract": {
+            "cohort": "atlas_original_two_pole_policy_v1",
+            "external_limit": "task.execution.steps",
+            "historical_credit": false,
+            "lifecycle": "ordered_public_update",
+            "owner": "particlegan.UpdatePolicy",
+            "recipe_overrides": {},
+            "row_semantics": "independent",
+            "schedule": "preserve_resolved_recipe_none",
+            "schema_version": 1,
+            "scientific_task_changed": false,
+            "sources": {
+              "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+              "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+              "experiments/forge/adapters.py": "741ac407fbf8d5f825e7143253081fa8856c9937a3152bd0d0e8932f610ffd10",
+              "experiments/forge/api.py": "7d10b8b12681aaf81c6481adeb376263f9959d8579cd206a5560d9d96f2afd9e",
+              "experiments/forge/atlas_measurement.py": "db88bd33121a7b1a00155b41841e11d2a37b2b64fd1d01e815b306456b7f9ec0",
+              "experiments/forge/atlas_task_binding.py": "1866098ed5324fe9e22bb862c725b00fc27fcfc8312721e18475ae995b17f8be",
+              "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+              "experiments/forge/policy_behavior_adapters.py": "f8ef202ef50de3781cd414f6fc8d1abb6024190758dcb194f81c586704bf8d54",
+              "particlegan/policy.py": "837a090ef9e3c5a05cac6d0aab814a4c3f9efe2b298d49a84f07eda2dbf46ba4",
+              "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+            }
+          },
+          "prior": {
+            "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+            "kind": "particle_cloud",
+            "sigma": 0.0,
+            "standardize": false
+          },
+          "prior_contract": "recipe_owned_v1",
+          "produces_state": false,
+          "protocol": "screening",
+          "resources": {
+            "batch_size": 12,
+            "num_particles": 12,
+            "z_dim": 1
+          },
+          "schedule_policy": "public_recipe_with_frozen_host_horizon",
+          "steps": 80,
+          "transport_consumer": "output_marginal_v1",
+          "transport_contract": {
+            "conditioning_in_distance": false,
+            "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+            "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+            "new_forward_passes": false,
+            "new_paired_supervision": false,
+            "new_random_draws": false,
+            "protected_objectives": "original adversarial",
+            "sample_space": "direct particle coordinates",
+            "target_law": "fixed original two-pole target panel",
+            "version": 1
+          }
+        },
+        "field_ownership": {
+          "delegated_reference_values": {},
+          "inactive_legacy_host_fields": {},
+          "protocol": {
+            "seed": {
+              "owner": "protocol",
+              "source": "protocol.seed",
+              "value": 0
+            }
+          },
+          "recipe_fields": {
+            "adam_variant": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "pytorch"
+            },
+            "alpha_bar": {
+              "owner": "task",
+              "reference_recipe_value": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "amsgrad": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "batch_size": {
+              "owner": "task",
+              "reference_recipe_value": 12,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "beta2_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.2
+            },
+            "beta2_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.999
+              ]
+            },
+            "birth_death_backend": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "auto"
+            },
+            "birth_death_cells": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 128
+            },
+            "birth_death_chunk": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 256
+            },
+            "birth_death_feature_scale": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "std"
+            },
+            "birth_death_isolation": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "birth_death_metric_rank": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 8
+            },
+            "birth_death_parent_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "real_anchor"
+            },
+            "birth_death_space": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "critic"
+            },
+            "conditioning": {
+              "owner": "task",
+              "reference_recipe_value": "scalar",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "constraint_geometry_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "continuous_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "dv12"
+            },
+            "critic_formulation": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "ka2"
+            },
+            "critic_payoff_damping": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "critic_r1_real": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.critic_r1_real",
+              "status": "effective",
+              "value": false
+            },
+            "critic_step_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "d_betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "d_eps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "d_guard_min_steps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 200
+            },
+            "d_guard_ratio": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 5.0
+            },
+            "d_lr_mult": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "direct_particle_betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.9
+              ]
+            },
+            "direct_particle_gain": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "distance_reduction": {
+              "owner": "task",
+              "reference_recipe_value": "sum",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ema_decay": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.995
+            },
+            "encoder_mode": {
+              "owner": "task",
+              "reference_recipe_value": "none",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "eps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1e-08
+            },
+            "input_noise_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.1
+            },
+            "input_noise_std": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "kinetic_transport_local_weight": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "kinetic_transport_projections": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 32
+            },
+            "kinetic_transport_weight": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "latent_damping_max_rate": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.5
+            },
+            "loss": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "relativistic"
+            },
+            "loss_labels": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                1.0,
+                1.0
+              ]
+            },
+            "lr": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.00425
+            },
+            "lr_anneal_start": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.6
+            },
+            "lr_control": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "stationarity"
+            },
+            "lr_decay_rate": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.96
+            },
+            "lr_decay_staircase": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": false
+            },
+            "lr_decay_steps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 50000
+            },
+            "lr_floor": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.05
+            },
+            "lr_schedule": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "cosine"
+            },
+            "model": {
+              "owner": "task",
+              "reference_recipe_value": "gan",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "name": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "metadata",
+              "value": "atlas"
+            },
+            "network_lr_floor": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.01
+            },
+            "network_lr_horizon_cap": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1600
+            },
+            "num_classes": {
+              "owner": "task",
+              "reference_recipe_value": null,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "num_particles": {
+              "owner": "task",
+              "reference_recipe_value": 12,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "observation_sigma": {
+              "owner": "task",
+              "reference_recipe_value": 0.03,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "optimizer_adam_lr": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "optimizer_convolution": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "optimizer_family": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "formulation"
+            },
+            "optimizer_momentum": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "optimizer_smoothing": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "optimizer_svd_backend": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "native"
+            },
+            "output_noise_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "learnable"
+            },
+            "output_noise_std": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.029
+            },
+            "output_noise_warmup": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "particle_birth_death": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "prior_betas": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": null,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_confinement": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.35,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_neighbors": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 8,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_softening": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.1,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_eps": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": null,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_kind": {
+              "owner": "task",
+              "source": "task.execution.prior.kind",
+              "status": "effective",
+              "value": "particles"
+            },
+            "prior_l2": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_lr_mult": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 2.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_proximal_strength": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg_eps": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0001,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg_target_std": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 1.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_regularizer": {
+              "owner": "technique",
+              "reference_recipe_value": "vicreg",
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_sigreg_knots": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 17,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_sigreg_projections": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 32,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_update": {
+              "owner": "technique",
+              "reference_recipe_value": "learned",
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "reconstruction_weight": {
+              "owner": "task",
+              "reference_recipe_value": 1.0,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "reg_anchor_min_decay": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.9
+            },
+            "reg_anchor_weight": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reg_arm": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "reg_coeff": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 3.0
+            },
+            "reg_coeff_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.2
+            },
+            "reg_coeff_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "reg_every": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1
+            },
+            "reg_kappa": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reopen_anchor": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "release"
+            },
+            "reopen_guard": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "settled"
+            },
+            "reopen_signal": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "optimizer"
+            },
+            "routing_temperature": {
+              "owner": "task",
+              "reference_recipe_value": 0.25,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "row_evidence_exclude": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_gate": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_hold": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_hot": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_null": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "scaled"
+            },
+            "row_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "independent"
+            },
+            "serve_average": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 4.0
+            },
+            "sigma_rel": {
+              "owner": "task",
+              "source": "public prior binding: absolute task sigma replaces relative calibration",
+              "status": "effective",
+              "value": 0.0
+            },
+            "standardize": {
+              "owner": "task",
+              "source": "task.execution.prior.standardize",
+              "status": "effective",
+              "value": false
+            },
+            "table_release_rule": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "anchor"
+            },
+            "total_steps": {
+              "owner": "technique",
+              "source": "schedule-free technique; task.execution.steps bounds execution separately",
+              "status": "effective",
+              "value": null
+            },
+            "ucd_target": {
+              "owner": "task",
+              "reference_recipe_value": "class",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ucd_weight": {
+              "owner": "task",
+              "reference_recipe_value": 0.02,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "z_dim": {
+              "owner": "task",
+              "reference_recipe_value": 1,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            }
+          },
+          "reference_declarations": {
+            "prior": {
+              "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+              "kind": "particle_cloud",
+              "learnable": true,
+              "sigma": 0.0,
+              "standardize": false
+            }
+          },
+          "schema_version": 1,
+          "task_contract": {
+            "budget": {
+              "owner": "task",
+              "source": "task.execution and task.resources",
+              "value": {
+                "execution_resources": {
+                  "allow_cpu": false,
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 512,
+                  "gpus": 1,
+                  "timeout_seconds": 300
+                },
+                "steps": 80
+              }
+            },
+            "evaluation": {
+              "owner": "task",
+              "source": "task.evaluation",
+              "value": {
+                "eval_output_noise": "not_applied_to_measurement",
+                "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+                "evaluator_revision": {
+                  "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+                  "id": "combined-opt-in-prior-source-v1",
+                  "previous_revision": {
+                    "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+                    "id": "opt-in-coulomb-prior-reference-v1",
+                    "previous_revision": {
+                      "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                      "id": "opt-in-component-objective-hooks-v1",
+                      "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                      "original_task_path": "configs/forge/tasks/two_pole.json",
+                      "previous_revision": {
+                        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                        "id": "explicit-equality-and-word-prior-betas-v3",
+                        "previous_revision": null,
+                        "previous_source_sha256": {
+                          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                        }
+                      },
+                      "previous_source_sha256": {}
+                    },
+                    "previous_source_sha256": {
+                      "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+                    }
+                  },
+                  "previous_source_sha256": {
+                    "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+                  }
+                },
+                "guards": {
+                  "finite_state": true,
+                  "mechanism_exercised": true,
+                  "optimizer_roles": [
+                    "prior",
+                    "discriminator"
+                  ],
+                  "rng_isolation": true
+                },
+                "kind": "transfer_sustained",
+                "minimum_stable_checks": 5,
+                "observations": 24,
+                "policy_observation": {
+                  "diagnostic_credit": false,
+                  "eval_streams": "forge-rng-v1_isolated",
+                  "latent_policy": "not_applied_to_parameter_measurement",
+                  "output_noise": false,
+                  "parameter_measurement": "live_table_and_current_critic_gradient",
+                  "row_selection": "original_task_strategy",
+                  "sampler": "live_snapshot",
+                  "schema_version": 1,
+                  "weight_selector": "live"
+                },
+                "sampling_contract_version": 1,
+                "sampling_law": "learned_particles_and_critic_gradient",
+                "scoring_weights": "live",
+                "sources": {
+                  "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                  "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                  "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+                  "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+                  "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+                  "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+                },
+                "thresholds": [
+                  [
+                    "mean_abs",
+                    ">=",
+                    0.3
+                  ],
+                  [
+                    "grad_med",
+                    "<=",
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "host": {
+              "owner": "task",
+              "source": "frozen task architecture/data declaration and host source",
+              "value": {
+                "definition": {
+                  "family": "existing_behavior",
+                  "phase": "fit",
+                  "runner": "legacy",
+                  "split": "development",
+                  "steps": 80
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": {
+                  "batch_size": 12,
+                  "num_particles": 12,
+                  "z_dim": 1
+                },
+                "source": "benchmarks/locked_shared/baseline.py"
+              }
+            },
+            "initialization": {
+              "fixed_initialization": {
+                "critic": "stored_host_weights",
+                "particles": "zeros"
+              },
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "prior": {
+              "applicability": "sampled",
+              "code_path": null,
+              "contract": "recipe_owned_v1",
+              "control_binding": {
+                "base_betas": "Recipe.betas",
+                "base_lr": "Recipe.lr",
+                "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+                "latent_table_controls": false,
+                "lr_schedule": "prior",
+                "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+                "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+                "representation": "direct_sample_coordinates"
+              },
+              "declared_code_path": "ParticlePrior",
+              "owner": "task",
+              "source": "task.execution.prior",
+              "update_policy": {
+                "owner": "technique",
+                "source": "Recipe.prior_update",
+                "value": "learned"
+              },
+              "value": {
+                "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+                "kind": "particle_cloud",
+                "sigma": 0.0,
+                "standardize": false
+              }
+            }
+          },
+          "task_id": "two_pole",
+          "version": "forge-field-boundaries-v3-recipe-priors"
+        },
+        "id": "two_pole",
+        "policy_parent": {
+          "definition": {
+            "adapter": "transfer_behavior",
+            "dependencies": [],
+            "evaluation": {
+              "eval_output_noise": "not_applied_to_measurement",
+              "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+              "evaluator_revision": {
+                "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+                "id": "combined-opt-in-prior-source-v1",
+                "previous_revision": {
+                  "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+                  "id": "opt-in-coulomb-prior-reference-v1",
+                  "previous_revision": {
+                    "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                    "id": "opt-in-component-objective-hooks-v1",
+                    "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                    "original_task_path": "configs/forge/tasks/two_pole.json",
+                    "previous_revision": {
+                      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                      "id": "explicit-equality-and-word-prior-betas-v3",
+                      "previous_revision": null,
+                      "previous_source_sha256": {
+                        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                      }
+                    },
+                    "previous_source_sha256": {}
+                  },
+                  "previous_source_sha256": {
+                    "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+                  }
+                },
+                "previous_source_sha256": {
+                  "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+                }
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "prior",
+                  "discriminator"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "transfer_sustained",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "sampling_contract_version": 1,
+              "sampling_law": "learned_particles_and_critic_gradient",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+                "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+                "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+                "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+              },
+              "thresholds": [
+                [
+                  "mean_abs",
+                  ">=",
+                  0.3
+                ],
+                [
+                  "grad_med",
+                  "<=",
+                  1.0
+                ]
+              ]
+            },
+            "execution": {
+              "device": "cuda",
+              "execution_path": "public_components",
+              "fixed_initialization": {
+                "critic": "stored_host_weights",
+                "particles": "zeros"
+              },
+              "host": "two_pole",
+              "host_definition": {
+                "family": "existing_behavior",
+                "phase": "fit",
+                "runner": "legacy",
+                "split": "development",
+                "steps": 80
+              },
+              "host_source": "benchmarks/locked_shared/baseline.py",
+              "initializer": "deterministic_orthogonal",
+              "prior": {
+                "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+                "kind": "particle_cloud",
+                "sigma": 0.0,
+                "standardize": false
+              },
+              "prior_contract": "recipe_owned_v1",
+              "produces_state": false,
+              "protocol": "screening",
+              "schedule_policy": "public_recipe_with_frozen_host_horizon",
+              "steps": 80,
+              "transport_consumer": "output_marginal_v1",
+              "transport_contract": {
+                "conditioning_in_distance": false,
+                "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+                "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+                "new_forward_passes": false,
+                "new_paired_supervision": false,
+                "new_random_draws": false,
+                "protected_objectives": "original adversarial",
+                "sample_space": "direct particle coordinates",
+                "target_law": "fixed original two-pole target panel",
+                "version": 1
+              }
+            },
+            "id": "two_pole",
+            "requires_capabilities": [
+              "named_rng",
+              "live_sampling",
+              "particle_cloud"
+            ],
+            "resources": {
+              "allow_cpu": false,
+              "cpu_threads": 1,
+              "gpu_memory_mb": 512,
+              "gpus": 1,
+              "timeout_seconds": 300
+            },
+            "schema_version": 1,
+            "task_cohort": "component_output_transport_v1"
+          },
+          "id": "two_pole",
+          "task_sha256": "93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1"
+        },
+        "requires_capabilities": [
+          "named_rng",
+          "live_sampling",
+          "particle_cloud"
+        ],
+        "resources": {
+          "allow_cpu": false,
+          "cpu_threads": 1,
+          "gpu_memory_mb": 512,
+          "gpus": 1,
+          "timeout_seconds": 300
+        },
+        "schema_version": 1,
+        "task_cohort": "atlas_original_two_pole_policy_v1"
+      }
+    },
+    "cc0af1bb7db23f6487843256dc45ed02c5b4661dda8ffc2e6d477c8935a3123f": {
+      "budget": {
+        "minimum_terminal_checks": 5,
+        "observations": 24,
+        "original_pair_cap_seconds": 60,
+        "steps": 80,
+        "whole_attempt_seconds": 54.08536759499839
+      },
+      "initialization": {
+        "CPU_checkpoint_used_as_GPU_initialization": false,
+        "D": "original stored97-parameter HostCritic",
+        "G": "parameterless Identity",
+        "fresh_for_both_arms": true,
+        "prior": "original zero12x1 raw unstandardized ParticlePrior",
+        "protocol_seed": 0,
+        "real": "unchanged deterministic balanced original12-row panel from real_batch",
+        "rows": "enumerate original12 rows"
+      },
+      "original_gates": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ],
+      "runtime": {
+        "actual_device": "cuda",
+        "audit": "15 runtime checks and matched generation/RNG accepted",
+        "declared": "Existing matched-env Python3.12.13/Torch2.13.0+cu126 for any later GPU child, current source/runtime fingerprints mandatory"
+      },
+      "sampling": {
+        "cadence": "unchanged task _checkpoints",
+        "evaluator": "unchanged original _grad_median and existing protocol verdict, byte-bound in source freeze",
+        "grad_med_population": "12 real plus12 clean live table coordinates, lower absolute median",
+        "metrics": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "minimum_terminal_passing_checks": 5,
+        "native_task_card": "[local reference omitted]",
+        "observation_count": 24,
+        "steps": 80,
+        "task_path": "[local reference omitted]",
+        "task_sha256": "2c6871048b211a51e152ae19fa85b679f67500e1a284edffffd32f668d013f3d",
+        "training_access": "Evaluation readouts only after native completed steps; no evaluation value/callable passed to filter or used for schedule/selection.",
+        "weights": "clean live parameter measurement as originally declared, no latent or output noise draw"
+      },
+      "screening_only": true,
+      "seed": 0,
+      "source_digest": "a2c47e3b544a15f2990be7fbc4c35e2b92c735585c75a7fd730d9e6b5ac0d743",
+      "task": {
+        "adapter": "transfer_behavior",
+        "dependencies": [],
+        "evaluation": {
+          "eval_output_noise": "not_applied_to_measurement",
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+            "id": "combined-opt-in-prior-source-v1",
+            "previous_revision": {
+              "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+              "id": "opt-in-coulomb-prior-reference-v1",
+              "previous_revision": {
+                "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                "id": "opt-in-component-objective-hooks-v1",
+                "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                "original_task_path": "configs/forge/tasks/two_pole.json",
+                "previous_revision": {
+                  "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                  "id": "explicit-equality-and-word-prior-betas-v3",
+                  "previous_revision": null,
+                  "previous_source_sha256": {
+                    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                  }
+                },
+                "previous_source_sha256": {}
+              },
+              "previous_source_sha256": {
+                "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+              }
+            },
+            "previous_source_sha256": {
+              "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+            }
+          },
+          "guards": {
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "policy_observation": {
+            "diagnostic_credit": false,
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "output_noise": false,
+            "parameter_measurement": "live_table_and_current_critic_gradient",
+            "row_selection": "original_task_strategy",
+            "sampler": "live_snapshot",
+            "schema_version": 1,
+            "weight_selector": "live"
+          },
+          "sampling_contract_version": 1,
+          "sampling_law": "learned_particles_and_critic_gradient",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+            "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+            "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+            "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+          },
+          "thresholds": [
+            [
+              "mean_abs",
+              ">=",
+              0.3
+            ],
+            [
+              "grad_med",
+              "<=",
+              1.0
+            ]
+          ]
+        },
+        "execution": {
+          "device": "cuda",
+          "execution_path": "public_components",
+          "fixed_initialization": {
+            "critic": "stored_host_weights",
+            "particles": "zeros"
+          },
+          "host": "two_pole",
+          "host_definition": {
+            "family": "existing_behavior",
+            "phase": "fit",
+            "runner": "legacy",
+            "split": "development",
+            "steps": 80
+          },
+          "host_source": "benchmarks/locked_shared/baseline.py",
+          "initializer": "deterministic_orthogonal",
+          "policy_contract": {
+            "cohort": "atlas_original_two_pole_policy_v1",
+            "external_limit": "task.execution.steps",
+            "historical_credit": false,
+            "lifecycle": "ordered_public_update",
+            "owner": "particlegan.UpdatePolicy",
+            "recipe_overrides": {},
+            "row_semantics": "independent",
+            "schedule": "preserve_resolved_recipe_none",
+            "schema_version": 1,
+            "scientific_task_changed": false,
+            "sources": {
+              "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+              "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+              "experiments/forge/adapters.py": "741ac407fbf8d5f825e7143253081fa8856c9937a3152bd0d0e8932f610ffd10",
+              "experiments/forge/api.py": "7d10b8b12681aaf81c6481adeb376263f9959d8579cd206a5560d9d96f2afd9e",
+              "experiments/forge/atlas_measurement.py": "db88bd33121a7b1a00155b41841e11d2a37b2b64fd1d01e815b306456b7f9ec0",
+              "experiments/forge/atlas_task_binding.py": "1866098ed5324fe9e22bb862c725b00fc27fcfc8312721e18475ae995b17f8be",
+              "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+              "experiments/forge/policy_behavior_adapters.py": "f8ef202ef50de3781cd414f6fc8d1abb6024190758dcb194f81c586704bf8d54",
+              "particlegan/policy.py": "837a090ef9e3c5a05cac6d0aab814a4c3f9efe2b298d49a84f07eda2dbf46ba4",
+              "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+            }
+          },
+          "prior": {
+            "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+            "kind": "particle_cloud",
+            "sigma": 0.0,
+            "standardize": false
+          },
+          "prior_contract": "recipe_owned_v1",
+          "produces_state": false,
+          "protocol": "screening",
+          "resources": {
+            "batch_size": 12,
+            "num_particles": 12,
+            "z_dim": 1
+          },
+          "schedule_policy": "public_recipe_with_frozen_host_horizon",
+          "steps": 80,
+          "transport_consumer": "output_marginal_v1",
+          "transport_contract": {
+            "conditioning_in_distance": false,
+            "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+            "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+            "new_forward_passes": false,
+            "new_paired_supervision": false,
+            "new_random_draws": false,
+            "protected_objectives": "original adversarial",
+            "sample_space": "direct particle coordinates",
+            "target_law": "fixed original two-pole target panel",
+            "version": 1
+          }
+        },
+        "field_ownership": {
+          "delegated_reference_values": {},
+          "inactive_legacy_host_fields": {},
+          "protocol": {
+            "seed": {
+              "owner": "protocol",
+              "source": "protocol.seed",
+              "value": 0
+            }
+          },
+          "recipe_fields": {
+            "adam_variant": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "pytorch"
+            },
+            "alpha_bar": {
+              "owner": "task",
+              "reference_recipe_value": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "amsgrad": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "batch_size": {
+              "owner": "task",
+              "reference_recipe_value": 12,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "beta2_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.2
+            },
+            "beta2_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.999
+              ]
+            },
+            "birth_death_backend": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "auto"
+            },
+            "birth_death_cells": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 128
+            },
+            "birth_death_chunk": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 256
+            },
+            "birth_death_feature_scale": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "std"
+            },
+            "birth_death_isolation": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "birth_death_metric_rank": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 8
+            },
+            "birth_death_parent_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "real_anchor"
+            },
+            "birth_death_space": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "critic"
+            },
+            "conditioning": {
+              "owner": "task",
+              "reference_recipe_value": "scalar",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "constraint_geometry_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "continuous_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "dv12"
+            },
+            "critic_formulation": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "ka2"
+            },
+            "critic_payoff_damping": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "critic_r1_real": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.critic_r1_real",
+              "status": "effective",
+              "value": false
+            },
+            "critic_step_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "d_betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "d_eps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "d_guard_min_steps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 200
+            },
+            "d_guard_ratio": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 5.0
+            },
+            "d_lr_mult": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "direct_particle_betas": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.9
+              ]
+            },
+            "direct_particle_gain": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "distance_reduction": {
+              "owner": "task",
+              "reference_recipe_value": "sum",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ema_decay": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.995
+            },
+            "encoder_mode": {
+              "owner": "task",
+              "reference_recipe_value": "none",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "eps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1e-08
+            },
+            "input_noise_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.1
+            },
+            "input_noise_std": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "kinetic_transport_local_weight": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "kinetic_transport_projections": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 32
+            },
+            "kinetic_transport_weight": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "latent_damping_max_rate": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.5
+            },
+            "loss": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "relativistic"
+            },
+            "loss_labels": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": [
+                0.0,
+                1.0,
+                1.0
+              ]
+            },
+            "lr": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.00425
+            },
+            "lr_anneal_start": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.6
+            },
+            "lr_control": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "stationarity"
+            },
+            "lr_decay_rate": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.96
+            },
+            "lr_decay_staircase": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": false
+            },
+            "lr_decay_steps": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 50000
+            },
+            "lr_floor": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.05
+            },
+            "lr_schedule": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "cosine"
+            },
+            "model": {
+              "owner": "task",
+              "reference_recipe_value": "gan",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "name": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "metadata",
+              "value": "atlas"
+            },
+            "network_lr_floor": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.01
+            },
+            "network_lr_horizon_cap": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1600
+            },
+            "num_classes": {
+              "owner": "task",
+              "reference_recipe_value": null,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "num_particles": {
+              "owner": "task",
+              "reference_recipe_value": 12,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "observation_sigma": {
+              "owner": "task",
+              "reference_recipe_value": 0.03,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "optimizer_adam_lr": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "optimizer_convolution": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "none"
+            },
+            "optimizer_family": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "formulation"
+            },
+            "optimizer_momentum": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "optimizer_smoothing": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "optimizer_svd_backend": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "native"
+            },
+            "output_noise_mode": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "learnable"
+            },
+            "output_noise_std": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.029
+            },
+            "output_noise_warmup": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.0
+            },
+            "particle_birth_death": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "prior_betas": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": null,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_confinement": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.35,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_neighbors": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 8,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_coulomb_softening": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.1,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_eps": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": null,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_kind": {
+              "owner": "task",
+              "source": "task.execution.prior.kind",
+              "status": "effective",
+              "value": "particles"
+            },
+            "prior_l2": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_lr_mult": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 2.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_proximal_strength": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg_eps": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.0001,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg_target_std": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 1.0,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_regularizer": {
+              "owner": "technique",
+              "reference_recipe_value": "vicreg",
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_sigreg_knots": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 17,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_sigreg_projections": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 32,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_update": {
+              "owner": "technique",
+              "reference_recipe_value": "learned",
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "reconstruction_weight": {
+              "owner": "task",
+              "reference_recipe_value": 1.0,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "reg_anchor_min_decay": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.9
+            },
+            "reg_anchor_weight": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reg_arm": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "reg_coeff": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 3.0
+            },
+            "reg_coeff_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 0.2
+            },
+            "reg_coeff_end": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": null
+            },
+            "reg_every": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1
+            },
+            "reg_kappa": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reopen_anchor": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "release"
+            },
+            "reopen_guard": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "settled"
+            },
+            "reopen_signal": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "optimizer"
+            },
+            "routing_temperature": {
+              "owner": "task",
+              "reference_recipe_value": 0.25,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "row_evidence_exclude": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_gate": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_hold": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_hot": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_null": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "scaled"
+            },
+            "row_policy": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "independent"
+            },
+            "serve_average": {
+              "owner": "hyperparameter",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": 4.0
+            },
+            "sigma_rel": {
+              "owner": "task",
+              "source": "public prior binding: absolute task sigma replaces relative calibration",
+              "status": "effective",
+              "value": 0.0
+            },
+            "standardize": {
+              "owner": "task",
+              "source": "task.execution.prior.standardize",
+              "status": "effective",
+              "value": false
+            },
+            "table_release_rule": {
+              "owner": "technique",
+              "source": "public Recipe preset atlas",
+              "status": "effective",
+              "value": "anchor"
+            },
+            "total_steps": {
+              "owner": "technique",
+              "source": "schedule-free technique; task.execution.steps bounds execution separately",
+              "status": "effective",
+              "value": null
+            },
+            "ucd_target": {
+              "owner": "task",
+              "reference_recipe_value": "class",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ucd_weight": {
+              "owner": "task",
+              "reference_recipe_value": 0.02,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "z_dim": {
+              "owner": "task",
+              "reference_recipe_value": 1,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            }
+          },
+          "reference_declarations": {
+            "prior": {
+              "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+              "kind": "particle_cloud",
+              "learnable": true,
+              "sigma": 0.0,
+              "standardize": false
+            }
+          },
+          "schema_version": 1,
+          "task_contract": {
+            "budget": {
+              "owner": "task",
+              "source": "task.execution and task.resources",
+              "value": {
+                "execution_resources": {
+                  "allow_cpu": false,
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 512,
+                  "gpus": 1,
+                  "timeout_seconds": 300
+                },
+                "steps": 80
+              }
+            },
+            "evaluation": {
+              "owner": "task",
+              "source": "task.evaluation",
+              "value": {
+                "eval_output_noise": "not_applied_to_measurement",
+                "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+                "evaluator_revision": {
+                  "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+                  "id": "combined-opt-in-prior-source-v1",
+                  "previous_revision": {
+                    "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+                    "id": "opt-in-coulomb-prior-reference-v1",
+                    "previous_revision": {
+                      "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                      "id": "opt-in-component-objective-hooks-v1",
+                      "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                      "original_task_path": "configs/forge/tasks/two_pole.json",
+                      "previous_revision": {
+                        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                        "id": "explicit-equality-and-word-prior-betas-v3",
+                        "previous_revision": null,
+                        "previous_source_sha256": {
+                          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                        }
+                      },
+                      "previous_source_sha256": {}
+                    },
+                    "previous_source_sha256": {
+                      "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+                    }
+                  },
+                  "previous_source_sha256": {
+                    "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+                  }
+                },
+                "guards": {
+                  "finite_state": true,
+                  "mechanism_exercised": true,
+                  "optimizer_roles": [
+                    "prior",
+                    "discriminator"
+                  ],
+                  "rng_isolation": true
+                },
+                "kind": "transfer_sustained",
+                "minimum_stable_checks": 5,
+                "observations": 24,
+                "policy_observation": {
+                  "diagnostic_credit": false,
+                  "eval_streams": "forge-rng-v1_isolated",
+                  "latent_policy": "not_applied_to_parameter_measurement",
+                  "output_noise": false,
+                  "parameter_measurement": "live_table_and_current_critic_gradient",
+                  "row_selection": "original_task_strategy",
+                  "sampler": "live_snapshot",
+                  "schema_version": 1,
+                  "weight_selector": "live"
+                },
+                "sampling_contract_version": 1,
+                "sampling_law": "learned_particles_and_critic_gradient",
+                "scoring_weights": "live",
+                "sources": {
+                  "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                  "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                  "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+                  "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+                  "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+                  "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+                },
+                "thresholds": [
+                  [
+                    "mean_abs",
+                    ">=",
+                    0.3
+                  ],
+                  [
+                    "grad_med",
+                    "<=",
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "host": {
+              "owner": "task",
+              "source": "frozen task architecture/data declaration and host source",
+              "value": {
+                "definition": {
+                  "family": "existing_behavior",
+                  "phase": "fit",
+                  "runner": "legacy",
+                  "split": "development",
+                  "steps": 80
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": {
+                  "batch_size": 12,
+                  "num_particles": 12,
+                  "z_dim": 1
+                },
+                "source": "benchmarks/locked_shared/baseline.py"
+              }
+            },
+            "initialization": {
+              "fixed_initialization": {
+                "critic": "stored_host_weights",
+                "particles": "zeros"
+              },
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "prior": {
+              "applicability": "sampled",
+              "code_path": null,
+              "contract": "recipe_owned_v1",
+              "control_binding": {
+                "base_betas": "Recipe.betas",
+                "base_lr": "Recipe.lr",
+                "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+                "latent_table_controls": false,
+                "lr_schedule": "prior",
+                "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+                "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+                "representation": "direct_sample_coordinates"
+              },
+              "declared_code_path": "ParticlePrior",
+              "owner": "task",
+              "source": "task.execution.prior",
+              "update_policy": {
+                "owner": "technique",
+                "source": "Recipe.prior_update",
+                "value": "learned"
+              },
+              "value": {
+                "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+                "kind": "particle_cloud",
+                "sigma": 0.0,
+                "standardize": false
+              }
+            }
+          },
+          "task_id": "two_pole",
+          "version": "forge-field-boundaries-v3-recipe-priors"
+        },
+        "id": "two_pole",
+        "policy_parent": {
+          "definition": {
+            "adapter": "transfer_behavior",
+            "dependencies": [],
+            "evaluation": {
+              "eval_output_noise": "not_applied_to_measurement",
+              "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+              "evaluator_revision": {
+                "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+                "id": "combined-opt-in-prior-source-v1",
+                "previous_revision": {
+                  "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+                  "id": "opt-in-coulomb-prior-reference-v1",
+                  "previous_revision": {
+                    "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                    "id": "opt-in-component-objective-hooks-v1",
+                    "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                    "original_task_path": "configs/forge/tasks/two_pole.json",
+                    "previous_revision": {
+                      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                      "id": "explicit-equality-and-word-prior-betas-v3",
+                      "previous_revision": null,
+                      "previous_source_sha256": {
+                        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                      }
+                    },
+                    "previous_source_sha256": {}
+                  },
+                  "previous_source_sha256": {
+                    "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+                  }
+                },
+                "previous_source_sha256": {
+                  "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+                }
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "prior",
+                  "discriminator"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "transfer_sustained",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "sampling_contract_version": 1,
+              "sampling_law": "learned_particles_and_critic_gradient",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+                "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+                "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+                "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+              },
+              "thresholds": [
+                [
+                  "mean_abs",
+                  ">=",
+                  0.3
+                ],
+                [
+                  "grad_med",
+                  "<=",
+                  1.0
+                ]
+              ]
+            },
+            "execution": {
+              "device": "cuda",
+              "execution_path": "public_components",
+              "fixed_initialization": {
+                "critic": "stored_host_weights",
+                "particles": "zeros"
+              },
+              "host": "two_pole",
+              "host_definition": {
+                "family": "existing_behavior",
+                "phase": "fit",
+                "runner": "legacy",
+                "split": "development",
+                "steps": 80
+              },
+              "host_source": "benchmarks/locked_shared/baseline.py",
+              "initializer": "deterministic_orthogonal",
+              "prior": {
+                "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+                "kind": "particle_cloud",
+                "sigma": 0.0,
+                "standardize": false
+              },
+              "prior_contract": "recipe_owned_v1",
+              "produces_state": false,
+              "protocol": "screening",
+              "schedule_policy": "public_recipe_with_frozen_host_horizon",
+              "steps": 80,
+              "transport_consumer": "output_marginal_v1",
+              "transport_contract": {
+                "conditioning_in_distance": false,
+                "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+                "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+                "new_forward_passes": false,
+                "new_paired_supervision": false,
+                "new_random_draws": false,
+                "protected_objectives": "original adversarial",
+                "sample_space": "direct particle coordinates",
+                "target_law": "fixed original two-pole target panel",
+                "version": 1
+              }
+            },
+            "id": "two_pole",
+            "requires_capabilities": [
+              "named_rng",
+              "live_sampling",
+              "particle_cloud"
+            ],
+            "resources": {
+              "allow_cpu": false,
+              "cpu_threads": 1,
+              "gpu_memory_mb": 512,
+              "gpus": 1,
+              "timeout_seconds": 300
+            },
+            "schema_version": 1,
+            "task_cohort": "component_output_transport_v1"
+          },
+          "id": "two_pole",
+          "task_sha256": "93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1"
+        },
+        "requires_capabilities": [
+          "named_rng",
+          "live_sampling",
+          "particle_cloud"
+        ],
+        "resources": {
+          "allow_cpu": false,
+          "cpu_threads": 1,
+          "gpu_memory_mb": 512,
+          "gpus": 1,
+          "timeout_seconds": 300
+        },
+        "schema_version": 1,
+        "task_cohort": "atlas_original_two_pole_policy_v1"
+      }
+    }
+  },
+  "original_evidence": {
+    "availability": "LOCAL_ONLY_NOT_PUBLISHED",
+    "pins": [
+      {
+        "bytes": 6131,
+        "file": "HANDOFF.json",
+        "sha256": "68fb3d1371e196d170dc735c68165d83e8867ce930797d0010f2a8c695f7a973"
+      },
+      {
+        "bytes": 7118,
+        "file": "REPORT.md",
+        "sha256": "fe2aab2dcd62085b0c87ce7fe3dd32435d67c8c60d5232e9bfdb0499b45fa1a4"
+      },
+      {
+        "bytes": 17284,
+        "file": "PROTOCOL.json",
+        "sha256": "2394feaf4d5409a06b9d2b19d5a70ea41d231e8b0fee28b6f2ed5a04d4932a93"
+      },
+      {
+        "bytes": 4853,
+        "file": "RESULT_RECORD.json",
+        "sha256": "0cb5f0e3ac28236541d26917c17460f3b8b65bc3e43d4b597b1570bf8dface96"
+      },
+      {
+        "bytes": 50353,
+        "file": "READ_ONLY_AUDIT.json",
+        "sha256": "380ae2c51e5d341be2aaa9b313c7b1c9b9c48117e902bb7aaa539c0b1ae398ad"
+      },
+      {
+        "bytes": 5013,
+        "file": "RESULT.json",
+        "sha256": "4f593fa9c90dd8ad11b7848ba1487affda75f761a5174c7924a194a21dcbe476"
+      },
+      {
+        "bytes": 43829,
+        "file": "TASK.json",
+        "sha256": "2c6871048b211a51e152ae19fa85b679f67500e1a284edffffd32f668d013f3d"
+      },
+      {
+        "bytes": 5731,
+        "file": "HANDOFF.json",
+        "sha256": "c89113e09d17cecc56e64738c8376b68cd4951f4ef11871605f96279f7e66b9c"
+      },
+      {
+        "bytes": 576,
+        "file": "ERROR.json",
+        "sha256": "bf181996f6d16d3e2181607fb14754773d62656c8baca9495d7d0b6a2cf6f9f7"
+      },
+      {
+        "bytes": 362,
+        "file": "TERMINAL.json",
+        "sha256": "9933951143d3de45927e03af94aa4984114089479e8c4fb1fe934d015843c040"
+      }
+    ],
+    "verification": "Source pins and recorded audit outcomes checked; no training, sampling or metric rescoring"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipe_contracts": {
+    "0ece11066c7f434aadd52ce6070446f55cce5a0d5e4baf944099b1754a6807d4": {
+      "extension": {
+        "adapter_sha256": "dbedb35a45dc1ccbe99e96fa77867dbc0a6b38c060e511dc5ea3ef814cb9756a",
+        "bypass": true,
+        "proposal_rule": {
+          "finite_fallback": "alpha0 for finite inherited violation; no repeated optimizer/backward or new packet.",
+          "float32_endpoint": "alpha1 uses original native endpoint, alpha0 exact old table; intermediate old+alpha*(native-old) in native dtype. It is endpoint filtering, not an Adam-rate or intended-displacement equivalence claim.",
+          "fractions": [
+            1,
+            0.5,
+            0.25,
+            0.125,
+            0.0625,
+            0.03125,
+            0.015625,
+            0
+          ],
+          "native_proposal": "one native Adam/A2/direct-response update followed by original hot-row correction",
+          "nonfinite_behavior": "Poison and stop, do not backtrack around NaN/Inf.",
+          "selection": "First finite candidate with training max slope <= training bound; strict comparison, no relaxed scientific or training tolerance."
+        },
+        "proposal_sampling": {
+          "actual_packet": "Capture before/after native G noise-generator states, actual output tensor, frozen pre-call controller and sigma actually used.",
+          "baseline_guard": "F0 must be bit-identical to actual G fake; every replay must reproduce original post-call generator state.",
+          "native_or_caller_RNG_reset": false,
+          "new_independent_data_or_noise_samples": false,
+          "private_replay_draws": "Count every private randn call and coordinate despite primitive reuse.",
+          "replay": "Private generator reset to copied actual pre-call state, native controller.perturb_latent(record=False) at proposed table/support, IdentityG, same output_sigma times replayed next primitive normal draw. Recompute DV12 support radii; do not translate an old residual or use bare clean G."
+        },
+        "source_freeze_sha256": "874f1fa2a1af437fdff9fbbff4efb925c02587b601e541848ab0071c20030cfe",
+        "state_and_order": {
+          "boundary": "Pinned private _settle_observe(index0) callback inside native after_generator_step, after hot correction before G displacement observation. Source-bound prototype, not a general public API extension.",
+          "complete_checkpoints": "Caller envelope plus native state, exact task/adapter identity, observers/target cursor/actual packets, gradients, logical records. Ready phase only.",
+          "controllers": "Native stationarity receives actual accepted table displacement; all other controller/noise/row/birth/EMA laws remain enabled. Endogenous responses are recorded, not forced to match control.",
+          "fault_injection": "CPU software control only; must remain false in prospective science.",
+          "native_histories": "Retain computed native gradients, Adam moments/clocks and learned-noise parameter update; apply fraction to table only.",
+          "partial_failure": "Preserve physical optimizer entries and returns, actual component clocks/flags/models/optimizer state/packets/RNG and poison. Use fault_export components as NON_RESUMABLE. Do not equate completed returns with attempted calls.",
+          "recovery": "No scientific retry in this registration. Any separately authorized recovery requires a fresh public constructor and exact retained complete pre-step caller envelope; do not bypass warm/cold validator or erase failed holder.",
+          "unsupported_post_boundary_motion": "Stop with poisoned receipt if finish/birth changes table after accepted endpoint; do not disable native birth/hot mechanisms."
+        },
+        "training_statistic": {
+          "bound": "max(reg_kappa, statistic of the consumed pre-G-optimizer training packet under same after-D critic)",
+          "definition": "max_i abs(d D_after_D / d x_i)",
+          "meaning": "If already above kappa, forbid additional worsening; do not assert universal kappa satisfaction.",
+          "population": "actually consumed G training fake, with original DV12 perturbation and original output noise, same12 row identities",
+          "real_eval_points_used_in_decision": false,
+          "scientific_gate_statistic_used_in_decision": false,
+          "threshold_owner": "unchanged Recipe.reg_kappa=1, not evaluator thresholds or scores"
+        }
+      },
+      "native_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 12,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "none",
+        "continuous_policy": "dv12",
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": false,
+        "critic_step_mode": "none",
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 0.05,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_convolution": "none",
+        "optimizer_family": "formulation",
+        "optimizer_momentum": 0.0,
+        "optimizer_smoothing": 0.0,
+        "optimizer_svd_backend": "native",
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_coulomb_confinement": 0.35,
+        "prior_coulomb_neighbors": 8,
+        "prior_coulomb_softening": 0.1,
+        "prior_eps": null,
+        "prior_kind": "particles",
+        "prior_l2": 0.0,
+        "prior_lr_mult": 2.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_sigreg_knots": 17,
+        "prior_sigreg_projections": 32,
+        "prior_update": "learned",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 3.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 1
+      },
+      "original_native_recipe_sha256": "1e67bd8f36732a088c7ad607740acd48b56387388bb9d03d6d5524c4752acd69"
+    },
+    "cbfc24bdb74bcdc77dcfbbc06433c0cca1f5f6b9dde4dc62fdc90919320c570e": {
+      "extension": {
+        "adapter_sha256": "dbedb35a45dc1ccbe99e96fa77867dbc0a6b38c060e511dc5ea3ef814cb9756a",
+        "bypass": false,
+        "proposal_rule": {
+          "finite_fallback": "alpha0 for finite inherited violation; no repeated optimizer/backward or new packet.",
+          "float32_endpoint": "alpha1 uses original native endpoint, alpha0 exact old table; intermediate old+alpha*(native-old) in native dtype. It is endpoint filtering, not an Adam-rate or intended-displacement equivalence claim.",
+          "fractions": [
+            1,
+            0.5,
+            0.25,
+            0.125,
+            0.0625,
+            0.03125,
+            0.015625,
+            0
+          ],
+          "native_proposal": "one native Adam/A2/direct-response update followed by original hot-row correction",
+          "nonfinite_behavior": "Poison and stop, do not backtrack around NaN/Inf.",
+          "selection": "First finite candidate with training max slope <= training bound; strict comparison, no relaxed scientific or training tolerance."
+        },
+        "proposal_sampling": {
+          "actual_packet": "Capture before/after native G noise-generator states, actual output tensor, frozen pre-call controller and sigma actually used.",
+          "baseline_guard": "F0 must be bit-identical to actual G fake; every replay must reproduce original post-call generator state.",
+          "native_or_caller_RNG_reset": false,
+          "new_independent_data_or_noise_samples": false,
+          "private_replay_draws": "Count every private randn call and coordinate despite primitive reuse.",
+          "replay": "Private generator reset to copied actual pre-call state, native controller.perturb_latent(record=False) at proposed table/support, IdentityG, same output_sigma times replayed next primitive normal draw. Recompute DV12 support radii; do not translate an old residual or use bare clean G."
+        },
+        "source_freeze_sha256": "874f1fa2a1af437fdff9fbbff4efb925c02587b601e541848ab0071c20030cfe",
+        "state_and_order": {
+          "boundary": "Pinned private _settle_observe(index0) callback inside native after_generator_step, after hot correction before G displacement observation. Source-bound prototype, not a general public API extension.",
+          "complete_checkpoints": "Caller envelope plus native state, exact task/adapter identity, observers/target cursor/actual packets, gradients, logical records. Ready phase only.",
+          "controllers": "Native stationarity receives actual accepted table displacement; all other controller/noise/row/birth/EMA laws remain enabled. Endogenous responses are recorded, not forced to match control.",
+          "fault_injection": "CPU software control only; must remain false in prospective science.",
+          "native_histories": "Retain computed native gradients, Adam moments/clocks and learned-noise parameter update; apply fraction to table only.",
+          "partial_failure": "Preserve physical optimizer entries and returns, actual component clocks/flags/models/optimizer state/packets/RNG and poison. Use fault_export components as NON_RESUMABLE. Do not equate completed returns with attempted calls.",
+          "recovery": "No scientific retry in this registration. Any separately authorized recovery requires a fresh public constructor and exact retained complete pre-step caller envelope; do not bypass warm/cold validator or erase failed holder.",
+          "unsupported_post_boundary_motion": "Stop with poisoned receipt if finish/birth changes table after accepted endpoint; do not disable native birth/hot mechanisms."
+        },
+        "training_statistic": {
+          "bound": "max(reg_kappa, statistic of the consumed pre-G-optimizer training packet under same after-D critic)",
+          "definition": "max_i abs(d D_after_D / d x_i)",
+          "meaning": "If already above kappa, forbid additional worsening; do not assert universal kappa satisfaction.",
+          "population": "actually consumed G training fake, with original DV12 perturbation and original output noise, same12 row identities",
+          "real_eval_points_used_in_decision": false,
+          "scientific_gate_statistic_used_in_decision": false,
+          "threshold_owner": "unchanged Recipe.reg_kappa=1, not evaluator thresholds or scores"
+        }
+      },
+      "native_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 12,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "none",
+        "continuous_policy": "dv12",
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": false,
+        "critic_step_mode": "none",
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 0.05,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_convolution": "none",
+        "optimizer_family": "formulation",
+        "optimizer_momentum": 0.0,
+        "optimizer_smoothing": 0.0,
+        "optimizer_svd_backend": "native",
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_coulomb_confinement": 0.35,
+        "prior_coulomb_neighbors": 8,
+        "prior_coulomb_softening": 0.1,
+        "prior_eps": null,
+        "prior_kind": "particles",
+        "prior_l2": 0.0,
+        "prior_lr_mult": 2.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_sigreg_knots": 17,
+        "prior_sigreg_projections": 32,
+        "prior_update": "learned",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 3.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 1
+      },
+      "original_native_recipe_sha256": "1e67bd8f36732a088c7ad607740acd48b56387388bb9d03d6d5524c4752acd69"
+    },
+    "dfa96d389161319e1d40c0f7c53ee4794fe092bf1c9b20f037f79470fba70200": {
+      "execution_stage": "two-arm startup; neither recipe executed",
+      "extension": {
+        "intended_arms": [
+          {
+            "bypass": true,
+            "extension_behavior": "Run fixed-noise baseline/proposal observer, always apply full native table endpoint.",
+            "id": "matched_R1off_bypass",
+            "native_recipe": "same full inline recipe"
+          },
+          {
+            "bypass": false,
+            "extension_behavior": "Select largest admissible fixed fraction using only G training packet and current training critic.",
+            "id": "R1off_proposed_training_packet_filter",
+            "native_recipe": "same full inline recipe"
+          }
+        ],
+        "proposal_rule": {
+          "finite_fallback": "alpha0 for finite inherited violation; no repeated optimizer/backward or new packet.",
+          "float32_endpoint": "alpha1 uses original native endpoint, alpha0 exact old table; intermediate old+alpha*(native-old) in native dtype. It is endpoint filtering, not an Adam-rate or intended-displacement equivalence claim.",
+          "fractions": [
+            1,
+            0.5,
+            0.25,
+            0.125,
+            0.0625,
+            0.03125,
+            0.015625,
+            0
+          ],
+          "native_proposal": "one native Adam/A2/direct-response update followed by original hot-row correction",
+          "nonfinite_behavior": "Poison and stop, do not backtrack around NaN/Inf.",
+          "selection": "First finite candidate with training max slope <= training bound; strict comparison, no relaxed scientific or training tolerance."
+        }
+      },
+      "native_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 12,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "none",
+        "continuous_policy": "dv12",
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": false,
+        "critic_step_mode": "none",
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_weight": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 0.05,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_convolution": "none",
+        "optimizer_family": "formulation",
+        "optimizer_momentum": 0.0,
+        "optimizer_smoothing": 0.0,
+        "optimizer_svd_backend": "native",
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_coulomb_confinement": 0.35,
+        "prior_coulomb_neighbors": 8,
+        "prior_coulomb_softening": 0.1,
+        "prior_eps": null,
+        "prior_kind": "particles",
+        "prior_l2": 0.0,
+        "prior_lr_mult": 2.0,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_sigreg_knots": 17,
+        "prior_sigreg_projections": 32,
+        "prior_update": "learned",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 3.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 1
+      }
+    }
+  },
+  "schema": "forge_test_display_evidence_v1",
+  "scope": "Original seed0 two_pole 80-update screen only; no whole-suite, density repair, ordinary qualification or default promotion. The earlier startup ERROR is retained."
+}
