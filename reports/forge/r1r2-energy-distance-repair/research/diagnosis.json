@@ -1,0 +1,278 @@
+{
+  "ambient_rng_unchanged": true,
+  "finite_budget": {
+    "aggregate_paid_seconds": 6970.914169566939,
+    "cap_seconds": 8000,
+    "exact_cached_parent_cells": 7,
+    "existing_attempts": 231,
+    "headroom_seconds": 1029.0858304330613,
+    "maximum_nonword_paid_before_word_reservation_seconds": 129.08583043306135,
+    "new_cells": 7,
+    "new_recipe_full_allowance_seconds": 2520,
+    "two_role_full_allowance_seconds": 5040,
+    "word_full_reservation_seconds": 900
+  },
+  "frozen_source_binding": {
+    "current_and_snapshot_bytes_match": true,
+    "origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+    "request_sha256": "211738c6917e36c5ff9f1ac9b770e894bf289bca8c4d2b9625e12ddff1565ab5",
+    "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+    "source_files_checked": 1216
+  },
+  "optimizer_updates_added": 0,
+  "prior_freeze_read_only_prerequisite": {
+    "candidate_capability_removed": "learned_locations",
+    "contexts": {
+      "ae_gan_hold": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        }
+      },
+      "clockfree_audit_measurement_v1": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false
+        }
+      },
+      "five_word_joint_smoke": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        }
+      },
+      "gaussian1d_smoke": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        }
+      },
+      "ring16_acquisition": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false
+        }
+      },
+      "two_pole": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        }
+      },
+      "unused_token_hold": {
+        "blockers": [],
+        "effective_recipe_delta": {
+          "prior_update": [
+            "learned",
+            "frozen"
+          ]
+        },
+        "unchanged_initial_prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        }
+      }
+    },
+    "numerical_repair_claim": false,
+    "runtime_frozen_energy_checkpoint_integration": "not run by this saved-only probe",
+    "status": "PASS"
+  },
+  "publication_sha256": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+  "qualification_input": false,
+  "registration_sha256": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+  "reproduction_source_sha256": "55eb8f71e7af4f79f2e2816ae263295613569922eb99b308501a8ab68c6c05e1",
+  "rings": {
+    "energy_u": {
+      "attempt_id": "219c852ff8c345768d5cd16407b04236",
+      "best_covariance": {
+        "step": 1500,
+        "value": 5.33237786591053
+      },
+      "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+      "checkpoint_sha256": "676740b80e7dfff7862a42b0962bfdea07b292437ec32f60efe9fb2db84c7426",
+      "core_covariance": 1.1562819331884384,
+      "covariance_passes": 0,
+      "endpoint_metrics": {
+        "component_core_covariance_error": 1.1562819331884384,
+        "component_core_min_eigen_ratio": 0.9094355702400208,
+        "component_covariance_error": 6.371506132185459,
+        "component_min_eigen_ratio": 1.0275816917419434,
+        "covariance_error": 0.09263927489519119,
+        "hq": 0.74755859375,
+        "mass_tv": 0.030517578125,
+        "max_component_spill": 0.3436293303966522,
+        "mean_error": 0.0384066179394722,
+        "min_hq_mass_ratio": 0.59375,
+        "min_mass_ratio": 0.8359375,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.038002607069356785,
+        "target_scale": 3.0029242038726807
+      },
+      "gate_status": "FAIL",
+      "mapped_centers_beyond_3sigma": 8,
+      "mapped_centers_beyond_4sigma": 7,
+      "panel_sha256": "6eaf89d0bddcac23caa0d1dbabc9d9df62b69fb6141184bfad18a64842560872",
+      "summary": {
+        "local_noise_radial": {
+          "maximum": 2.0978135169348104,
+          "mean": 1.5398565071101842,
+          "minimum": 0.9440497127494945
+        },
+        "local_noise_tangent": {
+          "maximum": 3.8191046804107427,
+          "mean": 2.8892875317737285,
+          "minimum": 2.2836289493807613
+        },
+        "mapped_centers_radial": {
+          "maximum": 38.67764240812461,
+          "mean": 6.617546016751731,
+          "minimum": 0.07565928880977493
+        },
+        "mapped_centers_tangent": {
+          "maximum": 7.117243169028336,
+          "mean": 1.3095855593138808,
+          "minimum": 0.21656870596839517
+        },
+        "output_radial": {
+          "maximum": 34.588084417899765,
+          "mean": 8.026237777588081,
+          "minimum": 1.0440830101766596
+        },
+        "output_tangent": {
+          "maximum": 9.450682747130246,
+          "mean": 4.393926011382897,
+          "minimum": 2.7755643646425208
+        }
+      }
+    },
+    "non_saturating": {
+      "attempt_id": "3e1e55b0f89d4a8c8cedd706dbd4e021",
+      "best_covariance": {
+        "step": 1584,
+        "value": 1.5018808841705322
+      },
+      "candidate_revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+      "checkpoint_sha256": "ac391adc90c90cc3dd445b4201765163a20c1187b39c90ba954d450afc8be328",
+      "core_covariance": 1.0512358620762825,
+      "covariance_passes": 0,
+      "endpoint_metrics": {
+        "component_core_covariance_error": 1.0512358620762825,
+        "component_core_min_eigen_ratio": 0.07926595211029053,
+        "component_covariance_error": 1.5565460547804832,
+        "component_min_eigen_ratio": 0.09407460689544678,
+        "covariance_error": 0.08417172729969025,
+        "hq": 0.888671875,
+        "mass_tv": 0.0498046875,
+        "max_component_spill": 0.1764705926179886,
+        "mean_error": 0.018157009035348892,
+        "min_hq_mass_ratio": 0.7109375,
+        "min_mass_ratio": 0.80078125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.028199601224341668,
+        "target_scale": 3.0029242038726807
+      },
+      "gate_status": "FAIL",
+      "mapped_centers_beyond_3sigma": 1,
+      "mapped_centers_beyond_4sigma": 0,
+      "panel_sha256": "2db2838d479c63cb7903c27253542dc5814a12a277393b6c4fbb0d526a2b6ebe",
+      "summary": {
+        "local_noise_radial": {
+          "maximum": 0.1997872114595422,
+          "mean": 0.09648300142767195,
+          "minimum": 0.039402687761850574
+        },
+        "local_noise_tangent": {
+          "maximum": 3.581699016569737,
+          "mean": 2.642178055113239,
+          "minimum": 1.8346319043899717
+        },
+        "mapped_centers_radial": {
+          "maximum": 0.4992819525502892,
+          "mean": 0.18502402398838527,
+          "minimum": 0.046035222316117924
+        },
+        "mapped_centers_tangent": {
+          "maximum": 1.1988319896752504,
+          "mean": 0.15659471432303038,
+          "minimum": 0.029376391480151157
+        },
+        "output_radial": {
+          "maximum": 0.6788671908416085,
+          "mean": 0.29701895442606957,
+          "minimum": 0.10798044540964
+        },
+        "output_tangent": {
+          "maximum": 4.240321124928259,
+          "mean": 3.053393866868053,
+          "minimum": 2.379346650511073
+        }
+      }
+    }
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved endpoints and declared deterministic target axes; no historical gradient or initialization reconstruction",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12"
+}

@@ -1,0 +1,151 @@
+{
+  "campaign": {
+    "budget_seconds": 5040,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-energy-prior-freeze-repair-v1"
+  },
+  "candidate": "r1r2-non-saturating-energy-u-v1",
+  "competing_explanation": "Historical cached grades remain bound to original scientific execution B, while the newly declared current cached request may have a new coordinator origin. No source/revision/task/receipt mismatch may receive control credit.",
+  "control": {
+    "candidate_id": "r1r2-non-saturating-energy-u-frozen-prior-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Reuse all seven exact measured energy1 learned-prior cases under their original source/runtime/protocol/revision and original paid owners; launch no control replay.",
+  "id": "r1r2-energy-u-cached-prior-control-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "56676fa4cf49455baaf9114bca5190c7",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "gaussian1d_smoke"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        0
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "d755b9a641ca47d981fa02df565d44ba",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "two_pole"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        1
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "da890dc8ee524c76ae49bad09cbb09e7",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "unused_token_hold"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        2
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "881af7d0f3724d55a1a220a0a49020ac",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "ae_gan_hold"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        3
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "219c852ff8c345768d5cd16407b04236",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "ring16_acquisition"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        4
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "a0893523c6564367ad59aab106e44cd1",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "five_word_joint_smoke"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        5
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "68a98c1f20454c9bbebbc107a4b3d87e",
+        "candidate_id": "r1r2-non-saturating-energy-u-v1",
+        "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+        "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+        "task_id": "clockfree_audit_measurement_v1"
+      },
+      "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+      "selector": [
+        "certified_results",
+        6
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

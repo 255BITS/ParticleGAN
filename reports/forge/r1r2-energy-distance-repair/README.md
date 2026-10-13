@@ -116,6 +116,10 @@ Preserve the stronger control and this negative result. A further global repair
 needs a distinct mechanism, saved-evidence justification and separate finite
 registration under the original tasks and remaining cap. This contrast permits
 no automatic coefficient grid, seed repeats, longer training or Tier 2.
+The subsequent [saved-geometry research](research/README.md) records one prior
+policy hypothesis and its separate prerequisites. The
+[least-squares review](research/least-squares/README.md) remains a deferred
+alternative; neither supplies a passing trained result to this closed contrast.
 
 Reproduce from the scientific execution checkout using the declared project
 interpreter. Collection is saved-state work:
