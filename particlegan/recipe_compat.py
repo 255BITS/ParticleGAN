@@ -11,6 +11,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "kinetic_transport_weight": 0.0,
     "kinetic_transport_local_weight": 0.0,
     "kinetic_transport_projections": 32,
+    "energy_distance_weight": 0.0,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
     "optimizer_svd_backend": "native",

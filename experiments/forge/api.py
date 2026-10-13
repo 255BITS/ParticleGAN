@@ -202,6 +202,12 @@ def task_policy_blockers(task, candidate):
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
+    if recipe.energy_distance_weight and task.get("execution", {}).get("execution_path") == "public_components":
+        contract = task.get("execution", {}).get("transport_contract", {})
+        if (consumer != "output_marginal_v1" or task["execution"].get("host") == "trajectory" or not contract
+                or any(contract.get(key) is not False for key in
+                       ("conditioning_in_distance", "new_paired_supervision", "new_forward_passes", "new_random_draws"))):
+            return [f"{task.get('id', '<task>')}: energy U requires the declared output-marginal contract"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -380,6 +386,8 @@ class FormulationContext:
         if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight) and component_transport is None:
             raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "
                                    "the current Forge host bindings do not support it"])
+        if execution_path == "public_components" and self.recipe.energy_distance_weight and component_transport != "output_marginal_v1":
+            raise CapabilityError(["public_components must explicitly consume Recipe energy U on output panels"])
         if self.recipe.row_policy != "independent":
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (

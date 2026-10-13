@@ -116,6 +116,8 @@ class Recipe:
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
+    # Opt-in raw signed Euclidean energy-U on the same G-phase output panel.
+    energy_distance_weight: float = 0.0
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
     # G/D LR that stays high: the Adam step then shrinks with the gradient at
     # equilibrium instead of creeping up as the second moment decays. The
@@ -452,6 +454,9 @@ class Recipe:
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
+        if (type(self.energy_distance_weight) not in (int, float)
+                or not math.isfinite(self.energy_distance_weight) or self.energy_distance_weight < 0):
+            raise ValueError("energy_distance_weight must be finite and nonnegative")
         if type(self.amsgrad) is not bool:
             raise ValueError("amsgrad must be a boolean")
         for key in ("critic_r1_real", "critic_payoff_damping"):
@@ -677,6 +682,11 @@ class Recipe:
         """
         from .kinetic_transport import kinetic_transport_local_loss
         return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+
+    def energy_distance_loss(self, fake, real):
+        """Weighted signed energy-U; no draws, real gradients or normalization."""
+        from .energy_distance import energy_distance_u
+        return self.energy_distance_weight * energy_distance_u(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.

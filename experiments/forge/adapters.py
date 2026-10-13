@@ -592,7 +592,11 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
     if adapter == "word_joint":
-        from .word_adapter import run_word
+        from .api import resolve_public_recipe
+        if resolve_public_recipe(request["candidate"]).energy_distance_weight:
+            from .energy_adapters import run_word
+        else:
+            from .word_adapter import run_word
         return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
     if adapter == "transfer_behavior":
         if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
@@ -600,7 +604,11 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
             return run_behavior(request, task, output_dir, device)
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
-        from .behavior_adapters import run_behavior
+        from .api import resolve_public_recipe
+        if resolve_public_recipe(request["candidate"]).energy_distance_weight:
+            from .energy_adapters import run_behavior
+        else:
+            from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
