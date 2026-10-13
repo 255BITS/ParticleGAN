@@ -1,0 +1,300 @@
+{
+  "archive_logs": {
+    "adjacent_native": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/mmd-adjacent-native-regression.log",
+      "sha256": "0c5c96f3ee234332386a74cf17cc1415dd32e81e1be6b4cbcebfa65c35c0a590"
+    },
+    "archived_inactive_comparison": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility.log",
+      "sha256": "bea777ef02f72f1078b3c8616a48c11d5012747b86004ae76c2a7cfb51852827"
+    },
+    "bindings_adjacent_regression": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/test-mmd-bindings-regression.log",
+      "sha256": "945608dd029c23c8038e610f0c4bf0ea035017e4e8f8d7f3b77db43a19223628"
+    },
+    "bindings_final": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/test-mmd-bindings-final.log",
+      "sha256": "27cc794396ee32974db85fb0bcae6b407e89b19c8126f927c4eb135690ff5be8"
+    },
+    "core_final": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/mmd-core-final-finite-schema.log",
+      "sha256": "644d6c6f5d11dbd95315363054b6c2399c6ab129568d597d178f3a4da8f8a34d"
+    },
+    "reviewer_probe": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/reviewer-probe.log",
+      "sha256": "d55a0aace66f548346cd230a70f625401818cbc13e8511755cd58d459aee2711"
+    }
+  },
+  "budget": {
+    "cached_grade_reuse": 0,
+    "current_cap_seconds": 8000,
+    "full_comparison_allowance_seconds": 5040,
+    "full_word_allowance_seconds": 900,
+    "historical_attempts": 238,
+    "historical_paid_seconds": 7168.248061007995,
+    "proposed_cap_authorized": false,
+    "proposed_cap_seconds": 12209,
+    "reason": "Current remainder cannot reserve one full word case; changed-source comparison requires all14 fresh cases.",
+    "remaining_seconds": 831.7519389920053,
+    "required_fresh_control_cases": 7,
+    "required_fresh_treatment_cases": 7
+  },
+  "budget_change_authorized": false,
+  "closed_declaration_relationship_count": 70,
+  "closed_unique_declaration_count": 59,
+  "closed_unique_declarations_sha256": "3df94f1403360912cd56ddd66e3661d61b8e25e8cd43dd9d588d8e88339108f2",
+  "draft_projections": {
+    "mmd_u": {
+      "candidate": "r1r2-non-saturating-output-mmd-u-v1",
+      "candidate_revision": "e3261895697dc8dc230e8c357c4d89455367ca66a883314055f73d8b60c04f08",
+      "draft_blockers": [
+        "study is draft: review actual bindings, prior evidence, finite scope and numerical signatures, then set status=ready"
+      ],
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "afa2179f4101aa8c0e1b102f13a893d202bf35b8c0f3374e84a43e3285cef17d",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "3bd74636dbbb374cae4f94378f3b076cd7cbe19fe85dd7c5d9bc04765ff8d06b",
+        "clockfree_audit_measurement_v1": "4dae623364d3b8927a13171a2f1813b91f7e93dc5bbfe37ba21260b083d7a31f",
+        "five_word_joint_smoke": "12e47160ecfabc4eacce2acb85c35d82365d89e28dbb90ede72262e5ef36560b",
+        "gaussian1d_smoke": "84deeec42676879b7ab669d7243e0b27a55809e3e45f3c14b60c82c7e00dc520",
+        "ring16_acquisition": "830c742c3ed70385fc42760bd6b7d18c7bccea46d4b60d3bd7ed832e1272008a",
+        "two_pole": "96fc10c834961b4e58a15593a28a6e2eb70a8e97084b3cf29616de4c25d33568",
+        "unused_token_hold": "320d97077be2a5de2ee0ea519ca84a5ce9561712b574b1308afe8d57324a9b42"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    },
+    "non_saturating": {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "candidate_revision": "81601abad49c9b401df8ca1adb44f9e7252ab73ec52393d78318446031636f34",
+      "draft_blockers": [
+        "study is draft: review actual bindings, prior evidence, finite scope and numerical signatures, then set status=ready"
+      ],
+      "full_allowance_seconds": 2520,
+      "jobs_sha256": "3ce7481040eb1b9ac0d25ab738420b2b508e5993a14cca226c96d93276024df2",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+      "source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+      "task_contracts": {
+        "ae_gan_hold": "c0c0168952711f693727a2c7cb814120f81c219ba3b43bf2fe15bf227d06f51b",
+        "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+        "five_word_joint_smoke": "6103ed2396ca83e858f8f1730c4f389a367c8f9ed241001833108ac788487237",
+        "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+        "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+        "two_pole": "25d37bc8a4edc2633d0fae5edc05256bce6b2a92b01fd9f247f51e6bf4c5a876",
+        "unused_token_hold": "7e8936be24d36397129f2c864e5dea4d89aa2a043a539f24608a7d89213486bd"
+      },
+      "task_keys": {
+        "ae_gan_hold": "4e40c0e10e5b7641f4babc309e3038ddb36f1c63b86249c733b0367720fdb7af",
+        "clockfree_audit_measurement_v1": "bffca66b2392e877db09e21ba0294de88b02811b457c598872916f8360a3e9e5",
+        "five_word_joint_smoke": "86898c4abe38fc11e8caf957376d4c2ed0d4325af3b91390314945850c1decbb",
+        "gaussian1d_smoke": "76603e3b2d6ab8a65ad64f0923a9051c627a02a454298c0d5bb62f1bc4199449",
+        "ring16_acquisition": "91fa04802b99eb7cda5f843fa2c3eef683e4d6b9771f0a3864ef192a514bd2f7",
+        "two_pole": "6b4252b74e25f196cce5fa94fc3e2efc2186be6976b17beed63e12332e3e8444",
+        "unused_token_hold": "7938a98c56b2b7405dc5aef73109c7963fe6dba01440e11d92875c2024afe5da"
+      },
+      "view_sha256": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    }
+  },
+  "externally_run_software_tests": {
+    "adjacent_native": "85 PASS",
+    "bindings_final": "33 PASS; 51 actual software updates disclosed",
+    "bindings_regression": "132 PASS",
+    "core_final": "52 focused MMD + 33 native = 85 PASS; 8 new native fixture updates",
+    "inactive_compatibility": "63 PASS; 408 actual software updates; archived metadata ownership-error cohort326 updates retained",
+    "not_rerun_by_reviewer": true,
+    "owner_receipt_sha256": "0aa75ad147227f1db3713b9f5986fb949453c007bf9d98f7cf816c36f76e8b15"
+  },
+  "final_files_sha256": {
+    "configs/forge/ideas/r1r2-non-saturating-output-mmd-u-v1.json": "dcfeedc347e53b9e067fe29fb6247b0d5b59049311c9bb3464a3305796723c76",
+    "configs/forge/studies/r1r2-non-saturating-output-mmd-u-v1-study.json": "e9cc65852aa6d0b51eb3527bf49161ecf892be4b57c61cb02a37427580bdfb3c",
+    "configs/forge/studies/r1r2-output-mmd-fresh-control-v1-study.json": "f8109cf1ccc0b01fcb40d1896b4d0e378475d93ef4552dac96032c3704203cd2",
+    "experiments/forge/adapters.py": "84bb5bebd369e9060c0acf6b21ab22dc160a04fd2bc4b0d2aa040913565b471a",
+    "experiments/forge/api.py": "b4e7108319effc2610bb7fb0b0f5287efeff6899ea7dadb63d333b1e5af7f368",
+    "experiments/forge/boundaries.py": "07159393fc8f3ed76daa8ebf8e8e25d7177aceea7f698e8b41f645d687bd97bb",
+    "experiments/forge/clockfree.py": "bd1c4c62dc324113d06d1d60c557d42a31235a3af0d5921732e5ce0621f1d442",
+    "experiments/forge/mmd_adapters.py": "7689b8533af018bcc043d1717d37fc9b768efeaf3c2d8d428a58c4b7706bfae4",
+    "particlegan/kernel_mmd.py": "45c79addf60ac7209b8d5f9c213bfb468ce12ee7974dd3af180c1693448b8dd8",
+    "particlegan/recipe_compat.py": "845883cd6035c4c5bd24db3c1f4f1dd3dce59acec5cc89da1bc1728496124861",
+    "particlegan/recipes.py": "0297c8ecf61b477d3b676d81b9b1b97ab6d6290c6d686164a4f5518284fd6f4c",
+    "particlegan/training.py": "79fbdd75df604e5c486b51cc4266d9aab66b6c7c84a58f266755061f4c61ce07",
+    "reports/forge/r1r2-mmd-repair/inactive_compatibility.py": "a85b4c0dbced3dd48e56ff3734ddc2949ab50fd38337ad85ae2c92029eae9a8b",
+    "reports/forge/r1r2-mmd-repair/manifest.json": "1193830ddc81e8b241633d7c0abbfbb8a1b9fdfe5287deebfe87727d5ea28e95",
+    "reports/forge/r1r2-mmd-repair/preparation.json": "792a3826fd8f0271519e2aee57bf5eed20df387eefbd7b4e2b060ec3fa1caef7",
+    "reports/forge/r1r2-mmd-repair/prepare.py": "1e5be10651eb0615dd3a968e6feaa66b9d8ff3b67f18823aed8014b281768d01",
+    "reports/forge/r1r2-mmd-repair/reviewer_probe.py": "ff926f88697d64dabe5feab31b6c94876bc14e0f4a95c5476ac5d3cfa4aeb770",
+    "reports/forge/r1r2-mmd-repair/software-validation.json": "0aa75ad147227f1db3713b9f5986fb949453c007bf9d98f7cf816c36f76e8b15",
+    "tests/test_kernel_mmd.py": "9d4ac1706b31fbee8d3541962918bbbfe5ccf5ad6d8731f2fdfa4611ae71f8d2",
+    "tests/test_mmd_bindings.py": "4d1fc5f055c4c74ff854182ac17d3a67e3d1b2c20929beaa13436c7a4f6f5a1f"
+  },
+  "fixed_law": {
+    "additional_draws": 0,
+    "additional_forwards": 0,
+    "bandwidth_standard_deviations": [
+      0.0625,
+      0.125,
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      4.0
+    ],
+    "clamp": "none",
+    "duplicate_rows": "retained except identical diagonal row indices",
+    "fake_gradient": "both fake arguments",
+    "kernel": "equal mean of seven RBF kernels",
+    "normalization": "none",
+    "statistic": "signed ordered off-diagonal FF and RR means minus twice cross mean",
+    "targets": "detached",
+    "units": "original task output coordinates"
+  },
+  "frozen_conftest_sha256": "0ad701c939839a02c282d4998ddcdf47c22b97cdda6d3515d50f3c90e9265241",
+  "global_and_seven_host_delta": {
+    "ae_gan_hold": [
+      "output_mmd_weight"
+    ],
+    "clockfree_audit_measurement_v1": [
+      "output_mmd_weight"
+    ],
+    "five_word_joint_smoke": [
+      "output_mmd_weight"
+    ],
+    "gaussian1d_smoke": [
+      "output_mmd_weight"
+    ],
+    "global": [
+      "output_mmd_weight"
+    ],
+    "ring16_acquisition": [
+      "output_mmd_weight"
+    ],
+    "two_pole": [
+      "output_mmd_weight"
+    ],
+    "unused_token_hold": [
+      "output_mmd_weight"
+    ]
+  },
+  "historical_charge_index_sha256": "21f77389c07b000aac495e5f5c5809db0aa02db91eb7d79a875bdc1d94fa35ef",
+  "inactive_harness_review": {
+    "cleanup": "pytest_unconfigure restores original fixture",
+    "defaults": "only exact output_mmd_weight0 and fixed seven-width tuple added to in-memory metadata map",
+    "frozen_files_unchanged": true,
+    "original_assertions": "tensor, optimizer, update, sampling and RNG checks retained",
+    "ownership": "exact JSON float list canonicalized to exact default tuple only",
+    "serializer": "Python repr supports tuple literals while frozen complete AST proof remains active"
+  },
+  "independent_checks": {
+    "analytic_mmd": {
+      "error_bound": 1e-12,
+      "gradient_max_error": 1.3010426069826053e-18,
+      "optimizer_updates": 0,
+      "sample_shape": [
+        4,
+        168
+      ],
+      "target_shape": [
+        7,
+        168
+      ],
+      "targets_detached": true,
+      "value_error": 5.377642775528102e-17
+    },
+    "default_public_api_exact_parity": true,
+    "final_probe_actual_updates": 4,
+    "initial_mismatch": "Two earlier four-update invocations differed only in independently OS-seeded ambient CPU RNG. Explicit seed0 fixture correction produced complete exact parity; archived mismatch retained.",
+    "post_fix_pure_huge_integer_cases": [
+      "bandwidths",
+      "recipe_weight",
+      "compat_weight",
+      "signed_summary"
+    ],
+    "pure_schema_updates": 0,
+    "reviewer_paid_jobs": 0,
+    "reviewer_queue_mutations": 0,
+    "total_reviewer_actual_software_updates": 12
+  },
+  "manifest_sha256": "1193830ddc81e8b241633d7c0abbfbb8a1b9fdfe5287deebfe87727d5ea28e95",
+  "material_limits": [
+    "Saved output force evidence is a low-confidence hypothesis, not generator/Adam dynamics or density qualification.",
+    "Fixed widths use original task units; no bandwidth optimum, unit invariance or target-adaptive unbiasedness claim.",
+    "Collapsed pole symmetry, duplicate-token shared paths, word softmax saturation and minibatch gradient variance remain risks.",
+    "Software fixtures produce no task gate, training GIF, completed own-clock qualification or old-source grade reuse.",
+    "Final pure huge-integer check followed core correction; unchanged default numerical proof was not retrained."
+  ],
+  "native_binding_review": {
+    "clock": "own actual recipe clock remains required; software perturbations provide no qualified clock credit",
+    "components": "external subclasses reuse pinned native loops and original output hooks; ContextVar and shared lock isolate factory binding with finally cleanup",
+    "composition": "native energy+MMD supported; components explicitly reject combined objectives before training",
+    "legacy_aliases": "active MMD rejects every legacy objective alias; inactive behavior retained",
+    "native": "existing generated and real panels; inactive path matches original API exactly",
+    "state": "separate signed summary bound to weight/widths; malformed prefix rejected before mutation",
+    "word": "original joint inverse encoder and probability output semantics retained; signed prefix state and native tuple/float representation validated before original restore"
+  },
+  "original_evaluator_pin_count": 19,
+  "original_evaluator_pins_sha256": "c507a55a265f8629de63767adfa5c75f54138db80ade35f9bf97b5635704f03a",
+  "original_execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "original_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "original_source_file_count": 1216,
+  "paid_admission_authorized": false,
+  "paid_readiness": false,
+  "preparation_sha256": "792a3826fd8f0271519e2aee57bf5eed20df387eefbd7b4e2b060ec3fa1caef7",
+  "prospective_source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "prospective_source_file_count": 1218,
+  "qualification_input": false,
+  "queue_sha256": "95e0f10aeb4f1835b932a3302de6837c9334c06eaed0c727bb9acfe1b620abe7",
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_success": false,
+  "scope": "independent_software_preparation_only",
+  "source_changes": {
+    "experiments/forge/adapters.py": {
+      "original": "0d49babe4add77d5603a42bd2be0aa3f387bb40d4aec61e1aa89ae3d28b25181",
+      "prospective": "84bb5bebd369e9060c0acf6b21ab22dc160a04fd2bc4b0d2aa040913565b471a"
+    },
+    "experiments/forge/api.py": {
+      "original": "98803a32bec4b6fadcdf82e1d829761b2188669d880be0fde656dfc320be5df5",
+      "prospective": "b4e7108319effc2610bb7fb0b0f5287efeff6899ea7dadb63d333b1e5af7f368"
+    },
+    "experiments/forge/boundaries.py": {
+      "original": "bc4bdafae028361dcb8324cfb17cc7cfcb5a3c8a8846896e45fcb060c2b1a79d",
+      "prospective": "07159393fc8f3ed76daa8ebf8e8e25d7177aceea7f698e8b41f645d687bd97bb"
+    },
+    "experiments/forge/clockfree.py": {
+      "original": "53f4bb2f0650eb198ff190afe2b0b39d48a20952c07d3f8bc5fc7934b8e72a05",
+      "prospective": "bd1c4c62dc324113d06d1d60c557d42a31235a3af0d5921732e5ce0621f1d442"
+    },
+    "experiments/forge/mmd_adapters.py": {
+      "original": null,
+      "prospective": "7689b8533af018bcc043d1717d37fc9b768efeaf3c2d8d428a58c4b7706bfae4"
+    },
+    "particlegan/kernel_mmd.py": {
+      "original": null,
+      "prospective": "45c79addf60ac7209b8d5f9c213bfb468ce12ee7974dd3af180c1693448b8dd8"
+    },
+    "particlegan/recipe_compat.py": {
+      "original": "c78a5be4180f32c18d52d27b5488d54617ccf99e6d72f9223a9eac15d4a1eee0",
+      "prospective": "845883cd6035c4c5bd24db3c1f4f1dd3dce59acec5cc89da1bc1728496124861"
+    },
+    "particlegan/recipes.py": {
+      "original": "e6649d3742c7977a756d3c6f899da01754768486a6ce639ab0d381d009a074cd",
+      "prospective": "0297c8ecf61b477d3b676d81b9b1b97ab6d6290c6d686164a4f5518284fd6f4c"
+    },
+    "particlegan/training.py": {
+      "original": "1437b41865b8670544823125bade26bff1b9552b8b641d144d3a89e6cf1d45fd",
+      "prospective": "79fbdd75df604e5c486b51cc4266d9aab66b6c7c84a58f266755061f4c61ce07"
+    }
+  },
+  "status": "PASS"
+}

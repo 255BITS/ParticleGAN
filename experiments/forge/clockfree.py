@@ -59,6 +59,7 @@ def source_audit(recipe, extensions):
              "particlegan/policy.py", "particlegan/continuous.py",
              "particlegan/recipe_schedules.py",
              "particlegan/energy_distance.py",
+             "particlegan/kernel_mmd.py",
              "particlegan/grad_regularizers.py", "experiments/forge/clockfree.py",
              "experiments/forge/api.py", "experiments/forge/rng.py"]
     return {"source_sha256": {name: file_hash(root / name) for name in files},

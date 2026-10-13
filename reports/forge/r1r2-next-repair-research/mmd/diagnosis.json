@@ -1,0 +1,854 @@
+{
+  "aggregate_paid_seconds": 7168.248061007995,
+  "attempt_id": "3e1e55b0f89d4a8c8cedd706dbd4e021",
+  "autograd_calls": 0,
+  "candidate_revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+  "checkpoint_sha256": "ac391adc90c90cc3dd445b4201765163a20c1187b39c90ba954d450afc8be328",
+  "checkpoint_state_sha256": "9a8e136e6178dfe3f10cd8d163355b0523295edfa464b18fabee9e9eb49c74b4",
+  "coefficient": 1,
+  "equal_weights": true,
+  "execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "fixed_kernel_u_unbiased_for_iid_minibatches": true,
+  "fixtures": {
+    "error_bound": 2e-09,
+    "finite_difference_coordinates": 8,
+    "gaussian_energy_gradient_coordinates": 8,
+    "gaussian_energy_max_error": 3.1621172347229276e-10,
+    "gaussian_expectation_gradient_coordinates": 8,
+    "gaussian_max_error": 3.943183973786901e-11,
+    "max_error": 4.2521416943053225e-11,
+    "pole": {
+      "gradient_max": 9.318975815887687e-19,
+      "symmetry_breaking": false
+    },
+    "signed_matched_u": -0.02477097553842497,
+    "token": {
+      "identical_target_rows": 8,
+      "shared_and_concept_slot_gradient": [
+        0.0,
+        -0.40984014214493003
+      ],
+      "target_distance_median": 0,
+      "unused_shared_path_still_moves": true,
+      "unused_slot_direct_gradient": [
+        0.0,
+        0.0
+      ],
+      "value": 1.2588767021033997
+    },
+    "unit_invariance_claimed": false,
+    "word_softmax": [
+      {
+        "logit_gap": 2.0,
+        "logit_gradient_norm": 0.0025232998648200564,
+        "output_gradient_norm": 0.02096870021969985,
+        "value": 0.8796300998838221
+      },
+      {
+        "logit_gap": 80.0,
+        "logit_gradient_norm": 1.4073399947114837e-36,
+        "output_gradient_norm": 0.016919718367925128,
+        "value": 0.65119848130035
+      }
+    ]
+  },
+  "helper_sha256": "9e39de0c1b045962370383d224c47ad1f60e0e5157f083f78ba794418e59d1d0",
+  "historical_attempts": 238,
+  "latest_publication_sha256": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207",
+  "mixture_stddev_native_units": [
+    0.0625,
+    0.125,
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "models_constructed": 0,
+  "optimizer_updates_added": 0,
+  "panels_sha256": "2db2838d479c63cb7903c27253542dc5814a12a277393b6c4fbb0d526a2b6ebe",
+  "publication_sha256": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+  "qualification_input": false,
+  "remaining_paid_seconds": 831.7519389920053,
+  "reproduction_source_sha256": "a9cc0db75c16261f255adb4fe8a826dd8d566b8d4f31d66ee82c52290cef2543",
+  "ring": {
+    "actual_seen_training_pair": false,
+    "comparison": {
+      "energy_u": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.0010136117651068956,
+            "samples": 301,
+            "tangent": 0.0030798865533460565
+          },
+          {
+            "component": 1,
+            "radial": 0.0010149831814355583,
+            "samples": 238,
+            "tangent": -0.0037260235591115446
+          },
+          {
+            "component": 2,
+            "radial": 0.0006984631065945537,
+            "samples": 252,
+            "tangent": -0.0003200301452759605
+          },
+          {
+            "component": 3,
+            "radial": 0.0026813160008027047,
+            "samples": 300,
+            "tangent": 0.0034313137820896674
+          },
+          {
+            "component": 4,
+            "radial": 0.0013840508154788305,
+            "samples": 267,
+            "tangent": -0.001318374640237007
+          },
+          {
+            "component": 5,
+            "radial": 0.0003201964822931255,
+            "samples": 221,
+            "tangent": -0.0031475614732126983
+          },
+          {
+            "component": 6,
+            "radial": 0.0006478260760621288,
+            "samples": 273,
+            "tangent": -0.0004281595576949197
+          },
+          {
+            "component": 7,
+            "radial": 0.0007958876696831348,
+            "samples": 278,
+            "tangent": -0.001124539731663722
+          },
+          {
+            "component": 8,
+            "radial": 0.0011398480936113367,
+            "samples": 287,
+            "tangent": 0.00046652261912108315
+          },
+          {
+            "component": 9,
+            "radial": 0.00031544439436162014,
+            "samples": 228,
+            "tangent": -0.00416283621912229
+          },
+          {
+            "component": 10,
+            "radial": 0.0011710289474870992,
+            "samples": 244,
+            "tangent": 0.00014852430151281675
+          },
+          {
+            "component": 11,
+            "radial": 0.0003287276075169015,
+            "samples": 205,
+            "tangent": -0.006281487563141605
+          },
+          {
+            "component": 12,
+            "radial": 0.0013860047990892524,
+            "samples": 284,
+            "tangent": 0.0014740556079000304
+          },
+          {
+            "component": 13,
+            "radial": 0.00043419108187718857,
+            "samples": 235,
+            "tangent": -0.0032449767342176764
+          },
+          {
+            "component": 14,
+            "radial": 0.00026544780601646563,
+            "samples": 221,
+            "tangent": -0.004737492550510517
+          },
+          {
+            "component": 15,
+            "radial": 0.00048082228259574357,
+            "samples": 262,
+            "tangent": -0.002915240155685766
+          }
+        ],
+        "mean_radial": 0.0008798656318757837,
+        "mean_tangent": -0.001425401216619003,
+        "output_gradient_norm": 4.294564997934867,
+        "radial_expanding": 16,
+        "tangent_contracting": 11
+      },
+      "mmd_u_mixture": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.0011430349759869586,
+            "samples": 301,
+            "tangent": 0.0018365382761791737
+          },
+          {
+            "component": 1,
+            "radial": 0.0022804765162348817,
+            "samples": 238,
+            "tangent": -0.0040855970723863155
+          },
+          {
+            "component": 2,
+            "radial": 0.0015325058045187454,
+            "samples": 252,
+            "tangent": 0.0003871816517185803
+          },
+          {
+            "component": 3,
+            "radial": 0.005046006565220107,
+            "samples": 300,
+            "tangent": 0.0030502215108396246
+          },
+          {
+            "component": 4,
+            "radial": 0.0026951777206249148,
+            "samples": 267,
+            "tangent": -0.002279151320858371
+          },
+          {
+            "component": 5,
+            "radial": 0.001052489069241878,
+            "samples": 221,
+            "tangent": -0.0028347111319543396
+          },
+          {
+            "component": 6,
+            "radial": 0.0014394422040864237,
+            "samples": 273,
+            "tangent": -0.001577083550510314
+          },
+          {
+            "component": 7,
+            "radial": 0.0010565379759955393,
+            "samples": 278,
+            "tangent": -0.0035014311860575953
+          },
+          {
+            "component": 8,
+            "radial": 0.001593233639960991,
+            "samples": 287,
+            "tangent": -0.0015552624547584143
+          },
+          {
+            "component": 9,
+            "radial": 0.00100057842149727,
+            "samples": 228,
+            "tangent": -0.004296163584875386
+          },
+          {
+            "component": 10,
+            "radial": 0.002881405626355435,
+            "samples": 244,
+            "tangent": 0.0014896984033778654
+          },
+          {
+            "component": 11,
+            "radial": 0.001065542795620985,
+            "samples": 205,
+            "tangent": -0.0059753968463511714
+          },
+          {
+            "component": 12,
+            "radial": 0.0030136781695225675,
+            "samples": 284,
+            "tangent": 0.0006664528430710827
+          },
+          {
+            "component": 13,
+            "radial": 0.001211827531354652,
+            "samples": 235,
+            "tangent": -0.0041675148615752155
+          },
+          {
+            "component": 14,
+            "radial": 0.0009266857814003009,
+            "samples": 221,
+            "tangent": -0.005212393199208732
+          },
+          {
+            "component": 15,
+            "radial": 0.0010542917927359615,
+            "samples": 262,
+            "tangent": -0.0052879600427984215
+          }
+        ],
+        "mean_radial": 0.001812057161897351,
+        "mean_tangent": -0.002083910785384247,
+        "output_gradient_norm": 3.5736937221095166,
+        "radial_expanding": 16,
+        "tangent_contracting": 11
+      },
+      "native_non_saturating": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.0002156851767395012,
+            "samples": 301,
+            "tangent": -0.021717165794382067
+          },
+          {
+            "component": 1,
+            "radial": -0.001136585209467059,
+            "samples": 238,
+            "tangent": -0.04545249703981588
+          },
+          {
+            "component": 2,
+            "radial": -0.0003660436884548682,
+            "samples": 252,
+            "tangent": -0.03245513270754778
+          },
+          {
+            "component": 3,
+            "radial": -0.0006998889549086076,
+            "samples": 300,
+            "tangent": -0.014609450700596683
+          },
+          {
+            "component": 4,
+            "radial": -0.0007279916127389755,
+            "samples": 267,
+            "tangent": -0.02589325197798366
+          },
+          {
+            "component": 5,
+            "radial": -0.0016436534447988984,
+            "samples": 221,
+            "tangent": -0.02858210220599281
+          },
+          {
+            "component": 6,
+            "radial": -0.0009851056414926103,
+            "samples": 273,
+            "tangent": -0.021085445535035992
+          },
+          {
+            "component": 7,
+            "radial": 0.0004229819682942293,
+            "samples": 278,
+            "tangent": -0.02669401283969179
+          },
+          {
+            "component": 8,
+            "radial": 0.0015386746586663383,
+            "samples": 287,
+            "tangent": -0.020190001368907595
+          },
+          {
+            "component": 9,
+            "radial": 0.0009904720143895616,
+            "samples": 228,
+            "tangent": -0.024131264043987913
+          },
+          {
+            "component": 10,
+            "radial": -0.0004940210295149409,
+            "samples": 244,
+            "tangent": -0.015606931017878665
+          },
+          {
+            "component": 11,
+            "radial": 0.00027948409005383037,
+            "samples": 205,
+            "tangent": -0.025188247583067966
+          },
+          {
+            "component": 12,
+            "radial": -0.0008527723673035404,
+            "samples": 284,
+            "tangent": -0.020529173711494108
+          },
+          {
+            "component": 13,
+            "radial": 0.000495304098042637,
+            "samples": 235,
+            "tangent": -0.015542198674030236
+          },
+          {
+            "component": 14,
+            "radial": -0.0011005788980704492,
+            "samples": 221,
+            "tangent": -0.02950261349080013
+          },
+          {
+            "component": 15,
+            "radial": -0.0010659165921580258,
+            "samples": 262,
+            "tangent": -0.03541377424329228
+          }
+        ],
+        "mean_radial": -0.00032062221454511736,
+        "mean_tangent": -0.0251620789334066,
+        "output_gradient_norm": 6.032433248179854,
+        "radial_expanding": 6,
+        "tangent_contracting": 16
+      }
+    },
+    "fake": "all4096 saved terminal evaluation outputs; ordered FF self exclusions",
+    "gradient_normalization": "n times derivative of mean loss; input-space force only",
+    "local_variance_is_only_output_space_first_order_proxy": true,
+    "prospective_objective_uses_only_existing_real_fake_minibatches": true,
+    "target": "exact uniform original16-Gaussian expectation; radius3, isotropic sigma.1",
+    "target_component_parameters_used_only_in_diagnostic": true,
+    "value": 0.002790037461164308
+  },
+  "rng_unchanged": true,
+  "sampling_draws_added": 0,
+  "saved_frozen_control": {
+    "attempt_id": "c168f1c417b04e1a9938d68b04b0556c",
+    "candidate_revision": "408a066fe78ee9f770a1b53dbdbcb2d2db3f01ff0dd9bd50363b1015970fc1cc",
+    "checkpoint_sha256": "cae963187dfca81c7bde6fb691baebc978a5b5a4196404829699a52bca719290",
+    "checkpoint_state_sha256": "a3e323ec0ae583ed0eb994d49b00af19fb289dd1941c6ab11f8ff339657c9111",
+    "comparison": {
+      "energy_u": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.00316591187754336,
+            "samples": 272,
+            "tangent": -0.01506470194855812
+          },
+          {
+            "component": 1,
+            "radial": 0.003026339188705365,
+            "samples": 295,
+            "tangent": -0.00812760048884085
+          },
+          {
+            "component": 2,
+            "radial": 0.0009193748513486962,
+            "samples": 281,
+            "tangent": -0.009189268885261698
+          },
+          {
+            "component": 3,
+            "radial": -0.00045268584210723337,
+            "samples": 236,
+            "tangent": -0.01433033055035793
+          },
+          {
+            "component": 4,
+            "radial": -0.00016511307397666842,
+            "samples": 248,
+            "tangent": -0.011474800286604999
+          },
+          {
+            "component": 5,
+            "radial": -0.0013311705764828517,
+            "samples": 238,
+            "tangent": -0.01233454792346772
+          },
+          {
+            "component": 6,
+            "radial": -0.0017081521238696972,
+            "samples": 255,
+            "tangent": -0.011000484651012093
+          },
+          {
+            "component": 7,
+            "radial": -0.006195485926137661,
+            "samples": 235,
+            "tangent": -0.008498950223115604
+          },
+          {
+            "component": 8,
+            "radial": -0.0006356072479431326,
+            "samples": 269,
+            "tangent": -0.005794076839701416
+          },
+          {
+            "component": 9,
+            "radial": -0.0007777103510491105,
+            "samples": 250,
+            "tangent": -0.009341388610112394
+          },
+          {
+            "component": 10,
+            "radial": -0.0012472675058944455,
+            "samples": 235,
+            "tangent": -0.010554315689075099
+          },
+          {
+            "component": 11,
+            "radial": 0.0003488004918807057,
+            "samples": 234,
+            "tangent": -0.016638931105089128
+          },
+          {
+            "component": 12,
+            "radial": 0.0017658118812618054,
+            "samples": 222,
+            "tangent": -0.01790215124891085
+          },
+          {
+            "component": 13,
+            "radial": -0.0007897238795136687,
+            "samples": 281,
+            "tangent": -0.013508502650965768
+          },
+          {
+            "component": 14,
+            "radial": -0.0005335570039077402,
+            "samples": 253,
+            "tangent": -0.018269655613036062
+          },
+          {
+            "component": 15,
+            "radial": 0.0010924605684577895,
+            "samples": 292,
+            "tangent": -0.01347749098850551
+          }
+        ],
+        "mean_radial": -0.00021986091698028044,
+        "mean_tangent": -0.01221919985641345,
+        "output_gradient_norm": 6.169047447923036,
+        "radial_expanding": 6,
+        "tangent_contracting": 16
+      },
+      "mmd_u_mixture": {
+        "components": [
+          {
+            "component": 0,
+            "radial": -0.00019440085862246025,
+            "samples": 272,
+            "tangent": -0.019700186661791838
+          },
+          {
+            "component": 1,
+            "radial": 0.0019096203060044287,
+            "samples": 295,
+            "tangent": -0.01343451179188895
+          },
+          {
+            "component": 2,
+            "radial": 0.00022403483809035638,
+            "samples": 281,
+            "tangent": -0.013571053994462724
+          },
+          {
+            "component": 3,
+            "radial": -0.0005267620226325991,
+            "samples": 236,
+            "tangent": -0.014391863718592942
+          },
+          {
+            "component": 4,
+            "radial": 0.0002288925599497282,
+            "samples": 248,
+            "tangent": -0.013664483891656483
+          },
+          {
+            "component": 5,
+            "radial": -0.0008224702172340298,
+            "samples": 238,
+            "tangent": -0.012696607045638998
+          },
+          {
+            "component": 6,
+            "radial": 0.0007282335422142157,
+            "samples": 255,
+            "tangent": -0.01265475744221075
+          },
+          {
+            "component": 7,
+            "radial": -0.005191982571073198,
+            "samples": 235,
+            "tangent": -0.01035131715197994
+          },
+          {
+            "component": 8,
+            "radial": -0.00010794186110504717,
+            "samples": 269,
+            "tangent": -0.010202155312545815
+          },
+          {
+            "component": 9,
+            "radial": 0.0001554559509480411,
+            "samples": 250,
+            "tangent": -0.01225916239344162
+          },
+          {
+            "component": 10,
+            "radial": -0.0003043168937227182,
+            "samples": 235,
+            "tangent": -0.012192065769898347
+          },
+          {
+            "component": 11,
+            "radial": 0.0014421328734860394,
+            "samples": 234,
+            "tangent": -0.018624842309785162
+          },
+          {
+            "component": 12,
+            "radial": 0.003022980477262523,
+            "samples": 222,
+            "tangent": -0.019604330363104182
+          },
+          {
+            "component": 13,
+            "radial": -0.001756979963416019,
+            "samples": 281,
+            "tangent": -0.016870832672630166
+          },
+          {
+            "component": 14,
+            "radial": -0.0018605157637084934,
+            "samples": 253,
+            "tangent": -0.0195750212539372
+          },
+          {
+            "component": 15,
+            "radial": -9.459189531790936e-05,
+            "samples": 292,
+            "tangent": -0.01882230090472051
+          }
+        ],
+        "mean_radial": -0.00019678821867982136,
+        "mean_tangent": -0.014913468292392852,
+        "output_gradient_norm": 3.6140768204645557,
+        "radial_expanding": 7,
+        "tangent_contracting": 16
+      }
+    },
+    "execution_origin": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+    "panels_sha256": "a71ca74e390eb980597c440b726fdbf184adf0b3311f0576b64ff49db963f862",
+    "role": "frozen_prior",
+    "sample_count": 4096,
+    "value": 0.005718888908418372
+  },
+  "saved_overwide_control": {
+    "attempt_id": "219c852ff8c345768d5cd16407b04236",
+    "candidate_revision": "3e1058380fc698dcbeb6dd478f6d18016725b6bd8a80c9a3d3b31892f14178ee",
+    "checkpoint_sha256": "676740b80e7dfff7862a42b0962bfdea07b292437ec32f60efe9fb2db84c7426",
+    "checkpoint_state_sha256": "a962e84b7dcfb0ece1885181dfa3b2b8910a688fbb5c762c386fff1180d624ba",
+    "comparison": {
+      "energy_u": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.0023876471112346375,
+            "samples": 292,
+            "tangent": -0.00012220674304794346
+          },
+          {
+            "component": 1,
+            "radial": -0.0008367279592211712,
+            "samples": 234,
+            "tangent": -0.008310211230203644
+          },
+          {
+            "component": 2,
+            "radial": -0.0031311486524389187,
+            "samples": 219,
+            "tangent": -0.004779739360726913
+          },
+          {
+            "component": 3,
+            "radial": -0.0004927368500674808,
+            "samples": 251,
+            "tangent": -0.00016982009586251462
+          },
+          {
+            "component": 4,
+            "radial": -0.0004155593129177271,
+            "samples": 272,
+            "tangent": 0.0024109933220031166
+          },
+          {
+            "component": 5,
+            "radial": -0.00336777593434285,
+            "samples": 254,
+            "tangent": -0.004149448602842344
+          },
+          {
+            "component": 6,
+            "radial": -0.00662938693149167,
+            "samples": 214,
+            "tangent": -0.005926206054691779
+          },
+          {
+            "component": 7,
+            "radial": 0.00020109048553323557,
+            "samples": 261,
+            "tangent": -0.007131059212163212
+          },
+          {
+            "component": 8,
+            "radial": -0.0007872380271300425,
+            "samples": 275,
+            "tangent": -0.00240805770580503
+          },
+          {
+            "component": 9,
+            "radial": 0.009253727272239366,
+            "samples": 266,
+            "tangent": -0.004133886126903006
+          },
+          {
+            "component": 10,
+            "radial": -0.002161453812169556,
+            "samples": 246,
+            "tangent": -0.00705233720440766
+          },
+          {
+            "component": 11,
+            "radial": -0.0018024119149162299,
+            "samples": 260,
+            "tangent": -0.0049296078192084605
+          },
+          {
+            "component": 12,
+            "radial": 0.0034300504240441947,
+            "samples": 259,
+            "tangent": -0.00752356360911056
+          },
+          {
+            "component": 13,
+            "radial": -0.0007594756662206382,
+            "samples": 249,
+            "tangent": -0.0011508557946143506
+          },
+          {
+            "component": 14,
+            "radial": -0.0023104687428567895,
+            "samples": 268,
+            "tangent": -0.003118617035950384
+          },
+          {
+            "component": 15,
+            "radial": 0.011591742155874918,
+            "samples": 276,
+            "tangent": -0.0009513466251025115
+          }
+        ],
+        "mean_radial": 0.0002606171028220799,
+        "mean_tangent": -0.003715373118664824,
+        "output_gradient_norm": 4.984262097793442,
+        "radial_expanding": 5,
+        "tangent_contracting": 15
+      },
+      "mmd_u_mixture": {
+        "components": [
+          {
+            "component": 0,
+            "radial": 0.00045068492572471674,
+            "samples": 292,
+            "tangent": -0.0022559019187536737
+          },
+          {
+            "component": 1,
+            "radial": -0.0012435512601817367,
+            "samples": 234,
+            "tangent": -0.008832371771499451
+          },
+          {
+            "component": 2,
+            "radial": -0.0038289200182116258,
+            "samples": 219,
+            "tangent": -0.003765853649843291
+          },
+          {
+            "component": 3,
+            "radial": 0.0001286832522740663,
+            "samples": 251,
+            "tangent": 0.0006711647009509712
+          },
+          {
+            "component": 4,
+            "radial": 0.00022435259301373863,
+            "samples": 272,
+            "tangent": 0.00327819469460406
+          },
+          {
+            "component": 5,
+            "radial": -0.0034160387314583836,
+            "samples": 254,
+            "tangent": -0.0053263402724765775
+          },
+          {
+            "component": 6,
+            "radial": -0.0072619895572764775,
+            "samples": 214,
+            "tangent": -0.006358985048318273
+          },
+          {
+            "component": 7,
+            "radial": -0.0007611480714035082,
+            "samples": 261,
+            "tangent": -0.009112420780842165
+          },
+          {
+            "component": 8,
+            "radial": -0.0029784828319736403,
+            "samples": 275,
+            "tangent": -0.004208986359796438
+          },
+          {
+            "component": 9,
+            "radial": 0.006153821632855381,
+            "samples": 266,
+            "tangent": -0.00443031567039148
+          },
+          {
+            "component": 10,
+            "radial": -0.0029370148618335173,
+            "samples": 246,
+            "tangent": -0.007503884653011559
+          },
+          {
+            "component": 11,
+            "radial": -0.0022999017159956166,
+            "samples": 260,
+            "tangent": -0.005459203152009716
+          },
+          {
+            "component": 12,
+            "radial": -0.000799001878812287,
+            "samples": 259,
+            "tangent": -0.00712751684918065
+          },
+          {
+            "component": 13,
+            "radial": -0.001278525483802421,
+            "samples": 249,
+            "tangent": -0.0002562466252903396
+          },
+          {
+            "component": 14,
+            "radial": -0.0032409094416153608,
+            "samples": 268,
+            "tangent": -0.003385822322856266
+          },
+          {
+            "component": 15,
+            "radial": 0.00629385620532595,
+            "samples": 276,
+            "tangent": -0.003050861361256931
+          }
+        ],
+        "mean_radial": -0.00104963032771067,
+        "mean_tangent": -0.004195334439998236,
+        "output_gradient_norm": 3.3998728551818633,
+        "radial_expanding": 5,
+        "tangent_contracting": 14
+      }
+    },
+    "panels_sha256": "6eaf89d0bddcac23caa0d1dbabc9d9df62b69fb6141184bfad18a64842560872",
+    "role": "energy_u",
+    "sample_count": 4096,
+    "value": 0.003290448696653008
+  },
+  "schema_version": 1,
+  "scope": "read_only_saved_and_explicit_mathematical_fixtures",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files_verified": 1216,
+  "source_files_verified_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/snapshots/2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "statistic": "signed squared-MMD offdiagonal U-form; no sqrt/clamp"
+}

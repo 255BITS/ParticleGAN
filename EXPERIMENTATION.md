@@ -115,6 +115,9 @@ reference decisions. Existing profiles without this field retain their semantics
 
 The [energy prior-policy comparison](reports/forge/r1r2-energy-prior-freeze-repair/README.md)
 keeps its finite declarations, evidence receipts and conclusions in its report.
+The subsequent [saved-evidence mechanism review](reports/forge/r1r2-next-repair-research/README.md)
+and [output-kernel preparation](reports/forge/r1r2-mmd-repair/PLAN.md)
+retain their hypothesis, software prerequisites and admission limits separately.
 
 The [formulation-comparison readout](reports/forge/FORMULATION_COMPARISON_READOUT.md)
 owns its measured outcomes, control checks, costs, coverage and stopping decisions.

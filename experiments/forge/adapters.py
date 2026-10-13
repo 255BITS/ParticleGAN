@@ -593,7 +593,10 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     adapter = task["adapter"]
     if adapter == "word_joint":
         from .api import resolve_public_recipe
-        if resolve_public_recipe(request["candidate"]).energy_distance_weight:
+        recipe = resolve_public_recipe(request["candidate"])
+        if recipe.output_mmd_weight:
+            from .mmd_adapters import run_word
+        elif recipe.energy_distance_weight:
             from .energy_adapters import run_word
         else:
             from .word_adapter import run_word
@@ -605,7 +608,10 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
         from .api import resolve_public_recipe
-        if resolve_public_recipe(request["candidate"]).energy_distance_weight:
+        recipe = resolve_public_recipe(request["candidate"])
+        if recipe.output_mmd_weight:
+            from .mmd_adapters import run_behavior
+        elif recipe.energy_distance_weight:
             from .energy_adapters import run_behavior
         else:
             from .behavior_adapters import run_behavior

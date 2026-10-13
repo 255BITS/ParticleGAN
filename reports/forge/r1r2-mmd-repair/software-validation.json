@@ -1,0 +1,135 @@
+{
+  "adapter_counterevidence": {
+    "exact_json_ownership_check_error": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility-ownership-list-error.log",
+      "sha256": "c07447837dc10a66f44a64e72a1959eee28fe61f985530dfc139326275d6bdb0"
+    },
+    "ownership_error_software_updates": 326,
+    "resolution": "Scoped metadata adapter fixed; no tensor/update/stream assertion removed and frozen files untouched.",
+    "setup_errors_without_updates": [
+      {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility-adapter-setup-error.log",
+        "sha256": "8d7707d315379c94c191efcf227193a8c1e1b97a04c785acb0fc54e18ce30d84"
+      },
+      {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility-tuple-adapter-error.log",
+        "sha256": "8077bd9ce9822fcf1fb41a6356059c8140c527ccc2afa6f86c165b57437a0133"
+      }
+    ]
+  },
+  "adjacent_native": {
+    "energy_math_checks": 21,
+    "includes_existing_trainer_checks": 33,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/mmd-adjacent-native-regression.log",
+      "sha256": "0c5c96f3ee234332386a74cf17cc1415dd32e81e1be6b4cbcebfa65c35c0a590"
+    },
+    "passed": 85,
+    "recipe_defaults_checks": 31,
+    "scope_note": "Recorded before final pure finite-schema rejection extension; same valid numerical law. Counts overlap core_final."
+  },
+  "archived_inactive_comparison": {
+    "actual_software_updates": 408,
+    "bulk_artifact_index": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-artifact-index.json",
+      "sha256": "16871a215287c722aed0ef2fe4bb8c0dd5b81b2ba350c4dd588a92f6cde27a1f"
+    },
+    "junit": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility.xml",
+      "sha256": "c99999ab6f137d4a75ad691d46d69e398fc5fc2313752fe1b740d068910575dc"
+    },
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/inactive-compatibility.log",
+      "sha256": "bea777ef02f72f1078b3c8616a48c11d5012747b86004ae76c2a7cfb51852827"
+    },
+    "metadata_only_adaptation": "Two exact inactive defaults, tuple literal serializer retaining full AST assertion proof, exact float JSON-list width ownership accepted. Original tensor/optimizer/update/sampling/stream assertions unchanged.",
+    "original_comparator_sha256": "0ef9c1a1cc30abe3ac02e999d989ef6fbb7374d3ca4b6e85bc87aa9ff7ad2211",
+    "original_conftest_sha256": "0ad701c939839a02c282d4998ddcdf47c22b97cdda6d3515d50f3c90e9265241",
+    "passed": 63,
+    "scope": "Original archived API/native/component/word two-interpreter software cohort; no current task gate credit",
+    "source": "reports/forge/r1r2-mmd-repair/inactive_compatibility.py"
+  },
+  "bindings_adjacent_regression": {
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/test-mmd-bindings-regression.log",
+      "sha256": "945608dd029c23c8038e610f0c4bf0ea035017e4e8f8d7f3b77db43a19223628"
+    },
+    "passed": 132,
+    "scope_note": "Recorded before final pure representation/cleanup guards; final33 includes those guards. Counts overlap bindings_final."
+  },
+  "bindings_final": {
+    "actual_fixture_updates": 51,
+    "clock": "24 native software updates; no ordinary own-clock qualification",
+    "junit": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/test-mmd-bindings-final.junit.xml",
+      "sha256": "1f0e3dbde101b67c922813c674711ce7a597c413f3da5041232e50cc150970f7"
+    },
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-repair-20261012/test-mmd-bindings-final.log",
+      "sha256": "27cc794396ee32974db85fb0bcae6b407e89b19c8126f927c4eb135690ff5be8"
+    },
+    "passed": 33,
+    "word_counters": "834/836 and passing producer metrics are synthetic strict-restore fixtures; original hold remains INCOMPLETE2/4000. CUDA ordinary/acquisition do two actual updates each."
+  },
+  "budget_change_authorized": false,
+  "core_final": {
+    "existing_trainer_checks": 33,
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-prior-freeze-repair-20261012/mmd-core-final-finite-schema.log",
+      "sha256": "644d6c6f5d11dbd95315363054b6c2399c6ab129568d597d178f3a4da8f8a34d"
+    },
+    "new_mmd_checks": 52,
+    "new_native_fixture_updates": 8,
+    "passed": 85
+  },
+  "draft_bindings": {
+    "all_global_and_seven_host_deltas": [
+      "output_mmd_weight"
+    ],
+    "closed_declarations_preserved": 59,
+    "fresh_cases_required": 14,
+    "original_pins": 19,
+    "receipt_sha256": "792a3826fd8f0271519e2aee57bf5eed20df387eefbd7b4e2b060ec3fa1caef7"
+  },
+  "forge_validate": {
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012/forge-validate.log",
+      "sha256": "dad8be7e33ae0252ad0f1d7483ccdc4cda7a6a1f06d3564310bafc208967908c"
+    },
+    "status": "PASS"
+  },
+  "limits": [
+    "Software acceptance is separate from task quality. Fixed widths and weight 1 are one low-confidence hypothesis.",
+    "Archived results retain their original 2b04 source; this prospective source requires all 14 fresh scientific cases.",
+    "Shared 8000 paid cap is unchanged; the full original 900-second word reservation cannot fit the remaining allowance."
+  ],
+  "paid_admission_authorized": false,
+  "prospective_scientific_source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "queue": {
+    "claims_added": 0,
+    "paid_attempts_added": 0,
+    "paid_seconds_added": 0,
+    "unchanged_sha256": "95e0f10aeb4f1835b932a3302de6837c9334c06eaed0c727bb9acfe1b620abe7"
+  },
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_success": false,
+  "scope": "bounded_software_preparation_only",
+  "software_source_sha256": {
+    "experiments/forge/adapters.py": "84bb5bebd369e9060c0acf6b21ab22dc160a04fd2bc4b0d2aa040913565b471a",
+    "experiments/forge/api.py": "b4e7108319effc2610bb7fb0b0f5287efeff6899ea7dadb63d333b1e5af7f368",
+    "experiments/forge/boundaries.py": "07159393fc8f3ed76daa8ebf8e8e25d7177aceea7f698e8b41f645d687bd97bb",
+    "experiments/forge/clockfree.py": "bd1c4c62dc324113d06d1d60c557d42a31235a3af0d5921732e5ce0621f1d442",
+    "experiments/forge/mmd_adapters.py": "7689b8533af018bcc043d1717d37fc9b768efeaf3c2d8d428a58c4b7706bfae4",
+    "particlegan/kernel_mmd.py": "45c79addf60ac7209b8d5f9c213bfb468ce12ee7974dd3af180c1693448b8dd8",
+    "particlegan/recipe_compat.py": "845883cd6035c4c5bd24db3c1f4f1dd3dce59acec5cc89da1bc1728496124861",
+    "particlegan/recipes.py": "0297c8ecf61b477d3b676d81b9b1b97ab6d6290c6d686164a4f5518284fd6f4c",
+    "particlegan/training.py": "79fbdd75df604e5c486b51cc4266d9aab66b6c7c84a58f266755061f4c61ce07",
+    "reports/forge/r1r2-mmd-repair/inactive_compatibility.py": "a85b4c0dbced3dd48e56ff3734ddc2949ab50fd38337ad85ae2c92029eae9a8b",
+    "tests/test_kernel_mmd.py": "9d4ac1706b31fbee8d3541962918bbbfe5ccf5ad6d8731f2fdfa4611ae71f8d2",
+    "tests/test_mmd_bindings.py": "4d1fc5f055c4c74ff854182ac17d3a67e3d1b2c20929beaa13436c7a4f6f5a1f"
+  },
+  "status": "PASS"
+}

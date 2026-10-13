@@ -1,0 +1,165 @@
+{
+  "algebra": {
+    "LS_adversarial_scale": "1/4",
+    "NS_common_shift_curvature_at_equilibrium": 0.5,
+    "NS_expansion": "softplus(s)=log(2)+s/2+s^2/8-s^4/192+O(s^6)",
+    "R1_R2_penalty_scale": "1/16",
+    "affine_LS_common_shift_curvature": 0.125,
+    "effective_gamma_ratio_after_normalizing_adversarial_units": "1/4",
+    "gamma_point1_maps_locally_to": 0.025,
+    "mapped_chain_rule_ratio_of_recorded_mean_weights": 0.2499998135938364,
+    "mean_mapped_chain_rule_ascent_weight": 0.12515691438248558,
+    "polynomials": {
+      "D_fake": {
+        "LS_after_affine_map_constant_linear_quadratic": [
+          "1/8",
+          "1/8",
+          "1/32"
+        ],
+        "NS_Taylor_linear_quadratic": [
+          "1/2",
+          "1/8"
+        ],
+        "gradient_and_Hessian_scale_relative_to_NS_at_zero": "1/4"
+      },
+      "D_real": {
+        "LS_after_affine_map_constant_linear_quadratic": [
+          "1/8",
+          "-1/8",
+          "1/32"
+        ],
+        "NS_Taylor_linear_quadratic": [
+          "-1/2",
+          "1/8"
+        ],
+        "gradient_and_Hessian_scale_relative_to_NS_at_zero": "1/4"
+      },
+      "E_reversed_real": {
+        "LS_after_affine_map_constant_linear_quadratic": [
+          "1/8",
+          "1/8",
+          "1/32"
+        ],
+        "NS_Taylor_linear_quadratic": [
+          "1/2",
+          "1/8"
+        ],
+        "gradient_and_Hessian_scale_relative_to_NS_at_zero": "1/4"
+      },
+      "G_fake": {
+        "LS_after_affine_map_constant_linear_quadratic": [
+          "1/8",
+          "-1/8",
+          "1/32"
+        ],
+        "NS_Taylor_linear_quadratic": [
+          "-1/2",
+          "1/8"
+        ],
+        "gradient_and_Hessian_scale_relative_to_NS_at_zero": "1/4"
+      }
+    },
+    "raw_LS_common_shift_curvature": 2.0,
+    "scalar_coordinate_fixtures": [
+      {
+        "NS_score": -0.18125203352374686,
+        "affine_LS_chain_rule_to_NS_ascent_ratio": 0.2500566990390875,
+        "affine_LS_score": 0.4546869916190633,
+        "same_raw_score_LS_to_NS_ascent_ratio": 2.166682105113586
+      },
+      {
+        "NS_score": 0.0,
+        "affine_LS_chain_rule_to_NS_ascent_ratio": 0.25,
+        "affine_LS_score": 0.5,
+        "same_raw_score_LS_to_NS_ascent_ratio": 2.0
+      },
+      {
+        "NS_score": 0.17253734933154963,
+        "affine_LS_chain_rule_to_NS_ascent_ratio": 0.2499416330067357,
+        "affine_LS_score": 0.5431343373328874,
+        "same_raw_score_LS_to_NS_ascent_ratio": 1.8107499255057697
+      }
+    ],
+    "score_map": "q = 1/2 + s/4"
+  },
+  "autograd_calls": 0,
+  "budget": {
+    "admission": "BLOCKED by existing full-reservation paid ceiling; no cap increase or task reduction",
+    "aggregate_existing_attempts": 238,
+    "aggregate_paid_seconds": 7168.248061007995,
+    "full_word_reservation_fits": false,
+    "headroom_seconds": 831.7519389920053,
+    "original_word_full_reservation_seconds": 900,
+    "unchanged_cap_seconds": 8000
+  },
+  "conclusion": "Defer native LS; reject the saved twofold-force and raw-curvature comparisons as stronger from-initialization density evidence.",
+  "current_and_snapshot_scientific_bytes_match": true,
+  "future_scope_if_reconsidered": {
+    "complete_comparison_allowance_seconds": 5040,
+    "exact_cached_NS_control_allowance_seconds": 2520,
+    "full_new_arm_allowance_seconds": 2520,
+    "inherited_labels": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "new_source_requires_fresh_controls": true,
+    "original_ordinary_hosts": 6,
+    "original_task_protocol_unchanged": true,
+    "parent_energy_weight": 0.0,
+    "prior_update": "learned",
+    "separate_own_clock": true,
+    "sole_recipe_delta": "loss non_saturating to least_squares"
+  },
+  "inputs_sha256": {
+    "NS_parent_publication": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+    "archived_NS_request": "4d4db71ee278494e2130dd9a1b7b9933bd15b66a62085260fb0d9c28b6ebebb3",
+    "latest_closed_publication": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207",
+    "reports/forge/r1r2-energy-distance-repair/research/least-squares/README.md": "c8e978bdb914fa81ddef646436e0b3a7f167adaaede4ebdd2cf2b4c6d1e97c85",
+    "reports/forge/r1r2-energy-distance-repair/research/least-squares/diagnosis.json": "b4a01f64506c765f8684c4e2ff89251a2d9b264f78ddd4181b06d4867d2581e7",
+    "reports/forge/r1r2-energy-distance-repair/research/least-squares/probe.py": "2b4c7135bcdfd303ddc22b929d61d8752fe31774b9060952e6a26f5e79d59cd2",
+    "reproduction_source": "9ffcea4b6a3c7d3d2128432cd522147e34b39e723453683101f600b80c3cdf21"
+  },
+  "live_evaluations_or_rescoring": 0,
+  "models_constructed": 0,
+  "non_equivalence_limits": [
+    "Affine map is not the native initialized critic path.",
+    "Taylor statement is local; logistic fourth/higher terms and LS overshoot/tails differ.",
+    "Gradient penalty changes the unregularized best-response relation.",
+    "Fixed Adam/AMSGrad epsilon and auxiliary objective units prevent exact optimizer equivalence.",
+    "Saved input-force proxies omit G/E Jacobians, optimizer history and future critic refitting."
+  ],
+  "optimizer_updates_added": 0,
+  "original_saved_NS_fixture_identity": {
+    "attempt_id": "3e1e55b0f89d4a8c8cedd706dbd4e021",
+    "candidate_revision": "766cbd948505c484976ba0abd553dac11400eb537af1b8ac10a326c78aefe0fe",
+    "checkpoint_sha256": "ac391adc90c90cc3dd445b4201765163a20c1187b39c90ba954d450afc8be328",
+    "original_mean_of_raw_LS_to_NS_ascent_weight_ratios": 1.9996220599783703,
+    "original_probe_scope": "saved_endpoint_plus_explicit_target_center_fixture",
+    "original_proxy": {
+      "least_squares": {
+        "mean_radial_variance_drift": -0.0006047676326578766,
+        "mean_tangent_variance_drift": -0.05049547678569146,
+        "radial_expanding_components": 6,
+        "tangent_contracting_components": 16
+      },
+      "non_saturating": {
+        "mean_radial_variance_drift": -0.0003206222145451173,
+        "mean_tangent_variance_drift": -0.025162078933406596,
+        "radial_expanding_components": 6,
+        "tangent_contracting_components": 16
+      }
+    },
+    "panels_sha256": "2db2838d479c63cb7903c27253542dc5814a12a277393b6c4fbb0d526a2b6ebe"
+  },
+  "python_rng_unchanged": true,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "Exact rational affine/Taylor loss algebra plus byte-bound saved receipt review; not a repair prerequisite PASS.",
+  "source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "source_files_checked": 1216,
+  "source_origin_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+  "status": "PASS",
+  "tensor_runtime_imported": false
+}

@@ -1,0 +1,28 @@
+{
+  "budget_change_authorized": false,
+  "compiled_memory_current": true,
+  "evidence_hashes": {
+    "reports/forge/EXPERIMENT_MEMORY.md": "2acaf1c1855b160efd1125a57690b80fde4151da3db4d6591f3b8a77a5b17282",
+    "reports/forge/compilation.json": "b971945b6be898b1ef11d7cb125b3bf5d97c5fb3de81443c7b18444facf11656",
+    "reports/forge/r1r2-mmd-repair/independent-review.json": "fece94dd034cc22d5565dde8ebdb8e85cc3380cf1f0f20aa133e65845c07093a",
+    "reports/forge/r1r2-mmd-repair/manifest.json": "1193830ddc81e8b241633d7c0abbfbb8a1b9fdfe5287deebfe87727d5ea28e95",
+    "reports/forge/r1r2-mmd-repair/preparation.json": "792a3826fd8f0271519e2aee57bf5eed20df387eefbd7b4e2b060ec3fa1caef7",
+    "reports/forge/r1r2-mmd-repair/software-validation.json": "0aa75ad147227f1db3713b9f5986fb949453c007bf9d98f7cf816c36f76e8b15"
+  },
+  "frozen_declaration_hash_relations_preserved": 70,
+  "historical_publication_records_preserved": 513,
+  "local_links_checked": 24,
+  "new_paid_attempts": 0,
+  "new_paid_seconds": 0,
+  "new_ranked_results": 0,
+  "original_host_pins": 19,
+  "paid_admission_authorized": false,
+  "prospective_source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "prospective_source_files": 1218,
+  "published_and_current_snapshots_preserved": 8,
+  "schema_version": 1,
+  "scientific_success": false,
+  "scope": "software_preparation_only",
+  "shared_queue_unchanged_sha256": "95e0f10aeb4f1835b932a3302de6837c9334c06eaed0c727bb9acfe1b620abe7",
+  "status": "PASS"
+}

@@ -1,0 +1,45 @@
+{
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-mmd-preparation-20261012",
+  "baseline_role": "non_saturating",
+  "budget_change_authorized": false,
+  "campaign": {
+    "budget_seconds": 5040,
+    "candidate_budget_seconds": 2520,
+    "id": "r1r2-output-mmd-repair-v1"
+  },
+  "candidates": [
+    {
+      "candidate": "r1r2-non-saturating-ams-m110-v1",
+      "role": "non_saturating",
+      "study": "r1r2-output-mmd-fresh-control-v1-study"
+    },
+    {
+      "candidate": "r1r2-non-saturating-output-mmd-u-v1",
+      "role": "mmd_u",
+      "study": "r1r2-non-saturating-output-mmd-u-v1-study"
+    }
+  ],
+  "current_aggregate_paid_cap_seconds": 8000,
+  "evidence_origin_commit": "59256e21fd9372d0a837a74808dc811518d4ffd4",
+  "id": "r1r2-output-mmd-repair-v1",
+  "max_candidates": 2,
+  "paid_admission_authorized": false,
+  "prepared_runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "prepared_source_digest": "e2401cced59c8696d6a3eae3c7b9fc0ab7ee360bcdb790c2e5c91d0a1c1834cf",
+  "proposed_aggregate_paid_cap_seconds": 12209,
+  "round": 1,
+  "schema_version": 1,
+  "scientific_python_executable": "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+  "searches": [],
+  "shared_queue": "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue",
+  "status": "draft_budget_pending",
+  "task_full_allowance_seconds": {
+    "ae_gan_hold": 300,
+    "clockfree_audit_measurement_v1": 300,
+    "five_word_joint_smoke": 900,
+    "gaussian1d_smoke": 120,
+    "ring16_acquisition": 300,
+    "two_pole": 300,
+    "unused_token_hold": 300
+  }
+}
