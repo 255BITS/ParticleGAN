@@ -78,7 +78,7 @@ const fs = require('node:fs');
   await page.selectOption('#filter', 'all');
   await page.fill('#recipe', 'Cell moment');
   await page.fill('#search', 'vector_anisotropic');
-  const anisotropic = page.locator('#matrix tbody tr').filter({ hasText: 'Scoped diagnostic' });
+  const anisotropic = page.locator('#matrix tbody tr').filter({ hasText: 'Scoped diagnostic' }).filter({ hasText: 'source f90962a5b3' });
   assert.equal(await anisotropic.count(), 1);
   assert.equal(await anisotropic.locator('td .badge.PASS').count(), 4);
   assert.equal(await anisotropic.locator('td .badge.FAIL').count(), 1);
