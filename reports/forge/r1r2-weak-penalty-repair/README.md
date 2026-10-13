@@ -97,3 +97,8 @@ Close this contrast without adoption. Preserve the stronger parent's acquisition
 passes and unresolved Ring failure. Further work requires a distinct justified
 mechanism and separate finite registration under the original complete suite;
 no automatic penalty grid, seed study, longer training, added budget or Tier 2.
+
+Subsequent [energy-distance prerequisites](research/energy-distance/README.md)
+and the separate [single structural contrast plan](../r1r2-energy-distance-repair/PLAN.md)
+record the next research direction. They add no trained result or credit to this
+closed comparison.

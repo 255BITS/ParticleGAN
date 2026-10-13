@@ -24,10 +24,29 @@
     "saved_observations": 96,
     "terminal_suffix": 0
   },
+  "energy_software_prerequisite": {
+    "explicit_fixture_and_saved_prefix_scope": true,
+    "finite_difference_coordinates": 8,
+    "finite_difference_max_absolute_error": 2.827882095157719e-10,
+    "log_sha256": {
+      "compile-prerequisite-check.log": "51beca62a9ba446dc97943a0159cd91a645bad0acbcf9190d90fe1d75eca1d3b",
+      "energy-distance-probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "energy-distance-probe.stdout.log": "a0b6f6c5b74d826a4cc2f478ceb988466ceb9e057795bf8a8e6528a6101aaec5"
+    },
+    "model_recipe_optimizer_constructions": 0,
+    "next_selected_research_weight": 1,
+    "optimizer_updates_added": 0,
+    "paid_admission": false,
+    "qualification_input": false,
+    "sampling_draws_added": 0,
+    "source_unchanged": true,
+    "status": "PASS"
+  },
   "execution_commit": "3cb46b91121f42f8b171a77f17776365aebad1d8",
   "inputs_sha256": {
+    "reports/forge/r1r2-energy-distance-repair/PLAN.md": "7317e73548b621caf877f8d95aec180ab220b1ed34c99a0802e5a503cb12870d",
     "reports/forge/r1r2-weak-penalty-repair/PLAN.md": "8c9d09f21797a90e33f24483e6125a04a7d5bf2a534154fa258aa0b563424686",
-    "reports/forge/r1r2-weak-penalty-repair/README.md": "a80a017cba799a8d5e03f829061b8484c432f42a522c80c20f67bea3b2a4e184",
+    "reports/forge/r1r2-weak-penalty-repair/README.md": "52511024040637db423e857b63ccea896dbeb27233b591e25a8e848c4340a4d6",
     "reports/forge/r1r2-weak-penalty-repair/audit_collection.py": "d8719a7f6b1917f1563ec7e3bd43c08355666d1bf6b2c653d0d5280938b8266d",
     "reports/forge/r1r2-weak-penalty-repair/collection-audit-readout.md": "a4deeb29679393f7c1313d9e54c074739fdec20e89e922bc0013c3b8fe5093ae",
     "reports/forge/r1r2-weak-penalty-repair/collection-audit.json": "f252d35de8ca405fa34f6017db4adb7786949099cd61c2812d8bf3a9fbc5ef33",
@@ -39,7 +58,11 @@
     "reports/forge/r1r2-weak-penalty-repair/publication/results.json": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
     "reports/forge/r1r2-weak-penalty-repair/registration-validation.json": "2436079b2f071b4eb592df313f1c6f58d7f5f9c797b64898158995bce523bc1b",
     "reports/forge/r1r2-weak-penalty-repair/registration.json": "f321d5a9a38a767095a885601a162db08d76c0e2e72c151fb34ff4d9cf6efaf7",
-    "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md": "46063e613846b0b6b2a804b3193c86336d42c066677966d01f3422241726f13a",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-api-plan.md": "f7afcca218d8a6066d4f2b2990b4780ddf0869cdf4c9d7ab34df7bef059a3336",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/README.md": "6e13586deafa571f966f55b836dd9be999bcc350d4c5a7f5de8e105488414de1",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/diagnosis.json": "a0b6f6c5b74d826a4cc2f478ceb988466ceb9e057795bf8a8e6528a6101aaec5",
+    "reports/forge/r1r2-weak-penalty-repair/research/energy-distance/probe.py": "319af6fedb2471bdf18ff3ea2e4c2de27ebe44932de63270dfcbd48797f4e754",
+    "reports/forge/r1r2-weak-penalty-repair/research/next-density-mechanism.md": "4d36cbe7b3c9f643025034dd8b40b6a5d1b845ae13a0088932d93778cf8a1c9b",
     "reports/forge/r1r2-weak-penalty-repair/research/weak-penalty.md": "44a0bdbd9c4e52ea5d09b43ae7d9c756d42667d033c35940f87d1bcbe002747a",
     "reports/forge/r1r2-weak-penalty-repair/test_weak_penalty_workflow.py": "d8e38eb7a020c3f24aec52c3671b44822236c8213ef165caa21edab0da624bab",
     "reports/forge/r1r2-weak-penalty-repair/workflow.py": "752f3aa7fe5ca3cc1e3d6ed03168ad9733c5c53125d89dad4f6912f1808f3c85",
