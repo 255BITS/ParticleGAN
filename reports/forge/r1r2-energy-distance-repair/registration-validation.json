@@ -1,0 +1,43 @@
+{
+  "bulk_archive": "/mnt/ml7tb/ParticleGAN-forge/r1r2-energy-distance-repair-20261012",
+  "bulk_files_in_git": false,
+  "concurrent_word_reservations_allowed": 1,
+  "fresh_measurements": 14,
+  "full_campaign_allowance_seconds": 5040,
+  "full_candidate_allowance_seconds": 2520,
+  "historical_paid_attempts": 217,
+  "historical_paid_seconds": 6586.162437112915,
+  "independent_preflight": "PASS",
+  "inputs_sha256": {
+    "configs/forge/catalog.json": "0c2dc234f89a3ac244f52a0fd52d4f31862edda082d67888c8d3e2edd8568d7a",
+    "reports/forge/EXPERIMENT_MEMORY.md": "ef77783aec33b83e9d82fb7870b59d5780c3da4d895656e7c0964553b3d78e1b",
+    "reports/forge/compilation.json": "0d2e46c456cea62e653945f9542e49b5319c76853c34003081d1a2231ba34e3c",
+    "reports/forge/r1r2-energy-distance-repair/manifest.json": "b9147d2fe0a5a249a10ad85c582449656c75f551b6aa55c9a9a2911e10e97a9e",
+    "reports/forge/r1r2-energy-distance-repair/preflight-review.json": "c0f15f97829aaea1f8ec6d9ee9567a3bf95684e51abe3b0e5eb439338538203d",
+    "reports/forge/r1r2-energy-distance-repair/registration.json": "848667950e78d79675c208f3d903ca14fd7a047794c22abe6712bc0c21547e2c",
+    "reports/forge/r1r2-energy-distance-repair/software-validation.json": "8fb2573fc7834747d3637060287b813023c90d3584d00961ee1455dceb652a8d"
+  },
+  "local_logs_sha256": {
+    "compile-catalog-final-check.log": "a73475b802a35960d6879fb3dd79655206434947929868d11bbc71646f960404",
+    "compile-catalog-final.log": "99d7d5ca8fb1a1e8d269b0127313bae11b23927c8f3ad9a618301d429cf0e82a",
+    "independent-preflight-final.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "independent-preflight-final.stdout.log": "b4c94a3e76770f2967b5032173e37030a033bad58906d620da121a098a7cc188",
+    "prepare.log": "e41911a1af30babaff7504b06c9bdeff0383bcb29bc21a422aa2273bb76be380"
+  },
+  "memory_status": "CURRENT",
+  "old_source_cached_grades": 0,
+  "paid_admission_at_validation": false,
+  "preserved_published_record_count": 513,
+  "qualification_input": false,
+  "recall_record_count": 839,
+  "reproduction": "Use this campaign workflow prepare/run/collect with the frozen manifest and explicit scientific Python; admission binds the subsequent reviewed execution commit, whose scientific bytes must remain unchanged.",
+  "reviewed_source_commit": "79a16bc7c5b0cd2eedfb9a17a0f0095c39cb2d40",
+  "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+  "schema_version": 1,
+  "scientific_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+  "scope": "preexecution_registration_validation",
+  "shared_paid_cap_seconds": 8000,
+  "status": "PASS",
+  "valid_inventory_coverage": true,
+  "word_reservation_seconds": 900
+}

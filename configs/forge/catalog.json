@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11783,
+    "files": 11784,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -40,7 +40,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 86,
+      "forge_engine": 87,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -103,7 +103,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 404,
-      "engine_support": 86,
+      "engine_support": 87,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -123,8 +123,8 @@
     "missing": [],
     "stale": [],
     "unclassified": [],
-    "tracked_count": 11783,
-    "declared_count": 11783
+    "tracked_count": 11784,
+    "declared_count": 11784
   },
   "excluded_prefixes": [
     "configs/forge/",
@@ -7453,6 +7453,13 @@
     {
       "path": "experiments/forge/decision_contracts.py",
       "git_blob": "89f4dc9c4c97c3ab4e5096e71393c66dbbb0f5af",
+      "family": "forge_engine",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "path": "experiments/forge/energy_adapters.py",
+      "git_blob": "7f911776c42bb57e2e9965643bdb04b0afdba355",
       "family": "forge_engine",
       "role": "engine_support",
       "suggested_tiers": []
