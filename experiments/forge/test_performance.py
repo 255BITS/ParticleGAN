@@ -388,13 +388,27 @@ def _add_supplemental(inputs, add_recipe, add_test, add_record):
             status = recorded_status({"status": cell["status"]})
             if status in {"PASS", "FAIL"} and cell["full_protocol_complete"] is not True:
                 raise ValueError("test performance: incomplete diagnostic claims full gate")
+            result = cell["result"]
+            if "effective_recipe" in result:
+                effective = result["effective_recipe"]
+                declared = recipe.get("declared_global_recipe", {})
+                owned = result.get("task_owned_recipe_fields", {})
+                if (stable_hash(effective) != result.get("effective_recipe_sha256")
+                        or set(effective) != set(declared)
+                        or any(value != (owned[field]["value"] if field in owned else declared[field])
+                               for field, value in effective.items())
+                        or result.get("original_grade", {}).get("gate_status") != cell["status"]):
+                    raise ValueError("test performance: executed diagnostic recipe or grade differs from binding")
             identity = {"candidate_id": cell["candidate_id"], "recipe_sha256": cell["recipe_sha256"],
                         "source_digest": conditions["source_digest"], "runtime": conditions["runtime"]}
+            if cell.get("candidate_revision") is not None:
+                identity["candidate_revision"] = cell["candidate_revision"]
             key = add_recipe(identity, cell["label"], False, "Forge", recipe)
             test = add_test(cell["task_id"], conditions, "Scoped diagnostic", conditions["task"], "separate scoped protocol")
             add_record(test, key, {"kind": "optimizer", "status": status, "recorded_status": cell["status"],
                 "receipt": pin["path"], "receipt_sha256": pin["sha256"], "evidence_available": True,
                 "result": cell["result"], "full_protocol_complete": cell["full_protocol_complete"],
+                "cell_id": cell["id"], "candidate_revision": cell.get("candidate_revision"),
                 "original_evidence": document["original_evidence"], "scope": document["scope"]})
 
 

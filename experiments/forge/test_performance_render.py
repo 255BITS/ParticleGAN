@@ -2,8 +2,97 @@
 import html
 import json
 from posixpath import relpath
+from pathlib import Path
+from collections import Counter
 
 from .test_performance import cell_status
+
+
+def render_discovery_navigation(root, page):
+    """Shared inventory navigation over byte-pinned scoped outcomes only."""
+    from .test_performance import Inputs, SUPPLEMENTAL, portable
+    inputs = Inputs(root)
+    if not (inputs.root / SUPPLEMENTAL).is_file():
+        return ""
+    registry = inputs.read(SUPPLEMENTAL)
+    if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
+        raise ValueError("test discoveries: invalid display registry")
+    full = prefix = None
+    for pin in registry["publications"]:
+        document = inputs.read(pin["path"], sha256=pin["sha256"])
+        summary = document.get("discovery_summary", {})
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64"}:
+            continue
+        if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
+                or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
+                or summary.get("promotion") is not False or portable(document) != document):
+            raise ValueError("test discoveries: scoped evidence cannot promote or leak local references")
+        if summary["id"] == "nonatlas-cell-moment-seed0-20261012":
+            if full is not None:
+                raise ValueError("test discoveries: duplicate full-run summary")
+            for round in summary["rounds"]:
+                cells = [cell for cell in document["cells"] if cell["result"]["round"] == round["id"]]
+                counts = Counter(("control" if cell["result"]["mode"] == "per_kernel" else "aggregate", cell["status"])
+                                 for cell in cells)
+                if (len(cells) != round["full_runs"] or any(cell["full_protocol_complete"] is not True for cell in cells)
+                        or counts["aggregate", "PASS"] != round["aggregate_passed"]
+                        or counts["control", "PASS"] != round["control_passed"]
+                        or sum(count for (kind, _), count in counts.items() if kind == "aggregate") != round["aggregate_total"]
+                        or sum(count for (kind, _), count in counts.items() if kind == "control") != round["control_total"]
+                        or abs(sum(cell["result"]["actual_Popen_to_exit_seconds"] for cell in cells)
+                               - round["Popen_to_exit_seconds"]) > 1e-7):
+                    raise ValueError("test discoveries: summary differs from original cells")
+            if (summary["full_run_count"] != len(document["cells"])
+                    or sum(round["full_runs"] for round in summary["rounds"]) != len(document["cells"])
+                    or any(summary[field] != sum(round[field] for round in summary["rounds"])
+                           for field in ("aggregate_passed", "aggregate_total", "control_passed", "control_total"))
+                    or abs(summary["full_round_charge_seconds"]
+                           - sum(round["Popen_to_exit_seconds"] for round in summary["rounds"])) > 1e-7):
+                raise ValueError("test discoveries: overall summary differs from original rounds")
+            full = pin, summary
+        else:
+            if len(document["cells"]) != summary["prefix_cells"] or any(cell["status"] != "INCOMPLETE"
+                    or cell["full_protocol_complete"] is not False for cell in document["cells"]) or abs(
+                    sum(cell["result"]["actual_Popen_to_exit_seconds"] for cell in document["cells"])
+                    - summary["paired_charge_seconds"]) > 1e-7:
+                raise ValueError("test discoveries: prefix cannot become full quality evidence")
+            prefix = pin, summary
+    if full is None:
+        return ""
+    if prefix and abs(prefix[1]["combined_disjoint_charge_seconds"]
+                      - full[1]["full_round_charge_seconds"] - prefix[1]["paired_charge_seconds"]) > 1e-7:
+        raise ValueError("test discoveries: disjoint charge differs from original scopes")
+    base = Path(page).parent
+    def link(name):
+        return relpath(str(Path(root) / name), str(base))
+    pin, summary = full
+    lines = ["", "## Scoped non-Atlas discoveries", "",
+             f"[Verified complete recipes, exact protocols and all outcomes]({link(pin['path'])}): "
+             f"**{summary['full_run_count']} unique full runs** in three separately scoped seed-0 rounds. "
+             f"Aggregate outcomes are **{summary['aggregate_passed']}/{summary['aggregate_total']} PASS**; "
+             f"the **{summary['control_total']} unique controls** are **{summary['control_passed']}/{summary['control_total']} PASS**. "
+             "These are execution-ledger counts, not a pooled score, independent control repetitions or an ordinary whole-suite winner.", "",
+             "| Registered round / task IDs | Executed source | Aggregate PASS / total | Control PASS / total | Inclusive child seconds |",
+             "| --- | --- | ---: | ---: | ---: |"]
+    for round in summary["rounds"]:
+        lines.append(f"| {_text(round['id'])}<br>{', '.join('`'+name+'`' for name in round['case_ids'])} | "
+                     f"`{round['source_digest'][:12]}` · seed 0 | {round['aggregate_passed']}/{round['aggregate_total']} | "
+                     f"{round['control_passed']}/{round['control_total']} | {round['Popen_to_exit_seconds']:.9f} |")
+    lines += ["", "All four aggregate objectives pass the anisotropic, unequal-width, unequal-mass, broad, overlap and spiral "
+              "scoped cases in the first two rounds. Acquisition preserves **Bures ring FAIL**. The Gaussian acquisition "
+              "smoke uses any scheduled full pass plus an independent same-state draw; ring executes 1,600 updates with "
+              "96 observations and its original 400-update schedule horizon. Published-discriminator width is a distinct "
+              "task ID. Metric regressions remain visible; no objective is declared universally superior.", ""]
+    if prefix:
+        pp, ps = prefix
+        lines += [f"[Paired finite-realization mechanism prefix]({link(pp['path'])}): two 64-update arms, both **INCOMPLETE** "
+                  "against the original 7,000-update staggered100 quality gates. "
+                  f"Prefix charge **{ps['paired_charge_seconds']:.9f} seconds**; disjoint charge including the three full rounds "
+                  f"**{ps['combined_disjoint_charge_seconds']:.9f} seconds**. No prefix PASS is imported into full quality.", ""]
+    lines += ["Preparation/audit errors and exclusions are retained in the pinned receipts. Original source, generated arrays "
+              "and checkpoints remain local-only; individual consumed CUDA packets were not separately retained. "
+              "These discoveries change display coverage only. Selected family rows, ordinary qualification and defaults remain unchanged.", ""]
+    return "\n".join(lines) + "\n"
 
 
 def _text(value):
@@ -150,7 +239,7 @@ ts.sort((a,b)=>{let d=sort.value==='passes'?a.c.passing-b.c.passing:sort.value==
 rowPage=Math.min(rowPage,Math.max(0,Math.ceil(ts.length/rowSize)-1));colPage=Math.min(colPage,Math.max(0,Math.ceil(rs.length/colSize)-1));
 const stats=$('stats');stats.replaceChildren();for(const [n,label] of [[ts.length,'test / protocol rows'],[rs.length,'recipe identities'],[ts.filter(x=>!x.c.passing).length,'zero optimizer passes'],[ts.filter(x=>!x.c.passing&&!hasWitness(x.t)).length,'no indexed witness']]){const div=el('div',undefined,'stat');div.append(el('b',n),el('span',label));stats.append(div);}
 const cols=rs.slice(colPage*colSize,(colPage+1)*colSize),thead=$('matrix').querySelector('thead'),tbody=$('matrix').querySelector('tbody');thead.replaceChildren();tbody.replaceChildren();const head=el('tr');head.append(el('th','Test / exact protocol'),el('th','PASS / recipes'),el('th','Coverage & witnesses'));
-cols.forEach(r=>{const th=el('th'),btn=el('button',r.label);btn.title='Open complete recipe '+r.id;btn.onclick=()=>showRecipe(r.id);th.append(btn,el('small',r.id.slice(0,10)),el('small',String(r.recipe?.optimizer_family||r.recipe?.native_recipe?.optimizer_family||r.recipe?.complete_recipe?.optimizer_family||r.lane)));head.append(th);});thead.append(head);
+cols.forEach(r=>{const th=el('th'),btn=el('button',r.label);btn.title='Open complete recipe '+r.id;btn.onclick=()=>showRecipe(r.id);th.append(btn,el('small',r.id.slice(0,10)),el('small',String(r.recipe?.optimizer_family||r.recipe?.native_recipe?.optimizer_family||r.recipe?.complete_recipe?.optimizer_family||r.recipe?.declared_global_recipe?.optimizer_family||r.lane)));head.append(th);});thead.append(head);
 ts.slice(rowPage*rowSize,(rowPage+1)*rowSize).forEach(({t,c})=>{const tr=el('tr',undefined,c.passing?'':'zero'),th=el('th'),btn=el('button',t.task_id);btn.onclick=()=>showCell(t.id);th.append(btn,el('small',t.lane+' · '+t.id.slice(0,12)),el('small',protocolLabel(t)),el('small','Definition: '+t.definition_match));tr.append(th,el('td',c.passing+' / '+rs.length));const cov=el('td');cov.append(el('small',c.graded+' graded · '+(c.ERROR||0)+' errors · '+(c.INCOMPLETE||0)+' incomplete'),el('small',(c['NOT RUN']||0)+' not run · '+(c.BLOCKED||0)+' blocked · '+(c.INVALID||0)+' invalid'));
 const witnesses=t.witnesses.filter(w=>w.status==='PASS');cov.append(el('small','Oracle '+witnesses.filter(w=>w.kind==='oracle').length+' · representation '+witnesses.filter(w=>w.kind==='representational').length));if(!c.passing&&!witnesses.length)cov.append(el('small','NO INDEXED WITNESS','warning'));tr.append(cov);
 cols.forEach(r=>{const td=el('td'),btn=el('button',undefined,'detail');btn.setAttribute('aria-label',t.task_id+' · '+r.label+' · '+status(t,r.id)+' · evidence');btn.append(badge(status(t,r.id)));btn.onclick=()=>showCell(t.id,r.id);td.append(btn);tr.append(td);});tbody.append(tr);});

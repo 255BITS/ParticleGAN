@@ -15,6 +15,14 @@
     {
       "path": "reports/forge/test-performance-evidence/atlas-location-confirmation.json",
       "sha256": "0c79aca40f3f149778eb8739a511e3e192cfafb4291a5c5587b2e50e857cde2f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-cell-moment-full-runs.json",
+      "sha256": "b359595a77cbfa2b8aa396ca356742bbc82d203190ed2a597cee7d34bad5df6a"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-finite-realization-prefix64.json",
+      "sha256": "a3e205f77a98f5cbf80cb159aefcc469296723805d76732327920dddc1c545e9"
     }
   ],
   "qualification_input": false,

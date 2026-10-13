@@ -106,6 +106,49 @@ qualification, change experiments or launch training.
 - G-angle anisotropic: full 1,200-update seed-0 FAIL, 0/24 passing observations.
   Original gates and the saved-score audit remain bound. This is a different
   complete recipe/source from the width runs, not an isolated-angle causal test.
+- Non-Atlas cell-moment diagnostics: 45 unique completed seed-0 runs under nine
+  exact task/source protocols. Four global aggregate objectives produce 35/36
+  PASS outcomes; nine fresh per-kernel controls produce 5/9. The first two rounds
+  cover anisotropic, unequal-width, unequal-mass, broad, overlap and spiral
+  cases; all four aggregate variants pass those scoped gates. Acquisition adds
+  Gaussian smoke, ring acquisition and published-discriminator unequal width.
+  Bures ring FAIL remains visible. The round table and byte-pinned compact
+  receipts appear in both inventories; filter the offline matrix's
+  Forge history by recipe `Cell moment` to inspect all outcomes.
+  These are disjoint execution-ledger counts, not a pooled score or independent
+  controls for every aggregate comparison. Metric regressions remain visible;
+  no objective is declared universally superior.
+- Finite-realization paired prefix: two fresh 64-update staggered100 arms show
+  the recorded mechanism check, while both quality cells remain **INCOMPLETE**
+  against the original 7,000-update native gates. Four earlier full FAILs and
+  the failed CPU preparation check stay explicit exclusions. The prefix paid
+  20.104729663 child seconds; the three full rounds paid 2,223.081716294.
+  Their disjoint total is 2,243.186445957 seconds, with no continuation or
+  qualification inferred from the prefix.
+
+The non-Atlas receipts preserve each declared global recipe's 110 fields and
+each run's 110 effective fields. Task-owned dimensions, capacity, batch size,
+prior binding and budget replace only their declared resource fields; ownership
+and original request/result/terminal hashes remain in each cell. Recipe-dependent
+ownership metadata is kept with the execution record, so it does not split the
+same evaluation question into one row per objective. Candidate revisions and
+the two distinct executed source digests remain separate identities. The frozen
+source catalogs record their declared base commit and file hashes; no missing
+origin commit is invented. Original source archives and states are local-only.
+
+Gaussian acquisition requires any scheduled full pass plus an independent
+same-state confirmation draw; it is not the sustained Gaussian stability gate.
+Ring acquisition ran 1,600 updates and 96 observations while retaining its
+original 400-update schedule horizon. The published-discriminator width test
+has its own ID. Five Gaussian receipts lack a standalone initial-prior summary;
+that absence stays null while their task prior law and initial-state hashes are
+retained. Full-run audits pair source, initial states, named streams and
+training-only reference statistics. They did not retain every consumed CUDA
+batch or latent packet, so the projection makes no packet-for-packet replay
+claim. The separate 64-update mechanism receipt does retain matching packet
+hashes. Preparation/audit errors are recorded as exclusions rather than invented
+scientific executions. Inclusive Popen-to-exit charge and narrower runner time
+are distinct fields.
 
 These runs do not qualify the current suite. G-angle's handoff still lacks
 registered cross-host extension/restore support and six-task Tier-1 evidence.

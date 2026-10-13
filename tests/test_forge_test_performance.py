@@ -257,7 +257,7 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 10
+    assert len(cells) == 57
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"
@@ -274,6 +274,112 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
         assert document["qualification_input"] is document["qualification_reuse"] is False
         assert document["original_evidence"]["availability"] == "LOCAL_ONLY_NOT_PUBLISHED"
         assert portable(document) == document
+
+
+@pytest.fixture
+def nonatlas(evidence):
+    from pathlib import Path
+    root, publication, _ = evidence
+    repository = Path(__file__).resolve().parents[1]
+    directory = "reports/forge/test-performance-evidence/"
+    documents = []
+    pins = []
+    for name in ("nonatlas-cell-moment-full-runs", "nonatlas-finite-realization-prefix64"):
+        relative = directory + name + ".json"
+        document = json.loads((repository / relative).read_text())
+        atomic_json(root / relative, document)
+        pins.append({"path": relative, "sha256": file_hash(root / relative)})
+        documents.append(document)
+    registry = {"schema": "forge_test_display_registry_v1", "qualification_input": False, "publications": pins}
+    atomic_json(root / (directory + "index.json"), registry)
+    return root, publication, documents, registry
+
+
+def test_nonatlas_preserves_executed_recipes_and_nine_distinct_full_protocols(nonatlas):
+    from collections import Counter
+    root, publication, (full, prefix), _ = nonatlas
+    before = deepcopy(publication)
+    report = build_report(root, publication=publication)
+    assert publication == before
+    tests = [test for test in report["tests"] if test["lane"] == "Scoped diagnostic"]
+    complete = [test for test in tests if test["task_id"] != "staggered100"]
+    assert len(complete) == 9
+    assert {test["task_id"] for test in complete} == {
+        "vector_anisotropic", "vector_unequal_width", "vector_unequal_mass", "vector_two_broad",
+        "vector_overlap", "vector_spiral", "vector_unequal_width_published", "gaussian1d_smoke", "ring16_acquisition"}
+    for test in complete:
+        assert len(test["cells"]) == 5 and test["conditions"]["seed"] == 0
+        assert test["witnesses"] == []
+        for ids in test["cells"].values():
+            assert len(ids) == 1
+            record = report["records"][ids[0]]
+            actual = record["result"]
+            assert record["full_protocol_complete"] is True
+            assert actual["completed_steps"] == test["conditions"]["budget"]["steps"]
+            assert len(actual["effective_recipe"]) == 110
+            assert stable_hash(actual["effective_recipe"]) == actual["effective_recipe_sha256"]
+            assert actual["actual_Popen_to_exit_seconds"] >= actual["runner_reported_seconds"]
+            assert actual["ordinary_qualification"] is actual["promotion"] is False
+    counts = Counter(("control" if c["result"]["mode"] == "per_kernel" else "aggregate", c["status"])
+                     for c in full["cells"])
+    assert counts == {("aggregate", "PASS"): 35, ("aggregate", "FAIL"): 1,
+                      ("control", "PASS"): 5, ("control", "FAIL"): 4}
+    ring = next(test for test in complete if test["task_id"] == "ring16_acquisition")
+    assert ring["conditions"]["budget"]["steps"] == 1600
+    assert ring["conditions"]["budget"]["observations"] == 96
+    assert ring["conditions"]["budget"]["original_schedule_horizon"] == 400
+    assert next(c for c in full["cells"] if c["task_id"] == "ring16_acquisition"
+                and c["result"]["mode"] == "aggregate_bures")["status"] == "FAIL"
+    assert sum(c["result"]["initial_prior"] is None for c in full["cells"]) == 5
+    assert full["original_evidence"]["retained_errors_and_exclusions"]
+    assert prefix["original_evidence"]["initial_CPU_validation_error_retained"] is True
+
+
+def test_nonatlas_prefix_mechanism_pass_is_incomplete_quality(nonatlas):
+    root, publication, (_, prefix), _ = nonatlas
+    report = build_report(root, publication=publication)
+    rows = [test for test in report["tests"] if test["task_id"] == "staggered100"]
+    assert len(rows) == 1 and len(rows[0]["cells"]) == 2
+    assert rows[0]["conditions"]["budget"]["steps"] == 7000
+    assert rows[0]["coverage"]["optimizer_passes"] == 0
+    for cell in prefix["cells"]:
+        assert cell["status"] == "INCOMPLETE" and cell["full_protocol_complete"] is False
+        assert cell["result"]["completed_updates"] == 64
+        assert cell["result"]["original_four_full_FAILs_preserved"] is True
+        assert len(prefix["recipe_contracts"][cell["recipe_sha256"]]["native_recipe"]) == 109
+    receipts = [cell["result"]["actual_sequence_receipt"] for cell in prefix["cells"]]
+    assert receipts[0] == receipts[1]
+
+
+@pytest.mark.parametrize("field,value", [("aggregate_passed", 36), ("full_round_charge_seconds", 1)])
+def test_nonatlas_shared_navigation_validates_counts_and_costs(nonatlas, field, value):
+    from experiments.forge.test_performance_render import render_discovery_navigation
+    root, _, (full, _), registry = nonatlas
+    text = render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
+    assert "35/36 PASS" in text and "5/9 PASS" in text
+    assert "Bures ring FAIL" in text and "INCOMPLETE" in text and "2243.186445957" in text
+    assert "/ml2/" not in text
+    # Even a repinned document must not turn incorrect discovery totals into a leaderboard claim.
+    full["discovery_summary"][field] = value
+    pin = registry["publications"][0]
+    atomic_json(root / pin["path"], full)
+    pin["sha256"] = file_hash(root / pin["path"])
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    with pytest.raises(ValueError, match="overall summary"):
+        render_discovery_navigation(root, root / "reports/forge/technique-inventory.md")
+
+
+def test_nonatlas_rejects_repinned_executed_recipe_change(nonatlas):
+    root, publication, (full, _), registry = nonatlas
+    cell = full["cells"][0]
+    cell["result"]["effective_recipe"]["lr"] *= 2
+    cell["result"]["effective_recipe_sha256"] = stable_hash(cell["result"]["effective_recipe"])
+    pin = registry["publications"][0]
+    atomic_json(root / pin["path"], full)
+    pin["sha256"] = file_hash(root / pin["path"])
+    atomic_json(root / "reports/forge/test-performance-evidence/index.json", registry)
+    with pytest.raises(ValueError, match="executed diagnostic recipe"):
+        build_report(root, publication=publication)
 
 
 def test_existing_scoped_policy_registry_stays_separate_from_parent(evidence):

@@ -1873,6 +1873,8 @@ def _current_markdown(result, root, path):
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
+        from experiments.forge.test_performance_render import render_discovery_navigation
+        markdown += render_discovery_navigation(root, path)
         pure = root / "reports/forge/pure-bcap"
         if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
             import importlib.util
@@ -2137,6 +2139,8 @@ def _shared_score_intro(root, result):
                "Refresh it with `python reports/forge/regenerate_technique_inventory.py`.\n\n")
     leading += ("The [performance-by-test matrix](../test-performance.md) shows complete recipe cells, "
                 "zero-pass tests, execution errors and separately typed feasibility witnesses.\n\n")
+    from experiments.forge.test_performance_render import render_discovery_navigation
+    leading += render_discovery_navigation(root, path)
     half_base = result.get("word_half_base_diagnostic")
     if half_base:
         accounting = half_base["accounting"]

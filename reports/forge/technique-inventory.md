@@ -252,4 +252,21 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 Publication input digest `3cc0aeaa3d3bb5aaf0c0fd5f73168b3311c39ff4ff99ba96c1d1c78289030102`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
 
+## Scoped non-Atlas discoveries
+
+[Verified complete recipes, exact protocols and all outcomes](test-performance-evidence/nonatlas-cell-moment-full-runs.json): **45 unique full runs** in three separately scoped seed-0 rounds. Aggregate outcomes are **35/36 PASS**; the **9 unique controls** are **5/9 PASS**. These are execution-ledger counts, not a pooled score, independent control repetitions or an ordinary whole-suite winner.
+
+| Registered round / task IDs | Executed source | Aggregate PASS / total | Control PASS / total | Inclusive child seconds |
+| --- | --- | ---: | ---: | ---: |
+| cell-moment-round<br>`vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic` | `f90962a5b351` · seed 0 | 12/12 | 2/3 | 746.970010416 |
+| cell-moment-transfer-round<br>`vector_spiral`, `vector_two_broad`, `vector_overlap` | `f90962a5b351` · seed 0 | 12/12 | 1/3 | 730.446546641 |
+| cell-moment-acquisition-round<br>`vector_unequal_width_published`, `gaussian1d_smoke`, `ring16_acquisition` | `a21587094267` · seed 0 | 11/12 | 2/3 | 745.665159237 |
+
+All four aggregate objectives pass the anisotropic, unequal-width, unequal-mass, broad, overlap and spiral scoped cases in the first two rounds. Acquisition preserves **Bures ring FAIL**. The Gaussian acquisition smoke uses any scheduled full pass plus an independent same-state draw; ring executes 1,600 updates with 96 observations and its original 400-update schedule horizon. Published-discriminator width is a distinct task ID. Metric regressions remain visible; no objective is declared universally superior.
+
+[Paired finite-realization mechanism prefix](test-performance-evidence/nonatlas-finite-realization-prefix64.json): two 64-update arms, both **INCOMPLETE** against the original 7,000-update staggered100 quality gates. Prefix charge **20.104729663 seconds**; disjoint charge including the three full rounds **2243.186445957 seconds**. No prefix PASS is imported into full quality.
+
+Preparation/audit errors and exclusions are retained in the pinned receipts. Original source, generated arrays and checkpoints remain local-only; individual consumed CUDA packets were not separately retained. These discoveries change display coverage only. Selected family rows, ordinary qualification and defaults remain unchanged.
+
+
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

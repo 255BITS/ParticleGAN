@@ -8,7 +8,7 @@ The table below shows selected recipes. The offline view also searches measured 
 
 PASS and FAIL retain the original complete gate; ERROR is execution failure (including pre-training errors); INCOMPLETE lacks the full protocol; NOT RUN has no compatible indexed result. BLOCKED, INVALID and other recorded statuses remain explicit. MIXED exposes conflicting outcomes instead of picking a favorable one. Click any cell for receipts and metrics.
 
-Indexed: **1118 test/protocol rows**, **430 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1128 test/protocol rows**, **442 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 | Recipe | Full identity |
 | --- | --- |
@@ -196,6 +196,8 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 
 | Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
 | --- | --- | ---: | ---: | --- | --- |
+| staggered100 | Finite realization control · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
+| staggered100 | Finite realization candidate · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
 | two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
 | two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
@@ -206,6 +208,51 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | vector_unequal_width | G-angle unequal-width · full1200 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
 | two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| gaussian1d_smoke | Cell moment aggregate bures | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| gaussian1d_smoke | Cell moment aggregate forward kl | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| gaussian1d_smoke | Cell moment per kernel | 0 | 1000 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| gaussian1d_smoke | Cell moment aggregate reverse kl | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| gaussian1d_smoke | Cell moment aggregate moment | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| ring16_acquisition | Cell moment aggregate reverse kl | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| ring16_acquisition | Cell moment aggregate bures | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| ring16_acquisition | Cell moment aggregate moment | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| ring16_acquisition | Cell moment aggregate forward kl | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| ring16_acquisition | Cell moment per kernel | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_anisotropic | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_anisotropic | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_anisotropic | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_anisotropic | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_anisotropic | Cell moment per kernel | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap | Cell moment per kernel | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_overlap | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_spiral | Cell moment aggregate forward kl | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_spiral | Cell moment aggregate bures | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_spiral | Cell moment per kernel | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_spiral | Cell moment aggregate moment | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_spiral | Cell moment aggregate reverse kl | 0 | 1600 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_two_broad | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_two_broad | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_two_broad | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_two_broad | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_two_broad | Cell moment per kernel | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_mass | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_mass | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_mass | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_mass | Cell moment per kernel | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_mass | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width | Cell moment per kernel | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width_published | Cell moment aggregate moment | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width_published | Cell moment per kernel | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width_published | Cell moment aggregate forward kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width_published | Cell moment aggregate bures | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
+| vector_unequal_width_published | Cell moment aggregate reverse kl | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-cell-moment-full-runs.json) |
 
 Regenerate with `python -m experiments.forge.test_performance` or the existing `python reports/forge/regenerate_technique_inventory.py` workflow. `python -m experiments.forge.test_performance --check` verifies deterministic generated bytes without writing or training.
 
