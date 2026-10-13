@@ -257,7 +257,9 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 252
+    assert len(cells) == 276
+    assert sum(not name.startswith(("successor-nonatlas-", "atlas-seed0-"))
+               for name in cells) == 252
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"
@@ -619,3 +621,27 @@ def test_existing_scoped_policy_registry_stays_separate_from_parent(evidence):
     assert scoped["coverage"]["optimizer_passes"] == 1
     assert scoped["selected_coverage"]["optimizer_passes"] == 0
     assert len(publication["rows"]) == 1
+
+
+def test_successor_packet_adds_only_new_attempts_and_keeps_atlas_diagnostic():
+    from collections import Counter
+    from pathlib import Path
+    from experiments.forge.test_performance import _add_supplemental
+    from experiments.forge.test_performance_render import render_discovery_navigation
+
+    root = Path(__file__).resolve().parents[1]
+    records = []
+    _add_supplemental(Inputs(root),
+                      lambda identity, label, selected, lane, recipe: label,
+                      lambda task, conditions, lane, contract, match: task,
+                      lambda task, recipe, record: records.append(record))
+    successor = [row for row in records if row["receipt"].endswith(
+        ("successor-nonatlas-21.json", "atlas-seed0-diagnostics-3.json"))]
+    assert len(records) == 276 and len(successor) == 24
+    assert Counter(row["status"] for row in successor) == {"PASS": 10, "FAIL": 14}
+    assert len({(row["result"]["attempt_id"], row["cell_id"]) for row in successor}) == 24
+    assert all(row["result"]["ordinary_qualification"] is False for row in successor)
+    rendered = render_discovery_navigation(root, root / "reports/forge/test-performance.md")
+    assert "249 non-Atlas full runs" in rendered
+    assert "Three separate Atlas two-pole diagnostics" in rendered
+    assert "no global survivor" in rendered

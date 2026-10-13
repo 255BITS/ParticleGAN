@@ -322,4 +322,13 @@ The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall
 </details>
 
 
+## Verified successor packet
+
+[Twenty-one new non-Atlas full runs](test-performance-evidence/successor-nonatlas-21.json) add **9 PASS / 12 FAIL** and **39,000 new updates** to the existing 228-run execution ledger, for **249 non-Atlas full runs**. The cumulative total counts distinct source-bound attempts across recipes; it is not a pooled winner or global qualification.
+
+[Three separate Atlas two-pole diagnostics](test-performance-evidence/atlas-seed0-diagnostics-3.json) add **1 PASS / 2 FAIL** over 240 updates. Native fails, RMS cap passes, and paired-score centering fails at the original 80-update, 24-observation seed-0 screen. These formulations retain distinct source and recipe identities; none establish current MoG, held-out transfer, robustness or release qualification.
+
+The saved request, raw result, original grade and terminal pins were checked against the local packet. Bulk states and observations remain local-only. Earlier 24 packet attempts already indexed by Astra are counted once.
+
+
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

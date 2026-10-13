@@ -31,6 +31,14 @@
     {
       "path": "reports/forge/test-performance-evidence/astra-cumulative-24.json",
       "sha256": "cffcbd7be99971b38881320564c034701cd6fd4a8387a0c6c55bb22cd70ca0b9"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/successor-nonatlas-21.json",
+      "sha256": "087d367dd29d8b13b285d6df7d0b55a214692533a4c4dfa5e2a3a3b890984562"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-seed0-diagnostics-3.json",
+      "sha256": "0fde5927e4225eaba30aa25ff034f5a49166203f7a544b2528373ed267c9237a"
     }
   ],
   "qualification_input": false,

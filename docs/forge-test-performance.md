@@ -9,7 +9,7 @@ selects a different recipe for every task or changes the scientific leaderboard.
 1. Generate the offline view with `python -m experiments.forge.test_performance`.
 2. Open `reports/forge/test-performance.html` in a browser. It needs no server.
 3. Choose **Selected Forge recipes** for the suite view, or **Research diagnostics**
-   and a cohort for the 228 indexed research runs. Filter by a test or source ID.
+   and a cohort for the 249 indexed non-Atlas research runs. Filter by a test or source ID.
 4. Click a result for its gate, completion and costs. Click a recipe for its full
    configuration; exact IDs and source/protocol bindings are always retained.
 
@@ -20,14 +20,14 @@ selects a different recipe for every task or changes the scientific leaderboard.
 
 ## Findings at a glance
 
-- The source-specific research ledger contains **228 full runs: 112 PASS and
-  116 FAIL**, across 79 recipe IDs, 93 revisions and 12 source cohorts. **No global
+- The source-specific non-Atlas research ledger contains **249 full runs: 121 PASS
+  and 128 FAIL**. Three new Atlas seed-0 diagnostics remain separate. **No global
   winner** is established. These are ledger counts across separate protocols.
 - All twelve Astra hypotheses fail the full unequal-mass gate. Three final
   covariance submetrics pass, but their 1/5 terminal suffixes still fail the
   required sustained gate.
-- The complete index has 1,154 protocol rows and 537 recipe identities. The
-  default selected view has 166 rows, including 150 with zero optimizer passes.
+- The complete index has 1,181 protocol rows and 550 recipe identities. The
+  default selected view has 169 rows, including 153 with zero optimizer passes.
   Many are unmeasured or blocked; zero passing evidence is not proof of impossibility.
 
 ## Status guide
@@ -289,7 +289,7 @@ from each cell's hash in its drill-down, keeping the growing offline matrix smal
 
 The quota-transition/Astra cumulative packet adds **24 unique full runs**: eight
 predecessor runs and sixteen Astra runs. Its six interim Astra receipts occur once.
-The resulting family ledger has 228 full runs and 470,400 new accepted updates.
+The then-current family ledger had 228 full runs and 470,400 new accepted updates.
 All twelve Astra candidate hypotheses and four fresh source-bound controls FAIL
 the full unequal-mass gate. Five predecessor Gaussian/mode-retention outcomes
 PASS; the predecessor unequal-mass cells remain FAIL. Swap, slower covariance
@@ -317,6 +317,21 @@ preparation failures retain pins with unavailable elapsed times explicitly null.
 The supplied audits certify model equality for controls; this importer verifies
 their metadata and artifact bytes without decoding model tensors. No new research
 execution, gate change, regression/confirmation run or qualification follows.
+
+A subsequent [verified cumulative packet](../reports/forge/test-performance-evidence/successor-nonatlas-21.json)
+contains 48 attempt rows. Twenty-four match the already indexed Astra attempts
+and are counted once. Its 21 new non-Atlas full runs add 9 PASS, 12 FAIL and
+39,000 accepted updates, bringing that execution ledger to **249 full runs,
+121 PASS and 128 FAIL, with 509,400 accepted updates**. Complete original grades,
+task and source bindings, recipes, checkpoints and file hashes remain attached
+to their new cells. They do not combine into a single winning formulation.
+
+The same packet adds [three separate Atlas two-pole diagnostics](../reports/forge/test-performance-evidence/atlas-seed0-diagnostics-3.json):
+native FAIL, RMS cap PASS and paired-score centering FAIL at 80 updates and 24
+observations each. Those 240 updates and distinct source identities stay outside
+the 249-run non-Atlas ledger. None establishes current MoG, held-out transfer,
+robustness or release qualification. The original evidence remains local-only;
+the display was regenerated without training or regrading.
 
 These runs do not qualify the current suite. G-angle's handoff still lacks
 registered cross-host extension/restore support and six-task Tier-1 evidence.

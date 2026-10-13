@@ -17,11 +17,11 @@ def render_discovery_navigation(root, page):
     registry = inputs.read(SUPPLEMENTAL)
     if registry.get("schema") != "forge_test_display_registry_v1" or registry.get("qualification_input") is not False:
         raise ValueError("test discoveries: invalid display registry")
-    full = prefix = reconciled = astra = None
+    full = prefix = reconciled = astra = successor = atlas_diagnostics = None
     for pin in registry["publications"]:
         document = inputs.read(pin["path"], sha256=pin["sha256"])
         summary = document.get("discovery_summary", {})
-        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013"}:
+        if summary.get("id") not in {"nonatlas-cell-moment-seed0-20261012", "nonatlas-finite-realization-prefix64", "nonatlas-reconciled-204-20261013", "astra-cumulative-24-20261013", "successor-nonatlas-21-20261013", "atlas-seed0-diagnostics-3-20261013"}:
             continue
         if (document.get("schema") != "forge_test_display_evidence_v1" or document.get("qualification_input") is not False
                 or document.get("qualification_reuse") is not False or summary.get("ordinary_qualification") is not False
@@ -31,6 +31,14 @@ def render_discovery_navigation(root, page):
             if astra is not None:
                 raise ValueError("test discoveries: duplicate Astra cumulative summary")
             astra = pin, document
+        elif summary["id"] == "successor-nonatlas-21-20261013":
+            if successor is not None:
+                raise ValueError("test discoveries: duplicate successor summary")
+            successor = pin, document
+        elif summary["id"] == "atlas-seed0-diagnostics-3-20261013":
+            if atlas_diagnostics is not None:
+                raise ValueError("test discoveries: duplicate Atlas diagnostics summary")
+            atlas_diagnostics = pin, document
         elif summary["id"] == "nonatlas-reconciled-204-20261013":
             if reconciled is not None:
                 raise ValueError("test discoveries: duplicate reconciled summary")
@@ -77,6 +85,8 @@ def render_discovery_navigation(root, page):
         text = _render_reconciled(reconciled, full, prefix, registry, inputs, link)
         if astra:
             text += _render_astra(astra, reconciled, link)
+        if successor or atlas_diagnostics:
+            text += _render_successor(successor, atlas_diagnostics, astra, link)
         return text
     pin, summary = full
     lines = ["", "## Scoped non-Atlas discoveries", "",
@@ -267,6 +277,42 @@ def _render_astra(astra, previous, link):
     return "\n".join(lines)
 
 
+def _render_successor(nonatlas, atlas, prior, link):
+    """Show only new attempts; old receipts stay in their original publications."""
+    if nonatlas is None or atlas is None or prior is None:
+        raise ValueError("test discoveries: cumulative successor packet is incomplete")
+    npin, ndoc = nonatlas
+    apin, adoc = atlas
+    ns, az = ndoc["discovery_summary"], adoc["discovery_summary"]
+    prior_runs = prior[1]["discovery_summary"]["family_full_runs"]
+    for document, summary, count, statuses, updates in (
+            (ndoc, ns, 21, {"PASS": 9, "FAIL": 12}, 39000),
+            (adoc, az, 3, {"PASS": 1, "FAIL": 2}, 240)):
+        cells = document["cells"]
+        if (len(cells) != count or dict(Counter(cell["status"] for cell in cells)) != statuses
+                or sum(cell["result"]["new_updates"] for cell in cells) != updates
+                or len({(cell["task_id"], cell["result"]["attempt_id"]) for cell in cells}) != count
+                or any(cell["full_protocol_complete"] is not True for cell in cells)
+                or summary["full_runs"] != count or summary["status_counts"] != statuses
+                or summary["new_updates"] != updates or summary["global_survivor"] is not False
+                or summary["source_packet_sha256"] != document["original_evidence"]["packet_sha256"]):
+            raise ValueError("test discoveries: successor counts differ from original cells")
+    if (prior_runs != 228 or ns["previous_nonatlas_full_runs"] != prior_runs
+            or ns["family_nonatlas_full_runs"] != prior_runs + 21
+            or ns["source_packet_sha256"] != az["source_packet_sha256"]):
+        raise ValueError("test discoveries: successor overlaps or repins the earlier ledger")
+    return "\n".join(["", "## Verified successor packet", "",
+        f"[Twenty-one new non-Atlas full runs]({link(npin['path'])}) add **9 PASS / 12 FAIL** and "
+        f"**39,000 new updates** to the existing 228-run execution ledger, for **249 non-Atlas full runs**. "
+        "The cumulative total counts distinct source-bound attempts across recipes; it is not a pooled winner or global qualification.", "",
+        f"[Three separate Atlas two-pole diagnostics]({link(apin['path'])}) add **1 PASS / 2 FAIL** "
+        "over 240 updates. Native fails, RMS cap passes, and paired-score centering fails at the original "
+        "80-update, 24-observation seed-0 screen. These formulations retain distinct source and recipe identities; "
+        "none establish current MoG, held-out transfer, robustness or release qualification.", "",
+        "The saved request, raw result, original grade and terminal pins were checked against the local packet. "
+        "Bulk states and observations remain local-only. Earlier 24 packet attempts already indexed by Astra are counted once.", ""])
+
+
 def _text(value):
     return str(value).replace("|", "\\|").replace("\n", " ").replace("<", "&lt;")
 
@@ -288,7 +334,8 @@ def selected_tests(report):
 
 def campaign_overview(report):
     """Display counts of already-indexed receipts; never a comparable suite score."""
-    rows = [r for r in report["records"].values() if r.get("cell_id", "").startswith(("nonatlas-", "astra-"))
+    rows = [r for r in report["records"].values() if r.get("cell_id", "").startswith(
+            ("nonatlas-", "astra-", "successor-nonatlas-"))
             and r.get("full_protocol_complete") is True]
     counts = Counter(r["status"] for r in rows)
     return {"full_runs": len(rows), "passes": counts["PASS"], "fails": counts["FAIL"]}
@@ -298,6 +345,8 @@ def diagnostic_group(receipt):
     name = Path(receipt or "").name
     if name.startswith("astra-"):
         return "Quota transition and Astra portfolio"
+    if name.startswith("successor-nonatlas-"):
+        return "Verified successor non-Atlas research"
     if name.startswith("nonatlas-finite"):
         return "Bounded mechanism prefixes"
     if name.startswith("nonatlas-"):
