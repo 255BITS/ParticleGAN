@@ -48,3 +48,7 @@ Further work needs separately authorized checkpoint-export and component-transpo
 ## Preserved prior Atlas findings
 
 [Historical Atlas/RA14 cohorts](historical/README.md) recover the complete 7-PASS/4-FAIL fast panel, unequal-width/anisotropic transfers, native restoration, Ring causal negatives, and clean100/quarter-G tradeoffs. Their original reports, sources, raw errors, costs and incomplete cases remain separate. No historical pass fills current selected cells or contributes to the three new attempt count.
+
+## Publication validation
+
+[Verification](verification.json) records byte-deterministic inventory and summary-memory regeneration, certificate/media/link validation, and all eight unchanged selected scientific rows. The scoped software run had 141 passes, one stale compiled-memory metadata check, and 57 passing subtests; after the summaries-only metadata refresh, the single freshness check passed. No test or implementation edits were made. [Reusable lesson index](LESSON-INDEX.json) provides ten source-scoped pointers for the separate attempt catalog.

@@ -20,9 +20,12 @@
   "software_tests": {
     "initial_result": "141 passed, 1 failed, 57 subtests passed",
     "initial_failure": "Committed research memory stale after three receipt additions; summaries-only metadata recompilation performed without code/test changes.",
-    "freshness_rerun": "IN_PROGRESS",
-    "full_suite_not_claimed": true
+    "freshness_rerun": "1 passed in 1.04s",
+    "full_suite_not_claimed": true,
+    "distinct_tests_with_passing_results": 142,
+    "subtests_passed": 57
   },
   "summaries_only_memory_refresh": true,
-  "unchanged_publication_memory_records": 816
+  "unchanged_publication_memory_records": 816,
+  "summaries_only_memory_byte_deterministic": true
 }
