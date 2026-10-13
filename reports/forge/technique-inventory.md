@@ -256,6 +256,11 @@ Publication input digest `3cc0aeaa3d3bb5aaf0c0fd5f73168b3311c39ff4ff99ba96c1d1c7
 
 [Verified reconciled receipts, complete recipes and audit gaps](test-performance-evidence/nonatlas-reconciled-204.json): **204 full runs** across **66 recipe IDs**, **75 source-bound revisions** and **7 source cohorts**. Recorded outcomes are **107 PASS / 97 FAIL**. These are disjoint ledger counts across exact protocols; **no global survivor or pooled score** is established.
 
+**Evidence limits:** six mode-hold transfers lack saved sample panels; raw archives and full-run CUDA packets are not publicly available. Their original logged-metric FAIL grades remain explicit.
+
+<details>
+<summary>Open the 204-run cohort table, exact clocks and audit limitations</summary>
+
 | Round | Full PASS / FAIL | Source cohorts | Inclusive attempt wall seconds | Audit |
 | --- | ---: | --- | ---: | --- |
 | cell-moment-round | 14 / 1 | `f90962a5b351` | 746.970010416 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
@@ -286,10 +291,17 @@ The amended CPU reference ablation keeps primary **REJECT** and secondary postho
 
 Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; selected family rows, qualification, experiments and training code remain unchanged.
 
+</details>
+
 
 ## Quota-transition and Astra portfolio follow-up
 
 [Verified cumulative receipts and original submetrics](test-performance-evidence/astra-cumulative-24.json): **24 additional full runs**, 8 predecessor quota runs plus 16 Astra runs. The six interim Astra receipts occur once. Family execution ledger: **228 full runs** and **470,400 new accepted updates**; no global survivor.
+
+**Finding:** all twelve Astra hypotheses fail full unequal-mass gates. Three endpoint covariance submetrics pass, but their 1/5 terminal suffixes still fail the original sustained requirement.
+
+<details>
+<summary>Open the 24-run follow-up: controls, predictors and separate cost clocks</summary>
 
 | Round | Full PASS / FAIL | Source | Queue seconds | Supervisor wall seconds |
 | --- | ---: | --- | ---: | ---: |
@@ -306,6 +318,8 @@ Added work: **36,000 accepted updates** plus **1,200 temporary predictor evaluat
 The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall charge is **1206.481903937 seconds**. These clocks are distinct and are not added together. Inherited budgets and earlier charges are not counted again. Preparation errors and predecessor failed-audit CPU costs remain diagnostic exclusions; unavailable preparation elapsed times stay null.
 
 5 additional source cohorts and all saved-output/state/trace pins were verified. Fractional transport uses row-argmax labels with exact soft capacities; integer assignment counts are not substituted for those labels. Controls' model equality is certified by the supplied audits. Raw arrays, tensor states and traces stay local-only; the import runs no research code, training or metric rescore and grants no qualification.
+
+</details>
 
 
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

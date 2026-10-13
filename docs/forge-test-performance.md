@@ -1,5 +1,82 @@
 # Performance by test
 
+Use the matrix to answer **which complete recipes pass this exact test**, which
+fail, and where evidence is missing. Each protocol stays separate; nothing here
+selects a different recipe for every task or changes the scientific leaderboard.
+
+## Start here
+
+1. Generate the offline view with `python -m experiments.forge.test_performance`.
+2. Open `reports/forge/test-performance.html` in a browser. It needs no server.
+3. Choose **Selected Forge recipes** for the suite view, or **Research diagnostics**
+   and a cohort for the 228 indexed research runs. Filter by a test or source ID.
+4. Click a result for its gate, completion and costs. Click a recipe for its full
+   configuration; exact IDs and source/protocol bindings are always retained.
+
+[Readable Markdown matrix](../reports/forge/test-performance.md) ·
+[Family leaderboard](../reports/forge/technique-inventory.md) ·
+[Status guide](#status-guide) · [Interpretation examples](#interpretation-examples) ·
+[Prominent limitations](#prominent-limitations) · [Full contract and receipts](#full-contract-and-evidence-timeline)
+
+## Findings at a glance
+
+- The source-specific research ledger contains **228 full runs: 112 PASS and
+  116 FAIL**, across 79 recipe IDs, 93 revisions and 12 source cohorts. **No global
+  winner** is established. These are ledger counts across separate protocols.
+- All twelve Astra hypotheses fail the full unequal-mass gate. Three final
+  covariance submetrics pass, but their 1/5 terminal suffixes still fail the
+  required sustained gate.
+- The complete index has 1,154 protocol rows and 537 recipe identities. The
+  default selected view has 166 rows, including 150 with zero optimizer passes.
+  Many are unmeasured or blocked; zero passing evidence is not proof of impossibility.
+
+## Status guide
+
+| Cell | What it tells you |
+| --- | --- |
+| PASS | The original full scientific gate passes. |
+| FAIL | The original full gate fails, including sustained checks. |
+| NOT RUN | No compatible indexed run exists; this is missing evidence. |
+| ERROR | Execution failed, possibly before training began. |
+| INCOMPLETE | The full required protocol has not been completed. |
+| BLOCKED / INVALID | The original admission or contract failure remains recorded. |
+| MIXED | Compatible receipts disagree; every receipt remains available. |
+
+A row marked **No graded result** has no complete PASS/FAIL evidence. A row marked
+**Failures only** has completed gates that failed. Oracle and representational
+witnesses have their own counters and never replace an optimizer result.
+
+## Interpretation examples
+
+- **Anisotropic components, seed 0, 1,200 updates, source `f90962a5b351`:** four
+  aggregate recipes PASS and the per-kernel control FAIL. That is 4/5 passing
+  recipe identities under this protocol, not four independent seeds or a suite win.
+- **Temporary lookahead on unequal masses:** the final covariance metric PASS
+  does not override a 1/5 terminal suffix. The full result remains FAIL. Its 1,200
+  temporary predictor evaluations are separate from 1,200 accepted updates and
+  already included in the recorded cost.
+- **NOT RUN:** an older protocol's PASS never fills this row. Inspect the source,
+  budget and original gates before comparing otherwise similar names.
+
+## Prominent limitations
+
+**No qualification or default change.** Six mode-hold transfers lack saved sample
+panels and retain logged-metric FAIL regrades. Bulk source, samples, tensors and
+traces remain local-only; full-run CUDA packets and causal gradient/reference
+histories were not retained. Some preparation-error times remain unknown, not zero.
+No oracle or representational feasibility witness is currently registered.
+
+Existing GitHub Actions workflows target **master only**. This PR targets develop,
+so it has no remote CI checks. Local software, browser, regeneration and link
+checks are reported explicitly. The inactive workflow proposal cannot be enabled
+with the available credential's scope; no protection or credential change is made.
+
+## Full contract and evidence timeline
+
+<details>
+<summary>Generation commands, identity contract and complete evidence timeline</summary>
+
+
 [The generated matrix](../reports/forge/test-performance.md) is another view of
 the existing Forge publications, not another leaderboard. Its offline HTML view
 sorts and filters test/protocol rows, searches full recipe and source identities,
@@ -246,3 +323,5 @@ registered cross-host extension/restore support and six-task Tier-1 evidence.
 Original raw archives are not hosted by this PR. Further local evidence and
 feasibility witnesses require reviewed, exact public identities before indexing;
 missing evidence never authorizes a new experiment.
+
+</details>

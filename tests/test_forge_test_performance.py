@@ -557,6 +557,26 @@ def test_duplicate_interim_attempt_is_rejected_even_with_a_new_cell_id(astra):
         build_report(root, publication=publication)
 
 
+def test_reader_presentation_preserves_every_scientific_field_and_receipt(astra):
+    from experiments.forge.test_performance_render import campaign_overview, diagnostic_group
+    root, publication, _, _ = astra
+    report = build_report(root, publication=publication)
+    before = deepcopy(report)
+    markdown = render_markdown(report)
+    rendered = render_html(report)
+    payload = rendered.split('<script id="evidence" type="application/json">')[1].split('</script>')[0]
+    assert json.loads(payload) == before and report == before
+    assert campaign_overview(report) == {"full_runs": 228, "passes": 112, "fails": 116}
+    assert '228 full research runs' in rendered and 'No global winner' in rendered
+    assert 'How to read a row' in markdown and 'NOT RUN' in markdown and 'MIXED' in markdown
+    assert 'No graded result' in rendered and 'Failures only' in rendered
+    for record in report["records"].values():
+        if not record.get("cell_id"): continue
+        assert record["receipt"].split('/')[-1] in markdown
+    assert diagnostic_group('reports/forge/test-performance-evidence/astra-cumulative-24.json') == 'Quota transition and Astra portfolio'
+    assert 'cohort' in rendered and 'metricSummary' in rendered
+
+
 @pytest.mark.parametrize("field,value", [("family_full_runs", 234), ("additional_temporary_predictor_evaluations", 0),
                                         ("all_24_supervisor_wall_seconds", 0)])
 def test_astra_summary_checks_cumulative_counts_predictors_and_separate_clocks(astra, field, value):

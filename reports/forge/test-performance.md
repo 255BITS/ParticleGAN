@@ -1,14 +1,37 @@
-# Performance by test and complete recipe
+# Which recipes pass each test?
 
 [Generate/open the sortable offline matrix](../../docs/forge-test-performance.md) · [Family leaderboard](technique-inventory.md)
 
-The table below shows selected recipes. The offline view also searches measured Forge history and public-API protocols. Each row binds one exact test and protocol, including seeds/RNG, source, runtime, initialization, sampling, budgets and original gates. Changed definitions remain separate; these counts do not rank techniques or select a different recipe for every task.
+One row is **one test under one exact protocol**. One column is a complete recipe, source and runtime identity. Different seeds, budgets, sampling laws, initializers and original gates stay separate.
 
-**Zero optimizer passes is a smell, not proof of impossibility.** Oracle and representational witnesses are separate from optimizer passes. NO INDEXED WITNESS means none is registered for these exact conditions; unindexed evidence remains unknown.
+[How to read a row](#how-to-read-a-row) · [Selected-recipe matrix](#selected-recipe-matrix) · [Research cohorts](#research-cohorts) · [Limitations](#limitations)
 
-PASS and FAIL retain the original complete gate; ERROR is execution failure (including pre-training errors); INCOMPLETE lacks the full protocol; NOT RUN has no compatible indexed result. BLOCKED, INVALID and other recorded statuses remain explicit. MIXED exposes conflicting outcomes instead of picking a favorable one. Click any cell for receipts and metrics.
+## Findings at a glance
+
+- Latest indexed research: **228 full runs**, with **112 PASS / 116 FAIL** under their separate original protocols. **No global winner** is established; these are ledger counts, not a pooled score.
+- All twelve Astra hypotheses fail the full unequal-mass gate. Three final covariance submetrics pass, but their 1/5 terminal suffixes still fail the original sustained requirement.
+- Zero passing recipes is an evidence gap to investigate, not proof that a test is impossible. Oracle and representational witnesses are counted separately; none is currently registered.
+
+## How to read a row
+
+**4/5 passing recipes** means four of the five matching recipe identities have a compatible PASS receipt. It does not mean four independent seeds, and it does not borrow passes from another protocol. Open the cell for its original gate and evidence; open a column for the whole recipe.
+
+| Cell | Meaning |
+| --- | --- |
+| PASS | The original full scientific gate passes. |
+| FAIL | The original full gate fails, even if an endpoint submetric passes. |
+| NOT RUN | No compatible indexed run exists; this is not a failed experiment. |
+| ERROR | Execution failed, including failures before training. |
+| INCOMPLETE | Evidence stops before the full required protocol. |
+| BLOCKED / INVALID | Original admission or contract failure; reasons remain in the receipt. |
+| MIXED | Compatible receipts disagree; every outcome remains visible. |
+
+## Selected-recipe matrix
 
 Indexed: **1154 test/protocol rows**, **537 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+
+<details>
+<summary>Open all 166 selected-protocol rows and their exact recipe identities</summary>
 
 | Recipe | Full identity |
 | --- | --- |
@@ -190,9 +213,14 @@ Indexed: **1154 test/protocol rows**, **537 complete recipe/source/runtime ident
 | two_pole<br>seed 0 · 80 updates · source a5eafc73e4<br>`cb36e0a8d9df` | [CHANGED](../../configs/forge/tasks/two_pole.json) | 5/8 | optimizer 5, oracle 0, representation 0 | NOT RUN | NOT RUN | [PASS](technique-receipts/b8c0aec18d634a079dc933ccd8ccf99d.json) | NOT RUN | [PASS](technique-receipts/ec2040278df846ea82edd557f2e4f6ff.json) | [PASS](technique-receipts/2902e49c05ca419cb2aa1c4e42d5c957.json) | [PASS](technique-receipts/e2790a2add2b4d32b78f104d48e51789.json) | [PASS](technique-receipts/f9becf6fada64aad9c1f2dbf4851d510.json) |
 | unused_token_hold<br>seed 0 · 200 updates · source a5eafc73e4<br>`bf8da9db773d` | [CHANGED](../../configs/forge/tasks/unused_token_hold.json) | 5/8 | optimizer 5, oracle 0, representation 0 | NOT RUN | NOT RUN | [PASS](technique-receipts/31cc71d5b81e4b2da6fdacc69e65f05d.json) | NOT RUN | [PASS](technique-receipts/9b5bc4b2ce7046abb604eec946b53136.json) | [PASS](technique-receipts/dc7d28df5914444da53e7393fcd4040d.json) | [PASS](technique-receipts/9b389d1f0706465db68f2b90d6ce1893.json) | [PASS](technique-receipts/3744477eabd649c4b83a5f9f1e72dbdd.json) |
 
-## Recent scoped diagnostics
+</details>
 
-These complete recipes keep their original sources, seeds, gates and budgets. They do not fill another row or establish a suite winner. The startup error remains independent of the later Atlas recovery.
+## Research cohorts
+
+Use the offline view's cohort menu to inspect one study at a time. Each row below keeps its original source, seed, budget and gate; these diagnostic passes grant no suite qualification.
+
+<details>
+<summary>Cell objectives, memory and transfer · 216 evidence records</summary>
 
 | Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
 | --- | --- | ---: | ---: | --- | --- |
@@ -275,40 +303,12 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | ring16_acquisition | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | ring16_acquisition | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | ring16_acquisition | cell-gradient-signal-moment-gp-v1 | 0 | 1600 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
-| staggered100 | Finite realization control · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
-| staggered100 | Finite realization candidate · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
-| two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
-| two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| vector_anisotropic | G-angle anisotropic · full1200 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/g-angle-anisotropic.json) |
-| vector_unequal_mass | cell-quota-equal-shape-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-prior-signal-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-aggregate-swap-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-conditional-rbf-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-conditional-sliced-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-conditional-fourth-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-extragradient-map-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-projected-cells-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-minimum-switch-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-slow-covariance-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-worst-shape-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-fractional-capacity-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
 | vector_unequal_width | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_width | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
-| mode_hold | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| mode_hold | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| two_pole | Atlas location control · screening | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
-| two_pole | Atlas location treatment · screening | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
 | vector_anisotropic_published | cell-gradient-signal-forward-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_anisotropic_published | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_anisotropic_published | cell-gradient-signal-reverse-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
@@ -321,14 +321,6 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | vector_unequal_mass | cell-gradient-signal-reverse-kl-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_mass | cell-gradient-signal-per-kernel-gp-control-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_unequal_mass | cell-gradient-signal-moment-gp-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
-| vector_unequal_width | G-angle unequal-width · full1200 | 1 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
-| vector_unequal_width | G-angle unequal-width · full1200 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
-| gaussian1d_smoke | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| gaussian1d_smoke | cell-gradient-signal-forward-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| gaussian1d_stability | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| gaussian1d_stability | cell-gradient-signal-forward-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
-| two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
-| two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
 | vector_anisotropic_published | cell-moment-aggregate-forward-kl-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_anisotropic_published | cell-moment-aggregate-moment-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | vector_anisotropic_published | cell-moment-per-kernel-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
@@ -448,6 +440,84 @@ These complete recipes keep their original sources, seeds, gates and budgets. Th
 | gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-global-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | gaussian1d_smoke | cell-optimizer-forward-kl-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
 | gaussian1d_smoke | cell-optimizer-moment-nsgda-layer-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/nonatlas-reconciled-204.json) |
+
+</details>
+
+<details>
+<summary>Bounded mechanism prefixes · 2 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| staggered100 | Finite realization control · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
+| staggered100 | Finite realization candidate · prefix64 | 0 | 7000 | INCOMPLETE | [full recipe, gates and original pins](test-performance-evidence/nonatlas-finite-realization-prefix64.json) |
+
+</details>
+
+<details>
+<summary>Atlas diagnostics · 7 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| two_pole | Atlas location first attempt · ERROR | 0 | 80 | ERROR | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | Atlas location control · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | Atlas location treatment · confirmation | 1 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | Atlas location control · screening | 0 | 80 | FAIL | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | Atlas location treatment · screening | 0 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-screen.json) |
+| two_pole | Atlas location control · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+| two_pole | Atlas location treatment · confirmation | 2 | 80 | PASS | [full recipe, gates and original pins](test-performance-evidence/atlas-location-confirmation.json) |
+
+</details>
+
+<details>
+<summary>G-angle diagnostics · 3 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| vector_anisotropic | G-angle anisotropic · full1200 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/g-angle-anisotropic.json) |
+| vector_unequal_width | G-angle unequal-width · full1200 | 1 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
+| vector_unequal_width | G-angle unequal-width · full1200 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/g-angle-width.json) |
+
+</details>
+
+<details>
+<summary>Quota transition and Astra portfolio · 24 evidence records</summary>
+
+| Test | Complete recipe | Seed | Declared updates | Original result | Evidence |
+| --- | --- | ---: | ---: | --- | --- |
+| vector_unequal_mass | cell-quota-equal-shape-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-prior-signal-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-aggregate-swap-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-conditional-rbf-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-conditional-sliced-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-conditional-fourth-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-extragradient-map-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-projected-cells-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-minimum-switch-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-slow-covariance-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-worst-shape-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-fractional-capacity-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| vector_unequal_mass | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| mode_hold | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1200 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| mode_hold | cell-gradient-signal-forward-kl-g-v1 | 0 | 1200 | FAIL | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| gaussian1d_smoke | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| gaussian1d_smoke | cell-gradient-signal-forward-kl-g-v1 | 0 | 1000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| gaussian1d_stability | cell-quota-minimum-change-forward-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+| gaussian1d_stability | cell-gradient-signal-forward-kl-g-v1 | 0 | 6000 | PASS | [full recipe, gates and original pins](test-performance-evidence/astra-cumulative-24.json) |
+
+</details>
+
+## Limitations
+
+**No global winner or qualification change.** Six mode-hold transfers lack saved sample panels and retain logged-metric FAIL regrades. Bulk source, samples, tensors and traces remain local-only. Full-run CUDA packets and contemporaneous causal histories were not retained. Missing preparation timings stay unknown, not zero.
+
+NO INDEXED WITNESS means no compatible passing optimizer, oracle or representational evidence is registered for that row; unindexed evidence remains unknown. A row with no graded result is different from a row of complete FAILs.
+
+## Generate and verify
 
 Regenerate with `python -m experiments.forge.test_performance` or the existing `python reports/forge/regenerate_technique_inventory.py` workflow. `python -m experiments.forge.test_performance --check` verifies deterministic generated bytes without writing or training.
 
