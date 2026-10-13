@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "857b546de060d008ad3343ebe53657f6e2e4410992af9a259bbefcf9996e73d5",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6b6f56543475a675dab8af8c78c9bd4a49918d6204c057bfc5c4ad0ab6d33181",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-tier1-search-20261012/queue/r1r2-energy-distance-repair-v1/a0893523c6564367ad59aab106e44cd1/observed-records.pt": "e79196ebace9aa27750b1d3f4ea5219ba6c67d3738e3e8f4a327dbdceffd9394"
+  },
+  "task_id": "five_word_joint_smoke"
+}

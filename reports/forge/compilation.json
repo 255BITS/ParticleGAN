@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "ea835f82d0f30cbda4fb8ce724de10100133708df0570ce254be5f0f9819c85f",
+  "input_digest": "f990064ad74b0bc54076a53625fddd7bf799b8ce3d716a4066edbb86092e6485",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -1527,6 +1527,7 @@
     "reports/forge/records/pr344-smoothed-dualnorm-1e-4-context-v1.json": "a02be8342c7eb7b4e2203f8c62c9484b5cf7641bca3bdf69b99d9a76dcfb34b4",
     "reports/forge/records/r1r2-constant-tier1-round1-20261012.json": "efa920147b69287d6f1c856ef2e960bbe2db87686696bd281afb475a6ee1848d",
     "reports/forge/records/r1r2-direction-floor-repair-20261012.json": "8ea3352fcaa659b4a1e3546c7c76d300fb3f424f78328f1396b8bd38330907e3",
+    "reports/forge/records/r1r2-energy-distance-repair-20261012.json": "3cf878fc4c5808706e7ed5c734753ca4cb4d7eb62bfd75b601ac53d34499a83b",
     "reports/forge/records/r1r2-five-track-repair-20261012.json": "a06dd14a8b72eedbd6e84c70e334f8ae892a2e5f0aecb1c78a45a6f3d277d6f6",
     "reports/forge/records/r1r2-objective-memory-repair-20261012.json": "7fee1f11d40c6856551e02d125fc155b6cd1b93e98bce0d669f0475e41cef879",
     "reports/forge/records/r1r2-recorded-baseline-20261012.json": "58405c5ee9b84dfd5afaedad99c154730bd184842ce9e97c896f6713eb399e96",
@@ -3942,7 +3943,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "ef77783aec33b83e9d82fb7870b59d5780c3da4d895656e7c0964553b3d78e1b",
+    "reports/forge/EXPERIMENT_MEMORY.md": "830a54fb2efe371bf1933e239ee7ad3f073f4ed96abb5e348d1d655aedce7f37",
     "reports/forge/publication-records.json": "1dde7845c644f4d735b70ac2cdc6b667c927d1ac21165657eacd6458d3cfff94"
   },
   "pending_readout": [
@@ -3956,7 +3957,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
-  "record_count": 839,
+  "record_count": 840,
   "reducer_hashes": {
     "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 839. Inventory coverage: complete. Unresolved import items: 7.
+Records: 840. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3878,6 +3878,22 @@ No complete repair. All three new recipes pass 4/6 ordinary tasks plus clock and
 
 [Evidence](../../reports/forge/r1r2-direction-floor-repair/publication/results.json) · [Record](records/r1r2-direction-floor-repair-20261012.json)
 
+### r1r2-non-saturating-energy-u-v1 · r1r2-energy-distance-repair-20261012
+
+**Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
+
+Raw signed energy-U added globally to positive paired R1/R2 repairs the unchanged complete Tier 1 suite.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Reject this energy repair: both fresh global recipes pass five ordinary tasks and own clock but fail Ring16. Energy restores spread while worsening covariance and HQ. Exact metrics and limits remain in the report.
+
+**Next:** Preserve this closed contrast and baseline; use saved geometry to justify any distinct separately registered global mechanism under unchanged tasks and remaining paid cap.
+
+[Evidence](../../reports/forge/r1r2-energy-distance-repair/publication/results.json) · [Record](records/r1r2-energy-distance-repair-20261012.json)
+
 ### r1r2-constant-policy-v1 · r1r2-five-track-repair-20261012
 
 **Scope:** bounded_global_tier1_search; family_context; revision `unknown`.
@@ -5383,4 +5399,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `ea835f82d0f30cbda4fb8ce724de10100133708df0570ce254be5f0f9819c85f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f990064ad74b0bc54076a53625fddd7bf799b8ce3d716a4066edbb86092e6485`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -105,6 +105,8 @@ The subsequent [native score-law comparison](reports/forge/r1r2-score-law-repair
 declares one loss-field contrast under the same task and protocol contracts.
 The separate [weaker-penalty comparison](reports/forge/r1r2-weak-penalty-repair/README.md)
 retains the original task contracts and declares its constant-strength delta explicitly.
+The subsequent [raw energy-distance comparison](reports/forge/r1r2-energy-distance-repair/README.md)
+binds an opt-in structural objective and fresh-source controls to those same contracts.
 `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
 the shared public trainer. Paired noisy artifacts retain the required clean/live
 grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`
