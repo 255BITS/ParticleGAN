@@ -1,0 +1,14 @@
+{
+  "falsifiers": [],
+  "full_fixed_fixture_count": 12,
+  "native_shipped_transport_objective": true,
+  "new_GPU_attempts": 0,
+  "no_target_coordinates_or_original_gate_changes": true,
+  "orders": [
+    9,
+    13
+  ],
+  "primary_protection_explicit_changed": true,
+  "reservations": 0,
+  "status": "ANALYTICAL_PREREQUISITE_SUPPORTED_SOFTWARE_CONTROLS_REQUIRED"
+}

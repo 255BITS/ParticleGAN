@@ -1,0 +1,136 @@
+{
+  "Martyn_or_release_qualified": false,
+  "PR404_unchanged": true,
+  "candidate_revision": "0f547e4e02839d1869e20719fd1d5bbe0929b71b3741d857536b0f99ccf32b27",
+  "global_winner": false,
+  "kind": "VERIFIED_AUGMENTED_TRANSPORT_PRIMARY_CANDIDATE",
+  "new_GPU_attempts": 2,
+  "new_budget": 0,
+  "new_updates": 6000,
+  "original_task_gates_sampler_prior_initialization_horizons_unchanged": true,
+  "paid_retries": 0,
+  "peak_actual_training": 1,
+  "protected_primary_objective_change_explicit": true,
+  "queue_seconds": 111.9232298489951,
+  "recipe_delta": {
+    "kinetic_transport_protect_primary": true,
+    "kinetic_transport_weight": 1.0
+  },
+  "rows": [
+    {
+      "all_finite": true,
+      "attempt": "aa6593c85b784513a8e93b7dfcd3759d",
+      "candidate": "balanced-primary-gaussian-v1",
+      "candidate_revision": "0f547e4e02839d1869e20719fd1d5bbe0929b71b3741d857536b0f99ccf32b27",
+      "canonical_result_sha256": "ac846108fd31ec91a0a24a7b291a12820d80518c54f9f75d874032dd8b2ab899",
+      "completed_steps": 1000,
+      "continuity": null,
+      "evaluator_result": {
+        "confirmed_steps": [
+          125,
+          334,
+          417,
+          459,
+          584,
+          667,
+          917,
+          959,
+          1000
+        ],
+        "first_confirmed_step": 125,
+        "observations": 24,
+        "passing_observations": 10
+      },
+      "log": {
+        "path": "[local reference omitted]",
+        "sha256": "10ea2769ead185cf828bf12fae1a0e3b9f58ae44d613c98bc94cf09594902a24"
+      },
+      "metrics": {
+        "cdf_ks": 0.01805603484688334,
+        "finite_fraction": 1.0,
+        "mean": 2.013595298965811,
+        "mean_error_sigma": 0.027190597931621596,
+        "sample_count": 4096,
+        "std": 0.4935231069729497,
+        "std_ratio": 0.9870462139458994,
+        "step": 1000
+      },
+      "mode": "augmented_transport_primary_G",
+      "new_updates": 1000,
+      "original_result": {
+        "path": "[local reference omitted]",
+        "sha256": "e776226a0d36d449de5a1b1267bf4c9525e3c516201548ec701afca6d1feee75"
+      },
+      "original_task_object_unchanged": true,
+      "own_state_continuation": null,
+      "queue_seconds": 25.139742580009624,
+      "raw_status": "completed",
+      "source_digest": "60a7aff419fcdeb9999685cb8cf39cc8db4cd6b58c0a2d0eead5c7401288be7e",
+      "status": "PASS",
+      "supervisor_seconds": 26.513603421015432,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "all_finite": true,
+      "attempt": "d548c8ac76b445c2aa3324045debce1f",
+      "candidate": "balanced-primary-gaussian-v1",
+      "candidate_revision": "0f547e4e02839d1869e20719fd1d5bbe0929b71b3741d857536b0f99ccf32b27",
+      "canonical_result_sha256": "94b2f0563a1d8e3dbf4d54572d22b445dcd870fe5840219a3dd5de5af7b80636",
+      "completed_steps": 6000,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "0f547e4e02839d1869e20719fd1d5bbe0929b71b3741d857536b0f99ccf32b27",
+        "parent_checkpoint_sha256": "7a903ef7f2b743144c8cd752854bdd4277559448eb2c4a38f12f41227cb3a18f",
+        "parent_compatibility_key": "34eae0f784542e8e7e61f511a25cdeaf3ddc74272c3f3b76e51717f88e0c209f",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "267610920b7b768724d915cadeadadea2d8f9c915529533d5a4f2d7189b9fcb4",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "evaluator_result": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 12,
+        "stationary_checks": 72,
+        "stationary_passes": 35
+      },
+      "log": {
+        "path": "[local reference omitted]",
+        "sha256": "30cd11302195d5bb337994f6094b1ff0ff6ab7a26a82c0e6b3971cf1b8bcbc76"
+      },
+      "metrics": {
+        "cdf_ks": 0.07612553755008189,
+        "finite_fraction": 1.0,
+        "mean": 3.0880204606510233,
+        "mean_error_sigma": 0.17604092130204663,
+        "sample_count": 4096,
+        "std": 0.5142787610129114,
+        "std_ratio": 1.0285575220258227,
+        "step": 6000
+      },
+      "mode": "augmented_transport_primary_G",
+      "new_updates": 5000,
+      "original_result": {
+        "path": "[local reference omitted]",
+        "sha256": "460b4d270a40aca2cfc60b1882ef2013b65743af11784e259ba6b627a1dd0884"
+      },
+      "original_task_object_unchanged": true,
+      "own_state_continuation": true,
+      "queue_seconds": 86.78348726898548,
+      "raw_status": "completed",
+      "source_digest": "60a7aff419fcdeb9999685cb8cf39cc8db4cd6b58c0a2d0eead5c7401288be7e",
+      "status": "FAIL",
+      "supervisor_seconds": 88.19375005198526,
+      "task": "gaussian1d_stability"
+    }
+  ],
+  "schema_version": 1,
+  "source_digest": "60a7aff419fcdeb9999685cb8cf39cc8db4cd6b58c0a2d0eead5c7401288be7e",
+  "status": "TWO_ORIGINAL_GAUSSIAN_TASKS_TERMINAL",
+  "supervisor_seconds": 114.7073534730007
+}

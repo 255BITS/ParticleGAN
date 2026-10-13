@@ -1,0 +1,16 @@
+{
+  "higher_polar_derivatives_supported": false,
+  "new_GPU_jobs": 0,
+  "new_budget": 0,
+  "repair": "Invariant spectral-map first VJP with exact native SVD forward, rank cutoff, smoothing, dtype and fused-add tensor rounding. No forward optimizer change or rate/reaction sweep.",
+  "root_cause": "Anomaly trace identifies LinalgSvdBackward0 on repeated/rank-deficient singular subspaces; all 12 full reaction probes nonfinite.",
+  "software_prerequisite_only": true,
+  "source_code_changes": 0,
+  "status": "ANALYTICAL_ONLY_NOT_IMPLEMENTED_IN_TRAINER",
+  "validation_required": [
+    "Every virtual forward polar tensor byte-equal to shipped polar_factor",
+    "Complete-objective fixed central differences at eps1e-3/3e-4 agree with the complete G/prior derivative",
+    "Finite all entries across all 12 fixed fixtures",
+    "Same original mean/variance/acquisition scientific falsifiers"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "active_complete_restore": true,
+  "default_off_parity": true,
+  "extra_forward_or_sampler_calls": 0,
+  "full_physical_reservation": 760,
+  "full_queue_reservation": 720,
+  "global_primary_objective_change_explicit": true,
+  "normal_admission": true,
+  "original_task_objects_unchanged": true,
+  "request_set_sha256": "ac5474c511cb761ed9bff2dcf69c8cddea8ec4273615767fbeea044aceec6af2",
+  "source_digest": "60a7aff419fcdeb9999685cb8cf39cc8db4cd6b58c0a2d0eead5c7401288be7e",
+  "status": "PASS"
+}

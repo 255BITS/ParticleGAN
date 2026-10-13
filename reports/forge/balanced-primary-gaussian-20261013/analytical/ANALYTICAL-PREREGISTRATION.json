@@ -1,0 +1,59 @@
+{
+  "GPU_eligible": false,
+  "conditional_future_original_gaussian_reservation": {
+    "own_final_smoke_checkpoint_required": true,
+    "queue_seconds": 720,
+    "retention_additional_updates": 5000,
+    "smoke_updates": 1000,
+    "supervisor_seconds": 760,
+    "timeouts_unchanged": [
+      120,
+      600
+    ],
+    "whole_six_task_forbidden_under_remaining_budget": true
+  },
+  "derivative_paths": {
+    "D1": "fixed after ordinary commit",
+    "D2_BCAP": "include fake-input gradient dependence",
+    "D2_parameters": "differentiable via D loss gradients, original polar normalization and cached fake generator/prior graph",
+    "confidence_gain": "existing detached statistical gain retained, not differentiated",
+    "prior_rows": "actual sampled row ownership retained"
+  },
+  "distinct_from_rejection": "Earlier extra-D2 guidance detached the critic reaction map. This proposal changes the derivative, not the reaction count or rate.",
+  "frozen_fixtures": {
+    "integration_orders": [
+      9,
+      13
+    ],
+    "lineages": [
+      "absolute_confidence",
+      "positive_evidence"
+    ],
+    "panels": [
+      0,
+      1
+    ],
+    "steps": [
+      1000,
+      4000,
+      6000
+    ]
+  },
+  "live_commit_rule": "Exactly one real D and one G/prior update if a future implementation is admitted; all present work is detached saved-state functional algebra with no live update or sampler call.",
+  "mechanism": "One virtual D2 proposal after the ordinary committed D1, with the full G/prior derivative through the exact zero-momentum normalized D2 map and its cached D-phase fake panel.",
+  "new_budget": 0,
+  "original_task_contracts_changed": false,
+  "reservations": 0,
+  "sampling_law": {
+    "D_and_G_panels_distinct": true,
+    "components": 256,
+    "isotropic_sigma": 0.1,
+    "latent_dimensions": 2,
+    "new_RNG_draws": 0,
+    "uniform_masses": true
+  },
+  "scientific_prerequisite": "Repair adverse baseline and positive-evidence terminal mean and variance directions on both fixed panels at both integration orders; preserve acquisition's W2-improving ordinary directions and finite proposal, with no best-panel or endpoint substitution.",
+  "software_prerequisite": "Every relevant higher-order derivative finite and agrees with fixed central differences of the complete virtual-G objective; retain failures and unsupported native SVD gradients.",
+  "status": "PREREGISTERED_ANALYTICAL_ONLY",
+  "virtual_operator": "Native public polar_factor, inherited smoothing/rates/BCAP, unchanged zero-momentum dense/scalar tensor normalization; no SGD replacement, SVD smoothing change or parameter-rate sweep."
+}

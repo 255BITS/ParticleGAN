@@ -1,0 +1,28 @@
+[
+  {
+    "attempt": "aa6593c85b784513a8e93b7dfcd3759d",
+    "charged_Popen_to_exit_seconds": 26.513603421015432,
+    "exit_code": 0,
+    "inode": 3941,
+    "lease": "[local reference omitted]",
+    "lease_metadata_unchanged": true,
+    "lease_released": true,
+    "log": "[local reference omitted]",
+    "physical_GPU": 0,
+    "slot": 0,
+    "supervisor_PID": 348518
+  },
+  {
+    "attempt": "d548c8ac76b445c2aa3324045debce1f",
+    "charged_Popen_to_exit_seconds": 88.19375005198526,
+    "exit_code": 0,
+    "inode": 3941,
+    "lease": "[local reference omitted]",
+    "lease_metadata_unchanged": true,
+    "lease_released": true,
+    "log": "[local reference omitted]",
+    "physical_GPU": 0,
+    "slot": 0,
+    "supervisor_PID": 348946
+  }
+]

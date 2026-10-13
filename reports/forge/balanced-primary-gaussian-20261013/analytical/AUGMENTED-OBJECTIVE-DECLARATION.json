@@ -1,0 +1,36 @@
+{
+  "PR404_source_changes": 0,
+  "admitted": false,
+  "all_other_recipe_controls": "Original BCAP critic/input-gradient penalty, live D/G/prior updates, learned MoG, all rates, momentum/operator/smoothing, confidence response, schedule and RNG retained.",
+  "analytic_support": "All fixed acquisition finite-proposal W2 improvements preserved; both terminal mean/variance restored on both panels at both orders9/13. Pure preserved NS protection fails four terminal comparisons, retained as counterevidence.",
+  "base": "generator-confidence-lr-bcap-direction-v1, unchanged successful acquisition recipe",
+  "candidate": "balanced-primary-gaussian-v1",
+  "new_budget": 0,
+  "objective_implementation": "Reuse shipped Recipe.kinetic_transport_loss exactly (float32 scalar sort, inherited inactive scale floor), coefficient1. New field only controls explicit augmented primary protection.",
+  "original_allowances": {
+    "queue_total": 720,
+    "retention": 600,
+    "smoke": 120,
+    "supervisor_total": 760
+  },
+  "original_operator_protection_counterevidence": "NS-only projection loses terminal correction at both baseline panels; preserved in BALANCED-PROTECTED-ANALYSIS.json.",
+  "original_task_gates_prior_architecture_initialization_cadence_horizons": "unchanged",
+  "paid_retries": 0,
+  "protected_objective_change_explicit": "Existing direction_blend protects the augmented primary objective instead of NS-only. NS-only protection is measured to turn restoring transport motion into adverse baseline terminal motion. No conditional/reconstruction objective is dropped; unsupported hosts are refused before allocation.",
+  "recipe_delta": {
+    "kinetic_transport_protect_primary": true,
+    "kinetic_transport_weight": 1.0
+  },
+  "remaining_ledger": "successor/BUDGET-AFTER-ATLAS-COVERAGE.json",
+  "required_software_controls": [
+    "Off-mode tensor and RNG parity with frozen base, ignoring only declared default-zero recipe metadata field",
+    "Active auxiliary exact matched loss/gradient on original tensors, positive data scale and finite entries",
+    "No extra model forward/sampler draws; genuine D/G/prior clocks each advance once",
+    "Complete save/rebuild/load and next-step full-state/RNG equality",
+    "Reject unsupported component/continuous/noisy or non-scalar hosts and mismatched active checkpoint before mutation"
+  ],
+  "scope": "Focused original Gaussian smoke plus its own exact terminal-checkpoint continuation only; not whole-six-task or Martyn superiority qualification.",
+  "semantic_dedup": "Existing kinetic_transport_local_v2 is not repeated; new exact scalar transport primary protection differs from NS-only protected auxiliaries. Existing objective math reused, not relabelled as invented.",
+  "single_primary_objective_change": "G/prior primary objective becomes original non-saturating GAN loss plus coefficient1 normalized exact balanced quadratic scalar output matching on existing G-phase real/fake occurrences.",
+  "status": "DECLARED_FOR_SOFTWARE_PREFLIGHT_NOT_ADMITTED"
+}

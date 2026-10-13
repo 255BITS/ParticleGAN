@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "executed_frozen_source_members": 1214,
+  "source_drift": 0,
+  "original_task_objects_unchanged": true,
+  "certificate_projected_attempts": 2,
+  "original_grades": [
+    "PASS",
+    "FAIL"
+  ],
+  "actual_training_GIFs": 2,
+  "additional_training_samples_or_updates_for_media": 0,
+  "report_relative_links_valid": true,
+  "prototype_patch_applies_to_declared_archived_baseline": true,
+  "PR404_head_unchanged": true,
+  "PR404_worktree_clean": true,
+  "no_develop_core_science_or_test_changes": true,
+  "default_off_normalized_state_exact": true,
+  "active_complete_restore_next4_exact": true,
+  "all_twelve_leases_free_at_terminal": true,
+  "new_budget": 0,
+  "paid_retries": 0
+}

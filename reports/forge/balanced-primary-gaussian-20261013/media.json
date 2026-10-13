@@ -1,0 +1,65 @@
+{
+  "additional_samples": 0,
+  "additional_updates": 0,
+  "items": [
+    {
+      "attempt": "aa6593c85b784513a8e93b7dfcd3759d",
+      "gif": "reports/forge/balanced-primary-gaussian-20261013/gifs/gaussian1d_smoke.gif",
+      "gif_sha256": "d7eb56b43fc850625c3369174eec903037d626519cfe2cc291f33051c43a0523",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "3ec3da76bf3b390545e4b905c2e125d5e6b022002101ad254a56873c93470619",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "PASS",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/aa6593c85b784513a8e93b7dfcd3759d/evaluator/observed-samples.pt": "42396f8cd1a21857993ab5ec70be72b729ff4cd82646861a45ea0199b3e65642"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt": "d548c8ac76b445c2aa3324045debce1f",
+      "gif": "reports/forge/balanced-primary-gaussian-20261013/gifs/gaussian1d_stability.gif",
+      "gif_sha256": "9f4bd524e1d0930cd7f44b198e9eda302e341ed01c43d8c651c813857ac7258d",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 120,
+      "observations_sha256": "54a833be4dbbf660d38df4e4e42aa58ad43c16fb588f79433cb337afa2cb2ebd",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        74,
+        89,
+        104,
+        119
+      ],
+      "source_inputs": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/observed-samples.pt": "e554bc3593c27ba3f848b99b1ddd53aab7b69971cab337eff966e7e673bc6589"
+      },
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "qualification_input": false
+}

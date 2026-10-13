@@ -1,0 +1,32 @@
+[
+  {
+    "PID": 348518,
+    "attempt": "aa6593c85b784513a8e93b7dfcd3759d",
+    "candidate": "balanced-primary-gaussian-v1",
+    "event": "STANDARD_FORGE_SUPERVISOR_STARTED",
+    "full_queue_reservation": 120,
+    "inode": 3941,
+    "lease": "[local reference omitted]",
+    "log": "[local reference omitted]",
+    "physical_GPU": 0,
+    "physical_reservation": 140,
+    "slot": 0,
+    "task": "gaussian1d_smoke",
+    "unix": 1791928204.0457873
+  },
+  {
+    "PID": 348946,
+    "attempt": "d548c8ac76b445c2aa3324045debce1f",
+    "candidate": "balanced-primary-gaussian-v1",
+    "event": "STANDARD_FORGE_SUPERVISOR_STARTED",
+    "full_queue_reservation": 600,
+    "inode": 3941,
+    "lease": "[local reference omitted]",
+    "log": "[local reference omitted]",
+    "physical_GPU": 0,
+    "physical_reservation": 620,
+    "slot": 0,
+    "task": "gaussian1d_stability",
+    "unix": 1791928230.796339
+  }
+]

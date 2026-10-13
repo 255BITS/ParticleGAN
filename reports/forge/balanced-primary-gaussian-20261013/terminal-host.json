@@ -1,0 +1,98 @@
+{
+  "all_owned_processes_absent": true,
+  "all_twelve_leases_free": true,
+  "leases": [
+    {
+      "free": true,
+      "inode": 3941,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 4005,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846966,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846967,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846968,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846969,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846970,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846971,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846972,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 846973,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 4006,
+      "path": "[local reference omitted]"
+    },
+    {
+      "free": true,
+      "inode": 4007,
+      "path": "[local reference omitted]"
+    }
+  ],
+  "no_unrelated_process_changes": true,
+  "owned_processes": [
+    {
+      "pid": 348429,
+      "proc_exists": false
+    },
+    {
+      "pid": 348518,
+      "proc_exists": false
+    },
+    {
+      "pid": 348542,
+      "proc_exists": false
+    },
+    {
+      "pid": 348879,
+      "proc_exists": false
+    },
+    {
+      "pid": 348946,
+      "proc_exists": false
+    },
+    {
+      "pid": 348969,
+      "proc_exists": false
+    },
+    {
+      "pid": 350264,
+      "proc_exists": false
+    }
+  ],
+  "unix": 1791928556.3162766
+}

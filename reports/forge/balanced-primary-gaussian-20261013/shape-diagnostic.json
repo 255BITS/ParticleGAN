@@ -1,0 +1,860 @@
+{
+  "artifact": {
+    "path": "[local reference omitted]",
+    "sha256": "e554bc3593c27ba3f848b99b1ddd53aab7b69971cab337eff966e7e673bc6589"
+  },
+  "failed_rows_fit_KS_over_point05": 0,
+  "failed_rows_gaussian_parameter_displacement_over_point05": 48,
+  "fit_KS_range": [
+    0.007043768465517908,
+    0.02891804984100943
+  ],
+  "model_or_training_calls": 0,
+  "no_evaluator_grade_changes": true,
+  "original_KS_failures": 61,
+  "original_grade": "FAIL",
+  "original_rows": 120,
+  "rows": [
+    {
+      "Gaussian_fit_KS": 0.01096236687829344,
+      "Gaussian_mean_std_CDF_displacement": 0.0788815932322855,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07792491578888805,
+      "step": 1042
+    },
+    {
+      "Gaussian_fit_KS": 0.013765756775612814,
+      "Gaussian_mean_std_CDF_displacement": 0.07030608503143809,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07713390759707855,
+      "step": 1084
+    },
+    {
+      "Gaussian_fit_KS": 0.026949759980746224,
+      "Gaussian_mean_std_CDF_displacement": 0.04353791855546724,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06272720286228162,
+      "step": 1125
+    },
+    {
+      "Gaussian_fit_KS": 0.020504567292079612,
+      "Gaussian_mean_std_CDF_displacement": 0.1363231164944143,
+      "diagnostic_only": true,
+      "recorded_KS": 0.14628731227266467,
+      "step": 1167
+    },
+    {
+      "Gaussian_fit_KS": 0.018517192585484454,
+      "Gaussian_mean_std_CDF_displacement": 0.032664280155063286,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04263227080853521,
+      "step": 1209
+    },
+    {
+      "Gaussian_fit_KS": 0.016582233815355008,
+      "Gaussian_mean_std_CDF_displacement": 0.027047168998330706,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02964064962002466,
+      "step": 1250
+    },
+    {
+      "Gaussian_fit_KS": 0.01627444894485336,
+      "Gaussian_mean_std_CDF_displacement": 0.02622614436526055,
+      "diagnostic_only": true,
+      "recorded_KS": 0.027231553135145026,
+      "step": 1292
+    },
+    {
+      "Gaussian_fit_KS": 0.013887140662329323,
+      "Gaussian_mean_std_CDF_displacement": 0.05742373047486804,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07127042227631353,
+      "step": 1334
+    },
+    {
+      "Gaussian_fit_KS": 0.024466391148862676,
+      "Gaussian_mean_std_CDF_displacement": 0.06603498996967061,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06910559533365379,
+      "step": 1375
+    },
+    {
+      "Gaussian_fit_KS": 0.021228776424859153,
+      "Gaussian_mean_std_CDF_displacement": 0.021427532452786946,
+      "diagnostic_only": true,
+      "recorded_KS": 0.037166828620370684,
+      "step": 1417
+    },
+    {
+      "Gaussian_fit_KS": 0.028088119496719632,
+      "Gaussian_mean_std_CDF_displacement": 0.030271825514720074,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05285386920280177,
+      "step": 1459
+    },
+    {
+      "Gaussian_fit_KS": 0.02156637409786466,
+      "Gaussian_mean_std_CDF_displacement": 0.02761590308613593,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03323648065224716,
+      "step": 1500
+    },
+    {
+      "Gaussian_fit_KS": 0.024604721143994812,
+      "Gaussian_mean_std_CDF_displacement": 0.02934494443811153,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04842083308140943,
+      "step": 1542
+    },
+    {
+      "Gaussian_fit_KS": 0.011474380722524047,
+      "Gaussian_mean_std_CDF_displacement": 0.04947900035443875,
+      "diagnostic_only": true,
+      "recorded_KS": 0.048873575463314056,
+      "step": 1584
+    },
+    {
+      "Gaussian_fit_KS": 0.010379924713002975,
+      "Gaussian_mean_std_CDF_displacement": 0.03899566733587556,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04420095684355485,
+      "step": 1625
+    },
+    {
+      "Gaussian_fit_KS": 0.018702456957023217,
+      "Gaussian_mean_std_CDF_displacement": 0.007139299492704976,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0220875377187848,
+      "step": 1667
+    },
+    {
+      "Gaussian_fit_KS": 0.027122879668195488,
+      "Gaussian_mean_std_CDF_displacement": 0.08239944567115176,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08242044607016674,
+      "step": 1709
+    },
+    {
+      "Gaussian_fit_KS": 0.012085918626110193,
+      "Gaussian_mean_std_CDF_displacement": 0.03827100535997363,
+      "diagnostic_only": true,
+      "recorded_KS": 0.047887595014820095,
+      "step": 1750
+    },
+    {
+      "Gaussian_fit_KS": 0.020123657504616865,
+      "Gaussian_mean_std_CDF_displacement": 0.027463032320149572,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03970944990988401,
+      "step": 1792
+    },
+    {
+      "Gaussian_fit_KS": 0.01580515283763373,
+      "Gaussian_mean_std_CDF_displacement": 0.09984194545622305,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10214403482809287,
+      "step": 1834
+    },
+    {
+      "Gaussian_fit_KS": 0.028239437393198008,
+      "Gaussian_mean_std_CDF_displacement": 0.07626790726759969,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06104747786943365,
+      "step": 1875
+    },
+    {
+      "Gaussian_fit_KS": 0.015148215009718635,
+      "Gaussian_mean_std_CDF_displacement": 0.03341750308422414,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04755327966773437,
+      "step": 1917
+    },
+    {
+      "Gaussian_fit_KS": 0.015949567681940446,
+      "Gaussian_mean_std_CDF_displacement": 0.045951556715134456,
+      "diagnostic_only": true,
+      "recorded_KS": 0.060281591388445355,
+      "step": 1959
+    },
+    {
+      "Gaussian_fit_KS": 0.018505358406245953,
+      "Gaussian_mean_std_CDF_displacement": 0.048263976984185164,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05633914884521163,
+      "step": 2000
+    },
+    {
+      "Gaussian_fit_KS": 0.01607534753253015,
+      "Gaussian_mean_std_CDF_displacement": 0.019477266063194887,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03498033316567217,
+      "step": 2042
+    },
+    {
+      "Gaussian_fit_KS": 0.017126446416507846,
+      "Gaussian_mean_std_CDF_displacement": 0.03243575637575513,
+      "diagnostic_only": true,
+      "recorded_KS": 0.041376468342519124,
+      "step": 2084
+    },
+    {
+      "Gaussian_fit_KS": 0.014748733842686379,
+      "Gaussian_mean_std_CDF_displacement": 0.022383227763171587,
+      "diagnostic_only": true,
+      "recorded_KS": 0.036397395648191444,
+      "step": 2125
+    },
+    {
+      "Gaussian_fit_KS": 0.014587019349159458,
+      "Gaussian_mean_std_CDF_displacement": 0.08060410498422343,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0866373834868599,
+      "step": 2167
+    },
+    {
+      "Gaussian_fit_KS": 0.01029567348522975,
+      "Gaussian_mean_std_CDF_displacement": 0.14888642817995928,
+      "diagnostic_only": true,
+      "recorded_KS": 0.15677579741099468,
+      "step": 2209
+    },
+    {
+      "Gaussian_fit_KS": 0.019562626571294484,
+      "Gaussian_mean_std_CDF_displacement": 0.008209622005696637,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02509881244802492,
+      "step": 2250
+    },
+    {
+      "Gaussian_fit_KS": 0.017043731482759283,
+      "Gaussian_mean_std_CDF_displacement": 0.013930708100928335,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0236598974563762,
+      "step": 2292
+    },
+    {
+      "Gaussian_fit_KS": 0.019382246053033403,
+      "Gaussian_mean_std_CDF_displacement": 0.07964778726918714,
+      "diagnostic_only": true,
+      "recorded_KS": 0.09570418833660405,
+      "step": 2334
+    },
+    {
+      "Gaussian_fit_KS": 0.017797201004267516,
+      "Gaussian_mean_std_CDF_displacement": 0.05138487618608445,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04981123758599515,
+      "step": 2375
+    },
+    {
+      "Gaussian_fit_KS": 0.011284851038086352,
+      "Gaussian_mean_std_CDF_displacement": 0.018032595431350162,
+      "diagnostic_only": true,
+      "recorded_KS": 0.021899556545320387,
+      "step": 2417
+    },
+    {
+      "Gaussian_fit_KS": 0.016807379845809822,
+      "Gaussian_mean_std_CDF_displacement": 0.026217168489062526,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04206080652041355,
+      "step": 2459
+    },
+    {
+      "Gaussian_fit_KS": 0.014747466653573404,
+      "Gaussian_mean_std_CDF_displacement": 0.06007351679172912,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06576771834416917,
+      "step": 2500
+    },
+    {
+      "Gaussian_fit_KS": 0.017755999154237756,
+      "Gaussian_mean_std_CDF_displacement": 0.035267665290599104,
+      "diagnostic_only": true,
+      "recorded_KS": 0.044370100877868524,
+      "step": 2542
+    },
+    {
+      "Gaussian_fit_KS": 0.012680416168269815,
+      "Gaussian_mean_std_CDF_displacement": 0.06514846931266483,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06321679320457552,
+      "step": 2584
+    },
+    {
+      "Gaussian_fit_KS": 0.027581262049603317,
+      "Gaussian_mean_std_CDF_displacement": 0.026344997166034334,
+      "diagnostic_only": true,
+      "recorded_KS": 0.051356750356548075,
+      "step": 2625
+    },
+    {
+      "Gaussian_fit_KS": 0.01405110387834907,
+      "Gaussian_mean_std_CDF_displacement": 0.03203073340284285,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03314685332648981,
+      "step": 2667
+    },
+    {
+      "Gaussian_fit_KS": 0.016622773830435422,
+      "Gaussian_mean_std_CDF_displacement": 0.10333094309928237,
+      "diagnostic_only": true,
+      "recorded_KS": 0.11893333826161734,
+      "step": 2709
+    },
+    {
+      "Gaussian_fit_KS": 0.024582005611939906,
+      "Gaussian_mean_std_CDF_displacement": 0.0464463660456238,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07063526268126474,
+      "step": 2750
+    },
+    {
+      "Gaussian_fit_KS": 0.012990235868501565,
+      "Gaussian_mean_std_CDF_displacement": 0.10076607867559162,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10587086183727434,
+      "step": 2792
+    },
+    {
+      "Gaussian_fit_KS": 0.020690088970168552,
+      "Gaussian_mean_std_CDF_displacement": 0.10515600881104159,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10172475830264438,
+      "step": 2834
+    },
+    {
+      "Gaussian_fit_KS": 0.02891804984100943,
+      "Gaussian_mean_std_CDF_displacement": 0.08611697863509882,
+      "diagnostic_only": true,
+      "recorded_KS": 0.11085102529233226,
+      "step": 2875
+    },
+    {
+      "Gaussian_fit_KS": 0.016453579816273822,
+      "Gaussian_mean_std_CDF_displacement": 0.13425833668016296,
+      "diagnostic_only": true,
+      "recorded_KS": 0.14411978399500391,
+      "step": 2917
+    },
+    {
+      "Gaussian_fit_KS": 0.0136917937596292,
+      "Gaussian_mean_std_CDF_displacement": 0.024691227033365903,
+      "diagnostic_only": true,
+      "recorded_KS": 0.032623838221117696,
+      "step": 2959
+    },
+    {
+      "Gaussian_fit_KS": 0.024239495402988642,
+      "Gaussian_mean_std_CDF_displacement": 0.034001959255654746,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05177809503155428,
+      "step": 3000
+    },
+    {
+      "Gaussian_fit_KS": 0.015802048326957197,
+      "Gaussian_mean_std_CDF_displacement": 0.06563581177762551,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07563236786832972,
+      "step": 3042
+    },
+    {
+      "Gaussian_fit_KS": 0.014333259728229963,
+      "Gaussian_mean_std_CDF_displacement": 0.014249857462247162,
+      "diagnostic_only": true,
+      "recorded_KS": 0.019218340912196874,
+      "step": 3084
+    },
+    {
+      "Gaussian_fit_KS": 0.01592055203968501,
+      "Gaussian_mean_std_CDF_displacement": 0.012111053625823265,
+      "diagnostic_only": true,
+      "recorded_KS": 0.026674273562593553,
+      "step": 3125
+    },
+    {
+      "Gaussian_fit_KS": 0.01949293924649087,
+      "Gaussian_mean_std_CDF_displacement": 0.049050726034851555,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0639675054832256,
+      "step": 3167
+    },
+    {
+      "Gaussian_fit_KS": 0.02037659946311965,
+      "Gaussian_mean_std_CDF_displacement": 0.0521903773904383,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06215776354671254,
+      "step": 3209
+    },
+    {
+      "Gaussian_fit_KS": 0.02057891693177416,
+      "Gaussian_mean_std_CDF_displacement": 0.009086578402950407,
+      "diagnostic_only": true,
+      "recorded_KS": 0.014476416857365226,
+      "step": 3250
+    },
+    {
+      "Gaussian_fit_KS": 0.013950063551980973,
+      "Gaussian_mean_std_CDF_displacement": 0.030445820540898838,
+      "diagnostic_only": true,
+      "recorded_KS": 0.036195144936712276,
+      "step": 3292
+    },
+    {
+      "Gaussian_fit_KS": 0.016340831267616096,
+      "Gaussian_mean_std_CDF_displacement": 0.05872749505686081,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06722344650619294,
+      "step": 3334
+    },
+    {
+      "Gaussian_fit_KS": 0.023873742409254217,
+      "Gaussian_mean_std_CDF_displacement": 0.1053329912617823,
+      "diagnostic_only": true,
+      "recorded_KS": 0.09717026921367733,
+      "step": 3375
+    },
+    {
+      "Gaussian_fit_KS": 0.016057663108247078,
+      "Gaussian_mean_std_CDF_displacement": 0.027792937336780787,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02937604033775354,
+      "step": 3417
+    },
+    {
+      "Gaussian_fit_KS": 0.020631318557217115,
+      "Gaussian_mean_std_CDF_displacement": 0.022953719149494622,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04123879714397083,
+      "step": 3459
+    },
+    {
+      "Gaussian_fit_KS": 0.018167149390276638,
+      "Gaussian_mean_std_CDF_displacement": 0.10639861981043741,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10026050362211869,
+      "step": 3500
+    },
+    {
+      "Gaussian_fit_KS": 0.02328631135424919,
+      "Gaussian_mean_std_CDF_displacement": 0.11472491595478473,
+      "diagnostic_only": true,
+      "recorded_KS": 0.13428555475743176,
+      "step": 3542
+    },
+    {
+      "Gaussian_fit_KS": 0.018955248046936324,
+      "Gaussian_mean_std_CDF_displacement": 0.16243751890709546,
+      "diagnostic_only": true,
+      "recorded_KS": 0.17409845443537608,
+      "step": 3584
+    },
+    {
+      "Gaussian_fit_KS": 0.017336219044791767,
+      "Gaussian_mean_std_CDF_displacement": 0.02399959906048177,
+      "diagnostic_only": true,
+      "recorded_KS": 0.026773803716741262,
+      "step": 3625
+    },
+    {
+      "Gaussian_fit_KS": 0.019204392850736607,
+      "Gaussian_mean_std_CDF_displacement": 0.015536128093084411,
+      "diagnostic_only": true,
+      "recorded_KS": 0.021008202679238808,
+      "step": 3667
+    },
+    {
+      "Gaussian_fit_KS": 0.0194218068433632,
+      "Gaussian_mean_std_CDF_displacement": 0.04615125194160952,
+      "diagnostic_only": true,
+      "recorded_KS": 0.055339910288113914,
+      "step": 3709
+    },
+    {
+      "Gaussian_fit_KS": 0.021118949955376054,
+      "Gaussian_mean_std_CDF_displacement": 0.03318598516326532,
+      "diagnostic_only": true,
+      "recorded_KS": 0.037555347742056044,
+      "step": 3750
+    },
+    {
+      "Gaussian_fit_KS": 0.015790910207340914,
+      "Gaussian_mean_std_CDF_displacement": 0.05401810659307382,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06340708858936184,
+      "step": 3792
+    },
+    {
+      "Gaussian_fit_KS": 0.019730752155848408,
+      "Gaussian_mean_std_CDF_displacement": 0.008740202130844144,
+      "diagnostic_only": true,
+      "recorded_KS": 0.018992965901540815,
+      "step": 3834
+    },
+    {
+      "Gaussian_fit_KS": 0.015319465393825726,
+      "Gaussian_mean_std_CDF_displacement": 0.07610740776866631,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08134528936265417,
+      "step": 3875
+    },
+    {
+      "Gaussian_fit_KS": 0.017819825686848034,
+      "Gaussian_mean_std_CDF_displacement": 0.12653258101171272,
+      "diagnostic_only": true,
+      "recorded_KS": 0.1375741341416008,
+      "step": 3917
+    },
+    {
+      "Gaussian_fit_KS": 0.015500986668060046,
+      "Gaussian_mean_std_CDF_displacement": 0.01664916850047088,
+      "diagnostic_only": true,
+      "recorded_KS": 0.030212513413186037,
+      "step": 3959
+    },
+    {
+      "Gaussian_fit_KS": 0.011598951111445488,
+      "Gaussian_mean_std_CDF_displacement": 0.025833985219700706,
+      "diagnostic_only": true,
+      "recorded_KS": 0.030364175872206522,
+      "step": 4000
+    },
+    {
+      "Gaussian_fit_KS": 0.013823386654114311,
+      "Gaussian_mean_std_CDF_displacement": 0.05315585174470627,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06692725457007165,
+      "step": 4042
+    },
+    {
+      "Gaussian_fit_KS": 0.011942122699622082,
+      "Gaussian_mean_std_CDF_displacement": 0.06008426406193457,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06538653583992271,
+      "step": 4084
+    },
+    {
+      "Gaussian_fit_KS": 0.025018231332816443,
+      "Gaussian_mean_std_CDF_displacement": 0.08836959586537219,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0788707346727982,
+      "step": 4125
+    },
+    {
+      "Gaussian_fit_KS": 0.013637546317604388,
+      "Gaussian_mean_std_CDF_displacement": 0.08618130204508545,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08815870855220831,
+      "step": 4167
+    },
+    {
+      "Gaussian_fit_KS": 0.0179825850466509,
+      "Gaussian_mean_std_CDF_displacement": 0.0372981933367903,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05319134980457596,
+      "step": 4209
+    },
+    {
+      "Gaussian_fit_KS": 0.017573438427977428,
+      "Gaussian_mean_std_CDF_displacement": 0.06591366029798906,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08256518589538131,
+      "step": 4250
+    },
+    {
+      "Gaussian_fit_KS": 0.011815561871374225,
+      "Gaussian_mean_std_CDF_displacement": 0.07990069793989218,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07674265123621443,
+      "step": 4292
+    },
+    {
+      "Gaussian_fit_KS": 0.016516757975869267,
+      "Gaussian_mean_std_CDF_displacement": 0.053377709761600445,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06273436454181086,
+      "step": 4334
+    },
+    {
+      "Gaussian_fit_KS": 0.011953189854870927,
+      "Gaussian_mean_std_CDF_displacement": 0.01754347533559808,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02088920221428725,
+      "step": 4375
+    },
+    {
+      "Gaussian_fit_KS": 0.013903451364650654,
+      "Gaussian_mean_std_CDF_displacement": 0.03860411638431127,
+      "diagnostic_only": true,
+      "recorded_KS": 0.050673616713717895,
+      "step": 4417
+    },
+    {
+      "Gaussian_fit_KS": 0.021919610851753868,
+      "Gaussian_mean_std_CDF_displacement": 0.020829115071565596,
+      "diagnostic_only": true,
+      "recorded_KS": 0.029816124412770706,
+      "step": 4459
+    },
+    {
+      "Gaussian_fit_KS": 0.020583767388302365,
+      "Gaussian_mean_std_CDF_displacement": 0.08386993708545532,
+      "diagnostic_only": true,
+      "recorded_KS": 0.09522793462893797,
+      "step": 4500
+    },
+    {
+      "Gaussian_fit_KS": 0.018162473857214145,
+      "Gaussian_mean_std_CDF_displacement": 0.020007077695542552,
+      "diagnostic_only": true,
+      "recorded_KS": 0.023292762089293317,
+      "step": 4542
+    },
+    {
+      "Gaussian_fit_KS": 0.010026790420217868,
+      "Gaussian_mean_std_CDF_displacement": 0.029733530204143266,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03428205598673417,
+      "step": 4584
+    },
+    {
+      "Gaussian_fit_KS": 0.01930261656626392,
+      "Gaussian_mean_std_CDF_displacement": 0.017523976006780462,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02183614910145304,
+      "step": 4625
+    },
+    {
+      "Gaussian_fit_KS": 0.015679986074317087,
+      "Gaussian_mean_std_CDF_displacement": 0.00955724186314999,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02330036830231741,
+      "step": 4667
+    },
+    {
+      "Gaussian_fit_KS": 0.015564769616137397,
+      "Gaussian_mean_std_CDF_displacement": 0.033257119338856334,
+      "diagnostic_only": true,
+      "recorded_KS": 0.03806838865828355,
+      "step": 4709
+    },
+    {
+      "Gaussian_fit_KS": 0.02414211931558896,
+      "Gaussian_mean_std_CDF_displacement": 0.021116503679531107,
+      "diagnostic_only": true,
+      "recorded_KS": 0.025812929918752392,
+      "step": 4750
+    },
+    {
+      "Gaussian_fit_KS": 0.016070254998876043,
+      "Gaussian_mean_std_CDF_displacement": 0.046761101489904866,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04458456684739537,
+      "step": 4792
+    },
+    {
+      "Gaussian_fit_KS": 0.014631719347148797,
+      "Gaussian_mean_std_CDF_displacement": 0.03928142857434547,
+      "diagnostic_only": true,
+      "recorded_KS": 0.046888563597918154,
+      "step": 4834
+    },
+    {
+      "Gaussian_fit_KS": 0.024071152124709894,
+      "Gaussian_mean_std_CDF_displacement": 0.028383897507720857,
+      "diagnostic_only": true,
+      "recorded_KS": 0.030043263962634348,
+      "step": 4875
+    },
+    {
+      "Gaussian_fit_KS": 0.014293461088685677,
+      "Gaussian_mean_std_CDF_displacement": 0.08197616061724777,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08709155044506434,
+      "step": 4917
+    },
+    {
+      "Gaussian_fit_KS": 0.019627625763977363,
+      "Gaussian_mean_std_CDF_displacement": 0.004970772935098622,
+      "diagnostic_only": true,
+      "recorded_KS": 0.01638992046646981,
+      "step": 4959
+    },
+    {
+      "Gaussian_fit_KS": 0.024148061499808415,
+      "Gaussian_mean_std_CDF_displacement": 0.09915973406214174,
+      "diagnostic_only": true,
+      "recorded_KS": 0.11786252036691713,
+      "step": 5000
+    },
+    {
+      "Gaussian_fit_KS": 0.019590589951598014,
+      "Gaussian_mean_std_CDF_displacement": 0.013236669623400088,
+      "diagnostic_only": true,
+      "recorded_KS": 0.025503885726549713,
+      "step": 5042
+    },
+    {
+      "Gaussian_fit_KS": 0.014614933298830513,
+      "Gaussian_mean_std_CDF_displacement": 0.10728740543854909,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10443960563501753,
+      "step": 5084
+    },
+    {
+      "Gaussian_fit_KS": 0.024068317157596275,
+      "Gaussian_mean_std_CDF_displacement": 0.03770222162922365,
+      "diagnostic_only": true,
+      "recorded_KS": 0.033108645533557635,
+      "step": 5125
+    },
+    {
+      "Gaussian_fit_KS": 0.011986356790912756,
+      "Gaussian_mean_std_CDF_displacement": 0.04919793175032633,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05581739888860149,
+      "step": 5167
+    },
+    {
+      "Gaussian_fit_KS": 0.0106295133284241,
+      "Gaussian_mean_std_CDF_displacement": 0.08591207685308894,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08688994001700984,
+      "step": 5209
+    },
+    {
+      "Gaussian_fit_KS": 0.012201609228800647,
+      "Gaussian_mean_std_CDF_displacement": 0.04341369935692452,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04829206483082371,
+      "step": 5250
+    },
+    {
+      "Gaussian_fit_KS": 0.019808849217121782,
+      "Gaussian_mean_std_CDF_displacement": 0.038828361772809905,
+      "diagnostic_only": true,
+      "recorded_KS": 0.04440177655673183,
+      "step": 5292
+    },
+    {
+      "Gaussian_fit_KS": 0.016404894092137634,
+      "Gaussian_mean_std_CDF_displacement": 0.01715690254234825,
+      "diagnostic_only": true,
+      "recorded_KS": 0.022569620447948302,
+      "step": 5334
+    },
+    {
+      "Gaussian_fit_KS": 0.020332890288684458,
+      "Gaussian_mean_std_CDF_displacement": 0.05750834227811663,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05300339690416833,
+      "step": 5375
+    },
+    {
+      "Gaussian_fit_KS": 0.018398996813567714,
+      "Gaussian_mean_std_CDF_displacement": 0.051314884903571056,
+      "diagnostic_only": true,
+      "recorded_KS": 0.049665138506024,
+      "step": 5417
+    },
+    {
+      "Gaussian_fit_KS": 0.015320672326926021,
+      "Gaussian_mean_std_CDF_displacement": 0.04720754377615477,
+      "diagnostic_only": true,
+      "recorded_KS": 0.0489230138098099,
+      "step": 5459
+    },
+    {
+      "Gaussian_fit_KS": 0.018027954190174555,
+      "Gaussian_mean_std_CDF_displacement": 0.10648871997156117,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10594013047075235,
+      "step": 5500
+    },
+    {
+      "Gaussian_fit_KS": 0.012184798759709792,
+      "Gaussian_mean_std_CDF_displacement": 0.017646287468936483,
+      "diagnostic_only": true,
+      "recorded_KS": 0.023634845342174415,
+      "step": 5542
+    },
+    {
+      "Gaussian_fit_KS": 0.007043768465517908,
+      "Gaussian_mean_std_CDF_displacement": 0.06006521876520349,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06682405078107995,
+      "step": 5584
+    },
+    {
+      "Gaussian_fit_KS": 0.01513120506328236,
+      "Gaussian_mean_std_CDF_displacement": 0.03603710557236195,
+      "diagnostic_only": true,
+      "recorded_KS": 0.05015570884378029,
+      "step": 5625
+    },
+    {
+      "Gaussian_fit_KS": 0.010750914310925785,
+      "Gaussian_mean_std_CDF_displacement": 0.04262931431668726,
+      "diagnostic_only": true,
+      "recorded_KS": 0.046514106412413936,
+      "step": 5667
+    },
+    {
+      "Gaussian_fit_KS": 0.0075289581059273525,
+      "Gaussian_mean_std_CDF_displacement": 0.05638979579006187,
+      "diagnostic_only": true,
+      "recorded_KS": 0.06281585647159538,
+      "step": 5709
+    },
+    {
+      "Gaussian_fit_KS": 0.017312277210966398,
+      "Gaussian_mean_std_CDF_displacement": 0.07629524079478933,
+      "diagnostic_only": true,
+      "recorded_KS": 0.09321973545359441,
+      "step": 5750
+    },
+    {
+      "Gaussian_fit_KS": 0.020878114744506182,
+      "Gaussian_mean_std_CDF_displacement": 0.07083241882649971,
+      "diagnostic_only": true,
+      "recorded_KS": 0.08488848522400738,
+      "step": 5792
+    },
+    {
+      "Gaussian_fit_KS": 0.017254099332935646,
+      "Gaussian_mean_std_CDF_displacement": 0.09873648467171758,
+      "diagnostic_only": true,
+      "recorded_KS": 0.10179341952418663,
+      "step": 5834
+    },
+    {
+      "Gaussian_fit_KS": 0.02117582719243466,
+      "Gaussian_mean_std_CDF_displacement": 0.021379465495842354,
+      "diagnostic_only": true,
+      "recorded_KS": 0.029314782342943047,
+      "step": 5875
+    },
+    {
+      "Gaussian_fit_KS": 0.021921767294500683,
+      "Gaussian_mean_std_CDF_displacement": 0.04223254456588288,
+      "diagnostic_only": true,
+      "recorded_KS": 0.039441542562471676,
+      "step": 5917
+    },
+    {
+      "Gaussian_fit_KS": 0.012776400787428255,
+      "Gaussian_mean_std_CDF_displacement": 0.019071186237154814,
+      "diagnostic_only": true,
+      "recorded_KS": 0.02058190671959481,
+      "step": 5959
+    },
+    {
+      "Gaussian_fit_KS": 0.014642635122390724,
+      "Gaussian_mean_std_CDF_displacement": 0.07004510512711093,
+      "diagnostic_only": true,
+      "recorded_KS": 0.07612553755008189,
+      "step": 6000
+    }
+  ],
+  "status": "SAVED_ARRAY_DIAGNOSTIC_ONLY"
+}

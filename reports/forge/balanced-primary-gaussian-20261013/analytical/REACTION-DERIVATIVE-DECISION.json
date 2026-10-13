@@ -1,0 +1,75 @@
+{
+  "exact_forward_invariant_VJP_finite_probes": 12,
+  "falsifiers": [
+    {
+      "after": 0.01175635081268269,
+      "before": 0.004745742619321772,
+      "lineage": "absolute_confidence",
+      "panel": 0,
+      "reason": "Spoils finite acquisition repair",
+      "step": 1000
+    },
+    {
+      "after": 0.03424127758918353,
+      "before": 0.032538029243245684,
+      "lineage": "positive_evidence",
+      "panel": 1,
+      "reason": "Spoils finite acquisition repair",
+      "step": 1000
+    },
+    {
+      "direction": {
+        "W2_squared": 0.009992271743461735,
+        "mean": -0.08227771847162392,
+        "variance": -0.02825130103042128
+      },
+      "lineage": "positive_evidence",
+      "panel": 0,
+      "reason": "Does not repair both terminal mean and variance",
+      "step": 6000
+    },
+    {
+      "direction": {
+        "W2_squared": 0.01114522724701884,
+        "mean": -0.0914387980899009,
+        "variance": -0.033186334708021334
+      },
+      "lineage": "positive_evidence",
+      "panel": 1,
+      "reason": "Does not repair both terminal mean and variance",
+      "step": 6000
+    },
+    {
+      "check": {
+        "autograd": -0.03117939448433178,
+        "epsilon": 0.001,
+        "finite_difference": 0.0006556510925292969,
+        "relative_error": 1.0210283459115532,
+        "sign_agrees": false
+      },
+      "lineage": "absolute_confidence",
+      "panel": 0,
+      "reason": "Complete-objective fixed finite-difference sign disagreement",
+      "step": 6000
+    },
+    {
+      "check": {
+        "autograd": -0.014524934032202955,
+        "epsilon": 0.001,
+        "finite_difference": 0.012010335922241211,
+        "relative_error": 1.8268771407576325,
+        "sign_agrees": false
+      },
+      "lineage": "positive_evidence",
+      "panel": 0,
+      "reason": "Complete-objective fixed finite-difference sign disagreement",
+      "step": 1000
+    }
+  ],
+  "native_nonfinite_probes": 12,
+  "new_GPU_attempts": 0,
+  "new_reservations": 0,
+  "next_supported_observation": "Derivative repair restores finite values but moves near-correct acquisition states away. Examine direct critic score second-moment regularization at the ordinary D step, distinct from extra reactions and earlier squared batch-score mean.",
+  "public_source_edits": 0,
+  "status": "FALSIFIED_NOT_GPU_ELIGIBLE"
+}

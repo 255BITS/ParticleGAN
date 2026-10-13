@@ -1,0 +1,64 @@
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -114,6 +114,7 @@
+     reconstruction_weight: float = 1.0
+     # Opt-in label-free transport signal on the same G-phase target batch.
+     kinetic_transport_weight: float = 0.0
++    kinetic_transport_protect_primary: bool = False
+     kinetic_transport_local_weight: float = 0.0
+     kinetic_transport_projections: int = 32
+     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
+@@ -476,6 +477,10 @@
+         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
+             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
+                 raise ValueError(f"{key} must be finite and positive")
++        if type(self.kinetic_transport_protect_primary) is not bool:
++            raise ValueError("kinetic_transport_protect_primary must be boolean")
++        if self.kinetic_transport_protect_primary and (self.kinetic_transport_weight <= 0 or self.kinetic_transport_local_weight or self.continuous_policy is not None or self.input_noise_std or self.output_noise_std or self.constraint_geometry_mode != "direction_blend"):
++            raise ValueError("augmented transport protection requires positive ordinary clean transport and direction_blend")
+         if (type(self.kinetic_transport_weight) not in (int, float)
+                 or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
+             raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -426,7 +426,8 @@
+                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                     logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                     return (self.loss.g_loss(logits, real_logits),)
+-            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
++            primary_g = loss_gan + transport if recipe.kinetic_transport_protect_primary else loss_gan
++            constraint_geometry_backward(loss_g, self.opt_g, (primary_g,),
+                                          protected_evaluator=protected_evaluator)
+             self.policy.after_generator_backward(
+                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+@@ -448,6 +449,8 @@
+                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+                        prior_regularization=prior_reg, penalty=penalty).items()}
+         result["step"] = self.completed_steps
++        if recipe.kinetic_transport_protect_primary:
++            result["transport_primary_G"] = primary_g.detach()
+         if recipe.kinetic_transport_weight:
+             result["kinetic_transport"] = transport.detach()
+         if recipe.kinetic_transport_local_weight:
+--- a/experiments/forge/api.py
++++ b/experiments/forge/api.py
+@@ -193,6 +193,8 @@
+         recipe = resolve_public_recipe(candidate)
+     except CapabilityError as error:
+         return error.blockers
++    if recipe.kinetic_transport_protect_primary and (task.get('adapter') != 'transfer_vector' or task.get('evaluation', {}).get('kind') not in ('gaussian_smoke', 'gaussian_stability')):
++        return ['augmented transport-primary protection has no certified hook for this component/non-Gaussian host']
+     consumer = task.get('execution', {}).get('transport_consumer')
+     if consumer is not None and (consumer != 'output_marginal_v1'
+             or task.get('adapter') not in ('transfer_behavior', 'word_joint')
+--- a/experiments/forge/boundaries.py
++++ b/experiments/forge/boundaries.py
+@@ -34,7 +34,7 @@
+ TECHNIQUE_RECIPE_FIELDS = frozenset({
+     "optimizer_svd_backend",
+     "prior_update", "prior_regularizer",
+-    "kinetic_transport_weight", "kinetic_transport_local_weight",
++    "kinetic_transport_weight", "kinetic_transport_local_weight", "kinetic_transport_protect_primary",
+     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
+     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
+     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",

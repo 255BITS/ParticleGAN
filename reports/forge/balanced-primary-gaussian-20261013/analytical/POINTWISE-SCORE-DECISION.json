@@ -1,0 +1,40 @@
+{
+  "coefficient": 1,
+  "falsifiers": [
+    {
+      "after": 0.005166950851371497,
+      "before": 0.004745742619321772,
+      "lineage": "absolute_confidence",
+      "panel": 0,
+      "reason": "Finite acquisition improvement spoiled",
+      "step": 1000
+    },
+    {
+      "directions": {
+        "W2_squared": 0.12361037520389342,
+        "mean": 0.12317781993920233,
+        "variance": 0.02453697006902293
+      },
+      "lineage": "absolute_confidence",
+      "panel": 0,
+      "reason": "Terminal mean/variance direction not repaired",
+      "step": 6000
+    },
+    {
+      "directions": {
+        "W2_squared": 0.1324780660626336,
+        "mean": 0.12525683235116036,
+        "variance": 0.045227600140905266
+      },
+      "lineage": "absolute_confidence",
+      "panel": 1,
+      "reason": "Terminal mean/variance direction not repaired",
+      "step": 6000
+    }
+  ],
+  "new_GPU_jobs": 0,
+  "new_reservations": 0,
+  "no_coefficient_sweep": true,
+  "original_recipe_task_sampler_gates_unchanged": true,
+  "status": "FALSIFIED_NOT_GPU_ELIGIBLE"
+}

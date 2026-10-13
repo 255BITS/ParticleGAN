@@ -1,0 +1,70 @@
+{
+  "categories": {
+    "shift_deadline": {
+      "KS_range": [
+        0.01638992046646981,
+        0.11786252036691713
+      ],
+      "checks": 24,
+      "failures_by_original_metric": {
+        "cdf_ks": 12,
+        "finite_fraction": 0,
+        "mean_error_sigma": 4,
+        "sample_count": 0,
+        "std_ratio": 0
+      },
+      "mean_error_sigma_max": 0.2511629883083515,
+      "std_ratio_range": [
+        0.9025360905129349,
+        1.0378324504228498
+      ]
+    },
+    "shift_hold": {
+      "KS_range": [
+        0.02058190671959481,
+        0.10594013047075235
+      ],
+      "checks": 24,
+      "failures_by_original_metric": {
+        "cdf_ks": 12,
+        "finite_fraction": 0,
+        "mean_error_sigma": 4,
+        "sample_count": 0,
+        "std_ratio": 0
+      },
+      "mean_error_sigma_max": 0.25456555833807215,
+      "std_ratio_range": [
+        0.8666534810498292,
+        1.041483829874715
+      ]
+    },
+    "stationary": {
+      "KS_range": [
+        0.014476416857365226,
+        0.17409845443537608
+      ],
+      "checks": 72,
+      "failures_by_original_metric": {
+        "cdf_ks": 37,
+        "finite_fraction": 0,
+        "mean_error_sigma": 13,
+        "sample_count": 0,
+        "std_ratio": 0
+      },
+      "mean_error_sigma_max": 0.38203953867196105,
+      "std_ratio_range": [
+        0.8617575859327057,
+        1.1499577091904116
+      ]
+    }
+  },
+  "evaluator_unchanged": true,
+  "full_new_own_gaussian_reservation": 760,
+  "next_supported_hypothesis": "Training-gradient signal/noise response for the now-restoring transport objective, using existing catalogued gradient-history precedent rather than critic-gap confidence; unmeasured on this recipe.",
+  "original_observations_sha256": "54a833be4dbbf660d38df4e4e42aa58ad43c16fb588f79433cb337afa2cb2ebd",
+  "recategorization_only": true,
+  "recorded_gate": "FAIL",
+  "remaining_supervisor": 746.1211251119094,
+  "shortfall": 13.87887488809065,
+  "source_changed_checkpoint_reuse_forbidden": true
+}
