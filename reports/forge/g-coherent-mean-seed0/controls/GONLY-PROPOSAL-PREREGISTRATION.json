@@ -1,0 +1,21 @@
+{
+  "budget_increase": 0,
+  "changed_factors": [
+    "G-only gradient EMA7/8 mean before existing normalized optimizer",
+    "G-only coherence LR positive1/effective-weight-count floor; original prior response retained"
+  ],
+  "falsifiers": "Same original8 panels,9/13 quadratures and nonrestoring W2 derivative criterion.",
+  "mode": "coherent_G_mean_v1",
+  "motivation": "Catalog G-only gradient-signal retention positives and prior-only failures suggest preserving the original prior update while adapting only G.",
+  "prior_rejections": [
+    "SCALAR-RESPONSE-REJECTION.json",
+    "MEAN-ANALYTICAL-DECISION.json"
+  ],
+  "training_jobs": 0,
+  "unchanged": [
+    "original current NS+transport protection",
+    "all D updates",
+    "prior gradients and prior response",
+    "task/sampler/init/horizons/gates"
+  ]
+}

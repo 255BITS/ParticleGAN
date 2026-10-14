@@ -1,0 +1,612 @@
+{
+  "CPU_seconds": 2.9792280600231607,
+  "actual_training_draws": 0,
+  "diagnostic_fixture_draws": {
+    "batch": 128,
+    "batches": 136,
+    "private_fixture_seed": 0
+  },
+  "falsifiers": [
+    {
+      "order": "9",
+      "panel": 0,
+      "reason": "nonrestoring W2 direction or derivative disagreement",
+      "step": 1000
+    },
+    {
+      "order": "13",
+      "panel": 0,
+      "reason": "nonrestoring W2 direction or derivative disagreement",
+      "step": 1000
+    }
+  ],
+  "limitations": [
+    "Fixed-state history estimates are not a trained trajectory or qualification.",
+    "Same original data/prior law; private diagnostic draws do not advance production streams.",
+    "Scalar response cannot reverse an adverse local direction."
+  ],
+  "mechanism": "Fixed7/8 bias-corrected joint gradient coherence, positive1/effective-weight-count floor, common G/prior actual LR multiplier replacing critic-gap response.",
+  "optimizer_calls": 0,
+  "rows": [
+    {
+      "checkpoint": null,
+      "panel": 0,
+      "protected_objective_direction": -0.6042327280399296,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 4.220626309046697,
+          "after_full_proposal": {
+            "W2_squared": 4.057665549244824,
+            "mean": 0.037985561902590344,
+            "variance": 0.0019201674031538646
+          },
+          "direction": {
+            "W2_squared": -0.1662126478329716,
+            "mean": 0.042241154941839394,
+            "variance": -0.00032320364524044895
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.16620980091275328,
+            "mean": 0.04224024963487855,
+            "variance": -0.0003231257295630355
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": -0.003806919205180555,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -129.64956281700634,
+          "variance": 0.002197365526582431,
+          "variance_direction_restoring": false
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 4.220621285640556,
+          "after_full_proposal": {
+            "W2_squared": 4.0576679280378185,
+            "mean": 0.03798486502467577,
+            "variance": 0.0019202137964453273
+          },
+          "direction": {
+            "W2_squared": -0.16621510019654231,
+            "mean": 0.04224057334243113,
+            "variance": -0.0003228243784011546
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.16621052797516356,
+            "mean": 0.042239168631027446,
+            "variance": -0.00032271701933851704
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": -0.0038059646642557756,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -129.64632753658438,
+          "variance": 0.0021975209274122344,
+          "variance_direction_restoring": false
+        }
+      },
+      "step": 0,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.9770194146746889,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.9770194146746889,
+        "mean_square": 636.0058084687413,
+        "second_moment": 650.9653737848265
+      }
+    },
+    {
+      "checkpoint": null,
+      "panel": 1,
+      "protected_objective_direction": -0.6401687004921425,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 4.220626309046697,
+          "after_full_proposal": {
+            "W2_squared": 4.05719028513236,
+            "mean": 0.037594067722296676,
+            "variance": 0.002120104821585561
+          },
+          "direction": {
+            "W2_squared": -0.16669341330502782,
+            "mean": 0.041817853721426976,
+            "variance": -9.77008911040774e-05
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.1667090958323847,
+            "mean": 0.04182207741394977,
+            "variance": -9.782960216832975e-05
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": -0.003806919205180555,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -132.35459673752348,
+          "variance": 0.002197365526582431,
+          "variance_direction_restoring": false
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 4.220621285640556,
+          "after_full_proposal": {
+            "W2_squared": 4.057193723930302,
+            "mean": 0.037592973166345404,
+            "variance": 0.00212020626468178
+          },
+          "direction": {
+            "W2_squared": -0.16670330486837545,
+            "mean": 0.041819018927397894,
+            "variance": -9.732741090554238e-05
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.16671871917406378,
+            "mean": 0.041823251554061726,
+            "variance": -9.748268235318901e-05
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": -0.0038059646642557756,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -132.35335897164504,
+          "variance": 0.0021975209274122344,
+          "variance_direction_restoring": false
+        }
+      },
+      "step": 0,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.9894699446405051,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.9894699446405051,
+        "mean_square": 530.7901209203648,
+        "second_moment": 536.4388517260237
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/initial-state.pt",
+        "sha256": "1bb7a99026969088bec149e82f640c78c9cf16048ab17040b935d90dcab0fa50"
+      },
+      "panel": 0,
+      "protected_objective_direction": -0.006903895917733098,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": false,
+          "W2_squared": 0.0004448550191794736,
+          "after_full_proposal": {
+            "W2_squared": 0.0005368558130872107,
+            "mean": 1.9917563712705517,
+            "variance": 0.2417121287598977
+          },
+          "direction": {
+            "W2_squared": 1.1365550447714186e-05,
+            "mean": -0.008797736454387068,
+            "variance": -0.0018124625346163411
+          },
+          "finite_difference_direction": {
+            "W2_squared": 1.1456166600217962e-05,
+            "mean": -0.008787776069496545,
+            "variance": -0.0018055681743900376
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": false,
+          "mean": 2.000542518048836,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": 0.015282346917965867,
+          "variance": 0.24351756760437424,
+          "variance_direction_restoring": false
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": false,
+          "W2_squared": 0.0004481492659847849,
+          "after_full_proposal": {
+            "W2_squared": 0.0005400563210310908,
+            "mean": 1.9917533023521914,
+            "variance": 0.24171428857624103
+          },
+          "direction": {
+            "W2_squared": 1.1383226051052936e-05,
+            "mean": -0.008797749024486464,
+            "variance": -0.0018127580157323577
+          },
+          "finite_difference_direction": {
+            "W2_squared": 1.1376129193394272e-05,
+            "mean": -0.008788529984649074,
+            "variance": -0.0018038423301169892
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": false,
+          "mean": 2.0005393156695064,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": 0.015262044465999273,
+          "variance": 0.24351989949642866,
+          "variance_direction_restoring": false
+        }
+      },
+      "step": 1000,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.022399210370510094,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.08451641242151085,
+        "mean_square": 0.09081130717190208,
+        "second_moment": 4.054219129593096
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/initial-state.pt",
+        "sha256": "1bb7a99026969088bec149e82f640c78c9cf16048ab17040b935d90dcab0fa50"
+      },
+      "panel": 1,
+      "protected_objective_direction": -0.0009770503159780427,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.0004448550191794736,
+          "after_full_proposal": {
+            "W2_squared": 0.00042760775756355143,
+            "mean": 1.998043957191157,
+            "variance": 0.24481661219109085
+          },
+          "direction": {
+            "W2_squared": -2.599350476885819e-05,
+            "mean": -0.0025014206955775073,
+            "variance": 0.001280288943126407
+          },
+          "finite_difference_direction": {
+            "W2_squared": -2.6249996374515987e-05,
+            "mean": -0.002485022017495453,
+            "variance": 0.0012901015404021
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.000542518048836,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -0.0010626571016235647,
+          "variance": 0.24351756760437424,
+          "variance_direction_restoring": true
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.0004481492659847849,
+          "after_full_proposal": {
+            "W2_squared": 0.00043080194826668883,
+            "mean": 1.9980398034562008,
+            "variance": 0.24481808370907
+          },
+          "direction": {
+            "W2_squared": -2.58873766964025e-05,
+            "mean": -0.0025019108706692706,
+            "variance": 0.0012785856707142969
+          },
+          "finite_difference_direction": {
+            "W2_squared": -2.612756682887499e-05,
+            "mean": -0.0024862938889924635,
+            "variance": 0.0012892877466336161
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.0005393156695064,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -0.0010541286419229808,
+          "variance": 0.24351989949642866,
+          "variance_direction_restoring": true
+        }
+      },
+      "step": 1000,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.015564606501802464,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.08451641242151085,
+        "mean_square": 0.030744936995916336,
+        "second_moment": 1.9753109076259596
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/pre-shift-state.pt",
+        "sha256": "b2d3c0b2b102c4e9d5ae88f0d36303b8535640b05aee3316c5bfeda1040caefa"
+      },
+      "panel": 0,
+      "protected_objective_direction": -0.0971984227321499,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.002121514436052543,
+          "after_full_proposal": {
+            "W2_squared": 0.0015891374522168608,
+            "mean": 1.975835879598825,
+            "variance": 0.24185713595177605
+          },
+          "direction": {
+            "W2_squared": -0.0041115040691539146,
+            "mean": -0.05898875325626993,
+            "variance": -0.011335833840661327
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.004115049866802592,
+            "mean": -0.05903376065408139,
+            "variance": -0.011351276294452317
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.0343073166347754,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -1.049076200472129,
+          "variance": 0.2528644328099202,
+          "variance_direction_restoring": true
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.0021253654915246124,
+          "after_full_proposal": {
+            "W2_squared": 0.0015939498055864084,
+            "mean": 1.975833485088441,
+            "variance": 0.24185646520518397
+          },
+          "direction": {
+            "W2_squared": -0.00411244069325977,
+            "mean": -0.0589858806318545,
+            "variance": -0.011339674092825838
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.0041159265535978,
+            "mean": -0.05903010204155734,
+            "variance": -0.011354356942050448
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.0343034606848507,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -1.049054201839465,
+          "variance": 0.2528646219369442,
+          "variance_direction_restoring": true
+        }
+      },
+      "step": 4000,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.5333426252783945,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.5333426252783945,
+        "mean_square": 3.0083864332033357,
+        "second_moment": 5.640626289025777
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/pre-shift-state.pt",
+        "sha256": "b2d3c0b2b102c4e9d5ae88f0d36303b8535640b05aee3316c5bfeda1040caefa"
+      },
+      "panel": 1,
+      "protected_objective_direction": -0.005197807936796121,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.002121514436052543,
+          "after_full_proposal": {
+            "W2_squared": 0.001407741497675833,
+            "mean": 2.0232431280088523,
+            "variance": 0.24870528160014915
+          },
+          "direction": {
+            "W2_squared": -0.000857240157646727,
+            "mean": -0.011084501568357545,
+            "variance": -0.004214446554040154
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.0008555769215299897,
+            "mean": -0.01106242193538165,
+            "variance": -0.004197365918029439
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.0343073166347754,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -0.13642198861915156,
+          "variance": 0.2528644328099202,
+          "variance_direction_restoring": true
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.0021253654915246124,
+          "after_full_proposal": {
+            "W2_squared": 0.0014117358211094126,
+            "mean": 2.023239695343934,
+            "variance": 0.24870467651714745
+          },
+          "direction": {
+            "W2_squared": -0.000857014619134043,
+            "mean": -0.011085597689443852,
+            "variance": -0.0042146233085996725
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.0008549975561611585,
+            "mean": -0.01106061501743305,
+            "variance": -0.00419322660871746
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 2.0343034606848507,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -0.13645673749525927,
+          "variance": 0.2528646219369442,
+          "variance_direction_restoring": true
+        }
+      },
+      "step": 4000,
+      "target_mean_diagnostic_only": 2.0,
+      "training_gradient_response": {
+        "coherence": 0.13878537152611556,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.13878537152611556,
+        "mean_square": 0.5844213881770255,
+        "second_moment": 4.210972538031889
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/state.pt",
+        "sha256": "707f5c6ef670fd21cedf662526b1f48d1d553d1c95912616c7f7d74112baaf87"
+      },
+      "panel": 0,
+      "protected_objective_direction": -0.20585157752346872,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.007320833672269595,
+          "after_full_proposal": {
+            "W2_squared": 0.00039082633400704353,
+            "mean": 2.9923885913993242,
+            "variance": 0.23738070560217167
+          },
+          "direction": {
+            "W2_squared": -0.015838321610251282,
+            "mean": -0.09305056693646671,
+            "variance": -0.016370462516714274
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.015845628351530538,
+            "mean": -0.09309330528672888,
+            "variance": -0.016385598131329893
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 3.084454149403702,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -5.865459002676384,
+          "variance": 0.25311539099824076,
+          "variance_direction_restoring": true
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.00732743341432348,
+          "after_full_proposal": {
+            "W2_squared": 0.0003968365739744727,
+            "mean": 2.992390871771968,
+            "variance": 0.23737420394763062
+          },
+          "direction": {
+            "W2_squared": -0.015837808923284336,
+            "mean": -0.09305059886565813,
+            "variance": -0.01636895517441594
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.015844917396945404,
+            "mean": -0.09309119703715396,
+            "variance": -0.016386527940281947
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 3.08445736475037,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -5.865330768194557,
+          "variance": 0.25310789959878366,
+          "variance_direction_restoring": true
+        }
+      },
+      "step": 6000,
+      "target_mean_diagnostic_only": 3.0,
+      "training_gradient_response": {
+        "coherence": 0.6673362806293559,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.6673362806293559,
+        "mean_square": 11.445573430642497,
+        "second_moment": 17.151133188575226
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/balanced-primary/queue/balanced-primary-gaussian-20261013/d548c8ac76b445c2aa3324045debce1f/evaluator/state.pt",
+        "sha256": "707f5c6ef670fd21cedf662526b1f48d1d553d1c95912616c7f7d74112baaf87"
+      },
+      "panel": 1,
+      "protected_objective_direction": -0.054077343158428395,
+      "quadrature": {
+        "13": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.007320833672269595,
+          "after_full_proposal": {
+            "W2_squared": 0.00034382274063997256,
+            "mean": 2.9912890056257257,
+            "variance": 0.24308120056767674
+          },
+          "direction": {
+            "W2_squared": -0.015935994329541424,
+            "mean": -0.0941377957432503,
+            "variance": -0.010418203839343295
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.015937381437968173,
+            "mean": -0.09414615330971543,
+            "variance": -0.010413466267455984
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 3.084454149403702,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -1.2720419799708114,
+          "variance": 0.25311539099824076,
+          "variance_direction_restoring": true
+        },
+        "9": {
+          "W2_derivative_sign_agrees": true,
+          "W2_direction_restoring": true,
+          "W2_squared": 0.00732743341432348,
+          "after_full_proposal": {
+            "W2_squared": 0.0003522711659244122,
+            "mean": 2.9912856154814795,
+            "variance": 0.24307651903378893
+          },
+          "direction": {
+            "W2_squared": -0.015935092779081426,
+            "mean": -0.09414144475020388,
+            "variance": -0.010420947741464473
+          },
+          "finite_difference_direction": {
+            "W2_squared": -0.01593619967906173,
+            "mean": -0.09414866650669929,
+            "variance": -0.010418214575841356
+          },
+          "finite_difference_epsilon": 0.001,
+          "full_proposal_improves_W2": true,
+          "mean": 3.08445736475037,
+          "mean_direction_restoring": true,
+          "raw_negative_G_gradient_W2_direction": -1.2722026577580998,
+          "variance": 0.25310789959878366,
+          "variance_direction_restoring": true
+        }
+      },
+      "step": 6000,
+      "target_mean_diagnostic_only": 3.0,
+      "training_gradient_response": {
+        "coherence": 0.7057626126735412,
+        "effective_weight_count": 11.83202139500047,
+        "gain": 0.7057626126735412,
+        "mean_square": 10.766952079100603,
+        "second_moment": 15.255769979531323
+      }
+    }
+  ],
+  "status": "REJECTED_BEFORE_TRAINING",
+  "trainer_steps": 0
+}

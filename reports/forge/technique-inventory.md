@@ -323,3 +323,7 @@ The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall
 
 
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
+
+## Source-bound Gaussian research addendum
+
+[Original G-only mean/coherence matched seed-zero pair](g-coherent-mean-seed0/README.md): candidate **69/72 stationary, reacquisition PASS, 20/24 shifted hold** versus a **fresh same-source control 35/72, reacquisition FAIL, 12/24 shifted hold**. Both acquisitions PASS; **both original retentions FAIL**. This display-only row grants no qualification and does not change the selected family configurations or counts above. [Exact evidence and costs](g-coherent-mean-seed0/results.json).
