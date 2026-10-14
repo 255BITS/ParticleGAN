@@ -515,6 +515,7 @@ def observe_training(active, prior):
     if not child_path.exists() or not log.exists() or any(t['attempt'] == active['attempt'] for t in prior):
         return None
     child = read_json(child_path)
+    child.pop('supervisor_pid', None)  # authoritative supervisor is recorded below, once
     if child.get('phase') in ('evaluation', 'grading') or process_identity(child['pid']) != child['process_identity']:
         return None
     prefix = active['prefix_steps']

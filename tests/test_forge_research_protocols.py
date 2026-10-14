@@ -63,7 +63,7 @@ class ResearchProtocols(unittest.TestCase):
 
     def test_positive_new_updates_required_before_counting_training(self):
         directory=self.root/'attempt'; directory.mkdir(); pid=os.getpid()
-        atomic_json(directory/'child.json',{'pid':pid,'process_identity':process_identity(pid),'phase':'training'})
+        atomic_json(directory/'child.json',{'pid':pid,'process_identity':process_identity(pid),'supervisor_pid':pid,'phase':'training'})
         class Proc: pass
         proc=Proc(); proc.pid=pid
         active={'directory':directory,'attempt':'fixture','task_id':'original','log_offset':0,'prefix_steps':1000,'process':proc,
