@@ -211,6 +211,12 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     # Referenced evaluator source outside normal code roots must travel with a job.
     extra_sources = set(idea.get("source_files", []))
     if research_registration is not None:
+        extra_sources.update(str(p.relative_to(root)) for p in (root / 'configs/forge').rglob('*.json'))
+        for declaration_path in (root / 'configs/forge/studies').glob('*.json'):
+            declaration_value = read_json(declaration_path)
+            if declaration_value.get('id') in research_registration.get('study_ids', []):
+                extra_sources.update(item['path'] for item in declaration_value.get('prior_evidence', [])
+                                     if (root / item['path']).is_file())
         extra_sources.update(f"configs/forge/protocols/{name}.json" for name in research_registration['protocols'])
         extra_sources.update(('configs/forge/protocols/screening.json',
                               f"configs/forge/research-cohorts/{protocol['research']['cohort_id']}.json",
@@ -301,6 +307,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                "execution_backend": execution_backend, "compute_profiles": compute_profiles,
                "view": view, "policy_fingerprint": view_fingerprint(view), "tasks": tasks,
                "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
+    if research_registration is not None:
+        from .research_protocols import make_unit
+        request['research_unit'] = make_unit(root, request, research_registration)
     if study is not None:
         from .studies import inspect_study
         request["study"] = study

@@ -58,21 +58,31 @@ def registered_protocol(root, protocol_id):
     return protocol, registry
 
 
-def validate_unit(request, unit):
-    root = Path(request['source']['snapshot_path'])
-    protocol, registry = registered_protocol(root, request['protocol']['id'])
-    if registry is None or protocol != request['protocol']:
-        raise ValueError('replication request does not bind its registered protocol')
-    role = unit.get('role')
-    declared = registry['roles'].get(role, {})
+def make_unit(root, request, registry):
+    root = Path(root)
+    protocol = request['protocol']
+    matches = [role for role, value in registry['roles'].items() if value['candidate_id'] == request['candidate']['id']]
+    if len(matches) != 1:
+        raise ValueError('registered paired role is ambiguous or absent')
+    role = matches[0]
     registry_path = root / 'configs/forge/research-cohorts' / f"{protocol['research']['cohort_id']}.json"
-    expected = dict(role=role, replication_role='paired_seed', seed=protocol['seed'],
+    return dict(role=role, replication_role='paired_seed', seed=protocol['seed'],
                     protocol_semantics_sha256=stable_hash(protocol_semantics(protocol)),
                     comparison_sha256=stable_hash(comparison_identity(registry)),
                     source_semantics_sha256=stable_hash(registry['source_semantics']),
                     source_digest=request['source']['digest'],
                     candidate_revision=request['candidate_revision'],
                     registration_sha256=file_hash(registry_path), protocol_id=protocol['id'])
+
+
+def validate_unit(request, unit):
+    root = Path(request['source']['snapshot_path'])
+    protocol, registry = registered_protocol(root, request['protocol']['id'])
+    if registry is None or protocol != request['protocol']:
+        raise ValueError('replication request does not bind its registered protocol')
+    expected = make_unit(root, request, registry)
+    role = unit.get('role')
+    declared = registry['roles'].get(role, {})
     if unit != expected or role not in registry['roles']:
         raise ValueError('experimental unit differs from the registered role/protocol/source')
     candidate = request['candidate']
@@ -87,3 +97,24 @@ def validate_unit(request, unit):
     if request['view'] != registry['view'] or request['view'].get('evidence_scope') != 'research_diagnostic':
         raise ValueError('replication must remain separate from screening qualification')
     return registry
+
+
+def validate_submission(request):
+    """Separate, fully registered research admission; never weaken screening."""
+    if any(k in request for k in ('promotion', 'calibration_lane', 'promotion_campaign', 'calibration_campaign')):
+        raise ValueError('paired research cannot carry promotion/calibration metadata')
+    validate_unit(request, request.get('research_unit', {}))
+    from .api import FormulationContext
+    candidate, protocol = request['candidate'], request['protocol']
+    context = FormulationContext(recipe_preset=candidate.get('recipe_preset'), recipe_overrides=candidate.get('recipe_overrides', {}),
+        prior=candidate.get('prior'), seed=protocol['seed'], requires_capabilities=candidate.get('requires_capabilities', ()),
+        extensions=candidate.get('extensions', {}), initializer=candidate.get('initializer', 'deterministic_orthogonal'),
+        execution_path=candidate.get('execution_path', 'public_trainer'))
+    expected_rng = context.streams.manifest()
+    if request.get('rng') != expected_rng:
+        raise ValueError('research RNG does not match its frozen named-stream protocol')
+    for job in request['jobs']:
+        science = job['science']
+        if (science.get('seed') != protocol['seed'] or science.get('protocol') != protocol
+                or science.get('rng') != expected_rng or science.get('evidence_use') != 'research_diagnostic'):
+            raise ValueError('research job changed protocol/RNG or qualification scope')

@@ -171,6 +171,22 @@ class RunnerTests(unittest.TestCase):
         for path in paths:
             with path.open('r+b') as check: fcntl.flock(check, fcntl.LOCK_EX | fcntl.LOCK_NB)
 
+    def test_explicit_zero_admission_repair_preserves_history_and_fences_live_work(self):
+        entry = dict(key='prelaunch', semantic='same-unit', amounts=dict(queue=120, supervisor=140, agent=0))
+        self.spending.reserve_cohort([entry])
+        with self.assertRaisesRegex(ValueError, 'alive'):
+            self.spending.reconcile_prelaunch_refusal({'fixture': 'live owner'})
+        with self.spending.state() as state:
+            state['reservations']['prelaunch']['owner'] = '2147483647:absent'
+        self.spending.reconcile_prelaunch_refusal({'fixture':'verified no jobs'})
+        state = read_json(self.spending.path)
+        self.assertEqual(state['events'][-1]['actual_new_attempts'],0)
+        self.assertEqual(state['events'][-1]['previous_reservations']['prelaunch']['semantic'],'same-unit')
+        self.spending.reserve_cohort([{**entry,'key':'repaired'}])
+        atomic_json(self.queue/'queue/state.json',{'jobs':{'existing':{'status':'terminal'}},'submissions':{},'charges':[]})
+        with self.assertRaisesRegex(ValueError,'empty queue'):
+            self.spending.reconcile_prelaunch_refusal({'fixture':'must not release scientific work'})
+
     def test_actual_charges_and_negative_evidence_remain(self):
         self.spending.reserve('a', 'negative', dict(queue=100, supervisor=120, agent=10))
         self.spending.settle('a', dict(queue=21, supervisor=23, agent=4), {'status': 'FAIL', 'reason': 'original gate'})

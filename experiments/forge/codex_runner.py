@@ -115,9 +115,13 @@ class Spending:
         return {k: state['limits'][k] - state['spent'][k] - sum(r['amounts'][k] for r in state['reservations'].values())
                 for k in state['limits']}
 
+    @staticmethod
+    def semantic_available(state, semantic):
+        return semantic not in state['seen_semantics'] or state['seen_semantics'][semantic].get('status') == 'prelaunch_refusal_reconciled'
+
     def reserve(self, key, semantic, amounts, *, agent=False):
         with self.state() as state:
-            if semantic in state['seen_semantics']:
+            if not self.semantic_available(state, semantic):
                 raise ValueError('duplicate semantic factors, including terminal negatives/uncertain attempts')
             if agent and state['agent_sessions_started'] >= state['agent_session_limit']:
                 raise ValueError('aggregate model session cap exhausted')
@@ -145,7 +149,7 @@ class Spending:
         """One atomic full-cohort admission, including every chain's continuation."""
         with self.state() as state:
             semantics = [entry['semantic'] for entry in entries]
-            if len(set(semantics)) != len(semantics) or any(s in state['seen_semantics'] for s in semantics):
+            if len(set(semantics)) != len(semantics) or any(not self.semantic_available(state, s) for s in semantics):
                 raise ValueError('duplicate semantic unit in full cohort, including uncertain attempts')
             sessions = sum(bool(e['amounts']['agent']) for e in entries)
             if state['agent_sessions_started'] + sessions > state['agent_session_limit']:
@@ -165,6 +169,26 @@ class Spending:
             state['agent_sessions_started'] += sessions
             self.event(state, 'full_cohort_reserved', units=len(entries),
                        amounts={k: sum(e['amounts'][k] for e in entries) for k in state['limits']})
+
+    def reconcile_prelaunch_refusal(self, receipt):
+        """Explicit zero-job repair only; terminal science/uncertain jobs stay fenced."""
+        from .queue import Queue
+        with self.state() as state:
+            queued = Queue(Path(state['queue_root'])).inspect()
+            if (queued.get('jobs') or queued.get('submissions') or queued.get('charges')
+                    or state['agent_sessions_started'] or any(state['spent'].values())):
+                raise ValueError('prelaunch repair requires independently empty queue and zero model/actual spend')
+            for reservation in state['reservations'].values():
+                owner = reservation['owner']
+                if owner and process_identity(int(owner.split(':')[0])) == owner:
+                    raise ValueError('prelaunch reservation owner is still alive')
+            prior = deepcopy(state['reservations'])
+            for key, reservation in prior.items():
+                state['seen_semantics'][reservation['semantic']].update(status='prelaunch_refusal_reconciled',
+                    previous_reservation=key, reason='Explicit empty-queue/no-live-owner admission repair; no scientific attempt occurred')
+            state['reservations'] = {}
+            self.event(state, 'prelaunch_refusal_reconciled', previous_reservations=prior,
+                       receipt=receipt, actual_new_attempts=0, new_funds=0, charged=dict(state['spent']))
 
 
 class Leases:
@@ -318,7 +342,7 @@ def plan(config_path, *, root):
     total = {k: sum(row['amounts'][k] for row in rows) for k in balances}
     blocked = [f'aggregate {k} reservation exceeds remaining balance' for k in balances if total[k] > balances[k]]
     for row in rows:
-        if row['semantic'] in state['seen_semantics']:
+        if not Spending.semantic_available(state, row['semantic']):
             blocked.append(f'{row["id"]}: historical, active or terminal duplicate')
     for study in cfg['studies']:
         if study.get('request_path') and not Path(study['request_path']).is_file():
@@ -592,7 +616,9 @@ def execute(cfg, report, root):
             source_root = Path(request['source']['snapshot_path'])
             if contract(source_root)['files'] != report['frozen_files']:
                 raise ValueError('executed source drifted from the frozen global revision10 gauntlet')
-            queue = Queue(Path(cfg['queue_root']), report_root=source_root / 'reports/forge')
+            # Admission uses the authoritative declarations; durable attempt
+            # projections must never be written into the immutable snapshot.
+            queue = Queue(Path(cfg['queue_root']), report_root=Path(root) / 'reports/forge')
             before = queue.inspect()
             submission_started = True
             submission = queue.submit(request, request['study']['campaign'])

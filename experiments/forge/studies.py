@@ -218,7 +218,12 @@ def validate_admission(root, request, campaign):
     from .planning import resolve_idea
     # Re-resolve trusted declarations, source, gates, jobs and cohort before
     # queue mutation. Caller-edited bindings cannot authorize altered science.
-    current = resolve_idea(root, study["candidate"], study=study)
+    protocol_id = None
+    if request.get('research_unit'):
+        from .research_protocols import validate_unit
+        validate_unit(request, request['research_unit'])
+        protocol_id = request['protocol']['id']
+    current = resolve_idea(root, study["candidate"], study=study, protocol_id=protocol_id)
     review = current["study_review"]
     from .technique_inventory import _signature
     if (current["preflight_blockers"] or review["status"] != "READY"

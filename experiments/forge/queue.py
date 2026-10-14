@@ -249,6 +249,9 @@ class Queue:
             expected = validate_submission(self.report_root.parent.parent, request)
             if stable_hash(campaign) != stable_hash(expected):
                 raise ValueError("promotion campaign differs from frozen budgets/policy")
+        elif request.get('research_unit'):
+            from .research_protocols import validate_submission as validate_research_submission
+            validate_research_submission(request)
         else:
             validate_screening_submission(request)
         from .sampling import validate_request_sampling

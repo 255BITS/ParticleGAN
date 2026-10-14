@@ -4,9 +4,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 from experiments.forge.contracts import atomic_json, file_hash, stable_hash
-from experiments.forge.research_protocols import registered_protocol, protocol_semantics, validate_unit, comparison_identity
+from experiments.forge.research_protocols import registered_protocol, protocol_semantics, validate_unit, comparison_identity, validate_submission
 from experiments.forge.codex_runner import semantic_key, observe_training, process_identity
 import os
+from unittest.mock import patch, MagicMock
 
 class ResearchProtocols(unittest.TestCase):
     def setUp(self):
@@ -70,3 +71,13 @@ class ResearchProtocols(unittest.TestCase):
         log=directory/'run.log'; log.write_text('{"event":"observation","step":1000}\n'); self.assertIsNone(observe_training(active,[]))
         with log.open('a') as stream: stream.write('{"event":"observation","step":1042}\n')
         row=observe_training(active,[]); self.assertEqual(row['new_updates_confirmed'],42); self.assertIsNone(observe_training(active,[row]))
+
+    def test_research_submission_keeps_rng_and_nonqualification_bound(self):
+        req=deepcopy(self.req); req['research_unit']=self.unit; req['rng']={'bound':'seed1'}
+        req['jobs']=[{'science':{'seed':1,'protocol':self.protocol,'rng':req['rng'],'evidence_use':'research_diagnostic'}}]
+        context=MagicMock(); context.streams.manifest.return_value=req['rng']
+        with patch('experiments.forge.api.FormulationContext',return_value=context):
+            validate_submission(req)
+            for field,value in [('seed',2),('evidence_use','ordinary_qualification'),('rng',{'bound':'other'})]:
+                altered=deepcopy(req); altered['jobs'][0]['science'][field]=value
+                with self.assertRaisesRegex(ValueError,'protocol/RNG'): validate_submission(altered)
