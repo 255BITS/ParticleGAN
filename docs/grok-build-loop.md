@@ -7,7 +7,8 @@ receipt explicitly records delivery to the user and the included weekly bucket.
 No automated merge, deployment, API fallback, purchase, or top-up occurs.
 
 The selected full Git source commit and expected view revision are explicit.
-Develop revision9 has6 required Tier1,21 Tier2 and2 Tier3 tasks. Revision10
+Develop revision 9 has 6 required Tier 1, 21 Tier 2 and 2 Tier 3 tasks,
+plus the original optional density task. Revision10
 contains the unmerged PR403 tier declarations and requires an explicit
 `acknowledge_unmerged_PR403` acknowledgement. Archived receipts keep their
 original revision. Every original task condition, evaluator, dependency,
