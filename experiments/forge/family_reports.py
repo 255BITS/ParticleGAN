@@ -752,6 +752,9 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               link(root, page, "Experiments, criteria and tier assignments", "reports/forge/EXPERIMENTS_BY_TIER.md") + " · " +
               link(root, page, "Complete numerical publication and provenance", "reports/forge/technique-inventory.json"), "",
               f"Publication input digest `{publication['provenance']['input_digest']}`.", ""]
+    retained_notes = root / 'reports/forge/leaderboard-retained-source-notes.md'
+    if retained_notes.is_file():
+        lines.append(retained_notes.read_text())
     return "\n".join(lines)
 
 
