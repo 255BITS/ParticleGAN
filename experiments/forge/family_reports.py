@@ -741,6 +741,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
         lines += ["Atlas/E22 retain (*) for blocked, unrun tests in their selected main-table cohort. "
                   "The family pages list the host, prior, serving and parameter-ownership blockers. "
                   "Their separately scoped policy measurements keep their own results and do not fill these cells.", ""]
+    from .extended_results import board_rows as extended_board_rows
+    lines += extended_board_rows(root)
     lines += _tag_directory(root, page, progress)
     lines += ["## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
