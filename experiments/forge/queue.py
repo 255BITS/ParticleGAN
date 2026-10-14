@@ -598,7 +598,8 @@ class Queue:
                     return resolved
             return None
 
-    def launch(self, resolved: dict, *, module="experiments.forge.worker", shared_slot_fd=None) -> subprocess.Popen:
+    def launch(self, resolved: dict, *, module="experiments.forge.worker", shared_slot_fd=None,
+               shared_fleet_fds=()) -> subprocess.Popen:
         worker = resolved["worker"]
         directory = Path(worker["directory"])
         # launch + registration remain under queue lock. Recovery also checks the
@@ -616,10 +617,18 @@ class Queue:
                 environment["PYTHONPATH"] = resolved["request"]["source"]["snapshot_path"]
                 inherited = (lease.fileno(),)
                 environment.pop("FORGE_SHARED_SLOT_FD", None)
+                environment.pop("FORGE_SHARED_FLEET_FDS", None)
                 if shared_slot_fd is not None:
                     os.fstat(shared_slot_fd)  # fail before process creation on a stale descriptor
                     environment["FORGE_SHARED_SLOT_FD"] = str(shared_slot_fd)
                     inherited += (shared_slot_fd,)
+                if shared_fleet_fds:
+                    for fd in shared_fleet_fds:
+                        if type(fd) is not int or fd < 0:
+                            raise ValueError('fleet descriptor must be an open nonnegative integer')
+                        os.fstat(fd)
+                    environment['FORGE_SHARED_FLEET_FDS'] = ','.join(map(str, shared_fleet_fds))
+                    inherited = tuple(dict.fromkeys((*inherited, *shared_fleet_fds)))
                 with (directory / "run.log").open("ab", buffering=0) as log:
                     process = subprocess.Popen([sys.executable, "-u", "-m", module, str(directory / "request.json")],
                         cwd=resolved["request"]["source"]["snapshot_path"], env=environment,

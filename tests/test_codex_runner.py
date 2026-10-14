@@ -118,6 +118,59 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(read_json(self.spending.path)['reservations']), 1)
         self.assertIn('existing reservations require owner reconciliation; no automatic retry', self.plan()['blockers'])
 
+    def test_full_cohort_is_reserved_atomically_before_streaming(self):
+        entries = [dict(key=str(n), semantic=str(n), amounts=dict(queue=120, supervisor=140, agent=0)) for n in range(2)]
+        self.spending.reserve_cohort(entries)
+        state = read_json(self.spending.path)
+        self.assertEqual(len(state['reservations']), 2)
+        self.assertEqual(state['events'][-1]['amounts']['supervisor'], 280)
+        before = self.spending.path.read_bytes()
+        with self.assertRaises(ValueError):
+            self.spending.reserve_cohort([dict(key='new', semantic='new', amounts=dict(queue=1, supervisor=1, agent=0)), entries[0]])
+        self.assertEqual(before, self.spending.path.read_bytes())
+
+    def test_explicit_six_six_mapping_uses_exact_existing_tokens(self):
+        self.config['gpu_allocation'] = {'0': 6, '1': 6}
+        layout = runner.deployment_layout(self.config)
+        self.assertEqual([(r[0], r[1]) for r in layout], runner.SLOT_LAYOUT)
+        self.assertEqual([(r[2], r[3]) for r in layout], [(0,n) for n in range(6)] + [(1,n) for n in range(6)])
+        for allocation in ({'0':6,'1':5}, {'0':-1,'1':13}, {'0':True,'1':11}, {'0':6,'2':6}):
+            self.config['gpu_allocation'] = allocation
+            with self.assertRaises(ValueError): runner.deployment_layout(self.config)
+
+    def test_occupied_remapped_fleet_refuses_before_any_budget_or_job(self):
+        self.config['gpu_allocation'] = {'0':6,'1':6}
+        lease_root = Path(self.config['lease_root']); lease_root.mkdir()
+        for gpu, slot in runner.SLOT_LAYOUT:
+            (lease_root / f'gpu{gpu}-slot{slot}.lock').write_bytes(b'preserved')
+        before = self.spending.path.read_bytes()
+        with (lease_root / 'gpu0-slot3.lock').open('r+b') as occupied:
+            fcntl.flock(occupied, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            fake = MagicMock(); fake.inspect.return_value = {'jobs': {}}
+            fake.submit.side_effect = AssertionError('no partial fleet launch')
+            with patch('experiments.forge.queue.Queue', return_value=fake):
+                runs = runner.execute(self.config, self.plan(), ROOT)
+        self.assertEqual(read_json(runs / 'catalog.json')['status'], 'BLOCKED_EXISTING_LEASE_OWNER')
+        self.assertEqual(before, self.spending.path.read_bytes())
+
+    def test_surviving_child_keeps_every_remapped_token_exclusive(self):
+        from contextlib import ExitStack
+        paths = []
+        for gpu, slot in runner.SLOT_LAYOUT:
+            path = self.directory / f'gpu{gpu}-slot{slot}.lock'; path.write_bytes(b'preserved'); paths.append(path)
+        before = [(p.stat().st_ino, p.stat().st_size, p.stat().st_mode) for p in paths]
+        with ExitStack() as fleet:
+            owned = [fleet.enter_context(runner.Leases(self.directory).acquire(gpu, slot)) for gpu, slot in runner.SLOT_LAYOUT]
+            process = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(.4)'],
+                                       pass_fds=tuple(v['handle'].fileno() for v in owned))
+        for path in paths:
+            with path.open('r+b') as check:
+                with self.assertRaises(BlockingIOError): fcntl.flock(check, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        process.wait(timeout=5)
+        self.assertEqual(before, [(p.stat().st_ino, p.stat().st_size, p.stat().st_mode) for p in paths])
+        for path in paths:
+            with path.open('r+b') as check: fcntl.flock(check, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
     def test_actual_charges_and_negative_evidence_remain(self):
         self.spending.reserve('a', 'negative', dict(queue=100, supervisor=120, agent=10))
         self.spending.settle('a', dict(queue=21, supervisor=23, agent=4), {'status': 'FAIL', 'reason': 'original gate'})
@@ -208,10 +261,38 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual(len(popen.call_args.kwargs['pass_fds']), 2)
                 self.assertEqual(popen.call_args.kwargs['env']['FORGE_SHARED_SLOT_FD'], str(fd.fileno()))
 
+    def test_worker_forwards_all_fleet_descriptors_and_rejects_stale_fd(self):
+        from experiments.forge.worker import inherited_lease_fds
+        with (self.directory / 'one').open('w+b') as one, (self.directory / 'two').open('w+b') as two:
+            env = dict(FORGE_LEASE_FD=str(one.fileno()), FORGE_SHARED_SLOT_FD=str(two.fileno()),
+                       FORGE_SHARED_FLEET_FDS=f'{one.fileno()},{two.fileno()}')
+            with patch.dict(os.environ, env, clear=True):
+                self.assertEqual(inherited_lease_fds(), (one.fileno(), two.fileno()))
+            stale = two.fileno()
+        with patch.dict(os.environ, {'FORGE_LEASE_FD':str(stale)}, clear=True):
+            with self.assertRaises(OSError): inherited_lease_fds()
+
+    def test_six_six_capacity_uses_original_memory_and_reports_shortfall(self):
+        self.config.update(gpu_allocation={'0':6,'1':6}, required_concurrent_workers=12)
+        request_path = self.directory / 'capacity-request.json'
+        atomic_json(request_path, {'jobs':[{'resources':{'memory_mb':2048, 'gpu_model':'A6000'}}]})
+        self.study['request_path'] = str(request_path)
+        def slots(devices, workers_per_gpu, **kwargs):
+            self.assertEqual(workers_per_gpu,6)
+            return [{'device':devices[0], 'slot':n, 'model':'A6000', 'memory_mb':2048} for n in range(6)]
+        with patch('experiments.forge.queue.device_slots', side_effect=slots):
+            result = runner.concurrency_capacity(self.config)
+        self.assertEqual(result['available_under_current_native_partition'],12)
+        self.assertEqual([r['required_free_memory_mb'] for r in result['devices']],[12800,12800])
+        def short(devices, workers_per_gpu, **kwargs):
+            return [{**s, 'memory_mb':1900 if devices[0]=='0' else 2048} for s in slots(devices,workers_per_gpu)]
+        with patch('experiments.forge.queue.device_slots', side_effect=short):
+            self.assertEqual(runner.concurrency_capacity(self.config)['available_under_current_native_partition'],6)
+
     def test_original_contract_sections_and_seed_are_enforced(self):
         frozen = runner.contract(ROOT)
         request = {'view': frozen['view'], 'protocol': {'seed': 0}, 'jobs': [{'task_ids': self.study['task_ids'], 'task_id': self.study['task_ids'][0]}],
-                   'tasks': frozen['tasks'], 'study_admission': {'bound': True}, 'study_review': {'status': 'PASS'},
+                   'tasks': frozen['tasks'], 'study_admission': {'bound': True}, 'study_review': {'status': 'READY'},
                    'source': {'digest': 'bound'}, 'candidate_revision': 'revision'}
         runner.validate_request(request, self.study, frozen)
         for section in ('execution', 'evaluation', 'resources', 'dependencies'):
@@ -257,7 +338,7 @@ class RunnerTests(unittest.TestCase):
         directory = self.directory / 'attempt'
         directory.mkdir()
         req = dict(view=frozen['view'], protocol={'seed': 0}, jobs=[{'task_ids': ['gaussian1d_smoke'], 'task_id': 'gaussian1d_smoke'}],
-                   tasks=frozen['tasks'], study_admission={'bound': True}, study_review={'status': 'PASS'},
+                   tasks=frozen['tasks'], study_admission={'bound': True}, study_review={'status': 'READY'},
                    candidate_revision='candidate', source={'digest': 'source', 'snapshot_path': str(ROOT),
                    'files': {f'experiments/forge/{name}': runner.digest(ROOT / f'experiments/forge/{name}') for name in ['worker.py', 'queue.py']}},
                    study={'campaign': {'id': 'ours'}})
@@ -282,7 +363,7 @@ class RunnerTests(unittest.TestCase):
                     return None
                 assert kwargs['request_filter'] == 'ours'
                 self.claimed = True
-                return {'worker': {'directory': str(directory), 'attempt': 'fake'}, 'job': {'budget_seconds': 120}}
+                return {'worker': {'directory': str(directory), 'attempt': 'fake'}, 'job': {'budget_seconds': 120, 'task_id': 'gaussian1d_smoke'}}
             def launch(self, *args, **kwargs):
                 assert kwargs['shared_slot_fd'] >= 0
                 self.launched = True
@@ -325,6 +406,68 @@ class RunnerTests(unittest.TestCase):
              patch.object(runner.subprocess, 'Popen', side_effect=fake_process), \
              patch.object(runner, 'contract', return_value=frozen):
             return runner.propose(self.config, self.study, row, ROOT, runs)
+
+    def test_prepared_work_launches_before_last_study_admission(self):
+        frozen = runner.contract(ROOT)
+        order, entries, launched, claimed = [], {}, set(), set()
+        studies = []
+        for index in range(2):
+            rid = f'prepared-{index}'
+            path = self.directory / f'{rid}.json'
+            study = {**self.study, 'id': rid, 'task_ids': ['gaussian1d_smoke'],
+                     'semantic_factors': {'contrast': index}, 'request_path': str(path)}
+            atomic_json(path, dict(view=frozen['view'], protocol={'seed': 0},
+                jobs=[{'task_id': 'gaussian1d_smoke', 'task_ids': ['gaussian1d_smoke'], 'compatibility_key': rid}],
+                tasks=frozen['tasks'], study_admission={'bound': True}, study_review={'status': 'READY'},
+                candidate_revision='candidate', source={'digest': 'source', 'snapshot_path': str(ROOT),
+                    'files': {f'experiments/forge/{name}': runner.digest(ROOT / f'experiments/forge/{name}') for name in ['queue.py', 'worker.py']}},
+                study={'campaign': {'id': rid}}))
+            (self.directory / rid).mkdir()
+            studies.append(study)
+        self.config.update(studies=studies, max_studies=2)
+        lease_root = Path(self.config['lease_root']); lease_root.mkdir()
+        for gpu, slot in runner.SLOT_LAYOUT:
+            (lease_root / f'gpu{gpu}-slot{slot}.lock').write_bytes(b'preserved')
+        class FakeQueue:
+            def inspect(self):
+                return {'jobs': {rid: {'status': 'terminal' if rid in launched else 'pending'} for rid in entries},
+                        'submissions': entries, 'charges': [{'attempt_id': rid, 'seconds': 1} for rid in launched]}
+            def submit(self, request, campaign):
+                rid = campaign['id']; order.append(('submit', rid))
+                entries[rid] = {'request': {'request_id': rid}, 'status': 'queued'}
+                return entries[rid]
+            def claim(self, slots, **filters):
+                rid = filters['request_filter']
+                if rid in claimed: return None
+                claimed.add(rid)
+                return {'worker': {'attempt': rid, 'directory': str(self_directory / rid)},
+                        'job': {'budget_seconds': 120, 'task_id': 'gaussian1d_smoke'}}
+            def launch(self, claim, **kwargs):
+                rid = claim['worker']['attempt']; order.append(('launch', rid)); launched.add(rid)
+                process = MagicMock(pid=os.getpid(), returncode=0); process.poll.return_value = 0
+                return process
+            def collect(self):
+                for rid in launched: entries[rid]['status'] = 'completed'
+        self_directory = self.directory
+        with patch('experiments.forge.queue.Queue', return_value=FakeQueue()), \
+             patch('experiments.forge.sources.verify_snapshot'), \
+             patch('experiments.forge.queue.device_slots', return_value=[{'slot': n} for n in range(10)]), \
+             patch('experiments.forge.test_stages.generated_reports', return_value={}):
+            runs = runner.execute(self.config, self.plan(), ROOT)
+        self.assertLess(order.index(('launch', 'prepared-0')), order.index(('submit', 'prepared-1')))
+        self.assertEqual(read_json(runs / 'catalog.json')['peak_concurrent_training'], 0)
+        self.assertFalse(read_json(self.spending.path)['reservations'])
+
+    def test_capacity_blocker_precedes_admission_reservation_and_launch(self):
+        self.config['required_concurrent_workers'] = 12
+        before = self.spending.path.read_bytes()
+        capacity = {'required': 12, 'available_under_current_native_partition': 2}
+        with patch.object(runner, 'concurrency_capacity', return_value=capacity), \
+             patch('experiments.forge.queue.Queue', side_effect=AssertionError('no admission')), \
+             patch('experiments.forge.queue.subprocess.Popen', side_effect=AssertionError('no launch')):
+            runs = runner.execute(self.config, self.plan(), ROOT)
+        self.assertEqual(read_json(runs / 'catalog.json')['status'], 'BLOCKED_EXTERNAL_GPU_CAPACITY')
+        self.assertEqual(before, self.spending.path.read_bytes())
 
     def test_mock_codex_proposal_records_cli_and_observed_turns_separately(self):
         path, elapsed = self.mock_proposal([{'type': 'turn.started'}, {'type': 'turn.completed', 'usage': {'input_tokens': 4}}])

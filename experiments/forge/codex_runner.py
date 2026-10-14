@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import argparse
-from contextlib import contextmanager
+from contextlib import contextmanager, ExitStack, nullcontext
 from copy import deepcopy
 import fcntl
 import hashlib
@@ -141,6 +141,31 @@ class Spending:
             self.event(state, 'settled', key=key, actual=actual, receipt=receipt,
                        exceeded={k: actual[k] > reservation['amounts'][k] for k in actual})
 
+    def reserve_cohort(self, entries):
+        """One atomic full-cohort admission, including every chain's continuation."""
+        with self.state() as state:
+            semantics = [entry['semantic'] for entry in entries]
+            if len(set(semantics)) != len(semantics) or any(s in state['seen_semantics'] for s in semantics):
+                raise ValueError('duplicate semantic unit in full cohort, including uncertain attempts')
+            sessions = sum(bool(e['amounts']['agent']) for e in entries)
+            if state['agent_sessions_started'] + sessions > state['agent_session_limit']:
+                raise ValueError('aggregate model session cap exhausted')
+            for kind in state['limits']:
+                total = sum(number(e['amounts'][kind], kind) for e in entries)
+                if total > self.remaining(state)[kind]:
+                    raise ValueError(f'cannot reserve full cohort {kind} allowance')
+            for entry in entries:
+                key, semantic, amounts = entry['key'], entry['semantic'], entry['amounts']
+                if key in state['reservations']:
+                    raise ValueError('reservation key already exists')
+                state['reservations'][key] = dict(amounts=amounts, semantic=semantic,
+                    owner=process_identity(os.getpid()), started_at=time.time())
+                state['seen_semantics'][semantic] = dict(key=key, status='reserved')
+                self.event(state, 'reserved', key=key, semantic=semantic, amounts=amounts)
+            state['agent_sessions_started'] += sessions
+            self.event(state, 'full_cohort_reserved', units=len(entries),
+                       amounts={k: sum(e['amounts'][k] for e in entries) for k in state['limits']})
+
 
 class Leases:
     def __init__(self, root):
@@ -197,11 +222,35 @@ def contract(root):
 
 
 def semantic_key(study):
-    # Names, seed and source-only edits do not make a fresh experiment.
+    # Names/arbitrary seed edits remain aliases. Only a source-bound registered
+    # experimental unit can declare a paired replication or a control role.
     factors = study.get('semantic_factors')
     if not isinstance(factors, dict) or not factors:
         raise ValueError('each study needs explicit normalized semantic_factors')
-    return stable_hash(dict(factors=factors, tasks=sorted(study['task_ids'])))
+    identity = dict(factors=factors, tasks=sorted(study['task_ids']))
+    if 'experimental_unit' in study:
+        unit = study['experimental_unit']
+        fields = ('role', 'replication_role', 'seed', 'protocol_semantics_sha256',
+                  'comparison_sha256', 'source_semantics_sha256')
+        if (not isinstance(unit, dict) or any(k not in unit for k in fields)
+                or unit['role'] not in ('control', 'candidate') or unit['replication_role'] != 'paired_seed'):
+            raise ValueError('registered experimental unit identity is incomplete')
+        identity = dict(tasks=sorted(study['task_ids']), unit={k: unit[k] for k in fields})
+    return stable_hash(identity)
+
+
+def deployment_layout(cfg):
+    """Map preserved lease tokens explicitly; remapping requires the whole fleet."""
+    allocation = cfg.get('gpu_allocation')
+    if allocation is None:
+        return [(gpu, slot, gpu, slot) for gpu, slot in SLOT_LAYOUT]
+    if (not isinstance(allocation, dict) or set(allocation) != {'0', '1'}
+            or any(type(n) is not int or n < 0 for n in allocation.values())
+            or not 1 <= sum(allocation.values()) <= 12 or cfg['slots'] != sum(allocation.values())
+            or any(not s.get('request_path') for s in cfg['studies'])):
+        raise ValueError('GPU remapping needs an explicit prepared-work allocation within the twelve-token fleet')
+    physical = [(int(gpu), slot) for gpu in ('0', '1') for slot in range(allocation[gpu])]
+    return [(*lease, *device) for lease, device in zip(SLOT_LAYOUT, physical)]
 
 
 def plan(config_path, *, root):
@@ -218,6 +267,12 @@ def plan(config_path, *, root):
     slots, maximum = cfg['slots'], cfg['max_studies']
     if type(slots) is not int or not 1 <= slots <= 12 or type(maximum) is not int or not 1 <= maximum <= 12:
         raise ValueError('slots and finite max_studies must be integers in1..12')
+    required = cfg.get('required_concurrent_workers', 0)
+    if type(required) is not int or not 0 <= required <= slots:
+        raise ValueError('required concurrent workers must be an integer within the slot cap')
+    if required and any(not s.get('request_path') for s in cfg['studies']):
+        raise ValueError('a concurrency capacity requirement needs prepared requests')
+    deployment_layout(cfg)
     if not cfg['studies'] or len(cfg['studies']) > maximum:
         raise ValueError('provide a finite study list within max_studies; no replenishment beyond it')
     seen, names, rows = set(), set(), []
@@ -401,10 +456,13 @@ def validate_request(request, study, frozen):
         raise ValueError('a partial claim needs its own explicitly declared registered scoped view')
     tiers = {a['task']: a['qualification_tier'] for a in request['view']['assignments']}
     current_tiers = {a['task']: a['qualification_tier'] for a in frozen['view']['assignments']}
-    if any(current_tiers.get(name) != tier for name, tier in tiers.items()):
+    if not study.get('experimental_unit') and any(current_tiers.get(name) != tier for name, tier in tiers.items()):
         raise ValueError('scoped views preserve current tier labels and original tasks')
-    if request['protocol']['seed'] != 0:
-        raise ValueError('seed-only studies are not allowed')
+    if study.get('experimental_unit'):
+        from .research_protocols import validate_unit
+        validate_unit(request, study['experimental_unit'])
+    elif request['protocol'].get('id', 'screening') != 'screening' or request['protocol']['seed'] != 0:
+        raise ValueError('alternate seeds need an explicit registered experimental unit')
     members = {name for job in request['jobs']
                if all(tiers[name] <= request.get('through_tier', 3) for name in job.get('task_ids', [job['task_id']]))
                for name in job.get('task_ids', [job['task_id']])}
@@ -417,13 +475,70 @@ def validate_request(request, study, frozen):
     for key in ('study_admission', 'study_review', 'source', 'candidate_revision'):
         if not request.get(key):
             raise ValueError('normal source-bound study admission is required')
-    if request['study_review']['status'] != 'PASS':
-        raise ValueError('normal study review did not PASS')
+    if request['study_review']['status'] != 'READY':
+        raise ValueError('normal study review is not READY')
 
 
 def stopped(cfg):
     return any(Path(path).exists() for path in
                [str(Path(cfg['runs_dir']) / 'STOP'), *cfg.get('stop_files', ['/ml2/hypergan/gan-attempts/STOP'])])
+
+
+def observe_training(active, prior):
+    """Require a new completed update and the exact live training child."""
+    directory = active['directory']
+    child_path, log = directory / 'child.json', directory / 'run.log'
+    if not child_path.exists() or not log.exists() or any(t['attempt'] == active['attempt'] for t in prior):
+        return None
+    child = read_json(child_path)
+    if child.get('phase') in ('evaluation', 'grading') or process_identity(child['pid']) != child['process_identity']:
+        return None
+    prefix = active['prefix_steps']
+    with log.open(errors='replace') as stream:
+        stream.seek(active['log_offset'])
+        lines = stream.readlines()
+        active['log_offset'] = stream.tell()
+    for line in lines:
+        try:
+            event = json.loads(line)
+        except ValueError:
+            continue
+        if event.get('event') == 'observation' and type(event.get('step')) is int and event['step'] > prefix:
+            owner = active['owner']
+            return dict(kind='OBSERVED_REAL_TRAINING_UPDATES', unix=time.time(), attempt=active['attempt'],
+                        **child, completed_steps=event['step'], new_updates_confirmed=event['step'] - prefix,
+                        supervisor_pid=active['process'].pid, lease=active['lease'],
+                        source_digest=owner['request']['source']['digest'],
+                        candidate_revision=owner['request']['candidate_revision'],
+                        task_id=active['task_id'],
+                        study=owner['study']['id'], experimental_unit=owner['study'].get('experimental_unit'),
+                        log=str(log))
+    return None
+
+
+def concurrency_capacity(cfg):
+    """Native per-slot reservations, using unchanged prepared task resources."""
+    from .queue import device_slots
+    resources = [job['resources'] for study in cfg['studies']
+                 for job in read_json(study['request_path'])['jobs']]
+    memory = max(r['memory_mb'] for r in resources)
+    devices = []
+    total = 0
+    counts = {gpu: sum(row[2] == gpu for row in deployment_layout(cfg)) for gpu in (0, 1)}
+    for gpu, count in counts.items():
+        if not count:
+            continue
+        slots = [s for s in device_slots([str(gpu)], workers_per_gpu=count, allow_sharing=True)
+                 if s['device'] == str(gpu)]
+        compatible = [s for s in slots if s['memory_mb'] >= memory
+                      and all(not r.get('gpu_model') or s['model'] == r['gpu_model'] for r in resources)]
+        total += len(compatible)
+        devices.append(dict(gpu=gpu, lease_slots=count, native_slots=slots,
+                            required_memory_mb_per_worker=memory, compatible_slots=len(compatible),
+                            required_free_memory_mb=count * memory + 512))
+    return dict(unix=time.time(), required=cfg['required_concurrent_workers'],
+                available_under_current_native_partition=total, devices=devices,
+                original_task_resources_unchanged=True, deployment_layout=deployment_layout(cfg))
 
 
 def execute(cfg, report, root):
@@ -435,10 +550,21 @@ def execute(cfg, report, root):
     runs.mkdir(parents=True)
     leases = Leases(cfg['lease_root'])
     atomic_json(runs / 'plan.json', report)
+    if cfg.get('required_concurrent_workers'):
+        capacity = concurrency_capacity(cfg)
+        atomic_json(runs / 'capacity.json', capacity)
+        if capacity['available_under_current_native_partition'] < capacity['required']:
+            atomic_json(runs / 'catalog.json', dict(status='BLOCKED_EXTERNAL_GPU_CAPACITY',
+                        capacity=capacity, receipts=[], training_starts=[], peak_concurrent_training=0,
+                        unknown_or_unsettled=[], unadmitted_studies=[s['id'] for s in cfg['studies']],
+                        new_reservations=0, paid_model_sessions=0, additional_qualification=False))
+            return runs
     if any(s.get('agent_seconds') for s in cfg['studies']):
         atomic_json(runs / 'cli-contract.json', verify_cli(cfg.get('codex_bin', 'codex')))
     admitted, running, receipts, training = [], [], [], []
+    attempt_receipts = []
     stop = False
+    peak_training = []
 
     def drain(*_):
         nonlocal stop
@@ -446,53 +572,85 @@ def execute(cfg, report, root):
 
     signal.signal(signal.SIGTERM, drain)
     signal.signal(signal.SIGINT, drain)
-    with file_lock(spending.path.with_suffix('.coordinator.lock'), blocking=False), file_lock(Path(cfg['queue_root']) / 'coordinator.lock', blocking=False):
-        for study, row in zip(cfg['studies'], report['studies']):
-            if stop or stopped(cfg):
-                break
-            key = uuid.uuid4().hex
-            spending.reserve(key, row['semantic'], row['amounts'], agent=bool(row['amounts']['agent']))
-            model_seconds = 0.
-            submission_started = False
-            try:
-                if study.get('request_path'):
-                    request_path = Path(study['request_path']).resolve()
-                else:
-                    request_path, model_seconds = propose(cfg, study, row, root, runs)
-                request = read_json(request_path)
-                validate_request(request, study, contract(root))
-                verify_snapshot(Path(request['source']['snapshot_path']), request['source'])
-                for name in ('queue.py', 'worker.py'):
-                    relative = 'experiments/forge/' + name
-                    if request['source']['files'].get(relative) != digest(root / relative):
-                        raise ValueError('executed source must retain current queue/worker lease propagation')
-                source_root = Path(request['source']['snapshot_path'])
-                if contract(source_root)['files'] != report['frozen_files']:
-                    raise ValueError('executed source drifted from the frozen global revision10 gauntlet')
-                queue = Queue(Path(cfg['queue_root']), report_root=source_root / 'reports/forge')
-                before = queue.inspect()
-                if any(j['status'] == 'running' for j in before['jobs'].values()):
-                    raise ValueError('existing shared queue workers require owner reconciliation')
-                submission_started = True
-                submission = queue.submit(request, request['study']['campaign'])
-                admitted.append(dict(key=key, study=study, row=row, queue=queue, request=request,
-                                     submission=submission, model_seconds=model_seconds, attempts=[]))
-            except Exception as error:
-                # A paid turn that errored retains its actual cost; never charge zero by assumption.
-                terminal = runs / study['id'] / 'agent-terminal.json'
-                if terminal.exists():
-                    model_seconds = read_json(terminal)['seconds']
-                if submission_started:
-                    atomic_json(runs / 'uncertain-submission.json', dict(key=key, reason=str(error),
-                                reservation_retained=True, explicit_reconciliation_required=True))
-                    raise
-                spending.settle(key, dict(queue=0., supervisor=0., agent=model_seconds), dict(status='ERROR', reason=str(error)))
-                receipts.append(dict(study=study['id'], status='ERROR', reason=str(error)))
+    def admit(study, row, key):
+        if stop or stopped(cfg):
+            return
+        model_seconds = 0.
+        submission_started = False
+        try:
+            if study.get('request_path'):
+                request_path = Path(study['request_path']).resolve()
+            else:
+                request_path, model_seconds = propose(cfg, study, row, root, runs)
+            request = read_json(request_path)
+            validate_request(request, study, contract(root))
+            verify_snapshot(Path(request['source']['snapshot_path']), request['source'])
+            for name in ('queue.py', 'worker.py'):
+                relative = 'experiments/forge/' + name
+                if request['source']['files'].get(relative) != digest(root / relative):
+                    raise ValueError('executed source must retain current queue/worker lease propagation')
+            source_root = Path(request['source']['snapshot_path'])
+            if contract(source_root)['files'] != report['frozen_files']:
+                raise ValueError('executed source drifted from the frozen global revision10 gauntlet')
+            queue = Queue(Path(cfg['queue_root']), report_root=source_root / 'reports/forge')
+            before = queue.inspect()
+            submission_started = True
+            submission = queue.submit(request, request['study']['campaign'])
+            admitted.append(dict(key=key, study=study, row=row, queue=queue, request=request,
+                                 submission=submission, model_seconds=model_seconds, attempts=[]))
+        except Exception as error:
+            # A paid turn that errored retains its actual cost; never charge zero by assumption.
+            terminal = runs / study['id'] / 'agent-terminal.json'
+            if terminal.exists():
+                model_seconds = read_json(terminal)['seconds']
+            if submission_started:
+                atomic_json(runs / 'uncertain-submission.json', dict(key=key, reason=str(error),
+                            reservation_retained=True, explicit_reconciliation_required=True))
+                raise
+            spending.settle(key, dict(queue=0., supervisor=0., agent=model_seconds), dict(status='ERROR', reason=str(error)))
+            receipts.append(dict(study=study['id'], status='ERROR', reason=str(error)))
+
+    with file_lock(spending.path.with_suffix('.coordinator.lock'), blocking=False), file_lock(Path(cfg['queue_root']) / 'coordinator.lock', blocking=False), ExitStack() as fleet_stack:
+        existing = Queue(Path(cfg['queue_root'])).inspect()
+        if any(j['status'] == 'running' for j in existing['jobs'].values()):
+            raise ValueError('existing shared queue workers require owner reconciliation')
+        layout = deployment_layout(cfg)
+        fleet = {}
+        if cfg.get('gpu_allocation') is not None:
+            targets = {(a, b): (c, d) for a, b, c, d in layout}
+            for lease_gpu, lease_slot in SLOT_LAYOUT:
+                gpu, slot = targets.get((lease_gpu, lease_slot), (None, None))
+                lease = fleet_stack.enter_context(leases.acquire(lease_gpu, lease_slot))
+                if lease is None:
+                    atomic_json(runs / 'catalog.json', dict(status='BLOCKED_EXISTING_LEASE_OWNER',
+                        occupied_lease=str(leases.root / f'gpu{lease_gpu}-slot{lease_slot}.lock'),
+                        receipts=[], training_starts=[], unknown_or_unsettled=[],
+                        new_reservations=0, additional_qualification=False))
+                    return runs
+                fleet[(lease_gpu, lease_slot)] = {**lease, 'lease_gpu': lease_gpu, 'lease_slot': lease_slot,
+                                                 'gpu': gpu, 'slot': slot}
+            atomic_json(runs / 'fleet-binding.json', dict(unix=time.time(), entire_fleet_exclusive=True,
+                all_children_inherit_entire_fleet=True, leases=[{k: v for k, v in lease.items() if k != 'handle'} for lease in fleet.values()]))
+        if stopped(cfg):
+            atomic_json(runs / 'catalog.json', dict(status='STOPPED_BEFORE_ADMISSION', receipts=[],
+                        training_starts=[], unknown_or_unsettled=[], new_reservations=0, additional_qualification=False))
+            return runs
+        pending = [(study, row, uuid.uuid4().hex) for study, row in zip(cfg['studies'], report['studies'])]
+        spending.reserve_cohort([dict(key=key, semantic=row['semantic'], amounts=row['amounts']) for _, row, key in pending])
+        atomic_json(runs / 'full-cohort-reservation.json', dict(units=len(pending), amounts=report['total_full_reservation'],
+                    keys=[key for _, _, key in pending], reserved_before_first_launch=True))
         dispatch_started = time.monotonic()
         dispatch_window = number(cfg.get('dispatch_window_seconds', 300), 'dispatch window', zero=False)
-        while admitted:
+        while pending or admitted:
             if stopped(cfg) or time.monotonic() - dispatch_started >= dispatch_window:
                 stop = True
+            if pending and not stop:
+                admit(*pending.pop(0))
+            available_by_gpu = {}
+            if not stop:
+                for gpu in {row[2] for row in layout}:
+                    count = sum(row[2] == gpu for row in layout)
+                    available_by_gpu[gpu] = device_slots([str(gpu)], workers_per_gpu=count, allow_sharing=True)
             for owner in admitted:
                 owner['queue'].collect()
             for active in running[:]:
@@ -502,32 +660,34 @@ def execute(cfg, report, root):
                         atomic_json(active['directory'] / 'cancel.json', dict(reason='full supervisor allowance ceiling'))
                     if elapsed >= active['allowance'] - 5:
                         stop_process(active['process'], active['directory'])
-                    child_path = active['directory'] / 'child.json'
-                    if child_path.exists():
-                        child = read_json(child_path)
-                        marker = (active['attempt'], child['process_identity'])
-                        if child.get('phase') not in ('evaluation', 'grading') and marker not in {(t['attempt'], t['process_identity']) for t in training} and process_identity(child['pid']) == child['process_identity']:
-                            training.append(dict(kind='OBSERVED_TRAINING_START', attempt=active['attempt'], **child))
-                            atomic_json(runs / 'training-starts.json', training)
+                    observed = observe_training(active, training)
+                    if observed:
+                        training.append(observed)
+                        atomic_json(runs / 'training-starts.json', training)
                     continue
                 active['context'].__exit__(None, None, None)
                 running.remove(active)
                 active['owner']['queue'].collect()
-                active['owner']['attempts'].append(dict(attempt=active['attempt'], supervisor_seconds=elapsed,
-                    exit_code=active['process'].returncode, lease=active['lease'], log=str(active['directory'] / 'run.log')))
-                atomic_json(runs / 'attempt-receipts.json', [a for o in admitted for a in o['attempts']])
+                receipt = dict(attempt=active['attempt'], supervisor_seconds=elapsed,
+                    exit_code=active['process'].returncode, lease=active['lease'], log=str(active['directory'] / 'run.log'),
+                    supervisor_pid=active['process'].pid, task_id=active['task_id'], terminal_observed_unix=time.time())
+                active['owner']['attempts'].append(receipt)
+                attempt_receipts.append(receipt)
+                atomic_json(runs / 'attempt-receipts.json', attempt_receipts)
             if not stop:
                 for owner in admitted:
-                    for gpu, slot in SLOT_LAYOUT:
+                    for lease_gpu, lease_slot, gpu, slot in layout:
                         if len(running) >= cfg['slots']:
                             break
-                        context = leases.acquire(gpu, slot)
+                        if fleet and any(a['lease']['path'] == fleet[(lease_gpu, lease_slot)]['path'] for a in running):
+                            continue
+                        context = nullcontext(fleet[(lease_gpu, lease_slot)]) if fleet else leases.acquire(gpu, slot)
                         lease = context.__enter__()
                         if lease is None:
                             context.__exit__(None, None, None)
                             continue
                         try:
-                            available = device_slots([str(gpu)], workers_per_gpu=10 if gpu == 0 else 2, allow_sharing=True)
+                            available = available_by_gpu[gpu]
                             claimed = owner['queue'].claim([s for s in available if s['slot'] == slot],
                                     campaign_filter=owner['request']['study']['campaign']['id'],
                                     request_filter=owner['submission']['request']['request_id'])
@@ -535,15 +695,19 @@ def execute(cfg, report, root):
                                 context.__exit__(None, None, None)
                                 continue
                             clock = time.monotonic()
-                            process = owner['queue'].launch(claimed, shared_slot_fd=lease['handle'].fileno())
+                            process = owner['queue'].launch(claimed, shared_slot_fd=lease['handle'].fileno(),
+                                shared_fleet_fds=tuple(v['handle'].fileno() for v in fleet.values()))
                             directory = Path(claimed['worker']['directory'])
                             binding = {k: lease[k] for k in ('path', 'inode', 'gpu', 'slot')}
+                            binding.update(lease_gpu=lease_gpu, lease_slot=lease_slot)
                             atomic_json(directory / 'runner-start.json', dict(kind='FORGE_SUPERVISOR_STARTED',
                                         pid=process.pid, process_identity=process_identity(process.pid),
                                         unix=time.time(), lease=binding, attempt=claimed['worker']['attempt']))
                             running.append(dict(owner=owner, process=process, clock=clock, directory=directory,
                                 allowance=claimed['job']['budget_seconds'] + 20, context=context, lease=binding,
-                                attempt=claimed['worker']['attempt']))
+                                attempt=claimed['worker']['attempt'], log_offset=0,
+                                task_id=claimed['job']['task_id'],
+                                prefix_steps=owner['request']['tasks'][claimed['job']['task_id']]['execution'].get('preserve_prefix_steps', 0)))
                         except Exception:
                             context.__exit__(*sys.exc_info())
                             # Keep the whole cohort reservation fenced after uncertain launch.
@@ -573,14 +737,24 @@ def execute(cfg, report, root):
                     supervisor=sum(a['supervisor_seconds'] for a in owner['attempts']), agent=owner['model_seconds']), receipt)
                 receipts.append(receipt)
                 admitted.remove(owner)
+            live_training = [t for t in training if any(a['attempt'] == t['attempt'] for a in running)
+                             and process_identity(t['pid']) == t['process_identity']]
+            if len(live_training) > len(peak_training):
+                peak_training = list(live_training)
+                atomic_json(runs / 'peak-training.json', dict(unix=time.time(), count=len(peak_training), workers=peak_training))
             atomic_json(runs / 'live.json', dict(supervisors=len(running), observed_training_starts=len(training),
+                        supervisor_receipts=[dict(pid=a['process'].pid, process_identity=process_identity(a['process'].pid),
+                          attempt=a['attempt'], task_id=a['task_id'], lease=a['lease']) for a in running],
+                        current_training_workers=len(live_training), training_workers=live_training,
                         admitted_studies=len(admitted), agent_turns_are_not_experiments=True))
             if stop and not running:
                 # Preserve any queued work/reservations for explicit reconciliation; never replenish after STOP.
                 break
             time.sleep(.1)
         atomic_json(runs / 'catalog.json', dict(schema_version=1, receipts=receipts, training_starts=training,
-                    unknown_or_unsettled=[o['key'] for o in admitted], additional_qualification=False))
+                    peak_concurrent_training=len(peak_training), peak_training_workers=peak_training,
+                    unknown_or_unsettled=[o['key'] for o in admitted] + [key for _, _, key in pending],
+                    unadmitted_studies=[study['id'] for study, _, _ in pending], additional_qualification=False))
         # Existing report readers retain cohort binding; no new scored evidence is invented.
         if not admitted:
             try:

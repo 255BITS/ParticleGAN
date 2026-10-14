@@ -127,7 +127,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                  through_tier: int | None = None, queue_root: Path | None = None,
                  freeze_source: bool = False, execution_backend: str | None = None,
                  cuda_model: str | None = None, declaration: dict | None = None,
-                 study=None) -> dict:
+                 study=None, protocol_id: str | None = None) -> dict:
     """Tier placement never enters candidate/task compatibility keys."""
     root = Path(root).resolve()
     idea = load_idea(root, idea_id) if declaration is None else deepcopy(declaration)
@@ -162,8 +162,13 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     all_tasks = load_tasks(root)
     validate_view(view, all_tasks)
     tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
-    protocol_id = defaults["protocol"]
-    protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
+    from .research_protocols import registered_protocol
+    if protocol_id is None:
+        protocol_id = defaults["protocol"]
+        protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
+        research_registration = None
+    else:
+        protocol, research_registration = registered_protocol(root, protocol_id)
     prior = {**defaults["prior"], **idea.get("prior", {})}
     # Candidate reference construction cannot let a historical convenience
     # prior choose a new explicit recipe learning policy.
@@ -205,6 +210,15 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             blockers.append(f"view requires capability {name}")
     # Referenced evaluator source outside normal code roots must travel with a job.
     extra_sources = set(idea.get("source_files", []))
+    if research_registration is not None:
+        extra_sources.update(f"configs/forge/protocols/{name}.json" for name in research_registration['protocols'])
+        extra_sources.update(('configs/forge/protocols/screening.json',
+                              f"configs/forge/research-cohorts/{protocol['research']['cohort_id']}.json",
+                              f"configs/forge/views/{view['id']}.json",
+                              'configs/forge/views/discriminator_stability.json',
+                              'configs/forge/view-history/discriminator_stability-v9.json',
+                              'configs/forge/test-stages.json'))
+        extra_sources.update(str(p.relative_to(root)) for p in (root / 'configs/forge/tasks').glob('*.json'))
     # A view selects evidence, not a different candidate implementation. Capture
     # the same catalog evaluator support set for every view so quality/stability
     # requests can share their identical task receipts.

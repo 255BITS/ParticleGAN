@@ -56,8 +56,7 @@ Configuration version1 requires `budget_state`, `queue_root`, `runs_dir`,
 - original `task_ids`, including its own checkpoint/gate prerequisites;
 - either an existing normal Forge `request_path`, or positive `agent_seconds`.
 
-Different names, seeds, source-only edits and repeated lanes do not create a
-fresh semantic key. Prior negatives and uncertain attempts must remain in the
+Names, arbitrary seed edits, source-only edits and repeated lanes do not create a fresh semantic key. An explicit registered `experimental_unit` can distinguish paired control/candidate roles and preregistered research seeds. Its protocol, frozen recipes, original task contracts, scientific implementation, view and exact source must bind the registration. Cosmetic registration names still deduplicate. Prior negatives and uncertain attempts must remain in the
 shared history. Semantic-factor declarations complement Forge's exact
 compatibility dedup and scientific review; they do not prove that arbitrary
 different implementations are mathematically distinct. Read compiled experiment
@@ -66,12 +65,13 @@ memory before authoring another study. Do not pad twelve slots.
 Ordinary requests bind the full current view and tier. A partial comparison
 requires `scope: "scoped"`, an explicit registered `view_id`, current tier
 labels and unchanged original tasks. It grants no whole-gauntlet qualification.
+Registered paired research uses an explicit nonqualifying `research_diagnostic` view. Its diagnostic execution labels are separate from public qualification tiers; original numeric gates, samplers, task resources, full horizons and own-state dependencies remain unchanged. Protocol `screening` stays seed0. `resolve_idea(..., protocol_id=...)` accepts an alternate seed only with a matching `configs/forge/research-cohorts/<id>.json` registration. This is research, not promotion or whole-gauntlet qualification.
+
 All source snapshots retain the frozen global revision10 declarations and
 current queue/worker lease code. Normal Forge admission, source verification,
 checkpoint dependencies, resource checks and campaign caps still apply.
 
-The pool reserves every original execution group's complete timeout plus20
-supervisor seconds per group before a proposal starts. Shared uninterrupted
+The pool atomically reserves the entire finite cohort before its first launch, including every original execution group's complete timeout plus20 supervisor seconds per group. Prepared requests stream into ordinary admission and dispatch; it does not wait for the last request to be admitted before starting ready work. Forge v3 study review must be `READY`. Shared uninterrupted
 groups are counted once, using the maximum original timeout; it never shortens horizons to fit. It
 replenishes only from the supplied distinct list. Default dispatch window is
 300seconds; `dispatch_window_seconds` can set another finite positive window.
@@ -85,23 +85,22 @@ tools/gan_runner/try-gan.sh --config /absolute/one-study.json --dry-run
 python tools/gan_runner/run-gan-pool.py --config /absolute/finite-studies.json --dry-run
 ```
 
-At the inspected balance, a fresh original Gaussian pair needs720queue and
-760supervisor seconds; only746.121125112supervisor seconds remain. Planning
-reports that blocker. No new paid run was authorized or performed to validate
-this runner.
-
 ## Leases, actual receipts and provenance
 
-The existing ten GPU0/two GPU1 lock files are opened without creation or
+The existing twelve lease tokens (named ten GPU0/two GPU1) are opened without creation or
 truncation. Their inode/mode/size must remain unchanged. A supervisor and its
 training/evaluation descendants inherit the shared descriptor; coordinator
 crashes cannot release a live child's slot. Closing the owner's descriptor
 does not explicitly unlock a surviving child. Forge's coordinator lock and
 per-submission claim fence prevent another owner’s queued work being dispatched.
 
+Optional `gpu_allocation: {"0": 6, "1": 6}` explicitly maps those same twelve tokens onto six physical workers per GPU. Remapping requires an explicit prepared-work allocation within the twelve-token fleet; a smaller safe allocation still owns every token. All twelve tokens are acquired exclusively before any reservation or admission; an occupied token refuses the whole remapped fleet. Every supervisor, training child and evaluator inherits every fleet descriptor. Even after a coordinator crash, any surviving child holds the entire remapped fleet against other owners until the last child exits. No lease file is created, renamed, truncated or silently reassigned. `fleet-binding.json` records original token identity and actual physical GPU/slot. Native per-worker memory/model/CPU admission remains authoritative.
+
+Optional `required_concurrent_workers` checks native capacity before admission. A shortage returns a zero-reservation blocker receipt. The caller can explicitly choose a safe smaller concurrency or allocation; task memory reservations are never reduced.
+
 Each run keeps a tail-friendly local Codex JSONL log, original Forge logs,
 agent start/terminal receipts, supervisor receipts, separately observed live
-training-child starts, source/candidate identities, actual queue and supervisor
+training-child receipts confirmed by new completed updates beyond the task's own prefix, observed simultaneous peak, source/candidate/task/lease identities, actual queue and supervisor
 charges, and a compact `catalog.json`. An admitted agent turn is not a training
 start or a scientific success. Unavailable stage evidence is `UNMEASURED`.
 Raw logs/tensors/checkpoints remain outside Git.
