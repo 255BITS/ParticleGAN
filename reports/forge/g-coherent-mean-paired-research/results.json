@@ -1,0 +1,4565 @@
+{
+  "schema_version": 1,
+  "id": "g-coherent-mean-paired-seeds1-6",
+  "scope": "registered_nonqualifying_research",
+  "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+  "records": [
+    {
+      "attempt": "a103b7af2a08422e982eef64baa1c68c",
+      "study": "paired-g-coherence-seed3-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            84,
+            125,
+            167,
+            334,
+            375,
+            584,
+            750,
+            792
+          ],
+          "first_confirmed_step": 84,
+          "observations": 24,
+          "passing_observations": 11
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.1396418957534955,
+          "finite_fraction": 1.0,
+          "mean": 2.1642786525626434,
+          "mean_error_sigma": 0.3285573051252868,
+          "sample_count": 4096,
+          "std": 0.5281602449588418,
+          "std_ratio": 1.0563204899176837,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 50.97738969401689,
+        "adapter_seconds": 51.37815566000063,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 45.6015542394307,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5609456429956481
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.13676384897553362
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 44.903844747459516
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 52.78182043400011
+      },
+      "queue_seconds": 57.616828233003616,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "b958f64975a59cd17b2ddcf1ed782b9cbdb42b0eab3531e6f91c8b4c0c8112f3",
+        "state_sha256": "bc270786135359df8eb8b5ee8ba8c3a2ac7bcfd13a50b489b4a390f622a46e8f"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "88cfc92c739fec1a2e212185e054973c77a9b74b6f1aff0cd97d652cf7029a42",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "72f48ada72bda9b6a9a47a1a80fc2923adeba5a952ee9ac78d479bf509d70d4f",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "b958f64975a59cd17b2ddcf1ed782b9cbdb42b0eab3531e6f91c8b4c0c8112f3",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "40c3dedd5b8c77d3409aa2441e8bb77b1efbc6a34221a6b01c576d0afd829aa9",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.1396418957534955,
+          "finite_fraction": 1.0,
+          "mean": 2.1642786525626434,
+          "mean_error_sigma": 0.3285573051252868,
+          "sample_count": 4096,
+          "std": 0.5281602449588418,
+          "std_ratio": 1.0563204899176837,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "63c679abdc68048c13c14943c18c5115e6477878325522f531aedac0dfe7618a",
+      "graded_receipt_sha256": "2cb032eccc06d4660422adf699d9e9fe722e8f3031eff9374f3ab717bc763e67",
+      "request_sha256": "5bce1c677749c75fc4c5211ffdbbd7039cdf3b3e2a3e8a5ed1208ab55e2d3ba9",
+      "terminal_sha256": "6d462e0f0d0a9f05e7860932bea429f88ea5c815ffaa59f8d6c51d3248e83825",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-control/a103b7af2a08422e982eef64baa1c68c",
+      "qualification_input": false
+    },
+    {
+      "attempt": "f085afc822144439bfac5b65cb559768",
+      "study": "paired-g-coherence-seed6-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            42,
+            84,
+            125,
+            209,
+            334,
+            375,
+            542,
+            625,
+            792,
+            875
+          ],
+          "first_confirmed_step": 42,
+          "observations": 24,
+          "passing_observations": 12
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.14863613449034263,
+          "finite_fraction": 1.0,
+          "mean": 1.84489628431038,
+          "mean_error_sigma": 0.31020743137924,
+          "sample_count": 4096,
+          "std": 0.4595777307852708,
+          "std_ratio": 0.9191554615705416,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 47.966594906989485,
+        "adapter_seconds": 48.362122102000285,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 43.112152040353976,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5930649990332313
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.13809870299883187
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 42.38098833832191
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 49.834641569003
+      },
+      "queue_seconds": 54.98323568201158,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "9b49ac1a6b42a0f15aa09152b961696938cd830d397a7ec6218f15e41e44da4e",
+        "state_sha256": "8741a7c3d3a2e6808302173f0054df259553a22f2253fee0c669225d905b23a9"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "efdb5e9a86be9eba0f46ccd585c5a088456b101841b4f530aa5e5a853215c979",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "afb0ef35304c0794763be8ebf0b5f04bb6efb8a5fed56b7f25bf822499a0f474",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "9b49ac1a6b42a0f15aa09152b961696938cd830d397a7ec6218f15e41e44da4e",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "c4f06ddd131472172541a6284babbe453abf796ef392c42fe19a07e20fe0113e",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.14863613449034263,
+          "finite_fraction": 1.0,
+          "mean": 1.84489628431038,
+          "mean_error_sigma": 0.31020743137924,
+          "sample_count": 4096,
+          "std": 0.4595777307852708,
+          "std_ratio": 0.9191554615705416,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "838867fec39faa666937f4fa00db29fe71e4ae5116d4ebf00f205d3af8bef613",
+      "graded_receipt_sha256": "4ae93596e35996e2266a70b379c96963ee00eb29ceed59574b6840d881c94c36",
+      "request_sha256": "1b393a43fd995e8254b662adeebc4e29163a7b2cae9244e5cc0881efb6f4c751",
+      "terminal_sha256": "0779bf0f237f7b2672fedff1807517efe639d8c37c02a4c7ef191b0af4ae350a",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-control/f085afc822144439bfac5b65cb559768",
+      "qualification_input": false
+    },
+    {
+      "attempt": "331cbd27cf8244fe98530f0316a3857a",
+      "study": "paired-g-coherence-seed2-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            84,
+            167,
+            209,
+            375,
+            459,
+            500,
+            542,
+            667,
+            709,
+            750,
+            1000
+          ],
+          "first_confirmed_step": 84,
+          "observations": 24,
+          "passing_observations": 11
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.036505074854541686,
+          "finite_fraction": 1.0,
+          "mean": 1.9703906979993917,
+          "mean_error_sigma": 0.05921860400121659,
+          "sample_count": 4096,
+          "std": 0.5090556063448566,
+          "std_ratio": 1.0181112126897132,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 27.602366127975984,
+        "adapter_seconds": 27.952872908004792,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 25.499852544016903,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5194423850625753
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.10921391897136346
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 24.871196239982964
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 29.245746147993486
+      },
+      "queue_seconds": 33.50309451800422,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "b023ecf0bc7cb57246c643b7c3e8a71bc74ea3af8975b767a96fdbb7eb71a03a",
+        "state_sha256": "e157e950a63207a4f56dfed2c08b6014e03f0dcbb8d380f386ef71981980f391"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "41eeac55eb250a1f01836dea446cbe05ae3b9e24d646fd79172a649b62f2c924",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "0d3d773c59c8fe495245aa430d1fb4364e400c580194ad5b1b0c10843d0d4c97",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "b023ecf0bc7cb57246c643b7c3e8a71bc74ea3af8975b767a96fdbb7eb71a03a",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "d3f491c9e66a3a96a308669d37deec3e719e6f4d02fe307b47d5ec92d2458865",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.036505074854541686,
+          "finite_fraction": 1.0,
+          "mean": 1.9703906979993917,
+          "mean_error_sigma": 0.05921860400121659,
+          "sample_count": 4096,
+          "std": 0.5090556063448566,
+          "std_ratio": 1.0181112126897132,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "a4195d832ddc82abf0bbac3b5cfc8f351f15c5ee24e659268c7a20d18b3e6d9d",
+      "graded_receipt_sha256": "c31e5b6d58c6db81d7951098a3d780e6beeed980ae200714d643e63f957a783a",
+      "request_sha256": "25d0311bcd56b5f99e6b888385d1c4a3263afcba36befc1d76122ff5d357754a",
+      "terminal_sha256": "dfe82ab307763bb84370107bb19a0c7ce37253d0ce4a36f4f1c9397bf3af9a21",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-control/331cbd27cf8244fe98530f0316a3857a",
+      "qualification_input": false
+    },
+    {
+      "attempt": "a2c715896e7b4972931bf7a22c34e155",
+      "study": "paired-g-coherence-seed2-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 13,
+          "stationary_checks": 72,
+          "stationary_passes": 30
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.024978358657877342,
+          "finite_fraction": 1.0,
+          "mean": 2.979046311462298,
+          "mean_error_sigma": 0.04190737707540393,
+          "sample_count": 4096,
+          "std": 0.47440062353655477,
+          "std_ratio": 0.9488012470731095,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 245.84467328200117,
+        "adapter_seconds": 246.2447253119899,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 220.29751062046853,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9485140920151025
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1944388060073834
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 218.15455772244604
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 247.61249239498284
+      },
+      "queue_seconds": 252.30458729699603,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "b023ecf0bc7cb57246c643b7c3e8a71bc74ea3af8975b767a96fdbb7eb71a03a",
+        "parent_compatibility_key": "3fd19df91db173abfc6f417d120f9643bc0c578623e89793e87a287a707b007f",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "e157e950a63207a4f56dfed2c08b6014e03f0dcbb8d380f386ef71981980f391",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "80850d6ac598772489bdbdbd70c6d318b9f45f4bf9bdf4b5eb865ba253f5fb09",
+        "state_sha256": "5143d43b8cfd78a2cf742642d9010c27998d9d11ba52ea641bf13da441f851d3"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "bac009f05668240940026617e1811a56a2a7bd6aa8b4f0175e2df6859445e6b8",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "13a597b217c2800e58d0d08ae4445f9963dc67fa0a2a84a74fad9cae9f1dbff9",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "49796b29606f00d99514e5e706635c7bd0a9e431f67da38ada6be4adf2ccd0d8",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "1fd44f49e0e4bc350a6d00a705fb1f5ae8d56f85a47ffd541a5628c747b36ae2",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "80850d6ac598772489bdbdbd70c6d318b9f45f4bf9bdf4b5eb865ba253f5fb09",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "0d859403cd0798bf9f08af7b60439c09c591cf0bffa9b02690b3873ba64f01b0",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.024978358657877342,
+          "finite_fraction": 1.0,
+          "mean": 2.979046311462298,
+          "mean_error_sigma": 0.04190737707540393,
+          "sample_count": 4096,
+          "std": 0.47440062353655477,
+          "std_ratio": 0.9488012470731095,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "073771d174ce9d922b13806c05efae3c863087bbad27b668c34f26120db2fc55",
+      "graded_receipt_sha256": "1a833e1d0bfa98962b6a18f43494f30ef82bf1a99fad1c073ded4a1fd7468f7f",
+      "request_sha256": "43a35989bc868497c67f06f36a874c59f766675f357eff2e691d2127992521d8",
+      "terminal_sha256": "f768db6db1a3940fc7046a2c73330fe410ca1712ddc84c72617db6c341577f5d",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-control/a2c715896e7b4972931bf7a22c34e155",
+      "qualification_input": false
+    },
+    {
+      "attempt": "ad8314c6e0ae45398a3f73e371a9b473",
+      "study": "paired-g-coherence-seed5-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 9,
+          "stationary_checks": 72,
+          "stationary_passes": 65
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.03567461276223849,
+          "finite_fraction": 1.0,
+          "mean": 3.028948650811799,
+          "mean_error_sigma": 0.05789730162359774,
+          "sample_count": 4096,
+          "std": 0.5013956553739464,
+          "std_ratio": 1.0027913107478927,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 258.153905707004,
+        "adapter_seconds": 258.61365321002086,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 232.0353898422909,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.2279305261326954
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.2120780528348405
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 229.59538126332336
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 260.12277886498487
+      },
+      "queue_seconds": 264.9060506389942,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "ee978fb86e7f90a42b8a95f18bd89ab18382155109c513795e861d3e85f20502",
+        "parent_compatibility_key": "804bc5526ba734310e6ea9e46a0dbafa3d507fdd56bed75e65c9e5c0e349f594",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "12d1c4b4d4b739a1e22eb3e4489db5e7bbfe4d237f2353beae125873c9a085af",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "6f22b8217aa52eaae263b9ce758a178fc07d0c901135f999bb60b8b4846d02c5",
+        "state_sha256": "60168cc17baaed95a12f3e983c7058679db1a82c28023e3221617224bd548b5a"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "b819565322746f36b851f785e7fffab9ef5f42072208d931c293ad3cf5926288",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "678aa8bfba1f0265e8b1e4517bec8d0c3e7cf708ff2835949b158d55d4a470f6",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "4b6d5227b7e642205922c0bd2670d1cf356d52c2bac4d77c2361207926fc9660",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "b7ed63b415f5ca1197c4eecd6a4ee8f55f9935c11bbd886c65c92c7a7e32cd71",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "6f22b8217aa52eaae263b9ce758a178fc07d0c901135f999bb60b8b4846d02c5",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "df4787f08dfd4a22b35c4d8e8646efec39d469678f0a2ba34c271819fc0d330d",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.03567461276223849,
+          "finite_fraction": 1.0,
+          "mean": 3.028948650811799,
+          "mean_error_sigma": 0.05789730162359774,
+          "sample_count": 4096,
+          "std": 0.5013956553739464,
+          "std_ratio": 1.0027913107478927,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "9b25b3636cbcf9cc045326eaf3ab57196ad5f8fb9a9d282ee3ea8dbcf788e84c",
+      "graded_receipt_sha256": "3298ce78f5a0f4d607d8c415331d4986632b96462ac0241dcf05784361011cd5",
+      "request_sha256": "db67c41545ab18268e1a8dffeac1843c1f027dfd362b900cb393089caaa37d28",
+      "terminal_sha256": "ac30f08307e97a73ca40c196b891671595d0192b6ecfb231c5dd48fab8701327",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-candidate/ad8314c6e0ae45398a3f73e371a9b473",
+      "qualification_input": false
+    },
+    {
+      "attempt": "fbd44c1cac3d4d9fa236df053968af05",
+      "study": "paired-g-coherence-seed6-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 6,
+          "stationary_checks": 72,
+          "stationary_passes": 56
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.10331687175845217,
+          "finite_fraction": 1.0,
+          "mean": 2.912151114374865,
+          "mean_error_sigma": 0.1756977712502703,
+          "sample_count": 4096,
+          "std": 0.379717938031995,
+          "std_ratio": 0.75943587606399,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 257.34866663100547,
+        "adapter_seconds": 257.8308809720038,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 231.4296173233306,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.301380964956479
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.2141358591034077
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 228.91410049927072
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 259.3331444099895
+      },
+      "queue_seconds": 263.99559152300935,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "2653464a0f28bc7570ffc57079403d2fd91c95478301af7e7ba54836e61c693e",
+        "parent_compatibility_key": "ef9b0a977a9f3fc7c91d5ac656f4cee3f975414f7af7a93b94f4014bcbf60cc4",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "8996631482f65d767b1e3a9a58ec00e42677aaef381fa80642d06f2b860e271b",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "47b4728be1db271b6cb1f7f105a4b2219c44f4decc50e3ec4e057e26803d1f4e",
+        "state_sha256": "93323d47c6cef8fe12a6c686f3d95c35f9140ccd15eac206ca544696df3e37b6"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "01503b54c5c4ac2bd730f81971364be0a0ad4f4ae26e533dc829373409decd44",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "1bbdaae75c5c32f1dc17879c937bf2d519d7d9e965b8b7067bab45ea2d5c3363",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "1687699deb9f44d0699685db464325688dd7dfcd10a0f577175a211115fd7cf2",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "034b7f7a353c6ab08829aa7b9a2066521cc2c3ae2382224f7f6dfc45d764004b",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "47b4728be1db271b6cb1f7f105a4b2219c44f4decc50e3ec4e057e26803d1f4e",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "2c18fb4847a3f70904609101b894a33f139772ebc5242feb42dacc766737a602",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.10331687175845217,
+          "finite_fraction": 1.0,
+          "mean": 2.912151114374865,
+          "mean_error_sigma": 0.1756977712502703,
+          "sample_count": 4096,
+          "std": 0.379717938031995,
+          "std_ratio": 0.75943587606399,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "f251f3e8a0b56629568843c47d83d6b898f74c7fc24845af9a7ca1080217ea9e",
+      "graded_receipt_sha256": "f7daa8f870e041f7f5ac3a1fdcfacea992d86f7ff4aa1763e7487e3443ac3d37",
+      "request_sha256": "83c0cfd1b57d8acad63e138822e8148783fd1d6f27f9c75e7f066a0093c9015e",
+      "terminal_sha256": "ed4baaa6af0fc4c240fcfa4fe91a9ba7fe24519050d1986c0a552732ddd48816",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-candidate/fbd44c1cac3d4d9fa236df053968af05",
+      "qualification_input": false
+    },
+    {
+      "attempt": "c853c76487cd416fb9054e5769f35ccb",
+      "study": "paired-g-coherence-seed4-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            125,
+            292,
+            375,
+            542,
+            584,
+            625,
+            667,
+            792
+          ],
+          "first_confirmed_step": 125,
+          "observations": 24,
+          "passing_observations": 8
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.09708629518769751,
+          "finite_fraction": 1.0,
+          "mean": 2.1150697851990117,
+          "mean_error_sigma": 0.23013957039802335,
+          "sample_count": 4096,
+          "std": 0.53006521007774,
+          "std_ratio": 1.06013042015548,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 44.40862708399072,
+        "adapter_seconds": 44.747857059002854,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 40.06280430709012,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5829682580952067
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12704915989888832
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 39.35278688909602
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 46.18099577099201
+      },
+      "queue_seconds": 50.90061882400187,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "8cb118cc4649ef0818bacf40fb9db2124f239410eb2ab1174ce171feca5d0923",
+        "state_sha256": "7813e3cdd3570bb0e56fc4c2f3bf14f4ac0598bef1f0a84c5d819b79da224474"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "f6f19357f55ffadb234e45277fc00d7645a4d162b49550e8f04fee2f2e49989d",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "239da0a543e44e72c805b31ae1f6a857587ee22719a2777fefc8f3f112a39434",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "8cb118cc4649ef0818bacf40fb9db2124f239410eb2ab1174ce171feca5d0923",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "5fd89c173c8023ce9beba2c11cbf06b2b4e5751ab46f8cfca03109850c01fa4b",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.09708629518769751,
+          "finite_fraction": 1.0,
+          "mean": 2.1150697851990117,
+          "mean_error_sigma": 0.23013957039802335,
+          "sample_count": 4096,
+          "std": 0.53006521007774,
+          "std_ratio": 1.06013042015548,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "9d9bfd86b34d8392a25f0606feee9d513c17d7fe82ca373cd30430731c76d6f8",
+      "graded_receipt_sha256": "bd4417f859409da592e0435e71ecdca944ae27ce29937cc81fac88451b10b788",
+      "request_sha256": "cb321aade509960ac0e56db6c3d019b395174c8e1eb509e122da0308dcd2a8e2",
+      "terminal_sha256": "57ed6aa3fbc37dcd6b9fa040c7337a66265d9c592cea41c173469cbd944259cb",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-control/c853c76487cd416fb9054e5769f35ccb",
+      "qualification_input": false
+    },
+    {
+      "attempt": "5bddfbc1b91348a39b322115c2cd0f79",
+      "study": "paired-g-coherence-seed2-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 22,
+          "stationary_checks": 72,
+          "stationary_passes": 57
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.01860408810590608,
+          "finite_fraction": 1.0,
+          "mean": 3.000449378945632,
+          "mean_error_sigma": 0.0008987578912638128,
+          "sample_count": 4096,
+          "std": 0.4850410474190734,
+          "std_ratio": 0.9700820948381468,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 242.3724636179977,
+        "adapter_seconds": 242.82226309299585,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 218.66931668229518,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.268714109726716
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.19520673213992268
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 216.20539584042854
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 244.17355040600523
+      },
+      "queue_seconds": 248.61887686801492,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "66dfa9ca2e2777ea3d028d7c1f9ea18c195f687c4c332f92a9bd591c2d0f5d7e",
+        "parent_compatibility_key": "e3463355e6dce2e286975bc8bb5c3ac57cdd560017242151ddcf3cdc598f3642",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "740d4cb584f31255978febbd8b97b3186886707f707c48a621bd826444b32f9a",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "2b8a24d5e2b28d104ab6abac23ccd95009c758351a19cb3c3a583c9fb07efc4f",
+        "state_sha256": "9e8d600c397c6c93a15488469628a6464aa02589629a7798b5c082b6cc812243"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "792117e9a35fdb0b11a0f55b067bc45b81c6be58e161ff1b8f49146ffeaca052",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "e913f9c0e6300f69facb33164bf6ae66ca433088e65137ebc9e5d04d7b058298",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "a7a55b43d1e4f32f5d738e2437b51d3474dcd3f99b606cb64dda3cf122c25f51",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "4f728b9056b3ce9ac7759336bc1fe7f7cb45819fed9a4771315597b31374b968",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "2b8a24d5e2b28d104ab6abac23ccd95009c758351a19cb3c3a583c9fb07efc4f",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "6523bf799e6cf87580a624bc4765c7c84a60324b0dba47e1e838ef9667fa93c1",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.01860408810590608,
+          "finite_fraction": 1.0,
+          "mean": 3.000449378945632,
+          "mean_error_sigma": 0.0008987578912638128,
+          "sample_count": 4096,
+          "std": 0.4850410474190734,
+          "std_ratio": 0.9700820948381468,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "e1d74b5de7087a66b272ff5050d2e99c20d4a28767d70bb728115911a654d4e0",
+      "graded_receipt_sha256": "6e898b0b32b8090316a70a870a09aa75fd2c870614b3076edbf57a7c22d03b14",
+      "request_sha256": "b985aa7999ad8423d0778d01e8891e85a7e3c6ee28e6a53d351c4b0a65de739f",
+      "terminal_sha256": "57acaadf890f4ccaf4add7008d6fb1f16083342b5fbdb3e177acf696e301acad",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-candidate/5bddfbc1b91348a39b322115c2cd0f79",
+      "qualification_input": false
+    },
+    {
+      "attempt": "ecb236a6c7114540b5c3c46cab6ca3db",
+      "study": "paired-g-coherence-seed5-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            125,
+            167,
+            250,
+            292,
+            334,
+            375,
+            417,
+            459,
+            500,
+            542,
+            584,
+            625,
+            667,
+            750,
+            792,
+            834,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 125,
+          "observations": 24,
+          "passing_observations": 18
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.022110913466684645,
+          "finite_fraction": 1.0,
+          "mean": 2.005774283868959,
+          "mean_error_sigma": 0.011548567737918347,
+          "sample_count": 4096,
+          "std": 0.4903671977323605,
+          "std_ratio": 0.980734395464721,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 51.942236570001114,
+        "adapter_seconds": 52.372925439005485,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 46.76168387802318,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.7029928731208201
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.13535684684757143
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 45.923334158054786
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 53.978078340995125
+      },
+      "queue_seconds": 59.1367133629974,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "ee978fb86e7f90a42b8a95f18bd89ab18382155109c513795e861d3e85f20502",
+        "state_sha256": "12d1c4b4d4b739a1e22eb3e4489db5e7bbfe4d237f2353beae125873c9a085af"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "d66c1dbb10c7d57e02f06b00820ef66e897674ec8d3e7d26041974ee889c0e71",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "4099f7481647ee038d3126e2aa40847d02ce052d63662e9dc26640bd02e62542",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "ee978fb86e7f90a42b8a95f18bd89ab18382155109c513795e861d3e85f20502",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "797b62d8d5565114f9d8710778533a71e65bbc5f7fadec0024f88209eb3aa0bc",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.022110913466684645,
+          "finite_fraction": 1.0,
+          "mean": 2.005774283868959,
+          "mean_error_sigma": 0.011548567737918347,
+          "sample_count": 4096,
+          "std": 0.4903671977323605,
+          "std_ratio": 0.980734395464721,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "48d38bceaf7e9e18ad82e8b387846a4ae92d52cb15d3f8805ef7bd5806e85a3f",
+      "graded_receipt_sha256": "064717668593c097476446ab06bdbc9c7ea0abaffc68410cd771eb05f2a1db4c",
+      "request_sha256": "5e824e662444ca2d1c883cd980205804a917aa2386f1f399badef724b8e0bb49",
+      "terminal_sha256": "930f249a043500ea203f831e5242f39d748c151f0eac217a2aa870dffffeee71",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-candidate/ecb236a6c7114540b5c3c46cab6ca3db",
+      "qualification_input": false
+    },
+    {
+      "attempt": "b51bcc33fa8f47739ad8180ad9147285",
+      "study": "paired-g-coherence-seed5-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 11,
+          "stationary_checks": 72,
+          "stationary_passes": 37
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.055452943471294924,
+          "finite_fraction": 1.0,
+          "mean": 3.032627344073262,
+          "mean_error_sigma": 0.06525468814652413,
+          "sample_count": 4096,
+          "std": 0.47925256059874727,
+          "std_ratio": 0.9585051211974945,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 236.84813081400353,
+        "adapter_seconds": 237.19109712500358,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 212.63527150754817,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9384712110331748
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.2003003318386618
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 210.49649996467633
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 238.61126317002345
+      },
+      "queue_seconds": 243.27186666498892,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "8a31124f3af5991035522cadc996854c3b22dd964d1b4472a902919a0ef810f2",
+        "parent_compatibility_key": "ef423e8702926098c6f55c0e1badbddb61b7e15b41fbe987f38fae3cb1c7cba5",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "f9d9d6ca06d20f902c3b4011a6409504aeb3f7a3ea59a2b88e1ad1b9ef7cb054",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "75d65e2cc61d34689929c812b38361fa0caa0df4941e278b8a5edf742eb80337",
+        "state_sha256": "5502dec6672eb5cc8899040b89aa95580923bbd91965bc18453adaf67dcaf64a"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "c443c5e742d37f7494716d3984159c84225e48064043e3b7583b94a8f7487ef8",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "06f9dda71d4b6bd7cef8a3d0787d7538b527e7bb79e424d95f949a463b3acf35",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "58c41390d6d1c8eba7ea6588ccbf1cf27c22615e6d9b425436227ca01f7363fe",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "b51b156194c93228b382e2052e5b244cb087dfd651dbe9d8e3d38bc65e0f1a49",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "75d65e2cc61d34689929c812b38361fa0caa0df4941e278b8a5edf742eb80337",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "58a055169f125821cde78a9a335ac45dd7aea029633ebb8485f7b28cc2e73d9f",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.055452943471294924,
+          "finite_fraction": 1.0,
+          "mean": 3.032627344073262,
+          "mean_error_sigma": 0.06525468814652413,
+          "sample_count": 4096,
+          "std": 0.47925256059874727,
+          "std_ratio": 0.9585051211974945,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "cef1dcc625745e57fb03bf1d9b93eb5ec97eee4c2ee2578a136857bb656d4254",
+      "graded_receipt_sha256": "012d8d0df4cdf1c67993ba7316dce5c5b782218d83791f16aba7073581b4fe2d",
+      "request_sha256": "4ccf57f58fecaa64d510ff44961bdee3ec4b494c59e918e204046c7464aefb84",
+      "terminal_sha256": "d019e911a4042b49aa203b420acfd1cbfd02d5c76fa547f2ba4509574fae95ea",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-control/b51bcc33fa8f47739ad8180ad9147285",
+      "qualification_input": false
+    },
+    {
+      "attempt": "f56a36e252bc4afe8d9e826772c17e29",
+      "study": "paired-g-coherence-seed6-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 11,
+          "stationary_checks": 72,
+          "stationary_passes": 33
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.019547772844287215,
+          "finite_fraction": 1.0,
+          "mean": 2.9876801768841688,
+          "mean_error_sigma": 0.024639646231662482,
+          "sample_count": 4096,
+          "std": 0.46942453217608254,
+          "std_ratio": 0.9388490643521651,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 240.45416250699782,
+        "adapter_seconds": 240.85450609700638,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 215.6607634885586,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9306751081021503
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.19187978401896544
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 213.53820859643747
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 242.26265312501346
+      },
+      "queue_seconds": 246.93461588199716,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "9b49ac1a6b42a0f15aa09152b961696938cd830d397a7ec6218f15e41e44da4e",
+        "parent_compatibility_key": "1bcddbd44fdee12a73b1d56331bb487964a8acda64f97bb93b4977b7c4797ecb",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "8741a7c3d3a2e6808302173f0054df259553a22f2253fee0c669225d905b23a9",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "5c128a8fcbdb94a33ee44dd8b2a79527af464257ec097279c7ffa269120124ad",
+        "state_sha256": "498e21fcc009f38e16c2c090e127559c693ca4deaa25b9161a5e0352ae2215e4"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "f3c9233f3a890ff8a8f9473d0ad868eb57a98e046050657cda6a304eb88730bf",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "ccc604bf3355764f34d529298a8e932df7c18f648677da63d587dafa10314645",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "73f813fcd4ef42b5185c8ff398d292c405d74fcf63c41cef6b914a1e9f7da471",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "e64f9420cb40881948662fe6fd70cd7f3a7458597cc23af9df43573cab1b7438",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "5c128a8fcbdb94a33ee44dd8b2a79527af464257ec097279c7ffa269120124ad",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "d8293246d1e00cb86b9bcf623a604edeaaefee743579196759dddc05f0c12dd3",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.019547772844287215,
+          "finite_fraction": 1.0,
+          "mean": 2.9876801768841688,
+          "mean_error_sigma": 0.024639646231662482,
+          "sample_count": 4096,
+          "std": 0.46942453217608254,
+          "std_ratio": 0.9388490643521651,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "8ae36fdb02ee67fdc903b86ccef52576d69e6a69e7476df51d7cc5251e2c9188",
+      "graded_receipt_sha256": "6c84cf102047f102466eff15fb3ea6edc8480e3a8b3e3a7445e5831dc4a83868",
+      "request_sha256": "880078282c92eb979b2baae6e02c4c501347a7dc907331fbe780e20bb7fa5df6",
+      "terminal_sha256": "0b387f2d87ca39d90a6fd908b287ee2c32888ca549e9554ad64c74aa6c55e833",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-control/f56a36e252bc4afe8d9e826772c17e29",
+      "qualification_input": false
+    },
+    {
+      "attempt": "24e1fd9a5a324c9e8e87852a236e9725",
+      "study": "paired-g-coherence-seed4-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            84,
+            125,
+            167,
+            209,
+            250,
+            292,
+            334,
+            375,
+            417,
+            500,
+            542,
+            584,
+            625,
+            667,
+            709,
+            750,
+            792,
+            834,
+            875,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 84,
+          "observations": 24,
+          "passing_observations": 23
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.04143311521255999,
+          "finite_fraction": 1.0,
+          "mean": 2.0357955179933924,
+          "mean_error_sigma": 0.07159103598678485,
+          "sample_count": 4096,
+          "std": 0.514859425700329,
+          "std_ratio": 1.029718851400658,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 51.466092107992154,
+        "adapter_seconds": 51.79249318697839,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 46.25965950335376,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.6756642159889452
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.13291441299952567
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 45.45108087436529
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 53.275997480988735
+      },
+      "queue_seconds": 58.343418542004656,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "c42d8700c6f0d1a4de6cbad5f7280e414d34b071c383402a7960c42ddec008c2",
+        "state_sha256": "4d1ff6fa018cf6e96bb59fbc5b071a0acb1711b73bb62dcccd6660ff17da8870"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "31b5cc00719244e70854a068fccdeb1bd7fa651d127996523fd46cba037440a5",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "229fa58fb293a1ea98630a28df448ca7a9c02f2d16ee0170123aeb544dd5f472",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "c42d8700c6f0d1a4de6cbad5f7280e414d34b071c383402a7960c42ddec008c2",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "57778826975cb03651ff636cc10236773689ee71394fbc865823f9445457b191",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.04143311521255999,
+          "finite_fraction": 1.0,
+          "mean": 2.0357955179933924,
+          "mean_error_sigma": 0.07159103598678485,
+          "sample_count": 4096,
+          "std": 0.514859425700329,
+          "std_ratio": 1.029718851400658,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "30d3d32c93f1d5f163ab5fa355cc756e425739abaaa43fe635f4e62a473a8cb6",
+      "graded_receipt_sha256": "49b8ae1b208b87699fa1671d786bf78f300ed9e02751a616bfc194085693e2cb",
+      "request_sha256": "94d5c75323d03336983c4a1257fd096f03744574b2fffe334338382b3c0c739b",
+      "terminal_sha256": "3b9aea6797ebc564be697b3e010397ca3b641725c2d45b6d3a0b291b6133da03",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-candidate/24e1fd9a5a324c9e8e87852a236e9725",
+      "qualification_input": false
+    },
+    {
+      "attempt": "abb7de8a6ec64c21be831cad854c1ac2",
+      "study": "paired-g-coherence-seed1-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            42,
+            84,
+            167,
+            209,
+            334,
+            417,
+            459,
+            542,
+            584,
+            709,
+            834,
+            875,
+            917
+          ],
+          "first_confirmed_step": 42,
+          "observations": 24,
+          "passing_observations": 16
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.04712688125477382,
+          "finite_fraction": 1.0,
+          "mean": 2.0245990660623647,
+          "mean_error_sigma": 0.049198132124729455,
+          "sample_count": 4096,
+          "std": 0.5250588471461185,
+          "std_ratio": 1.050117694292237,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 26.805315605015494,
+        "adapter_seconds": 27.13506334502017,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 24.837841815664433,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5134111930383369
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.11175097888917662
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 24.21267964373692
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 28.528623363003135
+      },
+      "queue_seconds": 32.79177699898719,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "94dd24b7e6396b543ec5af40cf7dfd98cca8eacb1d6a334da9496b241c50fb6f",
+        "state_sha256": "5d4e394ca9249262492d88f4950ed21be8c9e02b46302c382d7916f154144c3e"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "6f847263e43c747b7ba1cbb400ecc866f2fe2a549c9378a1cc94bad2323a25bc",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "de6896e841aa8bab1629dc9fb6b917c321b5e4aec104b5255463c0b7553695dd",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "94dd24b7e6396b543ec5af40cf7dfd98cca8eacb1d6a334da9496b241c50fb6f",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "72e59dbbb0437082d024c37c4bb817969de33f096b71b13683dc709b2f019c52",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.04712688125477382,
+          "finite_fraction": 1.0,
+          "mean": 2.0245990660623647,
+          "mean_error_sigma": 0.049198132124729455,
+          "sample_count": 4096,
+          "std": 0.5250588471461185,
+          "std_ratio": 1.050117694292237,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "36f40316f34cbddf36519ca281f6e3f9ac53d40a77009deeaf8fe23af8cd13e6",
+      "graded_receipt_sha256": "6825ae6912b8696346889e59ac0b50987a8429b89e052f0c901f2dbc723e0d84",
+      "request_sha256": "1a4fdb556bcc75e293fd7c202cd015ab7d7396c00a0069d130f2477e23936f18",
+      "terminal_sha256": "2384513baf79f480cac77e03a912bb335eddc44f9ce753594bfeaa440b17ab81",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-control/abb7de8a6ec64c21be831cad854c1ac2",
+      "qualification_input": false
+    },
+    {
+      "attempt": "6dfbd6e78e7445399c754704415438cc",
+      "study": "paired-g-coherence-seed3-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            375,
+            417,
+            459,
+            500,
+            542,
+            584,
+            625,
+            667,
+            750,
+            792,
+            875,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 375,
+          "observations": 24,
+          "passing_observations": 14
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.04103326329080925,
+          "finite_fraction": 1.0,
+          "mean": 1.9659588667418575,
+          "mean_error_sigma": 0.06808226651628502,
+          "sample_count": 4096,
+          "std": 0.47710314038736473,
+          "std_ratio": 0.9542062807747295,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 57.47353029198712,
+        "adapter_seconds": 57.88986291998299,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 51.5570676822681,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.6681132458616048
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12950081916642375
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 50.75945361724007
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 59.281463875988265
+      },
+      "queue_seconds": 64.1601418130158,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "da731829b8df29d489fae6039f8071c06d4bd9106aa28a7ecb41ee7ecd2cf74a",
+        "state_sha256": "24acdd486ab1043081b82df38305f22ab00fbf8a0f9010fb22c8c06f0c2ca23c"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "fcd31db19e072cd080bde2a56fca6db7df2cedde050695955a56610f538d6633",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "fa1852e6348255bbbe4e6a77773f9e83c9d355854a5572ffda19e3ac7e743c2e",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "da731829b8df29d489fae6039f8071c06d4bd9106aa28a7ecb41ee7ecd2cf74a",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "24b947a69d1f9a29e79eb077e9b713b949c732f04ab0bee740aa4f855a6354d5",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.04103326329080925,
+          "finite_fraction": 1.0,
+          "mean": 1.9659588667418575,
+          "mean_error_sigma": 0.06808226651628502,
+          "sample_count": 4096,
+          "std": 0.47710314038736473,
+          "std_ratio": 0.9542062807747295,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "14dabb8f272ac24176d482b42cbcf66d3a7d0b1530abc7ea230fdb4cd2096df1",
+      "graded_receipt_sha256": "475a2fc05248f169ef2c05ba86e5d6d8406976fba801af9e98041f1bd363445a",
+      "request_sha256": "6fc0f126e51222fc8c7e039d5a78924d7299d453ee85f3a4b9dab8e4bc25e605",
+      "terminal_sha256": "6472aa0590f5afb6dcc319d7849e39a735a7833a7677483f11eac6b9fe0b164f",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-candidate/6dfbd6e78e7445399c754704415438cc",
+      "qualification_input": false
+    },
+    {
+      "attempt": "49794de17e1f4b7b846b5d5e42c012b3",
+      "study": "paired-g-coherence-seed1-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 20,
+          "stationary_checks": 72,
+          "stationary_passes": 44
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.023103783296799962,
+          "finite_fraction": 1.0,
+          "mean": 2.9996773973689415,
+          "mean_error_sigma": 0.0006452052621170878,
+          "sample_count": 4096,
+          "std": 0.4635578976873587,
+          "std_ratio": 0.9271157953747174,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 273.1125871279801,
+        "adapter_seconds": 273.47379660699517,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 245.00376634206623,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.2850269360351376
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.1970333060307894
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 242.5217061000003
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 274.8432491470012
+      },
+      "queue_seconds": 279.55729342397535,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "952f45ad5fd7999f836e2fba15765a1e1f620e202484ec2b09e1125d02535f87",
+        "parent_compatibility_key": "ef92147e10d88d6b8c8ec4e74ddb9750759a3ea1c6094a01f9731eb0235891b0",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "51f9e377da503805817a1c7004ea084fd2a09baa8ee19b57ebfbf3dbcdfe9fca",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "193556cc02984296236b4915acd4c7d601f1c3abed4901ab0be1833dfb9ab318",
+        "state_sha256": "3d315aba8a991b44d320784eb85dde195baed0d2f802011565e2dd7fef60a166"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "546d02819645e61e48592b995a1e480d525e80817e80390e6d105f346108862d",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "ccb09bfeee129ccffb76f21ba3499c3d8cf67d2f9f0f0b21ebe99fdf7d637df9",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "db84943e097e02ff6c9c51ce3403119c0751e01fdc61995a4379e71308479f9a",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "ab6bb2800974a95b3ae9b0712950d3d653b25f1458e09a00d29538f2e211f856",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "193556cc02984296236b4915acd4c7d601f1c3abed4901ab0be1833dfb9ab318",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "921d5bbb0b8e54843c6f63783181e133e6b2a6211d266b53cf6971eece4fadbd",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.023103783296799962,
+          "finite_fraction": 1.0,
+          "mean": 2.9996773973689415,
+          "mean_error_sigma": 0.0006452052621170878,
+          "sample_count": 4096,
+          "std": 0.4635578976873587,
+          "std_ratio": 0.9271157953747174,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "23ea0e7d84b05cdc25bd6dd996d6191f0a7eaeee55e52bf4904305d2a246257d",
+      "graded_receipt_sha256": "e1f21a9d8da47640e9e186387f375537328bd915285230f3651f5d4f35822c65",
+      "request_sha256": "e944a60ef31a3b7f59b754aaf9d98b9af19e76341ac89bf7f5b51db08775c7a2",
+      "terminal_sha256": "283cd7d24d160b640ef9405d145005d86772ffce4819b0febece38023076a249",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-candidate/49794de17e1f4b7b846b5d5e42c012b3",
+      "qualification_input": false
+    },
+    {
+      "attempt": "8737957bf0f44fb89b33d8977f887e3a",
+      "study": "paired-g-coherence-seed3-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 12,
+          "stationary_checks": 72,
+          "stationary_passes": 66
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.051857422717278334,
+          "finite_fraction": 1.0,
+          "mean": 3.007077577174641,
+          "mean_error_sigma": 0.014155154349282384,
+          "sample_count": 4096,
+          "std": 0.47470276343378953,
+          "std_ratio": 0.9494055268675791,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 235.11833094400936,
+        "adapter_seconds": 235.61160473298514,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 212.24410741389147,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.2712350845104083
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.2056595447647851
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 209.76721278461628
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 237.08034506300464
+      },
+      "queue_seconds": 241.55290816098568,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "da731829b8df29d489fae6039f8071c06d4bd9106aa28a7ecb41ee7ecd2cf74a",
+        "parent_compatibility_key": "c4ef45d2c7c628c7c983d4115beec8c1f1b6c704ce089f8181665202a33ead3c",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "24acdd486ab1043081b82df38305f22ab00fbf8a0f9010fb22c8c06f0c2ca23c",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "f5da45145a6bec7b2c478d3ba1b647aa88433174386e17ddeb74fd856ac2aa0f",
+        "state_sha256": "c3c0db820fde700c98276aab01d5652615462d4ee96868ffeef53a9ea3ef6355"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "9f7de42604455f2e8aa87b53778717b85613fa6493ec185db880f50af97bf330",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "b68b7f9819355b9d62df28bfbd8349e4f4e5521c4d2bfe85be617b22a605aa06",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "d257f8ab442e97619fb00adaa9b2f0eb5b212af17bc0dce2a30b029de4d5a078",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "f4397ef9315dd594dc4c26f4146bd0f1a8dbb7d741ed1da8ad652cea96ff998c",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "f5da45145a6bec7b2c478d3ba1b647aa88433174386e17ddeb74fd856ac2aa0f",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "5f36b54f2d355ad48ad85fcd1863d860bcf265561fd462ca1f069d4a8f5f8e9e",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.051857422717278334,
+          "finite_fraction": 1.0,
+          "mean": 3.007077577174641,
+          "mean_error_sigma": 0.014155154349282384,
+          "sample_count": 4096,
+          "std": 0.47470276343378953,
+          "std_ratio": 0.9494055268675791,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "68e5a4810f8da5a1ea15ba819688c23a2cab53a4f5303affaef7e1a106aa3708",
+      "graded_receipt_sha256": "286c173d6a77efac31d0e09e89390ba805a0ef3c79b780afd69b6fe3a103073e",
+      "request_sha256": "d5d2b4d4e16f93565842e8f2bc8f96ee16bf1de4b9815ef12578e7321edbcb6c",
+      "terminal_sha256": "da993405e2e179c343a166fde1a64987d60ba785f1b6d1773f361a96f0e61ab4",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-candidate/8737957bf0f44fb89b33d8977f887e3a",
+      "qualification_input": false
+    },
+    {
+      "attempt": "5f5fc269c42d496c8b2dd3cc3ca4df6c",
+      "study": "paired-g-coherence-seed3-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 6,
+          "stationary_checks": 72,
+          "stationary_passes": 34
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.05346670503481976,
+          "finite_fraction": 1.0,
+          "mean": 2.9271233171748463,
+          "mean_error_sigma": 0.1457533656503074,
+          "sample_count": 4096,
+          "std": 0.48669739316005767,
+          "std_ratio": 0.9733947863201153,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 227.99893895399873,
+        "adapter_seconds": 228.44094276300166,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 205.14464704092825,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9339924928790424
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.20994394793524407
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 203.00071060011396
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 229.85487823799485
+      },
+      "queue_seconds": 234.52338960100315,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "b958f64975a59cd17b2ddcf1ed782b9cbdb42b0eab3531e6f91c8b4c0c8112f3",
+        "parent_compatibility_key": "014a530743aeacd9b8fd32bd23e79b157bc0acaabb9f612a43253a0c141878f1",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "bc270786135359df8eb8b5ee8ba8c3a2ac7bcfd13a50b489b4a390f622a46e8f",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "b03c704e0c1c325ea3b4c9f8d975f6733d18333f98acdf2cc256211fdc6f1000",
+        "state_sha256": "741d9195d2fe873ea30aec6a7561711287bafb8e38b7ab816f5c2808bfc07b80"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "57368c1ed684adf251ed0158cc8c87567d6fe248285f1126fae769f984b6e912",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "07c352c039e119405b192909af12cb9a7dce3174001ba7accacbf8ec5c5e8f74",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "4f17bf56330fdf572386168825e024acda6cd909c14cfb7ac951122522c7e271",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "eff35faee6c05b8330896874bef3ce7bef2007a200412f0743dad97ec9b195ee",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "b03c704e0c1c325ea3b4c9f8d975f6733d18333f98acdf2cc256211fdc6f1000",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "3ddba993bcb3d2338270e42dd66e3a491cf218bfbd8f2580f6e8735a22af0c80",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.05346670503481976,
+          "finite_fraction": 1.0,
+          "mean": 2.9271233171748463,
+          "mean_error_sigma": 0.1457533656503074,
+          "sample_count": 4096,
+          "std": 0.48669739316005767,
+          "std_ratio": 0.9733947863201153,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "67d2d53663dac1a893cdca6a6652dac60a93fc4a3b16162d61f5680f6ecf0c56",
+      "graded_receipt_sha256": "597f31e7c6e7361e794e9e4de3c86d2aace376191c4bdd71acfc84725fcdb777",
+      "request_sha256": "0001fbd08370f7f3ded39391eaec38ab51fc8393dfe74a4b115e84a5681e89d0",
+      "terminal_sha256": "b646ffa12a721b4faf2dca011040750c006b74fd40c13dc6f58b77a63e934b73",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-control/5f5fc269c42d496c8b2dd3cc3ca4df6c",
+      "qualification_input": false
+    },
+    {
+      "attempt": "5bd53d89fc7c4021b9be10a92ff2915f",
+      "study": "paired-g-coherence-seed2-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            84,
+            125,
+            167,
+            250,
+            334,
+            375,
+            417,
+            500,
+            542,
+            584,
+            625,
+            667,
+            750,
+            792,
+            834,
+            875,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 84,
+          "observations": 24,
+          "passing_observations": 21
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.020026748451423604,
+          "finite_fraction": 1.0,
+          "mean": 1.9837906380416825,
+          "mean_error_sigma": 0.03241872391663492,
+          "sample_count": 4096,
+          "std": 0.4791372590448137,
+          "std_ratio": 0.9582745180896274,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 57.33917298002052,
+        "adapter_seconds": 57.72309832100291,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 51.26996615322423,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.6450967198179569
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.126930794067448
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 50.49793863933883
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 59.071410744974855
+      },
+      "queue_seconds": 63.87927996899816,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "66dfa9ca2e2777ea3d028d7c1f9ea18c195f687c4c332f92a9bd591c2d0f5d7e",
+        "state_sha256": "740d4cb584f31255978febbd8b97b3186886707f707c48a621bd826444b32f9a"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "cff747dde8cebbf2c42bd0c1edfcc6accc632a62371aa6eb3286551779bbcc13",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "58f0be43b15798edc71a23785e82fa5448df842e1922ea51e272de37c92c87a2",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "66dfa9ca2e2777ea3d028d7c1f9ea18c195f687c4c332f92a9bd591c2d0f5d7e",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "62cb76b194598977a9c1e984b8a5e7f678aabf2b8403dbd916c163f78f807a05",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.020026748451423604,
+          "finite_fraction": 1.0,
+          "mean": 1.9837906380416825,
+          "mean_error_sigma": 0.03241872391663492,
+          "sample_count": 4096,
+          "std": 0.4791372590448137,
+          "std_ratio": 0.9582745180896274,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "d1f125215635553b65c7bf107827a3e9e7325e96a7f39519022d6dfc31186522",
+      "graded_receipt_sha256": "26349abf982a07906d3c7ebabb30a9ec3b4f6ad95163f7527e149b374e2866a0",
+      "request_sha256": "d8995efd584bab3d02510f2a340e36f20541b824bf347c72eb7785beadb1abc7",
+      "terminal_sha256": "49d06e5157a55bf5dd601ad4b5e8d7fb892af8ed8491ca9353fcd90e2677ff47",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-candidate/5bd53d89fc7c4021b9be10a92ff2915f",
+      "qualification_input": false
+    },
+    {
+      "attempt": "738de7060dce401796bd0f32f5e564fe",
+      "study": "paired-g-coherence-seed1-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 10,
+          "stationary_checks": 72,
+          "stationary_passes": 35
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.03155769599983699,
+          "finite_fraction": 1.0,
+          "mean": 3.010853904648684,
+          "mean_error_sigma": 0.02170780929736793,
+          "sample_count": 4096,
+          "std": 0.4674220419863206,
+          "std_ratio": 0.9348440839726412,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 240.44729565901798,
+        "adapter_seconds": 240.7971305869869,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 215.79995583291748,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9700315868540201
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.19341520513989963
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 213.63650904092356
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 242.14711457601516
+      },
+      "queue_seconds": 247.00582864700118,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "94dd24b7e6396b543ec5af40cf7dfd98cca8eacb1d6a334da9496b241c50fb6f",
+        "parent_compatibility_key": "acf4cbf161687fb65e0e4948d8bb6b9d768ff07c5cea8c31f5e712e580f707fe",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "5d4e394ca9249262492d88f4950ed21be8c9e02b46302c382d7916f154144c3e",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "3697366f75f7bcd2ef117fc57ced2590979fe8f4072323541915b404ad2433d9",
+        "state_sha256": "23755ff80541005fbb8fb4d9f5a1cc52aa22366bc51447f26ffcad564e61e667"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "5f69f0e01c479b71bcbbd055004195254622da9e37a5529f9f8e16e6402d3030",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "2960cdfcd88ca704410be42abab79707c91c90be5b9f308ae211402a7f39048d",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "d9f7fcc52f4cb722d8891292291f26cf77e2b8b379a3ea8b8e1effdcd25500ad",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "564391a66e36aac1a8d3bc0601ded30212c310f2972aad24fcde5407a160cd0f",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "3697366f75f7bcd2ef117fc57ced2590979fe8f4072323541915b404ad2433d9",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "2c1c1cb611de05f75592442f5211a2767f25a80e674aafc776e08c830be52e50",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.03155769599983699,
+          "finite_fraction": 1.0,
+          "mean": 3.010853904648684,
+          "mean_error_sigma": 0.02170780929736793,
+          "sample_count": 4096,
+          "std": 0.4674220419863206,
+          "std_ratio": 0.9348440839726412,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "65c1963e1f5ff8f6610adc2086520e27d500ff9ecb0f2c3b6e8a9a330fa0be25",
+      "graded_receipt_sha256": "8900c683f6f53fb59540e69931ff40ebad42980ba912ffe6e6b6e09a4ac3cb26",
+      "request_sha256": "2b9a3f98949d3092804aec3f91c53bc39b619843f30d333e7467097cae1fdf91",
+      "terminal_sha256": "928cabb4937a68024eb0405d78c80deecccaa6d3120aaa9997e3e6a5e095b734",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-control/738de7060dce401796bd0f32f5e564fe",
+      "qualification_input": false
+    },
+    {
+      "attempt": "832064ebaad34d5380c377978515aa91",
+      "study": "paired-g-coherence-seed5-control",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            167,
+            250,
+            292,
+            334,
+            417,
+            459,
+            542,
+            709,
+            750,
+            792,
+            834,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 167,
+          "observations": 24,
+          "passing_observations": 15
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.024243788873123617,
+          "finite_fraction": 1.0,
+          "mean": 1.9754904500732664,
+          "mean_error_sigma": 0.049019099853467196,
+          "sample_count": 4096,
+          "std": 0.4992406116094429,
+          "std_ratio": 0.9984812232188858,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 47.56645253798342,
+        "adapter_seconds": 47.90642840001965,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 42.77058962243609,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5788153198955115
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.14228452602401376
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 42.049489776516566
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 49.35486748200492
+      },
+      "queue_seconds": 54.42870835401118,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "8a31124f3af5991035522cadc996854c3b22dd964d1b4472a902919a0ef810f2",
+        "state_sha256": "f9d9d6ca06d20f902c3b4011a6409504aeb3f7a3ea59a2b88e1ad1b9ef7cb054"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "75cafe8207adc80062773dcec56bf487e341cfe460384a9ed2d2b3e320c0979a",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "28a0849f278a99abd6ef3800116cea553544cd64d7581cc8d9dd8a6fcb814e5a",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "8a31124f3af5991035522cadc996854c3b22dd964d1b4472a902919a0ef810f2",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "4dba4efc1f4ce1aae94fa90e6715bd9c0d7552f36eec9fd1dd6be0cc2aa07f69",
+        "total_bytes": 972158
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.024243788873123617,
+          "finite_fraction": 1.0,
+          "mean": 1.9754904500732664,
+          "mean_error_sigma": 0.049019099853467196,
+          "sample_count": 4096,
+          "std": 0.4992406116094429,
+          "std_ratio": 0.9984812232188858,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "647da8dddfa9acb3255cca740c0cc7e18b7dc38288b7bc780054700525cc1683",
+      "graded_receipt_sha256": "0b0b9db879d2186361e736f50c281ce16bb001305efdce988294da15a61480b5",
+      "request_sha256": "70fd6bd16d3dbd6a4cdd33eacc5ac7935f984b45530ea51672454129269d6685",
+      "terminal_sha256": "90f2e5ec5b77be12c11a5a295b503cd34286446c78fdfe79ed51bf264656024d",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-control/832064ebaad34d5380c377978515aa91",
+      "qualification_input": false
+    },
+    {
+      "attempt": "97e2bce2af7e4dda82587668b42db725",
+      "study": "paired-g-coherence-seed1-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            84,
+            250,
+            459,
+            542,
+            584,
+            625,
+            667,
+            709,
+            750,
+            834,
+            875,
+            917,
+            1000
+          ],
+          "first_confirmed_step": 84,
+          "observations": 24,
+          "passing_observations": 14
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.02618791353758876,
+          "finite_fraction": 1.0,
+          "mean": 2.018186399785918,
+          "mean_error_sigma": 0.03637279957183637,
+          "sample_count": 4096,
+          "std": 0.49846372189399585,
+          "std_ratio": 0.9969274437879917,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 30.734622361982474,
+        "adapter_seconds": 31.067302559997188,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 28.339904304681113,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.6076699909463059
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.1133633230056148
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 27.618870990729192
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 32.38996265598689
+      },
+      "queue_seconds": 36.77088933298364,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "952f45ad5fd7999f836e2fba15765a1e1f620e202484ec2b09e1125d02535f87",
+        "state_sha256": "51f9e377da503805817a1c7004ea084fd2a09baa8ee19b57ebfbf3dbcdfe9fca"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "f18094149cae765366ed9b54dd56dedce4a8e1483410f7022b9030c2ceb424c3",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "2a73ace127ad72cd42e8f3ed0219d87a4bfb0a62922c779b66e750420c54260e",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "952f45ad5fd7999f836e2fba15765a1e1f620e202484ec2b09e1125d02535f87",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "3af6d9761e153e4c9e01d11aee1853a34962b3e30af540f20106bf69ddf05604",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.02618791353758876,
+          "finite_fraction": 1.0,
+          "mean": 2.018186399785918,
+          "mean_error_sigma": 0.03637279957183637,
+          "sample_count": 4096,
+          "std": 0.49846372189399585,
+          "std_ratio": 0.9969274437879917,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "a3ff5b11842579599bd6a39f1337ff8b996f2578102497781dab50227d8a6408",
+      "graded_receipt_sha256": "37656535cef8d3322b21e8d118639aee1b6b3e53a339b159d6fb9103a54dd9bd",
+      "request_sha256": "54c8bdde6a1583ab6ef26ef3e73bc3adfa99b256db67dec0e0964769c7513176",
+      "terminal_sha256": "e54888422d7b12832e0a71b4364b47fd17c91b47e84d95ccbd3b637bfd87d770",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-candidate/97e2bce2af7e4dda82587668b42db725",
+      "qualification_input": false
+    },
+    {
+      "attempt": "cff6f0553fac4a71ba94f65e437b72cc",
+      "study": "paired-g-coherence-seed6-candidate",
+      "task": "gaussian1d_smoke",
+      "gate": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            125,
+            167,
+            209,
+            250,
+            375,
+            417,
+            500,
+            542,
+            584,
+            625,
+            709,
+            750,
+            792,
+            834,
+            875,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 125,
+          "observations": 24,
+          "passing_observations": 19
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.03683984663021822,
+          "finite_fraction": 1.0,
+          "mean": 1.9632899181451648,
+          "mean_error_sigma": 0.0734201637096703,
+          "sample_count": 4096,
+          "std": 0.48771087786524,
+          "std_ratio": 0.97542175573048,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 51.054601677984465,
+        "adapter_seconds": 51.48681321099866,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 45.96513802395202,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.6975367207778618
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.12496114318491891
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 45.14264015998924
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 53.04307222599164
+      },
+      "queue_seconds": 57.97258780800621,
+      "continuity": null,
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "2653464a0f28bc7570ffc57079403d2fd91c95478301af7e7ba54836e61c693e",
+        "state_sha256": "8996631482f65d767b1e3a9a58ec00e42677aaef381fa80642d06f2b860e271b"
+      },
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "f43391415d65f3e2d3add083e407b6e9466e1c4e25f31aaf1d9b86b20469e7f2",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "d31093c0f37c1ec6830fad5cbd1797f7df2e1e5c20bce709fc3b98b53ffa2325",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "2653464a0f28bc7570ffc57079403d2fd91c95478301af7e7ba54836e61c693e",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "c75c99ac6186a5c9e84efd492cb27a94f6513ae5682bb5e8055d3b9da58c5fec",
+        "total_bytes": 983771
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.03683984663021822,
+          "finite_fraction": 1.0,
+          "mean": 1.9632899181451648,
+          "mean_error_sigma": 0.0734201637096703,
+          "sample_count": 4096,
+          "std": 0.48771087786524,
+          "std_ratio": 0.97542175573048,
+          "step": 1000
+        }
+      },
+      "raw_receipt_sha256": "0909b44a321ebb98f8b23ad3e6f8558b2fd3efa83ccf17fe50d74948e1f7a861",
+      "graded_receipt_sha256": "8a7e0b0dcfbbe00661318acfc3e1fda6deb7a89c58501518d257b27798a387b4",
+      "request_sha256": "2e4347a2c11f0952372a0c374c8a3173ac637a8f84a15d86c99a531e9483ed82",
+      "terminal_sha256": "723ab85b1c9cf73a487b1f72c3a2d4ac4e082c718e9020a3a913b18d685f7063",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-candidate/cff6f0553fac4a71ba94f65e437b72cc",
+      "qualification_input": false
+    },
+    {
+      "attempt": "8f0b97b3b50c4d81b35385e7fc93a03e",
+      "study": "paired-g-coherence-seed4-control",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 17,
+          "stationary_checks": 72,
+          "stationary_passes": 34
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.01927570153676983,
+          "finite_fraction": 1.0,
+          "mean": 2.9775427752174437,
+          "mean_error_sigma": 0.04491444956511259,
+          "sample_count": 4096,
+          "std": 0.4923536669504585,
+          "std_ratio": 0.984707333900917,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+      "cost": {
+        "adapter_loop_seconds": 227.73670509300428,
+        "adapter_seconds": 228.12961966200965,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 204.68369326135144,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9478228817752097
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.21041782095562667
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 202.5254525586206
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 229.6266808680084
+      },
+      "queue_seconds": 234.3748982489924,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "cb1671ed7174fdd2eaf66df4b70c55bdeb9f691e5c885a1d4d752e4b79d49448",
+        "parent_checkpoint_sha256": "8cb118cc4649ef0818bacf40fb9db2124f239410eb2ab1174ce171feca5d0923",
+        "parent_compatibility_key": "4e8500d86ea7b37cc50e2316f4f02e320653436965aa0fbc5fff7fa56a63d162",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "7813e3cdd3570bb0e56fc4c2f3bf14f4ac0598bef1f0a84c5d819b79da224474",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "b771e074c559762b5e8481ff79bd02fe50d19fc6d320558c1f4c231e389a608d",
+        "state_sha256": "ef8ba8791db66044d7fdd6bce82c2f25f4073e3e9e38895f09475ef44dc56a07"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "7fe1ea866b9946432aaefe56071c2bb99bfbb3fa12e1a812de4cefdd59b009e6",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "f1c0bdb60f574074d4165a198d379ce644dc058202964d28d758912295548e98",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "b067e415372ac4120abe85fd7b6828cffdcb28e10d8be454ecdd76603c296ecd",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "841eeaba552aa697f79f4c35736db7b659c72b5ff38a3e7f23fd891af232b5f2",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "b771e074c559762b5e8481ff79bd02fe50d19fc6d320558c1f4c231e389a608d",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "aaed281285750e550e4adc740c5f1b124a69ef23f5f7a030dafdefbc91b2d2ba",
+        "total_bytes": 3105787
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.01927570153676983,
+          "finite_fraction": 1.0,
+          "mean": 2.9775427752174437,
+          "mean_error_sigma": 0.04491444956511259,
+          "sample_count": 4096,
+          "std": 0.4923536669504585,
+          "std_ratio": 0.984707333900917,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "9ad5cd59a19b214f66dbc71add7e5b85575616091da2e0bf5097ec423000b63d",
+      "graded_receipt_sha256": "f1b06c7bf26639e6737cbd5fb19b675011a870dfaeb83001c2bc46570f9af66c",
+      "request_sha256": "bc5a1dc53ac02e490158e444942d0ae88a6a5db678f9c0d5f2173f327b745f1a",
+      "terminal_sha256": "15d79d0b1e96b6d8d3129d5a749205db2a1ffc420f1345de062a83ff05447327",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-control/8f0b97b3b50c4d81b35385e7fc93a03e",
+      "qualification_input": false
+    },
+    {
+      "attempt": "426e6f4d226d449bba8051e22993dee0",
+      "study": "paired-g-coherence-seed4-candidate",
+      "task": "gaussian1d_stability",
+      "gate": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 11,
+          "stationary_checks": 72,
+          "stationary_passes": 58
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.020081857137460746,
+          "finite_fraction": 1.0,
+          "mean": 3.000967021245742,
+          "mean_error_sigma": 0.0019340424914844334,
+          "sample_count": 4096,
+          "std": 0.4926855591457171,
+          "std_ratio": 0.9853711182914342,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "source_digest": "3e6ab1939a8f24ae4f874fe5d5c668d8291c681d762177eab191763b8dfd71c4",
+      "candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+      "cost": {
+        "adapter_loop_seconds": 261.3491487459978,
+        "adapter_seconds": 261.73036923102336,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 234.75861202782835,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 2.2440220600692555
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.19462373995338567
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 232.3199662278057
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 263.11881320600514
+      },
+      "queue_seconds": 267.5617108249862,
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "10df0bea444a45793fd77757f53453d909421c00283c5594d6613d220449a275",
+        "parent_checkpoint_sha256": "c42d8700c6f0d1a4de6cbad5f7280e414d34b071c383402a7960c42ddec008c2",
+        "parent_compatibility_key": "aa38917c28b3ea3bbef351b10b3d40c64c209d55f0142d01817d0777ac10afcf",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "4d1ff6fa018cf6e96bb59fbc5b071a0acb1711b73bb62dcccd6660ff17da8870",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "5d99716d6c3e6dda6672c26e11cd57fea67420333012d0d593741a7ea0123f61",
+        "state_sha256": "a555b6de25041f170a5e42cd753c00ee4cb3cd7257192cd9117d6955f2f895a2"
+      },
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "dffaf482a7c56defda9c787bba254b2c9004e8a5520bfe616f39687c78c169cc",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "2eddae88b22c905ec0c860af49b296a84205ae553dde2928a400e18981010439",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "62bdce144a1510c24884ff7c4999e778233fb9343550608dd2ee0d2ace19a586",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "073c4e684f824617d4028dcbd748354b981caef4bd4941b69fe964bc68b799b4",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "5d99716d6c3e6dda6672c26e11cd57fea67420333012d0d593741a7ea0123f61",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "16f80c2b7b776124c4db081880e44a3f3f4ec925ff993593fef82e83a5e477eb",
+        "total_bytes": 3152990
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.020081857137460746,
+          "finite_fraction": 1.0,
+          "mean": 3.000967021245742,
+          "mean_error_sigma": 0.0019340424914844334,
+          "sample_count": 4096,
+          "std": 0.4926855591457171,
+          "std_ratio": 0.9853711182914342,
+          "step": 6000
+        }
+      },
+      "raw_receipt_sha256": "a23cfeaab7c887272a700379e55fb2b5c073b1e9511d2f3387c64a91b416c1b6",
+      "graded_receipt_sha256": "d22a0273e749de8b91e699f320e96b5ef5159f00aa7b87a48b860b6524329054",
+      "request_sha256": "c8153cc772bb465e3b8a8cd54e885425bcf398c5e0a69e21eba49571595cc97f",
+      "terminal_sha256": "1c89da9b54db3bab5bae2e8e40f3c65ccb6f68a5aef22bb39a443b31375af4b8",
+      "local_artifact_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-candidate/426e6f4d226d449bba8051e22993dee0",
+      "qualification_input": false
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "seed": 1,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 10,
+        "stationary_checks": 72,
+        "stationary_passes": 35
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 20,
+        "stationary_checks": 72,
+        "stationary_passes": 44
+      },
+      "stationary_gain": 9,
+      "shift_gain": 10,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    },
+    {
+      "seed": 2,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 13,
+        "stationary_checks": 72,
+        "stationary_passes": 30
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 22,
+        "stationary_checks": 72,
+        "stationary_passes": 57
+      },
+      "stationary_gain": 27,
+      "shift_gain": 9,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    },
+    {
+      "seed": 3,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 6,
+        "stationary_checks": 72,
+        "stationary_passes": 34
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 12,
+        "stationary_checks": 72,
+        "stationary_passes": 66
+      },
+      "stationary_gain": 32,
+      "shift_gain": 6,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    },
+    {
+      "seed": 4,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 17,
+        "stationary_checks": 72,
+        "stationary_passes": 34
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 11,
+        "stationary_checks": 72,
+        "stationary_passes": 58
+      },
+      "stationary_gain": 24,
+      "shift_gain": -6,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    },
+    {
+      "seed": 5,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 11,
+        "stationary_checks": 72,
+        "stationary_passes": 37
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 9,
+        "stationary_checks": 72,
+        "stationary_passes": 65
+      },
+      "stationary_gain": 28,
+      "shift_gain": -2,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    },
+    {
+      "seed": 6,
+      "control": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 11,
+        "stationary_checks": 72,
+        "stationary_passes": 33
+      },
+      "candidate": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 6,
+        "stationary_checks": 72,
+        "stationary_passes": 56
+      },
+      "stationary_gain": 23,
+      "shift_gain": -5,
+      "control_gate": "FAIL",
+      "candidate_gate": "FAIL"
+    }
+  ],
+  "acquisition_passes": 12,
+  "retention_passes": 0,
+  "peak_concurrent_training": 12,
+  "mean_stationary_gain": 23.833333333333332,
+  "mean_shift_hold_gain": 2,
+  "candidate_reacquisition_passes": 0,
+  "control_reacquisition_passes": 0,
+  "queue_seconds": 3649.09491121897,
+  "supervisor_seconds": 3779.9362621812325,
+  "new_training_updates": 72000,
+  "paid_model_sessions": 0,
+  "scientific_retries": 0,
+  "qualification_input": false,
+  "qualification_reuse": false
+}

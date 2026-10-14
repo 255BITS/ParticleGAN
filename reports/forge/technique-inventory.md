@@ -323,3 +323,7 @@ The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall
 
 
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
+
+## Registered paired Gaussian research addendum
+
+[G-only mean/coherence, all six preregistered pairs](g-coherent-mean-paired-research/README.md): stationary improves in6/6, shifted hold in3/6, all12 acquisitions PASS, **all12 retentions FAIL**, and all6 candidate reacquisitions FAIL. Actual peak concurrency is12 training children. This separate nonqualifying research readout changes no selected family row or count. [Full source-bound grades/costs](g-coherent-mean-paired-research/results.json).
