@@ -5,4 +5,7 @@ runner_script=$(realpath -- "${BASH_SOURCE[0]}")
 runner_root=${PARTICLEGAN_RUNNER_ROOT:-$(cd -- "$(dirname -- "$runner_script")/../.." && pwd)}
 runner_python=${GAN_PYTHON:-python3}
 cd -- "$runner_root"
+if [[ "${1:-}" == "loop" ]]; then
+  exec "$runner_python" -m experiments.forge.grok_loop --root "$runner_root" "$@"
+fi
 exec "$runner_python" -m experiments.forge.codex_runner --root "$runner_root" study "$@"

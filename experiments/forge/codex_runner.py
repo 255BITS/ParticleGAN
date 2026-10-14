@@ -225,21 +225,23 @@ def contract(root):
     root = Path(root)
     view_path = root / 'configs/forge/views/discriminator_stability.json'
     view = read_json(view_path)
-    if view['revision'] != 10:
-        raise ValueError('runner requires the explicit revision-10 view; no historical reinterpretation')
-    stages = read_json(root / 'configs/forge/test-stages.json')
-    if stages['qualification_input'] or stages['execution_policy'] != 'shared_original_runs_no_additional_updates':
-        raise ValueError('stage readout must not invent qualification or training')
+    if view['revision'] not in (9, 10):
+        raise ValueError('unsupported frozen current view revision')
+    stages = None
+    files = {'configs/forge/views/discriminator_stability.json': digest(view_path)}
+    if view['revision'] == 10:
+        stages = read_json(root / 'configs/forge/test-stages.json')
+        if stages['qualification_input'] or stages['execution_policy'] != 'shared_original_runs_no_additional_updates':
+            raise ValueError('stage readout must not invent qualification or training')
+        files.update({'configs/forge/test-stages.json': digest(root / 'configs/forge/test-stages.json'),
+                      'configs/forge/view-history/discriminator_stability-v9.json': digest(root / 'configs/forge/view-history/discriminator_stability-v9.json')})
     names = {a['task'] for a in view['assignments']}
-    files = {'configs/forge/views/discriminator_stability.json': digest(view_path),
-             'configs/forge/test-stages.json': digest(root / 'configs/forge/test-stages.json'),
-             'configs/forge/view-history/discriminator_stability-v9.json': digest(root / 'configs/forge/view-history/discriminator_stability-v9.json')}
     tasks = {}
     for name in names:
         path = root / 'configs/forge/tasks' / f'{name}.json'
         files[str(path.relative_to(root))] = digest(path)
         tasks[name] = read_json(path)
-    for pin in stages['sources'].values():
+    for pin in (stages['sources'].values() if stages else ()):
         if digest(root / pin['path']) != pin['sha256']:
             raise ValueError('original stage source task changed')
     return dict(view=view, stages=stages, tasks=tasks, files=files)
@@ -286,6 +288,8 @@ def plan(config_path, *, root):
         raise ValueError('legacy engine/dollar/speed settings are unsupported; use explicit current caps')
     number(cfg.get('dispatch_window_seconds', 300), 'dispatch window', zero=False)
     frozen = contract(root)
+    if cfg.get('expected_view_revision', frozen['view']['revision']) != frozen['view']['revision']:
+        raise ValueError('explicit configured tier revision differs from current source')
     if cfg.get('model', MODEL) != MODEL or cfg.get('effort', EFFORT) != EFFORT or cfg.get('speed', 'standard') != 'standard':
         raise ValueError('this verified runner contract is Sol6.1/xhigh/standard only')
     slots, maximum = cfg['slots'], cfg['max_studies']
@@ -351,7 +355,7 @@ def plan(config_path, *, root):
         blocked.append('existing reservations require owner reconciliation; no automatic retry')
     if state['agent_sessions_started'] + sum(bool(r['amounts']['agent']) for r in rows) > state['agent_session_limit']:
         blocked.append('aggregate model session cap exceeded')
-    return cfg, dict(schema_version=1, view_revision=10, contract_sha256=stable_hash(frozen['files']),
+    return cfg, dict(schema_version=1, view_revision=frozen['view']['revision'], contract_sha256=stable_hash(frozen['files']),
                      frozen_files=frozen['files'], studies=rows, total_full_reservation=total,
                      remaining=balances, blockers=blocked, model=MODEL, effort=EFFORT, speed='standard',
                      service_tier='default', qualification=False, launches=0)
@@ -421,7 +425,7 @@ def propose(cfg, study, row, root, runs):
     if subprocess.check_output(['git', '-C', str(root), 'rev-parse', base], text=True).strip() != base:
         raise ValueError('source_commit must be an exact verified full commit')
     subprocess.run(['git', '-C', str(root), 'worktree', 'add', '--detach', str(checkout), base], check=True, capture_output=True)
-    # A committed revision10 source is required; uncommitted runner work is not a source binding.
+    # Exact committed source/declarations are required; historical results retain their recorded revision.
     frozen = contract(checkout)
     command = codex_command(cfg.get('codex_bin', 'codex'), checkout, directory)
     prompt = (f'Read AGENTS.md, EXPERIMENTATION.md and compiled experiment memory. Study {study["id"]}: '
@@ -474,8 +478,8 @@ def validate_request(request, study, frozen):
     if request.get('preflight_blockers'):
         raise ValueError('unsupported request remains BLOCKED before allocation')
     if request['view']['id'] == frozen['view']['id']:
-        if request['view']['revision'] != 10 or request['view']['assignments'] != frozen['view']['assignments']:
-            raise ValueError('request must bind the current revision10 view')
+        if request['view']['revision'] != frozen['view']['revision'] or request['view']['assignments'] != frozen['view']['assignments']:
+            raise ValueError('request must bind the explicitly frozen current view revision')
     elif study.get('scope') != 'scoped' or request['view']['id'] != study.get('view_id'):
         raise ValueError('a partial claim needs its own explicitly declared registered scoped view')
     tiers = {a['task']: a['qualification_tier'] for a in request['view']['assignments']}
@@ -566,9 +570,18 @@ def concurrency_capacity(cfg):
                 original_task_resources_unchanged=True, deployment_layout=deployment_layout(cfg))
 
 
+def coordinated_window_blocks(cfg,horizon,*,now=None):
+    from datetime import datetime
+    now=time.time() if now is None else now
+    for window in cfg.get('blocked_UTC_windows',[]):
+        begin=datetime.fromisoformat(window['start'].replace('Z','+00:00')).timestamp()
+        end=datetime.fromisoformat(window['end'].replace('Z','+00:00')).timestamp()
+        if now < end and now+horizon > begin:return True
+    return False
+
+
 def execute(cfg, report, root):
     from .queue import Queue, device_slots
-    from .test_stages import generated_reports
     from .sources import verify_snapshot
     spending = Spending(cfg['budget_state'])
     runs = Path(cfg['runs_dir']).resolve() / uuid.uuid4().hex
@@ -616,7 +629,7 @@ def execute(cfg, report, root):
                     raise ValueError('executed source must retain current queue/worker lease propagation')
             source_root = Path(request['source']['snapshot_path'])
             if contract(source_root)['files'] != report['frozen_files']:
-                raise ValueError('executed source drifted from the frozen global revision10 gauntlet')
+                raise ValueError('executed source drifted from the explicitly frozen global gauntlet')
             # Admission uses the authoritative declarations; durable attempt
             # projections must never be written into the immutable snapshot.
             queue = Queue(Path(cfg['queue_root']), report_root=Path(root) / 'reports/forge')
@@ -678,11 +691,17 @@ def execute(cfg, report, root):
                 for gpu in {row[2] for row in layout}:
                     count = sum(row[2] == gpu for row in layout)
                     available_by_gpu[gpu] = device_slots([str(gpu)], workers_per_gpu=count, allow_sharing=True)
+            if cfg.get('overall_deadline_unix') and time.time() >= cfg['overall_deadline_unix']:
+                stop = True
             for owner in admitted:
                 owner['queue'].collect()
             for active in running[:]:
                 elapsed = time.monotonic() - active['clock']
                 if active['process'].poll() is None:
+                    if cfg.get('overall_deadline_unix') and time.time() >= cfg['overall_deadline_unix']:
+                        atomic_json(active['directory'] / 'cancel.json', dict(reason='bounded loop deadline'))
+                        if time.time() >= cfg['overall_deadline_unix'] + 5:
+                            stop_process(active['process'], active['directory'])
                     if elapsed >= active['allowance'] - 10:
                         atomic_json(active['directory'] / 'cancel.json', dict(reason='full supervisor allowance ceiling'))
                     if elapsed >= active['allowance'] - 5:
@@ -715,6 +734,17 @@ def execute(cfg, report, root):
                             continue
                         try:
                             available = available_by_gpu[gpu]
+                            if cfg.get('blocked_UTC_windows'):
+                                tiers = {a['task']:a['qualification_tier'] for a in owner['request']['view']['assignments']}
+                                state_now = owner['queue'].inspect()
+                                pending_jobs = [j for j in owner['request']['jobs'] if state_now['jobs'][j['compatibility_key']]['status']=='pending']
+                                if pending_jobs:
+                                    current_tier = min(tiers[j['task_id']] for j in pending_jobs)
+                                    horizon = max(j['budget_seconds']+20 for j in pending_jobs if tiers[j['task_id']]==current_tier)
+                                    if coordinated_window_blocks(cfg,horizon):
+                                        stop=True
+                                        context.__exit__(None,None,None)
+                                        break
                             claimed = owner['queue'].claim([s for s in available if s['slot'] == slot],
                                     campaign_filter=owner['request']['study']['campaign']['id'],
                                     request_filter=owner['submission']['request']['request_id'])
@@ -757,7 +787,7 @@ def execute(cfg, report, root):
                                                  ('task_id', 'gate_status', 'raw_status', 'metrics', 'reason', 'compatibility_key')})
                 receipt = dict(study=owner['study']['id'], status=submission['status'], attempts=owner['attempts'],
                                source_digest=owner['request']['source']['digest'],
-                               candidate_revision=owner['request']['candidate_revision'], view_revision=10,
+                               candidate_revision=owner['request']['candidate_revision'], view_revision=owner['request']['view']['revision'],
                                semantic=owner['row']['semantic'], task_results=outcomes,
                                actual_new_attempts=len(owner['attempts']), qualification=False)
                 spending.settle(owner['key'], dict(queue=queue_seconds,
@@ -783,8 +813,9 @@ def execute(cfg, report, root):
                     unknown_or_unsettled=[o['key'] for o in admitted] + [key for _, _, key in pending],
                     unadmitted_studies=[study['id'] for study, _, _ in pending], additional_qualification=False))
         # Existing report readers retain cohort binding; no new scored evidence is invented.
-        if not admitted:
+        if not admitted and contract(root)['view']['revision']==10:
             try:
+                from .test_stages import generated_reports
                 for name, content in generated_reports(root).items():
                     destination = runs / Path(name).name
                     destination.write_text(content)
