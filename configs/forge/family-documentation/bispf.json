@@ -50,7 +50,9 @@
     "particlegan/recipes.py",
     "particlegan/training.py",
     "configs/forge/ideas/bispf-v1.json",
+    "configs/forge/ideas/bispf-v2.json",
     "configs/forge/studies/bispf-v1-study.json",
+    "configs/forge/studies/bispf-v2-study.json",
     "reports/forge/bispf/README.md"
   ],
   "equations": [
