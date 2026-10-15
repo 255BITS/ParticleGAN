@@ -325,3 +325,22 @@ feasibility witnesses require reviewed, exact public identities before indexing;
 missing evidence never authorizes a new experiment.
 
 </details>
+
+## Confidence experiments: acquisition succeeds, retention does not
+
+The [confidence research entry point](../reports/forge/generator-confidence-lr-bcap-direction/README.md)
+indexes fifteen additional source-bound attempts from four executed source closures.
+The original six-task screen passes 6/6 and own-word hold passes 25/25; original
+Gaussian retention fails. The finite-cap interaction fails acquisition and its
+retention was never started. Orientation, signed and positive-evidence responses
+pass acquisition but fail sustained retention. A passing final endpoint does
+not replace the original stationary, deadline or shifted-hold requirements.
+
+These compact receipts are display-only. They do not change scientific gates,
+recipes, selected configurations or current qualification. The earlier PR399
+paired controls remain [published separately](https://github.com/255BITS/ParticleGAN/pull/399)
+and are not copied or reclassified here. References to the historical 81-attempt
+coordinator ledger include that separate history; this publication adds exactly
+fifteen unique attempts, 10 PASS / 5 FAIL, rather than importing81 new experiments.
+Bulk states, sample panels, GIFs and raw logs retain their exact local archive
+identity. No training or sampling is launched by report generation.

@@ -257,7 +257,7 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 252
+    assert len(cells) == 267
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"
@@ -619,3 +619,95 @@ def test_existing_scoped_policy_registry_stays_separate_from_parent(evidence):
     assert scoped["coverage"]["optimizer_passes"] == 1
     assert scoped["selected_coverage"]["optimizer_passes"] == 0
     assert len(publication["rows"]) == 1
+
+
+def test_confidence_lr_complete_screen_keeps_own_retention_failure_separate():
+    from collections import Counter
+    from pathlib import Path
+    from experiments.forge.test_performance import _add_supplemental
+    from experiments.forge.test_performance_render import render_discovery_navigation
+
+    root = Path(__file__).resolve().parents[1]
+    records = []
+    _add_supplemental(Inputs(root),
+                      lambda identity, label, selected, lane, recipe: label,
+                      lambda task, conditions, lane, contract, match: task,
+                      lambda task, recipe, record: records.append(record))
+    screen = [r for r in records if r["cell_id"].startswith("pr399-confidence-lr-tier1-6-")]
+    retention = [r for r in records if r["cell_id"].startswith("pr399-confidence-lr-own-retention-2-")]
+    assert len(screen) == 6 and len(retention) == 2
+    assert Counter(r["status"] for r in screen) == {"PASS": 6}
+    assert Counter(r["status"] for r in retention) == {"PASS": 1, "FAIL": 1}
+    assert len({r["result"]["attempt_id"] for r in screen + retention}) == 8
+    assert all(r["full_protocol_complete"] is True and r["result"]["ordinary_qualification"] is False
+               for r in screen + retention)
+    assert {r["result"]["original_grade"]["gate_status"] for r in retention} == {"PASS", "FAIL"}
+    gaussian = next(r for r in retention if r["status"] == "FAIL")
+    assert gaussian["result"]["original_grade"]["evaluator_result"]["stationary_passes"] == 8
+    assert gaussian["result"]["original_grade"]["evaluator_result"]["shift_hold_passes"] == 0
+    rendered = render_discovery_navigation(root, root / "reports/forge/test-performance.md")
+    assert "74 unique attempts" in rendered and "full Martyn" in rendered
+
+
+def test_later_gaussian_corrections_retain_failure_and_unstarted_dependency():
+    from collections import Counter
+    from pathlib import Path
+    from experiments.forge.test_performance_render import render_discovery_navigation
+
+    root = Path(__file__).resolve().parents[1]
+    reader = Inputs(root)
+    registry = reader.read("reports/forge/test-performance-evidence/index.json")
+    pins = {Path(pin["path"]).name: pin for pin in registry["publications"]}
+    finite = reader.read(pins["pr399-gaussian-finite-cap-1.json"]["path"],
+                         sha256=pins["pr399-gaussian-finite-cap-1.json"]["sha256"])
+    orientation = reader.read(pins["pr399-critic-orientation-2.json"]["path"],
+                              sha256=pins["pr399-critic-orientation-2.json"]["sha256"])
+    assert len(finite["cells"]) == 1 and finite["cells"][0]["status"] == "FAIL"
+    assert finite["cells"][0]["task_id"] == "gaussian1d_smoke"
+    blocked = finite["discovery_summary"]["unstarted_retention"]
+    assert (blocked["status"], blocked["attempts"], blocked["new_updates"], blocked["charges"]) == (
+        "BLOCKED_UNSTARTED", 0, 0, 0)
+    assert len(orientation["cells"]) == 2
+    assert Counter(c["status"] for c in orientation["cells"]) == {"PASS": 1, "FAIL": 1}
+    assert {c["task_id"] for c in orientation["cells"]} == {"gaussian1d_smoke", "gaussian1d_stability"}
+    retention = next(c for c in orientation["cells"] if c["task_id"] == "gaussian1d_stability")
+    original = retention["result"]["original_grade"]["evaluator_result"]
+    assert (original["stationary_passes"], original["shift_hold_passes"], original["frozen_passes"]) == (5, 1, 0)
+    assert len({c["result"]["attempt_id"] for c in finite["cells"] + orientation["cells"]}) == 3
+    assert all(c["result"]["ordinary_qualification"] is False
+               for c in finite["cells"] + orientation["cells"])
+    rendered = render_discovery_navigation(root, root / "reports/forge/test-performance.md")
+    assert "77 unique attempts" in rendered and "BLOCKED/UNSTARTED" in rendered
+
+
+def test_signed_and_positive_responses_keep_endpoint_success_below_full_retention_gate():
+    from pathlib import Path
+    from experiments.forge.test_performance_render import render_discovery_navigation
+
+    root = Path(__file__).resolve().parents[1]
+    reader = Inputs(root)
+    registry = reader.read("reports/forge/test-performance-evidence/index.json")
+    pins = {Path(pin["path"]).name: pin for pin in registry["publications"]}
+    documents = []
+    for name in ("pr399-signed-confidence-2.json", "pr399-positive-evidence-2.json"):
+        pin = pins[name]
+        documents.append(reader.read(pin["path"], sha256=pin["sha256"]))
+    sources = set()
+    attempts = set()
+    for document, expected_stationary, expected_shifted in zip(documents, (7, 14), (0, 2)):
+        cells = document["cells"]
+        assert [(c["task_id"], c["status"]) for c in cells] == [
+            ("gaussian1d_smoke", "PASS"), ("gaussian1d_stability", "FAIL")]
+        assert all(c["full_protocol_complete"] is True and c["result"]["ordinary_qualification"] is False
+                   for c in cells)
+        observed = cells[1]["result"]["original_grade"]["evaluator_result"]
+        assert (observed["stationary_passes"], observed["shift_hold_passes"],
+                observed["frozen_passes"], observed["reacquisition_status"]) == (
+                expected_stationary, expected_shifted, 0, "FAIL")
+        sources.update(document["condition_contracts"][c["conditions_sha256"]]["source_digest"] for c in cells)
+        attempts.update(c["result"]["attempt_id"] for c in cells)
+    assert len(sources) == 2 and len(attempts) == 4
+    positive = documents[1]["cells"][1]["result"]["original_grade"]
+    assert positive["gate_status"] == "FAIL" and positive["metrics"]["cdf_ks"] < .05
+    rendered = render_discovery_navigation(root, root / "reports/forge/test-performance.md")
+    assert "81 unique attempts" in rendered and "endpoint bounds" in rendered

@@ -1,0 +1,68 @@
+{
+  "schema": "research_analytical_rejection_v1",
+  "archive": "successor/critic-reaction",
+  "scope": "Saved-state analytical prerequisite only; not an executed training experiment",
+  "original_archive_pins": {
+    "READOUT.md": {
+      "sha256": "aac7975b711efbfd8a3c79484c89b07edede089c5b781336f0b7608d604c4b6e",
+      "bytes": 5957
+    },
+    "ANALYSIS.json": {
+      "sha256": "2b779518e88e8af9169cdbd328f6d7f3cfb3b439c5f540aee62dc18a7653661f",
+      "bytes": 236676
+    },
+    "PROPOSAL-AND-DECISION.json": {
+      "sha256": "4c455dfcb16071e60b5888c270d6f5cff4ab90bb482053f59c658bc4836ff224",
+      "bytes": 33361
+    },
+    "DIAGNOSTIC-SCOPE-CORRECTION.json": {
+      "sha256": "4f83806536011be36eaf72a74610f7fc567be71e85e0b6293474a91d4083c760",
+      "bytes": 1836
+    },
+    "RESTORE-CONTRACT.md": {
+      "sha256": "bf8f6428a4ccee4cb1757e924c2948a4faff913b44f9fb8ed119cccbf516d72b",
+      "bytes": 9315
+    },
+    "PRESERVATION-RECEIPT.json": {
+      "sha256": "7f7bc3cd5c8aaa840cf5ab216d857445b33b56a4b669c2bd8109830df3662fbf",
+      "bytes": 1095
+    },
+    "SUPPORTING-EVIDENCE-PACKET.json": {
+      "sha256": "bba24bc92b0a4b2929ffc5cf5c7e57e95ed8a2ec76a46b68d2069749badc450c",
+      "bytes": 1970
+    }
+  },
+  "status": "ANALYTICALLY_FALSIFIED_NOT_ELIGIBLE_FOR_GPU",
+  "mechanism": "One additional stop-gradient normalized D reaction, after the ordinary D step, guiding G/prior on their original separate cached panel.",
+  "acquisition_falsifiers": [
+    {
+      "lineage": "positive_evidence",
+      "panel": 1,
+      "ordinary_W2_direction": -0.007004805668982193,
+      "extra_W2_direction": 0.001416634377040244,
+      "ordinary_W2_after": 0.026806080194781496,
+      "extra_W2_after": 0.03639565864883578
+    }
+  ],
+  "falsifier": "Failure to restore baseline and positive-excess late mean/variance/W2 direction on both fixed panel pairs at both law-integration resolutions, or reversal of a repairing acquisition-state ordinary proposal, rejects this candidate.",
+  "decision": "Do not implement or launch this exact correction as an admitted experiment. Partial terminal W2 improvements do not satisfy the fixed prerequisites.",
+  "numerical_checks": {
+    "quadrature_max_absolute_difference": {
+      "mean": 1.4943917099330406e-05,
+      "variance": 1.4866256497381158e-05,
+      "W2_squared": 3.717194923435335e-06
+    },
+    "quadrature_W2_sign_disagreements": [],
+    "finite_difference_checks": 144,
+    "finite_difference_sign_disagreements": []
+  },
+  "qualification": false,
+  "new_GPU_attempts": 0,
+  "optimizer_calls": 0,
+  "trainer_steps": 0,
+  "new_sampling_draws": 0,
+  "new_budget": 0,
+  "full_analysis_availability": "LOCAL_ARCHIVE_BY_PIN; no tensor/state or per-update stream copied",
+  "ordinary_qualification": false,
+  "cumulative_training_attempts_added": 0
+}
