@@ -937,13 +937,13 @@ def test_bispf_adaptive_image_kappa():
 
 
 def test_bispf_lambda_floor_default():
-    """Verify _BISPFPenaltyKernel and BISPFEngine default lambda_floor is 0.05."""
+    """Verify _BISPFPenaltyKernel and BISPFEngine default lambda_floor is 0.01."""
     from particlegan.bispf import _BISPFPenaltyKernel, BISPFEngine
 
     kernel = _BISPFPenaltyKernel()
-    assert kernel.lambda_floor == 0.05, f"Expected lambda_floor == 0.05, got {kernel.lambda_floor}"
+    assert kernel.lambda_floor == 0.01, f"Expected lambda_floor == 0.01, got {kernel.lambda_floor}"
     engine = BISPFEngine()
-    assert engine.lambda_floor == 0.05, f"Expected BISPFEngine.lambda_floor == 0.05, got {engine.lambda_floor}"
+    assert engine.lambda_floor == 0.01, f"Expected BISPFEngine.lambda_floor == 0.01, got {engine.lambda_floor}"
 
 
 def test_bispf_fast_attack_reheating():
