@@ -127,18 +127,18 @@ These are whole configurations under their original sources. Their individual pa
 
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
-| [recipe-prior-refactor-bcap-pure-v1](bcap-dualnorm.md) | 71/152 (14 not run) | `a5eafc73e4c4` | Selected |
+| [recipe-prior-refactor-bcap-pure-v1](bcap-dualnorm.md) | 71/152 (7 blocked, 7 diagnostic attempts) | `a5eafc73e4c4` | Selected |
 | [bcap-pure-adam-v2](bcap-pure-configuration.md) | 0/152 (152 not run) | `cbb19c5e55e9` | Alternative |
 
 </details>
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11/23 (1 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) |
-| [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12/30 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15/29 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
-| [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/2 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11/24 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
-| [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/2 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11/24 (2 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
+| [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11/23 (1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) |
+| [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (4 blocked, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12/30 (4 blocked, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
+| [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15/29 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11/24 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
+| [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11/24 (1 blocked, 1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | [quality_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [11/22](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 
 Separate cohort coverage (excluded from family totals):
@@ -147,7 +147,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-1bf9d7d34422-tier-1"></a>
 
@@ -1093,6 +1093,8 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
@@ -1162,7 +1164,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/clockfree-receipt.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1).
 
@@ -1181,6 +1183,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **clockfree_audit_measurement_v1: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1233,6 +1237,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -1316,6 +1322,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. every joint generation/inverse check throughout the fixed continuation window
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1374,6 +1382,8 @@ Dependencies: five_word_joint_smoke (checkpoint).
 **five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. any scheduled full joint pass plus independent same-state confirmation
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1466,6 +1476,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1513,6 +1525,8 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 **gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -1564,6 +1578,8 @@ Dependencies: gaussian1d_smoke (checkpoint).
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1632,7 +1648,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (retained_attempt; qualification unchanged). continuation requires this candidate's certified prerequisite attempt [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -1790,6 +1806,8 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1854,6 +1872,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 **img_blobs4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1920,6 +1940,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1984,6 +2006,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 **img_stripes2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2050,6 +2074,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2099,6 +2125,8 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2137,6 +2165,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **residual_student: PASS**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2178,6 +2208,8 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 **ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2258,7 +2290,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent ring_hold: FAIL [Attempt evidence](../attempt-coverage.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3).
 
@@ -2290,7 +2322,7 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
-Execution: **not run**.
+Run attempt: **FAIL** (retained_attempt; qualification unchanged). first qualifying window failed acquisition or uninterrupted hold [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3).
 
@@ -2321,6 +2353,8 @@ Dependencies: mode_hold (gate).
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2389,7 +2423,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (retained_attempt; qualification unchanged). continuation requires this candidate's certified prerequisite attempt [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2469,6 +2503,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2536,7 +2572,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (retained_attempt; qualification unchanged). continuation requires this candidate's certified prerequisite attempt [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
 Used by: [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2616,7 +2652,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
-Execution: **not run**.
+Run attempt: **FAIL** (retained_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
 Used by: [adaptation / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) · [clockfree_continuous / Tier 3](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2638,6 +2674,8 @@ Dependencies: mode_hold (gate).
 **trajectory: PASS**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2675,6 +2713,8 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2803,6 +2843,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2843,6 +2885,8 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2912,6 +2956,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 **vector_anisotropic: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2987,6 +3033,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3055,6 +3103,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3122,6 +3172,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_two_broad: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -3196,6 +3248,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -3273,6 +3327,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_unequal_width: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -3406,7 +3462,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-c195899a64af-tier-1"></a>
 
@@ -6322,7 +6378,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-0d83d78027c5-tier-1"></a>
 

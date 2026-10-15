@@ -61,6 +61,36 @@ def generate(report):
     return publication["family_progress"]["families"][0]["cohorts"][0]
 
 
+@pytest.mark.parametrize("source,attached,unrecorded", [
+    ("source-one", True, False), ("different-source", False, False), ("source-one", True, True)])
+def test_run_attempt_display_requires_exact_source_recipe_and_task_binding(report, source, attached, unrecorded):
+    root, publication = report
+    selected = publication["rows"][0]
+    contract = publication["task_contracts"][selected["bindings"]["task_contracts"]["missing"]]
+    if unrecorded:
+        from experiments.forge.family_reports import COVERAGE_PREFLIGHT
+        selected["bindings"]["task_contracts"].pop("missing")
+        atomic_json(root / COVERAGE_PREFLIGHT, {
+            "scope": "selected_formulation_task_preflight_only", "qualification_input": False,
+            "qualification_reuse": False, "families": [{"candidate_id": selected["candidate_id"],
+            "candidate_revision": selected["candidate_revision"], "source_digest": "source-one",
+            "recipe_sha256": None, "tasks": {"missing": {**contract, "blockers": []}}}]})
+    key = [source, selected["candidate_revision"], "missing", contract["execution_sha256"],
+           contract["evaluation_sha256"]]
+    atomic_json(root / "reports/forge/attempt-coverage.json", {
+        "schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
+        "summary": {"total": 1, "attempted": 1, "pending": 0, "running": 0},
+        "records": [{"key": stable_hash(key), "source_digest": source,
+                     "candidate_revision": selected["candidate_revision"], "task": "missing",
+                     "execution_sha256": key[3], "evaluation_sha256": key[4],
+                     "status": "FAIL", "attempted": True, "evidence": "reports/forge/attempt-coverage.json"}]})
+    before = deepcopy(publication["rows"])
+    cohort = generate(report)
+    assert ("run_attempt" in cohort["tasks"]["missing"]) is attached
+    assert cohort["tasks"]["missing"]["status"] == "UNKNOWN"
+    assert publication["rows"] == before
+
+
 def test_optimizer_alias_selects_whole_best_configuration_and_preserves_evidence(report):
     root, publication = report
     variant = deepcopy(publication["rows"][0])
@@ -617,7 +647,7 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
                    for task in row["tasks"] + row.get("nonrequired_tasks", []))
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
-    assert "preflight-blocked without execution" in text
+    assert "constructor refusals as incompatible" in text
     assert "earn no pass credit" in text
     assert publication["rows"] == rows
 

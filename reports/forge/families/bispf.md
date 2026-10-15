@@ -114,7 +114,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-6421ba55ca82-tier-1"></a>
 
@@ -1060,6 +1060,8 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1).
@@ -1149,6 +1151,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1).
@@ -1200,6 +1204,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -1283,6 +1289,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. every joint generation/inverse check throughout the fixed continuation window
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1341,6 +1349,8 @@ Dependencies: five_word_joint_smoke (checkpoint).
 **five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1433,6 +1443,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1480,6 +1492,8 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 **gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -1531,6 +1545,8 @@ Dependencies: gaussian1d_smoke (checkpoint).
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1757,6 +1773,8 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1821,6 +1839,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 **img_blobs4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1887,6 +1907,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1951,6 +1973,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 **img_stripes2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2017,6 +2041,8 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2066,6 +2092,8 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2104,6 +2132,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **residual_student: PASS**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2145,6 +2175,8 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 **ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2288,6 +2320,8 @@ Dependencies: mode_hold (gate).
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2435,6 +2469,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -2606,6 +2642,8 @@ Dependencies: mode_hold (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2642,6 +2680,8 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2770,6 +2810,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2810,6 +2852,8 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2879,6 +2923,8 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 **vector_anisotropic: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2954,6 +3000,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3022,6 +3070,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
+
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3089,6 +3139,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_two_broad: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -3163,6 +3215,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -3240,6 +3294,8 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 **vector_unequal_width: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+
+Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
