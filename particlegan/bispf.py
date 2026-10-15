@@ -1064,13 +1064,13 @@ class _BISPFPenaltyKernel:
             _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Gradient norm scaling:
-        # - High-dimensional continuous spatial fields (images, ndim >= 3) and medium continuous
-        #   features (dim > 4) evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d)
-        # - Low-dimensional continuous coordinates (dim <= 4) and discrete categorical
-        #   token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
-        #   without dividing by sqrt(d), preventing critic overshoot in 2D slot-hold tasks and
-        #   weakening of the cap penalty in discrete token codebooks.
-        if is_discrete_simplex or dim <= 4:
+        # - High-dimensional continuous spatial fields (images, ndim >= 3) and continuous
+        #   particle flows (b_r >= 32, e.g. ring16_acquisition and 100-mode grids) evaluate
+        #   gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d)
+        # - Low-batch slot-holds (b_r < 32 or b_f < 32, e.g. unused_token_hold) and discrete
+        #   categorical token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
+        #   without dividing by sqrt(d), preventing critic overshoot in low-batch slot-hold fixtures.
+        if is_discrete_simplex or (dim <= 4 and (b_r < 32 or b_f < 32)):
             scale_dim = 1.0
         else:
             scale_dim = math.sqrt(dim)
