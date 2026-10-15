@@ -1,0 +1,113 @@
+{
+  "authorization": "Root explicitly selected T+reg_coeff2 and S+halfjoint after certified initial eight completed, under the user instruction train it make it work.",
+  "campaign": "bcap-selective-history-repair-screen-v1",
+  "campaign_budget_seconds": 1200,
+  "candidate_budget_seconds": 600,
+  "commands": [
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-transport-penalty2-v1",
+      "--study",
+      "bcap-transport-penalty2-pole-ring-study-v1"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-selective-history-halfjoint-v1",
+      "--study",
+      "bcap-selective-history-halfjoint-v1-pole-ring-study-v1"
+    ]
+  ],
+  "diagnostics_profile": "same default as all initial arms; no added optimizer diagnostics",
+  "drain_finished_unix": 1792044920.9148195,
+  "drain_started_unix": 1792044850.871743,
+  "driver_pid": 1038616,
+  "initial_completion_sha256": "f1cacde160e4fcf40b413191acc65f88b3a9d17ec0ecde65e1659ab02f7a41cd",
+  "initial_evidence_sha256": "e90fb7288c5035e5e5e2aecb34099f4565096669d0869a7aa2f0a368c64d4f80",
+  "protocol_seed": 0,
+  "reason": "T already passes Ring, whereas S additionally fails Ring; primary targets T pole overshoot without adding history.",
+  "roster": [
+    {
+      "candidate": "bcap-transport-penalty2-v1",
+      "candidate_revision": "687abd4ca27df8ddf22e2a49b5634f5c455239f17adec259e6be254213a5d6dc",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "0e48106e46b187152ca5827a12777a585c41c8819631cf17000a728342a14086",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "5d389322d25615c1175dada0e5a0bdac180e72723420a28ebf22dbf5ec2fa666",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-transport-penalty2-pole-ring-study-v1"
+    },
+    {
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "candidate_revision": "d76a5d02b9856e6249f5d485b0c79f594975e03a3dad498abff0d1bb82d0f909",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "26ddaa68eb6c789b582284b3e2507187c00b0a4235972072c280572c97af974e",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "e78900005f83c5b0aa90fc0259d3a284a2467bb34b599fb338017cfed6e9c8bf",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-halfjoint-v1-pole-ring-study-v1"
+    }
+  ],
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "selected": [
+    "bcap-transport-penalty2-v1",
+    "bcap-selective-history-halfjoint-v1"
+  ],
+  "source_algorithm_changes": false,
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "submissions": [
+    {
+      "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+      "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+      "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/934d310f76ec11d120b50473.json",
+      "request_id": "934d310f76ec11d120b50473",
+      "status": "queued"
+    },
+    {
+      "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+      "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+      "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/6632b813365c7f82ec465cf7.json",
+      "request_id": "6632b813365c7f82ec465cf7",
+      "status": "queued"
+    }
+  ],
+  "time_unix": 1792044845.2934217,
+  "withdrawn_unsubmitted_draft": "bcap-selective-history-penalty2-v1"
+}

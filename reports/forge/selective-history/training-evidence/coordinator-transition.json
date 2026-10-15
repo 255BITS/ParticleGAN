@@ -1,0 +1,40 @@
+{
+  "action": "SIGINT old coordinator with no live children; resume same public queue without synchronous per-completion full compilation",
+  "authorization": "root instruction to execute this law-preserving infrastructure repair",
+  "campaign": "bcap-selective-history-pole-ring-v2",
+  "completed_receipts_before": {
+    "2f3e6cc58af14ee1aea7302ab180e3fa": {
+      "elapsed_seconds": 6.1208526869886555,
+      "grades": {
+        "two_pole": "PASS"
+      },
+      "sha256": "381aaef5de6dc4c48ae9f0f5ab57fcce5bf889ee300bb32fb02f81d92a96684c"
+    },
+    "e79666f6b8b94b6d84600dbaea2cdaad": {
+      "elapsed_seconds": 108.68051914600073,
+      "grades": {
+        "ring16_acquisition": "PASS"
+      },
+      "sha256": "24605563a2a63d1d20392febe45dd973a1e66f5c1e61c4920b783978d20a1e1c"
+    }
+  },
+  "devices": [
+    "0",
+    "1"
+  ],
+  "full_compilation": "deferred until scientific queue complete",
+  "new_coordinator_pid": 1014142,
+  "new_driver": "/ml2/hypergan/combination-training-20261015/resume_without_compile.py",
+  "old_command": "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python -m experiments.forge --root /ml2/hypergan/particlegan-selective-history-20261015 --queue-root /ml2/hypergan/combination-training-20261015/queue drain --gpus 0,1 --workers-per-gpu 1 --campaign bcap-selective-history-pole-ring-v2 ",
+  "old_coordinator_pid": 1004280,
+  "resume_finished_unix": 1792044614.6317697,
+  "resume_started_unix": 1792044365.0085518,
+  "same_queue": "/ml2/hypergan/combination-training-20261015/queue",
+  "scientific_retry": false,
+  "source_changes": false,
+  "time_unix": 1792044351.9608212,
+  "verified_child_states": {
+    "1004404": "Z"
+  },
+  "workers_per_gpu": 1
+}

@@ -1,0 +1,17 @@
+{
+  "authorization": "Root explicitly selected T+reg_coeff2 and S+halfjoint after certified initial eight completed, under the user instruction train it make it work.",
+  "campaign": "bcap-selective-history-repair-screen-v1",
+  "campaign_budget_seconds": 1200,
+  "candidate_budget_seconds": 600,
+  "diagnostics_profile": "same default as all initial arms; no added optimizer diagnostics",
+  "initial_completion_sha256": "f1cacde160e4fcf40b413191acc65f88b3a9d17ec0ecde65e1659ab02f7a41cd",
+  "initial_evidence_sha256": "e90fb7288c5035e5e5e2aecb34099f4565096669d0869a7aa2f0a368c64d4f80",
+  "protocol_seed": 0,
+  "reason": "T already passes Ring, whereas S additionally fails Ring; primary targets T pole overshoot without adding history.",
+  "selected": [
+    "bcap-transport-penalty2-v1",
+    "bcap-selective-history-halfjoint-v1"
+  ],
+  "source_algorithm_changes": false,
+  "withdrawn_unsubmitted_draft": "bcap-selective-history-penalty2-v1"
+}

@@ -1,0 +1,1432 @@
+{
+  "attempts": [
+    {
+      "arm": "S",
+      "attempt": "1618e77d8bb84a3095a7275223b51581",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/provenance/provenance-state.pt",
+      "sha256": "d3835d70e452b21c132a72e9412534d8d0d9700877ff1bd89206f99d7f1d5850",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 80,
+                "last": {
+                  "effective_gradient_count": 14.999311735241543,
+                  "gradient_variance": 4.7782775057199685e-05,
+                  "rho": 0.9979802420676432,
+                  "squared_signal": 0.023609891390649784
+                },
+                "weight": 0.9999770573150301,
+                "weight2": 0.06666666663157556,
+                "zero_steps": 0
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "B",
+      "attempt": "2f3e6cc58af14ee1aea7302ab180e3fa",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/provenance/provenance-state.pt",
+      "sha256": "6b1926661764a950e6f5b61c345d09856d4b80461a0e6f6e3d64b2ede19b80b6",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "S",
+      "attempt": "388c007f719e4c7d9e7d6df159e4c7d4",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/provenance/provenance-state.pt",
+      "sha256": "1fcea9d63d157f0fbbe58dc9192229f6683d34cd7404885ad90cd3af539b7860",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.01578120445297245,
+              "projected_steps": 11,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 11,
+              "conflict_steps": 11,
+              "max_retained_norm_ratio": 0.7071012747332357,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 7.7764424706701245
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 1600,
+                "last": {
+                  "effective_gradient_count": 14.999999999999996,
+                  "gradient_variance": 1.1727415138321755,
+                  "rho": 0.06242522022041758,
+                  "squared_signal": 0.07808299544897133
+                },
+                "weight": 0.9999999999999996,
+                "weight2": 0.06666666666666662,
+                "zero_steps": 116
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "W",
+      "attempt": "42252bc7a07845ecbda0abd6c6e2035c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/provenance/provenance-state.pt",
+      "sha256": "786370d52ed4f2108abc66f9cf4839d5b88f10c3e60e364a323699941a72f793",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.component_history",
+          "state": {
+            "mode": "whole",
+            "packets": {
+              "generator": {
+                "count": 80,
+                "last": {
+                  "effective_gradient_count": 14.999311735241543,
+                  "gradient_variance": 0.23817221213580397,
+                  "rho": 0.7117219291947858,
+                  "squared_signal": 0.5880169304186222
+                },
+                "weight": 0.9999770573150301,
+                "weight2": 0.06666666663157556,
+                "zero_steps": 0
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "T",
+      "attempt": "8169e4dc2daf472db4a81df6413a173c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c/provenance/provenance-state.pt",
+      "sha256": "74f0c97966e5ed0ca22c9b464ab15d29be2fe9e9bd23bca66a5455e0bbd0b787",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0027037528675587894,
+              "projected_steps": 2,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 2,
+              "conflict_steps": 2,
+              "max_retained_norm_ratio": 0.7071037201860442,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 1.4141754831753426
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "W",
+      "attempt": "a952b5e26e1048d4a7d9a915af74ea69",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69/provenance/provenance-state.pt",
+      "sha256": "f78f9fc9fb83496d3a0dbbb356493c2d7e8c20d397751918d6502d8f901257f6",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.component_history",
+          "state": {
+            "mode": "whole",
+            "packets": {
+              "generator": {
+                "count": 1600,
+                "last": {
+                  "effective_gradient_count": 14.999999999999996,
+                  "gradient_variance": 6.895439949985968,
+                  "rho": 0.0,
+                  "squared_signal": 0.0
+                },
+                "weight": 0.9999999999999996,
+                "weight2": 0.06666666666666662,
+                "zero_steps": 1122
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "T",
+      "attempt": "cc87fcf01d924529984c61f42c1224cd",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/provenance/provenance-state.pt",
+      "sha256": "d8a8d34d367f6af0db6bc8ca06d8e600b6ce1bb6fe85093a705d8ddb1fc133a1",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "B",
+      "attempt": "e79666f6b8b94b6d84600dbaea2cdaad",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad/provenance/provenance-state.pt",
+      "sha256": "409078af244ad98e38174ee95652b7501a91e82c26a500b9592f5437f9a3decc",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "SH",
+      "attempt": "04da310985f245e191a588aecad20c6f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/provenance/provenance-state.pt",
+      "sha256": "a9cf18ed1d27cf03d531213a810d6cff6ce1752eb71b85368fda97989dbe0c32",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 80,
+                "last": {
+                  "effective_gradient_count": 14.999311735241543,
+                  "gradient_variance": 0.00014576588482321007,
+                  "rho": 0.9959153665230749,
+                  "squared_signal": 0.03554063918597749
+                },
+                "weight": 0.9999770573150301,
+                "weight2": 0.06666666663157556,
+                "zero_steps": 0
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.006,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "SH",
+      "attempt": "214f69535ed74ab7a52e6d6d54a8c12f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/214f69535ed74ab7a52e6d6d54a8c12f/provenance/provenance-state.pt",
+      "sha256": "bcf7c6b54bf04b23611f211feea86884440f0cbcf2437658399b0671e57ccb1d",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.003805198705214384,
+              "projected_steps": 12,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 12,
+              "conflict_steps": 12,
+              "max_retained_norm_ratio": 0.7071065377534806,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 8.484741644495085
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 1600,
+                "last": {
+                  "effective_gradient_count": 14.999999999999996,
+                  "gradient_variance": 0.3803482587164013,
+                  "rho": 0.31837299693029203,
+                  "squared_signal": 0.177652314916249
+                },
+                "weight": 0.9999999999999996,
+                "weight2": 0.06666666666666662,
+                "zero_steps": 17
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.006,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.015,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "TP",
+      "attempt": "2f3167e14f3049669f71bb71a298f1d1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1/provenance/provenance-state.pt",
+      "sha256": "88d329fdbf68b9394e86376e17891a632ecf5986f0da86d705e1e51501645506",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.00396554159100608,
+              "projected_steps": 1,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 1,
+              "conflict_steps": 1,
+              "max_retained_norm_ratio": 0.7069929165538886,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.7069929165538886
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "TP",
+      "attempt": "78e7b5cc9bdd408e8c370400ff16fba1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1/provenance/provenance-state.pt",
+      "sha256": "24d8650af5cac2465c111c9011aed80de9bb916ffdab8718b355885282d1521d",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.018000000000000002,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "TD",
+      "attempt": "7a528019e4bd4615b11a83534ff54006",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/provenance/provenance-state.pt",
+      "sha256": "d7670e703797c50ee5e5abaa3658bb72290e923f5a38e2aaf974e14501201f64",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.009000000000000001,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "TD",
+      "attempt": "92da3b999bbb4202820242a2e56d6757",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/provenance/provenance-state.pt",
+      "sha256": "01a9afbc143ba0821d1d251584aed11a946db3fa66465e99716ed450a255b33f",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.006330070143515262,
+              "projected_steps": 1,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 1,
+              "conflict_steps": 1,
+              "max_retained_norm_ratio": 0.7069579639218618,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.7069579639218618
+            }
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.012,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.03,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.009000000000000001,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "SHD",
+      "attempt": "de6dcf241bb3408bbb0b0fd754e06a66",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/provenance/provenance-state.pt",
+      "sha256": "8721c38ca56e11c8d9a5874fe3874f577ab463b16baea5da05e04441458a1efe",
+      "summaries": [
+        {
+          "path": "root.optimizers.generator.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.0,
+              "projected_steps": 0,
+              "steps": 80
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 0,
+              "conflict_steps": 0,
+              "max_retained_norm_ratio": 0.0,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 0.0
+            }
+          }
+        },
+        {
+          "path": "root.optimizers.generator.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 80,
+                "last": {
+                  "effective_gradient_count": 14.999311735241543,
+                  "gradient_variance": 0.0005113122526680529,
+                  "rho": 0.9793966333845887,
+                  "squared_signal": 0.02430561510743098
+                },
+                "weight": 0.9999770573150301,
+                "weight2": 0.06666666663157556,
+                "zero_steps": 0
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.006,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80
+          ],
+          "path": "root.optimizers.generator.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.009000000000000001,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            80,
+            80,
+            80,
+            80
+          ],
+          "path": "root.optimizers.discriminator.normalized_clock"
+        }
+      ],
+      "task": "two_pole"
+    },
+    {
+      "arm": "SHD",
+      "attempt": "e9e061fb9ae245d59fea80b6fc6b408b",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b/provenance/provenance-state.pt",
+      "sha256": "cbf2640df2a86c0fd207ed17b322c99449561c574aa9471fb83a314c4c908a12",
+      "summaries": [
+        {
+          "path": "root.trainer.optimizers.0.constraint_geometry",
+          "state": {
+            "mode": "nonascent",
+            "pending": null,
+            "schema": 2,
+            "stats": {
+              "max_derivative_after": 0.0,
+              "max_derivative_before": 0.004686821856296856,
+              "projected_steps": 8,
+              "steps": 1600
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.direction_blend",
+          "state": {
+            "schema": 1,
+            "stats": {
+              "blended_steps": 8,
+              "conflict_steps": 8,
+              "max_retained_norm_ratio": 0.7071068744421091,
+              "pareto_stalls": 0,
+              "retained_norm_ratio_sum": 5.656035568508306
+            }
+          }
+        },
+        {
+          "path": "root.trainer.optimizers.0.component_history",
+          "state": {
+            "mode": "adversarial",
+            "packets": {
+              "generator": {
+                "count": 1600,
+                "last": {
+                  "effective_gradient_count": 14.999999999999996,
+                  "gradient_variance": 0.3057486316850615,
+                  "rho": 0.12392728202201975,
+                  "squared_signal": 0.043250515772406045
+                },
+                "weight": 0.9999999999999996,
+                "weight2": 0.06666666666666662,
+                "zero_steps": 6
+              }
+            },
+            "pending": false,
+            "placement": "before_normalization",
+            "schema": 1
+          }
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.006,
+              "role": "generator",
+              "sampled_rows_required": null,
+              "smoothing": null
+            },
+            {
+              "algorithm": "rownorm",
+              "lr": 0.015,
+              "role": "prior",
+              "sampled_rows_required": true,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.0.normalized_clock"
+        },
+        {
+          "groups": [
+            {
+              "algorithm": "dualnorm",
+              "lr": 0.009000000000000001,
+              "role": "critic",
+              "sampled_rows_required": null,
+              "smoothing": null
+            }
+          ],
+          "parameter_steps": [
+            1600,
+            1600,
+            1600,
+            1600,
+            1600,
+            1600
+          ],
+          "path": "root.trainer.optimizers.1.normalized_clock"
+        }
+      ],
+      "task": "ring16_acquisition"
+    }
+  ],
+  "kind": "read_only_final_optimizer_packets",
+  "limitations": "Final counters and last history receipt only; no per-update rho or finite-loss trace.",
+  "new_model_evaluations": 0,
+  "training_updates": 0
+}

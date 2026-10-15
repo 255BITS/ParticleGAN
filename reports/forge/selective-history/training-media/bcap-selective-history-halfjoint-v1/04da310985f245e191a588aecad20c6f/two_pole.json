@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "e151c0d6e1e8fa82e16d9a4e77a508cb29c85d5a4940a07156365a161b386ec1",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f6217390855ff4257fe80e5269206292a207301494461f7b3ee24e7aaaee312b",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/constraint_geometry-scored-outputs.pt": "0fc1e160bd69ffd60a3bd7d121c15e3bc304f77892a541c0152e5f27aa803454"
+  },
+  "task_id": "two_pole"
+}

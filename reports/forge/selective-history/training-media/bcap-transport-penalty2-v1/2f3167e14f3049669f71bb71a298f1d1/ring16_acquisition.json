@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "1f5db45dbec680ce53acd72f08f3152ea0bf8c44573d366903f1fd6be287543a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "708e43b2a7d43c58bc47ebad72f2a20e42bed0a8f4188e19f22d16caea1485bf",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1/observed-samples.pt": "14d110c26359fee7dd42869a342b2d40ad26d08cb1075a5a4fe7cb1d92b4a244"
+  },
+  "task_id": "ring16_acquisition"
+}

@@ -1,0 +1,99 @@
+{
+  "campaign": "bcap-critic-rate-final-screen-v1",
+  "commands": [
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-transport-halfcritic-v1",
+      "--study",
+      "bcap-transport-halfcritic-v1-pole-ring-study-v1"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-selective-history-halfjoint-halfcritic-v1",
+      "--study",
+      "bcap-selective-history-halfjoint-halfcritic-v1-pole-ring-study-v1"
+    ]
+  ],
+  "drain_finished_unix": 1792045303.0518312,
+  "drain_started_unix": 1792045181.1051254,
+  "driver_pid": 1054457,
+  "roster": [
+    {
+      "candidate": "bcap-transport-halfcritic-v1",
+      "candidate_revision": "9ec781bbe5ee677f854d04a64c1b0ab731240aa9ea28b551c702270b281ef6c0",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "d9cafc673ede7d8baea8b0a3f77a19bb22d1bce2c36d19f2a2b4682be05c2bc9",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "3a4f198304b1e2ec177675df6861bbaaab63d5753c7837a77d381d7a8bfa92d1",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-transport-halfcritic-v1-pole-ring-study-v1"
+    },
+    {
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "candidate_revision": "c577f4240163ba5602cda5e24b3b12c43d43fa7b316254c5635c4dd17071039b",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "ae83a546bae30194edb95cbef1bafa86a91db8c302cb62876eadf9e3cac86f3d",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "6b9b2080503d710410efa0e173e56208242ea6826b6ea186f11e7e1e278a5fcb",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-halfjoint-halfcritic-v1-pole-ring-study-v1"
+    }
+  ],
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "submissions": [
+    {
+      "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+      "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+      "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/13a7eaa424f84d53dd7b4686.json",
+      "request_id": "13a7eaa424f84d53dd7b4686",
+      "status": "queued"
+    },
+    {
+      "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+      "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+      "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/b6a8dbf8cc2992925619c867.json",
+      "request_id": "b6a8dbf8cc2992925619c867",
+      "status": "queued"
+    }
+  ],
+  "time_unix": 1792045175.3407056
+}

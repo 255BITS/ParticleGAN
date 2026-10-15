@@ -1,0 +1,63 @@
+{
+  "campaign": {
+    "budget_seconds": 1200,
+    "candidate_budget_seconds": 600,
+    "id": "bcap-selective-history-repair-screen-v1"
+  },
+  "candidate": "bcap-selective-history-halfjoint-v1",
+  "competing_explanation": "Exact new S full curves must justify selecting this draft. A passing endpoint cannot replace five terminal passes, and no original Tier1 qualification is borrowed. Both80-update pole/24checks and1600-update Ring/96checks must finish. Whole-history/adversarial-history effects may remain harmful even if a numerical repair works.",
+  "control": {
+    "candidate_id": "bcap-selective-history-adversarial-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Fresh S fails pole and Ring; its Ring retains all 16 modes but final HQ and covariance fail. Test half G/E/prior finite motion with D rate held at .018: lr .006, d_lr_mult 3, prior_lr_mult unchanged at 2.5. This may reduce overshoot, but slower acquisition and weaker pole travel are risks. Both original complete 80/1600-update gates must pass.",
+  "id": "bcap-selective-history-halfjoint-v1-pole-ring-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-pole-ring-v2",
+        "selective_attempts": {
+          "ring16_acquisition": "388c007f719e4c7d9e7d6df159e4c7d4",
+          "two_pole": "1618e77d8bb84a3095a7275223b51581"
+        },
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+        "transport_attempts": {
+          "ring16_acquisition": "8169e4dc2daf472db4a81df6413a173c",
+          "two_pole": "cc87fcf01d924529984c61f42c1224cd"
+        }
+      },
+      "path": "reports/forge/selective-history/initial-training-v2.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-selective-history-pole-ring-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

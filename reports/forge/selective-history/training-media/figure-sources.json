@@ -1,0 +1,26 @@
+[
+  {
+    "file": "training-curves.png",
+    "original_sha256": "59bddbb755aca3f8ae80856b1385147ea0b6f2746835573d9dca4fdb6c03c4e2",
+    "packaged_sha256": "59bddbb755aca3f8ae80856b1385147ea0b6f2746835573d9dca4fdb6c03c4e2",
+    "normalization": "none"
+  },
+  {
+    "file": "training-curves.svg",
+    "original_sha256": "2c6aaa4d54268f56385da0b46966d8889c675964de6654544daefeb45fc52dd6",
+    "packaged_sha256": "24f52e66fa3d7482a1e0816b4f19b8f57b8f0bef4792e613b8d4575af1bf1cb9",
+    "normalization": "trailing line whitespace removed"
+  },
+  {
+    "file": "repair-training-curves.png",
+    "original_sha256": "84c29a3d3eafcc45a9b96fef48066395ca11816a430c8f7adbcd1df5532a99ec",
+    "packaged_sha256": "84c29a3d3eafcc45a9b96fef48066395ca11816a430c8f7adbcd1df5532a99ec",
+    "normalization": "none"
+  },
+  {
+    "file": "repair-training-curves.svg",
+    "original_sha256": "a39faf65db72dd0e9a29f9e0a8e79dd456de4e1261c791c5c5f6a58fe662a934",
+    "packaged_sha256": "b6ead87bed530dc6acb742f5f49e85871909eff7b848cf6bd6e5d0154b01a509",
+    "normalization": "trailing line whitespace removed"
+  }
+]

@@ -1,0 +1,887 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "7a528019e4bd4615b11a83534ff54006",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/7a528019e4bd4615b11a83534ff54006",
+      "media": [
+        {
+          "gif_sha256": "725484ef0e7db04d106e732f8214839d341f0edb7fc42ceee08ce45ff197989a",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "68efa823a52dfaaf61b53c229682ab8911f16718e6bd07eb6a515695d2611828",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/constraint_geometry-scored-outputs.pt": "2d9d00203cbd0c636b2e55198f048cd191c8ef98b688909ca52ec75392b5ed39"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-transport-halfcritic-v1/7a528019e4bd4615b11a83534ff54006"
+    },
+    {
+      "attempt_id": "92da3b999bbb4202820242a2e56d6757",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/92da3b999bbb4202820242a2e56d6757",
+      "media": [
+        {
+          "gif_sha256": "2bccc30cdb9ec5d0d999a33e68318a265769ed2ec43730479137cd1717ca626b",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "909c3a23e030a4ccbee7d207d85f3ae8dff09ddf0b51e9c7bb9409643d556d01",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/observed-samples.pt": "bbb2df16253a531ee8f4afb4cb1e5f1450097ec0272b490f0ded66f6a5a92eed"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-transport-halfcritic-v1/92da3b999bbb4202820242a2e56d6757"
+    },
+    {
+      "attempt_id": "de6dcf241bb3408bbb0b0fd754e06a66",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/de6dcf241bb3408bbb0b0fd754e06a66",
+      "media": [
+        {
+          "gif_sha256": "e70fae8351b4794ffa741a1393b251fe8324c77e58f475cbe4a227dad1d0f194",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "486a9dfdaf60825e8740bf24423c0289d236300700e2bd6bb85a23989a66e779",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/constraint_geometry-scored-outputs.pt": "ac3550bc7b7254e1e88279c2057cfca07f1bd4432f97caef5c267ac321990f21"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-halfjoint-halfcritic-v1/de6dcf241bb3408bbb0b0fd754e06a66"
+    },
+    {
+      "attempt_id": "e9e061fb9ae245d59fea80b6fc6b408b",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/e9e061fb9ae245d59fea80b6fc6b408b",
+      "media": [
+        {
+          "gif_sha256": "0a73fdce379a03496e216224bc9fcb2306441ac72e197e26e6075eba05f93b24",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "94285ef757ef53111f17ee0b0895320fea88787007449d8e85db2810965a4bb6",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b/observed-samples.pt": "3eecce24621b52b0c9a0d6b2360355375a4aa1247540a8edc5880c39c7b93b61"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-halfjoint-halfcritic-v1/e9e061fb9ae245d59fea80b6fc6b408b"
+    },
+    {
+      "attempt_id": "43e4542f623e4495ae533fa63e74456f",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/43e4542f623e4495ae533fa63e74456f",
+      "media": [
+        {
+          "gif_sha256": "93fa16643a5f35677d4178adb34897cd070f0f61bf147bb105a94c299e991945",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "58c69e9c80a17576642c2e3e65e673099cf7c15b0f4aec7d367756375a39b280",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [
+            {
+              "method": "exact scored step and all authoritative metric fields; identical duplicates only",
+              "selected_source_indices": [
+                2,
+                3,
+                4,
+                5,
+                7,
+                8,
+                9,
+                10,
+                11,
+                13,
+                14,
+                15,
+                16,
+                17,
+                19,
+                20,
+                21,
+                22,
+                23,
+                25,
+                26,
+                27,
+                28,
+                29
+              ],
+              "source_frame_count": 31,
+              "source_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f/constraint_geometry-scored-outputs.pt",
+              "task_id": "ae_gan_hold"
+            }
+          ],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f/constraint_geometry-scored-outputs.pt": "f22de1258d0a3cc869a78901f4ef1c72ea4972a004c6ffe211a1f2b652c9ffcd"
+          },
+          "task_id": "ae_gan_hold"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/43e4542f623e4495ae533fa63e74456f"
+    },
+    {
+      "attempt_id": "557aa43fc89843bc9eff5bb4ec9334e6",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/557aa43fc89843bc9eff5bb4ec9334e6",
+      "media": [
+        {
+          "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 4,
+          "observations_sha256": "9a6ae9a7415a0e314e2cecb153c82d66c64b7450926e5e6d5568f850e7b8356c",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/557aa43fc89843bc9eff5bb4ec9334e6/clockfree-proof/comparisons.pt": "3f86d5794766400c66a6c731f66b5378d3b07c7505ae3abf5f11a4b233437bef"
+          },
+          "task_id": "clockfree_audit_measurement_v1"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/557aa43fc89843bc9eff5bb4ec9334e6"
+    },
+    {
+      "attempt_id": "5fa727858ca147db84ab102916207016",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/5fa727858ca147db84ab102916207016",
+      "media": [
+        {
+          "gif_sha256": "996bd1c584cb73bcb56ee24e36e1580064fcaaf13505149bb97cfebb7690910d",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "ee833301e76d1c836d79f850d982051da7afa680b36b5bc6fa0501c674146977",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/5fa727858ca147db84ab102916207016/constraint_geometry-scored-outputs.pt": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+          },
+          "task_id": "unused_token_hold"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/5fa727858ca147db84ab102916207016"
+    },
+    {
+      "attempt_id": "948a1c31848049ecbf115d23cc17be68",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/948a1c31848049ecbf115d23cc17be68",
+      "media": [
+        {
+          "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/948a1c31848049ecbf115d23cc17be68/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/948a1c31848049ecbf115d23cc17be68"
+    },
+    {
+      "attempt_id": "a063748fc3194662b2d65565a7b31469",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/a063748fc3194662b2d65565a7b31469",
+      "media": [
+        {
+          "gif_sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "744f278c444a0a9bc20ffe4a9b472e71a5a0e22c5fa7cd5d622a0f9af109e8ca",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/a063748fc3194662b2d65565a7b31469/observed-samples.pt": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/a063748fc3194662b2d65565a7b31469"
+    },
+    {
+      "attempt_id": "d3ab270c75ca4c5494f4fcd9016ff941",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/d3ab270c75ca4c5494f4fcd9016ff941",
+      "media": [],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/d3ab270c75ca4c5494f4fcd9016ff941"
+    },
+    {
+      "attempt_id": "fcd3007735a646f7ba26e343cc07cc63",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/fcd3007735a646f7ba26e343cc07cc63",
+      "media": [
+        {
+          "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/evaluator/observed-samples.pt": "2ab2fac0856ed74d60b3787fd19cf468a5efc8565cabc4ef9ce28b95d2a2e715"
+          },
+          "task_id": "gaussian1d_smoke"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/fcd3007735a646f7ba26e343cc07cc63"
+    },
+    {
+      "attempt_id": "1618e77d8bb84a3095a7275223b51581",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/1618e77d8bb84a3095a7275223b51581",
+      "media": [
+        {
+          "gif_sha256": "cf89c10f40f8e247941a5b7bd1eeb4ebd8250c3a051af4655eb14698145a44ca",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "4e430a10bb9a381a276fa8f27b4807ed1e4a52a319817f3f07f8b654a51d7fc5",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/constraint_geometry-scored-outputs.pt": "42c27f8eb7bdc6ff22deab6d6a51c4004add5d78c99f10138aea3ce29c2098be"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-adversarial-v1/1618e77d8bb84a3095a7275223b51581"
+    },
+    {
+      "attempt_id": "2f3e6cc58af14ee1aea7302ab180e3fa",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/2f3e6cc58af14ee1aea7302ab180e3fa",
+      "media": [
+        {
+          "gif_sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "07b4ba77208fed5cd0f701047b94567b16c3f6771493e409cba20169bc645707",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/constraint_geometry-scored-outputs.pt": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/2f3e6cc58af14ee1aea7302ab180e3fa"
+    },
+    {
+      "attempt_id": "388c007f719e4c7d9e7d6df159e4c7d4",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/388c007f719e4c7d9e7d6df159e4c7d4",
+      "media": [
+        {
+          "gif_sha256": "afbe4c47fd2b866c047ef31931e1b8446fe38cdd52aa3c30fd3c5152eb8089bf",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "2dc584b24da62692caa1aced97f1f89b8af717d4fd0e0e6b081fa47b0afadccd",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/observed-samples.pt": "11cf1164aafa6e2e677fb906d69e1e14d10ecde3c54831181712af2782b12d50"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-adversarial-v1/388c007f719e4c7d9e7d6df159e4c7d4"
+    },
+    {
+      "attempt_id": "42252bc7a07845ecbda0abd6c6e2035c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-whole-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/42252bc7a07845ecbda0abd6c6e2035c",
+      "media": [
+        {
+          "gif_sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "70e832558de0c7c5018b142dff4918ea00e213b590a1a64c1058373cab5a9471",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/constraint_geometry-scored-outputs.pt": "0915692cbe77f7d63d6c61e60389227eefc87dfaea061f9e54440960d322570b"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-whole-v1/42252bc7a07845ecbda0abd6c6e2035c"
+    },
+    {
+      "attempt_id": "8169e4dc2daf472db4a81df6413a173c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-transport-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/8169e4dc2daf472db4a81df6413a173c",
+      "media": [
+        {
+          "gif_sha256": "4f86acdf072260fb9a61ed2025c9ff54973218b26819e992bed4178b98b34aa1",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "3f96a4dd410e73a794709dd338d71d25e9f231f1c4a68279b12a1d19356d425f",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c/observed-samples.pt": "899e6d2d6dad3c7e66e7156f849ce1156e70014dea988dbe604f57f08b5d701d"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-transport-v1/8169e4dc2daf472db4a81df6413a173c"
+    },
+    {
+      "attempt_id": "a952b5e26e1048d4a7d9a915af74ea69",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-whole-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/a952b5e26e1048d4a7d9a915af74ea69",
+      "media": [
+        {
+          "gif_sha256": "b2951bf08f8c15144dda04de7c258e09ffe3143f99d8160048910a6cee488c6f",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "7df49a35f5b2c99fea7acfebfd72187387fd58a4c8fb280d3707841c35dc93d7",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69/observed-samples.pt": "a421ebe246571aa2c4675facf0a9b0dd579ea9f0ff6b11ee90f74f090ec67720"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-whole-v1/a952b5e26e1048d4a7d9a915af74ea69"
+    },
+    {
+      "attempt_id": "cc87fcf01d924529984c61f42c1224cd",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-transport-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/cc87fcf01d924529984c61f42c1224cd",
+      "media": [
+        {
+          "gif_sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "f7195a76da7610fe71a6e8c49ebf4e2b571f01d487a14d8da51468542765b4b2",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/constraint_geometry-scored-outputs.pt": "c0f73a115325b141ff30c5cd27020a19913828bcfb791d115011bef2b2571767"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-transport-v1/cc87fcf01d924529984c61f42c1224cd"
+    },
+    {
+      "attempt_id": "e79666f6b8b94b6d84600dbaea2cdaad",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/e79666f6b8b94b6d84600dbaea2cdaad",
+      "media": [
+        {
+          "gif_sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "744f278c444a0a9bc20ffe4a9b472e71a5a0e22c5fa7cd5d622a0f9af109e8ca",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "PASS",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad/observed-samples.pt": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/recipe-prior-refactor-bcap-pure-v1/e79666f6b8b94b6d84600dbaea2cdaad"
+    },
+    {
+      "attempt_id": "04da310985f245e191a588aecad20c6f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/04da310985f245e191a588aecad20c6f",
+      "media": [
+        {
+          "gif_sha256": "e151c0d6e1e8fa82e16d9a4e77a508cb29c85d5a4940a07156365a161b386ec1",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "f6217390855ff4257fe80e5269206292a207301494461f7b3ee24e7aaaee312b",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/constraint_geometry-scored-outputs.pt": "0fc1e160bd69ffd60a3bd7d121c15e3bc304f77892a541c0152e5f27aa803454"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-halfjoint-v1/04da310985f245e191a588aecad20c6f"
+    },
+    {
+      "attempt_id": "214f69535ed74ab7a52e6d6d54a8c12f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/214f69535ed74ab7a52e6d6d54a8c12f",
+      "media": [
+        {
+          "gif_sha256": "3b021c9e50d37ad280e54797b9748d33ebdc555518b19115f1d5b15ad93f099f",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "ced30b0314e311487c8cd0c60ed16e01d5aedabbccb1ecfbe6623f409c0e43d2",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/214f69535ed74ab7a52e6d6d54a8c12f/observed-samples.pt": "a505d0d79b0546147fa19c842c99bd333ebc8388b5cc49e9efc344dc3cb8b633"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-selective-history-halfjoint-v1/214f69535ed74ab7a52e6d6d54a8c12f"
+    },
+    {
+      "attempt_id": "2f3167e14f3049669f71bb71a298f1d1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-transport-penalty2-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/2f3167e14f3049669f71bb71a298f1d1",
+      "media": [
+        {
+          "gif_sha256": "1f5db45dbec680ce53acd72f08f3152ea0bf8c44573d366903f1fd6be287543a",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 96,
+          "observations_sha256": "708e43b2a7d43c58bc47ebad72f2a20e42bed0a8f4188e19f22d16caea1485bf",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            12,
+            24,
+            36,
+            48,
+            59,
+            71,
+            83,
+            95
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1/observed-samples.pt": "14d110c26359fee7dd42869a342b2d40ad26d08cb1075a5a4fe7cb1d92b4a244"
+          },
+          "task_id": "ring16_acquisition"
+        }
+      ],
+      "output_directory": "training-media/bcap-transport-penalty2-v1/2f3167e14f3049669f71bb71a298f1d1"
+    },
+    {
+      "attempt_id": "78e7b5cc9bdd408e8c370400ff16fba1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-transport-penalty2-v1",
+      "certified_directory": "/ml2/hypergan/particlegan-selective-history-20261015/reports/forge/attempts/78e7b5cc9bdd408e8c370400ff16fba1",
+      "media": [
+        {
+          "gif_sha256": "526ce6083845166b94dbada4ad758da1f4e88c46f82118a3386d04843522e795",
+          "kind": "actual_training_saved_observations_gif",
+          "observation_count": 24,
+          "observations_sha256": "3f3ca9238fa2506a6750f6ce6dfaa4ec784bbbf6990c3fed72910dd5fbd86e78",
+          "optimizer_updates_added": 0,
+          "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+          "qualification_input": false,
+          "recorded_grade": "FAIL",
+          "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "scored_frame_alignment": [],
+          "selected_observation_indices": [
+            0,
+            3,
+            6,
+            9,
+            12,
+            14,
+            17,
+            20,
+            23
+          ],
+          "source_inputs": {
+            "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1/constraint_geometry-scored-outputs.pt": "8c5ef0cfe53b50f145e6ffe4c68a151fa90d522c5afef8faad8b42d94c490be7"
+          },
+          "task_id": "two_pole"
+        }
+      ],
+      "output_directory": "training-media/bcap-transport-penalty2-v1/78e7b5cc9bdd408e8c370400ff16fba1"
+    }
+  ],
+  "attempts_without_media": [
+    {
+      "attempt_id": "d3ab270c75ca4c5494f4fcd9016ff941",
+      "reason": "No exported certified observation media; see original result."
+    }
+  ],
+  "kind": "certified_actual_training_media",
+  "optimizer_updates_added": 0,
+  "original_index_sha256": "1049fd0e8e37e0b30329ee1bcb406d81a022fc542e6d2c17f0c0d717932748ab",
+  "sampling_draws_added": 0,
+  "script_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0"
+}

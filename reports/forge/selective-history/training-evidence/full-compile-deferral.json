@@ -1,0 +1,44 @@
+{
+  "full_compile_terminal_record": {
+    "command": [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "compile"
+    ],
+    "exit_code": 130,
+    "finished_unix": 1792046960.2427459,
+    "pid": 1116270,
+    "started_unix": 1792046627.5094247,
+    "status": "ERROR",
+    "stderr": "/ml2/hypergan/combination-training-20261015/logs/final-compile.stderr.log",
+    "stdout": "/ml2/hypergan/combination-training-20261015/logs/final-compile.stdout.json",
+    "wall_seconds": 332.73332118988037,
+    "wrapper_pid": 1116269
+  },
+  "git_changed_names_before_interrupt": [],
+  "interrupted_utc": "2026-10-15T06:49:31.191056+00:00",
+  "pid": 1116270,
+  "previous_compilation_output_mismatches": [],
+  "previous_compilation_outputs_checked": 2,
+  "progress_io": "rchar: 12056077948\nwchar: 95877\nsyscr: 3480997\nsyscw: 6515\nread_bytes: 36753408\nwrite_bytes: 4096\ncancelled_write_bytes: 0\n",
+  "reason": "Root directed supported summaries-only refresh after full rebuild required at least7924 unrelated current resolutions and no first-board output afterfive minutes; preserve published qualification tables.",
+  "status": "FULL_REBUILD_DEFERRED",
+  "tracked_changed_names_after_interrupt": [],
+  "tracked_path_set_unchanged": true,
+  "utc": "2026-10-15T06:49:19.835546+00:00",
+  "verified_command": [
+    "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+    "-m",
+    "experiments.forge",
+    "--root",
+    "/ml2/hypergan/particlegan-selective-history-20261015",
+    "--queue-root",
+    "/ml2/hypergan/combination-training-20261015/queue",
+    "compile"
+  ]
+}

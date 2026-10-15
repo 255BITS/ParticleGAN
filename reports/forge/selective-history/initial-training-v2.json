@@ -1,0 +1,438 @@
+{
+  "campaign": "bcap-selective-history-pole-ring-v2",
+  "campaign_cap_seconds": 2400,
+  "candidate_spend_seconds": {
+    "bcap-selective-history-adversarial-v1": 54.23365827201633,
+    "bcap-selective-history-transport-v1": 62.57985807201476,
+    "bcap-selective-history-whole-v1": 49.72114068098017,
+    "recipe-prior-refactor-bcap-pure-v1": 114.80137183298939
+  },
+  "completed_at_unix": 1792044652.3974192,
+  "completed_attempts": 8,
+  "coordinator_repair": "Interrupted full-memory compilation after two completed baseline jobs, then resumed same public Queue/drain with deferred compilation; no training was interrupted or repeated.",
+  "jobs": [
+    {
+      "attempt_id": "388c007f719e4c7d9e7d6df159e4c7d4",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 1400,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 6,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "device": "0",
+      "durable_receipt_directory": "reports/forge/attempts/388c007f719e4c7d9e7d6df159e4c7d4",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4",
+      "file_sha256": {
+        "graded-result.json": "8973b6dd0303d689203c49ef3a255e926fb372b043685b87c8113ccfe6d2a6f2",
+        "raw-result.json": "d31184a027b38c94c26cac10fb713ff38b8881a0547c853c47c1ce955d2bb5d7",
+        "request.json": "70e3aabfd95d7bb884f693d2d9ca67b950c0939c11038274784676d3f0b94567",
+        "result.json": "3f6faa498de4dc21ff91d09497cd46cc369a869162567c2e574da58c6d2005d5",
+        "terminal.json": "5f08d21b85df7f8f4366d0761270e97c005b893a0d265096da4f589ee70ec11d"
+      },
+      "gate_status": "FAIL",
+      "job_key": "98710ea3f423b2dba26c5cce9536d3d53d817fdb131e8b88e1b3e078edc6f9b7",
+      "metrics": {
+        "component_core_covariance_error": 0.5436413297429681,
+        "component_core_min_eigen_ratio": 0.3410598635673523,
+        "component_covariance_error": 0.9583628606051207,
+        "component_min_eigen_ratio": 0.33835068345069885,
+        "covariance_error": 0.07802871614694595,
+        "hq": 0.77001953125,
+        "mass_tv": 0.03271484375,
+        "max_component_spill": 0.5708501935005188,
+        "mean_error": 0.023030955344438553,
+        "min_hq_mass_ratio": 0.40234375,
+        "min_mass_ratio": 0.8671875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03411112245584163,
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "830207d36f28e44f181872d4",
+      "saved_frame_files": [
+        "observed-samples.pt"
+      ],
+      "study": "bcap-selective-history-s-pole-ring-study-v2",
+      "task": "ring16_acquisition",
+      "wall_seconds": 46.05674142501084
+    },
+    {
+      "attempt_id": "1618e77d8bb84a3095a7275223b51581",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 27,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 6,
+        "passing_suffix": 1,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "device": "0",
+      "durable_receipt_directory": "reports/forge/attempts/1618e77d8bb84a3095a7275223b51581",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581",
+      "file_sha256": {
+        "graded-result.json": "038d8cf71746ecdfac1ea996819c6230097ac68784cf816ba42b1bce5128bba5",
+        "raw-result.json": "67992d50043873d4f8bff4c2b2fb6b356bea15d5c31a12e4b4a882ba1cec5073",
+        "request.json": "db1fdd631c1d8e483f6bfdb93613582b2c104da574d8d5d3a2ce5709505a77fd",
+        "result.json": "0d0ca5714658cbb9525769812c29ecb7d9cf828ed18079af641c39eccf3cecdf",
+        "terminal.json": "725e08063d1ce723ec6ccf003602f06e24976268a0ca270ccead2cf1a86db0fa"
+      },
+      "gate_status": "FAIL",
+      "job_key": "62d795783b918f46a44b99b1a8eb341b189ce5c1610702318c896f6077260d6d",
+      "metrics": {
+        "grad_med": 0.985077977180481,
+        "mean_abs": 0.9286096096038818
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "830207d36f28e44f181872d4",
+      "saved_frame_files": [
+        "constraint_geometry-scored-outputs.pt"
+      ],
+      "study": "bcap-selective-history-s-pole-ring-study-v2",
+      "task": "two_pole",
+      "wall_seconds": 8.176916847005486
+    },
+    {
+      "attempt_id": "8169e4dc2daf472db4a81df6413a173c",
+      "candidate": "bcap-selective-history-transport-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 1584,
+        "first_pass_step": 1300,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 12,
+        "passing_suffix": 6,
+        "stable_from_seconds": null,
+        "stable_from_step": 1517
+      },
+      "device": "1",
+      "durable_receipt_directory": "reports/forge/attempts/8169e4dc2daf472db4a81df6413a173c",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c",
+      "file_sha256": {
+        "graded-result.json": "36a9f72623297f6959b57675c727576cc55f1366b9c61d1dea46604d2ae08f36",
+        "raw-result.json": "821b1ca7ccad6f474cbd12821afc9b7ba1e3338cd8d21d71a37a36a520b43916",
+        "request.json": "64471fa9ed4e090175797d5e562a979633d28da038f22feaeb294958965dbd4d",
+        "result.json": "c14b3bbd597065fc499d0e649376d1425479984ee1292dc0850a10608f01c200",
+        "terminal.json": "845edd6629c51dd922ec1e91633c2056ca6e14d564972b50515a538ebba2a590"
+      },
+      "gate_status": "PASS",
+      "job_key": "7230d5a1c980326aa46cb2edf5e5a11998b852fe7e8472dbd03410afbf707b72",
+      "metrics": {
+        "component_core_covariance_error": 0.5551924044266343,
+        "component_core_min_eigen_ratio": 0.43811848759651184,
+        "component_covariance_error": 0.6733355186879635,
+        "component_min_eigen_ratio": 0.44135451316833496,
+        "covariance_error": 0.04388536512851715,
+        "hq": 0.91259765625,
+        "mass_tv": 0.03515625,
+        "max_component_spill": 0.23943662643432617,
+        "mean_error": 0.05149415507912636,
+        "min_hq_mass_ratio": 0.75390625,
+        "min_mass_ratio": 0.796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03754014086106134,
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "112a5f88ca959885175f1335",
+      "saved_frame_files": [
+        "observed-samples.pt"
+      ],
+      "study": "bcap-selective-history-t-pole-ring-study-v2",
+      "task": "ring16_acquisition",
+      "wall_seconds": 47.939229990006424
+    },
+    {
+      "attempt_id": "cc87fcf01d924529984c61f42c1224cd",
+      "candidate": "bcap-selective-history-transport-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 27,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 6,
+        "passing_suffix": 1,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "device": "0",
+      "durable_receipt_directory": "reports/forge/attempts/cc87fcf01d924529984c61f42c1224cd",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd",
+      "file_sha256": {
+        "graded-result.json": "033155ff6a3c89e50f21ac00d4dbb4f3667984b3f226f90324c0400743491cdb",
+        "raw-result.json": "2b63c3bb781fc6635f320faea14258930d09384a0ccaf303f16a3a3eabab80e9",
+        "request.json": "ca06b66200292cfc6b18293424c4e99df930eeb5b677d97cfdd797149aa547e3",
+        "result.json": "40bdf22cb544e35472b3e7fdc666c49c50fa3f9110899f065d11dbb3178adb75",
+        "terminal.json": "e1f2ec55c0ebb545ee4b7b888fd33db7d5a46d3293cb44a2e7c30a2492737cf5"
+      },
+      "gate_status": "FAIL",
+      "job_key": "2187e5a561876c5018c19d2392da240656b318d70a26dd34279ee9ddf4c49671",
+      "metrics": {
+        "grad_med": 0.9851563572883606,
+        "mean_abs": 0.9287881255149841
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "112a5f88ca959885175f1335",
+      "saved_frame_files": [
+        "constraint_geometry-scored-outputs.pt"
+      ],
+      "study": "bcap-selective-history-t-pole-ring-study-v2",
+      "task": "two_pole",
+      "wall_seconds": 14.640628082008334
+    },
+    {
+      "attempt_id": "a952b5e26e1048d4a7d9a915af74ea69",
+      "candidate": "bcap-selective-history-whole-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "device": "1",
+      "durable_receipt_directory": "reports/forge/attempts/a952b5e26e1048d4a7d9a915af74ea69",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69",
+      "file_sha256": {
+        "graded-result.json": "9255f8fa29911d93acd8f04ae762631b47829ae9545d8594bac017d393af2c75",
+        "raw-result.json": "d9ab2efec43198c5863d0badd6ad2ff9cc29cb4e52409a76929234454052d4e6",
+        "request.json": "5e8970d29aec124568ca2c19d5d454b7648147c1bc74d2535dfd2b0bc83fa5de",
+        "result.json": "01dcb808da25adc82361f691a35c48a36485ad974a78dfe8c8dbb6e638ad61f4",
+        "terminal.json": "51bb0d36924834133aa60414d0dad2de5808f85d58b568c3a16fc8eca271b7dd"
+      },
+      "gate_status": "FAIL",
+      "job_key": "581068ac8dd519e0c6f672777a083e436e2feb59b9afe3587bff168bf02fec47",
+      "metrics": {
+        "component_core_covariance_error": 0.6184621918946505,
+        "component_core_min_eigen_ratio": 1.0415024757385254,
+        "component_covariance_error": 1.941777553409338,
+        "component_min_eigen_ratio": 1.063904047012329,
+        "covariance_error": 0.014061531983315945,
+        "hq": 0.88037109375,
+        "mass_tv": 0.02734375,
+        "max_component_spill": 0.18918919563293457,
+        "mean_error": 0.04006489738821983,
+        "min_hq_mass_ratio": 0.71484375,
+        "min_mass_ratio": 0.796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.030623140508466058,
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "bed960f3ea0ae51eccc6e36e",
+      "saved_frame_files": [
+        "observed-samples.pt"
+      ],
+      "study": "bcap-selective-history-w-pole-ring-study-v2",
+      "task": "ring16_acquisition",
+      "wall_seconds": 41.92827212798875
+    },
+    {
+      "attempt_id": "42252bc7a07845ecbda0abd6c6e2035c",
+      "candidate": "bcap-selective-history-whole-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 27,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 6,
+        "passing_suffix": 1,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "device": "0",
+      "durable_receipt_directory": "reports/forge/attempts/42252bc7a07845ecbda0abd6c6e2035c",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c",
+      "file_sha256": {
+        "graded-result.json": "31c538521e81055932baa77708d9c2f801f7f52c844649ea2798dfbbb03818f3",
+        "raw-result.json": "72b757724b9310d2e0cc0812f3c2143231445610a847fd62c3c4c51a43f34a77",
+        "request.json": "14fe26aae76025a032f935deaadb69026ff1a117f5956a3d869b8cc509e67978",
+        "result.json": "5d9b6174c7a16e3ff2922eb78172d235cf4695f170847c913d640c2179d4796f",
+        "terminal.json": "489c3a67154ecbcd5db028fddbd18c5b2493cb881de549688cdf1ce2f5846e9d"
+      },
+      "gate_status": "FAIL",
+      "job_key": "1c2369340c1f026db3dac22feae79068ad253e0c6a0bd5e12ddb3d01bf069ea0",
+      "metrics": {
+        "grad_med": 0.985156238079071,
+        "mean_abs": 0.9287880659103394
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "bed960f3ea0ae51eccc6e36e",
+      "saved_frame_files": [
+        "constraint_geometry-scored-outputs.pt"
+      ],
+      "study": "bcap-selective-history-w-pole-ring-study-v2",
+      "task": "two_pole",
+      "wall_seconds": 7.792868552991422
+    },
+    {
+      "attempt_id": "e79666f6b8b94b6d84600dbaea2cdaad",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 1250,
+        "first_pass_step": 1184,
+        "minimum_stable_checks": 5,
+        "observations": 96,
+        "passing_observations": 26,
+        "passing_suffix": 26,
+        "stable_from_seconds": null,
+        "stable_from_step": 1184
+      },
+      "device": "1",
+      "durable_receipt_directory": "reports/forge/attempts/e79666f6b8b94b6d84600dbaea2cdaad",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad",
+      "file_sha256": {
+        "graded-result.json": "ca686099dd571a677569dae355439a3b97174a818ddd2575b591b819a03ba5e5",
+        "raw-result.json": "35762ac55d93e4d8e864218ef6142f31450b7a92adfd4cf78b16443120ffa8f2",
+        "request.json": "1999240fa39bf4341bb3212b1f17359b4247fbf2017ded222681d7f14488f49d",
+        "result.json": "2e876541a4a47f013050ea11fa41179f31c6b773a0d1e61a98313c7973a4660c",
+        "terminal.json": "24605563a2a63d1d20392febe45dd973a1e66f5c1e61c4920b783978d20a1e1c"
+      },
+      "gate_status": "PASS",
+      "job_key": "2f814369edc384dd5fb07de672c319450bdfcd9f35bf4e478c1edb36dde26d0e",
+      "metrics": {
+        "component_core_covariance_error": 0.46654487773776054,
+        "component_core_min_eigen_ratio": 0.24270759522914886,
+        "component_covariance_error": 0.49656706117093563,
+        "component_min_eigen_ratio": 0.24246710538864136,
+        "covariance_error": 0.06101250648498535,
+        "hq": 0.9609375,
+        "mass_tv": 0.065185546875,
+        "max_component_spill": 0.10080645233392715,
+        "mean_error": 0.007996227592229843,
+        "min_hq_mass_ratio": 0.73828125,
+        "min_mass_ratio": 0.76953125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.026980774069312406,
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "0e2384979c7205dc3f76ba73",
+      "saved_frame_files": [
+        "observed-samples.pt"
+      ],
+      "study": "bcap-selective-history-b-pole-ring-study-v2",
+      "task": "ring16_acquisition",
+      "wall_seconds": 108.68051914600073
+    },
+    {
+      "attempt_id": "2f3e6cc58af14ee1aea7302ab180e3fa",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 40,
+        "first_pass_step": 27,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 17,
+        "passing_suffix": 17,
+        "stable_from_seconds": null,
+        "stable_from_step": 27
+      },
+      "device": "0",
+      "durable_receipt_directory": "reports/forge/attempts/2f3e6cc58af14ee1aea7302ab180e3fa",
+      "existing_visual_files": [],
+      "external_artifact_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa",
+      "file_sha256": {
+        "graded-result.json": "bab9941830a4721e992916b3cb5eceff8688491dd14641af7b4cb8f257aabb1a",
+        "raw-result.json": "6746ba82705dd6817b81627fb49d44985586f5093753e7d2806ad41582943176",
+        "request.json": "bb8dbe55cf1466b94d5a44e6284b48fe731bde7bbc2e6656c72ef5f03e9cca71",
+        "result.json": "5a65f739bf8919b97cf8443ec335b67f2966a6fd67c783615c679380dc42b3bb",
+        "terminal.json": "381aaef5de6dc4c48ae9f0f5ab57fcce5bf889ee300bb32fb02f81d92a96684c"
+      },
+      "gate_status": "PASS",
+      "job_key": "d7aee9d569c90586966399c79dcbd5bcde872f538a443e3c455abc819c811c25",
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "request_id": "0e2384979c7205dc3f76ba73",
+      "saved_frame_files": [
+        "constraint_geometry-scored-outputs.pt"
+      ],
+      "study": "bcap-selective-history-b-pole-ring-study-v2",
+      "task": "two_pole",
+      "wall_seconds": 6.1208526869886555
+    }
+  ],
+  "qualification_input": false,
+  "remaining_seconds": 2118.6639711419994,
+  "reserved_seconds": 0,
+  "schema": "selective_history_training_completion_v2",
+  "scientific_attempts": 8,
+  "scientific_retries": 0,
+  "scientific_scope": "research_diagnostic",
+  "selective_attempts": {
+    "ring16_acquisition": "388c007f719e4c7d9e7d6df159e4c7d4",
+    "two_pole": "1618e77d8bb84a3095a7275223b51581"
+  },
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "source_origin_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+  "spent_seconds": 281.33602885800065,
+  "status": "COMPLETE",
+  "transport_attempts": {
+    "ring16_acquisition": "8169e4dc2daf472db4a81df6413a173c",
+    "two_pole": "cc87fcf01d924529984c61f42c1224cd"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "budget": {
+    "campaign_cap": 2520,
+    "conservative_after_original_timeout_plus_retry": 1977.0498042570252,
+    "original_reserved": 900.0,
+    "projection_not_final_charge": true,
+    "spent_other_completed_jobs": 177.04980425702524
+  },
+  "compatibility_key": "f6d05753fc15a7b2c55c42e0cee12b604465bd09c8bb6b682bb6e30c95898280",
+  "observer_environment": {
+    "PARTICLEGAN_FORGE_OPTIMIZER_DIAGNOSTICS": null,
+    "meaning": "unset in observed original word child; preserve unset for retry"
+  },
+  "original_attempt_id": "d3ab270c75ca4c5494f4fcd9016ff941",
+  "preconditions": [
+    "A6000 genuinely free of other training; idle persistent servers allowed",
+    "coordinate availability and exact launch with root and independent auditor",
+    "original terminal error/timeout/cancelled collected and child group fenced",
+    "original durable request/result/evidence preserved and hashed",
+    "existing driver exited and coordinator lease released",
+    "existing campaign and candidate cap admits full900 second reservation",
+    "Recheck actual terminalelapsed plus900 against campaign/candidate/round caps; public claim remains authoritative",
+    "Owning coordinator has stopped other feeder admissions to selected GPU and all its training children finish; transient gap is insufficient"
+  ],
+  "public_sequence": {
+    "after_terminal_and_conditions": [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "retry",
+      "f6d05753fc15a7b2c55c42e0cee12b604465bd09c8bb6b682bb6e30c95898280",
+      "--reason",
+      "Execution repair only: unrelated training occupied the same A6000 during the original full-horizon word attempt; retry uses an A6000 verified free of other training. Preserve source, runtime, seed0, original initializer, all20001 updates,24 independent confirmation pairs, original gates and900-second deadline. First attempt and all costs retained. Exactly one retry authorized."
+    ],
+    "drain_api": "drain(Queue(queue_root, report_root=root/reports/forge, on_completion=None), [isolated_gpu], workers_per_gpu=1, allow_sharing=False, campaign=campaign, request_filter=request_id)",
+    "if_cancelled_only": [
+      [
+        "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+        "-m",
+        "experiments.forge",
+        "--root",
+        "/ml2/hypergan/particlegan-selective-history-20261015",
+        "--queue-root",
+        "/ml2/hypergan/combination-training-20261015/queue",
+        "cancel",
+        "d6e4aac3dca9c827dc0f4300"
+      ],
+      [
+        "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+        "-m",
+        "experiments.forge",
+        "--root",
+        "/ml2/hypergan/particlegan-selective-history-20261015",
+        "--queue-root",
+        "/ml2/hypergan/combination-training-20261015/queue",
+        "enqueue",
+        "recipe-prior-refactor-bcap-pure-v1",
+        "--study",
+        "bcap-current-baseline-ordinary-tier1-20261015-v1"
+      ]
+    ]
+  },
+  "reason": "Execution repair only: unrelated training occupied the same A6000 during the original full-horizon word attempt; retry uses an A6000 verified free of other training. Preserve source, runtime, seed0, original initializer, all20001 updates,24 independent confirmation pairs, original gates and900-second deadline. First attempt and all costs retained. Exactly one retry authorized.",
+  "request_file": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/d6e4aac3dca9c827dc0f4300.json",
+  "request_id": "d6e4aac3dca9c827dc0f4300",
+  "request_sha256": "cddbee80f1838b4539c03eb80b49f457d23e2cd385f1673203d7d1e69bca484e",
+  "scientific_constraints": {
+    "attempt_timeout_seconds": 900,
+    "completed_peer_jobs_not_replayed": true,
+    "independent_confirmations": 24,
+    "max_additional_attempts": 1,
+    "no_warm_start": true,
+    "same_frozen_request": true,
+    "seed": 0,
+    "updates": 20001
+  },
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "source_references": {
+    "cancel": "experiments/forge/queue.py:808",
+    "drain": "experiments/forge/queue.py:939",
+    "reenqueue": "experiments/forge/queue.py:278",
+    "retry": "experiments/forge/queue.py:850"
+  },
+  "status": "AUTHORIZED_CONDITIONALLY_NOT_LAUNCHED",
+  "utc": "2026-10-15T06:37:15.652634+00:00"
+}

@@ -1,0 +1,64 @@
+{
+  "campaign": {
+    "budget_seconds": 1200,
+    "candidate_budget_seconds": 600,
+    "id": "bcap-critic-rate-final-screen-v1"
+  },
+  "candidate": "bcap-transport-halfcritic-v1",
+  "competing_explanation": "A smaller critic step may slow distribution tracking and fail Ring even if pole slopes improve. No generator/prior rate, penalty/cap, task, seed, source algorithm or diagnostic-profile change accompanies this comparison. No scientific retry, extra updates or automatic tuning follows.",
+  "control": {
+    "candidate_id": "bcap-selective-history-transport-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "Reduce only the critic effective rate .018 to .009 on the named exact parent. The measured parent has late sustained pole slope failures; reduced critic motion may suppress overshoot while preserving Ring. Complete the unchanged 80-update pole and 1600-update Ring gates for both candidates. A final-only scalar pass is insufficient. Stop transport/history recipe tuning for this task if neither candidate passes both full gates.",
+  "id": "bcap-transport-halfcritic-v1-pole-ring-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-pole-ring-v2",
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6"
+      },
+      "path": "reports/forge/selective-history/initial-training-v2.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-repair-screen-v1",
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6"
+      },
+      "path": "reports/forge/selective-history/repair-training-v1.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-selective-history-pole-ring-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

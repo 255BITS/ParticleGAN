@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "d25bad5d559bb30ad83f9c76a79e8c9b49b10e783af94a70b209338894258749",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6b7049a0322230adeb8ec945938f6c8c80d285a7c06095cf7637878f4d9c011b",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/evaluator/observed-samples.pt": "2ab2fac0856ed74d60b3787fd19cf468a5efc8565cabc4ef9ce28b95d2a2e715"
+  },
+  "task_id": "gaussian1d_smoke"
+}

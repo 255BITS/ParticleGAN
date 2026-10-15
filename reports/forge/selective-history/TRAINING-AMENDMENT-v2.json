@@ -1,0 +1,37 @@
+{
+  "authority": "User instruction relayed by root coordinator /root in this active task",
+  "base_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+  "campaign": "bcap-selective-history-pole-ring-v2",
+  "date": "2026-10-15",
+  "decision": "Acquire new source-bound diagnostic evidence with complete unchanged task gates and all eight independent jobs. Missing historical windows do not block this newly authorized comparison; they remain missing and no historical PASS is implied. No automatic deeper-stage advancement, new recipes, seed changes or budget expansion.",
+  "historical_frozen_file_sha256": {
+    "PREFLIGHT.md": "c90de15ba0f5056f62a5e3a810c5ff3887cc3901431d457c1c3773f92fc2fb45",
+    "stage-roster.json": "1b8fec86ed3caabcb91221d52e9e9eafb1f9c60423419cc386c3ecb9fd88a1c1"
+  },
+  "historical_preflight_status": "BLOCKED",
+  "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+  "schema": "selective_history_training_amendment_v2",
+  "scope": {
+    "arms": [
+      "B",
+      "T",
+      "W",
+      "S"
+    ],
+    "campaign_budget_seconds": 2400,
+    "candidate_budget_seconds": 600,
+    "gpus": [
+      0,
+      1
+    ],
+    "protocol_seed": 0,
+    "tasks": [
+      "two_pole",
+      "ring16_acquisition"
+    ],
+    "view": "bcap-selective-history-pole-ring-diagnostic-v1",
+    "workers": 2
+  },
+  "status": "AUTHORIZED_FOR_NEW_COMPARISON",
+  "user_instruction": "train it make it work"
+}

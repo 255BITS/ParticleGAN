@@ -1,0 +1,35 @@
+{
+  "conflicts": [],
+  "input_digest": "1ee3d9ebe30238bf739a6991482eb1677920dbb4539b7f3f5874a5c368aa1478",
+  "inventory_coverage": {
+    "declared_count": 11782,
+    "missing": [
+      "benchmarks/locked_shared/cuda_host_smoke.py",
+      "benchmarks/toy100/affine_replay.py",
+      "experiments/forge/atlas_catalog_scores.py",
+      "experiments/forge/confidence_coherence_scores.py",
+      "experiments/forge/pr399_scores.py",
+      "experiments/forge/research_tiers.py",
+      "experiments/forge/source_bound_board.py",
+      "experiments/forge/test_performance.py",
+      "experiments/forge/test_performance_render.py"
+    ],
+    "stale": [],
+    "tracked_count": 11791,
+    "unclassified": [],
+    "valid": false
+  },
+  "memory": "reports/forge/EXPERIMENT_MEMORY.md",
+  "pending_readout": [
+    "k3p-global-repair-v1",
+    "ka2-global-repair-v1",
+    "r1r2-global-repair-v1"
+  ],
+  "qualification_refresh": {
+    "mode": "preserved_published_evidence",
+    "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+    "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+  },
+  "records": 816,
+  "views": 7
+}

@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "afbe4c47fd2b866c047ef31931e1b8446fe38cdd52aa3c30fd3c5152eb8089bf",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "2dc584b24da62692caa1aced97f1f89b8af717d4fd0e0e6b081fa47b0afadccd",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/observed-samples.pt": "11cf1164aafa6e2e677fb906d69e1e14d10ecde3c54831181712af2782b12d50"
+  },
+  "task_id": "ring16_acquisition"
+}

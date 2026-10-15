@@ -1,0 +1,89 @@
+{
+  "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+  "commands": [
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "recipe-prior-refactor-bcap-pure-v1",
+      "--study",
+      "bcap-current-baseline-ordinary-tier1-20261015-v1"
+    ]
+  ],
+  "drain_finished_unix": 1792046557.9966488,
+  "drain_started_unix": 1792045604.7596743,
+  "driver_pid": 1074226,
+  "roster": [
+    {
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "458335d50aafb32a3c7aad52948dd206fba1a4af51abecbeff637722131acd8e",
+      "deferred_job_descriptors": 22,
+      "jobs": [
+        {
+          "budget_seconds": 120,
+          "key": "92444efe7719eee8841e07b79539a7781bd28661e7361333adf6ce347432a5c3",
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "e95048662efed562a74139087ae42125dfbdefeb3f61245c2173caa50f58bef5",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "257e6c5b91328f5f341b2ae7e93479072b3f8521a0952b9bbf1ac8c6c68c5c3d",
+          "task": "unused_token_hold"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "86af5b787d4ac8dcb3662bcebf2222eb0ce42b93e648bb9a4ee866aef5c6738a",
+          "task": "ae_gan_hold"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "0c7229f41ce544aa2a6c518b6ec7764568aca17dc0bd4959b2e2be6b130db469",
+          "task": "ring16_acquisition"
+        },
+        {
+          "budget_seconds": 900,
+          "key": "f6d05753fc15a7b2c55c42e0cee12b604465bd09c8bb6b682bb6e30c95898280",
+          "task": "five_word_joint_smoke"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "e49a4739a572e4481467f54a9160e2152a481067b44225074997cd03e804a405",
+          "task": "clockfree_audit_measurement_v1"
+        }
+      ],
+      "study": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "through_tier": 1
+    }
+  ],
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "submissions": [
+    {
+      "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+      "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+      "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/d6e4aac3dca9c827dc0f4300.json",
+      "request_id": "d6e4aac3dca9c827dc0f4300",
+      "status": "queued"
+    }
+  ],
+  "time_unix": 1792045600.8234754
+}

@@ -1,0 +1,63 @@
+{
+  "campaign": {
+    "budget_seconds": 1200,
+    "candidate_budget_seconds": 600,
+    "id": "bcap-selective-history-repair-screen-v1"
+  },
+  "candidate": "bcap-transport-penalty2-v1",
+  "competing_explanation": "A stronger coefficient can change critic response without bounding the actual finite update, and may damage T Ring behavior. Unlike the withdrawn S+penalty2 draft, this primary starts from T, avoiding the additional measured S Ring deficit. Complete both independent tasks and retain every failure.",
+  "control": {
+    "candidate_id": "bcap-selective-history-transport-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "Fresh complete T passes Ring with terminal suffix 6 but fails pole with terminal suffix 1 and 11 slope violations. Test only reg_coeff 1 to 2 on T, with generator history off. The stronger soft critic penalty may reduce pole overshoot while retaining Ring. Both unchanged full gates must pass; final scalar signatures alone are insufficient.",
+  "id": "bcap-transport-penalty2-pole-ring-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-pole-ring-v2",
+        "selective_attempts": {
+          "ring16_acquisition": "388c007f719e4c7d9e7d6df159e4c7d4",
+          "two_pole": "1618e77d8bb84a3095a7275223b51581"
+        },
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+        "transport_attempts": {
+          "ring16_acquisition": "8169e4dc2daf472db4a81df6413a173c",
+          "two_pole": "cc87fcf01d924529984c61f42c1224cd"
+        }
+      },
+      "path": "reports/forge/selective-history/initial-training-v2.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-selective-history-pole-ring-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

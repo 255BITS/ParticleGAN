@@ -1,0 +1,123 @@
+{
+  "campaign": "bcap-selective-history-pole-ring-v2",
+  "commands": [
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "recipe-prior-refactor-bcap-pure-v1",
+      "--study",
+      "bcap-selective-history-b-pole-ring-study-v2"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-selective-history-transport-v1",
+      "--study",
+      "bcap-selective-history-t-pole-ring-study-v2"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-selective-history-whole-v1",
+      "--study",
+      "bcap-selective-history-w-pole-ring-study-v2"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "enqueue",
+      "bcap-selective-history-adversarial-v1",
+      "--study",
+      "bcap-selective-history-s-pole-ring-study-v2"
+    ],
+    [
+      "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+      "-m",
+      "experiments.forge",
+      "--root",
+      "/ml2/hypergan/particlegan-selective-history-20261015",
+      "--queue-root",
+      "/ml2/hypergan/combination-training-20261015/queue",
+      "drain",
+      "--gpus",
+      "0,1",
+      "--workers-per-gpu",
+      "1",
+      "--campaign",
+      "bcap-selective-history-pole-ring-v2"
+    ]
+  ],
+  "drain_exit_code": 130,
+  "drain_finished_unix": 1792044361.133722,
+  "drain_pid": 1004280,
+  "drain_started_unix": 1792044205.8634958,
+  "driver_pid": 1003229,
+  "launch_time_unix": 1792044196.3130364,
+  "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "submissions": [
+    {
+      "arm": "B",
+      "receipt": {
+        "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+        "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+        "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/0e2384979c7205dc3f76ba73.json",
+        "request_id": "0e2384979c7205dc3f76ba73",
+        "status": "queued"
+      }
+    },
+    {
+      "arm": "T",
+      "receipt": {
+        "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+        "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+        "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/112a5f88ca959885175f1335.json",
+        "request_id": "112a5f88ca959885175f1335",
+        "status": "queued"
+      }
+    },
+    {
+      "arm": "W",
+      "receipt": {
+        "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+        "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+        "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/bed960f3ea0ae51eccc6e36e.json",
+        "request_id": "bed960f3ea0ae51eccc6e36e",
+        "status": "queued"
+      }
+    },
+    {
+      "arm": "S",
+      "receipt": {
+        "logs": "/ml2/hypergan/combination-training-20261015/queue/events.jsonl",
+        "queue_root": "/ml2/hypergan/combination-training-20261015/queue",
+        "request": "/ml2/hypergan/combination-training-20261015/queue/queue/requests/830207d36f28e44f181872d4.json",
+        "request_id": "830207d36f28e44f181872d4",
+        "status": "queued"
+      }
+    }
+  ]
+}

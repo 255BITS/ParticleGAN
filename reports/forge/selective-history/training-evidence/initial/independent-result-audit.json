@@ -1,0 +1,1629 @@
+{
+  "actual_execution_seconds": 281.33602885800065,
+  "all_full_original_updates": true,
+  "attempt_count": 8,
+  "comparisons": {
+    "ring16_acquisition": {
+      "final_named_stream_states_identical": true,
+      "initialization_receipts_identical": true,
+      "task_declaration_equal_excluding_ownership": true
+    },
+    "two_pole": {
+      "final_named_stream_states_identical": true,
+      "initialization_receipts_identical": true,
+      "task_declaration_equal_excluding_ownership": true
+    }
+  },
+  "current_outstanding_reservations_seconds": 0,
+  "declared_campaign_budget_seconds": 2400,
+  "history_survivors": [],
+  "independently_recomputed_grades": true,
+  "media_verification": {
+    "complete": true,
+    "no_added_updates_or_draws": true,
+    "source_files_hash_verified": true,
+    "verified_gifs": [
+      {
+        "attempt": "1618e77d8bb84a3095a7275223b51581",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-adversarial-v1/1618e77d8bb84a3095a7275223b51581/two_pole.gif",
+        "observation_count": 24,
+        "recorded_grade": "FAIL",
+        "selected_frames": 9,
+        "sha256": "cf89c10f40f8e247941a5b7bd1eeb4ebd8250c3a051af4655eb14698145a44ca"
+      },
+      {
+        "attempt": "2f3e6cc58af14ee1aea7302ab180e3fa",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/recipe-prior-refactor-bcap-pure-v1/2f3e6cc58af14ee1aea7302ab180e3fa/two_pole.gif",
+        "observation_count": 24,
+        "recorded_grade": "PASS",
+        "selected_frames": 9,
+        "sha256": "927622083da9ff3e2d638055de22daae13b00c57dec60652adf2335e35dea816"
+      },
+      {
+        "attempt": "388c007f719e4c7d9e7d6df159e4c7d4",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-adversarial-v1/388c007f719e4c7d9e7d6df159e4c7d4/ring16_acquisition.gif",
+        "observation_count": 96,
+        "recorded_grade": "FAIL",
+        "selected_frames": 9,
+        "sha256": "afbe4c47fd2b866c047ef31931e1b8446fe38cdd52aa3c30fd3c5152eb8089bf"
+      },
+      {
+        "attempt": "42252bc7a07845ecbda0abd6c6e2035c",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-whole-v1/42252bc7a07845ecbda0abd6c6e2035c/two_pole.gif",
+        "observation_count": 24,
+        "recorded_grade": "FAIL",
+        "selected_frames": 9,
+        "sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2"
+      },
+      {
+        "attempt": "8169e4dc2daf472db4a81df6413a173c",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-transport-v1/8169e4dc2daf472db4a81df6413a173c/ring16_acquisition.gif",
+        "observation_count": 96,
+        "recorded_grade": "PASS",
+        "selected_frames": 9,
+        "sha256": "4f86acdf072260fb9a61ed2025c9ff54973218b26819e992bed4178b98b34aa1"
+      },
+      {
+        "attempt": "a952b5e26e1048d4a7d9a915af74ea69",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-whole-v1/a952b5e26e1048d4a7d9a915af74ea69/ring16_acquisition.gif",
+        "observation_count": 96,
+        "recorded_grade": "FAIL",
+        "selected_frames": 9,
+        "sha256": "b2951bf08f8c15144dda04de7c258e09ffe3143f99d8160048910a6cee488c6f"
+      },
+      {
+        "attempt": "cc87fcf01d924529984c61f42c1224cd",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/bcap-selective-history-transport-v1/cc87fcf01d924529984c61f42c1224cd/two_pole.gif",
+        "observation_count": 24,
+        "recorded_grade": "FAIL",
+        "selected_frames": 9,
+        "sha256": "a699ad650b49ddbff2e7a93f246d9ee52594a60c2f184454bbbaaeabd2b151b2"
+      },
+      {
+        "attempt": "e79666f6b8b94b6d84600dbaea2cdaad",
+        "gif": "/ml2/hypergan/combination-training-20261015/media/recipe-prior-refactor-bcap-pure-v1/e79666f6b8b94b6d84600dbaea2cdaad/ring16_acquisition.gif",
+        "observation_count": 96,
+        "recorded_grade": "PASS",
+        "selected_frames": 9,
+        "sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a"
+      }
+    ],
+    "visual_qa": "root owns visual verification"
+  },
+  "recipe_differences": {
+    "generator_history_mode": {
+      "B": "none",
+      "S": "adversarial",
+      "T": "none",
+      "W": "whole"
+    },
+    "kinetic_transport_local_weight": {
+      "B": 0.0,
+      "S": 1.0,
+      "T": 1.0,
+      "W": 1.0
+    },
+    "kinetic_transport_weight": {
+      "B": 0.0,
+      "S": 1.0,
+      "T": 1.0,
+      "W": 1.0
+    }
+  },
+  "retry_count": 0,
+  "rows": [
+    {
+      "actual_existing_media": [],
+      "arm": "B",
+      "attempt": "e79666f6b8b94b6d84600dbaea2cdaad",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "458335d50aafb32a3c7aad52948dd206fba1a4af51abecbeff637722131acd8e",
+      "complete": true,
+      "confirmed_step": 1250,
+      "cost": {
+        "adapter_loop_seconds": 32.198802853992674,
+        "adapter_seconds": 33.51341554001556,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 108.68051914600073,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 31.13785506604472,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.252659840945853
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.056557942036306486
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 28.828637283062562
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 34.46101399100735,
+        "wall_seconds": 108.68051914600073
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 0.49656706117093563,
+        "component_min_eigen_ratio": 0.24246710538864136,
+        "hq": 0.9609375,
+        "mass_tv": 0.065185546875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "PASS",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 26,
+      "passing_suffix": 26,
+      "provenance_sha256": "409078af244ad98e38174ee95652b7501a91e82c26a500b9592f5437f9a3decc",
+      "receipt_hashes": {
+        "graded-result.json": "ca686099dd571a677569dae355439a3b97174a818ddd2575b591b819a03ba5e5",
+        "raw-result.json": "35762ac55d93e4d8e864218ef6142f31450b7a92adfd4cf78b16443120ffa8f2",
+        "request.json": "1999240fa39bf4341bb3212b1f17359b4247fbf2017ded222681d7f14488f49d",
+        "result.json": "2e876541a4a47f013050ea11fa41179f31c6b773a0d1e61a98313c7973a4660c",
+        "terminal.json": "24605563a2a63d1d20392febe45dd973a1e66f5c1e61c4920b783978d20a1e1c"
+      },
+      "request_id": "0e2384979c7205dc3f76ba73",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "B",
+      "attempt": "2f3e6cc58af14ee1aea7302ab180e3fa",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "458335d50aafb32a3c7aad52948dd206fba1a4af51abecbeff637722131acd8e",
+      "complete": true,
+      "confirmed_step": 40,
+      "cost": {
+        "adapter_seconds": 1.1312971549923532,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.1208526869886555,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.0768699900072534,
+        "wall_seconds": 6.1208526869886555
+      },
+      "final_gate_metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "gate": "PASS",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 0,
+        "component_transport_requested": false,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "provenance_sha256": "6b1926661764a950e6f5b61c345d09856d4b80461a0e6f6e3d64b2ede19b80b6",
+      "receipt_hashes": {
+        "graded-result.json": "bab9941830a4721e992916b3cb5eceff8688491dd14641af7b4cb8f257aabb1a",
+        "raw-result.json": "6746ba82705dd6817b81627fb49d44985586f5093753e7d2806ad41582943176",
+        "request.json": "bb8dbe55cf1466b94d5a44e6284b48fe731bde7bbc2e6656c72ef5f03e9cca71",
+        "result.json": "5a65f739bf8919b97cf8443ec335b67f2966a6fd67c783615c679380dc42b3bb",
+        "terminal.json": "381aaef5de6dc4c48ae9f0f5ab57fcce5bf889ee300bb32fb02f81d92a96684c"
+      },
+      "request_id": "0e2384979c7205dc3f76ba73",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/constraint_geometry-scored-outputs.pt",
+        "bytes": 20869,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "T",
+      "attempt": "8169e4dc2daf472db4a81df6413a173c",
+      "candidate": "bcap-selective-history-transport-v1",
+      "candidate_revision": "4e1c14a5d4c9bcb4aa11353727db51813b7005cd8ad10526749f48659e539717",
+      "complete": true,
+      "confirmed_step": 1584,
+      "cost": {
+        "adapter_loop_seconds": 36.55281731701689,
+        "adapter_seconds": 39.74691692300257,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 47.939229990006424,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 32.47807623189874,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.1530121881514788
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.054119835956953466
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 30.270944207790308
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 40.650264003983466,
+        "wall_seconds": 47.939229990006424
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 0.6733355186879635,
+        "component_min_eigen_ratio": 0.44135451316833496,
+        "hq": 0.91259765625,
+        "mass_tv": 0.03515625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "PASS",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 12,
+      "passing_suffix": 6,
+      "provenance_sha256": "74f0c97966e5ed0ca22c9b464ab15d29be2fe9e9bd23bca66a5455e0bbd0b787",
+      "receipt_hashes": {
+        "graded-result.json": "36a9f72623297f6959b57675c727576cc55f1366b9c61d1dea46604d2ae08f36",
+        "raw-result.json": "821b1ca7ccad6f474cbd12821afc9b7ba1e3338cd8d21d71a37a36a520b43916",
+        "request.json": "64471fa9ed4e090175797d5e562a979633d28da038f22feaeb294958965dbd4d",
+        "result.json": "c14b3bbd597065fc499d0e649376d1425479984ee1292dc0850a10608f01c200",
+        "terminal.json": "845edd6629c51dd922ec1e91633c2056ca6e14d564972b50515a538ebba2a590"
+      },
+      "request_id": "112a5f88ca959885175f1335",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "899e6d2d6dad3c7e66e7156f849ce1156e70014dea988dbe604f57f08b5d701d"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "T",
+      "attempt": "cc87fcf01d924529984c61f42c1224cd",
+      "candidate": "bcap-selective-history-transport-v1",
+      "candidate_revision": "4e1c14a5d4c9bcb4aa11353727db51813b7005cd8ad10526749f48659e539717",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_seconds": 3.7709346049814485,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 14.640628082008334,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.801801997993607,
+        "wall_seconds": 14.640628082008334
+      },
+      "final_gate_metrics": {
+        "grad_med": 0.9851563572883606,
+        "mean_abs": 0.9287881255149841
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 6,
+      "passing_suffix": 1,
+      "provenance_sha256": "d8a8d34d367f6af0db6bc8ca06d8e600b6ce1bb6fe85093a705d8ddb1fc133a1",
+      "receipt_hashes": {
+        "graded-result.json": "033155ff6a3c89e50f21ac00d4dbb4f3667984b3f226f90324c0400743491cdb",
+        "raw-result.json": "2b63c3bb781fc6635f320faea14258930d09384a0ccaf303f16a3a3eabab80e9",
+        "request.json": "ca06b66200292cfc6b18293424c4e99df930eeb5b677d97cfdd797149aa547e3",
+        "result.json": "40bdf22cb544e35472b3e7fdc666c49c50fa3f9110899f065d11dbb3178adb75",
+        "terminal.json": "e1f2ec55c0ebb545ee4b7b888fd33db7d5a46d3293cb44a2e7c30a2492737cf5"
+      },
+      "request_id": "112a5f88ca959885175f1335",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/constraint_geometry-scored-outputs.pt",
+        "bytes": 20933,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "c0f73a115325b141ff30c5cd27020a19913828bcfb791d115011bef2b2571767"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "W",
+      "attempt": "a952b5e26e1048d4a7d9a915af74ea69",
+      "candidate": "bcap-selective-history-whole-v1",
+      "candidate_revision": "8c629c57ffa9490b04a0f813e67a6c58ad2297d0022bfb1225fea1dc2aeef823",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_loop_seconds": 34.704834878008114,
+        "adapter_seconds": 35.63906258600764,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 41.92827212798875,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 33.57124480599305,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.218906561960466
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.054660705936839804
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 31.29767753809574
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 36.610633472009795,
+        "wall_seconds": 41.92827212798875
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 1.941777553409338,
+        "component_min_eigen_ratio": 1.063904047012329,
+        "hq": 0.88037109375,
+        "mass_tv": 0.02734375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 1600,
+        "last": {
+          "effective_gradient_count": 14.999999999999996,
+          "gradient_variance": 6.895439949985968,
+          "rho": 0.0,
+          "squared_signal": 0.0
+        },
+        "mode": "whole",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 1122
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "provenance_sha256": "f78f9fc9fb83496d3a0dbbb356493c2d7e8c20d397751918d6502d8f901257f6",
+      "receipt_hashes": {
+        "graded-result.json": "9255f8fa29911d93acd8f04ae762631b47829ae9545d8594bac017d393af2c75",
+        "raw-result.json": "d9ab2efec43198c5863d0badd6ad2ff9cc29cb4e52409a76929234454052d4e6",
+        "request.json": "5e8970d29aec124568ca2c19d5d454b7648147c1bc74d2535dfd2b0bc83fa5de",
+        "result.json": "01dcb808da25adc82361f691a35c48a36485ad974a78dfe8c8dbb6e638ad61f4",
+        "terminal.json": "51bb0d36924834133aa60414d0dad2de5808f85d58b568c3a16fc8eca271b7dd"
+      },
+      "request_id": "bed960f3ea0ae51eccc6e36e",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "a421ebe246571aa2c4675facf0a9b0dd579ea9f0ff6b11ee90f74f090ec67720"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "W",
+      "attempt": "42252bc7a07845ecbda0abd6c6e2035c",
+      "candidate": "bcap-selective-history-whole-v1",
+      "candidate_revision": "8c629c57ffa9490b04a0f813e67a6c58ad2297d0022bfb1225fea1dc2aeef823",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_seconds": 1.612823439994827,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.792868552991422,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.647143648006022,
+        "wall_seconds": 7.792868552991422
+      },
+      "final_gate_metrics": {
+        "grad_med": 0.985156238079071,
+        "mean_abs": 0.9287880659103394
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 80,
+        "last": {
+          "effective_gradient_count": 14.999311735241543,
+          "gradient_variance": 0.23817221213580397,
+          "rho": 0.7117219291947858,
+          "squared_signal": 0.5880169304186222
+        },
+        "mode": "whole",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 0
+      },
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 6,
+      "passing_suffix": 1,
+      "provenance_sha256": "786370d52ed4f2108abc66f9cf4839d5b88f10c3e60e364a323699941a72f793",
+      "receipt_hashes": {
+        "graded-result.json": "31c538521e81055932baa77708d9c2f801f7f52c844649ea2798dfbbb03818f3",
+        "raw-result.json": "72b757724b9310d2e0cc0812f3c2143231445610a847fd62c3c4c51a43f34a77",
+        "request.json": "14fe26aae76025a032f935deaadb69026ff1a117f5956a3d869b8cc509e67978",
+        "result.json": "5d9b6174c7a16e3ff2922eb78172d235cf4695f170847c913d640c2179d4796f",
+        "terminal.json": "489c3a67154ecbcd5db028fddbd18c5b2493cb881de549688cdf1ce2f5846e9d"
+      },
+      "request_id": "bed960f3ea0ae51eccc6e36e",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/constraint_geometry-scored-outputs.pt",
+        "bytes": 20933,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "0915692cbe77f7d63d6c61e60389227eefc87dfaea061f9e54440960d322570b"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "S",
+      "attempt": "388c007f719e4c7d9e7d6df159e4c7d4",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "candidate_revision": "32167caace55b02925ccc493ec6ac0b60a356e7e4c2640e9124695f11146400c",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_loop_seconds": 39.70430910601863,
+        "adapter_seconds": 40.042223965981975,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "0",
+        "execution_seconds": 46.05674142501084,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 38.16579862264916,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.204286223219242
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.05420133491861634
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 35.907311064511305
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 41.01416456498555,
+        "wall_seconds": 46.05674142501084
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 0.9583628606051207,
+        "component_min_eigen_ratio": 0.33835068345069885,
+        "hq": 0.77001953125,
+        "mass_tv": 0.03271484375,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 1600,
+        "last": {
+          "effective_gradient_count": 14.999999999999996,
+          "gradient_variance": 1.1727415138321755,
+          "rho": 0.06242522022041758,
+          "squared_signal": 0.07808299544897133
+        },
+        "mode": "adversarial",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 116
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 6,
+      "passing_suffix": 0,
+      "provenance_sha256": "1fcea9d63d157f0fbbe58dc9192229f6683d34cd7404885ad90cd3af539b7860",
+      "receipt_hashes": {
+        "graded-result.json": "8973b6dd0303d689203c49ef3a255e926fb372b043685b87c8113ccfe6d2a6f2",
+        "raw-result.json": "d31184a027b38c94c26cac10fb713ff38b8881a0547c853c47c1ce955d2bb5d7",
+        "request.json": "70e3aabfd95d7bb884f693d2d9ca67b950c0939c11038274784676d3f0b94567",
+        "result.json": "3f6faa498de4dc21ff91d09497cd46cc369a869162567c2e574da58c6d2005d5",
+        "terminal.json": "5f08d21b85df7f8f4366d0761270e97c005b893a0d265096da4f589ee70ec11d"
+      },
+      "request_id": "830207d36f28e44f181872d4",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "11cf1164aafa6e2e677fb906d69e1e14d10ecde3c54831181712af2782b12d50"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "S",
+      "attempt": "1618e77d8bb84a3095a7275223b51581",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "candidate_revision": "32167caace55b02925ccc493ec6ac0b60a356e7e4c2640e9124695f11146400c",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_seconds": 1.7819499309989624,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 8.176916847005486,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.8023843729752116,
+        "wall_seconds": 8.176916847005486
+      },
+      "final_gate_metrics": {
+        "grad_med": 0.985077977180481,
+        "mean_abs": 0.9286096096038818
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 80,
+        "last": {
+          "effective_gradient_count": 14.999311735241543,
+          "gradient_variance": 4.7782775057199685e-05,
+          "rho": 0.9979802420676432,
+          "squared_signal": 0.023609891390649784
+        },
+        "mode": "adversarial",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 0
+      },
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 6,
+      "passing_suffix": 1,
+      "provenance_sha256": "d3835d70e452b21c132a72e9412534d8d0d9700877ff1bd89206f99d7f1d5850",
+      "receipt_hashes": {
+        "graded-result.json": "038d8cf71746ecdfac1ea996819c6230097ac68784cf816ba42b1bce5128bba5",
+        "raw-result.json": "67992d50043873d4f8bff4c2b2fb6b356bea15d5c31a12e4b4a882ba1cec5073",
+        "request.json": "db1fdd631c1d8e483f6bfdb93613582b2c104da574d8d5d3a2ce5709505a77fd",
+        "result.json": "0d0ca5714658cbb9525769812c29ecb7d9cf828ed18079af641c39eccf3cecdf",
+        "terminal.json": "725e08063d1ce723ec6ccf003602f06e24976268a0ca270ccead2cf1a86db0fa"
+      },
+      "request_id": "830207d36f28e44f181872d4",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/constraint_geometry-scored-outputs.pt",
+        "bytes": 20933,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "42c27f8eb7bdc6ff22deab6d6a51c4004add5d78c99f10138aea3ce29c2098be"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    }
+  ],
+  "scope": "research_diagnostic_only",
+  "seed": 0,
+  "shared_request_fields_equal": {
+    "compute_profiles": true,
+    "protocol": true,
+    "rng": true,
+    "runtime": true,
+    "source": true
+  },
+  "source_verification": {
+    "digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+    "mismatches": [],
+    "origin_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+    "path": "/ml2/hypergan/combination-training-20261015/queue/snapshots/39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+    "verified_files": 1224
+  },
+  "status": "AUDIT_COMPLETE_NO_HISTORY_SURVIVOR"
+}

@@ -1,0 +1,894 @@
+{
+  "actual_execution_seconds": 175.05974149599206,
+  "all_full_original_updates": true,
+  "attempt_count": 4,
+  "comparisons": {
+    "ring16_acquisition": {
+      "final_named_stream_states_identical": true,
+      "initialization_receipts_identical": true,
+      "task_declaration_equal_excluding_ownership": true
+    },
+    "two_pole": {
+      "final_named_stream_states_identical": true,
+      "initialization_receipts_identical": true,
+      "task_declaration_equal_excluding_ownership": true
+    }
+  },
+  "current_outstanding_reservations_seconds": 0,
+  "declared_campaign_budget_seconds": 1200,
+  "effective_optimizer_group_rates": [
+    {
+      "actual_optimizer_groups": [
+        {
+          "lr": 0.012,
+          "role": "generator"
+        },
+        {
+          "lr": 0.009000000000000001,
+          "role": "critic"
+        }
+      ],
+      "candidate": "bcap-transport-halfcritic-v1",
+      "exact_parent_delta": {
+        "d_lr_mult": [
+          1.5,
+          0.75
+        ]
+      },
+      "task": "two_pole"
+    },
+    {
+      "actual_optimizer_groups": [
+        {
+          "lr": 0.012,
+          "role": "generator"
+        },
+        {
+          "lr": 0.03,
+          "role": "prior"
+        },
+        {
+          "lr": 0.009000000000000001,
+          "role": "critic"
+        }
+      ],
+      "candidate": "bcap-transport-halfcritic-v1",
+      "exact_parent_delta": {
+        "d_lr_mult": [
+          1.5,
+          0.75
+        ]
+      },
+      "task": "ring16_acquisition"
+    },
+    {
+      "actual_optimizer_groups": [
+        {
+          "lr": 0.006,
+          "role": "generator"
+        },
+        {
+          "lr": 0.009000000000000001,
+          "role": "critic"
+        }
+      ],
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "exact_parent_delta": {
+        "d_lr_mult": [
+          3.0,
+          1.5
+        ]
+      },
+      "task": "two_pole"
+    },
+    {
+      "actual_optimizer_groups": [
+        {
+          "lr": 0.006,
+          "role": "generator"
+        },
+        {
+          "lr": 0.015,
+          "role": "prior"
+        },
+        {
+          "lr": 0.009000000000000001,
+          "role": "critic"
+        }
+      ],
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "exact_parent_delta": {
+        "d_lr_mult": [
+          3.0,
+          1.5
+        ]
+      },
+      "task": "ring16_acquisition"
+    }
+  ],
+  "independently_recomputed_grades": true,
+  "parent_comparability_verified": true,
+  "recipe_differences": {
+    "d_lr_mult": {
+      "H": 1.5,
+      "P": 0.75
+    },
+    "generator_history_mode": {
+      "H": "adversarial",
+      "P": "none"
+    },
+    "lr": {
+      "H": 0.006,
+      "P": 0.012
+    }
+  },
+  "repair_survivors": [],
+  "retry_count": 0,
+  "rows": [
+    {
+      "actual_existing_media": [],
+      "arm": "P",
+      "attempt": "92da3b999bbb4202820242a2e56d6757",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "candidate_revision": "9ec781bbe5ee677f854d04a64c1b0ab731240aa9ea28b551c702270b281ef6c0",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_loop_seconds": 109.79869924599188,
+        "adapter_seconds": 110.15246280800784,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 115.71854822701425,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 103.0949157186551,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.2466264201211743
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.09507757998653688
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 100.75321171854739
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 111.12737805399229,
+        "wall_seconds": 115.71854822701425
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 1.2982986876741052,
+        "component_min_eigen_ratio": 0.45985841751098633,
+        "hq": 0.883544921875,
+        "mass_tv": 0.040283203125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "provenance_sha256": "01a9afbc143ba0821d1d251584aed11a946db3fa66465e99716ed450a255b33f",
+      "receipt_hashes": {
+        "graded-result.json": "514d6a2d99d74d47c252ba679947810864bc5a64782d25534c48b8f4b23dcf1c",
+        "raw-result.json": "39e164e530c70e1558a200e95d63bad2a0d02aa7ece083a98bc55ca461e9193f",
+        "request.json": "21e66a024f3efacd2b670e75ba3d719554c4385be92f9c10e7aeeefbd11a955a",
+        "result.json": "8d9fc6273f667181712c5ee97ef57d6ff4105142ee6fdd1ff60f5676358dedff",
+        "terminal.json": "b2f70fa88c349d7f109389123aeeb16d08f3989e2b46263c94b912531d20daa8"
+      },
+      "request_id": "13a7eaa424f84d53dd7b4686",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "bbb2df16253a531ee8f4afb4cb1e5f1450097ec0272b490f0ded66f6a5a92eed"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "P",
+      "attempt": "7a528019e4bd4615b11a83534ff54006",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "candidate_revision": "9ec781bbe5ee677f854d04a64c1b0ab731240aa9ea28b551c702270b281ef6c0",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_seconds": 1.3781509429973084,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 7.037535796989687,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3847687330271583,
+        "wall_seconds": 7.037535796989687
+      },
+      "final_gate_metrics": {
+        "grad_med": 1.005624771118164,
+        "mean_abs": 0.9251078367233276
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": null,
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 9,
+      "passing_suffix": 0,
+      "provenance_sha256": "d7670e703797c50ee5e5abaa3658bb72290e923f5a38e2aaf974e14501201f64",
+      "receipt_hashes": {
+        "graded-result.json": "7ebc540d3bf99d4d6dfbbc647b0e08747f5acab30a1a2aa88c9a954bcdfe96cd",
+        "raw-result.json": "58bd8ec0070ef15318b7defeafdd43f11bbeae7ad06768df6df83d922afb519c",
+        "request.json": "508e856bd149f9902104195ea64e047175ff36206855eb0cafc805f18c3e86de",
+        "result.json": "816555a02e76aa9f8eb27fb43540c1b7c5072b98a7c1bac4aeec9eeaa9dd0a10",
+        "terminal.json": "55f549b2dd2d275c2cad23dd7b6ab0cd3d92452a36ac0970b2b69e760bafd566"
+      },
+      "request_id": "13a7eaa424f84d53dd7b4686",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/constraint_geometry-scored-outputs.pt",
+        "bytes": 20933,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "2d9d00203cbd0c636b2e55198f048cd191c8ef98b688909ca52ec75392b5ed39"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "H",
+      "attempt": "e9e061fb9ae245d59fea80b6fc6b408b",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "candidate_revision": "c577f4240163ba5602cda5e24b3b12c43d43fa7b316254c5635c4dd17071039b",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_loop_seconds": 39.9628879330121,
+        "adapter_seconds": 40.255769659997895,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "0",
+        "execution_seconds": 45.61372775898781,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 38.88231073846691,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.216016879770905
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.05532403019606136
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 36.61096982849995
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 41.244910900015384,
+        "wall_seconds": 45.61372775898781
+      },
+      "final_gate_metrics": {
+        "component_covariance_error": 1.1847315123304725,
+        "component_min_eigen_ratio": 0.6016649603843689,
+        "hq": 0.91357421875,
+        "mass_tv": 0.036376953125,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1600,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1600,
+              "calls": 1600,
+              "eligible": 1600,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 1600,
+        "last": {
+          "effective_gradient_count": 14.999999999999996,
+          "gradient_variance": 0.3057486316850615,
+          "rho": 0.12392728202201975,
+          "squared_signal": 0.043250515772406045
+        },
+        "mode": "adversarial",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 6
+      },
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "8dcde881cc9941a1520dd63f134a554afc6ca03ea8be8e931406c380b7afca36",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "observations": 96,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "provenance_sha256": "cbf2640df2a86c0fd207ed17b322c99449561c574aa9471fb83a314c4c908a12",
+      "receipt_hashes": {
+        "graded-result.json": "f5898a34b659ceb104f4306446eb6c8b26ca5963d0cb7187e91f226a101cd170",
+        "raw-result.json": "7c5ecd301ff0cd311605c42e86f4fcb5ee53cbacc4b1bc8391c7265ddf0fc475",
+        "request.json": "a18dd7f057a70147bc49fc0a46caca2a78020be39b7f33b348851227f7901b39",
+        "result.json": "7687ee8a50b38737b4d87c36dbd3145748441af2cf000b6a4e8b9ac39333c3f3",
+        "terminal.json": "c5841854b5a322043f4945dce44d99f81597e2ce8f98eaae89142ec9d5773b84"
+      },
+      "request_id": "b6a8dbf8cc2992925619c867",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b/observed-samples.pt",
+        "bytes": 3174233,
+        "count": 96,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 96,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "3eecce24621b52b0c9a0d6b2360355375a4aa1247540a8edc5880c39c7b93b61"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 1600,
+      "stream_hashes": {
+        "[\"data\",\"target\",\"training\",\"cpu\"]": "543b966e1a382476cd20249fcd9c7ad6712e63cb161e2e314d54556fff78fd09",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "8b7b091eb5ab98307986493b67837d8d6fe981ebdc7d4d5c48abe94d4085ccf0",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "9bc63913a6b09c5e108ba2075f73ce257dffc4b1919c25941f26fbeec4145af3",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "7fe5aab126065475c69fa5c8766a474858022b220b8d7433e5c7eb08df76dd46",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "5ee97faf8ae5e6155a512abf553397e80736961bb86513210c5321dd31e53a66",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "668010546fbda26dccff8673ff55e457fb9aa2facca0b954e216435dfa9fba44"
+      },
+      "task": "ring16_acquisition",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ]
+    },
+    {
+      "actual_existing_media": [],
+      "arm": "H",
+      "attempt": "de6dcf241bb3408bbb0b0fd754e06a66",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "candidate_revision": "c577f4240163ba5602cda5e24b3b12c43d43fa7b316254c5635c4dd17071039b",
+      "complete": true,
+      "confirmed_step": null,
+      "cost": {
+        "adapter_seconds": 1.3888900890015066,
+        "charged_task": "two_pole",
+        "device": "0",
+        "execution_seconds": 6.689929713000311,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.447792174993083,
+        "wall_seconds": 6.689929713000311
+      },
+      "final_gate_metrics": {
+        "grad_med": 1.0873931646347046,
+        "mean_abs": 0.47962427139282227
+      },
+      "gate": "FAIL",
+      "grade_raw_hash_matches": true,
+      "guards": {
+        "all_finite": true,
+        "component_transport_active_calls": 80,
+        "component_transport_requested": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 80,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 80,
+              "calls": 80,
+              "eligible": 80,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 80,
+          "prior": 80
+        },
+        "unintended_rng_deviations": 0
+      },
+      "history": {
+        "count": 80,
+        "last": {
+          "effective_gradient_count": 14.999311735241543,
+          "gradient_variance": 0.0005113122526680529,
+          "rho": 0.9793966333845887,
+          "squared_signal": 0.02430561510743098
+        },
+        "mode": "adversarial",
+        "placement": "before_normalization",
+        "roles": [
+          "generator"
+        ],
+        "zero_steps": 0
+      },
+      "initialization": {},
+      "observations": 24,
+      "passing_observations": 6,
+      "passing_suffix": 0,
+      "provenance_sha256": "8721c38ca56e11c8d9a5874fe3874f577ab463b16baea5da05e04441458a1efe",
+      "receipt_hashes": {
+        "graded-result.json": "41709089c4bcd15b18ce77a031fec09ad6bd0f91e1b8ee6179bd7101c0dacc86",
+        "raw-result.json": "e8bb36b0cdec670752c5e93e7a502a995c55083ce6f769d2a5b39bb5e99b144e",
+        "request.json": "b5e2a85298feddef04b6e0dd82a85d7e5123c9925cbd45241bd33eefbc02249c",
+        "result.json": "d2715f74432b29fc01a2831159d9efba43ba907c39bdac375b6875c9bc34822a",
+        "terminal.json": "79d97d663929ad9a6d40f8f6531c6d49d59de07c282ae5922291169d4a6acafa"
+      },
+      "request_id": "b6a8dbf8cc2992925619c867",
+      "saved_outputs": {
+        "absolute_path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/constraint_geometry-scored-outputs.pt",
+        "bytes": 20933,
+        "count": 24,
+        "path": "constraint_geometry-scored-outputs.pt",
+        "sha256": "ac3550bc7b7254e1e88279c2057cfca07f1bd4432f97caef5c267ac321990f21"
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "steps": 80,
+      "stream_hashes": {
+        "[\"data\",\"host\",\"batches\",\"cuda:0\"]": "1f9e3e80ad86c415f5cf9ffd4fa873971b2b4a107453cc74a0178ebbd3963c68",
+        "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+        "[\"eval\",\"critic\",\"input\",\"cuda:0\"]": "ca55c6e84e71957bbe8cbeeeac02559a4f2d57d9ff04e8327b14162a866b6ed2",
+        "[\"eval\",\"generator\",\"output\",\"cuda:0\"]": "bd5fa1af2bd5e965eff43217ab7fc4404818ad0249633fd9210bac0d2bce4d3b",
+        "[\"eval\",\"host\",\"global\",\"cuda:0\"]": "4615dbcd607a087aeaf202d2ed71bb6c53995cb8232297c3aad378a385b5ee09",
+        "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+        "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+        "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "14f325127191fcaeb8d7d303ce5749c2eaf87bdeaafc0627a0612a6395882f4a",
+        "[\"init\",\"generator\",\"construction\",\"cpu\"]": "f295b7d42bc7dfe9974c3d75027f232bb2db31d39668cfeb2aa7e880c24402e4",
+        "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "0a1e650d97f74ae93e62d3503bd68479c6871e79a47a6eb9f6c317bf298d1e92",
+        "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+        "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+        "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+        "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+        "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+        "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "4eea1e6e5eb013441edd09682a07c40a40c6063d2181661bbd3815b62f341a53"
+      },
+      "task": "two_pole",
+      "terminal_status": "completed",
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    }
+  ],
+  "scope": "research_diagnostic_only",
+  "seed": 0,
+  "shared_request_fields_equal": {
+    "compute_profiles": true,
+    "protocol": true,
+    "rng": true,
+    "runtime": true,
+    "source": true
+  },
+  "source_verification": {
+    "digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+    "mismatches": [],
+    "origin_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+    "path": "/ml2/hypergan/combination-training-20261015/queue/snapshots/39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+    "verified_files": 1224
+  },
+  "status": "AUDIT_COMPLETE_NO_REPAIR_SURVIVOR"
+}

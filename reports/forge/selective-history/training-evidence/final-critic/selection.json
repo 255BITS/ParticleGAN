@@ -1,0 +1,20 @@
+{
+  "authorization": "Root final selection under user train it make it work after no-exact-repeat audit",
+  "budget_seconds": 1200,
+  "campaign": "bcap-critic-rate-final-screen-v1",
+  "candidate_budget_seconds": 600,
+  "entries": [
+    [
+      "bcap-transport-halfcritic-v1",
+      "bcap-selective-history-transport-v1",
+      0.75
+    ],
+    [
+      "bcap-selective-history-halfjoint-halfcritic-v1",
+      "bcap-selective-history-halfjoint-v1",
+      1.5
+    ]
+  ],
+  "source_algorithm_changes": false,
+  "stop_rule": "Stop transport/history recipe tuning if neither passes both full gates; next authorized phase is ordinary Tier1 baseline plus any full-screen survivors, with no diagnostic credit reuse."
+}

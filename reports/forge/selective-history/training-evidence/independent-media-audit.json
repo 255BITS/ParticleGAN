@@ -1,0 +1,52 @@
+{
+  "alignment_maps_independently_verified": [
+    {
+      "aligned_frames": 24,
+      "attempt": "43e4542f623e4495ae533fa63e74456f",
+      "original_frames": 31,
+      "selected_indices": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "task": "ae_gan_hold"
+    }
+  ],
+  "attempts": 23,
+  "derived_sidecars_exact": true,
+  "gifs_verified": 22,
+  "media_omissions": [
+    {
+      "attempt": "d3ab270c75ca4c5494f4fcd9016ff941",
+      "gate": "INCOMPLETE",
+      "gif_count": 0,
+      "reason": "timeout"
+    }
+  ],
+  "model_evaluations_or_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "source_hashes_verified": true,
+  "status": "PASS_RENDERING_PROVENANCE_AUDIT",
+  "visual_qa": "root owns visual inspection"
+}

@@ -1,0 +1,88 @@
+{
+  "campaign": "bcap-selective-history-repair-screen-v1",
+  "declared_campaign_budget_seconds": 1200,
+  "initial_completion_hash_matches": true,
+  "rows": [
+    {
+      "candidate": "bcap-transport-penalty2-v1",
+      "declared_role_base_rates": {
+        "discriminator": 0.018000000000000002,
+        "encoder": 0.012,
+        "generator": 0.012,
+        "prior": 0.03
+      },
+      "exact_parent_recipe_delta": {
+        "reg_coeff": [
+          1.0,
+          2.0
+        ]
+      },
+      "history_mode": "none",
+      "job_budget_seconds": 600,
+      "job_count": 2,
+      "preflight_blockers": [],
+      "request_id": "934d310f76ec11d120b50473",
+      "shared_bindings_match_parent": {
+        "compute_profiles": true,
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "source": true
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "task_declarations_match_parent_excluding_ownership": {
+        "ring16_acquisition": true,
+        "two_pole": true
+      },
+      "transport_weights": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "declared_role_base_rates": {
+        "discriminator": 0.018000000000000002,
+        "encoder": 0.006,
+        "generator": 0.006,
+        "prior": 0.015
+      },
+      "exact_parent_recipe_delta": {
+        "d_lr_mult": [
+          1.5,
+          3.0
+        ],
+        "lr": [
+          0.012,
+          0.006
+        ]
+      },
+      "history_mode": "adversarial",
+      "job_budget_seconds": 600,
+      "job_count": 2,
+      "preflight_blockers": [],
+      "request_id": "6632b813365c7f82ec465cf7",
+      "shared_bindings_match_parent": {
+        "compute_profiles": true,
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "source": true
+      },
+      "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+      "task_declarations_match_parent_excluding_ownership": {
+        "ring16_acquisition": true,
+        "two_pole": true
+      },
+      "transport_weights": [
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "scope": "research_diagnostic_only",
+  "source_algorithm_changes": false,
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "status": "PASS_ADMISSION_AUDIT_NOT_SCIENTIFIC_PASS",
+  "withdrawn_unsubmitted_candidate": "bcap-selective-history-penalty2-v1"
+}

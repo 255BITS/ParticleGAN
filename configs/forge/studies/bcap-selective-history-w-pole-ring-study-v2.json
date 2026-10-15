@@ -1,0 +1,56 @@
+{
+  "campaign": {
+    "budget_seconds": 2400,
+    "candidate_budget_seconds": 600,
+    "id": "bcap-selective-history-pole-ring-v2"
+  },
+  "candidate": "bcap-selective-history-whole-v1",
+  "competing_explanation": "Transport itself may drive excessive finite motion; a scalar response may cancel in DualNorm or weaken useful adversarial density repair. W and S use the same generator-role history law, gradient domain, placement and state initialization. B is the reverse transport ablation against T; no identity/no-op control is submitted.",
+  "control": {
+    "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "grad_med",
+    "op": ">",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "hypothesis": "On one fixed source/runtime, compare B (current direction-only), T (B plus transport), W (T plus whole-generator-player gradient history), and S (T plus adversarial-only generator-player gradient history). S must pass both complete original sustained two-pole and Ring gates before advancement. Individual final-metric signatures are predictions only and do not replace either gate. On 2026-10-15 the user explicitly instructed: train it make it work. This v2 comparison is authorized to acquire fresh diagnostic evidence despite missing historical windows; the v1 saved-state preflight remains BLOCKED and is not credited as PASS. Finish both independent full-budget tasks for all four arms; preserve all failures. No seed, task, recipe, numerical gate, or scope change is authorized by this amendment.",
+  "id": "bcap-selective-history-w-pole-ring-study-v2",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "grad_med",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "two_pole",
+    "threshold": 1.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "combined_attempt": "aa76d8f268014f84a7a553e0b47482b0",
+        "incumbent_attempt": "f80ae62046f14be8b0ad459cfbd1c9ee",
+        "scientific_source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17"
+      },
+      "path": "reports/forge/bcap-tier1-stability/existing-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-selective-history-pole-ring-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

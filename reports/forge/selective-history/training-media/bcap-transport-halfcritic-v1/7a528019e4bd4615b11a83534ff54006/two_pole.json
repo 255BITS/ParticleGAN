@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "725484ef0e7db04d106e732f8214839d341f0edb7fc42ceee08ce45ff197989a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "68efa823a52dfaaf61b53c229682ab8911f16718e6bd07eb6a515695d2611828",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/constraint_geometry-scored-outputs.pt": "2d9d00203cbd0c636b2e55198f048cd191c8ef98b688909ca52ec75392b5ed39"
+  },
+  "task_id": "two_pole"
+}

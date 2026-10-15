@@ -1,0 +1,481 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "388c007f719e4c7d9e7d6df159e4c7d4",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/observed-samples.pt",
+          "sha256": "11cf1164aafa6e2e677fb906d69e1e14d10ecde3c54831181712af2782b12d50"
+        },
+        {
+          "bytes": 150051,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/388c007f719e4c7d9e7d6df159e4c7d4/provenance/provenance-state.pt",
+          "sha256": "1fcea9d63d157f0fbbe58dc9192229f6683d34cd7404885ad90cd3af539b7860"
+        }
+      ]
+    },
+    {
+      "attempt_id": "1618e77d8bb84a3095a7275223b51581",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581",
+      "files": [
+        {
+          "bytes": 55386,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/component-state.pt",
+          "sha256": "d5e319bcc91e11605e9443d2a2764270672beb1ac1afc8fd1293c294fb30aa24"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/constraint_geometry-scored-outputs.pt",
+          "sha256": "42c27f8eb7bdc6ff22deab6d6a51c4004add5d78c99f10138aea3ce29c2098be"
+        },
+        {
+          "bytes": 55419,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/1618e77d8bb84a3095a7275223b51581/provenance/provenance-state.pt",
+          "sha256": "d3835d70e452b21c132a72e9412534d8d0d9700877ff1bd89206f99d7f1d5850"
+        }
+      ]
+    },
+    {
+      "attempt_id": "8169e4dc2daf472db4a81df6413a173c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-transport-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c/observed-samples.pt",
+          "sha256": "899e6d2d6dad3c7e66e7156f849ce1156e70014dea988dbe604f57f08b5d701d"
+        },
+        {
+          "bytes": 110649,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/8169e4dc2daf472db4a81df6413a173c/provenance/provenance-state.pt",
+          "sha256": "74f0c97966e5ed0ca22c9b464ab15d29be2fe9e9bd23bca66a5455e0bbd0b787"
+        }
+      ]
+    },
+    {
+      "attempt_id": "cc87fcf01d924529984c61f42c1224cd",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-transport-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd",
+      "files": [
+        {
+          "bytes": 53776,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/component-state.pt",
+          "sha256": "191789de9ae987696437a5cd371122d83ee68106d14622728b75f10306689ad8"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/constraint_geometry-scored-outputs.pt",
+          "sha256": "c0f73a115325b141ff30c5cd27020a19913828bcfb791d115011bef2b2571767"
+        },
+        {
+          "bytes": 53807,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/cc87fcf01d924529984c61f42c1224cd/provenance/provenance-state.pt",
+          "sha256": "d8a8d34d367f6af0db6bc8ca06d8e600b6ce1bb6fe85093a705d8ddb1fc133a1"
+        }
+      ]
+    },
+    {
+      "attempt_id": "a952b5e26e1048d4a7d9a915af74ea69",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-whole-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69/observed-samples.pt",
+          "sha256": "a421ebe246571aa2c4675facf0a9b0dd579ea9f0ff6b11ee90f74f090ec67720"
+        },
+        {
+          "bytes": 150051,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/a952b5e26e1048d4a7d9a915af74ea69/provenance/provenance-state.pt",
+          "sha256": "f78f9fc9fb83496d3a0dbbb356493c2d7e8c20d397751918d6502d8f901257f6"
+        }
+      ]
+    },
+    {
+      "attempt_id": "42252bc7a07845ecbda0abd6c6e2035c",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "bcap-selective-history-whole-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c",
+      "files": [
+        {
+          "bytes": 55386,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/component-state.pt",
+          "sha256": "7e71ffce6a0011fac9b2e1aec89a9f24287b0068aac5a5673271295838076027"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/constraint_geometry-scored-outputs.pt",
+          "sha256": "0915692cbe77f7d63d6c61e60389227eefc87dfaea061f9e54440960d322570b"
+        },
+        {
+          "bytes": 55419,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/42252bc7a07845ecbda0abd6c6e2035c/provenance/provenance-state.pt",
+          "sha256": "786370d52ed4f2108abc66f9cf4839d5b88f10c3e60e364a323699941a72f793"
+        }
+      ]
+    },
+    {
+      "attempt_id": "e79666f6b8b94b6d84600dbaea2cdaad",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad/observed-samples.pt",
+          "sha256": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+        },
+        {
+          "bytes": 110585,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/e79666f6b8b94b6d84600dbaea2cdaad/provenance/provenance-state.pt",
+          "sha256": "409078af244ad98e38174ee95652b7501a91e82c26a500b9592f5437f9a3decc"
+        }
+      ]
+    },
+    {
+      "attempt_id": "2f3e6cc58af14ee1aea7302ab180e3fa",
+      "campaign": "bcap-selective-history-pole-ring-v2",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa",
+      "files": [
+        {
+          "bytes": 53520,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/component-state.pt",
+          "sha256": "b79d70d9476a90b7524bbc0ecaa4f9769dec30abcd7a11c74ce8ec153d4b8b17"
+        },
+        {
+          "bytes": 20869,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/constraint_geometry-scored-outputs.pt",
+          "sha256": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+        },
+        {
+          "bytes": 53551,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-pole-ring-v2/2f3e6cc58af14ee1aea7302ab180e3fa/provenance/provenance-state.pt",
+          "sha256": "6b1926661764a950e6f5b61c345d09856d4b80461a0e6f6e3d64b2ede19b80b6"
+        }
+      ]
+    },
+    {
+      "attempt_id": "78e7b5cc9bdd408e8c370400ff16fba1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-transport-penalty2-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1",
+      "files": [
+        {
+          "bytes": 53776,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1/component-state.pt",
+          "sha256": "df9e70078af2e74a0d15c3a9f709bec4c2b85c88e5cef86c8466e248cea2c66e"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1/constraint_geometry-scored-outputs.pt",
+          "sha256": "8c5ef0cfe53b50f145e6ffe4c68a151fa90d522c5afef8faad8b42d94c490be7"
+        },
+        {
+          "bytes": 53807,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/78e7b5cc9bdd408e8c370400ff16fba1/provenance/provenance-state.pt",
+          "sha256": "24d8650af5cac2465c111c9011aed80de9bb916ffdab8718b355885282d1521d"
+        }
+      ]
+    },
+    {
+      "attempt_id": "04da310985f245e191a588aecad20c6f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f",
+      "files": [
+        {
+          "bytes": 55386,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/component-state.pt",
+          "sha256": "ddfb417db36451b60d2118ed4c883b5743877da5f497ecad7fe3aad0f81519e0"
+        },
+        {
+          "bytes": 20997,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/constraint_geometry-scored-outputs.pt",
+          "sha256": "0fc1e160bd69ffd60a3bd7d121c15e3bc304f77892a541c0152e5f27aa803454"
+        },
+        {
+          "bytes": 55419,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/04da310985f245e191a588aecad20c6f/provenance/provenance-state.pt",
+          "sha256": "a9cf18ed1d27cf03d531213a810d6cff6ce1752eb71b85368fda97989dbe0c32"
+        }
+      ]
+    },
+    {
+      "attempt_id": "2f3167e14f3049669f71bb71a298f1d1",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-transport-penalty2-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1/observed-samples.pt",
+          "sha256": "14d110c26359fee7dd42869a342b2d40ad26d08cb1075a5a4fe7cb1d92b4a244"
+        },
+        {
+          "bytes": 110649,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/2f3167e14f3049669f71bb71a298f1d1/provenance/provenance-state.pt",
+          "sha256": "88d329fdbf68b9394e86376e17891a632ecf5986f0da86d705e1e51501645506"
+        }
+      ]
+    },
+    {
+      "attempt_id": "214f69535ed74ab7a52e6d6d54a8c12f",
+      "campaign": "bcap-selective-history-repair-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/214f69535ed74ab7a52e6d6d54a8c12f",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/214f69535ed74ab7a52e6d6d54a8c12f/observed-samples.pt",
+          "sha256": "a505d0d79b0546147fa19c842c99bd333ebc8388b5cc49e9efc344dc3cb8b633"
+        },
+        {
+          "bytes": 150051,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-selective-history-repair-screen-v1/214f69535ed74ab7a52e6d6d54a8c12f/provenance/provenance-state.pt",
+          "sha256": "bcf7c6b54bf04b23611f211feea86884440f0cbcf2437658399b0671e57ccb1d"
+        }
+      ]
+    },
+    {
+      "attempt_id": "92da3b999bbb4202820242a2e56d6757",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/observed-samples.pt",
+          "sha256": "bbb2df16253a531ee8f4afb4cb1e5f1450097ec0272b490f0ded66f6a5a92eed"
+        },
+        {
+          "bytes": 110649,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/provenance/provenance-state.pt",
+          "sha256": "01a9afbc143ba0821d1d251584aed11a946db3fa66465e99716ed450a255b33f"
+        }
+      ]
+    },
+    {
+      "attempt_id": "e9e061fb9ae245d59fea80b6fc6b408b",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b/observed-samples.pt",
+          "sha256": "3eecce24621b52b0c9a0d6b2360355375a4aa1247540a8edc5880c39c7b93b61"
+        },
+        {
+          "bytes": 150051,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/e9e061fb9ae245d59fea80b6fc6b408b/provenance/provenance-state.pt",
+          "sha256": "cbf2640df2a86c0fd207ed17b322c99449561c574aa9471fb83a314c4c908a12"
+        }
+      ]
+    },
+    {
+      "attempt_id": "de6dcf241bb3408bbb0b0fd754e06a66",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-selective-history-halfjoint-halfcritic-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66",
+      "files": [
+        {
+          "bytes": 55386,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/component-state.pt",
+          "sha256": "c59dc3d9500a17295528f41697bfdf27ef000aa0fe0e066cd03176a3918491a4"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/constraint_geometry-scored-outputs.pt",
+          "sha256": "ac3550bc7b7254e1e88279c2057cfca07f1bd4432f97caef5c267ac321990f21"
+        },
+        {
+          "bytes": 55419,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/de6dcf241bb3408bbb0b0fd754e06a66/provenance/provenance-state.pt",
+          "sha256": "8721c38ca56e11c8d9a5874fe3874f577ab463b16baea5da05e04441458a1efe"
+        }
+      ]
+    },
+    {
+      "attempt_id": "7a528019e4bd4615b11a83534ff54006",
+      "campaign": "bcap-critic-rate-final-screen-v1",
+      "candidate": "bcap-transport-halfcritic-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006",
+      "files": [
+        {
+          "bytes": 53776,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/component-state.pt",
+          "sha256": "bec51fcbb67568a15ff0bd4820116633576696e648e510cdd335ec1d378fa918"
+        },
+        {
+          "bytes": 20933,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/constraint_geometry-scored-outputs.pt",
+          "sha256": "2d9d00203cbd0c636b2e55198f048cd191c8ef98b688909ca52ec75392b5ed39"
+        },
+        {
+          "bytes": 53807,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/7a528019e4bd4615b11a83534ff54006/provenance/provenance-state.pt",
+          "sha256": "d7670e703797c50ee5e5abaa3658bb72290e923f5a38e2aaf974e14501201f64"
+        }
+      ]
+    },
+    {
+      "attempt_id": "43e4542f623e4495ae533fa63e74456f",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f",
+      "files": [
+        {
+          "bytes": 72515,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f/component-state.pt",
+          "sha256": "24b4c077f10c5787898d0a28e2778cd358d844d5e919befb9d1eafb1349a4ca3"
+        },
+        {
+          "bytes": 530709,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f/constraint_geometry-scored-outputs.pt",
+          "sha256": "f22de1258d0a3cc869a78901f4ef1c72ea4972a004c6ffe211a1f2b652c9ffcd"
+        },
+        {
+          "bytes": 72569,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/43e4542f623e4495ae533fa63e74456f/provenance/provenance-state.pt",
+          "sha256": "882963f5bf1e46365971e092f8054e6d9cbffdaf7f8e4b3a6ca8a22d5cb25472"
+        }
+      ]
+    },
+    {
+      "attempt_id": "557aa43fc89843bc9eff5bb4ec9334e6",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/557aa43fc89843bc9eff5bb4ec9334e6",
+      "files": [
+        {
+          "bytes": 1041871,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/557aa43fc89843bc9eff5bb4ec9334e6/clockfree-proof/comparisons.pt",
+          "sha256": "3f86d5794766400c66a6c731f66b5378d3b07c7505ae3abf5f11a4b233437bef"
+        },
+        {
+          "bytes": 45011,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/557aa43fc89843bc9eff5bb4ec9334e6/clockfree-proof/initial.pt",
+          "sha256": "9b480899aafe591536ad94a25e5499bf5f5051d37d7b0330f6e679046d953b29"
+        }
+      ]
+    },
+    {
+      "attempt_id": "d3ab270c75ca4c5494f4fcd9016ff941",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/d3ab270c75ca4c5494f4fcd9016ff941",
+      "files": [
+        {
+          "bytes": 841141,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/d3ab270c75ca4c5494f4fcd9016ff941/acquisition/acquired-state.pt",
+          "sha256": "b7dd12da3524fb63ae51e40c64a21ad9eb8584f963807d9891d6488dbb70ca9f"
+        }
+      ]
+    },
+    {
+      "attempt_id": "fcd3007735a646f7ba26e343cc07cc63",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63",
+      "files": [
+        {
+          "bytes": 64087,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/evaluator/initial-state.pt",
+          "sha256": "e5fe805c1d0626bc68ead6988324f9c17e4de8a557eb61511cca1d2d42e4185d"
+        },
+        {
+          "bytes": 842949,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/evaluator/observed-samples.pt",
+          "sha256": "2ab2fac0856ed74d60b3787fd19cf468a5efc8565cabc4ef9ce28b95d2a2e715"
+        },
+        {
+          "bytes": 63650,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/evaluator/state.pt",
+          "sha256": "67b9a64df1d26f8e92eb9af62e809bc841b78449ba919a2d1dd9296f4e00cd20"
+        },
+        {
+          "bytes": 65599,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/fcd3007735a646f7ba26e343cc07cc63/provenance/provenance-state.pt",
+          "sha256": "6c6aa3469c9459995079c58d81c433b8a43b6cfe70a5f6c76acd17bca077ce45"
+        }
+      ]
+    },
+    {
+      "attempt_id": "a063748fc3194662b2d65565a7b31469",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/a063748fc3194662b2d65565a7b31469",
+      "files": [
+        {
+          "bytes": 3174233,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/a063748fc3194662b2d65565a7b31469/observed-samples.pt",
+          "sha256": "b74965a7ee787dcaecc79c50d68ea9e914e0879bdb97dab9758c1609ad2f39d6"
+        },
+        {
+          "bytes": 110585,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/a063748fc3194662b2d65565a7b31469/provenance/provenance-state.pt",
+          "sha256": "9eb3c3fb120362a761e20f35fcab15eee5def616d794a81cec436c883d678192"
+        }
+      ]
+    },
+    {
+      "attempt_id": "948a1c31848049ecbf115d23cc17be68",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/948a1c31848049ecbf115d23cc17be68",
+      "files": [
+        {
+          "bytes": 53520,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/948a1c31848049ecbf115d23cc17be68/component-state.pt",
+          "sha256": "b79d70d9476a90b7524bbc0ecaa4f9769dec30abcd7a11c74ce8ec153d4b8b17"
+        },
+        {
+          "bytes": 20869,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/948a1c31848049ecbf115d23cc17be68/constraint_geometry-scored-outputs.pt",
+          "sha256": "4335db354632a33df70cf9db94ee1ff6e9229b4ddeaf471edf9298bd430d5327"
+        },
+        {
+          "bytes": 53551,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/948a1c31848049ecbf115d23cc17be68/provenance/provenance-state.pt",
+          "sha256": "6b1926661764a950e6f5b61c345d09856d4b80461a0e6f6e3d64b2ede19b80b6"
+        }
+      ]
+    },
+    {
+      "attempt_id": "5fa727858ca147db84ab102916207016",
+      "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "external_directory": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/5fa727858ca147db84ab102916207016",
+      "files": [
+        {
+          "bytes": 58724,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/5fa727858ca147db84ab102916207016/component-state.pt",
+          "sha256": "f129f43b7fd33ee0dc124e2ea09c5e37d65c4abd4e701737321c9f52f4155d30"
+        },
+        {
+          "bytes": 18949,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/5fa727858ca147db84ab102916207016/constraint_geometry-scored-outputs.pt",
+          "sha256": "115d2417d5502f2e69262d4461b77eca90fc8420f5670554346039352144a15b"
+        },
+        {
+          "bytes": 58759,
+          "path": "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/5fa727858ca147db84ab102916207016/provenance/provenance-state.pt",
+          "sha256": "5d164e9886bed5d73f1580c0fd7de664c44c47eaea4011fdf1500275b161faa9"
+        }
+      ]
+    }
+  ],
+  "copied_into_git": false,
+  "kind": "external_original_tensor_artifacts",
+  "note": "Original saved states and observations remain at these local paths. Checkpoint suitability is governed by each task and its saved payload; this index does not assert arbitrary continuation or checkpoint portability."
+}

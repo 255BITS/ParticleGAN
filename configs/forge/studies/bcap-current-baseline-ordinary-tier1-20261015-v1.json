@@ -1,0 +1,72 @@
+{
+  "campaign": {
+    "budget_seconds": 2520,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-current-baseline-ordinary-tier1-20261015-v1"
+  },
+  "candidate": "recipe-prior-refactor-bcap-pure-v1",
+  "competing_explanation": "Earlier baseline6/6 and the new two-task diagnostic passes motivate this measurement but do not establish six current ordinary passes. A scalar prediction signature is not qualification; all six task graders must pass. The established pre-refactor control and task map document the genuine existing prior-ownership structural delta, not a newly measured causal comparison. Complete every permitted original task and retain failures/timeouts.",
+  "control": {
+    "candidate_id": "bcap-default-baseline-direction-v1",
+    "task_map": {
+      "ae_gan_hold": "recipe-prior-refactor-legacy-ae_gan_hold",
+      "clockfree_audit_measurement_v1": "recipe-prior-refactor-legacy-clockfree_audit_measurement_v1",
+      "five_word_joint_smoke": "recipe-prior-refactor-legacy-five_word_joint_smoke",
+      "gaussian1d_smoke": "recipe-prior-refactor-legacy-gaussian1d_smoke",
+      "ring16_acquisition": "recipe-prior-refactor-legacy-ring16_acquisition",
+      "two_pole": "recipe-prior-refactor-legacy-two_pole",
+      "unused_token_hold": "recipe-prior-refactor-legacy-unused_token_hold"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Freshly validate the unchanged current baseline under the exact ordinary Tier1 contracts and frozen source/runtime. The candidate retains its existing recipe-owned prior formulation; this is current qualification evidence, not a newly altered recipe. All six required tasks must independently pass their original acquisition or sustained gates; the seventh clock audit remains diagnostic. No historical or research-diagnostic result fills a fresh qualification cell.",
+  "id": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "exact_pre_refactor_selected_leader_settings",
+        "source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792"
+      },
+      "path": "reports/forge/recipe-prior-refactor/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-pole-ring-v2",
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6"
+      },
+      "path": "reports/forge/selective-history/initial-training-v2.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

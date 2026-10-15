@@ -1,0 +1,78 @@
+{
+  "arms": [
+    {
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "458335d50aafb32a3c7aad52948dd206fba1a4af51abecbeff637722131acd8e",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "d7aee9d569c90586966399c79dcbd5bcde872f538a443e3c455abc819c811c25",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "2f814369edc384dd5fb07de672c319450bdfcd9f35bf4e478c1edb36dde26d0e",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-b-pole-ring-study-v2"
+    },
+    {
+      "candidate": "bcap-selective-history-transport-v1",
+      "candidate_revision": "4e1c14a5d4c9bcb4aa11353727db51813b7005cd8ad10526749f48659e539717",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "2187e5a561876c5018c19d2392da240656b318d70a26dd34279ee9ddf4c49671",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "7230d5a1c980326aa46cb2edf5e5a11998b852fe7e8472dbd03410afbf707b72",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-t-pole-ring-study-v2"
+    },
+    {
+      "candidate": "bcap-selective-history-whole-v1",
+      "candidate_revision": "8c629c57ffa9490b04a0f813e67a6c58ad2297d0022bfb1225fea1dc2aeef823",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "1c2369340c1f026db3dac22feae79068ad253e0c6a0bd5e12ddb3d01bf069ea0",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "581068ac8dd519e0c6f672777a083e436e2feb59b9afe3587bff168bf02fec47",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-w-pole-ring-study-v2"
+    },
+    {
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "candidate_revision": "32167caace55b02925ccc493ec6ac0b60a356e7e4c2640e9124695f11146400c",
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "key": "62d795783b918f46a44b99b1a8eb341b189ce5c1610702318c896f6077260d6d",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "key": "98710ea3f423b2dba26c5cce9536d3d53d817fdb131e8b88e1b3e078edc6f9b7",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-s-pole-ring-study-v2"
+    }
+  ],
+  "campaign": "bcap-selective-history-pole-ring-v2",
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "source_members": 1224,
+  "source_origin_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+  "status": "READY",
+  "total_reservation_seconds": 2400
+}

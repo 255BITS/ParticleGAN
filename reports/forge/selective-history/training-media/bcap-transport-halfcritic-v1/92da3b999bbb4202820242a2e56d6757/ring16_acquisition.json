@@ -1,0 +1,29 @@
+{
+  "gif_sha256": "2bccc30cdb9ec5d0d999a33e68318a265769ed2ec43730479137cd1717ca626b",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "909c3a23e030a4ccbee7d207d85f3ae8dff09ddf0b51e9c7bb9409643d556d01",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-critic-rate-final-screen-v1/92da3b999bbb4202820242a2e56d6757/observed-samples.pt": "bbb2df16253a531ee8f4afb4cb1e5f1450097ec0272b490f0ded66f6a5a92eed"
+  },
+  "task_id": "ring16_acquisition"
+}

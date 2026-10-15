@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-selective-history-20261015/bin/python",
+    "-m",
+    "experiments.forge",
+    "--root",
+    "/ml2/hypergan/particlegan-selective-history-20261015",
+    "--queue-root",
+    "/ml2/hypergan/combination-training-20261015/queue",
+    "compile"
+  ],
+  "exit_code": 130,
+  "finished_unix": 1792046960.2427459,
+  "pid": 1116270,
+  "started_unix": 1792046627.5094247,
+  "status": "ERROR",
+  "stderr": "/ml2/hypergan/combination-training-20261015/logs/final-compile.stderr.log",
+  "stdout": "/ml2/hypergan/combination-training-20261015/logs/final-compile.stdout.json",
+  "wall_seconds": 332.73332118988037,
+  "wrapper_pid": 1116269
+}

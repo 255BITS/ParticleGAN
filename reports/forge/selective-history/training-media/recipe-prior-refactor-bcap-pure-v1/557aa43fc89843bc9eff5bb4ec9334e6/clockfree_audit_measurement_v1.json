@@ -1,0 +1,24 @@
+{
+  "gif_sha256": "ec352431e7292ed920fce7449a5cb7bdd6ad4088c426a3b48e443a74c4ee07e9",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "9a6ae9a7415a0e314e2cecb153c82d66c64b7450926e5e6d5568f850e7b8356c",
+  "optimizer_updates_added": 0,
+  "postprocessor_sha256": "bd225ee346f23455a93db73b4ef5a31f857c9575d1575c82d237a946c69765d0",
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scored_frame_alignment": [],
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/combination-training-20261015/queue/bcap-current-baseline-ordinary-tier1-20261015-v1/557aa43fc89843bc9eff5bb4ec9334e6/clockfree-proof/comparisons.pt": "3f86d5794766400c66a6c731f66b5378d3b07c7505ae3abf5f11a4b233437bef"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

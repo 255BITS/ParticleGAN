@@ -1,0 +1,70 @@
+{
+  "allowed_task_definition_matches": {
+    "ae_gan_hold": true,
+    "clockfree_audit_measurement_v1": true,
+    "five_word_joint_smoke": true,
+    "gaussian1d_smoke": true,
+    "ring16_acquisition": true,
+    "two_pole": true,
+    "unused_token_hold": true
+  },
+  "campaign": "bcap-current-baseline-ordinary-tier1-20261015-v1",
+  "candidate": "recipe-prior-refactor-bcap-pure-v1",
+  "candidate_and_campaign_budget_seconds": 2520,
+  "control": "bcap-default-baseline-direction-v1",
+  "exact_legacy_task_map": {
+    "ae_gan_hold": "recipe-prior-refactor-legacy-ae_gan_hold",
+    "clockfree_audit_measurement_v1": "recipe-prior-refactor-legacy-clockfree_audit_measurement_v1",
+    "five_word_joint_smoke": "recipe-prior-refactor-legacy-five_word_joint_smoke",
+    "gaussian1d_smoke": "recipe-prior-refactor-legacy-gaussian1d_smoke",
+    "ring16_acquisition": "recipe-prior-refactor-legacy-ring16_acquisition",
+    "two_pole": "recipe-prior-refactor-legacy-two_pole",
+    "unused_token_hold": "recipe-prior-refactor-legacy-unused_token_hold"
+  },
+  "execution_policy": {
+    "mode": "complete_current_tier",
+    "schema_version": 1
+  },
+  "higher_tiers_subscribed": false,
+  "ordinary_science_has_no_diagnostic_marker": true,
+  "prior_evidence_verified": [
+    {
+      "identity": {
+        "scope": "exact_pre_refactor_selected_leader_settings",
+        "source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792"
+      },
+      "path": "reports/forge/recipe-prior-refactor/baseline.json",
+      "sha256": "6bffbf589ae8523c804ce6401a873a03b1ed4cb548bc1b7cd4b0c632ca790013",
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "campaign": "bcap-selective-history-pole-ring-v2",
+        "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6"
+      },
+      "path": "reports/forge/selective-history/initial-training-v2.json",
+      "sha256": "e90fb7288c5035e5e5e2aecb34099f4565096669d0869a7aa2f0a368c64d4f80",
+      "use": "motivation_only"
+    }
+  ],
+  "queue_authorized_tasks": [
+    "ae_gan_hold",
+    "clockfree_audit_measurement_v1",
+    "five_word_joint_smoke",
+    "gaussian1d_smoke",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "queue_subscribed_job_count": 7,
+  "request_id": "d6e4aac3dca9c827dc0f4300",
+  "request_total_job_descriptors": 29,
+  "runtime_protocol_compute_rng_match_initial": true,
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "source_matches_initial": true,
+  "status": "PASS_ADMISSION_AUDIT_NOT_SCIENTIFIC_PASS",
+  "study_review_status": "READY",
+  "through_tier": 1,
+  "unchanged_baseline_recipe": true,
+  "view": "discriminator_stability"
+}

@@ -1,0 +1,71 @@
+{
+  "execution_base_commit": "071a8d5614caf632b11ead731a6bb5fdd8a2afc8",
+  "freshness": {
+    "added_inputs": [],
+    "changed_inputs": [],
+    "fresh": true,
+    "removed_inputs": [],
+    "status": "CURRENT"
+  },
+  "inventory_modified": false,
+  "kind": "preexisting_engineering_inventory_gaps",
+  "paths": [
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "benchmarks/locked_shared/cuda_host_smoke.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "benchmarks/toy100/affine_replay.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/atlas_catalog_scores.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/confidence_coherence_scores.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/pr399_scores.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/research_tiers.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/source_bound_board.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/test_performance.py"
+    },
+    {
+      "current_matches_execution_base_blob": true,
+      "exists_in_execution_base_commit": true,
+      "path": "experiments/forge/test_performance_render.py"
+    }
+  ],
+  "paths_absent_from_execution_base_catalog": [
+    "benchmarks/locked_shared/cuda_host_smoke.py",
+    "benchmarks/toy100/affine_replay.py",
+    "experiments/forge/atlas_catalog_scores.py",
+    "experiments/forge/confidence_coherence_scores.py",
+    "experiments/forge/pr399_scores.py",
+    "experiments/forge/research_tiers.py",
+    "experiments/forge/source_bound_board.py",
+    "experiments/forge/test_performance.py",
+    "experiments/forge/test_performance_render.py"
+  ],
+  "scientific_receipts_unchanged": true
+}

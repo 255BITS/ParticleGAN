@@ -1,0 +1,34 @@
+{
+  "actual_campaign_spend": 1077.3886686100159,
+  "campaign_cap": 2520,
+  "compile_started_after_terminal_receipts": true,
+  "evidence_files_sha256": {
+    "resource-observations.jsonl": "950af8ca446d70b7cf2ddbc98bed037b9c417c4ca2b083c417d831efc31dc92f",
+    "word-execution-repair-plan.json": "391db3fb5d12194b511e20c444b813f73dd75f0bf2f0c6211e18bd7d87c6cb36",
+    "word-progress-observations.jsonl": "cc764b04c085de26df8fb4258315a3b3d142a3d49790ae0b438f3794647b93be"
+  },
+  "final_optimizer_step_unknown": true,
+  "guard_updated_utc": "2026-10-15T06:46:39.726529+00:00",
+  "latest_logged_observation_step": 6667,
+  "original_attempt_id": "d3ab270c75ca4c5494f4fcd9016ff941",
+  "original_elapsed_seconds": 900.3388643529906,
+  "original_gate_status": "INCOMPLETE",
+  "original_terminal_status": "timeout",
+  "pending_driver": "/ml2/hypergan/combination-training-20261015/retry_word_after_contention.py",
+  "pending_driver_guard": "Reject any live attempt_coverage --watch feeder naming selected GPU, or with unresolved GPU selection; then require <=5% utilization and only known persistent clients.",
+  "pending_driver_sha256": "222ab4da126ea96c2847d16573b16010793845e532b9ee4f5a4bb2c860903f47",
+  "preserved_peer_attempts": [
+    "43e4542f623e4495ae533fa63e74456f",
+    "557aa43fc89843bc9eff5bb4ec9334e6",
+    "fcd3007735a646f7ba26e343cc07cc63",
+    "a063748fc3194662b2d65565a7b31469",
+    "948a1c31848049ecbf115d23cc17be68",
+    "5fa727858ca147db84ab102916207016"
+  ],
+  "projected_spend_with900_second_retry": 1977.3886686100159,
+  "reason": "Continuous external attempt-coverage feeder was using both A6000s. A transient idle gap is insufficient; no confirmed scheduling repair has been received. Original allowed to reach its unchanged900-second deadline.",
+  "remaining_authorized_operational_retries": 1,
+  "retry_count": 0,
+  "status": "PREPARED_NOT_EXECUTED_PENDING_SCHEDULING_REPAIR",
+  "utc": "2026-10-15T06:44:31.740587+00:00"
+}
