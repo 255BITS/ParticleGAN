@@ -72,7 +72,9 @@ def tier_rows(root, page, requirements):
             family, _, _, _, source, seed = identity
             target = f"reports/forge/families/{family}.md#pr399-retained-research"
             label = f"{labels[identity]}; seed {seed}; {source[:8]}"
-            rows[family].append(_row(root, page, label, target, tasks, requirements))
+            from .research_attempts import scope_id
+            rows[family].append(_row(root, page, label, target, tasks, requirements,
+                                     scope=scope_id(source, identity[2]) if seed == 0 else None))
     return dict(rows)
 
 

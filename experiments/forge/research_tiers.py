@@ -5,6 +5,7 @@ counts, and untiered historical studies remain on the family detail pages.
 """
 from pathlib import Path
 from posixpath import relpath
+from functools import lru_cache
 
 from .contracts import read_json, file_hash
 
@@ -30,8 +31,45 @@ def _link(root, page, label, target):
     return f"[{label}]({relpath(str(Path(root) / target), str(Path(page).parent))})"
 
 
-def _row(root, page, label, target, tasks, requirements):
+@lru_cache(maxsize=4)
+def _attempt_registry(path, modified):
+    return read_json(path)["records"]
+
+
+def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None):
     from .family_reports import score
+    registry = Path(root) / "reports/forge/attempt-coverage.json"
+    attempts = {}
+    if registry.is_file() and (scope or selected_family):
+        attempts = {r["task"]: r for r in _attempt_registry(registry, registry.stat().st_mtime_ns)
+                    if (scope and r.get("research_scope") == scope)
+                    or (selected_family and r.get("family") == selected_family)}
+    def count(required):
+        # These are explicitly nonqualifying research rows. New same-source
+        # attempts fill previously unmeasured research cells, never overwrite an
+        # archived verdict or a selected-family qualification result.
+        outcomes = {task: tasks.get(task) for task in required}
+        if scope:
+            for task in required:
+                if outcomes[task] in {None, "UNKNOWN", "NOT_RUN"} and attempts.get(task, {}).get("status") in {"PASS", "FAIL"}:
+                    outcomes[task] = attempts[task]["status"]
+        value = {"passed": sum(outcomes[task] == "PASS" for task in required), "total": len(required),
+                 "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
+                 "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}
+        if attempts:
+            coverage = {}
+            for task in required:
+                if outcomes[task] in {"PASS", "FAIL", "ERROR", "INVALID", "INCOMPLETE"}:
+                    continue
+                attempt = attempts.get(task, {})
+                status = attempt.get("status")
+                key = ("running" if status == "RUNNING" else
+                       "incompatible" if status == "BLOCKED" and attempt.get("block_kind") == "incompatible" else
+                       "blocked" if status == "BLOCKED" else
+                       "diagnostic_attempts" if attempt.get("attempted") else "not_run")
+                coverage[key] = coverage.get(key, 0) + 1
+            value["attempt_coverage"] = coverage
+        return value
     if set(tasks) - set().union(*map(set, requirements.values())):
         raise ValueError("research result has no recorded tier assignment")
     counts = []
@@ -40,15 +78,9 @@ def _row(root, page, label, target, tasks, requirements):
         if not required:
             counts.append("—")
             continue
-        passed = sum(tasks.get(task) == "PASS" for task in required)
-        counts.append(_link(root, page, score({"passed": passed, "total": len(required),
-            "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
-            "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}), target))
+        counts.append(_link(root, page, score(count(required)), target))
     required = set().union(*map(set, requirements.values()))
-    passed = sum(tasks.get(task) == "PASS" for task in required)
-    counts.append(_link(root, page, score({"passed": passed, "total": len(required),
-        "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
-        "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}), target))
+    counts.append(_link(root, page, score(count(required)), target))
     return "| " + " | ".join(["↳ † " + _link(root, page, label, target), *counts]) + " |"
 
 
@@ -99,8 +131,10 @@ def _confidence_rows(root, page, requirements):
                 identities.add((cell["candidate_revision"], condition["source_digest"], condition["seed"]))
         if len(identities) != 1:
             raise ValueError("research tier row cannot pool recipes, sources or seeds")
+        from .research_attempts import scope_id
+        revision, source, seed = next(iter(identities))
         rows.append(_row(root, page, label, "reports/forge/families/bcap-pure.md#" + anchor,
-                         tasks, requirements))
+                         tasks, requirements, scope=scope_id(source, revision) if seed == 0 else None))
     return rows
 
 
@@ -125,7 +159,9 @@ def tier_rows(root, page):
         for record in board["rows"]:
             tasks = {task: cell["status"] for task, cell in record["benchmark_tasks"].items()
                      if cell["status"] is not None}
-            bcap.append(_row(root, page, record["label"], record["readout"], tasks, requirements))
+            from .research_attempts import scope_id
+            bcap.append(_row(root, page, record["label"], record["readout"], tasks, requirements,
+                             scope=scope_id(record["source_digest"], record["candidate_revision"])))
         if (Path(root) / PAIRED).is_file():
             paired = _pinned(root, PAIRED)
             validate_paired_results(paired)
@@ -165,7 +201,8 @@ def tier_rows(root, page):
         for record in measured["diagnostic_rows"]:
             requirements = {tier: set(names) for tier, names in record["requirements"].items()}
             rows.setdefault(record["family"], []).append(_row(root, page, record["label"],
-                str(followup.with_name("README.md")), record["tasks"], requirements))
+                str(followup.with_name("README.md")), record["tasks"], requirements,
+                selected_family=record["family"] if record["label"].startswith("Unchanged selected recipe:") else None))
     return rows
 
 

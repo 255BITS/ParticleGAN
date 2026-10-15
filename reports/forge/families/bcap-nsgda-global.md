@@ -100,7 +100,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-nsgda-global.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](bcap-nsgda-global.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](bcap-nsgda-global.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](bcap-nsgda-global.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-nsgda-global.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-c195899a64af-tier-1"></a>
 
@@ -2982,7 +2982,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-nsgda-global.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (7 not run)](bcap-nsgda-global.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](bcap-nsgda-global.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](bcap-nsgda-global.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-nsgda-global.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 
-Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-0d83d78027c5-tier-1"></a>
 

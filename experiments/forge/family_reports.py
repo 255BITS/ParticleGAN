@@ -259,9 +259,23 @@ def _count(tasks):
     statuses = Counter(task["status"] for task in tasks)
     incompatible = sum(_incompatible(task) for task in tasks)
     not_run = sum(not task["execution_recorded"] for task in tasks) - incompatible
-    return {"passed": statuses.get("PASS", 0), "total": len(tasks),
+    value = {"passed": statuses.get("PASS", 0), "total": len(tasks),
             "incomplete": bool(not_run or incompatible), "not_run": not_run, "incompatible": incompatible,
             "counts": dict(sorted(statuses.items()))}
+    if any("run_attempt" in task for task in tasks):
+        coverage = Counter()
+        for task in tasks:
+            attempt = task.get("run_attempt", {})
+            if task["execution_recorded"]:
+                continue
+            if not attempt.get("attempted"):
+                coverage["incompatible" if _incompatible(task) else "not_run"] += 1
+            elif attempt["status"] == "BLOCKED":
+                coverage["incompatible" if attempt.get("block_kind") == "incompatible" else "blocked"] += 1
+            else:
+                coverage["running" if attempt["status"] == "RUNNING" else "diagnostic_attempts"] += 1
+        value["attempt_coverage"] = dict(coverage)
+    return value
 
 
 def _incompatible(task):
@@ -273,16 +287,27 @@ def _sum(counts):
     statuses = Counter()
     for count in counts:
         statuses.update(count["counts"])
-    return {"passed": sum(c["passed"] for c in counts), "total": sum(c["total"] for c in counts),
+    value = {"passed": sum(c["passed"] for c in counts), "total": sum(c["total"] for c in counts),
             "incomplete": any(c["incomplete"] for c in counts),
             "not_run": sum(c["not_run"] for c in counts),
             "incompatible": sum(c["incompatible"] for c in counts), "counts": dict(sorted(statuses.items()))}
+    if any("attempt_coverage" in c for c in counts):
+        coverage = Counter()
+        for count in counts:
+            coverage.update(count.get("attempt_coverage", {k: count.get(k, 0) for k in ("not_run", "incompatible")}))
+        value["attempt_coverage"] = dict(coverage)
+    return value
 
 
 def score(count, *, marker=True):
     value = f"{count['passed']}/{count['total']}"
+    coverage = count.get("attempt_coverage", count)
     missing = [f"{count[key]} {label}" for key, label in (("not_run", "not run"), ("incompatible", "incompatible"))
                if count.get(key)]
+    if "attempt_coverage" in count:
+        missing = [f"{coverage[key]} {label}" for key, label in (
+            ("not_run", "not run"), ("incompatible", "incompatible"), ("blocked", "blocked"),
+            ("running", "running"), ("diagnostic_attempts", "diagnostic attempts")) if coverage.get(key)]
     return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
 
@@ -497,6 +522,25 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
+    attempt_path = Path("reports/forge/attempt-coverage.json")
+    run_attempts = {}
+    attempt_summary = None
+    if (root / attempt_path).is_file():
+        registry = load(attempt_path)
+        attempt_summary = deepcopy(registry["summary"])
+        if (registry.get("schema") != "forge_attempt_coverage_v1"
+                or registry.get("qualification_input") is not False
+                or registry.get("qualification_reuse") is not False):
+            raise ValueError("run-attempt coverage must remain diagnostic only")
+        for attempt in registry["records"]:
+            key = (attempt["source_digest"], attempt["candidate_revision"], attempt["task"],
+                   attempt["execution_sha256"], attempt["evaluation_sha256"])
+            if attempt["key"] != stable_hash(list(key)) or key in run_attempts:
+                raise ValueError("invalid or duplicate run-attempt binding")
+            if attempt["status"] not in {"PENDING", "RUNNING", "PASS", "FAIL", "INCOMPLETE", "INVALID",
+                                         "ERROR", "TIMEOUT", "BLOCKED", "INTERRUPTED"}:
+                raise ValueError("invalid run-attempt status")
+            run_attempts[key] = attempt
     followup = Path("reports/forge/actual-missing-diagnostics-20261014/results.json")
     diagnostic_executions = set()
     if (root / followup).is_file():
@@ -651,6 +695,10 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                              "reason": reason, "coverage_reason": coverage, "changed_contract_fields": changed,
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
+            attempt_key = (selected.get("bindings", {}).get("source_digest"), selected["candidate_revision"],
+                           name, contract.get("execution_sha256"), contract.get("evaluation_sha256"))
+            if attempt_key in run_attempts:
+                results[name]["run_attempt"] = deepcopy(run_attempts[attempt_key])
             supported = task_support.get(name)
             if supported is not None:
                 if contract and (supported["execution_sha256"] != contract.get("execution_sha256")
@@ -662,6 +710,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     results[name]["reason"] = "Skipped incompatible test: " + "; ".join(supported["blockers"])
                 diagnostic_key = (support_rows[0]["source_digest"], selected["candidate_revision"], name,
                                   supported["execution_sha256"], supported["evaluation_sha256"])
+                if diagnostic_key in run_attempts:
+                    results[name]["run_attempt"] = deepcopy(run_attempts[diagnostic_key])
                 if diagnostic_key in diagnostic_executions and not results[name]["execution_recorded"]:
                     results[name]["separate_diagnostic_executed"] = True
                     results[name]["reason"] = ("Executable: completed in a separate-runtime diagnostic. "
@@ -740,6 +790,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                                                    "counts_scope": "AT_FIRST_ACCEPTED_CASE"}
     if atlas_navigation is not None:
         progress["atlas_evidence_navigation"] = atlas_navigation
+    if attempt_summary is not None:
+        progress["run_attempt_coverage"] = attempt_summary
     return progress
 
 
@@ -783,14 +835,16 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     lines += ["", "Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. "
               "† marks a separate diagnostic or research scope, excluded from the bold totals and current selection. "
               "Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question "
-              "Tier 1 policy scope. A retained pass grants no new qualification.", "",
+              "Tier 1 policy scope. Same-source backfill attempts can fill previously unmeasured research cells; "
+              "original verdicts remain immutable. A retained pass grants no new qualification.", "",
               "Family totals sum required-view instances: a shared task counts again in every view requiring it. "
               "For example, 152 is a count of requirements across views, not distinct training runs. "
               "Research rows count unique required tasks within their own scope.", "",
-              "Counts show passes / required tasks, followed by separate not-run and incompatible counts when nonzero. "
-              "Incompatible means the selected formulation/task contract was preflight-blocked without execution; "
-              "its reason appears on the family page. Not run covers remaining missing executions, including tier or "
-              "checkpoint prerequisites. No formulation is changed to fit a test. "
+              "Counts show passes / required tasks; selected-row pass counts remain unchanged. For rows with run-attempt coverage, the suffix counts "
+              "genuinely unattempted tasks as not run, constructor refusals as incompatible, missing required artifacts "
+              "as blocked, and other separate-runtime attempts as diagnostic attempts. A start refusal is not a "
+              "numerical failure. Rows without that registry retain their recorded missing/preflight counts. "
+              "No formulation is changed to fit a test. "
               "Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
               "or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. "
               "Zero recorded passes always displays as 0, including unrun families.", "",
@@ -798,6 +852,13 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and "
               "calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; "
               "untiered historical studies remain on those detail pages.", ""]
+    if (root / "reports/forge/attempt-coverage.json").is_file():
+        attempts = progress.get("run_attempt_coverage", {})
+        lines += [f"Run attempts: **{attempts.get('attempted', 0)}/{attempts.get('total', 0)} distinct "
+                  f"family/task pairs (selected and research)**; {attempts.get('pending', 0)} pending and {attempts.get('running', 0)} running. " +
+                  link(root, page, "Resumable run-attempt coverage and setup",
+                       "reports/forge/ATTEMPT_COVERAGE.md") +
+                  ". Attempts match the selected source, recipe and task contracts; they do not change qualification.", ""]
     if (root / "reports/forge/actual-missing-diagnostics-20261014/results.json").is_file():
         lines += [link(root, page, "Actual attempts of unrun and blocked tests",
                        "reports/forge/actual-missing-diagnostics-20261014/README.md") +
@@ -1056,8 +1117,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
                           cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
                           "`). These cells give no parent-cohort credit."]
-        lines += ["", "Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts "
-                  "without execution. These counts are separate and remain in the required denominator. "
+        lines += ["", "With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; "
+                  "blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. "
+                  "Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. "
                   "PASS and FAIL both count as executed. Attempted errors retain their status and cause; "
                   "changes to today's test definition are shown separately from execution coverage.", ""]
         for repair in cohort.get("retry_history", []):
@@ -1134,7 +1196,13 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       _existing_link(root, page, "Current experiment declaration", task_path) + ".", "",
                       "Test definition: **" + _definition_label(result) + "**. " + cell(result["coverage_reason"]) +
                       " " + cell(result["reason"]), ""]
-            if result["status"] not in COMPLETE:
+            attempt = result.get("run_attempt")
+            if attempt and attempt.get("attempted"):
+                lines += ["Run attempt: **" + cell(attempt["status"]) + "** (" +
+                          cell(attempt.get("origin")) + "; qualification unchanged). " +
+                          cell(attempt.get("reason", "Matched existing execution receipt.")) + " " +
+                          link(root, page, "Attempt evidence", attempt.get("evidence", "reports/forge/attempt-coverage.json")) + ".", ""]
+            if result["status"] not in COMPLETE and not (attempt and attempt.get("attempted")):
                 lines += ["Execution: **" + ("recorded" if result["execution_recorded"] else
                            "incompatible; skipped" if _incompatible(result) else "not run") + "**."]
                 if result["attempt_id"]:
