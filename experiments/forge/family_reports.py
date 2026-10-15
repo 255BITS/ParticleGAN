@@ -700,6 +700,8 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
+    from .source_bound_board import main_board_rows
+    source_rows = main_board_rows(root, page)
     lines = ["# Forge family leaderboard", "",
              "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
              "pseudocode and training details; click any count for the experiment results. "
@@ -709,9 +711,10 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain "
              "their separate evidence on the detail pages. "
              "Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.", "",
-             "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
-             "these totals measure requirements across views, not unique training runs or scientific rank.", "",
-             *_table_header()]
+             "Family totals sum required-view instances: a unique benchmark task is counted again in each view requiring it. "
+             "For example,152 is a count of required-view instances, not152 distinct benchmark tasks or experiments. "
+             "These totals do not establish scientific rank.", "",
+             *source_rows, *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
             if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
@@ -749,6 +752,9 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               link(root, page, "Experiments, criteria and tier assignments", "reports/forge/EXPERIMENTS_BY_TIER.md") + " · " +
               link(root, page, "Complete numerical publication and provenance", "reports/forge/technique-inventory.json"), "",
               f"Publication input digest `{publication['provenance']['input_digest']}`.", ""]
+    retained_notes = root / 'reports/forge/leaderboard-retained-source-notes.md'
+    if retained_notes.is_file():
+        lines.append(retained_notes.read_text())
     return "\n".join(lines)
 
 

@@ -1,0 +1,700 @@
+--- a/experiments/forge/api.py
++++ b/experiments/forge/api.py
+@@ -193,6 +193,10 @@
+         recipe = resolve_public_recipe(candidate)
+     except CapabilityError as error:
+         return error.blockers
++    if recipe.generator_gradient_response != "none" and (task.get('adapter') != 'transfer_vector' or task.get('evaluation', {}).get('kind') not in ('gaussian_smoke', 'gaussian_stability')):
++        return ['G-gradient response is declared only for the original ordinary Gaussian host']
++    if recipe.kinetic_transport_protect_primary and (task.get('adapter') != 'transfer_vector' or task.get('evaluation', {}).get('kind') not in ('gaussian_smoke', 'gaussian_stability')):
++        return ['augmented transport-primary protection has no certified hook for this component/non-Gaussian host']
+     consumer = task.get('execution', {}).get('transport_consumer')
+     if consumer is not None and (consumer != 'output_marginal_v1'
+             or task.get('adapter') not in ('transfer_behavior', 'word_joint')
+--- a/experiments/forge/boundaries.py
++++ b/experiments/forge/boundaries.py
+@@ -34,7 +34,7 @@
+ TECHNIQUE_RECIPE_FIELDS = frozenset({
+     "optimizer_svd_backend",
+     "prior_update", "prior_regularizer",
+-    "kinetic_transport_weight", "kinetic_transport_local_weight",
++    "kinetic_transport_weight", "kinetic_transport_local_weight", "kinetic_transport_protect_primary", "generator_gradient_response",
+     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
+     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
+     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",
+@@ -44,6 +44,7 @@
+     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
+     "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
+     "critic_step_mode",
++    "constant_lr", "generator_idle_se", "generator_idle_mode",
+ })
+ HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+     "prior_sigreg_projections", "prior_sigreg_knots",
+--- /dev/null
++++ b/particlegan/generator_idle.py
+@@ -0,0 +1,351 @@
++"""Opt-in generator idle gate. Off unless a caller sets the threshold.
++
++The trainer consults this rule only when its recipe enables it. A threshold of
++``None`` returns before any score is read, preserving the ordinary update.
++
++``generator_idle_mode`` selects the batch gap or a span-10 EMA of that gap.
++The default is ``batch``, which is the original rule.
++"""
++from contextlib import contextmanager
++from contextvars import ContextVar
++import math
++from weakref import WeakKeyDictionary
++
++import torch
++
++# Span 10. alpha = 2/(span+1) = 2/11. The asymptotic effective number of
++# batch-means is (2-alpha)/alpha = 10. One decay, not a searched coefficient.
++EMA_DECAY = 2.0 / 11.0
++_LR_MODES = ('ema_confidence_lr', 'ema_signed_confidence_lr', 'ema_positive_evidence_lr')
++_EMA_MODES = ('ema', *_LR_MODES)
++_PENDING_RATES = WeakKeyDictionary()
++
++
++def _finite_number(value):
++    if type(value) not in (int, float):
++        return False
++    try:
++        return math.isfinite(value)
++    except OverflowError:
++        return False
++
++# Legacy hosts do not see the Recipe inside their update loop. GANTrainer reads
++# the recipe field itself and does not consult this variable.
++_CURRENT: ContextVar["IdleAccounting | None"] = ContextVar("generator_idle", default=None)
++
++
++class IdleAccounting:
++    """Idle decisions for one run, plus the EMA state when that mode is on."""
++
++    def __init__(self, mode: str = "batch", standard_errors: float | None = None):
++        if mode not in ("batch", *_EMA_MODES):
++            raise ValueError("generator_idle_mode must be 'batch' or 'ema'")
++        if standard_errors is not None and (
++                not _finite_number(standard_errors) or standard_errors < 0):
++            raise ValueError("generator_idle_se must be None or a finite nonnegative number")
++        self.mode = mode
++        self.standard_errors = standard_errors
++        self.decisions = 0
++        self.idle_count = 0
++        self._mean: float | None = None
++        self._variance: float | None = None
++        self._weight_sq = 0.0
++        if mode in _LR_MODES:
++            self.response = dict(applied_steps=0, unresolved_count=0, invalid_batches=0,
++                                 gain_sum=0., gain_min=1., gain_max=.5, last_gain=1.)
++            if mode == 'ema_signed_confidence_lr':
++                self.response.update(negative_evidence_count=0, numerical_zero_gain_count=0)
++            if mode == 'ema_positive_evidence_lr':
++                self.response.update(negative_evidence_count=0, zero_evidence_gain_count=0)
++
++    def state_dict(self) -> dict:
++        return dict(schema_version=1, mode=self.mode, standard_errors=self.standard_errors,
++                    ema_alpha=EMA_DECAY if self.mode in _EMA_MODES else None,
++                    decisions=self.decisions, idle_count=self.idle_count,
++                    mean=self._mean, variance=self._variance, weight_sq=self._weight_sq,
++                    **({'response': dict(self.response)} if self.mode in _LR_MODES else {}))
++
++    def validate_state_dict(self, state) -> None:
++        expected = self.state_dict()
++        if (not isinstance(state, dict) or set(state) != set(expected)
++                or type(state["schema_version"]) is not int or state["schema_version"] != 1
++                or state["mode"] != self.mode
++                or state["standard_errors"] != self.standard_errors
++                or (state["standard_errors"] is not None
++                    and not _finite_number(state["standard_errors"]))
++                or state["ema_alpha"] != expected["ema_alpha"]
++                or any(type(state[key]) is not int or state[key] < 0
++                       for key in ("decisions", "idle_count"))
++                or state["idle_count"] > state["decisions"]
++                or not _finite_number(state["weight_sq"])):
++            raise ValueError("invalid generator idle checkpoint")
++        empty = state["mean"] is None and state["variance"] is None and state["weight_sq"] == 0
++        initialized = (self.mode in _EMA_MODES and state["decisions"] > 0
++                       and _finite_number(state["mean"]) and _finite_number(state["variance"])
++                       and state["variance"] >= 0 and 0 < state["weight_sq"] <= 1)
++        if (not (empty or initialized) or (self.standard_errors is None
++                and (state["decisions"] != 0 or state["idle_count"] != 0 or not empty))
++                or (self.mode in _EMA_MODES and empty and state["idle_count"] != 0)):
++            raise ValueError("invalid generator idle filter state")
++        if self.mode in _LR_MODES:
++            r=state['response']
++            lower = .5 if self.mode == 'ema_confidence_lr' else 0.
++            if (not isinstance(r,dict) or set(r)!=set(self.response) or state['idle_count']!=0
++                    or any(type(r[k]) is not int or r[k]<0 for k in ('applied_steps','unresolved_count','invalid_batches'))
++                    or r['applied_steps']!=state['decisions']
++                    or r['unresolved_count']>state['decisions'] or r['invalid_batches']>state['decisions']
++                    or any(not _finite_number(r[k]) for k in ('gain_sum','gain_min','gain_max','last_gain'))
++                    or not lower<=r['last_gain']<=1 or not lower<=r['gain_min']<=1 or not lower<=r['gain_max']<=1
++                    or not lower*state['decisions']<=r['gain_sum']<=state['decisions']):
++                raise ValueError('invalid confidence LR response checkpoint')
++            if self.mode == 'ema_signed_confidence_lr' and any(
++                    type(r[k]) is not int or not 0<=r[k]<=state['decisions']
++                    for k in ('negative_evidence_count','numerical_zero_gain_count')):
++                raise ValueError('invalid signed confidence LR response counters')
++            if self.mode == 'ema_positive_evidence_lr' and any(
++                    type(r[k]) is not int or not 0<=r[k]<=state['decisions']
++                    for k in ('negative_evidence_count','zero_evidence_gain_count')):
++                raise ValueError('invalid positive evidence LR response counters')
++
++    def load_state_dict(self, state) -> None:
++        self.validate_state_dict(state)
++        self.decisions, self.idle_count = state["decisions"], state["idle_count"]
++        self._mean, self._variance, self._weight_sq = state["mean"], state["variance"], state["weight_sq"]
++        if self.mode in _LR_MODES:self.response=dict(state['response'])
++
++    def confidence_gain(self, real_logits, fake_logits, standard_errors):
++        """Normal-approximation confidence proxy, with unchanged span-10 EMA.
++
++        Phi(|EMA gap| / SE) lies in [1/2,1]. This scales actual scheduled
++        G/E/prior step sizes, without clearing gradients or skipping moments.
++        It is a proxy under the inherited EMA variance model, not a claim of
++        empirical calibration or independent temporally correlated batches.
++        The signed mode instead uses Phi(EMA gap / SE) in [0,1]. It reduces
++        trust when real-over-fake advantage is negative, without changing D
++        coordinates or skipping gradient/moment updates. Numerically zero
++        rates are recorded explicitly; they confer no movement claim.
++        Positive-evidence mode uses max(0,2*Phi(EMA gap / SE)-1): zero
++        proposal at neutral/negative evidence, but real moment updates remain.
++        """
++        if self.mode not in _LR_MODES or standard_errors!=1 or self.standard_errors!=1:
++            raise ValueError('confidence LR requires its fixed EMA/se=1 declaration')
++        real_logits,fake_logits=_as_gap_pair(real_logits,fake_logits)
++        gap=(real_logits.detach()-fake_logits.detach()).reshape(-1).to(dtype=torch.float64)
++        if gap.numel()<2 or not bool(torch.isfinite(gap).all()):
++            gain=1.;self.response['invalid_batches']+=1
++        else:
++            unresolved=self._ema_idle(real_logits,fake_logits,standard_errors)
++            self.response['unresolved_count']+=int(unresolved)
++            se=math.sqrt(self._variance*self._weight_sq/int(gap.numel()))
++            if self.mode in ('ema_signed_confidence_lr','ema_positive_evidence_lr'):
++                self.response['negative_evidence_count']+=int(self._mean<0)
++                if se==0:gain=.5 if self._mean==0 else float(self._mean>0)
++                elif self._mean>=0:gain=.5*(1.+math.erf(self._mean/(math.sqrt(2.)*se)))
++                else:gain=.5*math.erfc(-self._mean/(math.sqrt(2.)*se))
++                if self.mode == 'ema_positive_evidence_lr':
++                    gain=max(0.,2*gain-1.)
++            else:
++                if se==0:gain=.5 if self._mean==0 else 1.
++                else:gain=.5*(1.+math.erf(abs(self._mean)/(math.sqrt(2.)*se)))
++        self.decisions+=1
++        if self.mode == 'ema_signed_confidence_lr':
++            self.response['numerical_zero_gain_count']+=int(gain==0)
++        if self.mode == 'ema_positive_evidence_lr':
++            self.response['zero_evidence_gain_count']+=int(gain==0)
++        self.response['gain_sum']+=gain
++        self.response['gain_min']=min(self.response['gain_min'],gain)
++        self.response['gain_max']=max(self.response['gain_max'],gain)
++        self.response['last_gain']=gain
++        return gain
++
++    def public(self) -> dict:
++        fraction = None if self.decisions == 0 else self.idle_count / self.decisions
++        return {
++            "mode": self.mode,
++            "standard_errors": self.standard_errors,
++            "idle_count": self.idle_count,
++            "decisions": self.decisions,
++            "idle_fraction": fraction,
++        }
++
++    def decide(self, real_logits, fake_logits, standard_errors: float, mode: str) -> bool:
++        if mode != self.mode or standard_errors != self.standard_errors:
++            raise ValueError("generator idle decision differs from its bound recipe")
++        if mode == "ema":
++            idle = self._ema_idle(real_logits, fake_logits, standard_errors)
++        elif mode == "batch":
++            idle = generator_is_idle(real_logits, fake_logits, standard_errors)
++        else:
++            raise ValueError("generator_idle_mode must be 'batch' or 'ema'")
++        self.decisions += 1
++        if idle:
++            self.idle_count += 1
++        return idle
++
++    def _ema_idle(self, real_logits, fake_logits, standard_errors: float) -> bool:
++        """Idle when the smoothed gap is within ``standard_errors`` of its own SE.
++
++        The filter is an EMA of the batch-mean gap and of the batch variance.
++        The first step stores that batch, so its test matches the batch rule.
++        Later steps use n_eff = 1 / sum(squared EMA weights). Fewer than two
++        scores, or a non-finite batch, is not idle and does not move the filter.
++        """
++        gap = (real_logits.detach() - fake_logits.detach()).reshape(-1).to(dtype=torch.float64)
++        count = int(gap.numel())
++        if count < 2:
++            return False
++        mean = gap.mean()
++        variance = gap.var(unbiased=True)
++        if not bool(torch.isfinite(mean)) or not bool(torch.isfinite(variance)):
++            return False
++        mean_value = float(mean)
++        variance_value = float(variance)
++        if variance_value < 0.0 or not math.isfinite(mean_value) or not math.isfinite(variance_value):
++            return False
++        if self._mean is None:
++            self._mean = mean_value
++            self._variance = variance_value
++            self._weight_sq = 1.0
++        else:
++            keep = 1.0 - EMA_DECAY
++            self._mean = keep * self._mean + EMA_DECAY * mean_value
++            self._variance = keep * self._variance + EMA_DECAY * variance_value
++            self._weight_sq = keep * keep * self._weight_sq + EMA_DECAY * EMA_DECAY
++        effective = 1.0 / self._weight_sq
++        standard_error = math.sqrt(self._variance / (count * effective))
++        if not math.isfinite(standard_error):
++            return False
++        return abs(self._mean) <= float(standard_errors) * standard_error
++
++
++def generator_idle_threshold() -> float | None:
++    accounting = _CURRENT.get()
++    if accounting is None:
++        return None
++    return accounting.standard_errors
++
++
++def generator_idle_accounting() -> IdleAccounting | None:
++    return _CURRENT.get()
++
++
++@contextmanager
++def generator_idle_scope(standard_errors: float | None, mode: str = "batch"):
++    """Install the idle rule for custom hosts. ``None`` leaves the rule off."""
++    if mode not in ("batch", *_EMA_MODES):
++        raise ValueError("generator_idle_mode must be 'batch' or 'ema'")
++    accounting = IdleAccounting(mode, standard_errors)
++    token = _CURRENT.set(accounting)
++    try:
++        yield accounting
++    finally:
++        _CURRENT.reset(token)
++
++
++def generator_is_idle(real_logits: torch.Tensor, fake_logits: torch.Tensor,
++                      standard_errors: float) -> bool:
++    """Whether the critic's paired real−fake gap is unresolved at this threshold.
++
++    Idle when the batch mean of ``real_logits - fake_logits`` is within
++    ``standard_errors`` unbiased standard errors of zero. Fewer than two scores,
++    or a non-finite mean or standard error, is not idle. A constant nonzero gap
++    has standard error zero, so it is not idle. A constant zero gap is idle.
++    """
++    gap = (real_logits.detach() - fake_logits.detach()).reshape(-1).to(dtype=torch.float64)
++    count = gap.numel()
++    if count < 2:
++        return False
++    mean = gap.mean()
++    variance = gap.var(unbiased=True)
++    if not bool(torch.isfinite(mean)) or not bool(torch.isfinite(variance)):
++        return False
++    standard_error = torch.sqrt(variance / count)
++    if not bool(torch.isfinite(standard_error)):
++        return False
++    return bool(mean.abs() <= float(standard_errors) * standard_error)
++
++
++def _as_gap_pair(real_logits, fake_logits):
++    if isinstance(real_logits, (list, tuple)):
++        real_logits = torch.cat([tensor.detach().reshape(-1) for tensor in real_logits])
++        fake_logits = torch.cat([tensor.detach().reshape(-1) for tensor in fake_logits])
++    return real_logits, fake_logits
++
++
++def gate_generator_update(optimizer, real_logits, fake_logits, standard_errors, *,
++                          mode: str = "batch", accounting: IdleAccounting | None = None,
++                          generator_gain=None, generator_response=None) -> bool:
++    """Drop this generator step's gradients when ``standard_errors`` says it is idle.
++
++    ``None`` returns immediately and does not read logits or gradients. An idle
++    step clears gradients to ``None`` so Adam does not move parameters or moments.
++    The caller still invokes ``optimizer.step()`` so learning-rate hooks and the
++    trainer phase machine run.
++    """
++    if standard_errors is None:
++        return False
++    real_logits, fake_logits = _as_gap_pair(real_logits, fake_logits)
++    if accounting is None:
++        accounting = IdleAccounting(mode, standard_errors)
++    if mode in _LR_MODES:
++        gain=accounting.confidence_gain(real_logits,fake_logits,standard_errors)
++        _stage_confidence_lr(optimizer,gain,accounting,generator_gain=generator_gain,
++                             generator_response=generator_response)
++        return False
++    if not accounting.decide(real_logits, fake_logits, standard_errors, mode):
++        return False
++    for group in optimizer.param_groups:
++        for parameter in group["params"]:
++            parameter.grad = None
++    return True
++
++
++def _stage_confidence_lr(optimizer,gain,accounting,*,generator_gain=None,generator_response=None):
++    """One real optimizer call at its response rate; restore scheduled rates after.
++
++    Hooks run around the public optimizer step, after existing scheduling
++    hooks. Direction normalization and Adam moments consume original gradients.
++    Only the LR used for the actual proposal is scaled. The joint bundle
++    supported by direction_blend contains exactly one public optimizer.
++    """
++    owned=getattr(optimizer,'optimizers',[optimizer])
++    if len(owned)!=1:raise ValueError('confidence LR requires one joint public optimizer')
++    public=owned[0]
++    if public in _PENDING_RATES:raise RuntimeError('confidence LR step still pending')
++    lower = .5 if accounting.mode == 'ema_confidence_lr' else 0.
++    if not lower<=gain<=1:raise ValueError('confidence LR gain outside declared range')
++    if generator_gain is not None and (not math.isfinite(generator_gain) or not 0<generator_gain<=1 or generator_response is None):
++        raise ValueError('invalid G gradient response gain')
++    handles=[];rates=[]
++    def before(opt,args,kwargs):
++        # DirectionBlend.step calls its wrapped base step on the same object.
++        # The signed law can produce an exact zero proposal: do not mistake
++        # that temporary response rate for a nonpositive scheduled rate, or
++        # apply it twice. Keep existing modes' invocation bytes unchanged.
++        if (accounting.mode in ('ema_signed_confidence_lr','ema_positive_evidence_lr') or generator_gain is not None) and rates:
++            return
++        rates.extend(group['lr'] for group in opt.param_groups)
++        if any(not math.isfinite(rate) or rate<=0 for rate in rates):
++            raise ValueError('confidence LR requires positive scheduled rates')
++        for group,rate in zip(opt.param_groups,rates):
++            group['lr']=rate*(generator_gain if generator_gain is not None and group['role']=='generator' else gain)
++    def after(opt,args,kwargs):
++        for group,rate in zip(opt.param_groups,rates):group['lr']=rate
++        for handle in handles:handle.remove()
++        del _PENDING_RATES[opt]
++        accounting.response['applied_steps']+=1
++        if generator_response is not None:
++            generator_response.response['applied_steps']+=1
++    handles.extend([public.register_step_pre_hook(before),public.register_step_post_hook(after)])
++    _PENDING_RATES[public]=handles
++
++
++def release_generator_step(optimizer, real_logits, fake_logits) -> bool:
++    """Legacy-host gate. No-op, without reading logits, when the scope is unset."""
++    accounting = _CURRENT.get()
++    if accounting is None or accounting.standard_errors is None:
++        return False
++    return gate_generator_update(
++        optimizer, real_logits, fake_logits, accounting.standard_errors,
++        mode=accounting.mode, accounting=accounting,
++    )
+--- /dev/null
++++ b/particlegan/gradient_response.py
+@@ -0,0 +1,88 @@
++"""Training-gradient coherence with fixed eight-batch history and positive weight floor.
++
++No samples, targets, critic scores, task IDs, update deadlines or evaluator enter here.
++The effective count describes EMA weights, not independent statistical observations.
++"""
++from copy import deepcopy
++import math
++import torch
++
++
++class GradientCoherence:
++    mode = 'gradient_coherence'
++    beta = 7 / 8
++
++    def __init__(self):
++        self.packet = None
++        self.response = dict(applied_steps=0)
++
++    @torch.no_grad()
++    def observe(self, gradients):
++        gradients = [g.detach().double() for g in gradients]
++        if not gradients or any(not bool(torch.isfinite(g).all()) for g in gradients):
++            raise ValueError('finite training gradients required')
++        if self.packet is None:
++            self.packet = dict(means=[torch.zeros_like(g) for g in gradients],
++                               second=gradients[0].new_zeros(()), weight=0., weight2=0., count=0, last={})
++        s = self.packet
++        if len(s['means']) != len(gradients) or any(m.shape != g.shape for m, g in zip(s['means'], gradients)):
++            raise ValueError('gradient layout changed')
++        alpha = 1 - self.beta
++        s['means'] = [self.beta*m + alpha*g for m, g in zip(s['means'], gradients)]
++        s['second'] = self.beta*s['second'] + alpha*sum(g.square().sum() for g in gradients)
++        s['weight'] = self.beta*s['weight'] + alpha
++        s['weight2'] = self.beta**2*s['weight2'] + alpha**2
++        s['count'] += 1
++        effective = s['weight']**2 / s['weight2']
++        mean2 = sum((m / s['weight']).square().sum() for m in s['means'])
++        second = s['second'] / s['weight']
++        coherence = float((mean2 / second).clamp(0, 1)) if bool(second > 0) else 0.
++        gain = max(1 / effective, coherence)
++        gain = min(1., gain)
++        if not math.isfinite(gain) or not 0 < gain <= 1:
++            raise ValueError('invalid gradient coherence gain')
++        s['last'] = dict(gain=gain, coherence=coherence, effective_weight_count=effective,
++                         mean_square=float(mean2), second_moment=float(second))
++        return gain
++
++    def state_dict(self):
++        return deepcopy(dict(schema=1, mode=self.mode, beta=self.beta, packet=self.packet, response=self.response))
++
++    def validate(self, value, parameters):
++        if (not isinstance(value, dict) or set(value) != {'schema','mode','beta','packet','response'}
++                or value['schema'] != 1 or value['mode'] != self.mode or value['beta'] != self.beta):
++            raise ValueError('gradient response checkpoint identity mismatch')
++        if not isinstance(value['response'], dict) or set(value['response']) != {'applied_steps'}:
++            raise ValueError('gradient response checkpoint counters malformed')
++        count = value['response']['applied_steps']
++        if type(count) is not int or count < 0:
++            raise ValueError('gradient response checkpoint counters invalid')
++        s = value['packet']
++        if s is None:
++            if count:
++                raise ValueError('gradient response missing initialized history')
++            return
++        if (set(s) != {'means','second','weight','weight2','count','last'} or type(s['count']) is not int
++                or s['count'] != count or count < 1 or len(s['means']) != len(parameters)):
++            raise ValueError('gradient response history/counters inconsistent')
++        for name, expected in [('weight',1-self.beta**count), ('weight2',(1-self.beta)**2*(1-self.beta**(2*count))/(1-self.beta**2))]:
++            if type(s[name]) not in (int,float) or not math.isfinite(s[name]) or abs(s[name]-expected)>1e-12:
++                raise ValueError('gradient response weight history invalid')
++        tensors = s['means'] + [s['second']]
++        if any(not isinstance(t,torch.Tensor) or t.dtype != torch.float64 or not bool(torch.isfinite(t).all()) for t in tensors):
++            raise ValueError('gradient response tensor history invalid')
++        if s['second'].numel()!=1 or bool(s['second']<0) or any(m.shape!=p.shape for m,p in zip(s['means'],parameters)):
++            raise ValueError('gradient response parameter layout invalid')
++        last=s['last']
++        if (not isinstance(last,dict) or set(last)!={'gain','coherence','effective_weight_count','mean_square','second_moment'}
++                or any(type(v) not in (int,float) or not math.isfinite(v) for v in last.values())
++                or not 0<last['gain']<=1 or not 0<=last['coherence']<=1):
++            raise ValueError('gradient response receipt invalid')
++
++    def load(self, value, parameters):
++        self.validate(value, parameters)
++        value=deepcopy(value)
++        self.packet=value['packet'];self.response=value['response']
++        if self.packet:
++            self.packet['means']=[m.to(p.device) for m,p in zip(self.packet['means'],parameters)]
++            self.packet['second']=self.packet['second'].to(parameters[0].device)
+--- a/particlegan/recipe_compat.py
++++ b/particlegan/recipe_compat.py
+@@ -18,6 +18,8 @@
+     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
+     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
+     "lr_decay_staircase": False,
++    "constant_lr": False, "generator_idle_se": None,
++    "generator_idle_mode": "batch",
+ }
+ 
+ 
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -114,6 +114,8 @@
+     reconstruction_weight: float = 1.0
+     # Opt-in label-free transport signal on the same G-phase target batch.
+     kinetic_transport_weight: float = 0.0
++    kinetic_transport_protect_primary: bool = False
++    generator_gradient_response: str = "none"
+     kinetic_transport_local_weight: float = 0.0
+     kinetic_transport_projections: int = 32
+     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
+@@ -242,6 +244,15 @@
+     lr_decay_rate: float = 0.96
+     lr_decay_steps: int = 50_000
+     lr_decay_staircase: bool = False
++    # Local constant-rate overlay. Off leaves the cosine anneal untouched.
++    # On, learning-rate multipliers are 1 while floors, caps, and seeds stay.
++    constant_lr: bool = False
++    # Standard errors of the critic's paired real−fake gap. None disables the
++    # generator idle rule. 1 is the critic batch estimate's own noise floor.
++    generator_idle_se: float | None = None
++    # ``batch`` is the per-step gap. ``ema`` smooths that gap with one fixed
++    # span-10 decay. Default ``batch`` leaves se=1 and se=3 runs unchanged.
++    generator_idle_mode: str = "batch"
+ 
+     def __post_init__(self):
+         if self.prior_update not in ("learned", "frozen"):
+@@ -336,6 +347,29 @@
+             raise ValueError("invalid exponential LR rate, steps or staircase")
+         if self.lr_schedule != "cosine" and (self.continuous_policy is not None or self.network_lr_horizon_cap is not None):
+             raise ValueError("explicit constant/exponential LR requires a scheduled recipe without a horizon cap")
++        if type(self.constant_lr) is not bool:
++            raise ValueError("constant_lr must be a bool")
++        if self.generator_idle_se is not None and (
++                isinstance(self.generator_idle_se, bool)
++                or type(self.generator_idle_se) not in (int, float)
++                or not math.isfinite(self.generator_idle_se)
++                or self.generator_idle_se < 0):
++            raise ValueError("generator_idle_se must be None or a finite nonnegative number")
++        if self.generator_idle_se is not None:
++            object.__setattr__(self, "generator_idle_se", float(self.generator_idle_se))
++        if self.generator_idle_mode not in ("batch", "ema", "ema_confidence_lr", "ema_signed_confidence_lr", "ema_positive_evidence_lr"):
++            raise ValueError("generator_idle_mode must be batch, ema, ema_confidence_lr, ema_signed_confidence_lr or ema_positive_evidence_lr")
++        if self.generator_idle_mode in ('ema_confidence_lr', 'ema_signed_confidence_lr','ema_positive_evidence_lr') and (
++                self.generator_idle_se!=1 or self.optimizer_family!='dualnorm'
++                or self.constraint_geometry_mode!='direction_blend'
++                or self.continuous_policy is not None):
++            raise ValueError('confidence LR is a fixed se=1 joint DualNorm direction-blend response')
++        if self.constant_lr and self.lr_schedule != "cosine":
++            raise ValueError("constant_lr overlays a cosine recipe; it is not a second schedule")
++        if self.constant_lr and self.continuous_policy is not None:
++            raise ValueError("constant_lr does not combine with a continuous policy")
++        if self.constant_lr and self.lr_control == "stationarity":
++            raise ValueError("constant_lr does not combine with lr_control='stationarity'")
+         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
+             raise ValueError("eps must be finite and positive")
+         for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
+@@ -444,6 +478,18 @@
+         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
+             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
+                 raise ValueError(f"{key} must be finite and positive")
++        if type(self.kinetic_transport_protect_primary) is not bool:
++            raise ValueError("kinetic_transport_protect_primary must be boolean")
++        if self.generator_gradient_response not in ("none", "coherent_G_mean_v1"):
++            raise ValueError("unknown generator gradient response")
++        if self.generator_gradient_response != "none" and (
++                not self.kinetic_transport_protect_primary or self.kinetic_transport_weight != 1.
++                or self.generator_idle_mode != "ema_confidence_lr" or self.generator_idle_se != 1.
++                or self.optimizer_family != "dualnorm" or self.optimizer_momentum
++                or self.loss != "non_saturating"):
++            raise ValueError("G gradient response requires declared protected transport/confidence baseline")
++        if self.kinetic_transport_protect_primary and (self.kinetic_transport_weight <= 0 or self.kinetic_transport_local_weight or self.continuous_policy is not None or self.input_noise_std or self.output_noise_std or self.constraint_geometry_mode != "direction_blend"):
++            raise ValueError("augmented transport protection requires positive ordinary clean transport and direction_blend")
+         if (type(self.kinetic_transport_weight) not in (int, float)
+                 or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
+             raise ValueError("kinetic_transport_weight must be finite and nonnegative")
+@@ -1239,6 +1285,16 @@
+     if getattr(recipe, "lr_control", "mobility") == "stationarity":
+         raise ValueError("lr_control='stationarity' requires per-group policy state; use "
+                          "E22Policy/UpdatePolicy.begin_step() or GANTrainer instead of learning_rate_scales")
++    if getattr(recipe, "constant_lr", False):
++        if recipe.continuous_policy is not None:
++            raise ValueError("constant_lr does not combine with a continuous policy")
++        if type(step) is not int or step < 0:
++            raise ValueError("LR schedule clock must be completed nonnegative training updates")
++        if network_transition is not None:
++            raise ValueError("constant_lr does not accept network transitions")
++        if controller is not None:
++            raise ValueError("controller requires a continuous recipe")
++        return 1.0, 1.0
+     if recipe.continuous_policy is not None:
+         from .continuous import DataDriftController
+         if not isinstance(controller, DataDriftController) or controller.variant != recipe.continuous_policy:
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -7,6 +7,7 @@
+ import torch
+ from torch import nn
+ 
++from .generator_idle import IdleAccounting, gate_generator_update
+ from .particle_prior import MoGParticlePrior, ParticlePrior
+ from .recipes import Recipe, learning_rate_scales
+ from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
+@@ -67,7 +68,9 @@
+                         "optimizer_family": "formulation", "eps": 1e-8,
+                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
+                         "beta2_end": None, "beta2_anneal_end": 0.2,
+-                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
++                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
++                        "constant_lr": False, "generator_idle_se": None,
++                        "generator_idle_mode": "batch"}
+ 
+ 
+ class GANTrainer:
+@@ -122,6 +125,10 @@
+                 or recipe.encoder_mode != "none"):
+             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
+         self.recipe, self.G, self.D = recipe, generator, discriminator
++        self._idle_accounting = IdleAccounting(
++            getattr(recipe, "generator_idle_mode", "batch"),
++            recipe.generator_idle_se,
++        )
+         if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
+             raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
+         if recipe.constraint_geometry_mode == "strict_progress" and any(
+@@ -173,6 +180,10 @@
+             self.G, self.D, self.prior, ema_critic=deepcopy(self.D),
+             require_latent_damping=require_latent_damping, **self.optimizer_options)
+         self.prior_mechanisms = self.opt_g.prior_mechanisms
++        self._gradient_response = None
++        if recipe.generator_gradient_response != "none":
++            from .gradient_response import GradientCoherence
++            self._gradient_response = GradientCoherence()
+         self.loss = recipe.make_loss()
+         self.prior_regularizer = recipe.make_prior_regularizer(
+             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
+@@ -419,10 +430,26 @@
+                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                     logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                     return (self.loss.g_loss(logits, real_logits),)
+-            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
++            primary_g = loss_gan + transport if recipe.kinetic_transport_protect_primary else loss_gan
++            constraint_geometry_backward(loss_g, self.opt_g, (primary_g,),
+                                          protected_evaluator=protected_evaluator)
+             self.policy.after_generator_backward(
+                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
++            generator_gain = None
++            if self._gradient_response is not None:
++                parameters = list(self.G.parameters())
++                gradients = [torch.zeros_like(p) if p.grad is None else p.grad for p in parameters]
++                generator_gain = self._gradient_response.observe(gradients)
++                for p, mean in zip(parameters, self._gradient_response.packet['means']):
++                    p.grad = (mean / self._gradient_response.packet['weight']).to(p).clone()
++            # None returns before the logits are read. An idle step clears
++            # gradients, then step() still runs so hooks and the phase advance.
++            gate_generator_update(
++                self.opt_g, real_logits, fake_logits, recipe.generator_idle_se,
++                mode=getattr(recipe, "generator_idle_mode", "batch"),
++                accounting=self._idle_accounting,
++                generator_gain=generator_gain, generator_response=self._gradient_response,
++            )
+             self.opt_g.step()
+             self.policy.after_generator_step()
+         finally:
+@@ -434,6 +461,10 @@
+                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+                        prior_regularization=prior_reg, penalty=penalty).items()}
+         result["step"] = self.completed_steps
++        if recipe.kinetic_transport_protect_primary:
++            result["transport_primary_G"] = primary_g.detach()
++        if self._gradient_response is not None:
++            result["gradient_response_gain"] = primary_g.new_tensor(generator_gain)
+         if recipe.kinetic_transport_weight:
+             result["kinetic_transport"] = transport.detach()
+         if recipe.kinetic_transport_local_weight:
+@@ -503,6 +534,10 @@
+             "serial_backward": True,
+             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
+             "schema": 4, "recipe": self.recipe.to_dict(),
++            **({"generator_idle": self._idle_accounting.state_dict()}
++               if self.recipe.generator_idle_se is not None else {}),
++            **({"generator_gradient_response": self._gradient_response.state_dict()}
++               if self._gradient_response is not None else {}),
+             **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
+             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
+             "device": str(self.device), "dtype": str(self.dtype),
+@@ -587,6 +622,14 @@
+         steps = state["completed_steps"]
+         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
+             raise ValueError("invalid checkpoint step count")
++        if self.recipe.generator_idle_se is not None:
++            self._idle_accounting.validate_state_dict(state["generator_idle"])
++            if state["generator_idle"]["decisions"] != steps:
++                raise ValueError("generator idle checkpoint decisions differ from completed updates")
++        if self._gradient_response is not None:
++            self._gradient_response.validate(state["generator_gradient_response"], list(self.G.parameters()))
++            if state["generator_gradient_response"]["response"]["applied_steps"] != steps:
++                raise ValueError("gradient response history differs from completed updates")
+         rates = state["initial_lrs"]
+         if (not isinstance(rates, list) or len(rates) != 2
+                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
+@@ -693,6 +736,10 @@
+         for name, values in state["models"].items():
+             getattr(self, name).load_state_dict(values)
+         self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"))
++        if self.recipe.generator_idle_se is not None:
++            self._idle_accounting.load_state_dict(state["generator_idle"])
++        if self._gradient_response is not None:
++            self._gradient_response.load(state["generator_gradient_response"], list(self.G.parameters()))
+         if self.log_output_sigma is not None:
+             with torch.no_grad():
+                 self.log_output_sigma.copy_(state["output_noise"]["log_sigma"])

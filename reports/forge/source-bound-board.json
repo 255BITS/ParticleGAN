@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "recorded_view": {
+    "schema_version": 1,
+    "id": "discriminator_stability",
+    "revision": 9,
+    "goal": "discriminator_stability",
+    "assignments": [
+      {
+        "importance": "required",
+        "order": 0,
+        "qualification_tier": 1,
+        "task": "gaussian1d_smoke"
+      },
+      {
+        "importance": "required",
+        "order": 1,
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "importance": "required",
+        "order": 2,
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "importance": "required",
+        "order": 3,
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "importance": "required",
+        "order": 4,
+        "qualification_tier": 1,
+        "task": "ring16_acquisition"
+      },
+      {
+        "importance": "required",
+        "order": 5,
+        "qualification_tier": 1,
+        "task": "five_word_joint_smoke"
+      },
+      {
+        "task": "gaussian1d_stability",
+        "qualification_tier": 2,
+        "importance": "required",
+        "order": 0
+      },
+      {
+        "task": "five_word_joint_hold",
+        "qualification_tier": 2,
+        "importance": "required",
+        "order": 1
+      },
+      {
+        "importance": "required",
+        "order": 2,
+        "qualification_tier": 2,
+        "task": "trajectory"
+      },
+      {
+        "importance": "required",
+        "order": 3,
+        "qualification_tier": 2,
+        "task": "residual_student"
+      },
+      {
+        "importance": "required",
+        "order": 4,
+        "qualification_tier": 2,
+        "task": "unipolar"
+      },
+      {
+        "importance": "required",
+        "order": 5,
+        "qualification_tier": 2,
+        "task": "cover_leftover"
+      },
+      {
+        "importance": "required",
+        "order": 6,
+        "qualification_tier": 2,
+        "task": "mid_scale_identity"
+      },
+      {
+        "importance": "required",
+        "order": 7,
+        "qualification_tier": 2,
+        "task": "mode_hold"
+      },
+      {
+        "importance": "required",
+        "order": 8,
+        "qualification_tier": 2,
+        "task": "vector_two_broad"
+      },
+      {
+        "importance": "required",
+        "order": 9,
+        "qualification_tier": 2,
+        "task": "vector_unequal_mass"
+      },
+      {
+        "importance": "required",
+        "order": 10,
+        "qualification_tier": 2,
+        "task": "vector_unequal_width"
+      },
+      {
+        "importance": "required",
+        "order": 11,
+        "qualification_tier": 2,
+        "task": "vector_anisotropic"
+      },
+      {
+        "importance": "required",
+        "order": 12,
+        "qualification_tier": 2,
+        "task": "vector_overlap"
+      },
+      {
+        "importance": "required",
+        "order": 13,
+        "qualification_tier": 2,
+        "task": "vector_spiral"
+      },
+      {
+        "importance": "required",
+        "order": 14,
+        "qualification_tier": 2,
+        "task": "img_stripes2"
+      },
+      {
+        "importance": "required",
+        "order": 15,
+        "qualification_tier": 2,
+        "task": "img_bars4"
+      },
+      {
+        "importance": "required",
+        "order": 16,
+        "qualification_tier": 2,
+        "task": "img_blobs4"
+      },
+      {
+        "importance": "required",
+        "order": 17,
+        "qualification_tier": 2,
+        "task": "img_intensity2"
+      },
+      {
+        "importance": "required",
+        "order": 18,
+        "qualification_tier": 2,
+        "task": "grid100"
+      },
+      {
+        "importance": "required",
+        "order": 19,
+        "qualification_tier": 2,
+        "task": "rotated100"
+      },
+      {
+        "importance": "required",
+        "order": 20,
+        "qualification_tier": 2,
+        "task": "staggered100"
+      },
+      {
+        "importance": "required",
+        "order": 0,
+        "qualification_tier": 3,
+        "task": "ring_hold"
+      },
+      {
+        "importance": "required",
+        "order": 1,
+        "qualification_tier": 3,
+        "task": "ring_extension"
+      },
+      {
+        "importance": "diagnostic",
+        "order": 100,
+        "qualification_tier": 1,
+        "task": "clockfree_audit_measurement_v1"
+      }
+    ],
+    "eligibility": {},
+    "calibration": {
+      "status": "provisional",
+      "adoption_blocker": "Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities."
+    },
+    "ranking": {
+      "policy": "qualified_tier_only_with_raw_metrics",
+      "compare_compatible_cohorts": true,
+      "cost_separate": true
+    },
+    "policy_change_reason": "Recipe-owned prior policy and regularization: tasks preserve initial prior law/capacity/sampling, architecture/data, initialization, budgets and numerical gates. New execution.prior_contract recipe_owned_v1 binds learning/freezing and all latent-prior penalties to one global recipe. Archived revisions retain their original semantics."
+  },
+  "recorded_view_sha256": "ed5ac311ad96ea48bd7ce0f219bc4c83b849baa3c87b62140495d765999db7b3",
+  "rows": [
+    {
+      "id": "candidate-g-coherent-seed0",
+      "label": "G-only coherent mean (original seed0)",
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+      "readout": "reports/forge/g-coherent-mean-seed0/README.md",
+      "qualification_input": false,
+      "whole_gauntlet_score": null,
+      "benchmark_counts": {
+        "passed": 1,
+        "failed": 1,
+        "run": 2,
+        "required_unique_tasks": 29,
+        "untested": 27
+      },
+      "benchmark_tasks": {
+        "gaussian1d_smoke": {
+          "tier": 1,
+          "status": "PASS",
+          "attempt": "63bae83b0c5e40dda401e0eeca967fe8",
+          "unit": "benchmark_task"
+        },
+        "two_pole": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "unused_token_hold": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ae_gan_hold": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring16_acquisition": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "five_word_joint_smoke": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "gaussian1d_stability": {
+          "tier": 2,
+          "status": "FAIL",
+          "attempt": "bfe18c8581014733a953f4ddfef4f8f5",
+          "unit": "benchmark_task"
+        },
+        "five_word_joint_hold": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "trajectory": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "residual_student": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "unipolar": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "cover_leftover": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "mid_scale_identity": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "mode_hold": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_two_broad": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_unequal_mass": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_unequal_width": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_anisotropic": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_overlap": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_spiral": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_stripes2": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_bars4": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_blobs4": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_intensity2": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "grid100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "rotated100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "staggered100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring_hold": {
+          "tier": 3,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring_extension": {
+          "tier": 3,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        }
+      },
+      "retention_phases": {
+        "stationary": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "passed": 69,
+          "checks": 72,
+          "unit": "observation_checks",
+          "status": "FAIL"
+        },
+        "reacquisition": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "status": "PASS",
+          "unit": "phase_result"
+        },
+        "shift_hold": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "passed": 20,
+          "checks": 24,
+          "unit": "observation_checks",
+          "status": "FAIL"
+        }
+      }
+    },
+    {
+      "id": "control-g-coherent-seed0",
+      "label": "Fresh matched protected NS/transport control",
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+      "readout": "reports/forge/g-coherent-mean-seed0/README.md",
+      "qualification_input": false,
+      "whole_gauntlet_score": null,
+      "benchmark_counts": {
+        "passed": 1,
+        "failed": 1,
+        "run": 2,
+        "required_unique_tasks": 29,
+        "untested": 27
+      },
+      "benchmark_tasks": {
+        "gaussian1d_smoke": {
+          "tier": 1,
+          "status": "PASS",
+          "attempt": "99b65cb02a794fe89633be8907139909",
+          "unit": "benchmark_task"
+        },
+        "two_pole": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "unused_token_hold": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ae_gan_hold": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring16_acquisition": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "five_word_joint_smoke": {
+          "tier": 1,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "gaussian1d_stability": {
+          "tier": 2,
+          "status": "FAIL",
+          "attempt": "2fd62fa187b24ca0a04d44ae23ea9f2e",
+          "unit": "benchmark_task"
+        },
+        "five_word_joint_hold": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "trajectory": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "residual_student": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "unipolar": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "cover_leftover": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "mid_scale_identity": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "mode_hold": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_two_broad": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_unequal_mass": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_unequal_width": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_anisotropic": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_overlap": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "vector_spiral": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_stripes2": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_bars4": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_blobs4": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "img_intensity2": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "grid100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "rotated100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "staggered100": {
+          "tier": 2,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring_hold": {
+          "tier": 3,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        },
+        "ring_extension": {
+          "tier": 3,
+          "status": null,
+          "attempt": null,
+          "unit": "benchmark_task"
+        }
+      },
+      "retention_phases": {
+        "stationary": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "passed": 35,
+          "checks": 72,
+          "unit": "observation_checks",
+          "status": "FAIL"
+        },
+        "reacquisition": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "status": "FAIL",
+          "unit": "phase_result"
+        },
+        "shift_hold": {
+          "recorded_task": "gaussian1d_stability",
+          "recorded_task_tier": 2,
+          "passed": 12,
+          "checks": 24,
+          "unit": "observation_checks",
+          "status": "FAIL"
+        }
+      }
+    }
+  ]
+}
