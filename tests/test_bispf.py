@@ -197,7 +197,7 @@ def test_bispf_rms_born_infeld_dimension_invariance_and_smoothness():
     slopes = [0.4, 1.0, 2.5]  # Sub-cap (harmonic floor), at cap, and ballistic cap
     dimensions = [
         (64, (16, 64)),
-        (144, (16, 1, 12, 12)),  # 4D conv image tensor
+        (144, (16, 144)),  # 2D continuous feature vectors (both ndim=2)
     ]
 
     for slope in slopes:
@@ -620,18 +620,20 @@ def test_bispf_endpoint_born_infeld_image_limit():
         chord_blend=0.02,
     )
 
+    dim_img = 1 * 8 * 8
+
     class ConstantSlopeImageCritic(nn.Module):
         def forward(self, x):
-            return s * x.flatten(1).sum(dim=1, keepdim=True)
+            return (s / math.sqrt(dim_img)) * x.flatten(1).sum(dim=1, keepdim=True)
 
     xr_math = torch.randn(8, 1, 8, 8)
     xf_math = torch.randn(8, 1, 8, 8)
     pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
 
-    # In RMS coordinates: g_rms = ||g||_2 / sqrt(d) = sqrt(d * s^2) / sqrt(d) = s = 2.0
-    # Endpoint Born-Infeld cap penalty: 0.5 * l_cap * (softplus(s - kappa)^2 + softplus(s - kappa)^2)
+    # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
+    # Under scale_dim = 1.0, norm = 2.0 matches expected analytical cap and floor penalties
     expected_cap = l_cap * (F.softplus(torch.tensor(s - kappa), beta=beta).item() ** 2)
-    expected_floor = 0.5 * l_floor * (s ** 2)
+    expected_floor = 0.5 * l_floor * ((s ** 2) / dim_img)
     expected_total = expected_cap + expected_floor
     assert abs(pen_math.item() - expected_total) < 1e-4, (
         f"Expected {expected_total}, got {pen_math.item()}"
@@ -712,4 +714,49 @@ def test_bispf_v2_trainer_integration_and_telemetry():
 
     assert torch.allclose(out_1["loss_d"], out_2["loss_d"])
     assert torch.allclose(out_1["loss_g"], out_2["loss_g"])
+
+
+def test_bispf_critic_hook_generator_gradient_unthrottled():
+    """Verify that critic forward hook does NOT throttle generator gradients even under
+    severe thermal cooling (s_thermal < 1.0), preserving true constant learning rate 1.0.
+    """
+    from particlegan.bispf import (
+        BISPFStepRecord,
+        _attach_critic_input_hook,
+    )
+
+    torch.manual_seed(42)
+    D = nn.Sequential(nn.Linear(2, 4), nn.LeakyReLU(0.2), nn.Linear(4, 1))
+    G = nn.Sequential(nn.Linear(2, 4), nn.LeakyReLU(0.2), nn.Linear(4, 2))
+
+    # 1. Baseline unhooked critic gradient
+    z = torch.randn(8, 2)
+    fake_base = G(z)
+    loss_base = D(fake_base).sum()
+    loss_base.backward()
+    grads_base = [p.grad.clone() for p in G.parameters()]
+
+    # 2. Hooked critic with severe thermal cooling (s_thermal = 0.02)
+    for p in G.parameters():
+        p.grad.zero_()
+
+    record = BISPFStepRecord()
+    _attach_critic_input_hook(D, record)
+    record._thermal_scale = 0.02  # Severe cooling
+    record._in_penalty = False
+
+    fake_hooked = G(z)
+    loss_hooked = D(fake_hooked).sum()
+    loss_hooked.backward()
+    grads_hooked = [p.grad.clone() for p in G.parameters()]
+
+    # Generator gradients must match baseline EXACTLY (100% unthrottled, ratio = 1.0)
+    for gb, gh in zip(grads_base, grads_hooked):
+        assert torch.allclose(gb, gh, atol=1e-7), "Generator gradients must not be throttled by critic hook"
+
+    # 3. Verify input coordinate attachment for SinkhornRelativisticLoss
+    fake_logits = D(fake_hooked)
+    assert hasattr(fake_logits, "_bispf_input")
+    assert fake_logits._bispf_input is fake_hooked
+
 

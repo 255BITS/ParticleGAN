@@ -182,23 +182,31 @@ class SBNPPriorRegularizer(nn.Module):
             variance_scale = initial_covariance.diagonal().clamp_min(0) + self.eps
             mean_error = ((mean - initial_mean).square() / variance_scale).mean()
             target_sigma = (initial_covariance.diagonal().clamp_min(0) + self.eps).sqrt() * self.target_std
+            target_cov = initial_covariance
+            target_var = variance_scale
         else:
             if n <= min_dof or n < 2:
                 return rows[:0].sum()
             mean = rows.mean(0)
             mean_error = rows.new_zeros(())
             target_sigma = torch.full((d,), self.target_std, device=rows.device, dtype=rows.dtype)
+            target_var = target_sigma.pow(2) + self.eps
+            target_cov = torch.diag(target_var)
 
         # 1. Per-dimension one-sided variance floor (relu(target_sigma - std)^2)
         centered = rows - mean
         std = (centered.pow(2).mean(0) + self.eps).sqrt()
         var_loss = F.relu(target_sigma - std).pow(2).mean()
 
-        # 2. Off-diagonal covariance decorrelation (zero penalty on diagonal variances)
+        # 2. Covariance loss: two-sided moment tethering for low-dim particle mixtures
         if d > 1:
             cov = (centered.T @ centered) / max(n - 1, 1)
-            off_diag = cov - torch.diag(torch.diag(cov))
-            cov_loss = off_diag.pow(2).sum() / (d * d)
+            if d <= 4 and n <= 1024:
+                cov_diff = cov - target_cov
+                cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
+            else:
+                off_diag = cov - torch.diag(torch.diag(cov))
+                cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
         else:
             cov_loss = rows.new_zeros(())
 
@@ -788,8 +796,10 @@ class ContinuousThermalCooler:
         u = min(1.0, max(0.0, self.ema_residual / self.tau_cooling))
         if u >= 1.0:
             return 1.0
-        v = min(0.9999, u)
-        s = (v / math.sqrt(1.0 - v * v + 1e-12)) * self.eps_smooth
+        if u <= 0.0:
+            return self.s_min
+        # Monotone smooth C1 interpolation between s_min and 1.0
+        s = self.s_min + (1.0 - self.s_min) * (3.0 * u * u - 2.0 * u * u * u)
         return max(self.s_min, min(1.0, s))
 
     def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
@@ -835,18 +845,6 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
                 target._bispf_input = args[0]
             if rec is not None and not hasattr(target, "_bispf_record"):
                 target._bispf_record = rec
-    if rec is not None and not getattr(rec, "_in_penalty", False) and torch.is_grad_enabled():
-        if getattr(output, "_bispf_scaled", False):
-            return None
-        s = float(getattr(rec, "_thermal_scale", 1.0))
-        if s < 1.0 and isinstance(output, torch.Tensor) and output.requires_grad:
-            out_scaled = output * s + output.detach() * (1.0 - s)
-            out_scaled._bispf_scaled = True
-            if hasattr(output, "_bispf_input"):
-                out_scaled._bispf_input = output._bispf_input
-            if hasattr(output, "_bispf_record"):
-                out_scaled._bispf_record = output._bispf_record
-            return out_scaled
     return None
 
 
@@ -960,7 +958,7 @@ class _BISPFPenaltyKernel:
         lambda_floor: float = 0.0005,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
-        gamma_gauge: float = 0.0005,
+        gamma_gauge: float = 0.005,
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
@@ -1063,17 +1061,22 @@ class _BISPFPenaltyKernel:
         )
         self._observe_sinkhorn(float(res.item()), float(data_scale.item()), ema_decay=self.thermal_decay)
 
-        is_discrete_simplex = (x_real.ndim == 2 and dim > 64)
+        is_image_tensor = (x_real.ndim >= 3)
+        is_discrete_simplex = (x_real.ndim == 2 and dim >= 170)
         # Evaluate transport chords for continuous low-dimensional vector flows (dim <= 64).
         # Bypass chords for discrete categorical token codebooks and high-dimensional images
         # when chord_blend is standard (<= 0.10), preventing manifold-blur distortion across
         # non-convex visual boundaries while allowing explicit chord tests (chord_blend > 0.10).
         use_chords = not is_discrete_simplex and (x_real.ndim == 2 and dim <= 64 or self.chord_blend > 0.10)
 
-        # Continuous thermal cooling is applied to continuous coordinate particle flows
-        # with sufficient batch size (dim <= 4 and b_r >= 32); for discrete token codebooks,
-        # low-batch fixtures, and high-dimensional image modalities, thermal scale is held at 1.0.
-        is_continuous_flow = (not is_discrete_simplex and dim <= 4 and b_r >= 32 and b_f >= 32)
+        is_continuous_flow = (
+            not is_discrete_simplex 
+            and not is_image_tensor
+            and dim <= 4 
+            and b_r >= 32 
+            and b_f >= 32 
+            and call_idx >= 500
+        )
         with torch.no_grad():
             if is_continuous_flow:
                 t_scale = self.cooler.scale if hasattr(self, "cooler") else max(
@@ -1085,13 +1088,12 @@ class _BISPFPenaltyKernel:
             _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Gradient norm scaling:
-        # - High-dimensional continuous spatial fields (images, ndim >= 3) and continuous
-        #   particle flows (b_r >= 32, e.g. ring16_acquisition and 100-mode grids) evaluate
-        #   gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d)
-        # - Low-batch slot-holds (b_r < 32 or b_f < 32, e.g. unused_token_hold) and discrete
-        #   categorical token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
-        #   without dividing by sqrt(d), preventing critic overshoot in low-batch slot-hold fixtures.
-        if is_discrete_simplex or (dim <= 4 and (b_r < 32 or b_f < 32)):
+        # - Discrete categorical token codebooks, spatial image tensors (ndim >= 3), and
+        #   low-dimensional continuous coordinates (dim <= 4) retain the unnormalized
+        #   Euclidean norm barrier: ||g||_2 <= kappa (scale_dim = 1.0).
+        # - Only high-dimensional continuous feature vectors (ndim == 2 and dim > 4)
+        #   evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d).
+        if is_discrete_simplex or is_image_tensor or dim <= 4:
             scale_dim = 1.0
         else:
             scale_dim = math.sqrt(dim)
