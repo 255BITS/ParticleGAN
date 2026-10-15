@@ -238,3 +238,27 @@ def test_manifested_run_cannot_omit_final_draw_receipt(tmp_path):
     result = evaluate_suite(tmp_path, write=False)
     assert result["problems"]["grid100"]["status"] == "INVALID"
     assert "lacks saved final evaluation draw" in result["problems"]["grid100"]["reason"]
+
+
+def test_recorded_initializer_manifest_reconstructs_and_rejects_an_unstamped_override(tmp_path):
+    from benchmarks.toy100.gate import _manifest_expected
+    declared = {"name": "initializer_receipt", "steps": 1000, "seed": 0}
+    contents = json.dumps(declared) + "\n"
+    configs = {name: {**resolve_problem_config(declared, name, device="cpu"),
+                      "deterministic_init": "batch_feature_zero"}
+               for name in problems.PROBLEM_NAMES}
+    receipt = {"config_path": str(tmp_path / "recipe.json"),
+               "config_sha256": hashlib.sha256(contents.encode()).hexdigest(),
+               "config_contents": contents, "declared_manifest": declared,
+               "resolved_problem_configs": configs,
+               "selected_problems": list(problems.PROBLEM_NAMES),
+               "command_overrides": {"steps": None, "device": "cpu",
+                                     "deterministic_init": "batch_feature_zero"}}
+    manifest = tmp_path / "run_manifest.json"
+    manifest.write_text(json.dumps(receipt))
+    expected = _manifest_expected(tmp_path, problems.PROBLEM_NAMES)
+    assert all(expected[name]["deterministic_init"] == "batch_feature_zero" for name in problems.PROBLEM_NAMES)
+    del receipt['command_overrides']['deterministic_init']
+    manifest.write_text(json.dumps(receipt))
+    with pytest.raises(ValueError, match="resolved config differs"):
+        _manifest_expected(tmp_path, problems.PROBLEM_NAMES)

@@ -401,6 +401,15 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 [research report](../reports/toy100/batch-feature-init/README.md) holds the
 22/22 frozen-suite evidence for the construction this API reproduces.
 
+The historical `benchmarks.toy100 --init NAME` runner records its installed
+construction hook as `deterministic_init` in the run manifest and resolved
+config. This field is replay metadata: passing it to `train(config, output)`
+does not install an initializer. Direct benchmark callers must install the
+declared hook before model construction. Affine receipt audits rebuild that
+initializer on the recorded device in a separate interpreter and check the
+actual prior and generator tensors; named initializer source files are pinned
+in the run archive.
+
 ## GANTrainer
 
 `GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,

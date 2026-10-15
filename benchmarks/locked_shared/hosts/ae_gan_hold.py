@@ -19,6 +19,7 @@ import torch
 
 
 from torch import nn
+from benchmarks.toy100.device import experiment_generator
 
 
 from benchmarks.legacy.recipe import get_recipe
@@ -116,7 +117,7 @@ def _hold_distance(fake: torch.Tensor) -> float:
 @torch.no_grad()
 def evaluate(encoder, decoder, prior, recipe, *, output_callback=None) -> dict[str, float]:
     """Score reconstruction and unconditional hold without moving the train RNG."""
-    state = torch.get_rng_state()
+    state = experiment_generator().get_state().clone()
     try:
         data = sample_data(1024)
         query, offset = encoder(data).chunk(2, dim=1)
@@ -132,7 +133,7 @@ def evaluate(encoder, decoder, prior, recipe, *, output_callback=None) -> dict[s
             output_callback(data, recon, fake, metrics)
         return metrics
     finally:
-        torch.set_rng_state(state)
+        experiment_generator().set_state(state)
 
 
 def _log(arm: str, step: int, metrics: dict, extra: str = "") -> None:
@@ -187,11 +188,12 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
     # 8x2 normal tensors. Preserve that training-data stream for EVERY candidate
     # without constructing an audit critic or checking its loss/penalty identity.
     if components is None:
-        stream = torch.Generator().manual_seed(0)
-        torch.rand(3, generator=stream)
-        torch.randn(8, 2, generator=stream)
-        torch.randn(8, 2, generator=stream)
-        torch.set_rng_state(stream.get_state())
+        stream = torch.Generator(device=experiment_generator().device).manual_seed(0)
+        drawn = stream.device
+        torch.rand(3, generator=stream, device=drawn)
+        torch.randn(8, 2, generator=stream, device=drawn)
+        torch.randn(8, 2, generator=stream, device=drawn)
+        experiment_generator().set_state(stream.get_state())
 
     def measure(step: int):
         context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
