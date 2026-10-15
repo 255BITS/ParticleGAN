@@ -1504,7 +1504,7 @@ Forge declarations: [grid100](../../configs/forge/tasks/grid100.json), [grid100_
 
 Declared Forge numerical gates and sampling:
 
-[grid100](../../configs/forge/tasks/grid100.json)
+[grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -1534,7 +1534,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-[grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [recipe-prior-refactor-legacy-grid100](../../configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json)
+[grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [recipe-prior-refactor-legacy-grid100](../../configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -2220,7 +2220,7 @@ Forge declarations: [recipe-prior-refactor-legacy-rotated100](../../configs/forg
 
 Declared Forge numerical gates and sampling:
 
-[recipe-prior-refactor-legacy-rotated100](../../configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json)
+[recipe-prior-refactor-legacy-rotated100](../../configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -2250,7 +2250,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-[rotated100](../../configs/forge/tasks/rotated100.json)
+[rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -2301,7 +2301,7 @@ Forge declarations: [recipe-prior-refactor-legacy-staggered100](../../configs/fo
 
 Declared Forge numerical gates and sampling:
 
-[recipe-prior-refactor-legacy-staggered100](../../configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json)
+[recipe-prior-refactor-legacy-staggered100](../../configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -2331,7 +2331,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
-[staggered100](../../configs/forge/tasks/staggered100.json)
+[staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -3014,6 +3014,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `f4c08b39c5ee38e1df072ddfb52e7fb9e3065a9a3f4d96218cb28e7bb3cab590`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `33fa6ea928eca8f0af0d9f5cbd4369b4a9dbb703b1c0bf5dc43b535cf5290520`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `0ee6f81e33919dd050fe8c2c65f9a767f5b57258dac8fada6d1deb973b774628`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `1d95beccfd50639f7c6e440622e45d9ddb090cd0fafbea6d0c892fccd6e3fcb1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

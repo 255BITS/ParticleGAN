@@ -347,6 +347,42 @@ def test_native_continuation_restores_own_prefix_and_matches_uninterrupted_state
         verify_native_prefix(continued, result["evidence"])
 
 
+def test_diagnostic_native_resume_accepts_failed_quality_without_forging_pass(tmp_path):
+    from experiments.forge.continuation import verify_native_prefix
+    parent = task("grid100", 2)
+    parent["evaluation"].update(eval_interval=1, early_eval_steps=[0, 1, 2], eval_samples=64)
+    parent["execution"]["resources"].update(num_particles=12, batch_size=4)
+    frozen = request(parent)
+    frozen["jobs"] = [{"task_id": "grid100", "compatibility_key": "fixture-prefix"}]
+    raw = adapters.run_task(frozen, {"task_id": "grid100"}, tmp_path / "parent", "cpu")
+    # Read the real continuation declaration: its ownership schema must match
+    # the producer, rather than being silently corrected by copying the parent.
+    child = task("grid100_14k", 4)
+    child["execution"]["resources"] = deepcopy(parent["execution"]["resources"])
+    child["execution"]["model"] = deepcopy(parent["execution"]["model"])
+    child["evaluation"] = deepcopy(parent["evaluation"])
+    child["execution"].update(steps=4, original_schedule_horizon=2, preserve_prefix_steps=2,
+                              continuation_of="grid100", incremental_steps=2)
+    frozen["tasks"][child["id"]] = child
+    receipt = dict(attempt_id="failed-prefix", candidate_revision=frozen["candidate_revision"],
+        compatibility_key="fixture-prefix", result_hash="fixture-only",
+        result={**raw, "task_id": "grid100", "compatibility_key": "fixture-prefix", "gate_status": "FAIL"})
+    job = dict(task_id=child["id"], prerequisites=dict(grid100=receipt))
+    with pytest.raises(CapabilityError, match="passing own-state"):
+        adapters.run_task(frozen, job, tmp_path / "ordinary", "cpu")
+    result = adapters.run_task(frozen, {**job, "diagnostic_continuation": True}, tmp_path / "diagnostic", "cpu")
+    verify_native_prefix(child, result["evidence"], diagnostic=True)
+    assert result["cost"]["completed_steps"] == 4
+    assert result["evidence"]["diagnostic_continuation"]["parent_gate_status"] == "FAIL"
+    assert receipt["result"]["gate_status"] == "FAIL"
+    with pytest.raises(ValueError, match="ordinary qualification"):
+        verify_native_prefix(child, result["evidence"])
+    forged = deepcopy(result["evidence"])
+    forged["diagnostic_continuation"]["parent_gate_status"] = "PASS"
+    with pytest.raises(ValueError, match="parent's recorded gate"):
+        verify_native_prefix(child, forged, diagnostic=True)
+
+
 def test_behavior_dispatch_uses_the_shared_component_adapter(tmp_path, monkeypatch):
     import sys
     from types import ModuleType

@@ -85,6 +85,9 @@ def test_checkpoint_parent_failure_remains_a_blocker_but_failed_gate_does_not():
     assert runner.dependency_blockers(job, state) == []
     job["dependencies"][0]["kind"] = "checkpoint"
     assert runner.dependency_blockers(job, state) == ["checkpoint parent parent: FAIL"]
+    job["diagnostic_continuation"] = True
+    assert runner.dependency_blockers(job, state) == [
+        "checkpoint parent parent: certified artifact binding unavailable to this attempt"]
 
 
 def test_uninterrupted_hold_cannot_be_restarted_from_a_passing_scalar(tmp_path):
@@ -179,3 +182,45 @@ def test_unbound_current_task_attempt_keeps_old_request_and_refuses_bound_replac
     atomic_json(root / "reports/forge/technique-inventory.json", publication)
     with pytest.raises(ValueError, match="cannot replace a recorded task binding"):
         prepare(root, directory)
+
+
+def test_checkpoint_repair_freezes_allowed_bytes_without_mutating_original(tmp_path):
+    from experiments.forge.checkpoint_recovery import repaired_source
+    from experiments.forge.contracts import file_hash, stable_hash
+    baseline = tmp_path / "baseline"
+    state_file = baseline / "experiments/forge/state.py"
+    state_file.parent.mkdir(parents=True)
+    state_file.write_text("# original checkpoint exporter\n")
+    model = baseline / "particlegan/recipes.py"
+    model.parent.mkdir()
+    model.write_text("# unchanged original formulation\n")
+    manifest = dict(schema_version=1, origin_commit="unused", files={
+        "experiments/forge/state.py": file_hash(state_file), "particlegan/recipes.py": file_hash(model)})
+    manifest["digest"] = stable_hash(manifest["files"])
+    current = Path(__file__).resolve().parents[1] / "experiments/forge/state.py"
+    frozen, repair = repaired_source(baseline, manifest, tmp_path / "runs", {"experiments/forge/state.py": file_hash(current)})
+    assert file_hash(frozen / "experiments/forge/state.py") == file_hash(current)
+    assert file_hash(state_file) == manifest["files"]["experiments/forge/state.py"]
+    assert file_hash(frozen / "particlegan/recipes.py") == file_hash(model)
+    assert repair["digest"] != manifest["digest"]
+    with pytest.raises(ValueError, match="cannot modify formulation sources"):
+        repaired_source(baseline, manifest, tmp_path / "runs", {"particlegan/recipes.py": file_hash(model)})
+
+
+def test_prior_ownership_repair_keeps_distribution_and_actual_recipe():
+    from experiments.forge.checkpoint_recovery import align_prior_contracts
+    parent = dict(id="parent", execution=dict(prior=dict(kind="mog", sigma=.025, standardize=False),
+                                              prior_contract="recipe_owned_v1"))
+    child = dict(id="child", execution=dict(continuation_of="parent",
+        prior=dict(kind="mog", sigma=.025, standardize=False, learnable=True)))
+    request = dict(candidate=dict(resolved_recipe=dict(prior_update="learned")), tasks=dict(parent=parent, child=child))
+    recipe = deepcopy(request["candidate"])
+    align_prior_contracts(request, ["child"])
+    assert request["candidate"] == recipe
+    assert child["execution"]["prior"] == parent["execution"]["prior"]
+    assert child["execution"]["prior_contract"] == "recipe_owned_v1"
+    assert request["task_metadata_repairs"]["child"]["original_execution"] != request["task_metadata_repairs"]["child"]["repaired_execution"]
+    child["execution"]["prior"]["learnable"] = True
+    request["candidate"]["resolved_recipe"]["prior_update"] = "frozen"
+    with pytest.raises(ValueError, match="preserve the actual learned prior"):
+        align_prior_contracts(request, ["child"])

@@ -807,6 +807,21 @@ qualify ordinary candidates. Record a readout after this work as usual.
 Start from the [diagnostic contract template](configs/forge/calibration-lane-template.json)
 and replace its placeholders with the frozen profile and selected lineage.
 
+User-authorized coverage diagnostics can rebuild missing checkpoints and continue
+after a producer's numerical quality FAIL. The bounded `attempt_coverage` runner
+uses an explicit `checkpoint-repairs.json` plan in its state directory. It keeps
+the original recipe, seed, prior distribution, schedule, observations and update
+budgets. A continuation still needs its complete own checkpoint, verified files,
+matching static context and RNGs, and exact restored prefix. It runs on its
+producer's GPU. A missing or incomplete state is rebuilt rather than relabeled.
+These receipts explicitly mark `diagnostic_continuation`; ordinary grading rejects
+them for qualification and the original parent FAIL remains recorded.
+
+Native continuation cards must inherit their producer's `recipe_owned_v1` prior
+contract. Legacy `learnable=true` metadata may be aligned only when the resolved
+recipe already learns that same prior and its complete initial distribution is
+unchanged. The repair freezes a new request and retains the earlier error receipt.
+
 An accepted calibration is a verified report with frozen criteria and compatible
 source/task/prior/RNG/runtime evidence. Editing a status field cannot approve it.
 Changing the required smoke set needs a corresponding calibration before adoption.

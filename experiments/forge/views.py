@@ -374,7 +374,7 @@ def _transfer(task, evidence):
                     metrics=live, evaluator_result=grade)
 
 
-def _native(task, evidence):
+def _native(task, evidence, *, diagnostic=False):
     from benchmarks.toy100.accuracy_gate import evaluate_suite
     from .artifacts import verify_artifacts
 
@@ -403,7 +403,7 @@ def _native(task, evidence):
         if prefix.get("continued_sha256") != prefix["reference_sha256"]:
             return _verdict("FAIL", "continuation changed the original training prefix")
         from .continuation import verify_native_prefix
-        verify_native_prefix(task, evidence)
+        verify_native_prefix(task, evidence, diagnostic=diagnostic)
     grade = evaluate_suite(path, problem=problem, write=False)["problems"][problem]
     verify_artifacts(path, manifest)
     return _verdict(grade["status"], grade["reason"],
@@ -544,7 +544,7 @@ def _clockfree(task, evidence):
                     metrics={"parity_comparisons": len(comparisons)})
 
 
-def grade_result(task: dict, result: dict | None) -> dict:
+def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     """Independently grade compatible raw evidence, without changing it."""
     try:
         _validate_measurement_contract(task)
@@ -597,7 +597,11 @@ def grade_result(task: dict, result: dict | None) -> dict:
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")
     try:
-        grade = grader(task, evidence)
+        if diagnostic and task.get("adapter") != "native100_continuation":
+            return _verdict("INVALID", "diagnostic checkpoint grading is limited to native continuations")
+        grade = _native(task, evidence, diagnostic=True) if diagnostic else grader(task, evidence)
+        if diagnostic:
+            grade.update(qualification_input=False, qualification_reuse=False)
         # Normalized metrics must not replace the raw curve when the input used
         # the metrics fallback. The queue can safely merge this grade into it.
         if "evidence" not in result:

@@ -310,7 +310,7 @@ def score(count, *, marker=True):
             ("errors", "error" if coverage.get("errors") == 1 else "errors"),
             ("timeouts", "timeout" if coverage.get("timeouts") == 1 else "timeouts"),
             ("incomplete_attempts", "incomplete"), ("interrupted_attempts", "interrupted"),
-            ("running", "running"), ("diagnostic_attempts", "diagnostic attempts")) if coverage.get(key)]
+            ("queued", "queued"), ("running", "running"), ("diagnostic_attempts", "diagnostic attempts")) if coverage.get(key)]
     return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
 

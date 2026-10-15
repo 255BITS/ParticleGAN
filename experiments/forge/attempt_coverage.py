@@ -150,7 +150,9 @@ def prepare(root, source, directory, *, include_research=False):
                 job.update({k: v for k, v in old.items() if k not in job or k == "status"})
             jobs[key] = job
     from .remaining_attempts import prepare as prepare_remaining
-    for key, job in prepare_remaining(root, directory).items():
+    from .checkpoint_recovery import prepare as prepare_repairs
+    additions = {**prepare_remaining(root, directory), **prepare_repairs(root, directory)}
+    for key, job in additions.items():
         old = previous["jobs"].get(key)
         if old:
             job.update({k: v for k, v in old.items() if k not in job or k == "status"})
@@ -174,7 +176,8 @@ def publish(root, state):
               "origin", "diagnostic", "evidence", "original_attempt", "attempt_id", "updates", "seconds",
               "result_sha256", "log_sha256", "runtime", "timeout_seconds", "setup_retries", "research_scope", "label",
               "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
-              "saved_observations")
+              "saved_observations", "repair_scope", "owning_family", "reporting_tier", "diagnostic_continuation",
+              "repair_origin_source", "required_gpu", "repair_superseded")
     value = {"schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
              "formulations_modified": False, "maximum_tests": 4, "maximum_per_gpu": 2,
              "summary": summary(state), "records": [{k: j[k] for k in fields if k in j}
@@ -228,7 +231,7 @@ def publish(root, state):
                   "previously empty research cells; archived verdicts and selected-family qualification never change. "
                   "Checkpoint/data dependencies still require passing certified artifacts; gate-only failures are "
                   "bypassed solely for this authorized diagnostic lane. No new qualification is granted.", ""]
-        remaining = [j for j in state["jobs"].values() if j.get("policy_scope") or j.get("retry_history")
+        remaining = [j for j in state["jobs"].values() if j.get("policy_scope") or (j.get("retry_history") and not j.get("repair_scope"))
                      or j.get("label", "").endswith(" current unbound task")]
         if remaining:
             lines += ['<a name="remaining-attempts"></a>', "", "## Follow-up attempts of remaining cells", "",
@@ -246,8 +249,27 @@ def publish(root, state):
                              f"{job['status']} | {updates if updates is not None else '—'} / {observed} | {reason} |")
             lines += ["", "Export errors retain their saved numerical observations and actual-training GIFs in the "
                       "local attempt directories. Those observations do not replace the recorded gate. "
-                      "BISPF continuations require their own passing parent checkpoints; failed parents remain blocked. "
+                      "The original BISPF attempts were blocked by failed parent gates; the checkpoint recovery section "
+                      "below rebuilds their states and runs explicitly nonqualifying continuations past those gates. "
                       "Original timeouts and incompatible formulations are not changed to obtain a score.", ""]
+        repairs = [j for j in state["jobs"].values() if j.get("repair_scope")]
+        if repairs:
+            lines += ['<a name="checkpoint-recovery"></a>', "", "## Checkpoint export repair and BISPF rebuilds", "",
+                      "The checkpoint hasher now preserves diagnostic NaN/Inf values while retaining every finite-state hash. "
+                      "Atlas/E22 rerun their unchanged Gaussian and Ring16 questions with the export fix. "
+                      "BISPF rebuilds each original 7k producer and continues its exact own state to 14k. "
+                      "A failed parent quality gate does not stop these user-authorized diagnostics. "
+                      "Recipes, seeds, initialization, prior laws, numerical gates and original budgets remain fixed; "
+                      "original failures stay recorded and these repaired-source diagnostics grant no qualification.", "",
+                      "| Family | Recovery run | Test | Outcome | Completed updates | Cause |",
+                      "| --- | --- | --- | --- | ---: | --- |"]
+            for job in sorted(repairs, key=lambda j: (j["owning_family"], j["reporting_tier"], j["task"])):
+                reason = str(job.get("reason", "Queued" if job["status"] == "PENDING" else "Running")).replace("|", "\\|").replace("\n", " ")
+                lines.append(f"| {job['owning_family']} | {job['label']} | {job['task']} | {job['status']} | "
+                             f"{job.get('updates') if job.get('updates') is not None else '—'} | {reason} |")
+            lines += ["", "Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, "
+                      "unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. "
+                      "Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.", ""]
         blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt"
                    and j["status"] in {"BLOCKED", "ERROR", "TIMEOUT", "INCOMPLETE", "INVALID"}]
         if blocked:
@@ -268,7 +290,8 @@ def dependency_blockers(job, state):
             continue  # Authorized diagnostic attempts may follow a failed gate.
         parent = next((j for j in state["jobs"].values()
                        if j["family"] == job["family"] and j["task"] == dep["task"]), None)
-        if parent is None or parent["status"] != "PASS":
+        allowed = {"PASS", "FAIL"} if job.get("diagnostic_continuation") else {"PASS"}
+        if parent is None or parent["status"] not in allowed:
             result.append(f"{dep['kind']} parent {dep['task']}: {parent['status'] if parent else 'unavailable'}")
         elif dep["task"] not in prerequisite_bindings(job, state):
             # A passing scalar stamp is not a usable checkpoint. Never fabricate
@@ -282,8 +305,9 @@ def prerequisite_bindings(job, state):
     for dep in job["dependencies"]:
         if not isinstance(dep, dict) or dep.get("kind") == "gate":
             continue
+        allowed = {"PASS", "FAIL"} if job.get("diagnostic_continuation") else {"PASS"}
         parent = next((j for j in state["jobs"].values()
-                       if j["family"] == job["family"] and j["task"] == dep["task"] and j["status"] == "PASS"), None)
+                       if j["family"] == job["family"] and j["task"] == dep["task"] and j["status"] in allowed), None)
         if parent is None:
             continue
         if parent.get("certified_parent"):
@@ -298,7 +322,8 @@ def prerequisite_bindings(job, state):
             expected = next(j["compatibility_key"] for j in request["jobs"]
                             if dep["task"] in j.get("task_ids", [j["task_id"]]))
             bindings[dep["task"]] = dict(attempt_id=parent["attempt_id"], result_hash=stable_hash(raw),
-                result={**raw, "gate_status": "PASS"}, candidate_revision=parent["candidate_revision"],
+                result={**raw, "task_id": dep["task"], "compatibility_key": expected, "gate_status": parent["status"]},
+                candidate_revision=parent["candidate_revision"],
                 compatibility_key=expected)
     return bindings
 
@@ -348,7 +373,13 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                            for parent in state["jobs"].values()
                            if parent["family"] == job["family"] and parent["task"] == dep["task"]):
                         continue
-                    slot = next((s for s in slots if (s["device"], s["slot"]) not in busy
+                    parent_gpus = {str(parent["gpu"]) for dep in job["dependencies"]
+                                   if job.get("diagnostic_continuation") and isinstance(dep, dict) and dep.get("kind") == "checkpoint"
+                                   for parent in state["jobs"].values()
+                                   if parent["family"] == job["family"] and parent["task"] == dep["task"] and "gpu" in parent}
+                    slot = next((s for s in slots if (job.get("required_gpu") is None or str(s["device"]) == str(job["required_gpu"]))
+                                 and (not parent_gpus or str(s["device"]) in parent_gpus)
+                                 and (s["device"], s["slot"]) not in busy
                                  and s["memory_mb"] >= job["resources"]["gpu_memory_mb"]), None)
                     if slot is None:
                         continue
