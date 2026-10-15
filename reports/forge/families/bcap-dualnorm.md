@@ -2245,7 +2245,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
 Execution: **not run**.
 
@@ -2571,7 +2571,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
 Execution: **not run**.
 
