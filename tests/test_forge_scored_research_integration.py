@@ -51,14 +51,15 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
 
 def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
     rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert len(rows["bcap-pure"]) == 31  # Existing19 plus ten source-bound successor recipes and two EMA-idle arms.
+    assert len(rows["bcap-pure"]) == 32  # Retained research plus the separate strict clock-free audit.
     paired = [row for row in rows["bcap-pure"] if "research seed" in row]
     assert len(paired) == 12
     for row in paired:
-        assert "[1(*)/6]" in row and "[0(*)/21]" in row and "[0(*)/2]" in row and "[1(*)/29]" in row
+        assert "[1/6 (5 not run)]" in row and "[0/21 (20 not run)]" in row
+        assert "[0/2 (2 not run)]" in row and "[1/29 (27 not run)]" in row
     finite = next(row for row in rows["bcap-pure"] if "Finite critic cap" in row)
-    assert "[0(*)/6]" in finite and "[0(*)/21]" in finite and "[0(*)/29]" in finite
-    assert "[0(*)/7]" in rows["atlas"][0] and " | — | — | " in rows["atlas"][0]
+    assert "[0/6 (5 not run)]" in finite and "[0/21 (21 not run)]" in finite and "[0/29 (28 not run)]" in finite
+    assert "[0/7 (4 incompatible)]" in rows["atlas"][0] and " | — | — | " in rows["atlas"][0]
     # A phase observation or an unassigned task cannot become a benchmark pass.
     with pytest.raises(ValueError, match="no recorded tier"):
         _row(ROOT, ROOT / "board.md", "invalid", "result.json", {"stationary_check": "PASS"},
