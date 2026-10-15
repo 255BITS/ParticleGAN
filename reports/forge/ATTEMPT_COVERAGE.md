@@ -6,31 +6,31 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | --- | ---: | ---: | --- |
 | atlas | 35/35 | 0 | 35 BLOCKED |
 | bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
-| bispf | 28/35 | 7 | 11 FAIL, 17 PASS, 7 PENDING |
+| bispf | 35/35 | 0 | 4 BLOCKED, 12 FAIL, 19 PASS |
 | e22 | 35/35 | 0 | 35 BLOCKED |
 | k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
 | ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
 | r1r2 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
 | release07-gan-v3 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
-| signed-confidence-lr-gaussian-v1 | 8/29 | 21 | 3 FAIL, 3 PASS, 21 PENDING, 2 RUNNING |
-| G-only coherent mean (original seed0) | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| kinetic-local-dualnorm-g-history-u-v1 | 3/29 | 26 | 2 FAIL, 1 PASS, 26 PENDING |
-| kinetic_transport_local_v2 | 1/29 | 28 | 1 PASS, 28 PENDING |
-| kinetic-local-dualnorm-g-history-bank8-v-v1 | 3/29 | 26 | 1 FAIL, 2 PASS, 26 PENDING |
-| cell-quota-dualnorm-cross-v1 | 1/29 | 28 | 1 FAIL, 28 PENDING |
-| kinetic-local-dualnorm-g-history-bank8-u-v1 | 3/29 | 26 | 2 FAIL, 1 PASS, 26 PENDING |
-| kinetic-local-dualnorm-g-history-reference8-current-v1 | 2/29 | 27 | 2 FAIL, 27 PENDING |
-| Fresh matched protected NS/transport control | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| generator-idle-ema-bcap-direction-v1 | 6/29 | 23 | 2 INCOMPLETE, 4 PASS, 23 PENDING |
-| kinetic-local-dualnorm-g-history-reference8-v1 | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| generator-confidence-lr-bcap-direction-v1 | 8/29 | 21 | 1 FAIL, 7 PASS, 21 PENDING |
-| bcap-default-baseline-direction-v1 | 6/29 | 23 | 1 INCOMPLETE, 5 PASS, 23 PENDING |
-| positive-evidence-lr-gaussian-v1 | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| confidence-lr-critic-orientation-gaussian-v1 | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| kinetic-local-dualnorm-g-history-reference8-u-v1 | 2/29 | 27 | 1 FAIL, 1 PASS, 27 PENDING |
-| confidence-lr-finite-cap-gaussian-v1 | 1/29 | 28 | 1 FAIL, 28 PENDING |
-| kinetic-local-dualnorm-g-history-v1 | 3/29 | 26 | 1 FAIL, 2 PASS, 26 PENDING |
-| kinetic-local-nsgda-cross-v1 | 1/29 | 28 | 1 FAIL, 28 PENDING |
+| signed-confidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
+| G-only coherent mean (original seed0) | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
+| kinetic-local-dualnorm-g-history-u-v1 | 29/29 | 0 | 11 BLOCKED, 11 FAIL, 7 PASS |
+| kinetic_transport_local_v2 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | 29/29 | 0 | 11 BLOCKED, 8 FAIL, 8 PASS, 2 TIMEOUT |
+| cell-quota-dualnorm-cross-v1 | 29/29 | 0 | 11 BLOCKED, 4 ERROR, 6 FAIL, 5 PASS, 3 TIMEOUT |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | 29/29 | 0 | 11 BLOCKED, 9 FAIL, 7 PASS, 2 TIMEOUT |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | 29/29 | 0 | 12 BLOCKED, 12 FAIL, 5 PASS |
+| Fresh matched protected NS/transport control | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
+| generator-idle-ema-bcap-direction-v1 | 29/29 | 0 | 3 BLOCKED, 12 FAIL, 2 INCOMPLETE, 12 PASS |
+| kinetic-local-dualnorm-g-history-reference8-v1 | 29/29 | 0 | 12 BLOCKED, 1 ERROR, 8 FAIL, 6 PASS, 2 TIMEOUT |
+| generator-confidence-lr-bcap-direction-v1 | 29/29 | 0 | 1 BLOCKED, 13 FAIL, 15 PASS |
+| bcap-default-baseline-direction-v1 | 29/29 | 0 | 2 BLOCKED, 1 ERROR, 12 FAIL, 1 INCOMPLETE, 13 PASS |
+| positive-evidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
+| confidence-lr-critic-orientation-gaussian-v1 | 29/29 | 0 | 20 BLOCKED, 7 FAIL, 2 PASS |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | 29/29 | 0 | 12 BLOCKED, 6 FAIL, 7 PASS, 4 TIMEOUT |
+| confidence-lr-finite-cap-gaussian-v1 | 29/29 | 0 | 3 BLOCKED, 14 FAIL, 11 PASS, 1 TIMEOUT |
+| kinetic-local-dualnorm-g-history-v1 | 29/29 | 0 | 2 BLOCKED, 15 FAIL, 11 PASS, 1 TIMEOUT |
+| kinetic-local-nsgda-cross-v1 | 29/29 | 0 | 2 BLOCKED, 19 FAIL, 8 PASS |
 
 [Exact per-task attempts](attempt-coverage.json) · [Main technique leaderboard](technique-inventory.md)
 
@@ -44,7 +44,7 @@ python -m experiments.forge.attempt_coverage status --state-root RUN_DIRECTORY
 
 For a durable user service, adapt [the systemd template](../../ops/forge-attempt-coverage.service.example), then run `systemctl --user enable --now particlegan-attempt-fill.service`. Follow its starts and completions with `journalctl --user -u particlegan-attempt-fill.service -f` or `tail -f RUN_DIRECTORY/events.jsonl`. Each event names the family, task and attempt directory ID.
 
-`--watch` rescans the local selected rows every 30 seconds after draining. `--refresh` regenerates the local main leaderboard during work and when the queue drains. An optional `--completion-hook ops/publish_attempt_coverage.py` publishes the completed batch through a generated-report-only commit and a checked GitHub PR on the dedicated branch. A changed source or recipe requires its matching frozen checkout; a mismatched source stops preparation. Interrupted attempts are retained for review, not replayed. The research intake includes the 19 seed-zero variants already shown in the leaderboard; historical seed-only repetitions are excluded. Original pinned requests supply each recipe and snapshot, and original source task declarations supply the missing questions. A mismatch with a frozen evaluator source blocks the attempt. Completed new same-source measurements fill previously empty research cells; archived verdicts and selected-family qualification never change. Checkpoint/data dependencies still require passing certified artifacts; gate-only failures are bypassed solely for this authorized diagnostic lane. No new qualification is granted.
+`--watch` rescans the local selected rows every 30 seconds after draining. `--refresh` regenerates the local main leaderboard during work and when the queue drains. An optional `--completion-hook ops/publish_attempt_coverage.py` publishes the completed batch through a generated-report-only commit and a checked GitHub PR on the dedicated branch. For multiple selected source cohorts, `RUN_DIRECTORY/source-roots.json` maps family IDs to their frozen checkouts; every source digest and candidate revision is checked. A changed source or recipe requires its matching frozen checkout; a mismatched source stops preparation. Interrupted attempts are retained for review, not replayed. The research intake includes the 19 seed-zero variants already shown in the leaderboard; historical seed-only repetitions are excluded. Original pinned requests supply each recipe and snapshot, and original source task declarations supply the missing questions. A mismatch with a frozen evaluator source blocks the attempt. Completed new same-source measurements fill previously empty research cells; archived verdicts and selected-family qualification never change. Checkpoint/data dependencies still require passing certified artifacts; gate-only failures are bypassed solely for this authorized diagnostic lane. No new qualification is granted.
 
 ## Attempted blockers and incomplete runs
 
@@ -52,6 +52,60 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 
 | Recipe | Task | Outcome | Reason |
 | --- | --- | --- | --- |
+| Fresh matched protected NS/transport control | ae_gan_hold | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | cover_leftover | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| Fresh matched protected NS/transport control | five_word_joint_smoke | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | grid100 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | img_bars4 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | img_blobs4 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | img_intensity2 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | img_stripes2 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | mid_scale_identity | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | mode_hold | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | residual_student | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | ring16_acquisition | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | ring_extension | BLOCKED | checkpoint parent ring_hold: BLOCKED |
+| Fresh matched protected NS/transport control | ring_hold | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | rotated100 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | staggered100 | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | trajectory | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | two_pole | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | unipolar | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | unused_token_hold | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_anisotropic | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_overlap | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_spiral | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_two_broad | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_unequal_mass | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| Fresh matched protected NS/transport control | vector_unequal_width | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
+| G-only coherent mean (original seed0) | ae_gan_hold | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | cover_leftover | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| G-only coherent mean (original seed0) | five_word_joint_smoke | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | grid100 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | img_bars4 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | img_blobs4 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | img_intensity2 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | img_stripes2 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | mid_scale_identity | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | mode_hold | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | residual_student | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | ring16_acquisition | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | ring_extension | BLOCKED | checkpoint parent ring_hold: BLOCKED |
+| G-only coherent mean (original seed0) | ring_hold | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | rotated100 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | staggered100 | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | trajectory | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | two_pole | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | unipolar | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | unused_token_hold | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_anisotropic | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_overlap | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_spiral | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_two_broad | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_unequal_mass | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
+| G-only coherent mean (original seed0) | vector_unequal_width | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
 | atlas | ae_gan_hold | BLOCKED | ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | clockfree_audit | BLOCKED | clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | clockfree_audit_measurement_v1 | BLOCKED | clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
@@ -87,7 +141,56 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | atlas | vector_two_broad | BLOCKED | vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | vector_unequal_mass | BLOCKED | vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | vector_unequal_width | BLOCKED | vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
+| bcap-default-baseline-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
+| bcap-default-baseline-direction-v1 | gaussian1d_stability | ERROR | ValueError: named-stream checkpoint identity mismatch |
+| bcap-default-baseline-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | bcap-pure | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| bispf | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
+| bispf | ring_extension | BLOCKED | checkpoint parent ring_hold: certified artifact binding unavailable to this attempt |
+| bispf | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
+| bispf | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
+| cell-quota-dualnorm-cross-v1 | ae_gan_hold | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | cover_leftover | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| cell-quota-dualnorm-cross-v1 | five_word_joint_smoke | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | grid100 | TIMEOUT | original task wall-time limit exhausted |
+| cell-quota-dualnorm-cross-v1 | img_bars4 | ERROR | ValueError: Positive-width unstandardized MoG required |
+| cell-quota-dualnorm-cross-v1 | img_blobs4 | ERROR | ValueError: Positive-width unstandardized MoG required |
+| cell-quota-dualnorm-cross-v1 | img_intensity2 | ERROR | ValueError: Positive-width unstandardized MoG required |
+| cell-quota-dualnorm-cross-v1 | img_stripes2 | ERROR | ValueError: Positive-width unstandardized MoG required |
+| cell-quota-dualnorm-cross-v1 | mid_scale_identity | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | residual_student | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| cell-quota-dualnorm-cross-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| cell-quota-dualnorm-cross-v1 | staggered100 | TIMEOUT | original task wall-time limit exhausted |
+| cell-quota-dualnorm-cross-v1 | trajectory | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | two_pole | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | unipolar | BLOCKED | Cell objective requires the public GANTrainer path |
+| cell-quota-dualnorm-cross-v1 | unused_token_hold | BLOCKED | Cell objective requires the public GANTrainer path |
+| confidence-lr-critic-orientation-gaussian-v1 | ae_gan_hold | BLOCKED | ae_gan_hold: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | cover_leftover | BLOCKED | cover_leftover: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| confidence-lr-critic-orientation-gaussian-v1 | five_word_joint_smoke | BLOCKED | five_word_joint_smoke: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | grid100 | BLOCKED | grid100: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | img_bars4 | BLOCKED | img_bars4: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | img_blobs4 | BLOCKED | img_blobs4: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | img_intensity2 | BLOCKED | img_intensity2: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | img_stripes2 | BLOCKED | img_stripes2: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | mid_scale_identity | BLOCKED | mid_scale_identity: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | mode_hold | BLOCKED | mode_hold: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | residual_student | BLOCKED | residual_student: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: BLOCKED |
+| confidence-lr-critic-orientation-gaussian-v1 | ring_hold | BLOCKED | ring_hold: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | rotated100 | BLOCKED | rotated100: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | staggered100 | BLOCKED | staggered100: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | trajectory | BLOCKED | trajectory: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | two_pole | BLOCKED | two_pole: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | unipolar | BLOCKED | unipolar: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-critic-orientation-gaussian-v1 | unused_token_hold | BLOCKED | unused_token_hold: critic orientation has only a public scalar GANTrainer consumer |
+| confidence-lr-finite-cap-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
+| confidence-lr-finite-cap-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
+| confidence-lr-finite-cap-gaussian-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
+| confidence-lr-finite-cap-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | e22 | ae_gan_hold | BLOCKED | ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | e22 | clockfree_audit | BLOCKED | clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | e22 | clockfree_audit_measurement_v1 | BLOCKED | clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
@@ -123,7 +226,105 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | e22 | vector_two_broad | BLOCKED | vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | e22 | vector_unequal_mass | BLOCKED | vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | e22 | vector_unequal_width | BLOCKED | vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
+| generator-confidence-lr-bcap-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| generator-idle-ema-bcap-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
+| generator-idle-ema-bcap-direction-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: INCOMPLETE |
+| generator-idle-ema-bcap-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | k3p | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | ka2 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | staggered100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-u-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | staggered100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-bank8-v-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-current-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | grid100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | ring16_acquisition | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | staggered100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-u-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-reference8-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-v1 | grid100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-reference8-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | ERROR | OutOfMemoryError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 47.40 GiB of which 517.25 MiB is free. Process 34929 has 262.00 MiB memory in use. Process 12273 has 6.84 MiB memory in use. Process 2415818 has 31.09 MiB memory in use. Process 98921 has 27.14 GiB memory in use. Process 1094111 has 12.09 MiB memory in use. Process 1503885 has 13.44 GiB memory in use. Including non-PyTorch memory, this process has 4.75 GiB memory in use. Of the allocated memory 3.42 GiB is allocated by PyTorch, and 896.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf) |
+| kinetic-local-dualnorm-g-history-reference8-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-reference8-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
+| kinetic-local-dualnorm-g-history-u-v1 | five_word_joint_smoke | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | mid_scale_identity | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-dualnorm-g-history-u-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-u-v1 | unused_token_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
+| kinetic-local-dualnorm-g-history-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
+| kinetic-local-dualnorm-g-history-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic-local-nsgda-cross-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: FAIL |
+| kinetic-local-nsgda-cross-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| kinetic_transport_local_v2 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
+| kinetic_transport_local_v2 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
+| kinetic_transport_local_v2 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| positive-evidence-lr-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
+| positive-evidence-lr-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
+| positive-evidence-lr-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | r1r2 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | release07-gan-v3 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
+| signed-confidence-lr-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
+| signed-confidence-lr-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
+| signed-confidence-lr-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |

@@ -351,6 +351,11 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                     refreshed = fingerprint; refresh_at = time.monotonic()
                 if drained:
                     if completion_hook is not None and fingerprint != published:
+                        if not completion_hook.is_file():
+                            print(f"Completion publisher is missing: {completion_hook}. "
+                                  "Results are retained; restore the publisher before restarting.",
+                                  file=sys.stderr, flush=True)
+                            raise SystemExit(2)
                         subprocess.run([sys.executable, str(completion_hook)], cwd=root, check=True, timeout=600)
                         published = fingerprint
                     if not watch:
