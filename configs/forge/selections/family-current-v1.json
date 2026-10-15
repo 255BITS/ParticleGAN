@@ -905,6 +905,25 @@
       "trainer_family": "bcap-dualnorm"
     },
     {
+      "candidate_id": "bispf-v1",
+      "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
+      "cohort": "c05372e7eb5c236de0a296c2b77ba9f572ee36ca06da7d7afcafa62653bbebcd",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Complete Tier 1 and Tier 2 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow (BISPF) on the BCAP DualNorm leader recipe.",
+      "recipe_sha256": "2ff56ec5abd077ede8ec957ad679fa1d2e0ab9611ab3fbbd354c7bc419d81ae3",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "6421ba55ca8249f676197d4c8920ffe4cc5286a6cc078f675d9ab3909662c694",
+      "scientific_row_sha256": "d3979921c5b9824d92d5d0d33587cc6f1b529e856faf24a613e433dcd1e07b25",
+      "selection_kind": "current_measurement",
+      "source_digest": "fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f",
+      "task_keys_sha256": "ebe03eac37a7bd0a489a8e057e3ff5f709847d3a8fc2f1f48cab5ce23a6dcfbc",
+      "trainer_family": "bispf"
+    },
+    {
       "candidate_id": "e22",
       "candidate_revision": "26bc81696c14502e279a40afcf91ebfeed4c97777bc29579b1c1c9020876407c",
       "cohort": "d4d9f66165a5b223bf35b8f166908684bf6d8114d43bc60e1548dea1086de7b1",

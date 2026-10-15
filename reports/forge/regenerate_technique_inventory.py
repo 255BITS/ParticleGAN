@@ -2314,10 +2314,11 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     if result.get("archived_base_presentation_only"):
         pointers = result["archived_base_presentation_only"]
         indices = {pointer["row_index"] for pointer in pointers}
-        if len(indices) != len(pointers) or any(index < 7 or index >= len(result["rows"]) for index in indices):
+        expected_leaders = max(7, len(read_json(root / CURRENT_SELECTION)["selections"])) if (root / CURRENT_SELECTION).is_file() else 7
+        if len(indices) != len(pointers) or any(index < expected_leaders or index >= len(result["rows"]) for index in indices):
             raise ValueError("invalid archived solution presentation indices")
         structure = {"rows": [deepcopy(row) for index, row in enumerate(result["rows"]) if index not in indices]}
-        if len(structure["rows"]) != 7:
+        if len(structure["rows"]) != expected_leaders:
             raise ValueError("archived bases cannot replace seven selected leaders")
         restored = _ownership_migration_helper().restore_archived_solution_rows(
             root, structure, read_json(root / CURRENT_SELECTION), archived_reports, validate_row=_validate_published_row)
@@ -2762,7 +2763,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if migrated_roster:
         current_ids = {pin["candidate_id"] for pin in roster_card["selections"]}
         if (roster_card["ownership_migration"].get("selection_scope") != "seven_visible_selected_leaders"
-                or len(current_ids) != 7 or not current_ids.issubset(candidates)):
+                or len(current_ids) < 7 or len(current_ids) != len(roster_card["selections"])
+                or not current_ids.issubset(candidates)):
             raise ValueError("ownership selection requires exact seven current declarations")
         candidates = current_ids
     if declaration_registration is not None:

@@ -44,6 +44,13 @@ Recorded benchmark passes / required tasks by tier. Click a count for its gates,
 | ↳ † [bcap-default-baseline-direction-v1; seed 0; 27ab4cf9](families/bcap-pure.md#pr399-retained-research) | [5/6](families/bcap-pure.md#pr399-retained-research) | [0/21 (21 not run)](families/bcap-pure.md#pr399-retained-research) | [0/2 (2 not run)](families/bcap-pure.md#pr399-retained-research) | [5/29 (23 not run)](families/bcap-pure.md#pr399-retained-research) |
 | ↳ † [Strict clock-free audit; separate Torch 2.13 cohort](tier-coverage-20261014/README.md) | — | — | [1/1](tier-coverage-20261014/README.md) | [1/1](tier-coverage-20261014/README.md) |
 | ↳ † [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [1/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) | [1/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) |
+| **[BISPF](families/bispf.md)**<br>Recorded source measurement · **stale**; no current qualification | **[22/22](families/bispf.md#cohort-cuda-6421ba55ca82-tier-1)** | **[55/116](families/bispf.md#cohort-cuda-6421ba55ca82-tier-2)** | **[0/14 (14 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-tier-3)** | **[77/152 (14 not run)](families/bispf.md#cohort-cuda-6421ba55ca82)** |
+| ↳ [adaptation](families/bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](families/bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/19](families/bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0/1 (1 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12/23 (1 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-adaptation) |
+| ↳ [clockfree_continuous](families/bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](families/bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](families/bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/7 (7 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/30 (7 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
+| ↳ [discriminator_stability](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/21](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/2 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16/29 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) |
+| ↳ [formulation_comparison](families/bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [3/3](families/bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) | [9/19](families/bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) | [0/2 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) | [12/24 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) |
+| ↳ [host_profile_transfer](families/bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [3/3](families/bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) | [9/19](families/bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) | [0/2 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3) | [12/24 (2 not run)](families/bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) |
+| ↳ [quality_coverage](families/bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) | [3/3](families/bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | [9/19](families/bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | [0/0](families/bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-3) | [12/22](families/bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) |
 | **[Atlas](families/atlas.md)** | **[0/22 (22 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/152 (152 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/3 (3 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/23 (23 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/4 (4 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/30 (30 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -63,7 +70,7 @@ Recorded benchmark passes / required tasks by tier. Click a count for its gates,
 | ↳ [quality_coverage](families/e22.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/3 (3 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/19 (19 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/e22.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/22 (22 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 | ↳ † [Unchanged public policy: image diagnostics](actual-missing-diagnostics-20261014/README.md) | — | [1/4](actual-missing-diagnostics-20261014/README.md) | — | [1/4](actual-missing-diagnostics-20261014/README.md) |
 | ↳ † [Selected-cloud execution after adapter investigation](actual-missing-diagnostics-20261014/README.md) | [0/7 (3 incompatible)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (3 incompatible)](actual-missing-diagnostics-20261014/README.md) |
-| **[GAN v3 release 0.7](families/release07-gan-v3.md)** | **[20/22](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422)** |
+| **[GAN v3 release 0.7](families/release07-gan-v3.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3/23 (20 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (26 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
 | ↳ [discriminator_stability](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/21 (21 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5/29 (23 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
@@ -72,7 +79,7 @@ Recorded benchmark passes / required tasks by tier. Click a count for its gates,
 | ↳ [quality_coverage](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/19 (19 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3/22 (19 not run)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 | ↳ † [Selected recipe Tier 2 diagnostics; seed 0](tier-coverage-20261014/README.md) | — | [9/21](tier-coverage-20261014/README.md) | — | [9/21](tier-coverage-20261014/README.md) |
 | ↳ † [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) |
-| **[K3P](families/k3p.md)** | **[20/22](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422)** |
+| **[K3P](families/k3p.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/k3p.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3/23 (20 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](families/k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (26 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
 | ↳ [discriminator_stability](families/k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](families/k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/21 (21 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5/29 (23 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
@@ -81,7 +88,7 @@ Recorded benchmark passes / required tasks by tier. Click a count for its gates,
 | ↳ [quality_coverage](families/k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/19 (19 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3/22 (19 not run)](families/k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 | ↳ † [Selected recipe Tier 2 diagnostics; seed 0](tier-coverage-20261014/README.md) | — | [11/21](tier-coverage-20261014/README.md) | — | [11/21](tier-coverage-20261014/README.md) |
 | ↳ † [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) |
-| **[KA2](families/ka2.md)** | **[20/22](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422)** |
+| **[KA2](families/ka2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/ka2.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3/23 (20 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](families/ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (26 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
 | ↳ [discriminator_stability](families/ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](families/ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/21 (21 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5/29 (23 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
@@ -90,7 +97,7 @@ Recorded benchmark passes / required tasks by tier. Click a count for its gates,
 | ↳ [quality_coverage](families/ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/19 (19 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3/22 (19 not run)](families/ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 | ↳ † [Selected recipe Tier 2 diagnostics; seed 0](tier-coverage-20261014/README.md) | — | [10/21](tier-coverage-20261014/README.md) | — | [10/21](tier-coverage-20261014/README.md) |
 | ↳ † [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) | [0/7 (4 not run)](actual-missing-diagnostics-20261014/README.md) |
-| **[R1/R2](families/r1r2.md)** | **[20/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422)** |
+| **[R1/R2](families/r1r2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (14 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (130 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/r1r2.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](families/r1r2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3/23 (20 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/r1r2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](families/r1r2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (26 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
 | ↳ [discriminator_stability](families/r1r2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](families/r1r2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/21 (21 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5/29 (23 not run)](families/r1r2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
@@ -144,6 +151,7 @@ Trains a generator against a critic; task-owned auxiliary objectives may also ap
 - [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
 - [BCAP sgda](families/bcap-sgda.md) (historical cohort)
 - [BCAP with K3P](families/bcap.md) (historical cohort)
+- [BISPF](families/bispf.md)
 - [E22](families/e22.md)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
@@ -173,6 +181,7 @@ Penalizes critic input-gradient norms above a threshold on real and generated in
 - [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
 - [BCAP sgda](families/bcap-sgda.md) (historical cohort)
 - [BCAP with K3P](families/bcap.md) (historical cohort)
+- [BISPF](families/bispf.md)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
 - [GAN v3 release 0.7 (cloud)](families/release07-gan-v3-cloud.md) (historical cohort)
@@ -183,6 +192,7 @@ Penalizes critic input-gradient norms above a threshold on real and generated in
 
 Declared baseline uses constant learning rates; resolved per-role rates remain configuration-specific.
 
+- [BISPF](families/bispf.md)
 - [Halloween optimizer/loss transfer](families/halloween.md) (historical cohort)
 
 <a name="tag-critic-gradient-penalty"></a>
@@ -202,6 +212,7 @@ Uses a penalty on critic input gradients; its formula and strength are configura
 - [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
 - [BCAP sgda](families/bcap-sgda.md) (historical cohort)
 - [BCAP with K3P](families/bcap.md) (historical cohort)
+- [BISPF](families/bispf.md)
 - [E22](families/e22.md)
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
@@ -247,6 +258,7 @@ Includes formulation-specific interventions around optimizer steps; availability
 - [BCAP particle_rownorm_only](families/bcap-particle-rownorm-only.md) (historical cohort)
 - [BCAP sgda](families/bcap-sgda.md) (historical cohort)
 - [BCAP with K3P](families/bcap.md) (historical cohort)
+- [BISPF](families/bispf.md)
 - [E22](families/e22.md)
 - [K3P](families/k3p.md)
 - [K3P without A2](families/k3p-no-a2.md) (historical cohort)
@@ -263,6 +275,7 @@ The family explicitly supports multiple adversarial loss formulations.
 
 - [BCAP](families/bcap-pure.md)
 - [BCAP](families/bcap-pure-configuration.md)
+- [BISPF](families/bispf.md)
 
 <a name="tag-structural-ablation"></a>
 
@@ -293,5 +306,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `577f2133a44650840e2d57496d350eb27737ca44d2097be2f84d03eeab7fa6d2`.
+Publication input digest `fac0ba894bb1d848b144f5c10e014913f5bdc8d9ec13107e64eba0098baa06e4`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
