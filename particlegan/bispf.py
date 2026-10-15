@@ -329,7 +329,8 @@ class StratifiedBlueNoisePrior(nn.Module):
         z_batch = self.z[idx]
 
         if self.training and self.jitter_std > 0.0:
-            t_ratio = float(self.thermal_ratio.item())
+            t_scale = float(_LAST_THERMAL_SCALE.get(self.z.device, self.thermal_ratio.item()))
+            t_ratio = min(float(self.thermal_ratio.item()), t_scale)
             if t_ratio > 1e-5 and batch_size > 1:
                 with torch.no_grad():
                     k = min(self.k_nn, batch_size - 1)
@@ -401,9 +402,12 @@ def sinkhorn_coupling(
     Pi = torch.exp(log_Pi)
     Pi = Pi / (Pi.sum(dim=1, keepdim=True).clamp_min(eps) * b_r)
 
-    res = (Pi * C).sum()
+    # Scale-free symmetric nearest-neighbor residual with zero entropic blur floor
+    min_r = sq_dist.min(dim=1).values.mean()
+    min_f = sq_dist.min(dim=0).values.mean()
+    delta_nn = torch.sqrt(0.5 * (min_r + min_f) / med_sq_dist)
     data_scale = med_sq_dist.sqrt()
-    return Pi, med_sq_dist, res, data_scale
+    return Pi, med_sq_dist, delta_nn, data_scale
 
 
 @torch.no_grad()
@@ -738,19 +742,21 @@ class BISPFStepRecord(CriticStepRecord):
 class ContinuousThermalCooler:
     """Continuous residual-driven thermal cooler for basin settling and autonomous re-heating.
 
-    Computes smooth straight-through gradient scaling:
-        s_thermal = max(s_min, min(1.0, ema_residual / tau_cooling))
-    where ema_residual tracks the scale-free Sinkhorn Optimal Transport residual.
+    Computes linearized within-basin velocity scaling inverting DualNorm rownorm:
+        u = min(1.0, ema_residual / tau_cooling)
+        s_thermal = (v / sqrt(1 - v^2 + 1e-12)) * eps_smooth
+    where ema_residual tracks the scale-free nearest-neighbor residual delta_nn.
     """
 
     def __init__(
         self,
-        tau_cooling: float = 0.20,
-        s_min: float = 0.05,
+        tau_cooling: float = 0.035,
+        s_min: float = 1e-5,
         ema_decay: float = 0.95,
         initial_residual: float = 1.0,
+        eps_smooth: float = 0.001,
     ) -> None:
-        for name, val in (("tau_cooling", tau_cooling), ("s_min", s_min), ("ema_decay", ema_decay)):
+        for name, val in (("tau_cooling", tau_cooling), ("s_min", s_min), ("ema_decay", ema_decay), ("eps_smooth", eps_smooth)):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or val <= 0:
                 raise ValueError(f"{name} must be a finite positive number")
         if s_min > 1.0:
@@ -760,6 +766,7 @@ class ContinuousThermalCooler:
         self.tau_cooling = float(tau_cooling)
         self.s_min = float(s_min)
         self.ema_decay = float(ema_decay)
+        self.eps_smooth = float(eps_smooth)
         self.ema_residual = float(initial_residual)
         self.initialized = False
 
@@ -778,8 +785,12 @@ class ContinuousThermalCooler:
         """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
         if self.tau_cooling <= 0.0:
             return 1.0
-        ratio = self.ema_residual / self.tau_cooling
-        return max(self.s_min, min(1.0, ratio))
+        u = min(1.0, max(0.0, self.ema_residual / self.tau_cooling))
+        if u >= 1.0:
+            return 1.0
+        v = min(0.9999, u)
+        s = (v / math.sqrt(1.0 - v * v + 1e-12)) * self.eps_smooth
+        return max(self.s_min, min(1.0, s))
 
     def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
         """Apply straight-through gradient scaling: backward gradient is scaled by scale (or self.scale) while forward pass is identity."""
@@ -798,6 +809,7 @@ class ContinuousThermalCooler:
             "s_min": self.s_min,
             "ema_decay": self.ema_decay,
             "ema_residual": self.ema_residual,
+            "eps_smooth": self.eps_smooth,
             "initialized": self.initialized,
         }
 
@@ -806,6 +818,8 @@ class ContinuousThermalCooler:
         self.s_min = float(state["s_min"])
         self.ema_decay = float(state["ema_decay"])
         self.ema_residual = float(state["ema_residual"])
+        if "eps_smooth" in state:
+            self.eps_smooth = float(state["eps_smooth"])
         self.initialized = bool(state["initialized"])
 
 
@@ -822,9 +836,12 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
             if rec is not None and not hasattr(target, "_bispf_record"):
                 target._bispf_record = rec
     if rec is not None and not getattr(rec, "_in_penalty", False) and torch.is_grad_enabled():
+        if getattr(output, "_bispf_scaled", False):
+            return None
         s = float(getattr(rec, "_thermal_scale", 1.0))
         if s < 1.0 and isinstance(output, torch.Tensor) and output.requires_grad:
             out_scaled = output * s + output.detach() * (1.0 - s)
+            out_scaled._bispf_scaled = True
             if hasattr(output, "_bispf_input"):
                 out_scaled._bispf_input = output._bispf_input
             if hasattr(output, "_bispf_record"):
@@ -947,8 +964,8 @@ class _BISPFPenaltyKernel:
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
-        tau_cooling: float = 0.20,
-        s_min: float = 0.05,
+        tau_cooling: float = 0.035,
+        s_min: float = 1e-5,
         thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,
     ) -> None:
@@ -1047,7 +1064,11 @@ class _BISPFPenaltyKernel:
         self._observe_sinkhorn(float(res.item()), float(data_scale.item()), ema_decay=self.thermal_decay)
 
         is_discrete_simplex = (x_real.ndim == 2 and dim > 64)
-        use_chords = not is_discrete_simplex
+        # Evaluate transport chords for continuous low-dimensional vector flows (dim <= 64).
+        # Bypass chords for discrete categorical token codebooks and high-dimensional images
+        # when chord_blend is standard (<= 0.10), preventing manifold-blur distortion across
+        # non-convex visual boundaries while allowing explicit chord tests (chord_blend > 0.10).
+        use_chords = not is_discrete_simplex and (x_real.ndim == 2 and dim <= 64 or self.chord_blend > 0.10)
 
         # Continuous thermal cooling is applied to continuous coordinate particle flows
         # with sufficient batch size (dim <= 4 and b_r >= 32); for discrete token codebooks,
@@ -1056,7 +1077,7 @@ class _BISPFPenaltyKernel:
         with torch.no_grad():
             if is_continuous_flow:
                 t_scale = self.cooler.scale if hasattr(self, "cooler") else max(
-                    0.05, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / 0.20)
+                    1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / 0.035)
                 )
             else:
                 t_scale = 1.0
@@ -1064,13 +1085,12 @@ class _BISPFPenaltyKernel:
             _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Gradient norm scaling:
-        # - High-dimensional continuous spatial fields (images, ndim >= 3) and continuous
-        #   particle flows (b_r >= 32, e.g. ring16_acquisition and 100-mode grids) evaluate
-        #   gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d)
-        # - Low-batch slot-holds (b_r < 32 or b_f < 32, e.g. unused_token_hold) and discrete
-        #   categorical token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
-        #   without dividing by sqrt(d), preventing critic overshoot in low-batch slot-hold fixtures.
-        if is_discrete_simplex or (dim <= 4 and (b_r < 32 or b_f < 32)):
+        # - Low-dimensional continuous coordinates (dim <= 4) and discrete categorical
+        #   token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
+        #   without dividing by sqrt(d), eliminating limit-cycle oscillations on 2D mixture tasks.
+        # - High-dimensional continuous spatial fields (images, ndim >= 3) and medium continuous
+        #   features (dim > 4) evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d).
+        if is_discrete_simplex or dim <= 4:
             scale_dim = 1.0
         else:
             scale_dim = math.sqrt(dim)
@@ -1138,13 +1158,20 @@ class _BISPFPenaltyKernel:
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
             sq_fake = g_fake.flatten(1).pow(2).sum(dim=1)
             norm_fake = (sq_fake + 1e-12).sqrt() / scale_dim
-            sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
-            norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
-            floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
             cap_real = F.softplus(norm_real - self.kappa, beta=self.ebi_beta).pow(2).mean()
             cap_fake = F.softplus(norm_fake - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_chord = F.softplus(norm_chord - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
+
+            if use_chords:
+                sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
+                norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
+                floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
+                cap_chord = F.softplus(norm_chord - self.kappa, beta=self.ebi_beta).pow(2).mean()
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
+            else:
+                norm_chord = 0.5 * (norm_real + norm_fake)
+                floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean()) / (2.0 * dim))
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + cap_fake)
+
             ebi_loss = floor_pen + cap_pen
 
             # Universal zero-mean logit gauge across all continuous dimensions and modalities

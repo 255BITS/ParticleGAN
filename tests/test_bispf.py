@@ -384,9 +384,10 @@ def test_bispf_continuous_thermal_cooling_and_reheating():
     from particlegan.bispf import ContinuousThermalCooler
 
     cooler = ContinuousThermalCooler(
-        tau_cooling=0.20,
-        s_min=0.05,
+        tau_cooling=0.035,
+        s_min=1e-5,
         ema_decay=0.90,  # Responsive EMA for unit test
+        eps_smooth=0.001,
     )
 
     # 1. Initial high residual -> s_thermal = 1.0
@@ -394,18 +395,18 @@ def test_bispf_continuous_thermal_cooling_and_reheating():
     assert abs(s_init - 1.0) < 1e-6
 
     # 2. Monotonic cooling as particles settle in basins
-    residuals = [0.15, 0.10, 0.05, 0.02, 0.005]
+    residuals = [0.030, 0.020, 0.010, 0.005, 0.001]
     prev_s = s_init
     for r in residuals:
         s_curr = cooler.update(batch_residual=r)
         assert s_curr <= prev_s, f"Thermal scale must decrease monotonically: {s_curr} > {prev_s}"
-        assert s_curr >= 0.05, f"Thermal scale must never drop below s_min: {s_curr} < 0.05"
+        assert s_curr >= 1e-5, f"Thermal scale must never drop below s_min: {s_curr} < 1e-5"
         prev_s = s_curr
 
-    # At steady-state near r=0.005, cooler reaches floor s_min
-    for _ in range(60):
-        cooler.update(batch_residual=0.005)
-    assert abs(cooler.scale - 0.05) < 1e-4
+    # At steady-state near r=0.0, cooler reaches floor s_min
+    for _ in range(120):
+        cooler.update(batch_residual=0.0)
+    assert abs(cooler.scale - 1e-5) < 1e-6
 
     # 3. Straight-Through Gradient Verification
     x = torch.randn(8, 2, requires_grad=True)
@@ -546,6 +547,121 @@ def test_bispf_continuous_image_transport_chords():
     assert stats["applied"] is True
     assert "mean_grad_norm" in stats
     assert stats["mean_grad_norm"] > 0.0
+
+
+def test_bispf_endpoint_born_infeld_image_limit():
+    """Verify 4D image tensors (with standard chord_blend <= 0.10) bypass chord
+    interpolation and evaluate crisp endpoint Born-Infeld penalties strictly
+    at real and fake endpoints without evaluating g_chord, while continuous 2D
+    flows evaluate chords.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+    import torch.nn.functional as F
+
+    # 1. Verify 4D image tensors bypass chords (exactly 2 critic evaluations, real and fake)
+    called_image_shapes = []
+    class TrackingImageCritic(nn.Module):
+        def forward(self, x):
+            called_image_shapes.append(tuple(x.shape))
+            return x.flatten(1).sum(dim=1, keepdim=True)
+
+    kernel = _BISPFPenaltyKernel(
+        coeff=1.0,
+        lambda_floor=0.1,
+        lambda_cap=10.0,
+        kappa=1.0,
+        chord_blend=0.02,
+        gamma_gauge=0.002,
+    )
+
+    xr_img = torch.randn(16, 1, 12, 12)
+    xf_img = torch.randn(16, 1, 12, 12)
+    pen_img, stats_img = kernel.penalty(TrackingImageCritic(), xr_img, xf_img, step=0, collect_stats=True)
+
+    assert len(called_image_shapes) == 2, (
+        f"Image tensors must bypass chords and evaluate only real and fake endpoints; "
+        f"got {len(called_image_shapes)} calls: {called_image_shapes}"
+    )
+    assert called_image_shapes == [(16, 1, 12, 12), (16, 1, 12, 12)]
+    assert stats_img["applied"] is True
+    assert "mean_grad_norm" in stats_img
+    assert stats_img["mean_grad_norm"] > 0.0
+    assert "gauge_loss" in stats_img
+
+    # 2. Verify continuous 2D flows evaluate chords (exactly 3 critic evaluations: real, fake, chord)
+    called_2d_shapes = []
+    class Tracking2DCritic(nn.Module):
+        def forward(self, x):
+            called_2d_shapes.append(tuple(x.shape))
+            return x.flatten(1).sum(dim=1, keepdim=True)
+
+    xr_2d = torch.randn(16, 2)
+    xf_2d = torch.randn(16, 2)
+    pen_2d, stats_2d = kernel.penalty(Tracking2DCritic(), xr_2d, xf_2d, step=0, collect_stats=True)
+
+    assert len(called_2d_shapes) == 3, (
+        f"Continuous 2D coordinates must evaluate chords; got {len(called_2d_shapes)} calls: {called_2d_shapes}"
+    )
+    assert called_2d_shapes == [(16, 2), (16, 2), (16, 2)]
+
+    # 3. Verify theoretical endpoint Born-Infeld math for image tensors
+    s = 2.0
+    kappa = 1.0
+    beta = 30.0
+    l_cap = 10.0
+    l_floor = 0.1
+    kernel_math = _BISPFPenaltyKernel(
+        coeff=1.0,
+        kappa=kappa,
+        lambda_cap=l_cap,
+        lambda_floor=l_floor,
+        ebi_beta=beta,
+        gamma_gauge=0.0,
+        chord_blend=0.02,
+    )
+
+    class ConstantSlopeImageCritic(nn.Module):
+        def forward(self, x):
+            return s * x.flatten(1).sum(dim=1, keepdim=True)
+
+    xr_math = torch.randn(8, 1, 8, 8)
+    xf_math = torch.randn(8, 1, 8, 8)
+    pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
+
+    # In RMS coordinates: g_rms = ||g||_2 / sqrt(d) = sqrt(d * s^2) / sqrt(d) = s = 2.0
+    # Endpoint Born-Infeld cap penalty: 0.5 * l_cap * (softplus(s - kappa)^2 + softplus(s - kappa)^2)
+    expected_cap = l_cap * (F.softplus(torch.tensor(s - kappa), beta=beta).item() ** 2)
+    expected_floor = 0.5 * l_floor * (s ** 2)
+    expected_total = expected_cap + expected_floor
+    assert abs(pen_math.item() - expected_total) < 1e-4, (
+        f"Expected {expected_total}, got {pen_math.item()}"
+    )
+
+
+def test_bispf_sinkhorn_scale_free_nn_residual():
+    """Verify sinkhorn_coupling returns scale-free symmetric nearest-neighbor residual delta_nn
+    with zero entropic floor when real and fake points coincide, and affine scale-invariance.
+    """
+    from particlegan.bispf import sinkhorn_coupling
+
+    torch.manual_seed(42)
+    # 1. Identical mode sets -> delta_nn must be exactly zero (zero entropic floor!)
+    x_real = torch.randn(32, 2)
+    x_fake = x_real.clone()
+    Pi, med_sq, delta_nn, scale = sinkhorn_coupling(x_real, x_fake)
+    assert abs(delta_nn.item()) < 5e-4, f"Identical real/fake batches must have delta_nn ~ 0, got {delta_nn.item()}"
+
+    # 2. Separated modes -> delta_nn > 0
+    x_fake_sep = x_real + 2.0
+    _, _, delta_sep, _ = sinkhorn_coupling(x_real, x_fake_sep)
+    assert delta_sep.item() > 0.05
+
+    # 3. Scale-invariance: multiplying coordinates by alpha leaves delta_nn unchanged
+    alpha = 15.0
+    _, _, delta_scaled, _ = sinkhorn_coupling(x_real * alpha, x_fake_sep * alpha)
+    assert abs(delta_sep.item() - delta_scaled.item()) < 1e-4, (
+        f"delta_nn must be scale-invariant: got {delta_sep.item()} vs {delta_scaled.item()}"
+    )
 
 
 def test_bispf_v2_trainer_integration_and_telemetry():
