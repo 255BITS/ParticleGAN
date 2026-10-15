@@ -1,5 +1,6 @@
 """Unit and integration tests for Born-Infeld Sinkhorn Particle Flow (BISPF)."""
 from copy import deepcopy
+import math
 import pytest
 import torch
 import torch.nn as nn
@@ -192,10 +193,9 @@ def test_bispf_rms_born_infeld_dimension_invariance_and_smoothness():
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
-    # 1. Dimension Invariance across d=2, d=64, d=144 (image 1x12x12)
+    # 1. Dimension Invariance across medium (d=64) and conv image (d=144 = 1x12x12) in RMS regime
     slopes = [0.4, 1.0, 2.5]  # Sub-cap (harmonic floor), at cap, and ballistic cap
     dimensions = [
-        (2, (16, 2)),
         (64, (16, 64)),
         (144, (16, 1, 12, 12)),  # 4D conv image tensor
     ]
@@ -231,7 +231,7 @@ def test_bispf_rms_born_infeld_dimension_invariance_and_smoothness():
             pen, _ = kernel.penalty(D, xr, xf, step=0, collect_stats=True)
             penalties.append(float(pen.detach().item()))
 
-        # Penalties must match across d=2, d=64, and d=144 within numerical tolerance
+        # Penalties must match across d=64 and d=144 within numerical tolerance
         ref_pen = penalties[0]
         for idx, p in enumerate(penalties[1:], 1):
             assert abs(p - ref_pen) < 1e-4, (
@@ -239,7 +239,43 @@ def test_bispf_rms_born_infeld_dimension_invariance_and_smoothness():
                 f"dim {dimensions[0][0]} ({ref_pen})"
             )
 
-    # 2. Smoothness across kappa=1.0 (no jump discontinuity in value or derivative)
+    # 2. Verify low-dimensional continuous coordinates (d <= 2) enforce raw Euclidean barrier ||g||_2 <= 1.0
+    # without dividing by sqrt(d), ensuring tight critic regularization in 2D slot-hold tasks
+    kernel_2d = _BISPFPenaltyKernel(
+        coeff=1.0,
+        lambda_floor=0.1,
+        lambda_cap=10.0,
+        kappa=1.0,
+        ebi_beta=30.0,
+        gamma_gauge=0.0,
+        chord_blend=0.0,
+    )
+    D_2d_at_cap = ConstantSlopeCritic(1.0 / math.sqrt(2.0))  # ||g||_2 = sqrt(2 * (1/sqrt(2))^2) = 1.0
+    xr_2d = torch.randn(16, 2)
+    xf_2d = torch.randn(16, 2)
+    pen_2d, stats_2d = kernel_2d.penalty(D_2d_at_cap, xr_2d, xf_2d, step=0, collect_stats=True)
+    assert abs(stats_2d["mean_grad_norm"] - 1.0) < 1e-4
+
+    # 3. Verify discrete categorical codebooks (d=170, ndim=2) retain raw Euclidean norm,
+    # omit zero-mean logit gauge, omit chords, and hold thermal scale at 1.0
+    xr_token = torch.randn(16, 170)
+    xf_token = torch.randn(16, 170)
+    D_token = ConstantSlopeCritic(1.0 / math.sqrt(170.0))  # ||g||_2 = 1.0
+    kernel_token = _BISPFPenaltyKernel(
+        coeff=1.0,
+        lambda_floor=0.1,
+        lambda_cap=10.0,
+        kappa=1.0,
+        gamma_gauge=0.002,
+    )
+    pen_tok, stats_tok = kernel_token.penalty(D_token, xr_token, xf_token, step=0, collect_stats=True)
+    assert abs(stats_tok["mean_grad_norm"] - 1.0) < 1e-4
+    assert stats_tok["mean_logit"] == 0.0
+    assert stats_tok["gauge_loss"] == 0.0
+    assert stats_tok["floor_pen"] == 0.0
+    assert stats_tok["s_thermal"] == 1.0
+
+    # 4. Smoothness across kappa=1.0 (no jump discontinuity in value or derivative)
     c_vals = torch.linspace(0.8, 1.2, 41, requires_grad=False)
     kernel = _BISPFPenaltyKernel(
         coeff=1.0,
