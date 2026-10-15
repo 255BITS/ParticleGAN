@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 from pathlib import Path
+import pytest
 
 from experiments.forge import attempt_coverage as runner
 from experiments.forge.contracts import atomic_json, read_json
@@ -116,3 +117,19 @@ def test_research_backfill_fills_empty_cells_without_replacing_original_verdicts
                 {"1": {"original", "missing", "unbound"}, "2": set(), "3": set()}, scope="frozen-scope")
     assert "1/3 (1 not run)" in text
     assert original == {"original": "FAIL"}
+
+
+def test_missing_completion_publisher_stops_without_restart_or_replaying_work(tmp_path, monkeypatch):
+    directory = tmp_path / "runs"
+    atomic_json(directory / "state.json", dict(jobs={}))
+    monkeypatch.setattr(runner, "device_slots", lambda *args, **kwargs: [])
+    def unexpected_subprocess(*args, **kwargs):
+        pytest.fail("a missing publisher must be detected before launching a subprocess")
+    monkeypatch.setattr(runner.subprocess, "run", unexpected_subprocess)
+    with pytest.raises(SystemExit) as stopped:
+        runner.drain(tmp_path / "repo", directory, gpus=["0", "1"],
+                     completion_hook=tmp_path / "missing-publisher.py")
+    assert stopped.value.code == 2
+    assert read_json(directory / "state.json")["jobs"] == {}
+    template = Path(__file__).resolve().parents[1] / "ops/forge-attempt-coverage.service.example"
+    assert "RestartPreventExitStatus=2" in template.read_text()
