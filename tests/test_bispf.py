@@ -384,7 +384,7 @@ def test_bispf_continuous_thermal_cooling_and_reheating():
     from particlegan.bispf import ContinuousThermalCooler
 
     cooler = ContinuousThermalCooler(
-        tau_cooling=0.035,
+        tau_cooling=0.020,
         s_min=1e-5,
         ema_decay=0.90,  # Responsive EMA for unit test
         eps_smooth=0.001,
@@ -395,7 +395,7 @@ def test_bispf_continuous_thermal_cooling_and_reheating():
     assert abs(s_init - 1.0) < 1e-6
 
     # 2. Monotonic cooling as particles settle in basins
-    residuals = [0.030, 0.020, 0.010, 0.005, 0.001]
+    residuals = [0.018, 0.014, 0.010, 0.005, 0.001]
     prev_s = s_init
     for r in residuals:
         s_curr = cooler.update(batch_residual=r)

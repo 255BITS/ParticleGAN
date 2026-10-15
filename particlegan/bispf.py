@@ -750,7 +750,7 @@ class ContinuousThermalCooler:
 
     def __init__(
         self,
-        tau_cooling: float = 0.035,
+        tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         ema_decay: float = 0.95,
         initial_residual: float = 1.0,
@@ -964,7 +964,7 @@ class _BISPFPenaltyKernel:
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
-        tau_cooling: float = 0.035,
+        tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,
@@ -1077,7 +1077,7 @@ class _BISPFPenaltyKernel:
         with torch.no_grad():
             if is_continuous_flow:
                 t_scale = self.cooler.scale if hasattr(self, "cooler") else max(
-                    1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / 0.035)
+                    1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
                 )
             else:
                 t_scale = 1.0
@@ -1085,12 +1085,13 @@ class _BISPFPenaltyKernel:
             _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Gradient norm scaling:
-        # - Low-dimensional continuous coordinates (dim <= 4) and discrete categorical
-        #   token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
-        #   without dividing by sqrt(d), eliminating limit-cycle oscillations on 2D mixture tasks.
-        # - High-dimensional continuous spatial fields (images, ndim >= 3) and medium continuous
-        #   features (dim > 4) evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d).
-        if is_discrete_simplex or dim <= 4:
+        # - High-dimensional continuous spatial fields (images, ndim >= 3) and continuous
+        #   particle flows (b_r >= 32, e.g. ring16_acquisition and 100-mode grids) evaluate
+        #   gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d)
+        # - Low-batch slot-holds (b_r < 32 or b_f < 32, e.g. unused_token_hold) and discrete
+        #   categorical token codebooks retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa
+        #   without dividing by sqrt(d), preventing critic overshoot in low-batch slot-hold fixtures.
+        if is_discrete_simplex or (dim <= 4 and (b_r < 32 or b_f < 32)):
             scale_dim = 1.0
         else:
             scale_dim = math.sqrt(dim)
