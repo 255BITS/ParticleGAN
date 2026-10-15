@@ -177,7 +177,7 @@ def publish(root, state):
               "result_sha256", "log_sha256", "runtime", "timeout_seconds", "setup_retries", "research_scope", "label",
               "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
               "saved_observations", "repair_scope", "owning_family", "reporting_tier", "diagnostic_continuation",
-              "repair_origin_source", "required_gpu", "repair_superseded")
+              "repair_origin_source", "required_gpu", "repair_superseded", "reused_execution")
     value = {"schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
              "formulations_modified": False, "maximum_tests": 4, "maximum_per_gpu": 2,
              "summary": summary(state), "records": [{k: j[k] for k in fields if k in j}
@@ -270,6 +270,21 @@ def publish(root, state):
             lines += ["", "Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, "
                       "unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. "
                       "Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.", ""]
+        reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution"]
+        if reused:
+            lines += ["## Results recovered from existing uninterrupted runs", "",
+                      "These task results reuse their producer's already measured observations. No new training "
+                      "or sampling was performed. Original refused-start receipts remain linked in each certificate; "
+                      "ordinary qualification is unchanged.", "",
+                      "| Family | Test | Result | Passing extension checks | Evidence |",
+                      "| --- | --- | --- | ---: | --- |"]
+            for job in sorted(reused, key=lambda j: (j["family"], j["task"])):
+                metrics = job["grade"]["metrics"]
+                evidence = job["evidence"].removeprefix("reports/forge/")
+                lines.append(f"| {job['family']} | {job['task']} | {job['status']} | "
+                             f"{metrics['extension_passing']}/{metrics['extension_checks']} | "
+                             f"[Verified saved run]({evidence}) |")
+            lines.append("")
         blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt"
                    and j["status"] in {"BLOCKED", "ERROR", "TIMEOUT", "INCOMPLETE", "INVALID"}]
         if blocked:
@@ -345,6 +360,55 @@ def recover(state):
                        reason="prior worker stopped without a terminal receipt; retained without automatic replay")
 
 
+def reconcile_grouped(root, directory, state):
+    """Recover completed grouped measurements, without granting restart eligibility."""
+    recovered = []
+    for child in state["jobs"].values():
+        if not (child["status"] == "PENDING" or
+                child["status"] == "BLOCKED" and child.get("block_kind") == "prerequisite"):
+            continue
+        if child.get("task") != "ring_extension" or not child.get("request_path"):
+            continue
+        request = read_json(Path(child["request_path"]))
+        card = request["tasks"][child["task"]]
+        if card["adapter"] != "ring_endurance" or not card["execution"].get("execution_group"):
+            continue
+        parents = [job for job in state["jobs"].values()
+                   if job["task"] == card["execution"].get("continuation_of")
+                   and all(job.get(key) == child.get(key) for key in
+                           ("family", "candidate_revision", "source_digest", "request_sha256"))
+                   and job["status"] == "PASS" and job.get("origin") == "new_attempt"]
+        if len(parents) != 1:
+            continue
+        parent = parents[0]
+        reuse_id = stable_hash([child["key"], parent["result_sha256"], child["request_sha256"],
+                               file_hash(Path(__file__).with_name("grouped_evidence.py"))])
+        target = directory / "reused-groups" / reuse_id
+        spec = {"source_root": parent["source_root"], "parent": parent, "child": child}
+        atomic_json(target / "request.json", spec)
+        subprocess.run([sys.executable, str(WORKER), "reuse_group", str(target / "request.json")],
+                       check=True, timeout=60, stdout=subprocess.DEVNULL)
+        certificate = read_json(target / "result.json")
+        previous = {key: child[key] for key in ("status", "attempt_id", "result_sha256", "reason", "evidence")
+                    if key in child}
+        certificate["previous_attempt"] = previous
+        evidence_path = Path("reports/forge/grouped-evidence") / (reuse_id + ".json")
+        atomic_json(root / evidence_path, certificate)
+        for key in ("block_kind", "pid", "process_identity", "gpu", "slot", "directory", "log_sha256"):
+            child.pop(key, None)
+        child.update(status=certificate["grade"]["status"], grade=certificate["grade"],
+                     reason="verified observations from the same uninterrupted producer; no new execution",
+                     origin="reused_execution", diagnostic=True, attempted=True,
+                     evidence=evidence_path.as_posix(), original_attempt=certificate["original_attempt"],
+                     attempt_id="reuse_" + reuse_id[:32], result_sha256=file_hash(root / evidence_path),
+                     updates=0, seconds=0, runtime=certificate["runtime"],
+                     reused_execution={"producer_attempt_id": parent["attempt_id"],
+                         "producer_updates": certificate["producer_updates"], "previous_attempt": previous,
+                         "optimizer_updates_added": 0, "sampling_draws_added": 0})
+        recovered.append(child["key"])
+    return recovered
+
+
 def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None):
     if len(gpus) != 2 or len(set(gpus)) != 2:
         raise ValueError("select exactly two distinct GPUs; the fixed limit is 4 tests / 2 per GPU")
@@ -357,6 +421,7 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
             while True:
                 state = read_json(directory / "state.json")
                 recover(state)
+                reconcile_grouped(root, directory, state)
                 for job in state["jobs"].values():
                     if job["status"] in DONE and job.get("origin") == "new_attempt" and not job.get("announced"):
                         event(directory, "finished", job); job["announced"] = True
@@ -442,7 +507,7 @@ def event(directory, action, job):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("plan", "run", "status"))
+    parser.add_argument("action", choices=("plan", "run", "status", "reconcile"))
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
     parser.add_argument("--source-root", type=Path)
     parser.add_argument("--state-root", type=Path, required=True)
@@ -454,6 +519,13 @@ def main():
     args = parser.parse_args(); root=args.root.resolve(); directory=args.state_root.resolve()
     if args.action == "status":
         print(json.dumps(summary(read_json(directory / "state.json")), sort_keys=True)); return
+    if args.action == "reconcile":
+        with file_lock(directory / "coordinator.lock", blocking=False):
+            state = read_json(directory / "state.json")
+            recovered = reconcile_grouped(root, directory, state)
+            atomic_json(directory / "state.json", state)
+            publish(root, state)
+        print(json.dumps({"recovered": recovered, **summary(state)}, sort_keys=True)); return
     if args.source_root is None:
         parser.error("--source-root is required for plan/run")
     # Preparing cannot race an active coordinator or replace its live state.

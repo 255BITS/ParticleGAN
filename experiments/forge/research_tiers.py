@@ -240,6 +240,17 @@ def tier_rows(root, page):
                 policy_scope=policy))
     for family, additions in checkpoint_repair_rows(root, page).items():
         rows.setdefault(family, []).extend(additions)
+    registry = Path(root) / "reports/forge/attempt-coverage.json"
+    if registry.is_file():
+        for record in _attempt_registry(registry, registry.stat().st_mtime_ns):
+            if record.get("origin") != "reused_execution":
+                continue
+            if record.get("qualification_input", False) or not record.get("reused_execution"):
+                raise ValueError("saved group reuse must remain an explicit diagnostic")
+            rows.setdefault(record["family"], []).append(_row(root, page,
+                "Verified extension from the existing uninterrupted run; source " + record["source_digest"][:12],
+                record["evidence"], {record["task"]: record["status"]},
+                {"1": set(), "2": set(), "3": {record["task"]}}))
     return rows
 
 

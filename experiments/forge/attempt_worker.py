@@ -17,7 +17,7 @@ import traceback
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("prepare", "prepare_policy", "supervise", "execute"))
+    parser.add_argument("mode", choices=("prepare", "prepare_policy", "supervise", "execute", "reuse_group"))
     parser.add_argument("path", type=Path)
     args = parser.parse_args()
     spec = json.loads(args.path.read_text())
@@ -58,6 +58,16 @@ def main():
         atomic_json(Path(spec["output"]), request)
         return
     directory = args.path.parent
+    if args.mode == "reuse_group":
+        # Only orchestration comes from the updated worker. The isolated frozen
+        # package still supplies every scientific grader and source check.
+        import importlib.util
+        name = "experiments.forge.grouped_evidence"
+        module_spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("grouped_evidence.py"))
+        module = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(module)
+        atomic_json(directory / "result.json", module.grade_saved_group(spec["parent"], spec["child"]))
+        return
     if args.mode == "supervise":
         from experiments.forge.worker import stop_group
         with file_lock(directory / "execution.lock", blocking=False) as lease:

@@ -6,7 +6,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | --- | ---: | ---: | --- |
 | atlas | 35/35 | 0 | 35 BLOCKED |
 | bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
-| bispf | 41/41 | 0 | 10 BLOCKED, 12 FAIL, 19 PASS |
+| bispf | 41/41 | 0 | 9 BLOCKED, 12 FAIL, 20 PASS |
 | e22 | 35/35 | 0 | 35 BLOCKED |
 | k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
 | ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
@@ -95,6 +95,14 @@ The checkpoint hasher now preserves diagnostic NaN/Inf values while retaining ev
 | e22 | E22 checkpoint-export repair (same recipe) | ring16_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1600 | recomputed complete live curve and terminal suffix |
 
 Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.
+
+## Results recovered from existing uninterrupted runs
+
+These task results reuse their producer's already measured observations. No new training or sampling was performed. Original refused-start receipts remain linked in each certificate; ordinary qualification is unchanged.
+
+| Family | Test | Result | Passing extension checks | Evidence |
+| --- | --- | --- | ---: | --- |
+| bispf | ring_extension | PASS | 300/300 | [Verified saved run](grouped-evidence/4ee70c2cf634f45fbef5072e8689ed2a366f695603ad175fa4905dd19d9e04e8.json) |
 
 ## Attempted blockers and incomplete runs
 
@@ -201,7 +209,6 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | bcap-default-baseline-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | bcap-pure | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | bispf | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
-| bispf | ring_extension | BLOCKED | checkpoint parent ring_hold: certified artifact binding unavailable to this attempt |
 | bispf | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
 | bispf | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |

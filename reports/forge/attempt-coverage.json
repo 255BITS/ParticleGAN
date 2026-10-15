@@ -2382,22 +2382,63 @@
       "timeout_seconds": 300
     },
     {
-      "attempt_id": "36bc31bae9234fc4a7d16b37b28ffab0",
+      "attempt_id": "reuse_4ee70c2cf634f45fbef5072e8689ed2a",
       "attempted": true,
-      "block_kind": "prerequisite",
       "candidate_id": "bispf-v1",
       "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
       "diagnostic": true,
       "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
-      "evidence": "reports/forge/attempt-coverage.json",
+      "evidence": "reports/forge/grouped-evidence/4ee70c2cf634f45fbef5072e8689ed2a366f695603ad175fa4905dd19d9e04e8.json",
       "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32",
       "family": "bispf",
+      "grade": {
+        "gate_status": "PASS",
+        "metrics": {
+          "confirmation_checks": 200,
+          "converged_step": 1400,
+          "convergence": "first consecutive qualifying window; operational quality criterion",
+          "extension_checks": 300,
+          "extension_passing": 300,
+          "first_hold_failure": null,
+          "frozen_toy_verdicts_unchanged": true,
+          "hold": "the next updates, disjoint from confirmation; no restart after failure",
+          "hold_budget": 1200,
+          "hold_budget_complete": true,
+          "hold_checks": 1200,
+          "longest_settling_streak": 200,
+          "min_hq": 0.9,
+          "modes": 8,
+          "name": "first_convergence_then_hold_v1",
+          "settling_budget": 4800,
+          "settling_checks": 200,
+          "settling_failures": 0,
+          "start_step": 1200,
+          "status": "PASS",
+          "training_feedback": false
+        },
+        "reasons": [
+          "recomputed every extension observation without selecting another window"
+        ],
+        "status": "PASS"
+      },
       "key": "6bb7b781a448fcc68310d4d572233bd0272a901b4f946c12bd101c59481cc62b",
-      "log_sha256": "3feb2884dac8d21ad551169af4088ae0e4056b8882b077b1a318c0108c6efc2d",
-      "origin": "new_attempt",
-      "original_attempt": "/ml2/hypergan/attempt-fill-20261015/attempts/36bc31bae9234fc4a7d16b37b28ffab0/result.json",
-      "reason": "checkpoint parent ring_hold: certified artifact binding unavailable to this attempt",
-      "result_sha256": "029180961699f497bce702da9fa6cb045dcdaca77ad5d14a8044965eec680f93",
+      "origin": "reused_execution",
+      "original_attempt": "/ml2/hypergan/attempt-fill-20261015/attempts/bf5d13ff3aeb4cba98d07373963839d8/result.json",
+      "reason": "verified observations from the same uninterrupted producer; no new execution",
+      "result_sha256": "149affd681e056f7c4b5bda8be93e15428778033de65abb843b8b5ab659d4f9b",
+      "reused_execution": {
+        "optimizer_updates_added": 0,
+        "previous_attempt": {
+          "attempt_id": "36bc31bae9234fc4a7d16b37b28ffab0",
+          "evidence": "/ml2/hypergan/attempt-fill-20261015/attempts/36bc31bae9234fc4a7d16b37b28ffab0/result.json",
+          "reason": "checkpoint parent ring_hold: certified artifact binding unavailable to this attempt",
+          "result_sha256": "029180961699f497bce702da9fa6cb045dcdaca77ad5d14a8044965eec680f93",
+          "status": "BLOCKED"
+        },
+        "producer_attempt_id": "bf5d13ff3aeb4cba98d07373963839d8",
+        "producer_updates": 2900,
+        "sampling_draws_added": 0
+      },
       "runtime": {
         "implementation": "CPython",
         "machine": "x86_64",
@@ -2409,9 +2450,9 @@
         "python": "3.12.13",
         "system": "Linux"
       },
-      "seconds": 0.1731753050116822,
+      "seconds": 0,
       "source_digest": "fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f",
-      "status": "BLOCKED",
+      "status": "PASS",
       "task": "ring_extension",
       "timeout_seconds": 3600,
       "updates": 0
@@ -63923,11 +63964,11 @@
   "summary": {
     "attempted": 853,
     "counts": {
-      "BLOCKED": 274,
+      "BLOCKED": 273,
       "ERROR": 9,
       "FAIL": 295,
       "INCOMPLETE": 3,
-      "PASS": 253,
+      "PASS": 254,
       "TIMEOUT": 19
     },
     "pending": 0,
