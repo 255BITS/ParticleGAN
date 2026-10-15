@@ -51,7 +51,8 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
 
 def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
     rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert len(rows["bcap-pure"]) == 32  # Retained research plus the separate strict clock-free audit.
+    assert len(rows["bcap-pure"]) == 33  # Retained research, strict audit and actual deeper diagnostics.
+    assert "1/7 (4 not run)" in rows["bcap-pure"][-1]
     paired = [row for row in rows["bcap-pure"] if "research seed" in row]
     assert len(paired) == 12
     for row in paired:

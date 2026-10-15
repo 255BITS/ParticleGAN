@@ -194,10 +194,16 @@ def task_policy_blockers(task, candidate):
     except CapabilityError as error:
         return error.blockers
     consumer = task.get('execution', {}).get('transport_consumer')
+    # The selected-policy two-pole declaration inherits its parent's optional
+    # transport metadata. Its existing owner implements the original objective
+    # when transport is disabled; it does not implement a transport loss.
+    policy_two_pole = (task.get('task_cohort') == 'tier1_policy_selected_cloud_v1'
+        and task.get('execution', {}).get('host') == 'two_pole'
+        and not (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight))
     if consumer is not None and (consumer != 'output_marginal_v1'
             or task.get('adapter') not in ('transfer_behavior', 'word_joint')
             or task.get('execution', {}).get('host') not in COMPONENT_OBJECTIVE_HOSTS
-            or task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS):
+            or (task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS and not policy_two_pole)):
         return ['unsupported explicit component transport consumer']
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "

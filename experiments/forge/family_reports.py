@@ -265,7 +265,8 @@ def _count(tasks):
 
 
 def _incompatible(task):
-    return not task["execution_recorded"] and (task["status"] == "BLOCKED" or bool(task.get("preflight_blockers")))
+    return (not task["execution_recorded"] and not task.get("separate_diagnostic_executed")
+            and (task["status"] == "BLOCKED" or bool(task.get("preflight_blockers"))))
 
 
 def _sum(counts):
@@ -496,6 +497,18 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
+    followup = Path("reports/forge/actual-missing-diagnostics-20261014/results.json")
+    diagnostic_executions = set()
+    if (root / followup).is_file():
+        measured = load(followup)  # Display evidence, never a qualification input.
+        if (measured.get("qualification_input") is not False
+                or measured.get("qualification_reuse") is not False
+                or measured.get("formulations_modified") is not False):
+            raise ValueError("actual execution coverage must remain diagnostic only")
+        diagnostic_executions = {(r["source_digest"], r["candidate_revision"], r["task"],
+            r["task_execution_sha256"], r["task_evaluation_sha256"])
+            for r in measured["records"] if r["lane"] == "ordinary_diagnostics"
+            and r["raw_status"] == "COMPLETE" and r["status"] in COMPLETE}
     if support is not None and (support.get("scope") != "selected_formulation_task_preflight_only"
                                 or support.get("qualification_input") is not False
                                 or support.get("qualification_reuse") is not False):
@@ -647,6 +660,12 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 results[name]["preflight_source_digest"] = support_rows[0]["source_digest"]
                 if not results[name]["execution_recorded"] and supported["blockers"]:
                     results[name]["reason"] = "Skipped incompatible test: " + "; ".join(supported["blockers"])
+                diagnostic_key = (support_rows[0]["source_digest"], selected["candidate_revision"], name,
+                                  supported["execution_sha256"], supported["evaluation_sha256"])
+                if diagnostic_key in diagnostic_executions and not results[name]["execution_recorded"]:
+                    results[name]["separate_diagnostic_executed"] = True
+                    results[name]["reason"] = ("Executable: completed in a separate-runtime diagnostic. "
+                        "This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.")
             matching_media = [item for (family, task_id, attempt), item in media.items()
                               if family == family_id and task_id == name
                               and attempt in selected.get("attempt_ids", []) + scoped_attempts
@@ -779,6 +798,11 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and "
               "calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; "
               "untiered historical studies remain on those detail pages.", ""]
+    if (root / "reports/forge/actual-missing-diagnostics-20261014/results.json").is_file():
+        lines += [link(root, page, "Actual attempts of unrun and blocked tests",
+                       "reports/forge/actual-missing-diagnostics-20261014/README.md") +
+                  ". The new diagnostic rows show executions beyond failed tier gates and Atlas/E22 public-policy tests. "
+                  "Atlas's original 19/19 CUDA passes remain valid under their original task and sampling contracts.", ""]
     if (root / "reports/forge/tier-coverage-20261014/results.json").is_file():
         lines += [link(root, page, "Diagnostic completion, new strict audit and every skip reason",
                        "reports/forge/tier-coverage-20261014/README.md") + ". "

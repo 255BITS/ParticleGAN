@@ -24,6 +24,21 @@ def candidate(name):
     return json.loads((ROOT / 'configs/forge/ideas' / (name + '.json')).read_text())
 
 
+@pytest.mark.parametrize('family', ['atlas', 'e22'])
+def test_current_two_pole_parent_allows_inactive_transport_metadata(family):
+    live_root = Path(__file__).resolve().parents[1]
+    parent = json.loads((live_root / 'configs/forge/tasks/two_pole.json').read_text())
+    idea = json.loads((live_root / f'configs/forge/ideas/{family}.json').read_text())
+    variant = materialize(parent, live_root)
+    assert variant['execution']['transport_consumer'] == 'output_marginal_v1'
+    assert adapter_preflight(variant, idea, root=live_root) == []
+    for field in ('kinetic_transport_weight', 'kinetic_transport_local_weight'):
+        active = deepcopy(idea)
+        active['recipe_overrides'][field] = 0.1
+        assert any('unsupported explicit component transport' in reason
+                   for reason in adapter_preflight(variant, active, root=live_root))
+
+
 @pytest.fixture(scope='module')
 def original_parent_checkout(tmp_path_factory):
     return current_policy_software_checkout(tmp_path_factory.mktemp('original-policy-parents'))
@@ -208,8 +223,11 @@ def test_new_transport_parent_cannot_fill_original_policy_cohort():
     parent = json.loads((live_root / 'configs/forge/tasks/two_pole.json').read_text())
     assert parent['task_cohort'] == 'component_output_transport_v1'
     variant = materialize(parent, live_root)
-    assert adapter_preflight(variant, candidate('atlas'), root=live_root) == [
-        'unsupported explicit component transport consumer']
+    original = json.loads((live_root / 'configs/forge/task-variants/tier1_policy_selected_cloud_v1/'
+                           'two_pole_tier1_policy_selected_cloud_v1.json').read_text())
+    assert variant['policy_parent'] != original['policy_parent']
+    assert adapter_preflight(original, candidate('atlas'), root=live_root)
+    assert adapter_preflight(variant, candidate('atlas'), root=live_root) == []
 
 
 def test_changed_original_parent_bytes_block_private_policy_request(tmp_path):
