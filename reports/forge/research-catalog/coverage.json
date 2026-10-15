@@ -1,0 +1,53 @@
+{
+  "schema": "research_catalog_coverage_v1",
+  "ordinary_qualification": false,
+  "verified_recent_attempts": 285,
+  "status_counts": {
+    "PASS": 142,
+    "FAIL": 136,
+    "INCOMPLETE": 7
+  },
+  "nonatlas249_overlap_with_successor81": 45,
+  "publication_partition": {
+    "402": 228,
+    "399": 42,
+    "405": 15
+  },
+  "older_study_records": 312,
+  "older_kinds": {
+    "trained_comparison": 100,
+    "diagnostic": 77,
+    "full_horizon_diagnostic": 129,
+    "unrun": 6
+  },
+  "older_original_arm_records": 65,
+  "older_comparison_records": 406,
+  "deduplication": "Recent canonical attempt IDs unique; shared controls/cumulative copies reused once. Older studies overlap comparisons and arms and are not added to the recent run total.",
+  "coverage_complete": false,
+  "frozen_recent_packet": "CUMULATIVE-VERIFIED-PACKET-v8.json",
+  "later_Atlas_scope": "PR404 adds3 starts under separate owner; linked, not reimported into285-ID snapshot",
+  "gaps": [
+    "Older108 Atlas supervisor bindings mix training/analysis/failed launches; handled by Atlas owner/PR404.",
+    "Six historical transfer mode-hold runs lack sample panels.",
+    "Timed-out PR399 word control lacks final raw result/final scored archive/final state and exact terminal update count.",
+    "Four Atlas dynamics attempts lack full grade files; incomplete records receive no scientific-utility credit.",
+    "Older study kinds, source/build/prior/serving laws remain distinct; no complete deduplicated historic experiment total certified.",
+    "Some original human reports or timing/control receipts unavailable; explicit missing metadata retained.",
+    "Analytical rejection adds0 training attempts. Unrun dependent finite-cap retention adds0 attempts."
+  ],
+  "source_pins": {
+    "candidate_ledger.json": {
+      "sha256": "45215af49554a15362b6c491a5bd444841c5e7d526569d12ec572caa7cda96e8",
+      "bytes": 57411319
+    },
+    "recent_run_register.csv": {
+      "sha256": "ba464ffc28aae099cdeef521366247e5f17f34966beb56a41b832605dae435d5"
+    }
+  },
+  "separate_operational_records": {
+    "startup_errors": 12,
+    "CPU_preflight_rejections": 3,
+    "bounded_prefixes": 2,
+    "not_added_to285": true
+  }
+}
