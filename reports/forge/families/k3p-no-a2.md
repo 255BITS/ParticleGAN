@@ -129,7 +129,7 @@ Selection: historical_incumbent. Preserve the exact archived revision-7 measurem
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](k3p-no-a2.md#cohort-cuda-c195899a64af-adaptation) | [2/3](k3p-no-a2.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/19 (19 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [2/23 (20 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-adaptation) |
 | [clockfree_continuous](k3p-no-a2.md#cohort-cuda-c195899a64af-clockfree_continuous) | [2/4](k3p-no-a2.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/19 (19 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [2/30 (26 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-clockfree_continuous) |
@@ -140,7 +140,7 @@ Selection: historical_incumbent. Preserve the exact archived revision-7 measurem
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](k3p-no-a2.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](k3p-no-a2.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](k3p-no-a2.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
@@ -3005,7 +3005,7 @@ Selection: historical_incumbent. Retain the exact complete measurement under its
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](k3p-no-a2.md#cohort-cuda-0d83d78027c5-adaptation) | [2/3](k3p-no-a2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/19 (19 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [2/23 (20 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](k3p-no-a2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [2/4](k3p-no-a2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/19 (19 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [2/30 (26 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
@@ -3016,7 +3016,7 @@ Selection: historical_incumbent. Retain the exact complete measurement under its
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](k3p-no-a2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](k3p-no-a2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](k3p-no-a2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](k3p-no-a2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 

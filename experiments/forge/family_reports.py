@@ -796,8 +796,10 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     return progress
 
 
-def _table_header():
-    return ["| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |",
+def _table_header(*, selected=False):
+    header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Total view requirements |"
+              if selected else "| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |")
+    return [header,
             "| --- | ---: | ---: | ---: | ---: |"]
 
 
@@ -817,8 +819,16 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     from .research_tiers import tier_rows
     research = tier_rows(root, page)
     lines = ["# Forge family leaderboard", "",
-             "Recorded benchmark passes / required tasks by tier. Click a count for its gates, measurements and evidence. "
-             "Required lower tiers must pass before advancing.", "", *_table_header()]
+             "A **family** can have several **recipes**. Each score belongs to one exact recipe and source. "
+             "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
+             "are separate BCAP research recipes, with their own scores.", "",
+             "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
+             "## Selected recipes", "",
+             "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
+             "that requires them: **152 means 152 view requirements, including repeated tests**. "
+             "These totals retain the selected recipe's recorded qualification; separate diagnostic runs appear below.", "",
+             *_table_header(selected=True)]
+    selected = []
     for family in progress["families"]:
         for cohort in family["cohorts"]:
             if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
@@ -827,20 +837,47 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
             if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
                 name += " (" + cohort["backend"] + ")"
             cells = ["**" + link(root, page, name, family["page"]) + "**"]
+            if cohort.get("configuration_family"):
+                configuration = next(item for item in progress.get("configuration_families", [])
+                                     if item["id"] == cohort["configuration_family"])
+                cells[0] += " · " + link(root, page, configuration["label"], configuration["page"])
             cells += _score_cells(root, page, family, cohort, cohort, bold=True)
             lines.append("| " + " | ".join(cells) + " |")
-            for view in cohort["views"]:
-                label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
-                lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
-        lines += research.get(family["id"], [])
-    lines += ["", "Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. "
-              "† marks a separate diagnostic or research scope, excluded from the bold totals and current selection. "
-              "Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question "
-              "Tier 1 policy scope. Same-source backfill attempts can fill previously unmeasured research cells; "
-              "original verdicts remain immutable. A retained pass grants no new qualification.", "",
-              "Family totals sum required-view instances: a shared task counts again in every view requiring it. "
-              "For example, 152 is a count of requirements across views, not distinct training runs. "
-              "Research rows count unique required tasks within their own scope.", "",
+            selected.append((family, cohort))
+    lines += [""]
+    if (root / "reports/forge/attempt-coverage.json").is_file():
+        attempts = progress.get("run_attempt_coverage", {})
+        lines += [f"Backfill coverage: **{attempts.get('attempted', 0)}/{attempts.get('total', 0)} distinct "
+                  f"recipe/test pairs attempted (selected and research)**; {attempts.get('pending', 0)} pending and {attempts.get('running', 0)} running. " +
+                  link(root, page, "Outcomes, blocked attempts and setup", "reports/forge/ATTEMPT_COVERAGE.md") +
+                  ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
+    if any(research.values()):
+        lines += ["## Research recipes and separate diagnostics", "",
+                  "Each row names its owning family and its own recipe or diagnostic scope. "
+                  "Counts are **passes / distinct required tests within that row**: 29 means 29 different tests. "
+                  "These scores are excluded from the selected-recipe totals above. "
+                  "Compare rows only when their test, source and sampling contracts match.", "",
+                  "Research recipes use their recorded revision 9 assignments. Atlas selected-cloud has a separate "
+                  "seven-question Tier 1 policy scope. Same-source backfill results fill previously unmeasured research "
+                  "cells while retaining original verdicts and qualification. Seed 1–6 entries are historical studies "
+                  "excluded from this backfill.", "",
+                  "| Family | Recipe / diagnostic scope | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |",
+                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+        for family in progress["families"]:
+            for row in research.get(family["id"], []):
+                lines.append("| " + link(root, page, family["label"], family["page"]) + " | " + row.removeprefix("| "))
+        lines += [""]
+    lines += ["<details>", "<summary>Selected recipe breakdown by view (shared tests repeat across views)</summary>", "",
+              "Each view uses the selected recipe above. View scores are the requirements summed in its selected-recipe total.", "",
+              "| Family / selected recipe | View | Tier 1 | Tier 2 | Tier 3 | Total view requirements |",
+              "| --- | --- | ---: | ---: | ---: | ---: |"]
+    for family, cohort in selected:
+        for view in cohort["views"]:
+            label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
+            lines.append("| " + " | ".join([link(root, page, family["label"], family["page"]), label,
+                                           *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+    lines += ["", "</details>", "",
+              "## Reading the results", "",
               "Counts show passes / required tasks; selected-row pass counts remain unchanged. For rows with run-attempt coverage, the suffix counts "
               "genuinely unattempted tasks as not run, constructor refusals as incompatible, missing required artifacts "
               "as blocked, and other separate-runtime attempts as diagnostic attempts. A start refusal is not a "
@@ -853,13 +890,6 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and "
               "calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; "
               "untiered historical studies remain on those detail pages.", ""]
-    if (root / "reports/forge/attempt-coverage.json").is_file():
-        attempts = progress.get("run_attempt_coverage", {})
-        lines += [f"Run attempts: **{attempts.get('attempted', 0)}/{attempts.get('total', 0)} distinct "
-                  f"family/task pairs (selected and research)**; {attempts.get('pending', 0)} pending and {attempts.get('running', 0)} running. " +
-                  link(root, page, "Resumable run-attempt coverage and setup",
-                       "reports/forge/ATTEMPT_COVERAGE.md") +
-                  ". Attempts match the selected source, recipe and task contracts; they do not change qualification.", ""]
     if (root / "reports/forge/actual-missing-diagnostics-20261014/results.json").is_file():
         lines += [link(root, page, "Actual attempts of unrun and blocked tests",
                        "reports/forge/actual-missing-diagnostics-20261014/README.md") +
