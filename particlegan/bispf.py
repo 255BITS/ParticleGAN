@@ -198,15 +198,11 @@ class SBNPPriorRegularizer(nn.Module):
         std = (centered.pow(2).mean(0) + self.eps).sqrt()
         var_loss = F.relu(target_sigma - std).pow(2).mean()
 
-        # 2. Covariance loss: two-sided moment tethering for low-dim particle mixtures
+        # 2. Covariance loss: off-diagonal decorrelation (zero diagonal penalty)
         if d > 1:
             cov = (centered.T @ centered) / max(n - 1, 1)
-            if d <= 4 and n <= 1024:
-                cov_diff = cov - target_cov
-                cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
-            else:
-                off_diag = cov - torch.diag(torch.diag(cov))
-                cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
+            off_diag = cov - torch.diag(torch.diag(cov))
+            cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
         else:
             cov_loss = rows.new_zeros(())
 
