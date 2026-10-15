@@ -51,7 +51,7 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
 
 def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
     rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert len(rows["bcap-pure"]) == 19  # Five confidence recipes, two original arms, twelve research arms.
+    assert len(rows["bcap-pure"]) == 31  # Existing19 plus ten source-bound successor recipes and two EMA-idle arms.
     paired = [row for row in rows["bcap-pure"] if "research seed" in row]
     assert len(paired) == 12
     for row in paired:

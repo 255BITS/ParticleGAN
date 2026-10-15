@@ -55,6 +55,22 @@
     {
       "path": "reports/forge/test-performance-evidence/pr399-positive-evidence-2.json",
       "sha256": "bdf2cee710a11685ea194a4fc2e3f8783e354250b8a7cb2f6684af12e020fbff"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-successor-nonatlas-21.json",
+      "sha256": "ade708511a345262c07ab562fed340edf963917d2a30ececfeed584ecb2baca0"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-atlas-seed0-diagnostics-3.json",
+      "sha256": "6cc3cd8bbcfb8306c57065c70f67de70e9899132ad92fc6fae5e495ef13c9301"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-pr399-paired-tier1-12.json",
+      "sha256": "e85096d198e735640807bed50b981032522d099ad878aef9614f7d5d72f48378"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-atlas-dynamics-6.json",
+      "sha256": "fe2420f19398069d8e2b9b66152eb6c5100ad173fdd47635aeda9195afe340a7"
     }
   ],
   "qualification_input": false,

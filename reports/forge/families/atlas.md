@@ -183,7 +183,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [cover_leftover](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | changed since run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
@@ -191,8 +191,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [mid_scale_identity](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mode_hold](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 | [residual_student](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [trajectory](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [unipolar](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_anisotropic](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | BLOCKED | matches recorded run |
@@ -260,9 +260,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-3"></a>
 
@@ -306,9 +306,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
 
@@ -351,9 +351,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [vector_unequal_mass](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | BLOCKED | matches recorded run |
 | [vector_unequal_width](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | BLOCKED | matches recorded run |
 | [vector_anisotropic](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
 
@@ -510,9 +510,9 @@ Additional eligibility requirements:
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3"></a>
 
@@ -576,9 +576,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3"></a>
 
@@ -631,9 +631,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 | [img_intensity2_residual16](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -701,9 +701,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 | [img_intensity2_residual16](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -800,9 +800,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-3"></a>
 
@@ -846,9 +846,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-2"></a>
 
@@ -898,9 +898,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-2"></a>
 
@@ -950,9 +950,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-2"></a>
 
@@ -1002,9 +1002,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | BLOCKED | matches recorded run |
 | [img_blobs4](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | BLOCKED | matches recorded run |
 | [img_intensity2](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | BLOCKED | matches recorded run |
-| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | matches recorded run |
-| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | matches recorded run |
-| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-2"></a>
 
@@ -1101,7 +1101,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1).
 
@@ -1428,7 +1428,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2062,7 +2062,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2183,7 +2183,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -2532,7 +2532,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1).
 
@@ -3886,7 +3886,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1).
 
@@ -4209,7 +4209,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -4843,7 +4843,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -4964,7 +4964,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -5313,7 +5313,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1).
 
@@ -6669,7 +6669,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1).
 
@@ -7033,7 +7033,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -7686,7 +7686,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -7807,7 +7807,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Execution: **no recorded execution (*)**.
 
@@ -8171,7 +8171,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Execution: **no recorded execution (*)**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1).
 
@@ -8584,6 +8584,37 @@ The separate native seed-0 two-pole pilot retains a local RMS-cap win at its ori
 |---|---|---:|---:|---:|
 | `squared` | FAIL | 0/24 | 0.005321 | 0.012204 |
 | `rms_cap` | PASS | 8/24 | 0.460720 | 0.405106 |
+
+<a name="pr399-retained-research"></a>
+
+## PR399 retained research
+
+Each tier row keeps its original recipe, source and seed. The task-name projection into the recorded revision 9 tiers is archival research; it grants no current qualification. Final metrics and observation checks never override the original full task gate.
+
+The seed-0 80-update diagnostics retain **1 PASS / 2 FAIL**. The separate dynamics-only ablation retains **1 PASS / 1 FAIL / 4 INCOMPLETE**. Saved ring samples are diagnostics; they cannot repair missing lifecycle/optimizer metadata or grant a full task pass. The earlier cumulative 66-attempt packet is not pooled into a qualification score.
+
+### atlas-seed0-diagnostics-3-20261013
+
+[Compact evidence](../test-performance-evidence/pr399-retained-atlas-seed0-diagnostics-3.json) · [immutable original](https://github.com/255BITS/ParticleGAN/blob/e71cd6ea13f841092ed346b3217ecee0c4d53d29/reports/forge/test-performance-evidence/atlas-seed0-diagnostics-3.json) · original blob `7f3b983c45aa6b3e8b5affea1182d3ac2251a9ad`, SHA-256 `0fde5927e4225eaba30aa25ff034f5a49166203f7a544b2528373ed267c9237a`. Full original contracts and per-observation diagnostics remain in that archive; compact receipts retain their exact hashes and all final grades, costs and artifact pins.
+
+| Recipe / source | Task | Original gate | Completed lifecycle / optimizer updates | Final metrics / observations | Queue seconds |
+| --- | --- | --- | --- | --- | ---: |
+| `astra-atlas-squared` / `5bc17f2a` | `two_pole` | FAIL | 80 / {'discriminator': 80, 'prior': 80} | grad_med=0.0122044; mean_abs=0.00532108 | 9.312965 |
+| `astra-atlas-rms-cap` / `5bc17f2a` | `two_pole` | PASS | 80 / {'discriminator': 80, 'prior': 80} | grad_med=0.405106; mean_abs=0.46072 | 9.177725 |
+| `sol-atlas-paired-score-center-one` / `3591a661` | `two_pole` | FAIL | 80 / {'discriminator': 80, 'prior': 80} | grad_med=0.00142884; mean_abs=0.00343568 | 9.472804 |
+
+### atlas-dynamics-6-20261013
+
+[Compact evidence](../test-performance-evidence/pr399-retained-atlas-dynamics-6.json) · [immutable original](https://github.com/255BITS/ParticleGAN/blob/e71cd6ea13f841092ed346b3217ecee0c4d53d29/reports/forge/test-performance-evidence/atlas-dynamics-6.json) · original blob `93d58e3179cfed988fa0e7a7529430c18381d8b3`, SHA-256 `4e4ccfdf6749c9e596e84d72b0673c267062f14b22cf5bf62493bbf8c3686a0c`. Full original contracts and per-observation diagnostics remain in that archive; compact receipts retain their exact hashes and all final grades, costs and artifact pins.
+
+| Recipe / source | Task | Original gate | Completed lifecycle / optimizer updates | Final metrics / observations | Queue seconds |
+| --- | --- | --- | --- | --- | ---: |
+| `sol-atlas-dynamics-squared` / `e873af38` | `ring16_acquisition` | INCOMPLETE | unknown / unknown | regraded_observations=96; passing=0; suffix=0; qualification=False | 41.438168 |
+| `sol-atlas-dynamics-rms-cap` / `e873af38` | `gaussian1d_smoke` | INCOMPLETE | unknown / unknown | Full final metrics and original grade in compact evidence | 6.028719 |
+| `sol-atlas-dynamics-squared` / `e873af38` | `two_pole` | FAIL | 80 / unknown | Full final metrics and original grade in compact evidence | 9.753525 |
+| `sol-atlas-dynamics-squared` / `e873af38` | `gaussian1d_smoke` | INCOMPLETE | unknown / unknown | Full final metrics and original grade in compact evidence | 6.098872 |
+| `sol-atlas-dynamics-rms-cap` / `e873af38` | `ring16_acquisition` | INCOMPLETE | unknown / unknown | regraded_observations=96; passing=0; suffix=0; qualification=False | 41.454624 |
+| `sol-atlas-dynamics-rms-cap` / `e873af38` | `two_pole` | PASS | 80 / unknown | Full final metrics and original grade in compact evidence | 9.539622 |
 
 - [Original Atlas recipe and serving-law evidence](../continuous-baseline-20261003/README.md)
 - [fresh_retest](../pr223-original-full-retest-stopped17-20261004/README.md)
