@@ -6,6 +6,10 @@ Fresh ordinary validation of that baseline passed **five of six required Tier 1 
 
 Read the [full training report](TRAINING.md), [machine-readable results](training-summary.json), and [exact executed baseline recipe](training-evidence/executed-baseline-recipe.json). The report explains the negative results, original gates, controlled repairs, resource limitation, and reproduction steps.
 
+**Core insights from our custom work:** in the measured pole run, positive whole-gradient confidence scaling was largely canceled by DualNorm, but zero scaling became a hard gate. Whole-gradient history zeroed the network gradient on 70.125% of Ring updates while the learned prior retained its normal clock. Selective history changed the balance between adversarial correction and fresh transport, rather than simply reducing the whole step. Separately, transport improved Ring mass allocation (TV .0652 to .0352) while worsening full covariance error (.4966 to .6733) and shortening sustained success (26 final passes to 6). Near-unity terminal coherence and negligible trajectory changes did not repair pole's critic-slope violations. These findings point to measuring actual update and output motion by channel before more scalar tuning; the detailed report distinguishes measured effects from unproven causal explanations.
+
+**Latest leaderboard follow-up (2026-10-15):** BCAP was strongest only among the eight configurations in this experiment; BISPF was not included. The newer recorded evidence favors BISPF: 10/21 required Tier 2 passes versus BCAP's 9/21, and 19 versus 17 passes across the latest 35-task attempt coverage. Those are different evidence scopes, and the historical ordinary source/runtime cohorts differ. See the [documented comparison and limitations](TRAINING.md) and [dated evidence snapshot](training-evidence/latest-leaderboard-followup.json). Further history tuning is not the priority supported by these results.
+
 | Evidence | Contents |
 |---|---|
 | [Initial screen](training-evidence/initial/completion.json) | B/T/W/S, two original diagnostic tasks each |

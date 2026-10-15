@@ -1,0 +1,108 @@
+{
+  "kind": "dated_leaderboard_followup_not_new_qualification",
+  "checked_at_utc": "2026-10-15T14:31:37.551163+00:00",
+  "campaign_scope": "Selective-history campaign tested eight configurations; BISPF was not included.",
+  "ordinary_discriminator_stability": {
+    "bcap-pure": {
+      "tier1_required_passes": 6,
+      "tier1_required_tasks": 6,
+      "tier2_required_passes": 9,
+      "tier2_required_tasks": 21
+    },
+    "bispf": {
+      "tier1_required_passes": 6,
+      "tier1_required_tasks": 6,
+      "tier2_required_passes": 10,
+      "tier2_required_tasks": 21
+    }
+  },
+  "latest_35_task_attempt_coverage": {
+    "bcap-pure": {
+      "PASS": 17,
+      "FAIL": 14,
+      "BLOCKED": 4
+    },
+    "bispf": {
+      "PASS": 19,
+      "FAIL": 12,
+      "BLOCKED": 4
+    }
+  },
+  "interpretation": [
+    "Recorded evidence favors BISPF over further history tuning.",
+    "77 versus 71 sums overlapping required-view instances; mode_hold is the one additional ordinary task pass.",
+    "The latest attempt comparison additionally passes diagnostic ring_hold; diagnostics do not add ordinary qualification credit.",
+    "The historical ordinary cohorts have different source/runtime bindings and are both marked stale against current contracts.",
+    "This follow-up is a documentation correction; it introduces no new training, gate change, or qualification."
+  ],
+  "sources": [
+    {
+      "path": "/ml2/hypergan/particlegan-attempt-fill-20261015/reports/forge/technique-inventory.md",
+      "sha256": "3fa2fc1e6dc6a617712d570b4f9e9e1a1192a6f5d80cb816b45b16fa61e7e466",
+      "selected_lines": [
+        {
+          "line": 7,
+          "text": "| **[BCAP](families/bcap-pure.md)** | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/116](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71/152 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |"
+        },
+        {
+          "line": 10,
+          "text": "| \u21b3 [discriminator_stability](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15/29 (1 blocked, 1 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |"
+        },
+        {
+          "line": 47,
+          "text": "| **[BISPF](families/bispf.md)**<br>Recorded source measurement \u00b7 **stale**; no current qualification | **[22/22](families/bispf.md#cohort-cuda-6421ba55ca82-tier-1)** | **[55/116](families/bispf.md#cohort-cuda-6421ba55ca82-tier-2)** | **[0/14 (3 not run, 4 blocked, 7 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-tier-3)** | **[77/152 (3 not run, 4 blocked, 7 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82)** |"
+        },
+        {
+          "line": 50,
+          "text": "| \u21b3 [discriminator_stability](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/21](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16/29 (1 blocked, 1 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) |"
+        },
+        {
+          "line": 112,
+          "text": "Family totals sum required-view instances: a shared task counts again in every view requiring it. For example, 152 is a count of requirements across views, not distinct training runs. Research rows count unique required tasks within their own scope."
+        }
+      ]
+    },
+    {
+      "path": "/ml2/hypergan/particlegan-attempt-fill-20261015/reports/forge/ATTEMPT_COVERAGE.md",
+      "sha256": "ff4c98ad5d23630d4a5da059968d45724aed6dfc22055a4a1e1ff38160cc5316",
+      "selected_lines": [
+        {
+          "line": 8,
+          "text": "| bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |"
+        },
+        {
+          "line": 9,
+          "text": "| bispf | 35/35 | 0 | 4 BLOCKED, 12 FAIL, 19 PASS |"
+        }
+      ]
+    },
+    {
+      "path": "/ml2/hypergan/particlegan-attempt-fill-20261015/reports/forge/families/bcap-pure.md",
+      "sha256": "82df4bd0d647680b2312f80dd95394f05a1ef64b3d32aff9bda1a3722b726e68",
+      "selected_lines": [
+        {
+          "line": 94,
+          "text": "Source digest: `a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14`. Candidate revision: `f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540`. Runtime cohort: `8a6ee0b1c9ce171bdb3f16e833253381dbb40ac16da53d973088a19764a7fb40`."
+        },
+        {
+          "line": 98,
+          "text": "Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Retain the declared selected recipe after explicit prior-ownership migration; fresh ordinary evidence only, no outcome ranking or archived qualification transfer."
+        }
+      ]
+    },
+    {
+      "path": "/ml2/hypergan/particlegan-attempt-fill-20261015/reports/forge/families/bispf.md",
+      "sha256": "a7e37ca6543a77a0ac58a2135398c5da856b0b351b863a46937bda91b3bdf738",
+      "selected_lines": [
+        {
+          "line": 94,
+          "text": "Source digest: `fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f`. Candidate revision: `45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b`. Runtime cohort: `c05372e7eb5c236de0a296c2b77ba9f572ee36ca06da7d7afcafa62653bbebcd`."
+        },
+        {
+          "line": 98,
+          "text": "Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Complete Tier 1 and Tier 2 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow (BISPF) on the BCAP DualNorm leader recipe."
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,51 @@ results under the prescribed seed-0 deterministic initializer. They establish
 the stated task qualification only, not reliability across random seeds,
 architectures, longer horizons or unmeasured tasks.
 
+**Core insights from our custom work.** The contribution is a measured account
+of how these components interact, despite no new recipe passing both gates:
+
+1. **Placement changes the meaning of history.** Our custom whole-gradient
+   filter acts before normalization. On pole it ended at rho .711722, yet its
+   recorded trajectory differed from transport alone by at most 1.32e-6.
+   With positive scaling, normalization can remove almost all intended
+   attenuation. This is not equivalent to the recovered historical caller,
+   which scaled learning rates after normalization; that placement was not
+   tested in this campaign.
+2. **Coherence is not a safety signal.** Selective history on pole ended at
+   rho .997980 and barely changed the trajectory, while retaining the same
+   eleven critic-slope violations as transport alone. A coherent adversarial
+   gradient can coexist with failure of the declared stability constraint.
+   The initial hypothesis that this estimator would detect and suppress the
+   offending behavior did not receive support. The endpoint rho is not a
+   measurement of rho at each earlier violation.
+3. **Mode allocation and mode shape are separate problems.** Transport
+   improved Ring mass TV from .065186 to .035156, but worsened full covariance
+   error from .496567 to .673336 and shortened the final passing streak from
+   26 to 6. All variants finished with sixteen modes. Whole history's core
+   covariance error .618462 hid full covariance error 1.941778. Counting modes
+   or examining only the core can conceal the distributional failure.
+4. **Attenuation can alter the balance between players and loss channels.**
+   Whole history zeroed the network generator gradient on 1,122/1,600 Ring
+   updates (70.125%), while the learned prior retained its ordinary clock.
+   Selective history instead zeroed the adversarial channel 116 times while
+   leaving transport fresh. This is a different intervention from uniformly
+   slowing the joint system. Loss of useful shape correction is a plausible
+   explanation for the quality failures, not an established temporal cause:
+   per-update channel forces, realized displacements and rho were not saved.
+5. **The measured failures did not yield to simple scalar repairs.** Doubling
+   the penalty reduced pole violations from eleven to three, but still failed
+   its required suffix and lost Ring. Halving generator/prior or critic rates
+   also failed the joint gates. This bounded evidence weakens the proposed
+   simple overshoot explanation; it does not prove that every step size,
+   history placement or transport design must fail.
+
+The design implication is to check what each intervention does to the
+**realized normalized update and resulting output motion**, including learned
+prior motion, instead of treating raw gradient magnitude or confidence as a
+proxy. The existing implementation, curves, saved states and independent
+audits support these scoped findings. They do not establish a new general
+optimizer or identify the full causal sequence of Ring's collapse.
+
 The original [v1 preflight](PREFLIGHT.md) and [draft roster](stage-roster.json)
 remain unchanged and **BLOCKED**: several required original saved windows
 were unavailable. Available-state disposable probes established a real
@@ -96,6 +141,17 @@ and zero rho can break exact equality. In the measured pole run, W's history
 advanced 80 times, had no zero-rho step and ended at rho .711722; its entire
 recorded trajectory differed from T by at most 1.32e-6. History was active,
 but whole-gradient attenuation barely changed the normalized motion.
+
+The code gives a more precise interpretation for this campaign's zero-momentum,
+smoothed DualNorm. For whole-gradient W, a matrix singular value `s` receives weight
+`rho*s / sqrt((rho*s)^2 + lambda^2)`, equivalently
+`s / sqrt(s^2 + (lambda/rho)^2)` for positive rho, up to numerical cutoffs.
+Here `lambda=.001`. Scaling therefore raises the effective smoothing scale
+rather than uniformly shrinking every normalized direction: strong directions
+change little, while weak directions can be suppressed. At rho zero the
+gradient is removed. This algebra explains why a nominal confidence control
+can have little effect in one regime and a large effect in another; the
+saved data do not resolve its per-step spectral contribution to Ring failure.
 
 S also advanced 80 history observations on pole, with no zero-rho step,
 terminal rho .997980 and a largest T/S metric difference of .000410. Its
@@ -247,11 +303,33 @@ lists saved original tensors and their paths, sizes and hashes; the
 task-specific payload governs continuation. A `.pt` extension alone does
 not imply that a file can resume the full trainer.
 
+**Latest leaderboard follow-up (2026-10-15).** B was strongest only among the
+eight configurations in this experiment. BISPF was not trained in this
+campaign. The newer [recorded leaderboard](../../../../particlegan-attempt-fill-20261015/reports/forge/technique-inventory.md)
+favors BISPF: both ordinary cohorts record 6/6 required Tier 1 passes, while
+BISPF records 10/21 required Tier 2 passes versus BCAP's 9/21. The additional
+ordinary pass is `mode_hold`. The headline 77 versus 71 sums overlapping
+views; it is not six independent task improvements.
+
+The newer [35-task attempt coverage](../../../../particlegan-attempt-fill-20261015/reports/forge/ATTEMPT_COVERAGE.md)
+records BISPF 19 PASS / 12 FAIL / 4 BLOCKED versus BCAP 17 PASS / 14 FAIL /
+4 BLOCKED. Its only verdict improvements are `mode_hold` and diagnostic
+`ring_hold`, with no recorded verdict regressions. The `ring_hold` diagnostic
+does not add ordinary qualification credit. The [BCAP](../../../../particlegan-attempt-fill-20261015/reports/forge/families/bcap-pure.md)
+and [BISPF](../../../../particlegan-attempt-fill-20261015/reports/forge/families/bispf.md)
+ordinary cohorts have different source/runtime bindings and are both marked
+stale against current contracts. These records support prioritizing BISPF
+for a fresh controlled comparison; they do not establish current matched
+superiority. A [dated snapshot](training-evidence/latest-leaderboard-followup.json)
+preserves the selected rows and source hashes. This follow-up changes no
+training result, gate or qualification in this campaign.
+
 **Conclusion:** the measured transport/history extensions and their bounded
-repairs failed the joint gates. B remains the strongest measured candidate,
-with five fresh ordinary passes and incomplete word qualification. Complete
-the unchanged word contract only after resource isolation; do not promote a
-new default on the current partial evidence. One research question remains: **which part
+repairs failed the joint gates. B was strongest among our eight configurations,
+with five fresh ordinary passes and incomplete word qualification. The broader
+recorded evidence favors BISPF and supports that comparison ahead of further
+history tuning. Any unchanged word retry still requires resource isolation;
+do not promote a new default on this campaign's partial evidence. One research question remains: **which part
 of the realized network and learned-prior output motion destroys within-mode
 shape when transport improves marginal coverage?** Answering that requires
 explicit per-channel force and output-displacement evidence, rather than
