@@ -700,8 +700,9 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
+    from .atlas_catalog_scores import atlas_catalog_score_lines
     from .source_bound_board import main_board_rows
-    source_rows = main_board_rows(root, page)
+    source_rows = atlas_catalog_score_lines(root, page) + main_board_rows(root, page)
     lines = ["# Forge family leaderboard", "",
              "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
              "pseudocode and training details; click any count for the experiment results. "

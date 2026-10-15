@@ -6,7 +6,86 @@ A family is the high-level implementation and formulation. Optimizers, learning 
 
 The [BCAP leader prior searches](bcap-prior-search/README.md) compare five opt-in mechanisms and fifteen global strengths, with every task measurement, score, target and source-bound repair or regression. Their [interpretation and recommendations](bcap-prior-search/findings.md) explain the results. The selected family configuration and its recorded counts remain unchanged.
 
-Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
+Family totals sum required-view instances: a unique benchmark task is counted again in each view requiring it. For example,152 is a count of required-view instances, not152 distinct benchmark tasks or experiments. These totals do not establish scientific rank.
+
+## Preserved Atlas scores — separate original cohorts
+
+PR404's selected-policy particle-cloud scope has **0 PASS / 1 FAIL / 2 INCOMPLETE / 4 BLOCKED across 7 questions**. The three started runs and four unstarted questions remain distinct. These scores add no ordinary MoG/live qualification or default-adoption credit. [Original receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/results.json).
+
+| Started question | Original gate | Completed / declared updates | Original measured score |
+|---|---|---:|---|
+| `gaussian1d_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1000/1000 | Logged CDF KS 0.029021; diagnostic only, checkpoint export ERROR |
+| `ring16_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1600/1600 | Logged component covariance error 1.812179; diagnostic only, checkpoint export ERROR |
+| `clockfree_audit_tier1_policy_selected_cloud_v1` | FAIL | 24/24 | 2/4 state-digest comparisons match; step-label and restart differ |
+
+Unstarted BLOCKED questions: two-pole, unused-token hold, AE hold, and five-word joint acquisition.
+
+The historical adapted RA14 panel reported **7 PASS / 4 FAIL across 11 cases**. These are its original reported verdicts: Blobs stopped at 300/600 updates and remains incomplete under its full horizon. Width/anisotropic transfers are counted once. This different source/prior/serving cohort cannot fill current cells. [Historical report](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/FAST_PANEL_REPORT.md).
+
+| Historical case | Reported verdict | Passing checks / observations | Actual / original updates |
+|---|---|---:|---:|
+| `vector_unequal_width` | PASS | 20/24 | 1200/1200 |
+| `vector_anisotropic` | PASS | 20/24 | 1200/1200 |
+| `vector_two_broad` | PASS | 23/24 | 1200/1200 |
+| `vector_unequal_mass` | PASS | 20/24 | 1200/1200 |
+| `vector_overlap` | PASS | 23/24 | 1200/1200 |
+| `vector_spiral` | PASS | 23/24 | 1600/1600 |
+| `img_stripes2` | PASS | 14/24 | 600/600 |
+| `img_intensity2` | FAIL | 0/24 | 600/600 |
+| `img_bars4` | FAIL | 0/24 | 600/600 |
+| `img_blobs4` | FAIL; full horizon incomplete | 0/12 | 300/600 |
+| `ring16_acquisition` | FAIL | 4/24 | 400/400 |
+
+The separate native seed-0 two-pole pilot retains a local RMS-cap win at its original **80-update** horizon; call-800 behavior and transfer were unmeasured. [Pilot receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/INVENTORY-RECEIPT-PACKET.json).
+
+| Native pilot arm | Original gate | Passing checks / observations | Final mean absolute position (≥0.3) | Final median critic gradient (≤1) |
+|---|---|---:|---:|---:|
+| `squared` | FAIL | 0/24 | 0.005321 | 0.012204 |
+| `rms_cap` | PASS | 8/24 | 0.460720 | 0.405106 |
+
+## Preserved catalog scores — original CPU geometry comparisons
+
+PR406's catalog contains **285 distinct attempt IDs: 142 PASS / 136 FAIL / 7 INCOMPLETE**. Those are record counts across different protocols, not a pooled performance score. The numerical comparisons below preserve two original CPU 2.13 studies on source `d378734f40b09ce223a389e8f54a9783ec6a0c75`; each seed, task and recipe remains separate. No new training or current-source qualification is claimed. [Original catalog](https://github.com/255BITS/ParticleGAN/blob/c732db2c9353884764b336baa5fed525d2ed33f7/reports/forge/research-catalog/studies.json); [byte-pinned score receipts](research-catalog/leaderboard-scores.json).
+
+| Recipe change / task / seed | Original gate, control → candidate | Passing checks / 24, control → candidate | Terminal passing suffix (required 5) | Original endpoint scores, control → candidate |
+|---|---|---|---|---|
+| Full G Frobenius; `vector_overlap`; seed 0 | FAIL → PASS | 14 → 15 | 3 → 5 | covariance error 0.240728 → 0.230126; mean error 0.030689 → 0.119350; SW1 0.058851 → 0.088509 |
+| Full G Frobenius; `vector_overlap`; seed 1 | FAIL → PASS | 14 → 16 | 3 → 5 | covariance error 0.277288 → 0.241869; mean error 0.043819 → 0.027366; SW1 0.063741 → 0.051240 |
+| Full G Frobenius; `vector_two_broad`; seed 0 | PASS → PASS | 20 → 18 | 20 → 18 | component covariance error 0.437817 → 0.233551 |
+| G half polar / half Frobenius; `trajectory`; seed 0 | FAIL → PASS | 0 → 18 | 0 → 18 | identity MSE 0.021320 → 0.000101 |
+| G half polar / half Frobenius; `vector_overlap`; seed 0 | PASS → PASS | 15 → 17 | 5 → 5 | covariance error 0.230126 → 0.402998; mean error 0.119350 → 0.134850; SW1 0.088509 → 0.113960 |
+
+Overlap and broad use 1,200 updates; trajectory uses 400. The seed-0 full-Frobenius overlap gains a sustained PASS while mean/SW1 worsen; the half-sum repairs trajectory while worsening overlap endpoint errors. Full Frobenius alone fails the conditional trajectory control, and broader preservation and CUDA equivalence remain unmeasured. The reused broad control is not a fresh attempt. These five comparison rows and their control/candidate arms must not be added to the 285-ID register.
+
+## Source-bound benchmark rows
+
+These rows are visible on the main board but do not replace a selected family configuration. Benchmark-task totals and within-task observation checks have different units. Untested benchmark cells are null in the machine data; no whole-gauntlet score is inferred.
+
+| Source-bound candidate / matched control | Benchmark tasks passed / run | Required benchmark tasks untested | Recorded Tier2 stationary checks | Recorded Tier2 reacquisition | Recorded Tier2 shifted-hold checks | Original retention benchmark |
+| --- | --- | --- | --- | --- | --- | --- |
+| [G-only coherent mean (original seed0)](g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 69 of 72 observation checks | PASS (phase) | 20 of 24 observation checks | **FAIL** |
+| [Fresh matched protected NS/transport control](g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 35 of 72 observation checks | FAIL (phase) | 12 of 24 observation checks | **FAIL** |
+
+Recorded discriminator_stability revision9: acquisition is Tier1 and the complete stability benchmark is Tier2. Stationary retention, deadline reacquisition and shifted hold are phases of that same Tier2 task; they are not separate Tier3 benchmark passes. The proposed revision10 display split is not applied retrospectively.
+
+Machine row source: [source-bound-board.json](source-bound-board.json), SHA256 `2181898ee61a7fbc2a7f2230b32a26f5d55933b6565645bd1ae988cd67c4d404`.
+
+## G-only coherence: registered paired research
+
+[Original receipt scores](g-coherent-mean-paired-research/results.json), source `3e6ab1939a8f`; control revision `cb1671ed7174`, candidate revision `10df0bea444a`. Each arm passes acquisition and fails its own complete retention task: **1/2 tasks per arm**. The six research seeds remain separate from the original seed-zero screening result and from selected family scores.
+
+| Research seed | Stationary checks, control → candidate | Shifted-hold checks, control → candidate | Reacquisition, control / candidate | Complete retention, control / candidate |
+| --- | --- | --- | --- | --- |
+| 1 | 35/72 → 44/72 | 10/24 → 20/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 2 | 30/72 → 57/72 | 13/24 → 22/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 3 | 34/72 → 66/72 | 6/24 → 12/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 4 | 34/72 → 58/72 | 17/24 → 11/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 5 | 37/72 → 65/72 | 11/24 → 9/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 6 | 33/72 → 56/72 | 11/24 → 6/24 | FAIL / FAIL | **FAIL / FAIL** |
+
+Stationary checks improve in all six pairs; shifted-hold checks improve in three and regress in three. These fractions count observations inside each retention task, not additional benchmark passes. Every continuation restores its own acquisition checkpoint. No pooled qualification or default promotion is inferred.
+
+## Selected family rows
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
@@ -249,7 +328,9 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `427b8ed821a884d49945a7a11222b88c540a409069dbf301a522553cc7f9089e`.
+Publication input digest `53a13f44378235b34e5d0a89edecf382f5103a8999aab957801ad3e65365b7ff`.
+
+[BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
 
 ## Scoped non-Atlas discoveries
@@ -347,7 +428,3 @@ The cumulative ledger has **77 unique attempts: 33 PASS / 37 FAIL / 7 INCOMPLETE
 These are two distinct source/revision cohorts; neither inherits the earlier six-task screen. The cumulative packet has **81 unique attempts: 35 PASS / 39 FAIL / 7 INCOMPLETE**, retaining all 77 earlier rows exactly and adding four attempts once. No Gaussian-retention winner, full Martyn superiority, default or release qualification follows.
 
 [BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
-
-## Registered paired Gaussian research addendum
-
-[G-only mean/coherence, all six preregistered pairs](g-coherent-mean-paired-research/README.md): stationary improves in6/6, shifted hold in3/6, all12 acquisitions PASS, **all12 retentions FAIL**, and all6 candidate reacquisitions FAIL. Actual peak concurrency is12 training children. This separate nonqualifying research readout changes no selected family row or count. [Full source-bound grades/costs](g-coherent-mean-paired-research/results.json).

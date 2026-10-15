@@ -1869,7 +1869,10 @@ def _current_markdown(result, root, path):
                                 "and fifteen global strengths, with every task measurement, score, target and source-bound "
                                 "repair or regression. Their [interpretation and recommendations](" + findings_link + ") "
                                 "explain the results. The selected family configuration and its recorded counts remain unchanged.\n\n")
-            markdown = markdown.replace("Family totals sum the view rows.", prior_navigation + "Family totals sum the view rows.", 1)
+            for anchor in ("Family totals sum required-view instances:", "Family totals sum the view rows."):
+                if anchor in markdown:
+                    markdown = markdown.replace(anchor, prior_navigation + anchor, 1)
+                    break
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
