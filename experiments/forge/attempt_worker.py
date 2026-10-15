@@ -112,12 +112,14 @@ def main():
                 if mismatched:
                     raise CapabilityError(["Original task source binding unavailable; do not port the formulation: " +
                                            ", ".join(mismatched)])
-                raw = run_task(request, {"task_id": spec["task"], "prerequisites": spec.get("prerequisites", {})},
+                raw = run_task(request, {"task_id": spec["task"], "prerequisites": spec.get("prerequisites", {}),
+                                       "diagnostic_continuation": spec.get("diagnostic_continuation") is True},
                                directory, spec["device"])
                 atomic_json(directory / "raw.json", raw)
                 cost = raw.get("cost", {})
                 result["updates"] = cost.get("completed_steps", cost.get("completed_updates", raw.get("raw", {}).get("steps")))
-                result["grade"] = grade_result(task, raw)
+                result["grade"] = (grade_result(task, raw, diagnostic=True) if spec.get("diagnostic_continuation")
+                                   else grade_result(task, raw))
                 result["status"] = result["grade"]["status"]
                 result["reason"] = "; ".join(result["grade"].get("reasons", []))
                 result["raw_sha256"] = __import__("hashlib").sha256((directory / "raw.json").read_bytes()).hexdigest()

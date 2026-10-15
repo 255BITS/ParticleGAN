@@ -449,7 +449,7 @@ def _ring(request, task, output, device, *, endurance=False):
     return run.receipt(evidence)
 
 
-def _native(request, task, output, device, *, prerequisites=None):
+def _native(request, task, output, device, *, prerequisites=None, diagnostic=False):
     from .paired_sampling import paired_sampling_blockers
     blockers = paired_sampling_blockers(task)
     if blockers:
@@ -482,7 +482,8 @@ def _native(request, task, output, device, *, prerequisites=None):
             raise CapabilityError(["continuation requires this candidate's certified prerequisite attempt"])
         expected = next(job["compatibility_key"] for job in request["jobs"]
                         if task["execution"]["continuation_of"] in job.get("task_ids", [job["task_id"]]))
-        if parent["compatibility_key"] != expected or parent["result"]["gate_status"] != "PASS":
+        allowed = {"PASS", "FAIL"} if diagnostic else {"PASS"}
+        if parent["compatibility_key"] != expected or parent["result"]["gate_status"] not in allowed:
             raise CapabilityError(["continuation prerequisite is not a compatible passing own-state result"])
         old = parent["result"]["evidence"]
         verify_artifacts(old["artifact_root"], old["artifact_manifest"])
@@ -578,6 +579,10 @@ def _native(request, task, output, device, *, prerequisites=None):
         evidence["paired_sampling_diagnostic"] = paired_receipt
     if prefix:
         evidence["prefix_parity"] = prefix
+        if diagnostic:
+            evidence["diagnostic_continuation"] = {"qualification_input": False, "qualification_reuse": False,
+                "parent_gate_status": parent["result"]["gate_status"],
+                "reason": "User-authorized diagnostic continuation after the parent's quality gate; exact own-state restoration required."}
     return run.receipt(evidence, save_state=False)
 
 
@@ -606,7 +611,8 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     if adapter == "native100":
         return _native(request, task, output_dir, device)
     if adapter == "native100_continuation":
-        return _native(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+        return _native(request, task, output_dir, device, prerequisites=job.get("prerequisites"),
+                       diagnostic=job.get("diagnostic_continuation") is True)
     if adapter == "clockfree_audit":
         from .clockfree import run_clockfree
         return run_clockfree(request, task, output_dir, device)

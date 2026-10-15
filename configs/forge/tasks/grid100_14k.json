@@ -19,8 +19,7 @@
     "prior": {
       "kind": "mog",
       "sigma": 0.025,
-      "standardize": false,
-      "learnable": true
+      "standardize": false
     },
     "protocol": "screening",
     "produces_state": true,
@@ -28,7 +27,8 @@
     "continuation_of": "grid100",
     "claim": "clockfree",
     "preserve_prefix_steps": 7000,
-    "original_schedule_horizon": 7000
+    "original_schedule_horizon": 7000,
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,

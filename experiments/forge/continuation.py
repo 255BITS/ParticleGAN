@@ -8,7 +8,14 @@ from .contracts import file_hash
 from .state import require_optimizer_steps, require_same_formulation, state_digest
 
 
-def verify_native_prefix(task, evidence):
+def verify_native_prefix(task, evidence, *, diagnostic=False):
+    scope = evidence.get("diagnostic_continuation")
+    if scope:
+        if (not diagnostic or scope.get("qualification_input") is not False
+                or scope.get("qualification_reuse") is not False):
+            raise ValueError("diagnostic continuation cannot supply ordinary qualification")
+    elif diagnostic:
+        raise ValueError("diagnostic continuation requires its explicit nonqualifying scope")
     prefix = evidence["prefix_parity"]
     root = Path(evidence["artifact_root"])
     retained = root / "prefix"
@@ -34,11 +41,13 @@ def verify_native_prefix(task, evidence):
         raise ValueError("continuation changed the original scheduling horizon")
     parent = prefix["prerequisite"]
     if (parent["result"]["task_id"] != execution["continuation_of"]
-            or parent["result"]["gate_status"] != "PASS"
+            or parent["result"]["gate_status"] not in ({"PASS", "FAIL"} if diagnostic else {"PASS"})
             or parent["result"]["compatibility_key"] != parent["compatibility_key"]
             or parent["result"]["evidence"]["checkpoint"] != checkpoint
             or parent["result"]["evidence"]["artifact_manifest"] != manifest):
         raise ValueError("continuation prefix declaration differs from its prerequisite receipt")
+    if diagnostic and scope.get("parent_gate_status") != parent["result"]["gate_status"]:
+        raise ValueError("diagnostic continuation changed its parent's recorded gate")
     current = evidence["checkpoint"]
     if current["path"] not in evidence["artifact_manifest"]["files"]:
         raise ValueError("continued checkpoint is not certified")

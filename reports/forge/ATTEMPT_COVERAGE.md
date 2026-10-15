@@ -6,13 +6,17 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | --- | ---: | ---: | --- |
 | atlas | 35/35 | 0 | 35 BLOCKED |
 | bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
-| bispf | 38/38 | 0 | 7 BLOCKED, 12 FAIL, 19 PASS |
+| bispf | 41/41 | 0 | 10 BLOCKED, 12 FAIL, 19 PASS |
 | e22 | 35/35 | 0 | 35 BLOCKED |
 | k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
 | ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
 | r1r2 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
 | release07-gan-v3 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
+| E22 checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
+| ATLAS checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
+| BISPF continuation attempts before prior-metadata fix | 3/3 | 0 | 1 BLOCKED, 2 ERROR |
+| BISPF rebuilt checkpoints + matched-prior 14k diagnostics | 6/6 | 0 | 5 FAIL, 1 RUNNING |
 | signed-confidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
 | G-only coherent mean (original seed0) | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
 | kinetic-local-dualnorm-g-history-u-v1 | 29/29 | 0 | 11 BLOCKED, 11 FAIL, 7 PASS |
@@ -23,7 +27,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | kinetic-local-dualnorm-g-history-reference8-current-v1 | 29/29 | 0 | 12 BLOCKED, 12 FAIL, 5 PASS |
 | Fresh matched protected NS/transport control | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
 | generator-idle-ema-bcap-direction-v1 | 29/29 | 0 | 3 BLOCKED, 12 FAIL, 2 INCOMPLETE, 12 PASS |
-| kinetic-local-dualnorm-g-history-reference8-v1 | 29/29 | 0 | 12 BLOCKED, 8 FAIL, 6 PASS, 1 RUNNING, 2 TIMEOUT |
+| kinetic-local-dualnorm-g-history-reference8-v1 | 29/29 | 0 | 12 BLOCKED, 8 FAIL, 6 PASS, 3 TIMEOUT |
 | generator-confidence-lr-bcap-direction-v1 | 29/29 | 0 | 1 BLOCKED, 13 FAIL, 15 PASS |
 | bcap-default-baseline-direction-v1 | 29/29 | 0 | 2 BLOCKED, 1 ERROR, 12 FAIL, 1 INCOMPLETE, 13 PASS |
 | positive-evidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
@@ -56,14 +60,41 @@ These cover the three previously empty Atlas policy cells, three current BISPF c
 | Family / recipe | Test | Outcome | Updates / saved observations | Cause |
 | --- | --- | --- | --- | --- |
 | bispf current unbound task | grid100_14k | BLOCKED | 0 / — | checkpoint parent grid100: FAIL |
+| bispf current unbound task | grid100_14k | BLOCKED | 0 / — | checkpoint parent grid100: FAIL |
 | bispf current unbound task | rotated100_14k | BLOCKED | 0 / — | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | rotated100_14k | BLOCKED | 0 / — | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | staggered100_14k | BLOCKED | 0 / — | checkpoint parent staggered100: FAIL |
 | bispf current unbound task | staggered100_14k | BLOCKED | 0 / — | checkpoint parent staggered100: FAIL |
 | atlas selected-cloud after investigation | clockfree_audit | FAIL | 24 / — | step_label changed the update or common-prefix state |
 | atlas selected-cloud after investigation | gaussian1d_acquisition | ERROR | 1000 / 24 | ValueError: Out of range float values are not JSON compliant: nan |
 | atlas selected-cloud after investigation | ring16_acquisition | ERROR | 1600 / 96 | ValueError: Out of range float values are not JSON compliant: nan |
-| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | RUNNING | — / — | Pending attempt. |
+| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | TIMEOUT | — / — | original task wall-time limit exhausted |
 
-Export errors retain their saved numerical observations and actual-training GIFs in the local attempt directories. Those observations do not replace the recorded gate. BISPF continuations require their own passing parent checkpoints; failed parents remain blocked. Original timeouts and incompatible formulations are not changed to obtain a score.
+Export errors retain their saved numerical observations and actual-training GIFs in the local attempt directories. Those observations do not replace the recorded gate. The original BISPF attempts were blocked by failed parent gates; the checkpoint recovery section below rebuilds their states and runs explicitly nonqualifying continuations past those gates. Original timeouts and incompatible formulations are not changed to obtain a score.
+
+<a name="checkpoint-recovery"></a>
+
+## Checkpoint export repair and BISPF rebuilds
+
+The checkpoint hasher now preserves diagnostic NaN/Inf values while retaining every finite-state hash. Atlas/E22 rerun their unchanged Gaussian and Ring16 questions with the export fix. BISPF rebuilds each original 7k producer and continues its exact own state to 14k. A failed parent quality gate does not stop these user-authorized diagnostics. Recipes, seeds, initialization, prior laws, numerical gates and original budgets remain fixed; original failures stay recorded and these repaired-source diagnostics grant no qualification.
+
+| Family | Recovery run | Test | Outcome | Completed updates | Cause |
+| --- | --- | --- | --- | ---: | --- |
+| atlas | ATLAS checkpoint-export repair (same recipe) | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1000 | recomputed complete live curve and terminal suffix |
+| atlas | ATLAS checkpoint-export repair (same recipe) | ring16_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1600 | recomputed complete live curve and terminal suffix |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | grid100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | grid100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF continuation attempts before prior-metadata fix | grid100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF continuation attempts before prior-metadata fix | rotated100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100_14k | RUNNING | — | Running |
+| bispf | BISPF continuation attempts before prior-metadata fix | staggered100_14k | BLOCKED | 0 | checkpoint parent staggered100: unavailable |
+| e22 | E22 checkpoint-export repair (same recipe) | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1000 | recomputed complete live curve and terminal suffix |
+| e22 | E22 checkpoint-export repair (same recipe) | ring16_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1600 | recomputed complete live curve and terminal suffix |
+
+Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.
 
 ## Attempted blockers and incomplete runs
 
@@ -71,6 +102,9 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 
 | Recipe | Task | Outcome | Reason |
 | --- | --- | --- | --- |
+| BISPF continuation attempts before prior-metadata fix | grid100_14k | ERROR | ValueError: invalid context checkpoint schema |
+| BISPF continuation attempts before prior-metadata fix | rotated100_14k | ERROR | ValueError: invalid context checkpoint schema |
+| BISPF continuation attempts before prior-metadata fix | staggered100_14k | BLOCKED | checkpoint parent staggered100: unavailable |
 | Fresh matched protected NS/transport control | ae_gan_hold | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
 | Fresh matched protected NS/transport control | cover_leftover | BLOCKED | augmented transport-primary protection has no certified hook for this component/non-Gaussian host |
 | Fresh matched protected NS/transport control | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
@@ -171,7 +205,10 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | bispf | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
 | bispf | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
+| bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
 | bispf current unbound task | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | bispf current unbound task | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | cell-quota-dualnorm-cross-v1 | ae_gan_hold | BLOCKED | Cell objective requires the public GANTrainer path |
 | cell-quota-dualnorm-cross-v1 | cover_leftover | BLOCKED | Cell objective requires the public GANTrainer path |
@@ -320,6 +357,7 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | kinetic-local-dualnorm-g-history-reference8-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | kinetic-local-dualnorm-g-history-reference8-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
+| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | TIMEOUT | original task wall-time limit exhausted |
 | kinetic-local-dualnorm-g-history-reference8-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |

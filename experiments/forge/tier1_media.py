@@ -67,6 +67,15 @@ def _scored_outputs(task, evidence, local):
 
 
 def render(task, row, local, output):
+    if task['adapter'] in {'native100', 'native100_continuation'}:
+        import importlib.util
+        source = Path(__file__).resolve().parents[2] / 'reports/forge/gaussian-smoke-inventory/export_media.py'
+        spec = importlib.util.spec_from_file_location('forge_native_saved_media', source)
+        exporter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exporter)
+        output = Path(output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        return exporter.render_native(task, row, output)
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
