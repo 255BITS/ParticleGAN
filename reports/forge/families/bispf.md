@@ -102,7 +102,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0/1 (1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12/23 (1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-adaptation) |
-| [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/7 (3 not run, 1 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/30 (3 not run, 1 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
+| [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/7 (4 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/30 (4 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
 | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/21](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16/29 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) |
 | [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) | [12/24 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) |
 | [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) | [0/2 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3) | [12/24 (1 blocked, 1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) |
@@ -1615,7 +1615,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent grid100: FAIL [Attempt evidence](../attempt-coverage.json).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -2390,7 +2390,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent rotated100: FAIL [Attempt evidence](../attempt-coverage.json).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -2539,7 +2539,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **not run**.
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent staggered100: FAIL [Attempt evidence](../attempt-coverage.json).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 

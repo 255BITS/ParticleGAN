@@ -14,6 +14,7 @@ import argparse
 from collections import Counter
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -91,7 +92,7 @@ def prepare(root, source, directory, *, include_research=False):
     pins = {f["family"]: f for f in read_json(root / "reports/forge/tier-coverage-20261014/preflight.json")["families"]}
     directory.mkdir(parents=True, exist_ok=True)
     previous = read_json(directory / "state.json") if (directory / "state.json").exists() else {"jobs": {}}
-    jobs = {}
+    jobs = deepcopy(previous["jobs"])  # Retain attempts against earlier task definitions.
     selected = selected_tasks(publication)
     source_map_path = directory / "source-roots.json"
     source_map = read_json(source_map_path) if source_map_path.is_file() else {}
@@ -148,6 +149,12 @@ def prepare(root, source, directory, *, include_research=False):
             if old:
                 job.update({k: v for k, v in old.items() if k not in job or k == "status"})
             jobs[key] = job
+    from .remaining_attempts import prepare as prepare_remaining
+    for key, job in prepare_remaining(root, directory).items():
+        old = previous["jobs"].get(key)
+        if old:
+            job.update({k: v for k, v in old.items() if k not in job or k == "status"})
+        jobs[key] = job
     state = {"schema_version": 1, "jobs": jobs, "maximum_tests": 4, "maximum_per_gpu": 2,
              "include_research": include_research}
     atomic_json(directory / "state.json", state)
@@ -166,7 +173,8 @@ def publish(root, state):
               "execution_sha256", "evaluation_sha256", "status", "attempted", "block_kind", "reason",
               "origin", "diagnostic", "evidence", "original_attempt", "attempt_id", "updates", "seconds",
               "result_sha256", "log_sha256", "runtime", "timeout_seconds", "setup_retries", "research_scope", "label",
-              "training_gif_sha256", "media_error", "media_note", "grade")
+              "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
+              "saved_observations")
     value = {"schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
              "formulations_modified": False, "maximum_tests": 4, "maximum_per_gpu": 2,
              "summary": summary(state), "records": [{k: j[k] for k in fields if k in j}
@@ -182,7 +190,7 @@ def publish(root, state):
             "Every record identifies an attempt to run an unchanged selected or archived research recipe and task. "
             "PASS/FAIL diagnostics remain separate from ordinary qualification. BLOCKED means an actual "
             "start was refused by its constructor or required checkpoint; it is not a numerical failure.", "",
-            "| Family | Attempted / distinct tasks | Pending | Outcome counts |",
+            "| Family or exact recipe | Attempted / distinct tests | Pending | Outcome counts |",
             "| --- | ---: | ---: | --- |"]
         for family in sorted({j["family"] for j in state["jobs"].values()}):
             jobs = [j for j in state["jobs"].values() if j["family"] == family]
@@ -220,6 +228,26 @@ def publish(root, state):
                   "previously empty research cells; archived verdicts and selected-family qualification never change. "
                   "Checkpoint/data dependencies still require passing certified artifacts; gate-only failures are "
                   "bypassed solely for this authorized diagnostic lane. No new qualification is granted.", ""]
+        remaining = [j for j in state["jobs"].values() if j.get("policy_scope") or j.get("retry_history")
+                     or j.get("label", "").endswith(" current unbound task")]
+        if remaining:
+            lines += ['<a name="remaining-attempts"></a>', "", "## Follow-up attempts of remaining cells", "",
+                      "These cover the three previously empty Atlas policy cells, three current BISPF continuation "
+                      "declarations, and one unchanged retry after a GPU-memory failure. Earlier receipts remain intact. "
+                      "The 324 missing pairs in historical seed-only studies are excluded from this backfill.", "",
+                      "| Family / recipe | Test | Outcome | Updates / saved observations | Cause |",
+                      "| --- | --- | --- | --- | --- |"]
+            for job in sorted(remaining, key=lambda j: (j["family"], j["task"])):
+                saved = job.get("saved_observations", {})
+                updates = saved.get("completed_updates", job.get("updates"))
+                observed = saved.get("count", "—")
+                reason = str(job.get("reason", "Pending attempt.")).replace("|", "\\|").replace("\n", " ")
+                lines.append(f"| {job.get('label', job['family'])} | {job.get('parent_task', job['task'])} | "
+                             f"{job['status']} | {updates if updates is not None else '—'} / {observed} | {reason} |")
+            lines += ["", "Export errors retain their saved numerical observations and actual-training GIFs in the "
+                      "local attempt directories. Those observations do not replace the recorded gate. "
+                      "BISPF continuations require their own passing parent checkpoints; failed parents remain blocked. "
+                      "Original timeouts and incompatible formulations are not changed to obtain a score.", ""]
         blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt"
                    and j["status"] in {"BLOCKED", "ERROR", "TIMEOUT", "INCOMPLETE", "INVALID"}]
         if blocked:
@@ -356,7 +384,8 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                                   "Results are retained; restore the publisher before restarting.",
                                   file=sys.stderr, flush=True)
                             raise SystemExit(2)
-                        subprocess.run([sys.executable, str(completion_hook)], cwd=root, check=True, timeout=600)
+                        subprocess.run([sys.executable, str(completion_hook)], cwd=root, check=True, timeout=600,
+                                       env={**os.environ, "FORGE_ATTEMPT_STATE_ROOT": str(directory)})
                         published = fingerprint
                     if not watch:
                         return summary(state)

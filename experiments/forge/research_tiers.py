@@ -36,20 +36,21 @@ def _attempt_registry(path, modified):
     return read_json(path)["records"]
 
 
-def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None):
+def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None, policy_scope=None):
     from .family_reports import score
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     attempts = {}
-    if registry.is_file() and (scope or selected_family):
-        attempts = {r["task"]: r for r in _attempt_registry(registry, registry.stat().st_mtime_ns)
+    if registry.is_file() and (scope or selected_family or policy_scope):
+        attempts = {r.get("parent_task", r["task"]): r for r in _attempt_registry(registry, registry.stat().st_mtime_ns)
                     if (scope and r.get("research_scope") == scope)
-                    or (selected_family and r.get("family") == selected_family)}
+                    or (selected_family and r.get("family") == selected_family)
+                    or (policy_scope and r.get("policy_scope") == policy_scope)}
     def count(required):
         # These are explicitly nonqualifying research rows. New same-source
         # attempts fill previously unmeasured research cells, never overwrite an
         # archived verdict or a selected-family qualification result.
         outcomes = {task: tasks.get(task) for task in required}
-        if scope:
+        if scope or policy_scope:
             for task in required:
                 if outcomes[task] in {None, "UNKNOWN", "NOT_RUN"} and attempts.get(task, {}).get("status") in {"PASS", "FAIL"}:
                     outcomes[task] = attempts[task]["status"]
@@ -59,12 +60,17 @@ def _row(root, page, label, target, tasks, requirements, *, scope=None, selected
         if attempts:
             coverage = {}
             for task in required:
-                if outcomes[task] in {"PASS", "FAIL", "ERROR", "INVALID", "INCOMPLETE"}:
+                if outcomes[task] in {"PASS", "FAIL"}:
                     continue
                 attempt = attempts.get(task, {})
-                status = attempt.get("status")
+                status = (outcomes[task] if outcomes[task] in {"ERROR", "INVALID", "INCOMPLETE"}
+                          else attempt.get("status", outcomes[task]))
                 key = ("running" if status == "RUNNING" else
-                       "incompatible" if status == "BLOCKED" and attempt.get("block_kind") == "incompatible" else
+                       "errors" if status in {"ERROR", "INVALID"} else
+                       "timeouts" if status == "TIMEOUT" else
+                       "incomplete_attempts" if status == "INCOMPLETE" else
+                       "interrupted_attempts" if status == "INTERRUPTED" else
+                       "incompatible" if status == "BLOCKED" and (not attempt or attempt.get("block_kind") == "incompatible") else
                        "blocked" if status == "BLOCKED" else
                        "diagnostic_attempts" if attempt.get("attempted") else "not_run")
                 coverage[key] = coverage.get(key, 0) + 1
@@ -142,9 +148,7 @@ def tier_rows(root, page):
     """Rows keyed by owning family; no modification of selected publication data."""
     rows = {}
     from .source_bound_board import BOARD_SOURCE, validate_board
-    from .confidence_coherence_scores import (
-        PAIRED, _pinned, validate_original_rows, validate_paired_results,
-    )
+    from .confidence_coherence_scores import validate_original_rows
     if (Path(root) / BOARD_SOURCE).is_file():
         board = validate_board(read_json(Path(root) / BOARD_SOURCE))
         validate_original_rows(root, board)
@@ -162,16 +166,6 @@ def tier_rows(root, page):
             from .research_attempts import scope_id
             bcap.append(_row(root, page, record["label"], record["readout"], tasks, requirements,
                              scope=scope_id(record["source_digest"], record["candidate_revision"])))
-        if (Path(root) / PAIRED).is_file():
-            paired = _pinned(root, PAIRED)
-            validate_paired_results(paired)
-            for seed in range(1, 7):
-                for arm in ("candidate", "control"):
-                    study = f"paired-g-coherence-seed{seed}-{arm}"
-                    tasks = {r["task"]: r["gate"]["status"] for r in paired["records"] if r["study"] == study}
-                    bcap.append(_row(root, page, f"G-coherence {arm}; research seed {seed}",
-                                     "reports/forge/families/bcap-pure.md#g-only-coherence-registered-paired-research",
-                                     tasks, requirements))
         from .pr399_scores import tier_rows as pr399_tier_rows
         for family, additions in pr399_tier_rows(root, page, requirements).items():
             rows.setdefault(family, []).extend(additions)
@@ -200,10 +194,48 @@ def tier_rows(root, page):
             raise ValueError("actual execution readout must remain an unchanged-formulation diagnostic")
         for record in measured["diagnostic_rows"]:
             requirements = {tier: set(names) for tier, names in record["requirements"].items()}
+            policy = None
+            if record["label"] == "Selected-cloud execution after adapter investigation":
+                identities = {(r["source_digest"], r["candidate_revision"]) for r in measured["records"]
+                              if r["family"] == record["family"] and r["lane"] == "policy"}
+                # Older E22 summaries already retain multiple source cohorts.
+                # Do not attach new results to such an aggregate.
+                if len(identities) == 1:
+                    from .remaining_attempts import policy_scope
+                    policy = policy_scope(record["family"], *next(iter(identities)))
+            target = str(followup.with_name("README.md"))
+            registry = Path(root) / "reports/forge/attempt-coverage.json"
+            if policy and registry.is_file() and any(r.get("policy_scope") == policy for r in
+                    _attempt_registry(registry, registry.stat().st_mtime_ns)):
+                target = "reports/forge/ATTEMPT_COVERAGE.md#remaining-attempts"
             rows.setdefault(record["family"], []).append(_row(root, page, record["label"],
-                str(followup.with_name("README.md")), record["tasks"], requirements,
-                selected_family=record["family"] if record["label"].startswith("Unchanged selected recipe:") else None))
+                target, record["tasks"], requirements,
+                selected_family=record["family"] if record["label"].startswith("Unchanged selected recipe:") else None,
+                policy_scope=policy))
     return rows
+
+
+def historical_seed_rows(root, page):
+    """Keep excluded seed-only studies visible without presenting them as queued work."""
+    from .source_bound_board import BOARD_SOURCE, validate_board
+    from .confidence_coherence_scores import PAIRED, _pinned, validate_paired_results
+    if not (Path(root) / BOARD_SOURCE).is_file() or not (Path(root) / PAIRED).is_file():
+        return {}
+    board = validate_board(read_json(Path(root) / BOARD_SOURCE))
+    requirements = {str(tier): {a["task"] for a in board["recorded_view"]["assignments"]
+                               if a["importance"] == "required" and a["qualification_tier"] == tier}
+                    for tier in (1, 2, 3)}
+    paired = _pinned(root, PAIRED)
+    validate_paired_results(paired)
+    rows = []
+    for seed in range(1, 7):
+        for arm in ("candidate", "control"):
+            study = f"paired-g-coherence-seed{seed}-{arm}"
+            tasks = {r["task"]: r["gate"]["status"] for r in paired["records"] if r["study"] == study}
+            rows.append(_row(root, page, f"G-coherence {arm}; research seed {seed}",
+                             "reports/forge/families/bcap-pure.md#g-only-coherence-registered-paired-research",
+                             tasks, requirements))
+    return {"bcap-pure": rows}
 
 
 def family_research_lines(root, page, family_id):
