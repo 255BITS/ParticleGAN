@@ -21,6 +21,7 @@ from .views import task_evaluation_fingerprint, task_execution_fingerprint
 FAMILY_DIRECTORY = Path("reports/forge/families")
 COMPLETE = {"PASS", "FAIL"}
 TIERS = ("1", "2", "3")
+COVERAGE_PREFLIGHT = Path("reports/forge/tier-coverage-20261014/preflight.json")
 
 
 FIRST_FULL_ATLAS_RESULT = Path("reports/forge/common26-first-two-pole-full-atlas-20261004/results.json")
@@ -256,9 +257,15 @@ def _execution_recorded(status, receipt):
 
 def _count(tasks):
     statuses = Counter(task["status"] for task in tasks)
+    incompatible = sum(_incompatible(task) for task in tasks)
+    not_run = sum(not task["execution_recorded"] for task in tasks) - incompatible
     return {"passed": statuses.get("PASS", 0), "total": len(tasks),
-            "incomplete": any(not task["execution_recorded"] for task in tasks),
+            "incomplete": bool(not_run or incompatible), "not_run": not_run, "incompatible": incompatible,
             "counts": dict(sorted(statuses.items()))}
+
+
+def _incompatible(task):
+    return not task["execution_recorded"] and (task["status"] == "BLOCKED" or bool(task.get("preflight_blockers")))
 
 
 def _sum(counts):
@@ -266,11 +273,16 @@ def _sum(counts):
     for count in counts:
         statuses.update(count["counts"])
     return {"passed": sum(c["passed"] for c in counts), "total": sum(c["total"] for c in counts),
-            "incomplete": any(c["incomplete"] for c in counts), "counts": dict(sorted(statuses.items()))}
+            "incomplete": any(c["incomplete"] for c in counts),
+            "not_run": sum(c["not_run"] for c in counts),
+            "incompatible": sum(c["incompatible"] for c in counts), "counts": dict(sorted(statuses.items()))}
 
 
 def score(count, *, marker=True):
-    return f"{count['passed']}" + ("(*)" if marker and count["incomplete"] else "") + f"/{count['total']}"
+    value = f"{count['passed']}/{count['total']}"
+    missing = [f"{count[key]} {label}" for key, label in (("not_run", "not run"), ("incompatible", "incompatible"))
+               if count.get(key)]
+    return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
 
 def _definition_label(result):
@@ -483,6 +495,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
+    support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
+    if support is not None and (support.get("scope") != "selected_formulation_task_preflight_only"
+                                or support.get("qualification_input") is not False
+                                or support.get("qualification_reuse") is not False):
+        raise ValueError("coverage preflight is display-only task compatibility")
     scoped_publications, media = attachments["cohorts"], attachments["media"]
     inputs.update({item["gif"]: item["gif_sha256"] for item in media.values()})
     for view in views:
@@ -513,6 +530,15 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
         bindings = dict(selected.get("bindings", {}).get("task_contracts", {}))
         catalogs = dict(publication.get("task_contracts", {}))
         reason_catalog = dict(publication.get("status_reasons", {}))
+        support_rows = [item for item in (support or {}).get("families", [])
+                        if item["candidate_id"] == selected["candidate_id"]
+                        and item["candidate_revision"] == selected.get("candidate_revision")
+                        and item["source_digest"] == selected.get("bindings", {}).get("source_digest")]
+        if len(support_rows) > 1:
+            raise ValueError("duplicate selected formulation preflight")
+        task_support = support_rows[0]["tasks"] if support_rows else {}
+        if support_rows and support_rows[0]["recipe_sha256"] != selected.get("bindings", {}).get("recipe_sha256"):
+            raise ValueError("coverage preflight changed the selected recipe")
         separate = [item for item in scoped_publications if item["family"] == family_id
                     and item["row"]["candidate_id"] == selected["candidate_id"]
                     and item["row"].get("candidate_revision") == selected.get("candidate_revision")
@@ -612,6 +638,15 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                              "reason": reason, "coverage_reason": coverage, "changed_contract_fields": changed,
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
+            supported = task_support.get(name)
+            if supported is not None:
+                if contract and (supported["execution_sha256"] != contract.get("execution_sha256")
+                                 or supported["evaluation_sha256"] != contract.get("evaluation_sha256")):
+                    raise ValueError("coverage preflight differs from recorded task: " + name)
+                results[name]["preflight_blockers"] = supported["blockers"]
+                results[name]["preflight_source_digest"] = support_rows[0]["source_digest"]
+                if not results[name]["execution_recorded"] and supported["blockers"]:
+                    results[name]["reason"] = "Skipped incompatible test: " + "; ".join(supported["blockers"])
             matching_media = [item for (family, task_id, attempt), item in media.items()
                               if family == family_id and task_id == name
                               and attempt in selected.get("attempt_ids", []) + scoped_attempts
@@ -663,6 +698,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
         atlas_navigation["next_steps"] = {"readout": next_steps.as_posix(),
                                           "sha256": inputs[next_steps.as_posix()]}
     first_full_atlas = _full_original_atlas_first_case(root, load)
+    from .research_tiers import coverage_report, COVERAGE
+    coverage = coverage_report(root)
+    if coverage is not None:
+        inputs[COVERAGE.as_posix()] = file_hash(root / COVERAGE)
+        inputs.update(coverage["inputs"])
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped],
@@ -722,20 +762,28 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                 lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
         lines += research.get(family["id"], [])
     lines += ["", "Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. "
-              "† marks a separate research recipe/source/seed, excluded from the bold totals and current selection. "
+              "† marks a separate diagnostic or research scope, excluded from the bold totals and current selection. "
               "Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question "
               "Tier 1 policy scope. A retained pass grants no new qualification.", "",
               "Family totals sum required-view instances: a shared task counts again in every view requiring it. "
               "For example, 152 is a count of requirements across views, not distinct training runs. "
               "Research rows count unique required tasks within their own scope.", "",
-              "(*) means at least one required experiment has no recorded execution for the selected configuration and source, "
-              "including preflight-blocked tests. Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
+              "Counts show passes / required tasks, followed by separate not-run and incompatible counts when nonzero. "
+              "Incompatible means the selected formulation/task contract was preflight-blocked without execution; "
+              "its reason appears on the family page. Not run covers remaining missing executions, including tier or "
+              "checkpoint prerequisites. No formulation is changed to fit a test. "
+              "Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
               "or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. "
               "Zero recorded passes always displays as 0, including unrun families.", "",
               "Counts retain each original recipe, prior, initialization, budget, serving law and source. "
               "Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and "
               "calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; "
               "untiered historical studies remain on those detail pages.", ""]
+    if (root / "reports/forge/tier-coverage-20261014/results.json").is_file():
+        lines += [link(root, page, "Diagnostic completion, new strict audit and every skip reason",
+                       "reports/forge/tier-coverage-20261014/README.md") + ". "
+                  "The selected-recipe Tier 2 diagnostic rows retain their original 21-task scope. "
+                  "The new strict BCAP audit has a separate runtime and changes no qualification.", ""]
     if (root / "reports/forge/bcap-prior-search/findings.md").is_file():
         lines += [link(root, page, "Prior-search measurements and gates", "reports/forge/bcap-prior-search/README.md") + " · " +
                   link(root, page, "Prior-search findings", "reports/forge/bcap-prior-search/findings.md"), ""]
@@ -984,9 +1032,10 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
                           cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
                           "`). These cells give no parent-cohort credit."]
-        lines += ["", "(*) means at least one required experiment has no recorded execution, including preflight blockers. "
+        lines += ["", "Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts "
+                  "without execution. These counts are separate and remain in the required denominator. "
                   "PASS and FAIL both count as executed. Attempted errors retain their status and cause; "
-                  "test-definition compatibility is shown separately and does not add (*).", ""]
+                  "changes to today's test definition are shown separately from execution coverage.", ""]
         for repair in cohort.get("retry_history", []):
             lines += ["Certified execution repair: " +
                       link(root, page, repair["attempt_id"], repair["receipt"]) + " → " +
@@ -1062,7 +1111,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       "Test definition: **" + _definition_label(result) + "**. " + cell(result["coverage_reason"]) +
                       " " + cell(result["reason"]), ""]
             if result["status"] not in COMPLETE:
-                lines += ["Execution: **" + ("recorded" if result["execution_recorded"] else "no recorded execution (*)") + "**."]
+                lines += ["Execution: **" + ("recorded" if result["execution_recorded"] else
+                           "incompatible; skipped" if _incompatible(result) else "not run") + "**."]
                 if result["attempt_id"]:
                     lines.append("Attempt: `" + result["attempt_id"] + "`; raw outcome: " +
                                  cell(result["metrics"].get("raw_status", "unavailable")) + ".")

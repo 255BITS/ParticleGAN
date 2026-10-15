@@ -6,7 +6,24 @@ counts, and untiered historical studies remain on the family detail pages.
 from pathlib import Path
 from posixpath import relpath
 
-from .contracts import read_json
+from .contracts import read_json, file_hash
+
+COVERAGE = Path("reports/forge/tier-coverage-20261014/results.json")
+
+
+def coverage_report(root):
+    path = Path(root) / COVERAGE
+    if not path.is_file():
+        return None
+    report = read_json(path)
+    if (report.get("schema_version") != 1 or report.get("scope") != "selected_family_diagnostic_coverage"
+            or report.get("qualification_input") is not False or report.get("qualification_reuse") is not False):
+        raise ValueError("selected family coverage must remain diagnostic-only")
+    for relative, digest in report["inputs"].items():
+        target = Path(root) / relative
+        if not target.resolve().is_relative_to(Path(root).resolve()) or file_hash(target) != digest:
+            raise ValueError("diagnostic coverage input changed: " + relative)
+    return report
 
 
 def _link(root, page, label, target):
@@ -14,6 +31,7 @@ def _link(root, page, label, target):
 
 
 def _row(root, page, label, target, tasks, requirements):
+    from .family_reports import score
     if set(tasks) - set().union(*map(set, requirements.values())):
         raise ValueError("research result has no recorded tier assignment")
     counts = []
@@ -23,12 +41,14 @@ def _row(root, page, label, target, tasks, requirements):
             counts.append("—")
             continue
         passed = sum(tasks.get(task) == "PASS" for task in required)
-        missing = any(task not in tasks or tasks[task] == "BLOCKED" for task in required)
-        counts.append(_link(root, page, f"{passed}{'(*)' if missing else ''}/{len(required)}", target))
+        counts.append(_link(root, page, score({"passed": passed, "total": len(required),
+            "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
+            "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}), target))
     required = set().union(*map(set, requirements.values()))
     passed = sum(tasks.get(task) == "PASS" for task in required)
-    missing = any(task not in tasks or tasks[task] == "BLOCKED" for task in required)
-    counts.append(_link(root, page, f"{passed}{'(*)' if missing else ''}/{len(required)}", target))
+    counts.append(_link(root, page, score({"passed": passed, "total": len(required),
+        "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
+        "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}), target))
     return "| " + " | ".join(["↳ † " + _link(root, page, label, target), *counts]) + " |"
 
 
@@ -129,6 +149,11 @@ def tier_rows(root, page):
             raise ValueError("Atlas policy questions must retain their original Tier 1 scope")
         rows["atlas"] = [_row(root, page, "Selected-cloud policy; seed 0 (separate scope)",
                               f"{ATLAS}/README.md", tasks, {"1": set(tasks), "2": set(), "3": set()})]
+    coverage = coverage_report(root)
+    for record in (coverage or {}).get("diagnostic_rows", []):
+        requirements = {tier: set(names) for tier, names in record["requirements"].items()}
+        rows.setdefault(record["family"], []).append(_row(root, page, record["label"],
+            "reports/forge/tier-coverage-20261014/README.md", record["tasks"], requirements))
     return rows
 
 

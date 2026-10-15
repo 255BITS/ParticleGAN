@@ -1,0 +1,37 @@
+{
+  "actual_training_gif_inspected": {
+    "dimensions": [
+      900,
+      600
+    ],
+    "frames": 4,
+    "sampling_draws_added": 0,
+    "updates_added": 0
+  },
+  "base_commit": "4728b8b030237aa00ef2188a8782cea247991c32",
+  "broader_inventory_suite": {
+    "baseline_log": "/ml2/hypergan/fill-tier-values-20261014-baseline-broad.log",
+    "baseline_log_sha256": "50fe87156d341ca4a442f4142cbfe3dc057a7c5523dd8a71aecf7ca90d2287de",
+    "cause_summary": "Pre-existing missing supplemental-registry/media fixtures and stale archived selection/source expectations.",
+    "failure_names_sha256": "04c0104d53afa379d13780bde26aaa692924953c00c1a0f84ad4246096bdb0b9",
+    "initial_change_log": "/ml2/hypergan/fill-tier-values-20261014-validation.log",
+    "initial_change_log_sha256": "43c4d7d938f41cfe0c68e2edd03d138009ee73b360e7a5e8cf1942238c3e4967",
+    "new_renderer_expectation_failure_fixed_and_covered_by_focused_tests": true,
+    "preexisting_failures_reproduced": 106
+  },
+  "focused_tests": {
+    "log": "/ml2/hypergan/fill-tier-values-20261014-focused-final.log",
+    "passed": 106,
+    "sha256": "9d38367da4cae175101913053f1fb49b2850e5d8ae290dbe4809ad7252bcb7a3"
+  },
+  "formulation_and_task_files_unchanged": true,
+  "maximum_observed_concurrent_tests": 1,
+  "maximum_observed_per_gpu": {
+    "0": 1
+  },
+  "original_receipts": "/ml2/hypergan/fill-tier-values-20261014-run/original-receipts",
+  "queue_events_sha256": "2b2fe028be3e4f6c3cfc26aa886763551e38029a44d6103b265b19288b3d7592",
+  "schema_version": 1,
+  "scientific_rows_preserved": true,
+  "selection_bytes_preserved": true
+}

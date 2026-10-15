@@ -1,0 +1,57 @@
+{
+  "campaign": {
+    "budget_seconds": 600,
+    "candidate_budget_seconds": 600,
+    "id": "selected-family-coverage-20261014"
+  },
+  "candidate": "recipe-prior-refactor-bcap-pure-v1",
+  "competing_explanation": "A hidden external-clock dependency or restart state difference prevents exact parity despite constant declared rates.",
+  "control": {
+    "candidate_id": "bcap-default-baseline-direction-v1",
+    "task_map": {
+      "clockfree_audit": "recipe-prior-refactor-legacy-clockfree_audit_measurement_v1"
+    }
+  },
+  "falsifier": {
+    "metric": "parity_comparisons",
+    "op": "<",
+    "phase": "final",
+    "task_id": "clockfree_audit",
+    "threshold": 4
+  },
+  "hypothesis": "The unchanged selected BCAP recipe satisfies the strict source audit and all four measured clock perturbation comparisons.",
+  "id": "bcap-clockfree-coverage-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "parity_comparisons",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "clockfree_audit",
+    "threshold": 4
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "exact_pre_refactor_selected_leader_settings",
+        "source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792"
+      },
+      "path": "reports/forge/recipe-prior-refactor/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "selected-family-coverage-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

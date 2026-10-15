@@ -1,0 +1,2061 @@
+{
+  "families": [
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_revision": "f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540",
+      "family": "bcap-pure",
+      "recipe_sha256": "2e515acac007dc57b9ae38cd81167769513c156d82e612e0cb77f75f2439853e",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "atlas",
+      "candidate_revision": "8ed57a6c3701fe104a9a9d002ae5ae307a22b3165afca46937a640d8e7e5a74f",
+      "family": "atlas",
+      "recipe_sha256": "4cadd6d59b07818732b55daaad4bfc26f7b604e151350a3ece4fcd569a10c1b9",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [
+            "grid100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [
+            "ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [
+            "ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [
+            "rotated100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [
+            "staggered100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [
+            "target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "e22",
+      "candidate_revision": "26bc81696c14502e279a40afcf91ebfeed4c97777bc29579b1c1c9020876407c",
+      "family": "e22",
+      "recipe_sha256": "5b85bc9a676ee54051c5604eb9c7a26d6c0535f6ebabf80391f8dfe0b98ffbe3",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [
+            "grid100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [
+            "ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [
+            "ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [
+            "rotated100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [
+            "staggered100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [
+            "target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "candidate_revision": "e3c2cae91adf0ccbedfcbc529cd1442eba3cd4dfc8399c37f63aa6d097b50770",
+      "family": "release07-gan-v3",
+      "recipe_sha256": "44e11c48e6a0879a814121fff323384b2dfa24b12ae9b7b02c46e721e9ca8453",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "learning-rate annealing depends on completed steps and horizon"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "candidate_revision": "e36ba4acdb7f9424db9981ff248e93dfb6f0b256b8a7cf71af713b3a8d7f8e56",
+      "family": "k3p",
+      "recipe_sha256": "3a5d1cc0cf316e849b5d5565975647364b24106c3105850e590a67b116f53ef3",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "learning-rate annealing depends on completed steps and horizon",
+            "input-noise annealing depends on completed steps and horizon",
+            "output-noise warmup depends on completed steps and horizon",
+            "critic guard releases at a fixed minimum update count"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "candidate_revision": "cc3bec6763cfcdc5236ac8eb61f6dd2d952e84790322fad0bc05622f4f0a5e98",
+      "family": "ka2",
+      "recipe_sha256": "a504666a19b6c5ae0d009ffa2e928398a572dea89431e197e49b13621947333c",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "learning-rate annealing depends on completed steps and horizon",
+            "input-noise annealing depends on completed steps and horizon",
+            "output-noise warmup depends on completed steps and horizon",
+            "KA2 switches from pure A to blended penalty at call 800",
+            "critic guard releases at a fixed minimum update count"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "candidate_revision": "594012d6f37dcf9bb8d8c2e9c84085cfcd896d5d44843496901fb5d0019c617a",
+      "family": "r1r2",
+      "recipe_sha256": "5843de56a9fa816760d45f1a1f8a34724f069490e70e93002f6277a0501bb29d",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "ae_gan_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "dae63fd94fa38bfc2d69fd77ac5a7ea12f5e3235640947c7e1fc644154b6dcfd",
+          "execution_sha256": "51793c0afdf11972eadcf145c407e9a0e0e5373164392000a5c9434a5eb6d902"
+        },
+        "clockfree_audit": {
+          "blockers": [
+            "learning-rate annealing depends on completed steps and horizon"
+          ],
+          "dependencies": [],
+          "evaluation_sha256": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+          "execution_sha256": "fe4c39c44ffc1a2a67ab90c42b8c17b9f6983298271092f0151fb00ae0ed7413"
+        },
+        "clockfree_audit_measurement_v1": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "161e02e5577c8ed5652b3657a2ad44f94399de1bfd642b1fd7ab67afdae67ba1",
+          "execution_sha256": "183866431531b858c3fa3672c1db8ee9fc2835de24c4fbddc144b411970e9f05"
+        },
+        "cover_leftover": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "b2ae94c8ee239fc156b868c252cc8a6de27ae4baf84e2941e4b50be777b5cfcf",
+          "execution_sha256": "0f999bb64af88a98288eb1e005d93a518af2dc1f3f14115ec3e8fc641ff863c2"
+        },
+        "five_word_joint_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "five_word_joint_smoke"
+            }
+          ],
+          "evaluation_sha256": "f649721555eb9a62c9cb8cdef4489a30219b2e1d5cf0dc9de2e54bf2d2d73858",
+          "execution_sha256": "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64"
+        },
+        "five_word_joint_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "7a9f53a03b35ae133e2a6cea1d337cd0d2cce9f0b4aaab1c31958c549d6f3819",
+          "execution_sha256": "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b"
+        },
+        "gaussian1d_smoke": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+          "execution_sha256": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+        },
+        "gaussian1d_stability": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "gaussian1d_smoke"
+            }
+          ],
+          "evaluation_sha256": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+          "execution_sha256": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+        },
+        "grid100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63"
+        },
+        "grid100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "grid100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "ee28ba39d927623f9019204acc56b87c062bc169929e0bf64783020038ede53a"
+        },
+        "img_bars4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "4b5aad1ee6e0f0c48f04ed7f8e4dcdcc7e8793a2e23af8c51e4b6c2f4fa02935"
+        },
+        "img_blobs4": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+          "execution_sha256": "298972e63843ff4bc4a0975331c54a319328a146eee42c22cd9ebd04e5d008ba"
+        },
+        "img_intensity2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+          "execution_sha256": "328fe380b705d35436a3d9e0d7cea852fde468738cfa5ea862557c6a94a2355e"
+        },
+        "img_stripes2": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+          "execution_sha256": "a9e9e73979d705a8322af14ce25ce60225822927ce616acdc0509fd1456769e1"
+        },
+        "mid_scale_identity": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "bb2c877ae72b3b32e03cb53bdc98a9757cd067d1825365e7d1b7fe6cf6359109",
+          "execution_sha256": "93176e78d69f6e4b83838335116215b70f7cd3f0774351284fe87850bc163a02"
+        },
+        "mode_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+          "execution_sha256": "c82280fdb09f6920bf7927d4e6f288a33fb3b339e9c10a0c1c41d6d5addb3fe6"
+        },
+        "residual_student": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "883902cdc9d127e95ee6a347214460fee1321316d7faf030213d098e6511e533",
+          "execution_sha256": "d7cd16fae5f561c8d6d03bf84ddbf644261e9e2e1057400bc1b22dac030d416e"
+        },
+        "ring16_acquisition": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "9f5f3048f6ffee7e58e3bf50679ace7f4722e80a4a58b59aff9959fc3cb74409",
+          "execution_sha256": "c056837042b77a21059a98e0bc0c4b4c1858d26c34060192ea4242f196b74435"
+        },
+        "ring_extension": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "ring_hold"
+            }
+          ],
+          "evaluation_sha256": "2fc570b0aa0bb5e93a019d2ff455a1e72e2bafae6cb72b7a753deacd4fe61023",
+          "execution_sha256": "54083c008d70161ed05a0b7708a1e5f8fbb82dd03ec76c7134ae06ba5a4eee32"
+        },
+        "ring_hold": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "825dc1e7777b87847c21b62aba3d597c98ba65e207ae25b05b125b8e5b5fbfb5",
+          "execution_sha256": "a0498d1563822906a2beb1e49015411b8c57088243d115a923fd4db25d30d65a"
+        },
+        "rotated100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0"
+        },
+        "rotated100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "rotated100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "3e08214cdc99447ba857454ffa90a1564228c0db992e1203043784c040eab1c6"
+        },
+        "staggered100": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8"
+        },
+        "staggered100_14k": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "checkpoint",
+              "task": "staggered100"
+            },
+            {
+              "kind": "gate",
+              "task": "clockfree_audit"
+            }
+          ],
+          "evaluation_sha256": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+          "execution_sha256": "b8ebc46665e0f2332b9024905c658a78c29621d090bab7dfdee909d1e535aa0e"
+        },
+        "target_shift_recovery": {
+          "blockers": [],
+          "dependencies": [
+            {
+              "kind": "gate",
+              "task": "mode_hold"
+            }
+          ],
+          "evaluation_sha256": "7d9846a1c3a924eed7668fe6218845db03abf23389d9d2cb83baadf3046ebad1",
+          "execution_sha256": "18afee8cd542ba4bbc98012346941e42762467b886a54314930db66110755497"
+        },
+        "trajectory": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1ed8765017ecf4fc8dab63175f167e1400943fabeb39d53427a8bcabcf94ad69",
+          "execution_sha256": "c16242e1dcf3a4c21dde353eb3be8b561defa23d2d5ff29ce46cedecd2450a7d"
+        },
+        "two_pole": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "a1104733e912c56c00ff8d801c9865f5da8d5b2201b303b13ebbd0683d7cd861",
+          "execution_sha256": "3ace7d50833ae488e76ed23964f05141a5f4ae032add0bc8fe1f48ce2ac671b9"
+        },
+        "unipolar": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "100452fe990862ae79babc46fdb28716b215ba0737e612482b7ccc4b2efda575",
+          "execution_sha256": "19a8b74d7a2d1ebdf2566e66f581564cf8e8077aa3f83e30eed2c85555368335"
+        },
+        "unused_token_hold": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "1d1e72e3999dc8d6305f42137c089b11f680b53f4cf6594b60f718343bcfdfbb",
+          "execution_sha256": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0"
+        },
+        "vector_anisotropic": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "623f32f9d1ae946244ad2bffe85dbd517c3db87c88751a4741c3168a9d21515c"
+        },
+        "vector_overlap": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "618668c218868974f5ef1e2b20d796b85e5f04cffe00581858768917fd9e7f68"
+        },
+        "vector_spiral": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+          "execution_sha256": "9863763bb5fd75b76adfe8b67dbf505b9efa0703b209c40ea65bdc5f421e239c"
+        },
+        "vector_two_broad": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "9a0456116124f9bb7124fc36a9e8b880cd7cf9d30f6a182797030d497c4a6096"
+        },
+        "vector_unequal_mass": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+          "execution_sha256": "13fe78d36f6a307fed5e687c783021829f18d861abb2d11a0b70888b218eec09"
+        },
+        "vector_unequal_width": {
+          "blockers": [],
+          "dependencies": [],
+          "evaluation_sha256": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+          "execution_sha256": "f8b57f304ca3135dcb36ac2f42780506a2963112b46a8c49a45cc7dacd8f0cae"
+        }
+      }
+    }
+  ],
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "selected_formulation_task_preflight_only",
+  "source_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+}

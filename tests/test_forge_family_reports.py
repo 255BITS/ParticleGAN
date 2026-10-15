@@ -162,11 +162,23 @@ def test_hidden_inventory_entry_preserves_numerical_rows_without_navigation(repo
 def test_shared_tasks_count_per_view_and_diagnostics_never_fill_required_totals(report):
     cohort = generate(report)
     assert {tier: score(count) for tier, count in cohort["tiers"].items()} == {
-        "1": "2/2", "2": "1/2", "3": "0(*)/1"}
-    assert score(cohort["total"]) == "3(*)/5"
-    assert [score(view["total"]) for view in cohort["views"]] == ["1(*)/3", "2/2"]
+        "1": "2/2", "2": "1/2", "3": "0/1 (1 not run)"}
+    assert score(cohort["total"]) == "3/5 (1 not run)"
+    assert [score(view["total"]) for view in cohort["views"]] == ["1/3 (1 not run)", "2/2"]
     assert len(cohort["tasks"]) == 5  # Four unique requirements plus a diagnostic.
     assert cohort["tasks"]["diagnostic"]["status"] == "UNKNOWN"
+
+
+def test_unrun_and_incompatible_counts_are_disjoint_and_preserve_executed_failures(report):
+    root, publication = report
+    publication["rows"][0]["tasks"][3].update(status="BLOCKED", reason="required capability unavailable")
+    cohort = generate(report)
+    assert cohort["total"]["counts"] == {"BLOCKED": 1, "FAIL": 1, "PASS": 2, "UNKNOWN": 1}
+    assert cohort["total"]["not_run"] == cohort["total"]["incompatible"] == 1
+    assert score(cohort["total"]) == "2/5 (1 not run, 1 incompatible)"
+    assert score({"passed": 10, "total": 21, "not_run": 3, "incompatible": 6}) == "10/21 (3 not run, 6 incompatible)"
+    assert cohort["tasks"]["failed"]["execution_recorded"] is True
+    assert cohort["tasks"]["held"]["execution_recorded"] is False
 
 
 def test_completed_failure_has_no_marker_and_new_result_refreshes_every_total(report):
@@ -185,8 +197,8 @@ def test_unrun_family_defaults_to_zero_with_full_denominators(report):
     selected["tasks"] = []
     selected["attempt_ids"] = []
     cohort = generate(report)
-    assert score(cohort["total"]) == "0(*)/5"
-    assert [score(cohort["tiers"][tier]) for tier in ("1", "2", "3")] == ["0(*)/2", "0(*)/2", "0(*)/1"]
+    assert score(cohort["total"]) == "0/5 (5 not run)"
+    assert [score(cohort["tiers"][tier]) for tier in ("1", "2", "3")] == ["0/2 (2 not run)", "0/2 (2 not run)", "0/1 (1 not run)"]
 
 
 def test_changed_gate_preserves_recorded_failure_without_unrun_marker(report):
@@ -254,7 +266,7 @@ def test_no_task_execution_evidence_retains_marker_even_when_cohort_has_an_attem
     cohort = generate(report)
     assert cohort["tasks"]["missing"]["execution_recorded"] is False
     assert cohort["tasks"]["missing"]["attempt_id"] is None
-    assert score(cohort["views"][0]["tiers"]["3"]) == "0(*)/1"
+    assert score(cohort["views"][0]["tiers"]["3"]) == ("0/1 (1 incompatible)" if status == "BLOCKED" else "0/1 (1 not run)")
 
 
 def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
@@ -267,7 +279,7 @@ def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
     atomic_json(path, receipt)
     cohort = generate(report)
     assert cohort["tasks"]["failed"]["execution_recorded"] is False
-    assert score(cohort["views"][0]["tiers"]["2"]) == "0(*)/1"
+    assert score(cohort["views"][0]["tiers"]["2"]) == "0/1 (1 not run)"
     assert "worker launch failed" in next(iter(generated_pages(root, publication).values()))
 
 
@@ -342,7 +354,7 @@ def test_certified_repair_uses_successor_metrics_and_preserves_original_history_
     assert cohort["retry_history"][0]["attempt_id"] == "attempt-one"
     assert cohort["retry_history"][0]["superseded_by"] == "attempt-retry"
     assert cohort["retry_history"][0]["original_task_costs"] == {"failed": {"wall_seconds": 12.5}}
-    assert score(cohort["total"]) == "4(*)/5"
+    assert score(cohort["total"]) == "4/5 (1 not run)"
     text = next(iter(generated_pages(root, publication).values()))
     assert "Certified execution repair" in text and "attempt-one.json" in text and "attempt-retry.json" in text
     assert "original outcome and cost remain recorded" in text
@@ -413,7 +425,7 @@ def test_runtime_groups_never_sum_or_borrow_each_others_passes(report):
     publication["rows"].append(cpu)
     generate(report)
     cohorts = publication["family_progress"]["families"][0]["cohorts"]
-    assert [score(cohort["total"]) for cohort in cohorts] == ["3(*)/5", "0(*)/5"]
+    assert [score(cohort["total"]) for cohort in cohorts] == ["3/5 (1 not run)", "0/5 (5 not run)"]
     assert len(generated_pages(root, publication)) == 1
     publication["rows"].append(deepcopy(cpu))
     with pytest.raises(ValueError, match="multiple selected configurations"):
@@ -474,7 +486,7 @@ def test_separate_policy_view_retains_required_results_without_expanding_parent_
     assert updated["total"] == original["total"] and updated["tiers"] == original["tiers"]
     assert publication["family_progress"]["scoped_views"] == ["policy-coverage"]
     assert updated["scoped_views"][0]["tiers"]["1"] == {"passed": 1, "total": 1,
-        "incomplete": False, "counts": {"PASS": 1}}
+        "incomplete": False, "not_run": 0, "incompatible": 0, "counts": {"PASS": 1}}
     text = next(iter(generated_pages(root, publication).values()))
     assert "Separate cohort coverage (excluded from family totals)" in text
     assert "This ordinary lane retains its own required gates" in text
@@ -491,7 +503,7 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
         path.write_text(content)
     overview = root / "reports/forge/technique-inventory.md"
     text = render_leaderboard(root, publication, overview)
-    assert "**[3(*)/5]" in text and "↳ [alpha]" in text
+    assert "**[3/5 (1 not run)]" in text and "↳ [alpha]" in text
     table = text.split("| --- | ---: | ---: | ---: | ---: |", 1)[1].split("\n\n", 1)[0]
     for target in re.findall(r"\]\(([^)]+)\)", table):
         filename, _, fragment = target.partition("#")
@@ -605,7 +617,7 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
                    for task in row["tasks"] + row.get("nonrequired_tasks", []))
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
-    assert "including preflight-blocked tests" in text
+    assert "preflight-blocked without execution" in text
     assert "earn no pass credit" in text
     assert publication["rows"] == rows
 
@@ -680,9 +692,11 @@ def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_
         old_pins.setdefault(pin["trainer_family"], set()).add(pin["scientific_row_sha256"])
     for row in publication["historical_family_rows"]:
         assert scientific_row_hash(row) in old_pins[row["trainer_family"]]
-    aliases = publication["family_progress"]["historical_families"]
+    aliases = [family for family in publication["family_progress"]["historical_families"]
+               if family["id"].startswith("release07-gan-v3-")]
     historical_ids = {family["id"] for family in read_json(root / "configs/forge/trainer-families.json")["historical_families"]}
-    assert {family["id"] for family in aliases} == set(old_pins) & historical_ids
+    assert {family["id"] for family in aliases} == {
+        name for name in set(old_pins) & historical_ids if name.startswith("release07-gan-v3-")}
     assert not historical_ids & {family["id"] for family in publication["family_progress"]["families"]}
     pages = generated_pages(root, publication)
     for family in aliases:
@@ -706,4 +720,4 @@ def test_first_case_snapshot_is_archival_and_missing_later_reports_add_no_cells(
     assert archived["archived_snapshot"] is True
     assert archived["counts_scope"] == "AT_FIRST_ACCEPTED_CASE"
     assert archived["remaining_not_run"] == historical["remaining_not_run"]
-    assert score(progress["families"][0]["cohorts"][0]["total"]) == "3(*)/5"
+    assert score(progress["families"][0]["cohorts"][0]["total"]) == "3/5 (1 not run)"
