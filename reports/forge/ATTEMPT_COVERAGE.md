@@ -16,7 +16,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | E22 checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | ATLAS checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | BISPF continuation attempts before prior-metadata fix | 3/3 | 0 | 1 BLOCKED, 2 ERROR |
-| BISPF rebuilt checkpoints + matched-prior 14k diagnostics | 6/6 | 0 | 5 FAIL, 1 RUNNING |
+| BISPF rebuilt checkpoints + matched-prior 14k diagnostics | 6/6 | 0 | 6 FAIL |
 | signed-confidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
 | G-only coherent mean (original seed0) | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
 | kinetic-local-dualnorm-g-history-u-v1 | 29/29 | 0 | 11 BLOCKED, 11 FAIL, 7 PASS |
@@ -89,7 +89,7 @@ The checkpoint hasher now preserves diagnostic NaN/Inf values while retaining ev
 | bispf | BISPF continuation attempts before prior-metadata fix | grid100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
 | bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF continuation attempts before prior-metadata fix | rotated100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
-| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100_14k | RUNNING | — | Running |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF continuation attempts before prior-metadata fix | staggered100_14k | BLOCKED | 0 | checkpoint parent staggered100: unavailable |
 | e22 | E22 checkpoint-export repair (same recipe) | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1000 | recomputed complete live curve and terminal suffix |
 | e22 | E22 checkpoint-export repair (same recipe) | ring16_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1600 | recomputed complete live curve and terminal suffix |
