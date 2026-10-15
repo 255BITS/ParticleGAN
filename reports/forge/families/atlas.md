@@ -139,7 +139,7 @@ Selection: historical_incumbent. Retain the declared selected recipe after expli
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/23 (23 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | [clockfree_continuous](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/4 (4 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (3 incompatible, 4 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/30 (26 incompatible, 4 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -150,7 +150,7 @@ Selection: historical_incumbent. Retain the declared selected recipe after expli
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
 
@@ -2954,7 +2954,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-c195899a64af-adaptation) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [0/23 (1 not run, 22 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation) |
 | [clockfree_continuous](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0/4 (4 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/7 (5 not run, 2 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [0/30 (5 not run, 25 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous) |
@@ -2965,7 +2965,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
@@ -5765,7 +5765,7 @@ Selection: historical_incumbent. Exact executed-source parent cohort remains blo
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [0/23 (1 not run, 22 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0/4 (4 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/19 (19 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/7 (5 not run, 2 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0/30 (5 not run, 25 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
@@ -5776,7 +5776,7 @@ Selection: historical_incumbent. Exact executed-source parent cohort remains blo
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 

@@ -77,7 +77,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](halloween.md#cohort-cuda-c195899a64af-adaptation) | [0/3 (3 not run)](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/19 (19 not run)](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](halloween.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [0/23 (23 not run)](halloween.md#cohort-cuda-c195899a64af-adaptation) |
 | [clockfree_continuous](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0/4 (4 not run)](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/19 (19 not run)](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/7 (7 not run)](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [0/30 (30 not run)](halloween.md#cohort-cuda-c195899a64af-clockfree_continuous) |
@@ -88,7 +88,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](halloween.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](halloween.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](halloween.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](halloween.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](halloween.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 

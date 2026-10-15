@@ -81,7 +81,7 @@ def _row(root, page, label, target, tasks, requirements, *, scope=None, selected
         counts.append(_link(root, page, score(count(required)), target))
     required = set().union(*map(set, requirements.values()))
     counts.append(_link(root, page, score(count(required)), target))
-    return "| " + " | ".join(["↳ † " + _link(root, page, label, target), *counts]) + " |"
+    return "| " + " | ".join([_link(root, page, label, target), *counts]) + " |"
 
 
 def _confidence_rows(root, page, requirements):

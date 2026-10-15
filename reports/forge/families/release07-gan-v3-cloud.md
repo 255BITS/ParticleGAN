@@ -123,7 +123,7 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) | [0/19 (19 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) | [0/1 (1 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) | [0/23 (1 not run, 22 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) |
 | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0/4 (1 not run, 3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | [0/19 (19 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) | [0/7 (5 not run, 2 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | [0/30 (6 not run, 24 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) |
@@ -134,7 +134,7 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) | [0/7 (7 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) |
 

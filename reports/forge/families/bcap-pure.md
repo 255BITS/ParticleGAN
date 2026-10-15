@@ -132,7 +132,7 @@ These are whole configurations under their original sources. Their individual pa
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11/23 (1 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (4 blocked, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12/30 (4 blocked, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -143,7 +143,7 @@ These are whole configurations under their original sources. Their individual pa
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
 
@@ -3447,7 +3447,7 @@ These are whole configurations under their original sources. Their individual pa
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure.md#cohort-cuda-c195899a64af-adaptation) | [3/3](bcap-pure.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/19 (19 not run)](bcap-pure.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](bcap-pure.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [3/23 (20 not run)](bcap-pure.md#cohort-cuda-c195899a64af-adaptation) |
 | [clockfree_continuous](bcap-pure.md#cohort-cuda-c195899a64af-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/19 (19 not run)](bcap-pure.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [4/30 (26 not run)](bcap-pure.md#cohort-cuda-c195899a64af-clockfree_continuous) |
@@ -3458,7 +3458,7 @@ These are whole configurations under their original sources. Their individual pa
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
@@ -6363,7 +6363,7 @@ These are whole configurations under their original sources. Their individual pa
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap-pure.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/19 (19 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3/23 (20 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](bcap-pure.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/19 (19 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4/30 (26 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
@@ -6374,7 +6374,7 @@ These are whole configurations under their original sources. Their individual pa
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-pure.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 

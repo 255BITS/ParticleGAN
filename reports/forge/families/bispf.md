@@ -99,7 +99,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0/1 (1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12/23 (1 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-adaptation) |
 | [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/7 (3 not run, 1 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/30 (3 not run, 1 blocked, 3 diagnostic attempts)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
@@ -110,7 +110,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) |
 
