@@ -249,7 +249,7 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `3cc0aeaa3d3bb5aaf0c0fd5f73168b3311c39ff4ff99ba96c1d1c78289030102`.
+Publication input digest `427b8ed821a884d49945a7a11222b88c540a409069dbf301a522553cc7f9089e`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
 
 ## Scoped non-Atlas discoveries

@@ -1,0 +1,390 @@
+{
+  "blocked_unstarted": {
+    "ae_gan_hold_tier1_policy_selected_cloud_v1": [
+      "unsupported explicit component transport consumer"
+    ],
+    "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": [
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract"
+    ],
+    "two_pole_tier1_policy_selected_cloud_v1": [
+      "unsupported explicit component transport consumer"
+    ],
+    "unused_token_hold_tier1_policy_selected_cloud_v1": [
+      "unsupported explicit component transport consumer"
+    ]
+  },
+  "full_Martyn_or_release_qualified": false,
+  "global_winner": false,
+  "kind": "VERIFIED_SOURCE_SCOPED_ATLAS_COVERAGE",
+  "new_GPU_starts": 3,
+  "new_budget": 0,
+  "new_queue_seconds": 94.13518967101118,
+  "new_supervisor_seconds": 98.23526351500186,
+  "new_updates": 2624,
+  "paid_retries": 0,
+  "parent_qualification_credit": false,
+  "peak_actual_training": 1,
+  "raw_errors_not_regraded": true,
+  "rows": [
+    {
+      "attempt": "b1e6f8aaf1d7487696108fbb0f7322bf",
+      "candidate": "atlas",
+      "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+      "completed_steps": 1000,
+      "declared_updates": 1000,
+      "error": {
+        "message": "Out of range float values are not JSON compliant",
+        "type": "ValueError"
+      },
+      "final_logged_metrics": {
+        "cdf_ks": 0.029021421171091633,
+        "finite_fraction": 1.0,
+        "mean": 2.015275946490874,
+        "mean_error_sigma": 0.030551892981748097,
+        "sample_count": 4096,
+        "std": 0.5115333654786962,
+        "std_ratio": 1.0230667309573924
+      },
+      "final_logged_metrics_qualification_input": false,
+      "formal_gate_unchanged": true,
+      "log": {
+        "path": "[local reference omitted]",
+        "sha256": "6d1fd77fcb28aee7b3df87e2ba074a4fd2554d3914b6998b3fd2777050231bc9"
+      },
+      "logged_observations": 24,
+      "metrics": {},
+      "mode": "unchanged_Atlas_selected_cloud_coverage",
+      "new_updates": 1000,
+      "original_result": {
+        "canonical_sha256": "862c25749d604abd8510dcc1f4fbd575a8576d8bed5a4730f1bc56c3f9d9e0ff",
+        "path": "[local reference omitted]",
+        "sha256": "5023a16a9629646feccc68365539d75ff80b1e5253490f094b496ab778748af9"
+      },
+      "queue_seconds": 31.215179689010256,
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "source_byte_origin_verified": "dacf96749a4effc0648a7a0945266d508804110e",
+      "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+      "source_origin_commit_recorded": null,
+      "status": "INCOMPLETE",
+      "supervisor_seconds": 32.65575541500584,
+      "task": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt": "810dabfbc7724e789d9210e457978b0a",
+      "candidate": "atlas",
+      "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+      "completed_steps": 1600,
+      "declared_updates": 1600,
+      "error": {
+        "message": "Out of range float values are not JSON compliant",
+        "type": "ValueError"
+      },
+      "final_logged_metrics": {
+        "component_core_covariance_error": 0.6416533291339874,
+        "component_core_covariance_errors": [
+          0.24325944483280182,
+          0.3585502803325653,
+          0.7124906778335571,
+          0.3080764710903168,
+          0.5399978756904602,
+          0.8394147753715515,
+          0.8424839973449707,
+          0.514114260673523,
+          0.24307242035865784,
+          0.8024224042892456,
+          0.6473150849342346,
+          0.6428971290588379,
+          0.09658385813236237,
+          1.4755584001541138,
+          0.880537211894989,
+          1.1196789741516113
+        ],
+        "component_core_eigen_ratios": [
+          1.1848231554031372,
+          0.5521779656410217,
+          1.5217591524124146,
+          1.1144099235534668,
+          1.2050909996032715,
+          1.2410941123962402,
+          1.1070301532745361,
+          0.8292146921157837,
+          0.8317019939422607,
+          0.7478961944580078,
+          1.2764238119125366,
+          1.4314243793487549,
+          0.9617722034454346,
+          2.1958882808685303,
+          1.3831192255020142,
+          1.9915516376495361
+        ],
+        "component_core_min_eigen_ratio": 0.5521779656410217,
+        "component_counts": [
+          261,
+          199,
+          252,
+          254,
+          211,
+          259,
+          270,
+          260,
+          212,
+          272,
+          242,
+          273,
+          281,
+          263,
+          297,
+          290
+        ],
+        "component_covariance_error": 1.8121794760227203,
+        "component_covariance_errors": [
+          1.3187435865402222,
+          0.8105234503746033,
+          1.4652507305145264,
+          1.4634162187576294,
+          0.6282394528388977,
+          1.710959792137146,
+          1.4074082374572754,
+          1.2648967504501343,
+          1.019627571105957,
+          1.5458718538284302,
+          2.686553955078125,
+          3.304699182510376,
+          1.14087975025177,
+          4.299284934997559,
+          2.6786673069000244,
+          2.2498488426208496
+        ],
+        "component_mass": [
+          0.063720703125,
+          0.048583984375,
+          0.0615234375,
+          0.06201171875,
+          0.051513671875,
+          0.063232421875,
+          0.06591796875,
+          0.0634765625,
+          0.0517578125,
+          0.06640625,
+          0.05908203125,
+          0.066650390625,
+          0.068603515625,
+          0.064208984375,
+          0.072509765625,
+          0.07080078125
+        ],
+        "component_min_eigen_ratio": 0.8581597805023193,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.14942528307437897,
+          0.10050251334905624,
+          0.1785714328289032,
+          0.18503937125205994,
+          0.10900473594665527,
+          0.18918919563293457,
+          0.13703703880310059,
+          0.10769230872392654,
+          0.1037735864520073,
+          0.12132352590560913,
+          0.21900826692581177,
+          0.31501832604408264,
+          0.13523131608963013,
+          0.4334600865840912,
+          0.25589224696159363,
+          0.23103448748588562
+        ],
+        "covariance_error": 0.07597579807043076,
+        "hq": 0.810302734375,
+        "hq_component_counts": [
+          222,
+          179,
+          207,
+          207,
+          188,
+          210,
+          233,
+          232,
+          190,
+          239,
+          189,
+          187,
+          243,
+          149,
+          221,
+          223
+        ],
+        "mass_tv": 0.04052734375,
+        "max_component_spill": 0.4334600865840912,
+        "mean_error": 0.04298778250813484,
+        "min_hq_mass_ratio": 0.58203125,
+        "min_mass_ratio": 0.77734375,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03730243826664762,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "final_logged_metrics_qualification_input": false,
+      "formal_gate_unchanged": true,
+      "log": {
+        "path": "[local reference omitted]",
+        "sha256": "62db38f6cf357d138da2b95bc1ec350f93c3ced2f4f742feb992472413b40b49"
+      },
+      "logged_observations": 96,
+      "metrics": {},
+      "mode": "unchanged_Atlas_selected_cloud_coverage",
+      "new_updates": 1600,
+      "original_result": {
+        "canonical_sha256": "03dea35bab45ae0225d30ec593c0608c0e76fe3f5b9e5dafb9788981fa415834",
+        "path": "[local reference omitted]",
+        "sha256": "cfc34e05346c87c32ebef0ab2e0e74423a9b232f87a3f1c3a53e54f3605ba789"
+      },
+      "queue_seconds": 55.54519968800014,
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "source_byte_origin_verified": "dacf96749a4effc0648a7a0945266d508804110e",
+      "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+      "source_origin_commit_recorded": null,
+      "status": "INCOMPLETE",
+      "supervisor_seconds": 56.87503750700853,
+      "task": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt": "fcd5df9c44d64d1c9add83a0015700e9",
+      "candidate": "atlas",
+      "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+      "clock_comparisons": [
+        {
+          "changed_sha256": "d9e2e417b3d79734655adfa4d31660f868b395c71b7605ddd632db90d9872223",
+          "condition": "step_label",
+          "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+          "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+        },
+        {
+          "changed_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "condition": "horizon",
+          "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+          "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+        },
+        {
+          "changed_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "condition": "evaluation_cadence",
+          "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+          "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+        },
+        {
+          "changed_sha256": "9e480af99bf2affbed61c04f7f2ef5e2d3a0603f5733891983b503ae71613e6b",
+          "condition": "restart",
+          "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+          "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+          "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+        }
+      ],
+      "clock_source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "45ceabdc067fb420e163d3d4ac5a4edb0bb47d154c38c73865f95dabeaefcad7",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+          "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+          "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+        },
+        "unexplained_clock_dependencies": [
+          "continuous policy lifecycle needs a separate reviewed clock/state audit",
+          "KA2 switches from pure A to blended penalty at call 800",
+          "critic guard releases at a fixed minimum update count"
+        ]
+      },
+      "completed_steps": 24,
+      "declared_updates": 24,
+      "error": null,
+      "final_logged_metrics": null,
+      "final_logged_metrics_qualification_input": false,
+      "formal_gate_unchanged": true,
+      "log": {
+        "path": "[local reference omitted]",
+        "sha256": "871ae1efba5386b4f0aae0d309b7cf5a671ace0e2c778ccc9765dc8dc7b47531"
+      },
+      "logged_observations": 0,
+      "metrics": {},
+      "mode": "unchanged_Atlas_selected_cloud_coverage",
+      "new_updates": 24,
+      "original_result": {
+        "canonical_sha256": "4ceabbe8ab0441a975c6a9003b309b01ccf1ca6e557b2780ed75f771a285901c",
+        "path": "[local reference omitted]",
+        "sha256": "0959f53353e1dcf766302b2567bcd1472aaec525dcbddc937d69581804cf67bc"
+      },
+      "queue_seconds": 7.374810294000781,
+      "raw_status": "completed",
+      "reason": "step_label changed the update or common-prefix state",
+      "source_byte_origin_verified": "dacf96749a4effc0648a7a0945266d508804110e",
+      "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+      "source_origin_commit_recorded": null,
+      "status": "FAIL",
+      "supervisor_seconds": 8.70447059298749,
+      "task": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    }
+  ],
+  "schema_version": 1,
+  "source_byte_origin_verified": "dacf96749a4effc0648a7a0945266d508804110e",
+  "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+  "source_implementation_fixes": 0,
+  "source_members": 1215,
+  "status": "ALL_COMPATIBLE_CELLS_TERMINAL",
+  "terminal_host": {
+    "path": "[local reference omitted]",
+    "sha256": "7e0e84fc31ddaee6b7260d9aa6e186fcbae28afb3564cbab7f43662fd80ef2f3"
+  }
+}

@@ -1,0 +1,11 @@
+# Native Atlas real-gradient cap: preserved 80-update pilot
+
+This is the earlier separately preregistered seed-0 native Atlas pair, source `5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff`. It is copied here as historical evidence, not rerun or pooled into selected-cloud coverage.
+
+Native R1 ON fails: mean absolute position 0.005321078, gradient median 0.012204401, 0/24 passing observations. The real KA2-A RMS hinge cap passes: 0.460719913 / 0.405106425, 8/24 passing checks and terminal suffix 8. Both complete 80 updates and 24 observations with unchanged bounds (mean absolute position at least 0.3, gradient median at most 1).
+
+Only the real input-gradient component changes from squared normalized gradient to squared excess RMS over 1. Lambda remains 3; fake cap, Adam/AMSGrad, DV12, noise and later B/anchor/handover are preserved. This is not an output/logit penalty. The 80-update pilot does not test the call-800 handover. Historical Ring failures and unmeasured robustness/transfer prevent a global repair claim.
+
+[Original readout](READOUT.md), [compact result packet](INVENTORY-RECEIPT-PACKET.json), [original independent audit](ROUND-AUDIT.json), [preregistration](preregistration.json), [source/request binding](PRELAUNCH-BINDING.json), and [terminal receipt](TERMINAL-HOST-RECEIPT.json) are unmodified. Every stored result-packet file hash was freshly reverified. [Native GIF](gifs/astra-atlas-squared.gif) and [cap GIF](gifs/astra-atlas-rms-cap.gif) are copied from their original actual-training export, with zero new samples or updates.
+
+The original pair costs 18.490690234 queue / 21.830803280 supervisor seconds under its original ledger. They are not new costs or experiment starts in the three-attempt current coverage campaign. The original readout's timing and PR-reference comments remain historical context, not a current comparator audit.

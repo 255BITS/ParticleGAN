@@ -1,0 +1,15 @@
+{
+  "status": "PREPARED_NOT_RUNNING",
+  "created_unix": 1791867812.556163,
+  "source_digest": "5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff",
+  "preregistration_sha256": "f7faa35480c02718d352c97ae4cbc784c0c92c61b38c4738e07a20ca44bd4b69",
+  "preflight_sha256": "bc1147b8d4e488d848ff430a627f4c8cf88b34d5a30861410f5fe56febcc1622",
+  "requests": {
+    "squared-seed0": "1dff5ca41bf3a69867147767fdfb8f712d3542bad30c4a48ce55b28ea381454b",
+    "rms_cap-seed0": "b0c8bebe7d022215f9732a0f79e1144fcd2b361b9308d15fc888fb4a04f4e336"
+  },
+  "queue_cap": 6275.500788840014,
+  "physical_cap": 4747.1662061969255,
+  "full_queue_reservation": 600,
+  "full_wall_reservation": 640
+}

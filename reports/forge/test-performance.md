@@ -28,7 +28,7 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1154 test/protocol rows**, **537 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1161 test/protocol rows**, **538 complete recipe/source/runtime identities**; below: **166 rows**, **8 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
 <summary>Open all 166 selected-protocol rows and their exact recipe identities</summary>

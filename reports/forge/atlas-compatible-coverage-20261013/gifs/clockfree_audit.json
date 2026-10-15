@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "2f31ec132e53d2111b55a087aa768731821b139f88dca7264a1e929968f6ae5a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "115e7c659c6449c539dc46d949d7f0c8a65d013c8eb20cc2c37bc32e5f9b7305",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/atlas-compatible/queue/atlas-unchanged-policy-coverage-20261013/fcd5df9c44d64d1c9add83a0015700e9/clockfree-proof/comparisons.pt": "1067ebd2ff1c47e4f2fc021233845ec93665850f20cdaadd71820a24feaf1760"
+  },
+  "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+}

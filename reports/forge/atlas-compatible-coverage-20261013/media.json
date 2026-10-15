@@ -1,0 +1,93 @@
+{
+  "items": [
+    {
+      "attempt_id": "b1e6f8aaf1d7487696108fbb0f7322bf",
+      "family": "atlas",
+      "gif": "reports/forge/atlas-compatible-coverage-20261013/gifs/gaussian1d_acquisition.gif",
+      "gif_sha256": "83a167b2897f605f5e27aec016c654d06bd91e2f1aa2f21622074ab8e00025c9",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 24,
+      "observations_sha256": "51705a745ab8983eccf74942fc00954c1f75665984212c39a767d2e65646875b",
+      "optimizer_updates_added": 0,
+      "provenance_note": "Recovered already-scored observation arrays and stdout after checkpoint serialization error; formal gate remains INCOMPLETE, raw terminal ERROR. Declared sampler label is not a completed attestation.",
+      "qualification_input": false,
+      "recorded_grade": "INCOMPLETE",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_inputs": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/atlas-compatible/queue/atlas-unchanged-policy-coverage-20261013/b1e6f8aaf1d7487696108fbb0f7322bf/observed-samples.pt": "bb7c91481eaf0b0a914e15a2faa51d6505c5666e439a111f72ac676137c63474"
+      },
+      "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "810dabfbc7724e789d9210e457978b0a",
+      "family": "atlas",
+      "gif": "reports/forge/atlas-compatible-coverage-20261013/gifs/ring16_acquisition.gif",
+      "gif_sha256": "2a49017d608e11c6ebcec27a90a552e42503abff3b4c21814f7e57595cda4ea2",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 96,
+      "observations_sha256": "e3d45ad0424e288ac1a65a18e20a5c38668c826228ecb1d0932cccc330f72bdf",
+      "optimizer_updates_added": 0,
+      "provenance_note": "Recovered already-scored observation arrays and stdout after checkpoint serialization error; formal gate remains INCOMPLETE, raw terminal ERROR. Declared sampler label is not a completed attestation.",
+      "qualification_input": false,
+      "recorded_grade": "INCOMPLETE",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_inputs": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/atlas-compatible/queue/atlas-unchanged-policy-coverage-20261013/810dabfbc7724e789d9210e457978b0a/observed-samples.pt": "2089b3676db8c5cd8e850a2998d6ca19efb5d0c02a77017b2bd784aa27c18cd7"
+      },
+      "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "fcd5df9c44d64d1c9add83a0015700e9",
+      "family": "atlas",
+      "gif": "reports/forge/atlas-compatible-coverage-20261013/gifs/clockfree_audit.gif",
+      "gif_sha256": "2f31ec132e53d2111b55a087aa768731821b139f88dca7264a1e929968f6ae5a",
+      "kind": "actual_training_saved_observations_gif",
+      "observation_count": 4,
+      "observations_sha256": "115e7c659c6449c539dc46d949d7f0c8a65d013c8eb20cc2c37bc32e5f9b7305",
+      "optimizer_updates_added": 0,
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+      "sampling_draws_added": 0,
+      "schema_version": 1,
+      "selected_observation_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "source_inputs": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/atlas-compatible/queue/atlas-unchanged-policy-coverage-20261013/fcd5df9c44d64d1c9add83a0015700e9/clockfree-proof/comparisons.pt": "1067ebd2ff1c47e4f2fc021233845ec93665850f20cdaadd71820a24feaf1760"
+      },
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    }
+  ],
+  "qualification_input": false,
+  "schema": "atlas_source_scoped_actual_training_media_v1"
+}

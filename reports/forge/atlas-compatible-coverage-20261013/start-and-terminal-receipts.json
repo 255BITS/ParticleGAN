@@ -1,0 +1,207 @@
+{
+  "host": {
+    "all_owned_processes_absent": true,
+    "all_twelve_leases_free": true,
+    "leases": [
+      {
+        "free": true,
+        "inode": 3941,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 4005,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846966,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846967,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846968,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846969,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846970,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846971,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846972,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 846973,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 4006,
+        "path": "[local reference omitted]"
+      },
+      {
+        "free": true,
+        "inode": 4007,
+        "path": "[local reference omitted]"
+      }
+    ],
+    "no_unrelated_process_changes": true,
+    "owned_processes": [
+      {
+        "pid": 3657740,
+        "proc_exists": false
+      },
+      {
+        "pid": 3657827,
+        "proc_exists": false
+      },
+      {
+        "pid": 3659296,
+        "proc_exists": false
+      },
+      {
+        "pid": 3659583,
+        "proc_exists": false
+      },
+      {
+        "pid": 3666731,
+        "proc_exists": false
+      },
+      {
+        "pid": 3666810,
+        "proc_exists": false
+      },
+      {
+        "pid": 3666851,
+        "proc_exists": false
+      },
+      {
+        "pid": 3666981,
+        "proc_exists": false
+      }
+    ],
+    "unix": 1791902567.8016262
+  },
+  "scheduler_resume": {
+    "old_coordinator_PID": 3657627,
+    "owned_workers_running": 0,
+    "reason": "External coordinator counted blocked 900-second word cell in dispatch allowance. Restart only idle scheduler with exact prior actual spend and terminal attempts; no trainer/adapter/evaluator edits or paid retries.",
+    "scientific_source_changes": 0,
+    "unix": 1791902490.9114969
+  },
+  "starts": [
+    {
+      "PID": 3657740,
+      "attempt": "b1e6f8aaf1d7487696108fbb0f7322bf",
+      "candidate": "atlas",
+      "event": "STANDARD_FORGE_SUPERVISOR_STARTED",
+      "full_queue_reservation": 120,
+      "inode": 3941,
+      "lease": "[local reference omitted]",
+      "log": "[local reference omitted]",
+      "physical_GPU": 0,
+      "physical_reservation": 140,
+      "slot": 0,
+      "task": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1",
+      "unix": 1791902322.8150015
+    },
+    {
+      "PID": 3659296,
+      "attempt": "810dabfbc7724e789d9210e457978b0a",
+      "candidate": "atlas",
+      "event": "STANDARD_FORGE_SUPERVISOR_STARTED",
+      "full_queue_reservation": 300,
+      "inode": 3941,
+      "lease": "[local reference omitted]",
+      "log": "[local reference omitted]",
+      "physical_GPU": 0,
+      "physical_reservation": 320,
+      "slot": 0,
+      "task": "ring16_acquisition_tier1_policy_selected_cloud_v1",
+      "unix": 1791902355.8411932
+    },
+    {
+      "PID": 3666810,
+      "attempt": "fcd5df9c44d64d1c9add83a0015700e9",
+      "candidate": "atlas",
+      "event": "STANDARD_FORGE_SUPERVISOR_STARTED",
+      "full_queue_reservation": 300,
+      "inode": 3941,
+      "lease": "[local reference omitted]",
+      "log": "[local reference omitted]",
+      "physical_GPU": 0,
+      "physical_reservation": 320,
+      "slot": 0,
+      "task": "clockfree_audit_tier1_policy_selected_cloud_v1",
+      "unix": 1791902521.2906058
+    }
+  ],
+  "terminal": {
+    "PID": 3666731,
+    "all_owned_leases_released": true,
+    "charged_Popen_to_exit_seconds": 98.23526351500186,
+    "paid_retries": 0,
+    "peak_actual_runtime": 1,
+    "receipts": [
+      {
+        "attempt": "b1e6f8aaf1d7487696108fbb0f7322bf",
+        "charged_Popen_to_exit_seconds": 32.65575541500584,
+        "exit_code": 1,
+        "inode": 3941,
+        "lease": "[local reference omitted]",
+        "lease_metadata_unchanged": true,
+        "lease_released": true,
+        "log": "[local reference omitted]",
+        "physical_GPU": 0,
+        "slot": 0,
+        "supervisor_PID": 3657740
+      },
+      {
+        "attempt": "810dabfbc7724e789d9210e457978b0a",
+        "charged_Popen_to_exit_seconds": 56.87503750700853,
+        "exit_code": 1,
+        "inode": 3941,
+        "lease": "[local reference omitted]",
+        "lease_metadata_unchanged": true,
+        "lease_released": true,
+        "log": "[local reference omitted]",
+        "physical_GPU": 0,
+        "slot": 0,
+        "supervisor_PID": 3659296
+      },
+      {
+        "attempt": "fcd5df9c44d64d1c9add83a0015700e9",
+        "charged_Popen_to_exit_seconds": 8.70447059298749,
+        "exit_code": 0,
+        "inode": 3941,
+        "lease": "[local reference omitted]",
+        "lease_metadata_unchanged": true,
+        "lease_released": true,
+        "log": "[local reference omitted]",
+        "physical_GPU": 0,
+        "slot": 0,
+        "supervisor_PID": 3666810
+      }
+    ],
+    "unix": 1791902530.046149
+  }
+}

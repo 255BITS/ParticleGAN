@@ -1,0 +1,98 @@
+{
+  "unix": 1791867944.0292134,
+  "owned_processes": [
+    {
+      "pid": 2805010,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805399,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805404,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805407,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805410,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805706,
+      "proc_exists": false
+    },
+    {
+      "pid": 2805707,
+      "proc_exists": false
+    }
+  ],
+  "all_owned_processes_absent": true,
+  "leases": [
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot0.lock",
+      "inode": 3941,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot1.lock",
+      "inode": 4005,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot2.lock",
+      "inode": 846966,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot3.lock",
+      "inode": 846967,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot4.lock",
+      "inode": 846968,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot5.lock",
+      "inode": 846969,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot6.lock",
+      "inode": 846970,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot7.lock",
+      "inode": 846971,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot8.lock",
+      "inode": 846972,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot9.lock",
+      "inode": 846973,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot0.lock",
+      "inode": 4006,
+      "free": true
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot1.lock",
+      "inode": 4007,
+      "free": true
+    }
+  ],
+  "all_twelve_leases_free": true,
+  "no_unrelated_process_changes": true
+}
