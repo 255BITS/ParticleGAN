@@ -154,6 +154,18 @@ def tier_rows(root, page):
         requirements = {tier: set(names) for tier, names in record["requirements"].items()}
         rows.setdefault(record["family"], []).append(_row(root, page, record["label"],
             "reports/forge/tier-coverage-20261014/README.md", record["tasks"], requirements))
+    followup = Path("reports/forge/actual-missing-diagnostics-20261014/results.json")
+    if (Path(root) / followup).is_file():
+        measured = read_json(Path(root) / followup)
+        if (measured.get("schema") != "actual_missing_diagnostics_v1"
+                or measured.get("qualification_input") is not False
+                or measured.get("qualification_reuse") is not False
+                or measured.get("formulations_modified") is not False):
+            raise ValueError("actual execution readout must remain an unchanged-formulation diagnostic")
+        for record in measured["diagnostic_rows"]:
+            requirements = {tier: set(names) for tier, names in record["requirements"].items()}
+            rows.setdefault(record["family"], []).append(_row(root, page, record["label"],
+                str(followup.with_name("README.md")), record["tasks"], requirements))
     return rows
 
 

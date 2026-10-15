@@ -41,6 +41,14 @@ def test_new_audit_remains_a_separate_runtime_and_does_not_fill_ordinary_tier3()
     cohort = next(c for c in family["cohorts"] if c["anchor"] == family["current_cohort_anchor"])
     assert cohort["tiers"]["3"]["passed"] == 0
     assert cohort["tasks"]["clockfree_audit"]["execution_recorded"] is False
+    for other in publication["family_progress"]["families"]:
+        if other["id"] not in {"k3p", "ka2", "r1r2", "release07-gan-v3"}:
+            continue
+        current = next(c for c in other["cohorts"] if c["anchor"] == other["current_cohort_anchor"])
+        task = current["tasks"]["clockfree_audit"]
+        assert task["separate_diagnostic_executed"] is True
+        assert task["execution_recorded"] is False
+        assert current["tiers"]["3"]["incompatible"] == 0
 
 
 def test_saved_diagnostic_input_drift_is_rejected(tmp_path):

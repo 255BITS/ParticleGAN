@@ -140,7 +140,7 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/19 (19 not run)](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [3/23 (20 not run)](ka2.md#cohort-cuda-1bf9d7d34422-adaptation) |
-| [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (6 not run, 1 incompatible)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (25 not run, 1 incompatible)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
+| [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/19 (19 not run)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [3/30 (26 not run)](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
 | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/6](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/21 (21 not run)](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [5/29 (23 not run)](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
 | [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0/19 (19 not run)](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/2 (2 not run)](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [3/24 (21 not run)](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0/19 (19 not run)](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/2 (2 not run)](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [3/24 (21 not run)](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
@@ -1165,9 +1165,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Skipped incompatible test: learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; KA2 switches from pure A to blended penalty at call 800; critic guard releases at a fixed minimum update count
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
-Execution: **incompatible; skipped**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1).
 
@@ -2125,7 +2125,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
 Execution: **not run**.
 
@@ -2399,7 +2399,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
 Execution: **not run**.
 
