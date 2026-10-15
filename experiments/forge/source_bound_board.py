@@ -40,6 +40,8 @@ def main_board_rows(root, page):
     if not path.exists():
         return []
     data = validate_board(read_json(path))
+    from .confidence_coherence_scores import validate_original_rows, main_board_rows as paired_rows
+    validate_original_rows(root, data)
     lines = ['## Source-bound benchmark rows', '',
         'These rows are visible on the main board but do not replace a selected family configuration. '
         'Benchmark-task totals and within-task observation checks have different units. '
@@ -54,6 +56,7 @@ def main_board_rows(root, page):
     lines += ['', 'Recorded discriminator_stability revision9: acquisition is Tier1 and the complete stability benchmark is Tier2. '
         'Stationary retention, deadline reacquisition and shifted hold are phases of that same Tier2 task; '
         'they are not separate Tier3 benchmark passes. The proposed revision10 display split is not applied retrospectively.', '',
-        f'Machine row source: [source-bound-board.json](source-bound-board.json), SHA256 `{file_hash(path)}`.', '',
-        '## Selected family rows', '']
+        f'Machine row source: [source-bound-board.json](source-bound-board.json), SHA256 `{file_hash(path)}`.', '']
+    lines += paired_rows(root, page)
+    lines += ['## Selected family rows', '']
     return lines
