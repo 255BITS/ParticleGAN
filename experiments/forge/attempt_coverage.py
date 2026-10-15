@@ -93,16 +93,20 @@ def prepare(root, source, directory, *, include_research=False):
     previous = read_json(directory / "state.json") if (directory / "state.json").exists() else {"jobs": {}}
     jobs = {}
     selected = selected_tasks(publication)
+    source_map_path = directory / "source-roots.json"
+    source_map = read_json(source_map_path) if source_map_path.is_file() else {}
     missing = [{"candidate_id": selection["candidate_id"], "tasks": tasks,
+                "source_root": source_map.get(family, str(source)),
                 "output": str(directory / "requests" / f"{family}.json")}
                for family, selection, tasks in selected
                if not (directory / "requests" / f"{family}.json").exists()
                or not read_json(directory / "requests" / f"{family}.json").get("source", {}).get("snapshot_path")]
     if missing:
-        spec = directory / "requests" / "prepare.json"
-        atomic_json(spec, {"source_root": str(source), "requests": missing})
-        subprocess.run([sys.executable, str(WORKER), "prepare", str(spec)], check=True,
-                       stdout=subprocess.DEVNULL, timeout=600)
+        for source_path in sorted({item["source_root"] for item in missing}):
+            spec = directory / "requests" / (stable_hash(source_path)[:12] + "-prepare.json")
+            atomic_json(spec, {"source_root": source_path, "requests": [item for item in missing if item["source_root"] == source_path]})
+            subprocess.run([sys.executable, str(WORKER), "prepare", str(spec)], check=True,
+                           stdout=subprocess.DEVNULL, timeout=600)
     for family, selection, tasks in selected:
         request_path = directory / "requests" / f"{family}.json"
         request = read_json(request_path)
@@ -112,8 +116,9 @@ def prepare(root, source, directory, *, include_research=False):
         for task in tasks:
             card = request["tasks"][task]
             execution, evaluation = task_execution_fingerprint(card), task_evaluation_fingerprint(card)
-            pin = pins[family]["tasks"][task]
-            if (execution != pin["execution_sha256"] or evaluation != pin["evaluation_sha256"]):
+            binding = selection["bindings"]["task_contracts"].get(task)
+            pin = (pins[family]["tasks"][task] if family in pins else publication["task_contracts"].get(binding))
+            if pin and (execution != pin["execution_sha256"] or evaluation != pin["evaluation_sha256"]):
                 raise ValueError(f"{family}/{task}: task differs from the selected frozen contract")
             key = identity(request["source"]["digest"], request["candidate_revision"], task, execution, evaluation)
             job = {"key": key, "family": family, "candidate_id": selection["candidate_id"],
@@ -128,6 +133,12 @@ def prepare(root, source, directory, *, include_research=False):
                 job.update({k: v for k, v in old.items() if k not in job or k == "status"})
             elif key in retained:
                 job.update(retained[key])
+            else:
+                recorded = next((r for r in selection["tasks"] + selection.get("nonrequired_tasks", [])
+                                 if r["task_id"] == task and r["status"] in {"PASS", "FAIL"}), None)
+                if recorded:
+                    job.update(status=recorded["status"], attempted=True, origin="retained_selected_row",
+                               diagnostic=False, evidence="reports/forge/technique-inventory.json")
             jobs[key] = job
     include_research = include_research or previous.get("include_research", False)
     if include_research:
@@ -198,6 +209,8 @@ def publish(root, state):
                   "`--refresh` regenerates the local main leaderboard during work and when the queue drains. "
                   "An optional `--completion-hook ops/publish_attempt_coverage.py` publishes the completed batch "
                   "through a generated-report-only commit and a checked GitHub PR on the dedicated branch. "
+                  "For multiple selected source cohorts, `RUN_DIRECTORY/source-roots.json` maps family IDs "
+                  "to their frozen checkouts; every source digest and candidate revision is checked. "
                   "A changed source or recipe requires its matching frozen checkout; "
                   "a mismatched source stops preparation. Interrupted attempts are retained for review, not replayed. "
                   "The research intake includes the 19 seed-zero variants already shown in the leaderboard; "

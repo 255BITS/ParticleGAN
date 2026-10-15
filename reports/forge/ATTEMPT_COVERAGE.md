@@ -6,6 +6,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | --- | ---: | ---: | --- |
 | atlas | 35/35 | 0 | 35 BLOCKED |
 | bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
+| bispf | 28/35 | 7 | 11 FAIL, 17 PASS, 7 PENDING |
 | e22 | 35/35 | 0 | 35 BLOCKED |
 | k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
 | ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
@@ -36,8 +37,8 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 The runner reuses matched source/recipe/task receipts, resumes pending work, and never replays a completed attempt automatically. It uses at most four workers, two per GPU. Each child retains the task's original timeout. Raw logs and checkpoints are stored outside Git in the configured state directory.
 
 ```sh
-python -m experiments.forge.attempt_coverage plan --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
-python -m experiments.forge.attempt_coverage run --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --refresh
+python -m experiments.forge.attempt_coverage plan --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --include-research
+python -m experiments.forge.attempt_coverage run --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --include-research --refresh
 python -m experiments.forge.attempt_coverage status --state-root RUN_DIRECTORY
 ```
 

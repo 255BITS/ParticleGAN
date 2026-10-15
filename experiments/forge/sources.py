@@ -32,6 +32,29 @@ def runtime_manifest() -> dict:
             "system": platform.system(), "machine": platform.machine(), "packages": packages}
 
 
+from functools import lru_cache
+
+
+@lru_cache(maxsize=4)
+def _cpu_model() -> str:
+    cpu = platform.processor()
+    path = Path("/proc/cpuinfo")
+    if path.exists():
+        cpu = next((line.split(":", 1)[1].strip() for line in path.read_text().splitlines()
+                    if line.startswith("model name")), cpu)
+    return cpu
+
+
+@lru_cache(maxsize=4)
+def _gpu_models() -> frozenset[tuple[str, ...]] | None:
+    try:
+        rows = subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version,compute_cap",
+                                        "--format=csv,noheader,nounits"], text=True, stderr=subprocess.DEVNULL)
+        return frozenset(tuple(v.strip() for v in line.split(",")) for line in rows.splitlines() if line.strip())
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+
+
 def compute_profile(backend: str, cuda_model: str | None = None, *, threads: int = 1) -> dict:
     """Scientific hardware cohort, independent of physical GPU index."""
     if backend not in {"cpu", "cuda"}:
@@ -41,19 +64,12 @@ def compute_profile(backend: str, cuda_model: str | None = None, *, threads: int
     result = {"backend": backend, "threads": threads, "deterministic": True, "tf32": False,
               "autograd_multithreading_enabled": False}
     if backend == "cpu":
-        cpu = platform.processor()
-        path = Path("/proc/cpuinfo")
-        if path.exists():
-            cpu = next((line.split(":", 1)[1].strip() for line in path.read_text().splitlines()
-                        if line.startswith("model name")), cpu)
-        result.update(model=cpu, machine=platform.machine())
+        result.update(model=_cpu_model(), machine=platform.machine())
         return result
-    try:
-        rows = subprocess.check_output(["nvidia-smi", "--query-gpu=name,driver_version,compute_cap",
-                                        "--format=csv,noheader,nounits"], text=True, stderr=subprocess.DEVNULL)
-        models = {tuple(v.strip() for v in line.split(",")) for line in rows.splitlines() if line.strip()}
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    queried = _gpu_models()
+    if queried is None:
         return {**result, "model": cuda_model, "availability": "unavailable"}
+    models = set(queried)
     if cuda_model:
         models = {row for row in models if row[0] == cuda_model}
     if len(models) != 1:

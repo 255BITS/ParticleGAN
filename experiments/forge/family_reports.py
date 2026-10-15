@@ -696,7 +696,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
             attempt_key = (selected.get("bindings", {}).get("source_digest"), selected["candidate_revision"],
-                           name, contract.get("execution_sha256"), contract.get("evaluation_sha256"))
+                           name, contract.get("execution_sha256", task_execution_fingerprint(task) if task else None),
+                           contract.get("evaluation_sha256", task_evaluation_fingerprint(task) if task else None))
             if attempt_key in run_attempts:
                 results[name]["run_attempt"] = deepcopy(run_attempts[attempt_key])
             supported = task_support.get(name)

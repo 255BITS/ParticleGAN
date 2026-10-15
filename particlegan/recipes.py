@@ -250,8 +250,8 @@ class Recipe:
         CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
                                confinement=self.prior_coulomb_confinement,
                                neighbors=self.prior_coulomb_neighbors)
-        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether", "initial_mmd"):
-            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether or initial_mmd")
+        if self.prior_regularizer not in ("vicreg", "none", "coulomb", "sigreg", "moment_tether", "initial_mmd", "sbnp"):
+            raise ValueError("prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether, initial_mmd or sbnp")
         for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
             if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
                 raise ValueError(f"{key} must be an integer >= {minimum}")
@@ -349,7 +349,7 @@ class Recipe:
                 isinstance(self.reg_coeff_end, bool) or not math.isfinite(self.reg_coeff_end) or self.reg_coeff_end < 0):
             raise ValueError("reg_coeff_end must be None or finite and nonnegative")
         if self.optimizer_family != "formulation":
-            if self.reg_arm not in ("a_r1r2", "b_cap"):
+            if self.reg_arm not in ("a_r1r2", "b_cap") and self.critic_formulation != "bispf":
                 raise ValueError("plain optimizers require an explicit fixed R1/R2 or BCap reg_arm")
             if (self.d_guard_ratio != 0 or self.reg_anchor_weight != 0
                     or self.latent_damping_max_rate != 0 or self.direct_particle_gain):
@@ -366,11 +366,16 @@ class Recipe:
             raise ValueError("scheduled reg_coeff requires a fixed R1/R2 or BCap reg_arm")
         if (self.beta2_end is not None or self.reg_coeff_end is not None) and self.total_steps is None:
             raise ValueError("recipe cosine schedules require a declared total_steps horizon")
-        if self.critic_formulation not in ("ka2", "k3p", "bcap"):
-            raise ValueError("critic_formulation must be ka2, k3p or bcap")
+        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf"):
+            raise ValueError("critic_formulation must be ka2, k3p, bcap or bispf")
         if self.critic_formulation == "bcap" and (self.optimizer_family == "formulation" or self.reg_arm != "b_cap"):
             raise ValueError("bcap formulation requires a plain optimizer and reg_arm='b_cap'")
-        if self.reg_arm is not None and self.critic_formulation != "bcap":
+        if self.critic_formulation == "bispf":
+            if self.reg_arm is not None:
+                raise ValueError("bispf formulation does not accept a legacy reg_arm")
+            if self.reg_anchor_weight != 0:
+                raise ValueError("bispf formulation uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if self.reg_arm is not None and self.critic_formulation not in ("bcap", "bispf"):
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
             object.__setattr__(self, "critic_formulation", "k3p")
@@ -655,6 +660,9 @@ class Recipe:
 
     def make_loss(self):
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
+        if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
+            from .bispf import SinkhornRelativisticLoss
+            return SinkhornRelativisticLoss(labels=self.loss_labels)
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
@@ -691,7 +699,9 @@ class Recipe:
         recipe's ``coeff``, ``kappa``, ``lazy_k``,
         ``anchor_weight`` or ``r1_real`` for this penalty.
         """
-        if self.effective_critic_formulation in ("k3p", "bcap"):
+        if self.effective_critic_formulation == "bispf":
+            from .bispf import BISPFCriticPenalty as CriticPenalty
+        elif self.effective_critic_formulation in ("k3p", "bcap"):
             from .k3p import CriticPenalty
         else:
             from .ka2 import CriticPenalty
@@ -700,8 +710,16 @@ class Recipe:
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
-        if self.critic_formulation not in ("ka2", "k3p", "bcap"):
-            raise ValueError("critic_formulation must be ka2, k3p or bcap")
+        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf"):
+            raise ValueError("critic_formulation must be ka2, k3p, bcap or bispf")
+        if self.effective_critic_formulation == "bispf":
+            if not self.critic_r1_real:
+                raise ValueError("critic_r1_real=False requires the KA2 formulation")
+            options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+                       "anchor_weight": self.reg_anchor_weight, **overrides}
+            from .bispf import _BISPFPenaltyKernel
+            _BISPFPenaltyKernel(**options)
+            return options
         if self.effective_critic_formulation in ("k3p", "bcap"):
             if not self.critic_r1_real:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
@@ -751,6 +769,10 @@ class Recipe:
             if self.optimizer_convolution == "per_offset":
                 params = convolution_parameter_groups(params, [critic], family=self.optimizer_family)
             return make_normalized_optimizer(self, params, critic=critic, **options)
+        if self.effective_critic_formulation == "bispf":
+            from .bispf import BISPFCriticAdam
+            return BISPFCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                                   guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
             return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
@@ -852,8 +874,8 @@ class Recipe:
     @property
     def effective_critic_formulation(self):
         """Explicit legacy arms retain their K3P optimizer and penalty family."""
-        if self.critic_formulation == "bcap":
-            return "bcap"
+        if self.critic_formulation in ("bcap", "bispf"):
+            return self.critic_formulation
         return "k3p" if self.reg_arm is not None else self.critic_formulation
 
     @property
@@ -868,6 +890,13 @@ class Recipe:
             prior = reference
         if reference is None:
             reference = prior
+        if self.prior_regularizer == "sbnp":
+            from .bispf import SBNPPriorRegularizer
+            options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
+                       "eps": self.prior_reg_eps, **overrides}
+            if self.prior_update == "frozen":
+                options["weight"] = 0.
+            return SBNPPriorRegularizer(reference, **options)
         if self.prior_regularizer == "coulomb":
             from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference
             options = {"weight": self.prior_reg, "softening": self.prior_coulomb_softening,
@@ -971,7 +1000,7 @@ class Recipe:
         if self.prior_update == "learned":
             if not prior.z.requires_grad:
                 raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
-            if self.prior_regularizer == "moment_tether" and self.prior_reg > 0:
+            if self.prior_regularizer in ("moment_tether", "sbnp") and self.prior_reg > 0:
                 from .moment_tether import capture_initial_moments
                 capture_initial_moments(prior)
         elif prior.z.requires_grad:
@@ -1090,6 +1119,10 @@ def get_recipe(name="gan", *, trainer=None, **overrides):
     recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
+    ``"bispf"`` selects the Born-Infeld Sinkhorn Particle Flow formulation
+    (scale-free Sinkhorn relativistic pairing, Elastic Born-Infeld chord
+    regularization, zero-mean logit gauge with no EMA critic copy, SBNP
+    prior regularization, and constant learning rates).
     No research configuration file is read at runtime.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
@@ -1121,6 +1154,16 @@ def get_recipe(name="gan", *, trainer=None, **overrides):
                      latent_damping_max_rate=0., direct_particle_gain=False,
                      prior_reg=0., ema_decay=0., input_noise_std=0., output_noise_std=0.,
                      output_noise_warmup=0.),
+        "bispf": dict(critic_formulation="bispf", optimizer_family="formulation",
+                      reg_coeff=1., reg_kappa=1., reg_every=1,
+                      lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .999),
+                      lr_schedule="constant", lr_floor=1., network_lr_floor=1.,
+                      network_lr_horizon_cap=None, beta2_end=None, reg_coeff_end=None,
+                      d_guard_ratio=0., reg_anchor_weight=0.,
+                      latent_damping_max_rate=0., direct_particle_gain=False,
+                      prior_regularizer="sbnp", prior_reg=0.05,
+                      ema_decay=0., input_noise_std=0., output_noise_std=0.,
+                      output_noise_warmup=0.),
         "e22": dict(continuous_policy="dv12", total_steps=None,
                     lr_control="stationarity", amsgrad=True, reg_coeff=3.0,
                     input_noise_std=0.0, output_noise_warmup=0.0,

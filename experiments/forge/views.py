@@ -676,7 +676,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             if dep["kind"] == "checkpoint":
                 child = selected.get(name, {}).get("evidence", {})
                 parent = selected.get(dep["task"], {}).get("evidence", {})
-                a, b = child.get("continuity", {}), parent.get("continuity", {})
+                a, b = child.get("continuity") or {}, parent.get("continuity") or {}
                 uninterrupted = a.get("mode") == b.get("mode") == "uninterrupted" and a.get("run_id") and a.get("run_id") == b.get("run_id")
                 native_resume = False
                 if tasks[name]["adapter"] == "native100_continuation":

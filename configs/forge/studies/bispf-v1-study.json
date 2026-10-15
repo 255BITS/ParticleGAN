@@ -1,0 +1,72 @@
+{
+  "campaign": {
+    "budget_seconds": 60000.0,
+    "candidate_budget_seconds": 60000.0,
+    "id": "bispf-v1-study"
+  },
+  "candidate": "bispf-v1",
+  "competing_explanation": "If Sinkhorn transport chords and degree-of-freedom-aware SBNP regularization only shifted the prior tether trade-off without stabilizing mode capture, either mode_hold would fail its terminal passing suffix (>= 5) or five_word_joint_hold / ring_hold would fail under constant learning rates.",
+  "control": {
+    "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "Born-Infeld Sinkhorn Particle Flow (critic_formulation=bispf, prior_regularizer=sbnp, prior_reg=0.01) passes all 6 Tier 1 gates, repairs mode_hold in Tier 2 while preserving all 9 BCAP leader Tier 2 passes (including five_word_joint_hold), and passes both Tier 3 endurance gates (ring_hold and ring_extension) under constant learning rates.",
+  "id": "bispf-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.95
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "gate_status": "FAIL",
+        "observation_count": 24
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/repair-witness.json",
+      "selector": [
+        "witnesses",
+        "control",
+        "mode_hold"
+      ],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "gate_status": "FAIL",
+        "original_valid_receipt": true
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/repair-witness.json",
+      "selector": [
+        "witnesses",
+        "moment_tether_0.01",
+        "five_word_joint_hold"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 3,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
