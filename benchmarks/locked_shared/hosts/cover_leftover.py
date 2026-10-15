@@ -526,7 +526,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
             jitter_m = (fake_m - neu - residual.delta(-1.0) - prior_m.z[rows_m]).detach()
         opt_g.zero_grad()
         protected = (protected_adversarial, cover) if cover_w > 0.0 else (protected_adversarial,)
-        constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
+        constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator, adversarial_loss=protected_adversarial)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         ema.update(generator_params)

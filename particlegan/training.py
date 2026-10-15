@@ -420,7 +420,8 @@ class GANTrainer:
                     logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
                     return (self.loss.g_loss(logits, real_logits),)
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
+                                         protected_evaluator=protected_evaluator,
+                                         adversarial_loss=loss_gan)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()

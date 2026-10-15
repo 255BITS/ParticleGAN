@@ -29,7 +29,7 @@ TRAINER_STREAM_BINDINGS = {
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
-    "policy_controls", "policy_serving", "served_sampling",
+    "policy_controls", "policy_serving", "served_sampling", "generator_component_history",
 )
 COMPONENT_OBJECTIVE_HOSTS = frozenset({
     "two_pole", "unused_token_hold", "ae_gan_hold", "trajectory",
@@ -202,6 +202,11 @@ def task_policy_blockers(task, candidate):
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
+    if (recipe.generator_history_mode != "none"
+            and task.get("execution", {}).get("execution_path") == "public_components"
+            and task.get("execution", {}).get("host") not in COMPONENT_OBJECTIVE_HOSTS):
+        return [f"{task.get('id', '<task>')}: generator component-history adversarial decomposition "
+                "is unavailable for this public_components host"]
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import blockers
         return blockers(task, recipe)
@@ -431,6 +436,7 @@ class FormulationContext:
                 "policy_controls": policy_controls(self.recipe),
                 "policy_serving": self.recipe.serve_average > 0,
                 "served_sampling": bool(self.policy_task) and policy_controls(self.recipe),
+                "generator_component_history": self.recipe.generator_history_mode != "none",
                 **{name: True for name in self.extension_values}}
 
     def _check_capabilities(self):

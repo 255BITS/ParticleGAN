@@ -1097,6 +1097,11 @@ class WordFixture:
             groups = [
                 dict(params=list(self.G.parameters()), lr=self.recipe.lr),
                 dict(params=list(self.E.parameters()), lr=self.recipe.lr)]
+            if self.recipe.generator_history_mode != "none":
+                # Explicit optimizer ownership keeps encoder gradients fresh.
+                # Inactive recipes preserve their original checkpoint groups.
+                groups[0]["role"] = "generator"
+                groups[1]["role"] = "encoder"
             if self.prior.z.requires_grad:
                 groups.append(dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
                     betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas))
@@ -1176,7 +1181,7 @@ class WordFixture:
                     self.noisy_critic(_join_words(real_words, self.E(real_words)))),)
             from particlegan.optim.constraint_geometry import constraint_geometry_backward
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
+                                         protected_evaluator=protected_evaluator, adversarial_loss=loss_gan)
             self.policy.after_generator_backward(loss_gan=loss_gan.detach(), loss_critic=adversarial_d.detach())
             self.opt_g.step()
             self.policy.after_generator_step()

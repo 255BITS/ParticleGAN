@@ -1,0 +1,149 @@
+{
+  "arms": [
+    "T",
+    "W",
+    "S"
+  ],
+  "cases": [
+    {
+      "available_panel_checks_status": "PASS",
+      "baseline_gradient_replay": "exact current-vs-source scalars/gradients before every panel",
+      "finite_transport_comparison": "Strict numerical increase of post-proposal global+local transport loss over the same fixed panel before proposal; no tolerance applied to this descriptive count.",
+      "finite_transport_loss_increase_count": {
+        "S": 19,
+        "T": 18,
+        "W": 17
+      },
+      "fresh_transport_first_order_reversal_count": 0,
+      "identical_T_S_generator_panels": 1,
+      "name": "gaussian1000",
+      "noninitial_S_effect_panels": 31,
+      "original_window_credit": true,
+      "panel_count": 32,
+      "raw_output_sha256": "34f242fed69672a2b9901a4cd5bc900e84a139de4a6c0318a66cb793258ccdbe",
+      "synthetic": false
+    },
+    {
+      "available_panel_checks_status": "PASS",
+      "baseline_gradient_replay": "exact current-vs-source scalars/gradients before every panel",
+      "finite_transport_comparison": "Strict numerical increase of post-proposal global+local transport loss over the same fixed panel before proposal; no tolerance applied to this descriptive count.",
+      "finite_transport_loss_increase_count": {
+        "S": 0,
+        "T": 0,
+        "W": 0
+      },
+      "fresh_transport_first_order_reversal_count": 0,
+      "identical_T_S_generator_panels": 1,
+      "name": "gaussian4000",
+      "noninitial_S_effect_panels": 31,
+      "original_window_credit": true,
+      "panel_count": 32,
+      "raw_output_sha256": "aac7eb0b597e154343e2e86287fb49ea3d618d298cd5f373e3f4186de3737d98",
+      "synthetic": false
+    },
+    {
+      "available_panel_checks_status": "PASS",
+      "baseline_gradient_replay": "exact current-vs-source scalars/gradients before every panel",
+      "finite_transport_comparison": "Strict numerical increase of post-proposal global+local transport loss over the same fixed panel before proposal; no tolerance applied to this descriptive count.",
+      "finite_transport_loss_increase_count": {
+        "S": 18,
+        "T": 18,
+        "W": 10
+      },
+      "fresh_transport_first_order_reversal_count": 0,
+      "identical_T_S_generator_panels": 1,
+      "name": "gaussian6000",
+      "noninitial_S_effect_panels": 31,
+      "original_window_credit": true,
+      "panel_count": 32,
+      "raw_output_sha256": "c17c789c0e6e733931c45de89b580375fb8e74857da6c2cba0f7741bd14b26f3",
+      "synthetic": false
+    },
+    {
+      "available_panel_checks_status": "PASS",
+      "baseline_gradient_replay": "exact current-vs-source scalars/gradients before every panel",
+      "finite_transport_comparison": "Strict numerical increase of post-proposal global+local transport loss over the same fixed panel before proposal; no tolerance applied to this descriptive count.",
+      "finite_transport_loss_increase_count": {
+        "S": 14,
+        "T": 14,
+        "W": 10
+      },
+      "fresh_transport_first_order_reversal_count": 0,
+      "identical_T_S_generator_panels": 1,
+      "name": "unequal1200",
+      "noninitial_S_effect_panels": 31,
+      "original_window_credit": true,
+      "panel_count": 32,
+      "raw_output_sha256": "25172b64122b1067ab0fbcdd6dc24e72c2a7ed2fc66b7bec47e28b814429d05b",
+      "synthetic": false
+    },
+    {
+      "available_panel_checks_status": "PASS",
+      "baseline_gradient_replay": "exact current-vs-source scalars/gradients before every panel",
+      "finite_transport_comparison": "Strict numerical increase of post-proposal global+local transport loss over the same fixed panel before proposal; no tolerance applied to this descriptive count.",
+      "finite_transport_loss_increase_count": {
+        "S": 0,
+        "T": 0,
+        "W": 0
+      },
+      "fresh_transport_first_order_reversal_count": 0,
+      "identical_T_S_generator_panels": 32,
+      "name": "synthetic-repeated-real",
+      "noninitial_S_effect_panels": 0,
+      "original_window_credit": false,
+      "panel_count": 32,
+      "raw_output_sha256": "39ed7113176aaa176195037d48fab2c4f65bfa44a427aaef250ac53b87b700e2",
+      "synthetic": true
+    }
+  ],
+  "counterfactual_process_wall_seconds": 13.10312305399566,
+  "evidence_scope": "available-state software/mechanism diagnostic only",
+  "finite_proposals": 480,
+  "interpretation": [
+    "S changed the actual normalized generator displacement on all 31 noninitial real panels in each of four available windows.",
+    "No tested panel showed the registered first-order reversal of a useful fresh transport correction.",
+    "Finite transport loss increased on many real panels despite the first-order check; broad finite-step stability and superiority over T or W are not established.",
+    "The synthetic repeated-real control has no original-window credit and T/S generator displacements matched on all 32 panels.",
+    "Each proposal restored the original model state; only designated channel history advanced between panel observations. Critic, schedule and original RNG streams did not advance."
+  ],
+  "model_trajectory_continued": false,
+  "preflight_file_sha256": "c90de15ba0f5056f62a5e3a810c5ff3887cc3901431d457c1c3773f92fc2fb45",
+  "qualification_input": false,
+  "raw_evidence": {
+    "current-counterfactual-maps.json": {
+      "bytes": 1172273,
+      "sha256": "cf10b230a90d22590fba18b69d2df4e341e29bee018d5ccc71b24a9b60e08315",
+      "workspace_relative_path": "../../../../combination-review-20261014/execution-probes/current-counterfactual-maps.json"
+    },
+    "current_counterfactual_maps.py": {
+      "bytes": 22353,
+      "sha256": "9dcb8829efa77a2659552636e50c46d249cc6973f0b4b7154272435232c8b43c",
+      "workspace_relative_path": "../../../../combination-review-20261014/execution-probes/current_counterfactual_maps.py"
+    },
+    "original-gradient-panels.json": {
+      "bytes": 56244,
+      "sha256": "842a308c952c9673a9e947e86f946cd8621371cb00e8f84cc513e9135de3dafd",
+      "workspace_relative_path": "../../../../combination-review-20261014/execution-probes/original-gradient-panels.json"
+    },
+    "original-restore-parity.json": {
+      "bytes": 6299,
+      "sha256": "6b5575fa8ee17064e20276ffd26f000d5a2f3128bcb63123a11adcee62ff00fc",
+      "workspace_relative_path": "../../../../combination-review-20261014/execution-probes/original-restore-parity.json"
+    }
+  },
+  "raw_evidence_availability": "Workspace-relative external paths are not portable published artifacts; hashes preserve exact reference identity.",
+  "real_panels": 128,
+  "schema": "selective_history_available_state_readout_v1",
+  "scientific_training": false,
+  "source_digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+  "stage_roster_sha256": "1b8fec86ed3caabcb91221d52e9e9eafb1f9c60423419cc386c3ecb9fd88a1c1",
+  "status": "BLOCKED",
+  "study_status": "draft",
+  "synthetic_panels": 32,
+  "unresolved_requirements": [
+    "original late two-pole window",
+    "original failed Ring window",
+    "original conditional identity window",
+    "next-update parity at exhausted Gaussian6000 and unequal1200 endpoints"
+  ]
+}

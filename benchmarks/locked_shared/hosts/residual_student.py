@@ -285,7 +285,7 @@ def train(*, pairing: str = "shared", echo: bool = False,
                 current = head(slow, prior.z)
                 adversarial = gan.g_loss(critic(slow, current), protected_real_scores)
                 return (adversarial, (current[mask] - fast[mask]).pow(2).mean()) if both else (adversarial,)
-            constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator)
+            constraint_geometry_backward(g_loss, opt_g, protected, protected_evaluator=protected_evaluator, adversarial_loss=protected_adversarial)
             schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:

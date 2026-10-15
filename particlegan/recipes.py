@@ -221,6 +221,9 @@ class Recipe:
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
+    # Explicit gradient-space adaptation of the archived gradient-signal law.
+    # Both modes act only on the generator player before one DualNorm update.
+    generator_history_mode: str = "none"
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -291,6 +294,14 @@ class Recipe:
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):
             raise ValueError("constraint_geometry requires zero-momentum full DualNorm")
+        if self.generator_history_mode not in ("none", "adversarial", "whole"):
+            raise ValueError("generator_history_mode must be none, adversarial or whole")
+        if self.generator_history_mode != "none" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum
+                or self.constraint_geometry_mode != "direction_blend"
+                or self.prior_proximal_strength):
+            raise ValueError("generator history requires zero-momentum full DualNorm with "
+                             "direction_blend and no prior proximal update")
         if self.critic_step_mode not in ("none", "finite_cap"):
             raise ValueError("critic_step_mode must be none or finite_cap")
         if self.critic_step_mode == "finite_cap" and (
@@ -784,6 +795,13 @@ class Recipe:
         Protection must cover the joint generator/encoder/prior optimizer.
         The default mode requires no protected-loss hook and retains the
         original optimizer type and checkpoint format.
+
+        ``generator_history_mode`` additionally requires the host to pass its
+        original adversarial scalar as ``adversarial_loss`` to that same hook.
+        History observes only parameters explicitly owned by the generator;
+        use separate ``role='encoder'`` groups for encoder parameters. Direct
+        generated particles belong to the generator, sampled latent tables do
+        not. This is a gradient-space adaptation, not the archived LR damping.
 
         ``prior_proximal_strength > 0`` restores only update-owned latent rows
         toward their positions at optimizer construction, after the complete

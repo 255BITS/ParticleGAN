@@ -118,6 +118,15 @@ class _OptimizerBundle:
             optimizer.set_sampled_rows(table, torch.arange(len(table), device=table.device))
         optimizer.bind_protected_losses(losses, protected_evaluator=protected_evaluator)
 
+    def backward_with_component_history(self, loss, *, adversarial_loss=None):
+        enabled = [optimizer for optimizer in self.optimizers
+                   if hasattr(optimizer, "backward_with_component_history")]
+        if not enabled:
+            return loss.backward()
+        if len(enabled) != 1 or len(self.optimizers) != 1:
+            raise CapabilityError(["component history requires a single joint generator/encoder/prior optimizer"])
+        return enabled[0].backward_with_component_history(loss, adversarial_loss=adversarial_loss)
+
     def state_dict(self):
         return [optimizer.state_dict() for optimizer in self.optimizers]
 
@@ -348,9 +357,19 @@ class BehaviorComponents:
         if prior_parameters or priors:
             self.role_parameters["prior"] = prior_parameters
         parts = []
-        g_parameters = self.role_parameters.get("generator", []) + self.role_parameters.get("encoder", [])
-        if g_parameters:
-            parts.append(self.recipe.make_generator_optimizer(g_parameters))
+        if self.recipe.generator_history_mode == "none":
+            # Keep the original inactive optimizer groups and checkpoint shape.
+            g_parameters = self.role_parameters.get("generator", []) + self.role_parameters.get("encoder", [])
+            if g_parameters:
+                parts.append(self.recipe.make_generator_optimizer(g_parameters))
+        else:
+            network_groups = [{"params": parameters, "role": role}
+                              for role in ("generator", "encoder")
+                              if (parameters := self.role_parameters.get(role, []))]
+            if network_groups:
+                # Preserve separate player ownership even when G and E share
+                # one step; generator-only history must not transform E.
+                parts.append(self.recipe.make_generator_optimizer(network_groups))
         for prior in priors:
             parameters = [p for p in prior.parameters() if p.requires_grad]
             if not parameters:

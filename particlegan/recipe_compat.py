@@ -8,6 +8,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "prior_sigreg_projections": 32, "prior_sigreg_knots": 17,
     "critic_step_mode": "none",
     "constraint_geometry_mode": "none",
+    "generator_history_mode": "none",
     "kinetic_transport_weight": 0.0,
     "kinetic_transport_local_weight": 0.0,
     "kinetic_transport_projections": 32,

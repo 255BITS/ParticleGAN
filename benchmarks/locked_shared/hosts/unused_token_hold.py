@@ -276,6 +276,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         if noise_policy is not None:
             fake_g = noise_policy.output(fake_g, generator_step=True)
         g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
+        history_adversarial = g_loss
         # Demo cover and the n=12 cloud are recorded on the card and are
         # not added here. The train pin is the unused-token hold.
         if float(recipe.fm_weight) != 0.0:
@@ -301,7 +302,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
                     critic.features(real).detach().mean(0) - critic.features(current).mean(0)).pow(2).mean()
             return ((adversarial, unused_hold_loss(student.embeds(1.0), student.neu, pairs))
                     if float(recipe.hold_weight) != 0.0 else (adversarial,))
-        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator)
+        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator, adversarial_loss=history_adversarial)
         critic.requires_grad_(True)
         schedule_optimizer(opt_g, step)
         opt_g.step()

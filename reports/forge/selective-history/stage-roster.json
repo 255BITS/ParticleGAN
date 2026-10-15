@@ -1,0 +1,192 @@
+{
+  "actual_queue_reserved_seconds": 0,
+  "arms": [
+    {
+      "arm": "B",
+      "candidate": "recipe-prior-refactor-bcap-pure-v1",
+      "candidate_file_sha256": "88e229a18bd66149d192a94f9fb39f7c36758c5b2cee7f8e5201c0163ed57c2e",
+      "candidate_revision": "458335d50aafb32a3c7aad52948dd206fba1a4af51abecbeff637722131acd8e",
+      "declared_candidate_seconds": 600,
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "d7aee9d569c90586966399c79dcbd5bcde872f538a443e3c455abc819c811c25",
+          "evidence_use": "research_diagnostic",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "2f814369edc384dd5fb07de672c319450bdfcd9f35bf4e478c1edb36dde26d0e",
+          "evidence_use": "research_diagnostic",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-b-pole-ring-study-v1",
+      "study_sha256": "0bd895826469e02f54b3d440c746c56d2cf33c3963d1551f373d1a0e67575606",
+      "study_status": "draft"
+    },
+    {
+      "arm": "T",
+      "candidate": "bcap-selective-history-transport-v1",
+      "candidate_file_sha256": "21268275cdb8d18a770a49995f2a8d9c45c148d6861b2f909391738c0192745d",
+      "candidate_revision": "4e1c14a5d4c9bcb4aa11353727db51813b7005cd8ad10526749f48659e539717",
+      "declared_candidate_seconds": 600,
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "2187e5a561876c5018c19d2392da240656b318d70a26dd34279ee9ddf4c49671",
+          "evidence_use": "research_diagnostic",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "7230d5a1c980326aa46cb2edf5e5a11998b852fe7e8472dbd03410afbf707b72",
+          "evidence_use": "research_diagnostic",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-t-pole-ring-study-v1",
+      "study_sha256": "96302bf2c6889a40fbec0eba99ef1d1c9843580d534ab96fa72abfc344ab7b47",
+      "study_status": "draft"
+    },
+    {
+      "arm": "W",
+      "candidate": "bcap-selective-history-whole-v1",
+      "candidate_file_sha256": "6cc055c958401ecb4806b0b5893f386de44f309e6896c4acce072174adb2d063",
+      "candidate_revision": "8c629c57ffa9490b04a0f813e67a6c58ad2297d0022bfb1225fea1dc2aeef823",
+      "declared_candidate_seconds": 600,
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "1c2369340c1f026db3dac22feae79068ad253e0c6a0bd5e12ddb3d01bf069ea0",
+          "evidence_use": "research_diagnostic",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "581068ac8dd519e0c6f672777a083e436e2feb59b9afe3587bff168bf02fec47",
+          "evidence_use": "research_diagnostic",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-w-pole-ring-study-v1",
+      "study_sha256": "e27b6ae91ab75cceb6ec749cd9d73a3573993a79789fbc5d41fd88a9aa2cd112",
+      "study_status": "draft"
+    },
+    {
+      "arm": "S",
+      "candidate": "bcap-selective-history-adversarial-v1",
+      "candidate_file_sha256": "4b34867830c252fc6ec425f0d3c4918525123855c53029d3bb2d78f12e8891cc",
+      "candidate_revision": "32167caace55b02925ccc493ec6ac0b60a356e7e4c2640e9124695f11146400c",
+      "declared_candidate_seconds": 600,
+      "jobs": [
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "62d795783b918f46a44b99b1a8eb341b189ce5c1610702318c896f6077260d6d",
+          "evidence_use": "research_diagnostic",
+          "task": "two_pole"
+        },
+        {
+          "budget_seconds": 300,
+          "compatibility_key": "98710ea3f423b2dba26c5cce9536d3d53d817fdb131e8b88e1b3e078edc6f9b7",
+          "evidence_use": "research_diagnostic",
+          "task": "ring16_acquisition"
+        }
+      ],
+      "study": "bcap-selective-history-s-pole-ring-study-v1",
+      "study_sha256": "ac1f6769451c4ada693beb537fda930d45ed567b07e428fa75f35dc2633752be",
+      "study_status": "draft"
+    }
+  ],
+  "campaign": {
+    "budget_seconds": 2400,
+    "id": "bcap-selective-history-pole-ring-v1"
+  },
+  "claim": "Exact draft roster only. All frozen saved-state preflight gates must pass before readiness or enqueue. Regenerate if source, declaration or runtime changes.",
+  "compute_profiles": {
+    "cuda": {
+      "autograd_multithreading_enabled": false,
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "595.99.02",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    }
+  },
+  "preflight_file_sha256": "c90de15ba0f5056f62a5e3a810c5ff3887cc3901431d457c1c3773f92fc2fb45",
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "schema": "selective_history_stage_roster_v1",
+  "scientific_outcomes": [],
+  "scientific_paid_seconds": 0,
+  "source": {
+    "base_commit": "4728b8b030237aa00ef2188a8782cea247991c32",
+    "digest": "39fad3b03e5178bcdc68cc17ba012ac4083d5887147bef91f0bbeee1205baea6",
+    "member_count": 1224,
+    "working_tree_includes_uncommitted_code": true
+  },
+  "source_snapshot_created": false,
+  "status": "DRAFT_PREFLIGHT_BLOCKED",
+  "task_file_sha256": {
+    "ring16_acquisition": "83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0",
+    "two_pole": "3a9d3553d93e24a503372d5138d5a9c02156ba4a97b7bf11842d5b999ea77645"
+  },
+  "view": {
+    "file_sha256": "7dc9f559bbd7097cd7f50727b303680571c2166502a51925e1706150eceade14",
+    "id": "bcap-selective-history-pole-ring-diagnostic-v1"
+  }
+}

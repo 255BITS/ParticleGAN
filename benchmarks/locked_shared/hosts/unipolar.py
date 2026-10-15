@@ -339,7 +339,7 @@ def _fit_rpgan(
                 adversarial = adversarial + 0.5 * gan.g_loss(critic(current, scale), real_scores[scale])
             return (adversarial,)
         constraint_geometry_backward(g_loss, opt_g, (protected_adversarial,),
-                                     protected_evaluator=protected_evaluator)
+                                     protected_evaluator=protected_evaluator, adversarial_loss=protected_adversarial)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)

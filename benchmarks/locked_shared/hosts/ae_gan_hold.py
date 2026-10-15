@@ -251,10 +251,12 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
         else:
             loss = loss + cfg.particle_l2 * prior.z.square().mean()
         protected = [recon] if cfg.reconstruction_weight > 0 else []
+        history_adversarial = loss * 0.0
         if cfg.adversarial_weight > 0:
             real_logits = critic(data).squeeze(-1).detach()
             fake_logits = critic(generated).squeeze(-1)
             adv = gan.g_loss(fake_logits, real_logits)
+            history_adversarial = cfg.adversarial_weight * adv
             anchors = _anchors()
             cover = torch.cdist(anchors, generated).min(dim=1).values.mean()
             loss = loss + cfg.adversarial_weight * adv + cfg.cover_weight * cover
@@ -282,7 +284,7 @@ def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
                 covered = torch.cdist(anchors, current).min(dim=1).values.mean()
                 result.append(cfg.adversarial_weight * adversarial + cfg.cover_weight * covered)
             return tuple(result)
-        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator)
+        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator, adversarial_loss=history_adversarial)
         for param in critic.parameters():
             param.requires_grad_(True)
         schedule_optimizer(opt_g, step - 1)

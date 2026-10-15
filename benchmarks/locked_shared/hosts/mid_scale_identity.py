@@ -525,7 +525,7 @@ def _fit(
                 paired_cover = paired_cover + F.mse_loss(student.state(scale), targets[scale])
             return adversarial, paired_cover
         constraint_geometry_backward(g_loss, opt_g, (protected_adversarial, cover),
-                                     protected_evaluator=protected_evaluator)
+                                     protected_evaluator=protected_evaluator, adversarial_loss=protected_adversarial)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)

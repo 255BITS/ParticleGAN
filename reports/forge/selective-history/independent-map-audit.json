@@ -1,0 +1,89 @@
+{
+  "status": "available_evidence_verified",
+  "overall_preflight_status": "BLOCKED",
+  "proposals": 480,
+  "cases": [
+    {
+      "case": "gaussian1000",
+      "panels": 32,
+      "identical_T_S": 1,
+      "noninitial_effect": 31,
+      "reversals": [],
+      "finite_transport_increases": {
+        "T": 18,
+        "W": 17,
+        "S": 19
+      },
+      "S_T_ratio_min": 0.9943251527542368,
+      "S_T_ratio_max": 1.8154539745434528,
+      "all_saved_finite_readouts_recomputed_exactly": true,
+      "all_finite_readouts_preserve_cpu_cuda_rng": true
+    },
+    {
+      "case": "gaussian4000",
+      "panels": 32,
+      "identical_T_S": 1,
+      "noninitial_effect": 31,
+      "reversals": [],
+      "finite_transport_increases": {
+        "T": 0,
+        "W": 0,
+        "S": 0
+      },
+      "S_T_ratio_min": 0.9999722557577412,
+      "S_T_ratio_max": 1.0000288487574391,
+      "all_saved_finite_readouts_recomputed_exactly": true,
+      "all_finite_readouts_preserve_cpu_cuda_rng": true
+    },
+    {
+      "case": "gaussian6000",
+      "panels": 32,
+      "identical_T_S": 1,
+      "noninitial_effect": 31,
+      "reversals": [],
+      "finite_transport_increases": {
+        "T": 18,
+        "W": 10,
+        "S": 18
+      },
+      "S_T_ratio_min": 0.9996549185391335,
+      "S_T_ratio_max": 1.000220270003492,
+      "all_saved_finite_readouts_recomputed_exactly": true,
+      "all_finite_readouts_preserve_cpu_cuda_rng": true
+    },
+    {
+      "case": "unequal1200",
+      "panels": 32,
+      "identical_T_S": 1,
+      "noninitial_effect": 31,
+      "reversals": [],
+      "finite_transport_increases": {
+        "T": 14,
+        "W": 10,
+        "S": 14
+      },
+      "S_T_ratio_min": 0.9993433461408942,
+      "S_T_ratio_max": 1.000068100921145,
+      "all_saved_finite_readouts_recomputed_exactly": true,
+      "all_finite_readouts_preserve_cpu_cuda_rng": true
+    },
+    {
+      "case": "synthetic-repeated-real",
+      "panels": 32,
+      "identical_T_S": 32,
+      "noninitial_effect": 0,
+      "reversals": [],
+      "finite_transport_increases": {
+        "T": 0,
+        "W": 0,
+        "S": 0
+      },
+      "S_T_ratio_min": 1.0,
+      "S_T_ratio_max": 1.0,
+      "all_saved_finite_readouts_recomputed_exactly": true,
+      "all_finite_readouts_preserve_cpu_cuda_rng": true
+    }
+  ],
+  "process_wall_seconds": 4.783232775022043,
+  "raw_unchanged": true
+}

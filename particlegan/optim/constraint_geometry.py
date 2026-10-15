@@ -11,16 +11,23 @@ import torch
 from .dualnorm import NormalizedOptimizer
 
 
-def constraint_geometry_backward(loss, optimizer, protected_losses, *, protected_evaluator=None):
-    """Backpropagate the unchanged scalar loss; bind existing protected losses.
+def constraint_geometry_backward(loss, optimizer, protected_losses, *, protected_evaluator=None,
+                                 adversarial_loss=None):
+    """Bind original protected losses, then backpropagate the current total.
 
     Ordinary optimizers use exactly the original backward. Enabled optimizers
     fail closed if their host omits this call. No samples or RNG draws are added.
+    Component-history optimizers additionally require the explicit original
+    adversarial scalar; they transform selected gradients after total.backward.
     """
     binder = getattr(optimizer, "bind_protected_losses", None)
     if binder is not None:
         binder(protected_losses, protected_evaluator=protected_evaluator)
-    loss.backward()
+    backward = getattr(optimizer, "backward_with_component_history", None)
+    if backward is None:
+        loss.backward()
+    else:
+        backward(loss, adversarial_loss=adversarial_loss)
 
 
 def project_nonascent(displacement, normals):

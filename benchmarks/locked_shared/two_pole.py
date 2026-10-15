@@ -154,7 +154,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
             current = particles if pairing == "live" else stranger
             return (gan.g_loss(critic(current), d_real),)
         constraint_geometry_backward(g_loss, opt_p, (protected_adversarial,),
-                                     protected_evaluator=protected_evaluator)
+                                     protected_evaluator=protected_evaluator, adversarial_loss=protected_adversarial)
         schedule_optimizer(opt_p, step - 1)
         opt_p.step()
         def observe_poles():
