@@ -19,7 +19,7 @@ Passes / required-view instances for one selected recipe per family. Shared test
 | **[KA2](families/ka2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 blocked, 7 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (7 blocked, 123 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422)** |
 | **[R1/R2](families/r1r2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (116 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 blocked, 7 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/152 (7 blocked, 123 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422)** |
 
-Backfill coverage: **853/853 distinct recipe/test pairs attempted (selected and research)**; 0 pending and 1 running. [Outcomes, blocked attempts and setup](ATTEMPT_COVERAGE.md). This counts attempts, including start refusals, rather than passes or qualification.
+Backfill coverage: **853/853 distinct recipe/test pairs attempted (selected and research)**; 0 pending and 0 running. [Outcomes, blocked attempts and setup](ATTEMPT_COVERAGE.md). This counts attempts, including start refusals, rather than passes or qualification.
 
 ## Research recipes and separate diagnostics
 
@@ -50,7 +50,7 @@ Research recipes use their recorded revision 9 assignments. Atlas selected-cloud
 | [BCAP](families/bcap-pure.md) | [bcap-default-baseline-direction-v1; seed 0; 27ab4cf9](families/bcap-pure.md#pr399-retained-research) | [5/6 (1 incomplete)](families/bcap-pure.md#pr399-retained-research) | [8/21 (1 blocked, 1 error)](families/bcap-pure.md#pr399-retained-research) | [0/2 (1 blocked)](families/bcap-pure.md#pr399-retained-research) | [13/29 (2 blocked, 1 error, 1 incomplete)](families/bcap-pure.md#pr399-retained-research) |
 | [BCAP](families/bcap-pure.md) | [Strict clock-free audit; separate Torch 2.13 cohort](tier-coverage-20261014/README.md) | — | — | [1/1](tier-coverage-20261014/README.md) | [1/1](tier-coverage-20261014/README.md) |
 | [BCAP](families/bcap-pure.md) | [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [1/7 (4 blocked)](actual-missing-diagnostics-20261014/README.md) | [1/7 (4 blocked)](actual-missing-diagnostics-20261014/README.md) |
-| [BISPF](families/bispf.md) | [BISPF rebuilt checkpoints + matched-prior 14k diagnostics](ATTEMPT_COVERAGE.md#checkpoint-recovery) | — | [0/3](ATTEMPT_COVERAGE.md#checkpoint-recovery) | [0/3 (1 running)](ATTEMPT_COVERAGE.md#checkpoint-recovery) | [0/6 (1 running)](ATTEMPT_COVERAGE.md#checkpoint-recovery) |
+| [BISPF](families/bispf.md) | [BISPF rebuilt checkpoints + matched-prior 14k diagnostics](ATTEMPT_COVERAGE.md#checkpoint-recovery) | — | [0/3](ATTEMPT_COVERAGE.md#checkpoint-recovery) | [0/3](ATTEMPT_COVERAGE.md#checkpoint-recovery) | [0/6](ATTEMPT_COVERAGE.md#checkpoint-recovery) |
 | [Atlas](families/atlas.md) | [Selected-cloud policy; seed 0 (separate scope)](atlas-compatible-coverage-20261013/README.md) | [0/7 (4 incompatible)](atlas-compatible-coverage-20261013/README.md) | — | — | [0/7 (4 incompatible)](atlas-compatible-coverage-20261013/README.md) |
 | [Atlas](families/atlas.md) | [Unchanged public policy: image diagnostics](actual-missing-diagnostics-20261014/README.md) | — | [1/4](actual-missing-diagnostics-20261014/README.md) | — | [1/4](actual-missing-diagnostics-20261014/README.md) |
 | [Atlas](families/atlas.md) | [Selected-cloud execution after adapter investigation (pre-repair source)](ATTEMPT_COVERAGE.md#remaining-attempts) | [0/7 (3 incompatible, 2 errors, 1 incomplete)](ATTEMPT_COVERAGE.md#remaining-attempts) | — | — | [0/7 (3 incompatible, 2 errors, 1 incomplete)](ATTEMPT_COVERAGE.md#remaining-attempts) |
@@ -344,5 +344,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `cbbd63862f09cd0ecc102379bf7ad76ee4f1896906edec4643e6ca16ad4a0083`.
+Publication input digest `d1061ab7f55567a7948547d0c235ea74dd4defea84b298e189fee7bb8ac64db7`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
