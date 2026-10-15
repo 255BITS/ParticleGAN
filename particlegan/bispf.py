@@ -745,7 +745,7 @@ class BISPFStepRecord(CriticStepRecord):
             if key != "formulation":
                 setattr(self, key, state[key])
         self._last_d_logits = None
-        self._thermal_scale = max(0.05, min(1.0, float(self.ema_residual) / 0.20))
+        self._thermal_scale = max(0.05, min(1.0, float(self.ema_residual) / 0.020))
 
 
 class ContinuousThermalCooler:
@@ -759,7 +759,7 @@ class ContinuousThermalCooler:
 
     def __init__(
         self,
-        tau_cooling: float = 0.20,
+        tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         ema_decay: float = 0.95,
         initial_residual: float = 1.0,
@@ -963,7 +963,7 @@ class _BISPFPenaltyKernel:
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
-        tau_cooling: float = 0.20,
+        tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,

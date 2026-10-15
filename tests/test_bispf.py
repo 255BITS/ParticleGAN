@@ -811,7 +811,7 @@ def test_bispf_1d_continuous_flow_cooler_bypass():
     from particlegan.bispf import _BISPFPenaltyKernel
 
     kernel = _BISPFPenaltyKernel(
-        tau_cooling=0.20,
+        tau_cooling=0.020,
         s_min=1e-5,
     )
     # Hold cooler residual at 0.001 by overriding _observe_sinkhorn
@@ -849,17 +849,35 @@ def test_bispf_1d_continuous_flow_cooler_bypass():
 
 def test_bispf_gauge_and_cooling_defaults():
     """Verify default hyperparameter calibration in _BISPFPenaltyKernel:
-    gamma_gauge == 0.020 and tau_cooling == 0.20.
+    gamma_gauge == 0.020 and tau_cooling == 0.020.
     """
     from particlegan.bispf import _BISPFPenaltyKernel, ContinuousThermalCooler
 
     kernel = _BISPFPenaltyKernel()
     assert kernel.gamma_gauge == 0.020, f"Expected default gamma_gauge=0.020, got {kernel.gamma_gauge}"
-    assert kernel.tau_cooling == 0.20, f"Expected default tau_cooling=0.20, got {kernel.tau_cooling}"
-    assert kernel.cooler.tau_cooling == 0.20, f"Expected cooler tau_cooling=0.20, got {kernel.cooler.tau_cooling}"
+    assert kernel.tau_cooling == 0.020, f"Expected default tau_cooling=0.020, got {kernel.tau_cooling}"
+    assert kernel.cooler.tau_cooling == 0.020, f"Expected cooler tau_cooling=0.020, got {kernel.cooler.tau_cooling}"
 
     cooler = ContinuousThermalCooler()
-    assert cooler.tau_cooling == 0.20, f"Expected default ContinuousThermalCooler tau_cooling=0.20, got {cooler.tau_cooling}"
+    assert cooler.tau_cooling == 0.020, f"Expected default ContinuousThermalCooler tau_cooling=0.020, got {cooler.tau_cooling}"
+
+
+def test_bispf_ring16_thermal_stability():
+    """Verify that multi-modal ring geometries with residual delta_nn >= 0.026
+    maintain s_thermal == 1.0 unconditionally under default tau_cooling=0.020,
+    preventing premature gradient throttling and preserving sustained passing suffixes.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel()
+    # Simulate ring16 residual regime: delta_nn ~ 0.028
+    kernel.cooler.ema_residual = 0.028
+    kernel.cooler.initialized = True
+    assert kernel.cooler.scale == 1.0, f"Ring16 residual must hold s_thermal=1.0; got {kernel.cooler.scale}"
+
+    # Counter-check: within-basin settling on 100-mode grids (residual ~ 0.005) DOES cool
+    kernel.cooler.ema_residual = 0.005
+    assert kernel.cooler.scale < 0.20, f"100-mode grid basin settling must cool below 0.20; got {kernel.cooler.scale}"
 
 
 def test_bispf_adaptive_image_kappa():
