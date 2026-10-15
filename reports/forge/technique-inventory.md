@@ -1,91 +1,6 @@
 # Forge family leaderboard
 
-Recorded passes / required experiments, grouped by family and view. Click a family for its technique, pseudocode and training details; click any count for the experiment results. Each family uses one current selected configuration and source. Earlier runtime cohorts remain on its detail page.
-
-A family is the high-level implementation and formulation. Optimizers, learning rates, momentum and other configuration choices stay within that family. Current benchmarks use the explicit family selection; BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain their separate evidence on the detail pages. Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.
-
-The [BCAP leader prior searches](bcap-prior-search/README.md) compare five opt-in mechanisms and fifteen global strengths, with every task measurement, score, target and source-bound repair or regression. Their [interpretation and recommendations](bcap-prior-search/findings.md) explain the results. The selected family configuration and its recorded counts remain unchanged.
-
-Family totals sum required-view instances: a unique benchmark task is counted again in each view requiring it. For example,152 is a count of required-view instances, not152 distinct benchmark tasks or experiments. These totals do not establish scientific rank.
-
-## Preserved Atlas scores — separate original cohorts
-
-PR404's selected-policy particle-cloud scope has **0 PASS / 1 FAIL / 2 INCOMPLETE / 4 BLOCKED across 7 questions**. The three started runs and four unstarted questions remain distinct. These scores add no ordinary MoG/live qualification or default-adoption credit. [Original receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/results.json).
-
-| Started question | Original gate | Completed / declared updates | Original measured score |
-|---|---|---:|---|
-| `gaussian1d_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1000/1000 | Logged CDF KS 0.029021; diagnostic only, checkpoint export ERROR |
-| `ring16_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1600/1600 | Logged component covariance error 1.812179; diagnostic only, checkpoint export ERROR |
-| `clockfree_audit_tier1_policy_selected_cloud_v1` | FAIL | 24/24 | 2/4 state-digest comparisons match; step-label and restart differ |
-
-Unstarted BLOCKED questions: two-pole, unused-token hold, AE hold, and five-word joint acquisition.
-
-The historical adapted RA14 panel reported **7 PASS / 4 FAIL across 11 cases**. These are its original reported verdicts: Blobs stopped at 300/600 updates and remains incomplete under its full horizon. Width/anisotropic transfers are counted once. This different source/prior/serving cohort cannot fill current cells. [Historical report](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/FAST_PANEL_REPORT.md).
-
-| Historical case | Reported verdict | Passing checks / observations | Actual / original updates |
-|---|---|---:|---:|
-| `vector_unequal_width` | PASS | 20/24 | 1200/1200 |
-| `vector_anisotropic` | PASS | 20/24 | 1200/1200 |
-| `vector_two_broad` | PASS | 23/24 | 1200/1200 |
-| `vector_unequal_mass` | PASS | 20/24 | 1200/1200 |
-| `vector_overlap` | PASS | 23/24 | 1200/1200 |
-| `vector_spiral` | PASS | 23/24 | 1600/1600 |
-| `img_stripes2` | PASS | 14/24 | 600/600 |
-| `img_intensity2` | FAIL | 0/24 | 600/600 |
-| `img_bars4` | FAIL | 0/24 | 600/600 |
-| `img_blobs4` | FAIL; full horizon incomplete | 0/12 | 300/600 |
-| `ring16_acquisition` | FAIL | 4/24 | 400/400 |
-
-The separate native seed-0 two-pole pilot retains a local RMS-cap win at its original **80-update** horizon; call-800 behavior and transfer were unmeasured. [Pilot receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/INVENTORY-RECEIPT-PACKET.json).
-
-| Native pilot arm | Original gate | Passing checks / observations | Final mean absolute position (≥0.3) | Final median critic gradient (≤1) |
-|---|---|---:|---:|---:|
-| `squared` | FAIL | 0/24 | 0.005321 | 0.012204 |
-| `rms_cap` | PASS | 8/24 | 0.460720 | 0.405106 |
-
-## Preserved catalog scores — original CPU geometry comparisons
-
-PR406's catalog contains **285 distinct attempt IDs: 142 PASS / 136 FAIL / 7 INCOMPLETE**. Those are record counts across different protocols, not a pooled performance score. The numerical comparisons below preserve two original CPU 2.13 studies on source `d378734f40b09ce223a389e8f54a9783ec6a0c75`; each seed, task and recipe remains separate. No new training or current-source qualification is claimed. [Original catalog](https://github.com/255BITS/ParticleGAN/blob/c732db2c9353884764b336baa5fed525d2ed33f7/reports/forge/research-catalog/studies.json); [byte-pinned score receipts](research-catalog/leaderboard-scores.json).
-
-| Recipe change / task / seed | Original gate, control → candidate | Passing checks / 24, control → candidate | Terminal passing suffix (required 5) | Original endpoint scores, control → candidate |
-|---|---|---|---|---|
-| Full G Frobenius; `vector_overlap`; seed 0 | FAIL → PASS | 14 → 15 | 3 → 5 | covariance error 0.240728 → 0.230126; mean error 0.030689 → 0.119350; SW1 0.058851 → 0.088509 |
-| Full G Frobenius; `vector_overlap`; seed 1 | FAIL → PASS | 14 → 16 | 3 → 5 | covariance error 0.277288 → 0.241869; mean error 0.043819 → 0.027366; SW1 0.063741 → 0.051240 |
-| Full G Frobenius; `vector_two_broad`; seed 0 | PASS → PASS | 20 → 18 | 20 → 18 | component covariance error 0.437817 → 0.233551 |
-| G half polar / half Frobenius; `trajectory`; seed 0 | FAIL → PASS | 0 → 18 | 0 → 18 | identity MSE 0.021320 → 0.000101 |
-| G half polar / half Frobenius; `vector_overlap`; seed 0 | PASS → PASS | 15 → 17 | 5 → 5 | covariance error 0.230126 → 0.402998; mean error 0.119350 → 0.134850; SW1 0.088509 → 0.113960 |
-
-Overlap and broad use 1,200 updates; trajectory uses 400. The seed-0 full-Frobenius overlap gains a sustained PASS while mean/SW1 worsen; the half-sum repairs trajectory while worsening overlap endpoint errors. Full Frobenius alone fails the conditional trajectory control, and broader preservation and CUDA equivalence remain unmeasured. The reused broad control is not a fresh attempt. These five comparison rows and their control/candidate arms must not be added to the 285-ID register.
-
-## Source-bound benchmark rows
-
-These rows are visible on the main board but do not replace a selected family configuration. Benchmark-task totals and within-task observation checks have different units. Untested benchmark cells are null in the machine data; no whole-gauntlet score is inferred.
-
-| Source-bound candidate / matched control | Benchmark tasks passed / run | Required benchmark tasks untested | Recorded Tier2 stationary checks | Recorded Tier2 reacquisition | Recorded Tier2 shifted-hold checks | Original retention benchmark |
-| --- | --- | --- | --- | --- | --- | --- |
-| [G-only coherent mean (original seed0)](g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 69 of 72 observation checks | PASS (phase) | 20 of 24 observation checks | **FAIL** |
-| [Fresh matched protected NS/transport control](g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 35 of 72 observation checks | FAIL (phase) | 12 of 24 observation checks | **FAIL** |
-
-Recorded discriminator_stability revision9: acquisition is Tier1 and the complete stability benchmark is Tier2. Stationary retention, deadline reacquisition and shifted hold are phases of that same Tier2 task; they are not separate Tier3 benchmark passes. The proposed revision10 display split is not applied retrospectively.
-
-Machine row source: [source-bound-board.json](source-bound-board.json), SHA256 `2181898ee61a7fbc2a7f2230b32a26f5d55933b6565645bd1ae988cd67c4d404`.
-
-## G-only coherence: registered paired research
-
-[Original receipt scores](g-coherent-mean-paired-research/results.json), source `3e6ab1939a8f`; control revision `cb1671ed7174`, candidate revision `10df0bea444a`. Each arm passes acquisition and fails its own complete retention task: **1/2 tasks per arm**. The six research seeds remain separate from the original seed-zero screening result and from selected family scores.
-
-| Research seed | Stationary checks, control → candidate | Shifted-hold checks, control → candidate | Reacquisition, control / candidate | Complete retention, control / candidate |
-| --- | --- | --- | --- | --- |
-| 1 | 35/72 → 44/72 | 10/24 → 20/24 | FAIL / FAIL | **FAIL / FAIL** |
-| 2 | 30/72 → 57/72 | 13/24 → 22/24 | FAIL / FAIL | **FAIL / FAIL** |
-| 3 | 34/72 → 66/72 | 6/24 → 12/24 | FAIL / FAIL | **FAIL / FAIL** |
-| 4 | 34/72 → 58/72 | 17/24 → 11/24 | FAIL / FAIL | **FAIL / FAIL** |
-| 5 | 37/72 → 65/72 | 11/24 → 9/24 | FAIL / FAIL | **FAIL / FAIL** |
-| 6 | 33/72 → 56/72 | 11/24 → 6/24 | FAIL / FAIL | **FAIL / FAIL** |
-
-Stationary checks improve in all six pairs; shifted-hold checks improve in three and regress in three. These fractions count observations inside each retention task, not additional benchmark passes. Every continuation restores its own acquisition checkpoint. No pooled qualification or default promotion is inferred.
-
-## Selected family rows
+Recorded benchmark passes / required tasks by tier. Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
@@ -96,6 +11,25 @@ Stationary checks improve in all six pairs; shifted-hold checks improve in three
 | ↳ [formulation_comparison](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | ↳ [host_profile_transfer](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11(*)/24](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | ↳ [quality_coverage](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/19](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [11/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
+| ↳ † [Confidence LR; seed 0](families/bcap-pure.md#confidence-lr-correction-six-task-screen-and-own-retention) | [6/6](families/bcap-pure.md#confidence-lr-correction-six-task-screen-and-own-retention) | [1(*)/21](families/bcap-pure.md#confidence-lr-correction-six-task-screen-and-own-retention) | [0(*)/2](families/bcap-pure.md#confidence-lr-correction-six-task-screen-and-own-retention) | [7(*)/29](families/bcap-pure.md#confidence-lr-correction-six-task-screen-and-own-retention) |
+| ↳ † [Finite critic cap; seed 0](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/6](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/21](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/2](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/29](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) |
+| ↳ † [Critic orientation; seed 0](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [1(*)/6](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/21](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [0(*)/2](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) | [1(*)/29](families/bcap-pure.md#later-gaussian-corrections-one-failed-acquisition-one-failed-retention) |
+| ↳ † [Signed confidence; seed 0](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [1(*)/6](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [0(*)/21](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [0(*)/2](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [1(*)/29](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) |
+| ↳ † [Positive evidence; seed 0](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [1(*)/6](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [0(*)/21](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [0(*)/2](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) | [1(*)/29](families/bcap-pure.md#signed-and-positive-evidence-responses-retention-remains-unsolved) |
+| ↳ † [G-only coherent mean (original seed0)](g-coherent-mean-seed0/README.md) | [1(*)/6](g-coherent-mean-seed0/README.md) | [0(*)/21](g-coherent-mean-seed0/README.md) | [0(*)/2](g-coherent-mean-seed0/README.md) | [1(*)/29](g-coherent-mean-seed0/README.md) |
+| ↳ † [Fresh matched protected NS/transport control](g-coherent-mean-seed0/README.md) | [1(*)/6](g-coherent-mean-seed0/README.md) | [0(*)/21](g-coherent-mean-seed0/README.md) | [0(*)/2](g-coherent-mean-seed0/README.md) | [1(*)/29](g-coherent-mean-seed0/README.md) |
+| ↳ † [G-coherence candidate; research seed 1](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 1](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence candidate; research seed 2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence candidate; research seed 3](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 3](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence candidate; research seed 4](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 4](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence candidate; research seed 5](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 5](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence candidate; research seed 6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
+| ↳ † [G-coherence control; research seed 6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/6](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/21](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [0(*)/2](families/bcap-pure.md#g-only-coherence-registered-paired-research) | [1(*)/29](families/bcap-pure.md#g-only-coherence-registered-paired-research) |
 | **[Atlas](families/atlas.md)** | **[0(*)/22](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0(*)/116](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0(*)/14](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0(*)/152](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) | [0(*)/3](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0(*)/23](families/atlas.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0(*)/4](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0(*)/30](families/atlas.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -103,6 +37,7 @@ Stationary checks improve in all six pairs; shifted-hold checks improve in three
 | ↳ [formulation_comparison](families/atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0(*)/3](families/atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](families/atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0(*)/24](families/atlas.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
 | ↳ [host_profile_transfer](families/atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0(*)/3](families/atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](families/atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0(*)/24](families/atlas.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | ↳ [quality_coverage](families/atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0(*)/3](families/atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0(*)/19](families/atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0(*)/22](families/atlas.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
+| ↳ † [Selected-cloud policy; seed 0 (separate scope)](atlas-compatible-coverage-20261013/README.md) | [0(*)/7](atlas-compatible-coverage-20261013/README.md) | — | — | [0(*)/7](atlas-compatible-coverage-20261013/README.md) |
 | **[E22](families/e22.md)** | **[0(*)/22](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0(*)/116](families/e22.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0(*)/14](families/e22.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0(*)/152](families/e22.md#cohort-cuda-1bf9d7d34422)** |
 | ↳ [adaptation](families/e22.md#cohort-cuda-1bf9d7d34422-adaptation) | [0(*)/3](families/e22.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0(*)/19](families/e22.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](families/e22.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0(*)/23](families/e22.md#cohort-cuda-1bf9d7d34422-adaptation) |
 | ↳ [clockfree_continuous](families/e22.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0(*)/4](families/e22.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0(*)/19](families/e22.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](families/e22.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0(*)/30](families/e22.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
@@ -139,15 +74,15 @@ Stationary checks improve in all six pairs; shifted-hold checks improve in three
 | ↳ [host_profile_transfer](families/r1r2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](families/r1r2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0(*)/19](families/r1r2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](families/r1r2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [3(*)/24](families/r1r2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | ↳ [quality_coverage](families/r1r2.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](families/r1r2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0(*)/19](families/r1r2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](families/r1r2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [3(*)/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 
-Runtime cohorts and actual per-task devices are recorded on the family pages and in receipt provenance.
+Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. † marks a separate research recipe/source/seed, excluded from the bold totals and current selection. Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question Tier 1 policy scope. A retained pass grants no new qualification.
+
+Family totals sum required-view instances: a shared task counts again in every view requiring it. For example, 152 is a count of requirements across views, not distinct training runs. Research rows count unique required tasks within their own scope.
 
 (*) means at least one required experiment has no recorded execution for the selected configuration and source, including preflight-blocked tests. Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. Zero recorded passes always displays as 0, including unrun families.
 
-Counts retain recorded verdicts under their original recipe, prior, initialization, budget, serving law and source. Changes to today's test definition and unavailable recorded definitions are shown separately on the family pages and do not add (*); recorded passes grant no new qualification. Required lower tiers must pass before later work is eligible. The declared calibration and eligibility requirements appear on each family page.
+Counts retain each original recipe, prior, initialization, budget, serving law and source. Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; untiered historical studies remain on those detail pages.
 
-Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the family pages and excluded from totals.
-
-Atlas/E22 retain (*) for blocked, unrun tests in their selected main-table cohort. The family pages list the host, prior, serving and parameter-ownership blockers. Their separately scoped policy measurements keep their own results and do not fill these cells.
+[Prior-search measurements and gates](bcap-prior-search/README.md) · [Prior-search findings](bcap-prior-search/findings.md)
 
 ## Browse by technique tag
 
@@ -328,103 +263,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `53a13f44378235b34e5d0a89edecf382f5103a8999aab957801ad3e65365b7ff`.
-
-[BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
+Publication input digest `a9ef023b20cbe3c1e091405574e0c4f22af9e469e0f7b0e63fa13e8fe7eadbc0`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
-
-## Scoped non-Atlas discoveries
-
-[Verified reconciled receipts, complete recipes and audit gaps](test-performance-evidence/nonatlas-reconciled-204.json): **204 full runs** across **66 recipe IDs**, **75 source-bound revisions** and **7 source cohorts**. Recorded outcomes are **107 PASS / 97 FAIL**. These are disjoint ledger counts across exact protocols; **no global survivor or pooled score** is established.
-
-**Evidence limits:** six mode-hold transfers lack saved sample panels; raw archives and full-run CUDA packets are not publicly available. Their original logged-metric FAIL grades remain explicit.
-
-<details>
-<summary>Open the 204-run cohort table, exact clocks and audit limitations</summary>
-
-| Round | Full PASS / FAIL | Source cohorts | Inclusive attempt wall seconds | Audit |
-| --- | ---: | --- | ---: | --- |
-| cell-moment-round | 14 / 1 | `f90962a5b351` | 746.970010416 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
-| cell-moment-transfer-round | 13 / 2 | `f90962a5b351` | 730.446546641 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
-| cell-moment-acquisition-round | 13 / 2 | `a21587094267` | 745.665159237 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
-| gaussian-stability-round | 0 / 3 | `a21587094267` | 386.763673001 | PASS_INDEPENDENT_SAVED_OUTPUT_CONTINUITY_AND_BINDING_AUDIT |
-| cell-moment-retention-architecture-round | 6 / 6 | `421df4e58168` | 1083.554060910 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
-| cell-memory-round | 12 / 12 | `47b8aff9e9ef` | 2487.138272296 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
-| cell-quadrature-round | 0 / 12 | `8220bfed22b6` | 3554.116458337 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
-| cell-optimizer-round | 12 / 12 | `47b8aff9e9ef` | 2950.390634309 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
-| cell-mixed-role-round | 12 / 12 | `d6b7ca5a0d78` | 2919.869744607 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
-| cell-gradient-signal-round | 17 / 7 | `11cf56e3462e` | 3236.489829691 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
-| cell-signal-transfer-round | 2 / 10 | `11cf56e3462e` | 708.227286190 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
-| cell-signal-reverse-transfer-round | 3 / 9 | `11cf56e3462e` | 730.770430319 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
-| cell-signal-moment-transfer-round | 3 / 9 | `11cf56e3462e` | 713.859442260 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
-
-The original 45 geometry/transfer/acquisition runs remain indexed once: aggregate 35/36 PASS and five of nine fresh controls PASS, with Bures ring FAIL retained. All cumulative representatives, all 12 memory corrections and all 12 mixed-role recipes fail full Gaussian stability; all 12 quadrature recipes fail mode retention. Gradient attenuation passes five of 12 full Gaussian runs, but all five passing recipes fail essential transfer gates. Forward, reverse and moment transfer cohorts pass 2/12, 3/12 and 3/12; these cannot fill one another's protocols.
-
-Gaussian continuations retain the complete 6,000-step clock and their own pinned 1,000-step producers: only 5,000 new updates and the new attempt charge are counted. Complete recipes expose objective, reference policy, cubature, optimizer, G/D/prior role assignments and signal attenuation. Published/base architectures and source revisions remain separate.
-
-**12 pre-runtime ERROR cells** cost **30.168105392 seconds**, with zero training updates. Three CPU-nonfinite SGDA rejections, semantic dedup exclusions, preparation/audit failures and the CPU gradient probe remain separate diagnostics. The probe's REJECT decision supplies no optimizer or feasibility PASS.
-
-The amended CPU reference ablation keeps primary **REJECT** and secondary posthoc quota **SUPPORT** separate, with original registrations and transparent quota/directional-measurement errata. These add zero trained rows and no qualified recipe or feasibility witness; 4.349590721 timed CPU seconds remain separate from attempt charges.
-
-[Two paired64 cells](test-performance-evidence/nonatlas-finite-realization-prefix64.json) remain **INCOMPLETE** against original 7,000-step staggered100 gates. Full-run wall charge **20994.261548214 seconds**; prefix **20.104729663 seconds**; disjoint full/prefix/failed-supervisor total **21044.534383269 seconds**. CPU preparation/probe costs are recorded separately; no exclusive CUDA-time or cross-protocol speed ranking is claimed.
-
-**Six mode-hold transfer jobs have unavailable saved sample panels**. Their cells explicitly retain original logged-metric gate regrades; score-history GIFs are not sample trajectories. The other 384 saved sample observations per transfer cohort regrade exactly in the supplied audits. Full-run CUDA packets and contemporaneous causal gradient/reference histories were not retained. Source/artifact hashes were verified; bulk archives remain local-only.
-
-Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; selected family rows, qualification, experiments and training code remain unchanged.
-
-</details>
-
-
-## Quota-transition and Astra portfolio follow-up
-
-[Verified cumulative receipts and original submetrics](test-performance-evidence/astra-cumulative-24.json): **24 additional full runs**, 8 predecessor quota runs plus 16 Astra runs. The six interim Astra receipts occur once. Family execution ledger: **228 full runs** and **470,400 new accepted updates**; no global survivor.
-
-**Finding:** all twelve Astra hypotheses fail full unequal-mass gates. Three endpoint covariance submetrics pass, but their 1/5 terminal suffixes still fail the original sustained requirement.
-
-<details>
-<summary>Open the 24-run follow-up: controls, predictors and separate cost clocks</summary>
-
-| Round | Full PASS / FAIL | Source | Queue seconds | Supervisor wall seconds |
-| --- | ---: | --- | ---: | ---: |
-| cell-quota-transition-round | 5 / 3 | `9bcc5a8eef26` | 462.898204478 | 480.149192524 |
-| astra-quota-followup | 0 / 4 | `db1f08de2d98` | 148.701697541 | 157.336667785 |
-| astra-fractional-transport | 0 / 2 | `1adee8703f13` | 65.182648164 | 68.483431482 |
-| astra-shape-distribution | 0 / 4 | `05e7cf2d2e6c` | 178.974365511 | 187.800058275 |
-| astra-remaining-mechanisms | 0 / 6 | `b95b46ed9444` | 301.378773134 | 312.712553871 |
-
-All **12 Astra hypotheses FAIL** the unchanged full unequal-mass gate. Four fresh source-bound controls are separate paid runs. Swap, slow covariance and lookahead pass the final covariance submetric, but each ends with a one-check suffix against five required checks; their full verdict stays FAIL. The predecessor minimum-change recipe passes Gaussian acquisition/stability and mode retention, but fails unequal mass.
-
-Added work: **36,000 accepted updates** plus **1,200 temporary predictor evaluations**. Lookahead's temporary predictor is not another accepted optimizer update; its work is already included in both clocks. Original horizons, budgets, quotas, assignment/transport semantics, reference policies and covariance-memory changes remain bound.
-
-The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall charge is **1206.481903937 seconds**. These clocks are distinct and are not added together. Inherited budgets and earlier charges are not counted again. Preparation errors and predecessor failed-audit CPU costs remain diagnostic exclusions; unavailable preparation elapsed times stay null.
-
-5 additional source cohorts and all saved-output/state/trace pins were verified. Fractional transport uses row-argmax labels with exact soft capacities; integer assignment counts are not substituted for those labels. Controls' model equality is certified by the supplied audits. Raw arrays, tensor states and traces stay local-only; the import runs no research code, training or metric rescore and grants no qualification.
-
-</details>
-
-
-## Confidence-LR correction: six-task screen and own retention
-
-[Six original required Tier 1 attempts](test-performance-evidence/pr399-confidence-lr-tier1-6.json) are **6/6 PASS** with complete actual optimizer histories. The positive confidence-scaled learning-rate response preserves generator, encoder and prior updates. This passes only the frozen six-task screening view; earlier hard-EMA and control attempts retain their separate source identities and are not relabelled as current-source controls.
-
-[Two own-checkpoint continuations](test-performance-evidence/pr399-confidence-lr-own-retention-2.json) keep the contrast: original word hold **PASS 25/25**, but Gaussian retention **FAIL** with 8/72 stationary checks, 0/24 shifted-hold checks and failed reacquisition. An acquisition pass is not sustained retention. The measured recipe has no broader Tier 2, full Martyn, robustness or release qualification.
-
-The cumulative packet now has **74 unique attempts**: 66 earlier identities and eight new confidence-LR runs, **32 PASS / 35 FAIL / 7 INCOMPLETE**. The earlier rows and failed gates are byte-unchanged. This is a source-scoped attempt ledger, not a pooled score or an addition to the 249-run non-Atlas total. Exact cumulative updates remain unavailable because the older timed-out word control has only a lower bound. No default, qualification or release promotion follows.
-
-## Later Gaussian corrections: one failed acquisition, one failed retention
-
-[Finite critic cap](test-performance-evidence/pr399-gaussian-finite-cap-1.json) completes the original Gaussian acquisition task but **FAILS** its any-scheduled-pass-with-independent-confirmation gate. Own Gaussian retention is **BLOCKED/UNSTARTED**: zero attempts, updates and charge; there is no synthetic retention result.
-
-[Critic orientation correction](test-performance-evidence/pr399-critic-orientation-2.json) **PASSes** original Gaussian acquisition at its distinct source/revision, then **FAILS** the original own-state retention continuation: 5/72 stationary, 1/24 shifted and 0/48 frozen checks, with failed reacquisition. Its remaining five required Tier 1 tasks were not run at this source. It cannot inherit the earlier confidence-LR six-task screen as current-source qualification.
-
-The cumulative ledger has **77 unique attempts: 33 PASS / 37 FAIL / 7 INCOMPLETE**. All earlier 74 rows retain their exact grades and identities; these three attempts are added once. Neither correction establishes Gaussian retention, full six-task superiority, broad Tier 2 or release eligibility.
-
-## Signed and positive-evidence responses: retention remains unsolved
-
-[Signed-confidence response](test-performance-evidence/pr399-signed-confidence-2.json) **PASSes** original Gaussian acquisition, then **FAILs** own-checkpoint retention: 7/72 stationary, 0/24 shifted, 0/48 frozen and deadline reacquisition FAIL. The signed gap is a confidence proxy, not a restoring-gradient certificate.
-
-[Positive-evidence response](test-performance-evidence/pr399-positive-evidence-2.json) also **PASSes** acquisition and **FAILs** full retention: 14/72 stationary, 2/24 shifted, 0/48 frozen and deadline reacquisition FAIL. Its final mean, width ratio and CDF KS meet numerical endpoint bounds, which do not replace the unchanged sustained gate. Neutral zero-gain proposals still advance real optimizer moment histories.
-
-These are two distinct source/revision cohorts; neither inherits the earlier six-task screen. The cumulative packet has **81 unique attempts: 35 PASS / 39 FAIL / 7 INCOMPLETE**, retaining all 77 earlier rows exactly and adding four attempts once. No Gaussian-retention winner, full Martyn superiority, default or release qualification follows.
-
-[BCAP initial Adam study](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

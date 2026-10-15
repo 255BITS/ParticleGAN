@@ -673,6 +673,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "task_paths": task_paths,
                 "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__)),
+                "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,
@@ -700,22 +701,11 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
-    from .atlas_catalog_scores import atlas_catalog_score_lines
-    from .source_bound_board import main_board_rows
-    source_rows = atlas_catalog_score_lines(root, page) + main_board_rows(root, page)
+    from .research_tiers import tier_rows
+    research = tier_rows(root, page)
     lines = ["# Forge family leaderboard", "",
-             "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
-             "pseudocode and training details; click any count for the experiment results. "
-             "Each family uses one current selected configuration and source. Earlier runtime cohorts remain on its detail page.", "",
-             "A family is the high-level implementation and formulation. Optimizers, learning rates, momentum "
-             "and other configuration choices stay within that family. Current benchmarks use the explicit family selection; "
-             "BCAP uses the selected DualNorm recipe. Historical optimizer variants, formulations and ablations retain "
-             "their separate evidence on the detail pages. "
-             "Source and runtime differences remain explicit on the detail pages; this selection grants no new qualification.", "",
-             "Family totals sum required-view instances: a unique benchmark task is counted again in each view requiring it. "
-             "For example,152 is a count of required-view instances, not152 distinct benchmark tasks or experiments. "
-             "These totals do not establish scientific rank.", "",
-             *source_rows, *_table_header()]
+             "Recorded benchmark passes / required tasks by tier. Click a count for its gates, measurements and evidence. "
+             "Required lower tiers must pass before advancing.", "", *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
             if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
@@ -729,22 +719,25 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
             for view in cohort["views"]:
                 label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
                 lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
-    lines += ["", "Runtime cohorts and actual per-task devices are recorded on the family pages and in receipt provenance.", "",
+        lines += research.get(family["id"], [])
+    lines += ["", "Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. "
+              "† marks a separate research recipe/source/seed, excluded from the bold totals and current selection. "
+              "Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question "
+              "Tier 1 policy scope. A retained pass grants no new qualification.", "",
+              "Family totals sum required-view instances: a shared task counts again in every view requiring it. "
+              "For example, 152 is a count of requirements across views, not distinct training runs. "
+              "Research rows count unique required tasks within their own scope.", "",
               "(*) means at least one required experiment has no recorded execution for the selected configuration and source, "
               "including preflight-blocked tests. Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
               "or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. "
               "Zero recorded passes always displays as 0, including unrun families.", "",
-              "Counts retain recorded verdicts under their original recipe, prior, initialization, budget, serving law "
-              "and source. Changes to today's test definition and unavailable recorded definitions are shown separately "
-              "on the family pages and do not add (*); recorded passes grant no "
-              "new qualification. Required lower tiers must pass before later work is eligible. "
-              "The declared calibration and eligibility requirements appear on each family page.", "",
-              "Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the "
-              "family pages and excluded from totals.", ""]
-    if {family["id"] for family in progress["families"]} & {"atlas", "e22"}:
-        lines += ["Atlas/E22 retain (*) for blocked, unrun tests in their selected main-table cohort. "
-                  "The family pages list the host, prior, serving and parameter-ownership blockers. "
-                  "Their separately scoped policy measurements keep their own results and do not fill these cells.", ""]
+              "Counts retain each original recipe, prior, initialization, budget, serving law and source. "
+              "Family pages retain exact metrics, phase checks, failures, blockers, historical comparisons and "
+              "calibration requirements. Observation checks and catalog attempt counts add no benchmark passes; "
+              "untiered historical studies remain on those detail pages.", ""]
+    if (root / "reports/forge/bcap-prior-search/findings.md").is_file():
+        lines += [link(root, page, "Prior-search measurements and gates", "reports/forge/bcap-prior-search/README.md") + " · " +
+                  link(root, page, "Prior-search findings", "reports/forge/bcap-prior-search/findings.md"), ""]
     lines += _tag_directory(root, page, progress)
     lines += ["## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
@@ -753,9 +746,6 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               link(root, page, "Experiments, criteria and tier assignments", "reports/forge/EXPERIMENTS_BY_TIER.md") + " · " +
               link(root, page, "Complete numerical publication and provenance", "reports/forge/technique-inventory.json"), "",
               f"Publication input digest `{publication['provenance']['input_digest']}`.", ""]
-    retained_notes = root / 'reports/forge/leaderboard-retained-source-notes.md'
-    if retained_notes.is_file():
-        lines.append(retained_notes.read_text())
     return "\n".join(lines)
 
 
@@ -1151,6 +1141,23 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                 lines += [_existing_link(root, page, "Explanation and existing training artifacts", explanation), ""]
     lines += ["## Historical and diagnostic evidence", "",
               "Separate configurations, API variants and serving laws retain their own scopes and supply no cells above.", ""]
+    from .research_tiers import family_research_lines
+    if not family.get("solution_page"):
+        lines += family_research_lines(root, page, family["id"])
+    if family["id"] == "bcap-pure" and not family.get("solution_page"):
+        pure = root / "reports/forge/pure-bcap"
+        if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("pure_bcap_family_navigation", pure / "publish.py")
+            helper = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(helper)
+            lines.append(helper.display_section(root, page))
+        else:
+            retained_notes = root / "reports/forge/leaderboard-retained-source-notes.md"
+            if retained_notes.is_file():
+                notes = retained_notes.read_text()
+                target = os.path.relpath(pure, page.parent)
+                lines.append(notes.replace("](pure-bcap/", "](" + target + "/"))
     if family["id"] == "release07-gan-v3":
         for previous in progress.get("historical_families", []):
             if previous["id"].startswith("release07-gan-v3-"):

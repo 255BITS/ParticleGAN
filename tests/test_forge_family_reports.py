@@ -605,7 +605,8 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
                    for task in row["tasks"] + row.get("nonrequired_tasks", []))
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
-    assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
+    assert "including preflight-blocked tests" in text
+    assert "earn no pass credit" in text
     assert publication["rows"] == rows
 
 

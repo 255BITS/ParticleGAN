@@ -1862,29 +1862,9 @@ def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
         markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
-        if (root / "reports/forge/bcap-prior-search/findings.md").is_file():
-            prior_link = os.path.relpath(root / "reports/forge/bcap-prior-search/README.md", path.parent)
-            findings_link = os.path.relpath(root / "reports/forge/bcap-prior-search/findings.md", path.parent)
-            prior_navigation = ("The [BCAP leader prior searches](" + prior_link + ") compare five opt-in mechanisms "
-                                "and fifteen global strengths, with every task measurement, score, target and source-bound "
-                                "repair or regression. Their [interpretation and recommendations](" + findings_link + ") "
-                                "explain the results. The selected family configuration and its recorded counts remain unchanged.\n\n")
-            for anchor in ("Family totals sum required-view instances:", "Family totals sum the view rows."):
-                if anchor in markdown:
-                    markdown = markdown.replace(anchor, prior_navigation + anchor, 1)
-                    break
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
-        from experiments.forge.test_performance_render import render_discovery_navigation
-        markdown += render_discovery_navigation(root, path)
-        pure = root / "reports/forge/pure-bcap"
-        if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
-            import importlib.util
-            spec = importlib.util.spec_from_file_location("pure_bcap_navigation", pure / "publish.py")
-            helper = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(helper)
-            markdown += helper.display_section(root, path)
         return markdown
     if not result.get('recorded_policy') and result['view'] == 'discriminator_stability':
         return _common26_current_markdown(result, root, path)

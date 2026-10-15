@@ -8550,6 +8550,41 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Separate configurations, API variants and serving laws retain their own scopes and supply no cells above.
 
+## Preserved Atlas scores — separate original cohorts
+
+PR404's selected-policy particle-cloud scope has **0 PASS / 1 FAIL / 2 INCOMPLETE / 4 BLOCKED across 7 questions**. The three started runs and four unstarted questions remain distinct. These scores add no ordinary MoG/live qualification or default-adoption credit. [Original receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/results.json).
+
+| Started question | Original gate | Completed / declared updates | Original measured score |
+|---|---|---:|---|
+| `gaussian1d_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1000/1000 | Logged CDF KS 0.029021; diagnostic only, checkpoint export ERROR |
+| `ring16_acquisition_tier1_policy_selected_cloud_v1` | INCOMPLETE | 1600/1600 | Logged component covariance error 1.812179; diagnostic only, checkpoint export ERROR |
+| `clockfree_audit_tier1_policy_selected_cloud_v1` | FAIL | 24/24 | 2/4 state-digest comparisons match; step-label and restart differ |
+
+Unstarted BLOCKED questions: two-pole, unused-token hold, AE hold, and five-word joint acquisition.
+
+The historical adapted RA14 panel reported **7 PASS / 4 FAIL across 11 cases**. These are its original reported verdicts: Blobs stopped at 300/600 updates and remains incomplete under its full horizon. Width/anisotropic transfers are counted once. This different source/prior/serving cohort cannot fill current cells. [Historical report](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/FAST_PANEL_REPORT.md).
+
+| Historical case | Reported verdict | Passing checks / observations | Actual / original updates |
+|---|---|---:|---:|
+| `vector_unequal_width` | PASS | 20/24 | 1200/1200 |
+| `vector_anisotropic` | PASS | 20/24 | 1200/1200 |
+| `vector_two_broad` | PASS | 23/24 | 1200/1200 |
+| `vector_unequal_mass` | PASS | 20/24 | 1200/1200 |
+| `vector_overlap` | PASS | 23/24 | 1200/1200 |
+| `vector_spiral` | PASS | 23/24 | 1600/1600 |
+| `img_stripes2` | PASS | 14/24 | 600/600 |
+| `img_intensity2` | FAIL | 0/24 | 600/600 |
+| `img_bars4` | FAIL | 0/24 | 600/600 |
+| `img_blobs4` | FAIL; full horizon incomplete | 0/12 | 300/600 |
+| `ring16_acquisition` | FAIL | 4/24 | 400/400 |
+
+The separate native seed-0 two-pole pilot retains a local RMS-cap win at its original **80-update** horizon; call-800 behavior and transfer were unmeasured. [Pilot receipts](https://github.com/255BITS/ParticleGAN/blob/3f970e106f66051c0054719b12c068681505da1a/reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/INVENTORY-RECEIPT-PACKET.json).
+
+| Native pilot arm | Original gate | Passing checks / observations | Final mean absolute position (≥0.3) | Final median critic gradient (≤1) |
+|---|---|---:|---:|---:|
+| `squared` | FAIL | 0/24 | 0.005321 | 0.012204 |
+| `rms_cap` | PASS | 8/24 | 0.460720 | 0.405106 |
+
 - [Original Atlas recipe and serving-law evidence](../continuous-baseline-20261003/README.md)
 - [fresh_retest](../pr223-original-full-retest-stopped17-20261004/README.md)
 - [native3_continuation](../pr223-native3-first-invalid-20261004/README.md)

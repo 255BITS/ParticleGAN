@@ -4,6 +4,9 @@ import importlib.util
 import json
 from pathlib import Path
 
+from experiments.forge.family_reports import render_family
+from experiments.forge.research_tiers import tier_rows, _row
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,6 +23,9 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
     second = regenerator._current_markdown(publication, ROOT, page)
     assert publication == original
     assert first == second == page.read_text()
+    assert first.splitlines()[4] == "| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |"
+    details = {f["id"]: render_family(ROOT, publication, f)
+               for f in publication["family_progress"]["families"] if f["id"] in {"atlas", "bcap-pure"}}
     for heading in (
         "## Preserved Atlas scores — separate original cohorts",
         "## Preserved catalog scores — original CPU geometry comparisons",
@@ -27,14 +33,33 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
         "## G-only coherence: registered paired research",
         "## Confidence-LR correction: six-task screen and own retention",
     ):
-        assert first.count(heading) == 1, heading
-    assert "0 PASS / 1 FAIL / 2 INCOMPLETE / 4 BLOCKED across 7 questions" in first
-    assert "FAIL → PASS | 14 → 15 | 3 → 5" in first
-    assert "69 of 72 observation checks" in first
-    assert "**1/2 tasks per arm**" in first
-    assert "Stationary checks improve in all six pairs" in first
-    assert "original word hold **PASS 25/25**" in first
-    assert "BCAP initial Adam study" in first
-    assert first.count("The [BCAP leader prior searches]") == 1
-    assert first.count("## Scoped non-Atlas discoveries") == 1
-    assert first.count("## Quota-transition and Astra portfolio follow-up") == 1
+        assert heading not in first, heading
+        assert sum(detail.count(heading) for detail in details.values()) == 1, heading
+    assert "0 PASS / 1 FAIL / 2 INCOMPLETE / 4 BLOCKED across 7 questions" in details["atlas"]
+    bcap = details["bcap-pure"]
+    assert "FAIL → PASS | 14 → 15 | 3 → 5" in bcap
+    assert "69 of 72 observation checks" in bcap
+    assert "**1/2 tasks per arm**" in bcap
+    assert "Stationary checks improve in all six pairs" in bcap
+    assert "original word hold **PASS 25/25**" in bcap
+    assert bcap.count("BCAP initial Adam study") == 1
+    assert first.count("[Prior-search measurements and gates]") == 1
+    assert bcap.count("## Scoped non-Atlas discoveries") == 1
+    assert bcap.count("## Quota-transition and Astra portfolio follow-up") == 1
+    assert "[source-bound-board.json](../source-bound-board.json)" in bcap
+
+
+def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
+    rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
+    assert len(rows["bcap-pure"]) == 19  # Five confidence recipes, two original arms, twelve research arms.
+    paired = [row for row in rows["bcap-pure"] if "research seed" in row]
+    assert len(paired) == 12
+    for row in paired:
+        assert "[1(*)/6]" in row and "[0(*)/21]" in row and "[0(*)/2]" in row and "[1(*)/29]" in row
+    finite = next(row for row in rows["bcap-pure"] if "Finite critic cap" in row)
+    assert "[0(*)/6]" in finite and "[0(*)/21]" in finite and "[0(*)/29]" in finite
+    assert "[0(*)/7]" in rows["atlas"][0] and " | — | — | " in rows["atlas"][0]
+    # A phase observation or an unassigned task cannot become a benchmark pass.
+    with pytest.raises(ValueError, match="no recorded tier"):
+        _row(ROOT, ROOT / "board.md", "invalid", "result.json", {"stationary_check": "PASS"},
+             {"1": {"smoke"}, "2": {"retention"}, "3": set()})

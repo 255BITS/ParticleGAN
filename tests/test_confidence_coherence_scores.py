@@ -95,10 +95,15 @@ def test_full_regenerator_preserves_confidence_coherence_and_selected_scores():
     first = driver._current_markdown(publication, ROOT, page)
     assert first == driver._current_markdown(publication, ROOT, page)
     assert publication == before
-    assert first.count("## G-only coherence: registered paired research") == 1
-    assert first.count("## Confidence-LR correction: six-task screen and own retention") == 1
-    assert "**6/6 PASS**" in first and "**PASS 25/25**" in first
-    assert "8/72 stationary checks" in first and "0/24 shifted-hold checks" in first
-    assert "69 of 72 observation checks" in first and "35 of 72 observation checks" in first
-    assert "35/72 → 44/72" in first and "11/24 → 6/24" in first
-    assert (ROOT / "reports/forge/leaderboard-retained-source-notes.md").read_text() in first
+    row = next(line for line in first.splitlines() if line.startswith("| ↳ †") and "Confidence LR;" in line)
+    assert "[6/6]" in row and "[1(*)/21]" in row and "[0(*)/2]" in row and "[7(*)/29]" in row
+    from experiments.forge.family_reports import render_family
+    family = next(f for f in publication["family_progress"]["families"] if f["id"] == "bcap-pure")
+    detail = render_family(ROOT, publication, family)
+    assert detail.count("## G-only coherence: registered paired research") == 1
+    assert detail.count("## Confidence-LR correction: six-task screen and own retention") == 1
+    assert "**6/6 PASS**" in detail and "**PASS 25/25**" in detail
+    assert "8/72 stationary checks" in detail and "0/24 shifted-hold checks" in detail
+    assert "69 of 72 observation checks" in detail and "35 of 72 observation checks" in detail
+    assert "35/72 → 44/72" in detail and "11/24 → 6/24" in detail
+    assert "BCAP initial Adam study" in detail

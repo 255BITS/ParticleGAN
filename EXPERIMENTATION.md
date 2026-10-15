@@ -503,6 +503,12 @@ Zero recorded passes display as `0(*)/N` when results are unavailable. Every
 table link opens the generated family page at its view or tier breakdown, with
 recorded metrics, current criteria, missing results and original evidence links.
 Diagnostic-only views and historical/API studies are separate from the totals.
+Retained research recipes appear as marked rows in the same tier table, with
+passes counted against their original required tasks. These rows keep each
+source, recipe and seed separate and do not enter the selected family totals.
+Phase observation checks remain measurements of their original benchmark gate.
+Detailed comparisons, attempt ledgers and untiered historical studies live on
+the family pages; they do not precede the scoreboard or create extra tier credit.
 One refresh rebuilds the leaderboard, family pages and experiments-by-tier
 report; the older shared score index links here instead of copying the table.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)

@@ -56,7 +56,6 @@ def main_board_rows(root, page):
     lines += ['', 'Recorded discriminator_stability revision9: acquisition is Tier1 and the complete stability benchmark is Tier2. '
         'Stationary retention, deadline reacquisition and shifted hold are phases of that same Tier2 task; '
         'they are not separate Tier3 benchmark passes. The proposed revision10 display split is not applied retrospectively.', '',
-        f'Machine row source: [source-bound-board.json](source-bound-board.json), SHA256 `{file_hash(path)}`.', '']
+        f'Machine row source: [source-bound-board.json]({os.path.relpath(path, Path(page).parent)}), SHA256 `{file_hash(path)}`.', '']
     lines += paired_rows(root, page)
-    lines += ['## Selected family rows', '']
     return lines

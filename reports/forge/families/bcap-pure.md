@@ -9077,6 +9077,154 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Separate configurations, API variants and serving laws retain their own scopes and supply no cells above.
 
+## Preserved catalog scores — original CPU geometry comparisons
+
+PR406's catalog contains **285 distinct attempt IDs: 142 PASS / 136 FAIL / 7 INCOMPLETE**. Those are record counts across different protocols, not a pooled performance score. The numerical comparisons below preserve two original CPU 2.13 studies on source `d378734f40b09ce223a389e8f54a9783ec6a0c75`; each seed, task and recipe remains separate. No new training or current-source qualification is claimed. [Original catalog](https://github.com/255BITS/ParticleGAN/blob/c732db2c9353884764b336baa5fed525d2ed33f7/reports/forge/research-catalog/studies.json); [byte-pinned score receipts](../research-catalog/leaderboard-scores.json).
+
+| Recipe change / task / seed | Original gate, control → candidate | Passing checks / 24, control → candidate | Terminal passing suffix (required 5) | Original endpoint scores, control → candidate |
+|---|---|---|---|---|
+| Full G Frobenius; `vector_overlap`; seed 0 | FAIL → PASS | 14 → 15 | 3 → 5 | covariance error 0.240728 → 0.230126; mean error 0.030689 → 0.119350; SW1 0.058851 → 0.088509 |
+| Full G Frobenius; `vector_overlap`; seed 1 | FAIL → PASS | 14 → 16 | 3 → 5 | covariance error 0.277288 → 0.241869; mean error 0.043819 → 0.027366; SW1 0.063741 → 0.051240 |
+| Full G Frobenius; `vector_two_broad`; seed 0 | PASS → PASS | 20 → 18 | 20 → 18 | component covariance error 0.437817 → 0.233551 |
+| G half polar / half Frobenius; `trajectory`; seed 0 | FAIL → PASS | 0 → 18 | 0 → 18 | identity MSE 0.021320 → 0.000101 |
+| G half polar / half Frobenius; `vector_overlap`; seed 0 | PASS → PASS | 15 → 17 | 5 → 5 | covariance error 0.230126 → 0.402998; mean error 0.119350 → 0.134850; SW1 0.088509 → 0.113960 |
+
+Overlap and broad use 1,200 updates; trajectory uses 400. The seed-0 full-Frobenius overlap gains a sustained PASS while mean/SW1 worsen; the half-sum repairs trajectory while worsening overlap endpoint errors. Full Frobenius alone fails the conditional trajectory control, and broader preservation and CUDA equivalence remain unmeasured. The reused broad control is not a fresh attempt. These five comparison rows and their control/candidate arms must not be added to the 285-ID register.
+
+## Source-bound benchmark rows
+
+These rows are visible on the main board but do not replace a selected family configuration. Benchmark-task totals and within-task observation checks have different units. Untested benchmark cells are null in the machine data; no whole-gauntlet score is inferred.
+
+| Source-bound candidate / matched control | Benchmark tasks passed / run | Required benchmark tasks untested | Recorded Tier2 stationary checks | Recorded Tier2 reacquisition | Recorded Tier2 shifted-hold checks | Original retention benchmark |
+| --- | --- | --- | --- | --- | --- | --- |
+| [G-only coherent mean (original seed0)](../g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 69 of 72 observation checks | PASS (phase) | 20 of 24 observation checks | **FAIL** |
+| [Fresh matched protected NS/transport control](../g-coherent-mean-seed0/README.md) | **1 of 2 benchmark tasks** | **27 of 29 required unique benchmark tasks** | 35 of 72 observation checks | FAIL (phase) | 12 of 24 observation checks | **FAIL** |
+
+Recorded discriminator_stability revision9: acquisition is Tier1 and the complete stability benchmark is Tier2. Stationary retention, deadline reacquisition and shifted hold are phases of that same Tier2 task; they are not separate Tier3 benchmark passes. The proposed revision10 display split is not applied retrospectively.
+
+Machine row source: [source-bound-board.json](../source-bound-board.json), SHA256 `2181898ee61a7fbc2a7f2230b32a26f5d55933b6565645bd1ae988cd67c4d404`.
+
+<a name="g-only-coherence-registered-paired-research"></a>
+
+## G-only coherence: registered paired research
+
+[Original receipt scores](../g-coherent-mean-paired-research/results.json), source `3e6ab1939a8f`; control revision `cb1671ed7174`, candidate revision `10df0bea444a`. Each arm passes acquisition and fails its own complete retention task: **1/2 tasks per arm**. The six research seeds remain separate from the original seed-zero screening result and from selected family scores.
+
+| Research seed | Stationary checks, control → candidate | Shifted-hold checks, control → candidate | Reacquisition, control / candidate | Complete retention, control / candidate |
+| --- | --- | --- | --- | --- |
+| 1 | 35/72 → 44/72 | 10/24 → 20/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 2 | 30/72 → 57/72 | 13/24 → 22/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 3 | 34/72 → 66/72 | 6/24 → 12/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 4 | 34/72 → 58/72 | 17/24 → 11/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 5 | 37/72 → 65/72 | 11/24 → 9/24 | FAIL / FAIL | **FAIL / FAIL** |
+| 6 | 33/72 → 56/72 | 11/24 → 6/24 | FAIL / FAIL | **FAIL / FAIL** |
+
+Stationary checks improve in all six pairs; shifted-hold checks improve in three and regress in three. These fractions count observations inside each retention task, not additional benchmark passes. Every continuation restores its own acquisition checkpoint. No pooled qualification or default promotion is inferred.
+
+
+## Scoped non-Atlas discoveries
+
+[Verified reconciled receipts, complete recipes and audit gaps](../test-performance-evidence/nonatlas-reconciled-204.json): **204 full runs** across **66 recipe IDs**, **75 source-bound revisions** and **7 source cohorts**. Recorded outcomes are **107 PASS / 97 FAIL**. These are disjoint ledger counts across exact protocols; **no global survivor or pooled score** is established.
+
+**Evidence limits:** six mode-hold transfers lack saved sample panels; raw archives and full-run CUDA packets are not publicly available. Their original logged-metric FAIL grades remain explicit.
+
+<details>
+<summary>Open the 204-run cohort table, exact clocks and audit limitations</summary>
+
+| Round | Full PASS / FAIL | Source cohorts | Inclusive attempt wall seconds | Audit |
+| --- | ---: | --- | ---: | --- |
+| cell-moment-round | 14 / 1 | `f90962a5b351` | 746.970010416 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-moment-transfer-round | 13 / 2 | `f90962a5b351` | 730.446546641 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-moment-acquisition-round | 13 / 2 | `a21587094267` | 745.665159237 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| gaussian-stability-round | 0 / 3 | `a21587094267` | 386.763673001 | PASS_INDEPENDENT_SAVED_OUTPUT_CONTINUITY_AND_BINDING_AUDIT |
+| cell-moment-retention-architecture-round | 6 / 6 | `421df4e58168` | 1083.554060910 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-memory-round | 12 / 12 | `47b8aff9e9ef` | 2487.138272296 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-quadrature-round | 0 / 12 | `8220bfed22b6` | 3554.116458337 | PASS_INDEPENDENT_SAVED_OUTPUT_AND_BINDING_AUDIT |
+| cell-optimizer-round | 12 / 12 | `47b8aff9e9ef` | 2950.390634309 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-mixed-role-round | 12 / 12 | `d6b7ca5a0d78` | 2919.869744607 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-gradient-signal-round | 17 / 7 | `11cf56e3462e` | 3236.489829691 | PASS_INDEPENDENT_SAVED_OUTPUT_OWN_CONTINUITY_AND_MEMORY_BINDING_AUDIT |
+| cell-signal-transfer-round | 2 / 10 | `11cf56e3462e` | 708.227286190 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
+| cell-signal-reverse-transfer-round | 3 / 9 | `11cf56e3462e` | 730.770430319 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
+| cell-signal-moment-transfer-round | 3 / 9 | `11cf56e3462e` | 713.859442260 | PARTIAL_SAVED_SAMPLES_FULL_BINDING_AND_LOGGED_GATE_AUDIT |
+
+The original 45 geometry/transfer/acquisition runs remain indexed once: aggregate 35/36 PASS and five of nine fresh controls PASS, with Bures ring FAIL retained. All cumulative representatives, all 12 memory corrections and all 12 mixed-role recipes fail full Gaussian stability; all 12 quadrature recipes fail mode retention. Gradient attenuation passes five of 12 full Gaussian runs, but all five passing recipes fail essential transfer gates. Forward, reverse and moment transfer cohorts pass 2/12, 3/12 and 3/12; these cannot fill one another's protocols.
+
+Gaussian continuations retain the complete 6,000-step clock and their own pinned 1,000-step producers: only 5,000 new updates and the new attempt charge are counted. Complete recipes expose objective, reference policy, cubature, optimizer, G/D/prior role assignments and signal attenuation. Published/base architectures and source revisions remain separate.
+
+**12 pre-runtime ERROR cells** cost **30.168105392 seconds**, with zero training updates. Three CPU-nonfinite SGDA rejections, semantic dedup exclusions, preparation/audit failures and the CPU gradient probe remain separate diagnostics. The probe's REJECT decision supplies no optimizer or feasibility PASS.
+
+The amended CPU reference ablation keeps primary **REJECT** and secondary posthoc quota **SUPPORT** separate, with original registrations and transparent quota/directional-measurement errata. These add zero trained rows and no qualified recipe or feasibility witness; 4.349590721 timed CPU seconds remain separate from attempt charges.
+
+[Two paired64 cells](../test-performance-evidence/nonatlas-finite-realization-prefix64.json) remain **INCOMPLETE** against original 7,000-step staggered100 gates. Full-run wall charge **20994.261548214 seconds**; prefix **20.104729663 seconds**; disjoint full/prefix/failed-supervisor total **21044.534383269 seconds**. CPU preparation/probe costs are recorded separately; no exclusive CUDA-time or cross-protocol speed ranking is claimed.
+
+**Six mode-hold transfer jobs have unavailable saved sample panels**. Their cells explicitly retain original logged-metric gate regrades; score-history GIFs are not sample trajectories. The other 384 saved sample observations per transfer cohort regrade exactly in the supplied audits. Full-run CUDA packets and contemporaneous causal gradient/reference histories were not retained. Source/artifact hashes were verified; bulk archives remain local-only.
+
+Display coverage changes only. Private prototype implementations are not public API releases or adopted defaults; selected family rows, qualification, experiments and training code remain unchanged.
+
+</details>
+
+
+## Quota-transition and Astra portfolio follow-up
+
+[Verified cumulative receipts and original submetrics](../test-performance-evidence/astra-cumulative-24.json): **24 additional full runs**, 8 predecessor quota runs plus 16 Astra runs. The six interim Astra receipts occur once. Family execution ledger: **228 full runs** and **470,400 new accepted updates**; no global survivor.
+
+**Finding:** all twelve Astra hypotheses fail full unequal-mass gates. Three endpoint covariance submetrics pass, but their 1/5 terminal suffixes still fail the original sustained requirement.
+
+<details>
+<summary>Open the 24-run follow-up: controls, predictors and separate cost clocks</summary>
+
+| Round | Full PASS / FAIL | Source | Queue seconds | Supervisor wall seconds |
+| --- | ---: | --- | ---: | ---: |
+| cell-quota-transition-round | 5 / 3 | `9bcc5a8eef26` | 462.898204478 | 480.149192524 |
+| astra-quota-followup | 0 / 4 | `db1f08de2d98` | 148.701697541 | 157.336667785 |
+| astra-fractional-transport | 0 / 2 | `1adee8703f13` | 65.182648164 | 68.483431482 |
+| astra-shape-distribution | 0 / 4 | `05e7cf2d2e6c` | 178.974365511 | 187.800058275 |
+| astra-remaining-mechanisms | 0 / 6 | `b95b46ed9444` | 301.378773134 | 312.712553871 |
+
+All **12 Astra hypotheses FAIL** the unchanged full unequal-mass gate. Four fresh source-bound controls are separate paid runs. Swap, slow covariance and lookahead pass the final covariance submetric, but each ends with a one-check suffix against five required checks; their full verdict stays FAIL. The predecessor minimum-change recipe passes Gaussian acquisition/stability and mode retention, but fails unequal mass.
+
+Added work: **36,000 accepted updates** plus **1,200 temporary predictor evaluations**. Lookahead's temporary predictor is not another accepted optimizer update; its work is already included in both clocks. Original horizons, budgets, quotas, assignment/transport semantics, reference policies and covariance-memory changes remain bound.
+
+The 24-run queue charge is **1157.135688828 seconds**; inclusive supervisor wall charge is **1206.481903937 seconds**. These clocks are distinct and are not added together. Inherited budgets and earlier charges are not counted again. Preparation errors and predecessor failed-audit CPU costs remain diagnostic exclusions; unavailable preparation elapsed times stay null.
+
+5 additional source cohorts and all saved-output/state/trace pins were verified. Fractional transport uses row-argmax labels with exact soft capacities; integer assignment counts are not substituted for those labels. Controls' model equality is certified by the supplied audits. Raw arrays, tensor states and traces stay local-only; the import runs no research code, training or metric rescore and grants no qualification.
+
+</details>
+
+
+<a name="confidence-lr-correction-six-task-screen-and-own-retention"></a>
+
+## Confidence-LR correction: six-task screen and own retention
+
+[Six original required Tier 1 attempts](../test-performance-evidence/pr399-confidence-lr-tier1-6.json) are **6/6 PASS** with complete actual optimizer histories. The positive confidence-scaled learning-rate response preserves generator, encoder and prior updates. This passes only the frozen six-task screening view; earlier hard-EMA and control attempts retain their separate source identities and are not relabelled as current-source controls.
+
+[Two own-checkpoint continuations](../test-performance-evidence/pr399-confidence-lr-own-retention-2.json) keep the contrast: original word hold **PASS 25/25**, but Gaussian retention **FAIL** with 8/72 stationary checks, 0/24 shifted-hold checks and failed reacquisition. An acquisition pass is not sustained retention. The measured recipe has no broader Tier 2, full Martyn, robustness or release qualification.
+
+The cumulative packet now has **74 unique attempts**: 66 earlier identities and eight new confidence-LR runs, **32 PASS / 35 FAIL / 7 INCOMPLETE**. The earlier rows and failed gates are byte-unchanged. This is a source-scoped attempt ledger, not a pooled score or an addition to the 249-run non-Atlas total. Exact cumulative updates remain unavailable because the older timed-out word control has only a lower bound. No default, qualification or release promotion follows.
+
+<a name="later-gaussian-corrections-one-failed-acquisition-one-failed-retention"></a>
+
+## Later Gaussian corrections: one failed acquisition, one failed retention
+
+[Finite critic cap](../test-performance-evidence/pr399-gaussian-finite-cap-1.json) completes the original Gaussian acquisition task but **FAILS** its any-scheduled-pass-with-independent-confirmation gate. Own Gaussian retention is **BLOCKED/UNSTARTED**: zero attempts, updates and charge; there is no synthetic retention result.
+
+[Critic orientation correction](../test-performance-evidence/pr399-critic-orientation-2.json) **PASSes** original Gaussian acquisition at its distinct source/revision, then **FAILS** the original own-state retention continuation: 5/72 stationary, 1/24 shifted and 0/48 frozen checks, with failed reacquisition. Its remaining five required Tier 1 tasks were not run at this source. It cannot inherit the earlier confidence-LR six-task screen as current-source qualification.
+
+The cumulative ledger has **77 unique attempts: 33 PASS / 37 FAIL / 7 INCOMPLETE**. All earlier 74 rows retain their exact grades and identities; these three attempts are added once. Neither correction establishes Gaussian retention, full six-task superiority, broad Tier 2 or release eligibility.
+
+<a name="signed-and-positive-evidence-responses-retention-remains-unsolved"></a>
+
+## Signed and positive-evidence responses: retention remains unsolved
+
+[Signed-confidence response](../test-performance-evidence/pr399-signed-confidence-2.json) **PASSes** original Gaussian acquisition, then **FAILs** own-checkpoint retention: 7/72 stationary, 0/24 shifted, 0/48 frozen and deadline reacquisition FAIL. The signed gap is a confidence proxy, not a restoring-gradient certificate.
+
+[Positive-evidence response](../test-performance-evidence/pr399-positive-evidence-2.json) also **PASSes** acquisition and **FAILs** full retention: 14/72 stationary, 2/24 shifted, 0/48 frozen and deadline reacquisition FAIL. Its final mean, width ratio and CDF KS meet numerical endpoint bounds, which do not replace the unchanged sustained gate. Neutral zero-gain proposals still advance real optimizer moment histories.
+
+These are two distinct source/revision cohorts; neither inherits the earlier six-task screen. The cumulative packet has **81 unique attempts: 35 PASS / 39 FAIL / 7 INCOMPLETE**, retaining all 77 earlier rows exactly and adding four attempts once. No Gaussian-retention winner, full Martyn superiority, default or release qualification follows.
+
+
+[BCAP initial Adam study](../pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.
+
 - [Other configurations and original evidence bindings](../technique-inventory.json)
 - [Compiled experiment memory](../EXPERIMENT_MEMORY.md)
 

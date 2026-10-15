@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 import pytest
 from experiments.forge.source_bound_board import validate_board, main_board_rows
-from experiments.forge.family_reports import render_leaderboard
+from experiments.forge.family_reports import render_leaderboard, render_family
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -28,9 +28,13 @@ def test_rendered_main_board_matches_machine_source_and_preserves_selection():
     publication=json.loads((ROOT/'reports/forge/technique-inventory.json').read_text());before=deepcopy(publication)
     text=render_leaderboard(ROOT,publication,ROOT/'reports/forge/technique-inventory.md')
     assert publication==before
-    assert text.index('G-only coherent mean') < text.index('## Selected family rows')
-    assert '1 of 2 benchmark tasks' in text and '27 of 29 required unique benchmark tasks' in text
-    assert '69 of 72 observation checks' in text and '35 of 72 observation checks' in text
-    assert '20 of 24 observation checks' in text and '12 of 24 observation checks' in text
-    assert '**FAIL**' in text and 'not separate Tier3 benchmark passes' in text
-    assert 'required-view instances' in text and 'not152 distinct benchmark tasks' in text
+    assert text.index('| Family / view | Tier 1') < text.index('G-only coherent mean')
+    row=next(line for line in text.splitlines() if line.startswith('| ↳ †') and 'G-only coherent mean' in line)
+    assert '[1(*)/6]' in row and '[0(*)/21]' in row and '[0(*)/2]' in row and '[1(*)/29]' in row
+    family=next(f for f in publication['family_progress']['families'] if f['id']=='bcap-pure')
+    detail=render_family(ROOT,publication,family)
+    assert '1 of 2 benchmark tasks' in detail and '27 of 29 required unique benchmark tasks' in detail
+    assert '69 of 72 observation checks' in detail and '35 of 72 observation checks' in detail
+    assert '20 of 24 observation checks' in detail and '12 of 24 observation checks' in detail
+    assert '**FAIL**' in detail and 'not separate Tier3 benchmark passes' in detail
+    assert 'required-view instances' in text and 'not distinct training runs' in text
