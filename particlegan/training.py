@@ -29,7 +29,11 @@ class InputNoise(nn.Module):
         if self.std == 0:
             return self.critic(x, *args, **kwargs)
         noise = torch.randn(x.shape, generator=self.generator, device=x.device, dtype=x.dtype)
-        return self.critic(x + self.std * noise, *args, **kwargs)
+        out = self.critic(x + self.std * noise, *args, **kwargs)
+        target = out[0] if isinstance(out, (tuple, list)) and out else out
+        if isinstance(target, torch.Tensor):
+            target._bispf_input = x
+        return out
 
 
 # Fields added to Recipe after checkpoints were written, with the value that
@@ -169,8 +173,9 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
+        ema_critic = None if recipe.effective_critic_formulation == "bispf" else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
-            self.G, self.D, self.prior, ema_critic=deepcopy(self.D),
+            self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()

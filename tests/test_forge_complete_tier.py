@@ -199,3 +199,22 @@ def test_invalid_execution_policy_rejected_before_mutation(tmp_path, value):
     with pytest.raises(ValueError, match="execution_policy"):
         queue.submit(req, campaign())
     assert queue.inspect()["submissions"] == {}
+
+
+def test_on_completion_triggers_only_at_tier_boundaries(tmp_path):
+    calls = []
+    queue = Queue(tmp_path / "queue", grader=grade, on_completion=lambda: calls.append("compile"))
+    queue.submit(full_request(tmp_path), campaign())
+    first = queue.claim(SLOTS)
+    finish(first, measured=1)
+    queue.collect()
+    assert calls == []  # t2 in Tier 1 is still pending.
+    peer = queue.claim(SLOTS)
+    finish(peer, measured=2)
+    queue.collect()
+    assert calls == ["compile"]  # Tier 1 completed and advanced to Tier 2.
+    next_tier = queue.claim(SLOTS)
+    finish(next_tier, measured=3)
+    queue.collect()
+    assert calls == ["compile", "compile"]  # Tier 2 completed.
+

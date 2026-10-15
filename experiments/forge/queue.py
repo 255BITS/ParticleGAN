@@ -620,13 +620,30 @@ class Queue:
                 atomic_json(directory / "process.json", job["worker"])
                 return process
 
+    def _active_tier(self, state, submission) -> int | None:
+        if submission["status"] in {"blocked", "completed", "cancelled", "concluded"}:
+            return None
+        eligible, reason, running = self._eligible(state, submission)
+        if reason or (not eligible and not running):
+            return None
+        tiers = {a["task"]: a["qualification_tier"] for a in submission["request"]["view"]["assignments"]}
+        if eligible:
+            return min(tiers[state["jobs"][k]["definition"]["task_id"]] for k in eligible)
+        return min((tiers[j["task_id"]] for j in submission["request"]["jobs"]
+                    if state["jobs"][j["compatibility_key"]]["status"] == "running"
+                    and j["task_id"] in tiers), default=None)
+
     def collect(self, *, only_orphans=False):
         completions = 0
+        tier_completed = False
         with self.state() as state:
             # Dedicated admission may recover abandoned reservations, but must
             # not fence the collector's claim-to-launch registration window.
             if only_orphans and lease_held(self.root / "coordinator.lock"):
                 return 0
+            tiers_before = {req_id: self._active_tier(state, entry)
+                            for req_id, entry in state["submissions"].items()}
+            touched_requests = set()
             for key, job in state["jobs"].items():
                 if job["status"] != "running":
                     continue
@@ -702,6 +719,8 @@ class Queue:
                                 "runtime": request.get("runtime"), "local_artifact_root": str(directory),
                                 "portability": "local_artifacts_required" if any(r.get("evidence", {}).get("artifact_root") for r in rows) else "embedded"})
                 job.update(status="terminal", result=result, charged_seconds=job.get("charged_seconds", 0) + elapsed, reserved_seconds=0)
+                touched_requests.update(job.get("subscribers", []))
+                touched_requests.add(owner["request"])
                 completions += 1
                 self.event(state, "completed", candidate=request["candidate"]["id"], campaign=owner["campaign"],
                            attempt=worker["attempt"], worker=worker["attempt"], gpu=worker["device"], task=task_id,
@@ -709,7 +728,12 @@ class Queue:
                            cost={"wall_seconds": elapsed}, metrics={r["task_id"]: r.get("metrics", {}) for r in rows},
                            reason={r["task_id"]: r.get("reason") for r in rows})
             self._refresh(state)
-        if completions and self.on_completion:
+            if completions:
+                tier_completed = (not touched_requests or any(
+                    self._active_tier(state, state["submissions"][req_id]) != tiers_before.get(req_id)
+                    for req_id in touched_requests if req_id in state["submissions"]
+                ))
+        if tier_completed and self.on_completion:
             self.on_completion()
         return completions
 
