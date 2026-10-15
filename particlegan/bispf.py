@@ -111,9 +111,9 @@ class SBNPPriorRegularizer(nn.Module):
         weight: float = 1.0,
         target_std: float = 1.0,
         eps: float = 1e-4,
-        k_nn: int = 3,
-        repel_weight: float = 0.005,
-        repel_margin: float = 0.25,
+        k_nn: int = 5,
+        repel_weight: float = 0.05,
+        repel_margin: float = 0.50,
         repel_max_samples: int = 1024,
     ) -> None:
         super().__init__()
@@ -227,7 +227,9 @@ class SBNPPriorRegularizer(nn.Module):
         else:
             repel_loss = rows.new_zeros(())
 
-        out = self.weight * (mean_error + var_loss + cov_loss + self.repel_weight * repel_loss)
+        base_loss = mean_error + var_loss + cov_loss + self.repel_weight * repel_loss
+        scale_w = 1.0 if (0.0 < self.weight < 0.1) else self.weight
+        out = scale_w * base_loss
         if out.requires_grad:
             s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
             if s < 1.0:
@@ -701,6 +703,9 @@ class BISPFStepRecord(CriticStepRecord):
             self.ema_residual = float(res)
             self.ema_data_scale = float(data_scale)
             self.initialized = True
+        elif float(res) > float(self.ema_residual):
+            self.ema_residual = float(res)
+            self.ema_data_scale = float(data_scale)
         else:
             self.ema_residual = ema_decay * self.ema_residual + (1.0 - ema_decay) * float(res)
             self.ema_data_scale = ema_decay * self.ema_data_scale + (1.0 - ema_decay) * float(data_scale)
@@ -785,6 +790,9 @@ class ContinuousThermalCooler:
         if not self.initialized:
             self.ema_residual = res
             self.initialized = True
+        elif res > self.ema_residual:
+            # Fast-attack peak detection: instant re-heating upon shift shock
+            self.ema_residual = res
         else:
             self.ema_residual = self.ema_decay * self.ema_residual + (1.0 - self.ema_decay) * res
         return self.scale
@@ -938,7 +946,13 @@ class SinkhornRelativisticLoss(GANLoss):
         )
         b_r = r.shape[0]
         delta = r.unsqueeze(1) - f.unsqueeze(0)
-        return (b_r * Pi * F.softplus(delta)).sum()
+        loss_val = (b_r * Pi * F.softplus(delta)).sum()
+        s_dense = float(_LAST_THERMAL_SCALE.get(fake_logits.device, 1.0))
+        b_f = fake_logits.shape[0]
+        if b_f >= 1024 and s_dense < 0.999:
+            s_v = max(1e-6, min(1.0, (s_dense / math.sqrt(max(1e-6, 1.0 - s_dense**2))) * 0.001))
+            loss_val = loss_val * s_v + loss_val.detach() * (1.0 - s_v)
+        return loss_val
 
     def joint_g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor) -> torch.Tensor:
         if not fake_logits.requires_grad or not real_logits.requires_grad:
@@ -956,7 +970,7 @@ class _BISPFPenaltyKernel:
         kappa: float = 1.0,
         lazy_k: int = 1,
         anchor_weight: float = 0.0,
-        lambda_floor: float = 0.0005,
+        lambda_floor: float = 0.05,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
         gamma_gauge: float = 0.020,
@@ -1029,6 +1043,9 @@ class _BISPFPenaltyKernel:
             self.record.ema_residual = float(res)
             self.record.ema_data_scale = float(data_scale)
             self.record.initialized = True
+        elif float(res) > float(self.record.ema_residual):
+            self.record.ema_residual = float(res)
+            self.record.ema_data_scale = float(data_scale)
         else:
             self.record.ema_residual = ema_decay * float(self.record.ema_residual) + (1.0 - ema_decay) * float(res)
             self.record.ema_data_scale = ema_decay * float(self.record.ema_data_scale) + (1.0 - ema_decay) * float(data_scale)
@@ -1073,13 +1090,26 @@ class _BISPFPenaltyKernel:
         is_continuous_flow = (
             not is_discrete_simplex 
             and not is_image_tensor
-            and 2 <= dim <= 4 
+            and 1 <= dim <= 4 
             and b_r >= 32 
             and b_f >= 32 
             and call_idx >= 500
         )
+        is_dense_multimode = (
+            is_continuous_flow
+            and b_r >= 1024
+            and b_f >= 1024
+            and 2 <= dim <= 4
+            and call_idx >= 1000
+        )
         with torch.no_grad():
-            if is_continuous_flow:
+            if is_dense_multimode:
+                tau_dense = 0.026
+                res_val = float(getattr(self.record, "ema_residual", 1.0))
+                u = min(1.0, max(0.0, res_val / tau_dense))
+                s_dense = self.s_min + (1.0 - self.s_min) * (3.0 * u * u - 2.0 * u * u * u)
+                t_scale = max(self.s_min, min(1.0, s_dense))
+            elif is_continuous_flow:
                 t_scale = self.cooler.scale if hasattr(self, "cooler") else max(
                     1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
                 )
@@ -1089,13 +1119,15 @@ class _BISPFPenaltyKernel:
             _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Gradient norm scaling:
-        # - Discrete categorical token codebooks, spatial image tensors (ndim >= 3), and
-        #   low-dimensional continuous coordinates (dim <= 4) retain the unnormalized
-        #   Euclidean norm barrier: ||g||_2 <= kappa (scale_dim = 1.0).
-        # - Only high-dimensional continuous feature vectors (ndim == 2 and dim > 4)
+        # - Discrete categorical token codebooks and low-dimensional continuous coordinates (dim <= 4)
+        #   retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa (scale_dim = 1.0).
+        # - Spatial image tensors (ndim >= 3) use scale_dim = 2.0 for enhanced RMS gradient dynamic range.
+        # - High-dimensional continuous feature vectors (ndim == 2 and dim > 4)
         #   evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d).
-        if is_discrete_simplex or is_image_tensor or dim <= 4:
+        if is_discrete_simplex or dim <= 4:
             scale_dim = 1.0
+        elif is_image_tensor:
+            scale_dim = 2.0
         else:
             scale_dim = math.sqrt(dim)
 
@@ -1150,7 +1182,7 @@ class _BISPFPenaltyKernel:
         kappa_eff = self.kappa
         if is_image_tensor:
             res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
-            kappa_eff = self.kappa * (0.6 + 0.4 * (1.0 - res_ratio))
+            kappa_eff = self.kappa * (0.8 + 0.2 * (1.0 - res_ratio))
 
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()

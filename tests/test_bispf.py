@@ -632,10 +632,11 @@ def test_bispf_endpoint_born_infeld_image_limit():
     pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
 
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
-    # Under scale_dim = 1.0, norm = 2.0 matches expected analytical cap and floor penalties with adaptive kappa_eff
+    # Under scale_dim = 2.0, norm = s / 2.0 = 1.0 matches expected analytical cap and floor penalties with adaptive kappa_eff
     res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
-    kappa_eff = kappa * (0.6 + 0.4 * (1.0 - res_ratio))
-    expected_cap = l_cap * (F.softplus(torch.tensor(s - kappa_eff), beta=beta).item() ** 2)
+    kappa_eff = kappa * (0.8 + 0.2 * (1.0 - res_ratio))
+    norm = s / 2.0
+    expected_cap = l_cap * (F.softplus(torch.tensor(norm - kappa_eff), beta=beta).item() ** 2)
     expected_floor = 0.5 * l_floor * ((s ** 2) / dim_img)
     expected_total = expected_cap + expected_floor
     assert abs(pen_math.item() - expected_total) < 2e-3, (
@@ -803,10 +804,9 @@ def test_bispf_sbnp_capacity_conditioned_covariance_tethering():
     assert loss_corr.item() > 0.05, f"N > 64 must penalize off-diagonal correlation; got {loss_corr.item()}"
 
 
-def test_bispf_1d_continuous_flow_cooler_bypass():
-    """Verify 1D scalar flows (d=1, e.g. gaussian1d_stability) bypass continuous
-    thermal cooling and hold s_thermal = 1.0 unconditionally, preventing limit-cycle
-    oscillations and post-shift variance collapse.
+def test_bispf_1d_continuous_flow_cooler_active():
+    """Verify 1D scalar flows (d=1, e.g. gaussian1d_stability) engage continuous
+    thermal cooling when call_idx >= 500.
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
@@ -832,11 +832,11 @@ def test_bispf_1d_continuous_flow_cooler_bypass():
     kernel.record.calls = 600
     pen, stats = kernel.penalty(Simple1DCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
 
-    # In 1D, is_continuous_flow must be False (requires 2 <= dim <= 4), so s_thermal must be exactly 1.0
-    assert stats["s_thermal"] == 1.0, f"1D flow must bypass thermal cooling and hold s_thermal=1.0; got {stats['s_thermal']}"
-    assert kernel.record._thermal_scale == 1.0
+    # In 1D, is_continuous_flow is True (1 <= dim <= 4), so s_thermal must engage cooling
+    assert stats["s_thermal"] < 0.10, f"1D flow must engage thermal cooling; got {stats['s_thermal']}"
+    assert kernel.record._thermal_scale < 0.10
 
-    # Counter-check: in 2D (2 <= dim <= 4), continuous cooling IS active for call_idx >= 500
+    # Counter-check: in 2D (1 <= dim <= 4), continuous cooling is also active for call_idx >= 500
     class Simple2DCritic(nn.Module):
         def forward(self, x):
             return x.sum(dim=-1, keepdim=True)
@@ -934,6 +934,128 @@ def test_bispf_adaptive_image_kappa():
     _, stats_img = kernel_gauge.penalty(BiasOnlyCritic(), xr, xf, step=0, collect_stats=True)
     expected_img_gauge = 0.5 * 0.005 * (2.0 ** 2)
     assert abs(stats_img["gauge_loss"] - expected_img_gauge) < 1e-5
+
+
+def test_bispf_lambda_floor_default():
+    """Verify _BISPFPenaltyKernel and BISPFEngine default lambda_floor is 0.05."""
+    from particlegan.bispf import _BISPFPenaltyKernel, BISPFEngine
+
+    kernel = _BISPFPenaltyKernel()
+    assert kernel.lambda_floor == 0.05, f"Expected lambda_floor == 0.05, got {kernel.lambda_floor}"
+    engine = BISPFEngine()
+    assert engine.lambda_floor == 0.05, f"Expected BISPFEngine.lambda_floor == 0.05, got {engine.lambda_floor}"
+
+
+def test_bispf_fast_attack_reheating():
+    """Verify ContinuousThermalCooler and _BISPFPenaltyKernel re-heat instantaneously on residual shock."""
+    from particlegan.bispf import ContinuousThermalCooler, _BISPFPenaltyKernel
+
+    cooler = ContinuousThermalCooler(tau_cooling=0.020)
+    for _ in range(50):
+        cooler.update(0.005)
+    assert cooler.scale < 0.20, f"Expected cooled scale < 0.20, got {cooler.scale}"
+
+    # Shock update (non-stationary shift, delta_nn spikes to 0.207)
+    scale_shock = cooler.update(0.207)
+    assert scale_shock == 1.0, f"Fast-attack must instantly restore scale to 1.0, got {scale_shock}"
+    assert cooler.ema_residual == 0.207
+
+    kernel = _BISPFPenaltyKernel(tau_cooling=0.020)
+    for _ in range(50):
+        kernel._observe_sinkhorn(0.005, 1.0)
+    assert kernel.cooler.scale < 0.20
+    kernel._observe_sinkhorn(0.207, 1.0)
+    assert kernel.cooler.scale == 1.0
+    assert kernel.record.ema_residual == 0.207
+
+
+def test_bispf_dense_multimode_rownorm_linearization():
+    """Verify Born-Infeld DualNorm rownorm inversion scales update norm linearly in dense multi-mode regimes."""
+    from particlegan.bispf import SinkhornRelativisticLoss, _LAST_THERMAL_SCALE
+
+    loss_fn = SinkhornRelativisticLoss()
+    fake_logits = torch.full((2048, 1), -5.0, requires_grad=True)
+    real_logits = torch.full((2048, 1), 5.0)
+    fake_logits._bispf_input = torch.randn(2048, 2)
+    real_logits._bispf_input = torch.randn(2048, 2)
+
+    # Set thermal scale to 0.10
+    _LAST_THERMAL_SCALE[fake_logits.device] = 0.10
+    try:
+        loss = loss_fn.g_loss(fake_logits, real_logits)
+        grad = torch.autograd.grad(loss, fake_logits)[0]
+        # Evaluate DualNorm rownorm on this gradient:
+        eps_smooth = 0.001
+        norm = grad.norm(dim=1, keepdim=True)
+        denom = torch.hypot(norm, torch.full_like(norm, eps_smooth))
+        step_norm = (grad / denom).norm(dim=1).mean().item()
+        assert abs(step_norm - 0.10) < 0.02, f"DualNorm step norm should be linearized to ~0.10, got {step_norm}"
+    finally:
+        _LAST_THERMAL_SCALE.clear()
+
+
+def test_bispf_image_scale_dim():
+    """Verify spatial image tensors evaluate penalties with scale_dim == 2.0."""
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel()
+
+    class IdentityCritic(nn.Module):
+        def forward(self, x):
+            return x.flatten(1).sum(dim=1, keepdim=True)
+
+    xr = torch.randn(16, 1, 8, 8)
+    xf = torch.randn(16, 1, 8, 8)
+    # On image tensors, scale_dim is 2.0 (dim = 64)
+    loss, _ = kernel.penalty(IdentityCritic(), xr, xf, step=0)
+    assert torch.isfinite(loss)
+
+
+def test_bispf_1d_continuous_flow_cooler_with_fast_attack():
+    """Verify 1D flows engage thermal cooling after step 500 and immediately re-heat upon shock."""
+    from particlegan.bispf import _BISPFPenaltyKernel, _LAST_THERMAL_SCALE
+
+    kernel = _BISPFPenaltyKernel(tau_cooling=0.020, s_min=1e-5)
+    kernel.record.calls = 600
+
+    class Dummy1DCritic(nn.Module):
+        def forward(self, x):
+            return x
+
+    xr = torch.randn(64, 1)
+    xf = xr + 1e-4
+
+    for _ in range(50):
+        kernel._observe_sinkhorn(0.001, 1.0)
+
+    try:
+        _, _ = kernel.penalty(Dummy1DCritic(), xr, xf, step=0, collect_stats=True)
+        scale_damped = _LAST_THERMAL_SCALE.get(xr.device, 1.0)
+        assert scale_damped < 0.20, f"1D flow should cool to < 0.20, got {scale_damped}"
+
+        # Non-stationary shift shock
+        xf_shock = xr + 2.0
+        _, _ = kernel.penalty(Dummy1DCritic(), xr, xf_shock, step=1, collect_stats=True)
+        scale_shock = _LAST_THERMAL_SCALE.get(xr.device, 0.0)
+        assert scale_shock == 1.0, f"1D flow must re-heat instantly to 1.0 on shock, got {scale_shock}"
+    finally:
+        _LAST_THERMAL_SCALE.clear()
+
+
+def test_sbnp_regularizer_defaults_and_unweighted_scale():
+    """Verify SBNPPriorRegularizer defaults to k_nn=5, repel_weight=0.05, repel_margin=0.50 and linear scaling."""
+    from particlegan.bispf import SBNPPriorRegularizer
+
+    reg = SBNPPriorRegularizer()
+    assert reg.k_nn == 5
+    assert reg.repel_weight == 0.05
+    assert reg.repel_margin == 0.50
+
+    reg_small = SBNPPriorRegularizer(weight=0.01)
+    z = torch.randn(64, 8, requires_grad=True)
+    loss = reg_small(z)
+    assert torch.isfinite(loss)
+
 
 
 
