@@ -88,6 +88,9 @@ def parser():
     d.add_argument("--watch", action="store_true")
     d.add_argument("--campaign")
     d.add_argument("--goal")
+    d.add_argument("--request", help="drain only this exact submitted request ID")
+    d.add_argument("--shared-fleet-fd", type=int, action="append", default=[],
+                   help="open external fleet lease descriptor to retain in every worker and child; repeat for each token")
     commands.add_parser("queue", help="show active/blocked requests, costs and log paths")
     commands.add_parser("stats", help="report measured automation costs, reuse, avoided work and execution limits")
     logs = commands.add_parser("logs", help="tail the collector's timestamped event stream")
@@ -320,7 +323,8 @@ def main(argv=None):
                 emit(queue.inspect()["submissions"][entry["request"]["request_id"]]["status"])
     elif command == "drain":
         drain(queue, args.gpus.split(","), workers_per_gpu=args.workers_per_gpu,
-              allow_sharing=args.allow_sharing, watch=args.watch, campaign=args.campaign, goal=args.goal)
+              allow_sharing=args.allow_sharing, watch=args.watch, campaign=args.campaign, goal=args.goal,
+              request_filter=args.request, shared_fleet_fds=tuple(args.shared_fleet_fd))
         emit({"status": "drained", "logs": str(queue_root / "events.jsonl")})
     elif command == "queue":
         state = queue.inspect()
