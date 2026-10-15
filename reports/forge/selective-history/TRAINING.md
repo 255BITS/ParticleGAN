@@ -305,19 +305,18 @@ not imply that a file can resume the full trainer.
 
 **Latest leaderboard follow-up (2026-10-15).** B was strongest only among the
 eight configurations in this experiment. BISPF was not trained in this
-campaign. The newer [recorded leaderboard](../../../../particlegan-attempt-fill-20261015/reports/forge/technique-inventory.md)
+campaign. The newer [recorded leaderboard snapshot](training-evidence/latest-leaderboard-followup.json)
 favors BISPF: both ordinary cohorts record 6/6 required Tier 1 passes, while
 BISPF records 10/21 required Tier 2 passes versus BCAP's 9/21. The additional
 ordinary pass is `mode_hold`. The headline 77 versus 71 sums overlapping
 views; it is not six independent task improvements.
 
-The newer [35-task attempt coverage](../../../../particlegan-attempt-fill-20261015/reports/forge/ATTEMPT_COVERAGE.md)
+The newer [35-task attempt coverage snapshot](training-evidence/latest-leaderboard-followup.json)
 records BISPF 19 PASS / 12 FAIL / 4 BLOCKED versus BCAP 17 PASS / 14 FAIL /
 4 BLOCKED. Its only verdict improvements are `mode_hold` and diagnostic
 `ring_hold`, with no recorded verdict regressions. The `ring_hold` diagnostic
-does not add ordinary qualification credit. The [BCAP](../../../../particlegan-attempt-fill-20261015/reports/forge/families/bcap-pure.md)
-and [BISPF](../../../../particlegan-attempt-fill-20261015/reports/forge/families/bispf.md)
-ordinary cohorts have different source/runtime bindings and are both marked
+does not add ordinary qualification credit. The BCAP and BISPF ordinary cohorts
+have different source/runtime bindings and are both marked
 stale against current contracts. These records support prioritizing BISPF
 for a fresh controlled comparison; they do not establish current matched
 superiority. A [dated snapshot](training-evidence/latest-leaderboard-followup.json)
