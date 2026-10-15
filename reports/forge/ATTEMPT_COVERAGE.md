@@ -2,14 +2,15 @@
 
 Every record identifies an attempt to run an unchanged selected or archived research recipe and task. PASS/FAIL diagnostics remain separate from ordinary qualification. BLOCKED means an actual start was refused by its constructor or required checkpoint; it is not a numerical failure.
 
-| Family | Attempted / distinct tasks | Pending | Outcome counts |
+| Family or exact recipe | Attempted / distinct tests | Pending | Outcome counts |
 | --- | ---: | ---: | --- |
 | atlas | 35/35 | 0 | 35 BLOCKED |
 | bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
-| bispf | 35/35 | 0 | 4 BLOCKED, 12 FAIL, 19 PASS |
+| bispf | 38/38 | 0 | 7 BLOCKED, 12 FAIL, 19 PASS |
 | e22 | 35/35 | 0 | 35 BLOCKED |
 | k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
 | ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
+| atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
 | r1r2 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
 | release07-gan-v3 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
 | signed-confidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
@@ -22,7 +23,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | kinetic-local-dualnorm-g-history-reference8-current-v1 | 29/29 | 0 | 12 BLOCKED, 12 FAIL, 5 PASS |
 | Fresh matched protected NS/transport control | 29/29 | 0 | 27 BLOCKED, 1 FAIL, 1 PASS |
 | generator-idle-ema-bcap-direction-v1 | 29/29 | 0 | 3 BLOCKED, 12 FAIL, 2 INCOMPLETE, 12 PASS |
-| kinetic-local-dualnorm-g-history-reference8-v1 | 29/29 | 0 | 12 BLOCKED, 1 ERROR, 8 FAIL, 6 PASS, 2 TIMEOUT |
+| kinetic-local-dualnorm-g-history-reference8-v1 | 29/29 | 0 | 12 BLOCKED, 8 FAIL, 6 PASS, 1 RUNNING, 2 TIMEOUT |
 | generator-confidence-lr-bcap-direction-v1 | 29/29 | 0 | 1 BLOCKED, 13 FAIL, 15 PASS |
 | bcap-default-baseline-direction-v1 | 29/29 | 0 | 2 BLOCKED, 1 ERROR, 12 FAIL, 1 INCOMPLETE, 13 PASS |
 | positive-evidence-lr-gaussian-v1 | 29/29 | 0 | 2 BLOCKED, 13 FAIL, 13 PASS, 1 TIMEOUT |
@@ -45,6 +46,24 @@ python -m experiments.forge.attempt_coverage status --state-root RUN_DIRECTORY
 For a durable user service, adapt [the systemd template](../../ops/forge-attempt-coverage.service.example), then run `systemctl --user enable --now particlegan-attempt-fill.service`. Follow its starts and completions with `journalctl --user -u particlegan-attempt-fill.service -f` or `tail -f RUN_DIRECTORY/events.jsonl`. Each event names the family, task and attempt directory ID.
 
 `--watch` rescans the local selected rows every 30 seconds after draining. `--refresh` regenerates the local main leaderboard during work and when the queue drains. An optional `--completion-hook ops/publish_attempt_coverage.py` publishes the completed batch through a generated-report-only commit and a checked GitHub PR on the dedicated branch. For multiple selected source cohorts, `RUN_DIRECTORY/source-roots.json` maps family IDs to their frozen checkouts; every source digest and candidate revision is checked. A changed source or recipe requires its matching frozen checkout; a mismatched source stops preparation. Interrupted attempts are retained for review, not replayed. The research intake includes the 19 seed-zero variants already shown in the leaderboard; historical seed-only repetitions are excluded. Original pinned requests supply each recipe and snapshot, and original source task declarations supply the missing questions. A mismatch with a frozen evaluator source blocks the attempt. Completed new same-source measurements fill previously empty research cells; archived verdicts and selected-family qualification never change. Checkpoint/data dependencies still require passing certified artifacts; gate-only failures are bypassed solely for this authorized diagnostic lane. No new qualification is granted.
+
+<a name="remaining-attempts"></a>
+
+## Follow-up attempts of remaining cells
+
+These cover the three previously empty Atlas policy cells, three current BISPF continuation declarations, and one unchanged retry after a GPU-memory failure. Earlier receipts remain intact. The 324 missing pairs in historical seed-only studies are excluded from this backfill.
+
+| Family / recipe | Test | Outcome | Updates / saved observations | Cause |
+| --- | --- | --- | --- | --- |
+| bispf current unbound task | grid100_14k | BLOCKED | 0 / — | checkpoint parent grid100: FAIL |
+| bispf current unbound task | rotated100_14k | BLOCKED | 0 / — | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | staggered100_14k | BLOCKED | 0 / — | checkpoint parent staggered100: FAIL |
+| atlas selected-cloud after investigation | clockfree_audit | FAIL | 24 / — | step_label changed the update or common-prefix state |
+| atlas selected-cloud after investigation | gaussian1d_acquisition | ERROR | 1000 / 24 | ValueError: Out of range float values are not JSON compliant: nan |
+| atlas selected-cloud after investigation | ring16_acquisition | ERROR | 1600 / 96 | ValueError: Out of range float values are not JSON compliant: nan |
+| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | RUNNING | — / — | Pending attempt. |
+
+Export errors retain their saved numerical observations and actual-training GIFs in the local attempt directories. Those observations do not replace the recorded gate. BISPF continuations require their own passing parent checkpoints; failed parents remain blocked. Original timeouts and incompatible formulations are not changed to obtain a score.
 
 ## Attempted blockers and incomplete runs
 
@@ -141,6 +160,8 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | atlas | vector_two_broad | BLOCKED | vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | vector_unequal_mass | BLOCKED | vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas | vector_unequal_width | BLOCKED | vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
+| atlas selected-cloud after investigation | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | ERROR | ValueError: Out of range float values are not JSON compliant: nan |
+| atlas selected-cloud after investigation | ring16_acquisition_tier1_policy_selected_cloud_v1 | ERROR | ValueError: Out of range float values are not JSON compliant: nan |
 | bcap-default-baseline-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
 | bcap-default-baseline-direction-v1 | gaussian1d_stability | ERROR | ValueError: named-stream checkpoint identity mismatch |
 | bcap-default-baseline-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
@@ -149,6 +170,9 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | bispf | ring_extension | BLOCKED | checkpoint parent ring_hold: certified artifact binding unavailable to this attempt |
 | bispf | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
 | bispf | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
+| bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
+| bispf current unbound task | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
+| bispf current unbound task | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | cell-quota-dualnorm-cross-v1 | ae_gan_hold | BLOCKED | Cell objective requires the public GANTrainer path |
 | cell-quota-dualnorm-cross-v1 | cover_leftover | BLOCKED | Cell objective requires the public GANTrainer path |
 | cell-quota-dualnorm-cross-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
@@ -296,7 +320,6 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | kinetic-local-dualnorm-g-history-reference8-v1 | residual_student | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | kinetic-local-dualnorm-g-history-reference8-v1 | rotated100 | TIMEOUT | original task wall-time limit exhausted |
-| kinetic-local-dualnorm-g-history-reference8-v1 | staggered100 | ERROR | OutOfMemoryError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 47.40 GiB of which 517.25 MiB is free. Process 34929 has 262.00 MiB memory in use. Process 12273 has 6.84 MiB memory in use. Process 2415818 has 31.09 MiB memory in use. Process 98921 has 27.14 GiB memory in use. Process 1094111 has 12.09 MiB memory in use. Process 1503885 has 13.44 GiB memory in use. Including non-PyTorch memory, this process has 4.75 GiB memory in use. Of the allocated memory 3.42 GiB is allocated by PyTorch, and 896.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf) |
 | kinetic-local-dualnorm-g-history-reference8-v1 | trajectory | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | two_pole | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-reference8-v1 | unipolar | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |

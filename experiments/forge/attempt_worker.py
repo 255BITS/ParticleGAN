@@ -17,7 +17,7 @@ import traceback
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("prepare", "supervise", "execute"))
+    parser.add_argument("mode", choices=("prepare", "prepare_policy", "supervise", "execute"))
     parser.add_argument("path", type=Path)
     args = parser.parse_args()
     spec = json.loads(args.path.read_text())
@@ -40,6 +40,22 @@ def main():
             request["source"]["snapshot_path"] = str(snapshot)
             request["tasks"].update({name: tasks[name] for name in item["tasks"] if name in tasks})
             atomic_json(Path(item["output"]), request)
+        return
+    if args.mode == "prepare_policy":
+        from experiments.forge.tier1_policy import materialize
+        from experiments.forge.sources import verify_snapshot
+        original = Path(spec["original_request"])
+        if file_hash(original) != spec["request_sha256"]:
+            raise ValueError("original policy request bytes changed")
+        request = json.loads(original.read_text())
+        verify_snapshot(Path(spec["source_root"]), request["source"])
+        request["source"]["snapshot_path"] = spec["source_root"]
+        request["tasks"] = {}
+        for parent in spec["parents"]:
+            card = json.loads((Path(spec["source_root"]) / "configs/forge/tasks" / (parent + ".json")).read_text())
+            card = materialize(card, Path(spec["source_root"]))
+            request["tasks"][card["id"]] = card
+        atomic_json(Path(spec["output"]), request)
         return
     directory = args.path.parent
     if args.mode == "supervise":

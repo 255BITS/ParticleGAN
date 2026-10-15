@@ -307,6 +307,9 @@ def score(count, *, marker=True):
     if "attempt_coverage" in count:
         missing = [f"{coverage[key]} {label}" for key, label in (
             ("not_run", "not run"), ("incompatible", "incompatible"), ("blocked", "blocked"),
+            ("errors", "error" if coverage.get("errors") == 1 else "errors"),
+            ("timeouts", "timeout" if coverage.get("timeouts") == 1 else "timeouts"),
+            ("incomplete_attempts", "incomplete"), ("interrupted_attempts", "interrupted"),
             ("running", "running"), ("diagnostic_attempts", "diagnostic attempts")) if coverage.get(key)]
     return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
@@ -816,8 +819,9 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
-    from .research_tiers import tier_rows
+    from .research_tiers import tier_rows, historical_seed_rows
     research = tier_rows(root, page)
+    historical_seeds = historical_seed_rows(root, page)
     lines = ["# Forge family leaderboard", "",
              "A **family** can have several **recipes**. Each score belongs to one exact recipe and source. "
              "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
@@ -859,14 +863,25 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                   "Compare rows only when their test, source and sampling contracts match.", "",
                   "Research recipes use their recorded revision 9 assignments. Atlas selected-cloud has a separate "
                   "seven-question Tier 1 policy scope. Same-source backfill results fill previously unmeasured research "
-                  "cells while retaining original verdicts and qualification. Seed 1–6 entries are historical studies "
-                  "excluded from this backfill.", "",
+                  "cells while retaining original verdicts and qualification. Historical seed-only studies are "
+                  "retained in the expandable section below and excluded from this backfill.", "",
                   "| Family | Recipe / diagnostic scope | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |",
                   "| --- | --- | ---: | ---: | ---: | ---: |"]
         for family in progress["families"]:
             for row in research.get(family["id"], []):
                 lines.append("| " + link(root, page, family["label"], family["page"]) + " | " + row.removeprefix("| "))
         lines += [""]
+    if any(historical_seeds.values()):
+        lines += ["<details>", "<summary>Historical seed-only studies (excluded from backfill)</summary>", "",
+                  "These 12 archived seed 1–6 rows retain **324 unrun recipe/test pairs**. "
+                  "They are excluded by the repository instruction against seed-only experiments. "
+                  "Their original counts and evidence remain visible here; they are outside the completed backfill scope.", "",
+                  "| Family | Historical seed-only recipe | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |",
+                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+        for family in progress["families"]:
+            for row in historical_seeds.get(family["id"], []):
+                lines.append("| " + link(root, page, family["label"], family["page"]) + " | " + row.removeprefix("| "))
+        lines += ["", "</details>", ""]
     lines += ["<details>", "<summary>Selected recipe breakdown by view (shared tests repeat across views)</summary>", "",
               "Each view uses the selected recipe above. View scores are the requirements summed in its selected-recipe total.", "",
               "| Family / selected recipe | View | Tier 1 | Tier 2 | Tier 3 | Total view requirements |",

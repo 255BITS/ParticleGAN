@@ -133,3 +133,49 @@ def test_missing_completion_publisher_stops_without_restart_or_replaying_work(tm
     assert read_json(directory / "state.json")["jobs"] == {}
     template = Path(__file__).resolve().parents[1] / "ops/forge-attempt-coverage.service.example"
     assert "RestartPreventExitStatus=2" in template.read_text()
+
+
+def test_policy_backfill_requires_exact_scope_and_keeps_original_verdicts(tmp_path):
+    from experiments.forge.remaining_attempts import policy_scope
+    from experiments.forge.research_tiers import _row
+    scope = policy_scope("atlas", "source", "recipe")
+    atomic_json(tmp_path / runner.REPORT, {"records": [
+        dict(policy_scope=scope, task="missing_policy", parent_task="missing", status="PASS", attempted=True),
+        dict(policy_scope=scope, task="original_policy", parent_task="original", status="PASS", attempted=True),
+        dict(policy_scope=policy_scope("atlas", "other-source", "recipe"),
+             task="unbound_policy", parent_task="unbound", status="PASS", attempted=True)]})
+    original = {"original": "FAIL"}
+    text = _row(tmp_path, tmp_path / "board.md", "Policy", "details.md", original,
+                {"1": {"original", "missing", "unbound"}, "2": set(), "3": set()}, policy_scope=scope)
+    assert "1/3 (1 not run)" in text and original == {"original": "FAIL"}
+    original.update(original="INCOMPLETE", unbound="BLOCKED")
+    text = _row(tmp_path, tmp_path / "board.md", "Policy", "details.md", original,
+                {"1": {"original", "missing", "unbound"}, "2": set(), "3": set()}, policy_scope=scope)
+    assert "1/3 (1 incompatible, 1 incomplete)" in text
+
+
+def test_unbound_current_task_attempt_keeps_old_request_and_refuses_bound_replacement(tmp_path):
+    from experiments.forge.remaining_attempts import prepare
+    from experiments.forge.views import task_evaluation_fingerprint
+    root, directory = tmp_path / "repo", tmp_path / "runs"
+    card = dict(id="task", adapter="fixture", execution=dict(steps=10), evaluation=dict(threshold=1),
+                resources=dict(gpus=1, gpu_memory_mb=1, timeout_seconds=10), dependencies=[])
+    publication = {"rows": [dict(candidate_revision="recipe", bindings=dict(source_digest="source", task_contracts={}))],
+        "family_progress": {"families": [dict(id="f", current_cohort_anchor="current", cohorts=[
+            dict(anchor="current", row_index=0, views=[dict(id="view")])])],
+            "views": [dict(id="view", assignments=[dict(task="task", importance="required")])]}}
+    original = dict(candidate=dict(id="candidate"), candidate_revision="recipe",
+                    source=dict(digest="source", snapshot_path=str(tmp_path / "frozen")),
+                    tasks=dict(task={**card, "evaluation": dict(threshold=0)}))
+    atomic_json(root / "reports/forge/technique-inventory.json", publication)
+    atomic_json(root / "configs/forge/tasks/task.json", card)
+    atomic_json(directory / "requests/f.json", original)
+    atomic_json(directory / "remaining-sources.json", dict(unbound_current_tasks=[dict(family="f", tasks=["task"])]))
+    job, = prepare(root, directory).values()
+    assert job["source_digest"] == "source" and job["candidate_revision"] == "recipe"
+    assert job["evaluation_sha256"] == task_evaluation_fingerprint(card)
+    assert read_json(directory / "requests/f.json") == original
+    publication["rows"][0]["bindings"]["task_contracts"]["task"] = "recorded"
+    atomic_json(root / "reports/forge/technique-inventory.json", publication)
+    with pytest.raises(ValueError, match="cannot replace a recorded task binding"):
+        prepare(root, directory)
