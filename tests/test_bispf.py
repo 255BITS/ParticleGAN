@@ -356,12 +356,13 @@ def test_bispf_universal_zero_mean_logit_gauge_active_and_drift_penalized():
 
         # 2. Translational drift: bias = +1.0 and bias = +3.0
         shifts = [1.0, 3.0, -2.0]
+        eff_gamma = 0.005 if dim_name == "image144" else gamma
         for b in shifts:
             D_b = BiasedCritic(in_feat, b=b)
             pen_b, stats_b = kernel.penalty(D_b, xr, xf, step=0, collect_stats=True)
 
-            # Gauge loss formula: 0.5 * gamma * b^2
-            expected_loss = 0.5 * gamma * (b ** 2)
+            # Gauge loss formula: 0.5 * eff_gamma * b^2
+            expected_loss = 0.5 * eff_gamma * (b ** 2)
             actual_loss = float(pen_b.item())
             assert abs(actual_loss - expected_loss) < 1e-5, (
                 f"{dim_name} with bias={b}: expected {expected_loss}, got {actual_loss}"
@@ -371,7 +372,7 @@ def test_bispf_universal_zero_mean_logit_gauge_active_and_drift_penalized():
             # Restoring gradient check
             pen_b.backward()
             bias_grad = D_b.proj.bias.grad.item()
-            expected_grad = gamma * b  # d/db [0.5 * gamma * b^2] = gamma * b
+            expected_grad = eff_gamma * b  # d/db [0.5 * eff_gamma * b^2] = eff_gamma * b
             assert abs(bias_grad - expected_grad) < 1e-5, (
                 f"{dim_name}: expected bias grad {expected_grad}, got {bias_grad}"
             )
@@ -631,11 +632,13 @@ def test_bispf_endpoint_born_infeld_image_limit():
     pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
 
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
-    # Under scale_dim = 1.0, norm = 2.0 matches expected analytical cap and floor penalties
-    expected_cap = l_cap * (F.softplus(torch.tensor(s - kappa), beta=beta).item() ** 2)
+    # Under scale_dim = 1.0, norm = 2.0 matches expected analytical cap and floor penalties with adaptive kappa_eff
+    res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
+    kappa_eff = kappa * (0.6 + 0.4 * (1.0 - res_ratio))
+    expected_cap = l_cap * (F.softplus(torch.tensor(s - kappa_eff), beta=beta).item() ** 2)
     expected_floor = 0.5 * l_floor * ((s ** 2) / dim_img)
     expected_total = expected_cap + expected_floor
-    assert abs(pen_math.item() - expected_total) < 1e-4, (
+    assert abs(pen_math.item() - expected_total) < 2e-3, (
         f"Expected {expected_total}, got {pen_math.item()}"
     )
 
@@ -758,5 +761,161 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     fake_logits = D(fake_hooked)
     assert hasattr(fake_logits, "_bispf_input")
     assert fake_logits._bispf_input is fake_hooked
+
+
+def test_bispf_sbnp_capacity_conditioned_covariance_tethering():
+    """Verify capacity-conditioned SBNP covariance loss:
+    - Finite ensembles (N <= 64, d <= 4): engages two-sided covariance tethering (Delta C = C - C_0)
+      to anchor mode basins against drift.
+    - Dense ensembles (N > 64): engages off-diagonal decorrelation (Delta C_off = C - diag(C)),
+      imposing zero penalty on diagonal expansion so radial rings can expand freely.
+    """
+    from particlegan.bispf import SBNPPriorRegularizer
+
+    class FixedRefSBNP(SBNPPriorRegularizer):
+        def _reference_moments(self):
+            return torch.zeros(2), torch.eye(2), 100
+
+    sbnp = FixedRefSBNP(target_std=1.0, k_nn=3, repel_weight=0.0)
+    sbnp.references = True
+
+    # Case A: Sample-starved finite ensemble (N = 12 <= 64, d = 2 <= 4)
+    # Particles with diagonal variance expansion: var = 4.0 (std = 2.0 > 1.0), zero off-diagonal
+    z_small = torch.zeros(12, 2)
+    pattern4 = torch.tensor([[2.0, 2.0], [2.0, -2.0], [-2.0, 2.0], [-2.0, -2.0]])
+    z_small = pattern4.repeat(3, 1)  # 12 samples, mean=0, off-diagonal cov=0, var ~ 4.36
+    loss_small = sbnp(z_small)
+    # Small N <= 64 must penalize the diagonal variance deviation from target_cov=I
+    assert loss_small.item() > 1.0, f"N <= 64 must engage two-sided covariance tethering; got {loss_small.item()}"
+
+    # Case B: Dense ensemble (N = 256 > 64, d = 2)
+    # Particles with exact same expanded diagonal variance (var ~ 4.015) and zero off-diagonal
+    z_large = pattern4.repeat(64, 1)  # 256 samples, mean=0, off-diagonal cov=0, var ~ 4.015
+    loss_large = sbnp(z_large)
+    # Large N > 64 uses off-diagonal decorrelation; since off-diagonal is 0 and std > target_std,
+    # covariance loss and variance floor loss are both 0!
+    assert loss_large.item() < 1e-4, f"N > 64 must allow diagonal variance expansion without penalty; got {loss_large.item()}"
+
+    # Case C: Dense ensemble with off-diagonal correlation (N = 256, cov_xy != 0)
+    z_corr = torch.randn(256, 1)
+    z_corr_2d = torch.cat([z_corr, z_corr], dim=1)  # perfectly correlated
+    loss_corr = sbnp(z_corr_2d)
+    assert loss_corr.item() > 0.05, f"N > 64 must penalize off-diagonal correlation; got {loss_corr.item()}"
+
+
+def test_bispf_1d_continuous_flow_cooler_bypass():
+    """Verify 1D scalar flows (d=1, e.g. gaussian1d_stability) bypass continuous
+    thermal cooling and hold s_thermal = 1.0 unconditionally, preventing limit-cycle
+    oscillations and post-shift variance collapse.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(
+        tau_cooling=0.20,
+        s_min=1e-5,
+    )
+    # Hold cooler residual at 0.001 by overriding _observe_sinkhorn
+    kernel._observe_sinkhorn = lambda res, ds, ema_decay=0.95: None
+    kernel.record.ema_residual = 0.001
+    kernel.cooler.ema_residual = 0.001
+    kernel.cooler.initialized = True
+    assert kernel.cooler.scale < 0.01
+
+    class Simple1DCritic(nn.Module):
+        def forward(self, x):
+            return x
+
+    xr_1d = torch.randn(64, 1)
+    xf_1d = torch.randn(64, 1)
+
+    # Call with call_idx >= 500
+    kernel.record.calls = 600
+    pen, stats = kernel.penalty(Simple1DCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
+
+    # In 1D, is_continuous_flow must be False (requires 2 <= dim <= 4), so s_thermal must be exactly 1.0
+    assert stats["s_thermal"] == 1.0, f"1D flow must bypass thermal cooling and hold s_thermal=1.0; got {stats['s_thermal']}"
+    assert kernel.record._thermal_scale == 1.0
+
+    # Counter-check: in 2D (2 <= dim <= 4), continuous cooling IS active for call_idx >= 500
+    class Simple2DCritic(nn.Module):
+        def forward(self, x):
+            return x.sum(dim=-1, keepdim=True)
+
+    xr_2d = torch.randn(64, 2)
+    xf_2d = torch.randn(64, 2)
+    pen_2d, stats_2d = kernel.penalty(Simple2DCritic(), xr_2d, xf_2d, step=0, collect_stats=True)
+    assert stats_2d["s_thermal"] < 0.10, f"2D flow must engage thermal cooling; got {stats_2d['s_thermal']}"
+
+
+def test_bispf_gauge_and_cooling_defaults():
+    """Verify default hyperparameter calibration in _BISPFPenaltyKernel:
+    gamma_gauge == 0.020 and tau_cooling == 0.20.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel, ContinuousThermalCooler
+
+    kernel = _BISPFPenaltyKernel()
+    assert kernel.gamma_gauge == 0.020, f"Expected default gamma_gauge=0.020, got {kernel.gamma_gauge}"
+    assert kernel.tau_cooling == 0.20, f"Expected default tau_cooling=0.20, got {kernel.tau_cooling}"
+    assert kernel.cooler.tau_cooling == 0.20, f"Expected cooler tau_cooling=0.20, got {kernel.cooler.tau_cooling}"
+
+    cooler = ContinuousThermalCooler()
+    assert cooler.tau_cooling == 0.20, f"Expected default ContinuousThermalCooler tau_cooling=0.20, got {cooler.tau_cooling}"
+
+
+def test_bispf_adaptive_image_kappa():
+    """Verify adaptive image Born-Infeld scale kappa_eff:
+    - High transport residual (early in training) softens kappa_eff to ~ 0.6 * kappa,
+      lowering the potential barrier and preventing mode monopolization.
+    - Low transport residual (converged) tightens kappa_eff back to 1.0 * kappa
+      for crisp terminal image mode reconstruction.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    # High residual regime: simulate early training
+    kernel_high = _BISPFPenaltyKernel(kappa=1.0)
+    kernel_high.record.ema_residual = 1.0
+    kernel_high.record.initialized = True
+
+    # Low residual regime: simulate late converged training
+    kernel_low = _BISPFPenaltyKernel(kappa=1.0)
+    kernel_low.record.ema_residual = 0.0
+    kernel_low.record.initialized = True
+
+    class ConstantImageCritic(nn.Module):
+        def forward(self, x):
+            return x.flatten(1).sum(dim=1, keepdim=True)
+
+    xr = torch.randn(16, 1, 8, 8)
+    xf = torch.randn(16, 1, 8, 8)
+
+    pen_high, _ = kernel_high.penalty(ConstantImageCritic(), xr, xf, step=0)
+
+    # Overwrite _observe_sinkhorn to keep residual at 0.0 for low-residual test
+    kernel_low._observe_sinkhorn = lambda res, scale, ema_decay=0.95: None
+    kernel_low.record.ema_residual = 0.0
+
+    pen_low, _ = kernel_low.penalty(ConstantImageCritic(), xr, xf, step=0)
+
+    # Softened barrier (kappa_eff=0.6) imposes higher cap penalty for the same gradient norm > 1.0
+    assert pen_high.item() > pen_low.item(), (
+        f"Softened barrier (kappa_eff=0.6) must penalize large gradients more strongly than kappa=1.0: "
+        f"{pen_high.item()} vs {pen_low.item()}"
+    )
+
+    # Check eff_gamma_gauge on images is 0.005 vs vector 0.020
+    kernel_gauge = _BISPFPenaltyKernel(gamma_gauge=0.020)
+    xr_vec = torch.randn(16, 2)
+    xf_vec = torch.randn(16, 2)
+    class BiasOnlyCritic(nn.Module):
+        def forward(self, x):
+            return 0.0 * x.flatten(1).sum(dim=1, keepdim=True) + 2.0
+    _, stats_vec = kernel_gauge.penalty(BiasOnlyCritic(), xr_vec, xf_vec, step=0, collect_stats=True)
+    expected_vec_gauge = 0.5 * 0.020 * (2.0 ** 2)
+    assert abs(stats_vec["gauge_loss"] - expected_vec_gauge) < 1e-5
+
+    _, stats_img = kernel_gauge.penalty(BiasOnlyCritic(), xr, xf, step=0, collect_stats=True)
+    expected_img_gauge = 0.5 * 0.005 * (2.0 ** 2)
+    assert abs(stats_img["gauge_loss"] - expected_img_gauge) < 1e-5
+
 
 

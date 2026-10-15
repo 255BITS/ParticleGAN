@@ -198,11 +198,15 @@ class SBNPPriorRegularizer(nn.Module):
         std = (centered.pow(2).mean(0) + self.eps).sqrt()
         var_loss = F.relu(target_sigma - std).pow(2).mean()
 
-        # 2. Covariance loss: off-diagonal decorrelation (zero diagonal penalty)
+        # 2. Covariance loss: capacity-conditioned covariance
         if d > 1:
             cov = (centered.T @ centered) / max(n - 1, 1)
-            off_diag = cov - torch.diag(torch.diag(cov))
-            cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
+            if self.references and d <= 4 and n <= 64:
+                cov_diff = cov - target_cov
+                cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
+            else:
+                off_diag = cov - torch.diag(torch.diag(cov))
+                cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
         else:
             cov_loss = rows.new_zeros(())
 
@@ -217,7 +221,8 @@ class SBNPPriorRegularizer(nn.Module):
                 r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
             eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
             knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-            norm_sq_dist = knn_sq_dist / (self.repel_margin * r_med_sq)
+            effective_margin = 1.0 if m_sub <= 64 else self.repel_margin
+            norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
             repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
         else:
             repel_loss = rows.new_zeros(())
@@ -754,7 +759,7 @@ class ContinuousThermalCooler:
 
     def __init__(
         self,
-        tau_cooling: float = 0.020,
+        tau_cooling: float = 0.20,
         s_min: float = 1e-5,
         ema_decay: float = 0.95,
         initial_residual: float = 1.0,
@@ -954,11 +959,11 @@ class _BISPFPenaltyKernel:
         lambda_floor: float = 0.0005,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
-        gamma_gauge: float = 0.005,
+        gamma_gauge: float = 0.020,
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
-        tau_cooling: float = 0.020,
+        tau_cooling: float = 0.20,
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,
@@ -1068,7 +1073,7 @@ class _BISPFPenaltyKernel:
         is_continuous_flow = (
             not is_discrete_simplex 
             and not is_image_tensor
-            and dim <= 4 
+            and 2 <= dim <= 4 
             and b_r >= 32 
             and b_f >= 32 
             and call_idx >= 500
@@ -1142,6 +1147,11 @@ class _BISPFPenaltyKernel:
         finally:
             self.record._in_penalty = False
 
+        kappa_eff = self.kappa
+        if is_image_tensor:
+            res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
+            kappa_eff = self.kappa * (0.6 + 0.4 * (1.0 - res_ratio))
+
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
             norm_fake = (g_fake.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
@@ -1157,14 +1167,14 @@ class _BISPFPenaltyKernel:
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
             sq_fake = g_fake.flatten(1).pow(2).sum(dim=1)
             norm_fake = (sq_fake + 1e-12).sqrt() / scale_dim
-            cap_real = F.softplus(norm_real - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_fake = F.softplus(norm_fake - self.kappa, beta=self.ebi_beta).pow(2).mean()
+            cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
+            cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
 
             if use_chords:
                 sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
                 norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
                 floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
-                cap_chord = F.softplus(norm_chord - self.kappa, beta=self.ebi_beta).pow(2).mean()
+                cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
             else:
                 norm_chord = 0.5 * (norm_real + norm_fake)
@@ -1182,7 +1192,8 @@ class _BISPFPenaltyKernel:
                 d_r = d_r_out.reshape(-1)
                 d_f = d_f_out.reshape(-1)
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
-            gauge_loss = 0.5 * self.gamma_gauge * mean_logit.pow(2)
+            eff_gamma_gauge = 0.005 if is_image_tensor else self.gamma_gauge
+            gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
         if t_scale < 1.0 and penalty.requires_grad:
