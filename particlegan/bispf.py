@@ -228,7 +228,7 @@ class SBNPPriorRegularizer(nn.Module):
             repel_loss = rows.new_zeros(())
 
         base_loss = mean_error + var_loss + cov_loss + self.repel_weight * repel_loss
-        scale_w = 1.0 if (0.0 < self.weight < 0.1) else self.weight
+        scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
         if out.requires_grad:
             s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))

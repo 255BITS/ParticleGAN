@@ -1051,10 +1051,26 @@ def test_sbnp_regularizer_defaults_and_unweighted_scale():
     assert reg.repel_weight == 0.05
     assert reg.repel_margin == 0.50
 
+    # Unanchored latent prior (weight=0.01 in (0, 0.1) -> scale_w = 1.0)
     reg_small = SBNPPriorRegularizer(weight=0.01)
     z = torch.randn(64, 8, requires_grad=True)
     loss = reg_small(z)
     assert torch.isfinite(loss)
+
+    # Anchored reference prior (scale_w = self.weight = 0.01)
+    class _MockPrior:
+        def __init__(self, d=2):
+            self.moment_tether_mean = torch.zeros(d)
+            self.moment_tether_covariance = torch.eye(d)
+            self.moment_tether_count = torch.tensor(100)
+
+    ref = _MockPrior(d=2)
+    reg_ref = SBNPPriorRegularizer(reference=ref, weight=0.01)
+    assert len(reg_ref.references) == 1
+    z_ref = torch.randn(64, 2, requires_grad=True)
+    loss_ref = reg_ref(z_ref)
+    assert torch.isfinite(loss_ref)
+
 
 
 
