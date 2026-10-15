@@ -116,6 +116,9 @@ def tier_rows(root, page):
                     bcap.append(_row(root, page, f"G-coherence {arm}; research seed {seed}",
                                      "reports/forge/families/bcap-pure.md#g-only-coherence-registered-paired-research",
                                      tasks, requirements))
+        from .pr399_scores import tier_rows as pr399_tier_rows
+        for family, additions in pr399_tier_rows(root, page, requirements).items():
+            rows.setdefault(family, []).extend(additions)
     from .atlas_catalog_scores import ATLAS, _read, atlas_score_lines
     if (Path(root) / ATLAS / "results.json").is_file():
         atlas_score_lines(root)  # Existing byte pins, original verdicts and scope.
@@ -133,7 +136,8 @@ def family_research_lines(root, page, family_id):
     """Keep detailed scores and untiered historical diagnostics off the scoreboard."""
     if family_id == "atlas":
         from .atlas_catalog_scores import atlas_score_lines
-        return atlas_score_lines(root)
+        from .pr399_scores import family_lines
+        return atlas_score_lines(root) + family_lines(root, page, family_id)
     if family_id != "bcap-pure":
         return []
     from .atlas_catalog_scores import catalog_score_lines
@@ -141,6 +145,8 @@ def family_research_lines(root, page, family_id):
     from .test_performance_render import render_discovery_navigation
     lines = catalog_score_lines(root, page) + main_board_rows(root, page)
     lines.append(render_discovery_navigation(root, page))
+    from .pr399_scores import family_lines
+    lines += family_lines(root, page, family_id)
     text = "\n".join(lines)
     for heading, anchor in (
         ("G-only coherence: registered paired research", "g-only-coherence-registered-paired-research"),

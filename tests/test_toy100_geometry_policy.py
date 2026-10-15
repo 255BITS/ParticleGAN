@@ -182,6 +182,60 @@ def test_all_cpu_affine_archives_replay_initialization(tmp_path, model):
             )
 
 
+def test_batch_feature_replay_rebuilds_the_adam_replacement(tmp_path, monkeypatch):
+    """The receipt is the post-Adam prior. Replay must install that init.
+
+    A rebuild that only repeats uniform_(-5, 5) is a different tensor. The
+    hash check stays, and dropping the recorded init name still fails it.
+    Replay also selects the recorded device before the build.
+    """
+    from benchmarks.init_research.batch_feature_init import install, uninstall
+    from benchmarks.toy100 import device as device_module
+
+    requested = []
+    real_apply = device_module.apply_device_policy
+
+    def spy(requested_device, **kwargs):
+        requested.append(str(requested_device))
+        return real_apply(requested_device, **kwargs)
+
+    monkeypatch.setattr(device_module, "apply_device_policy", spy)
+    config = dict(
+        model="gan", problem="grid100", device="cpu", seed=31, steps=2,
+        z_dim=2, num_particles=32, batch_size=16, d_hidden=8, n_hidden=1,
+        fourier=0, eval_samples=64, snapshot_samples=16,
+        eval_interval=2, snapshot_interval=2, log_interval=2, threads=1,
+        output_noise_std=0.029, input_noise_std=0.0,
+        toy100_model="affine_square_v1", deterministic_init="batch_feature_zero",
+    )
+    install("batch_feature_zero")
+    try:
+        summary = train(config, tmp_path)
+    finally:
+        uninstall()
+    resolved = summary["config"]
+    assert resolved["deterministic_init"] == "batch_feature_zero"
+    assert "benchmarks/init_research/batch_feature_init.py" in summary["provenance"]["source_sha256"]
+    card = summary["model_policy"]
+    assert card["generator_initial_weight"] == [[1.0, 0.0], [0.0, 1.0]]
+    _, naked_recipe = resolve_config(resolved)
+    naked = make_trainer(resolved, naked_recipe)
+    naked_prior = naked.prior.z.detach().cpu().contiguous().numpy().tobytes()
+    assert hashlib.sha256(naked_prior).hexdigest() != card["prior_initial_sha256"]
+    policy = declared_model_policy(config)
+    assert _check_toy100_policy(tmp_path, summary, resolved, policy)
+    assert requested == []  # Replay installs the initializer in a fresh process.
+
+    stripped = dict(resolved)
+    del stripped["deterministic_init"]
+    with pytest.raises(ValueError, match="seeded affine initialization differs"):
+        _check_toy100_policy(tmp_path, summary, stripped, policy)
+    forged = deepcopy(summary)
+    forged["model_policy"]["prior_initial_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="seeded affine initialization differs"):
+        _check_toy100_policy(tmp_path, forged, resolved, policy)
+
+
 def test_historical_cpu_square_policy_archive_still_regrades(tmp_path):
     root = Path(__file__).resolve().parents[1]
     archive = root / "reports/toy100/shared22/toy100/grid100"

@@ -5,14 +5,44 @@
     "eval_output_noise": "not_applied_to_measurement",
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "evaluator_revision": {
-      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
-      "id": "explicit-equality-and-word-prior-betas-v3",
-      "previous_revision": null,
-      "previous_source_sha256": {
-        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
-        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
-      }
+      "added_source_members": [
+        "benchmarks/locked_shared/hosts/unused_token_hold.py",
+        "benchmarks/toy100/device.py"
+      ],
+      "change": "Bind device-correct legacy fixtures and experiment RNG preservation plus recorded-device/initializer affine replay and receipt validation. No EMA-idle hooks are adopted. Architecture, target/data/prior/serving laws, optimizer policy, budgets, cadence and numerical gates are unchanged. Archived declarations and source-bound results retain their original identities.",
+      "id": "pr399-host-device-replay-source-only-v1",
+      "previous_revision": {
+        "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+        "id": "combined-opt-in-prior-source-v1",
+        "previous_revision": {
+          "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+          "id": "opt-in-coulomb-prior-reference-v1",
+          "previous_revision": {
+            "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+            "id": "opt-in-component-objective-hooks-v1",
+            "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+            "original_task_path": "configs/forge/tasks/unused_token_hold.json",
+            "previous_revision": {
+              "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+              "id": "explicit-equality-and-word-prior-betas-v3",
+              "previous_revision": null,
+              "previous_source_sha256": {
+                "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+              }
+            },
+            "previous_source_sha256": {}
+          },
+          "previous_source_sha256": {
+            "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+          }
+        },
+        "previous_source_sha256": {
+          "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+        }
+      },
+      "previous_source_sha256": {}
     },
     "guards": {
       "finite_state": true,
@@ -41,22 +71,27 @@
     "scoring_weights": "state_selected",
     "sources": {
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/hosts/unused_token_hold.py": "6ea45140c617ad8c9effbab11979825d3ddeb7a78301cccc0e675a0e2436ef38",
       "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "configs/forge/tasks/unused_token_hold.json": "ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8",
-      "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
-      "experiments/forge/api.py": "269bd8c090ad71a5f2b7dbf3d942de5da8a1f9d3cc00add0908b0ea5b7e154c5",
-      "experiments/forge/boundaries.py": "9a290d98182cd62e4e72338d04ef03ec2f9f66eeca581c3667d6b750758a2412",
+      "configs/forge/tasks/unused_token_hold.json": "d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a",
+      "experiments/forge/adapters.py": "8b97c19b60343e4a2974a68f5d07d2f12426cad83e0fafc398c7da5193303388",
+      "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+      "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+      "experiments/forge/boundaries.py": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814",
       "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
-      "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+      "experiments/forge/mechanisms.py": "cd4386e48696a58b73365b3d2f939d19eaad78ceec0b998b928210180b2280c3",
       "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
       "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
       "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
-      "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
-      "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
-      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
-      "particlegan/recipes.py": "f22cbd46e8d2b30a8e984e688595b8dd914b60a99a807399080180fbf55d5dc1",
-      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      "experiments/forge/tier1_policy.py": "ae68cf7204ebec3bd2bdf661f59b51a8a3082eacbabd83bd9e5777e7c9b84e9a",
+      "experiments/forge/views.py": "88f8bd4ae5aa1b51129247eb00edcb9cb78918a92ad552036f5b1bfcbf30dfc5",
+      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+      "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+      "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+      "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
     },
     "thresholds": [
       [
@@ -97,19 +132,19 @@
       "schedule": "preserve_resolved_recipe_none",
       "schema_version": 1,
       "sources": {
-        "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
-        "experiments/forge/api.py": "269bd8c090ad71a5f2b7dbf3d942de5da8a1f9d3cc00add0908b0ea5b7e154c5",
-        "experiments/forge/boundaries.py": "9a290d98182cd62e4e72338d04ef03ec2f9f66eeca581c3667d6b750758a2412",
+        "experiments/forge/adapters.py": "8b97c19b60343e4a2974a68f5d07d2f12426cad83e0fafc398c7da5193303388",
+        "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+        "experiments/forge/boundaries.py": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814",
         "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
-        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/mechanisms.py": "cd4386e48696a58b73365b3d2f939d19eaad78ceec0b998b928210180b2280c3",
         "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
         "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
         "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
-        "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
-        "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
-        "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
-        "particlegan/recipes.py": "f22cbd46e8d2b30a8e984e688595b8dd914b60a99a807399080180fbf55d5dc1",
-        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        "experiments/forge/tier1_policy.py": "ae68cf7204ebec3bd2bdf661f59b51a8a3082eacbabd83bd9e5777e7c9b84e9a",
+        "experiments/forge/views.py": "88f8bd4ae5aa1b51129247eb00edcb9cb78918a92ad552036f5b1bfcbf30dfc5",
+        "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+        "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+        "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
       }
     },
     "policy_parent_definition": {
@@ -119,14 +154,44 @@
         "eval_output_noise": "not_applied_to_measurement",
         "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
         "evaluator_revision": {
-          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
-          "id": "explicit-equality-and-word-prior-betas-v3",
-          "previous_revision": null,
-          "previous_source_sha256": {
-            "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
-            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
-          }
+          "added_source_members": [
+            "benchmarks/locked_shared/hosts/unused_token_hold.py",
+            "benchmarks/toy100/device.py"
+          ],
+          "change": "Bind device-correct legacy fixtures and experiment RNG preservation plus recorded-device/initializer affine replay and receipt validation. No EMA-idle hooks are adopted. Architecture, target/data/prior/serving laws, optimizer policy, budgets, cadence and numerical gates are unchanged. Archived declarations and source-bound results retain their original identities.",
+          "id": "pr399-host-device-replay-source-only-v1",
+          "previous_revision": {
+            "change": "Bind the integrated proximal, Coulomb, SIGReg, moment-tether and initial-MMD public API for future execution. Only current source provenance changes; architecture, target/data/prior/sampling laws, budgets, cadence and numerical gates are unchanged. Archived source-bound evidence and verdicts are preserved.",
+            "id": "combined-opt-in-prior-source-v1",
+            "previous_revision": {
+              "change": "Bind opt-in Coulomb initial-reference and factory plumbing. Task architecture, initialized prior, target/data/sampling laws, budgets, cadence and numerical gates are unchanged. Archived evidence retains its source identity.",
+              "id": "opt-in-coulomb-prior-reference-v1",
+              "previous_revision": {
+                "change": "Explicit optional transport/protected-objective hooks and current source binding. Original question, architecture, data/prior/sampling laws, update budget, cadence and all numerical gates retained. Disabled mechanisms preserve original behavior.",
+                "id": "opt-in-component-objective-hooks-v1",
+                "original_task_commit": "5737ade47dca89b04d338ada20667781d1f2b5df",
+                "original_task_path": "configs/forge/tasks/unused_token_hold.json",
+                "previous_revision": {
+                  "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                  "id": "explicit-equality-and-word-prior-betas-v3",
+                  "previous_revision": null,
+                  "previous_source_sha256": {
+                    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                  }
+                },
+                "previous_source_sha256": {}
+              },
+              "previous_source_sha256": {
+                "experiments/forge/behavior_adapters.py": "570b26537ca48930c49c88cc839a945ff3f4beddffadf86dd22ebe2fcb677306"
+              }
+            },
+            "previous_source_sha256": {
+              "experiments/forge/behavior_adapters.py": "890f0e984e4430aa277c1df76a013d9f4ce388b5f2a0340ae54a336066d6eba1"
+            }
+          },
+          "previous_source_sha256": {}
         },
         "guards": {
           "finite_state": true,
@@ -145,8 +210,13 @@
         "scoring_weights": "live",
         "sources": {
           "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/hosts/unused_token_hold.py": "6ea45140c617ad8c9effbab11979825d3ddeb7a78301cccc0e675a0e2436ef38",
           "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
-          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+          "experiments/forge/behavior_adapters.py": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104",
+          "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+          "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
         },
         "thresholds": [
           [
@@ -162,7 +232,7 @@
         ]
       },
       "execution": {
-        "device": "cpu",
+        "device": "cuda",
         "execution_path": "public_components",
         "host": "unused_token_hold",
         "host_definition": {
@@ -177,15 +247,28 @@
         "prior": {
           "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
           "kind": "particle_cloud",
-          "learnable": true,
           "sigma": 0.0,
           "standardize": false
         },
         "prior_applicability": "not_sampled",
+        "prior_contract": "recipe_owned_v1",
         "produces_state": false,
         "protocol": "screening",
         "schedule_policy": "public_recipe_with_frozen_host_horizon",
-        "steps": 200
+        "steps": 200,
+        "transport_consumer": "output_marginal_v1",
+        "transport_contract": {
+          "conditioning_in_distance": false,
+          "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+          "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+          "new_forward_passes": false,
+          "new_paired_supervision": false,
+          "new_random_draws": false,
+          "protected_objectives": "original adversarial and feature matching; existing hold",
+          "sample_space": "original trained-concept output panel",
+          "target_law": "repeated trained concept only; held-out token excluded",
+          "version": 1
+        }
       },
       "id": "unused_token_hold",
       "requires_capabilities": [
@@ -194,33 +277,47 @@
         "particle_cloud"
       ],
       "resources": {
-        "allow_cpu": true,
+        "allow_cpu": false,
         "cpu_threads": 1,
-        "gpu_memory_mb": 0,
-        "gpus": 0,
+        "gpu_memory_mb": 512,
+        "gpus": 1,
         "timeout_seconds": 300
       },
-      "schema_version": 1
+      "schema_version": 1,
+      "task_cohort": "component_output_transport_v1"
     },
     "prior": {
       "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
       "kind": "particle_cloud",
-      "learnable": true,
       "sigma": 0.0,
       "standardize": false
     },
     "prior_applicability": "not_sampled",
+    "prior_contract": "recipe_owned_v1",
     "produces_state": false,
     "protocol": "screening",
     "schedule_policy": "public_recipe_with_frozen_host_horizon",
-    "steps": 200
+    "steps": 200,
+    "transport_consumer": "output_marginal_v1",
+    "transport_contract": {
+      "conditioning_in_distance": false,
+      "gradient_ownership": "original generated branch parameters and learned prior; encoder receives only original word joint objective",
+      "inactive": "original losses, updates, clocks and RNG; no hook requirement",
+      "new_forward_passes": false,
+      "new_paired_supervision": false,
+      "new_random_draws": false,
+      "protected_objectives": "original adversarial and feature matching; existing hold",
+      "sample_space": "original trained-concept output panel",
+      "target_law": "repeated trained concept only; held-out token excluded",
+      "version": 1
+    }
   },
   "id": "unused_token_hold_tier1_policy_selected_cloud_v1",
   "policy_parent": {
-    "evaluation_fingerprint": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
-    "execution_fingerprint": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7",
+    "evaluation_fingerprint": "3d7e8bf87a866a9a8dada82be9c840b2ed1897a79fc4e0e49441e4bc777af95d",
+    "execution_fingerprint": "17ad0f371799f48e181d167712ee1e37af4b12b040c7c6ed7948d3793597d8d0",
     "id": "unused_token_hold",
-    "task_sha256": "ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8"
+    "task_sha256": "d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a"
   },
   "requires_capabilities": [
     "named_rng",
