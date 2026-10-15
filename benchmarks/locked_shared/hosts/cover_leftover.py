@@ -128,7 +128,7 @@ class _FourierCritic(nn.Module):
 
     def __init__(self, dim: int, *, n_rand: int, hidden: int, seed: int) -> None:
         super().__init__()
-        gen = torch.Generator().manual_seed(int(seed) + 17)
+        gen = torch.Generator(device="cpu").manual_seed(int(seed) + 17)
         # The fixed feature fixture keeps its historical CPU-generated values;
         # model evaluation and optimization follow the requested host device.
         bank = (2.0 * torch.randn(int(n_rand), int(dim), generator=gen, device="cpu")).to(torch.get_default_device())

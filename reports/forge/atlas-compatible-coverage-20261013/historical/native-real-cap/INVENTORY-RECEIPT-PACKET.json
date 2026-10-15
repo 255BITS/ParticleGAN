@@ -1,0 +1,146 @@
+{
+  "kind": "SEPARATE_ATLAS_DIAGNOSTIC_RECEIPT_PACKET",
+  "new_rows": [
+    {
+      "arm": "squared",
+      "candidate": "astra-atlas-squared",
+      "candidate_revision": "e99a49d6d83c9f10e9043657acac5aaec82b831381c2ace96304852faa1e906a",
+      "source_digest": "5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff",
+      "task": "two_pole",
+      "seed": 0,
+      "status": "FAIL",
+      "new_updates": 80,
+      "completed_steps": 80,
+      "metrics": {
+        "grad_med": 0.012204401195049286,
+        "mean_abs": 0.00532107800245285,
+        "step": 80
+      },
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.29467892199754714,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.00532107800245285
+          },
+          {
+            "margin": 0.9877955988049507,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.012204401195049286
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4911315366625786,
+        "status": "FAIL"
+      },
+      "attempt": "1b18615dff364f489c4c0dee66ff0b47",
+      "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/1b18615dff364f489c4c0dee66ff0b47/run.log",
+      "primary_regraded": 24,
+      "queue_seconds": 9.312965131000965,
+      "state_sha256": "2b4fedb499baaa50db0cf7b20a437c58089986422c4ecb6d336ca37748af7af7",
+      "GIF": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/actual-training/astra-atlas-squared.gif",
+      "files": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/1b18615dff364f489c4c0dee66ff0b47/raw-result.json": "f5f3bef353f45f066770732885f8edcf05d43436c80ae86eff277de6d80131d5",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/1b18615dff364f489c4c0dee66ff0b47/graded-result.json": "4e26973d03075103c983646aa8724a9f49337784619777a0fce11b4134159721",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/1b18615dff364f489c4c0dee66ff0b47/terminal.json": "5915aa09e975705e4c29dafc645fc2a7b8351fc76f0d94c820ca7df6ff986a1b",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/1b18615dff364f489c4c0dee66ff0b47/policy-behavior/state.pt": "083fad9d44d310b630fb3b9fd359c3671dcbc5507a162d6dedeceaceaccd0f4a"
+      }
+    },
+    {
+      "arm": "rms_cap",
+      "candidate": "astra-atlas-rms-cap",
+      "candidate_revision": "eff508f7f7f69e9fdf24d442699938700e4693defb23ed445c2de465c1ba6028",
+      "source_digest": "5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff",
+      "task": "two_pole",
+      "seed": 0,
+      "status": "PASS",
+      "new_updates": 80,
+      "completed_steps": 80,
+      "metrics": {
+        "grad_med": 0.40510642528533936,
+        "mean_abs": 0.46071991324424744,
+        "step": 80
+      },
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 70,
+          "first_pass_step": 57,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 8,
+          "passing_suffix": 8,
+          "stable_from_seconds": null,
+          "stable_from_step": 57
+        },
+        "metrics": [
+          {
+            "margin": 0.16071991324424745,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.46071991324424744
+          },
+          {
+            "margin": 0.5948935747146606,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.40510642528533936
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "attempt": "145aeb03170146bea4301c3329b0b04a",
+      "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/145aeb03170146bea4301c3329b0b04a/run.log",
+      "primary_regraded": 24,
+      "queue_seconds": 9.177725103014382,
+      "state_sha256": "3ea2ae2cda859ac1c517c84eed07078aab3ebd9bb5845b6591e2404c0c29cad4",
+      "GIF": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/actual-training/astra-atlas-rms-cap.gif",
+      "files": {
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/145aeb03170146bea4301c3329b0b04a/raw-result.json": "27aff6ca1d5dfeb1a2a70c2274a6c3e6c05ada85230a72ed0a12b2559fc49dd1",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/145aeb03170146bea4301c3329b0b04a/graded-result.json": "2cf12ba3f208a5a5a92bd7c53e5153e0ff0655f8e283ede8bd67ba9ea88a8cde",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/145aeb03170146bea4301c3329b0b04a/terminal.json": "dc61f261dc4e690c876eaf949ec1406e244c13db7d39c647076207c6569b37d0",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/queue/astra-atlas-cap-seed0-20261013/145aeb03170146bea4301c3329b0b04a/policy-behavior/state.pt": "04dce2223d0ee10c3a461d57d123692b60a09acbc53c026fde900a6623480622"
+      }
+    }
+  ],
+  "accounting": {
+    "new_queue_spend": 18.490690234015347,
+    "new_child_wall_seconds": 21.83080327999778,
+    "inherited_queue_spend": 2364.499211159986,
+    "inherited_child_wall_seconds": 2452.8337938030745,
+    "remaining_queue_seconds": 6257.010098605999,
+    "remaining_child_wall_seconds": 4725.335402916928
+  },
+  "original_non_Atlas_family_count_unchanged": true,
+  "canonical_inventory_modified": false,
+  "qualification": false
+}

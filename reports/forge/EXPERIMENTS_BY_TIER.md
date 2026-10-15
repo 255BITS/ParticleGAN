@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **96 tasks**; **59 assigned** to at least one view; **37 unassigned**. Showing **17/17 views**.
+Catalog: **96 tasks**; **59 assigned** to at least one view; **37 unassigned**. Showing **18/18 views**.
 
 Declared priors across the catalog: **55 MoGParticlePrior**, **41 ParticlePrior** (including **7 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -48,6 +48,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [recipe-prior-refactor-ka2-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-ka2-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | provisional |
 | [recipe-prior-refactor-r1r2-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-r1r2-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | provisional |
 | [recipe-prior-refactor-release07-gan-v3-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-release07-gan-v3-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | provisional |
+| [selected-family-coverage-diagnostic-v1](../../configs/forge/views/selected-family-coverage-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | undeclared |
 | [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json) | 1 | 7 required | 0 tasks | 0 tasks | undeclared |
 
 ## adaptation
@@ -863,6 +864,36 @@ No tasks assigned.
 
 No tasks assigned.
 
+## selected-family-coverage-diagnostic-v1
+
+Declaration: [selected-family-coverage-diagnostic-v1](../../configs/forge/views/selected-family-coverage-diagnostic-v1.json); revision 1; goal: `clockfree_continuous`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+1 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
 ## tier1_policy_coverage
 
 Declaration: [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json); revision 1; goal: `discriminator_stability`.
@@ -1012,7 +1043,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
@@ -1148,7 +1179,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | cover_leftover | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| cover_leftover | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| cover_leftover | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1567,8 +1598,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| grid100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| grid100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| grid100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| grid100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2253,8 +2284,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| rotated100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| rotated100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| rotated100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| rotated100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2334,8 +2365,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| staggered100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| staggered100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| staggered100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
+| staggered100 | [BISPF](../../configs/forge/ideas/bispf-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2526,7 +2557,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | unipolar | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| unipolar | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| unipolar | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -2601,7 +2632,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BISPF](../../configs/forge/ideas/bispf-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d2ea851a6fb6 / c05372e7eb5c | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [KA2](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / fb4738652dc8 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [R1/R2](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / a266b096fb60 | [source-bound receipt index](technique-inventory.json) |
@@ -2983,6 +3014,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `e05e74357e7fe3b653287a8c0e3844951c9aba732e3a922bd091d1ef62b8de8a`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `f4c08b39c5ee38e1df072ddfb52e7fb9e3065a9a3f4d96218cb28e7bb3cab590`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `4b5032bbc83fb447613696d3584ce6c89e15e05b7bcb451e84fbc70d6b094323`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `3c28b23461f1ca3568fd92d57b3a9c1f13875bb42939e720423bad23ac1e4bef`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

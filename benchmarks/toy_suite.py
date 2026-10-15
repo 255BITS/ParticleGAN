@@ -628,6 +628,12 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
             or not isinstance(sources, dict) or not required <= set(sources)):
         raise ValueError(f"100-mode policy source provenance differs: {name}")
     policy_source_scope(provenance)
+    if config.get("deterministic_init") is not None:
+        from benchmarks.toy100.train import ROOT as source_root
+        init_sources = {str(path.relative_to(source_root))
+                        for path in source_root.glob("benchmarks/init_research/*.py")}
+        if not init_sources <= set(sources):
+            raise ValueError(f"100-mode deterministic initializer source receipt is absent: {name}")
     archive_file = provenance.get("source_archive_file")
     archive_hash = provenance.get("source_archive_sha256")
     if (archive_file != "source.tar.gz"
@@ -726,21 +732,15 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
               or any(abs(value) > 2 ** -0.5 + 1e-7 for row in weight for value in row)
               or any(abs(value) > 2 ** -0.5 + 1e-7 for value in bias)):
             raise ValueError(f"100-mode default affine receipt differs: {name}")
-        # Recreate the actual initialized tensors on the declared CPU stream.
-        # The saved hash and extrema alone cannot prove that the seeded draw
-        # produced the prior; random affine weights need the same replay.
-        if config["device"] != "cpu":
-            raise ValueError(f"100-mode affine initialization replay requires CPU: {name}")
-        _, replay_recipe = resolve_config(config)
-        replay = make_trainer(config, replay_recipe)
-        replay_prior = replay.prior.z.detach().cpu().contiguous()
-        replay_generator = (replay.G.model if config["output_noise_std"] else replay.G)
-        if (card["prior_initial_sha256"] != hashlib.sha256(
-                replay_prior.numpy().tobytes()).hexdigest()
-                or card["prior_initial_min"] != float(replay_prior.min())
-                or card["prior_initial_max"] != float(replay_prior.max())
-                or weight != replay_generator.weight.detach().cpu().tolist()
-                or bias != replay_generator.bias.detach().cpu().tolist()):
+        # Replay on the recorded device and initializer in a fresh interpreter.
+        # Initializer hooks are process-wide, so auditing cannot leave them in
+        # the caller or inherit an already-advanced initializer counter.
+        from benchmarks.toy100.affine_replay import replay_initialization
+        expected = replay_initialization(config)
+        if (card["prior_initial_sha256"] != expected["prior_initial_sha256"]
+                or card["prior_initial_min"] != expected["prior_initial_min"]
+                or card["prior_initial_max"] != expected["prior_initial_max"]
+                or weight != expected["weight"] or bias != expected["bias"]):
             raise ValueError(f"100-mode seeded affine initialization differs: {name}")
         if prior_kind == "uniform_square":
             if (not _close(card.get("prior_scale"), 5.0)
@@ -856,6 +856,10 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
         raise ValueError(f"undeclared 100-mode network horizon receipt: {name}")
     elif "network_lr_floor" in summary:
         raise ValueError(f"undeclared 100-mode network floor receipt: {name}")
+    _check_toy100_learned_noise(
+        directory, summary, config, policy_archive_verified=True,
+    )
+    _check_toy100_output_rng(directory, summary, config)
     return sources
 
 

@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "2a49017d608e11c6ebcec27a90a552e42503abff3b4c21814f7e57595cda4ea2",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "e3d45ad0424e288ac1a65a18e20a5c38668c826228ecb1d0932cccc330f72bdf",
+  "optimizer_updates_added": 0,
+  "provenance_note": "Recovered already-scored observation arrays and stdout after checkpoint serialization error; formal gate remains INCOMPLETE, raw terminal ERROR. Declared sampler label is not a completed attestation.",
+  "qualification_input": false,
+  "recorded_grade": "INCOMPLETE",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/atlas-compatible/queue/atlas-unchanged-policy-coverage-20261013/810dabfbc7724e789d9210e457978b0a/observed-samples.pt": "2089b3676db8c5cd8e850a2998d6ca19efb5d0c02a77017b2bd784aa27c18cd7"
+  },
+  "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+}

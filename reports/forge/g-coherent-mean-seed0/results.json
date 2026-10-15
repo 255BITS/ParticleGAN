@@ -1,0 +1,3273 @@
+{
+  "attempt_timeline": {
+    "already_settled_do_not_repeat": true,
+    "fresh_baseline_distinct_from_historical_balanced_primary": true,
+    "historical_baseline_reuse": false,
+    "rows": [
+      {
+        "arm": "fresh_matched_control",
+        "attempt": "99b65cb02a794fe89633be8907139909",
+        "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+        "positive_updates_observed_utc": "2026-10-14T00:40:43.471127+00:00",
+        "process_identity": "676397:14349404",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "supervisor_started_unix": 1791938437.7167857,
+        "supervisor_started_utc": "2026-10-14T00:40:37.716786+00:00",
+        "task": "gaussian1d_smoke",
+        "terminal_utc": "2026-10-14T00:41:07.589+00:00",
+        "training_PID": 676397
+      },
+      {
+        "arm": "G_coherent_mean_candidate",
+        "attempt": "63bae83b0c5e40dda401e0eeca967fe8",
+        "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+        "positive_updates_observed_utc": "2026-10-14T00:40:43.758796+00:00",
+        "process_identity": "676400:14349425",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "supervisor_started_unix": 1791938437.938945,
+        "supervisor_started_utc": "2026-10-14T00:40:37.938945+00:00",
+        "task": "gaussian1d_smoke",
+        "terminal_utc": "2026-10-14T00:41:09.333+00:00",
+        "training_PID": 676400
+      },
+      {
+        "arm": "fresh_matched_control",
+        "attempt": "2fd62fa187b24ca0a04d44ae23ea9f2e",
+        "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+        "positive_updates_observed_utc": "2026-10-14T00:41:12.825214+00:00",
+        "process_identity": "676891:14352436",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "supervisor_started_unix": 1791938468.0772314,
+        "supervisor_started_utc": "2026-10-14T00:41:08.077231+00:00",
+        "task": "gaussian1d_stability",
+        "terminal_utc": "2026-10-14T00:43:07.175+00:00",
+        "training_PID": 676891
+      },
+      {
+        "arm": "G_coherent_mean_candidate",
+        "attempt": "bfe18c8581014733a953f4ddfef4f8f5",
+        "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+        "positive_updates_observed_utc": "2026-10-14T00:41:15.062575+00:00",
+        "process_identity": "676925:14352618",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "supervisor_started_unix": 1791938469.9205678,
+        "supervisor_started_utc": "2026-10-14T00:41:09.920568+00:00",
+        "task": "gaussian1d_stability",
+        "terminal_utc": "2026-10-14T00:43:16.903+00:00",
+        "training_PID": 676925
+      }
+    ],
+    "start_semantics": "Recorded supervisor Popen start receipt; positive-update observations and terminal timestamps are separate."
+  },
+  "evidence_scope": "source_bound_scoped_research_summary",
+  "id": "g-coherent-mean-seed0-original-pair",
+  "matched_control": "Fresh same-source OFF control with its own newly acquired checkpoint; historical balanced-primary results are separate context only.",
+  "new_training_updates": 12000,
+  "paid_model_sessions": 0,
+  "paid_retries": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "records": [
+    {
+      "arm": "control",
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "c6995920826b892206dfda62b178fc2a5aad3b4575fa9b4abd609faa7e2c62ff",
+            "size": 66339
+          },
+          "initial-state.pt": {
+            "sha256": "6b5b229cb9dc5355e9fcc2d082c9e39d796e309c28b15cbf3b0394a141501477",
+            "size": 66394
+          },
+          "observed-samples.pt": {
+            "sha256": "c6797e56fdf95c33d23e901ecd733ddcecd40d3542b550aa780911a2bf2b7cd8",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "a296883cf46c0dcd5567528076d32f610205d46151a95e08d59809053ac32c73",
+            "size": 66760
+          },
+          "state.pt": {
+            "sha256": "04580e327ddddaf83a8f8cb86512b7bc253fbbab68c69d21d2055a5f955950a7",
+            "size": 64866
+          }
+        },
+        "schema_version": 1,
+        "sha256": "37fea14e94c3b153e3340bda1cd31bbb52eeb8a6d6439a1d01e9704dc1d925da",
+        "total_bytes": 3105787
+      },
+      "attempt_id": "2fd62fa187b24ca0a04d44ae23ea9f2e",
+      "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "04580e327ddddaf83a8f8cb86512b7bc253fbbab68c69d21d2055a5f955950a7",
+        "state_sha256": "e87b4193bc91a6c1d339a132b5fad03aac7b8f3e527cb0f493267ae9735a68c0"
+      },
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+        "parent_checkpoint_sha256": "b73c80a150af89ee9a3698622fa225d7f3deafe86cdd7637ae5d6f66103db74f",
+        "parent_compatibility_key": "d953f02ec3e98e63febfd7251cd63b81251a4a82cabddf05fd1fd81c7547590d",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "fcf3c9320e57c8b0d6af7202112bbc89f341b46abcc400e29e2e78e01ec3dabd",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "cost": {
+        "adapter_loop_seconds": 112.82552511701942,
+        "adapter_seconds": 113.23349490598775,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 105.53306678493391,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.6829324880382046
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.15152860802481882
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 103.69860568887088
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 114.21863113899599
+      },
+      "data_sha256": {
+        "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+        "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+      },
+      "final_metrics": {
+        "cdf_ks": 0.07612553755008189,
+        "finite_fraction": 1.0,
+        "mean": 3.0880204606510233,
+        "mean_error_sigma": 0.17604092130204663,
+        "sample_count": 4096,
+        "std": 0.5142787610129114,
+        "std_ratio": 1.0285575220258227,
+        "step": 6000
+      },
+      "gate_status": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "original_grade": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "FAIL",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 12,
+          "stationary_checks": 72,
+          "stationary_passes": 35
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.07612553755008189,
+          "finite_fraction": 1.0,
+          "mean": 3.0880204606510233,
+          "mean_error_sigma": 0.17604092130204663,
+          "sample_count": 4096,
+          "std": 0.5142787610129114,
+          "std_ratio": 1.0285575220258227,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "original_local_attempt_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/2fd62fa187b24ca0a04d44ae23ea9f2e",
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "vicreg",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "c6b6e7c82027b3182cc5776e9669808f2fa09a9eb84cde1344d6862dcea76e67",
+              "size": 66815
+            }
+          },
+          "schema_version": 1,
+          "sha256": "d34bf3ec0adda737b2065f444326cf1586bc38b880334d49438285bba1141dea",
+          "total_bytes": 66815
+        },
+        "artifact_root": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/2fd62fa187b24ca0a04d44ae23ea9f2e/provenance",
+        "bytes": 66815,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "c6b6e7c82027b3182cc5776e9669808f2fa09a9eb84cde1344d6862dcea76e67",
+        "state_sha256": "e87b4193bc91a6c1d339a132b5fad03aac7b8f3e527cb0f493267ae9735a68c0"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "queue_seconds": 118.14136927199434,
+      "raw_status": "completed",
+      "receipt_hashes": {
+        "adapter-receipt.json": "277d897f3cc340256d735aa56ddfda2e225e7bf5275b604ca9f7aa5b41ddca99",
+        "graded-result.json": "fe06db8120bd2980847eff5ab24690c3bae45609fc0cd0bef6319d1f80640f12",
+        "raw-result.json": "49c4765b495ad407fd0399593b8c14dc48809b1f704a005770682169ea1b3183",
+        "request.json": "38f1cb808ab72c373a2996bee950a7891cc63dcaa882e2dab9d6db66069813a7",
+        "result.json": "7cab27fd3050af70b60e51f421ce1207043b6e2539f81a4c81c0cb790244dfb1",
+        "terminal.json": "3e4ffd712035d6672d0a481de7186cec3620cedaf88865bb7c7cada343140dd0"
+      },
+      "rng_audits": [
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        }
+      ],
+      "sampling_contract": {
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.07612553755008189,
+          "finite_fraction": 1.0,
+          "mean": 3.0880204606510233,
+          "mean_error_sigma": 0.17604092130204663,
+          "sample_count": 4096,
+          "std": 0.5142787610129114,
+          "std_ratio": 1.0285575220258227,
+          "step": 6000
+        },
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "supervisor_seconds": 119.61415392201161,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "candidate",
+      "artifact_manifest": {
+        "file_count": 5,
+        "files": {
+          "frozen-state.pt": {
+            "sha256": "d2314e66b85a12d65b4cca393cec4a084a653981fd329e57454c2174cc7a75bb",
+            "size": 78257
+          },
+          "initial-state.pt": {
+            "sha256": "4769d50301f1459b7f953e71a421301c57ee750b0802cb5644c93e8f1da55d0b",
+            "size": 78319
+          },
+          "observed-samples.pt": {
+            "sha256": "68d50995ab97adaba0bd08a22cf12fa76703730fa9f915462f8325d497d1b6d0",
+            "size": 2841428
+          },
+          "pre-shift-state.pt": {
+            "sha256": "c58e5ddcca275e51a9c8d04f014d5166208a304654956fd598b17b66003114d6",
+            "size": 78635
+          },
+          "state.pt": {
+            "sha256": "2dcbd41a3371df31a695b28939fba710c24f78de29f763ee96ba7b3e18bd3d99",
+            "size": 76351
+          }
+        },
+        "schema_version": 1,
+        "sha256": "d583c799d48a22222f976069e7b430b0388ccdf36e25f4a7030b445029a33175",
+        "total_bytes": 3152990
+      },
+      "attempt_id": "bfe18c8581014733a953f4ddfef4f8f5",
+      "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "2dcbd41a3371df31a695b28939fba710c24f78de29f763ee96ba7b3e18bd3d99",
+        "state_sha256": "ccdcb906b98f97e87d9de5cacd1ad71a7472e8871a55f620440344e57f9876d2"
+      },
+      "continuity": {
+        "diagnostic_continuation": false,
+        "frozen_completed_steps": 4000,
+        "history_reset": false,
+        "matched_frozen_draws": true,
+        "parent_candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+        "parent_checkpoint_sha256": "e339093a7036f672f5bc355bc2c9db27f20de84a9fcda59c3ccb9d411b37925d",
+        "parent_compatibility_key": "f106790ab9f764e847181a81d40fd34740f858b62b64c004b6d8de5522cc9407",
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "084c30869c84e5acf2fc6a1afd43c979e2127789c5ac9f15ee996c6a242f5f4b",
+        "prefix_steps": 1000,
+        "restored_exactly": true
+      },
+      "cost": {
+        "adapter_loop_seconds": 120.90581282100175,
+        "adapter_seconds": 121.31920056900708,
+        "completed_steps": 6000,
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 113.24691357379197,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9711203451734036
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.14798465787316673
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 111.1278085707454
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 122.2657650890178
+      },
+      "data_sha256": {
+        "shift": "dd6e1f6297c495d55222ca2d114743b3da84e99efe83d48df12d7228017e39ba",
+        "stationary": "2f7028a0573a22229ad8fe98622b2beee82e5ce7231fef1910af221af65f8d7f"
+      },
+      "final_metrics": {
+        "cdf_ks": 0.018775055506869753,
+        "finite_fraction": 1.0,
+        "mean": 3.0025452171394136,
+        "mean_error_sigma": 0.005090434278827161,
+        "sample_count": 4096,
+        "std": 0.46774487859110503,
+        "std_ratio": 0.9354897571822101,
+        "step": 6000
+      },
+      "gate_status": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "original_grade": {
+        "evaluator_result": {
+          "frozen_checks": 48,
+          "frozen_passes": 0,
+          "reacquisition_status": "PASS",
+          "shift_hold_checks": 24,
+          "shift_hold_passes": 20,
+          "stationary_checks": 72,
+          "stationary_passes": 69
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "cdf_ks": 0.018775055506869753,
+          "finite_fraction": 1.0,
+          "mean": 3.0025452171394136,
+          "mean_error_sigma": 0.005090434278827161,
+          "sample_count": 4096,
+          "std": 0.46774487859110503,
+          "std_ratio": 0.9354897571822101,
+          "step": 6000
+        },
+        "reasons": [
+          "stationary hold, deadline reacquisition and shifted hold"
+        ],
+        "status": "FAIL"
+      },
+      "original_local_attempt_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/bfe18c8581014733a953f4ddfef4f8f5",
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "vicreg",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "25fbc035fc05d2522883964f69bf783c7e2b81f8c0da007156917c2afefc9cdd",
+              "size": 78697
+            }
+          },
+          "schema_version": 1,
+          "sha256": "3a4805d43ebd315c5e39c73c0d93e5f11f9ea6ddf7b3eeac71328430ccf13ab4",
+          "total_bytes": 78697
+        },
+        "artifact_root": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/bfe18c8581014733a953f4ddfef4f8f5/provenance",
+        "bytes": 78697,
+        "completed_steps": 6000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "633556b0229301b92458faa7cefd5bbb0a9966bbd60c634fb4e22ebba86746f3",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "516a30e5b3aa62f09a8df1f6037b5afdc98a281c6e596a952170527b1436023a",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "54fc43b3aa33bf0dfef09d44913e5caaedf87e5357bcdf3c1cb500da1b2c3aa3",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "b1ae0c29a85cb0270fca148eec899251c1f852c6bb3a9df4fa3f123a3a3f5067"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "25fbc035fc05d2522883964f69bf783c7e2b81f8c0da007156917c2afefc9cdd",
+        "state_sha256": "ccdcb906b98f97e87d9de5cacd1ad71a7472e8871a55f620440344e57f9876d2"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "queue_seconds": 126.05677890000516,
+      "raw_status": "completed",
+      "receipt_hashes": {
+        "adapter-receipt.json": "b80212e7b07e83bf19cf1eb6cce4b9707a0440c8e00ad7a1d8f0721542334190",
+        "graded-result.json": "2706eae90b680a4884d9919090c6b26f3d680df7fd67494aa35f65ffac7d08b7",
+        "raw-result.json": "5d0840ca3f75f36d4e69996b737fd3b18bca24e647aeacd7c36942232e6e6760",
+        "request.json": "879853cb64eddc6cda980c566eebe2d2b2d5673fdb1e26447d649947a2470f86",
+        "result.json": "b78d0551c287e7a8ccbccaa475b56904962b11741f9aa9111bf49bd5ba94f840",
+        "terminal.json": "ecf64185e7bc81bdfca7bda461a35e2cb12d3eca8b81641814eb5c5b729cc72e"
+      },
+      "rng_audits": [
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        }
+      ],
+      "sampling_contract": {
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.018775055506869753,
+          "finite_fraction": 1.0,
+          "mean": 3.0025452171394136,
+          "mean_error_sigma": 0.005090434278827161,
+          "sample_count": 4096,
+          "std": 0.46774487859110503,
+          "std_ratio": 0.9354897571822101,
+          "step": 6000
+        },
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "supervisor_seconds": 127.54094245101442,
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "arm": "control",
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "353087143bf97db923a298e535bcd3d0737791ef0412e34b70dc268f22ca2c79",
+            "size": 64727
+          },
+          "observed-samples.pt": {
+            "sha256": "509a9657b6dd8cdde80b8c08f63b0f0e4e01b936accf61737f5d4ffc2a520d4f",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "b73c80a150af89ee9a3698622fa225d7f3deafe86cdd7637ae5d6f66103db74f",
+            "size": 64482
+          }
+        },
+        "schema_version": 1,
+        "sha256": "c4981a1fe98983bdd3cef9b78c263b524d57c5d1c6dbf83d491b74a283cfaa08",
+        "total_bytes": 972158
+      },
+      "attempt_id": "99b65cb02a794fe89633be8907139909",
+      "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "b73c80a150af89ee9a3698622fa225d7f3deafe86cdd7637ae5d6f66103db74f",
+        "state_sha256": "fcf3c9320e57c8b0d6af7202112bbc89f341b46abcc400e29e2e78e01ec3dabd"
+      },
+      "continuity": null,
+      "cost": {
+        "adapter_loop_seconds": 23.289610621985048,
+        "adapter_seconds": 23.866697884979658,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 21.822962341539096,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5077841469028499
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.2360307670896873
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 21.07914742754656
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 24.902977532998193
+      },
+      "data_sha256": {
+        "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+      },
+      "final_metrics": {
+        "cdf_ks": 0.01805603484688334,
+        "finite_fraction": 1.0,
+        "mean": 2.013595298965811,
+        "mean_error_sigma": 0.027190597931621596,
+        "sample_count": 4096,
+        "std": 0.4935231069729497,
+        "std_ratio": 0.9870462139458994,
+        "step": 1000
+      },
+      "gate_status": "PASS",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "original_grade": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            125,
+            334,
+            417,
+            459,
+            584,
+            667,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 125,
+          "observations": 24,
+          "passing_observations": 10
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.01805603484688334,
+          "finite_fraction": 1.0,
+          "mean": 2.013595298965811,
+          "mean_error_sigma": 0.027190597931621596,
+          "sample_count": 4096,
+          "std": 0.4935231069729497,
+          "std_ratio": 0.9870462139458994,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "original_local_attempt_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/99b65cb02a794fe89633be8907139909",
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "vicreg",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "860dec7150af57e54240d84a9f207fc360e0e158385a7c9e8293282c294b01e0",
+              "size": 66431
+            }
+          },
+          "schema_version": 1,
+          "sha256": "9287568ed881631e212ab160b834a1a5dff2670a0f45625655fe4e52da4d99b4",
+          "total_bytes": 66431
+        },
+        "artifact_root": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/99b65cb02a794fe89633be8907139909/provenance",
+        "bytes": 66431,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "860dec7150af57e54240d84a9f207fc360e0e158385a7c9e8293282c294b01e0",
+        "state_sha256": "fcf3c9320e57c8b0d6af7202112bbc89f341b46abcc400e29e2e78e01ec3dabd"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "queue_seconds": 28.90510792200803,
+      "raw_status": "completed",
+      "receipt_hashes": {
+        "adapter-receipt.json": "4a74a4ebe4c16f95ef26b8096cfc3fb23ec0da7c1d7d46786213819d7f3c56bf",
+        "graded-result.json": "f4a9c014a50d73c4193095562aa296160aa8117319d566cd435c0ef24b472d57",
+        "raw-result.json": "f2d38b5729d5a08a29a616e96cc8af8f454788a716af543926431ef781e44aaf",
+        "request.json": "d4c5a084c94ac4c0eb2890d5d45fa0d15da3f4f09365d2d57ec439d077ce16d6",
+        "result.json": "a8665d1e57313950f1150178d1f337bb87a21dabbc354abcb795f0cd30f19317",
+        "terminal.json": "74b3769b444046ac450cdb589e54fe3c654f76d37dc5b3c2d0ee82ca315604d1"
+      },
+      "rng_audits": [
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        }
+      ],
+      "sampling_contract": {
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.01805603484688334,
+          "finite_fraction": 1.0,
+          "mean": 2.013595298965811,
+          "mean_error_sigma": 0.027190597931621596,
+          "sample_count": 4096,
+          "std": 0.4935231069729497,
+          "std_ratio": 0.9870462139458994,
+          "step": 1000
+        },
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "supervisor_seconds": 30.127264714014018,
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "arm": "candidate",
+      "artifact_manifest": {
+        "file_count": 3,
+        "files": {
+          "initial-state.pt": {
+            "sha256": "d3dc7086e094fbe07ed1bef898c60b231cb2656d6c8dfb436945e26a56561526",
+            "size": 64855
+          },
+          "observed-samples.pt": {
+            "sha256": "5fc5af3062722847cca057128004de5810901f1b88947942a74adcc7c61d33f6",
+            "size": 842949
+          },
+          "state.pt": {
+            "sha256": "e339093a7036f672f5bc355bc2c9db27f20de84a9fcda59c3ccb9d411b37925d",
+            "size": 75967
+          }
+        },
+        "schema_version": 1,
+        "sha256": "edc618868b9aec4acb8f3f1c818f80b686232641c99e6859c0af80e38caf4757",
+        "total_bytes": 983771
+      },
+      "attempt_id": "63bae83b0c5e40dda401e0eeca967fe8",
+      "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+      "checkpoint": {
+        "path": "state.pt",
+        "sha256": "e339093a7036f672f5bc355bc2c9db27f20de84a9fcda59c3ccb9d411b37925d",
+        "state_sha256": "084c30869c84e5acf2fc6a1afd43c979e2127789c5ac9f15ee996c6a242f5f4b"
+      },
+      "continuity": null,
+      "cost": {
+        "adapter_loop_seconds": 25.094137754000258,
+        "adapter_seconds": 25.52338866100763,
+        "completed_steps": 1000,
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 23.54595167536172,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5956093110726215
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.23330374696524814
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 22.71703861732385
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 26.501226218999363
+      },
+      "data_sha256": {
+        "shift": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stationary": "33020275110915d6af86bd885033306411466409cd76bd284cf47124ee97f3c2"
+      },
+      "final_metrics": {
+        "cdf_ks": 0.020333318720727522,
+        "finite_fraction": 1.0,
+        "mean": 2.012968927869224,
+        "mean_error_sigma": 0.02593785573844798,
+        "sample_count": 4096,
+        "std": 0.5077070299801295,
+        "std_ratio": 1.015414059960259,
+        "step": 1000
+      },
+      "gate_status": "PASS",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1000,
+              "calls": 1000,
+              "eligible": 1000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "original_grade": {
+        "evaluator_result": {
+          "confirmed_steps": [
+            334,
+            375,
+            542,
+            625,
+            667,
+            709,
+            750,
+            792,
+            834,
+            875,
+            917,
+            959,
+            1000
+          ],
+          "first_confirmed_step": 334,
+          "observations": 24,
+          "passing_observations": 14
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "cdf_ks": 0.020333318720727522,
+          "finite_fraction": 1.0,
+          "mean": 2.012968927869224,
+          "mean_error_sigma": 0.02593785573844798,
+          "sample_count": 4096,
+          "std": 0.5077070299801295,
+          "std_ratio": 1.015414059960259,
+          "step": 1000
+        },
+        "reasons": [
+          "any scheduled full pass with independent same-state confirmation"
+        ],
+        "status": "PASS"
+      },
+      "original_local_attempt_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/63bae83b0c5e40dda401e0eeca967fe8",
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "vicreg",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.0
+      },
+      "provenance_checkpoint": {
+        "artifact_manifest": {
+          "file_count": 1,
+          "files": {
+            "provenance-state.pt": {
+              "sha256": "24fb629dab79f0f410e1a8a2488fa453aaf1f36ccf19ad95b0fc58836b8e01e4",
+              "size": 78377
+            }
+          },
+          "schema_version": 1,
+          "sha256": "a3d471d556da87da1c36ccf5db58477206fecbf045b6aa8c98a0cdcdf8227f78",
+          "total_bytes": 78377
+        },
+        "artifact_root": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/63bae83b0c5e40dda401e0eeca967fe8/provenance",
+        "bytes": 78377,
+        "completed_steps": 1000,
+        "named_stream_keys": [
+          "[\"data\",\"target\",\"training\",\"cpu\"]",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+        ],
+        "named_stream_state_sha256": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": "a62792e7fc5822a6de9f4e1600f86308deac1659d33ea13f69fce62a42288a13",
+          "[\"data\",\"target\",\"training\",\"cuda:0\"]": "3045f927f809a4d4908bc8c70834e5a1f37ab046029bd3c739b743dff9e57661",
+          "[\"eval\",\"live\",\"samples\",\"cuda:0\"]": "1067194d546695c470f7ceb2d3429ebf5100aa20d0a5b67338ff8799d3dab369",
+          "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]": "bbc4345f8912f65900e57706b63ca7716c05cf1a70d4b4e65d3d9a489766d780",
+          "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+          "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "cd907aa4982193e8f439fdce948dab9c9a98bfe5b6a41690ce628185d7b15c24",
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": "b31db9cd54e7451c5530e9b712f237b9d6c6157e31c80aaa453c501bf5fed3c4",
+          "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+          "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+          "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+          "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+          "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "f6259cfe03478e146d427dbe2d611878108208855aab65ccd9484f6d0e3012e2",
+          "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "5ba3875498d9aa8b369c35758ff9fd0da58f97f49fb05e777f0fed0303f08686"
+        },
+        "optimizer_updates_added": 0,
+        "path": "provenance-state.pt",
+        "prerequisite_eligible": false,
+        "purpose": "provenance_only",
+        "sampling_draws_added": 0,
+        "schema_version": 1,
+        "sha256": "24fb629dab79f0f410e1a8a2488fa453aaf1f36ccf19ad95b0fc58836b8e01e4",
+        "state_sha256": "084c30869c84e5acf2fc6a1afd43c979e2127789c5ac9f15ee996c6a242f5f4b"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "queue_seconds": 30.41274725299445,
+      "raw_status": "completed",
+      "receipt_hashes": {
+        "adapter-receipt.json": "e1b5ce6202d50f45520daea4d4e994b46c2103956e7076766636e91c93b2a6cd",
+        "graded-result.json": "6a82d3babcf1a301ef9c9aa688731e9117c58b099f7039c55ea1de4670f764e0",
+        "raw-result.json": "e4de78ab8ba89aa6769cb3ea36a017fa5fc2635e63398320436a4ef7d0aca614",
+        "request.json": "82ebdc4a2163176811db61cf7257284182c1935d7f395cc13e271c3f6161558d",
+        "result.json": "4c61a325ad29dbb06748510343ea7df960ef65a57b9503f9cebff9eb83a78045",
+        "terminal.json": "bdfa1e71cbc5f36f128fc5dc751fb7411b5d69f9c2e5f33442b951502e539ffc"
+      },
+      "rng_audits": [
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        },
+        {
+          "changed_streams": [
+            "[\"eval\",\"live\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"smoke_confirmation\",\"cuda:0\"]"
+          ],
+          "unintended_rng_deviations": 0,
+          "unintended_streams": []
+        }
+      ],
+      "sampling_contract": {
+        "eval_output_noise": "clean",
+        "live": {
+          "cdf_ks": 0.020333318720727522,
+          "finite_fraction": 1.0,
+          "mean": 2.012968927869224,
+          "mean_error_sigma": 0.02593785573844798,
+          "sample_count": 4096,
+          "std": 0.5077070299801295,
+          "std_ratio": 1.015414059960259,
+          "step": 1000
+        },
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "supervisor_seconds": 31.715989145013737,
+      "task_id": "gaussian1d_smoke"
+    }
+  ],
+  "schema_version": 1,
+  "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+  "total_new_queue_seconds": 303.51600334700197,
+  "total_supervisor_seconds": 308.9983502320538,
+  "verdict": "Both acquisitions PASS; both original retentions FAIL. No winner, current-source qualification, promotion or held-out claim."
+}

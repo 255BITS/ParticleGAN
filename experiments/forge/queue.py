@@ -19,7 +19,7 @@ import sys
 import time
 import uuid
 
-from .contracts import (atomic_json, canonical, file_lock, identifier, positive_number,
+from .contracts import (atomic_json, canonical, file_hash, file_lock, identifier, positive_number,
                         read_json, stable_hash, utc_now)
 from .sources import verify_snapshot
 from .execution_policy import completes_tier, group_blockers, policy
@@ -479,7 +479,7 @@ class Queue:
         from .decision_contracts import available_round_budget
         return available_round_budget(state, request, seconds if new_round_reservation else 0, job_key=job_key)
 
-    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None) -> dict | None:
+    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None, request_filter=None) -> dict | None:
         """Called only by the drain owner; reservation is atomic with submissions."""
         with self.state() as state:
             self._refresh(state)
@@ -500,6 +500,8 @@ class Queue:
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:
+                if request_filter is not None and request_id != request_filter:
+                    continue
                 request = entry["request"]
                 if entry["status"] not in {"queued", "running"}:
                     continue
@@ -596,7 +598,13 @@ class Queue:
                     return resolved
             return None
 
-    def launch(self, resolved: dict, *, module="experiments.forge.worker") -> subprocess.Popen:
+    def launch(self, resolved: dict, *, module="experiments.forge.worker", shared_slot_fd=None,
+               shared_fleet_fds=()) -> subprocess.Popen:
+        shared_fleet_fds = tuple(shared_fleet_fds)
+        if (shared_slot_fd is not None or shared_fleet_fds) and module == "experiments.forge.worker":
+            expected_worker = file_hash(Path(__file__).with_name("worker.py"))
+            if resolved["request"]["source"].get("files", {}).get("experiments/forge/worker.py") != expected_worker:
+                raise RuntimeError("external shared leases require the current FD-forwarding worker in the frozen source")
         worker = resolved["worker"]
         directory = Path(worker["directory"])
         # launch + registration remain under queue lock. Recovery also checks the
@@ -612,10 +620,26 @@ class Queue:
                                    CUBLAS_WORKSPACE_CONFIG=":4096:8", FORGE_LEASE_FD=str(lease.fileno()))
                 environment["CUDA_VISIBLE_DEVICES"] = "" if worker["device"] == "cpu" else str(worker["device"])
                 environment["PYTHONPATH"] = resolved["request"]["source"]["snapshot_path"]
+                inherited = (lease.fileno(),)
+                environment.pop("FORGE_SHARED_SLOT_FD", None)
+                environment.pop("FORGE_SHARED_FLEET_FDS", None)
+                if shared_slot_fd is not None:
+                    if type(shared_slot_fd) is not int or shared_slot_fd < 0:
+                        raise ValueError('shared slot descriptor must be an open nonnegative integer')
+                    os.fstat(shared_slot_fd)  # fail before process creation on a stale descriptor
+                    environment["FORGE_SHARED_SLOT_FD"] = str(shared_slot_fd)
+                    inherited += (shared_slot_fd,)
+                if shared_fleet_fds:
+                    for fd in shared_fleet_fds:
+                        if type(fd) is not int or fd < 0:
+                            raise ValueError('fleet descriptor must be an open nonnegative integer')
+                        os.fstat(fd)
+                    environment['FORGE_SHARED_FLEET_FDS'] = ','.join(map(str, shared_fleet_fds))
+                    inherited = tuple(dict.fromkeys((*inherited, *shared_fleet_fds)))
                 with (directory / "run.log").open("ab", buffering=0) as log:
                     process = subprocess.Popen([sys.executable, "-u", "-m", module, str(directory / "request.json")],
                         cwd=resolved["request"]["source"]["snapshot_path"], env=environment,
-                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=(lease.fileno(),))
+                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=inherited)
                 job["worker"].update(pid=process.pid, process_identity=process_identity(process.pid))
                 atomic_json(directory / "process.json", job["worker"])
                 return process
@@ -937,7 +961,16 @@ def device_slots(devices: list[str], workers_per_gpu: int = 1, *, allow_sharing:
 
 
 def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=False,
-          watch=False, campaign=None, goal=None, poll_seconds=.2):
+          watch=False, campaign=None, goal=None, poll_seconds=.2, request_filter=None,
+          shared_fleet_fds=()):
+    # External bounded schedulers can retain ownership across this normal drain
+    # and every training/evaluation child. Never infer ownership from inherited
+    # environment variables or create/replace an owner's lease files.
+    shared_fleet_fds = tuple(shared_fleet_fds)
+    for fd in shared_fleet_fds:
+        if type(fd) is not int or fd < 0:
+            raise ValueError('fleet descriptor must be an open nonnegative integer')
+        os.fstat(fd)
     with file_lock(queue.root / "coordinator.lock", blocking=False):
         processes = []
         try:
@@ -947,9 +980,10 @@ def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=
                         processes.remove(process)
                 queue.collect()
                 slots = device_slots(devices, workers_per_gpu, allow_sharing=allow_sharing)
-                while claim := queue.claim(slots, campaign_filter=campaign, goal_filter=goal):
+                while claim := queue.claim(slots, campaign_filter=campaign, goal_filter=goal,
+                                           request_filter=request_filter):
                     try:
-                        processes.append(queue.launch(claim))
+                        processes.append(queue.launch(claim, shared_fleet_fds=shared_fleet_fds))
                     except (OSError, RuntimeError) as error:
                         atomic_json(Path(claim["worker"]["directory"]) / "terminal.json", {
                             "schema_version": 1, "token": claim["worker"]["token"],
@@ -958,7 +992,8 @@ def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=
                         queue.collect()
                 queue.flush_events()
                 state = queue.inspect()
-                active = [e for e in state["submissions"].values() if e["status"] in {"queued", "running"}
+                active = [e for request_id, e in state["submissions"].items() if e["status"] in {"queued", "running"}
+                          and (request_filter is None or request_id == request_filter)
                           and (not campaign or e["request"]["campaign_id"] == campaign)
                           and (not goal or e["request"]["view"]["goal"] == goal)]
                 if not active and not watch:

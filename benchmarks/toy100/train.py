@@ -69,7 +69,7 @@ RUN_DEFAULTS = {
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
-    "eval_output_noise",
+    "eval_output_noise", "deterministic_init",
 }
 AFFINE_MODEL_POLICIES = {
     "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
@@ -240,6 +240,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not math.isfinite(value) or not 0 <= value <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
+    if "deterministic_init" in run:
+        init_name = run["deterministic_init"]
+        if type(init_name) is not str or not init_name:
+            raise ValueError("deterministic_init must be a registered init name")
+        from benchmarks.init_research.init_registry import names as init_names
+        if init_name not in init_names():
+            raise ValueError(f"unknown deterministic_init {init_name!r}")
     # Noise and network-horizon keys are benchmark-run fields: the benchmark
     # applies them through its own wrappers and hooks, so the trainer recipe
     # keeps their pre-K3P neutral values (see benchmarks.gan_v3).
@@ -499,13 +506,17 @@ def _isolated_output_receipt(trainer: GANTrainer, config: Mapping[str, Any]) -> 
     }
 
 
-def _source_provenance(*, include_policy: bool = False) -> dict[str, Any]:
+def _source_provenance(*, include_policy: bool = False, deterministic_init: str | None = None) -> dict[str, Any]:
     paths = POLICY_SOURCE_FILES_V1[:10]
     if include_policy:
         public = {str(path.relative_to(ROOT)) for path in ROOT.glob("particlegan/**/*.py")}
         if not set(POLICY_PUBLIC_SOURCE_FILES) <= public:
             raise RuntimeError("required public package source is missing")
         paths = tuple(sorted(set(POLICY_SOURCE_FILES_V1) | public))
+    if deterministic_init is not None:
+        initializers = {str(path.relative_to(ROOT))
+                        for path in ROOT.glob("benchmarks/init_research/*.py")}
+        paths = tuple(sorted(set(paths) | initializers | {"benchmarks/toy100/device.py"}))
     hashes = {}
     for name in paths:
         path = ROOT / name
@@ -690,7 +701,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     _write_json(out_dir / "config.json", resolved)
     policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
                       or "network_lr_floor" in resolved or "output_noise_rng" in resolved)
-    provenance = (_source_provenance(include_policy=True) if policy_enabled
+    provenance = (_source_provenance(include_policy=True, deterministic_init=resolved.get("deterministic_init")) if policy_enabled
                   else _source_provenance())
     if policy_enabled:
         _write_source_archive(out_dir, provenance)

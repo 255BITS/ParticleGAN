@@ -95,28 +95,26 @@ Source digest: `fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f
 
 [Frozen numerical evidence](../technique-evidence/7f6745f3a0d18f563c25908c905055815aadcf36b077832dd6bf6ebb3f92bf2d.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Complete Tier 1 and Tier 2 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow (BISPF) on the BCAP DualNorm leader recipe.
+Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Complete Tier 1 and Tier 2 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow (BISPF) on the BCAP DualNorm leader recipe.
 
 </details>
 
-Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
-
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0(*)/1](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12(*)/23](bispf.md#cohort-cuda-6421ba55ca82-adaptation) |
-| [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0(*)/7](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13(*)/30](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
-| [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/21](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0(*)/2](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16(*)/29](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) |
-| [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) | [0(*)/2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) | [12(*)/24](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) |
-| [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) | [0(*)/2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3) | [12(*)/24](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) |
+| [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0/1 (1 not run)](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12/23 (1 not run)](bispf.md#cohort-cuda-6421ba55ca82-adaptation) |
+| [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/30 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) |
+| [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/21](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/2 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16/29 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) |
+| [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) | [0/2 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) | [12/24 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) |
+| [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) | [0/2 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3) | [12/24 (2 not run)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) |
 | [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | [9/19](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-3) | [12/22](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) |
 
 Separate cohort coverage (excluded from family totals):
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [tier1_policy_coverage](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) | [0(*)/7](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-3) | [0(*)/7](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) |
+| [tier1_policy_coverage](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage) |
 
-(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
+Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-6421ba55ca82-tier-1"></a>
 
@@ -126,13 +124,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | matches recorded run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | changed since run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_smoke) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_smoke) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [ring16_acquisition](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-tier-2"></a>
 
@@ -142,10 +140,10 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | changed since run |
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | PASS | matches recorded run |
 | [gaussian1d_stability](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_stability) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | changed since run |
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
@@ -153,10 +151,10 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | changed since run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | changed since run |
 | [vector_anisotropic](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_anisotropic) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [vector_overlap](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_overlap) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [vector_spiral](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_spiral) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | PASS | matches recorded run |
@@ -197,8 +195,8 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-adaptation-tier-2"></a>
 
@@ -208,8 +206,8 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | --- | --- | --- | --- |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -222,9 +220,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-adaptation-tier-3"></a>
 
@@ -254,8 +252,8 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [gaussian1d_stability](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | diagnostic | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
@@ -268,9 +266,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
 
@@ -302,8 +300,8 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | diagnostic | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | diagnostic | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | diagnostic | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | diagnostic | PASS | changed since run |
 | [ring16_acquisition](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
@@ -313,9 +311,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [vector_unequal_mass](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
 
@@ -446,8 +444,8 @@ Additional eligibility requirements:
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2"></a>
@@ -458,8 +456,8 @@ Additional eligibility requirements:
 | --- | --- | --- | --- |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -472,9 +470,9 @@ Additional eligibility requirements:
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3"></a>
 
@@ -508,8 +506,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_smoke) | required | PASS | matches recorded run |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [ring16_acquisition](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) | required | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
@@ -524,8 +522,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | required | PASS | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -538,9 +536,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-discriminator_stability-tier-3"></a>
 
@@ -568,8 +566,8 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-formulation_comparison-tier-2"></a>
 
@@ -579,8 +577,8 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | --- | --- | --- | --- |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -593,9 +591,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -638,8 +636,8 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2"></a>
 
@@ -649,8 +647,8 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | --- | --- | --- | --- |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -663,9 +661,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -737,8 +735,8 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-quality_coverage-tier-2"></a>
 
@@ -748,8 +746,8 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | --- | --- | --- | --- |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | required | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | required | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | required | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | required | PASS | matches recorded run |
@@ -762,9 +760,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-quality_coverage-tier-3"></a>
 
@@ -794,8 +792,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | diagnostic | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
@@ -808,9 +806,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-recipe-prior-refactor-k3p-diagnostic-v1-tier-2"></a>
 
@@ -846,8 +844,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | diagnostic | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
@@ -860,9 +858,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-recipe-prior-refactor-ka2-diagnostic-v1-tier-2"></a>
 
@@ -898,8 +896,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | diagnostic | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
@@ -912,9 +910,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-recipe-prior-refactor-r1r2-diagnostic-v1-tier-2"></a>
 
@@ -950,8 +948,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [five_word_joint_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
 | [trajectory](bispf.md#cohort-cuda-6421ba55ca82-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](bispf.md#cohort-cuda-6421ba55ca82-experiment-residual_student) | diagnostic | PASS | matches recorded run |
-| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | matches recorded run |
-| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
+| [unipolar](bispf.md#cohort-cuda-6421ba55ca82-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-6421ba55ca82-experiment-cover_leftover) | diagnostic | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-6421ba55ca82-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
 | [mode_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
@@ -964,9 +962,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-2"></a>
 
@@ -975,6 +973,36 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 No experiments assigned.
 
 <a name="cohort-cuda-6421ba55ca82-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-6421ba55ca82-selected-family-coverage-diagnostic-v1"></a>
+
+## selected-family-coverage-diagnostic-v1
+
+**selected-family-coverage-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/selected-family-coverage-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-6421ba55ca82-selected-family-coverage-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-6421ba55ca82-selected-family-coverage-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-6421ba55ca82-selected-family-coverage-diagnostic-v1-tier-3"></a>
 
 ### Tier 3
 
@@ -1030,7 +1058,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -1072,9 +1100,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1).
 
@@ -1101,9 +1129,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1151,7 +1179,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1171,7 +1199,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -1220,7 +1248,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1371,7 +1399,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1502,7 +1530,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1571,7 +1599,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -1612,7 +1640,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2).
 
@@ -1651,7 +1679,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -1690,7 +1718,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2).
 
@@ -1768,7 +1796,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -1833,7 +1861,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -1898,7 +1926,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -1963,7 +1991,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -2165,7 +2193,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2197,7 +2225,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3).
 
@@ -2229,7 +2257,7 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3).
 
@@ -2259,7 +2287,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2328,7 +2356,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -2369,7 +2397,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -2406,7 +2434,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -2475,7 +2503,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -2516,7 +2544,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -2555,7 +2583,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3).
 
@@ -2655,7 +2683,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-k3p_two_pole_horizon-tier-1).
 
@@ -2684,7 +2712,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-k3p_two_pole_horizon-tier-1).
 
@@ -2713,7 +2741,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2740,7 +2768,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2781,7 +2809,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2823,9 +2851,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-tier1_policy_coverage-tier-1).
 
@@ -2897,7 +2925,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -2967,7 +2995,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -3035,7 +3063,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -3107,7 +3135,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -3183,7 +3211,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 
@@ -3258,7 +3286,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2).
 

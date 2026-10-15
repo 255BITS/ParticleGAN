@@ -1,0 +1,81 @@
+{
+  "attempt_id": "b1e6f8aaf1d7487696108fbb0f7322bf",
+  "attempt_status": "error",
+  "campaign_id": "atlas-unchanged-policy-coverage-20261013",
+  "candidate_id": "atlas",
+  "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "atlas-unchanged-policy-coverage-20261013",
+    "request": "892b8dbb00080a7bc7db66d1",
+    "revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "862c25749d604abd8510dcc1f4fbd575a8576d8bed5a4730f1bc56c3f9d9e0ff",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/b1e6f8aaf1d7487696108fbb0f7322bf/evidence.json",
+        "sha256": "369381c64933bbd187261c1bebef10fdd29ab400d99eda92aa75242708bf2f5d"
+      },
+      "request": {
+        "path": "reports/forge/attempts/b1e6f8aaf1d7487696108fbb0f7322bf/request.json",
+        "sha256": "acb17fd2b611777b7e3c1b70f56357c205bbfa17933b6f73a32f44c63bcd70c9"
+      },
+      "result": {
+        "path": "reports/forge/attempts/b1e6f8aaf1d7487696108fbb0f7322bf/result.json",
+        "sha256": "5023a16a9629646feccc68365539d75ff80b1e5253490f094b496ab778748af9"
+      }
+    },
+    "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+    "source_origin_commit": null
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "892b8dbb00080a7bc7db66d1",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "schedule_free",
+        "scoring_weights": "state_selected"
+      },
+      "compatibility_key": "1a95e6220922573e7b0166cde66a278e4d7d6c464a66bda530996dbfc5e41edc",
+      "cost": {
+        "adapter_seconds": 28.360666777007282,
+        "charged_task": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1",
+        "device": "0",
+        "execution_seconds": 31.215179689010256,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 29.365343967001536,
+        "wall_seconds": 31.215179689010256
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "reasons": [],
+      "sampling": {},
+      "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    }
+  ]
+}

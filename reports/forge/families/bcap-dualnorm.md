@@ -89,20 +89,20 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0(*)/1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11(*)/23](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) |
-| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12(*)/30](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
-| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15(*)/29](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
-| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11(*)/24](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
-| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11(*)/24](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
+| [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [11/23 (1 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation) |
+| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [12/30 (7 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) |
+| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/6](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/21](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [15/29 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability) |
+| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [11/24 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison) |
+| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [11/24 (2 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) |
 | [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/19](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [11/22](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage) |
 
 Separate cohort coverage (excluded from family totals):
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
+| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
 
-(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
+Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-1bf9d7d34422-tier-1"></a>
 
@@ -131,7 +131,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [cover_leftover](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [five_word_joint_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | changed since run |
 | [gaussian1d_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
@@ -139,8 +139,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [mid_scale_identity](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [mode_hold](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [residual_student](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
 | [trajectory](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [unipolar](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [vector_anisotropic](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [adaptation](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | matches recorded run |
@@ -208,9 +208,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-3"></a>
 
@@ -254,9 +254,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
 
@@ -299,9 +299,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [vector_unequal_mass](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
 
@@ -458,9 +458,9 @@ Additional eligibility requirements:
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3"></a>
 
@@ -524,9 +524,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3"></a>
 
@@ -579,9 +579,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -649,9 +649,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -748,9 +748,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | required | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | required | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | required | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-3"></a>
 
@@ -794,9 +794,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-2"></a>
 
@@ -846,9 +846,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-2"></a>
 
@@ -898,9 +898,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-2"></a>
 
@@ -950,9 +950,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
-| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
-| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [grid100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-2"></a>
 
@@ -961,6 +961,36 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 No experiments assigned.
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1"></a>
+
+## selected-family-coverage-diagnostic-v1
+
+**selected-family-coverage-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/selected-family-coverage-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-3"></a>
 
 ### Tier 3
 
@@ -1058,9 +1088,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1).
 
@@ -1087,9 +1117,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1137,7 +1167,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1206,7 +1236,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1357,7 +1387,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1488,7 +1518,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1557,7 +1587,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -1598,7 +1628,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2).
 
@@ -1637,7 +1667,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -1676,7 +1706,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2).
 
@@ -1754,7 +1784,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -1819,7 +1849,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -1884,7 +1914,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -1949,7 +1979,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -2151,7 +2181,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2183,7 +2213,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3).
 
@@ -2213,9 +2243,9 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3).
 
@@ -2245,7 +2275,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2314,7 +2344,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2355,7 +2385,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -2392,7 +2422,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. coverage, sustained live accuracy, or independent holdout failed
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2461,7 +2491,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2502,7 +2532,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -2539,9 +2569,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) · [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
 
@@ -2641,7 +2671,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-k3p_two_pole_horizon-tier-1).
 
@@ -2670,7 +2700,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-k3p_two_pole_horizon-tier-1).
 
@@ -2699,7 +2729,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2809,9 +2839,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1).
 
@@ -2883,7 +2913,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -2953,7 +2983,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -3021,7 +3051,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -3093,7 +3123,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -3169,7 +3199,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -3244,7 +3274,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2).
 
@@ -3286,20 +3316,20 @@ Selection: historical_incumbent. Preserve the exact archived revision-7 measurem
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [adaptation](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0(*)/1](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [3(*)/23](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation) |
-| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [4(*)/30](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous) |
-| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability) | [4(*)/6](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0(*)/21](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [4(*)/29](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability) |
-| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison) |
-| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer) |
-| [quality_coverage](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-3) | [3(*)/22](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage) |
+| [adaptation](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [3/23 (20 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation) |
+| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [4/30 (26 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous) |
+| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability) | [4/6 (1 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0/21 (21 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [4/29 (24 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability) |
+| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) | [3/24 (21 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison) |
+| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | [3/24 (21 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer) |
+| [quality_coverage](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-3) | [3/22 (19 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage) |
 
 Separate cohort coverage (excluded from family totals):
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
+| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
-(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
+Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-c195899a64af-tier-1"></a>
 
@@ -4163,6 +4193,36 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-c195899a64af-selected-family-coverage-diagnostic-v1"></a>
+
+## selected-family-coverage-diagnostic-v1
+
+**selected-family-coverage-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/selected-family-coverage-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-selected-family-coverage-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-selected-family-coverage-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-selected-family-coverage-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-c195899a64af-tier1_policy_coverage"></a>
 
 ## tier1_policy_coverage
@@ -4255,9 +4315,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1).
 
@@ -4284,9 +4344,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -4334,7 +4394,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4356,7 +4416,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4388,7 +4448,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4423,7 +4483,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4456,7 +4516,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4487,7 +4547,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4569,7 +4629,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4603,9 +4663,9 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4646,7 +4706,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3).
 
@@ -4687,7 +4747,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2).
 
@@ -4726,7 +4786,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -4765,7 +4825,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2).
 
@@ -4804,7 +4864,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4832,7 +4892,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -4858,7 +4918,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4886,7 +4946,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -4912,7 +4972,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4940,7 +5000,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -4966,7 +5026,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4994,7 +5054,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5020,7 +5080,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5054,7 +5114,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5082,7 +5142,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5158,7 +5218,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5190,7 +5250,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3).
 
@@ -5222,7 +5282,7 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3).
 
@@ -5252,9 +5312,9 @@ Dependencies: mode_hold (gate).
 
 **rotated100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5295,7 +5355,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3).
 
@@ -5336,7 +5396,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5373,9 +5433,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5416,7 +5476,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3).
 
@@ -5457,7 +5517,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5496,7 +5556,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-3) · [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3).
 
@@ -5519,7 +5579,7 @@ Dependencies: mode_hold (gate).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5586,7 +5646,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-k3p_two_pole_horizon-tier-1).
 
@@ -5615,7 +5675,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-k3p_two_pole_horizon-tier-1).
 
@@ -5644,7 +5704,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5673,7 +5733,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5742,9 +5802,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1).
 
@@ -5771,7 +5831,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5802,7 +5862,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5831,7 +5891,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5860,7 +5920,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5887,7 +5947,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5916,7 +5976,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -5943,7 +6003,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5974,7 +6034,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -6003,7 +6063,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -6035,7 +6095,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -6065,7 +6125,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -6096,7 +6156,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2).
 
@@ -6138,20 +6198,20 @@ Selection: historical_incumbent. Preserve the exact archived revision-5 measurem
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [adaptation](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) |
-| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4(*)/30](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3(*)/6](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/21](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/29](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
-| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
-| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
-| [quality_coverage](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) |
+| [adaptation](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3/23 (20 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) |
+| [clockfree_continuous](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4/30 (26 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| [discriminator_stability](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/6 (2 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/21 (21 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3/29 (25 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [formulation_comparison](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3/24 (21 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
+| [host_profile_transfer](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0/2 (2 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3/24 (21 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
+| [quality_coverage](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0/19 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3/22 (19 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) |
 
 Separate cohort coverage (excluded from family totals):
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
-| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0(*)/7](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
+| [tier1_policy_coverage](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 
-(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
+Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts without execution. These counts are separate and remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-0d83d78027c5-tier-1"></a>
 
@@ -7015,6 +7075,36 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-0d83d78027c5-selected-family-coverage-diagnostic-v1"></a>
+
+## selected-family-coverage-diagnostic-v1
+
+**selected-family-coverage-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/selected-family-coverage-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-0d83d78027c5-selected-family-coverage-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-selected-family-coverage-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-selected-family-coverage-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-0d83d78027c5-tier1_policy_coverage"></a>
 
 ## tier1_policy_coverage
@@ -7107,9 +7197,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1).
 
@@ -7136,9 +7226,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -7186,7 +7276,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -7208,7 +7298,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7240,7 +7330,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -7275,7 +7365,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7308,7 +7398,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7339,7 +7429,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -7373,7 +7463,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7404,7 +7494,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7436,9 +7526,9 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7479,7 +7569,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -7520,7 +7610,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -7559,7 +7649,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -7598,7 +7688,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -7637,7 +7727,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7665,7 +7755,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -7691,7 +7781,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7719,7 +7809,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -7745,7 +7835,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7773,7 +7863,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -7799,7 +7889,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7827,7 +7917,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -7853,7 +7943,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7887,7 +7977,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7915,7 +8005,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -7991,7 +8081,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -8023,7 +8113,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -8055,7 +8145,7 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -8085,9 +8175,9 @@ Dependencies: mode_hold (gate).
 
 **rotated100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8128,7 +8218,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -8169,7 +8259,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8206,9 +8296,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8249,7 +8339,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -8290,7 +8380,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8329,7 +8419,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) · [clockfree_continuous / Tier 3](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -8352,7 +8442,7 @@ Dependencies: mode_hold (gate).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8419,7 +8509,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -8448,7 +8538,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -8477,7 +8567,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -8506,7 +8596,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8575,9 +8665,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1).
 
@@ -8604,7 +8694,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8635,7 +8725,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8664,7 +8754,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8693,7 +8783,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8720,7 +8810,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8749,7 +8839,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8776,7 +8866,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8807,7 +8897,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8836,7 +8926,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8868,7 +8958,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -8898,7 +8988,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. no compatible result
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -8929,7 +9019,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 

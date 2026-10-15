@@ -1,0 +1,351 @@
+{
+  "archive_pins_sha256": "dab28c77f62304c20ec297fc5a83e3634c103d8c05555acb118302e84a6aab10",
+  "catalog_source_sha256": "2c8b40989eef7e4b8ca814440084152c2a9c2350f4c534a26cf5d50033a8cd53",
+  "comparisons": [
+    {
+      "baseline": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/artifacts/seed0-baseline/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.24072763323783875,
+          "mean_error": 0.030689319595694542,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.05885082305356255,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 14,
+        "passing_suffix": 3,
+        "sha256": "b95d482913a2aefe3be7eedf68f695e7d07f71d7a782336fed6f624fa7856fe8",
+        "status": "FAIL"
+      },
+      "candidate": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/artifacts/seed0-candidate/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.23012620210647583,
+          "mean_error": 0.1193503588438034,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.08850897546772095,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 15,
+        "passing_suffix": 5,
+        "sha256": "33da7b4ef6da56b75d9e60a93f7beb8b7cb676ca50b7a6c383f3af8d0b77caa9",
+        "status": "PASS"
+      },
+      "comparison_cohort": "CPU213 / seed0 / public named orthogonal / vector_overlap / native / baseline Raw G biases, polar G matrices",
+      "declared_change": "Only full G matrix Frobenius",
+      "environment": "CPU213; drift studies preserve CPU2.8/current CUDA separately.",
+      "initializer": "Original public named deterministic orthogonal initialization; exact retained tensors/protocol bindings in receipts.",
+      "limitations": "Two seeds stay separate; deterministic repeats are not extra independent wins; no global qualification.",
+      "original_report": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/REPORT.md",
+      "seed": 0,
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "study_id": "task-e50af8b0-7461-4bec-b941-2418027347bc",
+      "task": "vector_overlap",
+      "title": "Full Frobenius: exact reproduction and seed1"
+    },
+    {
+      "baseline": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/artifacts/seed1-baseline/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.27728819847106934,
+          "mean_error": 0.04381893575191498,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.06374146877472517,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 14,
+        "passing_suffix": 3,
+        "sha256": "909f3196f5cd47c2edeb58ec50283707c9621fa9f4420a974978095aad0484da",
+        "status": "FAIL"
+      },
+      "candidate": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/artifacts/seed1-candidate/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.24186937510967255,
+          "mean_error": 0.02736608125269413,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.05123952756932338,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 16,
+        "passing_suffix": 5,
+        "sha256": "cbae19317f5412b2b828c0b9e70c16a70b4d14707cd9903f089ba1d93d091570",
+        "status": "PASS"
+      },
+      "comparison_cohort": "CPU213 / seed1 / public named orthogonal / vector_overlap / native / baseline Raw G biases, polar G matrices",
+      "declared_change": "Only full G matrix Frobenius",
+      "environment": "CPU213; drift studies preserve CPU2.8/current CUDA separately.",
+      "initializer": "Original public named deterministic orthogonal initialization; exact retained tensors/protocol bindings in receipts.",
+      "limitations": "Two seeds stay separate; deterministic repeats are not extra independent wins; no global qualification.",
+      "original_report": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/REPORT.md",
+      "seed": 1,
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "study_id": "task-e50af8b0-7461-4bec-b941-2418027347bc",
+      "task": "vector_overlap",
+      "title": "Full Frobenius: exact reproduction and seed1"
+    },
+    {
+      "baseline": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-1fe544d5-4b94-4765-9886-86d4d05a6a74/artifacts/broad-incumbent/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "component_core_covariance_error": 0.43781663477420807,
+          "component_core_covariance_errors": [
+            0.5860060453414917,
+            0.28962722420692444
+          ],
+          "component_core_eigen_ratios": [
+            0.4624718129634857,
+            0.6457252502441406
+          ],
+          "component_core_min_eigen_ratio": 0.4624718129634857,
+          "component_counts": [
+            2170,
+            1926
+          ],
+          "component_covariance_error": 0.43781663477420807,
+          "component_covariance_errors": [
+            0.5860060453414917,
+            0.28962722420692444
+          ],
+          "component_mass": [
+            0.52978515625,
+            0.47021484375
+          ],
+          "component_min_eigen_ratio": 0.4624718129634857,
+          "component_resolved": [
+            true,
+            true
+          ],
+          "component_spill": [
+            0.036866359412670135,
+            0.0
+          ],
+          "covariance_error": 0.21795859932899475,
+          "hq": 0.98046875,
+          "mass_tv": 0.02978515625,
+          "max_component_spill": 0.036866359412670135,
+          "mean_error": 0.1440412998199463,
+          "min_mass_ratio": 0.9404296875,
+          "resolved_core_covariance_error": 0.43781663477420807,
+          "resolved_core_min_eigen_ratio": 0.4624718129634857,
+          "resolved_max_component_spill": 0.036866359412670135,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.10526266826296235,
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "target_scale": 1.0555585622787476
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 20,
+        "passing_suffix": 20,
+        "sha256": "93d8400bd671d00338448a679e53bd49424e6ea9aed704f1f59fe99275ae7a03",
+        "status": "PASS"
+      },
+      "candidate": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/artifacts/broad-candidate/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "component_core_covariance_error": 0.23355067521333694,
+          "component_core_covariance_errors": [
+            0.3290213346481323,
+            0.13808001577854156
+          ],
+          "component_core_eigen_ratios": [
+            0.63054358959198,
+            0.8230511546134949
+          ],
+          "component_core_min_eigen_ratio": 0.63054358959198,
+          "component_counts": [
+            2035,
+            2061
+          ],
+          "component_covariance_error": 0.23355067521333694,
+          "component_covariance_errors": [
+            0.3290213346481323,
+            0.13808001577854156
+          ],
+          "component_mass": [
+            0.496826171875,
+            0.503173828125
+          ],
+          "component_min_eigen_ratio": 0.63054358959198,
+          "component_resolved": [
+            true,
+            true
+          ],
+          "component_spill": [
+            0.0,
+            0.0
+          ],
+          "covariance_error": 0.07967185974121094,
+          "hq": 1.0,
+          "mass_tv": 0.003173828125,
+          "max_component_spill": 0.0,
+          "mean_error": 0.09147313237190247,
+          "min_mass_ratio": 0.99365234375,
+          "resolved_core_covariance_error": 0.23355067521333694,
+          "resolved_core_min_eigen_ratio": 0.63054358959198,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.06916146592525726,
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "target_scale": 1.0555585622787476
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 18,
+        "sha256": "e20262eb75ce0f7617df4da056f83f1469c2a524408350c1b2ba820a837ef4a7",
+        "status": "PASS"
+      },
+      "comparison_cohort": "CPU213 / seed0 / public named orthogonal / vector_two_broad / native / baseline Raw G biases, polar G matrices",
+      "declared_change": "Only full G matrix Frobenius",
+      "environment": "CPU213; drift studies preserve CPU2.8/current CUDA separately.",
+      "initializer": "Original public named deterministic orthogonal initialization; exact retained tensors/protocol bindings in receipts.",
+      "limitations": "Two seeds stay separate; deterministic repeats are not extra independent wins; no global qualification.",
+      "original_report": "archive://future-workspaces/2026-10-11/task-e50af8b0-7461-4bec-b941-2418027347bc/REPORT.md",
+      "seed": 0,
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "study_id": "task-e50af8b0-7461-4bec-b941-2418027347bc",
+      "task": "vector_two_broad",
+      "title": "Full Frobenius: exact reproduction and seed1"
+    },
+    {
+      "baseline": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/artifacts/trajectory-baseline/RESULT.json",
+        "complete": true,
+        "completed_steps": 400,
+        "horizon": 400,
+        "metrics": {
+          "identity_mse": 0.021320002153515816
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "sha256": "606008bc8d6a3b9236c810b7ccd72338d0f8b7b2da8a2fc793ed44d801214023",
+        "status": "FAIL"
+      },
+      "candidate": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/artifacts/trajectory-candidate/RESULT.json",
+        "complete": true,
+        "completed_steps": 400,
+        "horizon": 400,
+        "metrics": {
+          "identity_mse": 0.00010106455738423392
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 18,
+        "sha256": "54660b0c352b2fcebd2ca8379deaa1599cc4324ead5ff5fe47ef971ecb339075",
+        "status": "PASS"
+      },
+      "comparison_cohort": "CPU213 / seed0 / public named orthogonal / trajectory / conditional chord-forwarding support / baseline Complete Frobenius recipe",
+      "declared_change": "G matrix mode .5 polar + .5 Frobenius",
+      "environment": "CPU213; drift studies preserve CPU2.8/current CUDA separately.",
+      "initializer": "Original public named deterministic orthogonal initialization; exact retained tensors/protocol bindings in receipts.",
+      "limitations": "Overlap endpoint errors worsen; wider preservation unknown.",
+      "original_report": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/REPORT.md",
+      "seed": 0,
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "study_id": "task-f3fa0cca-aa40-477a-b203-a636fd1b989d",
+      "task": "trajectory",
+      "title": "Fixed polar/Frobenius half-sum"
+    },
+    {
+      "baseline": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/artifacts/vector_overlap-baseline/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.23012620210647583,
+          "mean_error": 0.1193503588438034,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.08850897546772095,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 15,
+        "passing_suffix": 5,
+        "sha256": "c5c5fccb85b2d2c86e3accad5e1995b67f0a7de89a271158141e22c263cd6789",
+        "status": "PASS"
+      },
+      "candidate": {
+        "artifact": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/artifacts/vector_overlap-candidate/RESULT.json",
+        "complete": true,
+        "completed_steps": 1200,
+        "horizon": 1200,
+        "metrics": {
+          "covariance_error": 0.40299782156944275,
+          "mean_error": 0.1348503679037094,
+          "sample_count": 4096,
+          "step": 1200,
+          "sw1_normalized": 0.11396048319275442,
+          "target_scale": 0.8501437306404114
+        },
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 17,
+        "passing_suffix": 5,
+        "sha256": "092a3290b5d63b88dc7ee78afb86a5a6dbbf6238ae3e949b604ee328ffc9bdbb",
+        "status": "PASS"
+      },
+      "comparison_cohort": "CPU213 / seed0 / public named orthogonal / vector_overlap / native / baseline Complete Frobenius recipe",
+      "declared_change": "G matrix mode .5 polar + .5 Frobenius",
+      "environment": "CPU213; drift studies preserve CPU2.8/current CUDA separately.",
+      "initializer": "Original public named deterministic orthogonal initialization; exact retained tensors/protocol bindings in receipts.",
+      "limitations": "Overlap endpoint errors worsen; wider preservation unknown.",
+      "original_report": "archive://future-workspaces/2026-10-11/task-f3fa0cca-aa40-477a-b203-a636fd1b989d/REPORT.md",
+      "seed": 0,
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "study_id": "task-f3fa0cca-aa40-477a-b203-a636fd1b989d",
+      "task": "vector_overlap",
+      "title": "Fixed polar/Frobenius half-sum"
+    }
+  ],
+  "new_training_attempts": 0,
+  "qualification_input": false,
+  "schema": "research_catalog_preserved_scores_v1",
+  "scope": "Original complete CPU 2.13 geometry comparisons; each seed, task, source, and recipe stays separate. No CUDA equivalence or current-source qualification."
+}
