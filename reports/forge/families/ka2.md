@@ -131,11 +131,9 @@ Source digest: `a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14
 
 [Frozen numerical evidence](../technique-evidence/29979e41c9c05e3304156cf4a43ed9c9dda6953bffd0fb47096fe47d6b8af13a.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Retain the declared selected recipe after explicit prior-ownership migration; fresh ordinary evidence only, no outcome ranking or archived qualification transfer.
+Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Retain the declared selected recipe after explicit prior-ownership migration; fresh ordinary evidence only, no outcome ranking or archived qualification transfer.
 
 </details>
-
-Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
@@ -162,13 +160,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | changed since run |
 | [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | FAIL | matches recorded run |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | changed since run |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [ring16_acquisition](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-2"></a>
 
@@ -178,21 +176,21 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | changed since run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
 | [grid100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_bars4](ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_blobs4](ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_intensity2](ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [img_stripes2](ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [rotated100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [staggered100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | changed since run |
 | [vector_anisotropic](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [vector_overlap](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 | [vector_spiral](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | [adaptation](ka2.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
@@ -232,9 +230,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-2"></a>
 
@@ -242,11 +240,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -288,11 +286,11 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
@@ -337,15 +335,15 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | PASS | changed since run |
 | [ring16_acquisition](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_width](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_anisotropic](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | UNKNOWN | matches recorded run |
@@ -381,7 +379,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-2"></a>
 
@@ -411,7 +409,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-2"></a>
 
@@ -481,9 +479,9 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2"></a>
@@ -492,11 +490,11 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -543,11 +541,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | required | PASS | matches recorded run |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [ring16_acquisition](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | PASS | changed since run |
 | [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -557,12 +555,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | required | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | required | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -603,9 +601,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2"></a>
 
@@ -613,11 +611,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -673,9 +671,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2"></a>
 
@@ -683,11 +681,11 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -772,9 +770,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | matches recorded run |
-| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | matches recorded run |
-| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | required | PASS | changed since run |
+| [unused_token_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | required | PASS | changed since run |
+| [ae_gan_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-2"></a>
 
@@ -782,11 +780,11 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | required | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | required | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | required | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
@@ -824,15 +822,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
@@ -876,15 +874,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
@@ -928,15 +926,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
@@ -980,15 +978,15 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
 | [gaussian1d_smoke](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
-| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
-| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | matches recorded run |
-| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | matches recorded run |
-| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | matches recorded run |
-| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | matches recorded run |
-| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | matches recorded run |
+| [five_word_joint_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | changed since run |
+| [trajectory](ka2.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | UNKNOWN | changed since run |
+| [residual_student](ka2.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | UNKNOWN | changed since run |
+| [unipolar](ka2.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | UNKNOWN | changed since run |
+| [cover_leftover](ka2.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | UNKNOWN | changed since run |
+| [mid_scale_identity](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | UNKNOWN | changed since run |
 | [mode_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_two_broad](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | UNKNOWN | matches recorded run |
 | [vector_unequal_mass](ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | UNKNOWN | matches recorded run |
@@ -1066,7 +1064,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -1201,7 +1199,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1268,7 +1266,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1303,7 +1301,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 **five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. any scheduled full joint pass plus independent same-state confirmation
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -1893,7 +1891,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -1955,7 +1953,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -2392,7 +2390,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -2419,7 +2417,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2546,7 +2544,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. no compatible result
 
 Execution: **no recorded execution (*)**.
 
@@ -2575,7 +2573,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 

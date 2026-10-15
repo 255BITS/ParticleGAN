@@ -608,33 +608,82 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         previous = read_json(output / "compilation.json") if (output / "compilation.json").is_file() else {}
         records, conflicts = _memory_records(root)
         boards = []
-        for path in sorted((root / "configs/forge/views").glob("*.json")):
-            if read_json(path).get("evidence_scope") == "research_diagnostic":
-                continue
-            if summaries_only:
-                result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
-            else:
-                result = board(root, path.stem)
-            boards.append(result)
-            if summaries_only:
+        from . import planning, sources, views
+        orig_inspect = sources.inspect_source
+        orig_planning_inspect = planning.inspect_source
+        orig_load_tasks = views.load_tasks
+        orig_attempts = _attempts
+        orig_records = _records
+        source_cache: dict = {}
+        tasks_cache: dict = {}
+        attempts_cache: dict = {}
+        records_cache: dict = {}
+
+        def cached_inspect(r: Path, extra_paths=()):
+            key = (str(Path(r).resolve()), tuple(sorted(str(p) for p in extra_paths)))
+            if key not in source_cache:
+                source_cache[key] = orig_inspect(r, extra_paths)
+            return deepcopy(source_cache[key])
+
+        def cached_load_tasks(r: Path | str):
+            key = str(Path(r).resolve())
+            if key not in tasks_cache:
+                tasks_cache[key] = orig_load_tasks(r)
+            return deepcopy(tasks_cache[key])
+
+        def cached_attempts(r: Path, t=None):
+            key = str(Path(r).resolve())
+            if key not in attempts_cache:
+                attempts_cache[key] = orig_attempts(r, t)
+            return deepcopy(attempts_cache[key])
+
+        def cached_records(r: Path):
+            key = str(Path(r).resolve())
+            if key not in records_cache:
+                records_cache[key] = orig_records(r)
+            return deepcopy(records_cache[key])
+
+        if not summaries_only:
+            sources.inspect_source = cached_inspect
+            planning.inspect_source = cached_inspect
+            views.load_tasks = cached_load_tasks
+            globals()["_attempts"] = cached_attempts
+            globals()["_records"] = cached_records
+        try:
+            for path in sorted((root / "configs/forge/views").glob("*.json")):
+                if read_json(path).get("evidence_scope") == "research_diagnostic":
+                    continue
+                if summaries_only:
+                    result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
+                else:
+                    result = board(root, path.stem)
+                boards.append(result)
+                if summaries_only:
+                    markdown_path = leaderboard_path(root, path.stem)
+                    published_path = root / markdown_path
+                    legacy_pointer = f"# {path.stem}\n\nThis view has no previously published goal table. "
+                    if not published_path.exists() or published_path.read_text().startswith(legacy_pointer):
+                        _text_output(root / markdown_path,
+                                     f"# {path.stem}\n\n{DECLARATION_ONLY_BOARD}\n\nThis view has no previously published goal table. "
+                                     "The compact memory refresh records its declaration without replaying original receipts. "
+                                     f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
+                                     "before making a qualification claim.\n")
+                    continue
+                _json_output(output / "leaderboards" / (path.stem + ".json"), result)
                 markdown_path = leaderboard_path(root, path.stem)
-                published_path = root / markdown_path
-                legacy_pointer = f"# {path.stem}\n\nThis view has no previously published goal table. "
-                if not published_path.exists() or published_path.read_text().startswith(legacy_pointer):
-                    _text_output(root / markdown_path,
-                                 f"# {path.stem}\n\n{DECLARATION_ONLY_BOARD}\n\nThis view has no previously published goal table. "
-                                 "The compact memory refresh records its declaration without replaying original receipts. "
-                                 f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
-                                 "before making a qualification claim.\n")
-                continue
-            _json_output(output / "leaderboards" / (path.stem + ".json"), result)
-            markdown_path = leaderboard_path(root, path.stem)
-            if markdown_path.parent == Path("reports/forge/leaderboards"):
-                _text_output(root / markdown_path, _board_markdown(result))
-            else:
-                # This is generated output; numerical cohort evidence stays in
-                # the goal JSON and the inventory's evidence registry.
-                (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
+                if markdown_path.parent == Path("reports/forge/leaderboards"):
+                    _text_output(root / markdown_path, _board_markdown(result))
+                else:
+                    # This is generated output; numerical cohort evidence stays in
+                    # the goal JSON and the inventory's evidence registry.
+                    (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
+        finally:
+            if not summaries_only:
+                sources.inspect_source = orig_inspect
+                planning.inspect_source = orig_planning_inspect
+                views.load_tasks = orig_load_tasks
+                globals()["_attempts"] = orig_attempts
+                globals()["_records"] = orig_records
         gaps = _gaps(root)
         inputs = _input_hashes(root, summaries_only=summaries_only)
         coverage = gaps.get("inventory_coverage", {"valid": False, "reason": "inventory unavailable"})
