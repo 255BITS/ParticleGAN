@@ -1,0 +1,589 @@
+{
+ "k3p-cad-const-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "7baaa17c344b4f09902fdf3a175ede82",
+   "clockfree_audit_measurement_v1": "4a49a2534a9946f9a175289a9f14b1fc",
+   "ring16_acquisition_6400-clockdig": "9ec61310d0434d8c927b9d4eb978abe6"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "seconds": 1.250729602004867,
+   "status": "PASS"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+   "seconds": 1.2575461310334504,
+   "status": "PASS"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.337,
+    "1617": 1.216,
+    "3200": 0.804,
+    "3217": 0.917,
+    "4800": 0.812,
+    "4817": 0.841
+   },
+   "final_cov": 0.5249,
+   "final_hq": 0.9578,
+   "final_mass_tv": 0.0286,
+   "final_min_eig": 0.2877,
+   "first_pass_step": 3184,
+   "last_fail_step": 5617,
+   "mean_cov_last16": 0.5722,
+   "min_cov": 0.5155,
+   "min_cov_step": 6250,
+   "obs_pass_except_cov": 282,
+   "observations": 384,
+   "passing_obs": 127,
+   "seconds": 71.52043620595941,
+   "stable_from_step": 5634,
+   "status": "PASS",
+   "terminal_streak": 47
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": false
+   },
+   "differing_conditions": [],
+   "overridden": [],
+   "power_witness": {
+    "input_noise": false,
+    "learning_rate": false,
+    "output_noise": false
+   },
+   "standing": []
+  },
+  "v2_strict": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "status": "PASS"
+  }
+ },
+ "k3p-cad-count6400-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "d14ffb5c34604af1a4878febba15af6c",
+   "clockfree_audit_measurement_v1": "7c388b184c6f42efb54df756f9bc3893",
+   "ring16_acquisition_6400-clockdig": "716f48a331964dceb6059abd75fde947"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "seconds": 1.2915713519905694,
+   "status": "PASS"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon",
+   "seconds": 1.3615034789545462,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.452,
+    "1617": 1.408,
+    "3200": 0.82,
+    "3217": 0.867,
+    "4800": 0.738,
+    "4817": 0.771
+   },
+   "final_cov": 0.4968,
+   "final_hq": 0.9695,
+   "final_mass_tv": 0.0515,
+   "final_min_eig": 0.2652,
+   "first_pass_step": 2750,
+   "last_fail_step": 4667,
+   "mean_cov_last16": 0.5349,
+   "min_cov": 0.4658,
+   "min_cov_step": 6284,
+   "obs_pass_except_cov": 275,
+   "observations": 384,
+   "passing_obs": 147,
+   "seconds": 73.74079521995736,
+   "stable_from_step": 4684,
+   "status": "PASS",
+   "terminal_streak": 104
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": true
+   },
+   "differing_conditions": [],
+   "overridden": [
+    {
+     "class": "step_schedule",
+     "entry": "learning-rate annealing depends on completed steps and horizon",
+     "witness": "probe power on learning_rate"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "input-noise annealing depends on completed steps and horizon",
+     "witness": "probe power on input_noise"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "output-noise warmup depends on completed steps and horizon",
+     "witness": "probe power on output_noise"
+    },
+    {
+     "class": "internal_counter",
+     "entry": "progress schedule advances by a fixed internal update count (progress_schedule='updates')",
+     "witness": "saved counter progress_observed"
+    }
+   ],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": []
+  },
+  "v2_strict": {
+   "reason": "progress schedule advances by a fixed internal update count (progress_schedule='updates')",
+   "status": "FAIL"
+  }
+ },
+ "k3p-cad-gated-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "03a7e44a88744f3b8216ef677ba55fc3",
+   "clockfree_audit_measurement_v1": "3560a9147ad54469be529b0e5baf3ae4",
+   "ring16_acquisition_6400-clockdig": "d1de0aebfc6442279f6c206dfe356fe8"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "seconds": 1.3088593879947439,
+   "status": "PASS"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon",
+   "seconds": 1.308691117039416,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.787,
+    "1617": 1.987,
+    "3200": 2.589,
+    "3217": 2.114,
+    "4800": 2.159,
+    "4817": 1.906
+   },
+   "final_cov": 1.9929,
+   "final_hq": 0.9399,
+   "final_mass_tv": 0.0435,
+   "final_min_eig": 0.2186,
+   "first_pass_step": null,
+   "last_fail_step": 6400,
+   "mean_cov_last16": 2.1361,
+   "min_cov": 1.4261,
+   "min_cov_step": 4884,
+   "obs_pass_except_cov": 318,
+   "observations": 384,
+   "passing_obs": 0,
+   "seconds": 76.48468215198955,
+   "stable_from_step": null,
+   "status": "FAIL",
+   "terminal_streak": 0
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": true
+   },
+   "differing_conditions": [],
+   "overridden": [
+    {
+     "class": "step_schedule",
+     "entry": "learning-rate annealing depends on completed steps and horizon",
+     "witness": "probe power on learning_rate"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "input-noise annealing depends on completed steps and horizon",
+     "witness": "probe power on input_noise"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "output-noise warmup depends on completed steps and horizon",
+     "witness": "probe power on output_noise"
+    }
+   ],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": []
+  },
+  "v2_strict": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "status": "PASS"
+  }
+ },
+ "k3p-cad-step-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "bd17379f0a514d30960eac0b8d7cb192",
+   "clockfree_audit_measurement_v1": "e96a33903b014446a6ec62215eef1e39",
+   "ring16_acquisition_6400-clockdig": "7204b0fbed4a44108247205b607e26ae"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "step_label changed the update or common-prefix state; horizon changed the update or common-prefix state",
+   "seconds": 1.380034687987063,
+   "status": "FAIL"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "step_label changed the update or common-prefix state",
+   "seconds": 1.3070034250267781,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.452,
+    "1617": 1.408,
+    "3200": 0.82,
+    "3217": 0.867,
+    "4800": 0.738,
+    "4817": 0.771
+   },
+   "final_cov": 0.4968,
+   "final_hq": 0.9695,
+   "final_mass_tv": 0.0515,
+   "final_min_eig": 0.2652,
+   "first_pass_step": 2750,
+   "last_fail_step": 4667,
+   "mean_cov_last16": 0.5349,
+   "min_cov": 0.4658,
+   "min_cov_step": 6284,
+   "obs_pass_except_cov": 275,
+   "observations": 384,
+   "passing_obs": 147,
+   "seconds": 70.78611737600295,
+   "stable_from_step": 4684,
+   "status": "PASS",
+   "terminal_streak": 104
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": false
+   },
+   "differing_conditions": [
+    "step_label",
+    "horizon"
+   ],
+   "overridden": [],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": [
+    "learning-rate annealing depends on completed steps and horizon",
+    "input-noise annealing depends on completed steps and horizon",
+    "output-noise warmup depends on completed steps and horizon"
+   ]
+  },
+  "v2_strict": {
+   "reason": "step_label changed the update or common-prefix state; horizon changed the update or common-prefix state",
+   "status": "FAIL"
+  }
+ },
+ "ka2-cad-const-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "f0dd3528e6684aaeb51a06d6b92aa87b",
+   "clockfree_audit_measurement_v1": "83fe48a9bf984ba7bd3955892763a30a",
+   "ring16_acquisition_6400-clockdig": "53cf67a7a2e04c04921830919cf03228"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "seconds": 1.6734826830215752,
+   "status": "PASS"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "KA2 switches from pure A to blended penalty at call 800",
+   "seconds": 1.5749483379768208,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.292,
+    "1617": 1.103,
+    "3200": 0.63,
+    "3217": 0.628,
+    "4800": 1.988,
+    "4817": 1.855
+   },
+   "final_cov": 0.785,
+   "final_hq": 0.9822,
+   "final_mass_tv": 0.0637,
+   "final_min_eig": 0.199,
+   "first_pass_step": 2384,
+   "last_fail_step": 6350,
+   "mean_cov_last16": 0.8466,
+   "min_cov": 0.4223,
+   "min_cov_step": 5517,
+   "obs_pass_except_cov": 245,
+   "observations": 384,
+   "passing_obs": 180,
+   "seconds": 100.14506891695783,
+   "stable_from_step": null,
+   "status": "FAIL",
+   "terminal_streak": 3
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": false
+   },
+   "differing_conditions": [],
+   "overridden": [
+    {
+     "class": "internal_counter",
+     "entry": "KA2 switches from pure A to blended penalty at call 800",
+     "witness": "saved counter ka2_calls"
+    }
+   ],
+   "power_witness": {
+    "input_noise": false,
+    "learning_rate": false,
+    "output_noise": false
+   },
+   "standing": []
+  },
+  "v2_strict": {
+   "reason": "KA2 switches from pure A to blended penalty at call 800",
+   "status": "FAIL"
+  }
+ },
+ "ka2-cad-count6400-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "c12786cc027249f9ac17663cbe50450b",
+   "clockfree_audit_measurement_v1": "1b3bec3c12bc4f0d9aa45fe8a94bb637",
+   "ring16_acquisition_6400-clockdig": "3892464d94564cfb911240eb3a60c767"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "measured parity agrees; declarations overridden by powered measurement",
+   "seconds": 1.3896108060143888,
+   "status": "PASS"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; KA2 switches from pure A to blended penalty at call 80",
+   "seconds": 2.00514371303143,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.266,
+    "1617": 1.273,
+    "3200": 0.601,
+    "3217": 0.594,
+    "4800": 0.569,
+    "4817": 0.561
+   },
+   "final_cov": 0.4351,
+   "final_hq": 0.9675,
+   "final_mass_tv": 0.0481,
+   "final_min_eig": 0.5276,
+   "first_pass_step": 2150,
+   "last_fail_step": 5500,
+   "mean_cov_last16": 0.4215,
+   "min_cov": 0.3404,
+   "min_cov_step": 6084,
+   "obs_pass_except_cov": 223,
+   "observations": 384,
+   "passing_obs": 188,
+   "seconds": 104.70426672801841,
+   "stable_from_step": 5517,
+   "status": "PASS",
+   "terminal_streak": 54
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": true
+   },
+   "differing_conditions": [],
+   "overridden": [
+    {
+     "class": "step_schedule",
+     "entry": "learning-rate annealing depends on completed steps and horizon",
+     "witness": "probe power on learning_rate"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "input-noise annealing depends on completed steps and horizon",
+     "witness": "probe power on input_noise"
+    },
+    {
+     "class": "step_schedule",
+     "entry": "output-noise warmup depends on completed steps and horizon",
+     "witness": "probe power on output_noise"
+    },
+    {
+     "class": "internal_counter",
+     "entry": "KA2 switches from pure A to blended penalty at call 800",
+     "witness": "saved counter ka2_calls"
+    },
+    {
+     "class": "internal_counter",
+     "entry": "progress schedule advances by a fixed internal update count (progress_schedule='updates')",
+     "witness": "saved counter progress_observed"
+    }
+   ],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": []
+  },
+  "v2_strict": {
+   "reason": "KA2 switches from pure A to blended penalty at call 800; progress schedule advances by a fixed internal update count (progress_schedule='updates')",
+   "status": "FAIL"
+  }
+ },
+ "ka2-cad-gated-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "0cf7036a3d8b45e68dd0489c7319082f",
+   "clockfree_audit_measurement_v1": "d641890f58d7448da03f5c1fe8bd954d",
+   "ring16_acquisition_6400-clockdig": "ec8047319be14c2c97fce3d404240350"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "restart changed the update or common-prefix state",
+   "seconds": 1.6145024670404382,
+   "status": "FAIL"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "restart changed the update or common-prefix state",
+   "seconds": 2.220399162033573,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.462,
+    "1617": 1.638,
+    "3200": 1.909,
+    "3217": 1.632,
+    "4800": 1.973,
+    "4817": 1.908
+   },
+   "final_cov": 1.9239,
+   "final_hq": 0.9263,
+   "final_mass_tv": 0.0691,
+   "final_min_eig": 0.357,
+   "first_pass_step": null,
+   "last_fail_step": 6400,
+   "mean_cov_last16": 2.0545,
+   "min_cov": 1.1596,
+   "min_cov_step": 1884,
+   "obs_pass_except_cov": 309,
+   "observations": 384,
+   "passing_obs": 0,
+   "seconds": 99.62855252000736,
+   "stable_from_step": null,
+   "status": "FAIL",
+   "terminal_streak": 0
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": true
+   },
+   "differing_conditions": [
+    "restart"
+   ],
+   "overridden": [],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": [
+    "learning-rate annealing depends on completed steps and horizon",
+    "input-noise annealing depends on completed steps and horizon",
+    "output-noise warmup depends on completed steps and horizon",
+    "KA2 switches from pure A to blended penalty at call 800"
+   ]
+  },
+  "v2_strict": {
+   "reason": "restart changed the update or common-prefix state",
+   "status": "FAIL"
+  }
+ },
+ "ka2-cad-step-v1": {
+  "attempts": {
+   "clockfree_audit_measured_v2-clockdig": "07b53a3dfffa4aaeb7e17c4d4da880af",
+   "clockfree_audit_measurement_v1": "2a184dec90c1443892e00577d0a968b8",
+   "ring16_acquisition_6400-clockdig": "b6f6448332af46bcba5a96faef82539e"
+  },
+  "clockfree_audit_measured_v2-clockdig": {
+   "reason": "step_label changed the update or common-prefix state; horizon changed the update or common-prefix state",
+   "seconds": 1.2714977320283651,
+   "status": "FAIL"
+  },
+  "clockfree_audit_measurement_v1": {
+   "reason": "step_label changed the update or common-prefix state",
+   "seconds": 1.3567788050277159,
+   "status": "FAIL"
+  },
+  "ring16": {
+   "cov_at": {
+    "1600": 1.266,
+    "1617": 1.273,
+    "3200": 0.601,
+    "3217": 0.594,
+    "4800": 0.569,
+    "4817": 0.561
+   },
+   "final_cov": 0.4351,
+   "final_hq": 0.9675,
+   "final_mass_tv": 0.0481,
+   "final_min_eig": 0.5276,
+   "first_pass_step": 2150,
+   "last_fail_step": 5500,
+   "mean_cov_last16": 0.4215,
+   "min_cov": 0.3404,
+   "min_cov_step": 6084,
+   "obs_pass_except_cov": 223,
+   "observations": 384,
+   "passing_obs": 188,
+   "seconds": 83.09027565299766,
+   "stable_from_step": 5517,
+   "status": "PASS",
+   "terminal_streak": 54
+  },
+  "v2_detail": {
+   "counter_witness": {
+    "ka2_calls": true,
+    "optimizer_step": true,
+    "progress_observed": false
+   },
+   "differing_conditions": [
+    "step_label",
+    "horizon"
+   ],
+   "overridden": [],
+   "power_witness": {
+    "input_noise": true,
+    "learning_rate": true,
+    "output_noise": true
+   },
+   "standing": [
+    "learning-rate annealing depends on completed steps and horizon",
+    "input-noise annealing depends on completed steps and horizon",
+    "output-noise warmup depends on completed steps and horizon",
+    "KA2 switches from pure A to blended penalty at call 800"
+   ]
+  },
+  "v2_strict": {
+   "reason": "step_label changed the update or common-prefix state; horizon changed the update or common-prefix state",
+   "status": "FAIL"
+  }
+ }
+}
