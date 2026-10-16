@@ -107,12 +107,18 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"]
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
-    assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
+    assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition_6400",
                      "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
     # Revision 11 (test dispositions 2026-10-15) holds 11 Tier 2 tests and removes
-    # ring_hold from the count as a phase of ring_extension; revision 9 is archived.
-    assert stability["revision"] == 11 and stability["previous_revision"]["revision"] == 9
+    # ring_hold from the count as a phase of ring_extension; revision 12 (adopt
+    # 2026-10-16) swaps the counted ring16 for ring16_acquisition_6400 only.
+    assert stability["revision"] == 12 and stability["previous_revision"]["revision"] == 11
+    previous = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v11.json").read_text())
+    assert previous["revision"] == 11 and previous["previous_revision"]["revision"] == 9
+    swapped = [dict(a, task="ring16_acquisition_6400") if a["task"] == "ring16_acquisition" else a
+               for a in previous["assignments"]]
+    assert swapped == stability["assignments"]
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "ring_hold", "clockfree_audit_measurement_v1"]
     assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
@@ -157,7 +163,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert smoke["counts"] == {"required": 6, "held": 0, "ranking": 0, "diagnostic": 1}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
-                                   ("ring16_acquisition", 1600, 300),
+                                   ("ring16_acquisition_6400", 6400, 1200),
                                    ("five_word_joint_smoke", 20001, 900)):
         assert planned[name]["qualification_tier"] == 1
         assert planned[name]["importance"] == "required" and planned[name]["permitted_by_tier_cap"]

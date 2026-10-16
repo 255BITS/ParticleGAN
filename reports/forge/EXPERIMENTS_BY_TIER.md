@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **154 tasks**; **117 assigned** to at least one view; **37 unassigned**. Showing **20/20 views**.
+Catalog: **155 tasks**; **118 assigned** to at least one view; **37 unassigned**. Showing **20/20 views**.
 
-Declared priors across the catalog: **55 MoGParticlePrior**, **99 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **56 MoGParticlePrior**, **99 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -41,7 +41,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [bcap-tier1-stability-repairs-diagnostic-v1](../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | provisional |
 | [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 4 | 4 required | 9 required, 10 held | 1 required, 4 held, 2 diagnostic (2 removed from the count) | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 11 | 6 required, 1 diagnostic | 10 required, 11 held | 1 required, 1 diagnostic (1 removed from the count) | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 12 | 6 required, 1 diagnostic | 10 required, 11 held | 1 required, 1 diagnostic (1 removed from the count) | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 2 | 3 required | 9 required, 10 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 5 | 3 required | 9 required, 10 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
@@ -372,7 +372,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 11; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 12; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
@@ -390,7 +390,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | [two_pole](../../configs/forge/tasks/two_pole.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; fixed: {"critic": "stored_host_weights", "particles": "zeros"}; screening | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
 | [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | ParticlePrior (sigma=0; not sampled) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
-| [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 1600 | 300 | — |
+| [ring16_acquisition_6400](../../configs/forge/tasks/ring16_acquisition_6400.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 6400 | 1200 | — |
 | [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_smoke | 20001 | 900 | — |
 | [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 
@@ -2840,7 +2840,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 1600 updates. No extended hold phase.
 
-Forge declarations: [recipe-prior-refactor-legacy-ring16_acquisition](../../configs/forge/tasks/recipe-prior-refactor-legacy-ring16_acquisition.json), [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json), [ring16_acquisition_policy_cloud_coverage_as_served_v1](../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json), [ring16_acquisition_policy_cloud_coverage_v1](../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json), [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
+Forge declarations: [recipe-prior-refactor-legacy-ring16_acquisition](../../configs/forge/tasks/recipe-prior-refactor-legacy-ring16_acquisition.json), [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json), [ring16_acquisition_6400](../../configs/forge/tasks/ring16_acquisition_6400.json), [ring16_acquisition_policy_cloud_coverage_as_served_v1](../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json), [ring16_acquisition_policy_cloud_coverage_v1](../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json), [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -2878,6 +2878,27 @@ All 96 declared observations and final live metrics are required.
 
 At least 5 consecutive passing terminal observations.
 All 96 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.1) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+[ring16_acquisition_6400](../../configs/forge/tasks/ring16_acquisition_6400.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 384 declared observations and final live metrics are required.
 
 | Measurement | Declared condition |
 | --- | --- |
@@ -4192,6 +4213,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `fa30256f217bda7aaa7ad97f645623c522d56449da5be327c804284390e68f9d`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `cbffddeeb88510f91dca1a55c73bea20d4ab0bff615bbfa8fe695ff6b4a414d2`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `19bf361b81d7aff60908b4d40ab664968faf1946495cd233001c032bf6f2277b`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `22857eb438a0aef4b529b12f25b03031fda9b5a7101e5a2b193e68c17d3f609c`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

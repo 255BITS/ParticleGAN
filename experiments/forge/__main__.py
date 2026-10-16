@@ -86,6 +86,8 @@ def parser():
     d.add_argument("--workers-per-gpu", type=int, default=1)
     d.add_argument("--allow-sharing", action="store_true")
     d.add_argument("--watch", action="store_true")
+    d.add_argument("--no-publish", action="store_true",
+                   help="skip the post-completion compile_memory hook (it rewrites reports/forge boards)")
     d.add_argument("--campaign")
     d.add_argument("--goal")
     d.add_argument("--request", help="drain only this exact submitted request ID")
@@ -286,7 +288,7 @@ def main(argv=None):
     # Compile the full set of boards once after draining this campaign.
     batch_inventory = args.command in {"inventory", "search"} and args.stage == "run"
     queue = Queue(queue_root, report_root=root / "reports/forge",
-                  on_completion=None if batch_inventory else publish)
+                  on_completion=None if batch_inventory or getattr(args, "no_publish", False) else publish)
     command = args.command
     if command == "new":
         from .planning import new_idea

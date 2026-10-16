@@ -1087,7 +1087,10 @@ def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
     progress = publication["family_progress"]
     cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
     counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
-    assert counts == {"passed": 17, "failed": 11, "other": {"UNKNOWN": 5}, "total": 33}
+    # Revision 12 counts ring16_acquisition_6400, which the recorded BISPF cohort never ran: its
+    # recorded 1,600-update ring16 PASS no longer counts, so it is UNKNOWN, not FAIL.
+    assert counts == {"passed": 16, "failed": 11, "other": {"UNKNOWN": 6}, "total": 33}
+    assert cohort["tasks"]["ring16_acquisition_6400"]["status"] == "UNKNOWN"
     definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
     described = {item["task"] for item in definitions["problems"]}
     held = {a["task"] for view in progress["views"] for a in view["assignments"]

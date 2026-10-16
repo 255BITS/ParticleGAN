@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 11,
+  "revision": 12,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -32,7 +32,7 @@
       "importance": "required",
       "order": 4,
       "qualification_tier": 1,
-      "task": "ring16_acquisition"
+      "task": "ring16_acquisition_6400"
     },
     {
       "importance": "required",
@@ -302,10 +302,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). gaussian1d_stability and ten more Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Revision 10 is skipped: committed research artifacts cite an unadopted 'revision10' draft that moved Gaussian retention to Tier 3, and this revision is not that draft. Recorded qualification stays at revision 9, archived byte for byte, until new ordinary evidence is registered; task gates and earlier grades are unchanged.",
+  "policy_change_reason": "User decision 2026-10-16 (dig2 round 2): the required Tier 1 ring16 question becomes ring16_acquisition_6400 (6400 updates, each recipe's own schedule declared over the full 6400, 384 checks at the same 16.67-update cadence, unchanged numerical gate and unchanged 5-check terminal sustained rule). Every other assignment, hold and removal of revision 11 (test dispositions 2026-10-15) is unchanged. ring16_acquisition (1600 updates) and every receipt graded under it keep their identity; revision 11 is archived at configs/forge/view-history/discriminator_stability-v11.json. The adopt measurements of 2026-10-16 ran under the unmerged adopt-branch draft numbered 10 (revision 9 with the same ring16 swap and no holds); that exact draft is kept in reports/forge/adopt-20261016/measured-view-draft10.json and is not a view-history revision. Evidence: reports/forge/dig2-20261016/ring16-cap.md, reports/forge/adopt-20261016/README.md.",
   "previous_revision": {
-    "revision": 9,
-    "archive": "configs/forge/view-history/discriminator_stability-v9.json",
-    "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a"
+    "revision": 11,
+    "archive": "configs/forge/view-history/discriminator_stability-v11.json",
+    "policy_fingerprint": "3d6f9b3b540eef6834c8512937094b729317147865965723869fddd2dd7a838e"
   }
 }

@@ -86,7 +86,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [bispf-v1](../../../configs/forge/ideas/bispf-v1.json).
 
-Recorded qualification: **tier 1**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 11, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 1**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 12, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -103,7 +103,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1) | [9/9](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-3) | [12/12](bispf.md#cohort-cuda-6421ba55ca82-adaptation) | [0/11 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-held) |
 | [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | [9/9](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-2) | [0/1 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-3) | [13/14 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous) | [0/14 (3 blocked, 1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-held) |
-| [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [6/6](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/10](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [16/17 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [0/11](bispf.md#cohort-cuda-6421ba55ca82-held) |
+| [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [5/6 (1 not run)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | [10/10](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-3) | [15/17 (1 not run, 1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability) | [0/11](bispf.md#cohort-cuda-6421ba55ca82-held) |
 | [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1) | [9/9](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-2) | [0/1 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-3) | [12/13 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison) | [0/10](bispf.md#cohort-cuda-6421ba55ca82-held) |
 | [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1) | [9/9](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-2) | [0/1 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-3) | [12/13 (1 diagnostic attempt)](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer) | [0/10](bispf.md#cohort-cuda-6421ba55ca82-held) |
 | [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) | [3/3](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | [9/9](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-3) | [12/12](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage) | [0/10](bispf.md#cohort-cuda-6421ba55ca82-held) |
@@ -128,7 +128,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_smoke) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_smoke) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [ring16_acquisition](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [ring16_acquisition_6400](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition_6400) | [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | matches recorded run |
 | [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | [adaptation](bispf.md#cohort-cuda-6421ba55ca82-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-6421ba55ca82-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-6421ba55ca82-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-6421ba55ca82-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-6421ba55ca82-quality_coverage-tier-1) | PASS | changed since run |
 
@@ -531,7 +531,7 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 11**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 12**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
 Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 10 / 1**. Held counts (measured and shown, not counted): **0 / 11 / 0**.
 
@@ -547,7 +547,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [two_pole](bispf.md#cohort-cuda-6421ba55ca82-experiment-two_pole) | required | PASS | matches recorded run |
 | [unused_token_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-unused_token_hold) | required | PASS | changed since run |
 | [ae_gan_hold](bispf.md#cohort-cuda-6421ba55ca82-experiment-ae_gan_hold) | required | PASS | changed since run |
-| [ring16_acquisition](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) | required | PASS | matches recorded run |
+| [ring16_acquisition_6400](bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition_6400) | required | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-6421ba55ca82-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
@@ -2219,7 +2219,7 @@ Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-bcap-projection-baseline-repair-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2253,6 +2253,36 @@ At least 5 consecutive passing terminal observations.
 All 96 declared observations and final live metrics are required.
 
 Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-6421ba55ca82-experiment-ring16_acquisition_6400"></a>
+
+### ring16_acquisition_6400
+
+**ring16_acquisition_6400: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition_6400.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-6421ba55ca82-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 384 declared observations and final live metrics are required.
+
+Declared budget: 6400 updates; timeout 1200 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
