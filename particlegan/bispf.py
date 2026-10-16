@@ -1248,7 +1248,7 @@ class _BISPFPenaltyKernel:
             d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
-            eff_gamma_gauge = 0.005 if is_image_tensor else self.gamma_gauge
+            eff_gamma_gauge = 0.005 if is_image_tensor else (min(self.gamma_gauge, 0.020) if b_r < 16 else self.gamma_gauge)
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)

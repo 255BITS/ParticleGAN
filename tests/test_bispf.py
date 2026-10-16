@@ -950,6 +950,14 @@ def test_bispf_adaptive_image_kappa():
     expected_img_gauge = 0.5 * 0.005 * (2.0 ** 2)
     assert abs(stats_img["gauge_loss"] - expected_img_gauge) < 1e-5
 
+    # Check sub-batch (b_r < 16, e.g. b_r=8) caps eff_gamma_gauge at 0.020 even with default gamma_gauge=0.050
+    kernel_default = _BISPFPenaltyKernel()
+    xr_sub = torch.randn(8, 2)
+    xf_sub = torch.randn(8, 2)
+    _, stats_sub = kernel_default.penalty(BiasOnlyCritic(), xr_sub, xf_sub, step=0, collect_stats=True)
+    expected_sub_gauge = 0.5 * 0.020 * (2.0 ** 2)
+    assert abs(stats_sub["gauge_loss"] - expected_sub_gauge) < 1e-5
+
 
 def test_bispf_lambda_floor_default():
     """Verify _BISPFPenaltyKernel and BISPFEngine default lambda_floor is 0.01."""
