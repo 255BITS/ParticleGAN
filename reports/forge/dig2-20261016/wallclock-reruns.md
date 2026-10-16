@@ -60,3 +60,19 @@ outcome kept out of fail totals and paired deltas, and a contention-aware limit 
 limit by the measured slowdown factor against a solo reference, capped at a hard ceiling). Success:
 (a) unit tests for both pass; (b) with the feature off, regenerated reports are byte-identical
 except provenance hashes; (c) no score changes except the R1 real verdicts.
+
+## Amendment A1 (committed after cells 0 and 1 finished, before any hold run)
+
+Disclosure: written after seeing that cells 0 (baseline) and 1 (signed Confidence LR) PASSed their reruns.
+It adds measurements; it does not change R1-R5 for the cells above.
+
+A1. If GPU budget remains after cells 0-7 (actual lease seconds used + 300 s per hold must stay within
+7,200 s), run `five_word_joint_hold` (declared limit 300 s, 4,000 updates, checkpoint dependency on
+`five_word_joint_smoke`) for recipes whose smoke rerun is PASS, continuing from that rerun's own saved
+checkpoint and bound exactly as the attempt-coverage runner binds a new-attempt parent
+(`prerequisite_bindings`). Priority: baseline, signed Confidence LR, Positive-evidence LR. R1 applies
+unchanged (real verdict only under the declared limit). The earlier BLOCKED hold verdicts are replaced in
+the overlay only by a real PASS/FAIL. R4 is extended: the Confidence LR minus baseline delta over
+{smoke, hold} uses the rerun smokes plus Confidence LR's recorded hold and the baseline's rerun hold;
+since Confidence LR's recorded hold ran on its own (earlier) smoke checkpoint, that comparison is
+labelled cross-runtime.
