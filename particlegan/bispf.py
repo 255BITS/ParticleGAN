@@ -797,19 +797,29 @@ class ContinuousThermalCooler:
             self.ema_residual = self.ema_decay * self.ema_residual + (1.0 - self.ema_decay) * res
         return self.scale
 
-    @property
-    def scale(self) -> float:
-        """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
-        if self.tau_cooling <= 0.0:
+    def effective_tau(self, batch_size: int = 128, dim: int = 2) -> float:
+        """Compute dimension- and batch-scale invariant cooling threshold."""
+        d = max(1, min(dim, 4))
+        b = max(16, batch_size)
+        scale = (1024.0 / b) ** (1.0 / d)
+        return self.tau_cooling * scale
+
+    def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
+        tau = self.effective_tau(batch_size=batch_size, dim=dim)
+        if tau <= 0.0:
             return 1.0
-        u = min(1.0, max(0.0, self.ema_residual / self.tau_cooling))
+        u = min(1.0, max(0.0, self.ema_residual / tau))
         if u >= 1.0:
             return 1.0
         if u <= 0.0:
             return self.s_min
-        # Monotone smooth C1 interpolation between s_min and 1.0
         s = self.s_min + (1.0 - self.s_min) * (3.0 * u * u - 2.0 * u * u * u)
         return max(self.s_min, min(1.0, s))
+
+    @property
+    def scale(self) -> float:
+        """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
+        return self.scale_for(batch_size=1024, dim=2)
 
     def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
         """Apply straight-through gradient scaling: backward gradient is scaled by scale (or self.scale) while forward pass is identity."""
@@ -854,6 +864,17 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
                 target._bispf_input = args[0]
             if rec is not None and not hasattr(target, "_bispf_record"):
                 target._bispf_record = rec
+            # Straight-through DualNorm velocity linearization during generator updates
+            if rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
+                s_thermal = getattr(rec, "_thermal_scale", 1.0)
+                if s_thermal < 0.999:
+                    s_v = max(1e-4, min(1.0, (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2))) * 0.010))
+                    scaled = target * s_v + target.detach() * (1.0 - s_v)
+                    scaled._bispf_input = args[0]
+                    scaled._bispf_record = rec
+                    if isinstance(output, (tuple, list)):
+                        return (scaled,) + tuple(output[1:])
+                    return scaled
     return None
 
 
@@ -1095,44 +1116,24 @@ class _BISPFPenaltyKernel:
             and b_f >= 32 
             and call_idx >= 500
         )
-        is_dense_multimode = (
-            is_continuous_flow
-            and b_r >= 1024
-            and b_f >= 1024
-            and 2 <= dim <= 4
-            and call_idx >= 1000
-        )
-        with torch.no_grad():
-            if is_dense_multimode:
-                tau_dense = 0.026
-                res_val = float(getattr(self.record, "ema_residual", 1.0))
-                u = min(1.0, max(0.0, res_val / tau_dense))
-                s_dense = self.s_min + (1.0 - self.s_min) * (3.0 * u * u - 2.0 * u * u * u)
-                t_scale = max(self.s_min, min(1.0, s_dense))
-            elif is_continuous_flow:
-                t_scale = self.cooler.scale if hasattr(self, "cooler") else max(
-                    1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
-                )
-            else:
-                t_scale = 1.0
-            self.record._thermal_scale = t_scale
-            _LAST_THERMAL_SCALE[x_real.device] = t_scale
-
-        # Gradient norm scaling:
-        # - Discrete categorical token codebooks and low-dimensional continuous coordinates (dim <= 4)
-        #   retain the unnormalized Euclidean norm barrier: ||g||_2 <= kappa (scale_dim = 1.0).
-        # - Spatial image tensors (ndim >= 3) use scale_dim = 2.0 for enhanced RMS gradient dynamic range.
-        # - High-dimensional continuous feature vectors (ndim == 2 and dim > 4)
-        #   evaluate gradient penalties in RMS coordinates: g_rms = ||g||_2 / sqrt(d).
-        if is_discrete_simplex or dim <= 4:
-            scale_dim = 1.0
-        elif is_image_tensor:
-            scale_dim = 2.0
+        # Scale-invariant thermal cooler query
+        if is_discrete_simplex or is_image_tensor:
+            t_scale = 1.0
+        elif is_continuous_flow:
+            t_scale = self.cooler.scale_for(batch_size=b_r, dim=dim) if hasattr(self, "cooler") else max(
+                1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
+            )
         else:
-            scale_dim = math.sqrt(dim)
+            t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
+
+        self.record._thermal_scale = t_scale
+        _LAST_THERMAL_SCALE[x_real.device] = t_scale
+
+        # Dimension normalization for Born-Infeld gradient norm
+        scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or dim <= 4) else math.sqrt(dim)
 
         if use_chords:
-            # Stratified low-discrepancy Sinkhorn transport chords (zero RNG stream mutation)
+            # Stratified low-discrepancy Sinkhorn transport chords + Density-Directed Transport Bridge
             with torch.no_grad():
                 col_probs = (b_r * Pi.t()).clamp_min(1e-12)
                 col_probs = col_probs / col_probs.sum(dim=1, keepdim=True).clamp_min(1e-12)
@@ -1140,8 +1141,20 @@ class _BISPFPenaltyKernel:
                 j_idx = torch.arange(b_f, device=x_real.device, dtype=x_real.dtype)
                 q = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI2, 1.0).unsqueeze(1)
                 matched_real_idx = torch.searchsorted(cdf, q).squeeze(1).clamp(0, b_r - 1)
-                x_r_matched = x_real.detach()[matched_real_idx]
 
+                # Density-Directed Transport Bridge across entropic voids
+                cached_d = getattr(self.record, "_last_d_logits", None)
+                if cached_d is not None and is_continuous_flow:
+                    d_r_cached, d_f_cached = cached_d
+                    starved_mask = d_r_cached > d_r_cached.median()
+                    overpop_mask = d_f_cached < d_f_cached.median()
+                    if starved_mask.any() and overpop_mask.any():
+                        bridge_r = torch.where(starved_mask)[0]
+                        k_bridge = max(1, int(0.20 * b_f))
+                        r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
+                        matched_real_idx[:k_bridge] = r_pick
+
+                x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)
                 alpha_shape = (b_f,) + (1,) * (x_real.ndim - 1)
                 alpha = u.reshape(alpha_shape)
@@ -1179,10 +1192,8 @@ class _BISPFPenaltyKernel:
         finally:
             self.record._in_penalty = False
 
-        kappa_eff = self.kappa
-        if is_image_tensor:
-            res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
-            kappa_eff = self.kappa * (0.8 + 0.2 * (1.0 - res_ratio))
+        res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
+        kappa_eff = self.kappa * (0.6 + 0.4 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
 
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
@@ -1194,6 +1205,9 @@ class _BISPFPenaltyKernel:
             ebi_loss = 0.5 * self.lambda_cap * (cap_real + cap_fake)
             mean_logit = x_real.new_zeros(())
             gauge_loss = x_real.new_zeros(())
+            d_r = d_r_out.reshape(-1)
+            d_f = d_f_out.reshape(-1)
+            self.record._last_d_logits = (d_r.detach(), d_f.detach())
         else:
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
@@ -1202,27 +1216,29 @@ class _BISPFPenaltyKernel:
             cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
             cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
 
+            eff_floor = 0.0005 if is_image_tensor else (self.lambda_floor * (max(1.0, 2.0 / dim) if is_continuous_flow else 1.0))
+            curv_pen = x_real.new_zeros(())
+
             if use_chords:
                 sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
                 norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
-                floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
+                floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
                 cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
+                if is_continuous_flow:
+                    g_r_matched = g_real.detach()[matched_real_idx]
+                    g_target = (1.0 - alpha) * g_fake + alpha * g_r_matched
+                    curv_pen = 0.25 * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()
+                ebi_loss = floor_pen + cap_pen + curv_pen
             else:
                 norm_chord = 0.5 * (norm_real + norm_fake)
-                floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean()) / (2.0 * dim))
+                floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean()) / (2.0 * dim))
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + cap_fake)
+                ebi_loss = floor_pen + cap_pen
 
-            ebi_loss = floor_pen + cap_pen
-
-            # Universal zero-mean logit gauge across all continuous dimensions and modalities
-            cached = getattr(self.record, "_last_d_logits", None)
-            self.record._last_d_logits = None
-            if cached is not None and cached[0].requires_grad and cached[1].requires_grad:
-                d_r, d_f = cached
-            else:
-                d_r = d_r_out.reshape(-1)
-                d_f = d_f_out.reshape(-1)
+            d_r = d_r_out.reshape(-1)
+            d_f = d_f_out.reshape(-1)
+            self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
             eff_gamma_gauge = 0.005 if is_image_tensor else self.gamma_gauge
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)

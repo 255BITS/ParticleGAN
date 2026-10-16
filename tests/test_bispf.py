@@ -632,12 +632,12 @@ def test_bispf_endpoint_born_infeld_image_limit():
     pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
 
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
-    # Under scale_dim = 2.0, norm = s / 2.0 = 1.0 matches expected analytical cap and floor penalties with adaptive kappa_eff
+    # Under scale_dim = 1.0, norm = s / 1.0 = 2.0 matches expected analytical cap and decoupled floor penalties with adaptive kappa_eff
     res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
-    kappa_eff = kappa * (0.8 + 0.2 * (1.0 - res_ratio))
-    norm = s / 2.0
+    kappa_eff = kappa * (0.6 + 0.4 * (1.0 - res_ratio))
+    norm = s / 1.0
     expected_cap = l_cap * (F.softplus(torch.tensor(norm - kappa_eff), beta=beta).item() ** 2)
-    expected_floor = 0.5 * l_floor * ((s ** 2) / dim_img)
+    expected_floor = 0.5 * 0.0005 * ((s ** 2) / dim_img)
     expected_total = expected_cap + expected_floor
     assert abs(pen_math.item() - expected_total) < 2e-3, (
         f"Expected {expected_total}, got {pen_math.item()}"
@@ -740,28 +740,43 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     loss_base.backward()
     grads_base = [p.grad.clone() for p in G.parameters()]
 
-    # 2. Hooked critic with severe thermal cooling (s_thermal = 0.02)
+    # 2. Hooked critic during uncooled exploration (s_thermal = 1.0)
     for p in G.parameters():
         p.grad.zero_()
 
     record = BISPFStepRecord()
     _attach_critic_input_hook(D, record)
-    record._thermal_scale = 0.02  # Severe cooling
+    record._thermal_scale = 1.0  # Exploration
     record._in_penalty = False
 
-    fake_hooked = G(z)
-    loss_hooked = D(fake_hooked).sum()
-    loss_hooked.backward()
-    grads_hooked = [p.grad.clone() for p in G.parameters()]
+    fake_uncooled = G(z)
+    loss_uncooled = D(fake_uncooled).sum()
+    loss_uncooled.backward()
+    grads_uncooled = [p.grad.clone() for p in G.parameters()]
 
-    # Generator gradients must match baseline EXACTLY (100% unthrottled, ratio = 1.0)
-    for gb, gh in zip(grads_base, grads_hooked):
-        assert torch.allclose(gb, gh, atol=1e-7), "Generator gradients must not be throttled by critic hook"
+    # During exploration (s_thermal = 1.0), generator gradients must match baseline EXACTLY (100% unthrottled)
+    for gb, gu in zip(grads_base, grads_uncooled):
+        assert torch.allclose(gb, gu, atol=1e-7), "Generator gradients must not be throttled during exploration"
 
-    # 3. Verify input coordinate attachment for SinkhornRelativisticLoss
-    fake_logits = D(fake_hooked)
+    # 3. Hooked critic under thermal cooling (s_thermal = 0.02) linearizes velocity straight-through by s_v
+    for p in G.parameters():
+        p.grad.zero_()
+    record._thermal_scale = 0.02  # Cooling
+    fake_cooled = G(z)
+    loss_cooled = D(fake_cooled).sum()
+    # Forward pass value is unchanged
+    assert torch.allclose(loss_cooled, loss_base, atol=1e-6)
+    loss_cooled.backward()
+    grads_cooled = [p.grad.clone() for p in G.parameters()]
+
+    s_v = max(1e-4, min(1.0, (0.02 / math.sqrt(max(1e-6, 1.0 - 0.02**2))) * 0.010))
+    for gb, gc in zip(grads_base, grads_cooled):
+        assert torch.allclose(gc, s_v * gb, atol=1e-6), "Gradients must scale straight-through by s_v under cooling"
+
+    # 4. Verify input coordinate attachment for SinkhornRelativisticLoss
+    fake_logits = D(fake_cooled)
     assert hasattr(fake_logits, "_bispf_input")
-    assert fake_logits._bispf_input is fake_hooked
+    assert fake_logits._bispf_input is fake_cooled
 
 
 def test_bispf_sbnp_capacity_conditioned_covariance_tethering():
@@ -1034,7 +1049,7 @@ def test_bispf_1d_continuous_flow_cooler_with_fast_attack():
         assert scale_damped < 0.20, f"1D flow should cool to < 0.20, got {scale_damped}"
 
         # Non-stationary shift shock
-        xf_shock = xr + 2.0
+        xf_shock = xr + 4.0
         _, _ = kernel.penalty(Dummy1DCritic(), xr, xf_shock, step=1, collect_stats=True)
         scale_shock = _LAST_THERMAL_SCALE.get(xr.device, 0.0)
         assert scale_shock == 1.0, f"1D flow must re-heat instantly to 1.0 on shock, got {scale_shock}"
@@ -1070,6 +1085,186 @@ def test_sbnp_regularizer_defaults_and_unweighted_scale():
     z_ref = torch.randn(64, 2, requires_grad=True)
     loss_ref = reg_ref(z_ref)
     assert torch.isfinite(loss_ref)
+
+
+def test_bispf_scale_invariant_thermal_cooling():
+    """Verify ContinuousThermalCooler dimension- and batch-scale invariant thresholding:
+    - effective_tau scales as tau_0 * (1024 / B)^(1/d).
+    - For B=128, d=1: tau_eff = 0.020 * 8 = 0.160, so residual 0.10 cools (scale < 1.0).
+    - For B=1024, d=2: tau_eff = 0.020, so residual 0.10 does not cool (scale == 1.0).
+    """
+    from particlegan.bispf import ContinuousThermalCooler
+
+    cooler = ContinuousThermalCooler(tau_cooling=0.020, s_min=0.05)
+
+    # 1. Exact scaling factor checks
+    tau_base = cooler.effective_tau(batch_size=1024, dim=2)
+    assert abs(tau_base - 0.020) < 1e-6
+
+    tau_1d = cooler.effective_tau(batch_size=128, dim=1)
+    assert abs(tau_1d - 0.160) < 1e-6  # 0.020 * (1024/128)^1 = 0.020 * 8 = 0.160
+
+    tau_2d = cooler.effective_tau(batch_size=128, dim=2)
+    assert abs(tau_2d - (0.020 * math.sqrt(8.0))) < 1e-6  # 0.020 * (1024/128)^(1/2) = 0.0565685
+
+    # 2. Cooling behavior at residual = 0.10
+    cooler.ema_residual = 0.10
+    # For (1024, 2), 0.10 > 0.020 -> uncooled (exploration)
+    s_base = cooler.scale_for(batch_size=1024, dim=2)
+    assert s_base == 1.0
+    assert cooler.scale == 1.0
+
+    # For (128, 1), 0.10 < 0.160 -> actively cooling
+    s_1d = cooler.scale_for(batch_size=128, dim=1)
+    assert s_1d < 1.0
+    assert s_1d >= cooler.s_min
+
+
+def test_bispf_critic_hook_straight_through_damping():
+    """Verify _bispf_critic_forward_hook straight-through DualNorm velocity linearization:
+    - Forward pass is exact identity (loss_hooked == loss_base).
+    - Generator backward gradients are scaled by s_v when s_thermal < 0.999.
+    - Generator gradients are 100% unthrottled during exploration (s_thermal = 1.0).
+    """
+    from particlegan.bispf import BISPFStepRecord, _attach_critic_input_hook
+
+    torch.manual_seed(123)
+    D = nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
+    G = nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 2))
+
+    z = torch.randn(16, 2)
+    fake = G(z)
+    loss_base = D(fake).sum()
+    loss_base.backward()
+    grads_base = [p.grad.clone() for p in G.parameters()]
+
+    record = BISPFStepRecord()
+    _attach_critic_input_hook(D, record)
+
+    # 1. Uncooled exploration (s_thermal = 1.0) -> unthrottled
+    for p in G.parameters():
+        p.grad.zero_()
+    record._thermal_scale = 1.0
+    record._in_penalty = False
+    fake_exp = G(z)
+    loss_exp = D(fake_exp).sum()
+    loss_exp.backward()
+    grads_exp = [p.grad.clone() for p in G.parameters()]
+    for gb, ge in zip(grads_base, grads_exp):
+        assert torch.allclose(gb, ge, atol=1e-6)
+
+    # 2. Cooled settlement (s_thermal = 0.50) -> linearized by s_v
+    for p in G.parameters():
+        p.grad.zero_()
+    record._thermal_scale = 0.50
+    record._in_penalty = False
+    fake_cool = G(z)
+    loss_cool = D(fake_cool).sum()
+    assert torch.allclose(loss_cool, loss_base, atol=1e-6)  # Forward pass unchanged
+    loss_cool.backward()
+    grads_cool = [p.grad.clone() for p in G.parameters()]
+
+    s_v = max(1e-4, min(1.0, (0.50 / math.sqrt(1.0 - 0.50**2)) * 0.010))
+    for gb, gc in zip(grads_base, grads_cool):
+        assert torch.allclose(gc, s_v * gb, atol=1e-6)
+
+
+def test_bispf_density_directed_transport_bridge():
+    """Verify Density-Directed Transport Bridge (DDTB) connects overpopulated fakes
+    to starved reals using cached discriminator logits across entropic voids.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(chord_blend=0.02)
+    kernel.record.calls = 600  # is_continuous_flow = True
+
+    b = 32
+    xr = torch.randn(b, 2)
+    xf = torch.randn(b, 2)
+
+    class StarvedModeCritic(nn.Module):
+        def forward(self, x):
+            val = x[:, :1]
+            return val
+
+    # Run step 0: populates _last_d_logits
+    pen0, _ = kernel.penalty(StarvedModeCritic(), xr, xf, step=0, collect_stats=True)
+    assert kernel.record._last_d_logits is not None
+    dr_cached, df_cached = kernel.record._last_d_logits
+    assert len(dr_cached) == b
+    assert len(df_cached) == b
+
+    # Run step 1: DDTB activates using cached logits
+    pen1, stats1 = kernel.penalty(StarvedModeCritic(), xr, xf, step=1, collect_stats=True)
+    assert stats1["applied"] is True
+    assert torch.isfinite(pen1)
+
+
+def test_bispf_chord_curvature_penalty():
+    """Verify transport chord zero-curvature consistency penalizes non-linear critics
+    along continuous flow transport paths, conserving variance.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(chord_blend=0.02)
+    kernel.record.calls = 600  # is_continuous_flow = True
+
+    xr = torch.linspace(-1.0, 1.0, 32).unsqueeze(1)
+    xf = torch.linspace(-0.5, 0.5, 32).unsqueeze(1)
+
+    class LinearCritic(nn.Module):
+        def forward(self, x):
+            return 2.0 * x
+
+    class CurvatureCritic(nn.Module):
+        def forward(self, x):
+            return 2.0 * x + 5.0 * x.pow(2)
+
+    # Linear critic: D''(x) == 0 -> zero curvature penalty along transport chords
+    pen_lin, stats_lin = kernel.penalty(LinearCritic(), xr, xf, step=0, collect_stats=True)
+
+    # Quadratic critic: D''(x) != 0 -> non-zero curvature penalty
+    pen_curv, stats_curv = kernel.penalty(CurvatureCritic(), xr, xf, step=0, collect_stats=True)
+
+    assert pen_curv.item() > pen_lin.item(), (
+        f"Non-linear critic must incur higher penalty due to curvature regularizer: "
+        f"{pen_curv.item()} vs {pen_lin.item()}"
+    )
+
+
+def test_bispf_image_euclidean_barrier_and_kappa():
+    """Verify image tensors retain the Euclidean barrier (scale_dim == 1.0),
+    progressive well depth kappa_eff = kappa * (0.6 + 0.4(1 - r)), and decoupled floor eff_floor == 0.0005.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(kappa=1.0, lambda_floor=0.01)
+    kernel.record.calls = 600
+
+    xr = torch.randn(16, 1, 8, 8)
+    xf = torch.randn(16, 1, 8, 8)
+
+    class SlopedImageCritic(nn.Module):
+        def forward(self, x):
+            return 1.5 * x.flatten(1).sum(dim=1, keepdim=True)
+
+    # High transport residual (early in training): kappa_eff = 0.6 * kappa = 0.6
+    kernel.record.ema_residual = 1.0
+    kernel._observe_sinkhorn = lambda res, ds, ema_decay=0.95: None
+    pen_early, stats_early = kernel.penalty(SlopedImageCritic(), xr, xf, step=0, collect_stats=True)
+
+    # Converged transport residual (late in training): kappa_eff = 1.0 * kappa = 1.0
+    kernel.record.ema_residual = 0.0
+    pen_late, stats_late = kernel.penalty(SlopedImageCritic(), xr, xf, step=0, collect_stats=True)
+
+    # Under slope 1.5 > 1.0, early softened barrier (0.6) imposes higher softplus cap penalty than late (1.0)
+    assert pen_early.item() > pen_late.item(), (
+        f"Early softened barrier (kappa_eff=0.6) must penalize large gradients more strongly than kappa=1.0: "
+        f"{pen_early.item()} vs {pen_late.item()}"
+    )
+
+    # Verify background floor is decoupled to 0.0005 on images vs 0.01 on vectors
+    assert stats_early["floor_pen"] < 0.01, f"Image floor penalty must be decoupled; got {stats_early['floor_pen']}"
 
 
 
