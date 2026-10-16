@@ -213,7 +213,7 @@ class SBNPPriorRegularizer(nn.Module):
         # 3. Scale-free k-NN log-repulsion
         m_sub = min(n, self.repel_max_samples)
         z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
-        is_small_latent = (n <= 64 and d >= 8 and not self.references)
+        is_small_latent = (n <= 64 and d >= 8 and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references) <= 64))
         eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
         eff_repel_weight = (self.repel_weight * 5.0) if is_small_latent else self.repel_weight
         k = min(eff_k_nn, m_sub - 1)
@@ -224,13 +224,14 @@ class SBNPPriorRegularizer(nn.Module):
                 r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
             eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
             knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-            effective_margin = 1.0 if m_sub <= 64 else self.repel_margin
+            effective_margin = 0.25 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
             norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
-            repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
+            repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
         else:
             repel_loss = rows.new_zeros(())
 
-        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss
+        bound_pen = F.relu(rows.norm(dim=1) - 3.5 * target_sigma.mean()).pow(2).mean()
+        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss + bound_pen
         scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
         if out.requires_grad:
@@ -871,7 +872,8 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
             if rec is not None and not hasattr(target, "_bispf_record"):
                 target._bispf_record = rec
             # Straight-through DualNorm velocity linearization during generator updates
-            if rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
+            dim_hook = args[0].shape[-1] if (len(args) > 0 and torch.is_tensor(args[0]) and args[0].ndim == 2) else 0
+            if dim_hook >= 2 and rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
                 s_thermal = getattr(rec, "_thermal_scale", 1.0)
                 if s_thermal < 0.999:
                     s_v = max(1e-4, min(1.0, (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2))) * 0.010))
@@ -1122,9 +1124,18 @@ class _BISPFPenaltyKernel:
             and b_f >= 32 
             and call_idx >= 500
         )
+        is_dense_multimode = (
+            is_continuous_flow
+            and b_r >= 1024
+            and b_f >= 1024
+            and 2 <= dim <= 4
+            and call_idx >= 1000
+        )
         # Scale-invariant thermal cooler query
         if is_discrete_simplex or is_image_tensor:
             t_scale = 1.0
+        elif is_dense_multimode and hasattr(self, "cooler"):
+            t_scale = self.cooler.scale_for(batch_size=128, dim=dim)
         elif is_continuous_flow:
             t_scale = self.cooler.scale_for(batch_size=b_r, dim=dim) if hasattr(self, "cooler") else max(
                 1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
@@ -1152,15 +1163,19 @@ class _BISPFPenaltyKernel:
                 cached_d = getattr(self.record, "_last_d_logits", None)
                 if cached_d is not None and is_continuous_flow and dim >= 2:
                     d_r_cached, d_f_cached = cached_d
-                    logit_gap = float((d_r_cached.max() - d_r_cached.median()).item())
-                    if logit_gap > 0.50:
-                        starved_mask = d_r_cached > (d_r_cached.median() + 0.25)
-                        overpop_mask = d_f_cached < (d_f_cached.median() - 0.25)
-                        if starved_mask.any() and overpop_mask.any():
-                            bridge_r = torch.where(starved_mask)[0]
-                            k_bridge = max(1, min(int(0.20 * b_f), len(bridge_r)))
-                            r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
-                            matched_real_idx[:k_bridge] = r_pick
+                    if (d_r_cached.shape[0] == b_r and d_f_cached.shape[0] == b_f and
+                        d_r_cached.device == x_real.device and d_f_cached.device == x_fake.device):
+                        d_r_gap = d_r_cached.max() - d_r_cached.median()
+                        if d_r_gap > 0.50:
+                            starved_mask = d_r_cached > (d_r_cached.median() + 0.25)
+                            overpop_mask = d_f_cached < (d_f_cached.median() - 0.25)
+                            if starved_mask.any() and overpop_mask.any():
+                                bridge_r = torch.where(starved_mask)[0]
+                                bridge_f = torch.where(overpop_mask)[0]
+                                k_bridge = max(1, min(int(0.20 * b_f), min(len(bridge_r), len(bridge_f))))
+                                r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
+                                f_pick = bridge_f[:k_bridge]
+                                matched_real_idx[f_pick] = r_pick
 
                 x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)
@@ -1201,7 +1216,7 @@ class _BISPFPenaltyKernel:
             self.record._in_penalty = False
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
-        kappa_eff = self.kappa * (0.6 + 0.65 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
+        kappa_eff = self.kappa * (0.6 + 0.85 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
 
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
@@ -1248,8 +1263,9 @@ class _BISPFPenaltyKernel:
             d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
+            mean_g = 0.5 * (g_real.flatten(1).mean(0) + g_fake.flatten(1).mean(0))
             eff_gamma_gauge = 0.005 if is_image_tensor else (min(self.gamma_gauge, 0.020) if b_r < 16 else self.gamma_gauge)
-            gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
+            gauge_loss = 0.5 * eff_gamma_gauge * (mean_logit.pow(2) + mean_g.pow(2).sum())
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
         if t_scale < 1.0 and penalty.requires_grad:

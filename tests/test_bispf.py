@@ -629,16 +629,16 @@ def test_bispf_endpoint_born_infeld_image_limit():
 
     xr_math = torch.randn(8, 1, 8, 8)
     xf_math = torch.randn(8, 1, 8, 8)
-    pen_math, _ = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
+    pen_math, stats_math = kernel_math.penalty(ConstantSlopeImageCritic(), xr_math, xf_math, step=0, collect_stats=True)
 
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
     # Under scale_dim = 1.0, norm = s / 1.0 = 2.0 matches expected analytical cap and decoupled floor penalties with adaptive kappa_eff
     res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
-    kappa_eff = kappa * (0.6 + 0.65 * (1.0 - res_ratio))
+    kappa_eff = kappa * (0.6 + 0.85 * (1.0 - res_ratio))
     norm = s / 1.0
     expected_cap = l_cap * (F.softplus(torch.tensor(norm - kappa_eff), beta=beta).item() ** 2)
     expected_floor = 0.5 * 0.0005 * ((s ** 2) / dim_img)
-    expected_total = expected_cap + expected_floor
+    expected_total = expected_cap + expected_floor + stats_math["gauge_loss"]
     assert abs(pen_math.item() - expected_total) < 2e-3, (
         f"Expected {expected_total}, got {pen_math.item()}"
     )
@@ -1292,22 +1292,22 @@ def test_bispf_sbnp_small_latent_repulsion():
     loss_base = reg_no_repel(z_img)
     repel_contrib = (loss_active - loss_base).item()
 
-    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.25:
+    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.25, effective_margin=0.25:
     m_sub = 32
     sq_dist = torch.cdist(z_img, z_img, p=2.0).pow(2)
     off_mask = ~torch.eye(m_sub, dtype=torch.bool)
     r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
     eye_inf = torch.eye(m_sub, dtype=z_img.dtype) * 1e9
     knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=10, dim=1, largest=False)
-    norm_sq_dist = knn_sq_dist / (1.0 * r_med_sq)
-    expected_repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
+    norm_sq_dist = knn_sq_dist / (0.25 * r_med_sq)
+    expected_repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
     expected_repel_contrib = 0.25 * expected_repel_loss.item()
 
     assert abs(repel_contrib - expected_repel_contrib) < 1e-5, (
         f"Small latent cloud must use eff_k_nn=10 and 5x repel weight (0.25): got {repel_contrib} vs {expected_repel_contrib}"
     )
 
-    # Counter-check: when references are provided, is_small_latent is FALSE
+    # Counter-check: when references are provided with moment_tether_count > 64, is_small_latent is FALSE
     class MockRef:
         moment_tether_mean = torch.zeros(8)
         moment_tether_covariance = torch.eye(8)
@@ -1317,7 +1317,7 @@ def test_bispf_sbnp_small_latent_repulsion():
     reg_ref_no_repel = SBNPPriorRegularizer(reference=MockRef(), weight=1.0, k_nn=5, repel_weight=0.0, repel_margin=0.50)
     knn_sq_dist_5, _ = torch.topk(sq_dist + eye_inf, k=5, dim=1, largest=False)
     norm_sq_dist_5 = knn_sq_dist_5 / (1.0 * r_med_sq)
-    expected_ref_loss = 0.05 * F.softplus(-torch.log(norm_sq_dist_5 + 1e-8)).mean().item()
+    expected_ref_loss = 0.05 * F.softplus(-torch.log(norm_sq_dist_5.clamp_min(1e-12))).mean().item()
     ref_contrib = (reg_ref(z_img) - reg_ref_no_repel(z_img)).item()
     assert abs(ref_contrib - expected_ref_loss) < 1e-5, (
         f"Anchored reference prior must retain default k_nn=5 and 1x repel weight: got {ref_contrib} vs {expected_ref_loss}"
@@ -1365,6 +1365,87 @@ def test_bispf_2d_continuous_flow_bypasses_chord_curvature():
     assert stats_2d_zero["ebi_loss"] == 0.0, (
         f"2D continuous flow must bypass curvature penalty completely; got ebi_loss = {stats_2d_zero['ebi_loss']}"
     )
+
+
+def test_bispf_spatial_tilt_gauge_damping():
+    """Verify that 1st-order spatial tilt gauge damping penalizes net spatial translation gradients
+    ||mean(g_real) + mean(g_fake)||^2 in addition to 0th-order scalar logit offset mean_logit^2.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    gamma = 0.05
+    kernel = _BISPFPenaltyKernel(
+        coeff=1.0,
+        lambda_cap=0.0,
+        lambda_floor=0.0,
+        gamma_gauge=gamma,
+        chord_blend=0.0,
+    )
+
+    w = torch.tensor([1.5, -2.0])
+
+    class LinearTiltCritic(nn.Module):
+        def forward(self, x):
+            return (x @ w).unsqueeze(1)
+
+    torch.manual_seed(123)
+    xr = torch.randn(32, 2)
+    xr = xr - xr.mean(0, keepdim=True)
+    xf = torch.randn(32, 2)
+    xf = xf - xf.mean(0, keepdim=True)
+
+    pen, stats = kernel.penalty(LinearTiltCritic(), xr, xf, step=0, collect_stats=True)
+
+    expected_gauge = 0.5 * gamma * float(w.pow(2).sum())
+    assert abs(stats["gauge_loss"] - expected_gauge) < 1e-5, (
+        f"Expected gauge_loss {expected_gauge}, got {stats['gauge_loss']}"
+    )
+    assert abs(stats["mean_logit"]) < 1e-5
+
+
+def test_bispf_1d_continuous_flow_hook_unthrottled():
+    """Verify that 1D continuous flow inputs (dim=1) bypass generator velocity scaling in
+    _bispf_critic_forward_hook even when s_thermal < 0.999, ensuring symmetric 100% learning rate
+    tracking during shift reacquisition without 258x throttling, while 2D flows are scaled.
+    """
+    from particlegan.bispf import _attach_critic_input_hook, CriticStepRecord
+
+    class DummyCritic(nn.Module):
+        def forward(self, x):
+            return x.sum(dim=-1, keepdim=True)
+
+    rec = CriticStepRecord()
+    rec._thermal_scale = 0.36
+    rec._in_penalty = False
+
+    critic = DummyCritic()
+    _attach_critic_input_hook(critic, rec)
+
+    # 1. 1D flow input (dim=1, shape [B, 1])
+    x_1d = torch.randn(16, 1, requires_grad=True)
+    out_1d = critic(x_1d)
+    loss_1d = out_1d.sum()
+    loss_1d.backward()
+    grad_1d = x_1d.grad.clone()
+
+    assert torch.allclose(grad_1d, torch.ones_like(grad_1d)), (
+        f"1D flow must have unthrottled gradient (all 1.0); got {grad_1d[:3]}"
+    )
+
+    # 2. 2D flow input (dim=2, shape [B, 2])
+    rec._thermal_scale = 0.36
+    x_2d = torch.randn(16, 2, requires_grad=True)
+    out_2d = critic(x_2d)
+    loss_2d = out_2d.sum()
+    loss_2d.backward()
+    grad_2d = x_2d.grad.clone()
+
+    s_thermal = 0.36
+    s_v = (s_thermal / math.sqrt(1.0 - s_thermal**2)) * 0.010
+    assert torch.allclose(grad_2d, torch.full_like(grad_2d, s_v), atol=1e-5), (
+        f"2D flow must be scaled by s_v={s_v}; got {grad_2d[:3]}"
+    )
+
 
 
 
