@@ -633,7 +633,7 @@
         "bispf-v1",
         "bispf-v2"
       ],
-      "canonical_candidate": "bispf-v1",
+      "canonical_candidate": "bispf-v2",
       "id": "bispf",
       "label": "BISPF",
       "rationale": "Born-Infeld Sinkhorn Particle Flow: Elastic Born-Infeld transport-chord critic penalty with zero-mean logit gauge, degree-of-freedom-aware SBNP prior regularizer, and scale-free Harmonic Mode Capture thermal cooling under constant learning rates.",
