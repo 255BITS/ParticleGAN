@@ -230,7 +230,8 @@ class SBNPPriorRegularizer(nn.Module):
         else:
             repel_loss = rows.new_zeros(())
 
-        bound_pen = F.relu(rows.norm(dim=1) - 3.5 * target_sigma.mean()).pow(2).mean()
+        sigma_bound = max(float(target_sigma.mean()), self.target_std)
+        bound_pen = F.relu(rows.norm(dim=1) - 3.5 * sigma_bound).pow(2).mean()
         base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss + bound_pen
         scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
