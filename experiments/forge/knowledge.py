@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from contextlib import ExitStack
+from copy import deepcopy
 import json
 from pathlib import Path
 import re
@@ -631,10 +632,10 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                 tasks_cache[key] = orig_load_tasks(r)
             return deepcopy(tasks_cache[key])
 
-        def cached_attempts(r: Path, t=None):
+        def cached_attempts(r: Path):
             key = str(Path(r).resolve())
             if key not in attempts_cache:
-                attempts_cache[key] = orig_attempts(r, t)
+                attempts_cache[key] = orig_attempts(r)
             return deepcopy(attempts_cache[key])
 
         def cached_records(r: Path):
