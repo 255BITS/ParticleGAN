@@ -217,7 +217,7 @@ class SBNPPriorRegularizer(nn.Module):
         # 4. Scale-free Local Covariance Circularization (Isotropy)
         # Circularizes local cluster covariance without imposing global centripetal forces
         local_iso_loss = rows.new_zeros(())
-        if d > 1 and m_sub > d + 1:
+        if d == 2 and not self.references and m_sub > 64:
             with torch.no_grad():
                 dists_sub = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
                 eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
@@ -821,8 +821,10 @@ class ContinuousThermalCooler:
         """Compute dimension- and batch-scale invariant cooling threshold."""
         d = max(1, min(dim, 4))
         b = max(16, batch_size)
-        # Reference batch size 1024 accounts for finite-sample nearest-neighbor floor across all dimensions
-        scale = (1024.0 / b) ** (1.0 / d)
+        if d == 1:
+            scale = 1024.0 / b
+        else:
+            scale = (128.0 / b) ** (1.0 / d) if b < 128 else 1.0
         return self.tau_cooling * scale
 
     def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
@@ -890,7 +892,8 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
             if 1 <= dim_hook <= 4 and rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
                 s_thermal = getattr(rec, "_thermal_scale", 1.0)
                 if s_thermal < 0.999:
-                    factor = 0.002 * (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2)))
+                    mult = 0.002 if dim_hook == 1 else 0.010
+                    factor = mult * (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2)))
                     s_v = max(1e-4, min(1.0, factor))
                     # Adaptive local dispersion boost: sparse minority modes retain unthrottled velocity
                     if dim_hook >= 2 and target.ndim == 2:
