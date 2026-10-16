@@ -26,7 +26,7 @@ from experiments.forge.decision_contracts import OUTCOMES
 from experiments.forge.planning import load_idea, plan_summary, resolve_idea
 from experiments.forge.studies import validate_study
 from experiments.forge.trainer_families import current_family_candidates
-from experiments.forge.views import load_tasks, validate_view
+from experiments.forge.views import load_tasks, load_view, validate_view, view_fingerprint
 
 VIEW = "discriminator_stability"
 CAMPAIGN = "recipe-prior-refactor-selected-leaders-v1"
@@ -94,7 +94,8 @@ def question(task):
 def ordinary_contract(root):
     old = baseline()
     # The campaign measures revision 9. Later revisions of the live view (held and
-    # removed-from-count tests) first archive it byte for byte in view-history.
+    # removed-from-count tests) first archive it byte for byte in view-history;
+    # planning, which reads the live view, refuses them (require_live_revision_9).
     view = read_json(root / "configs/forge/view-history" / f"{VIEW}-v9.json")
     validate_view(view, load_tasks(root))
     require(view["id"] == VIEW and view["revision"] == 9 and view.get("evidence_scope", "ordinary") == "ordinary",
@@ -117,6 +118,15 @@ def ordinary_contract(root):
     require(sum(tasks[a["task"]]["resources"]["timeout_seconds"] for a in active) == ORDINARY_ALLOWANCE,
             "Original full allowances plus the optional 300-second clock audit must be retained")
     return view, tasks
+
+
+def require_live_revision_9(root):
+    """Planning resolves the live view, so it must still be the campaign's revision 9."""
+    live = load_view(root, VIEW)
+    archived = read_json(root / "configs/forge/view-history" / f"{VIEW}-v9.json")
+    require(view_fingerprint(live) == view_fingerprint(archived),
+            f"Use the explicit revision-9 recipe-owned ordinary view: planning reads the live {VIEW} view, "
+            f"which is revision {live['revision']}")
 
 
 def candidate_for(leader):
@@ -278,6 +288,7 @@ def saved_grading(attempt):
 
 def resolve_plans(root, registration):
     ordinary_contract(root)
+    require_live_revision_9(root)
     requests = {}
     for family, plan in registration["families"].items():
         request = resolve_idea(root, plan["candidate_id"], study=plan["study_id"])
@@ -298,6 +309,7 @@ def prepare(options):
         install(stage, declarations)
         print(f"Staged {len(declarations)} declarations at {stage}; no admission or training.", flush=True)
         return
+    require_live_revision_9(root)
     install(root, declarations)
     old = baseline()
     plans = {}

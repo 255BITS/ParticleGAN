@@ -443,13 +443,13 @@ def test_publication_refresh_names_held_and_removed_tasks_without_counting_them(
         assert current.get(key) == baseline.get(key)
     declared = current["declared_view"]
     assert declared["tier_requirements"] == {"1": ["two_pole"], "2": [], "3": []}
-    assert declared["removed_required_tasks"]["1"] == ["token", "ae"]
+    assert declared["no_longer_required_tasks"]["1"] == ["token", "ae"]
     assert declared["held_tasks"] == {"1": ["ae"], "2": [], "3": []}
     assert declared["removed_from_count"] == {"1": [{"task": "token", "reason": "superseded", "counted_by": None}],
                                               "2": [], "3": []}
     markdown = Path(metadata["report"]).read_text()
-    assert ("**1 means 1 counted view requirements, including repeated tests**. 1 held and 1 removed view "
-            "assignments are still measured") in markdown
+    assert ("**1 means 1 counted view requirements, including repeated tests**, from 1 distinct test. 1 held and "
+            "1 removed view assignments (1 held test and 1 removed test) are still measured") in markdown
     assert ("Counts follow the declared view revisions: discriminator_stability 3. The recorded qualification keeps "
             "discriminator_stability revision 2 until new ordinary evidence is registered") in markdown
     assert "| `ae` | held: no one recipe passes it together with the counted tests | discriminator_stability (Tier 1) |" in markdown

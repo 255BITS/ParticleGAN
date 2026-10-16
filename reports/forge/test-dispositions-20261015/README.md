@@ -10,17 +10,20 @@ regraded. The machine-readable record is [dispositions.json](dispositions.json).
 
 The request was to fix, hold with an explanation, or remove every required leaderboard test that no selected
 recipe passes, because one training recipe may not be able to pass all of them. 18 required tests had zero selected
-passes. All 18 ask valid questions; none has a measurement defect.
+passes. All 18 ask valid questions and no recorded verdict is wrong; one evaluator tolerance question remains for a
+diagnostic run (see [Follow-ups](#follow-ups)).
 
 - **15 tests are held.** A held test stays declared, keeps running and keeps its full history on every page. It
   stops counting until one global recipe passes it together with every counted test. The 15 fall into four groups,
   and only the first group is a demonstrated conflict between tests:
   - **(a) Conflict shown (5):** `vector_anisotropic`, `vector_overlap`, `img_bars4`, `img_blobs4`,
-    `img_intensity2`. Every recorded recipe that passes one of them fails a counted test that BISPF passes. The
-    vector family as a whole also conflicts: the cell-moment recipes pass all four vector tests but fail
-    `mode_hold` or `ring16_acquisition`.
-  - **(b) Never passed by any recipe (4):** `grid100`, `rotated100`, `staggered100`, `target_shift_recovery`. These
-    are unsolved, not shown to conflict with anything.
+    `img_intensity2`. Every recipe with a [recorded pass](#recorded-passers) of one of them fails a counted test
+    that BISPF passes. The vector family as a whole also conflicts: the cell-moment recipes pass all four vector
+    tests but fail `mode_hold` or `ring16_acquisition`.
+  - **(b) Never passed under their current declaration (4):** `grid100`, `rotated100`, `staggered100`,
+    `target_shift_recovery`. These are unsolved, not shown to conflict with anything. Older historical receipts
+    pass the three 100-blob tests only under earlier contracts, including noise added at evaluation (see
+    [Recorded passers](#recorded-passers)).
   - **(c) Blocked behind (b) (3):** `grid100_14k`, `rotated100_14k`, `staggered100_14k`. They continue a passing
     7,000-update model, and none exists.
   - **(d) Partly untried (3):** `gaussian1d_stability`, `vector_unequal_mass`, `vector_unequal_width`. Some research
@@ -49,11 +52,12 @@ the total.
 - **K3P, KA2, R1/R2 and GAN v3:** 20/81; they still fail two Tier 1 tests.
 - **Atlas and E22:** 0/81; they remain incompatible with the ordinary suite.
 
-**Read this before reading those numbers.** After the holds, the counted set is exactly the set of tests BISPF's
-recorded measurement passes. That follows from the one-global-recipe rule (one recipe must pass every counted test)
-and from BISPF passing every test that any other selected recipe passes. It is not a new measurement of BISPF. No new
-test was passed: the totals shrank because unsolved tests left the count. BISPF's measurement is also stale against
-the current source.
+**Read this before reading those numbers.** After the holds, every counted test except ring endurance is one that
+BISPF's recorded measurement passes, and every test it fails is held; ring endurance (`ring_extension`) has no
+qualifying BISPF result yet. That follows from the one-global-recipe rule (one recipe must pass every counted test)
+and from BISPF passing every counted test that any other selected recipe's recorded result passes. It is not a new
+measurement of BISPF. No new test was passed: the totals shrank because the held and removed requirements left the
+count. BISPF's measurement is also stale against the current source.
 
 ## Words used here
 
@@ -74,14 +78,18 @@ the current source.
   question is counted elsewhere in the view), `superseded` (a retired definition) and `ill_posed` (it cannot run as
   declared). A phase or duplicate names the counted test in `counted_by`.
 - **HELD (status)**: a tier with only held tests reports HELD; it neither passes nor stops later tiers. A view reports
-  PASS only when every counted tier passes and its highest tier is counted. If its highest tier holds only held
-  tests, or nothing is counted, the view reports HELD, which is never eligible for promotion.
+  PASS only when every counted tier passes and its highest tier is counted. If every counted tier passes but its
+  highest tier holds only held tests, or nothing is counted, the view reports HELD, which is never eligible for
+  promotion. A counted failure still shows as FAIL (or BLOCKED or INCOMPLETE).
 - **Global recipe**: one training configuration used unchanged for every test. "Across tests" means one global
   recipe must pass every counted test.
 - **Selected recipe** and **cohort**: the recipe each family puts forward, and the exact source code and runtime its
   results were recorded with.
 - **Ordinary run** vs **diagnostic run**: an ordinary run in the recipe's own cohort can qualify. A diagnostic run
   (another runtime, or a separate investigation) is shown, but it never fills a qualifying cell.
+- **Recorded pass** (recorded passer): a PASS under the test's current declaration, in a selected cohort, the attempt
+  index or a research packet the leaderboard displays. Older historical receipts do not count; see
+  [Recorded passers](#recorded-passers) below.
 - **Archived view revision**: every change to a view gets a new revision number, and the previous file is first
   copied byte for byte to `configs/forge/view-history/<view>-v<N>.json`.
 - **Statuses**: **FAIL** means the test ran to its end and missed a gate. **TIMEOUT** means the run hit its time
@@ -117,6 +125,53 @@ the current source.
 - **Clean sampling**: outputs are scored as the generator makes them, with no noise added at evaluation.
 - **Policy mode**: Atlas/E22 run with an automatic controller that chooses step sizes and which saved state to
   report, and with a fixed cloud of input points; only the policy questions use it.
+- **Live weights**: scoring the generator's current weights, not an average of its past weights (an EMA,
+  exponential moving average).
+- **Public initializer**: the repository's deterministic network initializer (`deterministic_orthogonal`), which
+  every compared recipe must use. **Recipe hash**: the hash of a recipe's complete settings; "one recipe hash" means
+  the same settings for every test.
+- **Scheduled recipes**: recipes whose step size follows a timetable of update counts, such as a learning rate that
+  decays to a floor after a fixed number of updates (the **learning-rate-floor** runs, for example the historical
+  k3, k3g and rg5 runs). K3P, KA2, R1/R2 and GAN v3 are scheduled; a timetable is a clock dependency.
+- **Finite acceptance**: the update-acceptance layer of the round-5 BCAP recipes, which checks each proposed update
+  and can shrink it (backtracking) before applying it ([round 5](../bcap-physics/round5/README.md)).
+- **Fourier features**: an input encoding that feeds sines and cosines of the input to the generator.
+- **Bures variant**: the cell-moment aggregate that compares cell covariances with the Bures-Wasserstein distance
+  between Gaussians. **Per-kernel control**: a cell-moment control that matches each kernel's (particle's)
+  statistics separately instead of in aggregate.
+- **G-angle**: a historical research recipe (`G-angle-with-native-prior-affine-ball-v1`); its unequal-width pass was
+  recorded on an older source ([test-performance.md](../test-performance.md)).
+- **Native task**: the 100-blob coverage task family (`benchmarks/toy100`), whose "good modes" count the blobs drawn
+  well.
+- **Learned-MoG suite**: the ordinary tasks, whose starting prior is a learned mixture of Gaussians. **Particle
+  birth/death formulation**: Atlas/E22's formulation, which adds and removes particles during training.
+- **Receipt**: the saved record of one task result (inputs, metrics, verdict and hashes). **Producer**: the attempt
+  whose saved run another result continues or certifies.
+- **Mass TV**: the share of samples that fall in the wrong blobs (total variation between sample and target
+  shares). **Eigen ratio**: a blob's thinnest direction relative to the target's. **Precision** (100-blob tests):
+  the share of points within three blob widths of some blob centre. **Frozen copy**: a copy of the model that stops
+  learning at the target shift, used to prove the shift is noticeable.
+- **The handoff**: the 2026-10-15 failing-tests handoff note that asked for this decision; it is a working note kept
+  outside the repository. It summarised the earlier test-by-test zero-pass audit
+  ([pull request #421](https://github.com/255BITS/ParticleGAN/pull/421)), whose recommendations for the 18 tests
+  were 11 keep, 6 modify and 1 remove as a separate count, and it named three failing pytest checks. Where that
+  audit recommended keeping a test, this record keeps its declaration, gate and measurement unchanged: holding
+  changes only whether the test is counted.
+
+<a name="recorded-passers"></a>
+
+**Recorded passers and older historical receipts.** In this record, "recorded passer", "has passed" and "never
+passed" refer to results under each test's current declaration: the selected cohorts, the attempt index and the
+research packets the leaderboard displays. The repository also keeps older receipts in `reports/forge/records`
+(evidence scope `historical`) that pass several held test ids under earlier contracts, such as a fixed particle
+prior of zero width instead of the learned prior, EMA 0.995 evaluation weights, scheduled learning rates or noise
+added to model samples at evaluation. Examples: the September 2026 gap-fill K3P record
+(`history-k3p-84363f69cb3a`) passes 22 tests, including the three image tests, all four vector tests and the three
+100-blob tests; across the historical records there are 5 to 10 PASS receipts for each vector test, 8 for each image
+test and 36 to 39 for each 100-blob test, and five records pass both `img_bars4` and `img_stripes2`. Forge never
+reuses historical receipts as current evidence, because their recipe, prior, initialization and sampling contracts
+differ from today's declarations, so they do not show that one current global recipe passes these tests. None of
+them passes `gaussian1d_stability`, `target_shift_recovery`, the three 14k tests or the ring tests.
 
 ## Decision rules applied
 
@@ -145,17 +200,17 @@ the current source.
 | # | Test | Counted before in (tier) | Disposition | Count change | Reason in one line |
 | --- | --- | --- | --- | ---: | --- |
 | 1 | [`clockfree_audit`](#clockfree_audit) | clockfree_continuous (3) | REMOVE (duplicate) | -1 | Same clock probe and grader as `clockfree_audit_measurement_v1`, counted at Tier 1 of the same view; kept as the 14k gate. |
-| 2 | [`gaussian1d_stability`](#gaussian1d_stability) | discriminator_stability (2) | HOLD (no_global_recipe) | -1 | Neither selected recipe keeps or re-learns the bell curve; the one passer that also passes `mode_hold` was never run on the ring tests. |
+| 2 | [`gaussian1d_stability`](#gaussian1d_stability) | discriminator_stability (2) | HOLD (no_global_recipe) | -1 | Neither BCAP nor BISPF (the only selected recipes with recorded Tier 2 results) keeps or re-learns the bell curve; the one passer that also passes `mode_hold` was never run on the ring tests. |
 | 3 | [`vector_unequal_mass`](#vector_unequal_mass) | six views (2) | HOLD (no_global_recipe) | -6 | The rare 2% blob loses its share or collapses; the gate is sound; round-5 passers never ran most of the counted suite. |
 | 4 | [`vector_unequal_width`](#vector_unequal_width) | six views (2) | HOLD (no_global_recipe) | -6 | Shares wrong; balanced assignment passes but fails held tests and never ran most of the counted suite. |
 | 5 | [`vector_anisotropic`](#vector_anisotropic) | six views (2) | HOLD (no_global_recipe) | -6 | Wrong amounts per blob; of 16 passers, 12 fail Tier 1 `ring16_acquisition`, 1 timed out on it and 3 fail `mode_hold`. |
 | 6 | [`vector_overlap`](#vector_overlap) | six views (2) | HOLD (no_global_recipe) | -6 | Acquired then drifts; all 15 passers fail `ring16_acquisition` or `mode_hold`. |
-| 7 | [`img_bars4`](#img_bars4) | six views (2) | HOLD (no_global_recipe) | -6 | Mode dropping (2 of 4 bars); no recipe passes `img_bars4` and `img_stripes2` together. |
+| 7 | [`img_bars4`](#img_bars4) | six views (2) | HOLD (no_global_recipe) | -6 | Mode dropping (2 of 4 bars); no recorded passer passes `img_bars4` and `img_stripes2` together. |
 | 8 | [`img_blobs4`](#img_blobs4) | six views (2) | HOLD (no_global_recipe) | -6 | 2-3 of 4 corners; passers fail or cannot run Tier 1. |
 | 9 | [`img_intensity2`](#img_intensity2) | six views (2) | HOLD (no_global_recipe) | -6 | Brightness off or one level only; passers fail Tier 1. |
-| 10 | [`grid100`](#grid100) | six views (2) | HOLD (unsolved) | -6 | 24-37% of samples on target against 97%; never passed. |
-| 11 | [`rotated100`](#rotated100) | six views (2) | HOLD (unsolved) | -6 | 26-27% against 97%; never passed. |
-| 12 | [`staggered100`](#staggered100) | six views (2) | HOLD (unsolved) | -6 | 30-34% against 97%; never passed. |
+| 10 | [`grid100`](#grid100) | six views (2) | HOLD (unsolved) | -6 | 24-37% of samples on target against 97%; never passed under the current (clean) declaration. |
+| 11 | [`rotated100`](#rotated100) | six views (2) | HOLD (unsolved) | -6 | 26-27% against 97%; never passed under the current declaration. |
+| 12 | [`staggered100`](#staggered100) | six views (2) | HOLD (unsolved) | -6 | 30-34% against 97%; never passed under the current declaration. |
 | 13 | [`grid100_14k`](#grid100_14k) | clockfree_continuous (3) | HOLD (held_prerequisite: `grid100`) | -1 | Needs a passing `grid100` state; the rescue diagnostic also fails. |
 | 14 | [`rotated100_14k`](#rotated100_14k) | clockfree_continuous (3) | HOLD (held_prerequisite: `rotated100`) | -1 | Same, behind `rotated100`. |
 | 15 | [`staggered100_14k`](#staggered100_14k) | clockfree_continuous (3) | HOLD (held_prerequisite: `staggered100`) | -1 | Same, behind `staggered100`. |
@@ -210,17 +265,21 @@ Per family (selected recipe, counted requirements; computed read-only from the c
 
 Caveats, also printed on the board:
 
-- **No new test was passed.** The totals shrank because unsolved tests left the count; every pass count is
-  unchanged. The counted set now equals BISPF's recorded pass set; that follows from the one-global-recipe rule and
-  is not a new measurement.
+- **No new test was passed.** The totals shrank because the held and removed requirements left the count; every
+  pass count is unchanged. Every counted test except ring endurance is one that BISPF's recorded measurement passes;
+  that follows from the one-global-recipe rule and is not a new measurement.
 - **BISPF's measurement is stale.** It is a recorded measurement of an older source, so current qualification needs
   a fresh ordinary run of the counted suite at the current source anyway.
 - **Two denominators share the page.** Selected-recipe totals follow the declared revisions. Research rows keep their
-  recorded revision 9 denominators (29 tests), and recorded qualification stays at revision 9.
-- **adaptation counts the same tests as quality_coverage** while `target_shift_recovery` is held, and reports HELD.
+  recorded revision 9 denominators (29 tests, which still include the 12 tests that discriminator_stability revision
+  11 holds or removes from the count), and recorded qualification stays at revision 9.
+- **adaptation counts the same tests as quality_coverage** while `target_shift_recovery` is held, and it never shows
+  PASS: BISPF, which passes every counted tier, gets HELD, and BCAP's counted `mode_hold` failure still shows as FAIL.
 - **The board's "Held and removed tests" section** is built from the notes stored in the views, so it cannot drift
-  from them. It lists each test's reason, views, summary, re-entry rule, how many selected recipes pass it (0 of 8
-  for every held or removed test) and a link to its explanation below.
+  from them. It lists each test's reason, views, summary, re-entry rule, how many selected recipes' recorded results
+  pass it (0 of 8 for every held or removed test), which selected recipes pass it only in a separate diagnostic run
+  (for example R1/R2 and GAN v3 on `img_bars4`, and BCAP and BISPF on `clockfree_audit`), and a link to its
+  explanation below. A diagnostic run never becomes a recorded result, so those passes count nowhere.
 
 <a name="rules-in-the-views"></a>
 
@@ -234,19 +293,27 @@ experiments.forge test-dispositions check|apply --registry <file>`), driven by [
   `reason`, `blocked_by`, `summary`, `explanation` and `reentry`. A removed assignment stays `diagnostic` and carries
   a `removal` note with `schema` (`forge_count_removal_v1`), `previous_importance`, `reason`, `counted_by`, `summary`
   and `explanation`.
-- Tiers holding a counted or held test must run contiguously from Tier 1. A counted test may not depend on a held
-  one. `blocked_by` lists exactly the held parents.
+- Tiers holding a counted or held test must run contiguously from Tier 1. A counted test may not depend on a held or
+  uncounted test, directly or through a removed phase. `blocked_by` lists exactly the held parents.
 - **Phase exception:** a counted test may depend on a removed test only when the removed test is a phase of it: its
   `counted_by` names the counted test, both sit in the same uninterrupted execution group and tier, and the counted
-  test continues the phase's own saved state (a checkpoint dependency). The counted test still needs the phase to
-  pass, so no requirement is lost.
+  test continues the phase's own saved state (a checkpoint dependency). The phase's own prerequisites must be
+  counted too (for `ring_hold`, `mode_hold` is), so a held or diagnostic test can never decide a counted verdict
+  through a phase. The counted test still needs the phase to pass, so no requirement is lost.
 - **Duplicate rule:** a `duplicate` removal must name a counted test of the same view, at the same or an earlier tier,
-  with the same adapter and evaluation kind.
+  with the same adapter and the same evaluation declaration (thresholds, conditions and source pins). The counted
+  copy may also pin the duplicate's own task file as provenance, as `clockfree_audit_measurement_v1` pins
+  `clockfree_audit.json`.
+- **Registry base pin:** each view entry of [dispositions.json](dispositions.json) stores the policy fingerprint of
+  its base revision (`from_fingerprint`). `apply` refuses a live view that was edited without a new revision number,
+  and `check` reports drift when an archive no longer matches that fingerprint.
 - **Job identity:** a test's role is not part of job identity. The planning science that determines a job key has no
   role field; `tests/test_forge_dispositions.py` checks, for K3P on discriminator_stability and
   clockfree_continuous, that every planned job's science is identical with and without the role changes, apart from
-  `candidate_revision`, which follows the source code digest (any code change gives new keys). Existing evidence stays attached through unchanged task execution and evaluation fingerprints and
-  the grouped-evidence certificate.
+  `candidate_revision`, which follows the source code digest (any code change gives new keys). The verification of
+  this change repeated that comparison for the eight selected families and one extra BCAP configuration on each of
+  the six revised views (54 pairs), with identical science in every pair. Existing evidence stays attached through
+  unchanged task execution and evaluation fingerprints and the grouped-evidence certificate.
 
 Every dependency edge that touches a decided test:
 
@@ -292,8 +359,9 @@ replays 4 updates of a 24-update run four ways:
 
 The learned state must come out bit-for-bit identical, and a source check must find no step-based rule.
 
-**Why the board shows zero.** It is not a failure. Tier 3 is never reached because BCAP has 11 and BISPF 10 Tier 2
-failures in clockfree_continuous. Both recipes pass all four comparisons:
+**Why the board shows zero.** It is not a failure. Tier 3 was never reached because BCAP had 11 and BISPF 10 Tier 2
+failures in clockfree_continuous revision 3 (BISPF's 10 are all held now; BCAP still fails `mode_hold`). Both
+recipes pass all four comparisons:
 
 - in Torch 2.13 diagnostics (`a61d4c1b`, `6e14efde`);
 - in their own selected cohorts, as the Tier 1 `clockfree_audit_measurement_v1` (receipts `00dd0a06`, `9fb83c34`).
@@ -303,9 +371,12 @@ The scheduled recipes (K3P, KA2, R1/R2, GAN v3) really fail, and they already fa
 **Why it is a duplicate.** `clockfree_audit` and `clockfree_audit_measurement_v1` run the same probe and use the same
 grader (`views._clockfree`, adapter `clockfree_audit`, evaluation kind `clockfree_parity`, the same four
 conditions). They are separate jobs: the measurement copy's execution adds `clock_audit_scope` and
-`clock_audit_parent`, and the strict copy first checks a recipe's learning-rate floor (`lr_floor`) for unexplained
-clock dependencies and refuses to start (BLOCKED) where the measurement copy measures them and records FAIL. The two
-pass for the same recipes, so counting both counts one claim twice in one view.
+`clock_audit_parent`, and the strict copy refuses to start (BLOCKED) a recipe whose learning-rate floor (`lr_floor`)
+is an unexplained clock dependency, and grades an unexplained dependency found by the source audit as BLOCKED where
+the measurement copy records FAIL. Where the strict copy did run, its recorded diagnostic results for K3P, KA2,
+R1/R2, GAN v3 and E22 are FAIL (the step counter changed the learned state;
+[actual-missing-diagnostics-20261014](../actual-missing-diagnostics-20261014/README.md)). The two pass for the same
+recipes, so counting both counts one claim twice in one view.
 
 **Decision.** The clock-free claim stays counted once, at Tier 1. The Tier 3 copy stays assigned as a diagnostic in
 clockfree_continuous with `removal.reason = duplicate` and `counted_by = clockfree_audit_measurement_v1`, because the
@@ -376,6 +447,11 @@ training moves it.
   not shown to conflict.
 - **The reverse holds too:** BISPF and BCAP hold the ring but not the Gaussian.
 
+The view's summary for this test begins "Neither selected recipe": it describes BCAP and BISPF, the only selected
+recipes with recorded Tier 2 results. In diagnostic runs K3P and KA2 keep 71 of the 72 stay-matched checks, miss
+re-acquisition and hold 22/24 and 16/24 afterwards; R1/R2 and GAN v3 keep 19/72 and 11/72. All eight still fail the
+test. Correcting the summary's wording needs a new view revision (see [Follow-ups](#follow-ups)).
+
 No recorded recipe has shown this test, `ring16_acquisition`, `mode_hold` and ring endurance together; for the one
 candidate that passes both this test and `mode_hold`, the ring tests were never run.
 
@@ -417,7 +493,8 @@ must also pass every counted Tier 1 and Tier 2 test, including `ring16_acquisiti
 - overall distance to the real data (SW1, normalised): at most 0.18;
 - share of samples in the wrong blobs (mass TV): at most 0.15;
 - share of samples close to some blob (HQ): at least 0.85;
-- each blob's spread (covariance error): at most 0.85;
+- the average spread error across the blobs (covariance error): at most 0.85; one narrow blob's own error can be far
+  larger while the average passes;
 - no squashed blob: the thinnest direction keeps at least 15% of the target variance (eigen ratio at least 0.15);
 - every blob gets at least a quarter of its share (mass ratio at least 0.25).
 
@@ -469,8 +546,8 @@ without the share floor.
 
 **What fails.**
 
-- **BCAP:** gets the shares wrong. The 0.12 blob holds 197 of 4,096 samples (covariance error 23.9), mass TV is 0.29
-  and SW1 0.30.
+- **BCAP:** gets the shares wrong. The 0.12 blob holds 197 of 4,096 samples and its own spread error is 23.9, so the
+  average covariance error is 6.29 against 0.85; mass TV is 0.29 and SW1 0.30.
 - **BISPF:** shapes pass, but mass TV is 0.25 and SW1 0.27.
 - **No PASS in the attempt index:** none of its 27 indexed records passes.
 
@@ -516,7 +593,7 @@ is never confused. Its passers clear the gates with wide margins (shares off by 
 just place them. The recipes that manage it use a different critic (K3P, KA2, R1/R2) or data-matching transport
 forces (the kinetic research recipes).
 
-**Who passes it alone, and what they break.** 16 recorded recipes pass it:
+**Who passes it alone, and what they break.** 16 recipes have a recorded pass under the current declaration:
 
 - **12 in the attempt index** (K3P, KA2, R1/R2 and nine research recipes): 11 fail Tier 1 `ring16_acquisition` and
   one (`kinetic-local-dualnorm-g-history-reference8-u-v1`) timed out on it; all 12 fail `mode_hold`. K3P, KA2 and
@@ -546,7 +623,7 @@ SW1 at most 0.18.
 **Why it is hard.** An adversarial game aimed at a broad target tends to circle the answer instead of settling on it,
 so staying put needs an extra steadying force.
 
-**Who passes it alone, and what they break.** 15 recorded recipes pass it:
+**Who passes it alone, and what they break.** 15 recipes have a recorded pass under the current declaration:
 
 - **11 in the attempt index** (K3P and ten research recipes): all fail `mode_hold`; 10 fail Tier 1
   `ring16_acquisition` and one timed out on it. On `grid100` 8 fail and 3 timed out; on `img_bars4` 10 fail and 1
@@ -589,7 +666,8 @@ variants (2 of 4); kinetic transport and history variants (3-4 bars, 26-27 clean
 
 **Who passes it alone, and what they break.** R1/R2 and GAN v3 pass. Both fail Tier 1 `ring16_acquisition` and the
 clock measurement, which BCAP and BISPF pass, and both fail the counted `img_stripes2`. Of 21 recipes with results on
-both tests, none passes `img_bars4` and `img_stripes2` together.
+both tests under the current declarations, none passes `img_bars4` and `img_stripes2` together; five older historical
+receipts pass both under earlier contracts (see [Recorded passers](#recorded-passers)).
 
 <a name="img_blobs4"></a>
 
@@ -656,7 +734,7 @@ BISPF's rebuilt run reproduces its recorded result digit for digit.
 
 **What fails.**
 
-| Test | BCAP on target | BISPF on target | Best ever (any recipe) |
+| Test | BCAP on target | BISPF on target | Best 7,000-update result, current declaration (any recipe) |
 | --- | ---: | ---: | ---: |
 | `grid100` | 24% | 37% | 54% |
 | `rotated100` | 26% | 27% | 51% |
@@ -664,7 +742,8 @@ BISPF's rebuilt run reproduces its recorded result digit for digit.
 
 - **BCAP and BISPF:** centres are off by 1.1-1.5 blob-widths, many blobs are thin or nearly empty, and 22-34% of
   points land far out in the gaps.
-- **The best recipe ever:** places the centres correctly but makes every blob about twice too wide.
+- **The best recipe under the current declaration:** places the centres correctly but makes every blob about twice too
+  wide.
 - **Attempts:** 84 in the attempt index (28 per test): 56 FAIL, 15 BLOCKED and 13 TIMEOUT. Every completed run passes
   0 of the final 5 checks; the 13 timed-out runs stopped before reaching them.
 
@@ -680,8 +759,12 @@ clean outputs fail 0 of 5 checks.
 - The closest clean result is K3P on an uncounted straight-line generator variant: 99.5% on target, but blobs 27% too
   small and shrinking.
 
-**Who passes it alone.** Nobody: no PASS exists in the attempt index or in any published research result. The
-recipes that reach 49-56% are refused on the Tier 1 smoke tests, or fail `two_pole` and `unused_token_hold`.
+**Who passes it alone.** Nobody under the current declaration: no PASS exists in the attempt index or in any
+published research result. The recipes that reach 49-56% are refused on the Tier 1 smoke tests, or fail `two_pole`
+and `unused_token_hold`. The 36 to 39 historical PASS receipts per test used the earlier noisy evaluation and
+fixed-particle contracts (see [Recorded passers](#recorded-passers)). The view summaries' "best recipe ever" means
+the best 7,000-update result under the current declaration; the 14k rescue continuations (precision 0.65-0.70) and
+the uncounted straight-line variant above are separate questions.
 
 **Re-entry criterion (each).** Count it again when one global recipe has an ordinary PASS on the unchanged
 declaration (clean sampling, live weights, 5 final checks and the 100,000-point holdout). The recipe must still pass
@@ -702,7 +785,8 @@ updates, and check that it still passes. The task also requires the clock audit 
 **Why they cannot count now.** No recipe has a passing 7,000-update parent, so every ordinary start is refused before
 training (10, 10 and 11 refused starts). That is a dependency, not a separate measured failure. A separate "rescue"
 run continued BISPF's failed 7k states anyway. Precision jumped once and then stayed flat: 0.68, 0.65 and 0.70
-against 0.97, with blobs still 70-80% too wide. More training alone does not rescue a failed model.
+against 0.97, with the blobs still far too spread out (relative covariance trace bias 0.822, 0.788 and 0.715
+against a limit of 0.10). More training alone does not rescue a failed model.
 
 **Mechanics.** A counted test may not depend on an uncounted one, so each 14k test is held with `blocked_by` naming
 its held parent.
@@ -740,13 +824,16 @@ parts:
   tier-prerequisite zero.
 - **BCAP:** the failure is real. It fails `mode_hold` (the gate) and loses the hold at update 3,760 (HQ 0.897).
 - **K3P, KA2, R1/R2 and GAN v3:** never show all 8 blobs.
-- **Duplicate records:** five research FAIL records are byte-identical copies of BCAP's run.
+- **Duplicate records:** five research FAIL records have identical saved curves to BCAP's run (curve hash
+  `248878f828c5`; first hold failure at update 3,760), so they are not independent evidence.
 
 **What changes: counted once instead of twice, every requirement kept.** One run used to count twice in four views,
-and a failed hold counted as two failures.
+and a failed hold counted as two non-passes (the hold's FAIL plus a BLOCKED extension).
 
 - **`ring_extension` stays counted** as the single ring endurance verdict. This keeps all 300 extension checks in
-  the count, as the handoff asked ("fold its 300-check requirement into one endurance score").
+  the count. The handoff proposed the opposite assignment (stop counting `ring_extension` separately and keep
+  `ring_hold`), with the goal of folding the 300-check requirement into one endurance score. This decision keeps that
+  goal, one endurance score that keeps all 300 checks, but counts `ring_extension` instead, for the reasons below.
 - **`ring_hold` leaves the count** (`removal.reason = phase`, `counted_by = ring_extension`). It stays assigned in the
   same tier and the same uninterrupted group, so the planner still runs one ring job. A `ring_extension` PASS implies
   a `ring_hold` PASS on the same run, so no gate is weakened.
@@ -946,7 +1033,12 @@ without the late-phase renderer file) had 5,719 passed, 143 failed, 235 errors a
 `reports/forge/test_collect_gaussian_smoke_inventory.py`) had 79 passed, 12 failed and 9 errors. After that commit,
 in a shallow clone (only the newest commits): CI suite 5,955 passed, 24 failed, 115 errors and 358 skipped (240 tests
 newly pass or skip with a named reason); report-local files 81 passed, 10 failed and 9 errors, none newly failing.
-Tests that need old commits were also run with those commits supplied read-only, and passed.
+The history-dependent tests changed in that commit were also run with those commits supplied read-only, and passed;
+other history-only tests that still fail with the old commits present are listed below. In the final state of this
+change, run in the same checkout after the old commits had become readable in it: CI suite 6,138 passed, 44 failed,
+34 errors and 346 skipped, with none newly failing against `develop`; report-local files 97 passed and 4 failed.
+Every remaining failure belongs to a group in the table below (`test_coulomb_prior` failed in that run and passes
+when rerun alone).
 
 - **Shallow clone**: a copy of the repository that holds only the newest commits. Tests that read an older commit
   cannot run in it. CI checks out the full history (`fetch-depth: 0`).
@@ -972,7 +1064,7 @@ only) and LEFT_FAILING (cause and proposed fix recorded).
 | `test_cli_has_one_default_destination` (masked) | FIXED (stale expectation) | The command line deliberately gained `--output-prefix` for independent reports (help text "write an independent source report; do not register or change current selections"; guarded by `reports/forge/recipe-prior-refactor/test_publication_roster.py::test_independent_report_cli_cannot_mutate_current_policy`). The test now checks that an output prefix cannot refresh the current board and leaves its files unchanged, instead of expecting the option to be unknown. |
 | `test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs` (1, hash mismatch) | FIXED (stale replay; needs full history) | The test rebuilds the registry of scoped publications as recorded by the tier-1 completion round. A later cohort (`atlas-compatible-coverage-20261013`) was registered afterwards, so the rebuilt registry now keeps only the round's own cohort; its hash then equals the recorded `3bd16ed0...` exactly. The rest of the test reads commits `9c4fcd86` and `928b485f`, so in a shallow clone it still errors at `git rev-parse`; with those commits supplied read-only it passes. CI has full history. |
 | Registration path renders before writing its new snapshot: `test_explicit_frozen_regrade_registers_evidence_and_updates_canonical`, `test_source_registration_preserves_interrupted_receipt_with_missing_worker_time`, `test_explicit_policy_advance_preserves_original_cohorts_without_new_credit`, `test_policy_advance_rebinds_same_selected_recipes_and_archives_exact_card[True/False]`, `test_archived_policy_corruption_cannot_overwrite_current_publication`, `test_same_source_cpu_registration_retains_cuda_evidence`, `test_unmeasured_other_backend_cannot_overwrite_measured_registration` (8; 3 visible at baseline, 5 masked) | LEFT_FAILING (production bug, not in the decided scope) | When `publish_current` registers new evidence (`--source-commit`), it validates and renders all pages before writing the new content-addressed snapshot (`reports/forge/technique-evidence/<sha256>.json`), by design (see the comment in `family_reports.render_family`). The test-performance page builder (`test_performance.build_report`, called from `_family_pages`) reads that snapshot from disk, so registration fails with "file not found" before writing anything. `reports/forge/pure-bcap/publish.py` has the same order. Proposed fix: pass the pending snapshot bytes from `publish_current` (and the pure-BCAP composer) through `_family_pages` and `generated_reports` into `build_report`, which preloads them into its `Inputs` cache; existing callers are unchanged. After that, `test_explicit_policy_advance_preserves_original_cohorts_without_new_credit` also needs its stale "0(*)/5" updated. |
-| `test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence` (after the roster fix) | LEFT_FAILING (needs an owner decision) | It now stops at `"halloween" not in text`: the hidden Halloween family appears on the main board as a "(historical cohort)" in the tag directory, because `_tag_directory` lists every historical family regardless of `inventory_visible`. Either historical listings should honour the hidden flag (renderer change) or the test should accept historical listings. The test also still assumes the old one-table layout ("\| ↳ [" view rows and "families/" in every table line); those parts should be rewritten together with that decision. |
+| `test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence` (after the roster fix) | LEFT_FAILING (needs an owner decision) | It now stops at the `"tensorflow"` clause of its board assertion, and then at `"halloween"`: the hidden Halloween family and its `tag-tensorflow-v1-adam` tag appear on the main board as a "(historical cohort)" in the tag directory, because `_tag_directory` lists every historical family regardless of `inventory_visible`. Either historical listings should honour the hidden flag (renderer change) or the test should accept historical listings. The test also still assumes the old one-table layout ("\| ↳ [" view rows and "families/" in every table line); those parts should be rewritten together with that decision. |
 | `test_forge_views.py::test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer` (1) | FIXED (stale expectation) plus SKIP_WITH_REASON for its history part | PR #399 deliberately rebound the source pins of 7 of the 30 frozen legacy control cards (`evaluator_revision` `pr399-host-device-replay-source-only-v1`), and `tests/test_legacy_host_cuda_harness.py` requires exactly 27 such rebindings. The test now accepts exactly that one declared source-only layer over the frozen card and still checks everything else. Its comparison with commit `03466efa` skips with a message naming that commit when it is absent; with the commit supplied it passes. |
 | `test_forge_family_reports.py`: `test_current_clock_measurement_retains_original_evidence_alongside_policy_advance`, `test_current_measurement_families_complete_only_their_declared_view_scope` (2) | SKIP_WITH_REASON | Both rebuild the board published at commit `5737ade4`, absent from a shallow clone; the shared helper in `tests/archived_forge_contracts.py` now skips with a message naming that commit and no longer reuses a half-built mirror (that reuse caused the misleading "file not found" in the second test). With the commit supplied, both pass. |
 | `test_forge_atlas_evidence_navigation.py` (1, `NameError: _incompatible`) | FIXED (test-harness defect) | The test copies selected functions out of `family_reports.py`; `_count` now calls `_incompatible`, which the copy list lacked. Added it. |
@@ -980,12 +1072,12 @@ only) and LEFT_FAILING (cause and proposed fix recorded).
 | `test_pure_bcap_publication.py` (2) | FIXED (stale expectation) | The BCAP initial Adam study link moved from the main board to the BCAP family page (`family_reports.render_family` calls the pure-BCAP `display_section`; at `5737ade4` the main board appended it). The tests now check that the main board no longer carries it and that the family-page link stays bound to its receipt, including the "navigation binding" refusal. |
 | `test_forge_dualnorm_smoothing_search.py` (1) | FIXED (stale expectation) | Model families such as `gan` now inherit the DualNorm BCAP trainer (`DEFAULT_RECIPE = "bcap"`, smoothing 0.001), so `get_recipe("gan", optimizer_family="formulation")` is refused. The plain formulation recipe is now `get_recipe("gan", trainer="ka2")`, the same migration other tests use (`tests/test_adversarial_losses.py`, `tests/test_bcap_default_baseline.py`). |
 | `reports/forge/recipe-prior-refactor/test_workflow.py`: "Selected roster changed" (2) | FIXED (test-harness defect) | The two tests declared the campaign's controls against the live selection. The campaign's own published pins (`recipe-prior-refactor-*-v1`) and BISPF later replaced the seven leaders recorded in `baseline.json`, and `declarations_for` deliberately refuses a changed roster. The tests now use the recorded leaders and separately check the refusal; 42 declarations, 7 studies and exact aliases are unchanged. |
-| `test_forge_publication_memory.py` freshness (1) | FIXED by regeneration in this change | The compiled memory listed two removed records and pinned the old `knowledge.py` hash; it is recompiled with `compile --summaries-only` after the view revisions. |
+| `test_forge_publication_memory.py` freshness (1) | FIXED by regeneration in this change | The compiled memory pinned the old `knowledge.py` hash and listed two study readouts, `ring16-duration-20261011-readout` and `ring16-schedule-20261011-readout`, whose record and evidence files were never committed, so a clean compile cannot reproduce them (their text remains in the memory at commit `224958a3`). The memory is recompiled with `compile --summaries-only` after the view revisions. If those studies should stay in memory, their files must be recovered and committed. |
 | `test_archived_forge_contracts.py` published-view replay (1) | FIXED in this change | It compared the archived view fixture with the live publication's input hashes, which differ for every revised view. It now compares the fixture with `family_progress.input_hashes` recorded at commit `5737ade4`, and skips with a reason naming that commit when it is absent. The fixture keeps the original bytes of each revised view. |
-| History-only, failing on purpose without old commits: `test_bcap_integration_compatibility` (63 errors, needs `5737ade4`), `test_bcap_default_baseline` (18 errors, `git archive 5737ade4`), `test_recipe_prior_task_migration` (1, `03466efa`), `test_critic_balance_runner`, `test_generator_step_runner`, `test_routed_generator_batch_identity` (1 each, `git update-ref` to absent commits), report-local `test_publication_roster` (7, `a0493ca3`), `test_publication_migration` (9 errors, `a0493ca3`), `test_workflow::test_baseline_is_actual_committed_develop_bytes` (1, `03466efa`) | OUT_OF_SCOPE | With the old commits available, `test_bcap_default_baseline` (18), `test_publication_roster` (7), `test_baseline_is_actual_committed_develop_bytes`, 39 of the 63 `test_bcap_integration_compatibility` tests and 7 of the 9 `test_publication_migration` tests pass. Still failing then, for reasons unrelated to the view revisions: 24 `test_bcap_integration_compatibility::test_inactive_original_component_hosts_are_bitwise_develop` cases (the applied recipes now carry `prior_coulomb_*` fields that commit `5737ade4` did not have), `test_recipe_prior_task_migration` (a `grid100_14k` task-card difference from `03466efa`; no task declaration changed in this change), the three `git update-ref` tests (their private repositories lack the commit they point `HEAD` at) and two `test_publication_migration` tests (next row). |
+| History-only, failing on purpose without old commits: `test_bcap_integration_compatibility` (63 errors, needs `5737ade4`), `test_bcap_default_baseline` (18 errors, `git archive 5737ade4`), `test_recipe_prior_task_migration` (1, `03466efa`), `test_critic_balance_runner`, `test_generator_step_runner`, `test_routed_generator_batch_identity` (1 each, `git update-ref` to absent commits), report-local `test_publication_roster` (7, `a0493ca3`), `test_publication_migration` (9 errors, `a0493ca3`), `test_workflow::test_baseline_is_actual_committed_develop_bytes` (1, `03466efa`) | OUT_OF_SCOPE | With the old commits available, `test_bcap_default_baseline` (18), `test_publication_roster` (7), `test_baseline_is_actual_committed_develop_bytes`, 39 of the 63 `test_bcap_integration_compatibility` tests and 7 of the 9 `test_publication_migration` tests pass. Still failing then, for reasons unrelated to the view revisions: 24 `test_bcap_integration_compatibility::test_inactive_original_component_hosts_are_bitwise_develop` cases (the applied recipes now carry `prior_coulomb_*` fields that commit `5737ade4` did not have), `test_recipe_prior_task_migration` (a `grid100_14k` task-card difference from `03466efa`; no task declaration changed in this change), two `test_publication_migration` tests (next row) and the three `git update-ref` tests. Those three fail here only because this checkout is itself shallow: `git clone --shared` of a shallow repository does not share its object store, so each test's private clone lacks the old commit even when this checkout has it. They are expected to pass in the full-history CI clone. |
 | Report-local `test_publication_migration`: `test_ordinary_whole_rows_preserve_original_card_and_history_without_ranking`, `test_archived_presentation_restores_guard_and_cannot_hide_new_measurement` (2 of its 9 history errors) | OUT_OF_SCOPE (found once full history was available) | With commit `a0493ca3` present they stop at the selection roster check (`trainer_families.current_family_candidates`, reached from `publication_migration.advance_selection`): the campaign's historical selection card has no pin for BISPF, a family added later. This is independent of the view revisions. Past that check, `advance_selection` also requires the live discriminator_stability view to be revision 9 ("current view changed"), so a fix should also decide whether it reads the archived revision 9, as `workflow.ordinary_contract` now does. |
-| Report-local `test_publication_migration`: `test_final_registration_and_actual_initial_laws_are_bound`, `test_changed_registration_source_roster_or_initial_law_is_rejected[initial_law]` (2) | OUT_OF_SCOPE (cause differs from the listed one) | These are not history failures. `workflow.resolve_plans` rebuilds the campaign's requests from the live checkout and compares them with the frozen registration; the live source digest, candidate revision, study admission and task keys have all changed since the campaign, so they fail even with full history. |
-| Library behaviour outside Forge: `test_coulomb_prior` (pair count 16, expected 8), `test_r1_rotation` (plain optimizers now require disabled guard, anchor, latent damping and direct particle gain), `test_particle_native_2d` (1 error) and `test_toy_api_diagnostics` (2) ("direction blend step requires protected-loss backward"), `test_bcap_compatibility_adapter` (`SimpleNamespace` has no `DEVELOP`) | OUT_OF_SCOPE | Recorded only; these follow recipe/library API changes outside the Forge reporting code. |
+| Report-local `test_publication_migration`: `test_final_registration_and_actual_initial_laws_are_bound`, `test_changed_registration_source_roster_or_initial_law_is_rejected[initial_law]` (2) | OUT_OF_SCOPE (cause differs from the listed one) | These are not history failures. `workflow.resolve_plans` rebuilds the campaign's requests from the live checkout and compares them with the frozen registration. It now refuses first with "Use the explicit revision-9 recipe-owned ordinary view", because planning reads the live discriminator_stability view, which is revision 11. Past that guard the live source digest, candidate revision, study admission and task keys have all changed since the campaign, so they fail even with full history. |
+| Library behaviour outside Forge: `test_coulomb_prior` (pair count 16, expected 8; intermittent, it passes in some runs), `test_r1_rotation` (plain optimizers now require disabled guard, anchor, latent damping and direct particle gain), `test_particle_native_2d` (1 error) and `test_toy_api_diagnostics` (2) ("direction blend step requires protected-loss backward"), `test_bcap_compatibility_adapter` (`SimpleNamespace` has no `DEVELOP`) | OUT_OF_SCOPE | Recorded only; these follow recipe/library API changes outside the Forge reporting code. |
 | Missing PyYAML: 33 test files fail to import, plus `test_mog_api` (2) | OUT_OF_SCOPE | The shared Python runtime has no PyYAML and must not be changed. |
 
 The committed-page freshness guard
@@ -1007,12 +1099,18 @@ These tests pinned the old views or the old leaderboard text; each now pins the 
   when that commit is absent.
 - `reports/forge/recipe-prior-refactor/workflow.py`: the campaign's revision-9 contract reads the archived
   `configs/forge/view-history/discriminator_stability-v9.json` instead of requiring the live view to be revision 9.
+  Its planning paths (`resolve_plans` and an installing `prepare`), which resolve the live view, still refuse any
+  later revision with the revision-9 message, so plans can never be built from revision 11 and recorded as revision 9.
 - `tests/test_forge_current_technique_inventory.py`: the check that keeps an old Atlas "7/8" progress score off the
   board now matches only a standalone "7/8", because BISPF's new total "77/81" contains those characters.
 - The tier-report count dictionaries gained `"held": 0` (commit `856db97f`).
 - New in `tests/test_forge_dispositions.py`: every hold and removal note in every declared view comes verbatim from
   one applied record of [dispositions.json](dispositions.json), `test-dispositions check` reports no drift, and every
   explanation link resolves to an explicit anchor in this README.
+- After review: the published-view replay test runs its checks that need no history before it skips for the
+  missing commit `5737ade4`; `tests/test_forge_attempt_coverage.py` expects "1 diagnostic attempt" (singular, as "1
+  error" and "1 timeout" already were); `reports/forge/recipe-prior-refactor/test_workflow.py` checks that the
+  campaign's planning refuses the live revision 11 with the revision-9 message.
 
 <a name="calibration"></a>
 
@@ -1022,8 +1120,9 @@ These tests pinned the old views or the old leaderboard text; each now pins the 
 CPU-only Monte Carlo draws from each task's own true target law, scored by the unchanged scorer and graded by Forge's
 own grader. No training, generator or recipe is involved. It ran against the `224958a3` sources (the scorer hashes
 are recorded in the summary). [calibration-full-summary.json](calibration/calibration-full-summary.json) holds every
-panel's pass rates and metric quantiles, and [calibration-full-panels.jsonl](calibration/calibration-full-panels.jsonl)
-holds one line per panel. The 25,600 per-check rows (about 30 MB) are not committed.
+panel's record (its `panels` list), pass rates and metric quantiles. While it runs, the script also writes the same
+panel records as a tail-able `calibration-<full|quick>-panels.jsonl` log; like other JSONL traces, that log and the
+25,600 per-check rows (about 30 MB) stay outside Git.
 
 Rerun it from the repository root, CPU only (about 5 minutes; `--quick` runs a 4-repetition smoke test):
 
@@ -1031,7 +1130,7 @@ Rerun it from the repository root, CPU only (about 5 minutes; `--quick` runs a 4
 CUDA_VISIBLE_DEVICES= python reports/forge/test-dispositions-20261015/calibration/calibrate_vector_gates.py
 ```
 
-It rewrites the summary and panels files next to the script (or in `--output-dir`). Every draw uses a named seed, so
+It rewrites the summary and the panels log next to the script (or in `--output-dir`). Every draw uses a named seed, so
 the pass rates and quantiles reproduce exactly; only the timing fields and the recorded source hashes of edited files
 change. `--observations <path>` also writes the per-check rows; keep that file outside Git.
 
@@ -1084,6 +1183,18 @@ change. `--observations <path>` also writes the per-check rows; keep that file o
 - **Registration path:** fix the render-before-write order described in the [pytest ledger](#pytest).
 - **Recipe-prior-refactor publication migration:** resolve the BISPF roster check and the revision-9 binding in
   `publication_migration.advance_selection` (see the [pytest ledger](#pytest)).
+- **Hold summary wording, in the next view revision:** the notes are fingerprinted view policy, so they were not
+  edited here. Scope the "recorded" and "ever" claims to the current declaration (`img_bars4`, `img_blobs4`,
+  `img_intensity2`, `vector_anisotropic`, `vector_overlap`, and "the best recipe ever" in the three 100-blob notes,
+  which means the best 7,000-update result), and replace `gaussian1d_stability`'s "Neither selected recipe" with
+  "Neither BCAP nor BISPF".
+- **Per-view goal tables:** `reports/forge/leaderboards/*.md` (linked from the experiments-by-tier report and the
+  compiled memory) are rewritten only by a full `python -m experiments.forge compile`, which this change did not run.
+  Until then they show the previous view revisions; after it they also show each view's held count beside its
+  status.
+- **Two study readouts missing from the memory:** recover and commit the records and evidence of
+  `ring16-duration-20261011-readout` and `ring16-schedule-20261011-readout` if they should stay in the compiled
+  memory (see the [pytest ledger](#pytest)).
 
 ## Operations note for merging
 
@@ -1097,13 +1208,14 @@ and removed assignments are still selected for attempts.
 
 - [dispositions.json](dispositions.json): one record per decision (schema `forge_test_dispositions_v1`). It is the
   input to `test-dispositions check|apply` and provenance; grading never reads it, so view fingerprints never depend
-  on it. Records with `"applied": false` (the policy questions) are validated but not applied.
+  on it. Each view entry pins its base revision's policy fingerprint (`from_fingerprint`). Records with
+  `"applied": false` (the policy questions) are validated but not applied.
 - Revised views: adaptation 3, clockfree_continuous 4, discriminator_stability 11, formulation_comparison 2,
   host_profile_transfer 5, quality_coverage 3. Archives of the previous revisions, byte for byte:
   `configs/forge/view-history/adaptation-v2.json`, `clockfree_continuous-v3.json`, `discriminator_stability-v9.json`,
   `formulation_comparison-v1.json`, `host_profile_transfer-v4.json`, `quality_coverage-v2.json`.
-- [calibration/](calibration/): the declared vector calibration script and its summary and panels.
+- [calibration/](calibration/): the declared vector calibration script and its summary, which includes every panel.
 - Code and reports: commit `a748ae22` (held and removed-from-count roles, the HELD status and the archive-first apply
   command), commit `856db97f` (held and removed tests on the leaderboard, family pages and experiments-by-tier
-  report) and commit `579573b0` (pre-existing test repairs). The regenerated pages come from this change's
-  `--refresh-publication` run.
+  report), commit `579573b0` (pre-existing test repairs) and the review-repair commit (`fix: address review
+  findings`). The regenerated pages come from this change's `--refresh-publication` run.

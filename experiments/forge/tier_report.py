@@ -173,7 +173,8 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         *(["Held tasks are still run and shown but are not counted until one recipe passes them together with "
            "every counted task. A diagnostic task removed from the count is carried by another counted task or "
            "cannot run as declared. Each such role links to its explanation; a view whose highest tier has only "
-           "held tasks reports HELD, never PASS.", ""] if uncounted else []),
+           "held tasks never shows PASS: a candidate that passes every counted tier gets HELD, and a counted "
+           "failure still shows as a failure.", ""] if uncounted else []),
         "Steps and timeouts are declared per task, rather than measured costs. "
         "Tasks in an uninterrupted execution group share one run; their budgets must not be added together. "
         "Continuation rows distinguish total steps from additional or extension steps.", "",
@@ -219,8 +220,8 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             return None
         if not any(tier["counts"]["required"] for tier in tiers):
             return "Nothing in this view is counted while its tasks are held, so it reports HELD for every candidate."
-        return (f"Tier {tiers[-1]['qualification_tier']}, the highest tier, has only held tasks, so this view reports "
-                "HELD, never PASS, while they are held.")
+        return (f"Tier {tiers[-1]['qualification_tier']}, the highest tier, has only held tasks, so while they are "
+                "held this view never shows PASS: a candidate that passes every counted tier gets HELD.")
 
     for view in report["views"]:
         counts = [count_text(tier) for tier in view["tiers"]]

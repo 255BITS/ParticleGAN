@@ -760,6 +760,14 @@ def test_held_top_tier_reports_held_never_pass_and_keeps_counted_failures_visibl
     (lambda a: a["hold"].update(explanation="/tmp/README.md#b"), "path#anchor"),
     (lambda a: a["hold"].update(explanation=EXPLANATIONS), "path#anchor"),
     (lambda a: a["hold"].update(explanation="../README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/README.txt#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/README.md#"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/READ ME.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="https://example.com/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="C:/Users/x/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="~/notes/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(summary=" Fixture: a leading space is not plain text."), "20-280"),
     (lambda a: a["hold"].update(reentry="later"), "re-entry"),
     (lambda a: a["hold"].update(blocked_by=["a"]), "exactly its held prerequisites"),
     (lambda a: a["hold"].update(reason="held_prerequisite"), "held_prerequisite"),
@@ -819,12 +827,19 @@ def test_removed_phase_keeps_one_counted_verdict_and_its_prerequisites():
     counted["assignments"][1]["importance"] = "required"
     counted["assignments"][1].pop("removal")
     assert qualify(counted, tasks, results[:1])["next_tasks"] == ["phase"]
+    # In one tier the counted job still waits for the gate that its removed phase needs.
+    same_tier = deepcopy(view)
+    same_tier["assignments"][0]["qualification_tier"] = 2
+    same_tier["assignments"].insert(0, dict(task="smoke", qualification_tier=1, importance="required", order=9))
+    tiered_tasks = {**tasks, "smoke": simple_task("smoke")}
+    assert qualify(same_tier, tiered_tasks, [receipt(tiered_tasks["smoke"])])["next_tasks"] == ["gate"]
 
 
 @pytest.mark.parametrize("mutation,match", [
     (lambda t, v: v["assignments"][1]["removal"].update(counted_by="gate"), "nonrequired"),
     (lambda t, v: v["assignments"][1]["removal"].update(reason="duplicate"), "nonrequired"),
     (lambda t, v: [t[n]["execution"].pop("uninterrupted") for n in ("phase", "extension")], "nonrequired"),
+    (lambda t, v: t["phase"]["execution"].update(execution_group="other"), "nonrequired"),
     (lambda t, v: t["extension"].update(dependencies=[dict(task="phase", kind="gate")]), "nonrequired"),
     (lambda t, v: v["assignments"][1].update(qualification_tier=1), "uninterrupted execution group"),
     (lambda t, v: v["assignments"][2].update(importance="held", hold=hold("extension")), "phase removal"),
@@ -840,6 +855,34 @@ def test_phase_exception_is_narrow(mutation, match):
     mutation(tasks, view)
     with pytest.raises(ValueError, match=match):
         validate_view(view, tasks)
+
+
+def test_removed_phase_prerequisites_must_be_counted_like_its_counted_verdict():
+    """A held or uncounted gate behind a removed phase would decide the counted verdict."""
+    tasks, view = phase_tasks()
+    held_gate = deepcopy(view)
+    held_gate["assignments"][0].update(importance="held", hold=hold("gate"))
+    with pytest.raises(ValueError, match="removed phase phase depends on held task gate; count gate, "
+                                         "or hold extension and phase with reason held_prerequisite"):
+        validate_view(held_gate, tasks)
+    # The suggested repair is valid: the phase and its counted verdict are held behind the gate.
+    held_gate["assignments"][1].pop("removal")
+    held_gate["assignments"][1].update(importance="held", hold=hold("phase", reason="held_prerequisite", blocked_by=["gate"]))
+    held_gate["assignments"][2].update(importance="held", hold=hold("extension", reason="held_prerequisite",
+                                                                    blocked_by=["phase"]))
+    validate_view(held_gate, tasks)
+    probed_tasks, probed = deepcopy(tasks), deepcopy(view)
+    probed_tasks["probe"] = simple_task("probe")
+    probed_tasks["phase"]["dependencies"].append(dict(task="probe", kind="gate"))
+    probed["assignments"].append(dict(task="probe", qualification_tier=1, importance="diagnostic", order=3))
+    with pytest.raises(ValueError, match="nonrequired task \\(its removed phase phase depends on probe\\)"):
+        validate_view(probed, probed_tasks)
+    # The same holds for the real ring group: mode_hold gates ring_hold, which ring_extension replays.
+    stability, all_tasks = load_view(ROOT, "discriminator_stability"), load_tasks(ROOT)
+    gate = next(a for a in stability["assignments"] if a["task"] == "mode_hold")
+    gate.update(importance="held", hold=hold("mode_hold"))
+    with pytest.raises(ValueError, match="ring_extension: its removed phase ring_hold depends on held task mode_hold"):
+        validate_view(stability, all_tasks)
 
 
 def test_duplicate_removal_names_an_earlier_counted_task_with_the_same_grader():
@@ -858,12 +901,32 @@ def test_duplicate_removal_names_an_earlier_counted_task_with_the_same_grader():
                       v["assignments"][2].update(qualification_tier=1)],
         lambda t, v: t["probe"].update(adapter="another_host"),
         lambda t, v: t["copy"]["evaluation"].update(kind="custom_probe"),
+        # Same grader family but a different question: another bound or another source pin.
+        lambda t, v: t["copy"]["evaluation"].update(thresholds=[["error", "<=", 0.5]]),
+        lambda t, v: t["probe"]["evaluation"].update(sources={"benchmarks/other_scorer.py": "0" * 64}),
     ]
     for mutation in cases:
         bad_tasks, bad = deepcopy(tasks), deepcopy(view)
         mutation(bad_tasks, bad)
         with pytest.raises(ValueError, match="duplicate removal"):
             validate_view(bad, bad_tasks)
+    # A derived counted copy may pin the duplicate's own declaration as provenance.
+    derived = deepcopy(tasks)
+    derived["probe"]["evaluation"]["sources"] = {"configs/forge/tasks/copy.json": "0" * 64}
+    validate_view(view, derived)
+
+
+def test_duplicate_rule_accepts_the_clock_audit_copy_but_not_a_different_density_test():
+    all_tasks = load_tasks(ROOT)
+    clock = load_view(ROOT, "clockfree_continuous")
+    assert next(a for a in clock["assignments"] if a["task"] == "clockfree_audit")["removal"]["counted_by"] == (
+        "clockfree_audit_measurement_v1")
+    quality = load_view(ROOT, "quality_coverage")
+    spiral = next(a for a in quality["assignments"] if a["task"] == "vector_spiral")
+    assert spiral["importance"] == "required"
+    spiral.update(importance="diagnostic", removal=removal("vector_spiral", "duplicate", "vector_two_broad"))
+    with pytest.raises(ValueError, match="vector_spiral: a duplicate removal"):
+        validate_view(quality, all_tasks)
 
 
 def test_previous_revision_names_its_exact_archive():

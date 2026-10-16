@@ -9,7 +9,7 @@ import pytest
 from experiments.forge import dispositions
 from experiments.forge.__main__ import main
 from experiments.forge.contracts import atomic_json, canonical
-from experiments.forge.views import load_tasks, load_view, qualify
+from experiments.forge.views import load_tasks, load_view, qualify, view_fingerprint
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,14 +44,22 @@ def repo(tmp_path):
     return tmp_path
 
 
+def base_fingerprint(view_id, revision):
+    """The decided base revision's policy fingerprint, read from the committed archive or live view."""
+    archive = ROOT / dispositions.archive_path(view_id, revision)
+    return view_fingerprint(json.loads((archive if archive.is_file() else
+                                        ROOT / "configs/forge/views" / f"{view_id}.json").read_text()))
+
+
 def registry(root, rows=DECIDED, **changes):
-    views = {view: {"from_revision": revision,
+    views = {view: {"from_revision": revision, "from_fingerprint": base_fingerprint(view, revision),
                     "to_revision": revision + (2 if view == "discriminator_stability" else 1),
                     "archive": dispositions.archive_path(view, revision),
                     "policy_change_reason": f"Fixture dispositions: {view} holds and removes tests from its count."}
              for view, revision in BASE.items()}
     views["discriminator_stability"]["skipped_revision_note"] = "Revision 10 names an unadopted draft; it is skipped."
-    views["tier1_policy_coverage"] = {"from_revision": 1, "to_revision": 2,
+    views["tier1_policy_coverage"] = {"from_revision": 1, "from_fingerprint": base_fingerprint("tier1_policy_coverage", 1),
+                                      "to_revision": 2,
                                       "archive": dispositions.archive_path("tier1_policy_coverage", 1),
                                       "policy_change_reason": "Fixture: the policy view is revised in a follow-up change.",
                                       "applied": False, "apply_in": "follow-up change"}
@@ -172,6 +180,31 @@ def test_conflicting_archive_is_refused_before_any_write(repo):
     assert "configs/forge/view-history/quality_coverage-v2.json" not in dispositions.apply(repo, path)["archived"]
 
 
+def test_registry_pins_the_base_revision_so_an_unbumped_edit_is_never_archived(repo):
+    path, _ = registry(repo)
+    live = repo / "configs/forge/views/quality_coverage.json"
+    original = live.read_bytes()
+    view = json.loads(original)
+    # Hand edit without a revision bump: a Tier 2 test moves to Tier 1 in revision 2.
+    next(a for a in view["assignments"] if a["task"] == "img_stripes2")["qualification_tier"] = 1
+    live.write_text(json.dumps(view, indent=2) + "\n")
+    before = snapshot(repo)
+    report = dispositions.check(repo, path)
+    assert report["drift"] and report["views"]["quality_coverage"]["state"] == "conflict"
+    assert "not the registry's base revision" in report["views"]["quality_coverage"]["differences"][0]
+    with pytest.raises(ValueError, match="nothing was written"):
+        dispositions.apply(repo, path)
+    assert snapshot(repo) == before
+    # After a correct apply, a replaced archive no longer counts as the base revision.
+    live.write_bytes(original)
+    dispositions.apply(repo, path)
+    archive = repo / dispositions.archive_path("quality_coverage", 2)
+    archive.write_text(json.dumps(view, indent=2) + "\n")
+    report = dispositions.check(repo, path)
+    assert report["views"]["quality_coverage"]["state"] == "drift"
+    assert "not the registry's base revision" in report["views"]["quality_coverage"]["differences"][0]
+
+
 def test_each_file_keeps_its_key_order_and_unchanged_text(repo):
     path, value = registry(repo)
     originals = {view: (repo / f"configs/forge/views/{view}.json").read_text() for view in BASE}
@@ -263,6 +296,9 @@ def record(value, task):
     (lambda v: record(v, "17 indexed variants")["tasks"].append("missing_variant"), "declared tasks"),
     (lambda v: v["views"]["quality_coverage"].update(archive="configs/forge/view-history/quality_coverage.json"), "archive must be"),
     (lambda v: v["views"]["discriminator_stability"].pop("skipped_revision_note"), "skipped_revision_note"),
+    (lambda v: v["views"]["quality_coverage"].pop("from_fingerprint"), "needs"),
+    (lambda v: v["views"]["quality_coverage"].update(from_fingerprint="abc"), "from_fingerprint"),
+    (lambda v: v.update(explanations="https://example.com/README.md"), "repo-relative Markdown"),
     (lambda v: v["views"]["adaptation"].update(applied=False, apply_in="follow-up change"), "without an applied"),
     (lambda v: v["views"].update(k3p_two_pole_horizon=dict(v["views"]["quality_coverage"],
                                                            archive="configs/forge/view-history/k3p_two_pole_horizon-v2.json")),
@@ -304,6 +340,20 @@ def test_written_explanation_links_need_explicit_anchors(repo):
     readme.unlink()
     with pytest.raises(ValueError, match="explicit"):
         dispositions.check(repo, path)
+
+
+def test_validate_finds_every_hold_and_removal_link_whose_anchor_is_missing(repo):
+    path, _ = registry(repo)
+    dispositions.apply(repo, path)
+    views = [load_view(repo, name) for name in SIX]
+    assert dispositions.unresolved_explanations(repo, views) == []
+    readme = repo / EXPLANATIONS
+    readme.write_text(readme.read_text().replace('<a name="ring_hold"></a>', ""))
+    problems = dispositions.unresolved_explanations(repo, views)
+    assert len(problems) == 4 and all("ring_hold explanation" in problem for problem in problems)
+    assert all(f'<a name="ring_hold"></a> anchor in {EXPLANATIONS}' in problem for problem in problems)
+    readme.unlink()
+    assert len(dispositions.unresolved_explanations(repo, views)) == 71
 
 
 def test_retier_archives_the_previous_revision_first_and_refuses_conflicts(repo, monkeypatch, capsys):

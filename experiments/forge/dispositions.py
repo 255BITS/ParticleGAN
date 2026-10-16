@@ -13,8 +13,10 @@ views, and changing one is a policy change that needs a new archived revision.
 ``apply`` first copies each changed view's exact bytes to
 configs/forge/view-history/<view>-v<revision>.json (refusing a different file
 already there), validates every view, then writes the new revisions atomically
-in each file's own key order. A second apply changes nothing. Nothing here
-trains, grades or enqueues work.
+in each file's own key order. A second apply changes nothing. Each registry view
+entry pins its base revision's policy fingerprint (``from_fingerprint``), so a
+live file edited without a revision bump is refused instead of being archived
+as that revision. Nothing here trains, grades or enqueues work.
 """
 from __future__ import annotations
 
@@ -144,13 +146,17 @@ def _applied(record) -> bool:
 def _validate_view_entry(view_id, entry):
     label = f"registry view {view_id}"
     optional = {"skipped_revision_note", "applied", "apply_in"}
-    required = {"from_revision", "to_revision", "archive", "policy_change_reason"}
+    required = {"from_revision", "from_fingerprint", "to_revision", "archive", "policy_change_reason"}
     if (not isinstance(view_id, str) or Path(view_id).name != view_id or not isinstance(entry, dict)
             or not required <= set(entry) or set(entry) - required - optional):
         raise ValueError(f"{label} needs {sorted(required)} and optionally {sorted(optional)}")
     old, new = entry["from_revision"], entry["to_revision"]
     if type(old) is not int or type(new) is not int or not 1 <= old < new:
         raise ValueError(f"{label}: to_revision must follow from_revision")
+    # The decided base revision's policy fingerprint: a live file edited without a
+    # revision bump cannot be archived, or later accepted, as that revision.
+    if not isinstance(entry["from_fingerprint"], str) or not re.fullmatch(r"[0-9a-f]{64}", entry["from_fingerprint"]):
+        raise ValueError(f"{label}: from_fingerprint must be the base revision's SHA-256 policy fingerprint")
     if (new != old + 1) != ("skipped_revision_note" in entry):
         raise ValueError(f"{label}: a skipped revision number, and only one, needs skipped_revision_note")
     if "skipped_revision_note" in entry:
@@ -243,8 +249,9 @@ def validate_registry(registry: dict, tasks: dict) -> None:
     if not isinstance(registry["evidence_snapshot"], str) or not re.fullmatch(r"[0-9a-f]{40}", registry["evidence_snapshot"]):
         raise ValueError("evidence_snapshot must be a full commit id")
     explanations = registry["explanations"]
-    if (not isinstance(explanations, str) or not explanations.endswith(".md") or Path(explanations).is_absolute()
-            or ".." in Path(explanations).parts or "#" in explanations):
+    if (not isinstance(explanations, str) or Path(explanations).suffix != ".md" or Path(explanations).is_absolute()
+            or ".." in Path(explanations).parts or "#" in explanations or ":" in explanations
+            or explanations.startswith("~")):
         raise ValueError("explanations must be a repo-relative Markdown path")
     for key in ("qualification_input", "historical_verdicts_regraded", "training_launched"):
         if registry[key] is not False:
@@ -282,6 +289,21 @@ def load_registry(path: Path | str, tasks: dict) -> dict:
 
 def _anchors(path: Path) -> set:
     return set(ANCHOR.findall(path.read_text())) if path.is_file() else set()
+
+
+def unresolved_explanations(root: Path | str, views) -> list[str]:
+    """Hold and removal links whose Markdown file or explicit <a name> anchor is missing under root."""
+    problems = []
+    for view in views:
+        for assignment in view["assignments"]:
+            note = assignment.get("hold") or assignment.get("removal")
+            if not note:
+                continue
+            path, _, anchor = note["explanation"].partition("#")
+            if anchor not in _anchors(Path(root) / path):
+                problems.append(f"{view['id']}: {assignment['task']} explanation {note['explanation']} needs an "
+                                f'explicit <a name="{anchor}"></a> anchor in {path}')
+    return problems
 
 
 def _revise(base: dict, view_id: str, entry: dict, records: list, tasks: dict, style: str) -> dict:
@@ -388,6 +410,9 @@ def plan(root: Path | str, registry_path: Path | str) -> dict:
                 "removed": sorted(r["task"] for r in here if r["disposition"] == "REMOVE"), "differences": []}
         if live.get("revision") == entry["from_revision"]:
             try:
+                if view_fingerprint(live) != entry["from_fingerprint"]:
+                    raise ValueError(f"live {view_id} revision {entry['from_revision']} is not the registry's base "
+                                     "revision (its policy fingerprint differs from from_fingerprint)")
                 item["archive_action"] = _archive_state(root, view_id, entry["from_revision"], live_bytes)
             except ValueError as error:
                 item.update(state="conflict", differences=[str(error)])
@@ -405,6 +430,10 @@ def plan(root: Path | str, registry_path: Path | str) -> dict:
                 if base.get("id") != view_id or base.get("revision") != entry["from_revision"]:
                     item.update(state="drift", differences=[f"archive {entry['archive']} is not revision "
                                                             f"{entry['from_revision']} of {view_id}"])
+                elif view_fingerprint(base) != entry["from_fingerprint"]:
+                    item.update(state="drift", differences=[f"archive {entry['archive']} is not the registry's base "
+                                                            "revision (its policy fingerprint differs from "
+                                                            "from_fingerprint)"])
                 else:
                     expected = _revise(base, view_id, entry, here, tasks, key_style(raw))
                     differences = _differences(expected, live)

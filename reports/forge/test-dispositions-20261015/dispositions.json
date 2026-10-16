@@ -9,18 +9,21 @@
   "views": {
     "adaptation": {
       "from_revision": 2,
+      "from_fingerprint": "3154a08df89ffe889548faeff59023b55bb72040c30434bbac48fee43e61ce81",
       "to_revision": 3,
       "archive": "configs/forge/view-history/adaptation-v2.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. target_shift_recovery, the only Tier 3 test, is held because no recipe has passed it. While it is held this view counts the same tests as quality_coverage and reports HELD, never PASS. Task declarations, gates and earlier grades are unchanged; revision 2 is archived."
     },
     "clockfree_continuous": {
       "from_revision": 3,
+      "from_fingerprint": "bbb463d9fc50c3a19e30fc4784e544b0dbf94ecd7c5cd3ef5ac56d082643a911",
       "to_revision": 4,
       "archive": "configs/forge/view-history/clockfree_continuous-v3.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. target_shift_recovery and the three 14k continuations (behind their held 7k parents) are held at Tier 3. clockfree_audit leaves the count as a duplicate of the counted Tier 1 clockfree_audit_measurement_v1 and stays assigned as the 14k gate. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Task declarations, gates and earlier grades are unchanged; revision 3 is archived."
     },
     "discriminator_stability": {
       "from_revision": 9,
+      "from_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
       "to_revision": 11,
       "archive": "configs/forge/view-history/discriminator_stability-v9.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). gaussian1d_stability and ten more Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Revision 10 is skipped: committed research artifacts cite an unadopted 'revision10' draft that moved Gaussian retention to Tier 3, and this revision is not that draft. Recorded qualification stays at revision 9, archived byte for byte, until new ordinary evidence is registered; task gates and earlier grades are unchanged.",
@@ -28,24 +31,28 @@
     },
     "formulation_comparison": {
       "from_revision": 1,
+      "from_fingerprint": "9109179b94cf8c673dbb6d9a496b5264b44fcf5be0fb2cd124d2895f77eeffd1",
       "to_revision": 2,
       "archive": "configs/forge/view-history/formulation_comparison-v1.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Diagnostic variants, gates and earlier grades are unchanged; revision 1 is archived."
     },
     "host_profile_transfer": {
       "from_revision": 4,
+      "from_fingerprint": "33bfa05a9e8767fe5f5309e1a42fcad9bc5418f4b2a08463648a21f08e911e31",
       "to_revision": 5,
       "archive": "configs/forge/view-history/host_profile_transfer-v4.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Diagnostic variants, profiled 14k continuations, gates and earlier grades are unchanged; revision 4 is archived."
     },
     "quality_coverage": {
       "from_revision": 2,
+      "from_fingerprint": "a17939fd4e570b5598bb527ee9021c29d4779daac4ea8b3c55b0840efca5e6e4",
       "to_revision": 3,
       "archive": "configs/forge/view-history/quality_coverage-v2.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. Task declarations, gates and earlier grades are unchanged; revision 2 is archived."
     },
     "tier1_policy_coverage": {
       "from_revision": 1,
+      "from_fingerprint": "8bbcc385c79532adaf9050dfff9713fb9dc52bf5d43648b5a1c6295ca899c372",
       "to_revision": 2,
       "archive": "configs/forge/view-history/tier1_policy_coverage-v1.json",
       "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md), decided for a follow-up change. The ring16, two-pole and clock-audit policy questions are held because no policy recipe has passed them. The Gaussian copy is removed as a superseded definition; the unused-token, AE/GAN and five-word copies are removed because every recipe is refused before training. All seven stay assigned so their receipts remain visible; that revision has no counted requirements. Revision 1 is archived.",

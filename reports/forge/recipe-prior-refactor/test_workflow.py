@@ -50,6 +50,18 @@ def test_view_preserves_full_question_denominators_and_timeouts():
     assert workflow.PER_CANDIDATE - workflow.ORDINARY_ALLOWANCE == 1020
 
 
+def test_planning_refuses_a_later_live_view_while_the_contract_reads_revision_9():
+    # The contract reads the archived revision 9; planning resolves the live view,
+    # which a later revision (held and removed-from-count tests) has replaced.
+    assert workflow.ordinary_contract(workflow.ROOT)[0]["revision"] == 9
+    live = workflow.load_view(workflow.ROOT, workflow.VIEW)["revision"]
+    assert live > 9
+    with pytest.raises(ValueError, match=f"revision-9 recipe-owned ordinary view: .* which is revision {live}"):
+        workflow.require_live_revision_9(workflow.ROOT)
+    with pytest.raises(ValueError, match="revision-9 recipe-owned ordinary view"):
+        workflow.resolve_plans(workflow.ROOT, {"families": {}})
+
+
 @pytest.mark.parametrize("part", ["architecture", "gate", "prior_law", "budget", "cadence"])
 def test_question_projection_retains_scientific_changes(part):
     old = workflow.read_json(workflow.OUT / "legacy-task-cards/gaussian1d_smoke.json")

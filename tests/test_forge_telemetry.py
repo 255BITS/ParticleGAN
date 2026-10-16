@@ -313,6 +313,24 @@ def test_held_unit_is_neither_qualified_nor_rejected(tmp_path):
     assert report["cost_to_qualify"]["outcomes"] == report["cost_to_reject"]["outcomes"] == 0
     assert report["tier_rejections"] == {}
 
+
+def test_counted_failure_behind_a_held_middle_tier_is_rejected_at_its_own_tier(tmp_path):
+    req = request(cap=3)
+    late = deepcopy(req["tasks"]["quality"])
+    late["id"] = late["execution"]["fixture_id"] = "late"
+    req["tasks"]["late"] = late
+    req["view"]["assignments"][1]["importance"] = "held"
+    req["view"]["assignments"].append({"task": "late", "qualification_tier": 3, "importance": "required", "order": 2})
+    req["jobs"].append({"task_id": "late", "compatibility_key": stable_hash(("candidate", "late")),
+                        "science": {"compute": {"backend": "cpu", "threads": 1}}})
+    passed = save(tmp_path, req, "counted", tasks=("cheap",))
+    failed = save(tmp_path, req, "late-failure", score=0., status="FAIL", tasks=("late",))
+    report = t.summarize_automation(tmp_path, state(tmp_path, [req], [passed, failed]))
+    unit = report["qualification_units"][0]
+    assert (unit["status"], unit["qualified_tier"], unit["rejected_tier"]) == ("FAIL", 1, 3)
+    assert report["tier_rejections"] == {"3": 1}
+
+
 def test_runtime_normalizes_aggregate_cost_and_records_memory_without_training(tmp_path, monkeypatch):
     import experiments.forge.adapters as adapters
     from experiments.forge import runtime

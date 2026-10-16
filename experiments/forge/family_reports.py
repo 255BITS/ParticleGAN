@@ -213,7 +213,7 @@ def link(root, page, label, target, anchor=None):
 # count stays assigned as diagnostic (experiments/forge/views.py). Both carry a
 # note in the view naming the reason and linking its explanation.
 HOLD_REASON_TEXT = {"no_global_recipe": "no one recipe passes it together with the counted tests",
-                    "unsolved": "no recipe has passed it yet"}
+                    "unsolved": "no recipe has passed its current declaration"}
 REMOVAL_REASON_TEXT = {"phase": "phase of {} (counted there)", "duplicate": "duplicate of {} (counted there)",
                        "superseded": "replaced by newer tests", "ill_posed": "cannot run as declared"}
 
@@ -368,7 +368,9 @@ def score(count, *, marker=True):
             ("errors", "error" if coverage.get("errors") == 1 else "errors"),
             ("timeouts", "timeout" if coverage.get("timeouts") == 1 else "timeouts"),
             ("incomplete_attempts", "incomplete"), ("interrupted_attempts", "interrupted"),
-            ("queued", "queued"), ("running", "running"), ("diagnostic_attempts", "diagnostic attempts")) if coverage.get(key)]
+            ("queued", "queued"), ("running", "running"),
+            ("diagnostic_attempts", "diagnostic attempt" if coverage.get("diagnostic_attempts") == 1 else "diagnostic attempts"))
+            if coverage.get(key)]
     return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
 
@@ -924,6 +926,13 @@ def _views_cell(memberships, summed):
     return ", ".join(f"{cell(view)} (Tier {tier})" for view, tier in memberships)
 
 
+def _diagnostic_passers(selected, task):
+    """Selected recipes whose separate diagnostic run passes a task their recorded result does not."""
+    return [family["label"] for family, cohort in selected
+            if cohort["tasks"][task]["status"] != "PASS"
+            and cohort["tasks"][task].get("run_attempt", {}).get("status") == "PASS"]
+
+
 def _uncounted_disclosure(summed, selected):
     """What holding changed and what it did not, computed from recorded statuses."""
     counted = [a["task"] for view in summed for a in view["assignments"] if a["importance"] == "required"]
@@ -932,11 +941,18 @@ def _uncounted_disclosure(summed, selected):
         return []
     passes = sum(cohort["tasks"][a["task"]]["status"] == "PASS" for _, cohort in selected for a in uncounted)
     if passes:
-        sentences = [f"Selected recipes pass {passes} of the held or removed view requirements; those passes stay "
-                     "visible here and on the family pages but no longer count."]
+        sentences = [f"Selected recipes' recorded results pass {passes} of the held or removed view requirements; "
+                     "those passes stay visible here and on the family pages but no longer count."]
     else:
-        sentences = ["No new test was passed. No selected recipe passes a held or removed view requirement, so every "
-                     "pass count is unchanged; the totals shrank only because those requirements left the count."]
+        sentences = ["No new test was passed. No selected recipe's recorded result passes a held or removed view "
+                     "requirement, so every pass count is unchanged; the totals shrank only because those requirements "
+                     "left the count."]
+    diagnostic = {name for a in uncounted for name in _diagnostic_passers(selected, a["task"])}
+    if diagnostic:
+        sentences.append(f"Separate diagnostic runs of {len(diagnostic)} selected "
+                         + ("recipe pass" if len(diagnostic) == 1 else "recipes pass")
+                         + " some of these tests (named in the table); a diagnostic run never becomes a recorded "
+                           "result, so those passes count nowhere.")
     for family, cohort in selected:
         status = {name: result["status"] for name, result in cohort["tasks"].items()}
         failed = {a["importance"] for view in summed for a in view["assignments"]
@@ -950,11 +966,16 @@ def _uncounted_disclosure(summed, selected):
         rest = len(counted) - passed
         if rest:
             if set(others) == {"UNKNOWN"}:
-                detail = ("has" if rest == 1 else "have") + " no recorded result (UNKNOWN)"
+                detail = ("has" if rest == 1 else "have") + " no recorded result yet (UNKNOWN)"
             else:
                 detail = ("is " if rest == 1 else "are ") + " and ".join(
                     f"{value} {name}" if len(others) > 1 else name for name, value in sorted(others.items()))
             text += f" and the other {rest} {detail}"
+            passed_elsewhere = sorted({name for name in counted if status[name] != "PASS"
+                                       and cohort["tasks"][name].get("run_attempt", {}).get("status") == "PASS"})
+            if passed_elsewhere:
+                text += (f"; a separate diagnostic run passes {', '.join(passed_elsewhere)}, but a diagnostic run "
+                         "never becomes a recorded result")
         text += ". Every test it fails is " + ("held" if failed == {"held"} else "held or removed from the count") + ". "
         others_pass = {name for _, peer in selected if peer is not cohort
                        for name in counted if peer["tasks"][name]["status"] == "PASS"}
@@ -966,7 +987,7 @@ def _uncounted_disclosure(summed, selected):
 
 
 def _held_top_tier_notes(summed):
-    """A view whose highest tier has only held tests reports HELD, never PASS."""
+    """A view whose highest tier has only held tests never shows PASS."""
     counted = {view["id"]: sorted((a["task"], a["qualification_tier"]) for a in view["assignments"]
                                   if a["importance"] == "required") for view in summed}
     notes = []
@@ -976,16 +997,20 @@ def _held_top_tier_notes(summed):
         held = sorted(a["task"] for a in highest if a["importance"] == "held")
         if not held or any(a["importance"] == "required" for a in highest):
             continue
+        if not counted[view["id"]]:
+            # Nothing counted: name every held test of the view, not only its top tier.
+            held = sorted(a["task"] for a in view["assignments"] if a["importance"] == "held")
         names, verb = ", ".join(held), "is" if len(held) == 1 else "are"
         same = [other["id"] for other in summed if other is not view and counted[other["id"]] == counted[view["id"]]]
+        rule = "a recipe that passes every counted tier gets HELD, and a counted failure still shows as a failure."
         if not counted[view["id"]]:
             notes.append(f"Nothing in {view['id']} is counted while {names} {verb} held, so it reports HELD for every recipe.")
         elif same:
-            notes.append(f"While {names} {verb} held, {view['id']} counts the same tests as {' and '.join(same)} "
-                         f"and reports HELD: its highest tier, Tier {top}, has only held tests, so it never shows PASS.")
+            notes.append(f"While {names} {verb} held, {view['id']} counts the same tests as {' and '.join(same)}. "
+                         f"Its highest tier, Tier {top}, has only held tests, so it never shows PASS: " + rule)
         else:
             notes.append(f"While {names} {verb} held, the highest tier of {view['id']}, Tier {top}, has only held "
-                         "tests, so the view reports HELD and never PASS.")
+                         "tests, so the view never shows PASS: " + rule)
     return [" ".join(notes), ""] if notes else []
 
 
@@ -993,22 +1018,28 @@ def _uncounted_section(root, page, summed, selected):
     entries = uncounted_entries(summed)
     if not entries:
         return []
+    records = sorted({entry["note"]["explanation"].partition("#")[0] for entry in entries})
+    record = (" in " + link(root, page, "the decision record", records[0]) + ", which also defines the words used."
+              if len(records) == 1 else ".")
     lines = ["## Held and removed tests", "",
              "A **held** test is still declared, run and shown with its history, but it is not counted in the totals "
              "above or in qualification. It counts again once its re-entry rule is met. A test **removed from the "
              "count** stays in its views as a diagnostic, because another counted test already carries its question "
              "or it cannot run as declared. Rows come from the notes stored in the view declarations; each details "
-             "link explains the decision.", "",
+             "link opens that test's explanation" + record, "",
              *_uncounted_disclosure(summed, selected), *_held_top_tier_notes(summed),
-             "| Test | Role and reason | Views (tier) | Summary | Re-entry rule | Selected recipes passing | Details |",
+             "| Test | Role and reason | Views (tier) | Summary | Re-entry rule | Selected recipes passing (recorded result) | Details |",
              "| --- | --- | --- | --- | --- | ---: | --- |"]
     for entry in entries:
         note = entry["note"]
-        passing = sum(cohort["tasks"][entry["task"]]["status"] == "PASS" for _, cohort in selected)
+        passing = f"{sum(cohort['tasks'][entry['task']]['status'] == 'PASS' for _, cohort in selected)} of {len(selected)}"
+        diagnostic = _diagnostic_passers(selected, entry["task"])
+        if diagnostic:
+            passing += "; separate diagnostic runs only: " + ", ".join(diagnostic)
         path, _, anchor = note["explanation"].partition("#")
         lines.append("| " + " | ".join([
             "`" + cell(entry["task"]) + "`", cell(role_label(entry["assignment"])), _views_cell(entry["views"], summed),
-            cell(note["summary"]), cell(note.get("reentry", "—")), f"{passing} of {len(selected)}",
+            cell(note["summary"]), cell(note.get("reentry", "—")), cell(passing),
             link(root, page, "explanation", path, anchor)]) + " |")
     return lines + [""]
 
@@ -1032,9 +1063,12 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     summed = _summed_views(progress)
     assignments = [a for view in summed for a in view["assignments"]]
     counted = sum(a["importance"] == "required" for a in assignments)
-    uncounted = " and ".join(f"{value} {label}" for value, label in (
-        (sum(a["importance"] == "held" for a in assignments), "held"),
-        (sum("removal" in a for a in assignments), "removed")) if value)
+    distinct = len({a["task"] for a in assignments if a["importance"] == "required"})
+    roles = [(sum(a["importance"] == "held" for a in assignments),
+              len({a["task"] for a in assignments if a["importance"] == "held"}), "held"),
+             (sum("removal" in a for a in assignments), len({a["task"] for a in assignments if "removal" in a}), "removed")]
+    uncounted = " and ".join(f"{value} {label}" for value, _, label in roles if value)
+    uncounted_tests = " and ".join(f"{tests} {label} test" + ("" if tests == 1 else "s") for _, tests, label in roles if tests)
     lines = ["# Forge family leaderboard", "",
              "A **family** can have several **recipes**. Each score belongs to one exact recipe and source. "
              "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
@@ -1042,8 +1076,9 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
              "## Selected recipes", "",
              "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
-             f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**. " +
-             (uncounted + " view assignments are still measured and listed under "
+             f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**, "
+             f"from {distinct} distinct test" + ("" if distinct == 1 else "s") + ". " +
+             (uncounted + f" view assignments ({uncounted_tests}) are still measured and listed under "
               "**Held and removed tests** below. " if uncounted else "") +
              "These totals retain the selected recipe's recorded qualification; separate diagnostic runs appear below.", "",
              *_table_header(selected=True)]
@@ -1075,12 +1110,20 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                   ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
     lines += _uncounted_section(root, page, summed, selected)
     if any(research.values()):
+        declared_view = publication.get("declared_view", {})
+        no_longer = sum(len(names) for names in declared_view.get("no_longer_required_tasks", {}).values())
+        scale = (f"Those assignments still count the {no_longer} tests that {publication['view']} revision "
+                 f"{declared_view['revision']} holds or removes from the count "
+                 f"({sum(len(names) for names in publication['tier_requirements'].values())} tests per row, against "
+                 f"{sum(len(names) for names in declared_view['tier_requirements'].values())} counted in revision "
+                 f"{declared_view['revision']}), so research rows are not on the same scale as the selected-recipe "
+                 "totals. " if no_longer else "")
         lines += ["## Research recipes and separate diagnostics", "",
                   "Each row names its owning family and its own recipe or diagnostic scope. "
                   "Counts are **passes / distinct required tests within that row**: 29 means 29 different tests. "
                   "These scores are excluded from the selected-recipe totals above. "
                   "Compare rows only when their test, source and sampling contracts match.", "",
-                  "Research recipes use their recorded revision 9 assignments. Atlas selected-cloud has a separate "
+                  "Research recipes use their recorded revision 9 assignments. " + scale + "Atlas selected-cloud has a separate "
                   "seven-question Tier 1 policy scope. Same-source backfill results fill previously unmeasured research "
                   "cells while retaining original verdicts and qualification. Historical seed-only studies are "
                   "retained in the expandable section below and excluded from this backfill.", "",
@@ -1345,8 +1388,10 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         lines += _full_original_atlas_status(root, page, progress)
     declared = views.get(publication["view"], {}).get("revision", publication["view_revision"])
     declared_note = ("" if declared == publication["view_revision"] else
-                     f" Their counts follow the declared {publication['view']} revision {declared}; the recorded "
-                     f"qualification keeps revision {publication['view_revision']} until new ordinary evidence is registered.")
+                     " Their counts follow the declared view revisions (" +
+                     ", ".join(f"{view['id']} {view['revision']}" for view in _summed_views(progress)) +
+                     f"); the recorded qualification keeps {publication['view']} revision {publication['view_revision']} "
+                     "until new ordinary evidence is registered.")
     # Held tests stay listed with this family's recorded result; diagnostic-only views count nothing.
     held_entries = [entry for entry in uncounted_entries([view for view in progress["views"]
                                                           if view["id"] not in progress["diagnostic_views"]])
@@ -1505,8 +1550,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                     if not any(requirements):
                         text += " Nothing here is counted while these tests are held, so the view reports HELD."
                     elif not requirements[top - 1]:
-                        text += (f" Its highest tier, Tier {top}, has only held tests, so the view reports HELD, "
-                                 "never PASS, while they are held.")
+                        text += (f" Its highest tier, Tier {top}, has only held tests, so while they are held the view "
+                                 "never shows PASS: a recipe that passes every counted tier gets HELD.")
                 lines += [text, ""]
             calibration = definition.get("calibration", {})
             lines += ["Calibration: **" + cell(calibration.get("status", "undeclared")) + "**. " +

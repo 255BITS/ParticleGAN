@@ -250,11 +250,12 @@ def test_held_and_removed_roles_link_explanations_and_a_held_top_tier_reports_he
             "(test-dispositions-20261015/README.md#other_quality) |") in document
     assert ("| [removed: duplicate of quality (counted there)]"
             "(test-dispositions-20261015/README.md#diagnostic) |") in document
-    assert "| [held: no recipe has passed it yet](test-dispositions-20261015/README.md#endurance) |" in document
+    assert ("| [held: no recipe has passed its current declaration]"
+            "(test-dispositions-20261015/README.md#endurance) |") in document
     assert ("1 held. Nothing here is counted while these tasks are held, so this tier's status is HELD: "
             "it neither passes nor stops later tiers.") in document
-    assert ("Tier 3, the highest tier, has only held tasks, so this view reports HELD, never PASS, "
-            "while they are held.") in document
+    assert ("Tier 3, the highest tier, has only held tasks, so while they are held this view never shows PASS: "
+            "a candidate that passes every counted tier gets HELD.") in document
     short = document.split("## short", 1)[1].split("\n## ", 1)[0]
     assert "HELD" not in short and "held" not in short
     # Without held or removed tasks the report keeps its original wording.

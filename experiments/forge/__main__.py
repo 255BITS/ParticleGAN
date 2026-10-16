@@ -431,7 +431,8 @@ def main(argv=None):
                     compute = f"{backend}: {profile['model']}" if profile.get("model") else backend
                     compute = compute.replace("|", "\\|")
                     print(f"| {name} | {revision} | {row.get('evidence_scope')} | {compute} | {row.get('qualified_tier', '—')} | "
-                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | {row['status']} |")
+                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | "
+                          f"{row['status']}{knowledge.held_note(row)} |")
                 print(f"\nFull evidence: reports/forge/leaderboards/{args.goal}.json; use --json for raw metrics/cohorts.")
         else:
             emit(knowledge.readout(root, args.candidate, args.conclusion, args.comparison, args.next_action, study_id=args.study))
@@ -443,8 +444,13 @@ def main(argv=None):
             return 1
     elif command == "validate":
         from .views import load_tasks, load_view
+        from .dispositions import unresolved_explanations
         tasks = load_tasks(root)
-        views = [load_view(root, p.stem)["id"] for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        declared = [load_view(root, p.stem) for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        problems = unresolved_explanations(root, declared)
+        if problems:
+            raise ValueError("; ".join(problems))
+        views = [view["id"] for view in declared]
         from .planning import declaration_paths, load_idea
         from .studies import load_study
         from .family_documentation import validate_family_documentation

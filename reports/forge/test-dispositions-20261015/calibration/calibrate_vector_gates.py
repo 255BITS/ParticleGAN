@@ -23,9 +23,10 @@ label = "<task>|<panel>|rep=<r>|obs=<o>" (or "|centers" for frozen particle cent
 
 Usage (CPU only, about 5 minutes for the full 200-repetition run):
   python reports/forge/test-dispositions-20261015/calibration/calibrate_vector_gates.py [--quick]
-writes calibration-<full|quick>-summary.json and calibration-<full|quick>-panels.jsonl next to this
-script (or in --output-dir). The per-check rows (25,600 for the full run, about 30 MB) are written
-only to an explicit --observations path; keep that file outside Git.
+writes calibration-<full|quick>-summary.json next to this script (or in --output-dir), plus a tail-able
+calibration-<full|quick>-panels.jsonl progress log. The summary repeats every panel record, so only the
+summary is committed; like other JSONL traces, the log stays outside Git. The per-check rows (25,600 for
+the full run, about 30 MB) are written only to an explicit --observations path; keep that file outside Git.
 """
 from __future__ import annotations
 

@@ -449,9 +449,12 @@ progress or becomes a next task. Its `hold` note in the view gives the reason
 counting it again. A test **removed from the count** stays assigned as
 `diagnostic` with a `removal` note (`phase`, `duplicate`, `superseded` or
 `ill_posed`); a phase or duplicate names the counted test that carries its
-question in `counted_by`. A counted test may depend on a removed one only when that
-removed test is a phase of it: the same uninterrupted run and tier, with the counted
-test continuing the phase's own saved state (a checkpoint dependency).
+question in `counted_by`; a duplicate must have the same evaluation declaration as the
+counted test. A counted test may depend on a removed one only when that removed test
+is a phase of it: the same uninterrupted run and tier, with the counted test
+continuing the phase's own saved state (a checkpoint dependency). The phase still
+gates its counted test, whose grader replays it, and the phase's own prerequisites
+must be counted, so a held or diagnostic test never decides a counted verdict.
 A tier with only held tests has status `HELD`; it neither passes nor stops later
 tiers. A view reports `PASS` only when every counted tier passes and its highest
 tier is counted. If every counted tier passes but the highest tier is held, or

@@ -24,7 +24,11 @@ def test_coverage_retains_qualified_numerator_and_original_missing_counts():
     before = deepcopy(tasks)
     result = _count(tasks)
     assert result["passed"] == 1 and result["not_run"] == 3 and result["incompatible"] == 1
-    assert score(result) == "1/5 (1 not run, 1 incompatible, 1 blocked, 1 diagnostic attempts)"
+    # One attempt reads "1 diagnostic attempt", as "1 error" and "1 timeout" already do.
+    assert score(result) == "1/5 (1 not run, 1 incompatible, 1 blocked, 1 diagnostic attempt)"
+    tasks.append(dict(status="UNKNOWN", execution_recorded=False, run_attempt=dict(status="PASS", attempted=True)))
+    assert score(_count(tasks)) == "1/6 (1 not run, 1 incompatible, 1 blocked, 2 diagnostic attempts)"
+    tasks.pop()
     assert tasks == before
 
 

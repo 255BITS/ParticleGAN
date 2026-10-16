@@ -227,12 +227,16 @@ def load_view(root: Path | str, view_id: str) -> dict:
 
 
 def explanation_reference(value, label):
-    """Repo-relative Markdown path#anchor; report tests check that the anchor exists."""
+    """Repo-relative Markdown path#anchor; report tests check that the anchor exists.
+
+    A URL scheme, drive letter or home directory never resolves inside the
+    repository, so ':' and a leading '~' are refused like absolute paths.
+    """
     if not isinstance(value, str) or value.count("#") != 1:
         raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
     path, anchor = value.split("#")
-    if (not anchor or not path.endswith(".md") or Path(path).is_absolute() or ".." in Path(path).parts
-            or "\\" in path or any(c.isspace() for c in value)):
+    if (not anchor or Path(path).suffix != ".md" or Path(path).is_absolute() or ".." in Path(path).parts
+            or ":" in path or path.startswith("~") or "\\" in path or any(c.isspace() for c in value)):
         raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
 
 
@@ -299,7 +303,8 @@ def _phase_parent(index, tasks, parent, child):
     """A removed phase may precede the counted verdict that replays it on the same run.
 
     Both must share one uninterrupted execution group and tier, and the parent's
-    removal note must name the child. Callers also require a checkpoint edge.
+    removal note must name the child. Callers also require a checkpoint edge, and
+    validate_view requires the phase's own prerequisites to be counted.
     """
     removal = index[parent].get("removal") or {}
     group = tasks[child]["execution"].get("execution_group")
@@ -308,6 +313,19 @@ def _phase_parent(index, tasks, parent, child):
                 and tasks[child]["execution"].get("uninterrupted") and tasks[parent]["execution"].get("uninterrupted")
                 and tasks[parent]["execution"].get("execution_group") == group
                 and index[parent]["qualification_tier"] == index[child]["qualification_tier"])
+
+
+def _same_question(removed, counted):
+    """Duplicates grade one question: equal evaluation declarations, apart from a
+    source pin of the other task's own declaration (a derived copy's provenance)."""
+    def declared(task, other):
+        evaluation = deepcopy(task["evaluation"])
+        sources = evaluation.pop("sources", {})
+        if isinstance(sources, dict):
+            sources = {path: digest for path, digest in sources.items()
+                       if path != f"configs/forge/tasks/{other['id']}.json"}
+        return {**evaluation, **({"sources": sources} if sources else {})}
+    return _hash(declared(removed, counted)) == _hash(declared(counted, removed))
 
 
 def validate_view(view: dict, tasks: dict) -> None:
@@ -371,6 +389,19 @@ def validate_view(view: dict, tasks: dict) -> None:
             execution_groups[group] = tier
     visiting, visited = set(), set()
 
+    def require_counted(name, parent, via=None):
+        """A counted verdict rests only on counted tasks, directly or through its removed phase."""
+        if index[parent]["importance"] == "required":
+            return
+        if index[parent]["importance"] == "held" and via:
+            raise ValueError(f"{name}: its removed phase {via} depends on held task {parent}; count {parent}, "
+                             f"or hold {name} and {via} with reason held_prerequisite")
+        if index[parent]["importance"] == "held":
+            raise ValueError(f"{name}: required task depends on held task {parent}; hold {name} "
+                             f"with reason held_prerequisite and list {parent} in blocked_by")
+        raise ValueError("a required task cannot depend on a nonrequired task"
+                         + (f" (its removed phase {via} depends on {parent})" if via else ""))
+
     def visit(name):
         if name in visiting:
             raise ValueError(f"dependency cycle involving {name}")
@@ -383,12 +414,16 @@ def validate_view(view: dict, tasks: dict) -> None:
                 raise ValueError(f"{name}: dependency {parent} missing from view")
             if index[parent]["qualification_tier"] > index[name]["qualification_tier"]:
                 raise ValueError(f"{name}: dependency {parent} is in a later tier")
-            if (index[parent]["importance"] != "required" and index[name]["importance"] == "required"
-                    and not (dep["kind"] == "checkpoint" and _phase_parent(index, tasks, parent, name))):
-                if index[parent]["importance"] == "held":
-                    raise ValueError(f"{name}: required task depends on held task {parent}; hold {name} "
-                                     f"with reason held_prerequisite and list {parent} in blocked_by")
-                raise ValueError("a required task cannot depend on a nonrequired task")
+            if index[name]["importance"] == "required" and index[parent]["importance"] != "required":
+                if dep["kind"] == "checkpoint" and _phase_parent(index, tasks, parent, name):
+                    # The removed phase runs inside this counted job, so its own
+                    # prerequisites gate the counted verdict and must be counted too.
+                    for inner in _dependencies(tasks[parent]):
+                        if inner["task"] not in index:
+                            raise ValueError(f"{parent}: dependency {inner['task']} missing from view")
+                        require_counted(name, inner["task"], via=parent)
+                else:
+                    require_counted(name, parent)
             if dep["kind"] == "checkpoint":
                 if not tasks[parent]["execution"].get("produces_state"):
                     raise ValueError(f"{name}: checkpoint dependency does not produce state")
@@ -424,9 +459,9 @@ def validate_view(view: dict, tasks: dict) -> None:
             if (target == name or target not in index or index[target]["importance"] != "required"
                     or index[target]["qualification_tier"] > assignment["qualification_tier"]
                     or tasks[target]["adapter"] != tasks[name]["adapter"]
-                    or tasks[target]["evaluation"]["kind"] != tasks[name]["evaluation"]["kind"]):
+                    or not _same_question(tasks[name], tasks[target])):
                 raise ValueError(f"{name}: a duplicate removal must name a counted task of this view at the same "
-                                 "or an earlier tier, with the same adapter and evaluation kind")
+                                 "or an earlier tier, with the same adapter and the same evaluation declaration")
 
 
 def _verdict(status, reason, **details):
@@ -795,9 +830,10 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
     Held tasks are graded and shown but never counted. A tier with no required
     task has status HELD: it neither passes nor stops progression. The view
     reports PASS only when every counted tier passes and its highest assigned
-    tier is counted. When that highest tier is held, or nothing is counted,
-    the view status is HELD and the candidate is not eligible; qualified_tier
-    is then the highest counted tier reached. HELD is never a PASS.
+    tier is counted. When every counted tier passes but that highest tier is
+    held, or nothing is counted, the view status is HELD and the candidate is
+    not eligible; qualified_tier is then the highest counted tier reached. A
+    counted failure still reports FAIL, BLOCKED or INCOMPLETE. HELD is never a PASS.
     """
     validate_view(view, tasks)
     if not isinstance(results, list):

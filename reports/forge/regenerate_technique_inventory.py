@@ -2367,12 +2367,14 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
                     for tier in result["tier_requirements"]}
     # Held tasks are measured and shown but not counted; a task removed from the
     # count stays assigned as diagnostic with a note naming who carries it.
+    # no_longer_required_tasks: required by the recorded policy, not counted by
+    # the declared view (held or removed from the count).
     result["declared_view"] = {"revision": declared["revision"], "policy_fingerprint": stable_hash(declared),
                                "tier_requirements": requirements,
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
                                                         for tier, names in requirements.items()},
-                               "removed_required_tasks": {tier: [name for name in names if name not in requirements.get(tier, [])]
-                                                          for tier, names in manifest["tier_requirements"].items()},
+                               "no_longer_required_tasks": {tier: [name for name in names if name not in requirements.get(tier, [])]
+                                                            for tier, names in manifest["tier_requirements"].items()},
                                "held_tasks": {tier: [row["task"] for row in declared_tier(tier, lambda row: row["importance"] == "held")]
                                               for tier in result["tier_requirements"]},
                                "removed_from_count": {tier: [{"task": row["task"], "reason": row["removal"]["reason"],
