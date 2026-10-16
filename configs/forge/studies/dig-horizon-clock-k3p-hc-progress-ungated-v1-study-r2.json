@@ -4,7 +4,7 @@
     "candidate_budget_seconds": 1800,
     "id": "dig-horizon-clock-v1"
   },
-  "candidate": "k3p-hc-progress-v1",
+  "candidate": "k3p-hc-progress-ungated-v1",
   "competing_explanation": "K3P may need far more than 1,600 updates of training at high rate (the 6,400 full schedule still failed at its 1,600/3,200/4,800 cuts), so no schedule shape inside the cap can reproduce the long-horizon pass.",
   "control": {
     "candidate_id": "k3p-hc-step-v1",
@@ -17,8 +17,8 @@
     "task_id": "ring16_acquisition",
     "threshold": 0.85
   },
-  "hypothesis": "Candidate: critic-order progress drives K3P's annealing shape without the step label or horizon.",
-  "id": "dig-horizon-clock-k3p-hc-progress-v1-study",
+  "hypothesis": "Diagnostic: internal-counter progress (anneal inside the cap without a gate).",
+  "id": "dig-horizon-clock-k3p-hc-progress-ungated-v1-study-r2",
   "max_rounds": 1,
   "prediction": {
     "metric": "component_covariance_error",

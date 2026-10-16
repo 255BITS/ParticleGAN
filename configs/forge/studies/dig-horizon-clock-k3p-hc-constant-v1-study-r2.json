@@ -18,7 +18,7 @@
     "threshold": 0.85
   },
   "hypothesis": "Constant-rate clock-free K3P control.",
-  "id": "dig-horizon-clock-k3p-hc-constant-v1-study",
+  "id": "dig-horizon-clock-k3p-hc-constant-v1-study-r2",
   "max_rounds": 1,
   "prediction": {
     "metric": "component_covariance_error",

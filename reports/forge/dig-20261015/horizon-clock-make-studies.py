@@ -8,7 +8,10 @@ ARMS = {
     "k3p-hc-progress-v1": "Candidate: critic-order progress drives K3P's annealing shape without the step label or horizon.",
     "k3p-hc-progress-ungated-v1": "Diagnostic: internal-counter progress (anneal inside the cap without a gate).",
 }
+# Revision suffix: the first constant/progress/ungated studies were enqueued then cancelled
+# before any run (their control id changed); enqueued studies are immutable.
 for cid, hypothesis in ARMS.items():
+    sid = f"dig-horizon-clock-{cid}-study" + ("" if cid == "k3p-hc-step-v1" else "-r2")
     study = {
         "campaign": {"budget_seconds": 7200, "candidate_budget_seconds": 1800, "id": "dig-horizon-clock-v1"},
         "candidate": cid,
@@ -19,7 +22,7 @@ for cid, hypothesis in ARMS.items():
         "falsifier": {"metric": "component_covariance_error", "op": ">", "phase": "final",
                       "task_id": "ring16_acquisition", "threshold": 0.85},
         "hypothesis": hypothesis,
-        "id": f"dig-horizon-clock-{cid}-study",
+        "id": sid,
         "max_rounds": 1,
         "prediction": {"metric": "component_covariance_error", "op": "<=", "phase": "final",
                        "task_id": "ring16_acquisition", "threshold": 0.85},
@@ -33,6 +36,6 @@ for cid, hypothesis in ARMS.items():
         "terminal_rules": {"falsified": "stop_revision", "incomplete": "request_missing_evidence",
                            "inconclusive": "stop_and_readout", "prediction_observed": "review_saved_diagnostics"},
     }
-    Path(f"configs/forge/studies/dig-horizon-clock-{cid}-study.json").write_text(
+    Path(f"configs/forge/studies/{sid}.json").write_text(
         json.dumps(study, indent=2, sort_keys=True) + "\n")
-    print(f"dig-horizon-clock-{cid}-study")
+    print(sid)
