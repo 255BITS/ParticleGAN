@@ -120,6 +120,8 @@ def recipe_field_active(name, value, *, task=None):
         return False
     if name == "prior_regularizer" and not learned:
         return False
+    if name == "bispf_ablation":
+        return recipe.critic_formulation == "bispf" and recipe.bispf_ablation != "none"
     if name == "optimizer_momentum":
         return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
     if name == "optimizer_smoothing":

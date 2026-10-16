@@ -34,6 +34,38 @@ __all__ = [
     "SinkhornRelativisticLoss",
 ]
 
+# Opt-in research ablation of the recipe-path BISPF parts (Recipe.bispf_ablation).
+#   capture        harmonic mode-capture cooling (critic output / penalty / tether gradient
+#                  scaled by 1e-5 once both nearest-neighbour 95% distances are small)
+#   tether_thermal only the scaling of the SBNP prior tether by that capture factor
+#   chord          the Sinkhorn transport-chord cap term (chord_blend -> 0, fakes get full weight)
+#   softplus       the smooth softplus(beta) cap shape, replaced by a hinge relu (as BCAP's b_cap)
+#   floor          the weak squared-gradient floor term (lambda_floor -> 0)
+#   gauge          the zero-mean logit gauge (gamma_gauge -> 0)
+BISPF_ABLATION_PARTS = ("capture", "chord", "floor", "gauge", "softplus", "tether_thermal")
+
+
+def parse_bispf_ablation(value) -> frozenset:
+    """Validate ``Recipe.bispf_ablation``: "none" or a sorted, comma-separated subset."""
+    if value is None or value == "none" or value == "":
+        return frozenset()
+    if isinstance(value, (set, frozenset, tuple, list)):
+        parts = sorted(value)
+    elif isinstance(value, str):
+        parts = value.split(",")
+        if parts != sorted(set(parts)):
+            raise ValueError("bispf_ablation parts must be unique and sorted")
+    else:
+        raise ValueError("bispf_ablation must be 'none' or a comma-separated string")
+    unknown = set(parts) - set(BISPF_ABLATION_PARTS)
+    if unknown or not parts:
+        raise ValueError(f"bispf_ablation parts must be from {BISPF_ABLATION_PARTS}, got {sorted(unknown)}")
+    return frozenset(parts)
+
+
+# Diagnostic only: PARTICLEGAN_BISPF_CAPTURE_LOG=1 prints the capture test to stderr.
+_CAPTURE_LOG = __import__("os").environ.get("PARTICLEGAN_BISPF_CAPTURE_LOG") == "1"
+
 _PHI1 = 0.6180339887498949  # (sqrt(5) - 1) / 2
 _PHI2 = 0.3660254037844386  # (sqrt(3) - 1) / 2
 
@@ -114,8 +146,13 @@ class SBNPPriorRegularizer(nn.Module):
         repel_weight: float = 0.005,
         repel_margin: float = 0.25,
         repel_max_samples: int = 1024,
+        thermal_coupling: bool = True,
     ) -> None:
         super().__init__()
+        if type(thermal_coupling) is not bool:
+            raise ValueError("thermal_coupling must be a boolean")
+        # False: the BISPF capture factor never scales this tether (opt-in ablation).
+        self.thermal_coupling = thermal_coupling
         for name, value, strict in (
             ("weight", weight, False),
             ("target_std", target_std, True),
@@ -200,7 +237,7 @@ class SBNPPriorRegularizer(nn.Module):
             else:
                 repel_loss = rows.new_zeros(())
             out = self.weight * (mean_error + covariance_error + self.repel_weight * repel_loss)
-            if d <= 4 and out.requires_grad:
+            if d <= 4 and out.requires_grad and self.thermal_coupling:
                 s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
                 if s < 1.0:
                     out = out * s + out.detach() * (1.0 - s)
@@ -864,7 +901,15 @@ class _BISPFPenaltyKernel:
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
         record: CriticStepRecord | None = None,
+        ablation: Any = "none",
     ) -> None:
+        self.ablation = parse_bispf_ablation(ablation)
+        if "chord" in self.ablation:
+            chord_blend = 0.0
+        if "floor" in self.ablation:
+            lambda_floor = 0.0
+        if "gauge" in self.ablation:
+            gamma_gauge = 0.0
         for name, val, pos in (
             ("coeff", coeff, False),
             ("kappa", kappa, False),
@@ -944,7 +989,7 @@ class _BISPFPenaltyKernel:
 
         # Harmonic Mode Capture (Regime II) scale-free bidirectional nearest-neighbor thermal cooling
         with torch.no_grad():
-            if call_idx >= 1000 and dim <= 4 and b_r >= 64 and b_f >= 64:
+            if "capture" not in self.ablation and call_idx >= 1000 and dim <= 4 and b_r >= 64 and b_f >= 64:
                 d2 = torch.cdist(x_real.detach().flatten(1), x_fake.detach().flatten(1), p=2.0).pow(2)
                 norm_d = (d2 / d2.median().clamp_min(1e-12)).sqrt()
                 r2f_95 = float(norm_d.min(dim=1).values.quantile(0.95).item())
@@ -952,6 +997,15 @@ class _BISPFPenaltyKernel:
                 prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
                 thresh = 0.048 if prev_scale < 1.0 else 0.038
                 t_scale = 1e-5 if max(r2f_95, f2r_95) < thresh else 1.0
+                # Observation only: count captured penalty calls (no effect on training).
+                self.record._capture_calls = int(getattr(self.record, "_capture_calls", 0)) + int(t_scale < 1.0)
+                if t_scale < 1.0 and getattr(self.record, "_first_capture_call", None) is None:
+                    self.record._first_capture_call = call_idx
+                if _CAPTURE_LOG and (call_idx % 50 == 0 or t_scale != prev_scale):
+                    import sys
+                    print(f"bispf-capture call={call_idx} r2f95={r2f_95:.4f} f2r95={f2r_95:.4f} "
+                          f"thresh={thresh} scale={t_scale:g} captured_calls={self.record._capture_calls}",
+                          file=sys.stderr, flush=True)
             else:
                 t_scale = 1.0
             self.record._thermal_scale = t_scale
@@ -1028,14 +1082,17 @@ class _BISPFPenaltyKernel:
                     only_inputs=True,
                 )[0]
 
-                x_chord = ((1.0 - alpha) * x_fake.detach() + alpha * x_r_matched).requires_grad_(True)
-                d_chord_out = live(x_chord)
-                g_chord = torch.autograd.grad(
-                    outputs=_score_scalar(d_chord_out),
-                    inputs=x_chord,
-                    create_graph=True,
-                    only_inputs=True,
-                )[0]
+                if "chord" in self.ablation:
+                    g_chord = None
+                else:
+                    x_chord = ((1.0 - alpha) * x_fake.detach() + alpha * x_r_matched).requires_grad_(True)
+                    d_chord_out = live(x_chord)
+                    g_chord = torch.autograd.grad(
+                        outputs=_score_scalar(d_chord_out),
+                        inputs=x_chord,
+                        create_graph=True,
+                        only_inputs=True,
+                    )[0]
             finally:
                 self.record._in_penalty = False
 
@@ -1043,14 +1100,30 @@ class _BISPFPenaltyKernel:
             norm_real = (sq_real + 1e-12).sqrt()
             sq_fake = g_fake.flatten(1).pow(2).sum(dim=1)
             norm_fake = (sq_fake + 1e-12).sqrt()
-            sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
-            norm_chord = (sq_chord + 1e-12).sqrt()
+            if g_chord is None:
+                sq_chord = sq_real.new_zeros(sq_real.shape)
+                norm_chord = 0.5 * (norm_real + norm_fake)
+            else:
+                sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
+                norm_chord = (sq_chord + 1e-12).sqrt()
 
-            floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
-            cap_real = F.softplus(norm_real - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_fake = F.softplus(norm_fake - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_chord = F.softplus(norm_chord - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
+            if "softplus" in self.ablation:
+                def cap(norm):
+                    return F.relu(norm - self.kappa).pow(2).mean()
+            else:
+                def cap(norm):
+                    return F.softplus(norm - self.kappa, beta=self.ebi_beta).pow(2).mean()
+            cap_real = cap(norm_real)
+            cap_fake = cap(norm_fake)
+            if self.lambda_floor > 0.0 or "floor" not in self.ablation:
+                floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
+            else:
+                floor_pen = sq_real.new_zeros(())
+            if g_chord is None:
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + cap_fake)
+            else:
+                cap_chord = cap(norm_chord)
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
             ebi_loss = floor_pen + cap_pen
 
             # Zero-mean logit gauge
