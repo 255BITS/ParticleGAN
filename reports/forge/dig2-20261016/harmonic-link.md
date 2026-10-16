@@ -1,7 +1,13 @@
 # dig2 harmonic-link: what gives BISPF its mode_hold pass?
 
-Status: PREREGISTERED (rule written 2026-10-16 before any training on this branch). Results are appended
-below the rule.
+Status: DONE. The rule was committed in `60e823d80` before any training; results are appended below it.
+
+**Short answer.** The harmonic/thermal factor is not the link (refuted: switching it off leaves the run
+bit-identical through update 1050 and still passing). On BCAP + SBNP tether, adding back only BISPF's 2%-weight
+Sinkhorn transport-chord cap term gives the `mode_hold` pass and keeps gaussian1d, two_pole and ring16. The word
+tests timed out in both arms. Inside BISPF the only necessary part is the softplus cap shape, and on BCAP a
+different small part (floor + gauge) also works. So the "link" looks like trajectory sensitivity to small
+critic-penalty changes once the tether is on, not one mechanism.
 
 ## Background
 
@@ -104,4 +110,163 @@ Budget: at most 1.5 GPU-hours of training. One job per GPU through the workflow 
 
 ## Results
 
-(appended after the runs)
+### Stage 1: `mode_hold` (13 arms)
+
+All 13 attempts ran on frozen source digest
+`1ad9c43959c19d8b18883da65917b0acdf4cd8b89d42492efad6730fe3662c23` (enqueued from branch commit `dfbec1b7a`; the rule
+was committed earlier in `60e823d80`), seed 0, CUDA RTX A6000, `--workers-per-gpu 1`, two queue roots drained through
+the workflow GPU lease (GPU 1).
+
+"Terminal suffix" = consecutive passing checks at the end of training (PASS needs >= 5). "Passing checks" =
+checks anywhere in the run with `modes >= 8` and `hq >= 0.9`.
+
+| Arm | Candidate | Gate | Passing checks | Terminal suffix | Endpoint (not the verdict) | First 8-mode check | Runner s |
+| --- | --- | --- | ---: | ---: | --- | --- | ---: |
+| C BCAP control | `recipe-prior-refactor-bcap-pure-v1` | FAIL | 10/24 | 3 | modes 8, hq .989 | 650 | 37.3 |
+| T BCAP + tether | `bcap-sbnp-tether-v1` | FAIL | 0/24 | 0 | modes 7, hq .996 | never | 39.0 |
+| B full BISPF | `bispf-v1` | **PASS** | 13/24 | 12 | modes 8, hq 1.000 | 350 | 43.3 |
+| H0 no capture | `bispf-hl-no-capture-v1` | **PASS** | 13/24 | 12 | modes 8, hq .989 | 350 | 43.4 |
+| S0 no tether thermal | `bispf-hl-no-tether-thermal-v1` | **PASS** | 13/24 | 12 | modes 8, hq .996 | 350 | 43.4 |
+| K0 no chord | `bispf-hl-no-chord-v1` | **PASS** (thin) | 5/24 | 5 | modes 8, hq .969 | 850 | 41.8 |
+| P0 hinge cap | `bispf-hl-hinge-cap-v1` | FAIL | 7/24 | 4 | modes 8, hq .937 | 600 | 44.5 |
+| F0 no floor/gauge | `bispf-hl-no-floor-gauge-v1` | **PASS** | 10/24 | 10 | modes 8, hq .982 | 650 | 41.9 |
+| Z reduced (= T) | `bispf-hl-reduced-v1` | FAIL | 0/24 | 0 | modes 7, hq .996 | never | 39.9 |
+| Z+capture | `bispf-hl-reduced-plus-capture-v1` | FAIL | 0/24 | 0 | modes 7, hq .996 | never | 40.6 |
+| Z+softplus | `bispf-hl-reduced-plus-softplus-v1` | FAIL | 0/24 | 0 | modes 7, hq .749 | never | 40.2 |
+| Z+chord | `bispf-hl-reduced-plus-chord-v1` | **PASS** | 12/24 | 11 | modes 8, hq .997 | 600 | 40.9 |
+| Z+floor/gauge | `bispf-hl-reduced-plus-floor-gauge-v1` | **PASS** | 10/24 | 6 | modes 8, hq .991 | 650 | 39.2 |
+
+Attempts (first 8 hex of the attempt id, under `queue-s1a|queue-s1b/dig2-harmonic-link-v1/`): C f9cb32e1,
+T 1c76d4b1, B 2ac4ccac, H0 a302a47c, S0 f8908b4d, K0 177fee7d, P0 6e94be90, F0 c2c0d17f, Z b7d829f1,
+Z+cap d484e0dc, Z+sp 73f63a80, Z+chord 0162bcf7, Z+fg 0ed6afc4. Full curves:
+`/ml2/hypergan/dig2-20261016/harmonic-link/stage1-summary.txt`.
+
+Capture log (B, from `PARTICLEGAN_BISPF_CAPTURE_LOG=1`): the capture test runs from call 1000; it first fires at
+call 1075 (`r2f95=.0375 < .038`), drops out at 1079, re-captures at 1147 and stays captured; 58 of 200 eligible
+calls are captured. In S0 it captures only 4 calls. In K0, P0, F0 it never fires. In Z+capture it never fires
+(`r2f95 = .52`: the eighth mode is missing, so real points far from any fake keep the test open).
+
+Stage-1 GPU seconds: 535.4 s runner wall time over 13 attempts (about 0.15 GPU-hours).
+
+Rule outcomes:
+
+- Precondition (rule 1): B PASS, C FAIL. Holds. T FAILS as in round 1.
+- Lead hypothesis (rule 2): H0 and S0 both PASS -> **REFUTED**. The context check holds exactly: H0 and S0
+  produce B's per-check metrics bit for bit through update 1050, and differ only in the last three checks
+  (1100-1200), after capture first fires at call 1075. BISPF holds all 8 modes from update 350, long before the
+  capture factor can act. The thermal/capture factor does not cause the pass.
+- Necessary parts (rule 3): only the softplus cap shape. P0 (hinge cap) FAILS, with 7 passing checks and a
+  4-check terminal suffix (hq dips to .841 at update 1000). K0 PASSES only just (suffix 5), F0 PASSES.
+- Reduction check (rule 4): Z FAILS and is **bit-identical** to T, the same metrics at all 24 checks. So with all
+  six parts off, the bispf formulation reproduces BCAP + tether exactly; the residual non-identities
+  (no EMA critic copy, hook) have no effect here. The knock-in reading is valid.
+- Sufficiency on BCAP + tether (rule 5): Z+chord PASSES (suffix 11) and Z+floor/gauge PASSES (suffix 6);
+  Z+softplus FAILS (7 modes, hq .749) and Z+capture FAILS (identical to Z). The minimal set is **one part: the
+  chord term** (Z+chord, 1 part restored; Z+floor/gauge needs 2).
+
+What the minimal arm is, concretely: BCAP's `b_cap` hinge cap, with the fake-side weight reduced from 1 to 0.98 and
+a 0.02-weight hinge cap added on Sinkhorn transport chords between each fake and a matched real (stratified,
+no RNG draws), plus the SBNP tether at 0.01. Everything else is BCAP + tether.
+
+Reading (not part of the rule): the part that is "necessary" inside BISPF (softplus) is not sufficient on BCAP,
+and the two parts that are sufficient on BCAP (chord, floor+gauge) are not necessary inside BISPF. Each of them
+changes the critic penalty by a few percent or less. That pattern says `mode_hold` on this host is decided by
+small trajectory perturbations of the critic penalty once the tether is on, not by one identifiable mechanism.
+BCAP + tether stalls at 7 modes; a 2% chord term, or a 0.05% floor + gauge, moves that trajectory onto one that
+finds the eighth mode. One seed cannot separate "the chord term helps coverage" from "any small critic-penalty
+perturbation re-rolls the trajectory".
+
+### Stage 2: priority tests (C vs Z+chord)
+
+Per rule 6, stage 2 ran on C and the minimal passing knock-in only (Z+chord; Z+floor/gauge restores two parts, so
+it is not tied). Both arms ran on frozen source digest
+`485c18ecc9cbf05c3d60fb137e81df42851c86011057035d4a95e1dad527260a` (enqueued from `21c67edf1`; it differs from
+the stage-1 digest only by the coordinator-only `FORGE_SKIP_COMPLETION_COMPILE` switch and new study files).
+Seed 0, CUDA RTX A6000, one GPU per arm through the lease, both GPUs shared with other jobs at ~100% use.
+
+| Test | C BCAP control | Z+chord | Notes |
+| --- | --- | --- | --- |
+| `gaussian1d_smoke` | PASS (KS .072, std ratio 1.063; 36.8 s) | PASS (KS .104, std ratio .969; 31.0 s) | |
+| `two_pole` | PASS (17/24, suffix 17; 7.7 s) | PASS (17/24, suffix 17; 7.9 s) | |
+| `ring16_acquisition` | PASS (26/96, suffix 26; cov err .497, min eig ratio .242; 88.5 s) | PASS (32/96, suffix 31; cov err .538, min eig ratio .216; 62.9 s) | |
+| `five_word_joint_smoke` | INCOMPLETE: wall-time budget (900 s) exhausted at 7,501 of 20,001 steps | INCOMPLETE: same, 7,501 of 20,001 steps | infrastructure (rule 7) |
+| `five_word_joint_hold` | not run (depends on the smoke) | not run (depends on the smoke) | |
+
+Word smoke detail (not a verdict): both arms passed every confirmation check from step 2,501 to the cut-off at
+7,501 (5 words, quality fraction 1.0, mass TV <= .036). Z+chord learned the words later: mass TV .42 and .23 at
+steps 834 and 1,667, against C's .04 and .03.
+
+Rule outcome (rule 6): Z+chord passes every completed stage-2 test that C passes (3 of 3). The word smoke and word
+hold cells are INCONCLUSIVE in both arms because of the shared-GPU wall-clock limit, so "portable" holds only for
+the three completed tests.
+
+Stage-2 GPU seconds: C 1,033.3 s, Z+chord 1,002.2 s (each includes the 900 s word smoke cut-off).
+
+## GPU time
+
+Stage 1 535.4 s + stage 2 2,035.5 s = **2,570.9 s, about 0.71 GPU-hours**, under the 1.5-hour limit. Most of
+the waiting time (about 75 minutes before the first lease) was queueing for the shared lease, not training.
+
+## Conclusion
+
+1. **Lead hypothesis REFUTED.** BISPF's harmonic/thermal capture factor does not give the `mode_hold` pass.
+   Turning it off entirely (H0), or only its scaling of the tether (S0), leaves the run bit-identical to full
+   BISPF through update 1050 and still PASSING (12 terminal passes). In `mode_hold` the factor first acts at
+   critic call 1075; BISPF already holds all 8 modes from update 350. The "residual-driven thermal noise"
+   (`BISPFEngine`, `StratifiedBlueNoisePrior`) is not used by the Forge recipe path at all.
+2. **Minimal set found, and it ports to BCAP:** BCAP + SBNP tether + BISPF's 2%-weight Sinkhorn
+   transport-chord cap term (`bispf-hl-reduced-plus-chord-v1`) PASSES `mode_hold` (11 terminal passes), where
+   BCAP + tether alone stalls at 7 of 8 modes. It keeps `gaussian1d_smoke`, `two_pole` and
+   `ring16_acquisition`. The word tests are unresolved (wall-clock INCOMPLETE in both arms).
+   The reduction is exact: with all six parts off, the bispf formulation reproduced `bcap-sbnp-tether-v1`
+   bit for bit.
+3. **But the attribution is fragile.** Inside BISPF, only the softplus cap shape is necessary (hinge cap
+   FAILS by one check: suffix 4 of 5). On BCAP + tether, softplus is not sufficient, while the chord term alone and
+   the floor + gauge pair alone are each sufficient. Each of these parts changes the critic penalty by a few
+   percent or less. The data fit "with the tether on, small critic-penalty perturbations decide whether this one
+   seed finds the eighth mode" better than "the chord term is the mechanism". A recommendation to adopt
+   BCAP + tether + chord as a `mode_hold` repair needs evidence beyond this single seed, for example the other
+   priority suites or a second host with the same failure mode. Under the user's one-seed rule, this dig cannot
+   provide that.
+
+## Exact commands
+
+```sh
+PY=/ml2/codex-storage/workspaces/2026-10-07/task-14/runtime/python312/bin/python
+R=/ml2/hypergan/dig2-20261016/harmonic-link
+# from the worktree root, branch task/dig2-harmonic-link-20261016
+OMP_NUM_THREADS=1 $PY -m pytest -q tests/test_bispf_ablation.py tests/test_bispf.py
+OMP_NUM_THREADS=1 $PY -m experiments.forge validate
+# stage 1 enqueue (13 arms, two queue roots): $R/enqueue-s1.sh, i.e. for each candidate c
+OMP_NUM_THREADS=1 $PY -m experiments.forge --queue-root $R/queue-s1a enqueue $c --study dig2-harmonic-link-$c-mode-hold-v1
+# drain each queue root under the workflow lease: $R/drain.sh s1a|s1b, i.e.
+gpu-lease.sh bash -c "FORGE_SKIP_COMPLETION_COMPILE=1 PARTICLEGAN_BISPF_CAPTURE_LOG=1 OMP_NUM_THREADS=1 \
+  $PY -m experiments.forge --queue-root $R/queue-s1a drain --gpus \$LEASED_GPU --workers-per-gpu 1 --campaign dig2-harmonic-link-v1"
+# stage 2
+OMP_NUM_THREADS=1 $PY -m experiments.forge --queue-root $R/queue-s2c enqueue recipe-prior-refactor-bcap-pure-v1 --study dig2-harmonic-link-recipe-prior-refactor-bcap-pure-v1-priority-v1
+OMP_NUM_THREADS=1 $PY -m experiments.forge --queue-root $R/queue-s2z enqueue bispf-hl-reduced-plus-chord-v1 --study dig2-harmonic-link-bispf-hl-reduced-plus-chord-v1-priority-v1
+$R/drain.sh s2c; $R/drain.sh s2z
+# summaries (tail-able per-check metrics are in each attempt's run.log and $R/queue-*/events.jsonl)
+$PY $R/summarize.py $R/queue-s1a $R/queue-s1b      # -> $R/stage1-summary.txt
+```
+
+## Caveats
+
+- Seed 0 only, one attempt per arm, by design. `mode_hold` margins are thin (C misses by one check, P0 by one
+  check, K0 passes with exactly the minimum 5).
+- Stage 1 and stage 2 used different frozen digests. Within each stage, every arm shares one digest, so the
+  matched comparisons hold. The difference is coordinator-only code plus study files.
+- The two word cells are INCOMPLETE because the 900 s task wall-clock budget ran out at 7,501 of 20,001 steps on
+  GPUs shared at ~100% use. No rerun was made (rule 7). Whether Z+chord keeps `five_word_joint_hold` is open.
+  Z+chord trained differently from C on the word smoke (slower early word acquisition). I did not trace which
+  difference causes this. The bispf kernel takes a separate branch when an input has more than 64 dimensions.
+- The capture log is diagnostic stderr output gated by `PARTICLEGAN_BISPF_CAPTURE_LOG=1`. It was set for every
+  arm, does not change training (B reproduced round-1's 12 terminal passes and 13/24 passing checks exactly) and
+  is not part of the frozen source.
+- `tests/test_forge_current_technique_inventory.py` fails in this checkout (107 tests, e.g. `FileNotFoundError`
+  for `reports/forge/test-performance-evidence/index.json` in a temp fixture). It does not touch the code changed
+  here; it was not re-run on a clean develop checkout. `tests/test_bispf.py`, the new
+  `tests/test_bispf_ablation.py`, `test_forge_boundaries.py`, `test_forge_techniques.py`,
+  `test_forge_technique_bindings.py` and `test_forge_technique_inventory.py` pass (80 tests).
+- The new field is opt-in and research-only. With the default `"none"`, BISPF's penalty values and gradients
+  were checked bit-identical to the previous code over 1,105 calls, including the capture branch.
