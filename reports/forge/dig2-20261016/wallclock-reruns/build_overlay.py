@@ -28,6 +28,8 @@ for ROOT, spec_path in [(r, p) for r in ROOTS for p in sorted(glob.glob(f"{r}/sp
     if spec["rerun_of"]["status"] not in {"TIMEOUT", "INCOMPLETE", "BLOCKED"} or not os.path.exists(f"{directory}/result.json"):
         continue
     result = json.load(open(f"{directory}/result.json"))
+    if result["status"] == "DEFERRED":
+        continue
     record = {"key": spec["rerun_of"]["key"], "candidate_id": spec["candidate_id"], "task": spec["task"],
               "family": spec["family"], "source_digest": spec["source_digest"],
               "candidate_revision": spec["candidate_revision"], "execution_sha256": spec["execution_sha256"],
