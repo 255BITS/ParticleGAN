@@ -46,3 +46,12 @@ From `reports/forge/technique-inventory.json` (view revision 9) and `reports/for
 - **(b) Diagnostic credit.** The family's existing same-recipe Tier 2/3 diagnostic attempts count as if their Tier 1 were complete apart from the clock-free audit.
 
 Published scores are not regenerated.
+
+## Addendum, 2026-10-16: triggering conditional diagnostic D1 (written before any D1 training)
+
+The main 12 runs are complete. K3P and KA2 FAIL `ring16_acquisition_6400` with 0 of 384 passing observations. In both, the last failing gate is the min eigen ratio; the covariance error is below 0.85 at the end. Their G/D learning rate reaches its 0.01 floor at update 1,600, because of `network_lr_horizon_cap=1600`. That meets the rule 6 trigger. D1 runs these arms on one new frozen source:
+
+- `k3p-r16cap-net-horizon-full-v1` and `ka2-r16cap-net-horizon-full-v1`: the selected card with `network_lr_horizon_cap=None`, every other field unchanged.
+- The unchanged selected K3P and KA2 cards, re-enqueued as same-source matched controls.
+
+Each arm runs only `ring16_acquisition_6400`, with the same gate. D1 is labelled diagnostic, never selected-recipe evidence, and it does not enter the recount or change the main verdict. If a D1 arm passes, the finding is that the recipe's fixed 1,600-update network-anneal cap is what blocks the 6,400 pass. Whether to change any recipe is then a decision for the user. If the D1 arms fail, the cap is not the cause, and the most likely remaining difference from `ring16-schedule-20261011` is the recipe-owned prior refactor. That is not tested here.
