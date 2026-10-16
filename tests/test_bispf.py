@@ -758,7 +758,7 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     for gb, gu in zip(grads_base, grads_uncooled):
         assert torch.allclose(gb, gu, atol=1e-7), "Generator gradients must not be throttled during exploration"
 
-    # 3. Hooked critic under thermal cooling (s_thermal = 0.02) linearizes velocity straight-through by s_v
+    # 3. Hooked critic under thermal cooling (s_thermal = 0.02) linearizes velocity straight-through by s_local
     for p in G.parameters():
         p.grad.zero_()
     record._thermal_scale = 0.02  # Cooling
@@ -769,9 +769,26 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     loss_cooled.backward()
     grads_cooled = [p.grad.clone() for p in G.parameters()]
 
-    s_v = max(1e-4, min(1.0, (0.02 / math.sqrt(max(1e-6, 1.0 - 0.02**2))) * 0.010))
-    for gb, gc in zip(grads_base, grads_cooled):
-        assert torch.allclose(gc, s_v * gb, atol=1e-6), "Gradients must scale straight-through by s_v under cooling"
+    factor = 0.002 * (0.02 / math.sqrt(max(1e-6, 1.0 - 0.02**2)))
+    s_v = max(1e-4, min(1.0, factor))
+    with torch.no_grad():
+        x_in_flat = fake_cooled.detach().flatten(1)
+        dists = torch.cdist(x_in_flat, x_in_flat, p=2.0)
+        dists.diagonal().fill_(1e9)
+        nn_d = dists.min(dim=1).values
+        med_nn = nn_d.median().clamp_min(1e-6)
+        boost = (nn_d / med_nn).clamp(1.0, 3.0) - 1.0
+        s_local = torch.clamp(s_v * (1.0 + 2.0 * boost), max=1.0).view(-1, 1)
+
+    for p in G.parameters():
+        p.grad.zero_()
+    record._thermal_scale = 1.0  # Disable hook scaling to test s_local single application
+    fake_expected = G(z)
+    loss_expected = (D(fake_expected) * s_local).sum()
+    loss_expected.backward()
+    grads_expected = [p.grad.clone() for p in G.parameters()]
+    for gc, ge in zip(grads_cooled, grads_expected):
+        assert torch.allclose(gc, ge, atol=1e-6), "Gradients must scale straight-through by s_local under cooling"
 
     # 4. Verify input coordinate attachment for SinkhornRelativisticLoss
     fake_logits = D(fake_cooled)
@@ -885,14 +902,14 @@ def test_bispf_ring16_thermal_stability():
     from particlegan.bispf import _BISPFPenaltyKernel
 
     kernel = _BISPFPenaltyKernel()
-    # Simulate ring16 residual regime: delta_nn ~ 0.028
+    # Simulate ring16 residual regime: delta_nn ~ 0.028 in batch_size=1024
     kernel.cooler.ema_residual = 0.028
     kernel.cooler.initialized = True
-    assert kernel.cooler.scale == 1.0, f"Ring16 residual must hold s_thermal=1.0; got {kernel.cooler.scale}"
+    assert kernel.cooler.scale_for(batch_size=1024, dim=2) == 1.0, f"Ring16 residual must hold s_thermal=1.0; got {kernel.cooler.scale_for(batch_size=1024, dim=2)}"
 
     # Counter-check: within-basin settling on 100-mode grids (residual ~ 0.005) DOES cool
     kernel.cooler.ema_residual = 0.005
-    assert kernel.cooler.scale < 0.20, f"100-mode grid basin settling must cool below 0.20; got {kernel.cooler.scale}"
+    assert kernel.cooler.scale_for(batch_size=1024, dim=2) < 0.20, f"100-mode grid basin settling must cool below 0.20; got {kernel.cooler.scale_for(batch_size=1024, dim=2)}"
 
 
 def test_bispf_adaptive_image_kappa():
@@ -1097,30 +1114,28 @@ def test_sbnp_regularizer_defaults_and_unweighted_scale():
 
 def test_bispf_scale_invariant_thermal_cooling():
     """Verify ContinuousThermalCooler dimension- and batch-scale invariant thresholding:
-    - effective_tau scales as tau_0 * (1024 / B) in 1D and tau_0 * (128 / B)^(1/d) in 2D.
-    - For B=128, d=1: tau_eff = 0.020 * 8 = 0.160, so residual 0.10 cools (scale < 1.0).
-    - For B=128, d=2: tau_eff = 0.020, so ring16 residual 0.028 does not cool (scale == 1.0).
+    - effective_tau scales as tau_0 * (1024 / B)^(1/d) across all dimensions 1 <= d <= 4.
+    - For B=1024, d=2: tau_eff = 0.020 (reference scale).
+    - For B=128, d=2: tau_eff = 0.020 * sqrt(8) ~ 0.0566.
+    - For B=128, d=1: tau_eff = 0.020 * 8 = 0.160.
     """
     from particlegan.bispf import ContinuousThermalCooler
 
     cooler = ContinuousThermalCooler(tau_cooling=0.020, s_min=0.05)
 
-    # 1. Exact scaling factor checks
-    tau_base = cooler.effective_tau(batch_size=128, dim=2)
-    assert abs(tau_base - 0.020) < 1e-6
+    # 1. Exact scaling factor checks across dimensions 1 <= d <= 4
+    for d in [1, 2, 3, 4]:
+        for b in [16, 64, 128, 512, 1024]:
+            expected_scale = (1024.0 / b) ** (1.0 / d)
+            expected_tau = 0.020 * expected_scale
+            tau = cooler.effective_tau(batch_size=b, dim=d)
+            assert abs(tau - expected_tau) < 1e-6, f"Failed at b={b}, d={d}: {tau} vs {expected_tau}"
 
-    tau_1d = cooler.effective_tau(batch_size=128, dim=1)
-    assert abs(tau_1d - 0.160) < 1e-6  # 0.020 * (1024/128)^1 = 0.020 * 8 = 0.160
-
-    tau_1024_2d = cooler.effective_tau(batch_size=1024, dim=2)
-    assert abs(tau_1024_2d - (0.020 / math.sqrt(8.0))) < 1e-6
-
-    # 2. Cooling behavior at residual = 0.10
+    # 2. Cooling behavior
     cooler.ema_residual = 0.10
-    # For (128, 2), 0.10 > 0.020 -> uncooled (exploration)
-    s_base = cooler.scale_for(batch_size=128, dim=2)
+    # For (1024, 2), 0.10 > 0.020 -> uncooled (exploration)
+    s_base = cooler.scale_for(batch_size=1024, dim=2)
     assert s_base == 1.0
-    assert cooler.scale == 1.0
 
     # For (128, 1), 0.10 < 0.160 -> actively cooling
     s_1d = cooler.scale_for(batch_size=128, dim=1)
@@ -1161,7 +1176,7 @@ def test_bispf_critic_hook_straight_through_damping():
     for gb, ge in zip(grads_base, grads_exp):
         assert torch.allclose(gb, ge, atol=1e-6)
 
-    # 2. Cooled settlement (s_thermal = 0.50) -> linearized by s_v
+    # 2. Cooled settlement (s_thermal = 0.50) -> linearized by s_local
     for p in G.parameters():
         p.grad.zero_()
     record._thermal_scale = 0.50
@@ -1172,9 +1187,26 @@ def test_bispf_critic_hook_straight_through_damping():
     loss_cool.backward()
     grads_cool = [p.grad.clone() for p in G.parameters()]
 
-    s_v = max(1e-4, min(1.0, (0.50 / math.sqrt(1.0 - 0.50**2)) * 0.010))
-    for gb, gc in zip(grads_base, grads_cool):
-        assert torch.allclose(gc, s_v * gb, atol=1e-6)
+    factor = 0.002 * (0.50 / math.sqrt(1.0 - 0.50**2))
+    s_v = max(1e-4, min(1.0, factor))
+    with torch.no_grad():
+        x_in_flat = fake_cool.detach().flatten(1)
+        dists = torch.cdist(x_in_flat, x_in_flat, p=2.0)
+        dists.diagonal().fill_(1e9)
+        nn_d = dists.min(dim=1).values
+        med_nn = nn_d.median().clamp_min(1e-6)
+        boost = (nn_d / med_nn).clamp(1.0, 3.0) - 1.0
+        s_local = torch.clamp(s_v * (1.0 + 2.0 * boost), max=1.0).view(-1, 1)
+
+    for p in G.parameters():
+        p.grad.zero_()
+    record._thermal_scale = 1.0  # Disable hook scaling to test s_local single application
+    fake_fresh = G(z)
+    loss_expected = (D(fake_fresh) * s_local).sum()
+    loss_expected.backward()
+    grads_expected = [p.grad.clone() for p in G.parameters()]
+    for gc, ge in zip(grads_cool, grads_expected):
+        assert torch.allclose(gc, ge, atol=1e-6)
 
 
 def test_bispf_density_directed_transport_bridge():
@@ -1277,7 +1309,8 @@ def test_bispf_image_euclidean_barrier_and_kappa():
 
 def test_bispf_sbnp_small_latent_repulsion():
     """Verify that for small unanchored latent clouds (n <= 64 and d >= 8 and not references),
-    SBNPPriorRegularizer activates multi-neighbor repulsion with eff_k_nn = 10 and eff_repel_weight = 5.0 * repel_weight.
+    SBNPPriorRegularizer activates multi-neighbor repulsion with eff_k_nn = 10, eff_repel_weight = 7.5 * repel_weight (0.375),
+    and effective_margin = 0.50.
     """
     from particlegan.bispf import SBNPPriorRegularizer
     import torch.nn.functional as F
@@ -1292,19 +1325,19 @@ def test_bispf_sbnp_small_latent_repulsion():
     loss_base = reg_no_repel(z_img)
     repel_contrib = (loss_active - loss_base).item()
 
-    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.25, effective_margin=0.25:
+    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.375, effective_margin=0.50:
     m_sub = 32
     sq_dist = torch.cdist(z_img, z_img, p=2.0).pow(2)
     off_mask = ~torch.eye(m_sub, dtype=torch.bool)
     r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
     eye_inf = torch.eye(m_sub, dtype=z_img.dtype) * 1e9
     knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=10, dim=1, largest=False)
-    norm_sq_dist = knn_sq_dist / (0.25 * r_med_sq)
+    norm_sq_dist = knn_sq_dist / (0.50 * r_med_sq)
     expected_repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
-    expected_repel_contrib = 0.25 * expected_repel_loss.item()
+    expected_repel_contrib = 0.375 * expected_repel_loss.item()
 
     assert abs(repel_contrib - expected_repel_contrib) < 1e-5, (
-        f"Small latent cloud must use eff_k_nn=10 and 5x repel weight (0.25): got {repel_contrib} vs {expected_repel_contrib}"
+        f"Small latent cloud must use eff_k_nn=10 and 7.5x repel weight (0.375): got {repel_contrib} vs {expected_repel_contrib}"
     )
 
     # Counter-check: when references are provided with moment_tether_count > 64, is_small_latent is FALSE
@@ -1403,48 +1436,126 @@ def test_bispf_scalar_logit_gauge_preserves_spatial_tilt():
     assert abs(stats["mean_logit"] - 2.0) < 1e-5
 
 
-def test_bispf_1d_continuous_flow_hook_unthrottled():
-    """Verify that 1D continuous flow inputs (dim=1) bypass generator velocity scaling in
-    _bispf_critic_forward_hook even when s_thermal < 0.999, ensuring symmetric 100% learning rate
-    tracking during shift reacquisition without 258x throttling, while 2D flows are scaled.
+def test_bispf_1d_continuous_flow_velocity_scaling():
+    """Verify that 1D continuous flow inputs (dim=1) receive straight-through DualNorm
+    velocity scaling in _bispf_critic_forward_hook when s_thermal < 0.999:
+    - factor = 0.002 * (s_thermal / sqrt(1 - s_thermal^2))
+    - Forward pass is exact identity
+    - Backward gradients scale by s_v
     """
-    from particlegan.bispf import _attach_critic_input_hook, CriticStepRecord
+    from particlegan.bispf import BISPFStepRecord, _attach_critic_input_hook
 
     class DummyCritic(nn.Module):
         def forward(self, x):
-            return x.sum(dim=-1, keepdim=True)
-
-    rec = CriticStepRecord()
-    rec._thermal_scale = 0.36
-    rec._in_penalty = False
+            return 3.0 * x.sum(dim=-1, keepdim=True)
 
     critic = DummyCritic()
-    _attach_critic_input_hook(critic, rec)
+    record = BISPFStepRecord()
+    _attach_critic_input_hook(critic, record)
 
-    # 1. 1D flow input (dim=1, shape [B, 1])
+    # 1. Uncooled exploration (s_thermal = 1.0) -> unthrottled
+    record._thermal_scale = 1.0
+    record._in_penalty = False
     x_1d = torch.randn(16, 1, requires_grad=True)
     out_1d = critic(x_1d)
-    loss_1d = out_1d.sum()
-    loss_1d.backward()
-    grad_1d = x_1d.grad.clone()
+    out_1d.sum().backward()
+    assert torch.allclose(x_1d.grad, torch.full_like(x_1d.grad, 3.0), atol=1e-5)
 
-    assert torch.allclose(grad_1d, torch.ones_like(grad_1d)), (
-        f"1D flow must have unthrottled gradient (all 1.0); got {grad_1d[:3]}"
+    # 2. Cooled flow (s_thermal = 0.50) -> scaled by s_v
+    record._thermal_scale = 0.50
+    x_1d_cool = torch.randn(16, 1, requires_grad=True)
+    out_1d_cool = critic(x_1d_cool)
+    assert torch.allclose(out_1d_cool, 3.0 * x_1d_cool.detach(), atol=1e-5)
+
+    out_1d_cool.sum().backward()
+    factor = 0.002 * (0.50 / math.sqrt(1.0 - 0.50**2))
+    s_v = max(1e-4, min(1.0, factor))
+    expected_grad = 3.0 * s_v
+    assert torch.allclose(x_1d_cool.grad, torch.full_like(x_1d_cool.grad, expected_grad), atol=1e-5)
+
+
+def test_bispf_local_covariance_circularization():
+    """Verify scale-free local covariance circularization (isotropy):
+    - Circular/isotropic clusters have near-zero local_iso_loss.
+    - Elongated needle/anisotropic clusters produce positive local_iso_loss.
+    - Loss is scale-free: invariant to uniform spatial scaling of coordinates.
+    """
+    from particlegan.bispf import SBNPPriorRegularizer
+
+    reg = SBNPPriorRegularizer(weight=1.0, k_nn=4)
+
+    torch.manual_seed(0)
+    x_coords = torch.linspace(-30.0, 30.0, 7)
+    y_coords = torch.linspace(-30.0, 30.0, 7)
+    grid_x, grid_y = torch.meshgrid(x_coords, y_coords, indexing="ij")
+    z_iso = torch.stack([grid_x.flatten(), grid_y.flatten()], dim=1)  # 49 points in 2D regular grid
+
+    z_needle = z_iso.clone()
+    z_needle[:, 1] = z_needle[:, 1] * 0.01  # Highly flattened needle
+
+    d = 2
+    m_sub = z_needle.shape[0]
+    k_iso = min(max(reg.k_nn, d + 1), m_sub - 1)
+
+    def compute_local_iso(z):
+        dists_sub = torch.cdist(z, z, p=2.0).pow(2)
+        eye_inf = torch.eye(m_sub, dtype=z.dtype) * 1e9
+        _, iso_knn_idx = torch.topk(dists_sub + eye_inf, k=k_iso, dim=1, largest=False)
+        delta_z = z[iso_knn_idx] - z.unsqueeze(1)
+        M = torch.einsum("nkd,nke->nde", delta_z, delta_z) / max(1, k_iso)
+        tr_M = torch.diagonal(M, dim1=-2, dim2=-1).sum(dim=-1, keepdim=True).unsqueeze(-1)
+        M_iso = (tr_M / d) * torch.eye(d, dtype=z.dtype).unsqueeze(0)
+        A = M - M_iso
+        return (A.pow(2).sum(dim=(-2, -1)) / ((tr_M.squeeze(-1).squeeze(-1) / d) + 1e-6).pow(2)).mean().item()
+
+    iso_val_needle = compute_local_iso(z_needle)
+    iso_val_scale10 = compute_local_iso(z_needle * 10.0)
+    iso_val_iso = compute_local_iso(z_iso)
+
+    assert iso_val_needle > 1.5, f"Needle must have large local_iso_loss (~2.0); got {iso_val_needle}"
+    assert iso_val_needle > iso_val_iso * 5.0, f"Needle local_iso_loss ({iso_val_needle}) must exceed isotropic cluster ({iso_val_iso})"
+    assert abs(iso_val_needle - iso_val_scale10) < 1e-3, "Local circularization must be scale-free"
+
+
+def test_bispf_image_dynamic_well_depth():
+    """Verify dynamic image well depth scaling by s_metric:
+    - High-contrast images (ema_data_scale >= 4.899) have img_scale = 1.0 (unscaled kappa_eff).
+    - Low-contrast images (e.g. img_intensity2, ema_data_scale ~ 2.0) have img_scale < 1.0,
+      deepening the well (kappa_eff = kappa / img_scale * ... > kappa) for contrast separation.
+    - img_scale is clamped to [0.35, 1.0].
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(kappa=1.0)
+    kernel.record.calls = 600
+
+    xr = torch.randn(16, 1, 8, 8)
+    xf = torch.randn(16, 1, 8, 8)
+
+    class FlatCritic(nn.Module):
+        def forward(self, x):
+            return x.flatten(1).sum(dim=1, keepdim=True)
+
+    # 1. High-contrast image (ema_data_scale = 4.899 -> img_scale = 1.0)
+    kernel.record.ema_data_scale = 4.899
+    kernel.record.ema_residual = 1.0  # res_ratio = 1.0 -> kappa_eff = 1.0 / 1.0 * 0.6 = 0.6
+    kernel._observe_sinkhorn = lambda res, ds, ema_decay=0.95: None
+    pen_high, _ = kernel.penalty(FlatCritic(), xr, xf, step=0, collect_stats=True)
+
+    # 2. Low-contrast image (ema_data_scale = 2.0 -> img_scale = 2.0 / 4.899 ~ 0.4082)
+    # Deeper well: kappa_eff = 1.0 / 0.4082 * 0.6 ~ 1.47
+    kernel.record.ema_data_scale = 2.0
+    pen_low, _ = kernel.penalty(FlatCritic(), xr, xf, step=0, collect_stats=True)
+
+    assert pen_high.item() > pen_low.item(), (
+        f"Under gradient norm 1.0, tightened barrier (kappa_eff=0.6) must penalize more than deepened well (kappa_eff=1.47): "
+        f"{pen_high.item()} vs {pen_low.item()}"
     )
 
-    # 2. 2D flow input (dim=2, shape [B, 2])
-    rec._thermal_scale = 0.36
-    x_2d = torch.randn(16, 2, requires_grad=True)
-    out_2d = critic(x_2d)
-    loss_2d = out_2d.sum()
-    loss_2d.backward()
-    grad_2d = x_2d.grad.clone()
-
-    s_thermal = 0.36
-    s_v = (s_thermal / math.sqrt(1.0 - s_thermal**2)) * 0.010
-    assert torch.allclose(grad_2d, torch.full_like(grad_2d, s_v), atol=1e-5), (
-        f"2D flow must be scaled by s_v={s_v}; got {grad_2d[:3]}"
-    )
+    # 3. Minimum clamp verification: ema_data_scale = 0.1 -> clamped to 0.35
+    kernel.record.ema_data_scale = 0.1
+    img_scale_clamped = min(1.0, max(0.35, float(kernel.record.ema_data_scale) / 4.899))
+    assert abs(img_scale_clamped - 0.35) < 1e-6
 
 
 

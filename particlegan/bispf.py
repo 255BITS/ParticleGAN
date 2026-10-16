@@ -213,9 +213,26 @@ class SBNPPriorRegularizer(nn.Module):
         # 3. Scale-free k-NN log-repulsion
         m_sub = min(n, self.repel_max_samples)
         z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
+
+        # 4. Scale-free Local Covariance Circularization (Isotropy)
+        # Circularizes local cluster covariance without imposing global centripetal forces
+        local_iso_loss = rows.new_zeros(())
+        if d > 1 and m_sub > d + 1:
+            with torch.no_grad():
+                dists_sub = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
+                eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
+                k_iso = min(max(self.k_nn, d + 1), m_sub - 1)
+                _, iso_knn_idx = torch.topk(dists_sub + eye_inf, k=k_iso, dim=1, largest=False)
+            delta_z = z_sub[iso_knn_idx] - z_sub.unsqueeze(1)  # (m_sub, k_iso, d)
+            M = torch.einsum("nkd,nke->nde", delta_z, delta_z) / max(1, k_iso)
+            tr_M = torch.diagonal(M, dim1=-2, dim2=-1).sum(dim=-1, keepdim=True).unsqueeze(-1)
+            M_iso = (tr_M / d) * torch.eye(d, device=rows.device, dtype=rows.dtype).unsqueeze(0)
+            A = M - M_iso
+            local_iso_loss = (A.pow(2).sum(dim=(-2, -1)) / ((tr_M.squeeze(-1).squeeze(-1) / d) + 1e-6).pow(2)).mean()
+
         is_small_latent = (n <= 64 and d >= 8 and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references) <= 64))
         eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
-        eff_repel_weight = (self.repel_weight * 5.0) if is_small_latent else self.repel_weight
+        eff_repel_weight = (self.repel_weight * 7.5) if is_small_latent else self.repel_weight
         k = min(eff_k_nn, m_sub - 1)
         if k > 0 and eff_repel_weight > 0.0:
             sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
@@ -224,13 +241,13 @@ class SBNPPriorRegularizer(nn.Module):
                 r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
             eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
             knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-            effective_margin = 0.25 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
+            effective_margin = 0.50 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
             norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
             repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
         else:
             repel_loss = rows.new_zeros(())
 
-        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss
+        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss + 0.10 * local_iso_loss
         scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
         if out.requires_grad:
@@ -804,10 +821,8 @@ class ContinuousThermalCooler:
         """Compute dimension- and batch-scale invariant cooling threshold."""
         d = max(1, min(dim, 4))
         b = max(16, batch_size)
-        if d == 1:
-            scale = (1024.0 / b) ** 1.0
-        else:
-            scale = (128.0 / b) ** (1.0 / d)
+        # Reference batch size 1024 accounts for finite-sample nearest-neighbor floor across all dimensions
+        scale = (1024.0 / b) ** (1.0 / d)
         return self.tau_cooling * scale
 
     def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
@@ -872,11 +887,24 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
                 target._bispf_record = rec
             # Straight-through DualNorm velocity linearization during generator updates
             dim_hook = args[0].shape[-1] if (len(args) > 0 and torch.is_tensor(args[0]) and args[0].ndim == 2) else 0
-            if dim_hook >= 2 and rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
+            if 1 <= dim_hook <= 4 and rec is not None and not getattr(rec, "_in_penalty", False) and target.requires_grad:
                 s_thermal = getattr(rec, "_thermal_scale", 1.0)
                 if s_thermal < 0.999:
-                    s_v = max(1e-4, min(1.0, (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2))) * 0.010))
-                    scaled = target * s_v + target.detach() * (1.0 - s_v)
+                    factor = 0.002 * (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2)))
+                    s_v = max(1e-4, min(1.0, factor))
+                    # Adaptive local dispersion boost: sparse minority modes retain unthrottled velocity
+                    if dim_hook >= 2 and target.ndim == 2:
+                        with torch.no_grad():
+                            x_in_flat = args[0].detach().flatten(1)
+                            dists = torch.cdist(x_in_flat, x_in_flat, p=2.0)
+                            dists.diagonal().fill_(1e9)
+                            nn_d = dists.min(dim=1).values
+                            med_nn = nn_d.median().clamp_min(1e-6)
+                            boost = (nn_d / med_nn).clamp(1.0, 3.0) - 1.0
+                            s_local = torch.clamp(s_v * (1.0 + 2.0 * boost), max=1.0).view(-1, 1)
+                    else:
+                        s_local = s_v
+                    scaled = target * s_local + target.detach() * (1.0 - s_local)
                     scaled._bispf_input = args[0]
                     scaled._bispf_record = rec
                     if isinstance(output, (tuple, list)):
@@ -1158,22 +1186,6 @@ class _BISPFPenaltyKernel:
                 q = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI2, 1.0).unsqueeze(1)
                 matched_real_idx = torch.searchsorted(cdf, q).squeeze(1).clamp(0, b_r - 1)
 
-                # Density-Directed Transport Bridge across entropic voids
-                cached_d = getattr(self.record, "_last_d_logits", None)
-                if cached_d is not None and is_continuous_flow and dim >= 2:
-                    d_r_cached, d_f_cached = cached_d
-                    if (d_r_cached.shape[0] == b_r and d_f_cached.shape[0] == b_f and
-                        d_r_cached.device == x_real.device and d_f_cached.device == x_fake.device):
-                        d_r_gap = d_r_cached.max() - d_r_cached.median()
-                        if d_r_gap > 0.50:
-                            starved_mask = d_r_cached > (d_r_cached.median() + 0.25)
-                            overpop_mask = d_f_cached < (d_f_cached.median() - 0.25)
-                            if starved_mask.any() and overpop_mask.any():
-                                bridge_r = torch.where(starved_mask)[0]
-                                k_bridge = max(1, min(int(0.20 * b_f), len(bridge_r)))
-                                r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
-                                matched_real_idx[:k_bridge] = r_pick
-
                 x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)
                 alpha_shape = (b_f,) + (1,) * (x_real.ndim - 1)
@@ -1213,7 +1225,11 @@ class _BISPFPenaltyKernel:
             self.record._in_penalty = False
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
-        kappa_eff = self.kappa * (0.6 + 0.85 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
+        if is_image_tensor:
+            img_scale = min(1.0, max(0.35, float(getattr(self.record, "ema_data_scale", 4.899)) / 4.899))
+            kappa_eff = (self.kappa / img_scale) * (0.6 + 0.85 * (1.0 - res_ratio))
+        else:
+            kappa_eff = self.kappa
 
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
@@ -1264,8 +1280,6 @@ class _BISPFPenaltyKernel:
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
-        if t_scale < 1.0 and penalty.requires_grad:
-            penalty = penalty * t_scale + penalty.detach() * (1.0 - t_scale)
         if not collect_stats:
             return penalty, {}
         return penalty, {
