@@ -481,8 +481,10 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
                             "mechanism_class": idea.get("mechanism_class"), "prior": request["candidate"].get("prior"),
                             "claim_contract": request["candidate"].get("claim_contract"),
                             "preflight_blockers": request.get("preflight_blockers", []),
-                            "next_action": "Publish an explanation, comparison, and next action." if lifecycle["pending_readout"]
-                                           else "Run the next eligible task within an explicit budget."}
+                            "next_action": _next_action(qualified["status"], lifecycle["pending_readout"])}
+            if qualified.get("held_total"):
+                # Held tasks are graded and shown, never counted; say so beside the status.
+                row["held"] = {"total": qualified["held_total"], "passed": qualified["held_passed"]}
             if include_bindings:
                 from .technique_board import request_bindings
                 row["scientific_bindings"] = request_bindings(request)
@@ -565,6 +567,21 @@ def _cell(value) -> str:
     return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
 
 
+def _next_action(status: str, pending_readout: bool) -> str:
+    if pending_readout:
+        return "Publish an explanation, comparison, and next action."
+    if status == "HELD":
+        return ("No counted task remains: the rest of this view is held, so it shows HELD, never PASS, "
+                "until a held test meets its re-entry rule.")
+    return "Run the next eligible task within an explicit budget."
+
+
+def held_note(row: dict) -> str:
+    """'; N held (M pass, not counted)' for a view with held tasks, else empty."""
+    held = row.get("held")
+    return f"; {held['total']} held ({held['passed']} pass, not counted)" if held else ""
+
+
 def _board_markdown(result: dict) -> str:
     lines = [f"# {result['view']} — revision {result['view_revision']}", "", result["ranking_note"], "",
              "| Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |",
@@ -578,7 +595,7 @@ def _board_markdown(result: dict) -> str:
             models = sorted({p.get("model") for p in runtime.get("compute_profiles", {}).values() if p and p.get("model")})
             if models:
                 identity += " (" + ", ".join(models) + ")"
-        counts = ", ".join(f"{key} {value}" for key, value in row.get("counts", {}).items()) or "unmeasured"
+        counts = (", ".join(f"{key} {value}" for key, value in row.get("counts", {}).items()) or "unmeasured") + held_note(row)
         seconds = row["cost"].get("wall_seconds")
         lines.append("| " + " | ".join(_cell(x) for x in (identity, row["evidence_scope"], row["qualified_tier"],
                      counts, round(seconds, 3) if seconds is not None else None, row.get("next_action"))) + " |")

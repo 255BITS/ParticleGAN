@@ -382,3 +382,24 @@ def test_stopped_readout_persists_concluded_and_retry_needs_new_readout(setup):
     assert row["lifecycle"] == "awaiting_readout"
     knowledge.readout(root, "idea", "both tasks complete", "comparison", "next")
     assert knowledge.board(root, "stability")["current_rows"][0]["pending_readout"] is False
+
+
+def test_held_view_shows_its_held_count_beside_the_status_and_a_held_next_action(setup):
+    root, request = setup
+    request["view"]["assignments"][1].update(importance="held", hold={
+        "schema": "forge_hold_v1", "previous_importance": "required", "reason": "unsolved", "blocked_by": [],
+        "summary": "Fixture: quality is measured and shown, but not counted.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#quality",
+        "reentry": "Count quality again when one global recipe passes it."})
+    atomic_json(root / "configs/forge/views/stability.json", request["view"])
+    save_attempt(root, request)
+    row = knowledge.board(root, "stability")["current_rows"][0]
+    assert (row["status"], row["qualified_tier"]) == ("HELD", 1)
+    assert row["held"] == {"total": 1, "passed": 0}
+    assert knowledge.held_note(row) == "; 1 held (0 pass, not counted)"
+    assert knowledge.held_note({key: value for key, value in row.items() if key != "held"}) == ""
+    markdown = knowledge._board_markdown({"view": "stability", "view_revision": 1, "ranking_note": "Note.", "rows": [row]})
+    assert "| NOT_RUN 1, PASS 1; 1 held (0 pass, not counted) |" in markdown
+    assert "shows HELD, never PASS" in knowledge._next_action("HELD", False)
+    assert knowledge._next_action("HELD", True) == "Publish an explanation, comparison, and next action."
+    assert knowledge._next_action("FAIL", False) == "Run the next eligible task within an explicit budget."

@@ -36,12 +36,14 @@ def test_tier_rows_keep_whole_recipe_source_and_gate_incompleteness():
     assert len(rows['bcap-pure']) == 12  # Ten distinct successor recipes/sources and two paired arms.
     candidate = next(r for r in rows['bcap-pure'] if 'generator-idle-ema-bcap' in r)
     control = next(r for r in rows['bcap-pure'] if 'bcap-default-baseline-direction' in r)
-    assert '[4/6]' in candidate and '[4(*)/29]' in candidate
-    assert '[5/6]' in control and '[5(*)/29]' in control
+    # Counts name every unfinished cell. Same-source backfill attempts from
+    # reports/forge/attempt-coverage.json fill only the originally unrun cells.
+    assert '[4/6 (2 incomplete)]' in candidate and '[12/29 (3 blocked, 2 incomplete)]' in candidate
+    assert '[5/6 (1 incomplete)]' in control and '[13/29 (2 blocked, 1 error, 1 incomplete)]' in control
     # Two source-bound Gaussian retention wins do not pool their unequal-mass failures.
     history = next(r for r in rows['bcap-pure'] if 'kinetic-local-dualnorm-g-history-v1;' in r)
-    assert '[1(*)/6]' in history and '[1(*)/21]' in history
-    assert '[2(*)/29]' in history
+    assert '[2/6 (1 timeout)]' in history and '[9/21 (1 blocked)]' in history
+    assert '[11/29 (2 blocked, 1 timeout)]' in history
 
 
 def test_successor_and_paired_task_semantics_match_the_recorded_ordinary_questions():

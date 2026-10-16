@@ -210,3 +210,21 @@ def test_unknown_candidate_or_view_rejected_without_writes(fixture, monkeypatch)
     install(monkeypatch, fixture, [row(fixture)])
     with pytest.raises(ValueError, match="unknown candidate"): select.build_readiness(root, candidate_id="typo")
     with pytest.raises(ValueError, match="unknown Forge view"): select.build_readiness(root, view_id="typo")
+
+
+def test_held_top_tier_is_recorded_but_never_a_screen_pass(fixture, monkeypatch):
+    root, _, view = fixture
+    view["assignments"][2].update(qualification_tier=3, importance="held", hold={
+        "schema": "forge_hold_v1", "previous_importance": "required", "reason": "unsolved", "blocked_by": [],
+        "summary": "Software fixture: measured and shown, not counted.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#diagnostic",
+        "reentry": "Count again when one global recipe passes it."})
+    write(root / "configs/forge/views/quality_coverage.json", view)
+    held = row(fixture)
+    assert held["status"] == "HELD" and held["qualified_tier"] == 2
+    install(monkeypatch, fixture, [held])
+    result = select.build_readiness(root)
+    assert result["decision"] == "NO_QUALIFIED_OPTION" and not result["qualified_options"]
+    assert not result["rows"][0]["screen_qualified"]
+    assert (result["rows"][0]["held_total"], result["rows"][0]["held_passed"]) == (1, 1)
+    assert result["summary"]["required_cells"] == 2 and result["rows"][0]["task_statuses"]["diagnostic"] == "PASS"
