@@ -3878,7 +3878,7 @@
       {
         "check": "git cat-file of every snapshot path at the equivalent commit, sha256 compared with the request's source manifest; git ls-tree for files the snapshot rules would add",
         "differing_files": {
-          "experiments/forge/knowledge.py": "from develop's #430: imports deepcopy and calls the cached _attempts with one argument inside compile_memory, which only `forge compile` runs; no attempt or grade calls it"
+          "experiments/forge/knowledge.py": "from develop's #430: imports deepcopy and calls the cached _attempts with one argument inside compile_memory, the memory-compilation step run by `forge compile`, `forge readout` and the forge queue's post-completion refresh; the policy-cloud runner, its workers and the graders never call it"
         },
         "equivalent_branch": "task/atlas-e22-fill-20261015",
         "equivalent_commit": "de17a8556184b7675596404ca215873ca6186340",

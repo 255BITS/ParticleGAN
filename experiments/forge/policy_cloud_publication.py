@@ -716,7 +716,8 @@ SOURCE_EQUIVALENTS = {
         "differing_files": {
             "experiments/forge/knowledge.py": (
                 "from develop's #430: imports deepcopy and calls the cached _attempts with one argument inside "
-                "compile_memory, which only `forge compile` runs; no attempt or grade calls it"),
+                "compile_memory, the memory-compilation step run by `forge compile`, `forge readout` and the forge "
+                "queue's post-completion refresh; the policy-cloud runner, its workers and the graders never call it"),
         },
     },
 }
