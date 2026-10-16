@@ -4,7 +4,7 @@
     "candidate_budget_seconds": 1800,
     "id": "dig-horizon-clock-v1"
   },
-  "candidate": "k3p",
+  "candidate": "k3p-hc-step-v1",
   "competing_explanation": "K3P may need far more than 1,600 updates of training at high rate (the 6,400 full schedule still failed at its 1,600/3,200/4,800 cuts), so no schedule shape inside the cap can reproduce the long-horizon pass.",
   "control": {
     "candidate_id": "k3p-hc-constant-v1",
@@ -18,7 +18,7 @@
     "threshold": 0.85
   },
   "hypothesis": "Step-schedule control: shipped K3P; on ring16 the task-owned 400-update schedule horizon finishes annealing by update 400.",
-  "id": "dig-horizon-clock-k3p-study",
+  "id": "dig-horizon-clock-k3p-hc-step-v1-study",
   "max_rounds": 1,
   "prediction": {
     "metric": "component_covariance_error",

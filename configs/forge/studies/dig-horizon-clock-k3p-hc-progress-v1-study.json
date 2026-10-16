@@ -7,7 +7,7 @@
   "candidate": "k3p-hc-progress-v1",
   "competing_explanation": "K3P may need far more than 1,600 updates of training at high rate (the 6,400 full schedule still failed at its 1,600/3,200/4,800 cuts), so no schedule shape inside the cap can reproduce the long-horizon pass.",
   "control": {
-    "candidate_id": "k3p",
+    "candidate_id": "k3p-hc-step-v1",
     "task_map": {}
   },
   "falsifier": {

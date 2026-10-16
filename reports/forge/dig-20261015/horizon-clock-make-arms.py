@@ -7,6 +7,10 @@ from experiments.forge.clockfree import source_audit
 
 base = json.loads(Path("configs/forge/ideas/k3p-hc-progress-v1.json").read_text())
 ARMS = {
+    "k3p-hc-step-v1": dict(
+        ov={},
+        cf=["None: schema-3 copy of the shipped K3P recipe (step schedules over the task-owned horizon) as the matched step-schedule control"],
+        mr="Matched step-schedule control on the same frozen source; identical recipe to the shipped k3p card."),
     "k3p-hc-progress-v1": dict(
         ov={"progress_schedule": "critic_order", "progress_rate": 0.001, "progress_target": 0.75,
             "progress_ema": 0.98, "d_guard_min_steps": 0},

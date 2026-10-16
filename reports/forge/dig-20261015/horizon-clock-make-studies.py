@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ARMS = {
-    "k3p": "Step-schedule control: shipped K3P; on ring16 the task-owned 400-update schedule horizon finishes annealing by update 400.",
+    "k3p-hc-step-v1": "Step-schedule control: shipped K3P; on ring16 the task-owned 400-update schedule horizon finishes annealing by update 400.",
     "k3p-hc-constant-v1": "Constant-rate clock-free K3P control.",
     "k3p-hc-progress-v1": "Candidate: critic-order progress drives K3P's annealing shape without the step label or horizon.",
     "k3p-hc-progress-ungated-v1": "Diagnostic: internal-counter progress (anneal inside the cap without a gate).",
@@ -15,7 +15,7 @@ for cid, hypothesis in ARMS.items():
         "competing_explanation": ("K3P may need far more than 1,600 updates of training at high rate (the 6,400 full "
                                   "schedule still failed at its 1,600/3,200/4,800 cuts), so no schedule shape inside "
                                   "the cap can reproduce the long-horizon pass."),
-        "control": {"candidate_id": "k3p" if cid != "k3p" else "k3p-hc-constant-v1", "task_map": {}},
+        "control": {"candidate_id": "k3p-hc-step-v1" if cid != "k3p-hc-step-v1" else "k3p-hc-constant-v1", "task_map": {}},
         "falsifier": {"metric": "component_covariance_error", "op": ">", "phase": "final",
                       "task_id": "ring16_acquisition", "threshold": 0.85},
         "hypothesis": hypothesis,
