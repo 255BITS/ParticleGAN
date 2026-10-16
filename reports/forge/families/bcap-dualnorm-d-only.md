@@ -72,7 +72,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [bcap-dualnorm-d-only · 3305345f128e](../../../configs/forge/configurations/bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 11, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 12, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -89,7 +89,7 @@ Selection: historical_incumbent. Preserve the exact archived revision-7 measurem
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/0](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [2/12 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
 | [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous) | [3/4](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [3/14 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0/14 (14 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
-| [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability) | [3/6 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [3/17 (12 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
+| [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability) | [3/6 (2 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [3/17 (13 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
 | [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) | [2/13 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
 | [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | [2/13 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
 | [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | [0/0](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage-tier-3) | [2/12 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-held) |
@@ -114,7 +114,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | PASS | changed since run |
 | [five_word_joint_smoke](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-five_word_joint_smoke) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_smoke](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | PASS | changed since run |
-| [ring16_acquisition](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | FAIL | changed since run |
+| [ring16_acquisition_6400](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition_6400) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [two_pole](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-two_pole) | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | FAIL | changed since run |
 | [unused_token_hold](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-unused_token_hold) | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | PASS | changed since run |
 
@@ -517,7 +517,7 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 11**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 12**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
 Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 10 / 1**. Held counts (measured and shown, not counted): **0 / 11 / 0**.
 
@@ -533,7 +533,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [two_pole](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-two_pole) | required | FAIL | changed since run |
 | [unused_token_hold](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-unused_token_hold) | required | PASS | changed since run |
 | [ae_gan_hold](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-ae_gan_hold) | required | PASS | changed since run |
-| [ring16_acquisition](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition) | required | FAIL | changed since run |
+| [ring16_acquisition_6400](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition_6400) | required | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_smoke](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | changed since run |
 
@@ -1983,7 +1983,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2017,6 +2017,36 @@ At least 5 consecutive passing terminal observations.
 All 96 declared observations and final live metrics are required.
 
 Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-ring16_acquisition_6400"></a>
+
+### ring16_acquisition_6400
+
+**ring16_acquisition_6400: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition_6400.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 384 declared observations and final live metrics are required.
+
+Declared budget: 6400 updates; timeout 1200 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2993,7 +3023,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Runtime: **cuda**. Selected configuration: [bcap-dualnorm-d-only · 3305345f128e](../../../configs/forge/configurations/bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 11, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 3, clockfree_continuous 4, discriminator_stability 12, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -3010,7 +3040,7 @@ Selection: historical_incumbent. Preserve the exact archived revision-5 measurem
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/0](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [2/12 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
 | [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3/14 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0/14 (14 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
-| [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [2/6 (2 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [2/17 (13 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
+| [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [2/6 (3 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [2/17 (14 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/11 (11 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
 | [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [2/13 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
 | [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0/1 (1 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [2/13 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
 | [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage) | [2/3](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0/9 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [2/12 (9 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage) | [0/10 (10 not run)](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-held) |
@@ -3035,7 +3065,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | PASS | changed since run |
 | [five_word_joint_smoke](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_smoke](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
-| [ring16_acquisition](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | changed since run |
+| [ring16_acquisition_6400](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_6400) | [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [two_pole](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | FAIL | changed since run |
 | [unused_token_hold](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | changed since run |
 
@@ -3438,7 +3468,7 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 11**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 12**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
 Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 10 / 1**. Held counts (measured and shown, not counted): **0 / 11 / 0**.
 
@@ -3454,7 +3484,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [two_pole](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | FAIL | changed since run |
 | [unused_token_hold](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | changed since run |
 | [ae_gan_hold](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | changed since run |
-| [ring16_acquisition](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | FAIL | changed since run |
+| [ring16_acquisition_6400](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_6400) | required | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_smoke](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | changed since run |
 
@@ -4885,7 +4915,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-bcap-projection-baseline-repair-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4919,6 +4949,36 @@ At least 5 consecutive passing terminal observations.
 All 96 declared observations and final live metrics are required.
 
 Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_6400"></a>
+
+### ring16_acquisition_6400
+
+**ring16_acquisition_6400: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition_6400.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 384 declared observations and final live metrics are required.
+
+Declared budget: 6400 updates; timeout 1200 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
