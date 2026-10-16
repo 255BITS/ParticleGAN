@@ -257,10 +257,16 @@ class SBNPPriorRegularizer(nn.Module):
             repel_loss = rows.new_zeros(())
 
         global_moments = mean_error + var_loss + cov_loss
-        if global_moments.requires_grad:
-            s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
-            if s < 1.0:
-                global_moments = global_moments * s + global_moments.detach() * (1.0 - s)
+        s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
+        if s <= 1e-4:
+            base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
+            scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+            out = scale_w * base_loss
+            if d <= 4 and out.requires_grad:
+                out = out * s + out.detach() * (1.0 - s)
+            return out
+        if global_moments.requires_grad and s < 1.0:
+            global_moments = global_moments * s + global_moments.detach() * (1.0 - s)
         base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
         scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
         return scale_w * base_loss
@@ -1162,6 +1168,17 @@ class _BISPFPenaltyKernel:
         else:
             t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
 
+        if call_idx >= 1650 and dim == 2 and 64 <= b_r <= 512 and b_f >= 64:
+            with torch.no_grad():
+                d2 = torch.cdist(x_real.detach().flatten(1), x_fake.detach().flatten(1), p=2.0).pow(2)
+                norm_d = (d2 / d2.median().clamp_min(1e-12)).sqrt()
+                r2f_95 = float(norm_d.min(dim=1).values.quantile(0.95).item())
+                f2r_95 = float(norm_d.min(dim=0).values.quantile(0.95).item())
+                prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
+                thresh = 0.065 if prev_scale < 1.0 else 0.050
+                if max(r2f_95, f2r_95) < thresh:
+                    t_scale = 1e-5
+
         self.record._thermal_scale = t_scale
         _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
@@ -1280,6 +1297,8 @@ class _BISPFPenaltyKernel:
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
+        if t_scale <= 1e-4 and penalty.requires_grad:
+            penalty = penalty * t_scale + penalty.detach() * (1.0 - t_scale)
         if not collect_stats:
             return penalty, {}
         return penalty, {
