@@ -206,6 +206,7 @@ class Recipe:
     # betas[1]/reg_coeff over anneal_end * total_steps completed updates, then
     # hold. External execution limits do not change that declared horizon.
     optimizer_family: str = "formulation"
+    optimizer_signal_roles: tuple[str,...] = ()
     # Dual-norm experiments retain the fixed loss/penalty and LR multiplier.
     # lr is their step size; isolation arms can pin native Adam groups to the
     # original baseline rate independently of the normalized-step sweep.
@@ -221,6 +222,16 @@ class Recipe:
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
+    cell_gaussian_objective: str | None = None
+    cell_reference_policy: str = "cumulative"
+    cell_quota_policy: str = "largest_remainder"
+    cell_shape_weighting: str = "mass"
+    cell_assignment_refinement: str = "none"
+    cell_transport_policy: str = "integer"
+    cell_distribution_shape: str = "none"
+    cell_covariance_memory: str = "unchanged"
+    cell_gradient_projection: bool = False
+    cell_extragradient_map: bool = False
     optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
@@ -244,6 +255,31 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if self.cell_covariance_memory not in ('unchanged','slow32') or type(self.cell_gradient_projection) is not bool or type(self.cell_extragradient_map) is not bool:
+            raise ValueError('Invalid portfolio mechanism')
+        if (self.cell_covariance_memory!='unchanged' or self.cell_gradient_projection or self.cell_extragradient_map) and (self.cell_gaussian_objective!='aggregate_forward_kl' or self.cell_reference_policy!='exponential8' or self.cell_distribution_shape!='none' or self.cell_transport_policy!='integer'):
+            raise ValueError('Portfolio mechanism requires base integer cell objective')
+        if self.cell_distribution_shape not in ('none','sliced','rbf','fourth'):
+            raise ValueError('Unknown conditional shape')
+        if self.cell_distribution_shape!='none' and (self.cell_gaussian_objective!='aggregate_forward_kl' or self.cell_reference_policy!='exponential8' or self.cell_transport_policy!='integer'):
+            raise ValueError('Conditional shape requires integer aggregate forward KL')
+        if self.cell_transport_policy not in ("integer", "fractional_exact"):
+            raise ValueError('Unknown cell transport policy')
+        if self.cell_transport_policy != 'integer' and (self.cell_gaussian_objective != 'aggregate_forward_kl' or self.cell_reference_policy != 'exponential8' or self.cell_shape_weighting != 'mass' or self.cell_assignment_refinement != 'none'):
+            raise ValueError('Fractional transport requires unmodified aggregate forward KL')
+        if self.cell_shape_weighting not in ("mass", "uniform", "worst") or self.cell_assignment_refinement not in ("none", "best_single_swap", "minimum_switch"):
+            raise ValueError("Invalid conditional cell policy")
+        if (self.cell_shape_weighting != "mass" or self.cell_assignment_refinement != "none") and (self.cell_gaussian_objective != "aggregate_forward_kl" or self.cell_reference_policy != "exponential8"):
+            raise ValueError("Conditional cell policies require exponential8 forward KL")
+        if self.cell_quota_policy not in ("largest_remainder", "minimum_change"):
+            raise ValueError("invalid cell_quota_policy")
+        if self.cell_quota_policy == "minimum_change" and (
+                self.cell_reference_policy != "exponential8" or self.cell_gaussian_objective is None):
+            raise ValueError("minimum_change requires an exponential8 cell objective")
+        if self.cell_reference_policy not in ("cumulative","rolling8","block8","exponential8","evidence_reset"):
+            raise ValueError("invalid cell_reference_policy")
+        if self.cell_gaussian_objective not in (None, "per_kernel", "aggregate_forward_kl", "aggregate_reverse_kl", "aggregate_bures", "aggregate_moment"):
+            raise ValueError("invalid cell_gaussian_objective")
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
         from .coulomb_prior import CoulombPriorRegularizer
@@ -278,6 +314,10 @@ class Recipe:
         from .optim.dualnorm import NORMALIZED_FAMILIES
         if self.optimizer_family not in ("formulation", "adam", *NORMALIZED_FAMILIES):
             raise ValueError("unknown optimizer_family")
+        object.__setattr__(self,"optimizer_signal_roles",tuple(self.optimizer_signal_roles))
+        if (len(set(self.optimizer_signal_roles))!=len(self.optimizer_signal_roles) or any(r not in ("generator","prior") for r in self.optimizer_signal_roles)
+            or (self.optimizer_signal_roles and (self.optimizer_family!="nsgda_global" or self.optimizer_momentum or self.optimizer_smoothing or self.optimizer_convolution!="none"))):
+            raise ValueError("invalid optimizer gradient-signal roles")
         if isinstance(self.optimizer_momentum, bool) or self.optimizer_momentum not in (0., .5, .9):
             raise ValueError("optimizer_momentum must be 0, 0.5 or 0.9")
         if self.optimizer_momentum != 0 and self.optimizer_family not in ("dualnorm", "dualnorm_D_only"):

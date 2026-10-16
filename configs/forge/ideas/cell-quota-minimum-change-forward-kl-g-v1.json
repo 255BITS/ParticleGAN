@@ -1,0 +1,78 @@
+{
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Replace largest-remainder integer quota rounding with minimum-change floor/ceiling rounding; all reference statistics, exact capacities, hard Hungarian matching, optimizer rules and gates unchanged."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "id": "cell-quota-minimum-change-forward-kl-g-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Endpoint posthoc evidence links quota-induced assignment changes to large conditional gradient jumps. Retain the closest previous valid floor/ceiling allocation; force capacity adaptation whenever data-estimated mass crosses an integer boundary. No tuned deadband or frozen quota.",
+  "parent": "cell-gradient-signal-forward-kl-g-v1",
+  "recipe_overrides": {
+    "constraint_geometry_mode": "none",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "none",
+    "optimizer_family": "nsgda_global",
+    "optimizer_smoothing": 0.0,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "cell_gaussian_objective": "aggregate_forward_kl",
+    "cell_reference_policy": "exponential8",
+    "optimizer_signal_roles": [
+      "generator"
+    ],
+    "cell_quota_policy": "minimum_change"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-cell-moment",
+  "api_changes": [
+    {
+      "variable": "Recipe.cell_gaussian_objective",
+      "provider": "particlegan.cell_gaussian.CellObjective",
+      "affected_hosts": [
+        "public_trainer positive-width MoG vectors"
+      ],
+      "migration": "New default-off opt-in Recipe mechanism with native checkpointed cell state; historical source evidence remains separate"
+    },
+    {
+      "variable": "Recipe.optimizer_signal_roles",
+      "provider": "particlegan.optim.gradient_signal.GradientSignal",
+      "affected_hosts": [
+        "public trainer global-NSGDA G/prior"
+      ],
+      "migration": "Default empty retains original optimizer packet/law;opt-in gradient-history packets persist and validate. No evaluator or RNG inputs."
+    },
+    {
+      "variable": "Recipe.cell_reference_policy",
+      "provider": "particlegan.cell_gaussian.memory.ReferenceMemory",
+      "affected_hosts": [
+        "public trainer positive-width MoG vectors"
+      ],
+      "migration": "Default cumulative remains; opt-in data-only memory state checkpoints exactly."
+    },
+    {
+      "variable": "Recipe.cell_quota_policy",
+      "provider": "particlegan.cell_gaussian.memory.ReferenceMemory",
+      "affected_hosts": [
+        "positive-width MoG cell-reference public trainer"
+      ],
+      "migration": "Default largest_remainder retains numerical parent law; opt-in minimum_change adds checkpointed previous allocation. Historical state/source identities remain separate."
+    }
+  ]
+}

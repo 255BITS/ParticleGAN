@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "cell-quota-probe-rest-diagnostic-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "policy_change_reason": "Dig 2026-10-15 lead 4: second-stage tests for the cell-quota minimum-change probe, run only if ring16 does not decisively fail; opt-in diagnostic, no qualification.",
+  "assignments": [
+    {
+      "task": "mode_hold",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    },
+    {
+      "task": "gaussian1d_stability",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 1
+    },
+    {
+      "task": "gaussian1d_smoke",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 2
+    },
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 3
+    },
+    {
+      "task": "five_word_joint_smoke",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 4
+    }
+  ]
+}

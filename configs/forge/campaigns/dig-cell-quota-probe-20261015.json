@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "dig-cell-quota-probe-20261015",
+  "budget_seconds": 7200,
+  "candidate_budget_seconds": 3600,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Dig 2026-10-15 lead 4: cell-quota minimum-change candidate vs matched BCAP DualNorm control (plus an optional NSGDA attribution arm) on ring16_acquisition first, then mode_hold, gaussian1d_stability, gaussian1d_smoke, two_pole and five_word_joint_smoke. Fixed protocol seed 0, no seed sweeps, one worker per leased GPU, at most ~2 GPU-hours. Opt-in research diagnostic; no default, task, gate or budget changes."
+}
