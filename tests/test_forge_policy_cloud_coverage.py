@@ -1029,6 +1029,13 @@ def test_plain_causes_state_the_failed_checks_in_words():
     native = dict(base, grade={"evaluator_result": {"coverage_status": "INVALID", "terminal_checks": [{"passed": False}] * 5,
                                                      "holdout_metrics": {"precision": .034, "mass_tv": .128}}})
     assert plain_cause(native).startswith("Coverage gate INVALID; final live accuracy checks 0/5 passed; independent holdout fails")
+    assert "mass TV 0.128 (needs <= 0.06) FAIL" in plain_cause(native)
+    gaussian = dict(base, status="PASS", grade={"metrics": {"cdf_ks": .03, "std_ratio": 1.3, "sample_count": 4096},
+                                                "evaluator_result": dict(confirmed_steps=[84], first_confirmed_step=84,
+                                                                         passing_observations=16, observations=24)})
+    assert plain_cause(gaussian, [["sample_count", ">=", 4096], ["std_ratio", ">=", .8], ["std_ratio", "<=", 1.2],
+                                  ["cdf_ks", "<=", .05]]).endswith(
+        "Final: std_ratio 1.3 (needs 0.8 to 1.2) FAIL, cdf_ks 0.03 (needs <= 0.05).")
     stability = dict(base, grade={"evaluator_result": dict(stationary_passes=46, stationary_checks=72,
         reacquisition_status="FAIL", shift_hold_passes=17, shift_hold_checks=24, frozen_passes=0, frozen_checks=48)})
     assert "Stationary hold 46/72, deadline reacquisition FAIL, shifted hold 17/24" in plain_cause(stability)
@@ -1218,3 +1225,80 @@ def test_policy_cloud_drain_dispatches_the_longest_dependency_chains_first(tmp_p
     started = [e["task"] for e in map(json.loads, (selected / "events.jsonl").read_text().splitlines())
                if e["event"] == "started"]
     assert started[0] == "a_short"
+
+
+def _saved_run(directory, device, weight=1.0):
+    """One attempt directory whose receipt digests a saved state bound to ``device``."""
+    import torch
+    from experiments.forge.adapters import training_state_receipt
+    state = {"streams": {"manifest": {"bindings": {device: {"family": "training"}, "eval": {"family": "eval"}}},
+                         "states": {device: torch.tensor([1, 2, 3]), "eval": torch.tensor([7])}},
+             "trainer": {"G": torch.full((2,), weight), "cpu_rng": torch.tensor([5]), "device": device}}
+    (directory / "provenance").mkdir(parents=True)
+    path = directory / "provenance" / "provenance-state.pt"
+    torch.save(state, path)
+    receipt = training_state_receipt(state, 10)
+    atomic_json(directory / "raw.json", {"evidence": {"training_state": receipt, "provenance_checkpoint": {
+        "path": path.name, "sha256": file_hash(path)}}})
+    return receipt["sha256"]
+
+
+def test_training_state_pairs_normalize_the_device_label_only_across_gpus(tmp_path):
+    from experiments.forge import policy_cloud_publication as publication
+
+    def pair(name, clean_gpu, served_gpu, served_weight=1.0):
+        jobs = []
+        for cohort, gpu, weight in ((COHORT, clean_gpu, 1.0), (SERVED_COHORT, served_gpu, served_weight)):
+            directory = tmp_path / name / cohort
+            _saved_run(directory, f"cuda:{gpu}", weight)
+            jobs.append(dict(owning_family="atlas", cohort_id=cohort, parent_task="grid100", key=name + cohort,
+                             status="FAIL", attempt_id=cohort, gpu=gpu, directory=str(directory)))
+        states = {job["key"]: publication._training_state(Path(job["directory"])) for job in jobs}
+        (row,) = publication.training_state_pairs(jobs, states)
+        return row
+    across = pair("across", "0", "1")
+    assert across["clean"]["sha256"] != across["as_served"]["sha256"]  # The receipt digest names the device.
+    assert (across["comparison"], across["method"]) == ("match", "device_normalized_saved_state")
+    assert across["clean"]["device_normalized"]["verified"] is True
+    assert across["clean"]["device_normalized"]["sha256"] == across["as_served"]["device_normalized"]["sha256"]
+    same = pair("same", "1", "1")
+    assert (same["comparison"], same["method"]) == ("match", "receipt_digest")
+    changed = pair("changed", "0", "1", served_weight=2.0)  # A real training difference survives normalization.
+    assert (changed["comparison"], changed["method"]) == ("mismatch", "device_normalized_saved_state")
+    differs_same_gpu = pair("samegpu", "0", "0", served_weight=2.0)
+    assert (differs_same_gpu["comparison"], differs_same_gpu["method"]) == ("mismatch", "receipt_digest")
+    # A saved state that does not reproduce its receipt is never trusted.
+    tampered = tmp_path / "tampered"
+    _saved_run(tampered, "cuda:0")
+    raw = read_json(tampered / "raw.json")
+    raw["evidence"]["training_state"]["sha256"] = "0" * 64
+    atomic_json(tampered / "raw.json", raw)
+    check = publication.device_independent_digest(publication._training_state(tampered))
+    assert check["verified"] is False and check["sha256"] is None
+
+
+def test_cohort_media_tiles_in_run_gifs_without_training_or_sampling(tmp_path):
+    from PIL import Image
+    from experiments.forge.policy_cloud_media import render_cohort_media
+    trained = {}
+    for law, parent, status, colour in (("clean", "grid100", "FAIL", (200, 0, 0)), ("shared", "two_pole", "FAIL", (0, 0, 200)),
+                                        ("as_served", "grid100", "PASS", (0, 160, 0))):
+        directory = tmp_path / "attempts" / (law + parent)
+        directory.mkdir(parents=True)
+        frames = [Image.new("RGB", (90, 60), tuple(min(255, c + 20 * k) for c in colour)) for k in range(3)]
+        frames[0].save(directory / "training.gif", save_all=True, append_images=frames[1:], duration=100)
+        trained[("atlas", law, parent)] = dict(directory=str(directory), status=status, measurement_law=law,
+                                               attempt_id=law + parent)
+    root = tmp_path / "repo"
+    receipt = render_cohort_media(root, Path("report"), trained, families=("atlas",), laws=("clean", "as_served"),
+                                  order=["two_pole", "grid100"])
+    assert receipt["optimizer_updates_added"] == 0 and receipt["sampling_draws_added"] == 0
+    clean, served = receipt["sheets"]
+    assert [tile["test"] for tile in clean["tiles"]] == ["two_pole", "grid100"]  # Shared runs join the clean sheet.
+    assert [tile["test"] for tile in served["tiles"]] == ["grid100"]
+    assert clean["tiles"][0]["frames_used"][0] == 0 and clean["tiles"][0]["frames_used"][-1] == 2
+    first = (root / clean["path"]).read_bytes()
+    assert Image.open(root / clean["path"]).n_frames >= 2
+    render_cohort_media(root, Path("report"), trained, families=("atlas",), laws=("clean", "as_served"),
+                        order=["two_pole", "grid100"])
+    assert (root / clean["path"]).read_bytes() == first  # Deterministic rerun.

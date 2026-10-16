@@ -30,6 +30,7 @@ from copy import deepcopy
 import json
 import math
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -209,8 +210,49 @@ def _checks(checks):
                      for check in checks)
 
 
-def plain_cause(record):
-    """A short readable cause from the recorded grade; display only."""
+# Fixed native fidelity limits (benchmarks/toy100/accuracy.py LIMITS); display only.
+NATIVE_LIMITS = (("mass_tv", "mass TV", 0.06), ("center_rms_sigma", "center RMS (sigma)", 0.20),
+                 ("abs_cov_trace_bias", "|cov trace bias|", 0.10), ("radial_ks", "radial KS", 0.04))
+
+
+def _native_holdout(holdout):
+    parts = []
+    for key, name, limit in NATIVE_LIMITS:
+        if isinstance(holdout.get(key), (int, float)):
+            value = holdout[key]
+            parts.append(f"{name} {_number(value)} (needs <= {_number(limit)})" + (" FAIL" if value > limit else ""))
+    text = f"precision {_number(holdout.get('precision'))}" + (", " + ", ".join(parts) if parts else
+                                                              f", mass TV {_number(holdout.get('mass_tv'))}")
+    if isinstance(holdout.get("accuracy_score"), (int, float)):
+        text += f"; accuracy score {_number(holdout['accuracy_score'])} (mean ratio to those limits)"
+    return text
+
+
+def _thresholds(metrics, thresholds):
+    """``metric value (needs op bound)`` for flat final metrics with declared bounds."""
+    bounds = {}
+    for metric, op, bound in thresholds or ():
+        value = metrics.get(metric) if isinstance(metrics, dict) else None
+        if metric in {"sample_count", "finite_fraction"} or not isinstance(value, (int, float)):
+            continue
+        bounds.setdefault(metric, []).append((op, bound))
+    parts = []
+    for metric, rules in bounds.items():
+        value = metrics[metric]
+        ok = all({"<=": value <= bound, ">=": value >= bound, "==": value == bound}.get(op, True) for op, bound in rules)
+        ops = dict(rules)
+        need = (f"{_number(ops['>='])} to {_number(ops['<='])}" if set(ops) == {">=", "<="}
+                else ", ".join(f"{op} {_number(bound)}" for op, bound in rules))
+        parts.append(f"{metric} {_number(value)} (needs {need})" + ("" if ok else " FAIL"))
+    return ", ".join(parts)
+
+
+def plain_cause(record, thresholds=None):
+    """A short readable cause from the recorded grade; display only.
+
+    ``thresholds`` (the task's declared ``[metric, op, bound]`` list) adds the
+    final metrics against their bounds where the grade records flat metrics.
+    """
     status, reason = record["status"], str(record.get("reason") or "").strip()
     if status == "BLOCKED":
         if record.get("block_kind") == "incompatible":
@@ -232,7 +274,8 @@ def plain_cause(record):
                     "observations passed")
         failing = [check for check in result["metrics"] if check.get("status") != "PASS"]
         if status == "PASS":
-            return f"Stable passing suffix from step {_number(convergence.get('stable_from_step'))}; all final live checks pass ({observed})."
+            return (f"Stable passing suffix from step {_number(convergence.get('stable_from_step'))}; all final live "
+                    f"checks pass: {_checks(result['metrics'])}; {observed}.")
         if failing:
             return f"Final live checks fail: {_checks(failing)}; {observed}."
         return (f"Final live checks pass but no stable passing suffix ({_number(convergence.get('passing_suffix'))} "
@@ -243,25 +286,32 @@ def plain_cause(record):
         holdout_pass = bool(holdout.get("frozen_pass")) and bool(holdout.get("accuracy_pass"))
         return (f"Coverage gate {result['coverage_status']}; final live accuracy checks "
                 f"{sum(bool(c.get('passed')) for c in terminal)}/{len(terminal)} passed; independent holdout "
-                f"{'passes' if holdout_pass else 'fails'} (precision {_number(holdout.get('precision'))}, "
-                f"mass TV {_number(holdout.get('mass_tv'))}).")
+                f"{'passes' if holdout_pass else 'fails'} ({_native_holdout(holdout)}). PASS needs the coverage gate, "
+                f"every final live check and the holdout.")
     if "stationary_checks" in result:
+        final = _thresholds(metrics, thresholds)
         return (f"Stationary hold {result['stationary_passes']}/{result['stationary_checks']}, deadline reacquisition "
                 f"{result['reacquisition_status']}, shifted hold {result['shift_hold_passes']}/{result['shift_hold_checks']} "
-                f"(PASS needs every check); frozen control {result['frozen_passes']}/{result['frozen_checks']}.")
+                f"(PASS needs every check); frozen control {result['frozen_passes']}/{result['frozen_checks']}."
+                + (f" Final: {final}." if final else ""))
     if "confirmed_steps" in result:
+        final = _thresholds(metrics, thresholds)
+        final = f" Final: {final}." if final else ""
         if status == "PASS":
             return (f"First independently confirmed full pass at step {_number(result['first_confirmed_step'])} "
-                    f"({result['passing_observations']}/{result['observations']} scheduled observations passed).")
-        return f"No independently confirmed full pass ({result['passing_observations']}/{result['observations']} observations passed)."
+                    f"({result['passing_observations']}/{result['observations']} scheduled observations passed).{final}")
+        return (f"No independently confirmed full pass ({result['passing_observations']}/{result['observations']} "
+                f"observations passed).{final}")
     if metrics.get("name") == "first_convergence_then_hold_v1":
         if metrics.get("status") == "NOT_CONVERGED":
             text = (f"No qualifying window: {metrics.get('settling_failures')}/{metrics.get('settling_checks')} settling "
                     f"checks failed (needs {metrics.get('confirmation_checks')} consecutive checks with "
                     f"{metrics.get('modes')} modes and hq >= {metrics.get('min_hq')}).")
         elif metrics.get("status") == "POST_CONVERGENCE_FAIL":
-            text = (f"Converged at step {_number(metrics.get('converged_step'))}, then the hold failed at step "
-                    f"{_number(metrics.get('first_hold_failure'))}.")
+            text = (f"Converged at step {_number(metrics.get('converged_step'))} ({_number(metrics.get('confirmation_checks'))} "
+                    f"consecutive checks with {metrics.get('modes')} modes and hq >= {metrics.get('min_hq')}), then the "
+                    f"hold failed at step {_number(metrics.get('first_hold_failure'))} after "
+                    f"{_number(metrics.get('hold_checks'))}/{_number(metrics.get('hold_budget'))} hold checks (needs all).")
         else:
             text = (f"Converged at step {_number(metrics.get('converged_step'))}; held "
                     f"{metrics.get('hold_checks')}/{metrics.get('hold_budget')} checks.")
@@ -272,7 +322,8 @@ def plain_cause(record):
         live, frozen = metrics["live_deadline"], metrics.get("frozen_deadline") or {}
         return (f"Recovery window after the shift: live {live.get('passing_checks')}/{live.get('checks')} checks passed "
                 f"(min modes {_number(live.get('min_modes'))}, min hq {_number(live.get('min_hq'))}); frozen control "
-                f"{frozen.get('passing_checks')}/{frozen.get('checks')}.")
+                f"{frozen.get('passing_checks')}/{frozen.get('checks')} (PASS needs every live check after the "
+                f"recovery deadline, with the frozen control passing none).")
     reasons = grade.get("reasons") or ([reason] if reason else [])
     return "; ".join(str(item) for item in reasons) or status
 
@@ -295,15 +346,23 @@ def _training_state(directory):
     raw = directory / "raw.json"
     if not raw.is_file():
         return None
-    value = read_json(raw).get("evidence", {}).get("training_state")
-    return {key: value.get(key) for key in ("sha256", "completed_steps")} if isinstance(value, dict) else None
+    evidence = read_json(raw).get("evidence", {})
+    value = evidence.get("training_state")
+    if not isinstance(value, dict):
+        return None
+    state = {key: value.get(key) for key in ("sha256", "completed_steps")}
+    checkpoint = evidence.get("provenance_checkpoint")
+    if isinstance(checkpoint, dict) and checkpoint.get("path") and checkpoint.get("sha256"):
+        state["provenance_checkpoint"] = {"path": (directory / "provenance" / checkpoint["path"]).as_posix(),
+                                          "sha256": checkpoint["sha256"]}
+    return state
 
 
 def receipts_and_states(jobs):
     receipts, states = [], {}
     for job in jobs:
         entry = {key: job.get(key) for key in ("family", "owning_family", "measurement_law", "parent_task", "task",
-                                                "status", "attempt_id", "updates")}
+                                                "status", "attempt_id", "updates", "gpu", "seconds")}
         if job.get("origin") == "reused_execution":
             entry["reused_execution"] = deepcopy(job.get("reused_execution"))
         elif job.get("directory"):
@@ -316,11 +375,61 @@ def receipts_and_states(jobs):
     return receipts, states
 
 
+DEVICE_LABEL = re.compile(r"cuda:\d+")
+
+
+def _without_device_labels(value):
+    """Replace every ``cuda:<index>`` label in state keys and strings with ``cuda``."""
+    if isinstance(value, dict):
+        return {(DEVICE_LABEL.sub("cuda", key) if isinstance(key, str) else key): _without_device_labels(item)
+                for key, item in value.items()}
+    if isinstance(value, list):
+        return [_without_device_labels(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_without_device_labels(item) for item in value)
+    if isinstance(value, str):
+        return DEVICE_LABEL.sub("cuda", value)
+    return value
+
+
+def device_independent_digest(state):
+    """Recompute one receipt's training-state digest without the CUDA device index.
+
+    The receipt digest (``adapters.training_state_receipt``) records the named
+    stream bindings with their device, for example ``cuda:0`` versus
+    ``cuda:1``, so runs on different GPUs can never match. This loads the
+    run's saved final state (its provenance checkpoint, the exact object the
+    receipt digested), proves that by recomputing the receipt digest, then
+    applies the same exclusions after replacing the device label. Returns a
+    dict with ``verified`` (file and receipt digest reproduced) and
+    ``sha256`` (device-independent digest), or None without a saved state.
+    """
+    checkpoint = (state or {}).get("provenance_checkpoint")
+    if not checkpoint or not Path(checkpoint["path"]).is_file():
+        return None
+    import torch
+    from .adapters import training_state_receipt  # read-only use of the pinned digest
+    path = Path(checkpoint["path"])
+    if file_hash(path) != checkpoint["sha256"]:
+        return {"verified": False, "sha256": None, "reason": "saved state differs from its receipt"}
+    saved = torch.load(path, map_location="cpu", weights_only=False)
+    steps = state["completed_steps"]
+    reproduced = training_state_receipt(saved, steps)["sha256"]
+    if reproduced != state["sha256"]:
+        return {"verified": False, "sha256": None, "reason": "saved state does not reproduce the receipt digest"}
+    return {"verified": True, "sha256": training_state_receipt(_without_device_labels(saved), steps)["sha256"]}
+
+
 def training_state_pairs(jobs, states):
     """Compare the final training state of each clean/as-served pair.
 
-    Evaluation is audited as pure, so a pair should train identically. GPU
-    kernels can be nondeterministic: a mismatch is reported, never graded.
+    Evaluation is audited as pure, so a pair should train identically. The
+    receipt digests are compared first (method ``receipt_digest``). The receipt
+    digest includes the CUDA device index, so when two digests differ and the
+    runs used different GPUs, the saved final states are compared with the
+    device label normalized and the digest's own exclusions applied (method
+    ``device_normalized_saved_state``). A remaining mismatch is reported, never
+    graded.
     """
     index = {(job["owning_family"], job["cohort_id"], job["parent_task"]): job for job in jobs}
     pairs = []
@@ -330,18 +439,32 @@ def training_state_pairs(jobs, states):
             if clean is None or served is None:
                 continue
             first, second = states.get(clean["key"]), states.get(served["key"])
+            method, normalized = "receipt_digest", None
             if "reused_execution" in (clean.get("origin"), served.get("origin")):
-                comparison = "no_own_training"
+                comparison, method = "no_own_training", None
             elif not first or not second or not first.get("sha256") or not second.get("sha256"):
-                comparison = "unavailable"
+                comparison, method = "unavailable", None
             elif first["completed_steps"] != second["completed_steps"]:
                 comparison = "different_stop_steps"
+            elif first["sha256"] == second["sha256"]:
+                comparison = "match"
+            elif clean.get("gpu") is not None and served.get("gpu") is not None and clean["gpu"] != served["gpu"]:
+                method = "device_normalized_saved_state"
+                normalized = [device_independent_digest(first), device_independent_digest(second)]
+                comparison = ("match" if all(item and item["verified"] for item in normalized)
+                              and normalized[0]["sha256"] == normalized[1]["sha256"] else "mismatch")
             else:
-                comparison = "match" if first["sha256"] == second["sha256"] else "mismatch"
-            pairs.append({"family": family, "parent_task": parent, "comparison": comparison,
-                          "clean": {"status": clean["status"], "attempt_id": clean.get("attempt_id"), **(first or {})},
-                          "as_served": {"status": served["status"], "attempt_id": served.get("attempt_id"),
-                                        **(second or {})}})
+                comparison = "mismatch"
+
+            def side(job, state, extra):
+                value = {"status": job["status"], "attempt_id": job.get("attempt_id"), "gpu": job.get("gpu"),
+                         **{key: (state or {}).get(key) for key in ("sha256", "completed_steps") if state}}
+                if extra is not None:
+                    value["device_normalized"] = extra
+                return value
+            pairs.append({"family": family, "parent_task": parent, "comparison": comparison, "method": method,
+                          "clean": side(clean, first, normalized[0] if normalized else None),
+                          "as_served": side(served, second, normalized[1] if normalized else None)})
     return pairs
 
 
@@ -415,10 +538,73 @@ def summary(value):
     return result
 
 
+def _declared_thresholds(root, records):
+    """Each record's declared ``[metric, op, bound]`` list from its committed variant."""
+    directories = {COHORT: COVERAGE.directory, SERVED_COHORT: SERVED.directory}
+    found = {}
+    for record in records:
+        path = Path(root) / directories[record["cohort_id"]] / (record["task"] + ".json")
+        if path.is_file():
+            thresholds = read_json(path).get("evaluation", {}).get("thresholds")
+            if thresholds:
+                found[record["task"]] = thresholds
+    return found
+
+
+def _utc(seconds):
+    from datetime import datetime, timezone
+    return datetime.fromtimestamp(seconds, timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def run_costs(state_root, jobs):
+    """Summed attempt seconds, optimizer updates and coordinator wall time."""
+    attempts = [job for job in jobs if job.get("directory") and job.get("origin") != "reused_execution"]
+    trained = [job for job in attempts if job["status"] in {"PASS", "FAIL"} and (job.get("updates") or 0) > 0]
+    by_law = {}
+    for job in attempts:
+        entry = by_law.setdefault(job["measurement_law"], {"attempts": 0, "seconds": 0.0, "updates": 0})
+        entry["attempts"] += 1
+        entry["seconds"] = round(entry["seconds"] + float(job.get("seconds") or 0.0), 3)
+        entry["updates"] += int(job.get("updates") or 0)
+    gpus = {}
+    for job in trained:
+        gpus[str(job.get("gpu"))] = gpus.get(str(job.get("gpu")), 0) + 1
+    seconds = sum(float(job.get("seconds") or 0.0) for job in attempts)
+    value = {"attempts": len(attempts), "trained_attempts": len(trained), "attempt_seconds": round(seconds, 3),
+             "gpu_hours": round(seconds / 3600.0, 2), "optimizer_updates": sum(int(j.get("updates") or 0) for j in trained),
+             "by_law": dict(sorted(by_law.items())), "trained_attempts_by_gpu": dict(sorted(gpus.items()))}
+    events = Path(state_root) / "events.jsonl"
+    if events.is_file():
+        rows = [json.loads(line) for line in events.read_text().splitlines() if line.strip()]
+        starts = [row["time"] for row in rows if row.get("event") == "started"]
+        ends = [row["time"] for row in rows if row.get("event") == "finished"]
+        if starts and ends:
+            value.update(first_start=_utc(min(starts)), last_finish=_utc(max(ends)),
+                         wall_seconds=round(max(ends) - min(starts), 1))
+    return value
+
+
+def source_identity(state_root, jobs):
+    """The frozen execution source, recipes, seed and runtime shared by every attempt."""
+    requests = {}
+    for job in jobs:
+        if job.get("request_path") and Path(job["request_path"]).is_file():
+            requests.setdefault(job["request_path"], read_json(job["request_path"]))
+    origins = sorted({request["source"].get("origin_commit") or "" for request in requests.values()})
+    digests = sorted({request["source"]["digest"] for request in requests.values()})
+    runtimes = sorted({json.dumps(job.get("runtime"), sort_keys=True) for job in jobs if job.get("runtime")})
+    return {"origin_commits": origins, "source_digests": digests,
+            "protocol_seeds": sorted({request["protocol"]["seed"] for request in requests.values()}),
+            "candidate_revisions": {job["owning_family"]: job["candidate_revision"] for job in jobs},
+            "requests": {Path(path).name: file_hash(path) for path in sorted(requests)},
+            "runtimes": [json.loads(item) for item in runtimes]}
+
+
 def publish(root, state_root):
-    """Write records.json, results.json, README.md and grouped evidence."""
+    """Write records.json, results.json, README.md, GIF contact sheets and grouped evidence."""
     from .attempt_coverage import coverage_value
     from .policy_cloud_attempts import settings
+    from .policy_cloud_media import render_cohort_media
     root, state_root = Path(root).resolve(), Path(state_root).resolve()
     state = read_json(state_root / "state.json")
     if state.get("intake") != "policy-cloud":
@@ -448,23 +634,43 @@ def publish(root, state_root):
     value["summary"] = summary(value)
     receipts, states = receipts_and_states(jobs)
     pairs = training_state_pairs(jobs, states)
+    trained = {(job["owning_family"], job["measurement_law"], job["parent_task"]): job for job in jobs
+               if job.get("directory") and job["status"] in {"PASS", "FAIL"} and job.get("origin") != "reused_execution"}
+    order = [name for tier in (1, 2, 3) for name in TIERS[tier]]
     for path, text in certificates:
         atomic_text(path, text)
+    media = render_cohort_media(root, REPORT_DIRECTORY, trained, families=FAMILIES, laws=("clean", "as_served"),
+                                order=order)
     atomic_json(root / RECORDS, value)
     results = {"schema": RESULTS_SCHEMA, "qualification_input": False, "qualification_reuse": False,
                "state_root": str(state_root), "source_root": configured["source_root"],
                "records_sha256": file_hash(root / RECORDS), "recipes": deepcopy(value["recipes"]),
-               "summary": deepcopy(value["summary"]), "training_state_pairs": pairs,
+               "summary": deepcopy(value["summary"]), "source_identity": source_identity(state_root, jobs),
+               "costs": run_costs(state_root, jobs), "training_state_pairs": pairs,
+               "training_state_method": TRAINING_STATE_METHOD,
                "diagnostic_continuations": continuation_producers(jobs),
                "grouped_evidence": [{"path": path.relative_to(root).as_posix(), "sha256": file_hash(path)}
                                     for path, _ in certificates],
-               "receipts": receipts}
+               "media": media, "receipts": receipts}
     atomic_json(root / RESULTS, results)
-    atomic_text(root / README, render_readme(value, results))
+    atomic_text(root / README, render_readme(value, results, _declared_thresholds(root, records)))
     return {"records": str(root / RECORDS), "results": str(root / RESULTS), "readme": str(root / README),
             "summary": value["summary"],
             "training_state_pairs": {name: sum(p["comparison"] == name for p in pairs)
-                                     for name in sorted({p["comparison"] for p in pairs})}}
+                                     for name in sorted({p["comparison"] for p in pairs})},
+            "training_state_methods": {name: sum(p["method"] == name for p in pairs)
+                                       for name in sorted({p["method"] for p in pairs if p["method"]})}}
+
+
+TRAINING_STATE_METHOD = {
+    "receipt_digest": ("the two receipts' training_state.sha256 (adapters.training_state_receipt) compared directly"),
+    "device_normalized_saved_state": (
+        "the receipt digest includes the CUDA device index (named-stream bindings such as cuda:0 versus cuda:1), so "
+        "for a pair whose runs used different GPUs each run's saved final state (provenance/provenance-state.pt) is "
+        "loaded, verified by reproducing its receipt digest byte for byte, every cuda:<index> label in keys and "
+        "strings is replaced with cuda, and the same digest (same exclusions: isolated evaluation streams, global "
+        "CPU/CUDA RNG snapshots, birth/death eval_seconds) is recomputed and compared"),
+}
 
 
 # --- README ------------------------------------------------------------------
@@ -541,68 +747,272 @@ def _scores_table(value):
     return lines
 
 
-def render_readme(value, results):
+def _metric(record, name):
+    """One final metric from a recorded grade (curve checks or flat metrics), else None."""
+    if record is None:
+        return None
+    grade = record.get("grade") or {}
+    result = grade.get("evaluator_result") or {}
+    checks = result.get("metrics") if isinstance(result.get("metrics"), list) else []
+    for check in checks:
+        if check.get("metric") == name:
+            return check.get("value")
+    metrics = grade.get("metrics")
+    if isinstance(metrics, dict) and isinstance(metrics.get(name), (int, float)):
+        return metrics[name]
+    holdout = result.get("holdout_metrics")
+    if isinstance(holdout, dict) and isinstance(holdout.get(name), (int, float)):
+        return holdout[name]
+    return None
+
+
+def _status_pair(index, family, parent):
+    clean = index.get((family, COHORT, parent))
+    served = index.get((family, SERVED_COHORT, parent)) if parent in SERVED_PARENTS else clean
+    return clean, served
+
+
+def _verdicts(index, parent):
+    parts = []
+    for family in FAMILIES:
+        clean, served = _status_pair(index, family, parent)
+        if clean is None:
+            continue
+        if parent in LAW_INDEPENDENT:
+            parts.append(f"{FAMILY_NAMES[family]} {clean['status']} (shared)")
+        else:
+            parts.append(f"{FAMILY_NAMES[family]} {clean['status']} clean / {served['status'] if served else '—'} as served")
+    return "; ".join(parts)
+
+
+FAMILY_NAMES = {"atlas": "Atlas", "e22": "E22"}
+
+# Earlier Atlas/E22 measurements of the same questions (static history; the
+# "now" column is computed from this publication's records).
+EARLIER = (
+    ("img_stripes2", "[Unchanged public policy, 600 updates, selected serving state](../actual-missing-diagnostics-20261014/README.md)",
+     "Atlas PASS; E22 PASS", None),
+    ("img_bars4", "same image diagnostic", "Atlas FAIL; E22 FAIL", None),
+    ("img_blobs4", "same image diagnostic", "Atlas FAIL; E22 FAIL", None),
+    ("img_intensity2", "same image diagnostic", "Atlas FAIL; E22 FAIL (4 consecutive passing observations, 5 needed)", None),
+    ("two_pole", "[Selected-cloud two-pole, 80 updates](../actual-missing-diagnostics-20261014/README.md#what-the-atlase22-policy-attempts-uncovered)",
+     "Atlas INCOMPLETE, E22 INCOMPLETE (receipt lacked recipe-owned prior-policy metadata); mean_abs 0.002586, needs >= 0.3",
+     "mean_abs"),
+    ("gaussian1d_smoke", "[Tier 1 selected-cloud Gaussian acquisition](../atlas-compatible-coverage-20261013/README.md) "
+     "(a different gate: a stable terminal passing suffix)",
+     "first ERROR/INCOMPLETE (checkpoint NaN export; final CDF KS 0.029), then FAIL after the "
+     "[export repair](../ATTEMPT_COVERAGE.md#checkpoint-recovery), Atlas and E22", "cdf_ks"),
+    ("ring16_acquisition", "[Tier 1 selected-cloud Ring16 acquisition](../atlas-compatible-coverage-20261013/README.md)",
+     "first ERROR/INCOMPLETE (checkpoint NaN export), then FAIL after the export repair; logged component covariance "
+     "error Atlas 1.812, E22 1.139 (needs <= 0.85)", "component_covariance_error"),
+    ("clockfree_audit_measurement_v1", "[Tier 1 selected-cloud clock audit](../atlas-compatible-coverage-20261013/README.md); "
+     "[E22 policy clock audit](../actual-missing-diagnostics-20261014/README.md)",
+     "Atlas FAIL; E22 FAIL (step label and restart changed the state)", None),
+)
+
+
+def _now(index, parent, metric):
+    text = _verdicts(index, parent)
+    if metric:
+        values = []
+        for family in FAMILIES:
+            clean, served = _status_pair(index, family, parent)
+            got = [(law, _metric(record, metric)) for law, record in (("clean", clean), ("as served", served))
+                   if record is not None and _metric(record, metric) is not None]
+            if parent in LAW_INDEPENDENT:
+                got = got[:1]
+            if got:
+                values.append(FAMILY_NAMES[family] + " " + ", ".join(
+                    (f"{law} " if parent not in LAW_INDEPENDENT else "") + _number(value) for law, value in got))
+        if values:
+            text += f". {metric}: " + "; ".join(values)
+    return text
+
+
+def _pair_counts(pairs):
+    counts = {name: sum(p["comparison"] == name for p in pairs) for name in
+              ("match", "mismatch", "different_stop_steps", "no_own_training", "unavailable")}
+    counts["normalized"] = sum(p["comparison"] == "match" and p["method"] == "device_normalized_saved_state"
+                               for p in pairs)
+    return counts
+
+
+def _differing(index):
+    rows = []
+    for family in FAMILIES:
+        for parent in SERVED_PARENTS:
+            clean, served = _status_pair(index, family, parent)
+            if clean and served and clean["status"] != served["status"]:
+                rows.append((family, parent, clean["status"], served["status"]))
+    return rows
+
+
+def render_readme(value, results, thresholds=None):
+    thresholds = thresholds or {}
     records = value["records"]
     index = {(r["owning_family"], r["cohort_id"], r["parent_task"]): r for r in records}
-    lines = ["# Atlas/E22 policy-cloud scoped tests: clean and as-served scoring laws", "",
+    statuses = {}
+    for record in records:
+        statuses[record["status"]] = statuses.get(record["status"], 0) + 1
+    pairs = results["training_state_pairs"]
+    counts = _pair_counts(pairs)
+    comparable = counts["match"] + counts["mismatch"]
+    differing = _differing(index)
+    lines = ["# Atlas and E22 on the leaderboard tests: scoped policy-cloud runs, clean and as served", "",
              "Generated by `python -m experiments.forge.policy_cloud_publication` from one drained run. "
              "Do not edit by hand.", "",
-             "Atlas and E22 refused every selected-view test before training because ordinary test declarations "
-             "certify a clean/live mixture-prior measurement, not a policy-controlled served sampler. These "
-             "separately scoped variants run each compatible test with an explicit equal-mass particle cloud "
-             "(sigma 0, with a stated reason), the complete family recipe unchanged (no overrides or tuning) and "
-             "protocol seed 0. Each test keeps its architecture, data, update budget, timeout, evaluation cadence "
-             "and numerical gates. Scores use the state-selected served model, the actual served latent policy and "
-             "isolated evaluation streams. This is a diagnostic cohort: it changes no qualification, no other "
-             "family's row and no archived verdict, and the original live/MoG tests receive no credit.", "",
-             "**Two scoring laws.** *Clean* removes the learned output noise from the measured samples. *As served* "
-             "keeps it exactly as GANTrainer serves it (the learned sigma with its policy floor). Atlas and E22 "
-             "supply per-mode width through that noise, so the clean law alone can fail width gates for that reason "
-             "only. Each law trains in its own run; the recipe, training, gates, budget, data, cadence and seed are "
-             "identical, and only the evaluation draw differs. Tests whose measurement draws no output samples "
-             "(the two-pole parameter measurement, the clock audits) and tests refused by an ownership blocker are "
-             "*law-independent*: they run once and the same verdict appears in both columns, marked *shared*.", "",
-             "**Diagnostic continuation.** Checkpoint dependents (Gaussian stability and the three 14k natives) "
-             "continue their own same-law saved state, also after the parent's quality gate failed; this is "
-             "user-authorized and marked below. Ring extension is different: it is regraded only from its own "
-             "passing uninterrupted ring_hold run and stays BLOCKED (prerequisite) after a failed hold, matching "
-             "the precedent.", "",
-             "[Records](records.json) · [Receipt hashes and comparisons](results.json) · View declarations: "
-             "[clean](../../../configs/forge/views/policy_cloud_coverage.json), "
-             "[as served](../../../configs/forge/views/policy_cloud_coverage_as_served.json) · Variant declarations: "
-             "[clean](../../../configs/forge/task-variants/policy_cloud_coverage_v1/), "
-             "[as served](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/)", "",
-             "## Scores", "",
-             "Passes / distinct tests in each row. Every row covers all 35 tests; the as-served row shows the 12 "
-             "shared law-independent verdicts too. BLOCKED (incompatible) tests stay in the denominator.", "",
+             "## What was asked", "",
+             "Fill the Atlas and E22 rows of the Forge family leaderboard with actual PASS/FAIL results wherever a test "
+             "is compatible with those formulations and a scoped run makes scientific sense, by actually running the "
+             "experiments. Score every compatible test under two laws, *clean* and *as served*, and report them as two "
+             "separate rows per family.", "",
+             "Before this run the selected Atlas and E22 rows showed 0/152 view requirements (143 incompatible, 9 "
+             "blocked) over 35 distinct tests. No numerical failure caused those labels: one blanket guard refused "
+             "every attempt before training because the original tests declare a clean/live mixture-prior "
+             "measurement and no policy-control evidence or served-sampling contract, and the checkpoint and gate "
+             "dependents were then blocked as prerequisites.", "",
+             "## Result", "",
+             f"{len(records)} records in [records.json](records.json): " + ", ".join(
+                 f"{statuses[name]} {name}" for name in sorted(statuses)) + ". Each row below covers all 35 tests; "
+             "the as-served row repeats the 12 law-independent verdicts (two-pole, both clock audits and the 9 "
+             "incompatible hosts), which come from one run each. BLOCKED tests stay in the denominator.", "",
              *_scores_table(value), ""]
+    if differing:
+        lines += ["The two laws give different verdicts on " + ", ".join(
+            f"{FAMILY_NAMES[f]} {p} ({c} clean, {s} as served)" for f, p, c, s in differing) + ". "
+            + ("Every clean/as-served pair trained identically (see [training states](#training-states)), so each of "
+               "these differences is caused by the scoring law alone." if comparable and not counts["mismatch"]
+               and not counts["different_stop_steps"] else
+               "See [training states](#training-states) for which pairs trained identically."), ""]
+    lines += ["## The scoped law, and why it is the closest analog", "",
+              "The other families take the clean/live tests: the trained generator's own samples, scored with live "
+              "weights, from the task's declared prior, without added noise. Atlas and E22 cannot be measured that way "
+              "without changing them. Their recipes own an equal-mass table of latent rows with row controls "
+              "(birth/death, copying and rebalancing rows), a policy that selects which weights are served, and a "
+              "learned output noise. These scoped variants change only what has to change, and say so:", "",
+              "- an explicit equal-mass particle-cloud prior (sigma 0) with a stated reason, instead of the task's "
+              "mixture prior;",
+              "- the complete family recipe unchanged (no overrides, no tuning), schedule-free, protocol seed 0;",
+              "- the task's architecture, data law, seen batch sequence, capacity, update budget, timeout, evaluation "
+              "cadence and numerical gates unchanged;",
+              "- scoring with the state-selected served weights and the latent policy exactly as GANTrainer serves "
+              "it, drawn from isolated evaluation streams; every sample-measuring receipt attests its measured draws.", "",
+              "This is the closest runnable analog of the clean/live tests: the same question, gates and budget, "
+              "measured on what these recipes actually serve. It is a separate diagnostic cohort. It changes no "
+              "qualification numerator, no other family's row and no archived verdict, and the original live/MoG "
+              "tests receive no credit. Lower-tier failures did not stop higher-tier attempts in this "
+              "user-authorized lane. Checkpoint dependents (Gaussian stability and the three 14k natives) continue "
+              "their own same-law saved state, also after the parent's gate failed (marked below). Ring extension "
+              "is regraded only from its own passing uninterrupted ring_hold run and stays BLOCKED (prerequisite) "
+              "after a failed hold.", "",
+              "[Records](records.json) · [Receipt hashes, costs and comparisons](results.json) · View declarations: "
+              "[clean](../../../configs/forge/views/policy_cloud_coverage.json), "
+              "[as served](../../../configs/forge/views/policy_cloud_coverage_as_served.json) · Variant declarations: "
+              "[clean](../../../configs/forge/task-variants/policy_cloud_coverage_v1/), "
+              "[as served](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/)", "",
+              "## Why the two laws can differ", "",
+              "Atlas and E22 learn a set of points (latent rows mapped through the generator) plus one learned output "
+              "noise level. GANTrainer serves a sample as a point plus that noise; here the learned noise is about "
+              "0.029, close to the data's per-mode width of 0.03. The *clean* law removes the noise before scoring, "
+              "so each mode becomes a tight cluster: positions and masses can be right while the width is far too "
+              "narrow. The *as-served* law keeps the noise, so the same trained model is scored with the width it "
+              "actually produces. Recipe, training, gates, budget, data, cadence and seed are identical; only the "
+              "evaluation draw differs.", "",
+              "The native 100-mode tests show this most clearly. Their clean holdouts have precision near 0.999 but "
+              "fail the fixed width limits (|cov trace bias| about 0.9 against 0.10, radial KS about 0.65-0.79 "
+              "against 0.04). As served, the same weights meet those limits for several of them. Noise cannot help "
+              "where a test needs a different shape per component (Ring16 and the unequal-mass/unequal-width "
+              "vectors), and it does not change tests that fail on modes or on holding a learned state.", ""]
     for family in FAMILIES:
         if not any(r["owning_family"] == family for r in records):
             continue
         lines += [f'<a name="{family}"></a>', "", f"## {family}", "",
-                  "| Tier | Test | Clean (learned noise removed) | As served (learned noise kept) | Notes | Cause |",
+                  "| Tier | Test | Clean (learned noise removed) | As served (learned noise kept) | Notes | Key metrics against bounds |",
                   "| ---: | --- | --- | --- | --- | --- |"]
         for tier in (1, 2, 3):
             for parent in TIERS[tier]:
-                clean = index.get((family, COHORT, parent))
-                served = index.get((family, SERVED_COHORT, parent)) if parent in SERVED_PARENTS else clean
+                clean, served = _status_pair(index, family, parent)
                 if clean is None:
                     continue
-                if parent in LAW_INDEPENDENT:
-                    cause = plain_cause(clean)
+                if clean.get("block_kind") == "incompatible":
+                    cause = "Not run (incompatible); the reason is under [Incompatible tests](#incompatible-tests)."
+                elif parent in LAW_INDEPENDENT:
+                    cause = plain_cause(clean, thresholds.get(clean["task"]))
                 else:
-                    cause = f"Clean: {plain_cause(clean)}<br>As served: {plain_cause(served)}" if served else plain_cause(clean)
+                    cause = (f"Clean: {plain_cause(clean, thresholds.get(clean['task']))}<br>As served: "
+                             f"{plain_cause(served, thresholds.get(served['task']))}" if served
+                             else plain_cause(clean, thresholds.get(clean["task"])))
                 notes = _notes(family, parent, results["diagnostic_continuations"],
                                (clean, served) if parent in SERVED_PARENTS else (clean,))
                 lines.append(f"| {tier} | {parent} | {_cell(_result(clean))} | {_cell(_result(served))} | "
                              f"{_cell(notes)} | {_cell(cause)} |")
         lines.append("")
-    lines += ["## Recipe identity", "",
-              "The cohort ran the complete family recipe from its frozen source. Its resolved recipe hash differs from "
-              "the selected row's only because Recipe gained fields after that row was recorded; each added field "
-              "holds its registered default (`particlegan/recipe_compat.py`). Restricted to the selected row's "
-              "fields, the cohort recipe hashes exactly to the selected recipe.", "",
-              "| Family | Selected recipe (row) | Cohort recipe | Restricted to selected fields | Added fields at defaults | Why the additions are unused |",
+    lines += ["## Incompatible tests", "",
+              "These nine tests are refused by an ownership boundary before any host setup, for both families and "
+              "both laws (one refusal fills both rows). Atlas and E22 control an independent table of "
+              "interchangeable sample rows; each of these tests needs rows bound to something else.", "",
+              "| Tier | Test | Why Atlas/E22 cannot run it faithfully |", "| ---: | --- | --- |"]
+    for tier in (1, 2, 3):
+        for parent in TIERS[tier]:
+            if parent in COVERAGE.blocked_hosts:
+                reason = COVERAGE.blocked_hosts[parent]
+                lines.append(f"| {tier} | {parent} | {_cell(reason[:1].upper() + reason[1:])}. |")
+    lines += ["", "## The selected rows stay unchanged", "",
+              "The bold selected Atlas and E22 rows at the top of the leaderboard still show their recorded "
+              "qualification (0/152 with 143 incompatible and 9 blocked). The generator labels a selected-row cell a "
+              "*diagnostic attempt* only when the selected attempt registry (`reports/forge/attempt-coverage.json`) "
+              "holds an attempt of that same test contract. These runs are a different, explicitly scoped contract "
+              "(particle-cloud prior, state-selected served weights, a declared measurement law); the original "
+              "clean/live contract really is incompatible, and the cohort declaration gives its parent tests no "
+              "credit, as the `tier1_policy_selected_cloud_v1` precedent did. The registry also belongs to the live "
+              "attempt-fill service, which rewrites it from its own state, so cohort records never enter it. The "
+              "results therefore appear as two separate rows per family under *Research recipes and separate "
+              "diagnostics*, and per test on the family pages.", ""]
+    media = results.get("media")
+    if media:
+        lines += ["## Actual training GIFs", "",
+                  "Each tile is the attempt's own `training.gif`, written during its run from its saved scoring "
+                  "observations; the contact sheets only resample and tile those frames (zero optimizer updates, "
+                  "zero sampling draws). Shared law-independent attempts appear on the clean sheet. Provenance, "
+                  "source GIF hashes and frame indices are in [results.json](results.json) under `media`.", ""]
+        for sheet in media["sheets"]:
+            name = Path(sheet["path"]).name
+            lines.append(f"- [{FAMILY_NAMES[sheet['family']]}, {LAW_NAMES[sheet['law']]}](gifs/{name}) "
+                         f"({len(sheet['tiles'])} tests)")
+        lines.append("")
+    costs = results.get("costs") or {}
+    if costs:
+        lines += ["## Costs", ""]
+        text = (f"{costs['attempts']} attempts ({costs['trained_attempts']} trained) used "
+                f"{costs['attempt_seconds']:,.0f} attempt-seconds, about **{costs['gpu_hours']} GPU-hours** summed "
+                f"over attempts on shared GPUs, for {_number(costs['optimizer_updates'])} optimizer updates.")
+        if costs.get("wall_seconds"):
+            text += (f" The coordinator ran from {costs['first_start']} to {costs['last_finish']} "
+                     f"({_number(round(costs['wall_seconds'] / 3600.0, 2))} h wall) with at most two tests per GPU.")
+        lines += [text, "", "| Law | Attempts | Attempt-seconds | Optimizer updates |", "| --- | ---: | ---: | ---: |"]
+        for law, entry in costs["by_law"].items():
+            lines.append(f"| {LAW_NAMES.get(law, law)} | {entry['attempts']} | {entry['seconds']:,.0f} | "
+                         f"{_number(entry['updates'])} |")
+        lines += ["", "Nothing was retried, re-run or tuned unless a note above says so; incompatible refusals cost "
+                  "about one second each.", ""]
+    identity = results.get("source_identity") or {}
+    if identity:
+        runtime = identity["runtimes"][0] if len(identity["runtimes"]) == 1 else None
+        lines += ["## Source identity", "",
+                  f"- Frozen execution source: commit `{', '.join(identity['origin_commits'])}`, source digest "
+                  f"`{', '.join(d[:16] for d in identity['source_digests'])}`; every request names the same source.",
+                  "- Candidate revisions: " + ", ".join(f"{FAMILY_NAMES[f]} `{r[:16]}`"
+                                                        for f, r in sorted(identity["candidate_revisions"].items())) + ".",
+                  f"- Protocol seed: {', '.join(str(s) for s in identity['protocol_seeds'])}; recipe overrides: none.",
+                  (f"- Runtime: Python {runtime['python']}, torch {runtime['packages'].get('torch')}, numpy "
+                   f"{runtime['packages'].get('numpy')}." if runtime else "- Runtime: see results.json."),
+                  "", "The cohort ran the complete family recipe from its frozen source. Its resolved recipe hash differs "
+                  "from the selected row's only because Recipe gained fields after that row was recorded; each added "
+                  "field holds its registered default (`particlegan/recipe_compat.py`). Restricted to the selected "
+                  "row's fields, the cohort recipe hashes exactly to the selected recipe.", ""]
+    else:
+        lines += ["## Recipe identity", ""]
+    lines += ["| Family | Selected recipe (row) | Cohort recipe | Restricted to selected fields | Added fields at defaults | Why the additions are unused |",
               "| --- | --- | --- | --- | --- | --- |"]
     for family, mapping in value["recipes"].items():
         added = ", ".join(f"{key}={json.dumps(item)}" for key, item in mapping["added_fields_at_registered_defaults"].items()) or "none"
@@ -615,29 +1025,73 @@ def render_readme(value, results):
                      f"prior_regularizer {inert['prior_regularizer']} with prior_reg {_number(inert['prior_reg'])} (Coulomb and "
                      f"SIGReg settings apply only to those regularizers); prior_proximal_strength "
                      f"{_number(inert['prior_proximal_strength'])} (no proximal restore) |")
-    pairs = results["training_state_pairs"]
-    counts = {name: sum(p["comparison"] == name for p in pairs) for name in
-              ("match", "mismatch", "different_stop_steps", "no_own_training", "unavailable")}
-    lines += ["", "## Clean and as-served training states", "",
+    lines += ["", '<a name="training-states"></a>', "", "## Clean and as-served training states", "",
               "Evaluation is audited as pure, so a clean/as-served pair should end in the same training state. The "
-              "digest covers every model, optimizer, policy controller, named training stream and counter, and "
-              "excludes only the isolated evaluation streams, process-global RNG snapshots and wall-clock "
-              "diagnostics. GPU kernels can be nondeterministic, so a mismatch is reported here and never changes a "
-              "verdict. A ring_hold pair can stop at different updates because each law's own gate decides; such "
-              "pairs are not comparable.", "",
-              f"Pairs: **{counts['match']} match**, {counts['mismatch']} mismatch, {counts['different_stop_steps']} "
-              f"stopped at different updates, {counts['no_own_training']} without own training (regraded), "
-              f"{counts['unavailable']} unavailable (no completed receipt).", "",
-              "| Family | Test | Clean digest @ updates | As-served digest @ updates | Comparison |",
-              "| --- | --- | --- | --- | --- |"]
+              "receipt digest covers every model, optimizer, policy controller, named training stream and counter, "
+              "and excludes only the isolated evaluation streams, process-global RNG snapshots and wall-clock "
+              "diagnostics. It also records the CUDA device index inside the named-stream bindings (`cuda:0` versus "
+              "`cuda:1`), so two runs on different GPUs can never have equal receipt digests. For such pairs the "
+              "publication loads each run's saved final state, proves it is the digested state by reproducing the "
+              "receipt digest exactly, replaces the device label and recomputes the same digest. The method used is "
+              "recorded per pair.", "",
+              f"Pairs: **{counts['match']} match** ({counts['match'] - counts['normalized']} by receipt digest on the "
+              f"same GPU, {counts['normalized']} after device-label normalization across GPUs), {counts['mismatch']} "
+              f"mismatch, {counts['different_stop_steps']} stopped at different updates, {counts['no_own_training']} "
+              f"without own training (regraded), {counts['unavailable']} unavailable (no training receipt).", ""]
+    if comparable and not counts["mismatch"] and not counts["different_stop_steps"]:
+        lines += [f"All {counts['match']} trained pairs trained identically: every model, optimizer, policy "
+                  "controller, training stream and counter is equal. No verdict difference in this report comes from "
+                  "GPU nondeterminism; each comes from the scoring law.", ""]
+    lines += ["| Family | Test | Clean digest @ updates (GPU) | As-served digest @ updates (GPU) | Comparison | Method |",
+              "| --- | --- | --- | --- | --- | --- |"]
     for pair in pairs:
         def digest(side):
-            return (f"`{side['sha256'][:12]}` @ {_number(side.get('completed_steps'))}" if side.get("sha256")
-                    else side["status"])
+            if not side.get("sha256"):
+                return side["status"]
+            text = f"`{side['sha256'][:12]}` @ {_number(side.get('completed_steps'))} (GPU {side.get('gpu')})"
+            normalized = side.get("device_normalized")
+            if normalized:
+                text += (f"; device-normalized `{normalized['sha256'][:12]}`" if normalized.get("sha256")
+                         else f"; {normalized.get('reason', 'no saved state')}")
+            return text
+        method = {"receipt_digest": "receipt digest", "device_normalized_saved_state": "saved state, device label "
+                  "normalized"}.get(pair["method"], "—")
         lines.append(f"| {pair['family']} | {pair['parent_task']} | {digest(pair['clean'])} | {digest(pair['as_served'])} | "
-                     f"{pair['comparison'].replace('_', ' ')} |")
-    lines += ["", "## Reproduce", "",
-              f"Local state directory (raw receipts, logs, checkpoints, GIFs; outside Git): `{results['state_root']}`. "
+                     f"{pair['comparison'].replace('_', ' ')} | {method} |")
+    lines += ["", "## Comparison with earlier Atlas/E22 diagnostics", "",
+              "Earlier runs measured some of these questions under other contracts. Their receipts and verdicts are "
+              "unchanged; this table only places them next to the new results.", "",
+              "| Test | Earlier measurement | Earlier result | Now |", "| --- | --- | --- | --- |"]
+    for parent, where, earlier, metric in EARLIER:
+        if any(_status_pair(index, family, parent)[0] for family in FAMILIES):
+            lines.append(f"| {parent} | {where} | {_cell(earlier)} | {_cell(_now(index, parent, metric))} |")
+    lines += ["", "Ring hold, ring extension, target-shift recovery, the natives, mode hold and the vector transfers "
+              "had no earlier Atlas/E22 measurement under Forge; these are their first results.", "",
+              "## Recommended next experiments", "",
+              "1. Make `adapters.training_state_receipt` device-independent (drop the CUDA index from the named-stream "
+              "bindings before hashing), so the clean/as-served pairing check needs no saved-state fallback. It is a "
+              "source-pinned file, so this needs a new frozen source; it changes no verdict.",
+              "2. Decide which scoring law the Atlas/E22 cards declare. The as-served law measures what GANTrainer "
+              "serves; the clean law isolates where the rows sit. Keep both rows until the owners decide, and treat "
+              "clean-only native failures (precision near 0.999 with width far too narrow) as a property of the "
+              "measurement, not of training.",
+              "3. Image Bars4 and Blobs4 find 0 modes under both laws and both families at the declared 600 updates, "
+              "as in the earlier unchanged-policy diagnostic. Use the saved observations and policy-control receipts "
+              "to see whether the rows ever leave their initialization before changing anything.",
+              "4. Per-component shape (Ring16, unequal mass, unequal width) fails under both laws; one scalar output "
+              "noise cannot supply a different covariance per component. A per-row or per-mode width study would "
+              "test whether learned per-row width fixes it.",
+              "5. Holding and recovering a learned state fails under both laws with identical training: Atlas "
+              "ring_hold converges and then loses the hold, E22 never acquires the ring window, Gaussian stability "
+              "and target-shift recovery miss their windows. These are training-dynamics failures; a one-seed, "
+              "fixed-budget ablation of the late-phase row controls (birth/death and handover) on ring_hold is the "
+              "cheapest informative next run.",
+              "6. The clock audits fail by construction (absolute step stamps in policy diagnostics, KA2's call-800 "
+              "switch, the critic-guard release count). Passing needs clock-free versions of those controls.",
+              "7. The nine incompatible tests need a routed (conditional) row contract before any Atlas/E22 binding "
+              "is faithful.", "",
+              "## Reproduce", "",
+              f"Local state directory (raw receipts, logs, checkpoints, in-run GIFs; outside Git): `{results['state_root']}`. "
               f"Frozen execution source: `{results['source_root']}`.", "",
               "```sh",
               "python -m experiments.forge.attempt_coverage plan --intake policy-cloud --source-root FROZEN --state-root STATE",
