@@ -2,7 +2,7 @@
 
 Reads only saved files. Earlier timed-out runs have no timestamps, so their per-update time is
 bounded: between 900 / (last_logged_step + interval) (lower) and 900 / last_logged_step (upper).
-Usage: analyze.py STATE_ROOT > table.json
+Usage: analyze.py STATE_ROOT [STATE_ROOT ...] > table.json
 """
 import glob
 import json
@@ -10,7 +10,7 @@ import os
 import re
 import sys
 
-ROOT = sys.argv[1] if len(sys.argv) > 1 else "/ml2/hypergan/dig2-20261016/wallclock-reruns"
+ROOTS = sys.argv[1:] or ["/ml2/hypergan/dig2-20261016/wallclock-reruns"]
 FILL = "/ml2/hypergan/attempt-fill-20261015/attempts"
 UUID = {"GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 0, "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 1}
 # Long-lived residents seen before any rerun started: nano-work-server, desktop portal, nautilus,
@@ -45,7 +45,7 @@ def observations(path, stamped):
 
 
 rows = []
-for spec_path in sorted(glob.glob(f"{ROOT}/specs/*.json")):
+for ROOT, spec_path in [(r, p) for r in ROOTS for p in sorted(glob.glob(f"{r}/specs/*.json"))]:
     name = os.path.basename(spec_path)[:-5]
     spec = json.load(open(spec_path))
     directory = f"{ROOT}/attempts/{name}"
@@ -73,8 +73,13 @@ for spec_path in sorted(glob.glob(f"{ROOT}/specs/*.json")):
                        earlier_spu_high=r["seconds"] / r["last_step"])
         row["earlier_evidence"] = r["evidence"]
     # Rerun.
-    if os.path.exists(f"{directory}/result.json"):
+    row["root"] = os.path.basename(ROOT)
+    if os.path.exists(f"{directory}/result.json") and json.load(open(f"{directory}/result.json"))["status"] == "DEFERRED":
+        row.update(status="DEFERRED", reason=json.load(open(f"{directory}/result.json"))["reason"])
+    elif os.path.exists(f"{directory}/result.json"):
         result = json.load(open(f"{directory}/result.json"))
+        if result.get("wallclock"):
+            row["wallclock"] = result["wallclock"]
         obs = observations(f"{directory}/run.log", stamped=True)
         lease = [json.loads(l) for l in open(f"{directory}/lease.json")]
         start, end = lease[0]["start"], lease[-1].get("end")

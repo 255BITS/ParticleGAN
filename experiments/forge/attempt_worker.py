@@ -149,6 +149,22 @@ def main():
             torch.backends.cudnn.allow_tf32 = False
             torch.backends.cuda.matmul.allow_tf32 = False
             task = request["tasks"][spec["task"]]
+            if spec.get("wallclock_policy"):
+                # Opt-in contention-aware limit: adapters also stop themselves at
+                # resources.timeout_seconds, which would pre-empt the supervisor's
+                # extension. Raise only that in-process deadline to the hard ceiling;
+                # the supervisor still enforces the declared limit, then the measured
+                # extension. resources are outside the execution/evaluation fingerprints.
+                import importlib.util
+                module_spec = importlib.util.spec_from_file_location(
+                    "experiments.forge.attempt_wallclock", Path(__file__).with_name("wallclock.py"))
+                wallclock_module = importlib.util.module_from_spec(module_spec)
+                module_spec.loader.exec_module(wallclock_module)
+                resolved = wallclock_module.policy_for(spec["wallclock_policy"], spec["task"])
+                if resolved:
+                    ceiling = spec["timeout_seconds"] * resolved[1]
+                    task = request["tasks"][spec["task"]] = {**task, "resources": {**task["resources"], "timeout_seconds": ceiling}}
+                    result["adapter_allowance_seconds"] = ceiling
             from experiments.forge.contracts import file_hash
             mismatched = [relative for relative, digest in task["evaluation"].get("sources", {}).items()
                           if not (Path(spec["source_root"]) / relative).is_file()

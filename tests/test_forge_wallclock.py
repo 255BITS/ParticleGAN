@@ -156,6 +156,48 @@ def _supervise(tmp_path, timeout, policy=None):
     return json.loads((attempt / "result.json").read_text())
 
 
+FAKE_EXECUTE = {
+    "sources.py": "def runtime_manifest():\n    return {}\ndef verify_snapshot(root, source):\n    return None\n",
+    "api.py": "class CapabilityError(Exception):\n    pass\n",
+    "views.py": "def grade_result(task, raw, diagnostic=False):\n    return {'status': 'PASS', 'reasons': []}\n",
+    "adapters.py": ("def run_task(request, job, directory, device):\n"
+                    "    task = request['tasks'][job['task_id']]\n"
+                    "    return {'allowance': task['resources']['timeout_seconds'], 'cost': {'completed_steps': 1}}\n"),
+}
+
+
+def _execute(tmp_path, policy=None):
+    source = tmp_path / "source"
+    (source / "experiments/forge").mkdir(parents=True)
+    (source / "experiments/__init__.py").write_text("")
+    (source / "experiments/forge/__init__.py").write_text("")
+    shutil.copy(ROOT / "experiments/forge/contracts.py", source / "experiments/forge/contracts.py")
+    for name, text in FAKE_EXECUTE.items():
+        (source / "experiments/forge" / name).write_text(text)
+    card = {"resources": {"timeout_seconds": 900}, "evaluation": {}}
+    (tmp_path / "request.json").write_text(json.dumps({"source": {}, "tasks": {"toy": card}}))
+    attempt = tmp_path / "attempt"
+    attempt.mkdir()
+    spec = {"source_root": str(source), "task": "toy", "timeout_seconds": 900, "device": "cpu",
+            "request_path": str(tmp_path / "request.json")}
+    if policy:
+        spec["wallclock_policy"] = policy
+    (attempt / "request.json").write_text(json.dumps(spec))
+    subprocess.run([sys.executable, str(ROOT / "experiments/forge/attempt_worker.py"), "execute",
+                    str(attempt / "request.json")], capture_output=True, timeout=120, check=True)
+    return json.loads((attempt / "result.json").read_text()), json.loads((attempt / "raw.json").read_text())
+
+
+def test_adapter_deadline_follows_the_policy_ceiling_only_when_opted_in(tmp_path):
+    # Adapters stop themselves at resources.timeout_seconds; without lifting that in-process deadline a
+    # supervisor extension cannot take effect (observed: "word declared task allowance exceeded" at 901 s).
+    result, raw = _execute(tmp_path / "off")
+    assert raw["allowance"] == 900 and "adapter_allowance_seconds" not in result
+    result, raw = _execute(tmp_path / "on", {"solo_seconds_per_update": {"toy": 0.04}, "ceiling_factor": 1.5})
+    assert raw["allowance"] == 1350 and result["adapter_allowance_seconds"] == 1350
+    assert json.loads((tmp_path / "on/request.json").read_text())["tasks"]["toy"]["resources"]["timeout_seconds"] == 900
+
+
 def test_supervisor_without_policy_keeps_the_declared_limit(tmp_path):
     result = _supervise(tmp_path, 1)
     assert result["status"] == "TIMEOUT" and result["reason"] == "original task wall-time limit exhausted"
