@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 817. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 819. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4648,6 +4648,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### ring16-duration-20261011 · ring16-duration-20261011-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `257f8c355e756a3d615c369ef3774220951ff6bf121b60a4392a39b98a50d4de`.
+
+More unchanged training may repair the three selected ring density failures beyond 1,600 updates.
+
+**Observed:** {'FAIL': 3}; wall seconds 137.861; mechanism `execution_budget_only`.
+
+ring16_acquisition__r1r2__duration6400: modes=16, hq=0.94775, mass_tv=0.051514; ring16_acquisition__ka2__duration6400: modes=16, hq=0.87598, mass_tv=0.064697; ring16_acquisition__k3p__duration6400: modes=16, hq=0.89648, mass_tv=0.070312
+
+Three exact archived public-API CUDA continuations add 14,400 updates without replaying prefixes. All three fail the terminal gate at 6,400 updates. R1/R2 first reaches five consecutive passes at update 5,217 and its longest streak is 19 checks. It ends with only three terminal passes because minimum eigenvalue spread fails at update 6,350 (0.13328 < 0.15), despite a fully passing endpoint: HQ 0.947754 and covariance error 0.525637. KA2 and K3P have no full passing observations and finish with HQ 0.875977/0.896484 and covariance error 1.783269/1.599982. More unchanged updates improve all three recipes, but duration alone does not establish reliable terminal quality. The 400-update schedule stays fixed, so this study does not isolate schedule decay as the cause. Exact restores, cap-only extensions, final optimizer counts, complete consumed RNG checkpoints, matching continuation target batches and saved-sample checks pass. Original 1,600-update FAIL grades and the current leaderboard remain unchanged.
+
+**Next:** Stop this bounded duration round. A separately declared schedule-horizon comparison at a fixed 6,400-update cap is the next useful option for KA2/K3P. R1/R2 also needs local spread retention assessed. Preserve recipes, prior, target, architecture, seed 0, cadence and full gates; reuse the saved longer-budget baseline. No automatic follow-up, seed study, qualification or default adoption.
+
+[Evidence](../../reports/forge/ring16-duration-20261011/results.json) · [Record](records/ring16-duration-20261011-readout.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-failure-saved-diagnosis-v1
 
 **Scope:** saved_output_and_checkpoint_diagnosis; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
@@ -4695,6 +4711,22 @@ Four CUDA controls exactly reproduce historical ordinary critic gradients. Seria
 **Next:** Prioritize deterministic continuous truncation and retain weak-gradient noise as a second supported candidate for a separately frozen whole-configuration Tier1 comparison. Exact reload attribution needs scoped graph-construction/scheduling controls or executed-node order capture. Run Tier2 retention only after required ordinary gates pass. Stop completed every-step damping/sign-flip negatives; no seed study, automatic continuation, default adoption or qualification follows.
 
 [Evidence](../../reports/forge/ring16-followup/results.json) · [Record](records/ring16-runtime-and-interventions-v1.json)
+
+### ring16-schedule-20261011 · ring16-schedule-20261011-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `a6bf9a8d59af365fca1e7fa319c512dac16ccca1c2fe71e3e5ef942cbfb56df7`.
+
+At fixed 6,400 updates, full-budget schedules improve sustained ring density compared with the saved 400-horizon baselines.
+
+**Observed:** {'PASS': 3}; wall seconds 178.244; mechanism `bundled_schedule_horizon_intervention`.
+
+ring16_full_schedule6400_v1__r1r2: modes=16, hq=0.97754, mass_tv=0.050293; ring16_full_schedule6400_v1__ka2: modes=16, hq=0.97485, mass_tv=0.054688; ring16_full_schedule6400_v1__k3p: modes=16, hq=0.96338, mass_tv=0.040771
+
+All three full-schedule runs pass the original full ring gate at 6,400 updates: K3P has 66 terminal passing observations, KA2 47 and R1/R2 exactly 5 (required minimum 5). Matched saved 400-horizon baselines have terminal streaks 0/0/3 respectively and all fail. Final covariance errors change K3P 1.599982 to 0.567272, KA2 1.783269 to 0.563027 and R1/R2 0.525637 to 0.423491 (limit 0.85). All endpoints recover 16 modes with mass TV below 0.15 and HQ above 0.85. This supports schedule exhaustion as a major contributor to the ring failures; the coupled intervention does not identify LR alone as the cause. R1/R2 is fragile: update 6,317 fails minimum eigenvalue spread, and its endpoint ratio 0.157181 barely clears 0.15. KA2 last fails minimum spread at 5,617; K3P last fails covariance at 5,300. Every new arm still fails at the sampled 1,600/3,200/4,800 budget cuts. Frozen archived source/runtime, initial tensors/prior, actual target batches, cadence, clean-live sampling and the serialization boundary at 1,600 match. The first 1,600 baseline batches are verified by frozen-law replay and endpoint RNG state; the subsequent 4,800 by the actual baseline trace digest. No baseline is retrained. Source-bound receipts, restored states, final optimizer counts and saved-sample gate recomputations pass. This ring-only diagnostic changes neither original qualification results nor the current leaderboard. The separate clock audit remains unresolved.
+
+**Next:** Conclude this bounded three-run round. Prioritize K3P and KA2 for a future declared full-budget schedule policy comparison across the required task suite before selecting any global recipe. Inspect saved R1/R2 per-component spread and covariance near its late failures before proposing a repair. Treat clock-free eligibility as a separate mechanism question: longer schedules retain explicit time dependence. No automatic additional training, seed study, qualification or default adoption.
+
+[Evidence](../../reports/forge/ring16-schedule-20261011/results.json) · [Record](records/ring16-schedule-20261011-readout.json)
 
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-live-v1
 
@@ -5237,4 +5269,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `4ff6b2481bc3060d6505864448a6b24a430342cd66aa60091fa982a3913c3219`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `24516825c40c7ffbcc3e06284f724b7af69a036e2c6c6bf848f4f34b48cfe8ee`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
