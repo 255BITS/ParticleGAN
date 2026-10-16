@@ -1188,3 +1188,33 @@ def test_recipe_identity_maps_each_frozen_recipe_onto_its_selected_row(tmp_path)
     atomic_json(state_root / "requests/policy-cloud-atlas.json", request)
     with pytest.raises(ValueError, match="seed 0"):
         recipe_identity(ROOT, state_root, records)
+
+
+def test_policy_cloud_drain_dispatches_the_longest_dependency_chains_first(tmp_path, monkeypatch):
+    root, directory = tmp_path / "repo", tmp_path / "runs"
+
+    def job(task, timeout, dependencies=()):
+        return dict(key=task, family="policy-cloud-fixture", task=task, status="PENDING", timeout_seconds=timeout,
+                    resources=dict(gpus=1, gpu_memory_mb=1), dependencies=list(dependencies))
+    jobs = {j["key"]: j for j in [
+        job("a_short", 300), job("b_short", 1800), job("c_short", 1800), job("d_short", 1800), job("e_short", 1800),
+        job("z_native", 3600), job("z_gate", 300),
+        job("z_native_14k", 7200, [{"task": "z_native", "kind": "checkpoint"}, {"task": "z_gate", "kind": "gate"}])]}
+    state = dict(intake="policy-cloud", jobs=jobs)
+    critical = runner.critical_path_seconds(state)
+    # A gate dependency does not lengthen its producer's chain.
+    assert (critical["z_native"], critical["z_native_14k"], critical["z_gate"]) == (10800, 7200, 300)
+    atomic_json(directory / "state.json", state)
+    _fake_workers(monkeypatch, ["0", "1"])
+    runner.drain(root, directory, gpus=["0", "1"])
+    started = [e["task"] for e in map(json.loads, (directory / "events.jsonl").read_text().splitlines())
+               if e["event"] == "started"]
+    assert started[0] == "z_native" and started.index("z_native_14k") < started.index("a_short")
+    assert all(j["status"] == "FAIL" for j in read_json(directory / "state.json")["jobs"].values())
+    # Other intakes keep their original order.
+    selected = tmp_path / "selected"
+    atomic_json(selected / "state.json", dict(jobs={k: dict(v, family="fixture") for k, v in jobs.items()}))
+    runner.drain(root, selected, gpus=["0", "1"])
+    started = [e["task"] for e in map(json.loads, (selected / "events.jsonl").read_text().splitlines())
+               if e["event"] == "started"]
+    assert started[0] == "a_short"

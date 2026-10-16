@@ -562,6 +562,30 @@ def _slot_allowed(job, slot, active, pending_exclusive):
     return device not in exclusive and device not in pending_exclusive
 
 
+def critical_path_seconds(state):
+    """Each job's own time limit plus its longest chain of same-family dependents.
+
+    The policy-cloud intake dispatches the longest chains first (for example the
+    7k native parents before short tests), so continuations are not the tail.
+    Only the dispatch order changes; requests, limits and results do not."""
+    children = {}
+    for job in state["jobs"].values():
+        for dep in job["dependencies"]:
+            if isinstance(dep, dict) and dep.get("kind") != "gate":
+                children.setdefault((job["family"], dep["task"]), []).append(job)
+    memo = {}
+
+    def chain(job):
+        key = (job["family"], job["task"])
+        if key not in memo:
+            memo[key] = 0  # Guards a malformed cycle.
+            memo[key] = int(job.get("timeout_seconds") or 0) + max(
+                (chain(child) for child in children.get(key, [])), default=0)
+        return memo[key]
+
+    return {key: chain(job) for key, job in state["jobs"].items()}
+
+
 def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None,
           retry_interrupted=False):
     initial = read_json(directory / "state.json")
@@ -610,8 +634,14 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                 slots = [s for s in device_slots(gpus, 2, allow_sharing=True) if s["device"] != "cpu"]
                 active = [j for j in state["jobs"].values() if j["status"] == "RUNNING"]
                 busy = {(j["gpu"], j["slot"]) for j in active}
-                pending = sorted((j for j in state["jobs"].values() if j["status"] == "PENDING"),
-                                 key=lambda j: (len(j["dependencies"]), j["family"], j["task"]))
+                if state.get("intake") == "policy-cloud":
+                    critical = critical_path_seconds(state)
+                    pending = [j for _, j in sorted(
+                        ((k, j) for k, j in state["jobs"].items() if j["status"] == "PENDING"),
+                        key=lambda kj: (-critical[kj[0]], len(kj[1]["dependencies"]), kj[1]["family"], kj[1]["task"]))]
+                else:
+                    pending = sorted((j for j in state["jobs"].values() if j["status"] == "PENDING"),
+                                     key=lambda j: (len(j["dependencies"]), j["family"], j["task"]))
                 def waiting(job):
                     return any(parent["status"] in {"PENDING", "RUNNING"}
                                for dep in job["dependencies"] if isinstance(dep, dict) and dep.get("kind") != "gate"
