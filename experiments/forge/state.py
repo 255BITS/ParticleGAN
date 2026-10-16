@@ -2,6 +2,7 @@
 import hashlib
 import json
 import math
+import struct
 
 import torch
 
@@ -80,6 +81,10 @@ def state_digest(value):
             digest.update((b"L" if isinstance(item, list) else b"U") + len(item).to_bytes(8, "big"))
             for child in item:
                 write(child)
+        elif type(item) is float and not math.isfinite(item):
+            # Policy diagnostics retain source-defined NaN/Inf sentinels.
+            # Hash their exact IEEE representation; health checks remain separate.
+            digest.update(b"F" + struct.pack("!d", item))
         elif item is None or type(item) in (str, int, float, bool):
             digest.update(b"S")
             payload = json.dumps([type(item).__name__, item], allow_nan=False).encode()

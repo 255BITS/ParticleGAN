@@ -98,6 +98,23 @@ def test_runtime_filter_keeps_scopes_separate_and_never_reuses_archive_pass():
     assert "hardware-cpu" not in techniques.render_markdown(result)
 
 
+
+def test_held_tasks_sit_beside_counted_cells_and_a_held_view_is_not_read_as_pass():
+    held_view = view()
+    held_view["assignments"][2]["importance"] = "held"
+    row = current(statuses=("PASS", "PASS", "FAIL", "PASS"))
+    row.update(status="HELD", qualified_tier=2)
+    result = techniques.reduce_board(board(row), held_view)
+    cells = result["rows"][0]["tiers"]
+    assert cells["1"] == {"passed": 1, "total": 1, "counts": {"PASS": 1}}
+    assert cells["3"] == {"passed": 0, "total": 0, "counts": {}, "held": 1, "held_passed": 0}
+    assert {task["task_id"] for task in result["rows"][0]["nonrequired_tasks"]} == {"hold", "diagnostic"}
+    assert result["tier_requirements"]["3"] == []
+    text = techniques.render_markdown(result)
+    assert "| held (1) | 2 (HELD) | all required tasks PASS; 1 held (measured, not counted) |" in text
+    plain = techniques.render_markdown(techniques.reduce_board(board(current()), view()))
+    assert "held" not in plain and "(HELD)" not in plain
+
 def request(tasks):
     return {"candidate": {"id": "k3p", "resolved_recipe": {"reg_arm": "k3p"},
                           "prior": {"kind": "mog", "sigma": .025}, "initializer": "named_v1",

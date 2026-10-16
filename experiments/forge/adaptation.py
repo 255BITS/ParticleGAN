@@ -97,8 +97,14 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
         raise CapabilityError(["paired adaptation needs aligned active/control budgets and a frozen suffix"])
     if execution["original_schedule_horizon"] != 1200 or execution.get("shift") != [1.0, 0.0]:
         raise CapabilityError(["paired adaptation preserves the 1200-update horizon and target shift [1, 0]"])
-    if task["evaluation"].get("scoring_weights") != "live":
-        raise CapabilityError(["paired adaptation measures live public sampling only"])
+    from .tier1_policy import is_policy_task
+    policy = is_policy_task(task)
+    if task["evaluation"].get("scoring_weights") != ("state_selected" if policy else "live"):
+        raise CapabilityError(["paired adaptation measures live public sampling only" if not policy else
+                               "scoped policy adaptation measures the state-selected served model only"])
+    # The scoped policy cohort declares its own law name; others use public clean.
+    law = (executed_receipt(task["evaluation"]["sampling_law"], eval_output_noise=task["evaluation"]["eval_output_noise"])
+           if policy else executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"))
     spec = execution["host_definition"]
     resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"], "batch_size": spec["batch"]}
     sources, runtime = _provenance(request, device)
@@ -166,8 +172,7 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
               "config_sha256": stable_hash(config), "source_sha256": sources, "runtime": runtime,
               "steps": steps, "noise_horizon": context.recipe.total_steps, "diagnostic_every": cadence,
               "dense_after": None, "dense_until": None, "shift_step": shift_step,
-              "shift": execution["shift"], "shift_pair": shift_pair,
-              **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")}
+              "shift": execution["shift"], "shift_pair": shift_pair, **law}
     active = {**deepcopy(common), "freeze_after_shift": False, "diagnostic": active_points,
               "optimizer_final": _optimizer_rows(active_final), **_summary(active_points, execution)}
     frozen = {**deepcopy(common), "freeze_after_shift": True, "diagnostic": frozen_points,
@@ -185,9 +190,13 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
     atomic_json(artifact / "pair-proof.json", proof)
     evidence = {"active": active, "frozen": frozen, "artifact_root": str(artifact.resolve()),
                 "artifact_schema": "public_paired_adaptation_v1", "pair_proof": proof,
-                "scoring_weights": "live", "diagnostics": {"matched_control": confirmed["matched_control"],
+                "scoring_weights": task["evaluation"]["scoring_weights"],
+                "diagnostics": {"matched_control": confirmed["matched_control"],
                     "recorded_status": confirmed["status"], "quality_evidence_only": True},
                 "frozen_rng_audits": frozen_run.rng_audits}
+    if frozen_run.measurement is not None:
+        # The frozen control is measured under the same declared law.
+        evidence["frozen_served_output_noise"] = frozen_run.measurement.receipt()
     raw = active_run.receipt(evidence)
     raw["evidence"]["guards"]["unintended_rng_deviations"] += sum(
         audit["unintended_rng_deviations"] for audit in frozen_run.rng_audits)
@@ -233,6 +242,11 @@ def verify_pair_artifacts(evidence: dict) -> dict:
     if (not torch.equal(target["before"], ring_means()) or not torch.equal(
             target["before"] + torch.tensor(execution["shift"]), target["after"])):
         raise ValueError("saved target shift differs from declared ring")
+    # A schedule-free policy recipe has no noise horizon (None); the 1,200-update
+    # data windows remain declared by execution.original_schedule_horizon.
+    schedule_free = (execution.get("policy_contract", {}).get("schedule") == "preserve_resolved_recipe_none"
+                     and config["recipe"]["total_steps"] is None)
+    expected_horizon = None if schedule_free else execution["original_schedule_horizon"]
     for name, final in (("active", "active_final"), ("frozen", "frozen_final")):
         run = evidence[name]
         if run != read_json(root / (name + ".json")):
@@ -241,7 +255,7 @@ def verify_pair_artifacts(evidence: dict) -> dict:
                 or run["runtime"] != provenance["runtime"] or stable_hash(states[final]["recipe"]) != stable_hash(config["recipe"])
                 or states[final]["prior"] != config["prior"]
                 or run["noise_horizon"] != config["recipe"]["total_steps"]
-                or run["noise_horizon"] != execution["original_schedule_horizon"]):
+                or run["noise_horizon"] != expected_horizon):
             raise ValueError("paired provenance/config disagrees with measured checkpoint")
         expected = execution["shift_step"] if name == "frozen" else execution["steps"]
         if (states[final]["trainer"]["completed_steps"] != expected

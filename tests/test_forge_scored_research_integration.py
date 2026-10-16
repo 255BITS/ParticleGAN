@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from experiments.forge.family_reports import render_family
-from experiments.forge.research_tiers import tier_rows, _row
+from experiments.forge.research_tiers import historical_seed_rows, tier_rows, _row
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +23,10 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
     second = regenerator._current_markdown(publication, ROOT, page)
     assert publication == original
     assert first == second == page.read_text()
-    assert first.splitlines()[4] == "| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |"
+    lines = first.splitlines()
+    selected = lines.index("## Selected recipes")
+    assert ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
+            " | Total view requirements |") in lines[selected:selected + 6]
     details = {f["id"]: render_family(ROOT, publication, f)
                for f in publication["family_progress"]["families"] if f["id"] in {"atlas", "bcap-pure"}}
     for heading in (
@@ -51,15 +54,19 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
 
 def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
     rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert len(rows["bcap-pure"]) == 33  # Retained research, strict audit and actual deeper diagnostics.
-    assert "1/7 (4 not run)" in rows["bcap-pure"][-1]
-    paired = [row for row in rows["bcap-pure"] if "research seed" in row]
+    assert len(rows["bcap-pure"]) == 21  # Backfilled research, strict audit and actual deeper diagnostics.
+    assert "1/7 (4 blocked)" in rows["bcap-pure"][-1]
+    # Seed-only studies are excluded from the backfill and listed separately, still unrun.
+    assert not any("research seed" in row for row in rows["bcap-pure"])
+    paired = [row for row in historical_seed_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")["bcap-pure"]
+              if "research seed" in row]
     assert len(paired) == 12
     for row in paired:
         assert "[1/6 (5 not run)]" in row and "[0/21 (20 not run)]" in row
         assert "[0/2 (2 not run)]" in row and "[1/29 (27 not run)]" in row
     finite = next(row for row in rows["bcap-pure"] if "Finite critic cap" in row)
-    assert "[0/6 (5 not run)]" in finite and "[0/21 (21 not run)]" in finite and "[0/29 (28 not run)]" in finite
+    assert "[4/6 (1 timeout)]" in finite and "[7/21 (2 blocked)]" in finite
+    assert "[11/29 (3 blocked, 1 timeout)]" in finite
     assert "[0/7 (4 incompatible)]" in rows["atlas"][0] and " | — | — | " in rows["atlas"][0]
     # A phase observation or an unassigned task cannot become a benchmark pass.
     with pytest.raises(ValueError, match="no recorded tier"):

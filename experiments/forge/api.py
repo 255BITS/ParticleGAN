@@ -122,10 +122,11 @@ def task_recipe_resources(task):
 def task_recipe_overrides(candidate, task):
     """Materialize task binding once, identically for planning and execution."""
     from .taskrecipes import bind_task_candidate
+    from .tier1_policy import is_policy_task
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
-            and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
+            and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, bound)
         if blockers:
@@ -146,6 +147,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     from .nativeprofiles import native_host_initialization
     from .priors import task_prior
     from .taskrecipes import adaptation_receipt, bind_task_candidate
+    from .tier1_policy import is_policy_task
     bound = bind_task_candidate(candidate, task)
     blockers = task_policy_blockers(task, bound)
     if blockers:
@@ -159,12 +161,12 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
         component_transport=task["execution"].get("transport_consumer"),
         prior_contract=task["execution"].get("prior_contract"),
-        policy_task=task if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" else None)
+        policy_task=task if is_policy_task(task) else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
     blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
     if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
-            and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
+            and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
         blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
     if blockers:
@@ -193,11 +195,18 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    from .tier1_policy import blocked_host, is_policy_task
+    policy_task = is_policy_task(task)
+    if policy_task and blocked_host(task) is not None:
+        # An explicit ownership boundary is the actual reason; report it before
+        # inherited metadata (for example a component transport consumer).
+        from .tier1_policy import blockers
+        return blockers(task, recipe)
     consumer = task.get('execution', {}).get('transport_consumer')
     # The selected-policy two-pole declaration inherits its parent's optional
     # transport metadata. Its existing owner implements the original objective
     # when transport is disabled; it does not implement a transport loss.
-    policy_two_pole = (task.get('task_cohort') == 'tier1_policy_selected_cloud_v1'
+    policy_two_pole = (policy_task
         and task.get('execution', {}).get('host') == 'two_pole'
         and not (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight))
     if consumer is not None and (consumer != 'output_marginal_v1'
@@ -208,7 +217,7 @@ def task_policy_blockers(task, candidate):
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    if policy_task:
         from .tier1_policy import blockers
         return blockers(task, recipe)
     if not policy_controls(recipe):

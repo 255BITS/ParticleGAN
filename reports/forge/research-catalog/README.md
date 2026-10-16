@@ -30,6 +30,17 @@ metrics; the catalog summaries do not replace those original receipts.
 | Atlas historical and current compatibility | Restored-state compatibility, adapted shape gains and causal negatives stay in their own cohorts. Later Gaussian/Ring horizons ended in checkpoint-export ERROR; four questions are BLOCKED and clock audit FAILs | Complete-state export and real host compatibility are part of completion. A blocked task is not a numerical failure | [separately owned PR404](https://github.com/255BITS/ParticleGAN/pull/404), [ten Atlas lessons](ATLAS-LESSONS.md) |
 | Test stage separation | Fixed-target quality, stationary retention and adaptation have distinct measurement contracts; the split adds no experiments | Keep old combined contracts and grades; missing submetrics stay UNMEASURED | [PR403](https://github.com/255BITS/ParticleGAN/pull/403) |
 
+## Later research notes — 2026-10-15
+
+[Selective gradient history and transport lessons](SELECTIVE-HISTORY-LESSONS.md)
+explain why pre-normalization confidence can lose its intended attenuation,
+how selective history changes channel balance, and why better mode allocation
+can coexist with worse component shape. Eight recipes completed sixteen
+diagnostic attempts; no modified recipe passed both original gates. The note
+links the full report, curves and compact evidence at an exact publication
+commit. Its 23 attempts across four campaigns are outside the frozen
+285-attempt register below; this notes entry adds no qualification.
+
 ## What is counted
 
 The frozen recent register has **285 distinct canonical attempt IDs**:

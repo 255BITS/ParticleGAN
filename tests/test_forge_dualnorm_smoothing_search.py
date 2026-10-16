@@ -63,7 +63,9 @@ def test_invalid_scale_rejected_before_writing(checkout, spec, scale):
 
 def test_other_families_do_not_claim_an_active_smoothing_axis():
     for family in ("adam", "formulation", "sgda", "dualnorm_D_only", "particle_rownorm_only"):
-        recipe = get_recipe("gan" if family == "formulation" else "bcap_adam", optimizer_family=family)
+        # Model families now inherit the DualNorm BCAP trainer; ka2 keeps the plain formulation optimizer.
+        recipe = (get_recipe("gan", trainer="ka2", optimizer_family=family) if family == "formulation"
+                  else get_recipe("bcap_adam", optimizer_family=family))
         assert not recipe_field_active("optimizer_smoothing", recipe)
 
 

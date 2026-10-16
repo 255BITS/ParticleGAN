@@ -6,6 +6,9 @@ candidate revisions through goal-specific leaderboards.
 
 Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
+The [problem list](reports/forge/problems.md) explains each outstanding question,
+what it tests, what fails and which configurations have passed it. Held failures
+remain in the leaderboard's full-suite results; the qualification subset is separate.
 For BCAP repair ideas, also read the completed
 [five-theory comparison](reports/forge/bcap-physics/README.md), including its
 source-bound readouts and unresolved gates.
@@ -409,16 +412,29 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 8) | Purpose |
+| Qualification tier | Current stability profile (revision 11) | Purpose |
 | --- | --- | --- |
 | 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
-| 2: quality | 21 hosts, including own-checkpoint Gaussian stability, five-word hold and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
-| 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
+| 2: quality | 10 counted hosts, including the five-word hold; 11 held: own-checkpoint Gaussian stability, four vector density, three image and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
+| 3: endurance | Own-state ring endurance, counted once as `ring_extension` (acquisition, hold and extension of one run; `ring_hold` is its removed phase); reserve up to 7,500 total updates | Detect late failure after acquisition |
 
-The current required denominator is 6/21/2. Revision 7's 6/20/2, revision 3's 5/19/2 and revision 2's
-published 3/19/2 results remain historical evidence; adding acquisition requirements
-does not regrade them or transfer API demonstrations into Forge qualification.
+The current counted denominator is 6/10/1. Revision 9's 6/21/2, revision 7's 6/20/2, revision 3's 5/19/2 and
+revision 2's published 3/19/2 results remain historical evidence; adding acquisition requirements or holding
+tests does not regrade them or transfer API demonstrations into Forge qualification.
 The expanded smoke profile needs calibration before scientific adoption.
+
+After the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md) the six ordinary
+views count 81 view requirements (Tier 1/2/3): adaptation 3/9/0 (revision 3), clockfree_continuous 4/9/1
+(revision 4), discriminator_stability 6/10/1 (revision 11), formulation_comparison 3/9/1 (revision 2),
+host_profile_transfer 3/9/1 (revision 5) and quality_coverage 3/9/0 (revision 3). Held in all six at Tier 2:
+`vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic`, `vector_overlap`, `img_bars4`,
+`img_blobs4`, `img_intensity2`, `grid100`, `rotated100` and `staggered100`. Also held: `gaussian1d_stability`
+(discriminator_stability, Tier 2), `target_shift_recovery` (adaptation and clockfree_continuous, Tier 3) and
+`grid100_14k`, `rotated100_14k` and `staggered100_14k` (clockfree_continuous, Tier 3, behind their held 7k
+parents). Removed from the count: `ring_hold` (a phase of `ring_extension` in the four ring views) and
+`clockfree_audit` (a duplicate of `clockfree_audit_measurement_v1` in clockfree_continuous). While
+`target_shift_recovery` is held, adaptation counts the same tests as quality_coverage and reports `HELD`.
+`tier1_policy_coverage` is a separate scope and stays at revision 1.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop higher-tier spending after
@@ -427,6 +443,30 @@ the remaining tasks in that tier.
 Diagnostics remain visible without vetoing required passes. The hold and extension
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
+
+A view can also mark a previously required test as **held** (role `held`): it is
+still declared, run, graded and shown, but it is not counted, and it never blocks
+progress or becomes a next task. Its `hold` note in the view gives the reason
+(`no_global_recipe`, `unsolved`, or `held_prerequisite` with the held parents in
+`blocked_by`), a plain-language summary, an explanation link and the rule for
+counting it again. A test **removed from the count** stays assigned as
+`diagnostic` with a `removal` note (`phase`, `duplicate`, `superseded` or
+`ill_posed`); a phase or duplicate names the counted test that carries its
+question in `counted_by`; a duplicate must have the same evaluation declaration as the
+counted test. A counted test may depend on a removed one only when that removed test
+is a phase of it: the same uninterrupted run and tier, with the counted test
+continuing the phase's own saved state (a checkpoint dependency). The phase still
+gates its counted test, whose grader replays it, and the phase's own prerequisites
+must be counted, so a held or diagnostic test never decides a counted verdict.
+A tier with only held tests has status `HELD`; it neither passes nor stops later
+tiers. A view reports `PASS` only when every counted tier passes and its highest
+tier is counted. If every counted tier passes but the highest tier is held, or
+nothing is counted, the view reports `HELD`, which is never eligible; a counted
+failure still reports as a failure. These notes are view policy: changing a
+summary, re-entry rule or link needs a new archived revision. Apply a recorded set of decisions with
+`python -m experiments.forge test-dispositions check|apply --registry <file>`;
+`check` writes nothing and exits 1 on drift, and `apply` archives each old revision
+byte for byte before writing, so a second apply changes nothing.
 
 The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
 current task assignments for every view, including required, ranking and
@@ -599,10 +639,12 @@ API results while retaining the registered scientific rows and family selections
 It verifies the immutable evidence snapshots and exact archived policy, launches
 no training and does not regrade receipts. New required cells remain unknown
 until compatible ordinary evidence is explicitly registered.
-The default command selects that safe publication refresh automatically when
-the declared view is newer than the registered evidence policy. The explicit
-flag remains available; advancing qualification still requires the source and
-policy options above.
+The default command selects that safe publication refresh automatically only
+when the registered view itself (`discriminator_stability`) is newer than the
+registered evidence policy; a revision of any other view would take the ordinary
+publishing path. Always pass `--refresh-publication` after a view revision, for
+example after holding a test or removing one from the count. Advancing
+qualification still requires the source and policy options above.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
@@ -610,9 +652,9 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/21/2
-for the current revision-8 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 7 (6/20/2) until
+techniques reserve no training resources. Counted denominators are 6/10/1
+for the current revision-11 `discriminator_stability` view, including unknown and blocked
+cells. The current publication retains its recorded revision 9 qualification (6/21/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
@@ -659,6 +701,9 @@ python -m experiments.forge retier discriminator_stability \
 ```
 
 This creates a view revision and recomputes eligibility without launching jobs.
+It first copies the live revision byte for byte to
+`configs/forge/view-history/<view>-v<revision>.json`, refuses if a different file is
+already there, and records that archive in the new revision's `previous_revision`.
 Existing campaigns retain their pinned view. Changing the task's steps, prior,
 sampling, or thresholds instead changes scientific compatibility. Do not shorten
 `benchmarks.toy100 --steps` to claim a preserved prefix: that option also changes
@@ -806,6 +851,21 @@ producer. Diagnostic jobs use a separate queue namespace: their outcomes cannot
 qualify ordinary candidates. Record a readout after this work as usual.
 Start from the [diagnostic contract template](configs/forge/calibration-lane-template.json)
 and replace its placeholders with the frozen profile and selected lineage.
+
+User-authorized coverage diagnostics can rebuild missing checkpoints and continue
+after a producer's numerical quality FAIL. The bounded `attempt_coverage` runner
+uses an explicit `checkpoint-repairs.json` plan in its state directory. It keeps
+the original recipe, seed, prior distribution, schedule, observations and update
+budgets. A continuation still needs its complete own checkpoint, verified files,
+matching static context and RNGs, and exact restored prefix. It runs on its
+producer's GPU. A missing or incomplete state is rebuilt rather than relabeled.
+These receipts explicitly mark `diagnostic_continuation`; ordinary grading rejects
+them for qualification and the original parent FAIL remains recorded.
+
+Native continuation cards must inherit their producer's `recipe_owned_v1` prior
+contract. Legacy `learnable=true` metadata may be aligned only when the resolved
+recipe already learns that same prior and its complete initial distribution is
+unchanged. The repair freezes a new request and retains the earlier error receipt.
 
 An accepted calibration is a verified report with frozen criteria and compatible
 source/task/prior/RNG/runtime evidence. Editing a status field cannot approve it.

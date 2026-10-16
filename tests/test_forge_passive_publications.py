@@ -217,7 +217,8 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     report["original_pr223_atlas"] = renderer._original_pr223_atlas(report)
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
-    assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                      " | Tier 3 requirements | Total view requirements |") == 1
     pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
     families = {pin["trainer_family"] for pin in pins}
     assert len(pins) == len(families)
@@ -229,8 +230,11 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
             assert row["selection"]["qualified"] is False
     from experiments.forge.trainer_families import load_families
     registry = load_families(ROOT)
-    visible = {name for name in families if registry[name].get("inventory_visible", True)
-               and registry[name].get("reporting_family", name) == name}
+    # A visible family may be displayed through its current configuration
+    # family's pin, as BCAP is through its DualNorm configuration.
+    visible = {name for name, family in registry.items() if family.get("inventory_visible", True)
+               and family.get("reporting_family", name) == name
+               and family.get("current_configuration_family", name) in families}
     assert len([line for line in table if line.startswith("| **[")]) == len(visible)
     # Hidden configurations remain in the unchanged scientific rows while each
     # visible reporting family owns one table row.

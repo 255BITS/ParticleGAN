@@ -392,16 +392,22 @@ def _persist(root, summary):
 
 
 def _qualification(trial, through_tier):
-    """Retain the full view denominator independently of the tuning cap."""
+    """Retain the full view denominator independently of the tuning cap.
+
+    Held tasks are never counted. A held-only tier neither passes nor breaks
+    progression, and a view whose highest tier is held is never fully qualified.
+    """
     required = [task for task in trial["tasks"] if task["importance"] == "required"]
+    held = [task for task in trial["tasks"] if task["importance"] == "held"]
     tuning = [task for task in required if task["qualification_tier"] <= through_tier]
+    held_only = {task["qualification_tier"] for task in held} - {task["qualification_tier"] for task in required}
     tiers, qualified_tier = [], 0
     advancing = not trial.get("submission_blockers")
     for tier in sorted({task["qualification_tier"] for task in required}):
         tasks = [task for task in required if task["qualification_tier"] == tier]
         counts = dict(sorted(Counter(task["gate_status"] for task in tasks).items()))
         passed = bool(tasks) and counts.get("PASS", 0) == len(tasks)
-        advancing = advancing and passed and tier == qualified_tier + 1
+        advancing = advancing and passed and all(t in held_only for t in range(qualified_tier + 1, tier))
         if advancing:
             qualified_tier = tier
         tiers.append({"tier": tier, "required_total": len(tasks),
@@ -412,13 +418,15 @@ def _qualification(trial, through_tier):
         task["gate_status"] == "PASS" for task in required)
     return {"qualified_tier": qualified_tier, "tuning_qualified": tuning_passed,
             "full_view_qualified": full_passed and qualified_tier == max(
-                (task["qualification_tier"] for task in required), default=0) and all(
+                (task["qualification_tier"] for task in required + held), default=0) and all(
                 task["qualification_tier"] <= through_tier for task in required),
             "required_total": len(required),
             "required_passed": sum(task["gate_status"] == "PASS" for task in required),
             "required_statuses": dict(sorted(Counter(task["gate_status"] for task in required).items())),
             "tuning_required_total": len(tuning),
             "tuning_required_passed": sum(task["gate_status"] == "PASS" for task in tuning),
+            **({"held_total": len(held), "held_passed": sum(task["gate_status"] == "PASS" for task in held)}
+               if held else {}),
             "tiers": tiers}
 
 

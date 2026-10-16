@@ -122,7 +122,7 @@ def _tier_cells(row, assignments, reason_catalog):
     cells, tasks, nonrequired = {}, [], []
     unresolvable = not row.get("qualification") and row.get("status") == "BLOCKED"
     for tier in sorted({item["qualification_tier"] for item in assignments}):
-        required = []
+        required, held = [], []
         for assignment in assignments:
             if assignment["qualification_tier"] != tier:
                 continue
@@ -137,8 +137,12 @@ def _tier_cells(row, assignments, reason_catalog):
             (tasks if assignment["importance"] == "required" else nonrequired).append(receipt)
             if assignment["importance"] == "required":
                 required.append(status)
+            elif assignment["importance"] == "held":
+                held.append(status)
         counts = _counts(required)
-        cells[str(tier)] = {"passed": counts.get("PASS", 0), "total": len(required), "counts": counts}
+        cells[str(tier)] = {"passed": counts.get("PASS", 0), "total": len(required), "counts": counts,
+                            # Held tasks are measured and shown, never counted.
+                            **({"held": len(held), "held_passed": held.count("PASS")} if held else {})}
     return cells, tasks, nonrequired
 
 
@@ -274,15 +278,27 @@ def render_markdown(result: dict, *, json_link: str | None = None, repo_link_pre
              "| Technique | Cohort / exact revision | Compute | " + " | ".join(f"Tier {tier}" for tier in tiers) +
              " | Qualified tier | Other outcomes | Paid seconds |",
              "| --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
+
+    def tier_cell(cell):
+        held = cell.get("held", 0)
+        if held and not cell["total"]:
+            return f"held ({held})"
+        return f"{cell['passed']}/{cell['total']}" + (f" + {held} held" if held else "")
+
     for row in result["rows"]:
         counts = Counter(task["status"] for task in row["tasks"] if task["status"] != "PASS")
         others = ", ".join(f"{key} {value}" for key, value in sorted(counts.items())) or "all required tasks PASS"
+        held = sum(cell.get("held", 0) for cell in row["tiers"].values())
+        if held:
+            others += f"; {held} held (measured, not counted)"
         seconds = row["cost"].get("wall_seconds")
         identity = f"{(row.get('cohort') or 'unknown')[:12]} / {(row.get('candidate_revision') or 'unknown')[:12]}"
         label = f"[{row['technique']}]({repo_link_prefix}/configs/forge/ideas/{row['candidate_id']}.json)"
+        # HELD means the view's highest tier is held; it is never a PASS.
+        qualified = f"{row['qualified_tier']} (HELD)" if row.get("status") == "HELD" else row["qualified_tier"]
         values = [label, identity, _compute(row["runtime_cohort"]),
-                  *[f"{row['tiers'][tier]['passed']}/{row['tiers'][tier]['total']}" for tier in tiers],
-                  row["qualified_tier"], others, round(seconds, 3) if seconds is not None else "unknown"]
+                  *[tier_cell(row["tiers"][tier]) for tier in tiers],
+                  qualified, others, round(seconds, 3) if seconds is not None else "unknown"]
         lines.append("| " + " | ".join(_cell(value) for value in values) + " |")
     lines += ["", "UNKNOWN means missing or unrun evidence. A failed or blocked prerequisite stops later-tier "
               "spending while every declared task stays in its denominator. Nonrequired diagnostics never fill required cells.", "",

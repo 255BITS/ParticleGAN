@@ -60,6 +60,40 @@ def receipt(task, *, bad_steps=(), final=.5):
                 cost=dict(seconds=2.))
 
 
+EXPLANATIONS = "reports/forge/test-dispositions-20261015/README.md"
+
+
+def hold(name, *, reason="no_global_recipe", blocked_by=()):
+    return dict(schema="forge_hold_v1", previous_importance="required", reason=reason, blocked_by=list(blocked_by),
+                summary=f"Fixture: {name} is measured and shown, but not counted.",
+                explanation=f"{EXPLANATIONS}#{name}", reentry=f"Count {name} again when one global recipe passes it.")
+
+
+def removal(name, reason, counted_by=None):
+    return dict(schema="forge_count_removal_v1", previous_importance="required", reason=reason,
+                counted_by=counted_by, summary=f"Fixture: {name} leaves the count of this view.",
+                explanation=f"{EXPLANATIONS}#{name}")
+
+
+def phase_tasks():
+    """A gate, then one uninterrupted run graded as a removed phase and a counted extension."""
+    tasks = {n: simple_task(n) for n in ("gate", "phase", "extension")}
+    for name in ("phase", "extension"):
+        tasks[name]["execution"].update(execution_group="endurance", uninterrupted=True)
+    tasks["phase"]["dependencies"] = [dict(task="gate", kind="gate")]
+    tasks["extension"]["dependencies"] = [dict(task="phase", kind="checkpoint")]
+    tasks["extension"]["execution"]["continuation_of"] = "phase"
+    view = simple_view(("gate", 1, "required"), ("phase", 2, "diagnostic"), ("extension", 2, "required"))
+    view["assignments"][1]["removal"] = removal("phase", "phase", "extension")
+    return tasks, view
+
+
+def same_run(task, **options):
+    value = receipt(task, **options)
+    value["evidence"]["continuity"] = dict(mode="uninterrupted", run_id="one")
+    return value
+
+
 def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     tasks = load_tasks(ROOT)
     stability = load_view(ROOT, "discriminator_stability")
@@ -76,11 +110,19 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 9
+    # Revision 11 (test dispositions 2026-10-15) holds 11 Tier 2 tests and removes
+    # ring_hold from the count as a phase of ring_extension; revision 9 is archived.
+    assert stability["revision"] == 11 and stability["previous_revision"]["revision"] == 9
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "clockfree_audit_measurement_v1"]
+        "ring_hold", "clockfree_audit_measurement_v1"]
+    assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
+    for role, counts in (("required", [6, 10, 1]), ("held", [0, 11, 0])):
+        assert [sum(a["qualification_tier"] == tier and a["importance"] == role
+                    for a in stability["assignments"]) for tier in (1, 2, 3)] == counts
+    archived = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v9.json").read_text())
+    validate_view(archived, tasks)
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
+                for a in archived["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -112,7 +154,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 6, "held": 0, "ranking": 0, "diagnostic": 1}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition", 1600, 300),
@@ -149,8 +191,15 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             thresholds = [["modes", ">=", thresholds["modes"]], ["hq", ">=", thresholds["hq_min"]]]
         assert tasks[spec["name"]]["evaluation"]["thresholds"] == json.loads(json.dumps(thresholds))
     assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
+    from experiments.forge.tier1_policy import is_policy_task, validate as validate_policy
+    # Separately scoped policy variants keep their parent's exact frozen gates.
+    for task in tasks.values():
+        if is_policy_task(task):
+            parent = validate_policy(task)
+            for field in ("thresholds", "gate_policy", "observations", "minimum_stable_checks"):
+                assert task["evaluation"].get(field) == parent["evaluation"].get(field)
     assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"
-            and "vector_profile" not in task["execution"]
+            and "vector_profile" not in task["execution"] and not is_policy_task(task)
             and not name.startswith("recipe-prior-refactor-legacy-")
             and task["evaluation"].get("gate_policy", {}).get("id") == "forge-vector-full-component-v1"} == set(VECTOR_THRESHOLDS_V1)
     for task in tasks.values():
@@ -171,6 +220,7 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
         if upstream["thresholds"] != thresholds:
             changed_upstream.add(name)
     assert changed_upstream == {"vector_anisotropic", "vector_unequal_width", "vector_unequal_mass"}
+    missing_history = set()
     for task in tasks.values():
         if task["id"].startswith("recipe-prior-refactor-legacy-"):
             # Inert binding controls retain exact original source identities.
@@ -181,10 +231,26 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             assert hashlib.sha256(original_bytes).hexdigest() == baseline["task_cards"][original_id]["sha256"]
             original = json.loads(original_bytes)
             original["id"] = task["id"]
-            assert task == original
-            for path, digest in task["evaluation"].get("sources", {}).items():
-                source = subprocess.check_output(["git", "show", baseline["source_commit"] + ":" + path], cwd=ROOT)
-                assert hashlib.sha256(source).hexdigest() == digest
+            if task != original:
+                # PR399 rebinding: exactly one declared source-only layer over the frozen card.
+                revision = task["evaluation"]["evaluator_revision"]
+                assert revision["id"] == "pr399-host-device-replay-source-only-v1"
+                assert revision["previous_revision"] == original["evaluation"].get("evaluator_revision")
+                frozen = original["evaluation"].get("sources", {})
+                live = task["evaluation"].get("sources", {})
+                rebound = set(revision["previous_source_sha256"]) | set(revision.get("added_source_members", []))
+                assert all(frozen.get(p) == d for p, d in revision["previous_source_sha256"].items())
+                strip = lambda t: {**t, "evaluation": {k: v for k, v in t["evaluation"].items()
+                                                       if k not in {"sources", "evaluator_revision"}}}
+                assert strip(task) == strip(original)
+                assert {p for p in set(live) | set(frozen) if live.get(p) != frozen.get(p)} <= rebound
+            if subprocess.run(["git", "cat-file", "-e", baseline["source_commit"] + "^{commit}"], cwd=ROOT,
+                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
+                for path, digest in original["evaluation"].get("sources", {}).items():
+                    source = subprocess.check_output(["git", "show", baseline["source_commit"] + ":" + path], cwd=ROOT)
+                    assert hashlib.sha256(source).hexdigest() == digest
+            else:
+                missing_history.add(baseline["source_commit"])
             continue
         historical_policy_sources = task["execution"].get("policy_contract", {}).get("sources", {})
         if historical_policy_sources:
@@ -212,6 +278,9 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
+    if missing_history:
+        pytest.skip("frozen legacy-card source pins need archived commit(s) " + ", ".join(sorted(c[:12] for c in missing_history))
+                    + " which this shallow checkout lacks; all non-history checks passed")
 
 
 def test_forge_retains_rare_component_shape_failure_despite_upstream_finite_atom_exemption():
@@ -280,13 +349,24 @@ def test_current_clock_view_preserves_historical_policy_and_first_tier_budget():
     historical = json.loads(path.read_text())
     current = load_view(ROOT, "clockfree_continuous")
     validate_view(historical, tasks)
-    assert current["revision"] == 3 and historical["revision"] == 2
+    assert current["revision"] == 4 and historical["revision"] == 2
     assert current["eligibility"] == historical["eligibility"]
     assert current["calibration"] == historical["calibration"]
     assignments = {a["task"]: a for a in current["assignments"]}
     assert assignments["clockfree_audit_measurement_v1"]["qualification_tier"] == 1
     assert assignments["clockfree_audit"]["qualification_tier"] == 3
-    assert assignments["clockfree_audit"]["importance"] == "required"
+    # Revision 4 (test dispositions 2026-10-15) counts the clock claim once, at
+    # Tier 1; the Tier 3 copy stays assigned as the gate of the held 14k tests.
+    assert assignments["clockfree_audit"]["importance"] == "diagnostic"
+    assert {key: assignments["clockfree_audit"]["removal"][key] for key in ("reason", "counted_by")} == {
+        "reason": "duplicate", "counted_by": "clockfree_audit_measurement_v1"}
+    for name in ("grid100_14k", "rotated100_14k", "staggered100_14k", "target_shift_recovery"):
+        assert assignments[name]["importance"] == "held" and assignments[name]["qualification_tier"] == 3
+    assert [assignments[name]["hold"]["blocked_by"] for name in ("grid100_14k", "rotated100_14k", "staggered100_14k")] == [
+        ["grid100"], ["rotated100"], ["staggered100"]]
+    previous = json.loads((ROOT / current["previous_revision"]["archive"]).read_text())
+    assert previous["revision"] == 3
+    assert next(a for a in previous["assignments"] if a["task"] == "clockfree_audit")["importance"] == "required"
     assert next(a for a in historical["assignments"] if a["task"] == "clockfree_audit")["qualification_tier"] == 1
     # Shared execution groups reserve their maximum timeout once.
     def ceiling(view, tier=None):
@@ -610,3 +690,255 @@ def test_native_checkpoint_dependency_binds_the_selected_parent(monkeypatch):
     assert qualify(view, tasks, [first, second])["qualified_tier"] == 2
     second["evidence"]["prefix_parity"]["prerequisite"]["attempt_id"] = "another-candidate"
     assert qualify(view, tasks, [first, second])["task_statuses"]["continuation"] == "BLOCKED"
+
+
+def test_every_declared_and_archived_view_still_validates_and_legacy_views_count_every_tier():
+    tasks = load_tasks(ROOT)
+    paths = sorted((ROOT / "configs/forge/views").glob("*.json")) + sorted((ROOT / "configs/forge/view-history").glob("*.json"))
+    assert len(paths) >= 22
+    for path in paths:
+        view = json.loads(path.read_text())
+        validate_view(view, tasks)
+        if view.get("evidence_scope") or any(a["importance"] == "held" or "removal" in a for a in view["assignments"]):
+            continue
+        # Without held or removed tasks the new rules are inert: every assigned tier is counted.
+        result = qualify(view, tasks, [])
+        assert result["held_total"] == 0 and result["held_tiers"] == [] and result["held_tasks"] == []
+        assert result["counted_tiers"] == sorted({a["qualification_tier"] for a in view["assignments"]})
+        assert result["status"] in {"INCOMPLETE", "BLOCKED"} and not result["eligible"]
+
+
+def test_held_middle_tier_is_graded_and_shown_but_neither_passes_nor_stops_progression():
+    tasks = {n: simple_task(n) for n in "abc"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "held"), ("c", 3, "required"))
+    view["assignments"][1]["hold"] = hold("b")
+    result = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"], final=2.), receipt(tasks["c"])])
+    assert result["status"] == "PASS" and result["eligible"] and result["qualified_tier"] == 3
+    assert [t["status"] for t in result["tiers"]] == ["PASS", "HELD", "PASS"]
+    assert result["tiers"][1] == {"qualification_tier": 2, "status": "HELD", "required_passed": 0, "required_total": 0,
+                                  "counts": {}, "held_total": 1, "held_passed": 0, "diagnostic_total": 0}
+    assert result["counted_tiers"] == [1, 3] and result["held_tiers"] == [2] and result["held_tasks"] == ["b"]
+    assert (result["held_total"], result["held_passed"]) == (1, 0)
+    assert result["required_total"] == result["required_passed"] == 2
+    assert result["task_statuses"]["b"] == "FAIL" and result["blockers"] == []
+    assert next(row for row in result["tasks"] if row["task_id"] == "b")["hold"] == hold("b")
+    pending = qualify(view, tasks, [receipt(tasks["a"])])
+    assert pending["status"] == "INCOMPLETE" and pending["qualified_tier"] == 1 and pending["next_tasks"] == ["c"]
+    failed = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["c"], final=2.)])
+    assert failed["status"] == "FAIL" and failed["qualified_tier"] == 1
+    assert [b["task_id"] for b in failed["blockers"]] == ["c"]
+
+
+def test_held_top_tier_reports_held_never_pass_and_keeps_counted_failures_visible():
+    tasks = {n: simple_task(n) for n in "abc"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "required"), ("c", 3, "held"))
+    view["assignments"][2]["hold"] = hold("c", reason="unsolved")
+    result = qualify(view, tasks, [receipt(tasks[n]) for n in "abc"])
+    assert result["status"] == "HELD" and not result["eligible"] and result["qualified_tier"] == 2
+    assert result["tiers"][2]["status"] == "HELD" and (result["held_total"], result["held_passed"]) == (1, 1)
+    assert result["counted_tiers"] == [1, 2] and result["next_tasks"] == [] and result["blockers"] == []
+    failed = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"], final=2.)])
+    assert failed["status"] == "FAIL" and failed["qualified_tier"] == 1
+    gated = deepcopy(view)
+    gated["eligibility"] = {"requires_capabilities": ["named_rng"]}
+    assert qualify(gated, tasks, [receipt(tasks[n]) for n in "abc"])["status"] == "BLOCKED"
+    nothing_counted = simple_view(("a", 1, "held"))
+    nothing_counted["assignments"][0]["hold"] = hold("a")
+    empty = qualify(nothing_counted, tasks, [receipt(tasks["a"])])
+    assert empty["status"] == "HELD" and not empty["eligible"] and empty["qualified_tier"] == 0
+    assert empty["counted_tiers"] == [] and empty["held_tiers"] == [1] and empty["required_total"] == 0
+
+
+@pytest.mark.parametrize("mutation,match", [
+    (lambda a: a.pop("hold"), "hold metadata"),
+    (lambda a: a["hold"].update(extra="field"), "exactly"),
+    (lambda a: a["hold"].update(reason="too_hard"), "hold reason"),
+    (lambda a: a["hold"].update(previous_importance="diagnostic"), "previously required"),
+    (lambda a: a["hold"].update(schema="forge_hold_v0"), "previously required"),
+    (lambda a: a["hold"].update(summary="too short"), "20-280"),
+    (lambda a: a["hold"].update(summary="x" * 281), "20-280"),
+    (lambda a: a["hold"].update(explanation="/tmp/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation=EXPLANATIONS), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="../README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/README.txt#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/README.md#"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/READ ME.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="reports/x/.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="https://example.com/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="C:/Users/x/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(explanation="~/notes/README.md#b"), "path#anchor"),
+    (lambda a: a["hold"].update(summary=" Fixture: a leading space is not plain text."), "20-280"),
+    (lambda a: a["hold"].update(reentry="later"), "re-entry"),
+    (lambda a: a["hold"].update(blocked_by=["a"]), "exactly its held prerequisites"),
+    (lambda a: a["hold"].update(reason="held_prerequisite"), "held_prerequisite"),
+    (lambda a: a.update(importance="required"), "requires importance held"),
+    (lambda a: a.update(importance="diagnostic", removal=removal("b", "superseded")), "requires importance held"),
+])
+def test_hold_metadata_must_be_complete_and_consistent(mutation, match):
+    tasks = {n: simple_task(n) for n in "ab"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "held"))
+    view["assignments"][1]["hold"] = hold("b")
+    validate_view(deepcopy(view), tasks)
+    mutation(view["assignments"][1])
+    with pytest.raises(ValueError, match=match):
+        validate_view(view, tasks)
+
+
+def test_task_behind_a_held_prerequisite_is_held_too_and_names_it():
+    tasks = {n: simple_task(n) for n in "ab"}
+    tasks["b"]["dependencies"] = [dict(task="a", kind="checkpoint")]
+    tasks["b"]["execution"]["continuation_of"] = "a"
+    view = simple_view(("a", 1, "held"), ("b", 2, "required"))
+    view["assignments"][0]["hold"] = hold("a", reason="unsolved")
+    with pytest.raises(ValueError, match="depends on held task a; hold b with reason held_prerequisite"):
+        validate_view(view, tasks)
+    view["assignments"][1].update(importance="held", hold=hold("b", blocked_by=["a"]))
+    with pytest.raises(ValueError, match="uses reason held_prerequisite"):
+        validate_view(view, tasks)
+    view["assignments"][1]["hold"].update(reason="held_prerequisite", blocked_by=[])
+    with pytest.raises(ValueError, match="blocked_by must list exactly"):
+        validate_view(view, tasks)
+    view["assignments"][1]["hold"]["blocked_by"] = ["a"]
+    validate_view(view, tasks)
+    a, b = same_run(tasks["a"], final=2.), same_run(tasks["b"])
+    result = qualify(view, tasks, [a, b])
+    assert result["task_statuses"] == {"a": "FAIL", "b": "BLOCKED"}
+    assert result["status"] == "HELD" and result["blockers"] == [] and result["counted_tiers"] == []
+
+
+def test_removed_phase_keeps_one_counted_verdict_and_its_prerequisites():
+    tasks, view = phase_tasks()
+    validate_view(view, tasks)
+    results = [receipt(tasks["gate"]), same_run(tasks["phase"]), same_run(tasks["extension"])]
+    passed = qualify(view, tasks, results)
+    assert passed["status"] == "PASS" and passed["qualified_tier"] == 2
+    assert passed["required_total"] == 2 and passed["tiers"][1]["diagnostic_total"] == 1
+    assert next(row for row in passed["tasks"] if row["task_id"] == "phase")["removal"]["counted_by"] == "extension"
+    # A failing phase still blocks the counted verdict that replays it.
+    failed_phase = qualify(view, tasks, [results[0], same_run(tasks["phase"], final=2.), results[2]])
+    assert failed_phase["task_statuses"]["extension"] == "BLOCKED" and failed_phase["status"] == "BLOCKED"
+    assert [b["task_id"] for b in failed_phase["blockers"]] == ["extension"]
+    # The group is proposed through its counted member once the external gate passes.
+    assert qualify(view, tasks, results[:1])["next_tasks"] == ["extension"]
+    assert qualify(view, tasks, [])["next_tasks"] == ["gate"]
+    assert qualify(view, tasks, [receipt(tasks["gate"], final=2.)])["next_tasks"] == []
+    assert qualify(view, tasks, [results[0], same_run(tasks["phase"], final=2.)])["next_tasks"] == []
+    counted = deepcopy(view)
+    counted["assignments"][1]["importance"] = "required"
+    counted["assignments"][1].pop("removal")
+    assert qualify(counted, tasks, results[:1])["next_tasks"] == ["phase"]
+    # In one tier the counted job still waits for the gate that its removed phase needs.
+    same_tier = deepcopy(view)
+    same_tier["assignments"][0]["qualification_tier"] = 2
+    same_tier["assignments"].insert(0, dict(task="smoke", qualification_tier=1, importance="required", order=9))
+    tiered_tasks = {**tasks, "smoke": simple_task("smoke")}
+    assert qualify(same_tier, tiered_tasks, [receipt(tiered_tasks["smoke"])])["next_tasks"] == ["gate"]
+
+
+@pytest.mark.parametrize("mutation,match", [
+    (lambda t, v: v["assignments"][1]["removal"].update(counted_by="gate"), "nonrequired"),
+    (lambda t, v: v["assignments"][1]["removal"].update(reason="duplicate"), "nonrequired"),
+    (lambda t, v: [t[n]["execution"].pop("uninterrupted") for n in ("phase", "extension")], "nonrequired"),
+    (lambda t, v: t["phase"]["execution"].update(execution_group="other"), "nonrequired"),
+    (lambda t, v: t["extension"].update(dependencies=[dict(task="phase", kind="gate")]), "nonrequired"),
+    (lambda t, v: v["assignments"][1].update(qualification_tier=1), "uninterrupted execution group"),
+    (lambda t, v: v["assignments"][2].update(importance="held", hold=hold("extension")), "phase removal"),
+    (lambda t, v: v["assignments"][1]["removal"].update(counted_by=None), "name counted_by"),
+    (lambda t, v: v["assignments"][1]["removal"].update(reason="superseded"), "name counted_by"),
+    (lambda t, v: v["assignments"][1]["removal"].update(reason="unneeded"), "removal reason"),
+    (lambda t, v: v["assignments"][1]["removal"].update(summary="short"), "20-280"),
+    (lambda t, v: v["assignments"][1]["removal"].pop("explanation"), "exactly"),
+    (lambda t, v: v["assignments"][1].update(importance="ranking"), "stays assigned as diagnostic"),
+])
+def test_phase_exception_is_narrow(mutation, match):
+    tasks, view = phase_tasks()
+    mutation(tasks, view)
+    with pytest.raises(ValueError, match=match):
+        validate_view(view, tasks)
+
+
+def test_removed_phase_prerequisites_must_be_counted_like_its_counted_verdict():
+    """A held or uncounted gate behind a removed phase would decide the counted verdict."""
+    tasks, view = phase_tasks()
+    held_gate = deepcopy(view)
+    held_gate["assignments"][0].update(importance="held", hold=hold("gate"))
+    with pytest.raises(ValueError, match="removed phase phase depends on held task gate; count gate, "
+                                         "or hold extension and phase with reason held_prerequisite"):
+        validate_view(held_gate, tasks)
+    # The suggested repair is valid: the phase and its counted verdict are held behind the gate.
+    held_gate["assignments"][1].pop("removal")
+    held_gate["assignments"][1].update(importance="held", hold=hold("phase", reason="held_prerequisite", blocked_by=["gate"]))
+    held_gate["assignments"][2].update(importance="held", hold=hold("extension", reason="held_prerequisite",
+                                                                    blocked_by=["phase"]))
+    validate_view(held_gate, tasks)
+    probed_tasks, probed = deepcopy(tasks), deepcopy(view)
+    probed_tasks["probe"] = simple_task("probe")
+    probed_tasks["phase"]["dependencies"].append(dict(task="probe", kind="gate"))
+    probed["assignments"].append(dict(task="probe", qualification_tier=1, importance="diagnostic", order=3))
+    with pytest.raises(ValueError, match="nonrequired task \\(its removed phase phase depends on probe\\)"):
+        validate_view(probed, probed_tasks)
+    # The same holds for the real ring group: mode_hold gates ring_hold, which ring_extension replays.
+    stability, all_tasks = load_view(ROOT, "discriminator_stability"), load_tasks(ROOT)
+    gate = next(a for a in stability["assignments"] if a["task"] == "mode_hold")
+    gate.update(importance="held", hold=hold("mode_hold"))
+    with pytest.raises(ValueError, match="ring_extension: its removed phase ring_hold depends on held task mode_hold"):
+        validate_view(stability, all_tasks)
+
+
+def test_duplicate_removal_names_an_earlier_counted_task_with_the_same_grader():
+    tasks = {n: simple_task(n) for n in ("probe", "other", "copy")}
+    view = simple_view(("probe", 1, "required"), ("other", 2, "required"), ("copy", 2, "diagnostic"))
+    view["assignments"][2]["removal"] = removal("copy", "duplicate", "probe")
+    validate_view(view, tasks)
+    superseded = deepcopy(view)
+    superseded["assignments"][2]["removal"] = removal("copy", "ill_posed")
+    validate_view(superseded, tasks)
+    cases = [
+        lambda t, v: v["assignments"][2]["removal"].update(counted_by="copy"),
+        lambda t, v: v["assignments"][2]["removal"].update(counted_by="missing"),
+        lambda t, v: v["assignments"][0].update(importance="held", hold=hold("probe")),
+        lambda t, v: [v["assignments"][0].update(qualification_tier=2), v["assignments"][1].update(qualification_tier=1),
+                      v["assignments"][2].update(qualification_tier=1)],
+        lambda t, v: t["probe"].update(adapter="another_host"),
+        lambda t, v: t["copy"]["evaluation"].update(kind="custom_probe"),
+        # Same grader family but a different question: another bound or another source pin.
+        lambda t, v: t["copy"]["evaluation"].update(thresholds=[["error", "<=", 0.5]]),
+        lambda t, v: t["probe"]["evaluation"].update(sources={"benchmarks/other_scorer.py": "0" * 64}),
+    ]
+    for mutation in cases:
+        bad_tasks, bad = deepcopy(tasks), deepcopy(view)
+        mutation(bad_tasks, bad)
+        with pytest.raises(ValueError, match="duplicate removal"):
+            validate_view(bad, bad_tasks)
+    # A derived counted copy may pin the duplicate's own declaration as provenance.
+    derived = deepcopy(tasks)
+    derived["probe"]["evaluation"]["sources"] = {"configs/forge/tasks/copy.json": "0" * 64}
+    validate_view(view, derived)
+
+
+def test_duplicate_rule_accepts_the_clock_audit_copy_but_not_a_different_density_test():
+    all_tasks = load_tasks(ROOT)
+    clock = load_view(ROOT, "clockfree_continuous")
+    assert next(a for a in clock["assignments"] if a["task"] == "clockfree_audit")["removal"]["counted_by"] == (
+        "clockfree_audit_measurement_v1")
+    quality = load_view(ROOT, "quality_coverage")
+    spiral = next(a for a in quality["assignments"] if a["task"] == "vector_spiral")
+    assert spiral["importance"] == "required"
+    spiral.update(importance="diagnostic", removal=removal("vector_spiral", "duplicate", "vector_two_broad"))
+    with pytest.raises(ValueError, match="vector_spiral: a duplicate removal"):
+        validate_view(quality, all_tasks)
+
+
+def test_previous_revision_names_its_exact_archive():
+    tasks = {"a": simple_task("a")}
+    view = simple_view(("a", 1, "required"))
+    view["revision"] = 3
+    view["previous_revision"] = dict(revision=2, archive="configs/forge/view-history/test-v2.json",
+                                     policy_fingerprint="0" * 64)
+    validate_view(view, tasks)
+    for change, match in ((dict(revision=3), "earlier revision"), (dict(archive="configs/forge/views/test.json"), "view-history"),
+                          (dict(policy_fingerprint="abc"), "SHA-256"), (dict(extra=1), "exactly")):
+        bad = deepcopy(view)
+        bad["previous_revision"].update(change)
+        with pytest.raises(ValueError, match=match):
+            validate_view(bad, tasks)

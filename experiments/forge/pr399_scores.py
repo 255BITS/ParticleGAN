@@ -13,6 +13,8 @@ PINS = {'reports/forge/test-performance-evidence/pr399-retained-successor-nonatl
 def publications(root):
     """Validate byte pins and source identities before displaying archived scores."""
     inputs = Inputs(root)
+    if not (inputs.root / SUPPLEMENTAL).is_file():
+        return []  # No display index: nothing to show, as for the other optional display inputs.
     registry = inputs.read(SUPPLEMENTAL)
     indexed = {p["path"]: p["sha256"] for p in registry["publications"]}
     packets = []
@@ -72,7 +74,9 @@ def tier_rows(root, page, requirements):
             family, _, _, _, source, seed = identity
             target = f"reports/forge/families/{family}.md#pr399-retained-research"
             label = f"{labels[identity]}; seed {seed}; {source[:8]}"
-            rows[family].append(_row(root, page, label, target, tasks, requirements))
+            from .research_attempts import scope_id
+            rows[family].append(_row(root, page, label, target, tasks, requirements,
+                                     scope=scope_id(source, identity[2]) if seed == 0 else None))
     return dict(rows)
 
 

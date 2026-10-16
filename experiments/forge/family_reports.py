@@ -19,6 +19,8 @@ from .views import task_evaluation_fingerprint, task_execution_fingerprint
 
 
 FAMILY_DIRECTORY = Path("reports/forge/families")
+PROBLEM_DEFINITIONS = Path("reports/forge/problem-definitions.json")
+PROBLEM_PAGE = Path("reports/forge/problems.md")
 COMPLETE = {"PASS", "FAIL"}
 TIERS = ("1", "2", "3")
 COVERAGE_PREFLIGHT = Path("reports/forge/tier-coverage-20261014/preflight.json")
@@ -209,6 +211,64 @@ def link(root, page, label, target, anchor=None):
     return f"[{cell(label)}]({relative}" + (f"#{anchor}" if anchor else "") + ")"
 
 
+# A held task is measured and shown but not counted; a task removed from the
+# count stays assigned as diagnostic (experiments/forge/views.py). Both carry a
+# note in the view naming the reason and linking its explanation.
+HOLD_REASON_TEXT = {"no_global_recipe": "no one recipe passes it together with the counted tests",
+                    "unsolved": "no recipe has passed its current declaration"}
+REMOVAL_REASON_TEXT = {"phase": "phase of {} (counted there)", "duplicate": "duplicate of {} (counted there)",
+                       "superseded": "replaced by newer tests", "ill_posed": "cannot run as declared"}
+
+
+def role_note(assignment):
+    """The hold or removal note of an uncounted assignment, else None."""
+    return assignment.get("hold") if assignment["importance"] == "held" else assignment.get("removal")
+
+
+def role_label(assignment):
+    """Plain role text; held and removed roles name their reason."""
+    note = role_note(assignment)
+    if not note:
+        return assignment["importance"]
+    reason = note["reason"]
+    if assignment["importance"] != "held":
+        return "removed: " + REMOVAL_REASON_TEXT.get(reason, reason.replace("_", " ")).format(note.get("counted_by"))
+    parents = note.get("blocked_by") or []
+    if reason == "held_prerequisite" and parents:
+        return ("held: prerequisite " + parents[0] + " is held" if len(parents) == 1 else
+                "held: prerequisites " + ", ".join(parents) + " are held")
+    return "held: " + HOLD_REASON_TEXT.get(reason, reason.replace("_", " "))
+
+
+def role_cell(root, page, assignment):
+    """The role, linked to its explanation when the assignment is held or removed."""
+    note = role_note(assignment)
+    if not note:
+        return cell(assignment["importance"])
+    path, _, anchor = note["explanation"].partition("#")
+    return link(root, page, role_label(assignment), path, anchor)
+
+
+def uncounted_entries(views):
+    """One row per held or removed task and note, built from the view declarations.
+
+    The same disposition normally appears in every view that counted the task;
+    differing notes stay separate rows rather than being merged.
+    """
+    entries = {}
+    for view in views:
+        for assignment in view["assignments"]:
+            note = role_note(assignment)
+            if not note:
+                continue
+            key = (assignment["task"], assignment["importance"], json.dumps(note, sort_keys=True))
+            entry = entries.setdefault(key, {"task": assignment["task"], "assignment": assignment,
+                                             "note": note, "views": []})
+            entry["views"].append((view["id"], assignment["qualification_tier"]))
+    return sorted(entries.values(), key=lambda entry: (entry["assignment"]["importance"] != "held",
+                                                       min(tier for _, tier in entry["views"]), entry["task"]))
+
+
 def evaluation_rows(evaluation):
     """Readable bounds from the declaration, without an invented combined score."""
     rows = [(name, op, bound) for name, op, bound in evaluation.get("thresholds", [])]
@@ -259,9 +319,23 @@ def _count(tasks):
     statuses = Counter(task["status"] for task in tasks)
     incompatible = sum(_incompatible(task) for task in tasks)
     not_run = sum(not task["execution_recorded"] for task in tasks) - incompatible
-    return {"passed": statuses.get("PASS", 0), "total": len(tasks),
+    value = {"passed": statuses.get("PASS", 0), "total": len(tasks),
             "incomplete": bool(not_run or incompatible), "not_run": not_run, "incompatible": incompatible,
             "counts": dict(sorted(statuses.items()))}
+    if any("run_attempt" in task for task in tasks):
+        coverage = Counter()
+        for task in tasks:
+            attempt = task.get("run_attempt", {})
+            if task["execution_recorded"]:
+                continue
+            if not attempt.get("attempted"):
+                coverage["incompatible" if _incompatible(task) else "not_run"] += 1
+            elif attempt["status"] == "BLOCKED":
+                coverage["incompatible" if attempt.get("block_kind") == "incompatible" else "blocked"] += 1
+            else:
+                coverage["running" if attempt["status"] == "RUNNING" else "diagnostic_attempts"] += 1
+        value["attempt_coverage"] = dict(coverage)
+    return value
 
 
 def _incompatible(task):
@@ -273,16 +347,32 @@ def _sum(counts):
     statuses = Counter()
     for count in counts:
         statuses.update(count["counts"])
-    return {"passed": sum(c["passed"] for c in counts), "total": sum(c["total"] for c in counts),
+    value = {"passed": sum(c["passed"] for c in counts), "total": sum(c["total"] for c in counts),
             "incomplete": any(c["incomplete"] for c in counts),
             "not_run": sum(c["not_run"] for c in counts),
             "incompatible": sum(c["incompatible"] for c in counts), "counts": dict(sorted(statuses.items()))}
+    if any("attempt_coverage" in c for c in counts):
+        coverage = Counter()
+        for count in counts:
+            coverage.update(count.get("attempt_coverage", {k: count.get(k, 0) for k in ("not_run", "incompatible")}))
+        value["attempt_coverage"] = dict(coverage)
+    return value
 
 
 def score(count, *, marker=True):
     value = f"{count['passed']}/{count['total']}"
+    coverage = count.get("attempt_coverage", count)
     missing = [f"{count[key]} {label}" for key, label in (("not_run", "not run"), ("incompatible", "incompatible"))
                if count.get(key)]
+    if "attempt_coverage" in count:
+        missing = [f"{coverage[key]} {label}" for key, label in (
+            ("not_run", "not run"), ("incompatible", "incompatible"), ("blocked", "blocked"),
+            ("errors", "error" if coverage.get("errors") == 1 else "errors"),
+            ("timeouts", "timeout" if coverage.get("timeouts") == 1 else "timeouts"),
+            ("incomplete_attempts", "incomplete"), ("interrupted_attempts", "interrupted"),
+            ("queued", "queued"), ("running", "running"),
+            ("diagnostic_attempts", "diagnostic attempt" if coverage.get("diagnostic_attempts") == 1 else "diagnostic attempts"))
+            if coverage.get(key)]
     return value + (" (" + ", ".join(missing) + ")" if marker and missing else "")
 
 
@@ -496,7 +586,30 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
+    # The policy-cloud cohorts publish their own records file (never the
+    # repository attempt report); it fills only their scoped view cells.
+    from .policy_cloud_publication import VIEWS as POLICY_CLOUD_VIEWS, family_overlay, load_records, view_counts
+    policy_cloud = load_records(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
+    attempt_path = Path("reports/forge/attempt-coverage.json")
+    run_attempts = {}
+    attempt_summary = None
+    if (root / attempt_path).is_file():
+        registry = load(attempt_path)
+        attempt_summary = deepcopy(registry["summary"])
+        if (registry.get("schema") != "forge_attempt_coverage_v1"
+                or registry.get("qualification_input") is not False
+                or registry.get("qualification_reuse") is not False):
+            raise ValueError("run-attempt coverage must remain diagnostic only")
+        for attempt in registry["records"]:
+            key = (attempt["source_digest"], attempt["candidate_revision"], attempt["task"],
+                   attempt["execution_sha256"], attempt["evaluation_sha256"])
+            if attempt["key"] != stable_hash(list(key)) or key in run_attempts:
+                raise ValueError("invalid or duplicate run-attempt binding")
+            if attempt["status"] not in {"PENDING", "RUNNING", "PASS", "FAIL", "INCOMPLETE", "INVALID",
+                                         "ERROR", "TIMEOUT", "BLOCKED", "INTERRUPTED"}:
+                raise ValueError("invalid run-attempt status")
+            run_attempts[key] = attempt
     followup = Path("reports/forge/actual-missing-diagnostics-20261014/results.json")
     diagnostic_executions = set()
     if (root / followup).is_file():
@@ -522,10 +635,16 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             raise ValueError("family report view has duplicate assignments")
         if tasks and set(names) - tasks.keys():
             raise ValueError("family report view references a missing task")
+        shown = view.get("reporting", {}).get("families")
+        if shown is not None and (view.get("reporting", {}).get("family_totals") is not False
+                                  or not isinstance(shown, list) or not shown
+                                  or not all(isinstance(name, str) and name for name in shown)):
+            raise ValueError("only a scoped view may name the families whose pages display it")
     scoped = [view for view in views if view.get("reporting", {}).get("family_totals") is False]
+    # A view whose tests are all held still belongs to the totals; it counts nothing.
     ordinary = [view for view in views if view not in scoped
                 and view.get("evidence_scope") not in {"research_diagnostic", "calibration_diagnostic"}
-                and any(a["importance"] == "required" for a in view["assignments"])]
+                and any(a["importance"] in {"required", "held"} for a in view["assignments"])]
     diagnostics = [view for view in views if view not in ordinary and view not in scoped]
     families = {}
     selected_rows = publication["rows"] + publication.get("historical_family_rows", [])
@@ -607,7 +726,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     receipts[result["task_id"]] = {"path": path.as_posix(), "attempt_id": attempt, "result": result}
 
         results = {}
-        assigned = {assignment["task"] for view in views for assignment in view["assignments"]}
+        assigned = {assignment["task"] for view in views if _displayed_for(view, family_id)
+                    for assignment in view["assignments"]}
         for name in sorted(assigned):
             previous = recorded.get(name, {})
             contract_hash = bindings.get(name)
@@ -651,6 +771,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                              "reason": reason, "coverage_reason": coverage, "changed_contract_fields": changed,
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
+            attempt_key = (selected.get("bindings", {}).get("source_digest"), selected["candidate_revision"],
+                           name, contract.get("execution_sha256", task_execution_fingerprint(task) if task else None),
+                           contract.get("evaluation_sha256", task_evaluation_fingerprint(task) if task else None))
+            if attempt_key in run_attempts:
+                results[name]["run_attempt"] = deepcopy(run_attempts[attempt_key])
             supported = task_support.get(name)
             if supported is not None:
                 if contract and (supported["execution_sha256"] != contract.get("execution_sha256")
@@ -662,6 +787,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     results[name]["reason"] = "Skipped incompatible test: " + "; ".join(supported["blockers"])
                 diagnostic_key = (support_rows[0]["source_digest"], selected["candidate_revision"], name,
                                   supported["execution_sha256"], supported["evaluation_sha256"])
+                if diagnostic_key in run_attempts:
+                    results[name]["run_attempt"] = deepcopy(run_attempts[diagnostic_key])
                 if diagnostic_key in diagnostic_executions and not results[name]["execution_recorded"]:
                     results[name]["separate_diagnostic_executed"] = True
                     results[name]["reason"] = ("Executable: completed in a separate-runtime diagnostic. "
@@ -679,20 +806,35 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     and audit["recorded_grade"] == status):
                 results[name]["clock_audit"] = audit
 
+        overlay = family_overlay(policy_cloud, family_id, selected, lambda name: (
+            (task_execution_fingerprint(tasks[name]), task_evaluation_fingerprint(tasks[name])) if name in tasks else (None, None)))
+        for name, cell in (overlay or {}).get("cells", {}).items():
+            if name in results:
+                results[name].update(cell)
+
         def view_row(view):
             tiers = {}
             assignments = sorted(view["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
             for tier in TIERS:
                 required = [results[a["task"]] for a in assignments if str(a["qualification_tier"]) == tier
                             and a["importance"] == "required"]
-                tiers[tier] = _count(required)
-            return {"id": view["id"], "revision": view["revision"], "tiers": tiers,
-                    "total": _sum(list(tiers.values()))}
+                if overlay is not None and view["id"] in POLICY_CLOUD_VIEWS:
+                    # The same counts as the cohort's leaderboard row.
+                    tiers[tier] = view_counts({result["task_id"]: result["run_attempt"] for result in required
+                                               if "run_attempt" in result}, [result["task_id"] for result in required])
+                else:
+                    tiers[tier] = _count(required)
+            row = {"id": view["id"], "revision": view["revision"], "tiers": tiers,
+                   "total": _sum(list(tiers.values()))}
+            held = [results[a["task"]] for a in assignments if a["importance"] == "held"]
+            if held:
+                row["held"] = _count(held)  # Measured and shown, never in a total.
+            return row
 
         view_rows = [view_row(view) for view in ordinary]
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
-                                   "scoped_views": [view_row(view) for view in scoped],
+                                   "scoped_views": [view_row(view) for view in scoped if _displayed_for(view, family_id)],
                                    "scoped_publications": [{**{key: item[key] for key in ("path", "view", "source_commit")},
                                                             "cohort": item["row"].get("cohort"),
                                                             "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
@@ -701,6 +843,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                                    "total": _sum([view["total"] for view in view_rows])})
         if retry_history:
             family["cohorts"][-1]["retry_history"] = retry_history
+        if overlay is not None:
+            family["cohorts"][-1]["policy_cloud_publication"] = overlay["publication"]
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
@@ -722,6 +866,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     if coverage is not None:
         inputs[COVERAGE.as_posix()] = file_hash(root / COVERAGE)
         inputs.update(coverage["inputs"])
+    problems = load(PROBLEM_DEFINITIONS) if (root / PROBLEM_DEFINITIONS).is_file() else None
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped],
@@ -730,22 +875,287 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "historical_families": [family for family in families.values() if family["historical_only"]],
                 "tag_definitions": tag_definitions,
                 "task_paths": task_paths,
+                "problem_definitions": problems,
                 "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__)),
                 "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
                 "pr399_renderer_sha256": file_hash(Path(__file__).with_name("pr399_scores.py")),
+                "policy_cloud_renderer_sha256": file_hash(Path(__file__).with_name("policy_cloud_publication.py")),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,
                                                    "counts_scope": "AT_FIRST_ACCEPTED_CASE"}
     if atlas_navigation is not None:
         progress["atlas_evidence_navigation"] = atlas_navigation
+    if attempt_summary is not None:
+        progress["run_attempt_coverage"] = attempt_summary
     return progress
 
 
-def _table_header():
-    return ["| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |",
+def _table_header(*, selected=False, held=False):
+    header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Total view requirements |"
+              if selected else "| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |")
+    if held:
+        return [header + " Held (measured, not counted) |", "| --- | ---: | ---: | ---: | ---: | ---: |"]
+    return [header,
             "| --- | ---: | ---: | ---: | ---: |"]
+
+
+def _held_cell(root, page, family, cohort, view):
+    """Passes / held tests of one view, linked to the family's held-test list."""
+    if "held" not in view:
+        return "—"
+    return link(root, page, score(view["held"]), family["page"], cohort["anchor"] + "-held")
+
+
+def _summed_views(progress):
+    """The views whose counted requirements add up to the selected-recipe totals."""
+    excluded = set(progress.get("diagnostic_views", [])) | set(progress.get("scoped_views", []))
+    return [view for view in progress.get("views", []) if view["id"] not in excluded]
+
+
+def _selected_cohorts(progress):
+    """One displayed cohort per family: its current benchmark when one is pinned."""
+    for family in progress["families"]:
+        for cohort in family["cohorts"]:
+            if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
+                continue
+            yield family, cohort
+
+
+def full_suite_tasks(progress):
+    """Distinct ordinary questions, including held tests; omit duplicate phases.
+
+    This is a performance display, independent of tier qualification. A shared
+    test is counted once even when several views require or hold it.
+    """
+    return sorted({a["task"] for view in _summed_views(progress) for a in view["assignments"]
+                   if a["importance"] in {"required", "held"}})
+
+
+def full_suite_outcomes(cohort, names):
+    """Count original selected-row grades without borrowing diagnostic passes."""
+    statuses = Counter(cohort["tasks"].get(name, {}).get("status", "UNKNOWN") for name in names)
+    return {"passed": statuses.pop("PASS", 0), "failed": statuses.pop("FAIL", 0),
+            "other": dict(sorted(statuses.items())), "total": len(names)}
+
+
+def _outcome_text(counts):
+    labels = {"UNKNOWN": "not measured", "NOT_RUN": "not run", "BLOCKED": "blocked",
+              "ERROR": "error", "INVALID": "invalid", "INCOMPLETE": "incomplete", "TIMEOUT": "timeout"}
+    return "; ".join(f"{count} {labels.get(status, status.lower())}" for status, count in counts.items()) or "0"
+
+
+def _full_suite_section(root, publication, page, selected):
+    progress = publication["family_progress"]
+    names = full_suite_tasks(progress)
+    lines = ["## Full-suite results — failures included", "",
+             f"**{len(names)} distinct tests**, including held tests. Each test counts once. "
+             "A held FAIL is still a failure in this table. Only duplicate questions and phases already included "
+             "in another test are excluded. These are recorded results for the selected recipe and source, "
+             "not new measurements or current-source qualification.", "",
+             link(root, page, "Problem list: what each test asks, what fails, and which configurations have passed",
+                  PROBLEM_PAGE.as_posix()) + ".", "",
+             "| Family / selected recipe | Pass | Fail | Other outcomes | Total tests |",
+             "| --- | ---: | ---: | --- | ---: |"]
+    for family, cohort in selected:
+        name = family["label"]
+        if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
+            name += " (" + cohort["backend"] + ")"
+        label = "**" + link(root, page, name, family["page"]) + "**"
+        if cohort.get("configuration_family"):
+            configuration = next(item for item in progress.get("configuration_families", [])
+                                 if item["id"] == cohort["configuration_family"])
+            label += " · " + link(root, page, configuration["label"], configuration["page"])
+        counts = full_suite_outcomes(cohort, names)
+        lines.append(f"| {label} | {counts['passed']} | **{counts['failed']}** | "
+                     f"{_outcome_text(counts['other'])} | {counts['total']} |")
+    lines += ["", "Other outcomes are not scientific failures and earn no pass credit. "
+              "Separate diagnostic and historical passes remain on the problem and family pages; "
+              "they do not replace a selected recipe's result.", ""]
+    return lines
+
+
+def render_problem_list(root, publication, page):
+    """Explain unresolved questions alongside every selected recipe's actual grade."""
+    progress = publication["family_progress"]
+    selected = list(_selected_cohorts(progress))
+    registry = progress.get("problem_definitions") or {}
+    if registry and registry.get("schema") != "forge_problem_definitions_v1":
+        raise ValueError("unsupported problem definitions schema")
+    definitions = registry.get("problems", [])
+    names = set(full_suite_tasks(progress))
+    if len({item["task"] for item in definitions}) != len(definitions):
+        raise ValueError("problem definitions contain duplicate tasks")
+    if any(item["task"] not in names for item in definitions):
+        raise ValueError("problem definition is outside the ordinary full suite")
+    held = {a["task"] for view in _summed_views(progress) for a in view["assignments"]
+            if a["importance"] == "held"}
+    lines = ["<!-- Generated Forge problem list -->", "# Unresolved training problems", "",
+             link(root, page, "Full-suite leaderboard", "reports/forge/technique-inventory.md") + " · " +
+             link(root, page, "All test/protocol results", "reports/forge/test-performance.md"), "",
+             "This page explains the outstanding tests, including the held failures. **Held means excluded from "
+             "qualification, not solved:** these failures are included in the leaderboard's full-suite comparison. "
+             "Passing one problem does not establish that the same configuration passes the whole suite.", "",
+             "Selected results below use one recorded recipe/source/runtime cohort per family. Research, diagnostic "
+             "and historical configurations are named separately, with links to their original evidence. "
+             "An oracle or hand-built solution demonstrates feasibility, not successful training. "
+             "Not measured, blocked, timeout and error are never relabelled FAIL.", "",
+             *( ["Passer summaries reflect the evidence audit dated **" + registry["evidence_date"] +
+                  "**. Selected-result tables are regenerated from the registered publication.", ""]
+                if registry.get("evidence_date") else []),
+             "| Problem | What it tests | Has any configuration passed? |",
+             "| --- | --- | --- |"]
+    for item in definitions:
+        lines.append("| " + link(root, page, item["title"], PROBLEM_PAGE.as_posix(), item["task"]) +
+                     f" | {cell(item['intent'])} | "
+                     f"{cell(item['pass_summary'])} |")
+    for item in definitions:
+        task = item["task"]
+        lines += ["", f'<a name="{task}"></a>', "", f"## {item['title']}", "",
+                  f"Test: `{task}` · " + ("Held for qualification; included in full-suite results." if task in held else
+                                          "Required for qualification and included in full-suite results."), "",
+                  "**What it tests.** " + item["intent"], "",
+                  "**The problem.** " + item["problem"], "",
+                  "**Has any configuration beaten it?** " + item["pass_summary"], ""]
+        lines += ["- " + passer for passer in item["passers"]]
+        lines += ["", "**Selected recipes' recorded results:**", "",
+                  "| Selected recipe | Result |", "| --- | --- |"]
+        for family, cohort in selected:
+            result = cohort["tasks"].get(task, {})
+            status = result.get("status", "UNKNOWN")
+            result_label = "NOT MEASURED" if status == "UNKNOWN" else status
+            lines.append("| " + link(root, page, family["label"], family["page"], cohort["anchor"]) +
+                         " | " + link(root, page, result_label, family["page"], cohort["anchor"] + "-experiment-" + task) + " |")
+        lines += ["", "**What remains to solve.** " + item["next_step"], "",
+                  "Evidence: " + " · ".join(link(root, page, ref["label"], ref["path"], ref.get("anchor"))
+                                               for ref in item["evidence"]) + ".", ""]
+    return "\n".join(lines)
+
+
+def _views_cell(memberships, summed):
+    tiers = {tier for _, tier in memberships}
+    if len(summed) > 1 and len(tiers) == 1 and sorted(view for view, _ in memberships) == sorted(v["id"] for v in summed):
+        return f"all {len(summed)} views (Tier {tiers.pop()})"
+    return ", ".join(f"{cell(view)} (Tier {tier})" for view, tier in memberships)
+
+
+def _diagnostic_passers(selected, task):
+    """Selected recipes whose separate diagnostic run passes a task their recorded result does not."""
+    return [family["label"] for family, cohort in selected
+            if cohort["tasks"][task]["status"] != "PASS"
+            and cohort["tasks"][task].get("run_attempt", {}).get("status") == "PASS"]
+
+
+def _uncounted_disclosure(summed, selected):
+    """What holding changed and what it did not, computed from recorded statuses."""
+    counted = [a["task"] for view in summed for a in view["assignments"] if a["importance"] == "required"]
+    uncounted = [a for view in summed for a in view["assignments"] if role_note(a)]
+    if not uncounted:
+        return []
+    passes = sum(cohort["tasks"][a["task"]]["status"] == "PASS" for _, cohort in selected for a in uncounted)
+    if passes:
+        sentences = [f"Selected recipes' recorded results pass {passes} of the held or removed view requirements; "
+                     "those passes stay visible here and on the family pages but no longer count."]
+    else:
+        sentences = ["No new test was passed. No selected recipe's recorded result passes a held or removed view "
+                     "requirement, so every pass count is unchanged; the totals shrank only because those requirements "
+                     "left the count."]
+    diagnostic = {name for a in uncounted for name in _diagnostic_passers(selected, a["task"])}
+    if diagnostic:
+        sentences.append(f"Separate diagnostic runs of {len(diagnostic)} selected "
+                         + ("recipe pass" if len(diagnostic) == 1 else "recipes pass")
+                         + " some of these tests (named in the table); a diagnostic run never becomes a recorded "
+                           "result, so those passes count nowhere.")
+    for family, cohort in selected:
+        status = {name: result["status"] for name, result in cohort["tasks"].items()}
+        failed = {a["importance"] for view in summed for a in view["assignments"]
+                  if status[a["task"]] == "FAIL" and (a["importance"] in {"required", "held"} or "removal" in a)}
+        if "required" in failed or "held" not in failed:
+            continue
+        passed = sum(status[name] == "PASS" for name in counted)
+        others = Counter(status[name] for name in counted if status[name] != "PASS")
+        label = cell(family["label"])
+        text = f"{label}'s recorded measurement fails no counted test: {passed}/{len(counted)} pass"
+        rest = len(counted) - passed
+        if rest:
+            if set(others) == {"UNKNOWN"}:
+                detail = ("has" if rest == 1 else "have") + " no recorded result yet (UNKNOWN)"
+            else:
+                detail = ("is " if rest == 1 else "are ") + " and ".join(
+                    f"{value} {name}" if len(others) > 1 else name for name, value in sorted(others.items()))
+            text += f" and the other {rest} {detail}"
+            passed_elsewhere = sorted({name for name in counted if status[name] != "PASS"
+                                       and cohort["tasks"][name].get("run_attempt", {}).get("status") == "PASS"})
+            if passed_elsewhere:
+                text += (f"; a separate diagnostic run passes {', '.join(passed_elsewhere)}, but a diagnostic run "
+                         "never becomes a recorded result")
+        text += ". Every test it fails is " + ("held" if failed == {"held"} else "held or removed from the count") + ". "
+        others_pass = {name for _, peer in selected if peer is not cohort
+                       for name in counted if peer["tasks"][name]["status"] == "PASS"}
+        if others_pass <= {name for name in counted if status[name] == "PASS"}:
+            text += ("That is the one-global-recipe rule at work (one recipe must pass every counted test): "
+                     f"{label} passes every counted test that any other selected recipe passes. ")
+        sentences.append(text + f"It is not a new measurement of {label}.")
+    return [" ".join(sentences), ""]
+
+
+def _held_top_tier_notes(summed):
+    """A view whose highest tier has only held tests never shows PASS."""
+    counted = {view["id"]: sorted((a["task"], a["qualification_tier"]) for a in view["assignments"]
+                                  if a["importance"] == "required") for view in summed}
+    notes = []
+    for view in summed:
+        top = max(a["qualification_tier"] for a in view["assignments"])
+        highest = [a for a in view["assignments"] if a["qualification_tier"] == top]
+        held = sorted(a["task"] for a in highest if a["importance"] == "held")
+        if not held or any(a["importance"] == "required" for a in highest):
+            continue
+        if not counted[view["id"]]:
+            # Nothing counted: name every held test of the view, not only its top tier.
+            held = sorted(a["task"] for a in view["assignments"] if a["importance"] == "held")
+        names, verb = ", ".join(held), "is" if len(held) == 1 else "are"
+        same = [other["id"] for other in summed if other is not view and counted[other["id"]] == counted[view["id"]]]
+        rule = "a recipe that passes every counted tier gets HELD, and a counted failure still shows as a failure."
+        if not counted[view["id"]]:
+            notes.append(f"Nothing in {view['id']} is counted while {names} {verb} held, so it reports HELD for every recipe.")
+        elif same:
+            notes.append(f"While {names} {verb} held, {view['id']} counts the same tests as {' and '.join(same)}. "
+                         f"Its highest tier, Tier {top}, has only held tests, so it never shows PASS: " + rule)
+        else:
+            notes.append(f"While {names} {verb} held, the highest tier of {view['id']}, Tier {top}, has only held "
+                         "tests, so the view never shows PASS: " + rule)
+    return [" ".join(notes), ""] if notes else []
+
+
+def _uncounted_section(root, page, summed, selected):
+    entries = uncounted_entries(summed)
+    if not entries:
+        return []
+    records = sorted({entry["note"]["explanation"].partition("#")[0] for entry in entries})
+    record = (" in " + link(root, page, "the decision record", records[0]) + ", which also defines the words used."
+              if len(records) == 1 else ".")
+    lines = ["## Held and removed tests", "",
+             "A **held** test is still declared, run and shown with its history, but it is not counted in the totals "
+             "above or in qualification. It counts again once its re-entry rule is met. A test **removed from the "
+             "count** stays in its views as a diagnostic, because another counted test already carries its question "
+             "or it cannot run as declared. Rows come from the notes stored in the view declarations; each details "
+             "link opens that test's explanation" + record, "",
+             *_uncounted_disclosure(summed, selected), *_held_top_tier_notes(summed),
+             "| Test | Role and reason | Views (tier) | Summary | Re-entry rule | Selected recipes passing (recorded result) | Details |",
+             "| --- | --- | --- | --- | --- | ---: | --- |"]
+    for entry in entries:
+        note = entry["note"]
+        passing = f"{sum(cohort['tasks'][entry['task']]['status'] == 'PASS' for _, cohort in selected)} of {len(selected)}"
+        diagnostic = _diagnostic_passers(selected, entry["task"])
+        if diagnostic:
+            passing += "; separate diagnostic runs only: " + ", ".join(diagnostic)
+        path, _, anchor = note["explanation"].partition("#")
+        lines.append("| " + " | ".join([
+            "`" + cell(entry["task"]) + "`", cell(role_label(entry["assignment"])), _views_cell(entry["views"], summed),
+            cell(note["summary"]), cell(note.get("reentry", "—")), cell(passing),
+            link(root, page, "explanation", path, anchor)]) + " |")
+    return lines + [""]
 
 
 def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False):
@@ -761,36 +1171,116 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
-    from .research_tiers import tier_rows
+    from .research_tiers import tier_rows, historical_seed_rows
     research = tier_rows(root, page)
+    historical_seeds = historical_seed_rows(root, page)
+    summed = _summed_views(progress)
+    assignments = [a for view in summed for a in view["assignments"]]
+    counted = sum(a["importance"] == "required" for a in assignments)
+    distinct = len({a["task"] for a in assignments if a["importance"] == "required"})
+    roles = [(sum(a["importance"] == "held" for a in assignments),
+              len({a["task"] for a in assignments if a["importance"] == "held"}), "held"),
+             (sum("removal" in a for a in assignments), len({a["task"] for a in assignments if "removal" in a}), "removed")]
+    uncounted = " and ".join(f"{value} {label}" for value, _, label in roles if value)
+    uncounted_tests = " and ".join(f"{tests} {label} test" + ("" if tests == 1 else "s") for _, tests, label in roles if tests)
     lines = ["# Forge family leaderboard", "",
-             "Recorded benchmark passes / required tasks by tier. Click a count for its gates, measurements and evidence. "
-             "Required lower tiers must pass before advancing.", "", *_table_header()]
-    for family in progress["families"]:
-        for cohort in family["cohorts"]:
-            if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
-                continue
-            name = family["label"]
-            if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
-                name += " (" + cohort["backend"] + ")"
-            cells = ["**" + link(root, page, name, family["page"]) + "**"]
-            cells += _score_cells(root, page, family, cohort, cohort, bold=True)
-            lines.append("| " + " | ".join(cells) + " |")
-            for view in cohort["views"]:
-                label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
-                lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
-        lines += research.get(family["id"], [])
-    lines += ["", "Bold rows use one selected whole configuration per family; view rows show its recorded tier gates. "
-              "† marks a separate diagnostic or research scope, excluded from the bold totals and current selection. "
-              "Research rows use their recorded revision 9 assignments; Atlas selected-cloud uses its own seven-question "
-              "Tier 1 policy scope. A retained pass grants no new qualification.", "",
-              "Family totals sum required-view instances: a shared task counts again in every view requiring it. "
-              "For example, 152 is a count of requirements across views, not distinct training runs. "
-              "Research rows count unique required tasks within their own scope.", "",
-              "Counts show passes / required tasks, followed by separate not-run and incompatible counts when nonzero. "
-              "Incompatible means the selected formulation/task contract was preflight-blocked without execution; "
-              "its reason appears on the family page. Not run covers remaining missing executions, including tier or "
-              "checkpoint prerequisites. No formulation is changed to fit a test. "
+             "A **family** can have several **recipes**. Each score belongs to one exact recipe and source. "
+             "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
+             "are separate BCAP research recipes, with their own scores.", "",
+             "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
+             *_full_suite_section(root, publication, page, list(_selected_cohorts(progress))),
+             "<details>", "<summary>Qualification subset — held failures excluded from these scores</summary>", "",
+             "## Selected recipes — qualification subset", "",
+             "**This subset excludes held tests. Use the full-suite results above to compare failures.**", "",
+             "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
+             f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**, "
+             f"from {distinct} distinct test" + ("" if distinct == 1 else "s") + ". " +
+             (uncounted + f" view assignments ({uncounted_tests}) are still measured and listed under "
+              "**Held and removed tests** below. " if uncounted else "") +
+             "These totals retain the selected recipe's recorded qualification; separate diagnostic runs appear below.", "",
+             *_table_header(selected=True)]
+    selected = list(_selected_cohorts(progress))
+    for family, cohort in selected:
+        name = family["label"]
+        if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
+            name += " (" + cohort["backend"] + ")"
+        cells = [link(root, page, name, family["page"])]
+        if cohort.get("configuration_family"):
+            configuration = next(item for item in progress.get("configuration_families", [])
+                                 if item["id"] == cohort["configuration_family"])
+            cells[0] += " · " + link(root, page, configuration["label"], configuration["page"])
+        cells += _score_cells(root, page, family, cohort, cohort, bold=True)
+        lines.append("| " + " | ".join(cells) + " |")
+    lines += ["", "</details>", ""]
+    declared = {view["id"]: view["revision"] for view in progress.get("views", [])}
+    recorded = publication.get("view")
+    if recorded in declared and declared[recorded] != publication.get("view_revision"):
+        lines += ["Counts follow the declared view revisions: " +
+                  ", ".join(f"{view['id']} {view['revision']}" for view in summed) +
+                  f". The recorded qualification keeps {recorded} revision {publication['view_revision']} "
+                  "until new ordinary evidence is registered; no recorded verdict was regraded.", ""]
+    if (root / "reports/forge/attempt-coverage.json").is_file():
+        attempts = progress.get("run_attempt_coverage", {})
+        lines += [f"Backfill coverage: **{attempts.get('attempted', 0)}/{attempts.get('total', 0)} distinct "
+                  f"recipe/test pairs attempted (selected and research)**; {attempts.get('pending', 0)} pending and {attempts.get('running', 0)} running. " +
+                  link(root, page, "Outcomes, blocked attempts and setup", "reports/forge/ATTEMPT_COVERAGE.md") +
+                  ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
+    lines += _uncounted_section(root, page, summed, selected)
+    if any(research.values()):
+        declared_view = publication.get("declared_view", {})
+        no_longer = sum(len(names) for names in declared_view.get("no_longer_required_tasks", {}).values())
+        scale = (f"Those assignments still count the {no_longer} tests that {publication['view']} revision "
+                 f"{declared_view['revision']} holds or removes from the count "
+                 f"({sum(len(names) for names in publication['tier_requirements'].values())} tests per row, against "
+                 f"{sum(len(names) for names in declared_view['tier_requirements'].values())} counted in revision "
+                 f"{declared_view['revision']}), so research rows are not on the same scale as the selected-recipe "
+                 "totals. " if no_longer else "")
+        lines += ["## Research recipes and separate diagnostics", "",
+                  "Each row names its owning family and its own recipe or diagnostic scope. "
+                  "Counts are **passes / distinct required tests within that row**: 29 means 29 different tests. "
+                  "These scores are excluded from the selected-recipe totals above. "
+                  "Compare rows only when their test, source and sampling contracts match.", "",
+                  "Research recipes use their recorded revision 9 assignments. " + scale + "Atlas selected-cloud has a separate "
+                  "seven-question Tier 1 policy scope. Same-source backfill results fill previously unmeasured research "
+                  "cells while retaining original verdicts and qualification. Historical seed-only studies are "
+                  "retained in the expandable section below and excluded from this backfill.", "",
+                  "| Family | Recipe / diagnostic scope | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |",
+                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+        for family in progress["families"]:
+            for row in research.get(family["id"], []):
+                lines.append("| " + link(root, page, family["label"], family["page"]) + " | " + row.removeprefix("| "))
+        lines += [""]
+    if any(historical_seeds.values()):
+        lines += ["<details>", "<summary>Historical seed-only studies (excluded from backfill)</summary>", "",
+                  "These 12 archived seed 1–6 rows retain **324 unrun recipe/test pairs**. "
+                  "They are excluded by the repository instruction against seed-only experiments. "
+                  "Their original counts and evidence remain visible here; they are outside the completed backfill scope.", "",
+                  "| Family | Historical seed-only recipe | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |",
+                  "| --- | --- | ---: | ---: | ---: | ---: |"]
+        for family in progress["families"]:
+            for row in historical_seeds.get(family["id"], []):
+                lines.append("| " + link(root, page, family["label"], family["page"]) + " | " + row.removeprefix("| "))
+        lines += ["", "</details>", ""]
+    held = any("held" in view for _, cohort in selected for view in cohort["views"])
+    lines += ["<details>", "<summary>Selected recipe breakdown by view (shared tests repeat across views)</summary>", "",
+              "Each view uses the selected recipe above. View scores are the requirements summed in its selected-recipe total." +
+              (" Held cells count passes / held tests of that view; they are in no total." if held else ""), "",
+              "| Family / selected recipe | View | Tier 1 | Tier 2 | Tier 3 | Total view requirements |" +
+              (" Held (measured, not counted) |" if held else ""),
+              "| --- | --- | ---: | ---: | ---: | ---: |" + (" ---: |" if held else "")]
+    for family, cohort in selected:
+        for view in cohort["views"]:
+            label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
+            lines.append("| " + " | ".join([link(root, page, family["label"], family["page"]), label,
+                                           *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                           *([_held_cell(root, page, family, cohort, view)] if held else [])]) + " |")
+    lines += ["", "</details>", "",
+              "## Reading the results", "",
+              "Counts show passes / required tasks; selected-row pass counts remain unchanged. For rows with run-attempt coverage, the suffix counts "
+              "genuinely unattempted tasks as not run, constructor refusals as incompatible, missing required artifacts "
+              "as blocked, and other separate-runtime attempts as diagnostic attempts. A start refusal is not a "
+              "numerical failure. Rows without that registry retain their recorded missing/preflight counts. "
+              "No formulation is changed to fit a test. "
               "Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
               "or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. "
               "Zero recorded passes always displays as 0, including unrun families.", "",
@@ -816,6 +1306,11 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
               "and declarations. Register newly measured evidence with `--source-commit <executed-commit>`; "
               "advancing the recorded view policy also requires `--advance-policy`.", "",
+              "After any view revision (for example a held or removed test), always add `--refresh-publication`. "
+              "It rebuilds the counts and pages from the declared views and keeps every recorded verdict and the "
+              "recorded qualification. Without the flag, the command switches to that mode only when "
+              f"{publication.get('view', 'the registered view')} itself changed; any other view change would take "
+              "the ordinary publishing path, which re-reads earlier sources from Git.", "",
               link(root, page, "Experiments, criteria and tier assignments", "reports/forge/EXPERIMENTS_BY_TIER.md") + " · " +
               link(root, page, "Complete numerical publication and provenance", "reports/forge/technique-inventory.json"), "",
               f"Publication input digest `{publication['provenance']['input_digest']}`.", ""]
@@ -983,6 +1478,12 @@ def _selected_configuration_details(root, page, publication, family, cohort, row
     return lines + ["", "</details>", ""]
 
 
+def _displayed_for(view, family_id):
+    """A scoped view may name the families whose pages display it; others show everywhere."""
+    families = view.get("reporting", {}).get("families")
+    return families is None or family_id in families
+
+
 def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
@@ -1002,9 +1503,20 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   "This page preserves the original configuration evidence and diagnostics.", ""]
     if family["id"] == "atlas":
         lines += _full_original_atlas_status(root, page, progress)
+    declared = views.get(publication["view"], {}).get("revision", publication["view_revision"])
+    declared_note = ("" if declared == publication["view_revision"] else
+                     " Their counts follow the declared view revisions (" +
+                     ", ".join(f"{view['id']} {view['revision']}" for view in _summed_views(progress)) +
+                     f"); the recorded qualification keeps {publication['view']} revision {publication['view_revision']} "
+                     "until new ordinary evidence is registered.")
+    # Held tests stay listed with this family's recorded result; diagnostic-only views count nothing.
+    held_entries = [entry for entry in uncounted_entries([view for view in progress["views"]
+                                                          if view["id"] not in progress["diagnostic_views"]])
+                    if entry["assignment"]["importance"] == "held"]
     for cohort in family["cohorts"]:
         row = (publication["rows"] + publication.get("historical_family_rows", []))[cohort["row_index"]]
         base = cohort["anchor"]
+        held_views = any("held" in view for view in cohort["views"])
         config = Path("configs/forge/configurations") / (row["candidate_id"] + ".json")
         if not (root / config).is_file():
             config = Path("configs/forge/ideas") / (row["candidate_id"] + ".json")
@@ -1025,7 +1537,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   _existing_link(root, page, configuration_label, config) + ".", "",
                   f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
                   f"{publication['view']} revision {publication['view_revision']}. "
-                  "Other view rows below are navigation over recorded task evidence, not recomputed qualification.", "",
+                  "Other view rows below are navigation over recorded task evidence, not recomputed qualification." +
+                  declared_note, "",
                   "<details>", "<summary>Configuration, source and runtime provenance</summary>", "",
                   f"Source digest: `{source or 'unbound'}`. Candidate revision: `{row.get('candidate_revision') or 'unbound'}`. "
                   f"Runtime cohort: `{row.get('cohort') or 'unbound'}`.", "",
@@ -1033,7 +1546,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   link(root, page, "Complete recipe, prior, initialization and sampling bindings", "reports/forge/technique-inventory.json"), "",
                   "Selection: " + cell(row.get("selection", {}).get("selection_kind", "canonical fallback")) + ". " +
                   cell(row.get("selection", {}).get("reason", "No qualified configuration has been selected.")), "",
-                  "</details>", "", *_table_header()]
+                  "</details>", "", *_table_header(held=held_views)]
         if row.get("selection", {}).get("measurement_complete"):
             lines[-2:-2] = ["Complete current Tier 1 measurement in: " +
                             ", ".join(row["selection"]["measurement_views"]) +
@@ -1045,19 +1558,31 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             lines[-2:-2] = details
         for view in cohort["views"]:
             lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
-                                            *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+                                            *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                            *([_held_cell(root, page, family, cohort, view)] if held_views else [])]) + " |")
         if cohort.get("scoped_views"):
-            lines += ["", "Separate cohort coverage (excluded from family totals):", "", *_table_header()]
+            held_scoped = any("held" in view for view in cohort["scoped_views"])
+            lines += ["", "Separate cohort coverage (excluded from family totals):", "", *_table_header(held=held_scoped)]
             for view in cohort["scoped_views"]:
                 lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
-                                                *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+                                                *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                                *([_held_cell(root, page, family, cohort, view)] if held_scoped else [])]) + " |")
+            policy = cohort.get("policy_cloud_publication")
+            if policy:
+                lines += ["", "Policy-cloud cells come from the " + link(root, page, "cohort report", policy["readme"]) +
+                          " (" + link(root, page, "records", policy["records"]) + "): frozen source `" +
+                          policy["source_digest"][:12] + "`, candidate revision `" + policy["candidate_revision"][:12] +
+                          "`, verified there to run this selected recipe. Each law is its own row; the " +
+                          str(policy["shared"]) + " law-independent verdicts come from one run and appear in both. "
+                          "These diagnostics give no parent-cohort credit."]
             for item in cohort.get("scoped_publications", []):
                 lines += ["", link(root, page, "Frozen separate-cohort numerical evidence", item["path"]) +
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
                           cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
                           "`). These cells give no parent-cohort credit."]
-        lines += ["", "Not run counts missing executions; incompatible counts preflight-blocked formulation/task contracts "
-                  "without execution. These counts are separate and remain in the required denominator. "
+        lines += ["", "With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; "
+                  "blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. "
+                  "Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. "
                   "PASS and FAIL both count as executed. Attempted errors retain their status and cause; "
                   "changes to today's test definition are shown separately from execution coverage.", ""]
         for repair in cohort.get("retry_history", []):
@@ -1066,24 +1591,57 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       link(root, page, repair["superseded_by"], repair["retry_receipt"]) +
                       ". The original outcome and cost remain recorded; displayed task metrics use the certified successor.", ""]
         for tier in TIERS:
-            members = {}
+            members, held, removed = {}, {}, {}
             for definition in progress["views"]:
                 if definition["id"] in progress["diagnostic_views"] + progress.get("scoped_views", []):
                     continue
                 for assignment in definition["assignments"]:
-                    if str(assignment["qualification_tier"]) == tier and assignment["importance"] == "required":
-                        members.setdefault(assignment["task"], []).append(definition["id"])
-            lines += [*_heading(3, "Tier " + tier + " across views", base + "-tier-" + tier),
-                      "Shared experiments appear once in this list; the family numerator/denominator count their view requirements.", "",
-                      "| Experiment | Required by | Recorded result | Test definition |", "| --- | --- | --- | --- |"]
-            for name, memberships in sorted(members.items()):
-                result = cohort["tasks"][name]
-                lines.append("| " + " | ".join([
+                    if str(assignment["qualification_tier"]) != tier:
+                        continue
+                    group = (members if assignment["importance"] == "required" else
+                             held if assignment["importance"] == "held" else removed if "removal" in assignment else None)
+                    if group is not None:
+                        group.setdefault(assignment["task"], []).append((definition["id"], assignment))
+
+            def rows(group, tail):
+                return ["| " + " | ".join([
                     link(root, page, name, family["page"], base + "-experiment-" + name),
                     ", ".join(link(root, page, view_id, family["page"], base + "-" + view_id + "-tier-" + tier)
-                              for view_id in memberships), result["status"], _definition_label(result)]) + " |")
+                              for view_id, _ in memberships), *tail(cohort["tasks"][name], memberships[0][1])]) + " |"
+                    for name, memberships in sorted(group.items())]
+
+            def outcome(result, _):
+                return [result["status"], _definition_label(result)]
+
+            lines += [*_heading(3, "Tier " + tier + " across views", base + "-tier-" + tier),
+                      "Shared experiments appear once in this list; the family numerator/denominator count their view requirements.", "",
+                      "| Experiment | Required by | Recorded result | Test definition |", "| --- | --- | --- | --- |",
+                      *rows(members, outcome), ""]
+            if held:
+                lines += ["Held at this tier (measured and shown, not counted):", "",
+                          "| Experiment | Held in | Recorded result | Test definition |", "| --- | --- | --- | --- |",
+                          *rows(held, outcome), ""]
+            if removed:
+                lines += ["Removed from the count at this tier (still measured):", "",
+                          "| Experiment | Removed in | Reason | Recorded result |", "| --- | --- | --- | --- |",
+                          *rows(removed, lambda result, assignment: [role_cell(root, page, assignment), result["status"]]), ""]
+        if held_entries:
+            lines += [*_heading(3, "Held tests (still measured)", base + "-held"),
+                      "These tests keep running and keep this recipe's recorded result, but they do not count toward its "
+                      "totals or qualification. Each counts again once its re-entry rule is met.", "",
+                      "| Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |",
+                      "| --- | --- | --- | --- | --- | --- |"]
+            for entry in held_entries:
+                lines.append("| " + " | ".join([
+                    link(root, page, entry["task"], family["page"], base + "-experiment-" + entry["task"]),
+                    ", ".join(link(root, page, view_id + " / Tier " + str(tier), family["page"],
+                                   base + "-" + view_id + "-tier-" + str(tier)) for view_id, tier in entry["views"]),
+                    cohort["tasks"][entry["task"]]["status"], role_cell(root, page, entry["assignment"]),
+                    cell(entry["note"]["summary"]), cell(entry["note"]["reentry"])]) + " |")
             lines.append("")
         for definition in progress["views"]:
+            if not _displayed_for(definition, family["id"]):
+                continue
             view_id = definition["id"]
             anchor = base + "-" + view_id
             diagnostic = view_id in progress["diagnostic_views"]
@@ -1096,10 +1654,22 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                 if separate_cohort:
                     lines += ["Separately scoped cohort. This ordinary lane retains its own required gates and execution "
                               "policy; its measurements are excluded from family totals and give no parent-cohort credit.", ""]
-                requirements = [sum(a["importance"] == "required" and str(a["qualification_tier"]) == tier
-                                    for a in definition["assignments"]) for tier in TIERS]
-                lines += ["Qualification requires every required experiment to pass, with all lower tiers and "
-                          f"task dependencies passed first. Required counts (Tier 1 / 2 / 3): **{' / '.join(map(str, requirements))}**.", ""]
+                def per_tier(role):
+                    return [sum(a["importance"] == role and str(a["qualification_tier"]) == tier
+                                for a in definition["assignments"]) for tier in TIERS]
+
+                requirements, held_counts = per_tier("required"), per_tier("held")
+                text = ("Qualification requires every required experiment to pass, with all lower tiers and "
+                        f"task dependencies passed first. Required counts (Tier 1 / 2 / 3): **{' / '.join(map(str, requirements))}**.")
+                if any(held_counts):
+                    text += f" Held counts (measured and shown, not counted): **{' / '.join(map(str, held_counts))}**."
+                    top = max(a["qualification_tier"] for a in definition["assignments"])
+                    if not any(requirements):
+                        text += " Nothing here is counted while these tests are held, so the view reports HELD."
+                    elif not requirements[top - 1]:
+                        text += (f" Its highest tier, Tier {top}, has only held tests, so while they are held the view "
+                                 "never shows PASS: a recipe that passes every counted tier gets HELD.")
+                lines += [text, ""]
             calibration = definition.get("calibration", {})
             lines += ["Calibration: **" + cell(calibration.get("status", "undeclared")) + "**. " +
                       cell(calibration.get("adoption_blocker", "Calibration and robustness are separate from recorded task passes.")), ""]
@@ -1121,8 +1691,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                     name = assignment["task"]
                     result = cohort["tasks"][name]
                     lines.append("| " + " | ".join([
-                        link(root, page, name, family["page"], base + "-experiment-" + name), assignment["importance"],
-                        result["status"], _definition_label(result)]) + " |")
+                        link(root, page, name, family["page"], base + "-experiment-" + name),
+                        role_cell(root, page, assignment), result["status"], _definition_label(result)]) + " |")
                 lines.append("")
         lines += [*_heading(2, "Experiment metrics and pass criteria", base + "-experiments"), "One evidence entry per experiment is shared by its view rows. "
                   "Test-definition changes describe differences from the recorded run, independently of whether it was executed. "
@@ -1134,7 +1704,13 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       _existing_link(root, page, "Current experiment declaration", task_path) + ".", "",
                       "Test definition: **" + _definition_label(result) + "**. " + cell(result["coverage_reason"]) +
                       " " + cell(result["reason"]), ""]
-            if result["status"] not in COMPLETE:
+            attempt = result.get("run_attempt")
+            if attempt and attempt.get("attempted"):
+                lines += ["Run attempt: **" + cell(attempt["status"]) + "** (" +
+                          cell(attempt.get("origin")) + "; qualification unchanged). " +
+                          cell(attempt.get("reason", "Matched existing execution receipt.")) + " " +
+                          link(root, page, "Attempt evidence", attempt.get("evidence", "reports/forge/attempt-coverage.json")) + ".", ""]
+            if result["status"] not in COMPLETE and not (attempt and attempt.get("attempted")):
                 lines += ["Execution: **" + ("recorded" if result["execution_recorded"] else
                            "incompatible; skipped" if _incompatible(result) else "not run") + "**."]
                 if result["attempt_id"]:
@@ -1156,7 +1732,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "`. This measurement supplies no cells to the parent clean cohort.", ""]
             memberships = [link(root, page, view["id"] + " / Tier " + str(a["qualification_tier"]), family["page"],
                                 base + "-" + view["id"] + "-tier-" + str(a["qualification_tier"]))
-                           for view in progress["views"] for a in view["assignments"] if a["task"] == name]
+                           for view in progress["views"] if _displayed_for(view, family["id"])
+                           for a in view["assignments"] if a["task"] == name]
             lines += ["Used by: " + " · ".join(memberships) + ".", ""]
             measured = result["metrics"]
             checks = measured.get("evaluator_summary", {}).get("metric_checks", {})
@@ -1271,7 +1848,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
 
 
 def generated_pages(root: Path, publication: dict) -> dict[Path, str]:
-    return {root / family["page"]: render_family(root, publication, family)
+    pages = {root / family["page"]: render_family(root, publication, family)
             for family in (publication["family_progress"]["families"] +
                            publication["family_progress"].get("configuration_families", []) +
                            publication["family_progress"].get("historical_families", []))}
+    pages[root / PROBLEM_PAGE] = render_problem_list(root, publication, root / PROBLEM_PAGE)
+    return pages
