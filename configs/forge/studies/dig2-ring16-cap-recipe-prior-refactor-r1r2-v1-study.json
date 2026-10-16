@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 10800,
+    "candidate_budget_seconds": 1800,
+    "id": "dig2-ring16-cap-v1"
+  },
+  "candidate": "recipe-prior-refactor-r1r2-v1",
+  "competing_explanation": "A longer run can also expose late collapse: constant-rate recipes (BCAP, BISPF) that acquire by update ~700 may lose covariance or spread before update 6400.",
+  "control": {
+    "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400",
+    "threshold": 0.85
+  },
+  "hypothesis": "R1/R2 with its unchanged selected recipe passes the unchanged ring16 gate at a 6400-update cap with its own schedule over the full cap.",
+  "id": "dig2-ring16-cap-recipe-prior-refactor-r1r2-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "ring16-schedule-20261011-readout"
+      },
+      "path": "reports/forge/dig2-20261016/ring16-cap-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig2-ring16-cap-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
