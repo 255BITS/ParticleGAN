@@ -1057,6 +1057,8 @@ def _cohort_state(tmp_path, value):
                                                         else COVERAGE), "kind": "checkpoint"}]
                       if record["parent_task"] == "gaussian1d_stability" else [],
                       diagnostic_continuation=record["parent_task"] in DIAGNOSTIC_CONTINUATIONS)
+        if (record["owning_family"], record["cohort_id"], record["parent_task"]) == ("atlas", SERVED_COHORT, "grid100"):
+            record["retry_history"] = [{"attempt_id": "interrupted", "status": "INTERRUPTED", "retry_reason": "fixture"}]
         jobs[record["key"]] = record
     atomic_json(state_root / "state.json", {"intake": "policy-cloud", "jobs": jobs})
     from experiments.forge.policy_cloud_attempts import LAWS
@@ -1096,6 +1098,9 @@ def test_publication_writes_records_results_and_readme_deterministically(tmp_pat
     assert "Diagnostic continuation of its own same-law saved state after a FAIL parent gate" in readme
     assert "| [atlas](#atlas) | as served (12 shared with clean) |" in readme and '<a name="e22"></a>' in readme
     assert "Pairs: **46 match**" in readme and "prior_sigreg_knots=17" in readme
+    assert "| 2 | grid100 | FAIL · 10 updates | FAIL · 10 updates | Re-run after an infrastructure interruption (as served)" in readme
+    retried = next(r for r in results["receipts"] if r.get("retry_history"))
+    assert retried["retry_history"][0]["status"] == "INTERRUPTED"
     before = {path: path.read_bytes() for path in (root / publication.REPORT_DIRECTORY).rglob("*") if path.is_file()}
     publication.publish(root, state_root)
     assert {path: path.read_bytes() for path in before} == before  # Deterministic rerun.

@@ -811,6 +811,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "renderer_sha256": file_hash(Path(__file__)),
                 "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
                 "pr399_renderer_sha256": file_hash(Path(__file__).with_name("pr399_scores.py")),
+                "policy_cloud_renderer_sha256": file_hash(Path(__file__).with_name("policy_cloud_publication.py")),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,

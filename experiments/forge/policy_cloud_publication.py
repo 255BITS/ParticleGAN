@@ -500,11 +500,17 @@ def continuation_producers(jobs):
                          "producer": producer["parent_task"] if producer else dependency["task"],
                          "producer_status": producer["status"] if producer else "unavailable",
                          "status": job["status"]})
-    return sorted(rows, key=lambda row: (row["family"], row["task"], row["law"]))
+    order = {"clean": 0, "as_served": 1}
+    return sorted(rows, key=lambda row: (row["family"], row["task"], order.get(row["law"], 2)))
 
 
-def _notes(family, parent, continuations):
+def _notes(family, parent, continuations, records=()):
     notes = []
+    retried = [LAW_NAMES[record["measurement_law"]] for record in records
+               if record is not None and record.get("retry_history")]
+    if retried:
+        notes.append("Re-run after an infrastructure interruption (" + ", ".join(dict.fromkeys(retried)) +
+                     "); every earlier record is kept in results.json")
     if parent in LAW_INDEPENDENT:
         notes.append("Law-independent: " + LAW_INDEPENDENT[parent] + "; one run supplies both columns")
     if parent in DIAGNOSTIC_CONTINUATIONS:
@@ -586,8 +592,10 @@ def render_readme(value, results):
                     cause = plain_cause(clean)
                 else:
                     cause = f"Clean: {plain_cause(clean)}<br>As served: {plain_cause(served)}" if served else plain_cause(clean)
+                notes = _notes(family, parent, results["diagnostic_continuations"],
+                               (clean, served) if parent in SERVED_PARENTS else (clean,))
                 lines.append(f"| {tier} | {parent} | {_cell(_result(clean))} | {_cell(_result(served))} | "
-                             f"{_cell(_notes(family, parent, results['diagnostic_continuations']))} | {_cell(cause)} |")
+                             f"{_cell(notes)} | {_cell(cause)} |")
         lines.append("")
     lines += ["## Recipe identity", "",
               "The cohort ran the complete family recipe from its frozen source. Its resolved recipe hash differs from "
