@@ -10,7 +10,7 @@ Passes / required-view instances for one selected recipe per family. Shared test
 
 | Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Total view requirements |
 | --- | ---: | ---: | ---: | ---: |
-| **[BCAP](families/bcap-pure.md)** · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/116](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71/152 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
+| **[BCAP](families/bcap-pure.md)** · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)<br>Recorded source measurement · **stale**; no current qualification | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/116](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71/152 (7 blocked, 7 diagnostic attempts)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
 | **[BISPF](families/bispf.md)**<br>Recorded source measurement · **stale**; no current qualification | **[22/22](families/bispf.md#cohort-cuda-6421ba55ca82-tier-1)** | **[55/116](families/bispf.md#cohort-cuda-6421ba55ca82-tier-2)** | **[0/14 (3 blocked, 11 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-tier-3)** | **[77/152 (3 blocked, 11 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82)** |
 | **[Atlas](families/atlas.md)** | **[0/22 (22 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (114 incompatible, 2 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 incompatible, 7 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/152 (143 incompatible, 9 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
 | **[E22](families/e22.md)** | **[0/22 (22 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/116 (114 incompatible, 2 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/14 (7 incompatible, 7 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/152 (143 incompatible, 9 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422)** |
@@ -345,5 +345,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `5bbdb5e4f6104c9513371b0adf357e076f57bae5ab389452fac573ed2d3f45a9`.
+Publication input digest `8faf5cc91713e381344ba834cd766f8cd7f1e9e80407c622c2d3c62d8e92bc58`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
