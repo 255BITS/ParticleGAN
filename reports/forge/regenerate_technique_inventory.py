@@ -1846,15 +1846,23 @@ def _stale_measurement_labels(markdown, result, root, path):
              if row.get("selection", {}).get("freshness") == "stale"}
     lines = markdown.splitlines()
     for family in result.get("family_progress", {}).get("families", []):
-        if family["id"] not in stale:
+        # A family row can display a measurement owned by a separate configuration
+        # family (e.g. BCAP's selected DualNorm recipe); match render_leaderboard.
+        anchor = family.get("current_cohort_anchor")
+        measured = {family["id"]} | {cohort["configuration_family"] for cohort in family.get("cohorts", [])
+                                     if cohort.get("configuration_family")
+                                     and (not anchor or cohort.get("anchor") == anchor)}
+        if not measured & stale:
             continue
-        target = "](" + os.path.relpath(root / family["page"], path.parent) + ")** |"
-        matching = [index for index, line in enumerate(lines) if line.startswith("| **") and target in line]
+        target = "](" + os.path.relpath(root / family["page"], path.parent) + ")**"
+        matching = [index for index, line in enumerate(lines)
+                    if line.startswith("| **") and target in line.split(" | ", 1)[0]]
         if len(matching) != 1:
             raise ValueError("recorded measurement needs one explicit stale label in the family table")
         index = matching[0]
-        lines[index] = lines[index].replace(target, target[:-2] +
-            "<br>Recorded source measurement · **stale**; no current qualification |", 1)
+        end = lines[index].index(" | ")
+        lines[index] = (lines[index][:end] + "<br>Recorded source measurement · **stale**; no current qualification"
+                        + lines[index][end:])
     return "\n".join(lines)
 
 
