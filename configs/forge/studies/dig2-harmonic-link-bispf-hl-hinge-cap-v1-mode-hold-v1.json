@@ -7,7 +7,7 @@
   "candidate": "bispf-hl-hinge-cap-v1",
   "competing_explanation": "If the BISPF mode_hold pass does not come from the switched part, the knockout still passes mode_hold's sustained gate (>= 5 terminal passes of modes>=8 and hq>=0.9) and the matching knock-in on the reduced (BCAP + tether) kernel still fails.",
   "control": {
-    "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+    "candidate_id": "bispf-v1",
     "task_map": {}
   },
   "falsifier": {
