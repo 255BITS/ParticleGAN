@@ -194,6 +194,9 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
                 "diagnostics": {"matched_control": confirmed["matched_control"],
                     "recorded_status": confirmed["status"], "quality_evidence_only": True},
                 "frozen_rng_audits": frozen_run.rng_audits}
+    if frozen_run.measurement is not None:
+        # The frozen control is measured under the same declared law.
+        evidence["frozen_served_output_noise"] = frozen_run.measurement.receipt()
     raw = active_run.receipt(evidence)
     raw["evidence"]["guards"]["unintended_rng_deviations"] += sum(
         audit["unintended_rng_deviations"] for audit in frozen_run.rng_audits)

@@ -569,6 +569,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             raise ValueError("family report view has duplicate assignments")
         if tasks and set(names) - tasks.keys():
             raise ValueError("family report view references a missing task")
+        shown = view.get("reporting", {}).get("families")
+        if shown is not None and (view.get("reporting", {}).get("family_totals") is not False
+                                  or not isinstance(shown, list) or not shown
+                                  or not all(isinstance(name, str) and name for name in shown)):
+            raise ValueError("only a scoped view may name the families whose pages display it")
     scoped = [view for view in views if view.get("reporting", {}).get("family_totals") is False]
     ordinary = [view for view in views if view not in scoped
                 and view.get("evidence_scope") not in {"research_diagnostic", "calibration_diagnostic"}
@@ -654,7 +659,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     receipts[result["task_id"]] = {"path": path.as_posix(), "attempt_id": attempt, "result": result}
 
         results = {}
-        assigned = {assignment["task"] for view in views for assignment in view["assignments"]}
+        assigned = {assignment["task"] for view in views if _displayed_for(view, family_id)
+                    for assignment in view["assignments"]}
         for name in sorted(assigned):
             previous = recorded.get(name, {})
             contract_hash = bindings.get(name)
@@ -746,7 +752,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
         view_rows = [view_row(view) for view in ordinary]
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
-                                   "scoped_views": [view_row(view) for view in scoped],
+                                   "scoped_views": [view_row(view) for view in scoped if _displayed_for(view, family_id)],
                                    "scoped_publications": [{**{key: item[key] for key in ("path", "view", "source_commit")},
                                                             "cohort": item["row"].get("cohort"),
                                                             "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
@@ -1090,6 +1096,12 @@ def _selected_configuration_details(root, page, publication, family, cohort, row
     return lines + ["", "</details>", ""]
 
 
+def _displayed_for(view, family_id):
+    """A scoped view may name the families whose pages display it; others show everywhere."""
+    families = view.get("reporting", {}).get("families")
+    return families is None or family_id in families
+
+
 def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
@@ -1192,6 +1204,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                               for view_id in memberships), result["status"], _definition_label(result)]) + " |")
             lines.append("")
         for definition in progress["views"]:
+            if not _displayed_for(definition, family["id"]):
+                continue
             view_id = definition["id"]
             anchor = base + "-" + view_id
             diagnostic = view_id in progress["diagnostic_views"]
@@ -1270,7 +1284,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "`. This measurement supplies no cells to the parent clean cohort.", ""]
             memberships = [link(root, page, view["id"] + " / Tier " + str(a["qualification_tier"]), family["page"],
                                 base + "-" + view["id"] + "-tier-" + str(a["qualification_tier"]))
-                           for view in progress["views"] for a in view["assignments"] if a["task"] == name]
+                           for view in progress["views"] if _displayed_for(view, family["id"])
+                           for a in view["assignments"] if a["task"] == name]
             lines += ["Used by: " + " · ".join(memberships) + ".", ""]
             measured = result["metrics"]
             checks = measured.get("evaluator_summary", {}).get("metric_checks", {})

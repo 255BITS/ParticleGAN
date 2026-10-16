@@ -47,7 +47,8 @@ def _row(root, page, label, target, tasks, requirements, *, scope=None, selected
                     or (selected_family and r.get("family") == selected_family)
                     or (policy_scope and r.get("policy_scope") == policy_scope)
                     or (repair_scope and r.get("repair_scope") == repair_scope)
-                    or (cohort_scope and r.get("cohort_scope") == cohort_scope)}
+                    or (cohort_scope and (r.get("cohort_scope") == cohort_scope
+                                          or cohort_scope in r.get("shared_scopes", ())))}
     def count(required):
         # These are explicitly nonqualifying research rows. New same-source
         # attempts fill previously unmeasured research cells, never overwrite an
@@ -168,25 +169,40 @@ def checkpoint_repair_rows(root, page):
 
 
 def policy_cohort_rows(root, page):
-    """One separately scoped row per family/source/recipe policy-cloud cohort."""
+    """One separately scoped row per family/source/recipe policy-cloud cohort.
+
+    The clean and as-served scoring laws are separate cohorts, so each family
+    shows one row per law (clean first). A law-independent record (one run
+    for both laws) names the other law's scope in ``shared_scopes`` and enters
+    both rows with its single verdict.
+    """
     rows = {}
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     if registry.is_file():
         from collections import defaultdict
-        cohorts = defaultdict(list)
+        cohorts, shared = defaultdict(list), defaultdict(list)
         for record in _attempt_registry(registry, registry.stat().st_mtime_ns):
             if record.get("cohort_scope"):
                 cohorts[record["cohort_scope"]].append(record)
-        for scope, records in cohorts.items():
+                for scope in record.get("shared_scopes", ()):
+                    shared[scope].append(record)
+        if set(shared) - set(cohorts):
+            raise ValueError("shared policy cohort records name a row that has no records of its own")
+        def law(records):
+            return int(any(r.get("measurement_law") == "as_served" for r in records))
+        for scope, own in sorted(cohorts.items(), key=lambda item: law(item[1])):
+            records = own + shared.get(scope, [])
             identities = {(r["source_digest"], r["candidate_revision"], r["owning_family"]) for r in records}
             if len(identities) != 1 or len({r["parent_task"] for r in records}) != len(records):
                 raise ValueError("policy cohort rows cannot pool sources, recipes or repeated tasks")
             if any(r.get("diagnostic") is not True for r in records):
                 raise ValueError("policy cohort attempts must remain explicit diagnostics")
+            if len({r["label"] for r in own}) != 1 or len({r.get("measurement_law") == "as_served" for r in own}) != 1:
+                raise ValueError("one policy cohort row has one label and one scoring law")
             requirements = {str(tier): {r["parent_task"] for r in records if r["reporting_tier"] == tier}
                             for tier in (1, 2, 3)}
-            family = records[0]["owning_family"]
-            rows.setdefault(family, []).append(_row(root, page, records[0]["label"],
+            family = own[0]["owning_family"]
+            rows.setdefault(family, []).append(_row(root, page, own[0]["label"],
                 "reports/forge/ATTEMPT_COVERAGE.md#policy-cloud-coverage", {}, requirements, cohort_scope=scope))
     return rows
 

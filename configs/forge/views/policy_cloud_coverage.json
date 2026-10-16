@@ -216,6 +216,10 @@
   "goal": "discriminator_stability",
   "id": "policy_cloud_coverage",
   "reporting": {
+    "families": [
+      "atlas",
+      "e22"
+    ],
     "family_totals": false
   },
   "revision": 1,

@@ -7,7 +7,11 @@ settings and the complete family Recipe are never tuned by this transformation.
 Each cohort is one explicit, registered transformation of named parent
 questions. The original Tier 1 cohort keeps its exact declarations; later
 cohorts reuse the same transformation with their own identity, sources and
-explicit host blockers (see ``policy_coverage``).
+explicit host blockers (see ``policy_coverage``). A cohort's ``measurement``
+names its evaluation output-noise law: ``clean`` removes the learned output
+noise from measured samples; ``as_served`` keeps it exactly as GANTrainer
+serves it. An as-served cohort differs from its clean partner only in that
+declared measurement; law-independent parents stay with the partner.
 """
 from copy import deepcopy
 from dataclasses import dataclass
@@ -32,6 +36,8 @@ BLOCKED_HOSTS = {
 }
 CLOCK_HORIZON = 'independent_GANTrainer_max_steps_preserving_Recipe_total_steps_None'
 SCHEDULE_FREE = 'preserve_resolved_recipe_none'
+SERVED_OUTPUT_SIGMA = ('GANTrainer.sample(output_noise=True): GANTrainer.output_sigma() at the measured state '
+                       '(learned sigma with its policy floor), drawn from the isolated evaluation stream')
 
 
 @dataclass(frozen=True)
@@ -46,6 +52,24 @@ class PolicyCohort:
     parameter_parents: frozenset = frozenset({'two_pole', 'unused_token_hold'})
     clock_parents: frozenset = frozenset({'clockfree_audit'})
     rename_dependencies: bool = False
+    # Evaluation output-noise law of every measured sample (see module doc).
+    measurement: str = 'clean'
+    # Law-independent parents owned by the clean ``partner`` cohort. They are
+    # neither duplicated nor re-run here; a gate dependency names the
+    # partner's variant and publication shows the partner's single verdict.
+    shared: frozenset = frozenset()
+    partner: str | None = None
+
+    def __post_init__(self):
+        if self.measurement not in ('clean', 'as_served'):
+            raise ValueError('policy cohort measurement must be clean or as_served')
+        if self.measurement == 'as_served' and (
+                self.parameter_parents or self.clock_parents or self.blocked_hosts
+                or not self.partner or set(self.parents) & set(self.shared)):
+            raise ValueError('an as-served cohort measures output samples only; '
+                             'law-independent parents stay with its clean partner')
+        if self.measurement == 'clean' and (self.shared or self.partner):
+            raise ValueError('only an as-served cohort shares law-independent parents')
 
     @property
     def suffix(self):
@@ -55,6 +79,29 @@ class PolicyCohort:
     def directory(self):
         return Path('configs/forge/task-variants') / self.id
 
+    def dependency_task(self, name, kind):
+        """Same-law scoped producer; a shared gate names the clean partner."""
+        if name in self.shared:
+            if kind != 'gate':
+                raise ValueError(f'{self.id}: a checkpoint must come from its own same-law producer, not shared {name}')
+            return name + '_' + self.partner
+        return name + self.suffix
+
+    def sampling_law(self, parent_law):
+        """Cohort law name; it can never equal a parent or another cohort's law."""
+        if self.measurement == 'clean':
+            return self.law_prefix + parent_law
+        from .sampling import AS_SERVED_LAWS
+        if parent_law not in AS_SERVED_LAWS:
+            raise ValueError(f'{self.id}: {parent_law} draws no output samples; share its clean verdict instead')
+        return self.law_prefix + AS_SERVED_LAWS[parent_law]
+
+    def eval_output_noise(self, parent_noise):
+        if self.measurement == 'clean':
+            return parent_noise
+        from .sampling import SERVED_LEARNED_NOISE
+        return SERVED_LEARNED_NOISE
+
 
 TIER1 = PolicyCohort(id=COHORT, parents=PARENTS, sources=SOURCES, blocked_hosts=BLOCKED_HOSTS,
                      law_prefix='tier1_selected_', label='Tier 1 selected policy cohort')
@@ -62,8 +109,8 @@ TIER1 = PolicyCohort(id=COHORT, parents=PARENTS, sources=SOURCES, blocked_hosts=
 
 def cohorts():
     """Registered cohorts by id; later modules import this one, never the reverse."""
-    from .policy_coverage import COVERAGE
-    return {TIER1.id: TIER1, COVERAGE.id: COVERAGE}
+    from .policy_coverage import COVERAGE, SERVED
+    return {TIER1.id: TIER1, COVERAGE.id: COVERAGE, SERVED.id: SERVED}
 
 
 def task_cohort(task):
@@ -96,9 +143,9 @@ def _variant(parent, pin, sources, cohort=TIER1):
         # Dependents consume their own scoped parent's state and gates, never
         # an original (live/MoG) parent's evidence.
         for dependency in task['dependencies']:
-            dependency['task'] = dependency['task'] + cohort.suffix
+            dependency['task'] = cohort.dependency_task(dependency['task'], dependency['kind'])
         if 'continuation_of' in execution:
-            execution['continuation_of'] = execution['continuation_of'] + cohort.suffix
+            execution['continuation_of'] = cohort.dependency_task(execution['continuation_of'], 'checkpoint')
     execution['policy_parent_definition'] = deepcopy(parent)
     execution['prior'].update(kind='particle_cloud', sigma=0., standardize=False, learnable=True,
         exception_reason='Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.')
@@ -125,17 +172,23 @@ def _variant(parent, pin, sources, cohort=TIER1):
     evaluation['sources']['configs/forge/tasks/' + parent['id'] + '.json'] = pin['task_sha256']
     evaluation['scoring_weights'] = 'state_selected'
     parameter = parent['id'] in cohort.parameter_parents
+    served = cohort.measurement == 'as_served'
     evaluation['policy_observation'] = {
         'schema_version': 1, 'weight_selector': 'state_selected',
         'sampler': 'served_snapshot' if parameter else 'GANTrainer.sample',
-        'output_noise': False, 'latent_policy': 'not_applied_to_parameter_measurement' if parameter else 'actual_selected_public_policy',
+        'output_noise': served, 'latent_policy': 'not_applied_to_parameter_measurement' if parameter else 'actual_selected_public_policy',
         'row_selection': 'original_task_strategy', 'eval_streams': 'forge-rng-v1_isolated',
         'diagnostic_credit': False}
     if parent['id'] == 'two_pole':
         evaluation['policy_observation']['parameter_measurement'] = 'selected_table_and_critic_gradient'
+    if served:
+        # The single declared difference from the clean partner: measured
+        # samples keep the learned output noise exactly as GANTrainer serves it.
+        evaluation['policy_observation']['output_sigma'] = SERVED_OUTPUT_SIGMA
+        evaluation['eval_output_noise'] = cohort.eval_output_noise(parent['evaluation']['eval_output_noise'])
     # Different cohort law names prevent a selected policy from impersonating
     # a parent clean/live sampler, even when the output-noise flag is false.
-    evaluation['sampling_law'] = cohort.law_prefix + parent['evaluation']['sampling_law']
+    evaluation['sampling_law'] = cohort.sampling_law(parent['evaluation']['sampling_law'])
     caps = ['served_sampling' if name == 'live_sampling' else
             'particle_cloud' if name == 'mog_prior' else name for name in task['requires_capabilities']]
     task['requires_capabilities'] = list(dict.fromkeys(caps + ['policy_controls', 'policy_serving']))
@@ -146,6 +199,9 @@ def materialize(parent, root, cohort=TIER1):
     if parent['id'] not in cohort.parents:
         if cohort is TIER1:
             raise ValueError('only the seven declared Tier 1 questions may be transformed')
+        if parent['id'] in cohort.shared:
+            raise ValueError(f'{parent["id"]} is law-independent; {cohort.id} shares the {cohort.partner} '
+                             'verdict instead of duplicating it')
         raise ValueError(f'{parent["id"]} is not a declared parent of {cohort.id}')
     root = Path(root)
     path = root / 'configs/forge/tasks' / (parent['id'] + '.json')
@@ -221,6 +277,36 @@ def _expected_completed_steps(task, evidence):
     return execution['steps']
 
 
+def _measured_draws_grade(task, evidence, observations):
+    """The observed output-noise law of every measured draw.
+
+    Each recorded draw states whether learned output noise was applied and the
+    served sigma at that state. Clean draws must be noise-free; an as-served
+    cohort must attest a served draw in every observation and a receipt.
+    """
+    cohort = task_cohort(task)
+    served = cohort.measurement == 'as_served'
+    declared = task['evaluation']['policy_observation']['output_noise']
+    for row in observations:
+        draws = row.get('measured_draws')
+        if draws is None and not served:
+            continue  # Parameter measurements and older clean receipts draw no recorded samples.
+        if not isinstance(draws, list) or not draws:
+            return {'status': 'INCOMPLETE', 'reason': 'observation lacks its measured output-noise draws'}
+        # The recorded sigma is a receipt; the scientific grader judges the samples.
+        if any(not isinstance(draw, dict) or draw.get('output_noise') is not declared or 'output_sigma' not in draw
+               for draw in draws):
+            return {'status': 'INVALID', 'reason': 'measured draws differ from the declared output-noise law'}
+    if served:
+        summary = evidence.get('served_output_noise')
+        if (not isinstance(summary, dict) or summary.get('output_noise') is not True
+                or summary.get('law') != task['evaluation']['eval_output_noise']
+                or type(summary.get('draws')) is not int or summary['draws'] < 1
+                or summary.get('draws_without_output_noise') != 0):
+            return {'status': 'INCOMPLETE', 'reason': 'as-served receipt lacks its served output-noise attestation'}
+    return None
+
+
 def validate_evidence(task, evidence):
     """Require actual ordered hook, owner, health and observation attestation."""
     controls = evidence.get('policy_controls', {})
@@ -237,6 +323,9 @@ def validate_evidence(task, evidence):
     declaration = task['evaluation']['policy_observation']
     if any(any(row.get(name) != value for name, value in declaration.items()) for row in observations):
         return {'status': 'INVALID', 'reason': 'actual selected sampler declaration differs'}
+    measured = _measured_draws_grade(task, evidence, observations)
+    if measured is not None:
+        return measured
     expected = _expected_completed_steps(task, evidence)
     if expected is None or controls.get('completed_steps') != expected:
         return {'status': 'INCOMPLETE', 'reason': 'policy execution lacks the full task horizon'}

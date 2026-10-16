@@ -6,7 +6,8 @@ Examples:
   python -m experiments.forge.attempt_coverage plan --intake policy-cloud --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
 
 The policy-cloud intake schedules only the scoped Atlas/E22 policy-cloud
-coverage cohort and publishes its records inside RUN_DIRECTORY, never into the
+coverage cohorts (clean and as-served scoring laws; law-independent tests run
+once) and publishes their records inside RUN_DIRECTORY, never into the
 repository report.
 
 Completed evidence is reused. Every new attempt keeps the original task and
@@ -216,7 +217,8 @@ RECORD_FIELDS = ("key", "family", "candidate_id", "candidate_revision", "source_
                  "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
                  "saved_observations", "repair_scope", "owning_family", "reporting_tier", "diagnostic_continuation",
                  "repair_origin_source", "required_gpu", "repair_superseded", "reused_execution",
-                 "cohort_scope", "dependency_note", "exclusive_gpu")
+                 "cohort_scope", "dependency_note", "exclusive_gpu", "cohort_id", "measurement_law",
+                 "shared_scopes", "shared_reason")
 
 
 def coverage_value(state):
@@ -336,18 +338,24 @@ def publish(root, state, directory=None):
                       "Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.", ""]
         cohort = [j for j in state["jobs"].values() if j.get("cohort_scope")]
         if cohort:
+            laws = {"clean": "clean", "as_served": "as served", "shared": "shared (both laws)"}
             lines += ['<a name="policy-cloud-coverage"></a>', "", "## Policy-cloud scoped selected-view tests", "",
                       "Atlas and E22 run every selected-view test as an explicitly scoped policy-cloud variant: an "
                       "equal-mass particle cloud, the unchanged complete family recipe and seed 0, with each task's "
-                      "architecture, data, budget, cadence and gates kept, scored on the state-selected served model "
-                      "without output noise. Original live/MoG cells, other families and archived verdicts are "
-                      "unchanged; incompatible hosts record their ownership blocker. Checkpoint dependents continue "
-                      "their own scoped producer, including after a failed parent gate (diagnostic continuation).", "",
-                      "| Family | Tier | Test | Outcome | Completed updates | Cause |",
-                      "| --- | ---: | --- | --- | ---: | --- |"]
-            for job in sorted(cohort, key=lambda j: (j["owning_family"], j["reporting_tier"], j["parent_task"])):
+                      "architecture, data, budget, cadence and gates kept, scored on the state-selected served model. "
+                      "Two scoring laws are reported as separate rows: clean removes the learned output noise from the "
+                      "measured samples; as served keeps it exactly as GANTrainer serves it. Each law trains in its own "
+                      "run. Tests that measure no output samples, or that an ownership blocker refuses, run once and "
+                      "show the same verdict for both laws. Original live/MoG cells, other families and archived "
+                      "verdicts are unchanged. Checkpoint dependents continue their own same-law scoped producer, "
+                      "including after a failed parent gate (diagnostic continuation).", "",
+                      "| Family | Law | Tier | Test | Outcome | Completed updates | Cause |",
+                      "| --- | --- | ---: | --- | --- | ---: | --- |"]
+            for job in sorted(cohort, key=lambda j: (j["owning_family"], j["reporting_tier"], j["parent_task"],
+                                                     j.get("measurement_law") == "as_served")):
                 reason = str(job.get("reason", "Queued" if job["status"] == "PENDING" else "Running")).replace("|", "\\|").replace("\n", " ")
-                lines.append(f"| {job['owning_family']} | {job['reporting_tier']} | {job['parent_task']} | {job['status']} | "
+                law = laws.get(job.get("measurement_law"), "clean")
+                lines.append(f"| {job['owning_family']} | {law} | {job['reporting_tier']} | {job['parent_task']} | {job['status']} | "
                              f"{job.get('updates') if job.get('updates') is not None else '—'} | {reason} |")
             lines.append("")
         reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution" and not j.get("cohort_scope")]
@@ -621,8 +629,8 @@ def main():
     parser.add_argument("--include-research", action="store_true", help="include original seed-zero research variants")
     parser.add_argument("--refresh", action="store_true", help="refresh the ordinary leaderboard after draining")
     parser.add_argument("--completion-hook", type=Path, help="trusted Python publisher to run after the queue drains")
-    parser.add_argument("--intake", choices=INTAKES, help="selected (default) or the scoped policy-cloud cohort only; "
-                        "a state directory keeps the intake it was first prepared with")
+    parser.add_argument("--intake", choices=INTAKES, help="selected (default) or only the scoped policy-cloud cohorts "
+                        "(clean and as-served laws); a state directory keeps the intake it was first prepared with")
     args = parser.parse_args(); root=args.root.resolve(); directory=args.state_root.resolve()
     if args.action == "status":
         state = read_json(directory / "state.json")

@@ -5,10 +5,15 @@ task declarations, so its bytes stay unchanged. Its entry points validate the
 original live/MoG constants. A registered policy variant differs from its
 parent only by its declared transformation (state-selected scoring and an
 explicit particle cloud), so this module executes the unchanged
-``gaussian_tasks`` code objects with exactly one substitution: the entry
-validator first checks the variant's transformation identity and then every
-original constant on its unchanged parent declaration.
+``gaussian_tasks`` code objects with two substitutions: the entry validator
+first checks the variant's transformation identity and then every original
+constant on its unchanged parent declaration; the shared constructor binds the
+cohort's declared measurement law to every trainer it builds. The first
+trainer of a run is the measured model. A later one (the stability frozen
+control) records its draws in the same ledger, so both arms are measured under
+one law (clean, or as served with the learned output noise).
 """
+import contextvars
 import types
 
 from . import gaussian_tasks as original
@@ -35,6 +40,32 @@ def _rebind(names=("build", "grade", "run_gaussian")):
 
 
 _SCOPE = _rebind()
-build = _SCOPE["build"]
+_ORIGINAL_BUILD = _SCOPE["build"]
+_RUN_LAWS = contextvars.ContextVar("policy_gaussian_run_laws", default=None)
+
+
+def build(request, task, device, *, max_steps=1000):
+    """The unchanged constructor plus the cohort's declared measurement law."""
+    from .adapters import bind_measurement_law
+    context, trainer, spec = _ORIGINAL_BUILD(request, task, device, max_steps=max_steps)
+    laws = _RUN_LAWS.get()
+    primary = laws[0] if laws else None
+    law = bind_measurement_law(trainer, task, draws=None if primary is None else primary.draws,
+                               role="measured" if primary is None else "frozen_control")
+    if laws is not None:
+        laws.append(law)
+    return context, trainer, spec
+
+
+_SCOPE["build"] = build
 grade = _SCOPE["grade"]
-run_gaussian = _SCOPE["run_gaussian"]
+_ORIGINAL_RUN = _SCOPE["run_gaussian"]
+
+
+def run_gaussian(request, task, output, device, *, prerequisites=None, diagnostic=False):
+    """Run the unchanged evaluator code; its trainers share one measurement ledger."""
+    token = _RUN_LAWS.set([])
+    try:
+        return _ORIGINAL_RUN(request, task, output, device, prerequisites=prerequisites, diagnostic=diagnostic)
+    finally:
+        _RUN_LAWS.reset(token)

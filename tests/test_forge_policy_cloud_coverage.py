@@ -1,8 +1,10 @@
-"""Software controls for the scoped Atlas/E22 policy-cloud coverage cohort.
+"""Software controls for the scoped Atlas/E22 policy-cloud coverage cohorts.
 
-No qualification experiment runs here. Variants are materialized in memory
-from the current parent files and sources, so later source edits cannot make
-these controls depend on stale committed pins.
+Two scoring laws: clean (learned output noise removed from measured samples)
+and as served (kept exactly as GANTrainer serves it). No qualification
+experiment runs here. Variants are materialized in memory from the current
+parent files and sources, so later source edits cannot make these controls
+depend on stale committed pins.
 """
 from copy import deepcopy
 import json
@@ -17,8 +19,10 @@ from experiments.forge.adapters import adapter_preflight
 from experiments.forge.api import CapabilityError
 from experiments.forge.artifacts import manifest_artifacts
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from experiments.forge.policy_coverage import (BLOCKED_HOSTS, COHORT, COVERAGE, DIAGNOSTIC_CONTINUATIONS, PARENTS,
-                                               SOURCES, TIERS, VIEW, variant_id, view_declaration)
+from experiments.forge.policy_coverage import (BLOCKED_HOSTS, COHORT, COVERAGE, DIAGNOSTIC_CONTINUATIONS, LABEL,
+                                               LAW_INDEPENDENT, PARENTS, SERVED, SERVED_COHORT, SERVED_LABEL,
+                                               SERVED_PARENTS, SERVED_VIEW, SOURCES, TIERS, VIEW, served_row_task,
+                                               served_view_declaration, variant_id, view_declaration)
 from experiments.forge.tier1_policy import (TIER1, is_policy_task, materialize, schedule_free_policy, validate,
                                             validate_evidence)
 from experiments.forge.views import grade_result, load_tasks, task_evaluation_fingerprint, task_execution_fingerprint
@@ -39,6 +43,11 @@ def candidate(name):
 @pytest.fixture(scope="module")
 def variants():
     return {name: materialize(parent(name), ROOT, COVERAGE) for name in PARENTS}
+
+
+@pytest.fixture(scope="module")
+def served():
+    return {name: materialize(parent(name), ROOT, SERVED) for name in SERVED_PARENTS}
 
 
 def _undo(variant, original):
@@ -132,11 +141,21 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
     assert {tier: len(names) for tier, names in TIERS.items()} == {1: 7, 2: 21, 3: 7}
     assert len(BLOCKED_HOSTS) == 9 and len(COMPATIBLE) == 26
     view = read_json(ROOT / "configs/forge/views" / (VIEW + ".json"))
-    assert view == view_declaration() and view["reporting"] == {"family_totals": False}
+    assert view == view_declaration() and view["reporting"] == {"family_totals": False, "families": ["atlas", "e22"]}
     assignments = {row["task"]: row for row in view["assignments"]}
     assert all(row["importance"] == "required" for row in assignments.values())
     for tier, names in TIERS.items():
         assert {assignments[variant_id(name)]["qualification_tier"] for name in names} == {tier}
+    # The as-served cohort: 23 own variants; its view shares the 12 law-independent clean declarations.
+    as_served = {task["policy_parent"]["id"]: task for task in tasks.values() if task.get("task_cohort") == SERVED_COHORT}
+    assert set(as_served) == set(SERVED_PARENTS) and len(SERVED_PARENTS) == 23 and len(LAW_INDEPENDENT) == 12
+    assert set(SERVED_PARENTS) | set(LAW_INDEPENDENT) == set(PARENTS)
+    served_view = read_json(ROOT / "configs/forge/views" / (SERVED_VIEW + ".json"))
+    assert served_view == served_view_declaration() and served_view["reporting"] == view["reporting"]
+    rows = {row["task"]: row for row in served_view["assignments"]}
+    for tier, names in TIERS.items():
+        assert {rows[served_row_task(name)]["qualification_tier"] for name in names} == {tier}
+    assert {name for name in rows if tasks[name]["task_cohort"] == COHORT} == {variant_id(n) for n in LAW_INDEPENDENT}
     # Every selected-view requirement keeps its recorded tier.
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
     views = {v["id"]: v for v in publication["family_progress"]["views"]}
@@ -167,7 +186,7 @@ def test_blocked_hosts_refuse_before_any_host_setup(name, variants, tmp_path):
     assert not any(tmp_path.iterdir())
 
 
-def test_routing_reaches_each_cohort_adapter(variants, tmp_path, monkeypatch):
+def test_routing_reaches_each_cohort_adapter(variants, served, tmp_path, monkeypatch):
     from experiments.forge import adapters, policy_behavior_adapters, policy_gaussian
     calls = []
     def recorder(label):
@@ -186,22 +205,32 @@ def test_routing_reaches_each_cohort_adapter(variants, tmp_path, monkeypatch):
                 "grid100": "native", "grid100_14k": "native", "vector_spiral": "vector",
                 "ring16_acquisition": "vector", "img_bars4": "image"}
     for name, label in expected.items():
-        job = {"task_id": variant_id(name), "diagnostic_continuation": name in DIAGNOSTIC_CONTINUATIONS}
-        adapters._dispatch_task({"candidate": candidate("e22"), "tasks": {variant_id(name): variants[name]}},
-                                job, tmp_path, "cpu")
-        assert calls[-1][:2] == (label, name)
-        if name in {"gaussian1d_stability", "grid100_14k"}:
-            assert calls[-1][2]["diagnostic"] is True
+        for cards in (variants, served):
+            if name not in cards:
+                assert name in LAW_INDEPENDENT  # Shared tests run once, in the clean cohort.
+                continue
+            task = cards[name]
+            job = {"task_id": task["id"], "diagnostic_continuation": name in DIAGNOSTIC_CONTINUATIONS}
+            adapters._dispatch_task({"candidate": candidate("e22"), "tasks": {task["id"]: task}}, job, tmp_path, "cpu")
+            assert calls[-1][:2] == (label, name)
+            if name in {"gaussian1d_stability", "grid100_14k"}:
+                assert calls[-1][2]["diagnostic"] is True
 
 
-def test_policy_gaussian_runs_unchanged_evaluator_code_with_parent_constants(variants):
+def test_policy_gaussian_runs_unchanged_evaluator_code_with_parent_constants(variants, served):
     from experiments.forge import gaussian_tasks, policy_gaussian
     for name in ("gaussian1d_smoke", "gaussian1d_stability"):
-        policy_gaussian.validate_task(variants[name])
-        with pytest.raises(ValueError, match="fixed by its evaluator"):
-            gaussian_tasks.validate_task(variants[name])
-    assert policy_gaussian.run_gaussian.__code__ is gaussian_tasks.run_gaussian.__code__
+        for task in (variants[name], served[name]):
+            policy_gaussian.validate_task(task)
+            with pytest.raises(ValueError, match="fixed by its evaluator"):
+                gaussian_tasks.validate_task(task)
+    # The evaluator's own code objects execute; only the validator and the
+    # constructor's measurement-law binding are substituted in their scope.
+    assert policy_gaussian._ORIGINAL_RUN.__code__ is gaussian_tasks.run_gaussian.__code__
+    assert policy_gaussian._ORIGINAL_BUILD.__code__ is gaussian_tasks.build.__code__
     assert policy_gaussian.grade.__code__ is gaussian_tasks.grade.__code__
+    assert policy_gaussian._SCOPE["build"] is policy_gaussian.build
+    assert policy_gaussian._SCOPE["validate_task"] is policy_gaussian.validate_task
     assert policy_gaussian.build.__kwdefaults__ == gaussian_tasks.build.__kwdefaults__
     with pytest.raises(ValueError, match="registered scoped variant"):
         policy_gaussian.validate_task(parent("gaussian1d_smoke"))
@@ -209,11 +238,19 @@ def test_policy_gaussian_runs_unchanged_evaluator_code_with_parent_constants(var
 
 def _policy_evidence(task, final):
     declaration = task["evaluation"]["policy_observation"]
-    return {"policy_controls": {"cohort": task["task_cohort"], "implementation_observed": True,
-                                "requested_owners_bound": True, "lifecycle": {"complete": True},
-                                "completed_steps": final},
-            "policy_observations": [{**declaration, "observed": True, "policy_owner": "particlegan.UpdatePolicy"}],
-            "policy_purity": [{"pure": True}]}
+    noise = declaration["output_noise"]
+    draw = {"role": "measured", "model": "live", "n": 4096, "completed_steps": final,
+            "output_noise": noise, "output_sigma": .029}
+    evidence = {"policy_controls": {"cohort": task["task_cohort"], "implementation_observed": True,
+                                    "requested_owners_bound": True, "lifecycle": {"complete": True},
+                                    "completed_steps": final},
+                "policy_observations": [{**declaration, "observed": True, "policy_owner": "particlegan.UpdatePolicy",
+                                         "measured_draws": [draw]}],
+                "policy_purity": [{"pure": True}]}
+    if noise:
+        evidence["served_output_noise"] = {"law": task["evaluation"]["eval_output_noise"], "output_noise": True,
+                                           "draws": 1, "draws_without_output_noise": 0}
+    return evidence
 
 
 def test_uninterrupted_endurance_attests_its_own_early_stop(variants):
@@ -247,7 +284,7 @@ def test_policy_two_pole_receipt_attests_recipe_owned_prior(variants, tmp_path):
     assert grade["status"] in {"PASS", "FAIL"}, grade
 
 
-def _group(variants, tmp_path):
+def _group(variants, tmp_path, cohort=COVERAGE):
     cards = {name: deepcopy(variants[name]) for name in ("ring_hold", "ring_extension")}
     source = tmp_path / "frozen"
     files = {}
@@ -260,7 +297,7 @@ def _group(variants, tmp_path):
             shutil.copyfile(ROOT / relative, target)
             files[relative] = file_hash(target)
     manifest = dict(files=files, digest=stable_hash(files))
-    names = [variant_id("ring_hold"), variant_id("ring_extension")]
+    names = [variant_id("ring_hold", cohort), variant_id("ring_extension", cohort)]
     cards = {card["id"]: card for card in cards.values()}
     execution = {name: task_execution_fingerprint(cards[name]) for name in names}
     evaluation = {name: task_evaluation_fingerprint(cards[name]) for name in names}
@@ -307,6 +344,23 @@ def _group(variants, tmp_path):
     return parent_job, child
 
 
+def test_as_served_ring_group_regrades_its_own_saved_extension(served, tmp_path):
+    parent_job, child = _group(served, tmp_path, SERVED)
+    certificate = reuse.grade_saved_group(parent_job, child)
+    assert certificate["grade"]["status"] == "PASS" and certificate["task"] == variant_id("ring_extension", SERVED)
+    # A clean-law receipt cannot stand in for the as-served producer's draws.
+    raw_path = Path(parent_job["directory"]) / "raw.json"
+    raw = read_json(raw_path)
+    for row in raw["evidence"]["policy_observations"]:
+        row["measured_draws"][0]["output_noise"] = False
+    atomic_json(raw_path, raw)
+    result = read_json(Path(parent_job["directory"]) / "result.json")
+    atomic_json(Path(parent_job["directory"]) / "result.json", dict(result, raw_sha256=file_hash(raw_path)))
+    parent_job["result_sha256"] = file_hash(Path(parent_job["directory"]) / "result.json")
+    with pytest.raises(ValueError, match="original gate"):
+        reuse.grade_saved_group(parent_job, child)
+
+
 def test_scoped_ring_group_regrades_saved_extension_without_training(variants, tmp_path):
     parent_job, child = _group(variants, tmp_path)
     certificate = reuse.grade_saved_group(parent_job, child)
@@ -336,32 +390,56 @@ def _mixed_cohort(parent_job, child, tmp_path):
     return jobs
 
 
-def test_intake_prepares_only_the_cohort_and_never_writes_the_repository_report(tmp_path):
+def test_intake_prepares_both_laws_once_and_never_writes_the_repository_report(tmp_path):
     repository, directory = tmp_path / "repository", tmp_path / "run"
     sentinel = repository / runner.REPORT
     atomic_json(sentinel, {"records": ["unchanged"]})
     state = runner.prepare(repository, ROOT, directory, intake="policy-cloud")
     assert read_json(sentinel) == {"records": ["unchanged"]}
     jobs = list(state["jobs"].values())
-    assert state["intake"] == "policy-cloud" and len(jobs) == 70
-    assert {job["family"] for job in jobs} == {"policy-cloud-atlas", "policy-cloud-e22"}
+    # 35 clean jobs plus 23 as-served jobs per family; 12 law-independent tests run once.
+    assert state["intake"] == "policy-cloud" and len(jobs) == 2 * (35 + 23)
+    assert {job["family"] for job in jobs} == {"policy-cloud-atlas", "policy-cloud-e22",
+                                               "policy-cloud-as-served-atlas", "policy-cloud-as-served-e22"}
+    assert len({job["key"] for job in jobs}) == len(jobs) and len({(job["family"], job["task"]) for job in jobs}) == len(jobs)
     for family in FAMILIES:
         mine = [job for job in jobs if job["owning_family"] == family]
-        assert sorted(job["parent_task"] for job in mine) == sorted(PARENTS)
-        assert len({job["cohort_scope"] for job in mine}) == 1
+        clean = [job for job in mine if job["cohort_id"] == COHORT]
+        as_served = [job for job in mine if job["cohort_id"] == SERVED_COHORT]
+        assert sorted(job["parent_task"] for job in clean) == sorted(PARENTS)
+        assert sorted(job["parent_task"] for job in as_served) == sorted(SERVED_PARENTS)
+        clean_scope, = {job["cohort_scope"] for job in clean}
+        served_scope, = {job["cohort_scope"] for job in as_served}
+        assert clean_scope != served_scope
+        assert clean_scope == stable_hash([family, clean[0]["source_digest"], clean[0]["candidate_revision"], COHORT])
+        assert {(j["source_digest"], j["candidate_revision"]) for j in mine} == {(clean[0]["source_digest"],
+                                                                                 clean[0]["candidate_revision"])}
+        for job in clean:
+            shared = job["parent_task"] in LAW_INDEPENDENT
+            assert job["measurement_law"] == ("shared" if shared else "clean") and job["label"] == LABEL
+            assert job.get("shared_scopes") == ([served_scope] if shared else None)
+            assert job["task"] == variant_id(job["parent_task"])
+        for job in as_served:
+            assert job["measurement_law"] == "as_served" and job["label"] == SERVED_LABEL
+            assert job["task"] == variant_id(job["parent_task"], SERVED) and "shared_scopes" not in job
+            for dependency in job["dependencies"]:
+                # Checkpoints come from the same-law producer; the only shared
+                # dependency is a gate on the clean clock audit.
+                expected = SERVED if dependency["kind"] == "checkpoint" else (
+                    COVERAGE if dependency["task"].startswith("clockfree_audit") else SERVED)
+                assert dependency["task"].endswith(expected.suffix)
     for job in jobs:
-        assert job["task"] == variant_id(job["parent_task"]) and job["status"] == "PENDING"
-        assert job["label"] == "Policy-cloud scoped selected-view tests; seed 0" and job["diagnostic"] is True
+        assert job["status"] == "PENDING" and job["diagnostic"] is True
         assert job["reporting_tier"] == next(t for t, names in TIERS.items() if job["parent_task"] in names)
         assert job["diagnostic_continuation"] == (job["parent_task"] in DIAGNOSTIC_CONTINUATIONS)
+        assert job.get("exclusive_gpu", False) == (job["parent_task"] in
+                                                   {"gaussian1d_smoke", "gaussian1d_stability", "ring16_acquisition"})
         if job["parent_task"] in BLOCKED_HOSTS:
             assert job["dependencies"] == []
-        for dependency in job["dependencies"]:
-            assert dependency["task"].endswith(COVERAGE.suffix)
     published = read_json(directory / "attempt-coverage.json")
-    assert published["publication"] == "state_directory_only" and len(published["records"]) == 70
-    assert all({"cohort_scope", "owning_family", "reporting_tier", "parent_task"} <= set(r)
-               for r in published["records"])
+    assert published["publication"] == "state_directory_only" and len(published["records"]) == len(jobs)
+    assert all({"cohort_scope", "cohort_id", "measurement_law", "owning_family", "reporting_tier", "parent_task"}
+               <= set(r) for r in published["records"])
     # A second preparation keeps the same jobs; the state cannot change intake.
     assert runner.prepare(repository, ROOT, directory)["jobs"].keys() == state["jobs"].keys()
     with pytest.raises(ValueError, match="belongs to the policy-cloud intake"):
@@ -370,6 +448,13 @@ def test_intake_prepares_only_the_cohort_and_never_writes_the_repository_report(
         runner.publish(repository, state)
     with pytest.raises(ValueError, match="never refresh"):
         runner.drain(repository, directory, gpus=["0", "1"], refresh=True)
+    # A clean-only (first-build) state directory cannot silently gain a law.
+    old = tmp_path / "old"
+    atomic_json(old / "policy-cloud.json", {"schema_version": 1, "cohort": COHORT, "view": VIEW,
+                                            "families": list(FAMILIES), "source_root": str(ROOT)})
+    atomic_json(old / "state.json", {"intake": "policy-cloud", "jobs": {}})
+    with pytest.raises(ValueError, match="clean-only intake"):
+        runner.prepare(repository, ROOT, old)
 
 
 def test_selected_state_directory_cannot_switch_to_the_cohort(tmp_path):
@@ -423,32 +508,54 @@ def test_short_limit_jobs_run_alone_on_their_gpu(tmp_path, monkeypatch):
     assert all(job["status"] == "BLOCKED" for job in read_json(directory / "state.json")["jobs"].values())
 
 
-def test_cohort_records_project_one_scoped_row_per_family_without_changing_numerators(tmp_path):
+def test_cohort_records_project_one_row_per_law_and_family_with_shared_verdicts(tmp_path):
     from experiments.forge.research_tiers import _attempt_registry, policy_cohort_rows
     _attempt_registry.cache_clear()
     records = []
     for family in FAMILIES:
-        scope = stable_hash([family, "source", "recipe", COHORT])
-        for index, (tier, names) in enumerate(sorted(TIERS.items())):
+        scopes = {cohort: stable_hash([family, "source", "recipe", cohort]) for cohort in (COHORT, SERVED_COHORT)}
+        common = dict(owning_family=family, source_digest="source", candidate_revision="recipe", attempted=True,
+                      diagnostic=True)
+        for tier, names in sorted(TIERS.items()):
             for name in names:
                 status = ("BLOCKED" if name in BLOCKED_HOSTS else "PASS" if name == "img_stripes2" else "FAIL")
-                records.append(dict(cohort_scope=scope, owning_family=family, family="policy-cloud-" + family,
-                                    source_digest="source", candidate_revision="recipe", task=variant_id(name),
-                                    parent_task=name, reporting_tier=tier, status=status, attempted=True,
-                                    diagnostic=True, label="Policy-cloud scoped selected-view tests; seed 0",
+                shared = name in LAW_INDEPENDENT
+                records.append(dict(common, cohort_scope=scopes[COHORT], cohort_id=COHORT, family="policy-cloud-" + family,
+                                    task=variant_id(name), parent_task=name, reporting_tier=tier, status=status,
+                                    label=LABEL, measurement_law="shared" if shared else "clean",
+                                    **({"shared_scopes": [scopes[SERVED_COHORT]]} if shared else {}),
                                     **({"block_kind": "incompatible"} if status == "BLOCKED" else {})))
+                if not shared:
+                    # The as-served law passes one more (width-limited) test here.
+                    served_status = "PASS" if name in {"img_stripes2", "vector_two_broad"} else "FAIL"
+                    records.append(dict(common, cohort_scope=scopes[SERVED_COHORT], cohort_id=SERVED_COHORT,
+                                        family="policy-cloud-as-served-" + family, task=variant_id(name, SERVED),
+                                        parent_task=name, reporting_tier=tier, status=served_status,
+                                        label=SERVED_LABEL, measurement_law="as_served"))
     atomic_json(tmp_path / runner.REPORT, {"records": records})
     rows = policy_cohort_rows(tmp_path, tmp_path / "board.md")
     assert set(rows) == set(FAMILIES)
     for family in FAMILIES:
-        row, = rows[family]
-        assert "Policy-cloud scoped selected-view tests; seed 0" in row
-        assert "0/7 (3 incompatible)" in row and "1/21 (6 incompatible)" in row and "1/35 (9 incompatible)" in row
+        clean, as_served = rows[family]
+        assert LABEL in clean and SERVED_LABEL in as_served
+        # Both rows cover all 35 tests: the shared verdicts (two-pole, clock
+        # audits, 9 incompatible hosts) appear in each row exactly once.
+        assert "0/7 (3 incompatible)" in clean and "1/21 (6 incompatible)" in clean and "1/35 (9 incompatible)" in clean
+        assert "0/7 (3 incompatible)" in as_served and "2/21 (6 incompatible)" in as_served
+        assert "2/35 (9 incompatible)" in as_served
     records.append(dict(records[0], parent_task="duplicate", source_digest="other"))
     atomic_json(tmp_path / runner.REPORT, {"records": records})
     _attempt_registry.cache_clear()
     with pytest.raises(ValueError, match="cannot pool"):
         policy_cohort_rows(tmp_path, tmp_path / "board.md")
+    records.pop()
+    records.append(dict(records[0], shared_scopes=["no-such-row"]))
+    records.pop(0)
+    atomic_json(tmp_path / runner.REPORT, {"records": records})
+    _attempt_registry.cache_clear()
+    with pytest.raises(ValueError, match="no records of its own"):
+        policy_cohort_rows(tmp_path, tmp_path / "board.md")
+    _attempt_registry.cache_clear()
 
 
 def test_attempt_media_renders_saved_images_and_paired_curves_without_sampling(tmp_path, variants):
@@ -470,3 +577,203 @@ def test_attempt_media_renders_saved_images_and_paired_curves_without_sampling(t
                 "scoring_weights": "state_selected", "sampling_law": task["evaluation"]["sampling_law"]}
     receipt = render(task, {"evidence": evidence, "gate_status": "FAIL"}, tmp_path, tmp_path / "paired.gif")
     assert receipt["observation_count"] == 10 and (tmp_path / "paired.gif").is_file()
+
+
+# --- As-served scoring law -------------------------------------------------
+
+@pytest.mark.parametrize("name", SERVED_PARENTS)
+def test_as_served_variant_differs_from_its_clean_variant_only_in_the_declared_measurement(name, variants, served):
+    from experiments.forge.sampling import AS_SERVED_LAWS, SERVED_LEARNED_NOISE
+    clean, task = variants[name], deepcopy(served[name])
+    assert task["id"] == variant_id(name, SERVED) and task["task_cohort"] == SERVED_COHORT
+    evaluation, observation = task["evaluation"], task["evaluation"]["policy_observation"]
+    # The single declared difference, and the law names that follow from it.
+    assert observation.pop("output_noise") is True and clean["evaluation"]["policy_observation"]["output_noise"] is False
+    assert observation.pop("output_sigma").startswith("GANTrainer.sample(output_noise=True)")
+    assert evaluation["eval_output_noise"] == SERVED_LEARNED_NOISE
+    original_law = parent(name)["evaluation"]["sampling_law"]
+    assert evaluation["sampling_law"] == "policy_cloud_as_served_" + AS_SERVED_LAWS[original_law]
+    assert evaluation["sampling_law"] not in {original_law, clean["evaluation"]["sampling_law"]}
+    # Undo exactly those fields and the cohort identity: the clean variant remains.
+    observation["output_noise"] = False
+    evaluation["eval_output_noise"] = clean["evaluation"]["eval_output_noise"]
+    evaluation["sampling_law"] = clean["evaluation"]["sampling_law"]
+    task.update(id=clean["id"], task_cohort=COHORT)
+    task["execution"]["policy_contract"]["cohort"] = COHORT
+    for dependency in task["dependencies"]:
+        if dependency["task"].endswith(SERVED.suffix):
+            dependency["task"] = dependency["task"].removesuffix(SERVED.suffix) + COVERAGE.suffix
+        else:  # Only a gate may name a shared (law-independent) clean test.
+            assert dependency["kind"] == "gate" and dependency["task"].removesuffix(COVERAGE.suffix) in LAW_INDEPENDENT
+    if "continuation_of" in task["execution"]:
+        assert task["execution"]["continuation_of"] == variant_id(parent(name)["execution"]["continuation_of"], SERVED)
+        task["execution"]["continuation_of"] = clean["execution"]["continuation_of"]
+    assert task == clean
+    assert validate(served[name], root=ROOT) == parent(name)
+    assert adapter_preflight(served[name], candidate("e22"), root=ROOT) == []
+
+
+def test_law_independent_tests_are_shared_never_duplicated(variants):
+    from experiments.forge.tier1_policy import PolicyCohort
+    for name in LAW_INDEPENDENT:
+        with pytest.raises(ValueError, match="law-independent"):
+            materialize(parent(name), ROOT, SERVED)
+        assert served_row_task(name) == variant_id(name)
+        task = variants[name]
+        # Its measurement scores no output samples, or a blocker refuses it first.
+        assert (name in BLOCKED_HOSTS or task["adapter"] == "clockfree_audit"
+                or task["evaluation"]["policy_observation"]["sampler"] == "served_snapshot")
+    assert set(BLOCKED_HOSTS) <= set(LAW_INDEPENDENT)
+    with pytest.raises(ValueError, match="same-law producer"):
+        SERVED.dependency_task("two_pole", "checkpoint")
+    with pytest.raises(ValueError, match="draws no output samples"):
+        SERVED.sampling_law("learned_particles_and_critic_gradient")
+    with pytest.raises(ValueError, match="law-independent parents stay"):
+        PolicyCohort(id="x", parents=("two_pole",), sources=SOURCES, blocked_hosts={}, law_prefix="x_", label="x",
+                     parameter_parents=frozenset(), clock_parents=frozenset(), measurement="as_served",
+                     shared=frozenset({"two_pole"}), partner=COHORT)
+    with pytest.raises(ValueError, match="clean or as_served"):
+        PolicyCohort(id="x", parents=(), sources=(), blocked_hosts={}, law_prefix="x_", label="x", measurement="noisy")
+
+
+class _FakeTrainer:
+    completed_steps = 7
+
+    def __init__(self):
+        self.calls = []
+
+    def output_sigma(self):
+        return .031
+
+    def sample(self, n, *, ema=False, generator=None, output_noise=False, fixed_first_n=False):
+        import torch
+        self.calls.append(output_noise)
+        return torch.full((n, 2), float(output_noise))
+
+
+def test_output_noise_is_permitted_only_for_the_as_served_cohort(variants, served):
+    from experiments.forge.adapters import bind_measurement_law
+    from experiments.forge.sampling import SERVED_LEARNED_NOISE, executed_receipt, task_blockers
+    with pytest.raises(ValueError, match="registered policy task"):
+        bind_measurement_law(_FakeTrainer(), parent("vector_spiral"))
+    clean = _FakeTrainer()
+    law = bind_measurement_law(clean, variants["vector_spiral"])
+    clean.sample(8)
+    clean.sample(8, output_noise=False)
+    with pytest.raises(ValueError, match="without output noise"):
+        clean.sample(8, output_noise=True)
+    assert clean.calls == [False, False]
+    assert law.receipt()["output_noise"] is False and law.receipt()["draws_without_output_noise"] == 2
+    noisy = _FakeTrainer()
+    served_law = bind_measurement_law(noisy, served["vector_spiral"])
+    noisy.sample(8)
+    noisy.sample(8, ema=True, output_noise=False)  # An evaluator's clean request takes the declared law.
+    assert noisy.calls == [True, True]
+    receipt = served_law.receipt()
+    assert {key: receipt[key] for key in ("law", "output_noise", "draws", "draws_without_output_noise",
+                                          "evaluator_clean_requests_served")} == {
+        "law": SERVED_LEARNED_NOISE, "output_noise": True, "draws": 2, "draws_without_output_noise": 0,
+        "evaluator_clean_requests_served": 1}
+    assert receipt["output_sigma"] == {"first": .031, "last": .031, "min": .031, "max": .031}
+    assert served_law.observed(1) == {"output_noise": True, "measured_draws": [
+        {"role": "measured", "model": "ema", "n": 8, "completed_steps": 7, "output_noise": True, "output_sigma": .031}]}
+    assert served_law.observed(2) == {}
+    assert bind_measurement_law(noisy, served["vector_spiral"]) is served_law
+    with pytest.raises(ValueError, match="another declared law"):
+        bind_measurement_law(noisy, variants["vector_spiral"])
+    # The as-served law name exists only under the registered as-served prefix.
+    name = served["vector_spiral"]["evaluation"]["sampling_law"]
+    assert executed_receipt(name, eval_output_noise=SERVED_LEARNED_NOISE)["sampling_law"] == name
+    with pytest.raises(ValueError):
+        executed_receipt(name, eval_output_noise="clean")
+    with pytest.raises(ValueError):
+        executed_receipt("public_prior_with_learned_output_noise", eval_output_noise=SERVED_LEARNED_NOISE)
+    for task in (parent("vector_spiral"), variants["vector_spiral"]):
+        impersonating = deepcopy(task)
+        impersonating["evaluation"].update(sampling_law=name, eval_output_noise=SERVED_LEARNED_NOISE)
+        assert task_blockers(impersonating)  # Neither an ordinary task nor the clean variant may claim it.
+    assert task_blockers(served["vector_spiral"]) == [] and task_blockers(variants["vector_spiral"]) == []
+
+
+def test_policy_evidence_requires_the_observed_output_noise_law(variants, served):
+    task = served["vector_spiral"]
+    evidence = _policy_evidence(task, 1600)
+    assert validate_evidence(task, evidence) is None
+    for change, status in (("drop_draws", "INCOMPLETE"), ("clean_draw", "INVALID"),
+                           ("drop_summary", "INCOMPLETE"), ("observed_clean", "INVALID")):
+        altered = deepcopy(evidence)
+        row = altered["policy_observations"][0]
+        if change == "drop_draws":
+            row.pop("measured_draws")
+        elif change == "clean_draw":
+            row["measured_draws"][0]["output_noise"] = False
+        elif change == "drop_summary":
+            altered.pop("served_output_noise")
+        else:
+            row["output_noise"] = False
+        assert validate_evidence(task, altered)["status"] == status, change
+    ordinary = variants["vector_spiral"]
+    evidence = _policy_evidence(ordinary, 1600)
+    assert validate_evidence(ordinary, evidence) is None
+    noisy = deepcopy(evidence)
+    noisy["policy_observations"][0]["measured_draws"][0]["output_noise"] = True
+    assert validate_evidence(ordinary, noisy)["status"] == "INVALID"
+    legacy = deepcopy(evidence)
+    legacy["policy_observations"][0].pop("measured_draws")  # Older clean receipts recorded no draws.
+    assert validate_evidence(ordinary, legacy) is None
+
+
+def test_policy_gaussian_frozen_control_is_measured_under_the_same_law(served, monkeypatch):
+    from experiments.forge import policy_gaussian
+    monkeypatch.setattr(policy_gaussian, "_ORIGINAL_BUILD",
+                        lambda request, task, device, *, max_steps=1000: (object(), _FakeTrainer(), {}))
+
+    def run(request, task, output, device, *, prerequisites=None, diagnostic=False):
+        # The unchanged evaluator builds its active trainer, then its frozen control.
+        _, active, _ = policy_gaussian._SCOPE["build"](request, task, device)
+        _, frozen, _ = policy_gaussian._SCOPE["build"](request, task, device, max_steps=6000)
+        active.sample(4096)
+        frozen.sample(4096, generator=None, output_noise=False)
+        return active._forge_measurement_law, frozen._forge_measurement_law
+    monkeypatch.setattr(policy_gaussian, "_ORIGINAL_RUN", run)
+    primary, control = policy_gaussian.run_gaussian({}, served["gaussian1d_stability"], None, "cuda")
+    assert control.draws is primary.draws and [d["role"] for d in primary.draws] == ["measured", "frozen_control"]
+    assert all(d["output_noise"] for d in primary.draws)
+    assert primary.receipt()["control_draws"] == 1 and primary.receipt()["evaluator_clean_requests_served"] == 1
+    _, lone, _ = policy_gaussian.build({}, served["gaussian1d_smoke"], "cuda")
+    assert lone._forge_measurement_law.role == "measured"
+
+
+@pytest.mark.parametrize("name,steps", [("vector_spiral", 24), ("img_bars4", 24)])
+def test_both_laws_train_identically_and_only_the_as_served_draws_carry_noise(name, steps, tmp_path):
+    """Short CPU software control through the real adapters (never a result)."""
+    import torch
+    from experiments.forge.adapters import _dispatch_task
+    torch.set_num_threads(1)
+    short = parent(name)
+    short["execution"]["steps"] = steps
+    receipts = {}
+    for cohort in (COVERAGE, SERVED):
+        task = materialize(short, ROOT, cohort)
+        request = {"candidate": candidate("e22"), "protocol": {"seed": 0}, "tasks": {task["id"]: task}}
+        raw = _dispatch_task(request, {"task_id": task["id"]}, tmp_path / cohort.id, "cpu")
+        assert grade_result(task, raw)["status"] in {"PASS", "FAIL"}
+        receipts[cohort.measurement] = raw["evidence"]
+    clean, as_served = receipts["clean"], receipts["as_served"]
+    assert clean["served_output_noise"]["draws_without_output_noise"] == clean["served_output_noise"]["draws"]
+    assert as_served["served_output_noise"]["draws_without_output_noise"] == 0
+    assert as_served["served_output_noise"]["output_sigma"]["min"] > 0
+    assert all(row["output_noise"] is True for row in as_served["policy_observations"])
+    assert all(row["output_noise"] is False for row in clean["policy_observations"])
+    # Evaluation is pure: both laws end in the same training state.
+    assert clean["training_state"] == as_served["training_state"]
+    assert clean["observations"] != as_served["observations"]
+
+
+def test_policy_cloud_views_display_only_on_the_atlas_and_e22_pages():
+    from experiments.forge.family_reports import _displayed_for
+    tier1 = read_json(ROOT / "configs/forge/views/tier1_policy_coverage.json")
+    for view in (view_declaration(), served_view_declaration()):
+        assert _displayed_for(view, "atlas") and _displayed_for(view, "e22")
+        assert not _displayed_for(view, "bcap-pure") and not _displayed_for(view, "k3p")
+    assert all(_displayed_for(tier1, family) for family in ("atlas", "bcap-pure", "k3p"))

@@ -2,7 +2,7 @@
 
 The selected Atlas and E22 rows refused all 35 distinct tests before training
 because ordinary task declarations certify a clean/live MoG measurement, not a
-policy-controlled served sampler. This cohort applies the Tier 1 policy
+policy-controlled served sampler. The clean cohort applies the Tier 1 policy
 transformation (``tier1_policy._variant``) to all 35 questions:
 
 * an explicit ``particle_cloud`` sigma-0 prior exception with its reason;
@@ -14,18 +14,36 @@ transformation (``tier1_policy._variant``) to all 35 questions:
   policy and isolated evaluation streams, under a cohort-prefixed law name;
 * dependents consume their own scoped parent's state and gates.
 
-It is a separate diagnostic cohort: no qualification numerator, other family
+The as-served cohort is the same transformation with exactly one declared
+difference: measured samples keep the formulation's learned output noise
+exactly as GANTrainer serves it (learned sigma with its policy floor). Atlas
+and E22 supply per-mode width through that noise, so the clean law alone can
+fail width gates for that reason only. Recipe, training, gates, budgets, data,
+cadence and seed are identical; each law trains in its own run, and its
+dependents continue their own same-law producer. Law-independent tests (no
+measured output samples, or refused by an ownership blocker before any
+measurement) are not duplicated: the clean declaration runs once and its
+verdict is shown for both laws.
+
+Both are separate diagnostic cohorts: no qualification numerator, other family
 row or archived verdict changes, and the original parents receive no credit.
 Tests whose original objective needs conditional, encoder, multi-bank or
 word-bound row ownership keep an explicit blocker and spend no training.
 """
+from copy import deepcopy
 from pathlib import Path
 
 from .tier1_policy import SOURCES as TIER1_SOURCES, PolicyCohort, materialize
 
 COHORT = 'policy_cloud_coverage_v1'
 VIEW = 'policy_cloud_coverage'
-LABEL = 'Policy-cloud scoped selected-view tests; seed 0'
+LABEL = 'Policy-cloud scoped tests, clean (learned output noise removed); seed 0'
+SERVED_COHORT = 'policy_cloud_coverage_as_served_v1'
+SERVED_VIEW = 'policy_cloud_coverage_as_served'
+SERVED_LABEL = 'Policy-cloud scoped tests, as served (learned output noise kept); seed 0'
+# The selected recipes these scoped tests serve; only their pages display them.
+FAMILIES = ('atlas', 'e22')
+REPORTING = {'family_totals': False, 'families': list(FAMILIES)}
 # Tiers follow the selected Atlas/E22 views (each test has one tier there).
 TIERS = {
     1: ('two_pole', 'gaussian1d_smoke', 'ring16_acquisition', 'clockfree_audit_measurement_v1',
@@ -95,44 +113,84 @@ COVERAGE = PolicyCohort(
     parameter_parents=frozenset({'two_pole', 'unused_token_hold', 'cover_leftover', 'unipolar', 'mid_scale_identity'}),
     clock_parents=frozenset({'clockfree_audit', 'clockfree_audit_measurement_v1'}),
     rename_dependencies=True)
+# Law-independent tests: the measurement draws no scored output samples, or an
+# ownership blocker refuses the test before any measurement. One clean run (or
+# refusal) supplies the same verdict to the clean and as-served rows.
+LAW_INDEPENDENT = {
+    'two_pole': ('parameter measurement of the selected table and the critic gradient; it draws no output samples'),
+    'clockfree_audit_measurement_v1': ('clock audit comparing training-state parity across branches; its verdict '
+                                       'never scores output samples'),
+    'clockfree_audit': 'clock audit comparing training-state parity across branches; its verdict never scores output samples',
+    **{name: 'refused by its ownership blocker before training; no measurement exists under either law'
+       for name in BLOCKED_HOSTS},
+}
+SERVED_PARENTS = tuple(name for name in PARENTS if name not in LAW_INDEPENDENT)
+SERVED = PolicyCohort(
+    id=SERVED_COHORT, parents=SERVED_PARENTS, sources=SOURCES, blocked_hosts={},
+    law_prefix='policy_cloud_as_served_', label='Policy-cloud as-served coverage cohort',
+    parameter_parents=frozenset(), clock_parents=frozenset(), rename_dependencies=True,
+    measurement='as_served', shared=frozenset(LAW_INDEPENDENT), partner=COHORT)
+COHORTS = (COVERAGE, SERVED)
 
 
-def variant_id(parent):
-    return parent + COVERAGE.suffix
+def variant_id(parent, cohort=COVERAGE):
+    return parent + cohort.suffix
+
+
+def served_row_task(parent):
+    """The as-served row's task: its own variant, or the shared clean one."""
+    return variant_id(parent, SERVED if parent in SERVED_PARENTS else COVERAGE)
 
 
 def reporting_tier(parent):
     return next(tier for tier, names in TIERS.items() if parent in names)
 
 
+def _assignments(task_for):
+    return [{'task': task_for(name), 'qualification_tier': tier, 'importance': 'required', 'order': order}
+            for order, (tier, name) in enumerate((tier, name) for tier in (1, 2, 3) for name in TIERS[tier])]
+
+
 def view_declaration():
-    assignments = [{'task': variant_id(name), 'qualification_tier': tier, 'importance': 'required', 'order': order}
-                   for order, (tier, name) in enumerate((tier, name) for tier in (1, 2, 3) for name in TIERS[tier])]
     return {'schema_version': 1, 'id': VIEW, 'goal': 'discriminator_stability', 'revision': 1,
             'description': ('Separate Atlas/E22 policy-cloud scoped variants of the 35 distinct tests required by the '
                             'selected views, at their selected-view tiers. Each variant keeps its parent architecture, '
                             'data, budget, cadence and gates, binds an explicit equal-mass particle cloud and scores the '
                             'state-selected served model without output noise. Original live/MoG parents receive no '
                             'credit; incompatible hosts keep explicit ownership blockers.'),
-            'assignments': assignments, 'eligibility': {}, 'reporting': {'family_totals': False}}
+            'assignments': _assignments(variant_id), 'eligibility': {}, 'reporting': deepcopy(REPORTING)}
+
+
+def served_view_declaration():
+    return {'schema_version': 1, 'id': SERVED_VIEW, 'goal': 'discriminator_stability', 'revision': 1,
+            'description': ('As-served law of the Atlas/E22 policy-cloud scoped tests, at their selected-view tiers. '
+                            'Each as-served variant is its clean policy-cloud variant with one declared difference: '
+                            'measured samples keep the learned output noise exactly as GANTrainer serves it (learned '
+                            'sigma with its policy floor), with state-selected weights, the actual latent policy and '
+                            'isolated evaluation streams. Law-independent tests (the two-pole parameter measurement, '
+                            'the clock audits and the ownership-blocked hosts) are shared: this view assigns their '
+                            'clean declarations, which run once. Original parents receive no credit.'),
+            'assignments': _assignments(served_row_task), 'eligibility': {}, 'reporting': deepcopy(REPORTING)}
 
 
 def write_declarations(root):
-    """Materialize all variants from the current parent files and source bytes."""
+    """Materialize both cohorts from the current parent files and source bytes."""
     import json
     from .contracts import atomic_json
     root = Path(root)
-    directory = root / COVERAGE.directory
-    existing = set(directory.glob('*.json')) if directory.is_dir() else set()
-    written = set()
-    for name in PARENTS:
-        parent = json.loads((root / 'configs/forge/tasks' / (name + '.json')).read_text())
-        variant = materialize(parent, root, COVERAGE)
-        path = directory / (variant['id'] + '.json')
-        atomic_json(path, variant)
-        written.add(path)
-    for stale in existing - written:
-        stale.unlink()
-    view = view_declaration()
-    atomic_json(root / 'configs/forge/views' / (VIEW + '.json'), view)
-    return view
+    for cohort in COHORTS:
+        directory = root / cohort.directory
+        existing = set(directory.glob('*.json')) if directory.is_dir() else set()
+        written = set()
+        for name in cohort.parents:
+            parent = json.loads((root / 'configs/forge/tasks' / (name + '.json')).read_text())
+            variant = materialize(parent, root, cohort)
+            path = directory / (variant['id'] + '.json')
+            atomic_json(path, variant)
+            written.add(path)
+        for stale in existing - written:
+            stale.unlink()
+    views = view_declaration(), served_view_declaration()
+    for view in views:
+        atomic_json(root / 'configs/forge/views' / (view['id'] + '.json'), view)
+    return views

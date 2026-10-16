@@ -315,7 +315,8 @@ def test_scoped_measurements_media_and_clock_evidence_do_not_fill_clean_parent_c
     cohort = atlas["cohorts"][0]
     assert cohort["tasks"]["two_pole"]["status"] == "BLOCKED"
     assert cohort["tasks"]["two_pole_tier1_policy_selected_cloud_v1"]["status"] == "FAIL"
-    assert cohort["scoped_views"][0]["total"]["counts"] == {"FAIL": 4, "BLOCKED": 3}
+    tier1 = next(view for view in cohort["scoped_views"] if view["id"] == "tier1_policy_coverage")
+    assert tier1["total"]["counts"] == {"FAIL": 4, "BLOCKED": 3}
     text = generated_pages(root, display)[root / atlas["page"]]
     assert "Actual-training GIF" in text and "no parent-cohort credit" in text
     assert "Recorded clock parity diagnostics" in text and "Recorded unexplained clock dependencies: **1**" in text

@@ -272,13 +272,13 @@ def test_repaired_hosts_and_replay_declarations_pin_current_sources():
         for name in changed:
             digest = task["evaluation"]["sources"][name]
             assert hashlib.sha256((root / name).read_bytes()).hexdigest() == digest, (path, name)
-        if task.get("task_cohort") == "policy_cloud_coverage_v1":
-            # Scoped coverage variants inherit their counted parent's revision.
+        if task.get("task_cohort") in {"policy_cloud_coverage_v1", "policy_cloud_coverage_as_served_v1"}:
+            # Scoped coverage variants (both scoring laws) inherit their counted parent's revision.
             assert revision == task["execution"]["policy_parent_definition"]["evaluation"]["evaluator_revision"]
             inherited += 1
             continue
         checked += 1
-    assert checked == 27 and inherited == 10
+    assert checked == 27 and inherited == 10 + 6
 
 
 @CUDA
