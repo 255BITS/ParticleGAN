@@ -152,7 +152,11 @@ Separate cohort coverage (excluded from family totals):
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
+| [policy_cloud_coverage](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage) | [1/7 (3 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) | [5/21 (6 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) | [0/7 (1 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3) | [6/35 (9 incompatible, 1 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage) |
+| [policy_cloud_coverage_as_served](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served) | [1/7 (3 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1) | [7/21 (6 incompatible)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2) | [3/7 (1 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3) | [11/35 (9 incompatible, 1 blocked)](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served) |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](atlas.md#cohort-cuda-1bf9d7d34422-tier1_policy_coverage) |
+
+Policy-cloud cells come from the [cohort report](../atlas-e22-policy-cloud-20261015/README.md#atlas) ([records](../atlas-e22-policy-cloud-20261015/records.json)): frozen source `43b7e079c67a`, candidate revision `f66076217f56`, verified there to run this selected recipe. Each law is its own row; the 12 law-independent verdicts come from one run and appear in both. These diagnostics give no parent-cohort credit.
 
 With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
@@ -758,6 +762,142 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage"></a>
+
+## policy_cloud_coverage
+
+**policy_cloud_coverage — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [gaussian1d_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [ring16_acquisition_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [grid100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [rotated100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [staggered100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [img_stripes2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [img_bars4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [img_blobs4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [img_intensity2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [mode_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [vector_two_broad_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [vector_unequal_mass_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [vector_unequal_width_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [vector_anisotropic_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [vector_overlap_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [vector_spiral_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [grid100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [rotated100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [staggered100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [ring_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [ring_extension_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [target_shift_recovery_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served"></a>
+
+## policy_cloud_coverage_as_served
+
+**policy_cloud_coverage_as_served — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage_as_served.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-two_pole_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [gaussian1d_smoke_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [ring16_acquisition_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [grid100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [rotated100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [staggered100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [img_stripes2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [img_bars4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [img_blobs4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [img_intensity2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [mode_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [vector_two_broad_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [vector_unequal_mass_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [vector_unequal_width_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [vector_anisotropic_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [vector_overlap_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [vector_spiral_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-trajectory_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-residual_student_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-unipolar_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | BLOCKED | matches recorded run |
+
+<a name="cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
+| [grid100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [rotated100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [staggered100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [ring_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+| [ring_extension_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension_policy_cloud_coverage_as_served_v1) | required | BLOCKED | matches recorded run |
+| [target_shift_recovery_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
+
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage"></a>
 
 ## quality_coverage
@@ -1121,6 +1261,35 @@ Declared budget: 250 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold_policy_cloud_coverage_v1"></a>
+
+### ae_gan_hold_policy_cloud_coverage_v1
+
+**ae_gan_hold_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ae_gan_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): an autoencoder GAN whose encoder maps data into the Gaussian-mixture latent law that the test scores; Atlas/E22 refuse encoder recipes while their row controls are on, and replacing the mixture with an equal-weight point table would change the law under test, so it needs a routed encoder task
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). ae_gan_hold_policy_cloud_coverage_v1: an autoencoder GAN whose encoder maps data into the Gaussian-mixture latent law that the test scores; Atlas/E22 refuse encoder recipes while their row controls are on, and replacing the mixture with an equal-weight point table would change the law under test, so it needs a routed encoder task [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = encoder, generator, prior, discriminator; rng isolation = True.
+
+Declared budget: 250 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_reconstructed_prior_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1"></a>
 
 ### ae_gan_hold_tier1_policy_selected_cloud_v1
@@ -1192,6 +1361,50 @@ Declared budget: 24 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_measurement_v1_policy_cloud_coverage_v1
+
+**clockfree_audit_measurement_v1_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_measurement_v1_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. step_label changed the update or common-prefix state
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). step_label changed the update or common-prefix state [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [clockfree_audit_measurement_v1](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json); parent task SHA256 `b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_policy_cloud_coverage_v1
+
+**clockfree_audit_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. step_label changed the update or common-prefix state
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). step_label changed the update or common-prefix state [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3) · [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_tier1_policy_selected_cloud_v1"></a>
 
 ### clockfree_audit_tier1_policy_selected_cloud_v1
@@ -1245,6 +1458,38 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-cover_leftover_policy_cloud_coverage_v1"></a>
+
+### cover_leftover_policy_cloud_coverage_v1
+
+**cover_leftover_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/cover_leftover_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): two separately learned point banks plus scale-conditioned residuals, scored on polar contexts with declared host jitter; one independent equal-weight table cannot represent that joint law
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). cover_leftover_policy_cloud_coverage_v1: two separately learned point banks plus scale-conditioned residuals, scored on polar contexts with declared host jitter; one independent equal-weight table cannot represent that joint law [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [cover_leftover](../../../configs/forge/tasks/cover_leftover.json); parent task SHA256 `62558d6d4de641078c9d20c0e13d58073ec00c341b478eaafdaf83b80909f9f1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| u_kept | >= 0.85 |
+| content_kept | >= 0.75 |
+| leak_ratio | <= 0.2 |
+| pole_rel_err_plus | <= 0.2 |
+| pole_rel_err_minus | <= 0.2 |
+| same_dir | <= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -1316,6 +1561,41 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_hold_policy_cloud_coverage_v1
+
+**five_word_joint_hold_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): continues the five-word joint BiGAN from its own smoke checkpoint and inherits the same boundary (an encoder plus rows bound to word identities); there is no compatible scoped smoke state to continue
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). five_word_joint_hold_policy_cloud_coverage_v1: continues the five-word joint BiGAN from its own smoke checkpoint and inherits the same boundary (an encoder plus rows bound to word identities); there is no compatible scoped smoke state to continue [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [five_word_joint_hold](../../../configs/forge/tasks/five_word_joint_hold.json); parent task SHA256 `d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = False; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 4000 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: five_word_joint_smoke_policy_cloud_coverage_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke"></a>
 
 ### five_word_joint_smoke
@@ -1346,6 +1626,39 @@ Execution guards: finite state = True; optimizer roles = generator, encoder, pri
 Declared budget: 20001 updates; timeout 900 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_smoke_policy_cloud_coverage_v1
+
+**five_word_joint_smoke_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): a joint generator/encoder/critic (BiGAN) in which exactly five latent rows each stay bound to one word and must be recovered by the encoder; Atlas/E22 birth/death would copy rows between words, and the encoder, joint critic and five-row minimum population are outside the independent-row recipes
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). five_word_joint_smoke_policy_cloud_coverage_v1: a joint generator/encoder/critic (BiGAN) in which exactly five latent rows each stay bound to one word and must be recovered by the encoder; Atlas/E22 birth/death would copy rows between words, and the encoder, joint critic and five-row minimum population are outside the independent-row recipes [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [five_word_joint_smoke](../../../configs/forge/tasks/five_word_joint_smoke.json); parent task SHA256 `e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = True; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
@@ -1416,6 +1729,72 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_smoke_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. First independently confirmed full pass at step 84 (16/24 scheduled observations passed).
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). any scheduled full pass with independent same-state confirmation [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. First independently confirmed full pass at step 250 (15/24 scheduled observations passed).
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). any scheduled full pass with independent same-state confirmation [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability"></a>
 
 ### gaussian1d_stability
@@ -1449,6 +1828,78 @@ Declared budget: 6000 updates; timeout 600 seconds.
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: gaussian1d_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_stability_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_stability_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stationary hold 53/72, deadline reacquisition FAIL, shifted hold 17/24 (PASS needs every check); frozen control 0/48.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). stationary hold, deadline reacquisition and shifted hold [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_v1
+
+**gaussian1d_stability_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_stability_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stationary hold 46/72, deadline reacquisition FAIL, shifted hold 17/24 (PASS needs every check); frozen control 0/48.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). stationary hold, deadline reacquisition and shifted hold [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_v1 (checkpoint).
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
@@ -1534,6 +1985,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-grid100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_as_served_v1
+
+**grid100_14k_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate PASS; final live accuracy checks 5/5 passed; independent holdout passes (precision 0.987, mass TV 0.0153 (needs <= 0.06), center RMS (sigma) 0.112 (needs <= 0.2), \|cov trace bias\| 0.0212 (needs <= 0.1), radial KS 0.00862 (needs <= 0.04); accuracy score 0.311 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). sustained live accuracy and independent holdout pass [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: grid100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-grid100_14k_policy_cloud_coverage_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_v1
+
+**grid100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 0.998, mass TV 0.0153 (needs <= 0.06), center RMS (sigma) 0.109 (needs <= 0.2), \|cov trace bias\| 0.95 (needs <= 0.1) FAIL, radial KS 0.807 (needs <= 0.04) FAIL; accuracy score 7.62 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: grid100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-grid100_affine_paired_laws_v1"></a>
 
 ### grid100_affine_paired_laws_v1
@@ -1612,6 +2149,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-grid100_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_policy_cloud_coverage_as_served_v1
+
+**grid100_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate PASS; final live accuracy checks 5/5 passed; independent holdout passes (precision 0.986, mass TV 0.0164 (needs <= 0.06), center RMS (sigma) 0.115 (needs <= 0.2), \|cov trace bias\| 0.00949 (needs <= 0.1), radial KS 0.00387 (needs <= 0.04); accuracy score 0.26 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). sustained live accuracy and independent holdout pass [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-grid100_policy_cloud_coverage_v1"></a>
+
+### grid100_policy_cloud_coverage_v1
+
+**grid100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 0.999, mass TV 0.0164 (needs <= 0.06), center RMS (sigma) 0.111 (needs <= 0.2), \|cov trace bias\| 0.933 (needs <= 0.1) FAIL, radial KS 0.768 (needs <= 0.04) FAIL; accuracy score 7.34 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-grid100_release07_cloud_named_v1"></a>
 
 ### grid100_release07_cloud_named_v1
@@ -1679,6 +2298,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_bars4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_bars4_policy_cloud_coverage_as_served_v1
+
+**img_bars4_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_bars4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 0 (needs >= 4), hq 0 (needs >= 0.9); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_bars4_policy_cloud_coverage_v1"></a>
+
+### img_bars4_policy_cloud_coverage_v1
+
+**img_bars4_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_bars4_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 0 (needs >= 4), hq 0 (needs >= 0.9); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-img_bars4_residual16"></a>
 
 ### img_bars4_residual16
@@ -1732,6 +2407,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_blobs4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_as_served_v1
+
+**img_blobs4_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_blobs4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 0 (needs >= 4), hq 0 (needs >= 0.9); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_blobs4_policy_cloud_coverage_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_v1
+
+**img_blobs4_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_blobs4_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 0 (needs >= 4), hq 0 (needs >= 0.9); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-img_blobs4_residual16"></a>
 
@@ -1787,6 +2518,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_intensity2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_as_served_v1
+
+**img_intensity2_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_intensity2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks pass but no stable passing suffix (4 consecutive, needs 5); 8/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_intensity2_policy_cloud_coverage_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_v1
+
+**img_intensity2_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_intensity2_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks pass but no stable passing suffix (4 consecutive, needs 5); 8/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16"></a>
 
 ### img_intensity2_residual16
@@ -1840,6 +2627,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_stripes2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_as_served_v1
+
+**img_stripes2_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_stripes2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 50; all final live checks pass: modes 2 (needs >= 2), hq 1 (needs >= 0.9); 23/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-img_stripes2_policy_cloud_coverage_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_v1
+
+**img_stripes2_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_stripes2_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 50; all final live checks pass: modes 2 (needs >= 2), hq 1 (needs >= 0.9); 23/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-img_stripes2_residual16"></a>
 
@@ -1901,6 +2744,40 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity_policy_cloud_coverage_v1"></a>
+
+### mid_scale_identity_policy_cloud_coverage_v1
+
+**mid_scale_identity_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mid_scale_identity_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): like unipolar plus a fourth mid-scale vector that switches on only near scale 0.5; it is a scale-conditioned blend of role vectors with no sampled rows, so it cannot be bound without routed (conditional) semantics
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). mid_scale_identity_policy_cloud_coverage_v1: like unipolar plus a fourth mid-scale vector that switches on only near scale 0.5; it is a scale-conditioned blend of role vectors with no sampled rows, so it cannot be bound without routed (conditional) semantics [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [mid_scale_identity](../../../configs/forge/tasks/mid_scale_identity.json); parent task SHA256 `c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| concept_cos_plus | >= 0.85 |
+| concept_cos_minus | >= 0.85 |
+| concept_mag_plus | >= 0.75 |
+| concept_mag_plus | <= 1.25 |
+| concept_mag_minus | >= 0.75 |
+| concept_mag_minus | <= 1.25 |
+| identity_at_0 | >= 0.85 |
+| identity_at_mid | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-mode_hold"></a>
 
 ### mode_hold
@@ -1928,6 +2805,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-mode_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### mode_hold_policy_cloud_coverage_as_served_v1
+
+**mode_hold_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/mode_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 7 (needs >= 8), hq 0.591 (needs >= 0.9); 2/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-mode_hold_policy_cloud_coverage_v1"></a>
+
+### mode_hold_policy_cloud_coverage_v1
+
+**mode_hold_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mode_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: modes 7 (needs >= 8), hq 0.603 (needs >= 0.9); 3/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-residual_student"></a>
 
@@ -1957,6 +2890,35 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-residual_student_policy_cloud_coverage_v1"></a>
+
+### residual_student_policy_cloud_coverage_v1
+
+**residual_student_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/residual_student_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): a conditional residual head whose output depends on (source arc, row i), with row i tied to context i and a source-conditioned critic; rows are bound to contexts rather than independent equal-weight samples, which needs a conditional routing and protected-context contract
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). residual_student_policy_cloud_coverage_v1: a conditional residual head whose output depends on (source arc, row i), with row i tied to context i and a source-conditioned critic; rows are bound to contexts rather than independent equal-weight samples, which needs a conditional routing and protected-context contract [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [residual_student](../../../configs/forge/tasks/residual_student.json); parent task SHA256 `9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+| success_rate | >= 1 |
+| wrong_pad_rate | <= 0 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition"></a>
 
@@ -1989,6 +2951,70 @@ All 96 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_as_served_v1
+
+**ring16_acquisition_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: hq 0.797 (needs >= 0.85), component_covariance_error 1.96 (needs <= 0.85); 0/96 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition_policy_cloud_coverage_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_v1
+
+**ring16_acquisition_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: hq 0.81 (needs >= 0.85), component_covariance_error 1.81 (needs <= 0.85); 0/96 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -2054,6 +3080,70 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: ring_hold (checkpoint).
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring_extension_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_extension_policy_cloud_coverage_as_served_v1
+
+**ring_extension_policy_cloud_coverage_as_served_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_extension_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (prerequisite): checkpoint parent ring_hold_policy_cloud_coverage_as_served_v1: FAIL
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent ring_hold_policy_cloud_coverage_as_served_v1: FAIL [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: ring_hold_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring_extension_policy_cloud_coverage_v1"></a>
+
+### ring_extension_policy_cloud_coverage_v1
+
+**ring_extension_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_extension_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (prerequisite): checkpoint parent ring_hold_policy_cloud_coverage_v1: FAIL
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent ring_hold_policy_cloud_coverage_v1: FAIL [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: ring_hold_policy_cloud_coverage_v1 (checkpoint).
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-ring_hold"></a>
 
 ### ring_hold
@@ -2085,6 +3175,70 @@ Declared budget: 7500 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_hold_policy_cloud_coverage_as_served_v1
+
+**ring_hold_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Converged at step 2,565 (200 consecutive checks with 8 modes and hq >= 0.9), then the hold failed at step 2,643 after 78/1,200 hold checks (needs all).
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). first qualifying window failed acquisition or uninterrupted hold [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-ring_hold_policy_cloud_coverage_v1"></a>
+
+### ring_hold_policy_cloud_coverage_v1
+
+**ring_hold_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Converged at step 2,565 (200 consecutive checks with 8 modes and hq >= 0.9), then the hold failed at step 2,643 after 78/1,200 hold checks (needs all).
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). first qualifying window failed acquisition or uninterrupted hold [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-rotated100"></a>
 
@@ -2168,6 +3322,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_as_served_v1
+
+**rotated100_14k_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate PASS; final live accuracy checks 5/5 passed; independent holdout passes (precision 0.987, mass TV 0.0139 (needs <= 0.06), center RMS (sigma) 0.0807 (needs <= 0.2), \|cov trace bias\| 0.0136 (needs <= 0.1), radial KS 0.00639 (needs <= 0.04); accuracy score 0.233 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). sustained live accuracy and independent holdout pass [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: rotated100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-rotated100_14k_policy_cloud_coverage_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_v1
+
+**rotated100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 1, mass TV 0.0139 (needs <= 0.06), center RMS (sigma) 0.079 (needs <= 0.2), \|cov trace bias\| 0.935 (needs <= 0.1) FAIL, radial KS 0.775 (needs <= 0.04) FAIL; accuracy score 7.34 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: rotated100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-rotated100_affine_square_named_v1"></a>
 
 ### rotated100_affine_square_named_v1
@@ -2206,6 +3446,88 @@ Both sustained coverage and independent holdout accuracy must pass.
 Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-rotated100_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_policy_cloud_coverage_as_served_v1
+
+**rotated100_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 0.989, mass TV 0.0192 (needs <= 0.06), center RMS (sigma) 0.249 (needs <= 0.2) FAIL, \|cov trace bias\| 0.0563 (needs <= 0.1), radial KS 0.0117 (needs <= 0.04); accuracy score 0.605 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-rotated100_policy_cloud_coverage_v1"></a>
+
+### rotated100_policy_cloud_coverage_v1
+
+**rotated100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 1, mass TV 0.0192 (needs <= 0.06), center RMS (sigma) 0.265 (needs <= 0.2) FAIL, \|cov trace bias\| 0.994 (needs <= 0.1) FAIL, radial KS 0.821 (needs <= 0.04) FAIL; accuracy score 8.03 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-staggered100"></a>
 
@@ -2289,6 +3611,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_as_served_v1
+
+**staggered100_14k_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate PASS; final live accuracy checks 5/5 passed; independent holdout passes (precision 0.987, mass TV 0.0149 (needs <= 0.06), center RMS (sigma) 0.113 (needs <= 0.2), \|cov trace bias\| 0.022 (needs <= 0.1), radial KS 0.00932 (needs <= 0.04); accuracy score 0.316 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). sustained live accuracy and independent holdout pass [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: staggered100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-staggered100_14k_policy_cloud_coverage_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_v1
+
+**staggered100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 0.998, mass TV 0.0149 (needs <= 0.06), center RMS (sigma) 0.108 (needs <= 0.2), \|cov trace bias\| 0.949 (needs <= 0.1) FAIL, radial KS 0.806 (needs <= 0.04) FAIL; accuracy score 7.61 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: staggered100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-staggered100_affine_square_named_v1"></a>
 
 ### staggered100_affine_square_named_v1
@@ -2328,6 +3736,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-staggered100_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_policy_cloud_coverage_as_served_v1
+
+**staggered100_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate PASS; final live accuracy checks 5/5 passed; independent holdout passes (precision 0.985, mass TV 0.016 (needs <= 0.06), center RMS (sigma) 0.108 (needs <= 0.2), \|cov trace bias\| 0.0111 (needs <= 0.1), radial KS 0.00423 (needs <= 0.04); accuracy score 0.256 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). sustained live accuracy and independent holdout pass [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-staggered100_policy_cloud_coverage_v1"></a>
+
+### staggered100_policy_cloud_coverage_v1
+
+**staggered100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Coverage gate FAIL; final live accuracy checks 0/5 passed; independent holdout fails (precision 0.997, mass TV 0.016 (needs <= 0.06), center RMS (sigma) 0.106 (needs <= 0.2), \|cov trace bias\| 0.935 (needs <= 0.1) FAIL, radial KS 0.769 (needs <= 0.04) FAIL; accuracy score 7.34 (mean ratio to those limits)). PASS needs the coverage gate, every final live check and the holdout.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery"></a>
 
 ### target_shift_recovery
@@ -2350,6 +3840,56 @@ Declared budget: 3600 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_as_served_v1
+
+**target_shift_recovery_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/target_shift_recovery_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Live run: stationary window (steps 1,000-1,200) 2/5 checks passed, continued hold (steps 1,210-2,400) 27/120, recovery window after the deadline (steps 2,800-3,600) live 10/81 checks passed (min modes 7, min hq 0.528); frozen control 0/81 (PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks).
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery_policy_cloud_coverage_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_v1
+
+**target_shift_recovery_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/target_shift_recovery_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Live run: stationary window (steps 1,000-1,200) 2/5 checks passed, continued hold (steps 1,210-2,400) 28/120, recovery window after the deadline (steps 2,800-3,600) live 18/81 checks passed (min modes 8, min hq 0.534); frozen control 0/81 (PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks).
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-trajectory"></a>
 
@@ -2377,6 +3917,33 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-trajectory_policy_cloud_coverage_v1"></a>
+
+### trajectory_policy_cloud_coverage_v1
+
+**trajectory_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/trajectory_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): each latent row is permanently paired with one source trajectory and the critic judges (source, continuation) pairs, so rows are not interchangeable samples; copying or rebalancing rows would break the pairing, which needs a conditional routing contract
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). trajectory_policy_cloud_coverage_v1: each latent row is permanently paired with one source trajectory and the critic judges (source, continuation) pairs, so rows are not interchangeable samples; copying or rebalancing rows would break the pairing, which needs a conditional routing contract [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [trajectory](../../../configs/forge/tasks/trajectory.json); parent task SHA256 `23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-two_pole"></a>
 
@@ -2465,6 +4032,35 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 [Explanation and existing training artifacts](../k3p-two-pole-horizon-v1/README.md)
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-two_pole_policy_cloud_coverage_v1"></a>
+
+### two_pole_policy_cloud_coverage_v1
+
+**two_pole_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/two_pole_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: mean_abs 0.00259 (needs >= 0.3); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = prior, discriminator; rng isolation = True.
+
+Declared budget: 80 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_particles_and_critic_gradient; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-two_pole_tier1_policy_selected_cloud_v1"></a>
 
 ### two_pole_tier1_policy_selected_cloud_v1
@@ -2523,6 +4119,35 @@ Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-unipolar_policy_cloud_coverage_v1"></a>
+
+### unipolar_policy_cloud_coverage_v1
+
+**unipolar_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unipolar_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): the trainable rows are three role vectors (odd, even, origin) mixed with fixed scale weights; every output uses all of them, the critic is told the scale and the fake batch repeats one vector, so copying one role vector onto another would rewrite the residual law
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). unipolar_policy_cloud_coverage_v1: the trainable rows are three role vectors (odd, even, origin) mixed with fixed scale weights; every output uses all of them, the critic is told the scale and the fake batch repeats one vector, so copying one role vector onto another would rewrite the residual law [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [unipolar](../../../configs/forge/tasks/unipolar.json); parent task SHA256 `52ed4bbf499e743c12152e91a3fda3a2e5272585a9ed56080f85433128951afe`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| cover | >= 0.85 |
+| off_caption | <= 0.05 |
+| neu_hold | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-unused_token_hold"></a>
 
 ### unused_token_hold
@@ -2551,6 +4176,35 @@ Execution guards: finite state = True; optimizer roles = generator, discriminato
 Declared budget: 200 updates; timeout 300 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-unused_token_hold_policy_cloud_coverage_v1"></a>
+
+### unused_token_hold_policy_cloud_coverage_v1
+
+**unused_token_hold_policy_cloud_coverage_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unused_token_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (shared law; one run supplies both laws); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Not run (incompatible): the student is one shared embedding plus per-token slot corrections, and the test checks that an unused token stays unchanged; there is no table of interchangeable sample rows for Atlas/E22 to sample, copy or rebalance, so a faithful binding needs a conditional (routed) row contract that these independent-row recipes do not have
+
+Run attempt: **BLOCKED** (new_attempt; qualification unchanged). unused_token_hold_policy_cloud_coverage_v1: the student is one shared embedding plus per-token slot corrections, and the test checks that an unused token stays unchanged; there is no table of interchangeable sample rows for Atlas/E22 to sample, copy or rebalance, so a faithful binding needs a conditional (routed) row contract that these independent-row recipes do not have [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator; rng isolation = True.
+
+Declared budget: 200 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-unused_token_hold_tier1_policy_selected_cloud_v1"></a>
 
@@ -2612,6 +4266,68 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_as_served_v1
+
+**vector_anisotropic_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_anisotropic_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 550; all final live checks pass: sw1_normalized 0.0306 (needs <= 0.18), mass_tv 0.00472 (needs <= 0.15), hq 0.969 (needs >= 0.85), component_covariance_error 0.384 (needs <= 0.85), component_min_eigen_ratio 0.751 (needs >= 0.15); 14/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic_policy_cloud_coverage_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_v1
+
+**vector_anisotropic_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_anisotropic_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 550; all final live checks pass: sw1_normalized 0.0177 (needs <= 0.18), mass_tv 0.015 (needs <= 0.15), hq 0.972 (needs >= 0.85), component_covariance_error 0.257 (needs <= 0.85), component_min_eigen_ratio 0.78 (needs >= 0.15); 14/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic_published"></a>
 
 ### vector_anisotropic_published
@@ -2670,6 +4386,64 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_overlap_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_as_served_v1
+
+**vector_overlap_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_overlap_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 100; all final live checks pass: sw1_normalized 0.0346 (needs <= 0.18), mean_error 0.0449 (needs <= 0.15), covariance_error 0.0653 (needs <= 0.45); 23/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_overlap_policy_cloud_coverage_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_v1
+
+**vector_overlap_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_overlap_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 500; all final live checks pass: sw1_normalized 0.0353 (needs <= 0.18), mean_error 0.0449 (needs <= 0.15), covariance_error 0.0785 (needs <= 0.45); 22/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_overlap_published"></a>
 
 ### vector_overlap_published
@@ -2725,6 +4499,64 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_spiral_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_as_served_v1
+
+**vector_spiral_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_spiral_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 67; all final live checks pass: sw1_normalized 0.0225 (needs <= 0.18), mean_error 0.0309 (needs <= 0.15), covariance_error 0.0232 (needs <= 0.45); 24/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_spiral_policy_cloud_coverage_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_v1
+
+**vector_spiral_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_spiral_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 67; all final live checks pass: sw1_normalized 0.0268 (needs <= 0.18), mean_error 0.0286 (needs <= 0.15), covariance_error 0.0307 (needs <= 0.45); 24/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_spiral_published"></a>
 
@@ -2783,6 +4615,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_as_served_v1
+
+**vector_two_broad_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_two_broad_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 100; all final live checks pass: sw1_normalized 0.0293 (needs <= 0.18), mass_tv 0.00513 (needs <= 0.15), hq 0.981 (needs >= 0.85), component_covariance_error 0.185 (needs <= 0.85), component_min_eigen_ratio 0.764 (needs >= 0.15); 23/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_policy_cloud_coverage_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_v1
+
+**vector_two_broad_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_two_broad_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Stable passing suffix from step 100; all final live checks pass: sw1_normalized 0.0343 (needs <= 0.18), mass_tv 0.00879 (needs <= 0.15), hq 0.985 (needs >= 0.85), component_covariance_error 0.215 (needs <= 0.85), component_min_eigen_ratio 0.71 (needs >= 0.15); 23/24 observations passed.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published"></a>
 
@@ -2845,6 +4739,70 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_mass_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_mass_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: component_covariance_error 1.25 (needs <= 0.85); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_v1
+
+**vector_unequal_mass_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_mass_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: component_covariance_error 1.02 (needs <= 0.85); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published"></a>
 
 ### vector_unequal_mass_published
@@ -2905,6 +4863,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_width_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_width_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (as served law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: component_covariance_error 0.863 (needs <= 0.85); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_v1
+
+**vector_unequal_width_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_width_policy_cloud_coverage_v1.json).
+
+Test definition: **matches recorded run**. Separately scoped policy-cloud diagnostic (clean law); frozen source 43b7e079c67a, candidate revision f66076217f56. Test definition matches the recorded run. Final live checks fail: component_covariance_error 0.852 (needs <= 0.85); 0/24 observations passed.
+
+Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../atlas-e22-policy-cloud-20261015/README.md).
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-1bf9d7d34422-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width_published"></a>
 
@@ -2967,6 +4987,8 @@ Separate cohort coverage (excluded from family totals):
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
+| [policy_cloud_coverage](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) | [0/21 (21 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3) | [0/35 (35 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage) |
+| [policy_cloud_coverage_as_served](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1) | [0/21 (21 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3) | [0/35 (35 not run)](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served) |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage-tier-3) | [0/7 (7 not run)](atlas.md#cohort-cuda-c195899a64af-tier1_policy_coverage) |
 
 With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
@@ -3573,6 +5595,142 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage"></a>
+
+## policy_cloud_coverage
+
+**policy_cloud_coverage — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-two_pole_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-gaussian1d_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring16_acquisition_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-grid100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-rotated100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-staggered100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_stripes2_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_bars4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_bars4_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_blobs4_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_intensity2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_intensity2_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mode_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-mode_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_two_broad_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_unequal_mass_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_unequal_width_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_anisotropic_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_overlap_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_spiral_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-trajectory_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-residual_student_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-cover_leftover_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-unipolar_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-grid100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-rotated100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-staggered100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_extension_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring_extension_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-target_shift_recovery_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage_as_served"></a>
+
+## policy_cloud_coverage_as_served
+
+**policy_cloud_coverage_as_served — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage_as_served.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-two_pole_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring16_acquisition_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-grid100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-rotated100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-staggered100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_stripes2_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_bars4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_bars4_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_blobs4_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_intensity2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-img_intensity2_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mode_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-mode_hold_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_overlap_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-vector_spiral_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-trajectory_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-residual_student_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-cover_leftover_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-unipolar_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-grid100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring_hold_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_extension_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-ring_extension_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-c195899a64af-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+
 <a name="cohort-cuda-c195899a64af-quality_coverage"></a>
 
 ## quality_coverage
@@ -3936,6 +6094,35 @@ Declared budget: 250 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
+<a name="cohort-cuda-c195899a64af-experiment-ae_gan_hold_policy_cloud_coverage_v1"></a>
+
+### ae_gan_hold_policy_cloud_coverage_v1
+
+**ae_gan_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ae_gan_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = encoder, generator, prior, discriminator; rng isolation = True.
+
+Declared budget: 250 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_reconstructed_prior_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
+
 <a name="cohort-cuda-c195899a64af-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1"></a>
 
 ### ae_gan_hold_tier1_policy_selected_cloud_v1
@@ -4007,6 +6194,50 @@ Declared budget: 24 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_measurement_v1_policy_cloud_coverage_v1
+
+**clockfree_audit_measurement_v1_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_measurement_v1_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [clockfree_audit_measurement_v1](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json); parent task SHA256 `b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-clockfree_audit_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_policy_cloud_coverage_v1
+
+**clockfree_audit_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3) · [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-clockfree_audit_tier1_policy_selected_cloud_v1"></a>
 
 ### clockfree_audit_tier1_policy_selected_cloud_v1
@@ -4060,6 +6291,38 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-cover_leftover_policy_cloud_coverage_v1"></a>
+
+### cover_leftover_policy_cloud_coverage_v1
+
+**cover_leftover_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/cover_leftover_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [cover_leftover](../../../configs/forge/tasks/cover_leftover.json); parent task SHA256 `62558d6d4de641078c9d20c0e13d58073ec00c341b478eaafdaf83b80909f9f1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| u_kept | >= 0.85 |
+| content_kept | >= 0.75 |
+| leak_ratio | <= 0.2 |
+| pole_rel_err_plus | <= 0.2 |
+| pole_rel_err_minus | <= 0.2 |
+| same_dir | <= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-c195899a64af-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -4129,6 +6392,41 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
+<a name="cohort-cuda-c195899a64af-experiment-five_word_joint_hold_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_hold_policy_cloud_coverage_v1
+
+**five_word_joint_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [five_word_joint_hold](../../../configs/forge/tasks/five_word_joint_hold.json); parent task SHA256 `d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = False; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 4000 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: five_word_joint_smoke_policy_cloud_coverage_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
 <a name="cohort-cuda-c195899a64af-experiment-five_word_joint_smoke"></a>
 
 ### five_word_joint_smoke
@@ -4157,6 +6455,39 @@ Execution guards: finite state = True; optimizer roles = generator, encoder, pri
 Declared budget: 20001 updates; timeout 900 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
+<a name="cohort-cuda-c195899a64af-experiment-five_word_joint_smoke_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_smoke_policy_cloud_coverage_v1
+
+**five_word_joint_smoke_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [five_word_joint_smoke](../../../configs/forge/tasks/five_word_joint_smoke.json); parent task SHA256 `e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = True; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
@@ -4227,6 +6558,72 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
+<a name="cohort-cuda-c195899a64af-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_smoke_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-c195899a64af-experiment-gaussian1d_smoke_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
 <a name="cohort-cuda-c195899a64af-experiment-gaussian1d_stability"></a>
 
 ### gaussian1d_stability
@@ -4260,6 +6657,78 @@ Declared budget: 6000 updates; timeout 600 seconds.
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: gaussian1d_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-c195899a64af-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_stability_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_stability_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-c195899a64af-experiment-gaussian1d_stability_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_v1
+
+**gaussian1d_stability_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_stability_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_v1 (checkpoint).
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
@@ -4345,6 +6814,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-c195899a64af-experiment-grid100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_as_served_v1
+
+**grid100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: grid100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-grid100_14k_policy_cloud_coverage_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_v1
+
+**grid100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: grid100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-c195899a64af-experiment-grid100_affine_paired_laws_v1"></a>
 
 ### grid100_affine_paired_laws_v1
@@ -4423,6 +6978,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-grid100_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_policy_cloud_coverage_as_served_v1
+
+**grid100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-grid100_policy_cloud_coverage_v1"></a>
+
+### grid100_policy_cloud_coverage_v1
+
+**grid100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-grid100_release07_cloud_named_v1"></a>
 
 ### grid100_release07_cloud_named_v1
@@ -4490,6 +7127,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-img_bars4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_bars4_policy_cloud_coverage_as_served_v1
+
+**img_bars4_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_bars4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_bars4_policy_cloud_coverage_v1"></a>
+
+### img_bars4_policy_cloud_coverage_v1
+
+**img_bars4_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_bars4_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-img_bars4_residual16"></a>
 
 ### img_bars4_residual16
@@ -4543,6 +7236,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_blobs4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_as_served_v1
+
+**img_blobs4_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_blobs4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_blobs4_policy_cloud_coverage_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_v1
+
+**img_blobs4_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_blobs4_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-img_blobs4_residual16"></a>
 
@@ -4598,6 +7347,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-img_intensity2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_as_served_v1
+
+**img_intensity2_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_intensity2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_intensity2_policy_cloud_coverage_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_v1
+
+**img_intensity2_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_intensity2_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-img_intensity2_residual16"></a>
 
 ### img_intensity2_residual16
@@ -4651,6 +7456,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_stripes2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_as_served_v1
+
+**img_stripes2_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_stripes2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-img_stripes2_policy_cloud_coverage_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_v1
+
+**img_stripes2_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_stripes2_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-img_stripes2_residual16"></a>
 
@@ -4712,6 +7573,40 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-c195899a64af-experiment-mid_scale_identity_policy_cloud_coverage_v1"></a>
+
+### mid_scale_identity_policy_cloud_coverage_v1
+
+**mid_scale_identity_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mid_scale_identity_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mid_scale_identity](../../../configs/forge/tasks/mid_scale_identity.json); parent task SHA256 `c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| concept_cos_plus | >= 0.85 |
+| concept_cos_minus | >= 0.85 |
+| concept_mag_plus | >= 0.75 |
+| concept_mag_plus | <= 1.25 |
+| concept_mag_minus | >= 0.75 |
+| concept_mag_minus | <= 1.25 |
+| identity_at_0 | >= 0.85 |
+| identity_at_mid | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-c195899a64af-experiment-mode_hold"></a>
 
 ### mode_hold
@@ -4739,6 +7634,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-mode_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### mode_hold_policy_cloud_coverage_as_served_v1
+
+**mode_hold_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/mode_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-mode_hold_policy_cloud_coverage_v1"></a>
+
+### mode_hold_policy_cloud_coverage_v1
+
+**mode_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mode_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-residual_student"></a>
 
@@ -4768,6 +7719,35 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-c195899a64af-experiment-residual_student_policy_cloud_coverage_v1"></a>
+
+### residual_student_policy_cloud_coverage_v1
+
+**residual_student_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/residual_student_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [residual_student](../../../configs/forge/tasks/residual_student.json); parent task SHA256 `9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+| success_rate | >= 1 |
+| wrong_pad_rate | <= 0 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-c195899a64af-experiment-ring16_acquisition"></a>
 
@@ -4800,6 +7780,70 @@ All 96 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_as_served_v1
+
+**ring16_acquisition_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-ring16_acquisition_policy_cloud_coverage_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_v1
+
+**ring16_acquisition_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -4865,6 +7909,70 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: ring_hold (checkpoint).
 
+<a name="cohort-cuda-c195899a64af-experiment-ring_extension_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_extension_policy_cloud_coverage_as_served_v1
+
+**ring_extension_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_extension_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: ring_hold_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+<a name="cohort-cuda-c195899a64af-experiment-ring_extension_policy_cloud_coverage_v1"></a>
+
+### ring_extension_policy_cloud_coverage_v1
+
+**ring_extension_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_extension_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: ring_hold_policy_cloud_coverage_v1 (checkpoint).
+
 <a name="cohort-cuda-c195899a64af-experiment-ring_hold"></a>
 
 ### ring_hold
@@ -4896,6 +8004,70 @@ Declared budget: 7500 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-ring_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_hold_policy_cloud_coverage_as_served_v1
+
+**ring_hold_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-ring_hold_policy_cloud_coverage_v1"></a>
+
+### ring_hold_policy_cloud_coverage_v1
+
+**ring_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-c195899a64af-experiment-rotated100"></a>
 
@@ -4979,6 +8151,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-c195899a64af-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_as_served_v1
+
+**rotated100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: rotated100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-rotated100_14k_policy_cloud_coverage_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_v1
+
+**rotated100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: rotated100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-c195899a64af-experiment-rotated100_affine_square_named_v1"></a>
 
 ### rotated100_affine_square_named_v1
@@ -5017,6 +8275,88 @@ Both sustained coverage and independent holdout accuracy must pass.
 Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-rotated100_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_policy_cloud_coverage_as_served_v1
+
+**rotated100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-rotated100_policy_cloud_coverage_v1"></a>
+
+### rotated100_policy_cloud_coverage_v1
+
+**rotated100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-staggered100"></a>
 
@@ -5100,6 +8440,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-c195899a64af-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_as_served_v1
+
+**staggered100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: staggered100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-staggered100_14k_policy_cloud_coverage_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_v1
+
+**staggered100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: staggered100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-c195899a64af-experiment-staggered100_affine_square_named_v1"></a>
 
 ### staggered100_affine_square_named_v1
@@ -5139,6 +8565,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-staggered100_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_policy_cloud_coverage_as_served_v1
+
+**staggered100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-staggered100_policy_cloud_coverage_v1"></a>
+
+### staggered100_policy_cloud_coverage_v1
+
+**staggered100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-target_shift_recovery"></a>
 
 ### target_shift_recovery
@@ -5161,6 +8669,56 @@ Declared budget: 3600 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_as_served_v1
+
+**target_shift_recovery_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/target_shift_recovery_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-c195899a64af-experiment-target_shift_recovery_policy_cloud_coverage_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_v1
+
+**target_shift_recovery_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/target_shift_recovery_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-c195899a64af-experiment-trajectory"></a>
 
@@ -5188,6 +8746,33 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-c195899a64af-experiment-trajectory_policy_cloud_coverage_v1"></a>
+
+### trajectory_policy_cloud_coverage_v1
+
+**trajectory_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/trajectory_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [trajectory](../../../configs/forge/tasks/trajectory.json); parent task SHA256 `23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-c195899a64af-experiment-two_pole"></a>
 
@@ -5276,6 +8861,35 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 [Explanation and existing training artifacts](../k3p-two-pole-horizon-v1/README.md)
 
+<a name="cohort-cuda-c195899a64af-experiment-two_pole_policy_cloud_coverage_v1"></a>
+
+### two_pole_policy_cloud_coverage_v1
+
+**two_pole_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/two_pole_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = prior, discriminator; rng isolation = True.
+
+Declared budget: 80 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_particles_and_critic_gradient; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-c195899a64af-experiment-two_pole_tier1_policy_selected_cloud_v1"></a>
 
 ### two_pole_tier1_policy_selected_cloud_v1
@@ -5334,6 +8948,35 @@ Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-c195899a64af-experiment-unipolar_policy_cloud_coverage_v1"></a>
+
+### unipolar_policy_cloud_coverage_v1
+
+**unipolar_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unipolar_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [unipolar](../../../configs/forge/tasks/unipolar.json); parent task SHA256 `52ed4bbf499e743c12152e91a3fda3a2e5272585a9ed56080f85433128951afe`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| cover | >= 0.85 |
+| off_caption | <= 0.05 |
+| neu_hold | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-c195899a64af-experiment-unused_token_hold"></a>
 
 ### unused_token_hold
@@ -5362,6 +9005,35 @@ Execution guards: finite state = True; optimizer roles = generator, discriminato
 Declared budget: 200 updates; timeout 300 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-unused_token_hold_policy_cloud_coverage_v1"></a>
+
+### unused_token_hold_policy_cloud_coverage_v1
+
+**unused_token_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unused_token_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator; rng isolation = True.
+
+Declared budget: 200 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-c195899a64af-experiment-unused_token_hold_tier1_policy_selected_cloud_v1"></a>
 
@@ -5423,6 +9095,68 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_as_served_v1
+
+**vector_anisotropic_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_anisotropic_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_anisotropic_policy_cloud_coverage_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_v1
+
+**vector_anisotropic_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_anisotropic_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-vector_anisotropic_published"></a>
 
 ### vector_anisotropic_published
@@ -5481,6 +9215,64 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-vector_overlap_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_as_served_v1
+
+**vector_overlap_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_overlap_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_overlap_policy_cloud_coverage_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_v1
+
+**vector_overlap_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_overlap_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-vector_overlap_published"></a>
 
 ### vector_overlap_published
@@ -5536,6 +9328,64 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_spiral_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_as_served_v1
+
+**vector_spiral_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_spiral_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_spiral_policy_cloud_coverage_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_v1
+
+**vector_spiral_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_spiral_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-vector_spiral_published"></a>
 
@@ -5594,6 +9444,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_as_served_v1
+
+**vector_two_broad_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_two_broad_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_two_broad_policy_cloud_coverage_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_v1
+
+**vector_two_broad_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_two_broad_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-vector_two_broad_published"></a>
 
@@ -5656,6 +9568,70 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_mass_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_mass_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_unequal_mass_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_v1
+
+**vector_unequal_mass_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_mass_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-vector_unequal_mass_published"></a>
 
 ### vector_unequal_mass_published
@@ -5716,6 +9692,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_width_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_width_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-c195899a64af-experiment-vector_unequal_width_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_v1
+
+**vector_unequal_width_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_width_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-c195899a64af-experiment-vector_unequal_width_published"></a>
 
@@ -5778,6 +9816,8 @@ Separate cohort coverage (excluded from family totals):
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: |
+| [policy_cloud_coverage](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage) | [0/7 (7 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) | [0/21 (21 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) | [0/7 (7 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3) | [0/35 (35 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage) |
+| [policy_cloud_coverage_as_served](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served) | [0/7 (7 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1) | [0/21 (21 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2) | [0/7 (7 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3) | [0/35 (35 not run)](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served) |
 | [tier1_policy_coverage](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0/7 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0/7 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 
 [Frozen separate-cohort numerical evidence](../tier1-completion/scoped-evidence.json); source commit `928b485ffbe6e17d79b41d307ae8b6275489b37a`; exact scoped cohort `df620730e3d310e590a2841155c9a78fb3cacbb57a97be2e4f9a3799ff0e243c` (runtime SHA256 `957e45749c6edd39d55ad206e3911d627884a6e8d49bfb3d3b803093cbf7eaf7`). These cells give no parent-cohort credit.
@@ -6386,6 +10426,142 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage"></a>
+
+## policy_cloud_coverage
+
+**policy_cloud_coverage — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring16_acquisition_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_bars4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_intensity2_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mode_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_extension_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served"></a>
+
+## policy_cloud_coverage_as_served
+
+**policy_cloud_coverage_as_served — revision 1**. [View declaration](../../../configs/forge/views/policy_cloud_coverage_as_served.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 21 / 7**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_smoke_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring16_acquisition_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2"></a>
+
+### Tier 2
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_stability_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_bars4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [img_intensity2_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mode_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [trajectory_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [residual_student_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [cover_leftover_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unipolar_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [mid_scale_identity_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3"></a>
+
+### Tier 3
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit_policy_cloud_coverage_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_policy_cloud_coverage_v1) | required | UNKNOWN | recorded definition unavailable |
+| [grid100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring_extension_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1) | required | UNKNOWN | recorded definition unavailable |
+
 <a name="cohort-cuda-0d83d78027c5-quality_coverage"></a>
 
 ## quality_coverage
@@ -6749,6 +10925,35 @@ Declared budget: 250 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_policy_cloud_coverage_v1"></a>
+
+### ae_gan_hold_policy_cloud_coverage_v1
+
+**ae_gan_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ae_gan_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = encoder, generator, prior, discriminator; rng isolation = True.
+
+Declared budget: 250 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_reconstructed_prior_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1"></a>
 
 ### ae_gan_hold_tier1_policy_selected_cloud_v1
@@ -6821,6 +11026,50 @@ Exact state/output parity for: step_label, horizon, evaluation_cadence, restart;
 Declared budget: 24 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_measurement_v1_policy_cloud_coverage_v1
+
+**clockfree_audit_measurement_v1_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_measurement_v1_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [clockfree_audit_measurement_v1](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json); parent task SHA256 `b84b921957946275a1b03088b78bc268ede5635e7243c00bbbda92c82af29978`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-clockfree_audit_policy_cloud_coverage_v1"></a>
+
+### clockfree_audit_policy_cloud_coverage_v1
+
+**clockfree_audit_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3) · [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1"></a>
 
@@ -6899,6 +11148,38 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-cover_leftover_policy_cloud_coverage_v1"></a>
+
+### cover_leftover_policy_cloud_coverage_v1
+
+**cover_leftover_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/cover_leftover_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [cover_leftover](../../../configs/forge/tasks/cover_leftover.json); parent task SHA256 `62558d6d4de641078c9d20c0e13d58073ec00c341b478eaafdaf83b80909f9f1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| u_kept | >= 0.85 |
+| content_kept | >= 0.75 |
+| leak_ratio | <= 0.2 |
+| pole_rel_err_plus | <= 0.2 |
+| pole_rel_err_minus | <= 0.2 |
+| same_dir | <= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
 ### five_word_joint_acquisition_tier1_policy_selected_cloud_v1
@@ -6969,6 +11250,41 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
+<a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_hold_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_hold_policy_cloud_coverage_v1
+
+**five_word_joint_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [five_word_joint_hold](../../../configs/forge/tasks/five_word_joint_hold.json); parent task SHA256 `d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = False; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 4000 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: five_word_joint_smoke_policy_cloud_coverage_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
 <a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke"></a>
 
 ### five_word_joint_smoke
@@ -6997,6 +11313,39 @@ Execution guards: finite state = True; optimizer roles = generator, encoder, pri
 Declared budget: 20001 updates; timeout 900 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-tier-split/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_smoke_policy_cloud_coverage_v1"></a>
+
+### five_word_joint_smoke_policy_cloud_coverage_v1
+
+**five_word_joint_smoke_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [five_word_joint_smoke](../../../configs/forge/tasks/five_word_joint_smoke.json); parent task SHA256 `e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+Execution guards: exact optimizer updates = True; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../five-word-tier-split/README.md)
 
@@ -7083,6 +11432,72 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
+<a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_smoke_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_smoke_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_smoke_policy_cloud_coverage_v1
+
+**gaussian1d_smoke_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_smoke_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
 <a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability"></a>
 
 ### gaussian1d_stability
@@ -7114,6 +11529,78 @@ Declared budget: 6000 updates; timeout 600 seconds.
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: gaussian1d_smoke (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability_policy_cloud_coverage_as_served_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_as_served_v1
+
+**gaussian1d_stability_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_stability_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+[Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_stability_policy_cloud_coverage_v1"></a>
+
+### gaussian1d_stability_policy_cloud_coverage_v1
+
+**gaussian1d_stability_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_stability_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator, prior; rng isolation = True.
+
+Declared budget: 6000 updates; timeout 600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: gaussian1d_smoke_policy_cloud_coverage_v1 (checkpoint).
 
 [Explanation and existing training artifacts](../gaussian-smoke-tier-split/README.md)
 
@@ -7199,6 +11686,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-0d83d78027c5-experiment-grid100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_as_served_v1
+
+**grid100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: grid100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-grid100_14k_policy_cloud_coverage_v1"></a>
+
+### grid100_14k_policy_cloud_coverage_v1
+
+**grid100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: grid100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-0d83d78027c5-experiment-grid100_affine_paired_laws_v1"></a>
 
 ### grid100_affine_paired_laws_v1
@@ -7277,6 +11850,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-grid100_policy_cloud_coverage_as_served_v1"></a>
+
+### grid100_policy_cloud_coverage_as_served_v1
+
+**grid100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-grid100_policy_cloud_coverage_v1"></a>
+
+### grid100_policy_cloud_coverage_v1
+
+**grid100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-grid100_release07_cloud_named_v1"></a>
 
 ### grid100_release07_cloud_named_v1
@@ -7344,6 +11999,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-img_bars4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_bars4_policy_cloud_coverage_as_served_v1
+
+**img_bars4_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_bars4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_bars4_policy_cloud_coverage_v1"></a>
+
+### img_bars4_policy_cloud_coverage_v1
+
+**img_bars4_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_bars4_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16"></a>
 
 ### img_bars4_residual16
@@ -7397,6 +12108,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_blobs4_policy_cloud_coverage_as_served_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_as_served_v1
+
+**img_blobs4_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_blobs4_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_blobs4_policy_cloud_coverage_v1"></a>
+
+### img_blobs4_policy_cloud_coverage_v1
+
+**img_blobs4_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_blobs4_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16"></a>
 
@@ -7452,6 +12219,62 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-img_intensity2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_as_served_v1
+
+**img_intensity2_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_intensity2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_intensity2_policy_cloud_coverage_v1"></a>
+
+### img_intensity2_policy_cloud_coverage_v1
+
+**img_intensity2_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_intensity2_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16"></a>
 
 ### img_intensity2_residual16
@@ -7505,6 +12328,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_stripes2_policy_cloud_coverage_as_served_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_as_served_v1
+
+**img_stripes2_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_stripes2_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enumerated_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-img_stripes2_policy_cloud_coverage_v1"></a>
+
+### img_stripes2_policy_cloud_coverage_v1
+
+**img_stripes2_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_stripes2_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_enumerated_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16"></a>
 
@@ -7566,6 +12445,40 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-mid_scale_identity_policy_cloud_coverage_v1"></a>
+
+### mid_scale_identity_policy_cloud_coverage_v1
+
+**mid_scale_identity_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mid_scale_identity_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mid_scale_identity](../../../configs/forge/tasks/mid_scale_identity.json); parent task SHA256 `c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| concept_cos_plus | >= 0.85 |
+| concept_cos_minus | >= 0.85 |
+| concept_mag_plus | >= 0.75 |
+| concept_mag_plus | <= 1.25 |
+| concept_mag_minus | >= 0.75 |
+| concept_mag_minus | <= 1.25 |
+| identity_at_0 | >= 0.85 |
+| identity_at_mid | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 800 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-mode_hold"></a>
 
 ### mode_hold
@@ -7593,6 +12506,62 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-mode_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### mode_hold_policy_cloud_coverage_as_served_v1
+
+**mode_hold_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/mode_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-mode_hold_policy_cloud_coverage_v1"></a>
+
+### mode_hold_policy_cloud_coverage_v1
+
+**mode_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mode_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-residual_student"></a>
 
@@ -7622,6 +12591,35 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-residual_student_policy_cloud_coverage_v1"></a>
+
+### residual_student_policy_cloud_coverage_v1
+
+**residual_student_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/residual_student_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [residual_student](../../../configs/forge/tasks/residual_student.json); parent task SHA256 `9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+| success_rate | >= 1 |
+| wrong_pad_rate | <= 0 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition"></a>
 
@@ -7654,6 +12652,70 @@ All 96 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_as_served_v1
+
+**ring16_acquisition_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_policy_cloud_coverage_v1"></a>
+
+### ring16_acquisition_policy_cloud_coverage_v1
+
+**ring16_acquisition_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 96 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -7738,6 +12800,70 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: ring_hold (checkpoint).
 
+<a name="cohort-cuda-0d83d78027c5-experiment-ring_extension_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_extension_policy_cloud_coverage_as_served_v1
+
+**ring_extension_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_extension_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: ring_hold_policy_cloud_coverage_as_served_v1 (checkpoint).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring_extension_policy_cloud_coverage_v1"></a>
+
+### ring_extension_policy_cloud_coverage_v1
+
+**ring_extension_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_extension_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: ring_hold_policy_cloud_coverage_v1 (checkpoint).
+
 <a name="cohort-cuda-0d83d78027c5-experiment-ring_hold"></a>
 
 ### ring_hold
@@ -7769,6 +12895,70 @@ Declared budget: 7500 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring_hold_policy_cloud_coverage_as_served_v1"></a>
+
+### ring_hold_policy_cloud_coverage_as_served_v1
+
+**ring_hold_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_hold_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-ring_hold_policy_cloud_coverage_v1"></a>
+
+### ring_hold_policy_cloud_coverage_v1
+
+**ring_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+Declared budget: 7500 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-0d83d78027c5-experiment-rotated100"></a>
 
@@ -7852,6 +13042,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-0d83d78027c5-experiment-rotated100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_as_served_v1
+
+**rotated100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: rotated100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-rotated100_14k_policy_cloud_coverage_v1"></a>
+
+### rotated100_14k_policy_cloud_coverage_v1
+
+**rotated100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: rotated100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1"></a>
 
 ### rotated100_affine_square_named_v1
@@ -7890,6 +13166,88 @@ Both sustained coverage and independent holdout accuracy must pass.
 Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-rotated100_policy_cloud_coverage_as_served_v1"></a>
+
+### rotated100_policy_cloud_coverage_as_served_v1
+
+**rotated100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-rotated100_policy_cloud_coverage_v1"></a>
+
+### rotated100_policy_cloud_coverage_v1
+
+**rotated100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-staggered100"></a>
 
@@ -7973,6 +13331,92 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
+<a name="cohort-cuda-0d83d78027c5-experiment-staggered100_14k_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_as_served_v1
+
+**staggered100_14k_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_14k_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: staggered100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-staggered100_14k_policy_cloud_coverage_v1"></a>
+
+### staggered100_14k_policy_cloud_coverage_v1
+
+**staggered100_14k_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_14k_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 14000 updates; timeout 7200 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: staggered100_policy_cloud_coverage_v1 (checkpoint), clockfree_audit_policy_cloud_coverage_v1 (gate).
+
 <a name="cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1"></a>
 
 ### staggered100_affine_square_named_v1
@@ -8012,6 +13456,88 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-staggered100_policy_cloud_coverage_as_served_v1"></a>
+
+### staggered100_policy_cloud_coverage_as_served_v1
+
+**staggered100_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-staggered100_policy_cloud_coverage_v1"></a>
+
+### staggered100_policy_cloud_coverage_v1
+
+**staggered100_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-target_shift_recovery"></a>
 
 ### target_shift_recovery
@@ -8034,6 +13560,56 @@ Declared budget: 3600 updates; timeout 3600 seconds.
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 Dependencies: mode_hold (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-target_shift_recovery_policy_cloud_coverage_as_served_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_as_served_v1
+
+**target_shift_recovery_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/target_shift_recovery_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
+
+<a name="cohort-cuda-0d83d78027c5-experiment-target_shift_recovery_policy_cloud_coverage_v1"></a>
+
+### target_shift_recovery_policy_cloud_coverage_v1
+
+**target_shift_recovery_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/target_shift_recovery_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-3).
+
+Current pass criteria:
+
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
+
+Declared budget: 3600 updates; timeout 3600 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
+Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 <a name="cohort-cuda-0d83d78027c5-experiment-trajectory"></a>
 
@@ -8061,6 +13637,33 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-trajectory_policy_cloud_coverage_v1"></a>
+
+### trajectory_policy_cloud_coverage_v1
+
+**trajectory_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/trajectory_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [trajectory](../../../configs/forge/tasks/trajectory.json); parent task SHA256 `23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_prior_centers_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-two_pole"></a>
 
@@ -8149,6 +13752,35 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 [Explanation and existing training artifacts](../k3p-two-pole-horizon-v1/README.md)
 
+<a name="cohort-cuda-0d83d78027c5-experiment-two_pole_policy_cloud_coverage_v1"></a>
+
+### two_pole_policy_cloud_coverage_v1
+
+**two_pole_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/two_pole_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = prior, discriminator; rng isolation = True.
+
+Declared budget: 80 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_particles_and_critic_gradient; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-two_pole_tier1_policy_selected_cloud_v1"></a>
 
 ### two_pole_tier1_policy_selected_cloud_v1
@@ -8222,6 +13854,35 @@ Declared budget: 400 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-unipolar_policy_cloud_coverage_v1"></a>
+
+### unipolar_policy_cloud_coverage_v1
+
+**unipolar_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unipolar_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [unipolar](../../../configs/forge/tasks/unipolar.json); parent task SHA256 `52ed4bbf499e743c12152e91a3fda3a2e5272585a9ed56080f85433128951afe`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2) · [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| cover | >= 0.85 |
+| off_caption | <= 0.05 |
+| neu_hold | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-unused_token_hold"></a>
 
 ### unused_token_hold
@@ -8250,6 +13911,35 @@ Execution guards: finite state = True; optimizer roles = generator, discriminato
 Declared budget: 200 updates; timeout 300 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-unused_token_hold_policy_cloud_coverage_v1"></a>
+
+### unused_token_hold_policy_cloud_coverage_v1
+
+**unused_token_hold_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unused_token_hold_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-1) · [policy_cloud_coverage_as_served / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator; rng isolation = True.
+
+Declared budget: 200 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-unused_token_hold_tier1_policy_selected_cloud_v1"></a>
 
@@ -8313,6 +14003,68 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_as_served_v1
+
+**vector_anisotropic_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_anisotropic_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_policy_cloud_coverage_v1"></a>
+
+### vector_anisotropic_policy_cloud_coverage_v1
+
+**vector_anisotropic_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_anisotropic_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published"></a>
 
 ### vector_anisotropic_published
@@ -8371,6 +14123,64 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_overlap_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_as_served_v1
+
+**vector_overlap_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_overlap_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_overlap_policy_cloud_coverage_v1"></a>
+
+### vector_overlap_policy_cloud_coverage_v1
+
+**vector_overlap_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_overlap_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_overlap_published"></a>
 
 ### vector_overlap_published
@@ -8426,6 +14236,64 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1600 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_spiral_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_as_served_v1
+
+**vector_spiral_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_spiral_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_spiral_policy_cloud_coverage_v1"></a>
+
+### vector_spiral_policy_cloud_coverage_v1
+
+**vector_spiral_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_spiral_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1600 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_spiral_published"></a>
 
@@ -8484,6 +14352,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_two_broad_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_as_served_v1
+
+**vector_two_broad_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_two_broad_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_two_broad_policy_cloud_coverage_v1"></a>
+
+### vector_two_broad_policy_cloud_coverage_v1
+
+**vector_two_broad_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_two_broad_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published"></a>
 
@@ -8546,6 +14476,70 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_mass_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_mass_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_mass_policy_cloud_coverage_v1
+
+**vector_unequal_mass_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_mass_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published"></a>
 
 ### vector_unequal_mass_published
@@ -8606,6 +14600,68 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_policy_cloud_coverage_as_served_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_as_served_v1
+
+**vector_unequal_width_policy_cloud_coverage_as_served_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_width_policy_cloud_coverage_as_served_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage_as_served / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage_as_served-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_public_prior_with_learned_output_noise; weights state_selected; output noise learned_as_served.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_policy_cloud_coverage_v1"></a>
+
+### vector_unequal_width_policy_cloud_coverage_v1
+
+**vector_unequal_width_policy_cloud_coverage_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_width_policy_cloud_coverage_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [policy_cloud_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-policy_cloud_coverage-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published"></a>
 

@@ -37,7 +37,14 @@ def verify_native_prefix(task, evidence, *, diagnostic=False):
     if original["trainer"]["completed_steps"] != execution["preserve_prefix_steps"]:
         raise ValueError("prefix checkpoint update count differs from the declared continuation")
     require_optimizer_steps(original, execution["preserve_prefix_steps"])
-    if original["recipe"]["total_steps"] != execution["original_schedule_horizon"]:
+    from .tier1_policy import schedule_free_policy
+    if schedule_free_policy(task):
+        # A schedule-free policy recipe has no horizon to preserve; its prefix
+        # was bounded only by the producer's external execution cap.
+        if (original["recipe"]["total_steps"] is not None
+                or original["trainer"].get("max_steps") != execution["preserve_prefix_steps"]):
+            raise ValueError("schedule-free continuation changed its producer's horizon or external cap")
+    elif original["recipe"]["total_steps"] != execution["original_schedule_horizon"]:
         raise ValueError("continuation changed the original scheduling horizon")
     parent = prefix["prerequisite"]
     if (parent["result"]["task_id"] != execution["continuation_of"]

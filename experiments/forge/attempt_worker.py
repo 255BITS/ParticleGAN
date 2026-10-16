@@ -31,10 +31,12 @@ def main():
         from experiments.forge.sources import snapshot_source
         from experiments.forge.views import load_tasks
         # The inventory spans several views; retain exact source-owned cards.
+        # A scoped cohort intake names its own committed view explicitly.
         tasks = load_tasks(Path(spec["source_root"]))
         for item in spec.get("requests", [spec]):
             request = resolve_idea(Path(spec["source_root"]), item["candidate_id"],
-                                   view_id="clockfree_continuous", through_tier=3, execution_backend="cuda")
+                                   view_id=item.get("view_id", "clockfree_continuous"),
+                                   through_tier=3, execution_backend="cuda")
             snapshot = snapshot_source(Path(spec["source_root"]),
                                        Path(item["output"]).parents[1] / "source", request["source"])
             request["source"]["snapshot_path"] = str(snapshot)

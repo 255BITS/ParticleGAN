@@ -103,16 +103,20 @@ def _validate_measurement_contract(task):
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
     fixed = {"scoring_weights": "live"}
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    measured = task
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task):
         from .tier1_policy import validate
-        validate(task)
+        # A scoped variant changes only its declared binding; its unchanged
+        # parent must still satisfy the referenced evaluator's constants.
+        measured = validate(task)
         fixed["scoring_weights"] = "state_selected"
     if kind in {"gaussian_smoke", "gaussian_stability"}:
         from .gaussian_tasks import validate_task
-        validate_task(task)
+        validate_task(measured)
     elif kind in {"word_smoke", "word_hold"}:
         from .word_adapter import validate_word_task
-        validate_word_task(task)
+        validate_word_task(measured)
     elif kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         declared = evaluation.get("evaluator") == "experiments.forge.transfer_cadence:test_verdict"
@@ -473,8 +477,12 @@ def _adaptation(task, evidence):
     evaluation = task["evaluation"]
     required = ("config_sha256", "source_sha256", "runtime", "mode", "noise_horizon",
                 "diagnostic_every", "dense_after", "dense_until", "shift", "shift_pair", "optimizer_final")
+    from .tier1_policy import schedule_free_policy
+    # A schedule-free policy recipe has no noise/schedule horizon; its actual
+    # None is verified against the saved recipe by verify_pair_artifacts.
+    optional = {"dense_after", "dense_until"} | ({"noise_horizon"} if schedule_free_policy(task) else set())
     for run in (active, frozen):
-        if any(key not in run or (run[key] is None and key not in {"dense_after", "dense_until"}) for key in required):
+        if any(key not in run or (run[key] is None and key not in optional) for key in required):
             return _verdict("INCOMPLETE", "paired control lacks complete provenance/optimizer state")
         if run.get("steps") != evaluation["steps"] or run.get("shift_step") != evaluation["shift_step"]:
             return _verdict("INVALID", "shift timing differs from task")
@@ -578,7 +586,8 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" and task["adapter"] != "clockfree_audit":
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task) and task["adapter"] != "clockfree_audit":
         from .tier1_policy import validate_evidence
         policy_grade = validate_evidence(task, evidence)
         if policy_grade is not None:
@@ -586,7 +595,10 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
-    from .gaussian_tasks import grade as gaussian_grade
+    if is_policy_task(task):
+        from .policy_gaussian import grade as gaussian_grade
+    else:
+        from .gaussian_tasks import grade as gaussian_grade
     from .word_tasks import grade as word_grade
     graders = {"gaussian_smoke": gaussian_grade, "gaussian_stability": gaussian_grade,
                "word_smoke": word_grade, "word_hold": word_grade,
@@ -597,9 +609,22 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")
     try:
-        if diagnostic and task.get("adapter") != "native100_continuation":
+        from .tier1_policy import diagnostic_continuation_allowed
+        # Only a registered cohort's declared Gaussian stability variant may
+        # continue its own scoped smoke state after a failed gate; every other
+        # task keeps native-only diagnostic checkpoint grading.
+        gaussian_continuation = (task["evaluation"]["kind"] == "gaussian_stability"
+                                 and diagnostic_continuation_allowed(task))
+        scope = (evidence.get("continuity") or {}) if gaussian_continuation else {}
+        if diagnostic and task.get("adapter") != "native100_continuation" and not gaussian_continuation:
             return _verdict("INVALID", "diagnostic checkpoint grading is limited to native continuations")
-        grade = _native(task, evidence, diagnostic=True) if diagnostic else grader(task, evidence)
+        if gaussian_continuation and (scope.get("diagnostic_continuation") is True) != bool(diagnostic):
+            return _verdict("INVALID", "diagnostic Gaussian continuation requires its explicit nonqualifying scope"
+                            if diagnostic else "diagnostic continuation cannot supply ordinary qualification")
+        if diagnostic and gaussian_continuation and scope.get("parent_smoke_status") not in {"PASS", "FAIL"}:
+            return _verdict("INVALID", "diagnostic Gaussian continuation must record its parent's measured gate")
+        grade = (_native(task, evidence, diagnostic=True) if diagnostic and not gaussian_continuation
+                 else grader(task, evidence))
         if diagnostic:
             grade.update(qualification_input=False, qualification_reuse=False)
         # Normalized metrics must not replace the raw curve when the input used

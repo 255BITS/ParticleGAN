@@ -18,6 +18,50 @@ def _identity(job):
                                 "execution_sha256", "evaluation_sha256")]
 
 
+def _policy():
+    """Scoped-cohort helpers from the frozen source; older sources have none."""
+    try:
+        from .tier1_policy import is_policy_task, validate
+    except ImportError:
+        return (lambda task: False), None
+    return is_policy_task, validate
+
+
+def _schedule_free(card):
+    # Checked locally: an older frozen source may predate the shared helper.
+    return card.get("execution", {}).get("policy_contract", {}).get("schedule") == "preserve_resolved_recipe_none"
+
+
+def _law(card):
+    """Execution/evaluation law without a scoped variant's own parent identity."""
+    is_policy_task, validate = _policy()
+    execution, evaluation = deepcopy(card["execution"]), deepcopy(card["evaluation"])
+    if is_policy_task(card):
+        original = validate(card)
+        execution.pop("policy_parent_definition")
+        evaluation.get("sources", {}).pop("configs/forge/tasks/" + original["id"] + ".json")
+    return execution, evaluation
+
+
+def _check_group(producer, consumer):
+    a, b = producer["execution"], consumer["execution"]
+    if (producer["adapter"] != consumer["adapter"] or producer["adapter"] != "ring_endurance"
+            or producer["evaluation"]["kind"] != "ring_hold"
+            or consumer["evaluation"]["kind"] != "ring_extension"
+            or not a.get("execution_group") or a.get("execution_group") != b.get("execution_group")
+            or a.get("uninterrupted") is not True or b.get("uninterrupted") is not True
+            or b.get("continuation_of") != producer["id"]
+            or {"task": producer["id"], "kind": "checkpoint"} not in consumer.get("dependencies", [])):
+        raise ValueError("not a declared uninterrupted ring execution group")
+    (a, producer_evaluation), (execution, evaluation) = _law(producer), _law(consumer)
+    execution.pop("continuation_of", None)
+    extension_steps = execution.pop("extension_steps", None)
+    evaluation = {**evaluation, "kind": "ring_hold"}
+    if (execution != a or evaluation != producer_evaluation
+            or extension_steps != producer_evaluation["extension_steps"]):
+        raise ValueError("grouped consumer changes the producer law, budget or evaluator")
+
+
 def grade_saved_group(parent, child):
     """Validate both frozen bindings and regrade the complete producer curve."""
     for job in (parent, child):
@@ -46,22 +90,15 @@ def grade_saved_group(parent, child):
             if file_hash(source / relative) != digest:
                 raise ValueError("grouped evaluator source changed: " + relative)
     producer, consumer = cards
-    a, b = producer["execution"], consumer["execution"]
-    if (producer["adapter"] != consumer["adapter"] or producer["adapter"] != "ring_endurance"
-            or producer["evaluation"]["kind"] != "ring_hold"
-            or consumer["evaluation"]["kind"] != "ring_extension"
-            or not a.get("execution_group") or a.get("execution_group") != b.get("execution_group")
-            or a.get("uninterrupted") is not True or b.get("uninterrupted") is not True
-            or b.get("continuation_of") != producer["id"]
-            or {"task": producer["id"], "kind": "checkpoint"} not in consumer.get("dependencies", [])):
-        raise ValueError("not a declared uninterrupted ring execution group")
-    execution = deepcopy(b)
-    execution.pop("continuation_of", None)
-    extension_steps = execution.pop("extension_steps", None)
-    evaluation = {**consumer["evaluation"], "kind": "ring_hold"}
-    if (execution != a or evaluation != producer["evaluation"]
-            or extension_steps != producer["evaluation"]["extension_steps"]):
-        raise ValueError("grouped consumer changes the producer law, budget or evaluator")
+    a = producer["execution"]
+    is_policy_task, validate = _policy()
+    if is_policy_task(producer) or is_policy_task(consumer):
+        # Scoped variants must share one cohort, and their unchanged original
+        # parents must form the same declared uninterrupted group.
+        if producer.get("task_cohort") != consumer.get("task_cohort"):
+            raise ValueError("grouped evidence cannot pool policy cohorts")
+        _check_group(validate(producer), validate(consumer))
+    _check_group(producer, consumer)
     groups = [group for group in request["jobs"]
               if {producer["id"], consumer["id"]} <= set(group.get("task_ids", []))]
     if len(groups) != 1:
@@ -90,7 +127,8 @@ def grade_saved_group(parent, child):
     checkpoint = evidence.get("provenance_checkpoint", {})
     if (continuity.get("mode") != "uninterrupted" or not continuity.get("run_id")
             or continuity.get("resume_count") != 0
-            or continuity.get("original_schedule_horizon") != a["original_schedule_horizon"]
+            or continuity.get("original_schedule_horizon") != (
+                None if is_policy_task(producer) and _schedule_free(producer) else a["original_schedule_horizon"])
             or continuity.get("max_total_steps") != a["max_total_steps"]):
         raise ValueError("grouped evidence lacks the uninterrupted producer identity")
     verify_artifacts(checkpoint["artifact_root"], checkpoint["artifact_manifest"])

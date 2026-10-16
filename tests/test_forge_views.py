@@ -149,8 +149,15 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             thresholds = [["modes", ">=", thresholds["modes"]], ["hq", ">=", thresholds["hq_min"]]]
         assert tasks[spec["name"]]["evaluation"]["thresholds"] == json.loads(json.dumps(thresholds))
     assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
+    from experiments.forge.tier1_policy import is_policy_task, validate as validate_policy
+    # Separately scoped policy variants keep their parent's exact frozen gates.
+    for task in tasks.values():
+        if is_policy_task(task):
+            parent = validate_policy(task)
+            for field in ("thresholds", "gate_policy", "observations", "minimum_stable_checks"):
+                assert task["evaluation"].get(field) == parent["evaluation"].get(field)
     assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"
-            and "vector_profile" not in task["execution"]
+            and "vector_profile" not in task["execution"] and not is_policy_task(task)
             and not name.startswith("recipe-prior-refactor-legacy-")
             and task["evaluation"].get("gate_policy", {}).get("id") == "forge-vector-full-component-v1"} == set(VECTOR_THRESHOLDS_V1)
     for task in tasks.values():

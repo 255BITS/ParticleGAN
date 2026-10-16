@@ -524,6 +524,10 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
+    # The policy-cloud cohorts publish their own records file (never the
+    # repository attempt report); it fills only their scoped view cells.
+    from .policy_cloud_publication import VIEWS as POLICY_CLOUD_VIEWS, family_overlay, load_records, view_counts
+    policy_cloud = load_records(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
     attempt_path = Path("reports/forge/attempt-coverage.json")
     run_attempts = {}
@@ -569,6 +573,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             raise ValueError("family report view has duplicate assignments")
         if tasks and set(names) - tasks.keys():
             raise ValueError("family report view references a missing task")
+        shown = view.get("reporting", {}).get("families")
+        if shown is not None and (view.get("reporting", {}).get("family_totals") is not False
+                                  or not isinstance(shown, list) or not shown
+                                  or not all(isinstance(name, str) and name for name in shown)):
+            raise ValueError("only a scoped view may name the families whose pages display it")
     scoped = [view for view in views if view.get("reporting", {}).get("family_totals") is False]
     ordinary = [view for view in views if view not in scoped
                 and view.get("evidence_scope") not in {"research_diagnostic", "calibration_diagnostic"}
@@ -654,7 +663,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     receipts[result["task_id"]] = {"path": path.as_posix(), "attempt_id": attempt, "result": result}
 
         results = {}
-        assigned = {assignment["task"] for view in views for assignment in view["assignments"]}
+        assigned = {assignment["task"] for view in views if _displayed_for(view, family_id)
+                    for assignment in view["assignments"]}
         for name in sorted(assigned):
             previous = recorded.get(name, {})
             contract_hash = bindings.get(name)
@@ -733,20 +743,31 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     and audit["recorded_grade"] == status):
                 results[name]["clock_audit"] = audit
 
+        overlay = family_overlay(policy_cloud, family_id, selected, lambda name: (
+            (task_execution_fingerprint(tasks[name]), task_evaluation_fingerprint(tasks[name])) if name in tasks else (None, None)))
+        for name, cell in (overlay or {}).get("cells", {}).items():
+            if name in results:
+                results[name].update(cell)
+
         def view_row(view):
             tiers = {}
             assignments = sorted(view["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
             for tier in TIERS:
                 required = [results[a["task"]] for a in assignments if str(a["qualification_tier"]) == tier
                             and a["importance"] == "required"]
-                tiers[tier] = _count(required)
+                if overlay is not None and view["id"] in POLICY_CLOUD_VIEWS:
+                    # The same counts as the cohort's leaderboard row.
+                    tiers[tier] = view_counts({result["task_id"]: result["run_attempt"] for result in required
+                                               if "run_attempt" in result}, [result["task_id"] for result in required])
+                else:
+                    tiers[tier] = _count(required)
             return {"id": view["id"], "revision": view["revision"], "tiers": tiers,
                     "total": _sum(list(tiers.values()))}
 
         view_rows = [view_row(view) for view in ordinary]
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
-                                   "scoped_views": [view_row(view) for view in scoped],
+                                   "scoped_views": [view_row(view) for view in scoped if _displayed_for(view, family_id)],
                                    "scoped_publications": [{**{key: item[key] for key in ("path", "view", "source_commit")},
                                                             "cohort": item["row"].get("cohort"),
                                                             "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
@@ -755,6 +776,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                                    "total": _sum([view["total"] for view in view_rows])})
         if retry_history:
             family["cohorts"][-1]["retry_history"] = retry_history
+        if overlay is not None:
+            family["cohorts"][-1]["policy_cloud_publication"] = overlay["publication"]
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
@@ -788,6 +811,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "renderer_sha256": file_hash(Path(__file__)),
                 "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
                 "pr399_renderer_sha256": file_hash(Path(__file__).with_name("pr399_scores.py")),
+                "policy_cloud_renderer_sha256": file_hash(Path(__file__).with_name("policy_cloud_publication.py")),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,
@@ -1090,6 +1114,12 @@ def _selected_configuration_details(root, page, publication, family, cohort, row
     return lines + ["", "</details>", ""]
 
 
+def _displayed_for(view, family_id):
+    """A scoped view may name the families whose pages display it; others show everywhere."""
+    families = view.get("reporting", {}).get("families")
+    return families is None or family_id in families
+
+
 def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
@@ -1158,6 +1188,14 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             for view in cohort["scoped_views"]:
                 lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                                 *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+            policy = cohort.get("policy_cloud_publication")
+            if policy:
+                lines += ["", "Policy-cloud cells come from the " + link(root, page, "cohort report", policy["readme"]) +
+                          " (" + link(root, page, "records", policy["records"]) + "): frozen source `" +
+                          policy["source_digest"][:12] + "`, candidate revision `" + policy["candidate_revision"][:12] +
+                          "`, verified there to run this selected recipe. Each law is its own row; the " +
+                          str(policy["shared"]) + " law-independent verdicts come from one run and appear in both. "
+                          "These diagnostics give no parent-cohort credit."]
             for item in cohort.get("scoped_publications", []):
                 lines += ["", link(root, page, "Frozen separate-cohort numerical evidence", item["path"]) +
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
@@ -1192,6 +1230,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                               for view_id in memberships), result["status"], _definition_label(result)]) + " |")
             lines.append("")
         for definition in progress["views"]:
+            if not _displayed_for(definition, family["id"]):
+                continue
             view_id = definition["id"]
             anchor = base + "-" + view_id
             diagnostic = view_id in progress["diagnostic_views"]
@@ -1270,7 +1310,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "`. This measurement supplies no cells to the parent clean cohort.", ""]
             memberships = [link(root, page, view["id"] + " / Tier " + str(a["qualification_tier"]), family["page"],
                                 base + "-" + view["id"] + "-tier-" + str(a["qualification_tier"]))
-                           for view in progress["views"] for a in view["assignments"] if a["task"] == name]
+                           for view in progress["views"] if _displayed_for(view, family["id"])
+                           for a in view["assignments"] if a["task"] == name]
             lines += ["Used by: " + " · ".join(memberships) + ".", ""]
             measured = result["metrics"]
             checks = measured.get("evaluator_summary", {}).get("metric_checks", {})

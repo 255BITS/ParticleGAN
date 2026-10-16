@@ -1966,6 +1966,10 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
         parent = variant.get("execution", {}).get("policy_parent_definition")
         if parent is not None:
             relative = "configs/forge/tasks/" + parent["id"] + ".json"
+            # Later scoped cohorts may name questions added after this
+            # publication; those keep their current declarations here.
+            if relative not in original_task_paths:
+                continue
             archived_parent = __import__("json").loads(subprocess.check_output(
                 ["git", "show", original["source_commit"] + ":" + relative], cwd=ROOT, text=True))
             atomic_json(tmp_path / relative, archived_parent)
