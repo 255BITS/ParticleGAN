@@ -285,3 +285,38 @@ def test_retry_lineage_is_frozen_before_launch_and_preserved_in_durable_evidence
     assert not issues
     old = next(a for a in attempts if a["attempt_id"] == first_result["attempt_id"])
     assert old["superseded_by"] == result["attempt_id"]
+
+
+def test_ring_group_job_is_scheduled_through_a_removed_phase(tmp_path):
+    # ring_hold leaves the count as a phase of ring_extension; both stay in one uninterrupted job.
+    from experiments.forge.views import load_tasks
+    declared = load_tasks(Path(__file__).resolve().parents[1])
+    tasks = {name: {"id": name, "dependencies": declared[name]["dependencies"]}
+             for name in ("mode_hold", "ring_hold", "ring_extension")}
+    assert declared["ring_hold"]["execution"]["execution_group"] == declared["ring_extension"]["execution"]["execution_group"]
+    assignments = [{"task": "mode_hold", "qualification_tier": 2, "importance": "required", "order": 0},
+                   {"task": "ring_hold", "qualification_tier": 3, "importance": "diagnostic", "order": 0,
+                    "removal": {"reason": "phase", "counted_by": "ring_extension"}},
+                   {"task": "ring_extension", "qualification_tier": 3, "importance": "required", "order": 1}]
+    jobs = [{"task_id": "mode_hold", "task_ids": ["mode_hold"], "compatibility_key": "mode"},
+            {"task_id": "ring_hold", "task_ids": ["ring_hold", "ring_extension"], "execution_group": "ring_endurance",
+             "compatibility_key": "ring"}]
+
+    def state(mode_hold, ring=None):
+        return {"jobs": {"mode": {"status": "terminal", "result": {"task_results": [
+                    {"task_id": "mode_hold", "gate_status": mode_hold}]}},
+                "ring": {"status": "terminal" if ring else "pending",
+                         "result": {"task_results": [{"task_id": name, "gate_status": ring}
+                                                     for name in ("ring_hold", "ring_extension")]} if ring else None}}}
+
+    q = Queue(tmp_path / "queue", grader=grade)
+    for mode, eligible in (("fail_fast", q._eligible), ("complete_current_tier", q._eligible_complete_tier)):
+        submission = {"request": {"view": {"assignments": assignments}, "tasks": tasks, "jobs": jobs, "through_tier": 3,
+                                  "execution_policy": {"schema_version": 1, "mode": mode}}}
+        assert eligible(state("PASS"), submission) == (["ring"], None, False)
+        # The counted verdict vetoes the tier once the group ran; a failed gate never schedules it.
+        jobs_ran, reason, running = q._eligible(state("PASS", "FAIL"), submission)
+        assert jobs_ran == [] and "ring_extension: FAIL" in reason and not running
+        jobs_ran, reason, _ = q._eligible(state("FAIL"), submission)
+        assert jobs_ran == [] and "mode_hold: FAIL" in reason
+    assert not (tmp_path / "queue").exists()

@@ -282,6 +282,37 @@ def test_diagnostic_and_promotion_receipts_never_confer_ordinary_attainment(tmp_
     assert report["spend"]["wall_seconds"] == 4.
 
 
+
+def test_held_tiers_neither_pass_nor_stop_recorded_attainment():
+    def verdict(roles, statuses):
+        assignments = [{"task": name, "qualification_tier": tier, "importance": role, "order": 0}
+                       for name, (tier, role) in roles.items()]
+        rows = [{"task_id": name, "gate_status": status} for name, status in statuses.items()]
+        return t._recorded_qualification({}, assignments, rows)
+    middle = {"a": (1, "required"), "b": (2, "held"), "c": (3, "required")}
+    passed = verdict(middle, {"a": "PASS", "b": "FAIL", "c": "PASS"})
+    assert (passed["status"], passed["qualified_tier"]) == ("PASS", 3) and passed["task_statuses"]["b"] == "FAIL"
+    failed = verdict(middle, {"a": "PASS", "c": "FAIL"})
+    assert (failed["status"], failed["qualified_tier"], failed["stopped_tier"]) == ("FAIL", 1, 3)
+    top = {"a": (1, "required"), "b": (2, "required"), "c": (3, "held")}
+    held = verdict(top, {"a": "PASS", "b": "PASS", "c": "PASS"})
+    assert (held["status"], held["qualified_tier"]) == ("HELD", 2)
+    assert verdict(top, {"a": "PASS", "b": "FAIL"})["status"] == "FAIL"
+    assert verdict({"a": (1, "held")}, {"a": "PASS"})["status"] == "HELD"
+    # A tier with only diagnostic tasks still has no recorded qualification rule.
+    assert verdict({"a": (1, "required"), "b": (2, "diagnostic")}, {"a": "PASS"})["status"] == "UNAVAILABLE"
+
+
+def test_held_unit_is_neither_qualified_nor_rejected(tmp_path):
+    req = request(cap=2)
+    req["view"]["assignments"][1]["importance"] = "held"
+    result = save(tmp_path, req, "counted", tasks=("cheap", "quality"))
+    report = t.summarize_automation(tmp_path, state(tmp_path, [req], [result]))
+    assert report["qualification_units"][0]["status"] == "HELD"
+    assert report["qualification_units"][0]["qualified_tier"] == 1
+    assert report["cost_to_qualify"]["outcomes"] == report["cost_to_reject"]["outcomes"] == 0
+    assert report["tier_rejections"] == {}
+
 def test_runtime_normalizes_aggregate_cost_and_records_memory_without_training(tmp_path, monkeypatch):
     import experiments.forge.adapters as adapters
     from experiments.forge import runtime

@@ -139,6 +139,9 @@ def _finished(root, request):
             selected.extend(rows)
         bound[attempt["attempt_id"]] = attempt["result_hash"]
     qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"])
+    if qualification["status"] == "HELD":
+        # Counted tiers may all pass, but the view's highest tier is held: never a PASS.
+        _block("the qualifying view's highest tier is held (measured, not counted); a held view cannot qualify a candidate")
     if qualification["status"] != "PASS" or not qualification["eligible"]:
         _block("candidate has not passed every applicable qualification gate")
     records, conflicts = knowledge._records(root)

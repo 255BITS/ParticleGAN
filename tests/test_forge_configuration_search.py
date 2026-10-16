@@ -419,6 +419,22 @@ def test_pure_selector_lexicographic_counts_qualified_and_pending():
     assert search.select_configuration(trials, 1)["selection_kind"] == "pending"
 
 
+
+def test_held_tiers_never_complete_a_full_view_or_break_progression():
+    def trial(*rows):
+        return {"tasks": [{"task": name, "qualification_tier": tier, "importance": role, "gate_status": status}
+                          for name, tier, role, status in rows]}
+    top = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "required", "PASS"),
+                                      ("c", 3, "held", "FAIL")), 3)
+    assert top["qualified_tier"] == 2 and not top["full_view_qualified"]
+    assert top["required_total"] == top["required_passed"] == 2 and (top["held_total"], top["held_passed"]) == (1, 0)
+    middle = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "held", "FAIL"),
+                                         ("c", 3, "required", "PASS")), 3)
+    assert middle["qualified_tier"] == 3 and middle["full_view_qualified"]
+    assert [row["tier"] for row in middle["tiers"]] == [1, 3]
+    legacy = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "required", "PASS")), 2)
+    assert legacy["full_view_qualified"] and "held_total" not in legacy
+
 def test_git_metadata_advance_without_scientific_drift_reuses_requests(checkout, spec, monkeypatch):
     from experiments.forge import planning
     real = planning.inspect_source

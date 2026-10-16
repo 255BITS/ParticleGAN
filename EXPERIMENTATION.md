@@ -428,6 +428,27 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
+A view can also mark a previously required test as **held** (role `held`): it is
+still declared, run, graded and shown, but it is not counted, and it never blocks
+progress or becomes a next task. Its `hold` note in the view gives the reason
+(`no_global_recipe`, `unsolved`, or `held_prerequisite` with the held parents in
+`blocked_by`), a plain-language summary, an explanation link and the rule for
+counting it again. A test **removed from the count** stays assigned as
+`diagnostic` with a `removal` note (`phase`, `duplicate`, `superseded` or
+`ill_posed`); a phase or duplicate names the counted test that carries its
+question in `counted_by`. A counted test may depend on a removed one only when that
+removed test is a phase of it: the same uninterrupted run and tier, with the counted
+test continuing the phase's own saved state (a checkpoint dependency).
+A tier with only held tests has status `HELD`; it neither passes nor stops later
+tiers. A view reports `PASS` only when every counted tier passes and its highest
+tier is counted. If every counted tier passes but the highest tier is held, or
+nothing is counted, the view reports `HELD`, which is never eligible; a counted
+failure still reports as a failure. These notes are view policy: changing a
+summary, re-entry rule or link needs a new archived revision. Apply a recorded set of decisions with
+`python -m experiments.forge test-dispositions check|apply --registry <file>`;
+`check` writes nothing and exits 1 on drift, and `apply` archives each old revision
+byte for byte before writing, so a second apply changes nothing.
+
 The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
 current task assignments for every view, including required, ranking and
 diagnostic roles, declared budgets, dependencies and tasks unassigned to any
@@ -659,6 +680,9 @@ python -m experiments.forge retier discriminator_stability \
 ```
 
 This creates a view revision and recomputes eligibility without launching jobs.
+It first copies the live revision byte for byte to
+`configs/forge/view-history/<view>-v<revision>.json`, refuses if a different file is
+already there, and records that archive in the new revision's `previous_revision`.
 Existing campaigns retain their pinned view. Changing the task's steps, prior,
 sampling, or thresholds instead changes scientific compatibility. Do not shorten
 `benchmarks.toy100 --steps` to claim a preserved prefix: that option also changes
