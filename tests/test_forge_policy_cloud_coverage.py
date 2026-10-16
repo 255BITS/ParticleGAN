@@ -1079,13 +1079,31 @@ def test_publication_writes_records_results_and_readme_deterministically(tmp_pat
                      inert_because={"prior_regularizer": "vicreg", "prior_reg": 0.0, "prior_proximal_strength": 0.0})
         for family in FAMILIES})
     state_root = _cohort_state(tmp_path, value)
+    # A ring extension regraded from its own passing hold: a verified certificate, no new training.
+    state = read_json(state_root / "state.json")
+    regraded = next(job for job in state["jobs"].values()
+                    if job["owning_family"] == "e22" and job["task"] == variant_id("ring_extension"))
+    certificate = state_root / "grouped-evidence" / "certificate.json"
+    atomic_json(certificate, {"grade": {"status": "PASS"}, "original_attempt": "producer"})
+    for key in ("directory", "log_sha256"):
+        regraded.pop(key)
+    regraded.update(status="PASS", origin="reused_execution", evidence=str(certificate),
+                    result_sha256=file_hash(certificate), updates=0,
+                    reused_execution={"producer_attempt_id": "producer", "optimizer_updates_added": 0})
+    atomic_json(state_root / "state.json", state)
     root = tmp_path / "repo"
     summary = publication.publish(root, state_root)
     records = publication.validate_records(read_json(root / publication.RECORDS))
     assert len(records["records"]) == 2 * (35 + 23)
-    assert all(r["evidence"] == publication.README.as_posix() for r in records["records"])
+    assert all(r["evidence"] == publication.README.as_posix() for r in records["records"]
+               if r["origin"] == "new_attempt")
     assert summary["summary"]["atlas"]["as_served"]["scores"]["total"] == "2/35 (9 incompatible)"
-    assert summary["training_state_pairs"] == {"match": 2 * 23}
+    assert summary["summary"]["e22"]["clean"]["scores"]["total"] == "2/35 (9 incompatible)"
+    assert summary["training_state_pairs"] == {"match": 2 * 23 - 1, "no_own_training": 1}
+    copied = root / publication.GROUPED / "certificate.json"
+    assert copied.read_bytes() == certificate.read_bytes()
+    record = next(r for r in records["records"] if r["owning_family"] == "e22" and r["task"] == variant_id("ring_extension"))
+    assert record["evidence"] == (publication.GROUPED / "certificate.json").as_posix()
     results = read_json(root / publication.RESULTS)
     assert results["records_sha256"] == file_hash(root / publication.RECORDS)
     receipt = next(r for r in results["receipts"] if r["status"] == "FAIL")
@@ -1097,7 +1115,8 @@ def test_publication_writes_records_results_and_readme_deterministically(tmp_pat
     assert "| 1 | two_pole | FAIL · shared run | FAIL · shared run | Law-independent:" in readme
     assert "Diagnostic continuation of its own same-law saved state after a FAIL parent gate" in readme
     assert "| [atlas](#atlas) | as served (12 shared with clean) |" in readme and '<a name="e22"></a>' in readme
-    assert "Pairs: **46 match**" in readme and "prior_sigreg_knots=17" in readme
+    assert "Pairs: **45 match**" in readme and "prior_sigreg_knots=17" in readme
+    assert "| 3 | ring_extension | PASS · regraded, no new training |" in readme
     assert "| 2 | grid100 | FAIL · 10 updates | FAIL · 10 updates | Re-run after an infrastructure interruption (as served)" in readme
     retried = next(r for r in results["receipts"] if r.get("retry_history"))
     assert retried["retry_history"][0]["status"] == "INTERRUPTED"
