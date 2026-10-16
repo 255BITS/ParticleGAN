@@ -174,47 +174,24 @@ class SBNPPriorRegularizer(nn.Module):
 
         if self.references:
             initial_mean, initial_covariance, total_n = self._reference_moments()
-            if total_n <= min_dof or n < 2:
+            if total_n <= min_dof or n <= min_dof or n < 2:
                 return rows[:0].sum()
             if d != len(initial_mean):
                 raise ValueError("sbnp rows and initial reference dimensions differ")
             mean = rows.mean(0)
             variance_scale = initial_covariance.diagonal().clamp_min(0) + self.eps
             mean_error = ((mean - initial_mean).square() / variance_scale).mean()
-            centered = rows - mean
-            covariance = centered.T @ centered / max(len(rows) - 1, 1)
-            covariance_error = (
-                (covariance - initial_covariance).square() / torch.outer(variance_scale, variance_scale)
-            ).mean()
-            # Scale-free k-NN log-repulsion
-            m_sub = min(n, self.repel_max_samples)
-            z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
-            k = min(self.k_nn, m_sub - 1)
-            if k > 0 and self.repel_weight > 0.0:
-                sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
-                with torch.no_grad():
-                    off_mask = ~torch.eye(m_sub, dtype=torch.bool, device=rows.device)
-                    r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
-                eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
-                knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-                norm_sq_dist = knn_sq_dist / (self.repel_margin * r_med_sq)
-                repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
-            else:
-                repel_loss = rows.new_zeros(())
-            out = self.weight * (mean_error + covariance_error + self.repel_weight * repel_loss)
-            if d <= 4 and out.requires_grad:
-                s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
-                if s < 1.0:
-                    out = out * s + out.detach() * (1.0 - s)
-            return out
-
-        if n <= min_dof or n < 2:
-            return rows[:0].sum()
-        mean = rows.mean(0)
-        mean_error = rows.new_zeros(())
-        target_sigma = torch.full((d,), self.target_std, device=rows.device, dtype=rows.dtype)
-        target_var = target_sigma.pow(2) + self.eps
-        target_cov = torch.diag(target_var)
+            target_sigma = (initial_covariance.diagonal().clamp_min(0) + self.eps).sqrt() * self.target_std
+            target_cov = initial_covariance
+            target_var = variance_scale
+        else:
+            if n <= min_dof or n < 2:
+                return rows[:0].sum()
+            mean = rows.mean(0)
+            mean_error = rows.new_zeros(())
+            target_sigma = torch.full((d,), self.target_std, device=rows.device, dtype=rows.dtype)
+            target_var = target_sigma.pow(2) + self.eps
+            target_cov = torch.diag(target_var)
 
         # 1. Per-dimension one-sided variance floor (relu(target_sigma - std)^2)
         centered = rows - mean
@@ -224,8 +201,12 @@ class SBNPPriorRegularizer(nn.Module):
         # 2. Covariance loss: capacity-conditioned covariance
         if d > 1:
             cov = (centered.T @ centered) / max(n - 1, 1)
-            off_diag = cov - torch.diag(torch.diag(cov))
-            cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
+            if self.references and d <= 4 and n <= 64:
+                cov_diff = cov - target_cov
+                cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
+            else:
+                off_diag = cov - torch.diag(torch.diag(cov))
+                cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
         else:
             cov_loss = rows.new_zeros(())
 
@@ -1037,10 +1018,10 @@ class _BISPFPenaltyKernel:
         kappa: float = 1.0,
         lazy_k: int = 1,
         anchor_weight: float = 0.0,
-        lambda_floor: float = 0.0005,
+        lambda_floor: float = 0.01,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
-        gamma_gauge: float = 0.0005,
+        gamma_gauge: float = 0.050,
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
@@ -1169,20 +1150,20 @@ class _BISPFPenaltyKernel:
             and 2 <= dim <= 4
             and call_idx >= 1000
         )
-        # Harmonic Mode Capture (Regime II) scale-free bidirectional nearest-neighbor thermal cooling
-        with torch.no_grad():
-            if call_idx >= 1000 and dim <= 4 and b_r >= 64 and b_f >= 64:
-                d2 = torch.cdist(x_real.detach().flatten(1), x_fake.detach().flatten(1), p=2.0).pow(2)
-                norm_d = (d2 / d2.median().clamp_min(1e-12)).sqrt()
-                r2f_95 = float(norm_d.min(dim=1).values.quantile(0.95).item())
-                f2r_95 = float(norm_d.min(dim=0).values.quantile(0.95).item())
-                prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
-                thresh = 0.048 if prev_scale < 1.0 else 0.038
-                t_scale = 1e-5 if max(r2f_95, f2r_95) < thresh else 1.0
-            else:
-                t_scale = 1.0
-            self.record._thermal_scale = t_scale
-            _LAST_THERMAL_SCALE[x_real.device] = t_scale
+        # Scale-invariant thermal cooler query
+        if is_discrete_simplex or is_image_tensor:
+            t_scale = 1.0
+        elif is_dense_multimode and hasattr(self, "cooler"):
+            t_scale = self.cooler.scale_for(batch_size=128, dim=dim)
+        elif is_continuous_flow:
+            t_scale = self.cooler.scale_for(batch_size=b_r, dim=dim) if hasattr(self, "cooler") else max(
+                1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
+            )
+        else:
+            t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
+
+        self.record._thermal_scale = t_scale
+        _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
         # Dimension normalization for Born-Infeld gradient norm
         scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or dim <= 4) else math.sqrt(dim)
@@ -1283,25 +1264,22 @@ class _BISPFPenaltyKernel:
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + cap_fake)
                 ebi_loss = floor_pen + cap_pen
 
-            cached = getattr(self.record, "_last_d_logits", None)
-            if cached is not None and cached[0].requires_grad and cached[1].requires_grad:
-                d_r, d_f = cached
-            else:
-                d_r = d_r_out.reshape(-1)
-                d_f = d_f_out.reshape(-1)
+            d_r = d_r_out.reshape(-1)
+            d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
             if is_image_tensor:
                 eff_gamma_gauge = 0.005
             elif b_r < 16:
                 eff_gamma_gauge = min(self.gamma_gauge, 0.020)
+            elif is_continuous_flow and call_idx >= 1000:
+                ramp = min(1.0, max(0.0, (call_idx - 1000.0) / 200.0))
+                eff_gamma_gauge = self.gamma_gauge + 0.150 * ramp
             else:
                 eff_gamma_gauge = self.gamma_gauge
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
-        if t_scale < 1.0 and penalty.requires_grad:
-            penalty = penalty * t_scale + penalty.detach() * (1.0 - t_scale)
         if not collect_stats:
             return penalty, {}
         return penalty, {

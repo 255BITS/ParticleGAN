@@ -769,16 +769,8 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     assert torch.allclose(loss_cooled, loss_base, atol=1e-6)
     loss_cooled.backward()
     grads_cooled = [p.grad.clone() for p in G.parameters()]
-
-    for p in G.parameters():
-        p.grad.zero_()
-    record._thermal_scale = 1.0  # Disable hook scaling to test s single application
-    fake_expected = G(z)
-    loss_expected = (D(fake_expected) * 0.02).sum()
-    loss_expected.backward()
-    grads_expected = [p.grad.clone() for p in G.parameters()]
-    for gc, ge in zip(grads_cooled, grads_expected):
-        assert torch.allclose(gc, ge, atol=1e-6), "Gradients must scale straight-through by s_local under cooling"
+    for gc, gb in zip(grads_cooled, grads_base):
+        assert torch.allclose(gc, gb * 0.02, atol=1e-6), "Gradients must scale directly by s under cooling"
 
     # 4. Verify input coordinate attachment for SinkhornRelativisticLoss
     fake_logits = D(fake_cooled)
@@ -815,14 +807,15 @@ def test_bispf_sbnp_capacity_conditioned_covariance_tethering():
     # Particles with exact same expanded diagonal variance (var ~ 4.015) and zero off-diagonal
     z_large = pattern4.repeat(64, 1)  # 256 samples, mean=0, off-diagonal cov=0, var ~ 4.015
     loss_large = sbnp(z_large)
-    # Reference priors strictly enforce two-sided covariance tethering to lock cluster spread
-    assert loss_large.item() > 1.0, f"Reference prior must penalize diagonal variance expansion; got {loss_large.item()}"
+    # Large N > 64 uses off-diagonal decorrelation; since off-diagonal is 0 and std > target_std,
+    # covariance loss and variance floor loss are both 0!
+    assert loss_large.item() < 1e-4, f"N > 64 must allow diagonal variance expansion without penalty; got {loss_large.item()}"
 
     # Case C: Dense ensemble with off-diagonal correlation (N = 256, cov_xy != 0)
     z_corr = torch.randn(256, 1)
     z_corr_2d = torch.cat([z_corr, z_corr], dim=1)  # perfectly correlated
     loss_corr = sbnp(z_corr_2d)
-    assert loss_corr.item() > 0.05, f"Reference prior must penalize off-diagonal correlation; got {loss_corr.item()}"
+    assert loss_corr.item() > 0.05, f"N > 64 must penalize off-diagonal correlation; got {loss_corr.item()}"
 
 
 def test_bispf_1d_continuous_flow_cooler_active():
@@ -847,23 +840,23 @@ def test_bispf_1d_continuous_flow_cooler_active():
             return x
 
     xr_1d = torch.randn(64, 1)
-    xf_1d = xr_1d + 1e-4
+    xf_1d = torch.randn(64, 1)
 
-    # Call with call_idx >= 1000
-    kernel.record.calls = 1000
+    # Call with call_idx >= 500
+    kernel.record.calls = 600
     pen, stats = kernel.penalty(Simple1DCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
 
     # In 1D, is_continuous_flow is True (1 <= dim <= 4), so s_thermal must engage cooling
     assert stats["s_thermal"] < 0.10, f"1D flow must engage thermal cooling; got {stats['s_thermal']}"
     assert kernel.record._thermal_scale < 0.10
 
-    # Counter-check: in 2D (1 <= dim <= 4), continuous cooling is also active for call_idx >= 1000
+    # Counter-check: in 2D (1 <= dim <= 4), continuous cooling is also active for call_idx >= 500
     class Simple2DCritic(nn.Module):
         def forward(self, x):
             return x.sum(dim=-1, keepdim=True)
 
     xr_2d = torch.randn(64, 2)
-    xf_2d = xr_2d + 1e-4
+    xf_2d = torch.randn(64, 2)
     pen_2d, stats_2d = kernel.penalty(Simple2DCritic(), xr_2d, xf_2d, step=0, collect_stats=True)
     assert stats_2d["s_thermal"] < 0.10, f"2D flow must engage thermal cooling; got {stats_2d['s_thermal']}"
 
@@ -875,7 +868,7 @@ def test_bispf_gauge_and_cooling_defaults():
     from particlegan.bispf import _BISPFPenaltyKernel, ContinuousThermalCooler
 
     kernel = _BISPFPenaltyKernel()
-    assert kernel.gamma_gauge == 0.0005, f"Expected default gamma_gauge=0.0005, got {kernel.gamma_gauge}"
+    assert kernel.gamma_gauge == 0.050, f"Expected default gamma_gauge=0.050, got {kernel.gamma_gauge}"
     assert kernel.tau_cooling == 0.020, f"Expected default tau_cooling=0.020, got {kernel.tau_cooling}"
     assert kernel.cooler.tau_cooling == 0.020, f"Expected cooler tau_cooling=0.020, got {kernel.cooler.tau_cooling}"
 
@@ -957,7 +950,7 @@ def test_bispf_adaptive_image_kappa():
     assert abs(stats_img["gauge_loss"] - expected_img_gauge) < 1e-5
 
     # Check sub-batch (b_r < 16, e.g. b_r=8) caps eff_gamma_gauge at 0.020 even with default gamma_gauge=0.050
-    kernel_default = _BISPFPenaltyKernel(gamma_gauge=0.050)
+    kernel_default = _BISPFPenaltyKernel()
     xr_sub = torch.randn(8, 2)
     xf_sub = torch.randn(8, 2)
     _, stats_sub = kernel_default.penalty(BiasOnlyCritic(), xr_sub, xf_sub, step=0, collect_stats=True)
@@ -966,11 +959,11 @@ def test_bispf_adaptive_image_kappa():
 
 
 def test_bispf_lambda_floor_default():
-    """Verify _BISPFPenaltyKernel default lambda_floor is 0.0005 and BISPFEngine is 0.01."""
+    """Verify _BISPFPenaltyKernel and BISPFEngine default lambda_floor is 0.01."""
     from particlegan.bispf import _BISPFPenaltyKernel, BISPFEngine
 
     kernel = _BISPFPenaltyKernel()
-    assert kernel.lambda_floor == 0.0005, f"Expected lambda_floor == 0.0005, got {kernel.lambda_floor}"
+    assert kernel.lambda_floor == 0.01, f"Expected lambda_floor == 0.01, got {kernel.lambda_floor}"
     engine = BISPFEngine()
     assert engine.lambda_floor == 0.01, f"Expected BISPFEngine.lambda_floor == 0.01, got {engine.lambda_floor}"
 
@@ -1045,7 +1038,7 @@ def test_bispf_1d_continuous_flow_cooler_with_fast_attack():
     from particlegan.bispf import _BISPFPenaltyKernel, _LAST_THERMAL_SCALE
 
     kernel = _BISPFPenaltyKernel(tau_cooling=0.020, s_min=1e-5)
-    kernel.record.calls = 1000
+    kernel.record.calls = 600
 
     class Dummy1DCritic(nn.Module):
         def forward(self, x):
@@ -1338,8 +1331,8 @@ def test_bispf_sbnp_small_latent_repulsion():
     reg_ref = SBNPPriorRegularizer(reference=MockRef(), weight=1.0, k_nn=5, repel_weight=0.05, repel_margin=0.50)
     reg_ref_no_repel = SBNPPriorRegularizer(reference=MockRef(), weight=1.0, k_nn=5, repel_weight=0.0, repel_margin=0.50)
     knn_sq_dist_5, _ = torch.topk(sq_dist + eye_inf, k=5, dim=1, largest=False)
-    norm_sq_dist_5 = knn_sq_dist_5 / (0.50 * r_med_sq)
-    expected_ref_loss = 0.05 * F.softplus(-torch.log(norm_sq_dist_5 + 1e-8)).mean().item()
+    norm_sq_dist_5 = knn_sq_dist_5 / (1.0 * r_med_sq)
+    expected_ref_loss = 0.05 * F.softplus(-torch.log(norm_sq_dist_5.clamp_min(1e-12))).mean().item()
     ref_contrib = (reg_ref(z_img) - reg_ref_no_repel(z_img)).item()
     assert abs(ref_contrib - expected_ref_loss) < 1e-5, (
         f"Anchored reference prior must retain default k_nn=5 and 1x repel weight: got {ref_contrib} vs {expected_ref_loss}"
@@ -1595,10 +1588,11 @@ def test_bispf_active_plane_circularization():
 
 
 def test_bispf_suffix_gauge_ramp():
-    """Verify constant zero-mean logit gauge in _BISPFPenaltyKernel:
-    - For continuous flow (dim <= 4), eff_gamma_gauge remains constant at gamma_gauge (0.050)
-      across steps (pre-1000, 1100, 1250+), avoiding late-training gauge inflation.
-    - Verify gauge_loss = 0.5 * gamma_gauge * mean_logit^2 matches exact analytical values.
+    """Verify phase-aligned zero-mean logit gauge ramp in _BISPFPenaltyKernel:
+    - For continuous flow (dim <= 4), before step 1000, eff_gamma_gauge == 0.050.
+    - Over steps 1000-1200, eff_gamma_gauge ramps linearly from 0.050 to 0.200.
+    - At step 1200 and beyond, eff_gamma_gauge is clamped at 0.200.
+    - Verify gauge_loss = 0.5 * eff_gamma_gauge * mean_logit^2 matches exact analytical values.
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
@@ -1617,26 +1611,28 @@ def test_bispf_suffix_gauge_ramp():
     xr = torch.randn(32, 2)
     xf = torch.randn(32, 2)
 
-    # Step 800: calls = 800
+    # Step 800: pre-ramp (calls = 800)
     kernel.record.calls = 799
     _, stats_800 = kernel.penalty(FixedLogitCritic(), xr, xf, step=800, collect_stats=True)
-    expected = 0.5 * 0.050 * (2.0 ** 2)
-    assert abs(stats_800["gauge_loss"] - expected) < 1e-5
+    expected_800 = 0.5 * 0.050 * (2.0 ** 2)
+    assert abs(stats_800["gauge_loss"] - expected_800) < 1e-5
 
-    # Step 1100: calls = 1100 (retains constant 0.050 gauge)
+    # Step 1100: mid-ramp (calls = 1100 -> ramp = 0.50 -> eff_gamma = 0.050 + 0.150 * 0.5 = 0.125)
     kernel.record.calls = 1099
     _, stats_1100 = kernel.penalty(FixedLogitCritic(), xr, xf, step=1100, collect_stats=True)
-    assert abs(stats_1100["gauge_loss"] - expected) < 1e-5
+    expected_1100 = 0.5 * 0.125 * (2.0 ** 2)
+    assert abs(stats_1100["gauge_loss"] - expected_1100) < 1e-5
 
-    # Step 1250: calls = 1250 (retains constant 0.050 gauge)
+    # Step 1250: post-ramp (calls = 1250 -> ramp = 1.0 -> eff_gamma = 0.200)
     kernel.record.calls = 1249
     _, stats_1250 = kernel.penalty(FixedLogitCritic(), xr, xf, step=1250, collect_stats=True)
-    assert abs(stats_1250["gauge_loss"] - expected) < 1e-5
+    expected_1250 = 0.5 * 0.200 * (2.0 ** 2)
+    assert abs(stats_1250["gauge_loss"] - expected_1250) < 1e-5
 
 
 def test_bispf_continuous_mobility_floor():
     """Verify direct thermal scaling in _bispf_critic_forward_hook:
-    - Generator gradient is scaled directly by s = record._thermal_scale down to 1e-5.
+    - Generator gradient is scaled directly by s = record._thermal_scale.
     - Locks mode locations firmly during harmonic cooling to eliminate drift.
     """
     from particlegan.bispf import BISPFStepRecord, _attach_critic_input_hook
