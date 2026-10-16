@@ -76,6 +76,11 @@ class Recipe:
     # Post-optimizer proximal spring to the initial latent table; zero is exact
     # baseline behavior. Unlike a gradient penalty, restoration retains size.
     prior_proximal_strength: float = 0.0
+    # Opt-in relative-force limit for prior_regularizer="moment_tether": the
+    # tether's latent-table gradient is scaled so its norm is at most this
+    # multiple of the remaining (adversarial) gradient on that table, per
+    # backward pass. Zero keeps the fixed-coefficient tether exactly.
+    prior_tether_relative_cap: float = 0.0
     prior_coulomb_softening: float = .1
     prior_coulomb_confinement: float = .35
     prior_coulomb_neighbors: int = 8
@@ -255,12 +260,15 @@ class Recipe:
         for key, minimum in (("prior_sigreg_projections", 1), ("prior_sigreg_knots", 2)):
             if type(getattr(self, key)) is not int or getattr(self, key) < minimum:
                 raise ValueError(f"{key} must be an integer >= {minimum}")
-        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength"):
+        for key in ("prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
+                    "prior_tether_relative_cap"):
             value = getattr(self, key)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if self.prior_reg_eps == 0:
             raise ValueError("prior_reg_eps must be positive")
+        if self.prior_tether_relative_cap and self.prior_regularizer != "moment_tether":
+            raise ValueError("prior_tether_relative_cap requires prior_regularizer='moment_tether'")
         if self.prior_regularizer == "none" and self.prior_reg != 0:
             raise ValueError("prior_regularizer='none' requires prior_reg=0")
         if self.prior_update == "frozen" and (self.row_evidence_gate or self.particle_birth_death):
@@ -923,7 +931,8 @@ class Recipe:
                 raise TypeError(f"unsupported moment_tether options: {sorted(unknown)}")
             if self.prior_update == "learned" and self.prior_reg > 0:
                 from .moment_tether import MomentTetherRegularizer
-                return MomentTetherRegularizer(reference, weight=options["weight"], eps=options["eps"])
+                return MomentTetherRegularizer(reference, weight=options["weight"], eps=options["eps"],
+                                               relative_cap=self.prior_tether_relative_cap)
             options["weight"] = 0.
         if self.prior_regularizer == "none" or self.prior_update == "frozen":
             options["weight"] = 0.

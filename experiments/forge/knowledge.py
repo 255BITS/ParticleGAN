@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from contextlib import ExitStack
+from copy import deepcopy
 import json
 from pathlib import Path
 import re

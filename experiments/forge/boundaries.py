@@ -27,6 +27,7 @@ TUNABLE_FIELDS = frozenset({
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
+    "prior_tether_relative_cap",
     "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
@@ -247,7 +248,8 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         prior_fields = {"prior_lr_mult", "prior_betas", "prior_eps", "prior_proximal_strength"}
         if recipe_owned_prior(task):
             prior_fields |= {"prior_update", "prior_regularizer", "prior_reg", "prior_l2",
-                             "prior_reg_target_std", "prior_reg_eps", "prior_sigreg_projections", "prior_sigreg_knots",
+                             "prior_reg_target_std", "prior_reg_eps", "prior_tether_relative_cap",
+                             "prior_sigreg_projections", "prior_sigreg_knots",
                              "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors"}
         optimizer_inactive = (name in prior_fields - {"prior_update"}
                               and resolved_recipe["prior_update"] == "frozen" and recipe_owned_prior(task))

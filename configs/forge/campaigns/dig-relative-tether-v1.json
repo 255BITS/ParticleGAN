@@ -1,0 +1,8 @@
+{
+  "accept_shared_cost_transfer": false,
+  "budget_seconds": 14400,
+  "candidate_budget_seconds": 4800,
+  "id": "dig-relative-tether-v1",
+  "purpose": "Opt-in relative-force tether dig (2026-10-15): BCAP control, BCAP + fixed .01 tether, BCAP + .01 tether with relative cap 0.03, on one frozen source. Stage 1 mode_hold+ring16, stage 2 word smoke+hold, stage 3 remaining Tier 1. Seed 0 only; about 2 GPU-hours of actual training.",
+  "schema_version": 1
+}
