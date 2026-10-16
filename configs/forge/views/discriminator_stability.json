@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 9,
+  "revision": 10,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -32,7 +32,7 @@
       "importance": "required",
       "order": 4,
       "qualification_tier": 1,
-      "task": "ring16_acquisition"
+      "task": "ring16_acquisition_6400"
     },
     {
       "importance": "required",
@@ -195,5 +195,5 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Recipe-owned prior policy and regularization: tasks preserve initial prior law/capacity/sampling, architecture/data, initialization, budgets and numerical gates. New execution.prior_contract recipe_owned_v1 binds learning/freezing and all latent-prior penalties to one global recipe. Archived revisions retain their original semantics."
+  "policy_change_reason": "User decision 2026-10-16 (dig2 round 2): the required Tier 1 ring16 question becomes ring16_acquisition_6400 (6400 updates, each recipe's own schedule declared over the full 6400, 384 checks at the same 16.67-update cadence, unchanged numerical gate and unchanged 5-check terminal sustained rule). ring16_acquisition (1600 updates) and every receipt graded under it keep their identity; revision 9 is archived at configs/forge/view-history/discriminator_stability-v9.json. Evidence: reports/forge/dig2-20261016/ring16-cap.md."
 }

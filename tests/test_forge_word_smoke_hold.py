@@ -99,9 +99,15 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     assert smoke["evaluation"]["thresholds"] == hold["evaluation"]["thresholds"] == old["evaluation"]["thresholds"]
     assert hold["dependencies"] == [dict(task="five_word_joint_smoke", kind="checkpoint")]
     campaign = read_json(ROOT / "configs/forge/campaigns/technique-inventory-word-split-v1.json")
+    # The historical campaign was reserved for view revision 9 (1,600-update ring16, 300 s);
+    # revision 10 requires the 6,400-update ring16 (1,200 s) and its own adopt-20261016 campaigns.
+    archived = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v9.json")
     groups = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
-              tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
+              tasks[a["task"]]["resources"]["timeout_seconds"] for a in archived["assignments"]}
     assert campaign["candidate_budget_seconds"] == sum(groups.values()) == 46620
+    current = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
+               tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
+    assert sum(current.values()) == 46620 - 300 + 1200
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")
