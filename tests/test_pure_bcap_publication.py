@@ -367,6 +367,14 @@ def test_preservation_includes_denominators_and_metrics():
         publication.preserved_science(before, after)
 
 
+def family_page_navigation(root):
+    """Load the checkout's publisher as experiments/forge/family_reports.py does for the BCAP family page."""
+    page_spec = importlib.util.spec_from_file_location("pure_bcap_family_navigation", root / publication.REPORT / "publish.py")
+    helper = importlib.util.module_from_spec(page_spec)
+    page_spec.loader.exec_module(helper)
+    return helper.display_section(root, root / "reports/forge/families/bcap-pure.md")
+
+
 def test_current_generator_adds_only_bound_readout_navigation(completed, monkeypatch):
     root, _, readout, _ = completed
     receipt = {"scope": "pure_bcap_initial_current_measurement", "qualification_input": False,
@@ -382,12 +390,14 @@ def test_current_generator_adds_only_bound_readout_navigation(completed, monkeyp
     before = deepcopy(result)
     text = publication.inventory._current_markdown(result, root, root / "reports/forge/technique-inventory.md")
     assert text.count("| One current family table |") == 1
-    assert "[BCAP initial Adam study](pure-bcap/README.md)" in text
-    assert "2/6" in text and result == before
+    # The study link moved from the main board to the BCAP family page.
+    assert "BCAP initial Adam study" not in text and result == before
+    navigation = family_page_navigation(root)
+    assert "[BCAP initial Adam study](../pure-bcap/README.md)" in navigation and "2/6" in navigation
     receipt["paid_wall_seconds"] = 50
     atomic_json(root / publication.REPORT / "publication.json", receipt)
     with pytest.raises(ValueError, match="navigation binding"):
-        publication.inventory._current_markdown(result, root, root / "reports/forge/technique-inventory.md")
+        family_page_navigation(root)
 
 
 def test_two_source_composition_keeps_both_snapshots_and_original_plan(completed, monkeypatch):
@@ -720,9 +730,10 @@ def test_current_generator_links_partial_readout_without_selection(completed, mo
                         lambda *args: "| One current family table |\n")
     text = publication.inventory._current_markdown({"family_progress": {"fixture": True}}, root,
                                                  root / "reports/forge/technique-inventory.md")
-    assert text.count("| One current family table |") == 1
-    assert "[BCAP initial Adam study](pure-bcap/README.md)" in text
-    assert "53 original paid attempts" in text and "no new selection" in text
+    assert text.count("| One current family table |") == 1 and "BCAP initial Adam study" not in text
+    navigation = family_page_navigation(root)
+    assert "[BCAP initial Adam study](../pure-bcap/README.md)" in navigation
+    assert "53 original paid attempts" in navigation and "no new selection" in navigation
     assert not (root / publication.REPORT / "publication.json").exists()
 
 

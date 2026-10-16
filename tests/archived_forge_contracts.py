@@ -67,13 +67,33 @@ def restore_published_view_roster(root):
     return restore_archived_contracts(root, "published_develop_views")
 
 
+def commit_available(commit):
+    """True when this checkout can read the archived commit (shallow clones cannot)."""
+    return subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=ROOT,
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+
+
+def require_history(scope):
+    """Skip archived-history controls with an explicit reason instead of erroring."""
+    import pytest
+    commit = COMMITS[scope]
+    if not commit_available(commit):
+        pytest.skip(f"archived {scope} commit {commit[:12]} is unavailable in this checkout "
+                    "(shallow clone); fetch full history to run this control")
+
+
 def published_develop_checkout(tmp_path):
     """Read original committed reports against their published develop cards."""
     # These report controls only read their inputs; share one complete physical
     # report mirror per pytest run so containment guards retain their meaning.
+    require_history("published_develop")
     root = tmp_path.parent / "published-develop-checkout"
-    if root.is_dir():
+    complete = root.with_name(root.name + ".complete")
+    if complete.is_file() and root.is_dir():
         return root
+    if root.exists():
+        # An earlier call failed part-way; never hand out a partial mirror.
+        shutil.rmtree(root)
     root.mkdir()
     # Reports and artifact links are read-only inputs in these controls. Configs
     # are private copies, allowing exact original task identities to be restored.
@@ -136,7 +156,9 @@ def published_develop_checkout(tmp_path):
             data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
-    return restore_published_view_roster(root)
+    result = restore_published_view_roster(root)
+    complete.write_text("complete\n")
+    return result
 
 
 def bcap_legacy_software_checkout(directory):

@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("forge_current_inventory", ROOT / "reports/forge/regenerate_technique_inventory.py")
 publication = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(publication)
+# The board's diagnostics note may cite the historical Atlas replay in this one
+# scoped sentence (experiments/forge/family_reports.py), never as a score.
+ATLAS_HISTORY_NOTE = "Atlas's original 19/19 CUDA passes remain valid under their original task and sampling contracts."
 
 
 def test_publication_prefers_recorded_then_canonical_declarations(monkeypatch):
@@ -58,7 +61,12 @@ def _current_family_roster():
             assert row["selection"]["qualified"] is False
     # Editorial original-ID configuration alternatives need not manufacture
     # another row when their scientific declaration aliases an existing one.
-    assert unmeasured <= represented
+    # A hidden declaration-only family (inventory_visible false) that no current
+    # pin selects keeps only its historical row, as current_family_candidates skips it.
+    hidden = {family["id"] for family in registry if family.get("inventory_visible", True) is False}
+    assert unmeasured - hidden <= represented
+    historical = {row["trainer_family"] for row in report.get("historical_family_rows", [])}
+    assert (unmeasured & hidden) - pinned <= historical
     return represented
 
 
@@ -252,7 +260,8 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     assert "<summary>Selected configurations and provenance</summary>" not in markdown
     assert "19/19" not in markdown and "2/2 hold FAIL" not in markdown
     assert "Original Atlas recipe and serving-law evidence" in _family_text(root, current, "atlas")
-    assert markdown.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert markdown.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                          " | Tier 3 requirements | Total view requirements |") == 1
     outputs = _outputs(root)
     mtimes = {path: path.stat().st_mtime_ns for path in outputs}
     assert publication.publish_current(root) == published
@@ -623,7 +632,8 @@ def test_default_cli_refreshes_later_view_without_advancing_recorded_qualificati
     assert refreshed["rows"] == before["rows"] and refreshed["view_revision"] == 2
     assert refreshed["declared_view"]["revision"] == 3
     assert metadata["qualification_regraded"] is metadata["training_launched"] is False
-    assert "0(*)/4" in Path(metadata["report"]).read_text()
+    # The declared fourth task is counted and named as not run.
+    assert "[0/4 (3 not run)]" in Path(metadata["report"]).read_text()
 
 
 def test_standalone_scalar_display_binds_actual_receipt_and_never_changes_qualification():
@@ -845,7 +855,7 @@ def test_new_card_is_discovered_with_truthful_unknown_or_blocked_status(evidence
         assert new["candidate_revision"] is None
         assert new["bindings"] == {"source_origin_commit": None}
         markdown = (root / "reports/forge/technique-inventory.md").read_text()
-        assert "new-technique.md" in markdown and "0(*)/3" in markdown
+        assert "new-technique.md" in markdown and "[0/3 (2 not run, 1 incompatible)]" in markdown
         assert all(slot["fresh_common"]["passed"] is None
                    and slot["fresh_common"]["accepted_record"] is None
                    for slot in result["common26_display"]["rows"])
@@ -1333,8 +1343,12 @@ def test_cli_has_one_default_destination(evidence, capsys):
     root, _ = evidence
     publication.main(["--root", str(root)])
     assert '"rows":2' in capsys.readouterr().out
+    outputs = _outputs(root)
+    # --output-prefix now writes an independent report; it can never refresh
+    # or register the one current board.
     with pytest.raises(SystemExit):
-        publication.main(["--root", str(root), "--output-prefix", "another-board"])
+        publication.main(["--root", str(root), "--output-prefix", "another-board", "--refresh-publication"])
+    assert _outputs(root) == outputs
 
 
 def test_raw_technique_export_cannot_replace_registered_current_evidence(evidence):
@@ -1424,7 +1438,7 @@ def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit()
         assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in links
         assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in links
         assert row["qualified_tier"] == 0
-    assert "19/19" not in markdown
+    assert "19/19" not in markdown.replace(ATLAS_HISTORY_NOTE, "")
     assert "C6 baseline selection and retained diagnosis" in _family_text(ROOT, result, "atlas")
     assert result == before
     without_history = deepcopy(result)
@@ -1470,7 +1484,8 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
         "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
         "default_adoption", "speed_ranking"))
     markdown = Path(published["report"]).read_text()
-    assert markdown.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert markdown.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                          " | Tier 3 requirements | Total view requirements |") == 1
     assert "7/26 PASS" not in markdown and "4/26 PASS" not in markdown
     assert "INVALID 1" not in markdown and "7/8" not in markdown
     family_page = _family_text(root, after, "atlas")
@@ -1780,7 +1795,8 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     assert len(result["rows"]) == len(families)
     assert {row["trainer_family"] for row in result["rows"]} == families
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                      " | Tier 3 requirements | Total view requirements |") == 1
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
     cohort_count = len(result["family_progress"]["families"])
     assert len([line for line in table if line.startswith("| **[")]) == cohort_count
@@ -1829,7 +1845,8 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
     cohort_count = len(result["family_progress"]["families"])
-    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
+    assert "19/19" not in text.replace(ATLAS_HISTORY_NOTE, "")
+    assert sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
     assert result == before
 
 
@@ -1909,9 +1926,12 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     scoped_registry = Path("reports/forge/scoped-publications.json")
     if (ROOT / scoped_registry).is_file():
         # Replay the original navigation inputs, including its unchanged GIF
-        # index, rather than the later pure BCAP media successor.
+        # index, rather than the later pure BCAP media successor. Scoped
+        # cohorts registered after this round are not in its recorded registry.
         registry = read_json(ROOT / scoped_registry)
         original_media = Path("reports/forge/tier1-completion/media.json")
+        original_evidence = Path("reports/forge/tier1-completion/scoped-evidence.json")
+        registry["cohorts"] = [entry for entry in registry["cohorts"] if entry["path"] == original_evidence.as_posix()]
         registry["media"] = {"path": original_media.as_posix(),
                              "sha256": file_hash(tmp_path / original_media)}
         atomic_json(tmp_path / scoped_registry, registry)
