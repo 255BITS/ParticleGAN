@@ -409,7 +409,7 @@ def reconcile_grouped(root, directory, state):
     return recovered
 
 
-def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None):
+def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None, wallclock_policy=None):
     if len(gpus) != 2 or len(set(gpus)) != 2:
         raise ValueError("select exactly two distinct GPUs; the fixed limit is 4 tests / 2 per GPU")
     processes = {}
@@ -454,6 +454,8 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                     spec = {**job, "dependency_blockers": dependency_blockers(job, state),
                             "prerequisites": prerequisite_bindings(job, state),
                             "device": f"cuda:{slot['device']}" if job["resources"].get("gpus", 1) else "cpu"}
+                    if wallclock_policy:  # Opt-in contention-aware limit; see experiments/forge/wallclock.py.
+                        spec["wallclock_policy"] = wallclock_policy
                     atomic_json(target / "request.json", spec)
                     log = (target / "run.log").open("w")
                     child = subprocess.Popen([sys.executable, "-u", str(WORKER), "supervise", str(target / "request.json")],
@@ -516,6 +518,9 @@ def main():
     parser.add_argument("--include-research", action="store_true", help="include original seed-zero research variants")
     parser.add_argument("--refresh", action="store_true", help="refresh the ordinary leaderboard after draining")
     parser.add_argument("--completion-hook", type=Path, help="trusted Python publisher to run after the queue drains")
+    parser.add_argument("--wallclock-policy", type=Path,
+                        help="opt-in JSON {solo_seconds_per_update: {task: s}, ceiling_factor}: extend a task's "
+                             "limit by its measured slowdown, up to the ceiling (default: declared limit only)")
     args = parser.parse_args(); root=args.root.resolve(); directory=args.state_root.resolve()
     if args.action == "status":
         print(json.dumps(summary(read_json(directory / "state.json")), sort_keys=True)); return
@@ -533,7 +538,8 @@ def main():
         state = prepare(root, args.source_root.resolve(), directory, include_research=args.include_research)
     if args.action == "run":
         value = drain(root, directory, gpus=args.gpus.split(","), source=args.source_root.resolve(),
-                      watch=args.watch, refresh=args.refresh, completion_hook=args.completion_hook)
+                      watch=args.watch, refresh=args.refresh, completion_hook=args.completion_hook,
+                      wallclock_policy=read_json(args.wallclock_policy) if args.wallclock_policy else None)
     else:
         value = summary(state)
     print(json.dumps(value, sort_keys=True))

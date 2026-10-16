@@ -76,15 +76,52 @@ def main():
             child = subprocess.Popen([sys.executable, "-u", str(Path(__file__).resolve()), "execute", str(args.path)],
                                      env=env, start_new_session=True, pass_fds=(lease.fileno(),))
             started = time.monotonic()
+            # Opt-in contention-aware limit (spec["wallclock_policy"]); absent, the
+            # declared limit is enforced exactly as before.
+            wallclock = None
+            policy = spec.get("wallclock_policy")
+            if policy:
+                import importlib.util
+                module_spec = importlib.util.spec_from_file_location(
+                    "experiments.forge.attempt_wallclock", Path(__file__).with_name("wallclock.py"))
+                wallclock_module = importlib.util.module_from_spec(module_spec)
+                module_spec.loader.exec_module(wallclock_module)
+                resolved = wallclock_module.policy_for(policy, spec["task"])
+                wallclock = {"declared_limit": spec["timeout_seconds"], "effective_limit": spec["timeout_seconds"],
+                             "slowdown_factor": None, "progress_at_declared_limit": None,
+                             "solo_seconds_per_update": resolved and resolved[0],
+                             "ceiling_factor": resolved and resolved[1]}
             try:
-                child.wait(timeout=spec["timeout_seconds"])
+                try:
+                    child.wait(timeout=spec["timeout_seconds"])
+                except subprocess.TimeoutExpired:
+                    if not (wallclock and wallclock["solo_seconds_per_update"]):
+                        raise
+                    progressed = wallclock_module.logged_progress(directory / "run.log")
+                    limit, factor = wallclock_module.effective_limit(
+                        spec["timeout_seconds"], time.monotonic() - started, progressed,
+                        wallclock["solo_seconds_per_update"], wallclock["ceiling_factor"])
+                    wallclock.update(effective_limit=limit, slowdown_factor=factor,
+                                     progress_at_declared_limit=progressed)
+                    remaining = limit - (time.monotonic() - started)
+                    if remaining <= 0:
+                        raise
+                    child.wait(timeout=remaining)
             except subprocess.TimeoutExpired:
                 stop_group(child)
-                atomic_json(directory / "result.json", {"status": "TIMEOUT", "attempted": True,
+                value = {"status": "TIMEOUT", "attempted": True,
                     "reason": "original task wall-time limit exhausted", "updates": None,
-                    "seconds": time.monotonic() - started})
+                    "seconds": time.monotonic() - started}
+                if wallclock:
+                    value.update(reason="wall-clock limit exhausted (not measured); contention-aware limit "
+                                 f"{wallclock['effective_limit']:.0f} s", wallclock=wallclock)
+                atomic_json(directory / "result.json", value)
             finally:
                 stop_group(child, grace=0)
+            if wallclock and (directory / "result.json").exists():
+                value = json.loads((directory / "result.json").read_text())
+                if "wallclock" not in value:
+                    atomic_json(directory / "result.json", {**value, "wallclock": wallclock})
             if not (directory / "result.json").exists():
                 atomic_json(directory / "result.json", {"status": "ERROR", "attempted": True,
                     "reason": f"worker exited {child.returncode}; see run.log", "updates": None,

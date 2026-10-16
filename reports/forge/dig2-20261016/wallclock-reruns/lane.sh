@@ -7,6 +7,7 @@ ROOT=$1; WT=$2; BUDGET=$3
 PY=/ml2/codex-storage/workspaces/2026-10-07/task-14/runtime/python312/bin/python
 LEASE=/tmp/claude-1000/-ml2-hypergan/baedb70c-2c24-4e91-92d1-2f2bed2d913c/scratchpad/dig/gpu-lease.sh
 HERE=$WT/reports/forge/dig2-20261016/wallclock-reruns
+cd "$WT" || exit 1
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1
 for spec in "$ROOT"/specs/*.json; do
   name=$(basename "$spec" .json)
