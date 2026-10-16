@@ -242,6 +242,18 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+    # Opt-in progress-driven schedules (default None = unchanged step schedules).
+    # "critic_order" replaces completed_steps/total_steps in the cosine LR,
+    # input-noise anneal and output-noise warmup by an internal progress value
+    # p in [0, 1]. p rises by at most progress_rate per update, scaled by how
+    # close the critic's paired order accuracy EMA is to chance (full rate at
+    # 0.5, zero at progress_target), and never decreases. "updates" is a
+    # diagnostic that raises p by progress_rate every update (an internal
+    # counter). Neither reads the step label or the declared horizon.
+    progress_schedule: str | None = None
+    progress_rate: float = 0.001
+    progress_target: float = 0.75
+    progress_ema: float = 0.98
 
     def __post_init__(self):
         if self.prior_update not in ("learned", "frozen"):
@@ -327,6 +339,21 @@ class Recipe:
         if self.adam_variant == "tensorflow_v1" and (
                 self.optimizer_family != "adam" or self.amsgrad or self.beta2_end is not None):
             raise ValueError("tensorflow_v1 requires plain Adam, no AMSGrad and constant betas")
+        if self.progress_schedule not in (None, "critic_order", "updates"):
+            raise ValueError("progress_schedule must be None, critic_order or updates")
+        if self.progress_schedule is not None:
+            for key in ("progress_rate", "progress_ema"):
+                value = getattr(self, key)
+                if type(value) not in (int, float) or not math.isfinite(value) or not 0 < value < 1:
+                    raise ValueError(f"{key} must be in (0, 1)")
+            if (type(self.progress_target) not in (int, float) or not math.isfinite(self.progress_target)
+                    or not .5 < self.progress_target <= 1):
+                raise ValueError("progress_target must be in (0.5, 1]")
+            if (self.continuous_policy is not None or self.lr_schedule != "cosine"
+                    or self.lr_control != "mobility" or self.beta2_end is not None
+                    or self.reg_coeff_end is not None):
+                raise ValueError("progress_schedule replaces the cosine step schedules of a scheduled "
+                                 "mobility recipe without beta2/penalty step schedules")
         if self.lr_schedule not in ("cosine", "constant", "exponential"):
             raise ValueError("lr_schedule must be cosine, constant or exponential")
         if (type(self.lr_decay_steps) is not int or self.lr_decay_steps <= 0

@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 7200,
+    "candidate_budget_seconds": 1800,
+    "id": "dig-horizon-clock-v1"
+  },
+  "candidate": "k3p-hc-progress-v1",
+  "competing_explanation": "K3P may need far more than 1,600 updates of training at high rate (the 6,400 full schedule still failed at its 1,600/3,200/4,800 cuts), so no schedule shape inside the cap can reproduce the long-horizon pass.",
+  "control": {
+    "candidate_id": "k3p-hc-step-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "hypothesis": "Candidate: critic-order progress drives K3P's annealing shape without the step label or horizon.",
+  "id": "dig-horizon-clock-k3p-hc-progress-v1-study-r2",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "ring16-schedule-20261011-readout"
+      },
+      "path": "reports/forge/dig-20261015/horizon-clock-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig-horizon-clock-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

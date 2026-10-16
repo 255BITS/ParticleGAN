@@ -370,7 +370,9 @@ class GANTrainer:
             self.policy.observe_support(latent)
             fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
         self.policy.observe_critic_pair(real, fake)
-        loss_d = self.loss.d_loss(critic(real), critic(fake))
+        real_logits_d, fake_logits_d = critic(real), critic(fake)
+        self.policy.observe_critic_logits(real_logits_d, fake_logits_d)
+        loss_d = self.loss.d_loss(real_logits_d, fake_logits_d)
         self.penalty.collect_stats = collect_stats
         penalty = self.penalty(critic, real, fake)
         penalty_stats = self.penalty.last_stats
@@ -482,8 +484,7 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, rows = prior.sample(n, generator=stream, fixed_first_n=fixed_first_n, offset=offset)
-                sigma = (self._output_sigma(output_noise_std(self.recipe, self.completed_steps))
-                         if output_noise else 0.0)
+                sigma = (self.policy.output_sigma() if output_noise else 0.0)
                 return self._generate(model, latent, sigma, stream, rows=rows)
         finally:
             for module, flag in modes:
@@ -534,6 +535,7 @@ class GANTrainer:
             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
             **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
             **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
+            **({"progress": self.policy.progress.state_dict()} if self.policy.progress is not None else {}),
             **({"reopen_guard": self.policy.reopen_guard.state_dict()}
                if self.policy.reopen_guard is not None else {}),
         })
@@ -668,6 +670,8 @@ class GANTrainer:
             self.row_evidence.check_state(state["row_evidence"])
         if self.policy.surprise is not None:
             deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.progress is not None:
+            deepcopy(self.policy.progress).load_state_dict(state["progress"])
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.check_state(state["reopen_guard"], roles=self.policy.roles,
                                                  completed_steps=state["completed_steps"],
@@ -714,6 +718,8 @@ class GANTrainer:
             self.row_evidence.load_state_dict(state["row_evidence"])
         if self.policy.surprise is not None:
             self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.progress is not None:
+            self.policy.progress.load_state_dict(state["progress"])
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
                                                      completed_steps=state["completed_steps"],
