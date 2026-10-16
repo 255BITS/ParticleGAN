@@ -34,7 +34,7 @@ import subprocess
 import sys
 
 from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_hash
-from .policy_coverage import (BLOCKED_HOSTS, COHORT, COVERAGE, DIAGNOSTIC_CONTINUATIONS, FAMILIES, LABEL,
+from .policy_coverage import (COHORT, COVERAGE, DIAGNOSTIC_CONTINUATIONS, FAMILIES, LABEL,
                               LAW_INDEPENDENT, PARENTS, SERVED, SERVED_COHORT, SERVED_LABEL, SERVED_PARENTS,
                               SERVED_VIEW, TIERS, VIEW, reporting_tier, variant_id)
 
