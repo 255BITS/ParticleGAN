@@ -801,7 +801,10 @@ class ContinuousThermalCooler:
         """Compute dimension- and batch-scale invariant cooling threshold."""
         d = max(1, min(dim, 4))
         b = max(16, batch_size)
-        scale = (1024.0 / b) ** (1.0 / d)
+        if d == 1:
+            scale = (1024.0 / b) ** 1.0
+        else:
+            scale = (128.0 / b) ** (1.0 / d)
         return self.tau_cooling * scale
 
     def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
@@ -819,7 +822,7 @@ class ContinuousThermalCooler:
     @property
     def scale(self) -> float:
         """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
-        return self.scale_for(batch_size=1024, dim=2)
+        return self.scale_for(batch_size=128, dim=2)
 
     def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
         """Apply straight-through gradient scaling: backward gradient is scaled by scale (or self.scale) while forward pass is identity."""
@@ -1146,13 +1149,15 @@ class _BISPFPenaltyKernel:
                 cached_d = getattr(self.record, "_last_d_logits", None)
                 if cached_d is not None and is_continuous_flow:
                     d_r_cached, d_f_cached = cached_d
-                    starved_mask = d_r_cached > d_r_cached.median()
-                    overpop_mask = d_f_cached < d_f_cached.median()
-                    if starved_mask.any() and overpop_mask.any():
-                        bridge_r = torch.where(starved_mask)[0]
-                        k_bridge = max(1, int(0.20 * b_f))
-                        r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
-                        matched_real_idx[:k_bridge] = r_pick
+                    logit_gap = float((d_r_cached.max() - d_r_cached.median()).item())
+                    if logit_gap > 0.50:
+                        starved_mask = d_r_cached > (d_r_cached.median() + 0.25)
+                        overpop_mask = d_f_cached < (d_f_cached.median() - 0.25)
+                        if starved_mask.any() and overpop_mask.any():
+                            bridge_r = torch.where(starved_mask)[0]
+                            k_bridge = max(1, min(int(0.20 * b_f), len(bridge_r)))
+                            r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
+                            matched_real_idx[:k_bridge] = r_pick
 
                 x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)

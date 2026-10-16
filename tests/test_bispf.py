@@ -1089,28 +1089,28 @@ def test_sbnp_regularizer_defaults_and_unweighted_scale():
 
 def test_bispf_scale_invariant_thermal_cooling():
     """Verify ContinuousThermalCooler dimension- and batch-scale invariant thresholding:
-    - effective_tau scales as tau_0 * (1024 / B)^(1/d).
+    - effective_tau scales as tau_0 * (1024 / B) in 1D and tau_0 * (128 / B)^(1/d) in 2D.
     - For B=128, d=1: tau_eff = 0.020 * 8 = 0.160, so residual 0.10 cools (scale < 1.0).
-    - For B=1024, d=2: tau_eff = 0.020, so residual 0.10 does not cool (scale == 1.0).
+    - For B=128, d=2: tau_eff = 0.020, so ring16 residual 0.028 does not cool (scale == 1.0).
     """
     from particlegan.bispf import ContinuousThermalCooler
 
     cooler = ContinuousThermalCooler(tau_cooling=0.020, s_min=0.05)
 
     # 1. Exact scaling factor checks
-    tau_base = cooler.effective_tau(batch_size=1024, dim=2)
+    tau_base = cooler.effective_tau(batch_size=128, dim=2)
     assert abs(tau_base - 0.020) < 1e-6
 
     tau_1d = cooler.effective_tau(batch_size=128, dim=1)
     assert abs(tau_1d - 0.160) < 1e-6  # 0.020 * (1024/128)^1 = 0.020 * 8 = 0.160
 
-    tau_2d = cooler.effective_tau(batch_size=128, dim=2)
-    assert abs(tau_2d - (0.020 * math.sqrt(8.0))) < 1e-6  # 0.020 * (1024/128)^(1/2) = 0.0565685
+    tau_1024_2d = cooler.effective_tau(batch_size=1024, dim=2)
+    assert abs(tau_1024_2d - (0.020 / math.sqrt(8.0))) < 1e-6
 
     # 2. Cooling behavior at residual = 0.10
     cooler.ema_residual = 0.10
-    # For (1024, 2), 0.10 > 0.020 -> uncooled (exploration)
-    s_base = cooler.scale_for(batch_size=1024, dim=2)
+    # For (128, 2), 0.10 > 0.020 -> uncooled (exploration)
+    s_base = cooler.scale_for(batch_size=128, dim=2)
     assert s_base == 1.0
     assert cooler.scale == 1.0
 
