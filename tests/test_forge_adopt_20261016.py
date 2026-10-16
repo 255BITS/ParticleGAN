@@ -25,7 +25,7 @@ TIER1 = ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ri
 def test_counted_ring16_is_the_6400_update_revision_in_every_ordinary_view():
     tasks = load_tasks(ROOT)
     view = load_view(ROOT, "discriminator_stability")
-    assert view["revision"] == 10
+    assert view["revision"] == 12
     tier1 = [a["task"] for a in view["assignments"] if a["qualification_tier"] == 1 and a["importance"] == "required"]
     assert tier1 == TIER1
     validate_view(view, tasks)
@@ -35,12 +35,27 @@ def test_counted_ring16_is_the_6400_update_revision_in_every_ordinary_view():
     assert tasks["ring16_acquisition_6400"]["execution"]["steps"] == 6400
 
 
-def test_revision9_is_archived_and_revision10_changes_only_the_ring16_question():
-    archived = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v9.json")
+def test_revision11_is_archived_and_revision12_changes_only_the_ring16_question():
+    # develop's revision 11 (test dispositions) is the base; revision 12 swaps only the ring16 question.
+    archived = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v11.json")
     current = load_view(ROOT, "discriminator_stability")
-    assert archived["revision"] == 9
+    assert archived["revision"] == 11
     assert "ring16_acquisition" in {a["task"] for a in archived["assignments"]}
     projected = deepcopy(current)
+    for key in ("revision", "policy_change_reason", "previous_revision"):
+        projected[key] = archived[key]
+    for assignment in projected["assignments"]:
+        if assignment["task"] == "ring16_acquisition_6400":
+            assignment["task"] = "ring16_acquisition"
+    assert projected == archived
+
+
+def test_measured_adopt_draft10_was_revision9_with_only_the_ring16_question_changed():
+    # The 2026-10-16 adopt measurements ran under this unmerged draft; it is kept as provenance only.
+    archived = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v9.json")
+    draft = read_json(ROOT / "reports/forge/adopt-20261016/measured-view-draft10.json")
+    assert draft["revision"] == 10
+    projected = deepcopy(draft)
     projected["revision"] = 9
     projected["policy_change_reason"] = archived["policy_change_reason"]
     for assignment in projected["assignments"]:

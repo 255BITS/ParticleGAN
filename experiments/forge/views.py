@@ -22,7 +22,17 @@ from .initialization import task_initializer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-IMPORTANCES = {"required", "ranking", "diagnostic"}
+# A held task stays assigned, graded and shown, but it is not counted: it never
+# enters required totals, blockers or next tasks. A task removed from the count
+# stays assigned as diagnostic and carries a removal note naming why.
+IMPORTANCES = {"required", "ranking", "diagnostic", "held"}
+COUNTED_OR_HELD = frozenset({"required", "held"})
+HOLD_SCHEMA, REMOVAL_SCHEMA = "forge_hold_v1", "forge_count_removal_v1"
+# unsolved: no recorded recipe has ever passed the current declaration.
+# held_prerequisite: the task depends on a held task (listed in blocked_by).
+HOLD_REASONS = frozenset({"no_global_recipe", "unsolved", "held_prerequisite"})
+# phase and duplicate name the counted task that carries the question (counted_by).
+REMOVAL_REASONS = frozenset({"phase", "duplicate", "superseded", "ill_posed"})
 GATE_STATUSES = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"}
 DIAGNOSTIC_SCOPES = frozenset({"calibration_diagnostic", "research_diagnostic"})
 
@@ -216,6 +226,108 @@ def load_view(root: Path | str, view_id: str) -> dict:
     return view
 
 
+def explanation_reference(value, label):
+    """Repo-relative Markdown path#anchor; report tests check that the anchor exists.
+
+    A URL scheme, drive letter or home directory never resolves inside the
+    repository, so ':' and a leading '~' are refused like absolute paths.
+    """
+    if not isinstance(value, str) or value.count("#") != 1:
+        raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
+    path, anchor = value.split("#")
+    if (not anchor or Path(path).suffix != ".md" or Path(path).is_absolute() or ".." in Path(path).parts
+            or ":" in path or path.startswith("~") or "\\" in path or any(c.isspace() for c in value)):
+        raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
+
+
+def plain_summary(value, label):
+    if not isinstance(value, str) or value != value.strip() or not 20 <= len(value) <= 280:
+        raise ValueError(f"{label} needs a plain-language summary of 20-280 characters")
+
+
+def counted_by_matches(reason, counted_by) -> bool:
+    """Phase and duplicate removals name the counted task; the other reasons use null."""
+    if reason in {"phase", "duplicate"}:
+        return isinstance(counted_by, str) and bool(counted_by)
+    return counted_by is None
+
+
+def _validate_hold(name, hold):
+    keys = {"schema", "previous_importance", "reason", "blocked_by", "summary", "explanation", "reentry"}
+    if not isinstance(hold, dict) or set(hold) != keys:
+        raise ValueError(f"{name}: held assignments need hold metadata with exactly {sorted(keys)}")
+    if hold["schema"] != HOLD_SCHEMA or hold["previous_importance"] != "required":
+        raise ValueError(f"{name}: only a previously required task can be held ({HOLD_SCHEMA})")
+    if hold["reason"] not in HOLD_REASONS:
+        raise ValueError(f"{name}: hold reason must be one of {sorted(HOLD_REASONS)}")
+    blocked = hold["blocked_by"]
+    if (not isinstance(blocked, list) or any(not isinstance(x, str) or not x for x in blocked)
+            or blocked != sorted(set(blocked))):
+        raise ValueError(f"{name}: hold blocked_by must list distinct task ids in sorted order")
+    plain_summary(hold["summary"], f"{name}: hold")
+    explanation_reference(hold["explanation"], f"{name}: hold")
+    if not isinstance(hold["reentry"], str) or len(hold["reentry"].strip()) < 20:
+        raise ValueError(f"{name}: hold needs a concrete re-entry criterion")
+
+
+def _validate_removal(name, removal):
+    keys = {"schema", "previous_importance", "reason", "counted_by", "summary", "explanation"}
+    if not isinstance(removal, dict) or set(removal) != keys:
+        raise ValueError(f"{name}: removal metadata needs exactly {sorted(keys)}")
+    if removal["schema"] != REMOVAL_SCHEMA or removal["previous_importance"] != "required":
+        raise ValueError(f"{name}: only a previously required task can be removed from the count ({REMOVAL_SCHEMA})")
+    if removal["reason"] not in REMOVAL_REASONS:
+        raise ValueError(f"{name}: removal reason must be one of {sorted(REMOVAL_REASONS)}")
+    if not counted_by_matches(removal["reason"], removal["counted_by"]):
+        raise ValueError(f"{name}: phase and duplicate removals name counted_by; superseded and ill_posed use null")
+    plain_summary(removal["summary"], f"{name}: removal")
+    explanation_reference(removal["explanation"], f"{name}: removal")
+
+
+def _validate_previous_revision(view):
+    previous = view.get("previous_revision")
+    if previous is None:
+        return
+    if not isinstance(previous, dict) or set(previous) != {"revision", "archive", "policy_fingerprint"}:
+        raise ValueError("previous_revision needs exactly revision, archive and policy_fingerprint")
+    revision = previous["revision"]
+    if type(revision) is not int or not 1 <= revision < view["revision"]:
+        raise ValueError("previous_revision must name an earlier revision")
+    if previous["archive"] != f"configs/forge/view-history/{view['id']}-v{revision}.json":
+        raise ValueError("previous_revision archive must be configs/forge/view-history/<view>-v<revision>.json")
+    if not _digest(previous["policy_fingerprint"]):
+        raise ValueError("previous_revision policy_fingerprint must be a SHA-256 digest")
+
+
+def _phase_parent(index, tasks, parent, child):
+    """A removed phase may precede the counted verdict that replays it on the same run.
+
+    Both must share one uninterrupted execution group and tier, and the parent's
+    removal note must name the child. Callers also require a checkpoint edge, and
+    validate_view requires the phase's own prerequisites to be counted.
+    """
+    removal = index[parent].get("removal") or {}
+    group = tasks[child]["execution"].get("execution_group")
+    return bool(index[parent]["importance"] == "diagnostic" and removal.get("reason") == "phase"
+                and removal.get("counted_by") == child and group
+                and tasks[child]["execution"].get("uninterrupted") and tasks[parent]["execution"].get("uninterrupted")
+                and tasks[parent]["execution"].get("execution_group") == group
+                and index[parent]["qualification_tier"] == index[child]["qualification_tier"])
+
+
+def _same_question(removed, counted):
+    """Duplicates grade one question: equal evaluation declarations, apart from a
+    source pin of the other task's own declaration (a derived copy's provenance)."""
+    def declared(task, other):
+        evaluation = deepcopy(task["evaluation"])
+        sources = evaluation.pop("sources", {})
+        if isinstance(sources, dict):
+            sources = {path: digest for path, digest in sources.items()
+                       if path != f"configs/forge/tasks/{other['id']}.json"}
+        return {**evaluation, **({"sources": sources} if sources else {})}
+    return _hash(declared(removed, counted)) == _hash(declared(counted, removed))
+
+
 def validate_view(view: dict, tasks: dict) -> None:
     if not isinstance(view, dict):
         raise ValueError("view must be an object")
@@ -229,8 +341,9 @@ def validate_view(view: dict, tasks: dict) -> None:
         raise ValueError("view needs nonempty assignments")
     if not isinstance(view.get("eligibility", {}), dict):
         raise ValueError("view eligibility must be an object")
+    _validate_previous_revision(view)
     index = {}
-    required_tiers = set()
+    required_tiers = set()  # Tiers with a counted or held task.
     for assignment in assignments:
         if not isinstance(assignment, dict):
             raise ValueError("assignment must be an object")
@@ -247,9 +360,17 @@ def validate_view(view: dict, tasks: dict) -> None:
             raise ValueError("qualification_tier must be 1, 2, or 3")
         if assignment.get("importance") not in IMPORTANCES:
             raise ValueError("unknown task importance")
+        if assignment["importance"] == "held":
+            _validate_hold(name, assignment.get("hold"))
+        elif "hold" in assignment:
+            raise ValueError(f"{name}: hold metadata requires importance held")
+        if "removal" in assignment:
+            if assignment["importance"] != "diagnostic":
+                raise ValueError(f"{name}: a task removed from the count stays assigned as diagnostic")
+            _validate_removal(name, assignment["removal"])
         _positive_int(assignment.get("order"), "assignment order", minimum=0)
         index[name] = assignment
-        if assignment["importance"] == "required":
+        if assignment["importance"] in COUNTED_OR_HELD:
             required_tiers.add(tier)
     highest = max(a["qualification_tier"] for a in assignments)
     diagnostic = view.get("evidence_scope") in DIAGNOSTIC_SCOPES
@@ -268,6 +389,19 @@ def validate_view(view: dict, tasks: dict) -> None:
             execution_groups[group] = tier
     visiting, visited = set(), set()
 
+    def require_counted(name, parent, via=None):
+        """A counted verdict rests only on counted tasks, directly or through its removed phase."""
+        if index[parent]["importance"] == "required":
+            return
+        if index[parent]["importance"] == "held" and via:
+            raise ValueError(f"{name}: its removed phase {via} depends on held task {parent}; count {parent}, "
+                             f"or hold {name} and {via} with reason held_prerequisite")
+        if index[parent]["importance"] == "held":
+            raise ValueError(f"{name}: required task depends on held task {parent}; hold {name} "
+                             f"with reason held_prerequisite and list {parent} in blocked_by")
+        raise ValueError("a required task cannot depend on a nonrequired task"
+                         + (f" (its removed phase {via} depends on {parent})" if via else ""))
+
     def visit(name):
         if name in visiting:
             raise ValueError(f"dependency cycle involving {name}")
@@ -280,8 +414,16 @@ def validate_view(view: dict, tasks: dict) -> None:
                 raise ValueError(f"{name}: dependency {parent} missing from view")
             if index[parent]["qualification_tier"] > index[name]["qualification_tier"]:
                 raise ValueError(f"{name}: dependency {parent} is in a later tier")
-            if index[parent]["importance"] != "required" and index[name]["importance"] == "required":
-                raise ValueError("a required task cannot depend on a nonrequired task")
+            if index[name]["importance"] == "required" and index[parent]["importance"] != "required":
+                if dep["kind"] == "checkpoint" and _phase_parent(index, tasks, parent, name):
+                    # The removed phase runs inside this counted job, so its own
+                    # prerequisites gate the counted verdict and must be counted too.
+                    for inner in _dependencies(tasks[parent]):
+                        if inner["task"] not in index:
+                            raise ValueError(f"{parent}: dependency {inner['task']} missing from view")
+                        require_counted(name, inner["task"], via=parent)
+                else:
+                    require_counted(name, parent)
             if dep["kind"] == "checkpoint":
                 if not tasks[parent]["execution"].get("produces_state"):
                     raise ValueError(f"{name}: checkpoint dependency does not produce state")
@@ -293,6 +435,33 @@ def validate_view(view: dict, tasks: dict) -> None:
 
     for name in index:
         visit(name)
+    for name, assignment in index.items():
+        if assignment["importance"] == "held":
+            hold = assignment["hold"]
+            held_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
+                                  if index[dep["task"]]["importance"] == "held")
+            if hold["blocked_by"] != held_parents:
+                raise ValueError(f"{name}: hold blocked_by must list exactly its held prerequisites {held_parents}")
+            if (hold["reason"] == "held_prerequisite") != bool(held_parents):
+                raise ValueError(f"{name}: a task held behind a held prerequisite uses reason held_prerequisite, "
+                                 "and only such a task does")
+        removal = assignment.get("removal")
+        if removal and removal["reason"] == "phase":
+            target = removal["counted_by"]
+            if (target not in index or index[target]["importance"] != "required"
+                    or not any(dep["task"] == name and dep["kind"] == "checkpoint"
+                               for dep in _dependencies(tasks[target]))
+                    or not _phase_parent(index, tasks, name, target)):
+                raise ValueError(f"{name}: a phase removal must be the checkpoint parent of its counted task, "
+                                 "in one uninterrupted execution group and tier")
+        if removal and removal["reason"] == "duplicate":
+            target = removal["counted_by"]
+            if (target == name or target not in index or index[target]["importance"] != "required"
+                    or index[target]["qualification_tier"] > assignment["qualification_tier"]
+                    or tasks[target]["adapter"] != tasks[name]["adapter"]
+                    or not _same_question(tasks[name], tasks[target])):
+                raise ValueError(f"{name}: a duplicate removal must name a counted task of this view at the same "
+                                 "or an earlier tier, with the same adapter and the same evaluation declaration")
 
 
 def _verdict(status, reason, **details):
@@ -656,7 +825,16 @@ def _candidate_eligibility(view, candidate):
 
 
 def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | None = None) -> dict:
-    """Reduce one candidate's compatible receipts; tier attainment is computed."""
+    """Reduce one candidate's compatible receipts; tier attainment is computed.
+
+    Held tasks are graded and shown but never counted. A tier with no required
+    task has status HELD: it neither passes nor stops progression. The view
+    reports PASS only when every counted tier passes and its highest assigned
+    tier is counted. When every counted tier passes but that highest tier is
+    held, or nothing is counted, the view status is HELD and the candidate is
+    not eligible; qualified_tier is then the highest counted tier reached. A
+    counted failure still reports FAIL, BLOCKED or INCOMPLETE. HELD is never a PASS.
+    """
     validate_view(view, tasks)
     if not isinstance(results, list):
         raise ValueError("results must be a list")
@@ -680,6 +858,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             selected[name] = receipts[0]
         rows[name] = {"task_id": name, "qualification_tier": assignment["qualification_tier"],
                       "importance": assignment["importance"], **grade,
+                      **{key: deepcopy(assignment[key]) for key in ("hold", "removal") if key in assignment},
                       "cost": sum(_cost(r) for r in receipts)}
         rows[name].pop("evidence", None)
     # Retiering may place children before parents in presentation order. Resolve
@@ -724,6 +903,9 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                               if a.get("mode") == "verified_checkpoint" else
                               "checkpoint continuation is not bound to the producer's own state")
                     row.update(_verdict("BLOCKED", reason))
+    held_rows = [row for row in rows.values() if row["importance"] == "held"]
+    held_summary = {"held_total": len(held_rows), "held_passed": sum(row["status"] == "PASS" for row in held_rows),
+                    "held_tasks": [row["task_id"] for row in held_rows]}
     if view.get("evidence_scope") in DIAGNOSTIC_SCOPES:
         return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
                 "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False,
@@ -733,19 +915,42 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                 "tiers": [], "tasks": list(rows.values()),
                 "task_statuses": {name: row["status"] for name, row in rows.items()},
                 "next_task": None, "next_tasks": [], "blockers": [], "required_passed": 0, "required_total": 0,
+                **held_summary, "held_tiers": [], "counted_tiers": [],
                 "cost_seconds": sum(row["cost"] for row in rows.values())}
+    index = {a["task"]: a for a in assignments}
+
+    def ready(name):
+        # A removed phase runs inside its counted child's uninterrupted job, so
+        # its own prerequisites decide whether that job can be proposed.
+        for dep in _dependencies(tasks[name]):
+            parent = dep["task"]
+            if rows[parent]["status"] == "PASS":
+                continue
+            if (rows[parent]["status"] == "NOT_RUN" and dep["kind"] == "checkpoint"
+                    and _phase_parent(index, tasks, parent, name) and ready(parent)):
+                continue
+            return False
+        return True
+
     eligibility = _candidate_eligibility(view, candidate)
     tiers, qualified_tier, next_tasks, blockers = [], 0, [], []
     stopped = False
     for tier in sorted({a["qualification_tier"] for a in assignments}):
         subset = [rows[a["task"]] for a in assignments if a["qualification_tier"] == tier]
         required = [row for row in subset if row["importance"] == "required"]
+        held = [row for row in subset if row["importance"] == "held"]
+        shared = {"held_total": len(held), "held_passed": sum(row["status"] == "PASS" for row in held),
+                  "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset)}
+        if not required:
+            tiers.append({"qualification_tier": tier, "status": "HELD", "required_passed": 0,
+                          "required_total": 0, "counts": {}, **shared})
+            continue
         counts = dict(Counter(row["status"] for row in required))
         all_pass = all(row["status"] == "PASS" for row in required)
         status = "PASS" if all_pass else next((s for s in ("FAIL", "INVALID", "BLOCKED", "INCOMPLETE", "NOT_RUN") if counts.get(s)), "INCOMPLETE")
         tiers.append({"qualification_tier": tier, "status": status,
                       "required_passed": counts.get("PASS", 0), "required_total": len(required),
-                      "counts": counts, "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset)})
+                      "counts": counts, **shared})
         if stopped:
             continue
         if all_pass and not eligibility:
@@ -756,12 +961,16 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                     for row in required if row["status"] != "PASS"]
         hard_stop = eligibility or any(row["status"] in {"FAIL", "INVALID", "BLOCKED", "INCOMPLETE"} for row in required)
         if not hard_stop:
-            next_tasks = [row["task_id"] for row in required if row["status"] == "NOT_RUN"
-                          and all(rows[dep["task"]]["status"] == "PASS" for dep in _dependencies(tasks[row["task_id"]]))]
+            next_tasks = [row["task_id"] for row in required if row["status"] == "NOT_RUN" and ready(row["task_id"])]
     if eligibility:
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
-    status = ("PASS" if qualified_tier == len(tiers) else "BLOCKED" if eligibility else
-              next((t["status"] for t in tiers if t["qualification_tier"] > qualified_tier), "INCOMPLETE"))
+    counted = [t["qualification_tier"] for t in tiers if t["status"] != "HELD"]
+    complete = bool(counted) and qualified_tier == counted[-1]
+    status = ("BLOCKED" if eligibility else
+              "PASS" if complete and tiers[-1]["status"] != "HELD" else
+              "HELD" if complete or not counted else
+              next((t["status"] for t in tiers if t["status"] != "HELD" and t["qualification_tier"] > qualified_tier),
+                   "INCOMPLETE"))
     if status == "NOT_RUN":
         status = "INCOMPLETE"
     return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
@@ -770,4 +979,6 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             "next_task": next_tasks[0] if next_tasks else None, "next_tasks": next_tasks,
             "blockers": blockers, "required_passed": sum(row["status"] == "PASS" for row in rows.values() if row["importance"] == "required"),
             "required_total": sum(row["importance"] == "required" for row in rows.values()),
+            **held_summary, "held_tiers": [t["qualification_tier"] for t in tiers if t["status"] == "HELD"],
+            "counted_tiers": counted,
             "cost_seconds": sum(row["cost"] for row in rows.values())}

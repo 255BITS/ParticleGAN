@@ -48,6 +48,11 @@ def identity(source, revision, task, execution, evaluation):
 
 
 def selected_tasks(publication):
+    """Every test a selected recipe's views measure, counted or not.
+
+    Holding a test or removing it from the count changes what is counted, not
+    what runs, so held and removal-tagged assignments stay in the universe.
+    """
     result = []
     for family in publication["family_progress"]["families"]:
         current = next((c for c in family["cohorts"] if c["anchor"] == family.get("current_cohort_anchor")), None)
@@ -56,7 +61,7 @@ def selected_tasks(publication):
         row = publication["rows"][current["row_index"]]
         names = {v["id"] for v in current["views"]}
         tasks = sorted({a["task"] for v in publication["family_progress"]["views"] if v["id"] in names
-                        for a in v["assignments"] if a["importance"] == "required"})
+                        for a in v["assignments"] if a["importance"] in {"required", "held"} or "removal" in a})
         result.append((family["id"], row, tasks))
     return result
 

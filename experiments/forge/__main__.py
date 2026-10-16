@@ -172,11 +172,14 @@ def parser():
     for stage in ("plan", "enqueue", "report"):
         stage_parser = stages.add_parser(stage)
         stage_parser.add_argument("registration")
-    retier = commands.add_parser("retier", help="change only view policy, validate and recompute; never enqueue")
+    retier = commands.add_parser("retier", help="change only view policy, archive the previous revision, validate and recompute; never enqueue")
     retier.add_argument("view")
     retier.add_argument("--task", required=True)
     retier.add_argument("--tier", type=int, choices=(1, 2, 3), required=True)
     retier.add_argument("--reason", required=True)
+    dispositions = commands.add_parser("test-dispositions", help="check or apply held/removed-from-count test dispositions as archived view revisions; no training")
+    dispositions.add_argument("stage", choices=("check", "apply"), help="check writes nothing and exits 1 on drift; apply archives first and is idempotent")
+    dispositions.add_argument("--registry", type=Path, required=True, help="forge_test_dispositions_v1 JSON, relative to --root")
     out = commands.add_parser("readout", help="conclude an idea with comparison and recommendation, then compile memory")
     out.add_argument("candidate")
     out.add_argument("--study", help="conclude only this frozen study, preserving other uses of the recipe")
@@ -270,6 +273,12 @@ def main(argv=None):
         else:
             print(render_markdown(report, root), end="")
         return 0
+    if args.command == "test-dispositions":
+        from .dispositions import apply, check
+        registry = args.registry if args.registry.is_absolute() else root / args.registry
+        result = (check if args.stage == "check" else apply)(root, registry)
+        emit(result)
+        return int(args.stage == "check" and result["drift"])
     queue_root = queue_location(root, args.queue_root)
     from .queue import Queue, drain
     def publish():
@@ -424,7 +433,8 @@ def main(argv=None):
                     compute = f"{backend}: {profile['model']}" if profile.get("model") else backend
                     compute = compute.replace("|", "\\|")
                     print(f"| {name} | {revision} | {row.get('evidence_scope')} | {compute} | {row.get('qualified_tier', '—')} | "
-                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | {row['status']} |")
+                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | "
+                          f"{row['status']}{knowledge.held_note(row)} |")
                 print(f"\nFull evidence: reports/forge/leaderboards/{args.goal}.json; use --json for raw metrics/cohorts.")
         else:
             emit(knowledge.readout(root, args.candidate, args.conclusion, args.comparison, args.next_action, study_id=args.study))
@@ -436,8 +446,13 @@ def main(argv=None):
             return 1
     elif command == "validate":
         from .views import load_tasks, load_view
+        from .dispositions import unresolved_explanations
         tasks = load_tasks(root)
-        views = [load_view(root, p.stem)["id"] for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        declared = [load_view(root, p.stem) for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        problems = unresolved_explanations(root, declared)
+        if problems:
+            raise ValueError("; ".join(problems))
+        views = [view["id"] for view in declared]
         from .planning import declaration_paths, load_idea
         from .studies import load_study
         from .family_documentation import validate_family_documentation
@@ -478,7 +493,8 @@ def main(argv=None):
                 emit([{"request_id": queue.submit(request, request["promotion_campaign"])["request"]["request_id"],
                        "promotion": request["promotion"]} for request in requests])
     elif command == "retier":
-        from .views import load_tasks, load_view, validate_view
+        from .dispositions import write_view_revision
+        from .views import load_view
         view = load_view(root, args.view)
         found = False
         for assignment in view["assignments"]:
@@ -487,10 +503,8 @@ def main(argv=None):
                 found = True
         if not found:
             raise ValueError("task is not assigned to this view")
-        view["revision"] += 1
-        view["policy_change_reason"] = args.reason
-        validate_view(view, load_tasks(root))
-        atomic_json(root / "configs/forge/views" / f"{args.view}.json", view)
+        # Archives the live revision byte for byte first; refuses a different archive.
+        write_view_revision(root, view, args.reason)
         from .knowledge import board
         emit(board(root, args.view))
     elif command == "cancel":

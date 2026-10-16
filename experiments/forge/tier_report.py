@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
@@ -12,13 +13,14 @@ from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_ha
 from .knowledge import DECLARATION_ONLY_BOARD, leaderboard_path
 from .priors import PRIOR_CODE_PATHS, task_prior
 from .research_artifacts import build_artifacts
-from .family_reports import evaluation_notes, evaluation_rows, number
+from .family_reports import evaluation_notes, evaluation_rows, number, role_label, role_note
 from .views import load_tasks, load_view
 
 
 REPORT_PATH = Path("reports/forge/EXPERIMENTS_BY_TIER.md")
 TIER_NAMES = {1: "smoke", 2: "quality", 3: "endurance"}
-IMPORTANCES = ("required", "ranking", "diagnostic")
+# Held tasks are measured and shown but not counted (experiments/forge/views.py).
+IMPORTANCES = ("required", "held", "ranking", "diagnostic")
 
 
 def build_report(root: Path, view_id: str | None = None, *, publication: dict | None = None) -> dict:
@@ -77,7 +79,8 @@ def build_report(root: Path, view_id: str | None = None, *, publication: dict | 
             tiers.append({
                 "qualification_tier": tier, "name": name,
                 "counts": {importance: counts[importance] for importance in IMPORTANCES},
-                "tasks": [{**task_row(a["task"]), "importance": a["importance"], "order": a["order"]}
+                "tasks": [{**task_row(a["task"]), "importance": a["importance"], "order": a["order"],
+                           **{key: deepcopy(a[key]) for key in ("hold", "removal") if key in a}}
                           for a in assignments],
             })
         result_views.append({
@@ -125,15 +128,24 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
     output = root / (output_path if output_path is not None else REPORT_PATH)
     base = output.parent if output_path is not None else root
 
-    def link(label, source):
+    def link(label, source, anchor=None):
         relative = os.path.relpath(root / source, base)
-        return f"[{_cell(label)}]({quote(relative, safe='/._-')})"
+        return f"[{_cell(label)}]({quote(relative, safe='/._-')}" + (f"#{quote(anchor)}" if anchor else "") + ")"
+
+    def role(task):
+        """The declared role; held and removed roles link their explanation."""
+        note = role_note(task)
+        if not note:
+            return _cell(task["importance"])
+        path, _, anchor = note["explanation"].partition("#")
+        return link(role_label(task), path, anchor)
 
     command_parts = ["python", "-m", "experiments.forge", "experiments-by-tier"]
     if len(report["views"]) != report["view_count"]:
         command_parts += ["--view", report["views"][0]["id"]]
     command_parts += ["--output", output.relative_to(root).as_posix() if output.is_relative_to(root) else str(output)]
     command = shlex.join(command_parts)
+    uncounted = any(role_note(task) for view in report["views"] for tier in view["tiers"] for task in tier["tasks"])
     lines = [
         "# Forge experiments by tier", "",
         "Current task assignments, grouped by goal view and qualification tier. "
@@ -158,6 +170,11 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         "(use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.", "",
         "Tier 1 is smoke, Tier 2 is quality, and Tier 3 is endurance. "
         "Views may leave later tiers empty. Placement follows each view's policy.", "",
+        *(["Held tasks are still run and shown but are not counted until one recipe passes them together with "
+           "every counted task. A diagnostic task removed from the count is carried by another counted task or "
+           "cannot run as declared. Each such role links to its explanation; a view whose highest tier has only "
+           "held tasks never shows PASS: a candidate that passes every counted tier gets HELD, and a counted "
+           "failure still shows as a failure.", ""] if uncounted else []),
         "Steps and timeouts are declared per task, rather than measured costs. "
         "Tasks in an uninterrupted execution group share one run; their budgets must not be added together. "
         "Continuation rows distinguish total steps from additional or extension steps.", "",
@@ -191,8 +208,20 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
     lines[index:index] = review
 
     def count_text(tier):
-        return ", ".join(f"{tier['counts'][importance]} {importance}" for importance in IMPORTANCES
-                         if tier["counts"][importance]) or "0 tasks"
+        removed = sum("removal" in task for task in tier["tasks"])
+        return ", ".join(f"{tier['counts'][importance]} {importance}" +
+                         (f" ({removed} removed from the count)" if importance == "diagnostic" and removed else "")
+                         for importance in IMPORTANCES if tier["counts"][importance]) or "0 tasks"
+
+    def held_status(view):
+        """The HELD rule of a view whose highest assigned tier counts nothing, else None."""
+        tiers = [tier for tier in view["tiers"] if tier["tasks"]]
+        if not any(tier["counts"]["held"] for tier in tiers) or tiers[-1]["counts"]["required"]:
+            return None
+        if not any(tier["counts"]["required"] for tier in tiers):
+            return "Nothing in this view is counted while its tasks are held, so it reports HELD for every candidate."
+        return (f"Tier {tiers[-1]['qualification_tier']}, the highest tier, has only held tasks, so while they are "
+                "held this view never shows PASS: a candidate that passes every counted tier gets HELD.")
 
     for view in report["views"]:
         counts = [count_text(tier) for tier in view["tiers"]]
@@ -220,7 +249,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             if task["execution_group"]:
                 notes.append("group: " + _cell(task["execution_group"])
                              + (" (uninterrupted)" if task["uninterrupted"] else ""))
-            cells = [link(task["id"], task["source"])] + ([_cell(task["importance"])] if assigned else [])
+            cells = [link(task["id"], task["source"])] + ([role(task)] if assigned else [])
             cells += [_prior_cell(task["prior"], task["prior_applicability"]),
                       _cell(task["initializer"]) +
                       ("; fixed: " + _cell(json.dumps(task["fixed_initialization"], sort_keys=True)) if task["fixed_initialization"] else "") +
@@ -250,8 +279,14 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', board.as_posix())}."]
         else:
             lines += ["No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification."]
+        status_rule = held_status(view)
+        if status_rule:
+            lines += ["", status_rule]
         for tier in view["tiers"]:
-            lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + ".", ""]
+            held_only = tier["counts"]["held"] and not tier["counts"]["required"]
+            lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + "." +
+                      (" Nothing here is counted while these tasks are held, so this tier's status is HELD: "
+                       "it neither passes nor stops later tiers." if held_only else ""), ""]
             lines += task_table(tier["tasks"]) if tier["tasks"] else ["No tasks assigned."]
     lines += ["", "## Tasks unassigned to any view", "",
               "These catalog tasks have no tier placement. Add an assignment to a view to include them in its policy.", ""]

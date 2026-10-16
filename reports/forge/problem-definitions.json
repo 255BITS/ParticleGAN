@@ -1,0 +1,372 @@
+{
+  "schema": "forge_problem_definitions_v1",
+  "evidence_date": "2026-10-15",
+  "problems": [
+    {
+      "task": "gaussian1d_stability",
+      "title": "Keep a bell curve stable, then learn a moved target",
+      "intent": "After learning a simple bell curve, keep its centre, width and distribution correct while training continues; then track a shifted target and stay there.",
+      "problem": "BCAP and BISPF keep oscillating instead of settling. BISPF passes only 5 of 72 stationary checks, misses deadline re-acquisition and passes 0 of 24 shifted-hold checks. A one-time smoke pass does not establish stability.",
+      "pass_summary": "Yes, individual research configurations; no selected recipe passes the complete test.",
+      "passers": [
+        "`kinetic-local-nsgda-cross-v1`, `kinetic-local-dualnorm-g-history-v1` and `kinetic-local-dualnorm-g-history-bank8-v-v1` pass, but fail ring16 and mode hold.",
+        "Cell-gradient-signal configurations and `cell-quota-minimum-change-forward-kl-g-v1` also pass. The latter passes mode hold too, but its later ring16 probe fails and it cannot run two-pole or word smoke.",
+        "A hand-built network can draw the target; that is a capacity witness, not a trained full-protocol PASS."
+      ],
+      "next_step": "Find an update rule that settles when correct but responds after a shift, then verify the same recipe on ring16 and mode hold. Existing trade-offs do not prove the problem impossible.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "gaussian1d_stability"
+        }
+      ]
+    },
+    {
+      "task": "vector_unequal_mass",
+      "title": "Preserve rare clusters",
+      "intent": "Learn several blobs with different probabilities, including a rare 2% blob, without losing its population or collapsing its shape.",
+      "problem": "The rare blob receives little training signal. BISPF preserves its share but flattens its shape: minimum eigen ratio 0.004 against the required 0.15. BCAP also collapses it.",
+      "pass_summary": "Yes, transport and cell-moment research configurations; BCAP and BISPF fail.",
+      "passers": [
+        "`kinetic_transport_local_v2` and the two kinetic g-history reference8 variants pass; they fail unequal-width and mode hold.",
+        "Round-5 direction blend plus local-v2 passes, but fails Gaussian stability and unequal-width and was not measured on most of the required suite.",
+        "Cell-moment aggregate recipes pass all four vector tests; they lose mode hold or ring16. True-target sampling passes 200/200 reference runs, which validates the gate but is not a training win."
+      ],
+      "next_step": "Preserve rare-cluster coverage and shape while checking unequal-width, ring16 and mode hold with one unchanged recipe.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "vector_unequal_mass"
+        }
+      ]
+    },
+    {
+      "task": "vector_unequal_width",
+      "title": "Learn narrow and broad clusters together",
+      "intent": "Give four equally likely blobs different widths while preserving both their shapes and their equal probabilities.",
+      "problem": "BISPF gets the shares wrong (mass TV 0.25) even where shapes pass. BCAP has both share and spread errors. A few strays can dominate a narrow blob.",
+      "pass_summary": "Yes, balanced assignment and cell-moment research configurations.",
+      "passers": [
+        "Round-5 balanced coordinate assignment passes with 14 terminal checks and spread error 0.286, but loses unequal-mass, Gaussian stability and native 100-blob quality; much of the required suite is untried.",
+        "Cell-moment aggregate and per-kernel recipes pass but fail other required tests. G-angle has a historical-source pass, not a current selected pass."
+      ],
+      "next_step": "Test the balanced-assignment reference on the missing suite and solve its rare-cluster regression before claiming a global improvement.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "vector_unequal_width"
+        }
+      ]
+    },
+    {
+      "task": "vector_anisotropic",
+      "title": "Learn stretched and tilted clusters",
+      "intent": "Match the populations and shapes of three equally likely blobs stretched horizontally, vertically and diagonally.",
+      "problem": "Both leading recipes allocate the wrong amounts to the blobs. BISPF has mass TV 0.191 against 0.15 and covariance error 2.0.",
+      "pass_summary": "Yes: K3P, KA2, R1/R2 in separate diagnostics, plus research configurations.",
+      "passers": [
+        "K3P, KA2 and R1/R2 pass in the attempt index, separately from qualifying selected-cohort results. They fail mode hold, ring16 and the clock measurement in the recorded comparison.",
+        "Nine additional indexed research recipes and four cell-moment aggregates pass. Recorded passers with mode-hold measurements fail it."
+      ],
+      "next_step": "Retain the successful mass allocation while preserving mode hold and basic acquisition.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "vector_anisotropic"
+        }
+      ]
+    },
+    {
+      "task": "vector_overlap",
+      "title": "Settle on an overlapping distribution",
+      "intent": "Match the observable centre, spread and distribution of two overlapping blobs; no hidden component labels are required.",
+      "problem": "BCAP reaches the target temporarily and drifts away. BISPF ends with centre error 0.28, covariance error 0.53 and distribution distance 0.19; it misses the sustained ending.",
+      "pass_summary": "Yes: K3P in separate diagnostics and multiple research recipes.",
+      "passers": [
+        "K3P and ten other indexed configurations pass under the recorded declaration; all fail mode hold.",
+        "Four cell-moment aggregates pass; three lose mode hold and the Bures variant loses ring16."
+      ],
+      "next_step": "Add stability without losing multimodal acquisition or mode hold. A good endpoint alone does not meet the sustained gate.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "vector_overlap"
+        }
+      ]
+    },
+    {
+      "task": "img_bars4",
+      "title": "Generate all four bar images",
+      "intent": "Generate each of four simple bar pictures, rather than producing only a few convincing examples.",
+      "problem": "BCAP and BISPF produce clean pictures but only 2 of 4 bars. Some transport recipes reach more bars but produce too many blurry pictures.",
+      "pass_summary": "Yes: R1/R2 and GAN v3 in separate diagnostic measurements.",
+      "passers": [
+        "R1/R2 and GAN v3 pass this declaration, but fail ring16, the clock measurement and the required stripes test.",
+        "Older historical recipes pass bars and stripes together under different contracts; they cannot fill today's cells."
+      ],
+      "next_step": "Preserve all four clean bar modes while passing stripes and the acquisition tests with the same recipe.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "img_bars4"
+        }
+      ]
+    },
+    {
+      "task": "img_blobs4",
+      "title": "Generate all four image corners",
+      "intent": "Generate a small bright square at each of four corners, with enough clean examples of every corner.",
+      "problem": "BISPF reaches 3 corners and 28/32 clean pictures; the gate requires all 4 and at least 29/32. BCAP reaches 2 corners. A near miss or four passing checks is not a five-check sustained pass.",
+      "pass_summary": "Yes: R1/R2 and kinetic research configurations.",
+      "passers": [
+        "R1/R2 passes in separate diagnostic measurements with an 18-check streak, but loses ring16 and the clock measurement.",
+        "`kinetic_transport_local_v2` passes but fails two-pole and unused-token hold. Four kinetic history variants pass but are blocked on basic behavioural tests."
+      ],
+      "next_step": "Keep all four corners clean and sustained without breaking basic learning and identity preservation.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "img_blobs4"
+        }
+      ]
+    },
+    {
+      "task": "img_intensity2",
+      "title": "Generate both brightness levels accurately",
+      "intent": "Generate a square at either of two target brightnesses, with both levels represented and little brightness error.",
+      "problem": "BISPF collapses to one brightness level. BCAP produces both but 10/32 pictures have inaccurate brightness.",
+      "pass_summary": "Yes: GAN v3, R1/R2 and kinetic transport in separate measurements.",
+      "passers": [
+        "GAN v3, R1/R2 and `kinetic_transport_local_v2` pass the recorded declaration, but fail required Tier 1 tests.",
+        "A historical wider-network pass belongs to `img_intensity2_residual16`, a different task variant."
+      ],
+      "next_step": "Learn accurate, balanced brightness modes while retaining the other image and acquisition passes.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "img_intensity2"
+        }
+      ]
+    },
+    {
+      "task": "grid100",
+      "title": "A grid of 100 clusters",
+      "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
+      "problem": "BCAP/BISPF put only 24–37% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 54%, still below the gate.",
+      "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
+      "passers": [
+        "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
+        "True-target samplers demonstrate feasibility. Longer BISPF training improves precision initially but plateaus below the gate."
+      ],
+      "next_step": "Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "grid100"
+        }
+      ]
+    },
+    {
+      "task": "rotated100",
+      "title": "A rotated grid of 100 clusters",
+      "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
+      "problem": "BCAP/BISPF put only 26–27% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 51%, still below the gate.",
+      "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
+      "passers": [
+        "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
+        "True-target samplers demonstrate feasibility. Longer BISPF training improves precision initially but plateaus below the gate."
+      ],
+      "next_step": "Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "rotated100"
+        }
+      ]
+    },
+    {
+      "task": "staggered100",
+      "title": "A staggered grid of 100 clusters",
+      "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
+      "problem": "BCAP/BISPF put only 30–34% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 56%, still below the gate.",
+      "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
+      "passers": [
+        "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
+        "True-target samplers demonstrate feasibility. Longer BISPF training improves precision initially but plateaus below the gate."
+      ],
+      "next_step": "Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "staggered100"
+        }
+      ]
+    },
+    {
+      "task": "grid100_14k",
+      "title": "Keep the 100-cluster grid correct for longer",
+      "intent": "Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.",
+      "problem": "The required passing parent checkpoint does not exist. These are blocked continuations, not completed numerical failures. Continuing failed BISPF parents diagnostically still did not pass.",
+      "pass_summary": "No qualifying PASS; no passing current-declaration parent is available.",
+      "passers": [
+        "The BISPF rescue continuations from failed parents remain below the precision gate and do not establish a valid endurance pass.",
+        "The rotated rescue has an INVALID cross-device coverage audit near a scoring boundary; it is not a PASS or a scientific FAIL."
+      ],
+      "next_step": "First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "grid100_14k"
+        }
+      ]
+    },
+    {
+      "task": "rotated100_14k",
+      "title": "Keep the 100-cluster rotated grid correct for longer",
+      "intent": "Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.",
+      "problem": "The required passing parent checkpoint does not exist. These are blocked continuations, not completed numerical failures. Continuing failed BISPF parents diagnostically still did not pass.",
+      "pass_summary": "No qualifying PASS; no passing current-declaration parent is available.",
+      "passers": [
+        "The BISPF rescue continuations from failed parents remain below the precision gate and do not establish a valid endurance pass.",
+        "The rotated rescue has an INVALID cross-device coverage audit near a scoring boundary; it is not a PASS or a scientific FAIL."
+      ],
+      "next_step": "First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "rotated100_14k"
+        }
+      ]
+    },
+    {
+      "task": "staggered100_14k",
+      "title": "Keep the 100-cluster staggered grid correct for longer",
+      "intent": "Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.",
+      "problem": "The required passing parent checkpoint does not exist. These are blocked continuations, not completed numerical failures. Continuing failed BISPF parents diagnostically still did not pass.",
+      "pass_summary": "No qualifying PASS; no passing current-declaration parent is available.",
+      "passers": [
+        "The BISPF rescue continuations from failed parents remain below the precision gate and do not establish a valid endurance pass.",
+        "The rotated rescue has an INVALID cross-device coverage audit near a scoring boundary; it is not a PASS or a scientific FAIL."
+      ],
+      "next_step": "First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "staggered100_14k"
+        }
+      ]
+    },
+    {
+      "task": "target_shift_recovery",
+      "title": "Recover quickly after the target moves",
+      "intent": "Learn and hold a ring of blobs, then track a sudden sideways shift within 400 updates and stay correct; a frozen model must fail to show the change is real.",
+      "problem": "BISPF learns and holds the original ring, then recovers too late: it becomes steady 620 updates after the shift, missing the 400-update deadline. This is an adaptation-speed failure, not an inability to recover at all.",
+      "pass_summary": "No complete PASS under the current declaration in the audited evidence.",
+      "passers": [
+        "BISPF meets three of four parts but misses the recovery deadline.",
+        "Older PR215/PR217 recipes pass a different ring-shift question under earlier contracts, not this test."
+      ],
+      "next_step": "Improve adaptation speed while keeping stationary stability. If the deadline itself is reconsidered, use an explicitly versioned task and preserve the old failure.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "target_shift_recovery"
+        }
+      ]
+    },
+    {
+      "task": "mode_hold",
+      "title": "Keep every learned mode alive",
+      "intent": "Keep generating every target mode during continued training, rather than losing modes after initially finding them.",
+      "problem": "BCAP falls one sustained window short in the reviewed run (3 terminal passing checks; 5 required). This single test accounts for BISPF's six-point lead when repeated across six views.",
+      "pass_summary": "Yes: the selected BISPF recipe and some research configurations.",
+      "passers": [
+        "`bispf-v1` has a recorded PASS with a 12-check terminal streak. Its source is stale; this is not a fresh current-source qualification.",
+        "The cell-quota minimum-change recipe also passes mode hold but fails ring16. The reviewed tether-only BCAP ablation does not reproduce the BISPF win."
+      ],
+      "next_step": "Preserve the BISPF pass on current source and combine it with repairs to Gaussian, vector and image failures.",
+      "evidence": [
+        {
+          "label": "BISPF lead and ablation evidence",
+          "path": "reports/forge/WHAT_WORKED_REVIEW_20261015.md"
+        }
+      ]
+    },
+    {
+      "task": "ring_extension",
+      "title": "Keep a learned ring stable for a long run",
+      "intent": "Acquire all eight ring blobs, hold them for 1,200 consecutive checks, then survive 300 additional checks on the same uninterrupted run.",
+      "problem": "BISPF lacks an ordinary qualifying run in the selected cohort. BCAP's diagnostic run loses quality during the hold phase; the extension cannot rescue a failed hold.",
+      "pass_summary": "Yes: BISPF in a saved separate-runtime diagnostic; no selected ordinary PASS.",
+      "passers": [
+        "BISPF producer `bf5d13ff` passes the full diagnostic run: 1,200/1,200 hold checks and 300/300 extension checks, with minimum quality above 0.99.",
+        "That diagnostic result is evidence the problem is solvable. It does not fill the selected cohort's unmeasured cell. `ring_hold` remains a visible phase, not a second independent test."
+      ],
+      "next_step": "Measure the unchanged BISPF recipe in its ordinary cohort on current source and preserve the whole acquisition/hold/extension protocol.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "ring_extension"
+        }
+      ]
+    },
+    {
+      "task": "ring16_acquisition",
+      "title": "Learn sixteen distinct clusters from scratch",
+      "intent": "Learn all sixteen blobs on a ring with balanced populations and real within-blob spread, rather than sixteen collapsed points.",
+      "problem": "The selected K3P, KA2, R1/R2 and GAN v3 measurements fail this Tier 1 gate, preventing later qualification. Their results on other questions do not erase this acquisition failure.",
+      "pass_summary": "Yes: selected BCAP and BISPF recipes.",
+      "passers": [
+        "The selected BCAP DualNorm and `bispf-v1` records pass. Their recorded results remain bound to their original budgets and sources.",
+        "Some research recipes pass ring16 but lose mode hold; per-test winners do not establish a single winner for the entire suite."
+      ],
+      "next_step": "Retain the passing ring baseline while repairing the held tests. Longer-budget or changed-schedule results must remain explicitly separate until adopted and measured.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "gaussian1d_stability"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/ring16_acquisition.json"
+        }
+      ]
+    },
+    {
+      "task": "clockfree_audit_measurement_v1",
+      "title": "Learning must not depend on external clock labels",
+      "intent": "Check that the same learning state and inputs produce the same update despite changed step labels, declared horizon, evaluation cadence or a save/restart.",
+      "problem": "The recorded scheduled K3P, KA2, R1/R2 and GAN v3 recipes depend on step or horizon through annealing. Good numerical fits do not satisfy this separate invariance requirement.",
+      "pass_summary": "Yes: selected BCAP and BISPF recipes.",
+      "passers": [
+        "BCAP and BISPF pass the Tier 1 measurement with constant-rate configurations.",
+        "`clockfree_audit` is the duplicate longer-form gate and remains visible as a diagnostic; it is excluded from the distinct full-suite total to avoid counting the same question twice."
+      ],
+      "next_step": "Use saved internal state rather than external labels for adaptation, or explicitly version the desired policy. Do not silently treat an annealed recipe as clock-free.",
+      "evidence": [
+        {
+          "label": "Test-by-test evidence",
+          "path": "reports/forge/test-dispositions-20261015/README.md",
+          "anchor": "clockfree_audit"
+        }
+      ]
+    }
+  ]
+}

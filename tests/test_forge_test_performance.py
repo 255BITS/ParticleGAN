@@ -257,7 +257,8 @@ def test_reviewed_diagnostics_keep_failed_confirmation_and_all_original_cells():
     documents = [reader.read(pin["path"], sha256=pin["sha256"]) for pin in registry["publications"]]
     cells = {cell["id"]: {**cell, "conditions": document["condition_contracts"][cell["conditions_sha256"]]}
              for document in documents for cell in document["cells"]}
-    assert len(cells) == 267
+    # 267 reviewed diagnostic cells plus PR399's 42 retained attempts (experiments/forge/pr399_scores.py PINS).
+    assert len(cells) == 267 + 42
     assert cells["atlas-location-first-error"]["status"] == "ERROR"
     assert cells["atlas-location-first-error"]["result"]["work"]["new_GAN_updates"] == 0
     assert cells["atlas-location-treatment-seed0"]["status"] == "PASS"

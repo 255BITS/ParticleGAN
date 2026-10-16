@@ -251,6 +251,20 @@ def test_counterfeit_qualification_pass_stamp_cannot_register(setup):
         promotion.register(root, "finished", path)
 
 
+
+def test_held_top_tier_view_cannot_qualify_a_promotion(setup):
+    root, path, _, _ = setup
+    view_path = root / "configs/forge/views/stability.json"
+    view = read_json(view_path)
+    view["assignments"][1].update(importance="held", hold={
+        "schema": "forge_hold_v1", "previous_importance": "required", "reason": "no_global_recipe", "blocked_by": [],
+        "summary": "Fixture: quality is measured and shown, not counted.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#quality",
+        "reentry": "Count quality again when one global recipe passes it."})
+    atomic_json(view_path, view)
+    with pytest.raises(CapabilityError, match="highest tier is held"):
+        promotion.register(root, "finished", path)
+
 def test_readout_is_required_and_must_bind_actual_receipts(setup):
     root, path, _, _ = setup
     record = next((root / "reports/forge/records").glob("readout-*.json"))
