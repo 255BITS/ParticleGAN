@@ -49,3 +49,12 @@ Stage 2 (only if stage 1 leaves the claim open): `gaussian1d_smoke`, `two_pole`,
    cell, reported with its error; no reruns with other seeds.
 
 Budget: at most about 2 GPU-hours of training. One job per GPU through the workflow lease helper.
+
+## Exploratory follow-up (added after the preregistered verdict was decided; not part of the rule)
+
+Stage 1 decided the preregistered rule (see Results). One cheap complementary arm was then declared before
+running it: B0 = `bispf-no-prior-tether-v1`, which is `bispf-v1` with `prior_reg=0.0` (SBNP off, every
+critic-side BISPF part unchanged), `mode_hold` only, same frozen source if the digest matches.
+Reading: if B0 PASSES `mode_hold`, BISPF's repair comes from its critic-side parts and the tether is not
+needed; if B0 FAILS, the repair needs the tether together with BISPF's critic (for example the thermally
+scaled tether), and neither part alone is enough. This is a single-seed exploratory read.
