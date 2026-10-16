@@ -76,3 +76,19 @@ the overlay only by a real PASS/FAIL. R4 is extended: the Confidence LR minus ba
 {smoke, hold} uses the rerun smokes plus Confidence LR's recorded hold and the baseline's rerun hold;
 since Confidence LR's recorded hold ran on its own (earlier) smoke checkpoint, that comparison is
 labelled cross-runtime.
+
+## Amendment A2 (committed after cell 2 timed out again, before the run it describes)
+
+Observed before writing: cell 2 (Positive-evidence LR) hit the 900 s limit again under the lease, at
+step 16,668 of 20,001, while GPU 0 was at 99 % with processes outside this workflow's lease (the
+Atlas/E22 fill attempt workers and a desktop game). The baseline hold (A1) also hit its 300 s limit
+on the same GPU; the signed hold stopped with a recipe-side `ValueError` before training.
+
+A2. Cell 6 (confidence-lr-finite-cap, undetermined, Tier 1 already failing on Gaussian) is deferred and
+its budget moved to one demonstration of the opt-in contention-aware limit: cell 2 is rerun once more,
+unchanged except `wallclock_policy = {solo_seconds_per_update: {five_word_joint_smoke: 0.0398},
+ceiling_factor: 1.5}` (0.0398 s = cell 0's worker seconds / 20,001 updates under the lease with no
+other heavy co-tenant; the ceiling 1.5 bounds the run at 1,350 s to stay in budget). This run is a test
+of the mechanism (R5), not a score: whatever its verdict, it does NOT enter the leaderboard overlay,
+because R1 requires the declared limit. Its outcome is reported as "PASS/FAIL under contention-aware
+limit" next to the declared-limit NOT MEASURED. Cell 7 (ring16, 300 s) still runs if budget allows.
