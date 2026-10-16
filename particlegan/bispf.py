@@ -213,8 +213,11 @@ class SBNPPriorRegularizer(nn.Module):
         # 3. Scale-free k-NN log-repulsion
         m_sub = min(n, self.repel_max_samples)
         z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
-        k = min(self.k_nn, m_sub - 1)
-        if k > 0 and self.repel_weight > 0.0:
+        is_small_latent = (n <= 64 and d >= 8 and not self.references)
+        eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
+        eff_repel_weight = (self.repel_weight * 5.0) if is_small_latent else self.repel_weight
+        k = min(eff_k_nn, m_sub - 1)
+        if k > 0 and eff_repel_weight > 0.0:
             sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
             with torch.no_grad():
                 off_mask = ~torch.eye(m_sub, dtype=torch.bool, device=rows.device)
@@ -227,7 +230,7 @@ class SBNPPriorRegularizer(nn.Module):
         else:
             repel_loss = rows.new_zeros(())
 
-        base_loss = mean_error + var_loss + cov_loss + self.repel_weight * repel_loss
+        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss
         scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
         if out.requires_grad:
@@ -997,7 +1000,7 @@ class _BISPFPenaltyKernel:
         lambda_floor: float = 0.01,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
-        gamma_gauge: float = 0.020,
+        gamma_gauge: float = 0.050,
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
@@ -1147,7 +1150,7 @@ class _BISPFPenaltyKernel:
 
                 # Density-Directed Transport Bridge across entropic voids
                 cached_d = getattr(self.record, "_last_d_logits", None)
-                if cached_d is not None and is_continuous_flow:
+                if cached_d is not None and is_continuous_flow and dim >= 2:
                     d_r_cached, d_f_cached = cached_d
                     logit_gap = float((d_r_cached.max() - d_r_cached.median()).item())
                     if logit_gap > 0.50:
@@ -1198,7 +1201,7 @@ class _BISPFPenaltyKernel:
             self.record._in_penalty = False
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
-        kappa_eff = self.kappa * (0.6 + 0.4 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
+        kappa_eff = self.kappa * (0.6 + 0.65 * (1.0 - res_ratio)) if is_image_tensor else self.kappa
 
         if is_discrete_simplex:
             norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
@@ -1221,7 +1224,7 @@ class _BISPFPenaltyKernel:
             cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
             cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
 
-            eff_floor = 0.0005 if is_image_tensor else (self.lambda_floor * (max(1.0, 2.0 / dim) if is_continuous_flow else 1.0))
+            eff_floor = 0.0005 if is_image_tensor else self.lambda_floor
             curv_pen = x_real.new_zeros(())
 
             if use_chords:
@@ -1230,7 +1233,7 @@ class _BISPFPenaltyKernel:
                 floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
                 cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
-                if is_continuous_flow:
+                if is_continuous_flow and dim == 1:
                     g_r_matched = g_real.detach()[matched_real_idx]
                     g_target = (1.0 - alpha) * g_fake + alpha * g_r_matched
                     curv_pen = 0.25 * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()

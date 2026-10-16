@@ -634,7 +634,7 @@ def test_bispf_endpoint_born_infeld_image_limit():
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
     # Under scale_dim = 1.0, norm = s / 1.0 = 2.0 matches expected analytical cap and decoupled floor penalties with adaptive kappa_eff
     res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
-    kappa_eff = kappa * (0.6 + 0.4 * (1.0 - res_ratio))
+    kappa_eff = kappa * (0.6 + 0.65 * (1.0 - res_ratio))
     norm = s / 1.0
     expected_cap = l_cap * (F.softplus(torch.tensor(norm - kappa_eff), beta=beta).item() ** 2)
     expected_floor = 0.5 * 0.0005 * ((s ** 2) / dim_img)
@@ -864,12 +864,12 @@ def test_bispf_1d_continuous_flow_cooler_active():
 
 def test_bispf_gauge_and_cooling_defaults():
     """Verify default hyperparameter calibration in _BISPFPenaltyKernel:
-    gamma_gauge == 0.020 and tau_cooling == 0.020.
+    gamma_gauge == 0.050 and tau_cooling == 0.020.
     """
     from particlegan.bispf import _BISPFPenaltyKernel, ContinuousThermalCooler
 
     kernel = _BISPFPenaltyKernel()
-    assert kernel.gamma_gauge == 0.020, f"Expected default gamma_gauge=0.020, got {kernel.gamma_gauge}"
+    assert kernel.gamma_gauge == 0.050, f"Expected default gamma_gauge=0.050, got {kernel.gamma_gauge}"
     assert kernel.tau_cooling == 0.020, f"Expected default tau_cooling=0.020, got {kernel.tau_cooling}"
     assert kernel.cooler.tau_cooling == 0.020, f"Expected cooler tau_cooling=0.020, got {kernel.cooler.tau_cooling}"
 
@@ -1234,7 +1234,7 @@ def test_bispf_chord_curvature_penalty():
 
 def test_bispf_image_euclidean_barrier_and_kappa():
     """Verify image tensors retain the Euclidean barrier (scale_dim == 1.0),
-    progressive well depth kappa_eff = kappa * (0.6 + 0.4(1 - r)), and decoupled floor eff_floor == 0.0005.
+    progressive well depth kappa_eff = kappa * (0.6 + 0.65(1 - r)), and decoupled floor eff_floor == 0.0005.
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
@@ -1253,18 +1253,111 @@ def test_bispf_image_euclidean_barrier_and_kappa():
     kernel._observe_sinkhorn = lambda res, ds, ema_decay=0.95: None
     pen_early, stats_early = kernel.penalty(SlopedImageCritic(), xr, xf, step=0, collect_stats=True)
 
-    # Converged transport residual (late in training): kappa_eff = 1.0 * kappa = 1.0
+    # Converged transport residual (late in training): kappa_eff = 1.25 * kappa = 1.25
     kernel.record.ema_residual = 0.0
     pen_late, stats_late = kernel.penalty(SlopedImageCritic(), xr, xf, step=0, collect_stats=True)
 
-    # Under slope 1.5 > 1.0, early softened barrier (0.6) imposes higher softplus cap penalty than late (1.0)
+    # Under slope 1.5 > 1.25, early softened barrier (0.6) imposes higher softplus cap penalty than late (1.25)
     assert pen_early.item() > pen_late.item(), (
-        f"Early softened barrier (kappa_eff=0.6) must penalize large gradients more strongly than kappa=1.0: "
+        f"Early softened barrier (kappa_eff=0.6) must penalize large gradients more strongly than kappa=1.25: "
         f"{pen_early.item()} vs {pen_late.item()}"
     )
 
     # Verify background floor is decoupled to 0.0005 on images vs 0.01 on vectors
     assert stats_early["floor_pen"] < 0.01, f"Image floor penalty must be decoupled; got {stats_early['floor_pen']}"
+
+
+def test_bispf_sbnp_small_latent_repulsion():
+    """Verify that for small unanchored latent clouds (n <= 64 and d >= 8 and not references),
+    SBNPPriorRegularizer activates multi-neighbor repulsion with eff_k_nn = 10 and eff_repel_weight = 5.0 * repel_weight.
+    """
+    from particlegan.bispf import SBNPPriorRegularizer
+    import torch.nn.functional as F
+
+    torch.manual_seed(42)
+    # n=32, d=8: small unanchored latent cloud (image generator latent space)
+    z_img = torch.randn(32, 8)
+    reg_active = SBNPPriorRegularizer(weight=1.0, k_nn=5, repel_weight=0.05, repel_margin=0.50)
+    reg_no_repel = SBNPPriorRegularizer(weight=1.0, k_nn=5, repel_weight=0.0, repel_margin=0.50)
+
+    loss_active = reg_active(z_img)
+    loss_base = reg_no_repel(z_img)
+    repel_contrib = (loss_active - loss_base).item()
+
+    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.25:
+    m_sub = 32
+    sq_dist = torch.cdist(z_img, z_img, p=2.0).pow(2)
+    off_mask = ~torch.eye(m_sub, dtype=torch.bool)
+    r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
+    eye_inf = torch.eye(m_sub, dtype=z_img.dtype) * 1e9
+    knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=10, dim=1, largest=False)
+    norm_sq_dist = knn_sq_dist / (1.0 * r_med_sq)
+    expected_repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
+    expected_repel_contrib = 0.25 * expected_repel_loss.item()
+
+    assert abs(repel_contrib - expected_repel_contrib) < 1e-5, (
+        f"Small latent cloud must use eff_k_nn=10 and 5x repel weight (0.25): got {repel_contrib} vs {expected_repel_contrib}"
+    )
+
+    # Counter-check: when references are provided, is_small_latent is FALSE
+    class MockRef:
+        moment_tether_mean = torch.zeros(8)
+        moment_tether_covariance = torch.eye(8)
+        moment_tether_count = torch.tensor(100)
+
+    reg_ref = SBNPPriorRegularizer(reference=MockRef(), weight=1.0, k_nn=5, repel_weight=0.05, repel_margin=0.50)
+    reg_ref_no_repel = SBNPPriorRegularizer(reference=MockRef(), weight=1.0, k_nn=5, repel_weight=0.0, repel_margin=0.50)
+    knn_sq_dist_5, _ = torch.topk(sq_dist + eye_inf, k=5, dim=1, largest=False)
+    norm_sq_dist_5 = knn_sq_dist_5 / (1.0 * r_med_sq)
+    expected_ref_loss = 0.05 * F.softplus(-torch.log(norm_sq_dist_5 + 1e-8)).mean().item()
+    ref_contrib = (reg_ref(z_img) - reg_ref_no_repel(z_img)).item()
+    assert abs(ref_contrib - expected_ref_loss) < 1e-5, (
+        f"Anchored reference prior must retain default k_nn=5 and 1x repel weight: got {ref_contrib} vs {expected_ref_loss}"
+    )
+
+
+def test_bispf_2d_continuous_flow_bypasses_chord_curvature():
+    """Verify transport chord zero-curvature regularizer is strictly scoped to 1D continuous flows,
+    and 2D continuous flows (dim=2) bypass curv_pen (curv_pen == 0.0), preserving multi-cluster
+    potential barriers.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(chord_blend=0.02)
+    kernel.record.calls = 600  # call_idx >= 500 activates is_continuous_flow
+
+    class CurvatureCritic(nn.Module):
+        def forward(self, x):
+            return 2.0 * x.flatten(1).sum(dim=1, keepdim=True) + 5.0 * x.flatten(1).pow(2).sum(dim=1, keepdim=True)
+
+    # 1. 1D flow (dim=1): curv_pen is active on non-linear critic
+    xr_1d = torch.linspace(-1.0, 1.0, 32).unsqueeze(1)
+    xf_1d = torch.linspace(-0.5, 0.5, 32).unsqueeze(1)
+    pen_1d, stats_1d = kernel.penalty(CurvatureCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
+
+    class LinearCritic(nn.Module):
+        def forward(self, x):
+            return 2.0 * x.flatten(1).sum(dim=1, keepdim=True)
+
+    pen_lin_1d, stats_lin_1d = kernel.penalty(LinearCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
+    assert stats_1d["ebi_loss"] > stats_lin_1d["ebi_loss"], "1D continuous flow must incur curvature penalty"
+
+    # 2. 2D flow (dim=2): curv_pen must be strictly 0.0 (bypassed)
+    torch.manual_seed(0)
+    xr_2d = torch.randn(32, 2)
+    xf_2d = torch.randn(32, 2)
+
+    kernel_zero_caps = _BISPFPenaltyKernel(lambda_cap=0.0, lambda_floor=0.0, chord_blend=0.02)
+    kernel_zero_caps.record.calls = 600
+
+    _, stats_1d_zero = kernel_zero_caps.penalty(CurvatureCritic(), xr_1d, xf_1d, step=0, collect_stats=True)
+    assert stats_1d_zero["ebi_loss"] > 0.0, "1D flow with zero caps must show non-zero curv_pen"
+
+    _, stats_2d_zero = kernel_zero_caps.penalty(CurvatureCritic(), xr_2d, xf_2d, step=0, collect_stats=True)
+    assert stats_2d_zero["ebi_loss"] == 0.0, (
+        f"2D continuous flow must bypass curvature penalty completely; got ebi_loss = {stats_2d_zero['ebi_loss']}"
+    )
+
 
 
 
