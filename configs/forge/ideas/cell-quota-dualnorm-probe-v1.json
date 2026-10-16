@@ -1,0 +1,51 @@
+{
+  "api_changes": [
+    {
+      "variable": "Recipe.cell_quota_policy",
+      "provider": "particlegan.cell_gaussian.memory.ReferenceMemory",
+      "affected_hosts": [
+        "positive-width MoG cell-reference public trainer"
+      ],
+      "migration": "Default largest_remainder retains numerical parent law; opt-in minimum_change adds checkpointed previous allocation. Ported opt-in for the 2026-10-15 dig."
+    }
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Add the cell-quota minimum-change objective (aggregate_forward_kl, exponential8 data-cell memory, minimum_change quotas) to the BCAP DualNorm control recipe; optimizer, rates and every other recipe field unchanged; no gradient-signal attenuation."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "id": "cell-quota-dualnorm-probe-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Stage A of the dig showed the published cell-quota recipe fails ring16 mainly because of its global-NSGDA base. This variant keeps the ring16-passing DualNorm base and adds only the cell objective, to test whether the objective's reported mode_hold/Gaussian-stability benefit survives ring16.",
+  "parent": "bcap-default-baseline-control-v1",
+  "recipe_overrides": {
+    "constraint_geometry_mode": "none",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "cell_gaussian_objective": "aggregate_forward_kl",
+    "cell_reference_policy": "exponential8",
+    "cell_quota_policy": "minimum_change"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-cell-moment"
+}

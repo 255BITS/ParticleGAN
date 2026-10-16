@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "cell-quota-probe-held-candidate-study",
+  "status": "ready",
+  "candidate": "cell-quota-minimum-change-forward-kl-g-v1",
+  "control": {
+    "candidate_id": "bcap-default-baseline-control-v1",
+    "task_map": {}
+  },
+  "hypothesis": "Port-fidelity check: the original cell-quota recipe reproduces its mode_hold and gaussian1d_stability passes on the ported source.",
+  "scope": {
+    "view": "cell-quota-probe-held-diagnostic-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "dig-cell-quota-probe-20261015",
+    "budget_seconds": 7200,
+    "candidate_budget_seconds": 3600
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/test-performance-evidence/astra-cumulative-24.json",
+      "selector": [
+        "cells",
+        1
+      ],
+      "identity": {
+        "candidate_id": "cell-quota-minimum-change-forward-kl-g-v1",
+        "id": "astra-cell-quota-transition-round-58227e08258f47f1a02c4949380d5394"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "mode_hold",
+    "metric": "hq",
+    "op": ">=",
+    "threshold": 0.9,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "mode_hold",
+    "metric": "hq",
+    "op": "<",
+    "threshold": 0.9,
+    "phase": "final"
+  },
+  "competing_explanation": "Dig 2026-10-15 lead 4. The cell objective uses data-cell moments of observed training rows and only runs on positive-width MoG public-trainer hosts; a ring16 failure may come from the optimizer swap (DualNorm per-offset -> global NSGDA) rather than the cell objective, which the attribution arm separates. Seed 0 only; no tuning; opt-in research diagnostic.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}
