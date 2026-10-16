@@ -21,9 +21,9 @@ state = json.load(open(FILL))
 for d in ("specs", "requests", "attempts"):
     os.makedirs(f"{HOLD}/{d}", exist_ok=True)
 for i, candidate in enumerate(ORDER):
-    smoke_dir = next(d for d in sorted(os.listdir(f"{ROOT}/attempts")) if d.endswith(f"{candidate}--five_word_joint_smoke"))
+    smoke_dir = next((d for d in sorted(os.listdir(f"{ROOT}/attempts")) if d.endswith(f"{candidate}--five_word_joint_smoke")), "")
     smoke_dir = f"{ROOT}/attempts/{smoke_dir}"
-    if not os.path.exists(f"{smoke_dir}/result.json"):
+    if not smoke_dir.endswith("smoke") or not os.path.exists(f"{smoke_dir}/result.json"):
         print("skip", candidate, "smoke rerun not finished"); continue
     smoke_result = json.load(open(f"{smoke_dir}/result.json"))
     if smoke_result["status"] != "PASS":

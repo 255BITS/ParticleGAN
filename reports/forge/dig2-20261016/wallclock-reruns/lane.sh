@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # One rerun lane. Claims the next unclaimed spec (atomic mkdir), takes a GPU lease (one job per GPU),
 # and runs the unchanged attempt worker under the task's own declared timeout.
-# Usage: lane.sh STATE_ROOT WORKTREE BUDGET_SECONDS
+# Usage: lane.sh STATE_ROOT WORKTREE BUDGET_SECONDS [BUDGET_ROOTS (space separated; default STATE_ROOT)]
+# LEASE may override the lease helper (fastlease.sh: same locks, 2 s polling).
 set -u
-ROOT=$1; WT=$2; BUDGET=$3
+ROOT=$1; WT=$2; BUDGET=$3; BUDGET_ROOTS=${4:-$1}
 PY=/ml2/codex-storage/workspaces/2026-10-07/task-14/runtime/python312/bin/python
-LEASE=/tmp/claude-1000/-ml2-hypergan/baedb70c-2c24-4e91-92d1-2f2bed2d913c/scratchpad/dig/gpu-lease.sh
+LEASE=${LEASE:-/tmp/claude-1000/-ml2-hypergan/baedb70c-2c24-4e91-92d1-2f2bed2d913c/scratchpad/dig/gpu-lease.sh}
 HERE=$WT/reports/forge/dig2-20261016/wallclock-reruns
 cd "$WT" || exit 1
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONUNBUFFERED=1
@@ -14,7 +15,7 @@ for spec in "$ROOT"/specs/*.json; do
   dir=$ROOT/attempts/$name
   mkdir "$dir" 2>/dev/null || continue
   # Budget: declared timeouts of every claimed cell must fit the GPU-seconds budget.
-  claimed=$($PY -c "import json,glob,os;print(sum(json.load(open(f'$ROOT/specs/'+os.path.basename(d)+'.json'))['timeout_seconds'] for d in glob.glob('$ROOT/attempts/*')))")
+  claimed=$($PY $HERE/budget.py $BUDGET_ROOTS)
   if [ "$claimed" -gt "$BUDGET" ]; then echo "$(date -Is) skip $name: claimed $claimed > budget $BUDGET" >> "$ROOT/lanes.log"; rmdir "$dir"; continue; fi
   echo "$(date -Is) claim $name" >> "$ROOT/lanes.log"
   "$LEASE" bash -c '
