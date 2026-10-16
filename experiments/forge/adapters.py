@@ -760,12 +760,17 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
-            if is_policy_task(task):
-                from .policy_gaussian import run_gaussian
-            else:
+            if not is_policy_task(task):
+                # Ordinary Gaussian tasks keep their own continuation rules.
                 from .gaussian_tasks import run_gaussian
+                return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+            from .policy_gaussian import run_gaussian
+            from .tier1_policy import diagnostic_continuation_allowed
+            diagnostic = job.get("diagnostic_continuation") is True
+            if diagnostic and not diagnostic_continuation_allowed(task):
+                raise CapabilityError([f"{task['id']}: its cohort declares no diagnostic continuation for this task"])
             return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"),
-                                diagnostic=job.get("diagnostic_continuation") is True)
+                                diagnostic=diagnostic)
         return _vector(request, task, output_dir, device)
     if adapter == "transfer_image":
         return _image(request, task, output_dir, device)

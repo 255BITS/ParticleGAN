@@ -4,11 +4,17 @@ Examples:
   python -m experiments.forge.attempt_coverage plan --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
   python -m experiments.forge.attempt_coverage run --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --watch
   python -m experiments.forge.attempt_coverage plan --intake policy-cloud --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
+  python -m experiments.forge.attempt_coverage run --intake policy-cloud --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --gpus 0,1
+  python -m experiments.forge.attempt_coverage run --intake policy-cloud --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --gpus 0,1 --retry-interrupted
 
 The policy-cloud intake schedules only the scoped Atlas/E22 policy-cloud
 coverage cohorts (clean and as-served scoring laws; law-independent tests run
-once) and publishes their records inside RUN_DIRECTORY, never into the
-repository report.
+once) and keeps their records inside RUN_DIRECTORY, never in the repository
+report. ``python -m experiments.forge.policy_cloud_publication`` publishes a
+drained run into its own committed cohort report directory. This intake also
+accepts a single GPU (``--gpus 1``, at most two concurrent tests) as a
+fallback, and ``--retry-interrupted`` re-queues attempts whose worker stopped
+without any receipt (infrastructure interruptions only).
 
 Completed evidence is reused. Every new attempt keeps the original task and
 recipe, including constructor checks, checkpoints and timeout. Gate-only tier
@@ -221,7 +227,7 @@ RECORD_FIELDS = ("key", "family", "candidate_id", "candidate_revision", "source_
                  "shared_scopes", "shared_reason")
 
 
-def coverage_value(state):
+def coverage_value(state, *, evidence=REPORT.as_posix()):
     """The published record format, shared by the repository and cohort runs."""
     value = {"schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
              "formulations_modified": False, "maximum_tests": 4, "maximum_per_gpu": 2,
@@ -230,13 +236,15 @@ def coverage_value(state):
     for record in value["records"]:
         if record.get("origin") == "new_attempt":
             record["original_attempt"] = record["evidence"]
-            record["evidence"] = REPORT.as_posix()
+            record["evidence"] = evidence
     return value
 
 
 def publish_records(path, state):
     """Write a cohort run's records beside its state; no repository report."""
-    value = {**coverage_value(state), "intake": state["intake"], "publication": "state_directory_only"}
+    from .policy_cloud_publication import README
+    value = {**coverage_value(state, evidence=README.as_posix()), "intake": state["intake"],
+             "publication": "state_directory_only"}
     if not path.exists() or read_json(path) != value:
         atomic_json(path, value)
     return value
@@ -244,11 +252,14 @@ def publish_records(path, state):
 
 def publish(root, state, directory=None):
     if state.get("intake") == "policy-cloud":
-        # Scoped cohort records stay with their run until a separate, explicit
-        # publication merges them; the repository report is never rewritten here.
+        # Scoped cohort records stay with their run until the explicit cohort
+        # publication (policy_cloud_publication) writes its own report directory;
+        # the repository attempt report is never rewritten here.
         if directory is None:
             raise ValueError("policy-cloud records publish only inside their state directory")
         return publish_records(Path(directory) / "attempt-coverage.json", state)
+    if any(job.get("cohort_scope") for job in state["jobs"].values()):
+        raise ValueError("scoped cohort records never enter the repository attempt report")
     value = coverage_value(state)
     path = root / REPORT
     if not path.exists() or read_json(path) != value:
@@ -263,8 +274,6 @@ def publish(root, state, directory=None):
             jobs = [j for j in state["jobs"].values() if j["family"] == family]
             counts = Counter(j["status"] for j in jobs)
             label = jobs[0].get("label", family)
-            if jobs[0].get("cohort_scope"):
-                label += f" ({jobs[0]['owning_family']})"
             lines.append(f"| {label} | {sum(j.get('attempted', False) for j in jobs)}/{len(jobs)} | "
                          f"{counts.get('PENDING', 0)} | " + ", ".join(f"{n} {s}" for s, n in sorted(counts.items())) + " |")
         lines += ["", "[Exact per-task attempts](attempt-coverage.json) · "
@@ -336,29 +345,7 @@ def publish(root, state, directory=None):
             lines += ["", "Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, "
                       "unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. "
                       "Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.", ""]
-        cohort = [j for j in state["jobs"].values() if j.get("cohort_scope")]
-        if cohort:
-            laws = {"clean": "clean", "as_served": "as served", "shared": "shared (both laws)"}
-            lines += ['<a name="policy-cloud-coverage"></a>', "", "## Policy-cloud scoped selected-view tests", "",
-                      "Atlas and E22 run every selected-view test as an explicitly scoped policy-cloud variant: an "
-                      "equal-mass particle cloud, the unchanged complete family recipe and seed 0, with each task's "
-                      "architecture, data, budget, cadence and gates kept, scored on the state-selected served model. "
-                      "Two scoring laws are reported as separate rows: clean removes the learned output noise from the "
-                      "measured samples; as served keeps it exactly as GANTrainer serves it. Each law trains in its own "
-                      "run. Tests that measure no output samples, or that an ownership blocker refuses, run once and "
-                      "show the same verdict for both laws. Original live/MoG cells, other families and archived "
-                      "verdicts are unchanged. Checkpoint dependents continue their own same-law scoped producer, "
-                      "including after a failed parent gate (diagnostic continuation).", "",
-                      "| Family | Law | Tier | Test | Outcome | Completed updates | Cause |",
-                      "| --- | --- | ---: | --- | --- | ---: | --- |"]
-            for job in sorted(cohort, key=lambda j: (j["owning_family"], j["reporting_tier"], j["parent_task"],
-                                                     j.get("measurement_law") == "as_served")):
-                reason = str(job.get("reason", "Queued" if job["status"] == "PENDING" else "Running")).replace("|", "\\|").replace("\n", " ")
-                law = laws.get(job.get("measurement_law"), "clean")
-                lines.append(f"| {job['owning_family']} | {law} | {job['reporting_tier']} | {job['parent_task']} | {job['status']} | "
-                             f"{job.get('updates') if job.get('updates') is not None else '—'} | {reason} |")
-            lines.append("")
-        reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution" and not j.get("cohort_scope")]
+        reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution"]
         if reused:
             lines += ["## Results recovered from existing uninterrupted runs", "",
                       "These task results reuse their producer's already measured observations. No new training "
@@ -373,7 +360,7 @@ def publish(root, state, directory=None):
                              f"{metrics['extension_passing']}/{metrics['extension_checks']} | "
                              f"[Verified saved run]({evidence}) |")
             lines.append("")
-        blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt" and not j.get("cohort_scope")
+        blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt"
                    and j["status"] in {"BLOCKED", "ERROR", "TIMEOUT", "INCOMPLETE", "INVALID"}]
         if blocked:
             lines += ["## Attempted blockers and incomplete runs", "",
@@ -505,6 +492,66 @@ def reconcile_grouped(root, directory, state):
     return recovered
 
 
+# Attempt-specific fields; planning fields (request, task, scope, law,
+# dependencies, resources) are never touched by a retry.
+ATTEMPT_FIELDS = ("attempt_id", "directory", "pid", "process_identity", "gpu", "slot", "announced", "attempted",
+                  "reason", "block_kind", "origin", "evidence", "original_attempt", "result_sha256", "log_sha256",
+                  "updates", "seconds", "runtime", "grade", "raw_sha256", "training_gif_sha256", "media_error",
+                  "media_note")
+
+
+def requeue_interrupted(state):
+    """Re-queue infrastructure-interrupted attempts once, on explicit request.
+
+    Only INTERRUPTED records qualify: their supervisor stopped without writing
+    any terminal receipt (a crash, reboot or kill), so no outcome exists.
+    PASS, FAIL, TIMEOUT, ERROR, INCOMPLETE, INVALID and ordinary BLOCKED
+    records are never retried. A dependent that was refused (BLOCKED,
+    prerequisite) because a producer it waits on was interrupted is re-queued
+    with that producer. Every prior record is kept in ``retry_history``; the
+    frozen request, task, recipe and seed are unchanged.
+    """
+    if state.get("intake") != "policy-cloud":
+        raise ValueError("re-running interrupted attempts is available only to the policy-cloud intake")
+    requeued, reasons = [], {}
+    for job in state["jobs"].values():
+        if job["status"] != "INTERRUPTED":
+            continue
+        directory = Path(job["directory"])
+        if (directory / "result.json").exists() or lease_held(directory / "execution.lock"):
+            raise ValueError(f"{job['family']}/{job['task']}: interrupted attempt has a receipt or a live worker")
+        reasons[job["key"]] = ("explicit --retry-interrupted: the worker stopped without a terminal receipt "
+                               "(infrastructure interruption); same frozen request, task, recipe and seed")
+    changed = True
+    while changed:  # Dependents of re-queued producers, transitively.
+        changed = False
+        for job in state["jobs"].values():
+            if job["key"] in reasons or job["status"] != "BLOCKED" or job.get("block_kind") != "prerequisite":
+                continue
+            producers = [parent for dep in job["dependencies"] if isinstance(dep, dict) and dep.get("kind") != "gate"
+                         for parent in state["jobs"].values()
+                         if parent["family"] == job["family"] and parent["task"] == dep["task"] and parent["key"] in reasons]
+            if producers:
+                reasons[job["key"]] = ("re-queued with its interrupted producer " + producers[0]["task"] +
+                                       "; same frozen request, task, recipe and seed")
+                changed = True
+    for key, reason in reasons.items():
+        job = state["jobs"][key]
+        entry = {field: job[field] for field in ("attempt_id", "status", "block_kind", "reason", "gpu", "slot",
+                                                 "directory", "result_sha256", "log_sha256", "seconds", "updates")
+                 if job.get(field) is not None}
+        log = Path(job["directory"]) / "run.log" if job.get("directory") else None
+        if "log_sha256" not in entry and log is not None and log.is_file():
+            entry["log_sha256"] = file_hash(log)
+        entry["retry_reason"] = reason
+        for field in ATTEMPT_FIELDS:
+            job.pop(field, None)
+        job["retry_history"] = [*job.get("retry_history", []), entry]
+        job["status"] = "PENDING"
+        requeued.append(job)
+    return requeued
+
+
 def _slot_allowed(job, slot, active, pending_exclusive):
     """Short fixed task limits run alone; reserve their GPU until they start."""
     device = str(slot["device"])
@@ -515,11 +562,24 @@ def _slot_allowed(job, slot, active, pending_exclusive):
     return device not in exclusive and device not in pending_exclusive
 
 
-def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None):
-    if len(gpus) != 2 or len(set(gpus)) != 2:
+def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None,
+          retry_interrupted=False):
+    initial = read_json(directory / "state.json")
+    if initial.get("intake") == "policy-cloud":
+        # The cohort intake may also drain on one GPU (two tests at a time).
+        if not 1 <= len(gpus) <= 2 or len(set(gpus)) != len(gpus):
+            raise ValueError("select one or two distinct GPUs; at most 2 tests run per GPU")
+        pinned = {str(job["required_gpu"]) for job in initial["jobs"].values()
+                  if job.get("required_gpu") is not None and job["status"] in {"PENDING", "INTERRUPTED"}}
+        if pinned - {str(gpu) for gpu in gpus}:
+            raise ValueError("pending short fixed-limit tests are pinned to GPU " + ",".join(sorted(pinned)) +
+                             "; include it in --gpus")
+        if refresh or completion_hook is not None:
+            raise ValueError("policy-cloud runs never refresh or publish the repository leaderboard")
+    elif len(gpus) != 2 or len(set(gpus)) != 2:
         raise ValueError("select exactly two distinct GPUs; the fixed limit is 4 tests / 2 per GPU")
-    if read_json(directory / "state.json").get("intake") == "policy-cloud" and (refresh or completion_hook is not None):
-        raise ValueError("policy-cloud runs never refresh or publish the repository leaderboard")
+    if retry_interrupted and initial.get("intake") != "policy-cloud":
+        raise ValueError("re-running interrupted attempts is available only to the policy-cloud intake")
     processes = {}
     refreshed = None
     refresh_at = 0.0
@@ -529,6 +589,11 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
             while True:
                 state = read_json(directory / "state.json")
                 recover(state)
+                if retry_interrupted:
+                    # Once per invocation, after stopped workers are recognized.
+                    for job in requeue_interrupted(state):
+                        event(directory, "requeued", {**job, "reason": job["retry_history"][-1]["retry_reason"]})
+                    retry_interrupted = False
                 reconcile_grouped(root, directory, state)
                 for job in state["jobs"].values():
                     if job["status"] in DONE and job.get("origin") == "new_attempt" and not job.get("announced"):
@@ -631,6 +696,10 @@ def main():
     parser.add_argument("--completion-hook", type=Path, help="trusted Python publisher to run after the queue drains")
     parser.add_argument("--intake", choices=INTAKES, help="selected (default) or only the scoped policy-cloud cohorts "
                         "(clean and as-served laws); a state directory keeps the intake it was first prepared with")
+    parser.add_argument("--retry-interrupted", action="store_true",
+                        help="policy-cloud run only: re-queue INTERRUPTED attempts (worker stopped without any receipt) "
+                        "once, with the same frozen request and seed, plus dependents refused only because of them; "
+                        "PASS, FAIL, TIMEOUT and ERROR records are never retried and every prior record is kept")
     args = parser.parse_args(); root=args.root.resolve(); directory=args.state_root.resolve()
     if args.action == "status":
         state = read_json(directory / "state.json")
@@ -648,13 +717,16 @@ def main():
         print(json.dumps({"recovered": recovered, **summary(state)}, sort_keys=True)); return
     if args.source_root is None:
         parser.error("--source-root is required for plan/run")
+    if args.retry_interrupted and args.action != "run":
+        parser.error("--retry-interrupted applies to run only")
     # Preparing cannot race an active coordinator or replace its live state.
     with file_lock(directory / "coordinator.lock", blocking=False):
         state = prepare(root, args.source_root.resolve(), directory, include_research=args.include_research,
                         intake=args.intake)
     if args.action == "run":
         value = drain(root, directory, gpus=args.gpus.split(","), source=args.source_root.resolve(),
-                      watch=args.watch, refresh=args.refresh, completion_hook=args.completion_hook)
+                      watch=args.watch, refresh=args.refresh, completion_hook=args.completion_hook,
+                      retry_interrupted=args.retry_interrupted)
     else:
         value = summary(state)
         if state.get("intake") == "policy-cloud":

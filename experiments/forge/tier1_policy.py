@@ -59,6 +59,14 @@ class PolicyCohort:
     # partner's variant and publication shows the partner's single verdict.
     shared: frozenset = frozenset()
     partner: str | None = None
+    # A cohort registered with the per-draw ledger must attest the measured
+    # draws of every sample-measuring observation, under either law (an
+    # as-served cohort always does). The original Tier 1 receipts predate the
+    # ledger and keep their format.
+    attest_draws: bool = False
+    # Parents allowed to continue their own scoped producer's saved state
+    # after its quality gate failed (user-authorized diagnostic continuation).
+    diagnostic_continuations: frozenset = frozenset()
 
     def __post_init__(self):
         if self.measurement not in ('clean', 'as_served'):
@@ -70,6 +78,8 @@ class PolicyCohort:
                              'law-independent parents stay with its clean partner')
         if self.measurement == 'clean' and (self.shared or self.partner):
             raise ValueError('only an as-served cohort shares law-independent parents')
+        if not set(self.diagnostic_continuations) <= set(self.parents):
+            raise ValueError('a diagnostic continuation must be a declared parent of its cohort')
 
     @property
     def suffix(self):
@@ -128,6 +138,17 @@ def schedule_free_policy(task):
     """A registered policy task preserving the recipe's schedule-free horizon."""
     return (is_policy_task(task) and
             task.get('execution', {}).get('policy_contract', {}).get('schedule') == SCHEDULE_FREE)
+
+
+def diagnostic_continuation_allowed(task):
+    """Only a registered cohort's declared parents continue after a failed gate.
+
+    Ordinary tasks (including other checkpoint-repair intakes) keep their own
+    continuation rules; this never widens them.
+    """
+    cohort = task_cohort(task)
+    parent = task.get('policy_parent', {}).get('id') if isinstance(task, dict) else None
+    return cohort is not None and parent in cohort.diagnostic_continuations
 
 
 def _execution(task):
@@ -282,28 +303,37 @@ def _measured_draws_grade(task, evidence, observations):
 
     Each recorded draw states whether learned output noise was applied and the
     served sigma at that state. Clean draws must be noise-free; an as-served
-    cohort must attest a served draw in every observation and a receipt.
+    cohort must attest a served draw in every observation and a receipt. A
+    cohort registered with the draw ledger (``attest_draws``) must also attest
+    the draws and receipt of every clean sample-measuring task, and the frozen
+    control of a paired adaptation is held to the same declared law.
     """
     cohort = task_cohort(task)
     served = cohort.measurement == 'as_served'
-    declared = task['evaluation']['policy_observation']['output_noise']
+    declaration = task['evaluation']['policy_observation']
+    declared = declaration['output_noise']
+    required = served or (cohort.attest_draws and declaration.get('sampler') == 'GANTrainer.sample')
     for row in observations:
         draws = row.get('measured_draws')
-        if draws is None and not served:
-            continue  # Parameter measurements and older clean receipts draw no recorded samples.
+        if draws is None and not required:
+            continue  # Parameter measurements and archived Tier 1 receipts record no sampled draws.
         if not isinstance(draws, list) or not draws:
             return {'status': 'INCOMPLETE', 'reason': 'observation lacks its measured output-noise draws'}
         # The recorded sigma is a receipt; the scientific grader judges the samples.
         if any(not isinstance(draw, dict) or draw.get('output_noise') is not declared or 'output_sigma' not in draw
                for draw in draws):
             return {'status': 'INVALID', 'reason': 'measured draws differ from the declared output-noise law'}
-    if served:
-        summary = evidence.get('served_output_noise')
-        if (not isinstance(summary, dict) or summary.get('output_noise') is not True
-                or summary.get('law') != task['evaluation']['eval_output_noise']
-                or type(summary.get('draws')) is not int or summary['draws'] < 1
-                or summary.get('draws_without_output_noise') != 0):
-            return {'status': 'INCOMPLETE', 'reason': 'as-served receipt lacks its served output-noise attestation'}
+
+    def attested(summary):
+        return (isinstance(summary, dict) and summary.get('output_noise') is declared
+                and summary.get('law') == task['evaluation']['eval_output_noise']
+                and type(summary.get('draws')) is int and summary['draws'] >= 1
+                and summary.get('draws_without_output_noise') == (0 if declared else summary['draws']))
+    if required and not attested(evidence.get('served_output_noise')):
+        return {'status': 'INCOMPLETE', 'reason': ('as-served' if served else 'clean') +
+                ' receipt lacks its measured output-noise attestation'}
+    if required and task.get('adapter') == 'paired_adaptation' and not attested(evidence.get('frozen_served_output_noise')):
+        return {'status': 'INCOMPLETE', 'reason': 'frozen control lacks its measured output-noise attestation'}
     return None
 
 

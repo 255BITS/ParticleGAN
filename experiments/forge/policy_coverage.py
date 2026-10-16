@@ -105,6 +105,8 @@ BLOCKED_HOSTS = {
 }
 # Checkpoint dependents continue their own scoped producer even after its
 # quality gate fails (user-authorized diagnostic continuation; BISPF precedent).
+# Only these registered cohort parents may do so; ordinary tasks keep their
+# own continuation rules.
 DIAGNOSTIC_CONTINUATIONS = frozenset({'gaussian1d_stability', 'grid100_14k', 'rotated100_14k', 'staggered100_14k'})
 
 COVERAGE = PolicyCohort(
@@ -112,7 +114,7 @@ COVERAGE = PolicyCohort(
     law_prefix='policy_cloud_', label='Policy-cloud coverage cohort',
     parameter_parents=frozenset({'two_pole', 'unused_token_hold', 'cover_leftover', 'unipolar', 'mid_scale_identity'}),
     clock_parents=frozenset({'clockfree_audit', 'clockfree_audit_measurement_v1'}),
-    rename_dependencies=True)
+    rename_dependencies=True, attest_draws=True, diagnostic_continuations=DIAGNOSTIC_CONTINUATIONS)
 # Law-independent tests: the measurement draws no scored output samples, or an
 # ownership blocker refuses the test before any measurement. One clean run (or
 # refusal) supplies the same verdict to the clean and as-served rows.
@@ -129,7 +131,8 @@ SERVED = PolicyCohort(
     id=SERVED_COHORT, parents=SERVED_PARENTS, sources=SOURCES, blocked_hosts={},
     law_prefix='policy_cloud_as_served_', label='Policy-cloud as-served coverage cohort',
     parameter_parents=frozenset(), clock_parents=frozenset(), rename_dependencies=True,
-    measurement='as_served', shared=frozenset(LAW_INDEPENDENT), partner=COHORT)
+    measurement='as_served', shared=frozenset(LAW_INDEPENDENT), partner=COHORT,
+    attest_draws=True, diagnostic_continuations=DIAGNOSTIC_CONTINUATIONS)
 COHORTS = (COVERAGE, SERVED)
 
 

@@ -241,15 +241,16 @@ def _policy_evidence(task, final):
     noise = declaration["output_noise"]
     draw = {"role": "measured", "model": "live", "n": 4096, "completed_steps": final,
             "output_noise": noise, "output_sigma": .029}
+    summary = {"law": task["evaluation"]["eval_output_noise"], "output_noise": noise,
+               "draws": 1, "draws_without_output_noise": 0 if noise else 1}
     evidence = {"policy_controls": {"cohort": task["task_cohort"], "implementation_observed": True,
                                     "requested_owners_bound": True, "lifecycle": {"complete": True},
                                     "completed_steps": final},
                 "policy_observations": [{**declaration, "observed": True, "policy_owner": "particlegan.UpdatePolicy",
                                          "measured_draws": [draw]}],
-                "policy_purity": [{"pure": True}]}
-    if noise:
-        evidence["served_output_noise"] = {"law": task["evaluation"]["eval_output_noise"], "output_noise": True,
-                                           "draws": 1, "draws_without_output_noise": 0}
+                "policy_purity": [{"pure": True}], "served_output_noise": summary}
+    if task["adapter"] == "paired_adaptation":
+        evidence["frozen_served_output_noise"] = dict(summary)
     return evidence
 
 
@@ -508,54 +509,101 @@ def test_short_limit_jobs_run_alone_on_their_gpu(tmp_path, monkeypatch):
     assert all(job["status"] == "BLOCKED" for job in read_json(directory / "state.json")["jobs"].values())
 
 
-def test_cohort_records_project_one_row_per_law_and_family_with_shared_verdicts(tmp_path):
-    from experiments.forge.research_tiers import _attempt_registry, policy_cohort_rows
-    _attempt_registry.cache_clear()
-    records = []
+def _records(statuses=None):
+    """A complete synthetic two-family publication value (both laws)."""
+    from experiments.forge.policy_cloud_attempts import cohort_scope
+    statuses = statuses or {}
+    records, recipes = [], {}
     for family in FAMILIES:
-        scopes = {cohort: stable_hash([family, "source", "recipe", cohort]) for cohort in (COHORT, SERVED_COHORT)}
+        scopes = {cohort: cohort_scope(family, "source", "recipe", cohort) for cohort in (COHORT, SERVED_COHORT)}
         common = dict(owning_family=family, source_digest="source", candidate_revision="recipe", attempted=True,
-                      diagnostic=True)
+                      diagnostic=True, origin="new_attempt", candidate_id=family, execution_sha256="e", evaluation_sha256="v")
         for tier, names in sorted(TIERS.items()):
             for name in names:
-                status = ("BLOCKED" if name in BLOCKED_HOSTS else "PASS" if name == "img_stripes2" else "FAIL")
+                status = statuses.get(("clean", name), "BLOCKED" if name in BLOCKED_HOSTS else
+                                      "PASS" if name == "img_stripes2" else "FAIL")
                 shared = name in LAW_INDEPENDENT
                 records.append(dict(common, cohort_scope=scopes[COHORT], cohort_id=COHORT, family="policy-cloud-" + family,
                                     task=variant_id(name), parent_task=name, reporting_tier=tier, status=status,
-                                    label=LABEL, measurement_law="shared" if shared else "clean",
+                                    label=LABEL, measurement_law="shared" if shared else "clean", updates=10,
+                                    key=stable_hash([family, COHORT, name]), attempt_id="a" + name,
                                     **({"shared_scopes": [scopes[SERVED_COHORT]]} if shared else {}),
-                                    **({"block_kind": "incompatible"} if status == "BLOCKED" else {})))
+                                    **({"block_kind": "incompatible", "reason": variant_id(name) + ": " + BLOCKED_HOSTS[name]}
+                                       if status == "BLOCKED" else {})))
                 if not shared:
                     # The as-served law passes one more (width-limited) test here.
-                    served_status = "PASS" if name in {"img_stripes2", "vector_two_broad"} else "FAIL"
+                    served_status = statuses.get(("as_served", name),
+                                                 "PASS" if name in {"img_stripes2", "vector_two_broad"} else "FAIL")
                     records.append(dict(common, cohort_scope=scopes[SERVED_COHORT], cohort_id=SERVED_COHORT,
                                         family="policy-cloud-as-served-" + family, task=variant_id(name, SERVED),
-                                        parent_task=name, reporting_tier=tier, status=served_status,
+                                        parent_task=name, reporting_tier=tier, status=served_status, updates=10,
+                                        key=stable_hash([family, SERVED_COHORT, name]), attempt_id="b" + name,
                                         label=SERVED_LABEL, measurement_law="as_served"))
-    atomic_json(tmp_path / runner.REPORT, {"records": records})
-    rows = policy_cohort_rows(tmp_path, tmp_path / "board.md")
+        recipes[family] = dict(verified=True, cohort_source_digest="source", cohort_candidate_revision="recipe",
+                               selected_candidate_id=family, selected_candidate_revision="selected-" + family,
+                               selected_source_digest="selected-source")
+    from experiments.forge.policy_cloud_publication import SCHEMA
+    return dict(schema=SCHEMA, qualification_input=False, qualification_reuse=False, formulations_modified=False,
+                records=records, recipes=recipes)
+
+
+def test_cohort_records_project_one_row_per_law_and_family_with_shared_verdicts(tmp_path):
+    from experiments.forge import policy_cloud_publication as publication
+    from experiments.forge.research_tiers import _attempt_registry, policy_cohort_rows
+    _attempt_registry.cache_clear()
+    assert policy_cohort_rows(tmp_path, tmp_path / "board.md") == {}  # Nothing published yet.
+    value = _records()
+    atomic_json(tmp_path / publication.RECORDS, value)
+    page = tmp_path / "reports/forge/technique-inventory.md"
+    rows = policy_cohort_rows(tmp_path, page)
     assert set(rows) == set(FAMILIES)
     for family in FAMILIES:
         clean, as_served = rows[family]
         assert LABEL in clean and SERVED_LABEL in as_served
+        assert "12 law-independent verdicts shared with the clean row" in as_served and "shared" not in clean
+        assert f"atlas-e22-policy-cloud-20261015/README.md#{family})" in clean
         # Both rows cover all 35 tests: the shared verdicts (two-pole, clock
         # audits, 9 incompatible hosts) appear in each row exactly once.
         assert "0/7 (3 incompatible)" in clean and "1/21 (6 incompatible)" in clean and "1/35 (9 incompatible)" in clean
         assert "0/7 (3 incompatible)" in as_served and "2/21 (6 incompatible)" in as_served
         assert "2/35 (9 incompatible)" in as_served
-    records.append(dict(records[0], parent_task="duplicate", source_digest="other"))
-    atomic_json(tmp_path / runner.REPORT, {"records": records})
+    # The family pages count the same cells as the leaderboard rows.
+    row = {"candidate_id": "atlas", "candidate_revision": "selected-atlas", "bindings": {"source_digest": "selected-source"}}
+    overlay = publication.family_overlay(value, "atlas", row, lambda name: ("e", "v"))
+    assert len(overlay["cells"]) == 35 + 23 and overlay["publication"]["shared"] == 12
+    from experiments.forge.family_reports import score
+    for view in (view_declaration(), served_view_declaration()):
+        names = [a["task"] for a in view["assignments"]]
+        counts = publication.view_counts({n: overlay["cells"][n]["run_attempt"] for n in names}, names)
+        assert score(counts) == ("1/35 (9 incompatible)" if view["id"] == VIEW else "2/35 (9 incompatible)")
+    assert overlay["cells"][variant_id("two_pole")]["coverage_reason"].startswith("Separately scoped policy-cloud "
+                                                                               "diagnostic (shared law; one run")
+    assert publication.family_overlay(value, "atlas", dict(row, candidate_revision="other"), lambda name: ("e", "v")) is None
+    assert publication.family_overlay(value, "atlas", row, lambda name: ("x", "v"))["cells"][
+        variant_id("grid100")]["current_contract"] == "CHANGED"
+    # Cohort records never live in the repository attempt report.
+    atomic_json(tmp_path / runner.REPORT, {"records": [value["records"][0]]})
     _attempt_registry.cache_clear()
-    with pytest.raises(ValueError, match="cannot pool"):
-        policy_cohort_rows(tmp_path, tmp_path / "board.md")
-    records.pop()
-    records.append(dict(records[0], shared_scopes=["no-such-row"]))
-    records.pop(0)
-    atomic_json(tmp_path / runner.REPORT, {"records": records})
+    with pytest.raises(ValueError, match="their own publication"):
+        policy_cohort_rows(tmp_path, page)
     _attempt_registry.cache_clear()
-    with pytest.raises(ValueError, match="no records of its own"):
-        policy_cohort_rows(tmp_path, tmp_path / "board.md")
-    _attempt_registry.cache_clear()
+    # A publication must be complete, correctly scoped and shared only where law-independent.
+    for change, message in (("missing", "covers every test"), ("shared", "only a law-independent record"),
+                            ("scope", "cohort scope differs"), ("credit", "unchanged-formulation"),
+                            ("recipe", "verified recipe mapping")):
+        broken = deepcopy(value)
+        if change == "missing":
+            broken["records"].pop()
+        elif change == "shared":
+            broken["records"][0].pop("shared_scopes")
+        elif change == "scope":
+            broken["records"][1]["cohort_scope"] = "other"
+        elif change == "credit":
+            broken["qualification_input"] = True
+        else:
+            broken["recipes"]["atlas"]["verified"] = False
+        with pytest.raises(ValueError, match=message):
+            publication.validate_records(broken)
 
 
 def test_attempt_media_renders_saved_images_and_paired_curves_without_sampling(tmp_path, variants):
@@ -718,9 +766,43 @@ def test_policy_evidence_requires_the_observed_output_noise_law(variants, served
     noisy = deepcopy(evidence)
     noisy["policy_observations"][0]["measured_draws"][0]["output_noise"] = True
     assert validate_evidence(ordinary, noisy)["status"] == "INVALID"
-    legacy = deepcopy(evidence)
-    legacy["policy_observations"][0].pop("measured_draws")  # Older clean receipts recorded no draws.
-    assert validate_evidence(ordinary, legacy) is None
+    # The clean policy-cloud law attests its sampled draws and receipt as well.
+    for change in ("drop_draws", "drop_summary", "noisy_summary", "unsampled_summary"):
+        altered = deepcopy(evidence)
+        if change == "drop_draws":
+            altered["policy_observations"][0].pop("measured_draws")
+        elif change == "drop_summary":
+            altered.pop("served_output_noise")
+        elif change == "noisy_summary":
+            altered["served_output_noise"].update(output_noise=True, draws_without_output_noise=0)
+        else:
+            altered["served_output_noise"]["draws"] = 0
+        assert validate_evidence(ordinary, altered)["status"] == "INCOMPLETE", change
+    # A parameter measurement records no sampled draws under either law.
+    two_pole = variants["two_pole"]
+    unsampled = _policy_evidence(two_pole, two_pole["execution"]["steps"])
+    unsampled["policy_observations"][0].pop("measured_draws")
+    unsampled.pop("served_output_noise")
+    assert validate_evidence(two_pole, unsampled) is None
+    # Archived Tier 1 receipts predate the draw ledger and keep their format.
+    tier1 = materialize(parent("ring16_acquisition"), ROOT)
+    legacy = _policy_evidence(tier1, tier1["execution"]["steps"])
+    legacy["policy_observations"][0].pop("measured_draws")
+    legacy.pop("served_output_noise")
+    assert TIER1.attest_draws is False and validate_evidence(tier1, legacy) is None
+    # The paired adaptation's frozen control is held to the same declared law.
+    for cards in (variants, served):
+        shift = cards["target_shift_recovery"]
+        paired = _policy_evidence(shift, shift["execution"]["steps"])
+        assert validate_evidence(shift, paired) is None
+        for change in ("drop", "other_law"):
+            altered = deepcopy(paired)
+            if change == "drop":
+                altered.pop("frozen_served_output_noise")
+            else:
+                noise = not altered["frozen_served_output_noise"]["output_noise"]
+                altered["frozen_served_output_noise"].update(output_noise=noise, draws_without_output_noise=0 if noise else 1)
+            assert validate_evidence(shift, altered)["status"] == "INCOMPLETE", change
 
 
 def test_policy_gaussian_frozen_control_is_measured_under_the_same_law(served, monkeypatch):
@@ -777,3 +859,299 @@ def test_policy_cloud_views_display_only_on_the_atlas_and_e22_pages():
         assert _displayed_for(view, "atlas") and _displayed_for(view, "e22")
         assert not _displayed_for(view, "bcap-pure") and not _displayed_for(view, "k3p")
     assert all(_displayed_for(tier1, family) for family in ("atlas", "bcap-pure", "k3p"))
+
+
+# --- Build-fix controls: scoped continuations, retries, single GPU, publication ---
+
+def test_diagnostic_continuation_stays_limited_to_registered_cohort_parents(variants, served, tmp_path, monkeypatch):
+    from experiments.forge import adapters, gaussian_tasks, priors, views
+    from experiments.forge import tier1_policy
+    from experiments.forge.tier1_policy import diagnostic_continuation_allowed
+    calls = []
+    monkeypatch.setattr(gaussian_tasks, "run_gaussian",
+                        lambda request, task, output, device, **kwargs: calls.append(kwargs) or {"cost": {}})
+    ordinary = parent("gaussian1d_stability")
+    request = {"candidate": candidate("e22"), "tasks": {ordinary["id"]: ordinary}}
+    adapters._dispatch_task(request, {"task_id": ordinary["id"], "diagnostic_continuation": True}, tmp_path, "cpu")
+    assert calls == [{"prerequisites": None}]  # Ordinary Gaussian tasks keep their own rules.
+    smoke = variants["gaussian1d_smoke"]
+    with pytest.raises(CapabilityError, match="declares no diagnostic continuation"):
+        adapters._dispatch_task({"candidate": candidate("e22"), "tasks": {smoke["id"]: smoke}},
+                                {"task_id": smoke["id"], "diagnostic_continuation": True}, tmp_path, "cpu")
+    assert all(diagnostic_continuation_allowed(cards[name]) for cards in (variants, served)
+               for name in DIAGNOSTIC_CONTINUATIONS)
+    assert not diagnostic_continuation_allowed(ordinary) and not diagnostic_continuation_allowed(smoke)
+    assert not diagnostic_continuation_allowed(materialize(parent("gaussian1d_acquisition"), ROOT))
+    # Grading: only the registered stability variant may be graded as a diagnostic continuation.
+    monkeypatch.setattr(priors, "validate_prior_policy", lambda *args, **kwargs: None)
+    monkeypatch.setattr(views, "grade_sampling", lambda *args, **kwargs: None)
+    monkeypatch.setattr(views, "_guards", lambda *args, **kwargs: None)
+    monkeypatch.setattr(tier1_policy, "validate_evidence", lambda *args, **kwargs: None)
+    grade = grade_result(ordinary, {"evidence": {"scoring_weights": "live"}}, diagnostic=True)
+    assert grade["status"] == "INVALID" and grade["reasons"] == ["diagnostic checkpoint grading is limited to native continuations"]
+    variant = variants["gaussian1d_stability"]
+    grade = grade_result(variant, {"evidence": {"scoring_weights": "state_selected"}}, diagnostic=True)
+    assert grade["reasons"] == ["diagnostic Gaussian continuation requires its explicit nonqualifying scope"]
+    grade = grade_result(variant, {"evidence": {"scoring_weights": "state_selected", "continuity": {
+        "diagnostic_continuation": True, "parent_smoke_status": "FAIL"}}}, diagnostic=True)
+    assert "continuation" not in " ".join(grade["reasons"])  # Reaches the unchanged evaluator.
+
+
+def _interrupted_state(tmp_path):
+    jobs = {}
+
+    def job(key, status, dependencies=(), **extra):
+        directory = tmp_path / "attempts" / key
+        directory.mkdir(parents=True)
+        (directory / "run.log").write_text(key + " log\n")
+        jobs[key] = dict(key=key, family="policy-cloud-atlas", task=key, status=status, attempted=True,
+                         attempt_id="old-" + key, directory=str(directory), gpu="1", slot=0, pid=7,
+                         process_identity="gone", dependencies=list(dependencies), request_path="frozen.json",
+                         request_sha256="frozen", resources=dict(gpus=1, gpu_memory_mb=1), diagnostic=True,
+                         cohort_scope="scope", **extra)
+        return directory
+
+    job("producer", "INTERRUPTED", reason="prior worker stopped without a terminal receipt")
+    child = job("dependent", "BLOCKED", [{"task": "producer", "kind": "checkpoint"}], block_kind="prerequisite",
+                reason="checkpoint parent producer: INTERRUPTED", origin="new_attempt", result_sha256="r",
+                evidence=str(tmp_path / "attempts/dependent/result.json"))
+    atomic_json(child / "result.json", {"status": "BLOCKED"})
+    for key, status, extra in (("failed", "FAIL", {}), ("timeout", "TIMEOUT", {}), ("passed", "PASS", {}),
+                               ("error", "ERROR", {}), ("refused", "BLOCKED", {"block_kind": "incompatible"})):
+        directory = job(key, status, origin="new_attempt", evidence=str(tmp_path / "attempts" / key / "result.json"),
+                        **extra)
+        atomic_json(directory / "result.json", {"status": status})
+    job("waits_on_failure", "BLOCKED", [{"task": "failed", "kind": "checkpoint"}], block_kind="prerequisite")
+    return {"intake": "policy-cloud", "jobs": jobs}
+
+
+def test_retry_interrupted_requeues_only_infrastructure_interruptions(tmp_path):
+    state = _interrupted_state(tmp_path)
+    untouched = {key: deepcopy(job) for key, job in state["jobs"].items() if key not in {"producer", "dependent"}}
+    requeued = runner.requeue_interrupted(state)
+    assert sorted(job["task"] for job in requeued) == ["dependent", "producer"]
+    for key in ("producer", "dependent"):
+        job = state["jobs"][key]
+        assert job["status"] == "PENDING" and not set(runner.ATTEMPT_FIELDS) & set(job)
+        assert (job["request_path"], job["request_sha256"], job["dependencies"]) == (
+            "frozen.json", "frozen", untouched.get(key, job)["dependencies"])
+        history, = job["retry_history"]
+        assert history["attempt_id"] == "old-" + key and history["log_sha256"]
+        assert history["status"] == ("INTERRUPTED" if key == "producer" else "BLOCKED")
+        assert "same frozen request, task, recipe and seed" in history["retry_reason"]
+    assert {key: state["jobs"][key] for key in untouched} == untouched  # Outcomes are never retried.
+    assert runner.requeue_interrupted(state) == []
+    # A receipt means it was not an infrastructure interruption.
+    state = _interrupted_state(tmp_path / "second")
+    atomic_json(Path(state["jobs"]["producer"]["directory"]) / "result.json", {"status": "FAIL"})
+    with pytest.raises(ValueError, match="receipt or a live worker"):
+        runner.requeue_interrupted(state)
+    with pytest.raises(ValueError, match="only to the policy-cloud intake"):
+        runner.requeue_interrupted({"jobs": {}})
+
+
+def _fake_workers(monkeypatch, gpus, status="FAIL"):
+    monkeypatch.setattr(runner, "device_slots", lambda devices, *a, **kw: [
+        dict(device=gpu, slot=slot, memory_mb=100) for gpu in devices for slot in (0, 1)])
+    monkeypatch.setattr(runner, "process_identity", lambda pid: str(pid))
+    monkeypatch.setattr(runner.time, "sleep", lambda delay: None)
+    running = []
+
+    class Process:
+        def __init__(self, command, **kwargs):
+            self.path, self.pid, self.polls = Path(command[-1]).parent, 1000 + len(running), 0
+            running.append(self)
+
+        def poll(self):
+            self.polls += 1
+            if self.polls == 2:
+                atomic_json(self.path / "result.json", dict(status=status, attempted=True, reason="fixture"))
+            return 0 if self.polls >= 2 else None
+
+    monkeypatch.setattr(runner.subprocess, "Popen", Process)
+    return running
+
+
+def test_policy_cloud_drain_falls_back_to_one_gpu_and_retries_interrupted_attempts(tmp_path, monkeypatch):
+    root, directory = tmp_path / "repo", tmp_path / "runs"
+    jobs = {str(i): dict(key=str(i), family="policy-cloud-fixture", task=f"task{i}", status="PENDING",
+                         resources=dict(gpus=1, gpu_memory_mb=1), dependencies=[]) for i in range(6)}
+    jobs["0"].update(exclusive_gpu=True, required_gpu="1")
+    atomic_json(directory / "state.json", dict(intake="policy-cloud", jobs=jobs))
+    _fake_workers(monkeypatch, ["1"])
+    with pytest.raises(ValueError, match="pinned to GPU 1"):
+        runner.drain(root, directory, gpus=["0"])
+    runner.drain(root, directory, gpus=["1"])
+    occupancy, peak = 0, 0
+    for event in map(json.loads, (directory / "events.jsonl").read_text().splitlines()):
+        assert event["gpu"] == "1"
+        occupancy += 1 if event["event"] == "started" else -1
+        peak = max(peak, occupancy)
+    assert peak <= 2 and all(job["status"] == "FAIL" for job in read_json(directory / "state.json")["jobs"].values())
+    with pytest.raises(ValueError, match="exactly two distinct GPUs"):
+        runner.drain(root, tmp_path / "selected", gpus=["1"]) if atomic_json(
+            tmp_path / "selected/state.json", dict(jobs={})) is None else None
+    # An explicit retry re-runs the interrupted producer and its refused dependent once.
+    retry = tmp_path / "retry"
+    state = _interrupted_state(retry)
+    for job in state["jobs"].values():
+        job["family"] = "policy-cloud-fixture"
+    atomic_json(retry / "state.json", state)
+    _fake_workers(monkeypatch, ["0", "1"], status="PASS")
+    runner.drain(root, retry, gpus=["0", "1"], retry_interrupted=True)
+    final = read_json(retry / "state.json")["jobs"]
+    assert final["producer"]["status"] == "PASS" and final["producer"]["retry_history"][0]["status"] == "INTERRUPTED"
+    assert final["dependent"]["status"] == "PASS" and final["dependent"]["retry_history"][0]["status"] == "BLOCKED"
+    assert final["failed"]["status"] == "FAIL" and "retry_history" not in final["failed"]
+    events = [json.loads(line) for line in (retry / "events.jsonl").read_text().splitlines()]
+    assert sorted(e["task"] for e in events if e["event"] == "requeued") == ["dependent", "producer"]
+    with pytest.raises(ValueError, match="only to the policy-cloud intake"):
+        runner.drain(root, tmp_path / "selected", gpus=["0", "1"], retry_interrupted=True)
+
+
+def test_plain_causes_state_the_failed_checks_in_words():
+    from experiments.forge.policy_cloud_publication import plain_cause
+    base = dict(task="t_policy_cloud_coverage_v1", status="FAIL")
+    curve = dict(base, grade={"evaluator_result": {"metrics": [
+        {"metric": "modes", "op": ">=", "threshold": 16, "value": 0, "status": "FAIL"},
+        {"metric": "mass_tv", "op": "<=", "threshold": .15, "value": .08, "status": "PASS"}],
+        "convergence": {"observations": 96, "passing_observations": 0, "passing_suffix": 0, "minimum_stable_checks": 5}}})
+    assert plain_cause(curve) == "Final live checks fail: modes 0 (needs >= 16); 0/96 observations passed."
+    native = dict(base, grade={"evaluator_result": {"coverage_status": "INVALID", "terminal_checks": [{"passed": False}] * 5,
+                                                     "holdout_metrics": {"precision": .034, "mass_tv": .128}}})
+    assert plain_cause(native).startswith("Coverage gate INVALID; final live accuracy checks 0/5 passed; independent holdout fails")
+    stability = dict(base, grade={"evaluator_result": dict(stationary_passes=46, stationary_checks=72,
+        reacquisition_status="FAIL", shift_hold_passes=17, shift_hold_checks=24, frozen_passes=0, frozen_checks=48)})
+    assert "Stationary hold 46/72, deadline reacquisition FAIL, shifted hold 17/24" in plain_cause(stability)
+    ring = dict(base, grade={"metrics": dict(name="first_convergence_then_hold_v1", status="NOT_CONVERGED",
+        settling_failures=40, settling_checks=40, confirmation_checks=5, modes=8, min_hq=.9)})
+    assert plain_cause(ring).startswith("No qualifying window: 40/40 settling checks failed")
+    shift = dict(base, grade={"metrics": {"live_deadline": dict(passing_checks=0, checks=6, min_modes=8, min_hq=.64),
+                                          "frozen_deadline": dict(passing_checks=0, checks=6)}})
+    assert plain_cause(shift).startswith("Recovery window after the shift: live 0/6 checks passed")
+    blocked = dict(base, status="BLOCKED", block_kind="incompatible", reason="t_policy_cloud_coverage_v1: no rows")
+    assert plain_cause(blocked) == "Not run (incompatible): no rows"
+    assert plain_cause(dict(base, status="INTERRUPTED")).startswith("Worker stopped without any receipt")
+    assert "120 s" in plain_cause(dict(base, status="TIMEOUT", timeout_seconds=120))
+
+
+def _cohort_state(tmp_path, value):
+    """A drained synthetic policy-cloud run whose receipts back ``value``."""
+    state_root = tmp_path / "state"
+    jobs = {}
+    for record in deepcopy(value["records"]):
+        directory = state_root / "attempts" / record["key"][:16]
+        directory.mkdir(parents=True)
+        (directory / "run.log").write_text(record["task"] + "\n")
+        (directory / "request.json").write_text("{}\n")
+        raw = {"evidence": {"training_state": {"sha256": stable_hash([record["owning_family"], record["parent_task"]]),
+                                               "completed_steps": 10}}} if record["status"] in {"PASS", "FAIL"} else None
+        result = {"status": record["status"]}
+        if raw is not None:
+            atomic_json(directory / "raw.json", raw)
+            result["raw_sha256"] = file_hash(directory / "raw.json")
+        atomic_json(directory / "result.json", result)
+        record.update(directory=str(directory), evidence=str(directory / "result.json"),
+                      result_sha256=file_hash(directory / "result.json"), log_sha256=file_hash(directory / "run.log"),
+                      dependencies=[{"task": variant_id("gaussian1d_smoke", SERVED if record["cohort_id"] == SERVED_COHORT
+                                                        else COVERAGE), "kind": "checkpoint"}]
+                      if record["parent_task"] == "gaussian1d_stability" else [],
+                      diagnostic_continuation=record["parent_task"] in DIAGNOSTIC_CONTINUATIONS)
+        jobs[record["key"]] = record
+    atomic_json(state_root / "state.json", {"intake": "policy-cloud", "jobs": jobs})
+    from experiments.forge.policy_cloud_attempts import LAWS
+    atomic_json(state_root / "policy-cloud.json", {
+        "schema_version": 2, "families": list(FAMILIES), "source_root": str(tmp_path / "frozen"),
+        "laws": {law: {key: spec[key] for key in ("cohort", "view", "label")} for law, spec in LAWS.items()},
+        "shared_tests": sorted(LAW_INDEPENDENT), "timeout_sensitive_gpu": "1"})
+    return state_root
+
+
+def test_publication_writes_records_results_and_readme_deterministically(tmp_path, monkeypatch):
+    from experiments.forge import policy_cloud_publication as publication
+    value = _records()
+    monkeypatch.setattr(publication, "recipe_identity", lambda root, state_root, records: {
+        family: dict(value["recipes"][family], selected_recipe_sha256="a" * 64, cohort_recipe_sha256="b" * 64,
+                     restricted_to_selected_fields_sha256="a" * 64, cohort_source_origin_commit="c" * 40,
+                     added_fields_at_registered_defaults={"prior_sigreg_knots": 17},
+                     inert_because={"prior_regularizer": "vicreg", "prior_reg": 0.0, "prior_proximal_strength": 0.0})
+        for family in FAMILIES})
+    state_root = _cohort_state(tmp_path, value)
+    root = tmp_path / "repo"
+    summary = publication.publish(root, state_root)
+    records = publication.validate_records(read_json(root / publication.RECORDS))
+    assert len(records["records"]) == 2 * (35 + 23)
+    assert all(r["evidence"] == publication.README.as_posix() for r in records["records"])
+    assert summary["summary"]["atlas"]["as_served"]["scores"]["total"] == "2/35 (9 incompatible)"
+    assert summary["training_state_pairs"] == {"match": 2 * 23}
+    results = read_json(root / publication.RESULTS)
+    assert results["records_sha256"] == file_hash(root / publication.RECORDS)
+    receipt = next(r for r in results["receipts"] if r["status"] == "FAIL")
+    assert receipt["files"]["run.log"] == file_hash(Path(receipt["directory"]) / "run.log")
+    continuation = [row for row in results["diagnostic_continuations"] if row["family"] == "atlas"]
+    assert {(row["law"], row["producer"], row["producer_status"]) for row in continuation} == {
+        ("clean", "gaussian1d_smoke", "FAIL"), ("as_served", "gaussian1d_smoke", "FAIL")}
+    readme = (root / publication.README).read_text()
+    assert "| 1 | two_pole | FAIL · shared run | FAIL · shared run | Law-independent:" in readme
+    assert "Diagnostic continuation of its own same-law saved state after a FAIL parent gate" in readme
+    assert "| [atlas](#atlas) | as served (12 shared with clean) |" in readme and '<a name="e22"></a>' in readme
+    assert "Pairs: **46 match**" in readme and "prior_sigreg_knots=17" in readme
+    before = {path: path.read_bytes() for path in (root / publication.REPORT_DIRECTORY).rglob("*") if path.is_file()}
+    publication.publish(root, state_root)
+    assert {path: path.read_bytes() for path in before} == before  # Deterministic rerun.
+    # Changed local receipts or an undrained run refuse publication.
+    log = Path(receipt["directory"]) / "run.log"
+    log.write_text("edited\n")
+    with pytest.raises(ValueError, match="differs from its recorded receipt"):
+        publication.publish(root, state_root)
+    state = read_json(state_root / "state.json")
+    next(iter(state["jobs"].values()))["status"] = "PENDING"
+    atomic_json(state_root / "state.json", state)
+    with pytest.raises(ValueError, match="requires a drained run"):
+        publication.publish(root, state_root)
+
+
+def test_recipe_identity_maps_each_frozen_recipe_onto_its_selected_row(tmp_path):
+    from experiments.forge.attempt_coverage import selected_tasks
+    from experiments.forge.policy_cloud_publication import recipe_identity
+    from particlegan.recipe_compat import SEARCH_RECIPE_DEFAULTS
+    publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    rows = {name: row for name, row, _ in selected_tasks(publication)}
+    recipes = {}
+    for family in FAMILIES:
+        row = rows[family]
+        contract = read_json(ROOT / publication["evidence_sources"][row["publication_key"]]["snapshot"])[
+            "recipe_contracts"][row["bindings"]["recipe_sha256"]]
+        # A newer Recipe adds fields at their registered defaults.
+        recipes[family] = {**contract, "prior_sigreg_knots": SEARCH_RECIPE_DEFAULTS["prior_sigreg_knots"],
+                           "prior_proximal_strength": SEARCH_RECIPE_DEFAULTS["prior_proximal_strength"]}
+    state_root = tmp_path / "state"
+
+    def write(family, recipe):
+        for prefix in ("policy-cloud-", "policy-cloud-as-served-"):
+            atomic_json(state_root / "requests" / (prefix + family + ".json"), {
+                "source": {"digest": "source", "origin_commit": "c" * 40}, "candidate_revision": "recipe",
+                "protocol": {"seed": 0}, "candidate": {"recipe_overrides": {}, "resolved_recipe": recipe}})
+    for family in FAMILIES:
+        write(family, recipes[family])
+    records = [{"owning_family": family, "source_digest": "source", "candidate_revision": "recipe"} for family in FAMILIES]
+    mapping = recipe_identity(ROOT, state_root, records)
+    for family in FAMILIES:
+        assert mapping[family]["verified"] is True
+        assert mapping[family]["restricted_to_selected_fields_sha256"] == rows[family]["bindings"]["recipe_sha256"]
+        assert mapping[family]["selected_candidate_revision"] == rows[family]["candidate_revision"]
+        assert mapping[family]["added_fields_at_registered_defaults"] == {"prior_proximal_strength": 0.0,
+                                                                          "prior_sigreg_knots": 17}
+        assert mapping[family]["inert_because"]["prior_reg"] == 0.0
+    # A non-default addition, a changed recorded field or another seed is refused.
+    for change, message in (({"prior_sigreg_knots": 18}, "differs from the selected recipe"),
+                            ({"batch_size": recipes["atlas"]["batch_size"] + 1}, "differs from the selected recipe")):
+        write("atlas", {**recipes["atlas"], **change})
+        with pytest.raises(ValueError, match=message):
+            recipe_identity(ROOT, state_root, records)
+    write("atlas", recipes["atlas"])
+    request = read_json(state_root / "requests/policy-cloud-atlas.json")
+    request["protocol"]["seed"] = 1
+    atomic_json(state_root / "requests/policy-cloud-atlas.json", request)
+    with pytest.raises(ValueError, match="seed 0"):
+        recipe_identity(ROOT, state_root, records)

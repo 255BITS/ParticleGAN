@@ -524,6 +524,10 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
     from .scoped_publications import load_publications
     attachments = load_publications(root, load)
+    # The policy-cloud cohorts publish their own records file (never the
+    # repository attempt report); it fills only their scoped view cells.
+    from .policy_cloud_publication import VIEWS as POLICY_CLOUD_VIEWS, family_overlay, load_records, view_counts
+    policy_cloud = load_records(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
     attempt_path = Path("reports/forge/attempt-coverage.json")
     run_attempts = {}
@@ -739,13 +743,24 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                     and audit["recorded_grade"] == status):
                 results[name]["clock_audit"] = audit
 
+        overlay = family_overlay(policy_cloud, family_id, selected, lambda name: (
+            (task_execution_fingerprint(tasks[name]), task_evaluation_fingerprint(tasks[name])) if name in tasks else (None, None)))
+        for name, cell in (overlay or {}).get("cells", {}).items():
+            if name in results:
+                results[name].update(cell)
+
         def view_row(view):
             tiers = {}
             assignments = sorted(view["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
             for tier in TIERS:
                 required = [results[a["task"]] for a in assignments if str(a["qualification_tier"]) == tier
                             and a["importance"] == "required"]
-                tiers[tier] = _count(required)
+                if overlay is not None and view["id"] in POLICY_CLOUD_VIEWS:
+                    # The same counts as the cohort's leaderboard row.
+                    tiers[tier] = view_counts({result["task_id"]: result["run_attempt"] for result in required
+                                               if "run_attempt" in result}, [result["task_id"] for result in required])
+                else:
+                    tiers[tier] = _count(required)
             return {"id": view["id"], "revision": view["revision"], "tiers": tiers,
                     "total": _sum(list(tiers.values()))}
 
@@ -761,6 +776,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                                    "total": _sum([view["total"] for view in view_rows])})
         if retry_history:
             family["cohorts"][-1]["retry_history"] = retry_history
+        if overlay is not None:
+            family["cohorts"][-1]["policy_cloud_publication"] = overlay["publication"]
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
@@ -1170,6 +1187,14 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             for view in cohort["scoped_views"]:
                 lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                                 *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+            policy = cohort.get("policy_cloud_publication")
+            if policy:
+                lines += ["", "Policy-cloud cells come from the " + link(root, page, "cohort report", policy["readme"]) +
+                          " (" + link(root, page, "records", policy["records"]) + "): frozen source `" +
+                          policy["source_digest"][:12] + "`, candidate revision `" + policy["candidate_revision"][:12] +
+                          "`, verified there to run this selected recipe. Each law is its own row; the " +
+                          str(policy["shared"]) + " law-independent verdicts come from one run and appear in both. "
+                          "These diagnostics give no parent-cohort credit."]
             for item in cohort.get("scoped_publications", []):
                 lines += ["", link(root, page, "Frozen separate-cohort numerical evidence", item["path"]) +
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +

@@ -609,10 +609,15 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")
     try:
-        gaussian_continuation = task["evaluation"]["kind"] == "gaussian_stability"
+        from .tier1_policy import diagnostic_continuation_allowed
+        # Only a registered cohort's declared Gaussian stability variant may
+        # continue its own scoped smoke state after a failed gate; every other
+        # task keeps native-only diagnostic checkpoint grading.
+        gaussian_continuation = (task["evaluation"]["kind"] == "gaussian_stability"
+                                 and diagnostic_continuation_allowed(task))
         scope = (evidence.get("continuity") or {}) if gaussian_continuation else {}
         if diagnostic and task.get("adapter") != "native100_continuation" and not gaussian_continuation:
-            return _verdict("INVALID", "diagnostic checkpoint grading is limited to native and Gaussian own-state continuations")
+            return _verdict("INVALID", "diagnostic checkpoint grading is limited to native continuations")
         if gaussian_continuation and (scope.get("diagnostic_continuation") is True) != bool(diagnostic):
             return _verdict("INVALID", "diagnostic Gaussian continuation requires its explicit nonqualifying scope"
                             if diagnostic else "diagnostic continuation cannot supply ordinary qualification")
