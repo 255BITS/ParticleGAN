@@ -36,22 +36,24 @@ def _attempt_registry(path, modified):
     return read_json(path)["records"]
 
 
-def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None, policy_scope=None, repair_scope=None):
+def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None, policy_scope=None,
+         repair_scope=None, cohort_scope=None):
     from .family_reports import score
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     attempts = {}
-    if registry.is_file() and (scope or selected_family or policy_scope or repair_scope):
+    if registry.is_file() and (scope or selected_family or policy_scope or repair_scope or cohort_scope):
         attempts = {r.get("parent_task", r["task"]): r for r in _attempt_registry(registry, registry.stat().st_mtime_ns)
                     if (scope and r.get("research_scope") == scope)
                     or (selected_family and r.get("family") == selected_family)
                     or (policy_scope and r.get("policy_scope") == policy_scope)
-                    or (repair_scope and r.get("repair_scope") == repair_scope)}
+                    or (repair_scope and r.get("repair_scope") == repair_scope)
+                    or (cohort_scope and r.get("cohort_scope") == cohort_scope)}
     def count(required):
         # These are explicitly nonqualifying research rows. New same-source
         # attempts fill previously unmeasured research cells, never overwrite an
         # archived verdict or a selected-family qualification result.
         outcomes = {task: tasks.get(task) for task in required}
-        if scope or policy_scope or repair_scope:
+        if scope or policy_scope or repair_scope or cohort_scope:
             for task in required:
                 if outcomes[task] in {None, "UNKNOWN", "NOT_RUN"} and attempts.get(task, {}).get("status") in {"PASS", "FAIL"}:
                     outcomes[task] = attempts[task]["status"]
@@ -165,6 +167,30 @@ def checkpoint_repair_rows(root, page):
     return rows
 
 
+def policy_cohort_rows(root, page):
+    """One separately scoped row per family/source/recipe policy-cloud cohort."""
+    rows = {}
+    registry = Path(root) / "reports/forge/attempt-coverage.json"
+    if registry.is_file():
+        from collections import defaultdict
+        cohorts = defaultdict(list)
+        for record in _attempt_registry(registry, registry.stat().st_mtime_ns):
+            if record.get("cohort_scope"):
+                cohorts[record["cohort_scope"]].append(record)
+        for scope, records in cohorts.items():
+            identities = {(r["source_digest"], r["candidate_revision"], r["owning_family"]) for r in records}
+            if len(identities) != 1 or len({r["parent_task"] for r in records}) != len(records):
+                raise ValueError("policy cohort rows cannot pool sources, recipes or repeated tasks")
+            if any(r.get("diagnostic") is not True for r in records):
+                raise ValueError("policy cohort attempts must remain explicit diagnostics")
+            requirements = {str(tier): {r["parent_task"] for r in records if r["reporting_tier"] == tier}
+                            for tier in (1, 2, 3)}
+            family = records[0]["owning_family"]
+            rows.setdefault(family, []).append(_row(root, page, records[0]["label"],
+                "reports/forge/ATTEMPT_COVERAGE.md#policy-cloud-coverage", {}, requirements, cohort_scope=scope))
+    return rows
+
+
 def tier_rows(root, page):
     """Rows keyed by owning family; no modification of selected publication data."""
     rows = {}
@@ -240,11 +266,13 @@ def tier_rows(root, page):
                 policy_scope=policy))
     for family, additions in checkpoint_repair_rows(root, page).items():
         rows.setdefault(family, []).extend(additions)
+    for family, additions in policy_cohort_rows(root, page).items():
+        rows.setdefault(family, []).extend(additions)
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     if registry.is_file():
         for record in _attempt_registry(registry, registry.stat().st_mtime_ns):
-            if record.get("origin") != "reused_execution":
-                continue
+            if record.get("origin") != "reused_execution" or record.get("cohort_scope"):
+                continue  # Scoped cohort reuse is counted inside its own cohort row.
             if record.get("qualification_input", False) or not record.get("reused_execution"):
                 raise ValueError("saved group reuse must remain an explicit diagnostic")
             rows.setdefault(record["family"], []).append(_row(root, page,

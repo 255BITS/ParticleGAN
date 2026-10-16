@@ -86,8 +86,8 @@ def _behavior_host(task):
 
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
-    if (_behavior_host(task) == "two_pole"
-            and task.get("task_cohort") == "tier1_policy_selected_cloud_v1"):
+    from .tier1_policy import is_policy_task
+    if _behavior_host(task) == "two_pole" and is_policy_task(task):
         return {"representation": "policy_owned_direct_sample_coordinates",
                 "latent_table_controls": True, "construction": "public ParticlePrior with the original zero initialization",
                 "optimizer": "Recipe.make_generator_optimizer(latent_table=..., direct_particles=...)",

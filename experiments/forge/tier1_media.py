@@ -99,6 +99,15 @@ def render(task, row, local, output):
         parameter = next(key for key, value in initial.items() if value.is_floating_point() and value.numel())
         observations = [{'step': i + 1, **{name: float((proof['trajectories'][name][i]['trainer']['models']['G'][parameter] - initial[parameter]).abs().mean()) for name in names}} for i in range(task['execution']['probe_steps'])]
         thresholds = []
+    elif task['adapter'] == 'paired_adaptation':
+        # The paired evidence keeps one saved curve per arm; show both, with
+        # the ring bounds the active arm must recover after the target shift.
+        frozen = {point['step']: point for point in evidence['frozen']['diagnostic']}
+        observations = [{'step': point['step'], 'active_modes': point['modes'], 'active_hq': point['hq'],
+                         'frozen_modes': frozen[point['step']]['modes'], 'frozen_hq': frozen[point['step']]['hq']}
+                        for point in evidence['active']['diagnostic']]
+        thresholds = [['active_modes', '>=', 8], ['active_hq', '>=', .9]]
+        names = ['active_modes', 'frozen_modes', 'active_hq', 'frozen_hq']
     else:
         thresholds = task['evaluation']['thresholds']
         names = [name for name, _, _ in thresholds]
@@ -112,7 +121,22 @@ def render(task, row, local, output):
         if samples and 'samples' in samples[index]:
             values = samples[index]['samples'].numpy()
             spec = task['execution']['host_definition']
-            if values.shape[1] == 1:
+            if values.ndim == 4:
+                # Enumerated image outputs: declared templates above the saved,
+                # already scored generated images (no extra forward pass).
+                images = list(samples[index]['targets'].numpy()[:, 0]) + list(values[:, 0])
+                columns = 8
+                rows = -(-len(images) // columns)
+                height, width = values.shape[2:]
+                mosaic = np.ones((rows * (height + 1), columns * (width + 1)))
+                for position, image in enumerate(images):
+                    tile_row, tile_column = divmod(position, columns)
+                    mosaic[tile_row * (height + 1):tile_row * (height + 1) + height,
+                           tile_column * (width + 1):tile_column * (width + 1) + width] = image
+                top.imshow(mosaic, cmap='gray', vmin=0., vmax=1., interpolation='nearest')
+                top.set_xticks([]); top.set_yticks([])
+                top.set_title(f"First {len(samples[index]['targets'])} tiles: declared templates; then all saved scored outputs")
+            elif values.shape[1] == 1:
                 sigma = float(np.sqrt(spec['covariances'][0][0][0])); mean = spec['means'][0][0]
                 if task['evaluation']['kind'] == 'gaussian_stability' and observations[index]['step'] > task['evaluation']['stationary_end']:
                     mean = task['evaluation']['shift_mean']
@@ -125,12 +149,20 @@ def render(task, row, local, output):
                 top.plot(grid, np.exp(-.5 * ((grid - mean) / sigma)**2) / (sigma * np.sqrt(2*np.pi)), color='black', label='Declared target density')
                 top.set_xlim(*limits); top.set_ylim(0, 2 / sigma)
             else:
-                centers = np.asarray(spec['means'])
                 top.scatter(values[:, 0], values[:, 1], s=2, alpha=.25, label='Saved scored samples')
-                top.scatter(centers[:, 0], centers[:, 1], marker='+', color='black', label='Declared target centers')
-                extent = max(4., float(np.abs(centers).max()) + 1.)
+                extent = 4.
+                if 'means' in spec:
+                    centers = np.asarray(spec['means'])
+                    top.scatter(centers[:, 0], centers[:, 1], marker='+', color='black', label='Declared target centers')
+                    extent = max(extent, float(np.abs(centers).max()) + 1.)
+                else:
+                    # Non-mixture targets (for example the spiral) have no centers.
+                    finite = values[np.isfinite(values).all(axis=1)]
+                    if len(finite):
+                        extent = max(1., float(np.quantile(np.abs(finite), .99)) * 1.2)
                 top.set_xlim(-extent, extent); top.set_ylim(-extent, extent); top.set_aspect('equal')
-            top.legend(loc='upper right', fontsize=8)
+            if values.ndim != 4:
+                top.legend(loc='upper right', fontsize=8)
         elif samples and 'views' in samples[index]:
             # Established public API word renderer consumes the already retained
             # generated and paired-reconstructed views, without querying models.

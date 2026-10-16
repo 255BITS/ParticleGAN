@@ -479,7 +479,8 @@ def test_scoped_display_matches_only_exact_active_backend_and_runtime(packet, mo
     if change == "inactive_cpu":
         assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
         assert clock.get("clock_audit") and len(clock["training_media"]) == 1
-        assert cohort["scoped_views"][0]["total"]["counts"] == {"FAIL": 4, "BLOCKED": 3}
+        tier1 = next(view for view in cohort["scoped_views"] if view["id"] == "tier1_policy_coverage")
+        assert tier1["total"]["counts"] == {"FAIL": 4, "BLOCKED": 3}
         assert cohort["scoped_publications"][0]["runtime_cohort_sha256"] == stable_hash(runtime)
         assert cohort["tasks"]["two_pole"]["status"] == "BLOCKED"
     else:

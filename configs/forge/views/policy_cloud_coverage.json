@@ -1,0 +1,223 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "unused_token_hold_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "five_word_joint_smoke_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 7,
+      "qualification_tier": 2,
+      "task": "gaussian1d_stability_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 8,
+      "qualification_tier": 2,
+      "task": "grid100_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 9,
+      "qualification_tier": 2,
+      "task": "rotated100_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 10,
+      "qualification_tier": 2,
+      "task": "staggered100_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 11,
+      "qualification_tier": 2,
+      "task": "img_stripes2_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 12,
+      "qualification_tier": 2,
+      "task": "img_bars4_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 13,
+      "qualification_tier": 2,
+      "task": "img_blobs4_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 14,
+      "qualification_tier": 2,
+      "task": "img_intensity2_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 15,
+      "qualification_tier": 2,
+      "task": "mode_hold_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 16,
+      "qualification_tier": 2,
+      "task": "vector_two_broad_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 17,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 18,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 19,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "vector_overlap_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 21,
+      "qualification_tier": 2,
+      "task": "vector_spiral_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 22,
+      "qualification_tier": 2,
+      "task": "five_word_joint_hold_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 23,
+      "qualification_tier": 2,
+      "task": "trajectory_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 24,
+      "qualification_tier": 2,
+      "task": "residual_student_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 25,
+      "qualification_tier": 2,
+      "task": "cover_leftover_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 26,
+      "qualification_tier": 2,
+      "task": "unipolar_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 27,
+      "qualification_tier": 2,
+      "task": "mid_scale_identity_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 28,
+      "qualification_tier": 3,
+      "task": "clockfree_audit_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 29,
+      "qualification_tier": 3,
+      "task": "grid100_14k_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 30,
+      "qualification_tier": 3,
+      "task": "rotated100_14k_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 31,
+      "qualification_tier": 3,
+      "task": "staggered100_14k_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 32,
+      "qualification_tier": 3,
+      "task": "ring_hold_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 33,
+      "qualification_tier": 3,
+      "task": "ring_extension_policy_cloud_coverage_v1"
+    },
+    {
+      "importance": "required",
+      "order": 34,
+      "qualification_tier": 3,
+      "task": "target_shift_recovery_policy_cloud_coverage_v1"
+    }
+  ],
+  "description": "Separate Atlas/E22 policy-cloud scoped variants of the 35 distinct tests required by the selected views, at their selected-view tiers. Each variant keeps its parent architecture, data, budget, cadence and gates, binds an explicit equal-mass particle cloud and scores the state-selected served model without output noise. Original live/MoG parents receive no credit; incompatible hosts keep explicit ownership blockers.",
+  "eligibility": {},
+  "goal": "discriminator_stability",
+  "id": "policy_cloud_coverage",
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

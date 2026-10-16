@@ -71,6 +71,13 @@ class TwoPolePolicyFixture:
         self.max_steps = task["execution"]["steps"]
         if self.recipe.total_steps is not None:
             raise CapabilityError(["policy-selected two-pole preserves schedule-free Recipe.total_steps=None"])
+        from .priors import recipe_owned_prior
+        if recipe_owned_prior(task) and (self.recipe.prior_update != "learned" or self.recipe.prior_reg
+                                         or self.recipe.prior_l2 or self.recipe.prior_proximal_strength):
+            # The direct table is always learned and this fixture applies no
+            # Recipe prior regularizer; never attest a policy it did not run.
+            raise CapabilityError(["policy-selected two-pole binds a learned direct table without Recipe prior "
+                                   "regularization; this recipe's prior policy is not implemented here"])
         self.G = nn.Identity().to(device)
         self.D = self.context.construct(two_pole.HostCritic, component="discriminator").to(device)
         self.prior = self.recipe.make_prior(device=self.context.device,
@@ -297,6 +304,12 @@ def run_behavior(request, task, output_dir, device="cpu"):
                          "particle_l2": fixture.particle_l2, "critic_initialization": "stored_host_weights",
                          "particle_initialization": "zeros", "training_row_strategy": "enumerate all original rows",
                          "measurement": "selected table plus current critic; no DV12/noise evaluation draw"}}
+    from .priors import prior_policy_receipt, recipe_owned_prior
+    if recipe_owned_prior(task):
+        # The recipe owns the table's update policy; the host's particle_l2
+        # remains an original objective term recorded above (as in the
+        # ordinary behavior adapter), not a Recipe prior regularizer.
+        evidence["prior_policy"] = prior_policy_receipt(fixture.recipe, fixture.prior)
     result = {"task_id": task["id"], "evidence": evidence,
               "execution_path": "public_components", "device": str(device),
               "applied": fixture.context.receipt(),

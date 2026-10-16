@@ -51,7 +51,8 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task):
         from .tier1_policy import validate
         try:
             validate(task, root=root)
@@ -60,9 +61,17 @@ def adapter_preflight(task, candidate, *, root=None):
         blockers = task_policy_blockers(task, candidate)
         if blockers:
             return blockers
-        if adapter == "transfer_behavior":
+        # The mode-hold ring is an ordinary unconditional public-trainer host
+        # (``_ring``); only the direct two-pole table uses the policy fixture.
+        if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
             from .policy_behavior_adapters import behavior_preflight
             return behavior_preflight(task, candidate)
+        if adapter == "transfer_vector" and task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
+            from .policy_gaussian import validate_task
+            try:
+                validate_task(task)
+            except (ValueError, KeyError, TypeError) as error:
+                return [str(error)]
         try:
             task_formulation_context(candidate, task, device="cpu", root=root)
         except (ValueError, KeyError) as error:
@@ -466,8 +475,13 @@ def _native(request, task, output, device, *, prerequisites=None, diagnostic=Fal
         validate_native_continuation(request["tasks"][task["execution"]["continuation_of"]], task)
     context = _context(request, task, device, spec["resources"] if spec else task["execution"]["resources"])
     g, d = build_native_models(context, spec) if spec else _models(context, task["execution"]["model"])
+    prefix_cap = context.recipe.total_steps
+    if task["execution"].get("preserve_prefix_steps") and prefix_cap is None:
+        # A schedule-free recipe has no horizon; its producer's external cap
+        # was the preserved prefix, so restore under that same allowance.
+        prefix_cap = task["execution"]["preserve_prefix_steps"]
     trainer = context.build_trainer(g, d,
-        max_steps=context.recipe.total_steps if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
+        max_steps=prefix_cap if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"]["native_profile"], g, d) if spec else None
     run = _Run(context, trainer, output, task)
     artifact_root = Path(output) / "native100"
@@ -499,6 +513,9 @@ def _native(request, task, output, device, *, prerequisites=None, diagnostic=Fal
         if state["trainer"]["completed_steps"] != prefix_steps or state_digest(state) != old["checkpoint"]["state_sha256"]:
             raise ValueError("continuation checkpoint does not represent the exact original prefix")
         context.load_state_dict(state)
+        if run.policy_audit is not None:
+            # Attest only this continuation's own ordered public updates.
+            run.policy_audit.reset_after_restore()
         restored = context.state_dict()
         if state_digest(restored) != state_digest(state):
             raise ValueError("public restore changed prefix state")
@@ -590,21 +607,29 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    from .tier1_policy import blocked_host, is_policy_task
+    if blocked_host(task) is not None:
+        # Explicit ownership boundary: refuse before any host-specific setup.
+        raise CapabilityError(task_policy_blockers(task, bind_task_candidate(request["candidate"], task)))
     if adapter == "word_joint":
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
     if adapter == "transfer_behavior":
-        if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
-            from .policy_behavior_adapters import run_behavior
-            return run_behavior(request, task, output_dir, device)
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
+        if is_policy_task(task):
+            from .policy_behavior_adapters import run_behavior
+            return run_behavior(request, task, output_dir, device)
         from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
-            from .gaussian_tasks import run_gaussian
-            return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+            if is_policy_task(task):
+                from .policy_gaussian import run_gaussian
+            else:
+                from .gaussian_tasks import run_gaussian
+            return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"),
+                                diagnostic=job.get("diagnostic_continuation") is True)
         return _vector(request, task, output_dir, device)
     if adapter == "transfer_image":
         return _image(request, task, output_dir, device)

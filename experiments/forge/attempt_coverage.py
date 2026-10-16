@@ -3,6 +3,11 @@
 Examples:
   python -m experiments.forge.attempt_coverage plan --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
   python -m experiments.forge.attempt_coverage run --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY --watch
+  python -m experiments.forge.attempt_coverage plan --intake policy-cloud --source-root FROZEN_CHECKOUT --state-root RUN_DIRECTORY
+
+The policy-cloud intake schedules only the scoped Atlas/E22 policy-cloud
+coverage cohort and publishes its records inside RUN_DIRECTORY, never into the
+repository report.
 
 Completed evidence is reused. Every new attempt keeps the original task and
 recipe, including constructor checks, checkpoints and timeout. Gate-only tier
@@ -28,6 +33,7 @@ from .views import task_execution_fingerprint, task_evaluation_fingerprint
 REPORT = Path("reports/forge/attempt-coverage.json")
 WORKER = Path(__file__).with_name("attempt_worker.py")
 DONE = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "ERROR", "TIMEOUT", "BLOCKED", "INTERRUPTED"}
+INTAKES = ("selected", "policy-cloud")
 
 
 def identity(source, revision, task, execution, evaluation):
@@ -86,7 +92,40 @@ def retained_attempts(root):
     return result
 
 
-def prepare(root, source, directory, *, include_research=False):
+def _intake(previous, requested):
+    """A state directory belongs to exactly one intake for its whole life."""
+    recorded = previous.get("intake") or ("selected" if previous.get("jobs") else None)
+    intake = requested or recorded or "selected"
+    if intake not in INTAKES:
+        raise ValueError(f"unknown attempt intake {intake!r}")
+    if recorded is not None and recorded != intake:
+        raise ValueError(f"state directory belongs to the {recorded} intake, not {intake}")
+    return intake
+
+
+def prepare_policy_cloud(root, source, directory, previous):
+    """Plan only the scoped policy-cloud cohort; no other intake is consulted."""
+    from .policy_cloud_attempts import prepare as prepare_cohort
+    jobs = deepcopy(previous["jobs"])
+    for key, job in prepare_cohort(root, source, directory).items():
+        old = previous["jobs"].get(key)
+        if old:
+            job.update({k: v for k, v in old.items() if k not in job or k == "status"})
+        jobs[key] = job
+    state = {"schema_version": 1, "intake": "policy-cloud", "jobs": jobs, "maximum_tests": 4,
+             "maximum_per_gpu": 2, "include_research": False}
+    atomic_json(directory / "state.json", state)
+    publish(root, state, directory)
+    return state
+
+
+def prepare(root, source, directory, *, include_research=False, intake=None):
+    directory.mkdir(parents=True, exist_ok=True)
+    previous = read_json(directory / "state.json") if (directory / "state.json").exists() else {"jobs": {}}
+    if _intake(previous, intake) == "policy-cloud":
+        if include_research:
+            raise ValueError("the policy-cloud intake cannot include research variants")
+        return prepare_policy_cloud(root, source, directory, previous)
     publication = read_json(root / "reports/forge/technique-inventory.json")
     retained = retained_attempts(root)
     pins = {f["family"]: f for f in read_json(root / "reports/forge/tier-coverage-20261014/preflight.json")["families"]}
@@ -160,7 +199,7 @@ def prepare(root, source, directory, *, include_research=False):
     state = {"schema_version": 1, "jobs": jobs, "maximum_tests": 4, "maximum_per_gpu": 2,
              "include_research": include_research}
     atomic_json(directory / "state.json", state)
-    publish(root, state)
+    publish(root, state, directory)
     return state
 
 
@@ -170,22 +209,45 @@ def summary(state):
             "pending": counts.get("PENDING", 0), "running": counts.get("RUNNING", 0), "counts": dict(sorted(counts.items()))}
 
 
-def publish(root, state):
-    fields = ("key", "family", "candidate_id", "candidate_revision", "source_digest", "task",
-              "execution_sha256", "evaluation_sha256", "status", "attempted", "block_kind", "reason",
-              "origin", "diagnostic", "evidence", "original_attempt", "attempt_id", "updates", "seconds",
-              "result_sha256", "log_sha256", "runtime", "timeout_seconds", "setup_retries", "research_scope", "label",
-              "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
-              "saved_observations", "repair_scope", "owning_family", "reporting_tier", "diagnostic_continuation",
-              "repair_origin_source", "required_gpu", "repair_superseded", "reused_execution")
+RECORD_FIELDS = ("key", "family", "candidate_id", "candidate_revision", "source_digest", "task",
+                 "execution_sha256", "evaluation_sha256", "status", "attempted", "block_kind", "reason",
+                 "origin", "diagnostic", "evidence", "original_attempt", "attempt_id", "updates", "seconds",
+                 "result_sha256", "log_sha256", "runtime", "timeout_seconds", "setup_retries", "research_scope", "label",
+                 "training_gif_sha256", "media_error", "media_note", "grade", "policy_scope", "parent_task", "retry_history",
+                 "saved_observations", "repair_scope", "owning_family", "reporting_tier", "diagnostic_continuation",
+                 "repair_origin_source", "required_gpu", "repair_superseded", "reused_execution",
+                 "cohort_scope", "dependency_note", "exclusive_gpu")
+
+
+def coverage_value(state):
+    """The published record format, shared by the repository and cohort runs."""
     value = {"schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
              "formulations_modified": False, "maximum_tests": 4, "maximum_per_gpu": 2,
-             "summary": summary(state), "records": [{k: j[k] for k in fields if k in j}
+             "summary": summary(state), "records": [{k: j[k] for k in RECORD_FIELDS if k in j}
                         for j in sorted(state["jobs"].values(), key=lambda j: (j["family"], j["task"]))]}
     for record in value["records"]:
         if record.get("origin") == "new_attempt":
             record["original_attempt"] = record["evidence"]
             record["evidence"] = REPORT.as_posix()
+    return value
+
+
+def publish_records(path, state):
+    """Write a cohort run's records beside its state; no repository report."""
+    value = {**coverage_value(state), "intake": state["intake"], "publication": "state_directory_only"}
+    if not path.exists() or read_json(path) != value:
+        atomic_json(path, value)
+    return value
+
+
+def publish(root, state, directory=None):
+    if state.get("intake") == "policy-cloud":
+        # Scoped cohort records stay with their run until a separate, explicit
+        # publication merges them; the repository report is never rewritten here.
+        if directory is None:
+            raise ValueError("policy-cloud records publish only inside their state directory")
+        return publish_records(Path(directory) / "attempt-coverage.json", state)
+    value = coverage_value(state)
     path = root / REPORT
     if not path.exists() or read_json(path) != value:
         atomic_json(path, value)
@@ -199,6 +261,8 @@ def publish(root, state):
             jobs = [j for j in state["jobs"].values() if j["family"] == family]
             counts = Counter(j["status"] for j in jobs)
             label = jobs[0].get("label", family)
+            if jobs[0].get("cohort_scope"):
+                label += f" ({jobs[0]['owning_family']})"
             lines.append(f"| {label} | {sum(j.get('attempted', False) for j in jobs)}/{len(jobs)} | "
                          f"{counts.get('PENDING', 0)} | " + ", ".join(f"{n} {s}" for s, n in sorted(counts.items())) + " |")
         lines += ["", "[Exact per-task attempts](attempt-coverage.json) · "
@@ -270,7 +334,23 @@ def publish(root, state):
             lines += ["", "Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, "
                       "unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. "
                       "Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.", ""]
-        reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution"]
+        cohort = [j for j in state["jobs"].values() if j.get("cohort_scope")]
+        if cohort:
+            lines += ['<a name="policy-cloud-coverage"></a>', "", "## Policy-cloud scoped selected-view tests", "",
+                      "Atlas and E22 run every selected-view test as an explicitly scoped policy-cloud variant: an "
+                      "equal-mass particle cloud, the unchanged complete family recipe and seed 0, with each task's "
+                      "architecture, data, budget, cadence and gates kept, scored on the state-selected served model "
+                      "without output noise. Original live/MoG cells, other families and archived verdicts are "
+                      "unchanged; incompatible hosts record their ownership blocker. Checkpoint dependents continue "
+                      "their own scoped producer, including after a failed parent gate (diagnostic continuation).", "",
+                      "| Family | Tier | Test | Outcome | Completed updates | Cause |",
+                      "| --- | ---: | --- | --- | ---: | --- |"]
+            for job in sorted(cohort, key=lambda j: (j["owning_family"], j["reporting_tier"], j["parent_task"])):
+                reason = str(job.get("reason", "Queued" if job["status"] == "PENDING" else "Running")).replace("|", "\\|").replace("\n", " ")
+                lines.append(f"| {job['owning_family']} | {job['reporting_tier']} | {job['parent_task']} | {job['status']} | "
+                             f"{job.get('updates') if job.get('updates') is not None else '—'} | {reason} |")
+            lines.append("")
+        reused = [j for j in state["jobs"].values() if j.get("origin") == "reused_execution" and not j.get("cohort_scope")]
         if reused:
             lines += ["## Results recovered from existing uninterrupted runs", "",
                       "These task results reuse their producer's already measured observations. No new training "
@@ -285,7 +365,7 @@ def publish(root, state):
                              f"{metrics['extension_passing']}/{metrics['extension_checks']} | "
                              f"[Verified saved run]({evidence}) |")
             lines.append("")
-        blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt"
+        blocked = [j for j in state["jobs"].values() if j.get("origin") == "new_attempt" and not j.get("cohort_scope")
                    and j["status"] in {"BLOCKED", "ERROR", "TIMEOUT", "INCOMPLETE", "INVALID"}]
         if blocked:
             lines += ["## Attempted blockers and incomplete runs", "",
@@ -367,11 +447,13 @@ def reconcile_grouped(root, directory, state):
         if not (child["status"] == "PENDING" or
                 child["status"] == "BLOCKED" and child.get("block_kind") == "prerequisite"):
             continue
-        if child.get("task") != "ring_extension" or not child.get("request_path"):
+        if not child.get("request_path") or not str(child.get("task", "")).startswith("ring_extension"):
             continue
         request = read_json(Path(child["request_path"]))
         card = request["tasks"][child["task"]]
-        if card["adapter"] != "ring_endurance" or not card["execution"].get("execution_group"):
+        # Scoped variants keep the evaluator kind; their ids carry a cohort suffix.
+        if (card["adapter"] != "ring_endurance" or card["evaluation"].get("kind") != "ring_extension"
+                or not card["execution"].get("execution_group")):
             continue
         parents = [job for job in state["jobs"].values()
                    if job["task"] == card["execution"].get("continuation_of")
@@ -392,15 +474,21 @@ def reconcile_grouped(root, directory, state):
         previous = {key: child[key] for key in ("status", "attempt_id", "result_sha256", "reason", "evidence")
                     if key in child}
         certificate["previous_attempt"] = previous
-        evidence_path = Path("reports/forge/grouped-evidence") / (reuse_id + ".json")
-        atomic_json(root / evidence_path, certificate)
+        if state.get("intake") == "policy-cloud":
+            # Scoped cohort certificates stay in their run until publication.
+            evidence_file = directory / "grouped-evidence" / (reuse_id + ".json")
+            evidence_value = str(evidence_file)
+        else:
+            evidence_path = Path("reports/forge/grouped-evidence") / (reuse_id + ".json")
+            evidence_file, evidence_value = root / evidence_path, evidence_path.as_posix()
+        atomic_json(evidence_file, certificate)
         for key in ("block_kind", "pid", "process_identity", "gpu", "slot", "directory", "log_sha256"):
             child.pop(key, None)
         child.update(status=certificate["grade"]["status"], grade=certificate["grade"],
                      reason="verified observations from the same uninterrupted producer; no new execution",
                      origin="reused_execution", diagnostic=True, attempted=True,
-                     evidence=evidence_path.as_posix(), original_attempt=certificate["original_attempt"],
-                     attempt_id="reuse_" + reuse_id[:32], result_sha256=file_hash(root / evidence_path),
+                     evidence=evidence_value, original_attempt=certificate["original_attempt"],
+                     attempt_id="reuse_" + reuse_id[:32], result_sha256=file_hash(evidence_file),
                      updates=0, seconds=0, runtime=certificate["runtime"],
                      reused_execution={"producer_attempt_id": parent["attempt_id"],
                          "producer_updates": certificate["producer_updates"], "previous_attempt": previous,
@@ -409,9 +497,21 @@ def reconcile_grouped(root, directory, state):
     return recovered
 
 
+def _slot_allowed(job, slot, active, pending_exclusive):
+    """Short fixed task limits run alone; reserve their GPU until they start."""
+    device = str(slot["device"])
+    occupied = {str(j["gpu"]) for j in active}
+    exclusive = {str(j["gpu"]) for j in active if j.get("exclusive_gpu")}
+    if job.get("exclusive_gpu"):
+        return device not in occupied
+    return device not in exclusive and device not in pending_exclusive
+
+
 def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, completion_hook=None):
     if len(gpus) != 2 or len(set(gpus)) != 2:
         raise ValueError("select exactly two distinct GPUs; the fixed limit is 4 tests / 2 per GPU")
+    if read_json(directory / "state.json").get("intake") == "policy-cloud" and (refresh or completion_hook is not None):
+        raise ValueError("policy-cloud runs never refresh or publish the repository leaderboard")
     processes = {}
     refreshed = None
     refresh_at = 0.0
@@ -430,13 +530,17 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                 busy = {(j["gpu"], j["slot"]) for j in active}
                 pending = sorted((j for j in state["jobs"].values() if j["status"] == "PENDING"),
                                  key=lambda j: (len(j["dependencies"]), j["family"], j["task"]))
+                def waiting(job):
+                    return any(parent["status"] in {"PENDING", "RUNNING"}
+                               for dep in job["dependencies"] if isinstance(dep, dict) and dep.get("kind") != "gate"
+                               for parent in state["jobs"].values()
+                               if parent["family"] == job["family"] and parent["task"] == dep["task"])
+                pending_exclusive = {str(j["required_gpu"]) for j in pending
+                                     if j.get("exclusive_gpu") and j.get("required_gpu") is not None and not waiting(j)}
                 for job in pending:
                     if len(active) >= 4:
                         break
-                    if any(parent["status"] in {"PENDING", "RUNNING"}
-                           for dep in job["dependencies"] if isinstance(dep, dict) and dep.get("kind") != "gate"
-                           for parent in state["jobs"].values()
-                           if parent["family"] == job["family"] and parent["task"] == dep["task"]):
+                    if waiting(job):
                         continue
                     parent_gpus = {str(parent["gpu"]) for dep in job["dependencies"]
                                    if job.get("diagnostic_continuation") and isinstance(dep, dict) and dep.get("kind") == "checkpoint"
@@ -445,6 +549,7 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                     slot = next((s for s in slots if (job.get("required_gpu") is None or str(s["device"]) == str(job["required_gpu"]))
                                  and (not parent_gpus or str(s["device"]) in parent_gpus)
                                  and (s["device"], s["slot"]) not in busy
+                                 and _slot_allowed(job, s, active, pending_exclusive)
                                  and s["memory_mb"] >= job["resources"]["gpu_memory_mb"]), None)
                     if slot is None:
                         continue
@@ -463,7 +568,7 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
                                pid=child.pid, process_identity=process_identity(child.pid), gpu=slot["device"], slot=slot["slot"])
                     active.append(job); busy.add((slot["device"], slot["slot"]))
                     event(directory, "started", job)
-                atomic_json(directory / "state.json", state); publish(root, state)
+                atomic_json(directory / "state.json", state); publish(root, state, directory)
                 for pid, child in list(processes.items()):
                     if child.poll() is not None:
                         processes.pop(pid)
@@ -516,26 +621,37 @@ def main():
     parser.add_argument("--include-research", action="store_true", help="include original seed-zero research variants")
     parser.add_argument("--refresh", action="store_true", help="refresh the ordinary leaderboard after draining")
     parser.add_argument("--completion-hook", type=Path, help="trusted Python publisher to run after the queue drains")
+    parser.add_argument("--intake", choices=INTAKES, help="selected (default) or the scoped policy-cloud cohort only; "
+                        "a state directory keeps the intake it was first prepared with")
     args = parser.parse_args(); root=args.root.resolve(); directory=args.state_root.resolve()
     if args.action == "status":
-        print(json.dumps(summary(read_json(directory / "state.json")), sort_keys=True)); return
+        state = read_json(directory / "state.json")
+        value = summary(state)
+        if state.get("intake") == "policy-cloud":
+            from .policy_cloud_attempts import plan_summary
+            value = {**value, "intake": "policy-cloud", "jobs": plan_summary(state)}
+        print(json.dumps(value, sort_keys=True)); return
     if args.action == "reconcile":
         with file_lock(directory / "coordinator.lock", blocking=False):
             state = read_json(directory / "state.json")
             recovered = reconcile_grouped(root, directory, state)
             atomic_json(directory / "state.json", state)
-            publish(root, state)
+            publish(root, state, directory)
         print(json.dumps({"recovered": recovered, **summary(state)}, sort_keys=True)); return
     if args.source_root is None:
         parser.error("--source-root is required for plan/run")
     # Preparing cannot race an active coordinator or replace its live state.
     with file_lock(directory / "coordinator.lock", blocking=False):
-        state = prepare(root, args.source_root.resolve(), directory, include_research=args.include_research)
+        state = prepare(root, args.source_root.resolve(), directory, include_research=args.include_research,
+                        intake=args.intake)
     if args.action == "run":
         value = drain(root, directory, gpus=args.gpus.split(","), source=args.source_root.resolve(),
                       watch=args.watch, refresh=args.refresh, completion_hook=args.completion_hook)
     else:
         value = summary(state)
+        if state.get("intake") == "policy-cloud":
+            from .policy_cloud_attempts import plan_summary
+            value = {**value, "intake": "policy-cloud", "jobs": plan_summary(state)}
     print(json.dumps(value, sort_keys=True))
 
 
