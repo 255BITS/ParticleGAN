@@ -162,8 +162,11 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
     views = {v["id"]: v for v in publication["family_progress"]["views"]}
     family = next(f for f in publication["family_progress"]["families"] if f["id"] == "atlas")
     cohort = next(c for c in family["cohorts"] if c["anchor"] == family["current_cohort_anchor"])
-    selected = {(a["task"], a["qualification_tier"]) for v in cohort["views"] for a in views[v["id"]]["assignments"]
-                if a["importance"] in {"required", "held"} or "removal" in a}
+    # The policy-cloud cohort keeps its own variant of the 1,600-update ring16 parent; since
+    # discriminator_stability revision 12 the selected view counts ring16_acquisition_6400 instead.
+    renamed = {"ring16_acquisition_6400": "ring16_acquisition"}
+    selected = {(renamed.get(a["task"], a["task"]), a["qualification_tier"]) for v in cohort["views"]
+                for a in views[v["id"]]["assignments"] if a["importance"] in {"required", "held"} or "removal" in a}
     assert selected == {(name, tier) for tier, names in TIERS.items() for name in names}
 
 
