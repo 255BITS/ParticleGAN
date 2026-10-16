@@ -26,7 +26,7 @@ from experiments.forge.decision_contracts import OUTCOMES
 from experiments.forge.planning import load_idea, plan_summary, resolve_idea
 from experiments.forge.studies import validate_study
 from experiments.forge.trainer_families import current_family_candidates
-from experiments.forge.views import load_tasks, load_view, validate_view
+from experiments.forge.views import load_tasks, validate_view
 
 VIEW = "discriminator_stability"
 CAMPAIGN = "recipe-prior-refactor-selected-leaders-v1"
@@ -93,8 +93,11 @@ def question(task):
 
 def ordinary_contract(root):
     old = baseline()
-    view = load_view(root, VIEW)
-    require(view["revision"] == 9 and view.get("evidence_scope", "ordinary") == "ordinary",
+    # The campaign measures revision 9. Later revisions of the live view (held and
+    # removed-from-count tests) first archive it byte for byte in view-history.
+    view = read_json(root / "configs/forge/view-history" / f"{VIEW}-v9.json")
+    validate_view(view, load_tasks(root))
+    require(view["id"] == VIEW and view["revision"] == 9 and view.get("evidence_scope", "ordinary") == "ordinary",
             "Use the explicit revision-9 recipe-owned ordinary view")
     require(view["assignments"] == old["view"]["assignments"],
             "Retain all original placements/order, including the optional clock audit")

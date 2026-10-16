@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "clockfree_continuous",
-  "revision": 3,
+  "revision": 4,
   "goal": "clockfree_continuous",
   "assignments": [
     {
@@ -67,26 +67,62 @@
     {
       "task": "vector_unequal_mass",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 7
+      "importance": "held",
+      "order": 7,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "The rare 2% blob loses its share or collapses (BCAP eigen ratio 0.009, BISPF 0.004; need 0.15). Perfect samples pass 200/200 runs. Its passers fail counted tests, except some round-5 research recipes that fail only held tests and never ran most of the counted suite.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_unequal_mass",
+        "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_width, so the two will likely return together."
+      }
     },
     {
       "task": "vector_unequal_width",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 8
+      "importance": "held",
+      "order": 8,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "Equal shares, very different widths: BCAP and BISPF get the shares wrong (mass TV 0.29 and 0.25; limit 0.15). Perfect samples pass 200/200 runs. Cell-moment passers fail counted tests; round-5 balanced assignment fails only held tests but never ran most of the counted suite.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_unequal_width",
+        "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_mass, so the two will likely return together."
+      }
     },
     {
       "task": "vector_anisotropic",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 9
+      "importance": "held",
+      "order": 9,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "Three stretched, tilted blobs: BCAP and BISPF draw the shapes but the wrong amounts (mass TV 0.196 and 0.191; limit 0.15). Of its 16 recorded passers, 12 fail Tier 1 ring16_acquisition, 1 timed out on it, and 3 pass it but fail mode_hold.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_anisotropic",
+        "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold."
+      }
     },
     {
       "task": "vector_overlap",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 10
+      "importance": "held",
+      "order": 10,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recorded passers fail Tier 1 ring16_acquisition or mode_hold.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_overlap",
+        "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold."
+      }
     },
     {
       "task": "vector_spiral",
@@ -103,44 +139,106 @@
     {
       "task": "img_bars4",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 13
+      "importance": "held",
+      "order": 13,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; no recorded recipe passes both bars4 and stripes2.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#img_bars4",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
+      }
     },
     {
       "task": "img_blobs4",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 14
+      "importance": "held",
+      "order": 14,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe that passes it fails or cannot run Tier 1 tests.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#img_blobs4",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
+      }
     },
     {
       "task": "img_intensity2",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 15
+      "importance": "held",
+      "order": 15,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "no_global_recipe",
+        "blocked_by": [],
+        "summary": "Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes that pass it fail Tier 1 tests that BCAP and BISPF pass.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#img_intensity2",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
+      }
     },
     {
       "task": "grid100",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 16
+      "importance": "held",
+      "order": 16,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "100 tiny blobs on a grid: BCAP puts 24% and BISPF 37% of samples on target; 97% is required (a perfect sampler scores 98.9%). The best recipe ever reached 54%. No recipe has passed this clean-sampling version.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#grid100",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review."
+      }
     },
     {
       "task": "rotated100",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 17
+      "importance": "held",
+      "order": 17,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "The same 100-blob test rotated by 25 degrees: BCAP 26% and BISPF 27% of samples on target against 97%; the best recipe ever reached 51%. No recipe has passed this clean-sampling version.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#rotated100",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
+      }
     },
     {
       "task": "staggered100",
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 18
+      "importance": "held",
+      "order": 18,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "The same 100-blob test with alternate rows shifted: BCAP 30% and BISPF 34% of samples on target against 97%; the best recipe ever reached 56%. No recipe has passed this clean-sampling version.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#staggered100",
+        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
+      }
     },
     {
       "task": "ring_hold",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 1
+      "importance": "diagnostic",
+      "order": 1,
+      "removal": {
+        "schema": "forge_count_removal_v1",
+        "previous_importance": "required",
+        "reason": "phase",
+        "counted_by": "ring_extension",
+        "summary": "Same uninterrupted ring run as ring_extension, whose counted verdict already replays this acquisition and 1,200-check hold. Kept as a visible phase and counted once, through ring_extension.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#ring_hold"
+      }
     },
     {
       "task": "ring_extension",
@@ -157,32 +255,82 @@
     {
       "task": "grid100_14k",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 3
+      "importance": "held",
+      "order": 3,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "held_prerequisite",
+        "blocked_by": [
+          "grid100"
+        ],
+        "summary": "Continues a passing 7,000-update grid100 model to 14,000 updates. No recipe has a passing parent, so every start is refused; a BISPF rescue run from its failed parent also fails (precision 0.68).",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#grid100_14k",
+        "reentry": "Returns in the revision that restores grid100, once the global recipe has an ordinary grid100 PASS with its own saved state. That revision also restores clockfree_audit to the count as this test's gate."
+      }
     },
     {
       "task": "rotated100_14k",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 4
+      "importance": "held",
+      "order": 4,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "held_prerequisite",
+        "blocked_by": [
+          "rotated100"
+        ],
+        "summary": "Continues a passing 7,000-update rotated100 model to 14,000 updates. No recipe has a passing parent; a BISPF rescue run from its failed parent also fails (precision 0.65).",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#rotated100_14k",
+        "reentry": "Returns in the revision that restores rotated100, once the global recipe has an ordinary rotated100 PASS with its own saved state. That revision also restores clockfree_audit to the count as this test's gate."
+      }
     },
     {
       "task": "staggered100_14k",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 5
+      "importance": "held",
+      "order": 5,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "held_prerequisite",
+        "blocked_by": [
+          "staggered100"
+        ],
+        "summary": "Continues a passing 7,000-update staggered100 model to 14,000 updates. No recipe has a passing parent; a BISPF rescue run from its failed parent also fails (precision 0.70).",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#staggered100_14k",
+        "reentry": "Returns in the revision that restores staggered100, once the global recipe has an ordinary staggered100 PASS with its own saved state. That revision also restores clockfree_audit to the count as its gate."
+      }
     },
     {
       "task": "target_shift_recovery",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 6
+      "importance": "held",
+      "order": 6,
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "Learn an 8-blob ring, hold it, then recover within 400 updates after it shifts. BISPF recovers but 220 updates late; BCAP flickers before and after the shift. No recipe has ever passed it.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#target_shift_recovery",
+        "reentry": "Count again in adaptation and clockfree_continuous when one global recipe passes all four parts in one cohort (5/5, 120/120, 81/81 after the deadline, frozen copy 0/81) and every counted Tier 1 and Tier 2 test plus the counted ring endurance test."
+      }
     },
     {
       "task": "clockfree_audit",
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 0
+      "importance": "diagnostic",
+      "order": 0,
+      "removal": {
+        "schema": "forge_count_removal_v1",
+        "previous_importance": "required",
+        "reason": "duplicate",
+        "counted_by": "clockfree_audit_measurement_v1",
+        "summary": "Same clock probe and grader as clockfree_audit_measurement_v1, which this view counts at Tier 1. They run as separate jobs (this strict copy also checks learning-rate floors first) and pass for the same recipes. Kept as the 14k tests' gate.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#clockfree_audit"
+      }
     }
   ],
   "eligibility": {
@@ -204,5 +352,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Count the runnable clock-dependence measurement in Tier 1. Retain the original clock-free eligibility audit as a required Tier 3 prerequisite for long continuations; historical qualification and task contracts remain unchanged."
+  "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. target_shift_recovery and the three 14k continuations (behind their held 7k parents) are held at Tier 3. clockfree_audit leaves the count as a duplicate of the counted Tier 1 clockfree_audit_measurement_v1 and stays assigned as the 14k gate. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Task declarations, gates and earlier grades are unchanged; revision 3 is archived.",
+  "previous_revision": {
+    "revision": 3,
+    "archive": "configs/forge/view-history/clockfree_continuous-v3.json",
+    "policy_fingerprint": "bbb463d9fc50c3a19e30fc4784e544b0dbf94ecd7c5cd3ef5ac56d082643a911"
+  }
 }

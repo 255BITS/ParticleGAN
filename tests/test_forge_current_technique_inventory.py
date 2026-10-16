@@ -4,6 +4,7 @@ from collections import Counter
 import importlib.util
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 
@@ -1596,7 +1597,9 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert {row["trainer_family"] for row in result["rows"]} == families
     cohort_count = len(result["family_progress"]["families"])
     assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == cohort_count
-    assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
+    # No standalone 7/8 progress score. Totals such as 77/81 (81 counted view
+    # requirements since the 2026-10-15 test dispositions) are not one.
+    assert "Atlas unblocking progress" not in markdown and re.search(r"(?<![\d/])7/8(?![\d/])", markdown) is None
 
 
 @pytest.mark.parametrize("name,prior,expected", [

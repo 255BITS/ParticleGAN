@@ -351,3 +351,52 @@ def test_role_changes_keep_planning_science_identical_apart_from_candidate_revis
         assert before["policy_fingerprint"] != after["policy_fingerprint"]
         ring = next(job for job in after["jobs"] if "ring_extension" in job["task_ids"])
         assert ring["task_ids"] == ["ring_hold", "ring_extension"]
+
+
+COMMITTED = ROOT / "reports/forge/test-dispositions-20261015/dispositions.json"
+
+
+def test_committed_dispositions_match_every_declared_view():
+    report = dispositions.check(ROOT, COMMITTED)
+    assert not report["drift"] and set(report["views"]) == set(SIX)
+    assert {item["state"] for item in report["views"].values()} == {"applied"}
+    assert counted(report, "counts_before") == 152 and counted(report, "counts_after") == 81
+    registry = json.loads(COMMITTED.read_text())
+    records = {r["task"]: r for r in registry["dispositions"]
+               if r["disposition"] in {"HOLD", "REMOVE"} and r.get("applied", True)}
+    noted = set()
+    for path in sorted((ROOT / "configs/forge/views").glob("*.json")):
+        view = json.loads(path.read_text())
+        for assignment in view["assignments"]:
+            note = assignment.get("hold") or assignment.get("removal")
+            if note is None:
+                continue
+            # Every note in every declared view comes from one applied record, verbatim.
+            record = records[assignment["task"]]
+            noted.add((assignment["task"], view["id"]))
+            assert record["views"][view["id"]] == assignment["qualification_tier"]
+            assert record["disposition"] == ("HOLD" if "hold" in assignment else "REMOVE")
+            expected = record["hold"] if "hold" in assignment else record["removal"]
+            assert {key: note[key] for key in expected} == expected
+            assert note["explanation"] == record["explanation"]
+    assert noted == {(task, view_id) for task, record in records.items() for view_id in record["views"]}
+    # Decided but not applied here: the policy view still counts its seven questions.
+    pending = {r["task"] for r in registry["dispositions"] if r.get("applied") is False}
+    policy = load_view(ROOT, "tier1_policy_coverage")
+    assert policy["revision"] == 1 and len(pending) == 7
+    assert {a["task"] for a in policy["assignments"] if a["importance"] == "required"} == pending
+
+
+def test_every_hold_and_removal_explanation_resolves_to_a_readme_anchor():
+    registry = json.loads(COMMITTED.read_text())
+    links = {record["explanation"] for record in registry["dispositions"]}
+    for path in sorted((ROOT / "configs/forge/views").glob("*.json")):
+        for assignment in json.loads(path.read_text())["assignments"]:
+            note = assignment.get("hold") or assignment.get("removal")
+            if note:
+                links.add(note["explanation"])
+    readme = (ROOT / registry["explanations"]).read_text()
+    for link in sorted(links):
+        relative, anchor = link.split("#")
+        assert relative == registry["explanations"]
+        assert f'<a name="{anchor}"></a>' in readme, link

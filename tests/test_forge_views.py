@@ -110,11 +110,19 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 9
+    # Revision 11 (test dispositions 2026-10-15) holds 11 Tier 2 tests and removes
+    # ring_hold from the count as a phase of ring_extension; revision 9 is archived.
+    assert stability["revision"] == 11 and stability["previous_revision"]["revision"] == 9
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "clockfree_audit_measurement_v1"]
+        "ring_hold", "clockfree_audit_measurement_v1"]
+    assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
+    for role, counts in (("required", [6, 10, 1]), ("held", [0, 11, 0])):
+        assert [sum(a["qualification_tier"] == tier and a["importance"] == role
+                    for a in stability["assignments"]) for tier in (1, 2, 3)] == counts
+    archived = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v9.json").read_text())
+    validate_view(archived, tasks)
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
+                for a in archived["assignments"]) for tier in (1, 2, 3)] == [6, 21, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -341,13 +349,24 @@ def test_current_clock_view_preserves_historical_policy_and_first_tier_budget():
     historical = json.loads(path.read_text())
     current = load_view(ROOT, "clockfree_continuous")
     validate_view(historical, tasks)
-    assert current["revision"] == 3 and historical["revision"] == 2
+    assert current["revision"] == 4 and historical["revision"] == 2
     assert current["eligibility"] == historical["eligibility"]
     assert current["calibration"] == historical["calibration"]
     assignments = {a["task"]: a for a in current["assignments"]}
     assert assignments["clockfree_audit_measurement_v1"]["qualification_tier"] == 1
     assert assignments["clockfree_audit"]["qualification_tier"] == 3
-    assert assignments["clockfree_audit"]["importance"] == "required"
+    # Revision 4 (test dispositions 2026-10-15) counts the clock claim once, at
+    # Tier 1; the Tier 3 copy stays assigned as the gate of the held 14k tests.
+    assert assignments["clockfree_audit"]["importance"] == "diagnostic"
+    assert {key: assignments["clockfree_audit"]["removal"][key] for key in ("reason", "counted_by")} == {
+        "reason": "duplicate", "counted_by": "clockfree_audit_measurement_v1"}
+    for name in ("grid100_14k", "rotated100_14k", "staggered100_14k", "target_shift_recovery"):
+        assert assignments[name]["importance"] == "held" and assignments[name]["qualification_tier"] == 3
+    assert [assignments[name]["hold"]["blocked_by"] for name in ("grid100_14k", "rotated100_14k", "staggered100_14k")] == [
+        ["grid100"], ["rotated100"], ["staggered100"]]
+    previous = json.loads((ROOT / current["previous_revision"]["archive"]).read_text())
+    assert previous["revision"] == 3
+    assert next(a for a in previous["assignments"] if a["task"] == "clockfree_audit")["importance"] == "required"
     assert next(a for a in historical["assignments"] if a["task"] == "clockfree_audit")["qualification_tier"] == 1
     # Shared execution groups reserve their maximum timeout once.
     def ceiling(view, tier=None):

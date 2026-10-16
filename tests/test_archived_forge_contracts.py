@@ -1,5 +1,6 @@
 """Destructive controls for the explicit archival software fixture boundary."""
 import json
+import subprocess
 
 import pytest
 
@@ -50,6 +51,9 @@ def test_unchanged_archive_input_drift_cannot_rebind_its_byte_pins(tmp_path, mon
 
 
 def test_published_view_replay_keeps_exact_original_roster_and_later_views_private(tmp_path):
+    # The roster is checked against the original publication's own input
+    # hashes. Later view revisions change the live publication, not that record.
+    archived.require_history("published_develop_views")
     root = tmp_path / "published-checkout"
     directory = root / "configs/forge/views"
     directory.mkdir(parents=True)
@@ -60,7 +64,9 @@ def test_published_view_replay_keeps_exact_original_roster_and_later_views_priva
     records = packet["published_develop_views"]["files"]
     assert len(records) == 9
     assert {path.relative_to(root).as_posix() for path in directory.glob("*.json")} == set(records)
-    publication = json.loads((archived.ROOT / "reports/forge/technique-inventory.json").read_text())
+    commit = archived.COMMITS["published_develop_views"]
+    publication = json.loads(subprocess.check_output(
+        ["git", "show", f"{commit}:reports/forge/technique-inventory.json"], cwd=archived.ROOT))
     for relative, record in records.items():
         assert record["sha256"] == publication["family_progress"]["input_hashes"][relative]
         assert (root / relative).read_bytes() == archived.archived_contract_bytes("published_develop_views", relative)

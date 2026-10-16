@@ -409,16 +409,29 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 8) | Purpose |
+| Qualification tier | Current stability profile (revision 11) | Purpose |
 | --- | --- | --- |
 | 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
-| 2: quality | 21 hosts, including own-checkpoint Gaussian stability, five-word hold and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
-| 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
+| 2: quality | 10 counted hosts, including the five-word hold; 11 held: own-checkpoint Gaussian stability, four vector density, three image and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
+| 3: endurance | Own-state ring endurance, counted once as `ring_extension` (acquisition, hold and extension of one run; `ring_hold` is its removed phase); reserve up to 7,500 total updates | Detect late failure after acquisition |
 
-The current required denominator is 6/21/2. Revision 7's 6/20/2, revision 3's 5/19/2 and revision 2's
-published 3/19/2 results remain historical evidence; adding acquisition requirements
-does not regrade them or transfer API demonstrations into Forge qualification.
+The current counted denominator is 6/10/1. Revision 9's 6/21/2, revision 7's 6/20/2, revision 3's 5/19/2 and
+revision 2's published 3/19/2 results remain historical evidence; adding acquisition requirements or holding
+tests does not regrade them or transfer API demonstrations into Forge qualification.
 The expanded smoke profile needs calibration before scientific adoption.
+
+After the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md) the six ordinary
+views count 81 view requirements (Tier 1/2/3): adaptation 3/9/0 (revision 3), clockfree_continuous 4/9/1
+(revision 4), discriminator_stability 6/10/1 (revision 11), formulation_comparison 3/9/1 (revision 2),
+host_profile_transfer 3/9/1 (revision 5) and quality_coverage 3/9/0 (revision 3). Held in all six at Tier 2:
+`vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic`, `vector_overlap`, `img_bars4`,
+`img_blobs4`, `img_intensity2`, `grid100`, `rotated100` and `staggered100`. Also held: `gaussian1d_stability`
+(discriminator_stability, Tier 2), `target_shift_recovery` (adaptation and clockfree_continuous, Tier 3) and
+`grid100_14k`, `rotated100_14k` and `staggered100_14k` (clockfree_continuous, Tier 3, behind their held 7k
+parents). Removed from the count: `ring_hold` (a phase of `ring_extension` in the four ring views) and
+`clockfree_audit` (a duplicate of `clockfree_audit_measurement_v1` in clockfree_continuous). While
+`target_shift_recovery` is held, adaptation counts the same tests as quality_coverage and reports `HELD`.
+`tier1_policy_coverage` is a separate scope and stays at revision 1.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop higher-tier spending after
@@ -633,9 +646,9 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/21/2
-for the current revision-8 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 7 (6/20/2) until
+techniques reserve no training resources. Counted denominators are 6/10/1
+for the current revision-11 `discriminator_stability` view, including unknown and blocked
+cells. The current publication retains its recorded revision 9 qualification (6/21/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
