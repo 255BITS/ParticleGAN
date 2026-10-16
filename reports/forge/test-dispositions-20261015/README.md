@@ -171,7 +171,9 @@ added to model samples at evaluation. Examples: the September 2026 gap-fill K3P 
 test and 36 to 39 for each 100-blob test, and five records pass both `img_bars4` and `img_stripes2`. Forge never
 reuses historical receipts as current evidence, because their recipe, prior, initialization and sampling contracts
 differ from today's declarations, so they do not show that one current global recipe passes these tests. None of
-them passes `gaussian1d_stability`, `target_shift_recovery`, the three 14k tests or the ring tests.
+them passes `gaussian1d_stability`, `target_shift_recovery` or the three 14k tests. The scheduled-learning-rate K3P
+gap-fill record (`history-k3p-b85d094063c3`) passes ring hold (1,200/1,200) and extension (300/300) under its own
+contract but fails shift recovery, and three PR215/PR217 records pass an older lrfree-search `ring_shift` test.
 
 ## Decision rules applied
 
@@ -447,10 +449,9 @@ training moves it.
   not shown to conflict.
 - **The reverse holds too:** BISPF and BCAP hold the ring but not the Gaussian.
 
-The view's summary for this test begins "Neither selected recipe": it describes BCAP and BISPF, the only selected
-recipes with recorded Tier 2 results. In diagnostic runs K3P and KA2 keep 71 of the 72 stay-matched checks, miss
-re-acquisition and hold 22/24 and 16/24 afterwards; R1/R2 and GAN v3 keep 19/72 and 11/72. All eight still fail the
-test. Correcting the summary's wording needs a new view revision (see [Follow-ups](#follow-ups)).
+BCAP and BISPF are the only selected recipes with recorded Tier 2 results. In diagnostic runs K3P and KA2 keep 71
+of the 72 stay-matched checks, miss re-acquisition and hold 22/24 and 16/24 afterwards; R1/R2 and GAN v3 keep 19/72
+and 11/72. All eight still fail the test.
 
 No recorded recipe has shown this test, `ring16_acquisition`, `mode_hold` and ring endurance together; for the one
 candidate that passes both this test and `mode_hold`, the ring tests were never run.
@@ -762,9 +763,9 @@ clean outputs fail 0 of 5 checks.
 **Who passes it alone.** Nobody under the current declaration: no PASS exists in the attempt index or in any
 published research result. The recipes that reach 49-56% are refused on the Tier 1 smoke tests, or fail `two_pole`
 and `unused_token_hold`. The 36 to 39 historical PASS receipts per test used the earlier noisy evaluation and
-fixed-particle contracts (see [Recorded passers](#recorded-passers)). The view summaries' "best recipe ever" means
-the best 7,000-update result under the current declaration; the 14k rescue continuations (precision 0.65-0.70) and
-the uncounted straight-line variant above are separate questions.
+fixed-particle contracts (see [Recorded passers](#recorded-passers)). The view summaries give the best 7,000-update
+result under the current declaration; the 14k rescue continuations (precision 0.65-0.70) and the uncounted
+straight-line variant above are separate questions.
 
 **Re-entry criterion (each).** Count it again when one global recipe has an ordinary PASS on the unchanged
 declaration (clean sampling, live weights, 5 final checks and the 100,000-point holdout). The recipe must still pass
@@ -879,7 +880,9 @@ to learn the ring from scratch and 620 to recover after the slide. Recipes that 
 they should hold still, which is the same conflict as in the Gaussian test.
 
 **Tried and failed.** The selected recipes of BCAP, BISPF, K3P, KA2, R1/R2 and GAN v3, plus historical scheduled K3P
-and k3/k3g/rg5 learning-rate-floor runs. No recipe, current or historical, has ever passed it.
+and k3/k3g/rg5 learning-rate-floor runs. No recipe has passed its current declaration, and every historical
+shift-recovery record (scheduled K3P, k3, k3g and rg5) fails it. Three older PR215/PR217 records pass a different
+lrfree-search `ring_shift` test under earlier contracts.
 
 **Who passes it alone.** Nobody. BISPF meets 3 of the 4 parts.
 
@@ -1183,11 +1186,6 @@ change. `--observations <path>` also writes the per-check rows; keep that file o
 - **Registration path:** fix the render-before-write order described in the [pytest ledger](#pytest).
 - **Recipe-prior-refactor publication migration:** resolve the BISPF roster check and the revision-9 binding in
   `publication_migration.advance_selection` (see the [pytest ledger](#pytest)).
-- **Hold summary wording, in the next view revision:** the notes are fingerprinted view policy, so they were not
-  edited here. Scope the "recorded" and "ever" claims to the current declaration (`img_bars4`, `img_blobs4`,
-  `img_intensity2`, `vector_anisotropic`, `vector_overlap`, and "the best recipe ever" in the three 100-blob notes,
-  which means the best 7,000-update result), and replace `gaussian1d_stability`'s "Neither selected recipe" with
-  "Neither BCAP nor BISPF".
 - **Per-view goal tables:** `reports/forge/leaderboards/*.md` (linked from the experiments-by-tier report and the
   compiled memory) are rewritten only by a full `python -m experiments.forge compile`, which this change did not run.
   Until then they show the previous view revisions; after it they also show each view's held count beside its

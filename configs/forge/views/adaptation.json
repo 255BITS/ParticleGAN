@@ -104,7 +104,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "Three stretched, tilted blobs: BCAP and BISPF draw the shapes but the wrong amounts (mass TV 0.196 and 0.191; limit 0.15). Of its 16 recorded passers, 12 fail Tier 1 ring16_acquisition, 1 timed out on it, and 3 pass it but fail mode_hold.",
+        "summary": "Three stretched, tilted blobs: BCAP and BISPF draw the shapes but the wrong amounts (mass TV 0.196 and 0.191; limit 0.15). Of the 16 recipes passing its current declaration, 12 fail Tier 1 ring16_acquisition, 1 timed out on it and 3 fail mode_hold.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_anisotropic",
         "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold."
       }
@@ -119,7 +119,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recorded passers fail Tier 1 ring16_acquisition or mode_hold.",
+        "summary": "One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recipes passing its current declaration fail Tier 1 ring16_acquisition or mode_hold.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#vector_overlap",
         "reentry": "Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold."
       }
@@ -146,7 +146,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; no recorded recipe passes both bars4 and stripes2.",
+        "summary": "Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#img_bars4",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
       }
@@ -161,7 +161,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe that passes it fails or cannot run Tier 1 tests.",
+        "summary": "Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#img_blobs4",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
       }
@@ -176,7 +176,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes that pass it fail Tier 1 tests that BCAP and BISPF pass.",
+        "summary": "Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#img_intensity2",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test."
       }
@@ -191,7 +191,7 @@
         "previous_importance": "required",
         "reason": "unsolved",
         "blocked_by": [],
-        "summary": "100 tiny blobs on a grid: BCAP puts 24% and BISPF 37% of samples on target; 97% is required (a perfect sampler scores 98.9%). The best recipe ever reached 54%. No recipe has passed this clean-sampling version.",
+        "summary": "100 tiny blobs on a grid: BCAP puts 24% and BISPF 37% of samples on target; 97% is required (a perfect sampler scores 98.9%). The best 7,000-update result under this clean-sampling declaration is 54%, and none passes.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#grid100",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review."
       }
@@ -206,7 +206,7 @@
         "previous_importance": "required",
         "reason": "unsolved",
         "blocked_by": [],
-        "summary": "The same 100-blob test rotated by 25 degrees: BCAP 26% and BISPF 27% of samples on target against 97%; the best recipe ever reached 51%. No recipe has passed this clean-sampling version.",
+        "summary": "The same 100-blob test rotated by 25 degrees: BCAP 26% and BISPF 27% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 51%, and none passes.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#rotated100",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
       }
@@ -221,7 +221,7 @@
         "previous_importance": "required",
         "reason": "unsolved",
         "blocked_by": [],
-        "summary": "The same 100-blob test with alternate rows shifted: BCAP 30% and BISPF 34% of samples on target against 97%; the best recipe ever reached 56%. No recipe has passed this clean-sampling version.",
+        "summary": "The same 100-blob test with alternate rows shifted: BCAP 30% and BISPF 34% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 56%, and none passes.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#staggered100",
         "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
       }
@@ -236,7 +236,7 @@
         "previous_importance": "required",
         "reason": "unsolved",
         "blocked_by": [],
-        "summary": "Learn an 8-blob ring, hold it, then recover within 400 updates after it shifts. BISPF recovers but 220 updates late; BCAP flickers before and after the shift. No recipe has ever passed it.",
+        "summary": "Learn an 8-blob ring, hold it, then recover within 400 updates after it shifts. BISPF recovers but 220 updates late; BCAP flickers before and after the shift. No recipe has passed its current declaration.",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#target_shift_recovery",
         "reentry": "Count again in adaptation and clockfree_continuous when one global recipe passes all four parts in one cohort (5/5, 120/120, 81/81 after the deadline, frozen copy 0/81) and every counted Tier 1 and Tier 2 test plus the counted ring endurance test."
       }
