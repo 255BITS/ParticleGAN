@@ -284,7 +284,8 @@ def main(argv=None):
         compile_memory(root)
     # The inventory already records every attempt in the live event stream.
     # Compile the full set of boards once after draining this campaign.
-    batch_inventory = args.command in {"inventory", "search"} and args.stage == "run"
+    batch_inventory = (args.command in {"run", "drain"}
+                       or (args.command in {"inventory", "search"} and args.stage == "run"))
     queue = Queue(queue_root, report_root=root / "reports/forge",
                   on_completion=None if batch_inventory else publish)
     command = args.command
@@ -329,11 +330,15 @@ def main(argv=None):
                   "request": str(queue_root / "queue/requests" / f"{entry['request']['request_id']}.json")})
             if command == "run":
                 drain(queue, args.gpus.split(","), campaign=campaign["id"])
+                from .knowledge import compile_memory
+                compile_memory(root, summaries_only=True)
                 emit(queue.inspect()["submissions"][entry["request"]["request_id"]]["status"])
     elif command == "drain":
         drain(queue, args.gpus.split(","), workers_per_gpu=args.workers_per_gpu,
               allow_sharing=args.allow_sharing, watch=args.watch, campaign=args.campaign, goal=args.goal,
               request_filter=args.request, shared_fleet_fds=tuple(args.shared_fleet_fd))
+        from .knowledge import compile_memory
+        compile_memory(root, summaries_only=True)
         emit({"status": "drained", "logs": str(queue_root / "events.jsonl")})
     elif command == "queue":
         state = queue.inspect()
