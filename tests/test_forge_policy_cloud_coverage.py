@@ -156,13 +156,14 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
     for tier, names in TIERS.items():
         assert {rows[served_row_task(name)]["qualification_tier"] for name in names} == {tier}
     assert {name for name in rows if tasks[name]["task_cohort"] == COHORT} == {variant_id(n) for n in LAW_INDEPENDENT}
-    # Every selected-view requirement keeps its recorded tier.
+    # Every selected-view test keeps its recorded tier. Held and removed-from-count
+    # tests still run (attempt_coverage.selected_tasks), so the cohort covers them too.
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
     views = {v["id"]: v for v in publication["family_progress"]["views"]}
     family = next(f for f in publication["family_progress"]["families"] if f["id"] == "atlas")
     cohort = next(c for c in family["cohorts"] if c["anchor"] == family["current_cohort_anchor"])
     selected = {(a["task"], a["qualification_tier"]) for v in cohort["views"] for a in views[v["id"]]["assignments"]
-                if a["importance"] == "required"}
+                if a["importance"] in {"required", "held"} or "removal" in a}
     assert selected == {(name, tier) for tier, names in TIERS.items() for name in names}
 
 

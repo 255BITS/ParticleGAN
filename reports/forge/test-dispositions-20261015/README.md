@@ -1183,6 +1183,10 @@ change. `--observations <path>` also writes the per-check rows; keep that file o
 - **Policy view revision:** apply the seven recorded policy decisions as `tier1_policy_coverage` revision 2, after
   updating the policy-view replay tests and the scoped-publication archive lookup. Let the policy family pages show
   the existing FAIL receipts instead of "UNKNOWN".
+- **Policy-cloud coverage views:** develop added `policy_cloud_coverage` and `policy_cloud_coverage_as_served`
+  (pull request #437) after this decision. They declare a policy-cloud variant of all 35 selected-view tests for
+  Atlas and E22, in their own rows outside the 81. This change leaves them unchanged; align them with these
+  dispositions together with the policy view revision.
 - **Cross-device coverage tolerance:** `rotated100_14k`'s rescue coverage audit reports INVALID instead of FAIL,
   because one point lies 0.0000078 inside the scoring circle and the GPU and CPU disagree about it. Tolerating that
   needs a new evaluator revision, with old grades kept.

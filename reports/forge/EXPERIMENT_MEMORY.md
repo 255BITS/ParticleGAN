@@ -11,6 +11,8 @@ Records: 817. Inventory coverage: incomplete. Unresolved import items: 7.
 - [discriminator_stability](technique-inventory.md)
 - [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
+- [policy_cloud_coverage](technique-inventory.md)
+- [policy_cloud_coverage_as_served](technique-inventory.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
 - [tier1_policy_coverage](technique-inventory.md)
 
@@ -5235,4 +5237,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `b994d3dcdb8d5770687edfa253ce6ac5fc76db05d2c462f1e204dff94660a9f5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `4ff6b2481bc3060d6505864448a6b24a430342cd66aa60091fa982a3913c3219`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
