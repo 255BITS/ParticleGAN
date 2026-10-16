@@ -26,6 +26,8 @@ def prior_policy_receipt(recipe, *priors):
             "trainable_locations": any(prior.z.requires_grad for prior in priors)}
     if recipe.prior_proximal_strength:
         result["proximal_strength"] = recipe.prior_proximal_strength
+    if recipe.prior_tether_relative_cap:
+        result["tether_relative_cap"] = recipe.prior_tether_relative_cap
     if recipe.prior_regularizer == "coulomb":
         from particlegan.coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
         result["coulomb"] = dict(softening=recipe.prior_coulomb_softening,
@@ -73,6 +75,8 @@ def validate_prior_policy(task, evidence, recipe=None):
             return {"status": "INVALID", "reason": "prior policy proof contradicts the actual recipe"}
         if proof.get("proximal_strength", 0.) != recipe.get("prior_proximal_strength", 0.):
             return {"status": "INVALID", "reason": "prior proximal proof contradicts the actual recipe"}
+        if proof.get("tether_relative_cap", 0.) != recipe.get("prior_tether_relative_cap", 0.):
+            return {"status": "INVALID", "reason": "tether relative-cap proof contradicts the actual recipe"}
         if recipe.get("prior_regularizer") == "coulomb":
             settings = {"softening": recipe.get("prior_coulomb_softening", .1),
                         "confinement": recipe.get("prior_coulomb_confinement", .35),

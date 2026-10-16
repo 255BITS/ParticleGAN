@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Research diagnostic for the 2026-10-15 relative-force tether dig; not a qualification view. Task declarations and gates keep their original identities.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "dig-relative-tether-stage1-v1",
+  "policy_change_reason": "Stage 1: mode_hold (tether repair) and ring16_acquisition (tethers often break ring covariance). No ordinary qualification.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}
