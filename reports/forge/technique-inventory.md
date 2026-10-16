@@ -4,20 +4,46 @@ A **family** can have several **recipes**. Each score belongs to one exact recip
 
 Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.
 
-## Selected recipes
+## Full-suite results — failures included
+
+**33 distinct tests**, including held tests. Each test counts once. A held FAIL is still a failure in this table. Only duplicate questions and phases already included in another test are excluded. These are recorded results for the selected recipe and source, not new measurements or current-source qualification.
+
+[Problem list: what each test asks, what fails, and which configurations have passed](problems.md).
+
+| Family / selected recipe | Pass | Fail | Other outcomes | Total tests |
+| --- | ---: | ---: | --- | ---: |
+| **[BCAP](families/bcap-pure.md)** · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)<br>Recorded source measurement · **stale**; no current qualification | 16 | **12** | 5 not measured | 33 |
+| **[BISPF](families/bispf.md)**<br>Recorded source measurement · **stale**; no current qualification | 17 | **11** | 5 not measured | 33 |
+| **[Atlas](families/atlas.md)** | 0 | **0** | 29 blocked; 4 not measured | 33 |
+| **[E22](families/e22.md)** | 0 | **0** | 29 blocked; 4 not measured | 33 |
+| **[GAN v3 release 0.7](families/release07-gan-v3.md)**<br>Recorded source measurement · **stale**; no current qualification | 5 | **2** | 26 not measured | 33 |
+| **[K3P](families/k3p.md)**<br>Recorded source measurement · **stale**; no current qualification | 5 | **2** | 26 not measured | 33 |
+| **[KA2](families/ka2.md)**<br>Recorded source measurement · **stale**; no current qualification | 5 | **2** | 26 not measured | 33 |
+| **[R1/R2](families/r1r2.md)**<br>Recorded source measurement · **stale**; no current qualification | 5 | **2** | 26 not measured | 33 |
+
+Other outcomes are not scientific failures and earn no pass credit. Separate diagnostic and historical passes remain on the problem and family pages; they do not replace a selected recipe's result.
+
+<details>
+<summary>Qualification subset — held failures excluded from these scores</summary>
+
+## Selected recipes — qualification subset
+
+**This subset excludes held tests. Use the full-suite results above to compare failures.**
 
 Passes / required-view instances for one selected recipe per family. Shared tests count once in every view that requires them: **81 means 81 counted view requirements, including repeated tests**, from 18 distinct tests. 66 held and 5 removed view assignments (15 held tests and 2 removed tests) are still measured and listed under **Held and removed tests** below. These totals retain the selected recipe's recorded qualification; separate diagnostic runs appear below.
 
 | Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Total view requirements |
 | --- | ---: | ---: | ---: | ---: |
-| **[BCAP](families/bcap-pure.md)** · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)<br>Recorded source measurement · **stale**; no current qualification | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/55](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71/81 (4 blocked)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
-| **[BISPF](families/bispf.md)**<br>Recorded source measurement · **stale**; no current qualification | **[22/22](families/bispf.md#cohort-cuda-6421ba55ca82-tier-1)** | **[55/55](families/bispf.md#cohort-cuda-6421ba55ca82-tier-2)** | **[0/4 (4 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-tier-3)** | **[77/81 (4 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82)** |
-| **[Atlas](families/atlas.md)** | **[0/22 (22 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (54 incompatible, 1 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/81 (76 incompatible, 5 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
-| **[E22](families/e22.md)** | **[0/22 (22 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (54 incompatible, 1 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/81 (76 incompatible, 5 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422)** |
-| **[GAN v3 release 0.7](families/release07-gan-v3.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422)** |
-| **[K3P](families/k3p.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/k3p.md#cohort-cuda-1bf9d7d34422)** |
-| **[KA2](families/ka2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422)** |
-| **[R1/R2](families/r1r2.md)**<br>Recorded source measurement · **stale**; no current qualification | **[20/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422)** |
+| [BCAP](families/bcap-pure.md) · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | **[22/22](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[49/55](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[71/81 (4 blocked)](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** |
+| [BISPF](families/bispf.md) | **[22/22](families/bispf.md#cohort-cuda-6421ba55ca82-tier-1)** | **[55/55](families/bispf.md#cohort-cuda-6421ba55ca82-tier-2)** | **[0/4 (4 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82-tier-3)** | **[77/81 (4 diagnostic attempts)](families/bispf.md#cohort-cuda-6421ba55ca82)** |
+| [Atlas](families/atlas.md) | **[0/22 (22 incompatible)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (54 incompatible, 1 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/81 (76 incompatible, 5 blocked)](families/atlas.md#cohort-cuda-1bf9d7d34422)** |
+| [E22](families/e22.md) | **[0/22 (22 incompatible)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (54 incompatible, 1 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[0/81 (76 incompatible, 5 blocked)](families/e22.md#cohort-cuda-1bf9d7d34422)** |
+| [GAN v3 release 0.7](families/release07-gan-v3.md) | **[20/22](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422)** |
+| [K3P](families/k3p.md) | **[20/22](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/k3p.md#cohort-cuda-1bf9d7d34422)** |
+| [KA2](families/ka2.md) | **[20/22](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/ka2.md#cohort-cuda-1bf9d7d34422)** |
+| [R1/R2](families/r1r2.md) | **[20/22](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** | **[0/55 (55 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-2)** | **[0/4 (4 blocked)](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-3)** | **[20/81 (4 blocked, 55 diagnostic attempts)](families/r1r2.md#cohort-cuda-1bf9d7d34422)** |
+
+</details>
 
 Counts follow the declared view revisions: adaptation 3, clockfree_continuous 4, discriminator_stability 11, formulation_comparison 2, host_profile_transfer 5, quality_coverage 3. The recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered; no recorded verdict was regraded.
 
@@ -381,5 +407,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `3653c5a5f4541035eac94bf5d2f602d6fd0d400c9035cb4761c7f43d0c4177db`.
+Publication input digest `c4dcde12486718396ca6b3c583a92f6f932517918cc9dc3806010552a11f4913`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

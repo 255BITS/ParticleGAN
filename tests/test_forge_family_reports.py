@@ -7,6 +7,7 @@ import pytest
 
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
 from experiments.forge.family_reports import (build_progress, certified_retry_successors,
+                                              full_suite_outcomes, full_suite_tasks,
                                               generated_pages, render_leaderboard, score)
 from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
@@ -456,7 +457,9 @@ def test_runtime_groups_never_sum_or_borrow_each_others_passes(report):
     generate(report)
     cohorts = publication["family_progress"]["families"][0]["cohorts"]
     assert [score(cohort["total"]) for cohort in cohorts] == ["3/5 (1 not run)", "0/5 (5 not run)"]
-    assert len(generated_pages(root, publication)) == 1
+    pages = generated_pages(root, publication)
+    assert len([page for page in pages if page.parent.name == "families"]) == 1
+    assert root / "reports/forge/problems.md" in pages
     publication["rows"].append(deepcopy(cpu))
     with pytest.raises(ValueError, match="multiple selected configurations"):
         build_progress(root, publication)
@@ -1023,3 +1026,73 @@ def test_research_rows_say_their_recorded_assignments_still_count_held_tests(rep
             "so research rows are not on the same scale as the selected-recipe totals.") in text
     publication["declared_view"]["no_longer_required_tasks"] = {"1": [], "2": [], "3": []}
     assert "not on the same scale" not in render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+
+
+def test_full_suite_keeps_held_failures_and_deduplicates_shared_tests(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    # Qualification is perfect only because its failed and missing tests are held.
+    assert score(cohort["total"]) == "3/3"
+    names = full_suite_tasks(publication["family_progress"])
+    assert names == ["failed", "held", "missing", "shared"]
+    assert full_suite_outcomes(cohort, names) == {
+        "passed": 2, "failed": 1, "other": {"UNKNOWN": 1}, "total": 4}
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    headline, subset = text.split("<summary>Qualification subset", 1)
+    assert "| 2 | **1** | 1 not measured | 4 |" in headline
+    assert "A held FAIL is still a failure" in headline and "3/3" not in headline
+    assert "[3/3]" in subset and "[Problem list:" in headline
+
+
+def test_full_suite_never_borrows_diagnostic_passes_or_calls_errors_failures(report):
+    root, publication = report
+    cohort = generate(report)
+    cohort["tasks"]["missing"]["run_attempt"] = {"status": "PASS", "attempted": True}
+    for status in ("BLOCKED", "TIMEOUT", "ERROR", "INVALID", "INCOMPLETE", "UNKNOWN"):
+        cohort["tasks"]["missing"]["status"] = status
+        counts = full_suite_outcomes(cohort, full_suite_tasks(publication["family_progress"]))
+        assert counts == {"passed": 2, "failed": 1, "other": {status: 1}, "total": 4}
+
+
+def test_problem_page_explains_intent_failures_and_scoped_passers(report):
+    root, publication = report
+    hold_alpha(root)
+    definitions = {"schema": "forge_problem_definitions_v1", "problems": [{
+        "task": "failed", "title": "Keep a learned distribution stable",
+        "intent": "Stay correct while training continues.", "problem": "The model drifts away from its target.",
+        "pass_summary": "A research configuration passes; the selected recipe fails.",
+        "passers": ["Research config A passes this test but loses another."],
+        "next_step": "Preserve the repair on the other tests.",
+        "evidence": [{"label": "Audit", "path": EXPLANATIONS, "anchor": "failed"}]}]}
+    atomic_json(root / "reports/forge/problem-definitions.json", definitions)
+    generate(report)
+    pages = generated_pages(root, publication)
+    page = pages[root / "reports/forge/problems.md"]
+    assert "**What it tests.** Stay correct" in page
+    assert "**The problem.** The model drifts" in page
+    assert "**Has any configuration beaten it?** A research configuration passes" in page
+    assert "Research config A passes" in page and "Held for qualification; included in full-suite results." in page
+    assert "[FAIL](families/k3p.md#" in page
+    assert "problem-definitions.json" in str(publication["family_progress"]["input_hashes"])
+    # Includes the new page and all task-specific navigation targets.
+    assert_anchored_links_resolve(root, pages)
+
+
+def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
+    import json
+    root = Path(__file__).resolve().parents[1]
+    publication = json.loads((root / "reports/forge/technique-inventory.json").read_text())
+    from experiments.forge.family_reports import _selected_cohorts
+    progress = publication["family_progress"]
+    cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
+    counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
+    assert counts == {"passed": 17, "failed": 11, "other": {"UNKNOWN": 5}, "total": 33}
+    definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
+    described = {item["task"] for item in definitions["problems"]}
+    held = {a["task"] for view in progress["views"] for a in view["assignments"]
+            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]}
+    assert held <= described
+    failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
+              if cohort["tasks"][name]["status"] == "FAIL"}
+    assert failed <= described

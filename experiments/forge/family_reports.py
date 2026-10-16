@@ -19,6 +19,8 @@ from .views import task_evaluation_fingerprint, task_execution_fingerprint
 
 
 FAMILY_DIRECTORY = Path("reports/forge/families")
+PROBLEM_DEFINITIONS = Path("reports/forge/problem-definitions.json")
+PROBLEM_PAGE = Path("reports/forge/problems.md")
 COMPLETE = {"PASS", "FAIL"}
 TIERS = ("1", "2", "3")
 COVERAGE_PREFLIGHT = Path("reports/forge/tier-coverage-20261014/preflight.json")
@@ -864,6 +866,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     if coverage is not None:
         inputs[COVERAGE.as_posix()] = file_hash(root / COVERAGE)
         inputs.update(coverage["inputs"])
+    problems = load(PROBLEM_DEFINITIONS) if (root / PROBLEM_DEFINITIONS).is_file() else None
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped],
@@ -872,6 +875,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "historical_families": [family for family in families.values() if family["historical_only"]],
                 "tag_definitions": tag_definitions,
                 "task_paths": task_paths,
+                "problem_definitions": problems,
                 "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__)),
                 "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
@@ -917,6 +921,116 @@ def _selected_cohorts(progress):
             if family.get("current_cohort_anchor") and cohort["anchor"] != family["current_cohort_anchor"]:
                 continue
             yield family, cohort
+
+
+def full_suite_tasks(progress):
+    """Distinct ordinary questions, including held tests; omit duplicate phases.
+
+    This is a performance display, independent of tier qualification. A shared
+    test is counted once even when several views require or hold it.
+    """
+    return sorted({a["task"] for view in _summed_views(progress) for a in view["assignments"]
+                   if a["importance"] in {"required", "held"}})
+
+
+def full_suite_outcomes(cohort, names):
+    """Count original selected-row grades without borrowing diagnostic passes."""
+    statuses = Counter(cohort["tasks"].get(name, {}).get("status", "UNKNOWN") for name in names)
+    return {"passed": statuses.pop("PASS", 0), "failed": statuses.pop("FAIL", 0),
+            "other": dict(sorted(statuses.items())), "total": len(names)}
+
+
+def _outcome_text(counts):
+    labels = {"UNKNOWN": "not measured", "NOT_RUN": "not run", "BLOCKED": "blocked",
+              "ERROR": "error", "INVALID": "invalid", "INCOMPLETE": "incomplete", "TIMEOUT": "timeout"}
+    return "; ".join(f"{count} {labels.get(status, status.lower())}" for status, count in counts.items()) or "0"
+
+
+def _full_suite_section(root, publication, page, selected):
+    progress = publication["family_progress"]
+    names = full_suite_tasks(progress)
+    lines = ["## Full-suite results — failures included", "",
+             f"**{len(names)} distinct tests**, including held tests. Each test counts once. "
+             "A held FAIL is still a failure in this table. Only duplicate questions and phases already included "
+             "in another test are excluded. These are recorded results for the selected recipe and source, "
+             "not new measurements or current-source qualification.", "",
+             link(root, page, "Problem list: what each test asks, what fails, and which configurations have passed",
+                  PROBLEM_PAGE.as_posix()) + ".", "",
+             "| Family / selected recipe | Pass | Fail | Other outcomes | Total tests |",
+             "| --- | ---: | ---: | --- | ---: |"]
+    for family, cohort in selected:
+        name = family["label"]
+        if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
+            name += " (" + cohort["backend"] + ")"
+        label = "**" + link(root, page, name, family["page"]) + "**"
+        if cohort.get("configuration_family"):
+            configuration = next(item for item in progress.get("configuration_families", [])
+                                 if item["id"] == cohort["configuration_family"])
+            label += " · " + link(root, page, configuration["label"], configuration["page"])
+        counts = full_suite_outcomes(cohort, names)
+        lines.append(f"| {label} | {counts['passed']} | **{counts['failed']}** | "
+                     f"{_outcome_text(counts['other'])} | {counts['total']} |")
+    lines += ["", "Other outcomes are not scientific failures and earn no pass credit. "
+              "Separate diagnostic and historical passes remain on the problem and family pages; "
+              "they do not replace a selected recipe's result.", ""]
+    return lines
+
+
+def render_problem_list(root, publication, page):
+    """Explain unresolved questions alongside every selected recipe's actual grade."""
+    progress = publication["family_progress"]
+    selected = list(_selected_cohorts(progress))
+    registry = progress.get("problem_definitions") or {}
+    if registry and registry.get("schema") != "forge_problem_definitions_v1":
+        raise ValueError("unsupported problem definitions schema")
+    definitions = registry.get("problems", [])
+    names = set(full_suite_tasks(progress))
+    if len({item["task"] for item in definitions}) != len(definitions):
+        raise ValueError("problem definitions contain duplicate tasks")
+    if any(item["task"] not in names for item in definitions):
+        raise ValueError("problem definition is outside the ordinary full suite")
+    held = {a["task"] for view in _summed_views(progress) for a in view["assignments"]
+            if a["importance"] == "held"}
+    lines = ["<!-- Generated Forge problem list -->", "# Unresolved training problems", "",
+             link(root, page, "Full-suite leaderboard", "reports/forge/technique-inventory.md") + " · " +
+             link(root, page, "All test/protocol results", "reports/forge/test-performance.md"), "",
+             "This page explains the outstanding tests, including the held failures. **Held means excluded from "
+             "qualification, not solved:** these failures are included in the leaderboard's full-suite comparison. "
+             "Passing one problem does not establish that the same configuration passes the whole suite.", "",
+             "Selected results below use one recorded recipe/source/runtime cohort per family. Research, diagnostic "
+             "and historical configurations are named separately, with links to their original evidence. "
+             "An oracle or hand-built solution demonstrates feasibility, not successful training. "
+             "Not measured, blocked, timeout and error are never relabelled FAIL.", "",
+             *( ["Passer summaries reflect the evidence audit dated **" + registry["evidence_date"] +
+                  "**. Selected-result tables are regenerated from the registered publication.", ""]
+                if registry.get("evidence_date") else []),
+             "| Problem | What it tests | Has any configuration passed? |",
+             "| --- | --- | --- |"]
+    for item in definitions:
+        lines.append("| " + link(root, page, item["title"], PROBLEM_PAGE.as_posix(), item["task"]) +
+                     f" | {cell(item['intent'])} | "
+                     f"{cell(item['pass_summary'])} |")
+    for item in definitions:
+        task = item["task"]
+        lines += ["", f'<a name="{task}"></a>', "", f"## {item['title']}", "",
+                  f"Test: `{task}` · " + ("Held for qualification; included in full-suite results." if task in held else
+                                          "Required for qualification and included in full-suite results."), "",
+                  "**What it tests.** " + item["intent"], "",
+                  "**The problem.** " + item["problem"], "",
+                  "**Has any configuration beaten it?** " + item["pass_summary"], ""]
+        lines += ["- " + passer for passer in item["passers"]]
+        lines += ["", "**Selected recipes' recorded results:**", "",
+                  "| Selected recipe | Result |", "| --- | --- |"]
+        for family, cohort in selected:
+            result = cohort["tasks"].get(task, {})
+            status = result.get("status", "UNKNOWN")
+            result_label = "NOT MEASURED" if status == "UNKNOWN" else status
+            lines.append("| " + link(root, page, family["label"], family["page"], cohort["anchor"]) +
+                         " | " + link(root, page, result_label, family["page"], cohort["anchor"] + "-experiment-" + task) + " |")
+        lines += ["", "**What remains to solve.** " + item["next_step"], "",
+                  "Evidence: " + " · ".join(link(root, page, ref["label"], ref["path"], ref.get("anchor"))
+                                               for ref in item["evidence"]) + ".", ""]
+    return "\n".join(lines)
 
 
 def _views_cell(memberships, summed):
@@ -1074,7 +1188,10 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
              "are separate BCAP research recipes, with their own scores.", "",
              "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
-             "## Selected recipes", "",
+             *_full_suite_section(root, publication, page, list(_selected_cohorts(progress))),
+             "<details>", "<summary>Qualification subset — held failures excluded from these scores</summary>", "",
+             "## Selected recipes — qualification subset", "",
+             "**This subset excludes held tests. Use the full-suite results above to compare failures.**", "",
              "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
              f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**, "
              f"from {distinct} distinct test" + ("" if distinct == 1 else "s") + ". " +
@@ -1087,14 +1204,14 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
         name = family["label"]
         if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
             name += " (" + cohort["backend"] + ")"
-        cells = ["**" + link(root, page, name, family["page"]) + "**"]
+        cells = [link(root, page, name, family["page"])]
         if cohort.get("configuration_family"):
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
             cells[0] += " · " + link(root, page, configuration["label"], configuration["page"])
         cells += _score_cells(root, page, family, cohort, cohort, bold=True)
         lines.append("| " + " | ".join(cells) + " |")
-    lines += [""]
+    lines += ["", "</details>", ""]
     declared = {view["id"]: view["revision"] for view in progress.get("views", [])}
     recorded = publication.get("view")
     if recorded in declared and declared[recorded] != publication.get("view_revision"):
@@ -1731,7 +1848,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
 
 
 def generated_pages(root: Path, publication: dict) -> dict[Path, str]:
-    return {root / family["page"]: render_family(root, publication, family)
+    pages = {root / family["page"]: render_family(root, publication, family)
             for family in (publication["family_progress"]["families"] +
                            publication["family_progress"].get("configuration_families", []) +
                            publication["family_progress"].get("historical_families", []))}
+    pages[root / PROBLEM_PAGE] = render_problem_list(root, publication, root / PROBLEM_PAGE)
+    return pages

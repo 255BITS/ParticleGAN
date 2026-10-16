@@ -6,6 +6,9 @@ candidate revisions through goal-specific leaderboards.
 
 Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
+The [problem list](reports/forge/problems.md) explains each outstanding question,
+what it tests, what fails and which configurations have passed it. Held failures
+remain in the leaderboard's full-suite results; the qualification subset is separate.
 For BCAP repair ideas, also read the completed
 [five-theory comparison](reports/forge/bcap-physics/README.md), including its
 source-bound readouts and unresolved gates.
