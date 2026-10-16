@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Attribution arm for the cell-quota probe: the candidate cell-quota-minimum-change-forward-kl-g-v1 recipe with every cell field and optimizer_signal_roles removed. Equals the BCAP DualNorm control except optimizer_family=nsgda_global, optimizer_convolution=none, optimizer_smoothing=0."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "id": "cell-quota-probe-nsgda-parent-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Separates the optimizer swap (DualNorm per-offset -> global NSGDA) from the cell objective, so a ring16 failure of the cell-quota candidate can be attributed to one or the other. Opt-in research diagnostic only.",
+  "parent": "bcap-default-baseline-control-v1",
+  "recipe_overrides": {
+    "constraint_geometry_mode": "none",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "none",
+    "optimizer_family": "nsgda_global",
+    "optimizer_smoothing": 0.0,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-nsgda-global"
+}

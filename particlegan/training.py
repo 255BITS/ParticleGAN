@@ -112,7 +112,7 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=True):
+                 optimizer_options=None, penalty_options=None, serial_backward=True, cell_gaussian_objective=None):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
@@ -125,6 +125,16 @@ class GANTrainer:
         if (recipe.model != "gan" or recipe.conditioning != "scalar"
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
+        if cell_gaussian_objective is not None and cell_gaussian_objective != recipe.cell_gaussian_objective:
+            raise ValueError("trainer objective conflicts with recipe-owned objective")
+        cell_gaussian_objective = recipe.cell_gaussian_objective
+        self.cell_gaussian_objective = cell_gaussian_objective
+        self.cell_objective = None
+        if cell_gaussian_objective is not None:
+            from .cell_gaussian import CellObjective
+            self.cell_objective = CellObjective(cell_gaussian_objective,recipe.cell_reference_policy,recipe.cell_quota_policy,recipe.cell_shape_weighting,recipe.cell_assignment_refinement,recipe.cell_transport_policy,recipe.cell_distribution_shape,recipe.cell_covariance_memory,recipe.cell_gradient_projection)
+            if recipe.constraint_geometry_mode != "none" or recipe.input_noise_std or recipe.output_noise_std or recipe.standardize:
+                raise ValueError("cell objective requires unconstrained noise-free unstandardized trainer")
         self.recipe, self.G, self.D = recipe, generator, discriminator
         if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
             raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
@@ -308,6 +318,9 @@ class GANTrainer:
             # Scope the entire update: graph construction can affect backward
             # accumulation order too. Restore the caller's setting on exit.
             with torch.autograd.set_multithreading_enabled(False):
+                if self.recipe.cell_extragradient_map:
+                    from .cell_gaussian.portfolio import extragradient_step
+                    return extragradient_step(self,real,generator_real,collect_stats)
                 return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
         except Exception:
             self.policy.abort_step()
@@ -407,6 +420,9 @@ class GANTrainer:
                 raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
             loss_g = loss_gan + recipe.prior_reg * prior_reg
+            if self.cell_objective is not None:
+                cell_loss, _ = self.cell_objective(fake_g, real_g, self)
+                loss_g = loss_g + cell_loss
             if self.prior.z.requires_grad and recipe.prior_l2 > 0:
                 loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
             if recipe.kinetic_transport_weight:
@@ -424,8 +440,13 @@ class GANTrainer:
                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
                     logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
                     return (self.loss.g_loss(logits, real_logits),)
-            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
+            if recipe.cell_gradient_projection and self.cell_objective.gradient_terms is not None:
+                from .cell_gaussian.portfolio import projected_backward
+                conflicts=projected_backward(loss_g-cell_loss,self.cell_objective.gradient_terms,self.opt_g)
+                self.cell_objective.last["gradient_conflicts"]=conflicts
+            else:
+                constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                             protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
             self.opt_g.step()
@@ -505,6 +526,7 @@ class GANTrainer:
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
+            **({"cell_objective": self.cell_objective.state_dict()} if self.cell_objective is not None else {}),
             "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
@@ -592,6 +614,8 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
+        if self.cell_objective is not None:
+            self.cell_objective.validate_state(state.get("cell_objective"), steps)
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -718,6 +742,8 @@ class GANTrainer:
             self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
+        if self.cell_objective is not None:
+            self.cell_objective.load_state_dict(_state_to_device(state["cell_objective"], self.device))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():

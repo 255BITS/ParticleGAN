@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "cell-quota-probe-ring16-diagnostic-v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "policy_change_reason": "Dig 2026-10-15 lead 4: first-stage binding gate for the cell-quota minimum-change probe; opt-in diagnostic, no qualification.",
+  "assignments": [
+    {
+      "task": "ring16_acquisition",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    }
+  ]
+}

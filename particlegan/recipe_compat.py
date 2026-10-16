@@ -18,6 +18,14 @@ SEARCH_RECIPE_DEFAULTS = {
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
     "lr_decay_staircase": False,
+    # Opt-in cell-moment research mechanisms (ported from the Astra workspace,
+    # 2026-10-15 dig). Default-off values keep every existing identity.
+    "optimizer_signal_roles": (),
+    "cell_gaussian_objective": None, "cell_reference_policy": "cumulative",
+    "cell_quota_policy": "largest_remainder", "cell_shape_weighting": "mass",
+    "cell_assignment_refinement": "none", "cell_transport_policy": "integer",
+    "cell_distribution_shape": "none", "cell_covariance_memory": "unchanged",
+    "cell_gradient_projection": False, "cell_extragradient_map": False,
 }
 
 
@@ -25,7 +33,7 @@ def without_default_additions(values):
     result = dict(values)
     for name, default in SEARCH_RECIPE_DEFAULTS.items():
         value = result.get(name, default)
-        if name == "loss_labels" and isinstance(value, (list, tuple)):
+        if name in ("loss_labels", "optimizer_signal_roles") and isinstance(value, (list, tuple)):
             value = tuple(value)
         if value == default:
             result.pop(name, None)

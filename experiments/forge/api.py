@@ -193,6 +193,8 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.cell_gaussian_objective is not None and task.get("execution", {}).get("execution_path") == "public_components":
+        return ["Cell objective requires the public GANTrainer path"]
     consumer = task.get('execution', {}).get('transport_consumer')
     # The selected-policy two-pole declaration inherits its parent's optional
     # transport metadata. Its existing owner implements the original objective
@@ -317,7 +319,12 @@ def default_registry():
     Add a supported ExtensionSpec here after implementing its public API field;
     ordinary Recipe fields require no extension declaration.
     """
-    return CapabilityRegistry()
+    return CapabilityRegistry().register_extension(ExtensionSpec(
+        name="cell_gaussian_objective", value_type="str", target="trainer", argument="cell_gaussian_objective",
+        description="Training-only streaming cell conditional-moment objective; fixed cubature and integral assignment.",
+        supported_paths=("public_trainer",), ownership="recipe objective",
+        checkpoint="public GANTrainer cell_objective state", gradient_ownership="native joint G/prior backward",
+        initialization="empty consumed-training cell state", optimizer_binding="native joint G/prior optimizer"))
 
 
 def _resolved_prior(value):

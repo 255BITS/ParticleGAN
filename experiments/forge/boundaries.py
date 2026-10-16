@@ -32,6 +32,7 @@ TUNABLE_FIELDS = frozenset({
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
+    "optimizer_signal_roles", "cell_gaussian_objective", "cell_reference_policy", "cell_quota_policy", "cell_shape_weighting", "cell_assignment_refinement", "cell_transport_policy", "cell_distribution_shape", "cell_covariance_memory", "cell_gradient_projection", "cell_extragradient_map",
     "optimizer_svd_backend",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",

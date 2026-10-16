@@ -159,7 +159,7 @@ class NormalizedOptimizer(Optimizer):
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
                  eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
-                 svd_backend="native", **options):
+                 svd_backend="native", signal_roles=(), **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -190,6 +190,13 @@ class NormalizedOptimizer(Optimizer):
                 raise TypeError(f"unsupported normalized optimizer option: {key}")
             if value not in (None, False, 0):
                 raise ValueError(f"normalized optimizers require disabled {key}")
+        if signal_roles and (family!="nsgda_global" or len(set(signal_roles))!=len(signal_roles) or any(r not in ("generator","prior") for r in signal_roles)):
+            raise ValueError("invalid gradient-signal roles")
+        self.signal_roles=tuple(signal_roles)
+        self.gradient_signal=None
+        if self.signal_roles:
+            from .gradient_signal import GradientSignal
+            self.gradient_signal=GradientSignal(self.signal_roles)
         self.family, self.momentum = family, float(momentum)
         self.smoothing = float(smoothing)
         self.convolution = convolution
@@ -303,6 +310,17 @@ class NormalizedOptimizer(Optimizer):
 
     @torch.no_grad()
     def step(self, closure=None):
+        if self.gradient_signal is None:return self._step_without_signal(closure)
+        if closure is not None:raise ValueError("gradient-signal prototype requires explicit public-trainer gradients")
+        scales=self.gradient_signal.scale(self.param_groups)
+        rates=[group["lr"] for group in self.param_groups]
+        for group in self.param_groups:group["lr"]*=scales.get(group["role"],1.)
+        try:return self._step_without_signal()
+        finally:
+            for group,rate in zip(self.param_groups,rates):group["lr"]=rate
+
+    @torch.no_grad()
+    def _step_without_signal(self, closure=None):
         loss = None
         if closure is not None:
             with torch.enable_grad():
@@ -420,6 +438,7 @@ class NormalizedOptimizer(Optimizer):
                              if group["algorithm"] == "rownorm" else None
                              for group in self.param_groups],
         }
+        if self.gradient_signal is not None:result["dualnorm"]["gradient_signal"]=self.gradient_signal.state_dict()
         if self.smoothing:
             result["dualnorm"]["smoothing"] = self.smoothing
         if self.convolution != "none":
@@ -440,6 +459,7 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("invalid normalized optimizer checkpoint schema")
         meta = saved["dualnorm"]
         expected_meta = {"schema", "family", "momentum", "sampled_rows"}
+        if self.gradient_signal is not None:expected_meta.add("gradient_signal")
         if self.smoothing:
             expected_meta.add("smoothing")
         if self.convolution != "none":
@@ -449,6 +469,7 @@ class NormalizedOptimizer(Optimizer):
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
+        if self.gradient_signal is not None:self.gradient_signal.validate(meta["gradient_signal"],self.param_groups)
         if meta.get("smoothing", 0.) != self.smoothing:
             raise ValueError("checkpoint optimizer smoothing differs")
         if meta.get("convolution", "none") != self.convolution:
@@ -542,6 +563,7 @@ class NormalizedOptimizer(Optimizer):
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
         self._refresh_adam()
+        if self.gradient_signal is not None:self.gradient_signal.load(metadata["gradient_signal"],self.param_groups)
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):
             if rows is not None:
@@ -574,7 +596,7 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
                                     convolution=recipe.optimizer_convolution,
-                                    svd_backend=recipe.optimizer_svd_backend, **options)
+                                    svd_backend=recipe.optimizer_svd_backend, signal_roles=recipe.optimizer_signal_roles, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
