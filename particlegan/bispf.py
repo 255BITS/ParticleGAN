@@ -230,9 +230,7 @@ class SBNPPriorRegularizer(nn.Module):
         else:
             repel_loss = rows.new_zeros(())
 
-        sigma_bound = max(float(target_sigma.mean()), self.target_std)
-        bound_pen = F.relu(rows.norm(dim=1) - 3.5 * sigma_bound).pow(2).mean()
-        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss + bound_pen
+        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss
         scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
         out = scale_w * base_loss
         if out.requires_grad:
@@ -1172,11 +1170,9 @@ class _BISPFPenaltyKernel:
                             overpop_mask = d_f_cached < (d_f_cached.median() - 0.25)
                             if starved_mask.any() and overpop_mask.any():
                                 bridge_r = torch.where(starved_mask)[0]
-                                bridge_f = torch.where(overpop_mask)[0]
-                                k_bridge = max(1, min(int(0.20 * b_f), min(len(bridge_r), len(bridge_f))))
+                                k_bridge = max(1, min(int(0.20 * b_f), len(bridge_r)))
                                 r_pick = bridge_r[torch.remainder(call_idx + torch.arange(k_bridge, device=x_real.device), len(bridge_r))]
-                                f_pick = bridge_f[:k_bridge]
-                                matched_real_idx[f_pick] = r_pick
+                                matched_real_idx[:k_bridge] = r_pick
 
                 x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)
@@ -1264,9 +1260,8 @@ class _BISPFPenaltyKernel:
             d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
-            mean_g = 0.5 * (g_real.flatten(1).mean(0) + g_fake.flatten(1).mean(0))
             eff_gamma_gauge = 0.005 if is_image_tensor else (min(self.gamma_gauge, 0.020) if b_r < 16 else self.gamma_gauge)
-            gauge_loss = 0.5 * eff_gamma_gauge * (mean_logit.pow(2) + mean_g.pow(2).sum())
+            gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
         if t_scale < 1.0 and penalty.requires_grad:

@@ -1367,9 +1367,9 @@ def test_bispf_2d_continuous_flow_bypasses_chord_curvature():
     )
 
 
-def test_bispf_spatial_tilt_gauge_damping():
-    """Verify that 1st-order spatial tilt gauge damping penalizes net spatial translation gradients
-    ||mean(g_real) + mean(g_fake)||^2 in addition to 0th-order scalar logit offset mean_logit^2.
+def test_bispf_scalar_logit_gauge_preserves_spatial_tilt():
+    """Verify that gauge loss penalizes scalar logit drift mean_logit^2 without damping
+    spatial translation gradients, preserving critic restoring forces for multi-cluster acquisition.
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
@@ -1386,7 +1386,7 @@ def test_bispf_spatial_tilt_gauge_damping():
 
     class LinearTiltCritic(nn.Module):
         def forward(self, x):
-            return (x @ w).unsqueeze(1)
+            return (x @ w).unsqueeze(1) + 2.0
 
     torch.manual_seed(123)
     xr = torch.randn(32, 2)
@@ -1396,11 +1396,11 @@ def test_bispf_spatial_tilt_gauge_damping():
 
     pen, stats = kernel.penalty(LinearTiltCritic(), xr, xf, step=0, collect_stats=True)
 
-    expected_gauge = 0.5 * gamma * float(w.pow(2).sum())
+    expected_gauge = 0.5 * gamma * (2.0 ** 2)
     assert abs(stats["gauge_loss"] - expected_gauge) < 1e-5, (
         f"Expected gauge_loss {expected_gauge}, got {stats['gauge_loss']}"
     )
-    assert abs(stats["mean_logit"]) < 1e-5
+    assert abs(stats["mean_logit"] - 2.0) < 1e-5
 
 
 def test_bispf_1d_continuous_flow_hook_unthrottled():
