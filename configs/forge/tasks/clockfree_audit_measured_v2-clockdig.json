@@ -1,0 +1,75 @@
+{
+  "adapter": "clockfree_audit",
+  "dependencies": [],
+  "description": "PROPOSED revision of clockfree_audit_measurement_v1 (needs user/reviewer sign-off; not a counted gate). Same probe and four measured comparisons. Measured parity decides: any differing comparison fails. The v1 declaration table is a pre-screen: a step-schedule entry is overridden when the probe had power to see a step/horizon-driven version of that schedule; a fixed internal counter entry is overridden under internal_counter_policy=measured when the counter is saved learning state. Continuous policies, extensions and lazy-penalty counters keep their declarations.",
+  "evaluation": {
+    "audit_rule": "measured_parity_v2",
+    "conditions": [
+      "step_label",
+      "horizon",
+      "evaluation_cadence",
+      "restart"
+    ],
+    "eval_output_noise": "clean",
+    "evaluator": "experiments.forge.views:_clockfree",
+    "internal_counter_policy": "measured",
+    "kind": "clockfree_parity",
+    "previous_task": "clockfree_audit_measurement_v1",
+    "rule_status": "proposed_requires_sign_off",
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "live",
+    "sources": {
+      "configs/forge/tasks/clockfree_audit.json": "70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f"
+    },
+    "training_feedback": false
+  },
+  "execution": {
+    "clock_audit_parent": {
+      "evaluation_fingerprint": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+      "execution_fingerprint": "046bcb9371d7fe72f12bb6daa46cf7e90e99737385e1c1be08717625ceaf7477",
+      "id": "clockfree_audit",
+      "task_sha256": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258"
+    },
+    "clock_audit_scope": "measure_known_dependencies",
+    "evaluation_samples": 16,
+    "initializer": "deterministic_orthogonal",
+    "model": {
+      "fourier": 2,
+      "hidden": 16,
+      "layers": 2
+    },
+    "original_schedule_horizon": 128,
+    "perturbed_horizon": 4096,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_contract": "recipe_owned_v1",
+    "probe_steps": 4,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 8,
+      "num_particles": 16,
+      "z_dim": 2
+    },
+    "step_label_offset": 8192,
+    "steps": 24,
+    "warmup_steps": 4
+  },
+  "id": "clockfree_audit_measured_v2-clockdig",
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1
+}

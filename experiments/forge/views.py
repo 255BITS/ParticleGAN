@@ -514,8 +514,25 @@ def _adaptation(task, evidence):
 def _clockfree(task, evidence):
     if not evidence.get("artifact_root") or not evidence.get("artifact_manifest"):
         return _verdict("INCOMPLETE", "clock comparisons require certified saved state artifacts")
-    from .clockfree import verify_probe
-    comparisons, audit = verify_probe(task, evidence)
+    from .clockfree import MEASURED_V2, measured_v2_decision, verify_probe
+    rule = task["evaluation"].get("audit_rule")
+    if rule is not None and rule != MEASURED_V2:
+        return _verdict("INVALID", f"unknown clock audit rule {rule!r}")
+    comparisons, audit, proof = verify_probe(task, evidence, with_proof=True)
+    if rule == MEASURED_V2:
+        # Proposed revision (sign-off required): measured parity decides; the
+        # declaration table is a pre-screen a passing, powered measurement overrides.
+        if task["execution"].get("clock_audit_scope") != "measure_known_dependencies":
+            return _verdict("INVALID", "measured_parity_v2 is a measurement-scope audit")
+        decision = measured_v2_decision(proof, task["execution"], comparisons,
+                                        task["evaluation"].get("internal_counter_policy", "declared"))
+        reason = ("; ".join(f"{name} changed the update or common-prefix state" for name in decision["differing_conditions"])
+                  or "; ".join(decision["standing"])
+                  or "measured parity agrees; declarations overridden by powered measurement")
+        return _verdict(decision["verdict"], reason, metrics={
+            "parity_comparisons": len(comparisons), "differing_conditions": len(decision["differing_conditions"]),
+            "declared_entries": len(decision["declarations"]), "overridden_entries": len(decision["overridden"]),
+            "standing_entries": len(decision["standing"])})
     if not isinstance(comparisons, list) or not isinstance(audit, dict):
         return _verdict("INCOMPLETE", "state/horizon parity comparisons and source audit are required")
     conditions = task["evaluation"]["conditions"]
