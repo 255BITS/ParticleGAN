@@ -95,11 +95,16 @@ def test_reruns_replace_only_wallclock_hits_with_real_verdicts(tmp_path):
         {"key": "d", "status": "PASS", "attempt": "w", "seconds": 760.0,
          "original_hit": {"raw_terminal_status": "timeout", "seconds": 900.2, "evidence": "e.json"}},
     ])
+    reruns.update(_overlay(tmp_path, [
+        {"key": "f", "status": "FAIL", "attempt": "v", "seconds": 290.0},
+        {"key": "g", "status": "PASS", "attempt": "u", "seconds": 290.0}]))
     records = [{"key": "a", "status": "TIMEOUT"}, {"key": "b", "status": "TIMEOUT"},
                {"key": "c", "status": "FAIL"}, {"key": "d", "status": "INCOMPLETE", "timeout_seconds": 900},
-               {"key": "e", "status": "TIMEOUT"}]
+               {"key": "e", "status": "TIMEOUT"},
+               {"key": "f", "status": "BLOCKED", "reason": "checkpoint parent five_word_joint_smoke: TIMEOUT"},
+               {"key": "g", "status": "BLOCKED", "reason": "constructor refused", "block_kind": "incompatible"}]
     out = wc.apply_reruns(records, reruns)
-    assert [r["status"] for r in out] == ["PASS", "TIMEOUT", "FAIL", "PASS", "TIMEOUT"]
+    assert [r["status"] for r in out] == ["PASS", "TIMEOUT", "FAIL", "PASS", "TIMEOUT", "FAIL", "BLOCKED"]
     assert out[0]["wallclock_rerun"]["superseded_status"] == "TIMEOUT"
     assert "wallclock_rerun" not in out[2]  # a recorded FAIL is never overwritten
     assert records[0]["status"] == "TIMEOUT"  # inputs are not mutated

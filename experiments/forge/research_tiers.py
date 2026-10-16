@@ -60,7 +60,7 @@ def _row(root, page, label, target, tasks, requirements, *, scope=None, selected
                     outcomes[task] = attempts[task]["status"]
                 # An archived wall-clock hit was never graded; a same-key solo rerun's
                 # real verdict (wallclock_rerun) is its first measurement.
-                elif (outcomes[task] in {"INCOMPLETE", "TIMEOUT"} and attempts.get(task, {}).get("wallclock_rerun")
+                elif (outcomes[task] in {"INCOMPLETE", "TIMEOUT", "BLOCKED"} and attempts.get(task, {}).get("wallclock_rerun")
                       and attempts[task]["status"] in {"PASS", "FAIL"}):
                     outcomes[task] = attempts[task]["status"]
         value = {"passed": sum(outcomes[task] == "PASS" for task in required), "total": len(required),

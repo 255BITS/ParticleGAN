@@ -161,13 +161,18 @@ def load_reruns(root):
 
 
 def apply_reruns(records, reruns):
-    """Replace a wall-clock hit with its same-key rerun only when the rerun has a real verdict."""
+    """Replace a wall-clock hit with its same-key rerun only when the rerun has a real verdict.
+
+    A task BLOCKED only because its checkpoint parent was a wall-clock hit is
+    treated the same way: its rerun continues from the rerun parent's checkpoint.
+    """
     out = []
     for record in records:
         rerun = reruns.get(record.get("key"))
         # A retained receipt may keep its raw terminal status only in its evidence
         # file; the overlay then quotes it (``original_hit``) for the same check.
-        hit = rerun and is_wallclock_hit({**record, **rerun.get("original_hit", {}), "status": record.get("status")})
+        hit = rerun and (is_wallclock_hit({**record, **rerun.get("original_hit", {}), "status": record.get("status")})
+                         or blocked_by_wallclock(record))
         if hit and rerun["status"] in VERDICTS:
             merged = {**record, "status": rerun["status"], "reason": rerun.get("reason", ""),
                       "seconds": rerun.get("seconds"), "updates": rerun.get("updates"),

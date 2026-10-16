@@ -2,7 +2,7 @@
 
 Only cells whose earlier verdict was a wall-clock hit are listed; the same-runtime control
 (Confidence LR, earlier PASS) is reported in the readout but never enters the overlay.
-Usage: build_overlay.py STATE_ROOT REPO_ROOT
+Usage: build_overlay.py REPO_ROOT STATE_ROOT [STATE_ROOT ...]
 """
 import glob
 import hashlib
@@ -10,7 +10,7 @@ import json
 import os
 import sys
 
-ROOT, REPO = sys.argv[1], sys.argv[2]
+REPO, ROOTS = sys.argv[1], sys.argv[2:]
 # Retained receipts keep their raw terminal status in the evidence file only (see hygiene #428).
 QUOTED = {"bcap-default-baseline-direction-v1": {
     "raw_terminal_status": "timeout", "seconds": 900.2391388670076,
@@ -22,10 +22,10 @@ def sha(path):
 
 
 records = []
-for spec_path in sorted(glob.glob(f"{ROOT}/specs/*.json")):
+for ROOT, spec_path in [(r, p) for r in ROOTS for p in sorted(glob.glob(f"{r}/specs/*.json"))]:
     spec = json.load(open(spec_path))
     directory = f"{ROOT}/attempts/{os.path.basename(spec_path)[:-5]}"
-    if spec["rerun_of"]["status"] not in {"TIMEOUT", "INCOMPLETE"} or not os.path.exists(f"{directory}/result.json"):
+    if spec["rerun_of"]["status"] not in {"TIMEOUT", "INCOMPLETE", "BLOCKED"} or not os.path.exists(f"{directory}/result.json"):
         continue
     result = json.load(open(f"{directory}/result.json"))
     record = {"key": spec["rerun_of"]["key"], "candidate_id": spec["candidate_id"], "task": spec["task"],
@@ -37,7 +37,7 @@ for spec_path in sorted(glob.glob(f"{ROOT}/specs/*.json")):
               "result_sha256": sha(f"{directory}/result.json"), "log_sha256": sha(f"{directory}/run.log"),
               "superseded_attempt": spec["rerun_of"]["attempt_id"], "superseded_status": spec["rerun_of"]["status"],
               "lease": "one job of this workflow per GPU (gpu-lease.sh)", "seed": 0}
-    if spec["candidate_id"] in QUOTED:
+    if spec["candidate_id"] in QUOTED and spec["task"] == "five_word_joint_smoke":
         record["original_hit"] = QUOTED[spec["candidate_id"]]
     records.append(record)
 value = {"schema": "forge_wallclock_reruns_v1", "qualification_input": False, "formulations_modified": False,
