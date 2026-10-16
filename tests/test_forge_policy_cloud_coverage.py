@@ -988,6 +988,15 @@ def test_policy_cloud_drain_falls_back_to_one_gpu_and_retries_interrupted_attemp
         occupancy += 1 if event["event"] == "started" else -1
         peak = max(peak, occupancy)
     assert peak <= 2 and all(job["status"] == "FAIL" for job in read_json(directory / "state.json")["jobs"].values())
+    # A pending diagnostic continuation must keep its producer's GPU.
+    continuation = tmp_path / "continuation"
+    atomic_json(continuation / "state.json", dict(intake="policy-cloud", jobs={
+        "producer": dict(key="producer", family="f", task="producer", status="FAIL", gpu="0", dependencies=[],
+                         resources=dict(gpus=1, gpu_memory_mb=1)),
+        "child": dict(key="child", family="f", task="child", status="PENDING", diagnostic_continuation=True,
+                      dependencies=[{"task": "producer", "kind": "checkpoint"}], resources=dict(gpus=1, gpu_memory_mb=1))}))
+    with pytest.raises(ValueError, match="producer's GPU 0"):
+        runner.drain(root, continuation, gpus=["1"])
     with pytest.raises(ValueError, match="exactly two distinct GPUs"):
         runner.drain(root, tmp_path / "selected", gpus=["1"]) if atomic_json(
             tmp_path / "selected/state.json", dict(jobs={})) is None else None

@@ -574,6 +574,15 @@ def drain(root, directory, *, gpus, source=None, watch=False, refresh=False, com
         if pinned - {str(gpu) for gpu in gpus}:
             raise ValueError("pending short fixed-limit tests are pinned to GPU " + ",".join(sorted(pinned)) +
                              "; include it in --gpus")
+        # A diagnostic continuation restores its producer's state on the same GPU.
+        producers = {str(parent["gpu"]) for job in initial["jobs"].values()
+                     if job["status"] in {"PENDING", "INTERRUPTED"} and job.get("diagnostic_continuation")
+                     for dep in job["dependencies"] if isinstance(dep, dict) and dep.get("kind") == "checkpoint"
+                     for parent in initial["jobs"].values()
+                     if parent["family"] == job["family"] and parent["task"] == dep["task"] and "gpu" in parent}
+        if producers - {str(gpu) for gpu in gpus}:
+            raise ValueError("pending diagnostic continuations must run on their producer's GPU " +
+                             ",".join(sorted(producers)) + "; include it in --gpus")
         if refresh or completion_hook is not None:
             raise ValueError("policy-cloud runs never refresh or publish the repository leaderboard")
     elif len(gpus) != 2 or len(set(gpus)) != 2:
