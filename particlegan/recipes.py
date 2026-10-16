@@ -65,6 +65,10 @@ class Recipe:
     reg_every: int = 1
     # Optional finite same-training-panel critic step guard; none preserves history.
     critic_step_mode: str = "none"
+    # Opt-in BISPF component ablation (research only). "none" keeps BISPF exactly.
+    # Otherwise a comma-separated, sorted subset of BISPF_ABLATION_PARTS; each named
+    # part is switched off (see particlegan.bispf). Requires critic_formulation="bispf".
+    bispf_ablation: str = "none"
     prior_reg: float = 0.0
     # The recipe owns learning/freezing and every latent-prior penalty. Tasks
     # supply the initial distribution, capacity and sampling law.
@@ -375,6 +379,11 @@ class Recipe:
                 raise ValueError("bispf formulation does not accept a legacy reg_arm")
             if self.reg_anchor_weight != 0:
                 raise ValueError("bispf formulation uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if self.bispf_ablation != "none":
+            from .bispf import parse_bispf_ablation
+            parse_bispf_ablation(self.bispf_ablation)
+            if self.critic_formulation != "bispf":
+                raise ValueError("bispf_ablation requires critic_formulation='bispf'")
         if self.reg_arm is not None and self.critic_formulation not in ("bcap", "bispf"):
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
@@ -717,6 +726,8 @@ class Recipe:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
             options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                        "anchor_weight": self.reg_anchor_weight, **overrides}
+            if self.bispf_ablation != "none":
+                options.setdefault("ablation", self.bispf_ablation)
             from .bispf import _BISPFPenaltyKernel
             _BISPFPenaltyKernel(**options)
             return options
@@ -896,6 +907,10 @@ class Recipe:
                        "eps": self.prior_reg_eps, **overrides}
             if self.prior_update == "frozen":
                 options["weight"] = 0.
+            if self.bispf_ablation != "none":
+                from .bispf import parse_bispf_ablation
+                if "tether_thermal" in parse_bispf_ablation(self.bispf_ablation):
+                    options.setdefault("thermal_coupling", False)
             return SBNPPriorRegularizer(reference, **options)
         if self.prior_regularizer == "coulomb":
             from .coulomb_prior import CoulombPriorRegularizer, coulomb_reference

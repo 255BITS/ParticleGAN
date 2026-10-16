@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "dig2-harmonic-link-v1",
+  "budget_seconds": 5400,
+  "candidate_budget_seconds": 3720,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Opt-in dig2 harmonic-link (2026-10-16): which BISPF parts give mode_hold on top of the SBNP tether; seed 0 only; at most 1.5 GPU-hours of training."
+}

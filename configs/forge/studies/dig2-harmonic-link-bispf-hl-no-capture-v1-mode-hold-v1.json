@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 5400,
+    "candidate_budget_seconds": 3720,
+    "id": "dig2-harmonic-link-v1"
+  },
+  "candidate": "bispf-hl-no-capture-v1",
+  "competing_explanation": "If the BISPF mode_hold pass does not come from the switched part, the knockout still passes mode_hold's sustained gate (>= 5 terminal passes of modes>=8 and hq>=0.9) and the matching knock-in on the reduced (BCAP + tether) kernel still fails.",
+  "control": {
+    "candidate_id": "bispf-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "dig2 harmonic-link: the BISPF part(s) switched in this arm decide whether the SBNP-tethered recipe holds all 8 modes in mode_hold (see reports/forge/dig2-20261016/harmonic-link.md).",
+  "id": "dig2-harmonic-link-bispf-hl-no-capture-v1-mode-hold-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "modes",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "gate_status": "FAIL",
+        "observation_count": 24
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/repair-witness.json",
+      "selector": [
+        "witnesses",
+        "control",
+        "mode_hold"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig2-harmonic-link-mode-hold-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
