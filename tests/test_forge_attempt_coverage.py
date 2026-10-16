@@ -224,3 +224,42 @@ def test_prior_ownership_repair_keeps_distribution_and_actual_recipe():
     request["candidate"]["resolved_recipe"]["prior_update"] = "frozen"
     with pytest.raises(ValueError, match="preserve the actual learned prior"):
         align_prior_contracts(request, ["child"])
+
+
+def test_selected_universe_keeps_held_and_removed_tasks_and_drops_plain_diagnostics():
+    note = {"explanation": "reports/forge/test-dispositions-20261015/README.md#x"}
+    views = [{"id": "counted", "assignments": [
+        {"task": "kept", "importance": "required"}, {"task": "held", "importance": "held", "hold": note},
+        {"task": "removed", "importance": "diagnostic", "removal": note},
+        {"task": "probe", "importance": "diagnostic"}]},
+        {"id": "other", "assignments": [{"task": "elsewhere", "importance": "required"}]}]
+    publication = {"rows": [{"candidate_id": "one"}], "family_progress": {"views": views, "families": [
+        {"id": "family", "current_cohort_anchor": "a", "cohorts": [{"anchor": "a", "row_index": 0,
+                                                                    "views": [{"id": "counted"}]}]}]}}
+    assert runner.selected_tasks(publication) == [("family", {"candidate_id": "one"}, ["held", "kept", "removed"])]
+
+
+def test_holding_or_removing_tests_keeps_the_committed_selected_universe():
+    publication = read_json(Path(__file__).resolve().parents[1] / "reports/forge/technique-inventory.json")
+    counted, uncounted = deepcopy(publication), deepcopy(publication)
+    for view in counted["family_progress"]["views"]:
+        for assignment in view["assignments"]:
+            if assignment["importance"] == "held" or "removal" in assignment:
+                assignment.pop("hold", None)
+                assignment.pop("removal", None)
+                assignment["importance"] = "required"
+    for view in uncounted["family_progress"]["views"]:
+        for assignment in view["assignments"]:
+            # The decided dispositions: fifteen held tests and two removed from the count.
+            if assignment["importance"] != "required":
+                continue
+            if assignment["task"] in {"ring_hold", "clockfree_audit"}:
+                assignment.update(importance="diagnostic", removal={"reason": "phase"})
+            elif assignment["task"].startswith(("vector_un", "vector_aniso", "vector_overlap", "img_b", "img_i",
+                                                "grid100", "rotated100", "staggered100", "gaussian1d_stability",
+                                                "target_shift")):
+                assignment.update(importance="held", hold={"reason": "no_global_recipe"})
+    assert counted["family_progress"]["views"] != uncounted["family_progress"]["views"]
+    universe = runner.selected_tasks(publication)
+    assert universe and {len(tasks) for _, _, tasks in universe} == {35}
+    assert runner.selected_tasks(counted) == runner.selected_tasks(uncounted) == universe

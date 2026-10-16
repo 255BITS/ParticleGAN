@@ -751,3 +751,175 @@ def test_first_case_snapshot_is_archival_and_missing_later_reports_add_no_cells(
     assert archived["counts_scope"] == "AT_FIRST_ACCEPTED_CASE"
     assert archived["remaining_not_run"] == historical["remaining_not_run"]
     assert score(progress["families"][0]["cohorts"][0]["total"]) == "3/5 (1 not run)"
+
+
+EXPLANATIONS = "reports/forge/test-dispositions-20261015/README.md"
+
+
+def hold_note(name, reason="no_global_recipe"):
+    return {"schema": "forge_hold_v1", "previous_importance": "required", "reason": reason, "blocked_by": [],
+            "summary": f"Fixture: {name} is measured and shown but not counted.",
+            "explanation": f"{EXPLANATIONS}#{name}", "reentry": f"Count {name} again when one recipe passes it with the rest."}
+
+
+def removal_note(name):
+    return {"schema": "forge_count_removal_v1", "previous_importance": "required", "reason": "superseded",
+            "counted_by": None, "summary": f"Fixture: {name} left the count of this view.",
+            "explanation": f"{EXPLANATIONS}#{name}"}
+
+
+def uncount(root, view, changes):
+    """Rewrite a fixture view as a disposition apply would: {task: (importance, note key, note)}."""
+    path = root / f"configs/forge/views/{view}.json"
+    definition = read_json(path)
+    for assignment in definition["assignments"]:
+        if assignment["task"] in changes:
+            importance, key, note = changes[assignment["task"]]
+            assignment.update({"importance": importance, key: note})
+    atomic_json(path, definition)
+
+
+def hold_alpha(root):
+    # alpha keeps one counted test; its Tier 2 and Tier 3 tests are held, its diagnostic is removed.
+    uncount(root, "alpha", {"failed": ("held", "hold", hold_note("failed")),
+                            "missing": ("held", "hold", hold_note("missing", "unsolved")),
+                            "diagnostic": ("diagnostic", "removal", removal_note("diagnostic"))})
+
+
+def assert_anchored_links_resolve(root, pages):
+    """Every page-and-anchor link, including explanation links, reaches its anchor."""
+    readme = root / EXPLANATIONS
+    readme.parent.mkdir(parents=True, exist_ok=True)
+    readme.write_text("".join(f'<a name="{name}"></a>\n\n' for name in ("failed", "missing", "diagnostic", "held")))
+    for path, content in pages.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+    targets = [(path, target) for path, content in pages.items()
+               for target in re.findall(r"\]\(([^)]+#[^)]+)\)", content)]
+    assert any(EXPLANATIONS.rsplit("/", 2)[1] in target for _, target in targets)
+    for path, target in targets:
+        filename, _, fragment = target.partition("#")
+        linked = (path.parent / filename).resolve()
+        assert linked.is_file() and f'<a name="{fragment}"></a>' in linked.read_text(), (path, target)
+
+
+def test_views_without_held_tasks_add_no_held_sections_and_count_every_requirement(report):
+    root, publication = report
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "**5 means 5 counted view requirements, including repeated tests**. These totals" in text
+    for absent in ("Held and removed tests", "Held (measured, not counted)", "Counts follow the declared view revisions"):
+        assert absent not in text
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "Held tests (still measured)" not in page and "Held (measured, not counted)" not in page
+    assert "| [failed](k3p.md#" in page and "| required | FAIL |" in page
+    # Refresh guidance names the registered view whose change alone switches the plain command.
+    assert "always add `--refresh-publication`" in text and "only when alpha itself changed" in text
+
+
+def test_held_and_removed_tests_leave_the_count_and_are_listed_from_the_views(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    alpha, beta = cohort["views"]
+    assert score(alpha["total"]) == "1/1" and score(alpha["held"]) == "0/2 (1 not run)" and "held" not in beta
+    assert score(cohort["total"]) == "3/3"
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    summed = [read_json(root / f"configs/forge/views/{name}.json") for name in ("alpha", "beta")]
+    counted = sum(a["importance"] == "required" for view in summed for a in view["assignments"])
+    assert f"**{counted} means {counted} counted view requirements, including repeated tests**" in text
+    assert "2 held and 1 removed view assignments are still measured" in text
+    section = text.split("## Held and removed tests", 1)[1].split("\n## ", 1)[0]
+    rows = [line for line in section.splitlines() if line.startswith("| `")]
+    readme = "test-dispositions-20261015/README.md"
+    assert rows == [
+        "| `failed` | held: no one recipe passes it together with the counted tests | alpha (Tier 2) | "
+        f"{hold_note('failed')['summary']} | {hold_note('failed')['reentry']} | 0 of 1 | [explanation]({readme}#failed) |",
+        "| `missing` | held: no recipe has passed it yet | alpha (Tier 3) | "
+        f"{hold_note('missing')['summary']} | {hold_note('missing')['reentry']} | 0 of 1 | [explanation]({readme}#missing) |",
+        "| `diagnostic` | removed: replaced by newer tests | alpha (Tier 2) | "
+        f"{removal_note('diagnostic')['summary']} | — | 0 of 1 | [explanation]({readme}#diagnostic) |"]
+    assert "No new test was passed." in section
+    assert "K3P's recorded measurement fails no counted test: 3/3 pass. Every test it fails is held." in section
+    assert "K3P passes every counted test that any other selected recipe passes. It is not a new measurement of K3P." in section
+    assert "the highest tier of alpha, Tier 3, has only held tests, so the view reports HELD and never PASS" in section
+    breakdown = text.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    assert "| Total view requirements | Held (measured, not counted) |" in breakdown
+    assert f"[0/2 (1 not run)](families/k3p.md#{cohort['anchor']}-held) |" in breakdown
+    assert breakdown.rstrip().endswith("| — |")  # beta holds nothing.
+    pages = generated_pages(root, publication)
+    pages[root / "reports/forge/technique-inventory.md"] = text
+    assert_anchored_links_resolve(root, pages)
+    # A held pass stays visible and is named, but it no longer counts.
+    publication["rows"][0]["tasks"][1]["status"] = "PASS"
+    assert score(generate(report)["total"]) == "3/3"
+    section = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md").split(
+        "## Held and removed tests", 1)[1].split("\n## ", 1)[0]
+    assert "| 1 of 1 | [explanation](test-dispositions-20261015/README.md#failed) |" in section
+    assert "Selected recipes pass 1 of the held or removed view requirements" in section
+    assert "No new test was passed" not in section and "fails no counted test" not in section
+
+
+def test_disclosure_names_counted_requirements_without_a_recorded_pass(report):
+    root, publication = report
+    hold_alpha(root)
+    page = root / "reports/forge/technique-inventory.md"
+    for status, detail in (("UNKNOWN", "has no recorded result (UNKNOWN)"), ("BLOCKED", "is BLOCKED")):
+        publication["rows"][0]["tasks"][3]["status"] = status  # beta's counted task
+        generate(report)
+        assert (f"K3P's recorded measurement fails no counted test: 2/3 pass and the other 1 {detail}. "
+                "Every test it fails is held.") in render_leaderboard(root, publication, page)
+
+
+def test_view_counting_the_same_tests_as_another_while_its_top_tier_is_held_says_so(report):
+    root, publication = report
+    hold_alpha(root)
+    uncount(root, "beta", {"held": ("held", "hold", hold_note("held"))})
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert ("While missing is held, alpha counts the same tests as beta and reports HELD: its highest tier, "
+            "Tier 3, has only held tests, so it never shows PASS.") in text
+    assert "While held is held, beta counts the same tests as alpha and reports HELD" in text
+    assert "**2 means 2 counted view requirements, including repeated tests**. 3 held and 1 removed" in text
+
+
+def test_family_page_links_held_roles_and_lists_each_held_test_with_its_recorded_result(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    readme = "../test-dispositions-20261015/README.md"
+    assert f"| [held: no one recipe passes it together with the counted tests]({readme}#failed) | FAIL |" in page
+    assert f"| [held: no recipe has passed it yet]({readme}#missing) | UNKNOWN |" in page
+    assert f"| [removed: replaced by newer tests]({readme}#diagnostic) | UNKNOWN |" in page
+    assert ("Required counts (Tier 1 / 2 / 3): **1 / 0 / 0**. Held counts (measured and shown, not counted): "
+            "**0 / 1 / 1**. Its highest tier, Tier 3, has only held tests, so the view reports HELD, never PASS, "
+            "while they are held.") in page
+    assert "| Total distinct tests | Held (measured, not counted) |" in page
+    assert f"[0/2 (1 not run)](k3p.md#{cohort['anchor']}-held) |" in page
+    held = page.split("### Held tests (still measured)", 1)[1].split("\n## ", 1)[0]
+    rows = [line for line in held.splitlines() if line.startswith("| [")]
+    assert [row.split("](")[0] for row in rows] == ["| [failed", "| [missing"]
+    assert f"| FAIL | [held: no one recipe passes it together with the counted tests]({readme}#failed) | " in rows[0]
+    assert rows[1].endswith(f"| {hold_note('missing')['summary']} | {hold_note('missing')['reentry']} |")
+    second = page.split("### Tier 2 across views", 1)[1].split("<a name=", 1)[0]
+    counted, uncounted = second.split("Held at this tier (measured and shown, not counted):")
+    assert "[held](k3p.md" in counted and "[failed](k3p.md" not in counted
+    held_rows, removed_rows = uncounted.split("Removed from the count at this tier (still measured):")
+    assert "[failed](k3p.md" in held_rows and "| FAIL | matches recorded run |" in held_rows
+    assert f"[removed: replaced by newer tests]({readme}#diagnostic) | UNKNOWN |" in removed_rows
+
+
+def test_declared_revision_note_follows_the_recorded_view_only_when_it_changed(report):
+    root, publication = report
+    path = root / "configs/forge/views/alpha.json"
+    definition = read_json(path)
+    definition["revision"] = 2
+    atomic_json(path, definition)
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert ("Counts follow the declared view revisions: alpha 2, beta 1. The recorded qualification keeps alpha "
+            "revision 1 until new ordinary evidence is registered; no recorded verdict was regraded.") in text
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert ("Their counts follow the declared alpha revision 2; the recorded qualification keeps revision 1 "
+            "until new ordinary evidence is registered.") in page

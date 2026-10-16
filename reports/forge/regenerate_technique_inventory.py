@@ -10,6 +10,8 @@ source evidence and rebinding the same selected configurations under the current
 view. Archived outcomes and selection cards are preserved without regrade.
 --refresh-publication updates display evidence and declared-view coverage while
 preserving verified selected rows and their recorded qualification policy.
+Always pass it after a view revision, such as a held or removed test: without
+it, only a change to the registered view itself switches to the refresh.
 """
 from __future__ import annotations
 
@@ -2356,13 +2358,27 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         if (declared["revision"] <= manifest["view_revision"]
                 or not frozen.is_file() or stable_hash(read_json(frozen)) != manifest["policy_fingerprint"]):
             raise ValueError("declared-view refresh requires the exact archived publication policy")
-    requirements = {tier: [row["task"] for row in sorted(declared["assignments"], key=lambda row: row.get("order", 0))
-                           if str(row["qualification_tier"]) == tier and row["importance"] == "required"]
+    ordered = sorted(declared["assignments"], key=lambda row: row.get("order", 0))
+
+    def declared_tier(tier, match):
+        return [row for row in ordered if str(row["qualification_tier"]) == tier and match(row)]
+
+    requirements = {tier: [row["task"] for row in declared_tier(tier, lambda row: row["importance"] == "required")]
                     for tier in result["tier_requirements"]}
+    # Held tasks are measured and shown but not counted; a task removed from the
+    # count stays assigned as diagnostic with a note naming who carries it.
     result["declared_view"] = {"revision": declared["revision"], "policy_fingerprint": stable_hash(declared),
                                "tier_requirements": requirements,
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
-                                                        for tier, names in requirements.items()}}
+                                                        for tier, names in requirements.items()},
+                               "removed_required_tasks": {tier: [name for name in names if name not in requirements.get(tier, [])]
+                                                          for tier, names in manifest["tier_requirements"].items()},
+                               "held_tasks": {tier: [row["task"] for row in declared_tier(tier, lambda row: row["importance"] == "held")]
+                                              for tier in result["tier_requirements"]},
+                               "removed_from_count": {tier: [{"task": row["task"], "reason": row["removal"]["reason"],
+                                                              "counted_by": row["removal"]["counted_by"]}
+                                                             for row in declared_tier(tier, lambda row: "removal" in row)]
+                                                      for tier in result["tier_requirements"]}}
     if regroup:
         registry = read_json(root / REGISTRY) if registry_hash is not None else None
         previous = _previous_family_registry(root, result)
@@ -3082,7 +3098,8 @@ def main(argv=None):
     parser.add_argument("--ownership-migration", type=Path,
                         help="explicit source-bound selected-leader ownership migration; requires --advance-policy and --source-commit")
     parser.add_argument("--refresh-publication", action="store_true",
-                        help="refresh displayed evidence and view coverage, preserving registered scores and selections")
+                        help="refresh displayed evidence and view coverage, preserving registered scores and selections; "
+                             "always pass it after a view revision")
     args = parser.parse_args(argv)
     if args.output_prefix is not None:
         if args.recorded_policy or args.advance_policy or args.ownership_migration or args.refresh_publication:

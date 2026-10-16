@@ -418,6 +418,44 @@ def test_publication_refresh_preserves_science_and_shows_new_unknown_requirement
     assert _outputs(root) == before and times == {path: path.stat().st_mtime_ns for path in before}
 
 
+def test_publication_refresh_names_held_and_removed_tasks_without_counting_them(evidence):
+    root, manifest = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    policy = read_json(root / "configs/forge/views/discriminator_stability.json")
+    atomic_json(root / "configs/forge/view-history/discriminator_stability-v2.json", policy)
+    policy["revision"] = 3
+    explanation = "reports/forge/test-dispositions-20261015/README.md"
+    for assignment in policy["assignments"]:
+        if assignment["task"] == "ae":
+            assignment.update(importance="held", hold=dict(
+                schema="forge_hold_v1", previous_importance="required", reason="no_global_recipe", blocked_by=[],
+                summary="Fixture: measured and shown, not counted.", explanation=explanation + "#ae",
+                reentry="Count again when one recipe passes it and every counted task."))
+        elif assignment["task"] == "token":
+            assignment.update(importance="diagnostic", removal=dict(
+                schema="forge_count_removal_v1", previous_importance="required", reason="superseded",
+                counted_by=None, summary="Fixture: replaced by a newer declaration.", explanation=explanation + "#token"))
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
+    metadata = publication.refresh_publication(root)
+    current = read_json(metadata["json"])
+    for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", *publication.POLICY_FIELDS):
+        assert current.get(key) == baseline.get(key)
+    declared = current["declared_view"]
+    assert declared["tier_requirements"] == {"1": ["two_pole"], "2": [], "3": []}
+    assert declared["removed_required_tasks"]["1"] == ["token", "ae"]
+    assert declared["held_tasks"] == {"1": ["ae"], "2": [], "3": []}
+    assert declared["removed_from_count"] == {"1": [{"task": "token", "reason": "superseded", "counted_by": None}],
+                                              "2": [], "3": []}
+    markdown = Path(metadata["report"]).read_text()
+    assert ("**1 means 1 counted view requirements, including repeated tests**. 1 held and 1 removed view "
+            "assignments are still measured") in markdown
+    assert ("Counts follow the declared view revisions: discriminator_stability 3. The recorded qualification keeps "
+            "discriminator_stability revision 2 until new ordinary evidence is registered") in markdown
+    assert "| `ae` | held: no one recipe passes it together with the counted tests | discriminator_stability (Tier 1) |" in markdown
+    assert "| `token` | removed: replaced by newer tests | discriminator_stability (Tier 1) |" in markdown
+    assert "always add `--refresh-publication`" in markdown
+
+
 @pytest.mark.parametrize("tamper,message", [("digest", "input digest"), ("row", "unregistered scientific row")])
 def test_publication_refresh_rejects_changed_science_before_writing(evidence, tamper, message):
     root, _ = evidence

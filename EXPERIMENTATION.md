@@ -620,10 +620,12 @@ API results while retaining the registered scientific rows and family selections
 It verifies the immutable evidence snapshots and exact archived policy, launches
 no training and does not regrade receipts. New required cells remain unknown
 until compatible ordinary evidence is explicitly registered.
-The default command selects that safe publication refresh automatically when
-the declared view is newer than the registered evidence policy. The explicit
-flag remains available; advancing qualification still requires the source and
-policy options above.
+The default command selects that safe publication refresh automatically only
+when the registered view itself (`discriminator_stability`) is newer than the
+registered evidence policy; a revision of any other view would take the ordinary
+publishing path. Always pass `--refresh-publication` after a view revision, for
+example after holding a test or removing one from the count. Advancing
+qualification still requires the source and policy options above.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and

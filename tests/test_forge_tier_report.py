@@ -74,7 +74,7 @@ def test_inventory_keeps_diagnostics_empty_tiers_and_unassigned_tasks(inventory)
     assert view(result, "stability")["source"] == "configs/forge/views/stability.json"
     assert view(result, "stability")["calibration"] == {"status": "provisional"}
     second = tier(result, "stability", 2)
-    assert second["counts"] == {"required": 2, "ranking": 0, "diagnostic": 1}
+    assert second["counts"] == {"required": 2, "held": 0, "ranking": 0, "diagnostic": 1}
     assert [item["id"] for item in second["tasks"]] == ["quality", "other_quality", "diagnostic"]
     diagnostic = second["tasks"][-1]
     assert diagnostic["importance"] == "diagnostic" and diagnostic["order"] == 2
@@ -84,7 +84,7 @@ def test_inventory_keeps_diagnostics_empty_tiers_and_unassigned_tasks(inventory)
     assert diagnostic["dependencies"] == []
     empty = tier(result, "short", 3)
     assert empty["tasks"] == []
-    assert empty["counts"] == {"required": 0, "ranking": 0, "diagnostic": 0}
+    assert empty["counts"] == {"required": 0, "held": 0, "ranking": 0, "diagnostic": 0}
 
 
 def test_new_tasks_and_views_are_discovered_without_an_inventory_list(inventory):
@@ -137,7 +137,7 @@ def test_ranking_assignments_keep_their_declared_role(inventory):
         importance="ranking")
     atomic_json(path, definition)
     second = tier(build_report(inventory), "stability", 2)
-    assert second["counts"] == {"required": 2, "ranking": 1, "diagnostic": 0}
+    assert second["counts"] == {"required": 2, "held": 0, "ranking": 1, "diagnostic": 0}
     assert second["tasks"][-1]["importance"] == "ranking"
 
 
@@ -180,7 +180,7 @@ def test_calibration_diagnostic_view_preserves_scope_and_qualification_limits(in
     result = build_report(inventory, "calibration_probe")
     assert view(result, "calibration_probe")["evidence_scope"] == "calibration_diagnostic"
     assert tier(result, "calibration_probe", 1)["counts"] == {
-        "required": 0, "ranking": 0, "diagnostic": 1,
+        "required": 0, "held": 0, "ranking": 0, "diagnostic": 1,
     }
     document = render_markdown(result, inventory)
     assert "calibration_diagnostic" in document
@@ -210,6 +210,61 @@ def test_task_source_links_follow_renamed_declarations(inventory):
     document = render_markdown(result, inventory, inventory / "reports/forge/tiers.md")
     assert "../../configs/forge/tasks/renamed_smoke.json" in document
     assert "../../configs/forge/tasks/smoke.json" not in document
+
+
+def test_held_and_removed_roles_link_explanations_and_a_held_top_tier_reports_held(inventory):
+    explanation = "reports/forge/test-dispositions-20261015/README.md"
+    path = inventory / "configs/forge/views/stability.json"
+    definition = read_json(path)
+    notes = {
+        "other_quality": ("held", "hold", dict(
+            schema="forge_hold_v1", previous_importance="required", reason="no_global_recipe", blocked_by=[],
+            summary="Fixture: measured and shown, not counted.", explanation=explanation + "#other_quality",
+            reentry="Count again when one recipe passes it and every counted task.")),
+        "endurance": ("held", "hold", dict(
+            schema="forge_hold_v1", previous_importance="required", reason="unsolved", blocked_by=[],
+            summary="Fixture: no recipe has passed this task.", explanation=explanation + "#endurance",
+            reentry="Count again after an ordinary PASS with every counted task.")),
+        "diagnostic": ("diagnostic", "removal", dict(
+            schema="forge_count_removal_v1", previous_importance="required", reason="duplicate",
+            counted_by="quality", summary="Fixture: the same question as quality.",
+            explanation=explanation + "#diagnostic")),
+    }
+    for assignment in definition["assignments"]:
+        if assignment["task"] in notes:
+            importance, key, note = notes[assignment["task"]]
+            assignment.update({"importance": importance, key: note})
+    atomic_json(path, definition)
+    result = build_report(inventory)
+    second = tier(result, "stability", 2)
+    assert second["counts"] == {"required": 1, "held": 1, "ranking": 0, "diagnostic": 1}
+    assert tier(result, "stability", 3)["counts"] == {"required": 0, "held": 1, "ranking": 0, "diagnostic": 0}
+    rows = {row["id"]: row for row in second["tasks"]}
+    assert rows["other_quality"]["hold"] == notes["other_quality"][2]
+    assert rows["diagnostic"]["removal"] == notes["diagnostic"][2] and "hold" not in rows["quality"]
+    document = render_markdown(result, inventory, inventory / "reports/forge/EXPERIMENTS_BY_TIER.md")
+    assert "Held tasks are still run and shown but are not counted" in document
+    assert ("| [stability](../../configs/forge/views/stability.json) | 1 | 1 required | "
+            "1 required, 1 held, 1 diagnostic (1 removed from the count) | 1 held | provisional |") in document
+    assert ("| [held: no one recipe passes it together with the counted tests]"
+            "(test-dispositions-20261015/README.md#other_quality) |") in document
+    assert ("| [removed: duplicate of quality (counted there)]"
+            "(test-dispositions-20261015/README.md#diagnostic) |") in document
+    assert "| [held: no recipe has passed it yet](test-dispositions-20261015/README.md#endurance) |" in document
+    assert ("1 held. Nothing here is counted while these tasks are held, so this tier's status is HELD: "
+            "it neither passes nor stops later tiers.") in document
+    assert ("Tier 3, the highest tier, has only held tasks, so this view reports HELD, never PASS, "
+            "while they are held.") in document
+    short = document.split("## short", 1)[1].split("\n## ", 1)[0]
+    assert "HELD" not in short and "held" not in short
+    # Without held or removed tasks the report keeps its original wording.
+    for assignment in definition["assignments"]:
+        if assignment["task"] in notes:
+            assignment.pop(notes[assignment["task"]][1])
+            assignment["importance"] = "required"
+    atomic_json(path, definition)
+    plain = render_markdown(build_report(inventory), inventory, inventory / "reports/forge/EXPERIMENTS_BY_TIER.md")
+    assert "Held tasks are still run" not in plain and "HELD" not in plain and "removed from the count" not in plain
 
 
 def test_selected_view_must_exist_and_have_safe_id(inventory):
