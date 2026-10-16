@@ -230,9 +230,18 @@ class SBNPPriorRegularizer(nn.Module):
             A = M - M_iso
             local_iso_loss = (A.pow(2).sum(dim=(-2, -1)) / ((tr_M.squeeze(-1).squeeze(-1) / d) + 1e-6).pow(2)).mean()
 
+        # 5. Active 2D plane circularization on top-2 eigenvalues of local covariance
+        active_iso_loss = rows.new_zeros(())
+        if d >= 2 and m_sub > 64:
+            row_centered = z_sub - z_sub.mean(dim=0, keepdim=True)
+            cov_mat = (row_centered.T @ row_centered) / max(1, m_sub - 1)
+            eigs = torch.linalg.eigvalsh(cov_mat)
+            l1, l2 = eigs[-1], eigs[-2]
+            active_iso_loss = 0.05 * (l1 - l2).pow(2) / (l1 + l2 + 1e-6).pow(2)
+
         is_small_latent = (n <= 64 and d >= 8 and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references) <= 64))
         eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
-        eff_repel_weight = (self.repel_weight * 7.5) if is_small_latent else self.repel_weight
+        eff_repel_weight = (self.repel_weight * 25.0) if is_small_latent else self.repel_weight
         k = min(eff_k_nn, m_sub - 1)
         if k > 0 and eff_repel_weight > 0.0:
             sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
@@ -241,20 +250,20 @@ class SBNPPriorRegularizer(nn.Module):
                 r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
             eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
             knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-            effective_margin = 0.50 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
+            effective_margin = 1.00 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
             norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
             repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
         else:
             repel_loss = rows.new_zeros(())
 
-        base_loss = mean_error + var_loss + cov_loss + eff_repel_weight * repel_loss + 0.10 * local_iso_loss
-        scale_w = self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight)
-        out = scale_w * base_loss
-        if out.requires_grad:
+        global_moments = mean_error + var_loss + cov_loss
+        if global_moments.requires_grad:
             s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
             if s < 1.0:
-                out = out * s + out.detach() * (1.0 - s)
-        return out
+                global_moments = global_moments * s + global_moments.detach() * (1.0 - s)
+        base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
+        scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+        return scale_w * base_loss
 
 
 class StratifiedBlueNoisePrior(nn.Module):
@@ -821,10 +830,7 @@ class ContinuousThermalCooler:
         """Compute dimension- and batch-scale invariant cooling threshold."""
         d = max(1, min(dim, 4))
         b = max(16, batch_size)
-        if d == 1:
-            scale = 1024.0 / b
-        else:
-            scale = (128.0 / b) ** (1.0 / d) if b < 128 else 1.0
+        scale = 1.0 if b >= 128 else ((1024.0 / b) if d == 1 else (1024.0 / b) ** (1.0 / d))
         return self.tau_cooling * scale
 
     def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
@@ -894,7 +900,14 @@ def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output:
                 if s_thermal < 0.999:
                     mult = 0.002 if dim_hook == 1 else 0.010
                     factor = mult * (s_thermal / math.sqrt(max(1e-6, 1.0 - s_thermal**2)))
-                    s_v = max(1e-4, min(1.0, factor))
+                    if dim_hook == 1:
+                        s_v = max(0.05, min(1.0, factor))
+                    else:
+                        s_v = max(0.15, min(1.0, factor))
+                        call_idx = getattr(rec, "calls", 0)
+                        if call_idx >= 1000:
+                            ramp = min(1.0, max(0.0, (call_idx - 1000.0) / 200.0))
+                            s_v = s_v * (1.0 - 0.70 * ramp)
                     # Adaptive local dispersion boost: sparse minority modes retain unthrottled velocity
                     if dim_hook >= 2 and target.ndim == 2:
                         with torch.no_grad():
@@ -1229,8 +1242,8 @@ class _BISPFPenaltyKernel:
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
         if is_image_tensor:
-            img_scale = min(1.0, max(0.35, float(getattr(self.record, "ema_data_scale", 4.899)) / 4.899))
-            kappa_eff = (self.kappa / img_scale) * (0.6 + 0.85 * (1.0 - res_ratio))
+            img_scale = min(1.0, max(0.15, float(getattr(self.record, "ema_data_scale", 4.899)) / 4.899))
+            kappa_eff = (self.kappa / img_scale) * (0.6 + 1.10 * (1.0 - res_ratio))
         else:
             kappa_eff = self.kappa
 
@@ -1279,7 +1292,15 @@ class _BISPFPenaltyKernel:
             d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
-            eff_gamma_gauge = 0.005 if is_image_tensor else (min(self.gamma_gauge, 0.020) if b_r < 16 else self.gamma_gauge)
+            if is_image_tensor:
+                eff_gamma_gauge = 0.005
+            elif b_r < 16:
+                eff_gamma_gauge = min(self.gamma_gauge, 0.020)
+            elif is_continuous_flow and call_idx >= 1000:
+                ramp = min(1.0, max(0.0, (call_idx - 1000.0) / 200.0))
+                eff_gamma_gauge = self.gamma_gauge + 0.150 * ramp
+            else:
+                eff_gamma_gauge = self.gamma_gauge
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)

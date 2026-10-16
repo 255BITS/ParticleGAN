@@ -634,7 +634,8 @@ def test_bispf_endpoint_born_infeld_image_limit():
     # In Euclidean coordinates: ||g||_2 = sqrt(dim * (s / sqrt(dim))^2) = s = 2.0
     # Under scale_dim = 1.0, norm = s / 1.0 = 2.0 matches expected analytical cap and decoupled floor penalties with adaptive kappa_eff
     res_ratio = min(1.0, max(0.0, float(getattr(kernel_math.record, "ema_residual", 1.0))))
-    kappa_eff = kappa * (0.6 + 0.85 * (1.0 - res_ratio))
+    img_scale = min(1.0, max(0.15, float(getattr(kernel_math.record, "ema_data_scale", 4.899)) / 4.899))
+    kappa_eff = (kappa / img_scale) * (0.6 + 1.10 * (1.0 - res_ratio))
     norm = s / 1.0
     expected_cap = l_cap * (F.softplus(torch.tensor(norm - kappa_eff), beta=beta).item() ** 2)
     expected_floor = 0.5 * 0.0005 * ((s ** 2) / dim_img)
@@ -770,7 +771,7 @@ def test_bispf_critic_hook_generator_gradient_unthrottled():
     grads_cooled = [p.grad.clone() for p in G.parameters()]
 
     factor = 0.010 * (0.02 / math.sqrt(max(1e-6, 1.0 - 0.02**2)))
-    s_v = max(1e-4, min(1.0, factor))
+    s_v = max(0.15, min(1.0, factor))
     with torch.no_grad():
         x_in_flat = fake_cooled.detach().flatten(1)
         dists = torch.cdist(x_in_flat, x_in_flat, p=2.0)
@@ -1127,15 +1128,15 @@ def test_bispf_scale_invariant_thermal_cooling():
     assert abs(tau_base - 0.020) < 1e-6
 
     tau_1d = cooler.effective_tau(batch_size=128, dim=1)
-    assert abs(tau_1d - 0.160) < 1e-6  # 0.020 * (1024/128)^1 = 0.020 * 8 = 0.160
+    assert abs(tau_1d - 0.020) < 1e-6  # For b >= 128, tau_eff = 0.020 without 8x inflation
 
     tau_1024_2d = cooler.effective_tau(batch_size=1024, dim=2)
     assert abs(tau_1024_2d - 0.020) < 1e-6
 
     for b in [16, 64, 128, 512, 1024]:
-        expected_scale = 1024.0 / b
+        expected_scale = 1.0 if b >= 128 else (1024.0 / b)
         assert abs(cooler.effective_tau(batch_size=b, dim=1) - 0.020 * expected_scale) < 1e-6
-        expected_scale_2d = (128.0 / b) ** 0.5 if b < 128 else 1.0
+        expected_scale_2d = 1.0 if b >= 128 else (1024.0 / b) ** 0.5
         assert abs(cooler.effective_tau(batch_size=b, dim=2) - 0.020 * expected_scale_2d) < 1e-6
 
     # 2. Cooling behavior
@@ -1144,10 +1145,14 @@ def test_bispf_scale_invariant_thermal_cooling():
     s_base = cooler.scale_for(batch_size=128, dim=2)
     assert s_base == 1.0
 
-    # For (128, 1), 0.10 < 0.160 -> actively cooling
-    s_1d = cooler.scale_for(batch_size=128, dim=1)
-    assert s_1d < 1.0
-    assert s_1d >= cooler.s_min
+    # For (128, 1), 0.10 > 0.020 -> uncooled (no deadband)
+    s_1d_128 = cooler.scale_for(batch_size=128, dim=1)
+    assert s_1d_128 == 1.0
+
+    # For (64, 1), tau_eff = 0.020 * 16 = 0.320, 0.10 < 0.320 -> actively cooling
+    s_1d_64 = cooler.scale_for(batch_size=64, dim=1)
+    assert s_1d_64 < 1.0
+    assert s_1d_64 >= cooler.s_min
 
 
 def test_bispf_critic_hook_straight_through_damping():
@@ -1195,7 +1200,7 @@ def test_bispf_critic_hook_straight_through_damping():
     grads_cool = [p.grad.clone() for p in G.parameters()]
 
     factor = 0.010 * (0.50 / math.sqrt(1.0 - 0.50**2))
-    s_v = max(1e-4, min(1.0, factor))
+    s_v = max(0.15, min(1.0, factor))
     with torch.no_grad():
         x_in_flat = fake_cool.detach().flatten(1)
         dists = torch.cdist(x_in_flat, x_in_flat, p=2.0)
@@ -1332,19 +1337,19 @@ def test_bispf_sbnp_small_latent_repulsion():
     loss_base = reg_no_repel(z_img)
     repel_contrib = (loss_active - loss_base).item()
 
-    # Manual calculation with eff_k_nn=10, eff_repel_weight=0.375, effective_margin=0.50:
+    # Manual calculation with eff_k_nn=10, eff_repel_weight=1.25, effective_margin=1.00:
     m_sub = 32
     sq_dist = torch.cdist(z_img, z_img, p=2.0).pow(2)
     off_mask = ~torch.eye(m_sub, dtype=torch.bool)
     r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
     eye_inf = torch.eye(m_sub, dtype=z_img.dtype) * 1e9
     knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=10, dim=1, largest=False)
-    norm_sq_dist = knn_sq_dist / (0.50 * r_med_sq)
+    norm_sq_dist = knn_sq_dist / (1.00 * r_med_sq)
     expected_repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
-    expected_repel_contrib = 0.375 * expected_repel_loss.item()
+    expected_repel_contrib = 1.25 * expected_repel_loss.item()
 
     assert abs(repel_contrib - expected_repel_contrib) < 1e-5, (
-        f"Small latent cloud must use eff_k_nn=10 and 7.5x repel weight (0.375): got {repel_contrib} vs {expected_repel_contrib}"
+        f"Small latent cloud must use eff_k_nn=10 and 25x repel weight (1.25): got {repel_contrib} vs {expected_repel_contrib}"
     )
 
     # Counter-check: when references are provided with moment_tether_count > 64, is_small_latent is FALSE
@@ -1476,7 +1481,7 @@ def test_bispf_1d_continuous_flow_velocity_scaling():
 
     out_1d_cool.sum().backward()
     factor = 0.002 * (0.50 / math.sqrt(1.0 - 0.50**2))
-    s_v = max(1e-4, min(1.0, factor))
+    s_v = max(0.05, min(1.0, factor))
     expected_grad = 3.0 * s_v
     assert torch.allclose(x_1d_cool.grad, torch.full_like(x_1d_cool.grad, expected_grad), atol=1e-5)
 
@@ -1528,8 +1533,8 @@ def test_bispf_image_dynamic_well_depth():
     """Verify dynamic image well depth scaling by s_metric:
     - High-contrast images (ema_data_scale >= 4.899) have img_scale = 1.0 (unscaled kappa_eff).
     - Low-contrast images (e.g. img_intensity2, ema_data_scale ~ 2.0) have img_scale < 1.0,
-      deepening the well (kappa_eff = kappa / img_scale * ... > kappa) for contrast separation.
-    - img_scale is clamped to [0.35, 1.0].
+      deepening the well (kappa_eff = (kappa / img_scale) * (0.6 + 1.10 * (1 - res)) > kappa) for contrast separation.
+    - img_scale is clamped to [0.15, 1.0].
     """
     from particlegan.bispf import _BISPFPenaltyKernel
 
@@ -1559,10 +1564,143 @@ def test_bispf_image_dynamic_well_depth():
         f"{pen_high.item()} vs {pen_low.item()}"
     )
 
-    # 3. Minimum clamp verification: ema_data_scale = 0.1 -> clamped to 0.35
+    # 3. Minimum clamp verification: ema_data_scale = 0.1 -> clamped to 0.15
     kernel.record.ema_data_scale = 0.1
-    img_scale_clamped = min(1.0, max(0.35, float(kernel.record.ema_data_scale) / 4.899))
-    assert abs(img_scale_clamped - 0.35) < 1e-6
+    img_scale_clamped = min(1.0, max(0.15, float(kernel.record.ema_data_scale) / 4.899))
+    assert abs(img_scale_clamped - 0.15) < 1e-6
+
+
+def test_bispf_active_plane_circularization():
+    """Verify active-plane circularization on top 2 eigenvalues for d >= 2:
+    - Circular/isotropic 2D plane produces near-zero active_iso_loss (lambda_1 ~= lambda_2).
+    - Eccentric/anisotropic 2D plane produces positive active_iso_loss (lambda_1 >> lambda_2).
+    - Invariant: Ring disk in 4D space has lambda_1 ~= lambda_2, producing near-zero loss.
+    - Loss is scale-free: invariant to uniform spatial scaling of coordinates.
+    - SBNPPriorRegularizer integrates active_iso_loss and propagates valid finite gradients.
+    """
+    from particlegan.bispf import SBNPPriorRegularizer
+
+    reg = SBNPPriorRegularizer(weight=1.0, k_nn=5)
+
+    # 1. Circular 2D distribution (grid of 100 points, lambda_1 ~= lambda_2)
+    coords = torch.linspace(-5.0, 5.0, 10)
+    gx, gy = torch.meshgrid(coords, coords, indexing="ij")
+    z_circ = torch.stack([gx.flatten(), gy.flatten()], dim=1)
+
+    # 2. Needle 2D distribution (stretched ellipse, lambda_1 >> lambda_2)
+    z_needle = z_circ.clone()
+    z_needle[:, 1] = z_needle[:, 1] * 0.05
+
+    # 3. 4D embedded ring (2 active dimensions, 2 zero dimensions)
+    theta = torch.linspace(0, 2 * math.pi, 100)
+    z_ring4d = torch.stack([3.0 * torch.cos(theta), 3.0 * torch.sin(theta), torch.zeros(100), torch.zeros(100)], dim=1)
+
+    def calc_active_iso(z):
+        c = z - z.mean(dim=0, keepdim=True)
+        cov = (c.T @ c) / max(1, z.shape[0] - 1)
+        eigs = torch.linalg.eigvalsh(cov)
+        l1, l2 = eigs[-1], eigs[-2]
+        return (0.05 * (l1 - l2).pow(2) / (l1 + l2 + 1e-6).pow(2)).item()
+
+    iso_circ = calc_active_iso(z_circ)
+    iso_needle = calc_active_iso(z_needle)
+    iso_scale = calc_active_iso(z_needle * 10.0)
+    iso_ring4d = calc_active_iso(z_ring4d)
+
+    assert iso_circ < 1e-4, f"Circular plane must have near-zero active_iso_loss, got {iso_circ}"
+    assert iso_needle > 0.035, f"Needle plane must produce strong active_iso_loss (~0.045), got {iso_needle}"
+    assert abs(iso_needle - iso_scale) < 1e-4, "Active-plane circularization must be scale-free"
+    assert iso_ring4d < 1e-4, f"Ring disk in 4D space must produce near-zero active_iso_loss, got {iso_ring4d}"
+
+    # Verify SBNPPriorRegularizer gradient backpropagation
+    z_grad = z_needle.clone().requires_grad_(True)
+    loss = reg(z_grad)
+    loss.backward()
+    assert z_grad.grad is not None and torch.isfinite(z_grad.grad).all()
+
+
+def test_bispf_suffix_gauge_ramp():
+    """Verify phase-aligned zero-mean logit gauge ramp in _BISPFPenaltyKernel:
+    - For continuous flow (dim <= 4), before step 1000, eff_gamma_gauge == 0.050.
+    - Over steps 1000-1200, eff_gamma_gauge ramps linearly from 0.050 to 0.200.
+    - At step 1200 and beyond, eff_gamma_gauge is clamped at 0.200.
+    - Verify gauge_loss = 0.5 * eff_gamma_gauge * mean_logit^2 matches exact analytical values.
+    """
+    from particlegan.bispf import _BISPFPenaltyKernel
+
+    kernel = _BISPFPenaltyKernel(
+        coeff=1.0,
+        gamma_gauge=0.050,
+        lambda_cap=0.0,
+        lambda_floor=0.0,
+        chord_blend=0.0,
+    )
+
+    class FixedLogitCritic(nn.Module):
+        def forward(self, x):
+            return (x * 0.0).sum(dim=-1, keepdim=True) + 2.0
+
+    xr = torch.randn(32, 2)
+    xf = torch.randn(32, 2)
+
+    # Step 800: pre-ramp (calls = 800)
+    kernel.record.calls = 799
+    _, stats_800 = kernel.penalty(FixedLogitCritic(), xr, xf, step=800, collect_stats=True)
+    expected_800 = 0.5 * 0.050 * (2.0 ** 2)
+    assert abs(stats_800["gauge_loss"] - expected_800) < 1e-5
+
+    # Step 1100: mid-ramp (calls = 1100 -> ramp = 0.50 -> eff_gamma = 0.050 + 0.150 * 0.5 = 0.125)
+    kernel.record.calls = 1099
+    _, stats_1100 = kernel.penalty(FixedLogitCritic(), xr, xf, step=1100, collect_stats=True)
+    expected_1100 = 0.5 * 0.125 * (2.0 ** 2)
+    assert abs(stats_1100["gauge_loss"] - expected_1100) < 1e-5
+
+    # Step 1250: post-ramp (calls = 1250 -> ramp = 1.0 -> eff_gamma = 0.200)
+    kernel.record.calls = 1249
+    _, stats_1250 = kernel.penalty(FixedLogitCritic(), xr, xf, step=1250, collect_stats=True)
+    expected_1250 = 0.5 * 0.200 * (2.0 ** 2)
+    assert abs(stats_1250["gauge_loss"] - expected_1250) < 1e-5
+
+
+def test_bispf_continuous_mobility_floor():
+    """Verify continuous flow mobility floor and suffix jitter damping in _bispf_critic_forward_hook:
+    - For dim >= 2, s_v has a floor of 0.15 even under severe thermal cooling (s_thermal -> 0).
+    - Over steps 1000-1200, velocity jitter is damped by up to 70% (scaling s_v by up to 0.30).
+    """
+    from particlegan.bispf import BISPFStepRecord, _attach_critic_input_hook
+
+    class SimpleCritic(nn.Module):
+        def forward(self, x):
+            return 2.0 * x.sum(dim=-1, keepdim=True)
+
+    critic = SimpleCritic()
+    record = BISPFStepRecord()
+    _attach_critic_input_hook(critic, record)
+
+    # 1. Mobility floor under severe cooling (s_thermal = 0.01) before step 1000
+    record._thermal_scale = 0.01
+    record.calls = 500
+    record._in_penalty = False
+
+    x_2d = torch.randn(16, 2, requires_grad=True)
+    out_2d = critic(x_2d)
+    out_2d.sum().backward()
+
+    # Under dim=2, factor = 0.010 * (0.01 / sqrt(1 - 0.01^2)) ~ 0.0001, clamped to floor 0.15
+    # Since particles are random, med_nn boost is applied to s_local >= 0.15
+    assert (x_2d.grad >= 2.0 * 0.15 - 1e-5).all(), "Generator particles must preserve at least 15% mobility floor"
+
+    # 2. Suffix jitter damping at step 1200+ (damped by 70%, remaining factor 0.30)
+    for p in [x_2d]:
+        p.grad.zero_()
+    record.calls = 1250
+    out_2d_damped = critic(x_2d)
+    out_2d_damped.sum().backward()
+
+    # Base s_v is 0.15, damped by 70% -> s_v = 0.15 * 0.30 = 0.045
+    assert (x_2d.grad >= 2.0 * 0.045 - 1e-5).all()
+    assert (x_2d.grad < 2.0 * 0.15).any(), "Suffix damping must reduce velocity jitter compared to pre-ramp"
+
 
 
 
