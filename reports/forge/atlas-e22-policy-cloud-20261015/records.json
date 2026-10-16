@@ -1,4 +1,190 @@
 {
+  "adaptation_windows": {
+    "atlas/target_shift_recovery_policy_cloud_coverage_as_served_v1": {
+      "attempt_id": "3db41482d0d142e8b320437331cbf97a",
+      "continued_hold": {
+        "checks": 120,
+        "every": 10,
+        "first_step": 1210,
+        "last_step": 2400,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 27
+      },
+      "frozen_minimum_checks": 5,
+      "frozen_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 0
+      },
+      "live_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.528076171875,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 10
+      },
+      "raw_sha256": "ccea0b9a192bb964188ac63c52516a7fbf6fc272ed0a7350af6ec3286ce2b1ee",
+      "rule": "PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks.",
+      "stationary": {
+        "checks": 5,
+        "every": 50,
+        "first_step": 1000,
+        "last_step": 1200,
+        "min_hq": 0.593994140625,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 2
+      }
+    },
+    "atlas/target_shift_recovery_policy_cloud_coverage_v1": {
+      "attempt_id": "f0f3267f68cf40de9c765b40cdffb672",
+      "continued_hold": {
+        "checks": 120,
+        "every": 10,
+        "first_step": 1210,
+        "last_step": 2400,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 28
+      },
+      "frozen_minimum_checks": 5,
+      "frozen_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 0
+      },
+      "live_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.53369140625,
+        "min_modes": 8,
+        "pass_all": false,
+        "passing_checks": 18
+      },
+      "raw_sha256": "71ce52470b5e7dfa422df041c4a2c0eed9a86759e0d87ad63ea257e8110c139c",
+      "rule": "PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks.",
+      "stationary": {
+        "checks": 5,
+        "every": 50,
+        "first_step": 1000,
+        "last_step": 1200,
+        "min_hq": 0.60009765625,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 2
+      }
+    },
+    "e22/target_shift_recovery_policy_cloud_coverage_as_served_v1": {
+      "attempt_id": "87df227a42d64781861cd575e9b56693",
+      "continued_hold": {
+        "checks": 120,
+        "every": 10,
+        "first_step": 1210,
+        "last_step": 2400,
+        "min_hq": 0.00146484375,
+        "min_modes": 1,
+        "pass_all": false,
+        "passing_checks": 0
+      },
+      "frozen_minimum_checks": 5,
+      "frozen_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 0
+      },
+      "live_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.552734375,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 26
+      },
+      "raw_sha256": "a8e4fd381d3b4ab0db2515a9217d8a13d0e6d4c997f867bd84363204a741e264",
+      "rule": "PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks.",
+      "stationary": {
+        "checks": 5,
+        "every": 50,
+        "first_step": 1000,
+        "last_step": 1200,
+        "min_hq": 0.593994140625,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 2
+      }
+    },
+    "e22/target_shift_recovery_policy_cloud_coverage_v1": {
+      "attempt_id": "a691ce171f154abfa5a8d1319039231d",
+      "continued_hold": {
+        "checks": 120,
+        "every": 10,
+        "first_step": 1210,
+        "last_step": 2400,
+        "min_hq": 0.00146484375,
+        "min_modes": 1,
+        "pass_all": false,
+        "passing_checks": 2
+      },
+      "frozen_minimum_checks": 5,
+      "frozen_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.0,
+        "min_modes": 0,
+        "pass_all": false,
+        "passing_checks": 0
+      },
+      "live_recovery": {
+        "checks": 81,
+        "every": 10,
+        "first_step": 2800,
+        "last_step": 3600,
+        "min_hq": 0.567138671875,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 33
+      },
+      "raw_sha256": "9ca312ea7ce2ad414c5ee051c74e30b69b5631b4eccbe7ed7167335bb61b520f",
+      "rule": "PASS needs every live check in the stationary window, the continued hold up to the shift and the recovery window from the deadline to the end, with the frozen control passing none of its (at least 5) recovery-window checks.",
+      "stationary": {
+        "checks": 5,
+        "every": 50,
+        "first_step": 1000,
+        "last_step": 1200,
+        "min_hq": 0.60009765625,
+        "min_modes": 7,
+        "pass_all": false,
+        "passing_checks": 2
+      }
+    }
+  },
   "diagnostic_continuations": [
     "gaussian1d_stability",
     "grid100_14k",

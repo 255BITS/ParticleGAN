@@ -3861,7 +3861,7 @@
       "verified": true
     }
   },
-  "records_sha256": "427cc0f3900f88c9d8ee90756825439e3093d04d30f48d13b931b9ad8ee45e66",
+  "records_sha256": "b404b299416408db83b6f696de13adfbfe15324c3dbe0371e0529d30554ccc88",
   "schema": "forge_policy_cloud_results_v1",
   "source_identity": {
     "candidate_revisions": {
@@ -3873,6 +3873,21 @@
     ],
     "protocol_seeds": [
       0
+    ],
+    "rebased_equivalents": [
+      {
+        "check": "git cat-file of every snapshot path at the equivalent commit, sha256 compared with the request's source manifest; git ls-tree for files the snapshot rules would add",
+        "differing_files": {
+          "experiments/forge/knowledge.py": "from develop's #430: imports deepcopy and calls the cached _attempts with one argument inside compile_memory, which only `forge compile` runs; no attempt or grade calls it"
+        },
+        "equivalent_branch": "task/atlas-e22-fill-20261015",
+        "equivalent_commit": "de17a8556184b7675596404ca215873ca6186340",
+        "files_added_in_snapshot_scope": [],
+        "origin_commit": "90569733974b73a26d869ff9dd1a114f1184a390",
+        "origin_commit_location": "local checkout only (not pushed to GitHub)",
+        "snapshot_files": 1263,
+        "source_digest": "43b7e079c67a999c39b627c76dbb91e734cb480f4898aac27f9c7ca4bb3a1250"
+      }
     ],
     "requests": {
       "policy-cloud-as-served-atlas.json": "c199aadd816cc22611e8e7d8dd62562a1f8dda3285e6920abab1d2d3dc6882aa",

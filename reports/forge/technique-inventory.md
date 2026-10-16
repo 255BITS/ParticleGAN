@@ -349,5 +349,5 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `b154e371988c233ef9e9c11f134a01751f517831adf678f04ba519dd1120e7f4`.
+Publication input digest `a496407c01d8e5d21bc3b052ec2438f06d24dab1b6d52ac85ea9ed873a2219dd`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

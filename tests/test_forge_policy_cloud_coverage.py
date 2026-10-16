@@ -1044,11 +1044,104 @@ def test_plain_causes_state_the_failed_checks_in_words():
     assert plain_cause(ring).startswith("No qualifying window: 40/40 settling checks failed")
     shift = dict(base, grade={"metrics": {"live_deadline": dict(passing_checks=0, checks=6, min_modes=8, min_hq=.64),
                                           "frozen_deadline": dict(passing_checks=0, checks=6)}})
-    assert plain_cause(shift).startswith("Recovery window after the shift: live 0/6 checks passed")
+    assert plain_cause(shift).startswith("Recovery window after the deadline: live 0/6 checks passed")
+    # The complete grader rule names every window, also without the recomputed windows.
+    assert all(part in plain_cause(shift) for part in ("stationary window", "continued hold", "frozen control passing none"))
+    window = lambda first, last, passing, checks: dict(first_step=first, last_step=last, passing_checks=passing, checks=checks)
+    windows = {"stationary": window(1000, 1200, 2, 5), "continued_hold": window(1210, 2400, 28, 120),
+               "live_recovery": window(2800, 3600, 0, 6)}
+    assert plain_cause(shift, windows=windows).startswith(
+        "Live run: stationary window (steps 1,000-1,200) 2/5 checks passed, continued hold (steps 1,210-2,400) 28/120, "
+        "recovery window after the deadline (steps 2,800-3,600) live 0/6 checks passed")
     blocked = dict(base, status="BLOCKED", block_kind="incompatible", reason="t_policy_cloud_coverage_v1: no rows")
     assert plain_cause(blocked) == "Not run (incompatible): no rows"
     assert plain_cause(dict(base, status="INTERRUPTED")).startswith("Worker stopped without any receipt")
     assert "120 s" in plain_cause(dict(base, status="TIMEOUT", timeout_seconds=120))
+
+
+def test_native_width_ranges_come_from_the_recorded_holdouts():
+    from experiments.forge.policy_cloud_publication import _width_text, native_width_summary
+    value = _records()
+    holdouts = {("atlas", "clean"): (.82, .99), ("e22", "clean"): (.36, .70), ("atlas", "as_served"): (.004, .01),
+                ("e22", "as_served"): (.092, .106)}
+    for record in value["records"]:
+        if record["parent_task"] in {"grid100", "rotated100"} and record["measurement_law"] != "shared":
+            radial, bias = holdouts[record["owning_family"], record["measurement_law"]]
+            record["grade"] = {"evaluator_result": {"coverage_status": "FAIL", "holdout_metrics": dict(
+                precision=.999 if record["parent_task"] == "grid100" else .994, radial_ks=radial,
+                abs_cov_trace_bias=bias)}}
+    summary = native_width_summary(value["records"])
+    assert summary["clean"]["all"]["radial_ks"] == (.36, .82) and summary["clean"]["all"]["tests"] == 4
+    assert summary["as_served"]["all"]["within_width_limits"] == 2
+    text = _width_text(value["records"])
+    assert "Their 4 clean holdouts" in text and "precision 0.994-0.999" in text
+    assert "radial KS 0.36-0.82 against 0.04 (Atlas 0.82, E22 0.36)" in text and "|cov trace bias| 0.70-0.99" in text
+    assert "radial KS 0.004-0.092; 2 of 4 are within both width limits" in text
+
+
+def test_adaptation_windows_recompute_every_grader_window_from_the_raw_receipt(tmp_path):
+    from experiments.forge import policy_cloud_publication as publication
+    from benchmarks.toy100.continuous_probe import _window
+    task = variant_id("target_shift_recovery")
+    root = tmp_path / "repo"
+    atomic_json(root / COVERAGE.directory / (task + ".json"),
+                {"evaluation": {"shift_step": 2400, "steps": 3600, "recovery_deadline": 400}})
+
+    def curve(good):
+        return [{"step": step, "modes": 8 if good(step) else 7, "hq": .95} for step in range(10, 3601, 10)]
+    active = {"diagnostic": curve(lambda step: step not in {1000, 1050, 1210} and step < 3000)}
+    frozen = {"diagnostic": curve(lambda step: step <= 2400)}
+    directory = tmp_path / "attempt"
+    atomic_json(directory / "raw.json", {"evidence": {"active": active, "frozen": frozen}})
+    late = lambda run: _window([p for p in run["diagnostic"] if p["step"] >= 2800])
+    record = {"key": "k", "owning_family": "atlas", "task": task, "cohort_id": COHORT, "attempt_id": "a",
+              "grade": {"metrics": {"live_deadline": late(active), "frozen_deadline": late(frozen)}}}
+    found = publication.adaptation_windows(root, [{"key": "k", "directory": str(directory)}], [record])
+    entry = found["atlas/" + task]
+    assert (entry["stationary"]["passing_checks"], entry["stationary"]["checks"]) == (3, 5)
+    assert (entry["continued_hold"]["passing_checks"], entry["continued_hold"]["checks"]) == (119, 120)
+    assert (entry["live_recovery"]["passing_checks"], entry["live_recovery"]["checks"]) == (20, 81)
+    assert entry["frozen_recovery"]["passing_checks"] == 0 and entry["raw_sha256"] == file_hash(directory / "raw.json")
+    record["grade"]["metrics"]["live_deadline"] = dict(late(active), passing_checks=21)
+    with pytest.raises(ValueError, match="recomputed recovery window differs"):
+        publication.adaptation_windows(root, [{"key": "k", "directory": str(directory)}], [record])
+
+
+def test_source_equivalent_names_exactly_the_files_that_differ_from_the_snapshot(tmp_path, monkeypatch):
+    import hashlib
+    import subprocess
+    from experiments.forge import policy_cloud_publication as publication
+    repo = tmp_path / "repo"
+    files = {"experiments/a.py": "a = 1\n", "experiments/b.py": "b = 1\n", "configs/x.json": "{}\n"}
+    for path, text in files.items():
+        (repo / path).parent.mkdir(parents=True, exist_ok=True)
+        (repo / path).write_text(text)
+    manifest = {"origin_commit": "f" * 40, "digest": "d" * 64,
+                "files": {path: hashlib.sha256(text.encode()).hexdigest() for path, text in files.items()}}
+    (repo / "experiments/b.py").write_text("b = 2\n")
+
+    def commit():
+        git = ["git", "-C", str(repo), "-c", "user.name=t", "-c", "user.email=t@example.com"]
+        subprocess.run(git + ["init", "-q"] if not (repo / ".git").exists() else ["true"], check=True)
+        subprocess.run(git + ["add", "-A"], check=True)
+        subprocess.run(git + ["commit", "-qm", "c"], check=True)
+        return subprocess.run(git + ["rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+    head = commit()
+    declare = lambda differing: monkeypatch.setattr(publication, "SOURCE_EQUIVALENTS", {"f" * 40: {
+        "commit": head, "branch": "b", "differing_files": {path: "why" for path in differing}}})
+    declare(["experiments/b.py"])
+    entry = publication.source_equivalent(repo, manifest)
+    assert entry["equivalent_commit"] == head and entry["snapshot_files"] == 3
+    assert list(entry["differing_files"]) == ["experiments/b.py"] and entry["files_added_in_snapshot_scope"] == []
+    declare([])
+    with pytest.raises(ValueError, match="differs from the frozen snapshot"):
+        publication.source_equivalent(repo, manifest)
+    (repo / "experiments/new.py").write_text("n = 1\n")
+    head = commit()
+    declare(["experiments/b.py"])
+    with pytest.raises(ValueError, match="adds \\['experiments/new.py'\\]"):
+        publication.source_equivalent(repo, manifest)
+    assert publication.source_equivalent(repo, dict(manifest, origin_commit="e" * 40)) is None
 
 
 def _cohort_state(tmp_path, value):

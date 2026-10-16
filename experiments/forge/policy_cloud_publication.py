@@ -8,9 +8,12 @@ directory and writes this cohort's committed report directory:
 * ``records.json``: every cohort record of both scoring laws (clean and as
   served), in the ordinary attempt-record format. A law-independent record
   (one run for both laws) names the as-served row in ``shared_scopes``.
+  ``adaptation_windows`` holds every window the target-shift grader checks,
+  recomputed from each raw receipt.
 * ``results.json``: the sha256 of every local receipt (attempt request,
   result, raw evidence, run log and training GIF), the clean/as-served
-  training-state comparison and the recipe identity mapping.
+  training-state comparison, the recipe identity mapping and the source
+  identity (with a git-checked rebased equivalent of a local frozen commit).
 * ``README.md``: generated per-test tables with both laws side by side.
 * ``grouped-evidence/``: verified ring-extension regrading certificates.
 
@@ -178,7 +181,8 @@ def family_overlay(value, family_id, row, task_fingerprint):
         cells[record["task"]] = {
             "status": record["status"], "execution_recorded": record["status"] in {"PASS", "FAIL"},
             "attempt_id": record.get("attempt_id"), "current_contract": "CHANGED" if changed else "matches",
-            "changed_contract_fields": changed, "reason": plain_cause(record),
+            "changed_contract_fields": changed,
+            "reason": plain_cause(record, windows=(value.get("adaptation_windows") or {}).get(_window_key(record))),
             "coverage_reason": (f"Separately scoped policy-cloud diagnostic ({law} law"
                                 + ("; one run supplies both laws" if record["measurement_law"] == "shared" else "")
                                 + f"); frozen source {record['source_digest'][:12]}, candidate revision "
@@ -228,6 +232,56 @@ def _native_holdout(holdout):
     return text
 
 
+WIDTH_LIMITS = tuple(item for item in NATIVE_LIMITS if item[0] in {"abs_cov_trace_bias", "radial_ks"})
+
+
+def native_width_summary(records):
+    """Ranges of the native holdout precision and width metrics, per law and family, read from the records."""
+    summary = {}
+    for record in records:
+        result = (record.get("grade") or {}).get("evaluator_result") or {}
+        holdout = result.get("holdout_metrics")
+        if record["status"] not in {"PASS", "FAIL"} or "coverage_status" not in result or not isinstance(holdout, dict):
+            continue
+        for scope in ("all", record["owning_family"]):
+            entry = summary.setdefault(record["measurement_law"], {}).setdefault(
+                scope, {"tests": 0, "within_width_limits": 0})
+            entry["tests"] += 1
+            entry["within_width_limits"] += all(holdout[key] <= limit for key, _, limit in WIDTH_LIMITS)
+            for key in ("precision", "abs_cov_trace_bias", "radial_ks"):
+                low, high = entry.get(key, (math.inf, -math.inf))
+                entry[key] = (min(low, holdout[key]), max(high, holdout[key]))
+    return summary
+
+
+def _span(pair, digits):
+    low, high = (f"{value:.{digits}f}" for value in pair)
+    return low if low == high else f"{low}-{high}"
+
+
+def _width_text(records):
+    """The README's native width paragraph, with every range computed from the records."""
+    summary = native_width_summary(records)
+    clean, served = (summary.get(law, {}) for law in ("clean", "as_served"))
+    if not clean.get("all"):
+        return ""
+    limit = {key: _number(value) for key, _, value in WIDTH_LIMITS}
+    whole = clean["all"]
+    per_family = ", ".join(f"{FAMILY_NAMES[family]} {_span(clean[family]['radial_ks'], 2)}"
+                           for family in FAMILIES if family in clean)
+    text = (f"The native 100-mode tests show this most clearly. Their {whole['tests']} clean holdouts (both families, "
+            f"7k and 14k) have precision {_span(whole['precision'], 3)} but fail the fixed width limits: |cov trace "
+            f"bias| {_span(whole['abs_cov_trace_bias'], 2)} against {limit['abs_cov_trace_bias']}, radial KS "
+            f"{_span(whole['radial_ks'], 2)} against {limit['radial_ks']} ({per_family}); "
+            f"{whole['within_width_limits']} of {whole['tests']} are within both width limits.")
+    if served.get("all"):
+        other = served["all"]
+        text += (f" As served, the same weights give |cov trace bias| {_span(other['abs_cov_trace_bias'], 3)} and "
+                 f"radial KS {_span(other['radial_ks'], 3)}; {other['within_width_limits']} of {other['tests']} are "
+                 f"within both width limits.")
+    return text + " These ranges are computed from the holdout metrics in [records.json](records.json)."
+
+
 def _thresholds(metrics, thresholds):
     """``metric value (needs op bound)`` for flat final metrics with declared bounds."""
     bounds = {}
@@ -247,11 +301,22 @@ def _thresholds(metrics, thresholds):
     return ", ".join(parts)
 
 
-def plain_cause(record, thresholds=None):
+ADAPTATION_RULE = ("PASS needs every live check in the stationary window, the continued hold up to the shift and "
+                   "the recovery window from the deadline to the end, with the frozen control passing none of its "
+                   "(at least 5) recovery-window checks")
+
+
+def _steps(window):
+    return f"steps {window['first_step']:,}-{window['last_step']:,}"
+
+
+def plain_cause(record, thresholds=None, windows=None):
     """A short readable cause from the recorded grade; display only.
 
     ``thresholds`` (the task's declared ``[metric, op, bound]`` list) adds the
     final metrics against their bounds where the grade records flat metrics.
+    ``windows`` (one ``adaptation_windows`` entry) adds the stationary and
+    continued-hold windows that the paired-adaptation grader also checks.
     """
     status, reason = record["status"], str(record.get("reason") or "").strip()
     if status == "BLOCKED":
@@ -320,10 +385,15 @@ def plain_cause(record, thresholds=None):
         return text
     if "live_deadline" in metrics:
         live, frozen = metrics["live_deadline"], metrics.get("frozen_deadline") or {}
-        return (f"Recovery window after the shift: live {live.get('passing_checks')}/{live.get('checks')} checks passed "
-                f"(min modes {_number(live.get('min_modes'))}, min hq {_number(live.get('min_hq'))}); frozen control "
-                f"{frozen.get('passing_checks')}/{frozen.get('checks')} (PASS needs every live check after the "
-                f"recovery deadline, with the frozen control passing none).")
+        recovery = (f"live {live.get('passing_checks')}/{live.get('checks')} checks passed (min modes "
+                    f"{_number(live.get('min_modes'))}, min hq {_number(live.get('min_hq'))}); frozen control "
+                    f"{frozen.get('passing_checks')}/{frozen.get('checks')}")
+        if windows:
+            stationary, hold, late = windows["stationary"], windows["continued_hold"], windows["live_recovery"]
+            return (f"Live run: stationary window ({_steps(stationary)}) {stationary['passing_checks']}/"
+                    f"{stationary['checks']} checks passed, continued hold ({_steps(hold)}) {hold['passing_checks']}/"
+                    f"{hold['checks']}, recovery window after the deadline ({_steps(late)}) {recovery} ({ADAPTATION_RULE}).")
+        return f"Recovery window after the deadline: {recovery} ({ADAPTATION_RULE})."
     reasons = grade.get("reasons") or ([reason] if reason else [])
     return "; ".join(str(item) for item in reasons) or status
 
@@ -468,6 +538,57 @@ def training_state_pairs(jobs, states):
     return pairs
 
 
+def adaptation_windows(root, jobs, records):
+    """Every window the paired-adaptation grader checks, recomputed from each raw receipt.
+
+    ``views._adaptation`` passes target-shift recovery only when the active run
+    passes every check of the stationary window (steps 1000-1200, every 50),
+    the continued hold (step 1210 up to the shift, every 10) and the recovery
+    window (from shift + recovery_deadline to the end, every 10), and the frozen
+    control passes none of its (at least 5) recovery-window checks. The grade
+    records only the two recovery windows. This recomputes all of them with the
+    grader's own window function and refuses to publish unless the recovery
+    windows reproduce the recorded ones.
+    """
+    from benchmarks.toy100.continuous_probe import _window
+    by_key = {record["key"]: record for record in records}
+    directories = {COHORT: COVERAGE.directory, SERVED_COHORT: SERVED.directory}
+    found = {}
+    for job in jobs:
+        record = by_key.get(job["key"])
+        metrics = ((record or {}).get("grade") or {}).get("metrics") or {}
+        if "live_deadline" not in metrics or not job.get("directory"):
+            continue
+        raw = Path(job["directory"]) / "raw.json"
+        evidence = read_json(raw).get("evidence", {}) if raw.is_file() else {}
+        active, frozen = evidence.get("active"), evidence.get("frozen")
+        if not isinstance(active, dict) or not isinstance(frozen, dict):
+            continue
+        evaluation = read_json(Path(root) / directories[record["cohort_id"]] / (record["task"] + ".json"))["evaluation"]
+        shift = evaluation["shift_step"]
+        spans = {"stationary": (1000, 1200, 50), "continued_hold": (1210, shift, 10),
+                 "recovery": (shift + evaluation["recovery_deadline"], evaluation["steps"], 10)}
+
+        def windows(run):
+            by_step = {point["step"]: point for point in run["diagnostic"]}
+            return {name: dict(_window([by_step[step] for step in range(first, last + 1, every)]),
+                               first_step=first, last_step=last, every=every)
+                    for name, (first, last, every) in spans.items()}
+        live, control = windows(active), windows(frozen)
+        for window, recorded in ((live["recovery"], metrics["live_deadline"]),
+                                 (control["recovery"], metrics.get("frozen_deadline") or {})):
+            if any(window[key] != recorded.get(key) for key in ("checks", "passing_checks", "min_modes", "min_hq")):
+                raise ValueError(f"{record['task']}: recomputed recovery window differs from the recorded grade")
+        keep = ("first_step", "last_step", "every", "checks", "passing_checks", "min_modes", "min_hq", "pass_all")
+        found[_window_key(record)] = {
+            "attempt_id": record.get("attempt_id"), "raw_sha256": file_hash(raw),
+            **{name: {key: window[key] for key in keep} for name, window in (
+                ("stationary", live["stationary"]), ("continued_hold", live["continued_hold"]),
+                ("live_recovery", live["recovery"]), ("frozen_recovery", control["recovery"]))},
+            "frozen_minimum_checks": 5, "rule": ADAPTATION_RULE + "."}
+    return dict(sorted(found.items()))
+
+
 def _same(value, default):
     normalize = (lambda item: tuple(item) if isinstance(item, list) else item)
     return normalize(value) == normalize(default)
@@ -584,7 +705,79 @@ def run_costs(state_root, jobs):
     return value
 
 
-def source_identity(state_root, jobs):
+# The frozen execution commit, which every request records unchanged, exists
+# only in the local checkout that froze the run. This branch carries its
+# rebased equivalent; ``source_equivalent`` checks the stated file differences
+# with git before the publication states them.
+SOURCE_EQUIVALENTS = {
+    "90569733974b73a26d869ff9dd1a114f1184a390": {
+        "commit": "de17a8556184b7675596404ca215873ca6186340",
+        "branch": "task/atlas-e22-fill-20261015",
+        "differing_files": {
+            "experiments/forge/knowledge.py": (
+                "from develop's #430: imports deepcopy and calls the cached _attempts with one argument inside "
+                "compile_memory, which only `forge compile` runs; no attempt or grade calls it"),
+        },
+    },
+}
+
+
+def _in_snapshot_scope(path):
+    """Whether ``sources.source_files`` would snapshot this repository path."""
+    from .sources import SOURCE_DIRS, SOURCE_SUFFIXES
+    parts = path.split("/")
+    if Path(path).suffix not in SOURCE_SUFFIXES or {"__pycache__", ".venv", "runs"} & set(parts):
+        return False
+    return parts[0] in SOURCE_DIRS or (parts[0] == "configs" and "forge" not in parts)
+
+
+def source_equivalent(root, manifest):
+    """The rebased equivalent of a local frozen commit, checked file by file with git.
+
+    Every file in the frozen snapshot must be byte-identical in the
+    equivalent commit except the declared ones, and the commit may add no file
+    the snapshot would have included. Returns None when no equivalent is
+    declared for the manifest's origin commit.
+    """
+    import hashlib
+    entry = SOURCE_EQUIVALENTS.get(manifest.get("origin_commit"))
+    if entry is None:
+        return None
+    commit, files = entry["commit"], manifest["files"]
+    paths = sorted(files)
+    try:
+        batch = subprocess.run(["git", "-C", str(root), "cat-file", "--batch"], check=True, capture_output=True,
+                               input="".join(f"{commit}:{path}\n" for path in paths).encode())
+        listed = subprocess.run(["git", "-C", str(root), "ls-tree", "-r", "--name-only", commit], check=True,
+                                capture_output=True, text=True).stdout.splitlines()
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise ValueError(f"cannot check the rebased source equivalent {commit[:12]} with git: {error}") from error
+    output, offset, differing = batch.stdout, 0, []
+    for path in paths:
+        end = output.index(b"\n", offset)
+        header = output[offset:end].split()
+        if header[-1] == b"missing":
+            differing.append(path)
+            offset = end + 1
+            continue
+        size = int(header[2])
+        content = output[end + 1:end + 1 + size]
+        offset = end + 1 + size + 1
+        if hashlib.sha256(content).hexdigest() != files[path]:
+            differing.append(path)
+    added = sorted(path for path in listed if _in_snapshot_scope(path) and path not in files)
+    if differing != sorted(entry["differing_files"]) or added:
+        raise ValueError(f"rebased source {commit[:12]} differs from the frozen snapshot in {differing} "
+                         f"(declared {sorted(entry['differing_files'])}) and adds {added}")
+    return {"origin_commit": manifest["origin_commit"], "origin_commit_location": "local checkout only (not pushed to GitHub)",
+            "source_digest": manifest["digest"], "snapshot_files": len(paths), "equivalent_commit": commit,
+            "equivalent_branch": entry["branch"], "differing_files": dict(entry["differing_files"]),
+            "files_added_in_snapshot_scope": added,
+            "check": ("git cat-file of every snapshot path at the equivalent commit, sha256 compared with the "
+                      "request's source manifest; git ls-tree for files the snapshot rules would add")}
+
+
+def source_identity(state_root, jobs, root=None):
     """The frozen execution source, recipes, seed and runtime shared by every attempt."""
     requests = {}
     for job in jobs:
@@ -593,7 +786,12 @@ def source_identity(state_root, jobs):
     origins = sorted({request["source"].get("origin_commit") or "" for request in requests.values()})
     digests = sorted({request["source"]["digest"] for request in requests.values()})
     runtimes = sorted({json.dumps(job.get("runtime"), sort_keys=True) for job in jobs if job.get("runtime")})
-    return {"origin_commits": origins, "source_digests": digests,
+    equivalents = []
+    if root is not None:
+        manifests = {request["source"]["digest"]: request["source"] for request in requests.values()}
+        equivalents = [item for item in (source_equivalent(root, manifests[digest]) for digest in sorted(manifests))
+                       if item is not None]
+    return {"origin_commits": origins, "source_digests": digests, "rebased_equivalents": equivalents,
             "protocol_seeds": sorted({request["protocol"]["seed"] for request in requests.values()}),
             "candidate_revisions": {job["owning_family"]: job["candidate_revision"] for job in jobs},
             "requests": {Path(path).name: file_hash(path) for path in sorted(requests)},
@@ -631,6 +829,7 @@ def publish(root, state_root):
              "shared_tests": sorted(LAW_INDEPENDENT), "diagnostic_continuations": sorted(DIAGNOSTIC_CONTINUATIONS),
              "recipes": recipe_identity(root, state_root, records), "records": records}
     validate_records(value)
+    value["adaptation_windows"] = adaptation_windows(root, jobs, records)
     value["summary"] = summary(value)
     receipts, states = receipts_and_states(jobs)
     pairs = training_state_pairs(jobs, states)
@@ -645,7 +844,7 @@ def publish(root, state_root):
     results = {"schema": RESULTS_SCHEMA, "qualification_input": False, "qualification_reuse": False,
                "state_root": str(state_root), "source_root": configured["source_root"],
                "records_sha256": file_hash(root / RECORDS), "recipes": deepcopy(value["recipes"]),
-               "summary": deepcopy(value["summary"]), "source_identity": source_identity(state_root, jobs),
+               "summary": deepcopy(value["summary"]), "source_identity": source_identity(state_root, jobs, root),
                "costs": run_costs(state_root, jobs), "training_state_pairs": pairs,
                "training_state_method": TRAINING_STATE_METHOD,
                "diagnostic_continuations": continuation_producers(jobs),
@@ -847,8 +1046,17 @@ def _differing(index):
     return rows
 
 
+def _window_key(record):
+    return f"{record['owning_family']}/{record['task']}"
+
+
+def _cause(record, thresholds, windows):
+    return plain_cause(record, thresholds.get(record["task"]), windows.get(_window_key(record)))
+
+
 def render_readme(value, results, thresholds=None):
     thresholds = thresholds or {}
+    windows = value.get("adaptation_windows") or {}
     records = value["records"]
     index = {(r["owning_family"], r["cohort_id"], r["parent_task"]): r for r in records}
     statuses = {}
@@ -918,11 +1126,10 @@ def render_readme(value, results, thresholds=None):
               "narrow. The *as-served* law keeps the noise, so the same trained model is scored with the width it "
               "actually produces. Recipe, training, gates, budget, data, cadence and seed are identical; only the "
               "evaluation draw differs.", "",
-              "The native 100-mode tests show this most clearly. Their clean holdouts have precision near 0.999 but "
-              "fail the fixed width limits (|cov trace bias| about 0.9 against 0.10, radial KS about 0.65-0.79 "
-              "against 0.04). As served, the same weights meet those limits for several of them. Noise cannot help "
-              "where a test needs a different shape per component (Ring16 and the unequal-mass/unequal-width "
-              "vectors), and it does not change tests that fail on modes or on holding a learned state.", ""]
+              _width_text(records), "",
+              "Noise cannot help where a test needs a different shape per component (Ring16 and the "
+              "unequal-mass/unequal-width vectors), and it does not change tests that fail on modes or on holding a "
+              "learned state.", ""]
     for family in FAMILIES:
         if not any(r["owning_family"] == family for r in records):
             continue
@@ -937,11 +1144,10 @@ def render_readme(value, results, thresholds=None):
                 if clean.get("block_kind") == "incompatible":
                     cause = "Not run (incompatible); the reason is under [Incompatible tests](#incompatible-tests)."
                 elif parent in LAW_INDEPENDENT:
-                    cause = plain_cause(clean, thresholds.get(clean["task"]))
+                    cause = _cause(clean, thresholds, windows)
                 else:
-                    cause = (f"Clean: {plain_cause(clean, thresholds.get(clean['task']))}<br>As served: "
-                             f"{plain_cause(served, thresholds.get(served['task']))}" if served
-                             else plain_cause(clean, thresholds.get(clean["task"])))
+                    cause = (f"Clean: {_cause(clean, thresholds, windows)}<br>As served: "
+                             f"{_cause(served, thresholds, windows)}" if served else _cause(clean, thresholds, windows))
                 notes = _notes(family, parent, results["diagnostic_continuations"],
                                (clean, served) if parent in SERVED_PARENTS else (clean,))
                 lines.append(f"| {tier} | {parent} | {_cell(_result(clean))} | {_cell(_result(served))} | "
@@ -1000,7 +1206,18 @@ def render_readme(value, results, thresholds=None):
         runtime = identity["runtimes"][0] if len(identity["runtimes"]) == 1 else None
         lines += ["## Source identity", "",
                   f"- Frozen execution source: commit `{', '.join(identity['origin_commits'])}`, source digest "
-                  f"`{', '.join(d[:16] for d in identity['source_digests'])}`; every request names the same source.",
+                  f"`{', '.join(d[:16] for d in identity['source_digests'])}`; every request names the same source "
+                  "and records that commit unchanged."]
+        for item in identity.get("rebased_equivalents") or ():
+            lines += [f"- Commit `{item['origin_commit'][:12]}` exists only in the local checkout that froze the run and "
+                      "was not pushed to GitHub. The durable identity is the source digest "
+                      f"`{item['source_digest']}` over the frozen snapshot's {item['snapshot_files']:,} files, and "
+                      f"its rebased equivalent on `{item['equivalent_branch']}` is commit `{item['equivalent_commit']}`.",
+                      f"- Of the {item['snapshot_files']:,} snapshot files, `{item['equivalent_commit'][:12]}` differs only "
+                      "in " + "; ".join(f"`{path}` ({why})" for path, why in item["differing_files"].items())
+                      + ". The publication checks this with git: every other snapshot file is byte-identical at that "
+                      "commit, and it adds no file the snapshot rules would include."]
+        lines += [
                   "- Candidate revisions: " + ", ".join(f"{FAMILY_NAMES[f]} `{r[:16]}`"
                                                         for f, r in sorted(identity["candidate_revisions"].items())) + ".",
                   f"- Protocol seed: {', '.join(str(s) for s in identity['protocol_seeds'])}; recipe overrides: none.",
@@ -1073,7 +1290,7 @@ def render_readme(value, results, thresholds=None):
               "source-pinned file, so this needs a new frozen source; it changes no verdict.",
               "2. Decide which scoring law the Atlas/E22 cards declare. The as-served law measures what GANTrainer "
               "serves; the clean law isolates where the rows sit. Keep both rows until the owners decide, and treat "
-              "clean-only native failures (precision near 0.999 with width far too narrow) as a property of the "
+              "clean-only native failures (high precision with width far too narrow) as a property of the "
               "measurement, not of training.",
               "3. Image Bars4 and Blobs4 find 0 modes under both laws and both families at the declared 600 updates, "
               "as in the earlier unchanged-policy diagnostic. Use the saved observations and policy-control receipts "
