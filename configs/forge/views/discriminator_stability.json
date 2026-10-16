@@ -50,7 +50,7 @@
         "previous_importance": "required",
         "reason": "no_global_recipe",
         "blocked_by": [],
-        "summary": "BCAP and BISPF neither keep a learned bell curve (2/72 and 5/72 checks) nor re-learn it after the target moves (0/24); K3P and KA2 keep 71/72 but miss re-learning. The one recipe that passes it and mode_hold never ran the rest of the counted suite.",
+        "summary": "BCAP and BISPF neither keep a learned bell curve (2/72 and 5/72 checks) nor re-learn it after the target moves (0/24); K3P and KA2 keep 71/72 but miss re-learning. Its one candidate that also passes mode_hold fails ring16_acquisition (draft PR #427).",
         "explanation": "reports/forge/test-dispositions-20261015/README.md#gaussian1d_stability",
         "reentry": "Count again when one global recipe, in one same-source, same-runtime cohort, passes this whole test (72/72, re-acquisition, 24/24) and every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold, plus the counted ring endurance test."
       }

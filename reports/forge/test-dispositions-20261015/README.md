@@ -16,19 +16,21 @@ diagnostic run (see [Follow-ups](#follow-ups)).
 - **15 tests are held.** A held test stays declared, keeps running and keeps its full history on every page. It
   stops counting until one global recipe passes it together with every counted test. The 15 fall into four groups,
   and only the first group is a demonstrated conflict between tests:
-  - **(a) Conflict shown (5):** `vector_anisotropic`, `vector_overlap`, `img_bars4`, `img_blobs4`,
+  - **(a) Conflict shown (6):** `vector_anisotropic`, `vector_overlap`, `img_bars4`, `img_blobs4`,
     `img_intensity2`. Every recipe with a [recorded pass](#recorded-passers) of one of them fails a counted test
     that BISPF passes. The vector family as a whole also conflicts: the cell-moment recipes pass all four vector
-    tests but fail `mode_hold` or `ring16_acquisition`.
+    tests but fail `mode_hold` or `ring16_acquisition`. `gaussian1d_stability` joins this group on newer evidence:
+    its one candidate that also passes `mode_hold` fails `ring16_acquisition` in the dig run of open draft
+    [PR #427](https://github.com/255BITS/ParticleGAN/pull/427), not yet merged.
   - **(b) Never passed under their current declaration (4):** `grid100`, `rotated100`, `staggered100`,
     `target_shift_recovery`. These are unsolved, not shown to conflict with anything. Older historical receipts
     pass the three 100-blob tests only under earlier contracts, including noise added at evaluation (see
     [Recorded passers](#recorded-passers)).
   - **(c) Blocked behind (b) (3):** `grid100_14k`, `rotated100_14k`, `staggered100_14k`. They continue a passing
     7,000-update model, and none exists.
-  - **(d) Partly untried (3):** `gaussian1d_stability`, `vector_unequal_mass`, `vector_unequal_width`. Some research
-    recipes pass them and fail only held tests, but were never run on the rest of the counted suite. Holding them is
-    the cautious choice until that check is run; each explanation names the cheapest probe.
+  - **(d) Partly untried (2):** `vector_unequal_mass`, `vector_unequal_width`. Some research recipes pass them and
+    fail only held tests, but were never run on the rest of the counted suite. Holding them is the cautious choice
+    until that check is run; each explanation names the cheapest probe.
 - **2 are removed from the count, not from the board.** `clockfree_audit` runs the same clock probe and grader that
   the same view already counts at Tier 1. `ring_hold` is the first two phases of the same uninterrupted run that
   `ring_extension` grades. Both stay assigned as diagnostics with a removal note.
@@ -202,7 +204,7 @@ contract but fails shift recovery, and three PR215/PR217 records pass an older l
 | # | Test | Counted before in (tier) | Disposition | Count change | Reason in one line |
 | --- | --- | --- | --- | ---: | --- |
 | 1 | [`clockfree_audit`](#clockfree_audit) | clockfree_continuous (3) | REMOVE (duplicate) | -1 | Same clock probe and grader as `clockfree_audit_measurement_v1`, counted at Tier 1 of the same view; kept as the 14k gate. |
-| 2 | [`gaussian1d_stability`](#gaussian1d_stability) | discriminator_stability (2) | HOLD (no_global_recipe) | -1 | Neither BCAP nor BISPF (the only selected recipes with recorded Tier 2 results) keeps or re-learns the bell curve; the one passer that also passes `mode_hold` was never run on the ring tests. |
+| 2 | [`gaussian1d_stability`](#gaussian1d_stability) | discriminator_stability (2) | HOLD (no_global_recipe) | -1 | Neither BCAP nor BISPF (the only selected recipes with recorded Tier 2 results) keeps or re-learns the bell curve; the one passer that also passes `mode_hold` fails `ring16_acquisition` in a dig run (draft PR #427). |
 | 3 | [`vector_unequal_mass`](#vector_unequal_mass) | six views (2) | HOLD (no_global_recipe) | -6 | The rare 2% blob loses its share or collapses; the gate is sound; round-5 passers never ran most of the counted suite. |
 | 4 | [`vector_unequal_width`](#vector_unequal_width) | six views (2) | HOLD (no_global_recipe) | -6 | Shares wrong; balanced assignment passes but fails held tests and never ran most of the counted suite. |
 | 5 | [`vector_anisotropic`](#vector_anisotropic) | six views (2) | HOLD (no_global_recipe) | -6 | Wrong amounts per blob; of 16 passers, 12 fail Tier 1 `ring16_acquisition`, 1 timed out on it and 3 fail `mode_hold`. |
@@ -389,7 +391,7 @@ gate.
 
 <a name="gaussian1d_stability"></a>
 
-### 2. `gaussian1d_stability`: HOLD (no_global_recipe; partly untried; confidence medium)
+### 2. `gaussian1d_stability`: HOLD (no_global_recipe; conflict shown in an unmerged dig run; confidence medium)
 
 **What it asks.** The Tier 1 smoke run learns one bell curve (centre 2, width 0.5). This Tier 2 test keeps training
 that same model:
@@ -444,21 +446,23 @@ training moves it.
   fails `mode_hold`, `ring16_acquisition`, `vector_unequal_mass` and `vector_unequal_width`.
 - **`cell-quota-minimum-change-forward-kl-g-v1` passes this test and `mode_hold`**
   ([astra-cumulative-24.json](../test-performance-evidence/astra-cumulative-24.json)). Its only recorded failure is
-  `vector_unequal_mass` (component covariance 1.069 against 0.85), which is itself held. It has never been run on
-  `ring16_acquisition`, the rest of the counted suite or ring endurance. For this recipe "across tests" is untried,
-  not shown to conflict.
+  `vector_unequal_mass` (component covariance 1.069 against 0.85), which is itself held. A later dig run (open draft
+  [PR #427](https://github.com/255BITS/ParticleGAN/pull/427), which ports the recipe to develop for the probe and is
+  not merged) runs it on `ring16_acquisition`: 0 of 96 checks pass, while the matched BCAP DualNorm control passes
+  ring16 (26 consecutive passing checks) and fails `mode_hold` and this test. The recipe also cannot run `two_pole`
+  or `five_word_joint_smoke`. So for this recipe the across-tests conflict is shown, pending that pull request.
 - **The reverse holds too:** BISPF and BCAP hold the ring but not the Gaussian.
 
 BCAP and BISPF are the only selected recipes with recorded Tier 2 results. In diagnostic runs K3P and KA2 keep 71
 of the 72 stay-matched checks, miss re-acquisition and hold 22/24 and 16/24 afterwards; R1/R2 and GAN v3 keep 19/72
 and 11/72. All eight still fail the test.
 
-No recorded recipe has shown this test, `ring16_acquisition`, `mode_hold` and ring endurance together; for the one
-candidate that passes both this test and `mode_hold`, the ring tests were never run.
+No recipe has shown this test, `ring16_acquisition`, `mode_hold` and ring endurance together; the one candidate that
+passes both this test and `mode_hold` fails `ring16_acquisition` (draft PR #427).
 
-**Cheapest re-entry probe.** Run `cell-quota-minimum-change-forward-kl-g-v1` through the counted suite and ring
-endurance. Whether a cell-based objective is allowed in a global recipe under the portability rule is an open
-question (see [Unresolved](#unresolved)).
+**Re-entry probes.** The cell-quota probe has been run and refuted (draft PR #427). A recipe would need cell-quota's
+stability on this test together with BCAP-style ring acquisition, and none exists yet. Whether a cell-based
+objective is allowed in a global recipe under the portability rule is an open question (see [Unresolved](#unresolved)).
 
 **Re-entry criterion.** Count it again when one global recipe, in one same-source and same-runtime cohort, passes
 this whole test (72/72, re-acquisition, 24/24). The same recipe must also pass every counted Tier 1 and Tier 2 test,
@@ -1145,7 +1149,8 @@ change. `--observations <path>` also writes the per-check rows; keep that file o
    adaptation speed? BISPF needs 620 updates. Any change would be a new task version.
 2. **May a global recipe use a cell-based objective** (cell-moment aggregate or cell-quota) under the portability
    rule? These objectives build nearest-neighbour cells around real samples in data space. They are the cheapest
-   re-entry probes for the vector tests and for `gaussian1d_stability`.
+   re-entry probes for the vector tests; the cell-quota probe for `gaussian1d_stability` has since failed
+   `ring16_acquisition` (draft PR #427).
 3. **Should BISPF be re-run** in its own ordinary cohort at the current source, for the counted suite plus ring
    endurance? Its recorded measurement is stale. This needs GPU training and was not done.
 4. **No counted task represents the noisy-law 100-blob question** that the Atlas line historically passed. If it
