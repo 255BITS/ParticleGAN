@@ -19,6 +19,14 @@
   layouts from ordinary PyTorch modules while preserving caller learning rates
   and prior roles. Frozen parameters are excluded from this module-bound path;
   no architecture-specific training wrapper is required.
+- **Complete BISPF observer checkpoints.** Normalized and plain-Adam BISPF
+  optimizers now save transport residual/data-scale moving averages and the
+  exact thermal scale, fixing divergence after restoring a training checkpoint.
+  Earlier packets that omitted these moments fail with a compatibility error
+  directing callers to their original package source. New formulation-optimizer
+  packets also retain the exact thermal scale; historical formulation packets
+  keep their earlier reconstruction behavior. BCAP and KA2 observer formats
+  remain unchanged.
 - **Measured optimization scope:** the frozen optimization cohort preserves
   all 19 passing task verdicts and its 11 existing failures. The current
   overview's 81/81 counts repeated view requirements from 18 distinct tests.
