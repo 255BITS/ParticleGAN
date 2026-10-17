@@ -406,8 +406,19 @@ def test_role_changes_keep_planning_science_identical_apart_from_candidate_revis
 COMMITTED = ROOT / "reports/forge/test-dispositions-20261015/dispositions.json"
 
 
-def test_committed_dispositions_match_every_declared_view():
-    report = dispositions.check(ROOT, COMMITTED)
+def test_committed_dispositions_match_their_archived_target_views(repo):
+    # The 0.10 policy supersedes these dispositions without changing their history.
+    explanation = repo / EXPLANATIONS
+    explanation.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / EXPLANATIONS, explanation)
+    for name, revision in BASE.items():
+        archive = dispositions.archive_path(name, revision)
+        shutil.copyfile(ROOT / archive, repo / archive)
+    for name, entry in json.loads(COMMITTED.read_text())["views"].items():
+        if entry.get("applied", True):
+            archive = ROOT / dispositions.archive_path(name, entry["to_revision"])
+            shutil.copyfile(archive, repo / "configs/forge/views" / f"{name}.json")
+    report = dispositions.check(repo, COMMITTED)
     assert not report["drift"] and set(report["views"]) == set(SIX)
     assert {item["state"] for item in report["views"].values()} == {"applied"}
     assert counted(report, "counts_before") == 152 and counted(report, "counts_after") == 81
@@ -415,7 +426,7 @@ def test_committed_dispositions_match_every_declared_view():
     records = {r["task"]: r for r in registry["dispositions"]
                if r["disposition"] in {"HOLD", "REMOVE"} and r.get("applied", True)}
     noted = set()
-    for path in sorted((ROOT / "configs/forge/views").glob("*.json")):
+    for path in sorted((repo / "configs/forge/views").glob("*.json")):
         view = json.loads(path.read_text())
         for assignment in view["assignments"]:
             note = assignment.get("hold") or assignment.get("removal")
@@ -432,7 +443,7 @@ def test_committed_dispositions_match_every_declared_view():
     assert noted == {(task, view_id) for task, record in records.items() for view_id in record["views"]}
     # Decided but not applied here: the policy view still counts its seven questions.
     pending = {r["task"] for r in registry["dispositions"] if r.get("applied") is False}
-    policy = load_view(ROOT, "tier1_policy_coverage")
+    policy = load_view(repo, "tier1_policy_coverage")
     assert policy["revision"] == 1 and len(pending) == 7
     assert {a["task"] for a in policy["assignments"] if a["importance"] == "required"} == pending
 

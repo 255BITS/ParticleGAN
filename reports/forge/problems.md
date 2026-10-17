@@ -35,7 +35,7 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 
 ## Keep a bell curve stable, then learn a moved target
 
-Test: `gaussian1d_stability` · Held for qualification; included in full-suite results.
+Test: `gaussian1d_stability` · Required for qualification and included in full-suite results.
 
 **What it tests.** After learning a simple bell curve, keep its centre, width and distribution correct while training continues; then track a shifted target and stay there.
 
@@ -301,7 +301,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#img_inten
 
 ## A grid of 100 clusters
 
-Test: `grid100` · Held for qualification; included in full-suite results.
+Test: `grid100` · Required for qualification and included in full-suite results.
 
 **What it tests.** Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.
 
@@ -334,7 +334,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#grid100).
 
 ## A rotated grid of 100 clusters
 
-Test: `rotated100` · Held for qualification; included in full-suite results.
+Test: `rotated100` · Required for qualification and included in full-suite results.
 
 **What it tests.** Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.
 
@@ -367,7 +367,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#rotated10
 
 ## A staggered grid of 100 clusters
 
-Test: `staggered100` · Held for qualification; included in full-suite results.
+Test: `staggered100` · Required for qualification and included in full-suite results.
 
 **What it tests.** Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.
 
@@ -400,7 +400,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#staggered
 
 ## Keep the 100-cluster grid correct for longer
 
-Test: `grid100_14k` · Held for qualification; included in full-suite results.
+Test: `grid100_14k` · Required for qualification and included in full-suite results.
 
 **What it tests.** Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.
 
@@ -433,7 +433,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#grid100_1
 
 ## Keep the 100-cluster rotated grid correct for longer
 
-Test: `rotated100_14k` · Held for qualification; included in full-suite results.
+Test: `rotated100_14k` · Required for qualification and included in full-suite results.
 
 **What it tests.** Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.
 
@@ -466,7 +466,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#rotated10
 
 ## Keep the 100-cluster staggered grid correct for longer
 
-Test: `staggered100_14k` · Held for qualification; included in full-suite results.
+Test: `staggered100_14k` · Required for qualification and included in full-suite results.
 
 **What it tests.** Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality.
 
@@ -499,7 +499,7 @@ Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#staggered
 
 ## Recover quickly after the target moves
 
-Test: `target_shift_recovery` · Held for qualification; included in full-suite results.
+Test: `target_shift_recovery` · Required for qualification and included in full-suite results.
 
 **What it tests.** Learn and hold a ring of blobs, then track a sudden sideways shift within 400 updates and stay correct; a frozen model must fail to show the change is real.
 

@@ -1195,7 +1195,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              f"from {distinct} distinct test" + ("" if distinct == 1 else "s") + ". " +
              (uncounted + f" view assignments ({uncounted_tests}) are still measured and listed under "
               "**Held and removed tests** below. " if uncounted else "") +
-             "These totals retain the selected recipe's recorded qualification. Held failures remain visible in the "
+             "These totals project recorded task outcomes onto the current requirements; historical qualifications "
+             "keep their original policy revisions. Held failures remain visible in the "
              "full-suite results below; separate diagnostic runs appear below.", "",
              *_table_header(selected=True)]
     selected = list(_selected_cohorts(progress))

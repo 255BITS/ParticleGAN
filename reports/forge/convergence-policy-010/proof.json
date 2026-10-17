@@ -1,0 +1,79 @@
+{
+  "schema": "forge_010_convergence_policy_v1",
+  "baseline_commit": "2b2108c6ff0270f72f599ab5ab4c9b1bef6c3007",
+  "scope": "policy projection only; no training or scientific regrading",
+  "views": {
+    "adaptation": {
+      "previous_revision": 3,
+      "revision": 4,
+      "archive": "configs/forge/view-history/adaptation-v3.json",
+      "archive_sha256": "2a8a4862f3ed6c3639f3010706ba87de370f6df4c256197d663b28887a514084",
+      "required": {
+        "1": 3,
+        "2": 12,
+        "3": 1
+      }
+    },
+    "clockfree_continuous": {
+      "previous_revision": 4,
+      "revision": 5,
+      "archive": "configs/forge/view-history/clockfree_continuous-v4.json",
+      "archive_sha256": "fac941b045023d69c46fe948c874513464f2190cbd4a4002cc5873fbd9c7152c",
+      "required": {
+        "1": 4,
+        "2": 12,
+        "3": 6
+      }
+    },
+    "discriminator_stability": {
+      "previous_revision": 11,
+      "revision": 12,
+      "archive": "configs/forge/view-history/discriminator_stability-v11.json",
+      "archive_sha256": "65f769105ef9aaf63e5b50a5e185082fcd94fc168e70632cf386aeb568ba64b3",
+      "required": {
+        "1": 6,
+        "2": 14,
+        "3": 1
+      }
+    },
+    "formulation_comparison": {
+      "previous_revision": 2,
+      "revision": 3,
+      "archive": "configs/forge/view-history/formulation_comparison-v2.json",
+      "archive_sha256": "f4af464e7f639f78ce56309d05996c769e37f899bf17b7fda207f319842e14fe",
+      "required": {
+        "1": 3,
+        "2": 12,
+        "3": 1
+      }
+    },
+    "host_profile_transfer": {
+      "previous_revision": 5,
+      "revision": 6,
+      "archive": "configs/forge/view-history/host_profile_transfer-v5.json",
+      "archive_sha256": "4db4c9e3b8a4fcf4dda0e998218701b40c6762f572d8de5f9515b3eb8d7f2d94",
+      "required": {
+        "1": 3,
+        "2": 12,
+        "3": 1
+      }
+    },
+    "quality_coverage": {
+      "previous_revision": 3,
+      "revision": 4,
+      "archive": "configs/forge/view-history/quality_coverage-v3.json",
+      "archive_sha256": "67e86d5c7fa0482cb7f821a0546987f518267e903249daf51eb481ea2eef58f3",
+      "required": {
+        "1": 3,
+        "2": 12,
+        "3": 0
+      }
+    }
+  },
+  "scientific_rows_sha256": "61a7a1e7d00ce901daa241177299afeb14e8e54335630cf5c49db58f9be5f2df",
+  "scientific_rows_exactly_unchanged": true,
+  "task_and_variant_bytes_unchanged": true,
+  "trainer_bytes_unchanged": true,
+  "total_required_view_instances": 106,
+  "training_updates_added": 0
+}
