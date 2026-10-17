@@ -11,6 +11,7 @@ import argparse
 from contextlib import ExitStack, contextmanager
 from copy import deepcopy
 import json
+import math
 from pathlib import Path
 import statistics
 import time
@@ -63,6 +64,9 @@ class ComponentSpans:
         self.active, self.stage = False, "critic"
         self.stack, self.rows = [], []
         self.step = 0
+        self.final_step = 0
+        self.newton_depth = 0
+        self.matrix_samples = {}
 
     @contextmanager
     def span(self, name, **metadata):
@@ -108,17 +112,40 @@ class ComponentSpans:
             stack.enter_context(patch.object(FormulationContext, "build_trainer", build))
             for owner, attr, label, matrix in (
                     (bispf, "sinkhorn_coupling", "critic.sinkhorn", False),
-                    (dualnorm, "polar_factor", lambda: self.stage + ".optimizer.polar", True),
+                    (dualnorm, "polar_factor", lambda: self.stage + ".optimizer." +
+                     ("fallback_polar" if self.newton_depth else "polar"), True),
                     (torch.linalg, "svd", lambda: self.stage + ".optimizer.svd", True),
                     (torch.autograd, "grad", lambda: self.stage + ".autograd.grad", False),
                     (torch.autograd, "backward", lambda: self.stage + ".backward", False),
                     (training, "constraint_geometry_backward", "generator.constraint_backward", False)):
                 stack.enter_context(patch.object(owner, attr, self.wrap(getattr(owner, attr), label, matrix=matrix)))
+            if hasattr(dualnorm, "_newton_schulz_polar"):
+                original_newton = dualnorm._newton_schulz_polar
+                def newton(matrices, **kwargs):
+                    shape = list(matrices.shape)
+                    self.newton_depth += 1
+                    try:
+                        with self.span(self.stage + ".optimizer.newton_schulz", shape=shape,
+                                       matrix_count=math.prod(shape[:-2])):
+                            result = original_newton(matrices, **kwargs)
+                    finally:
+                        self.newton_depth -= 1
+                    # Capture a representative actual-gradient matrix only on
+                    # the separate torch-profile update. It never affects the
+                    # two synchronized component medians or plain replay.
+                    key = self.stage + ":" + str(shape[-2:])
+                    if self.active and self.step == self.final_step and key not in self.matrix_samples:
+                        self.matrix_samples[key] = dict(
+                            matrix=matrices.detach().reshape(-1, *shape[-2:])[0].cpu(),
+                            smoothing=kwargs["smoothing"], batch_shape=shape)
+                    return result
+                stack.enter_context(patch.object(dualnorm, "_newton_schulz_polar", newton))
             yield self
 
     def _bind(self, trainer, stack):
         original_step = trainer.step
         total = trainer.max_steps
+        self.final_step = total
         def step(*args, **kwargs):
             self.step = trainer.completed_steps + 1
             self.active = self.step > total - 3
@@ -140,6 +167,8 @@ class ComponentSpans:
                     profiler.export_chrome_trace(str(self.output / "torch-trace.json"))
                     (self.output / "torch-table.txt").write_text(profiler.key_averages(group_by_input_shape=True).table(
                         sort_by="self_cuda_time_total" if self.device.type == "cuda" else "self_cpu_time_total", row_limit=60))
+                    if self.matrix_samples:
+                        torch.save(self.matrix_samples, self.output / "actual-gradient-matrices.pt")
                 with (self.output / "components.jsonl").open("a") as stream:
                     for row in self.rows:
                         stream.write(canonical(row) + "\n")
@@ -215,6 +244,13 @@ def run(root, output, *, candidate_id, task_id, device="cuda:0"):
     # JSON has lists for shapes, not tuples.
     summary["polar_shapes"] = {str(shape): sum(row["name"].endswith(".polar") and tuple(row.get("shape", ())) == shape for row in rows)
                                for shape in {tuple(row["shape"]) for row in rows if row["name"].endswith(".polar")}}
+    newton_rows = [row for row in rows if row["name"].endswith(".newton_schulz")]
+    summary["newton_schulz"] = dict(
+        matrix_count=sum(row["matrix_count"] for row in newton_rows),
+        exact_fallback_count=sum(row["name"].endswith(".fallback_polar") for row in rows),
+        observation_scope="final three instrumented updates; diagnostic counters; representative gradients saved only in final torch-profile update",
+        matrix_samples_sha256=(file_hash(component_dir / "actual-gradient-matrices.pt")
+                               if (component_dir / "actual-gradient-matrices.pt").exists() else None))
     atomic_json(arm / "summary.json", summary)
     print(canonical(dict(event="profile_complete", candidate=candidate_id, task=task_id,
                          passed=summary["passed"], plain_ms=plain["metrics"]["update_ms_median"],
