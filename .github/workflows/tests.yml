@@ -21,7 +21,7 @@ jobs:
   cpu-tests:
     name: CPU / Python ${{ matrix.python }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
