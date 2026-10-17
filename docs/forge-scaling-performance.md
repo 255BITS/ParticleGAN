@@ -248,6 +248,18 @@ bundles, traces, logs, checkpoints and GIFs stay in local artifacts. A compact
 readout may reference their exact paths and hashes. All ordinary qualification,
 sampling and default-adoption rules remain unchanged.
 
+The separate `bispf_fastpath_quality` research diagnostic keeps the original
+8×8 stripe and four-bar target laws and numerical gates while increasing the
+convolutional width from 12 to 64. Its named task variants compare native and
+optimized BISPF on the same wider architecture, initialization, batches, prior,
+600 updates and 24 observations. The wider kernels exercise the CUDA fast path;
+the ordinary small image hosts remain on the native dispatch. Balanced target
+samples must pass the actual scorer; mode collapse, uniform blur, a terminal
+failure and nonfinite images must fail or be rejected. The frozen scorer control
+receipt is [published with the optimization evidence](../reports/forge/bispf-optimized/fastpath-scorer-controls.json).
+This diagnostic reserves 1,200 seconds for four arms, permits no paid retries,
+and grants no ordinary qualification or natural-image quality credit.
+
 ## Comparing a new source with an older recorded policy
 
 When a later view changes only counted/held dispositions, the explicit
