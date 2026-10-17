@@ -257,8 +257,12 @@ the ordinary small image hosts remain on the native dispatch. Balanced target
 samples must pass the actual scorer; mode collapse, uniform blur, a terminal
 failure and nonfinite images must fail or be rejected. The frozen scorer control
 receipt is [published with the optimization evidence](../reports/forge/bispf-optimized/fastpath-scorer-controls.json).
-This diagnostic reserves 1,200 seconds for four arms, permits no paid retries,
-and grants no ordinary qualification or natural-image quality credit.
+The initial unexecuted polar-solver campaign reserves 1,200 seconds for four
+arms. The separately declared `bispf-fastpath-alternatives-v1` campaign reserves
+1,800 seconds for six arms: native BISPF, Frobenius and quintic on both tasks.
+Each campaign permits no paid retries and grants no ordinary qualification or
+natural-image quality credit. The actual six-arm readout and training GIFs are
+[published separately](../reports/forge/bispf-optimized/wide-quality.json).
 
 ## Comparing a new source with an older recorded policy
 
@@ -289,8 +293,26 @@ comparison policy and never regrades historical rows. `--advance-policy` and
 `--recorded-policy` remain separate operations. Public default adoption retains
 its existing calibration requirements.
 
-For BISPF optimizer version 2, the existing image quality hosts have at most 24
-convolution channels and use the preserved native path. Their passes establish
-preservation of the known task suite. Large convolution solver checks and DCGAN
-mock-data benchmarks establish numerical behavior and latency; image quality on
-large images remains unmeasured.
+For the hybrid BISPF optimizer rules, the existing ordinary image-quality hosts
+have at most 24 convolution channels and use the preserved native path. Their
+passes establish preservation of the known suite; the widened diagnostics
+exercise the changed CUDA rule. DCGAN mock-data benchmarks establish complete
+update latency and memory. Image quality on large natural images remains
+unmeasured.
+
+## Incremental whole-family performance publication
+
+A new performance registration may explicitly override a selected family's
+candidate with `scaling register --candidate FAMILY=CANDIDATE` and use an
+immutable shared campaign. Each candidate still reserves the complete six-task
+allowance and uses one recipe across the whole matrix. This is a diagnostic
+choice, independent of ordinary qualification or family selection.
+
+`scaling_publication.compose_manifests(root, paths)` combines exact archived
+manifests from oldest to newest. It replaces an entire family's six-task matrix,
+validates task contracts and archive file/input digests, and preserves the other
+families' original source-bound cells. It never chooses individual winning cells
+or mixes sources into a certified paired timing cohort. The pure helper writes
+nothing; archive each input and publish the resulting current manifest only
+when the selected recipe is ready. The technique inventory remains the single
+current performance overview.

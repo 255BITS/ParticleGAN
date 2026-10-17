@@ -963,6 +963,23 @@ is a declared trainer change requiring its own quality evidence. Its checkpoints
 bind solver version 3 and reject earlier experimental solver states. CUDA graph
 caches are disposable execution state and are rebuilt after restoration. Native
 remains the default.
+
+`optimizer_convolution_rule="quintic"` selects a separately declared hybrid
+optimizer: large CUDA per-offset channel matrices use five fixed FP32 polynomial
+steps on `[M; optimizer_smoothing I]`, with coefficients
+`(3.4445, -4.775, 2.0315)` and final scaling by `1/1.21`. This bounded filter
+changes the update law; it is not an exact polar solve or PyTorch Muon. The
+experimental `"frobenius"` rule uses `M / sqrt(||M||_F^2 + smoothing^2)` and
+failed the direct wide-channel mode-coverage controls. Neither rule changes the
+original channel/kernel factor, momentum, learning rates or sampled-prior law.
+They require full DualNorm, per-offset convolution and the native SVD backend.
+Only CUDA kernels whose largest channel count per group exceeds 32 use the new
+rule. CPU, tiny convolution, dense, bias and prior paths retain native behavior.
+The default `"polar"` preserves existing serialization and native checkpoints;
+nondefault rules bind their own checkpoint versions. See the
+[BISPF investigation](../reports/forge/bispf-optimized/README.md) for measured
+quality and latency, scope and reproduction sources.
+
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and
 `optimizer_convolution="none"`. Direction blending requires zero-momentum full
