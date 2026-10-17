@@ -37,7 +37,7 @@ ParticleGAN benchmark and public API architecture expansion:
 | M2 | Tanh & Deep100g Suite Implementation & Solvability | Features F4, F5, F6, F7, and F11 (tanh & deep100g): Public API fixtures, task JSONs, and 3-level solvability unit tests | M1 | **DONE** (Gate Passed: 19 solvability tests pass, all reviewers/challengers/auditor approve) |
 | M3 | MisGAN & BiGAN Suite Implementation & Solvability | Features F8, F9, F10, and F11 (misgan & bigan): Public API fixtures, task JSONs, and 3-level solvability unit tests | M1 | **DONE** (Gate Passed: 9 solvability tests pass, ppost 2.88x headroom, genuine witnesses, load_state_dict, all reviewers/challengers/auditor approve) |
 | M4 | Full-Budget API Execution, GIFs, View Registration & Publication Refresh | Features F12, F13: Run `api_run` for all new cases at protocol seed 0, produce GIFs/receipts, register views (rev 13), refresh publications | M2, M3 | **DONE** (Gate Passed: all 7 runs verified, goal GIFs & receipts <100KB, rev 13 view registered, rev 12 archived, publications CURRENT, validate exits 0, all reviewers/challengers/auditor approve) |
-| M5 | Final Acceptance, E2E Verification & Git Publication | Feature F14: Pass 100% E2E test suite (Tiers 1-4), execute Tier 5 adversarial hardening, verify clean git tree, merge into `develop`, push to `origin/develop` | M4, E2E-Track | IN_PROGRESS |
+| M5 | Final Acceptance, E2E Verification & Git Publication | Feature F14: Pass 100% E2E test suite (Tiers 1-4), execute Tier 5 adversarial hardening, verify clean git tree, merge into `develop`, push to `origin/develop` | M4, E2E-Track | **DONE** (100% verification across gauntlet, git porcelain clean, pushed to origin/develop) |
 
 ## Interface Contracts
 
