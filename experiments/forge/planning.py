@@ -312,8 +312,8 @@ class _ResolutionCache:
         cand_info = self.get_candidate_info(idea_id)
         through_tier = 1 if through_tier is None else through_tier
         execution_backend = execution_backend or "cuda"
-        if through_tier not in (1, 2, 3):
-            raise ValueError("through-tier must be 1, 2, or 3")
+        if not isinstance(through_tier, int) or isinstance(through_tier, bool) or through_tier < 1:
+            raise ValueError("through-tier must be an integer >= 1")
         idea = cand_info["idea"]
         candidate = cand_info["candidate"]
         capabilities = cand_info["capabilities"]
@@ -619,8 +619,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         cuda_model = study["scope"].get("cuda_model")
     through_tier = 1 if through_tier is None else through_tier
     execution_backend = execution_backend or "cuda"
-    if through_tier not in (1, 2, 3):
-        raise ValueError("through-tier must be 1, 2, or 3")
+    if not isinstance(through_tier, int) or isinstance(through_tier, bool) or through_tier < 1:
+        raise ValueError("through-tier must be an integer >= 1")
     defaults = read_json(root / "configs/forge/defaults.json")
     view = load_view(root, view_id or idea.get("goal", "discriminator_stability"))
     all_tasks = load_tasks(root)

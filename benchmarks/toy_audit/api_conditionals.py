@@ -91,9 +91,23 @@ _CASES = [
         sampling=f"Pinned PR196 lift/observed-standardization with 20000 training/10000 test rows; {mechanism}; exact conditional Bayes samples; 16 fixed ambiguous single-sensor queries (a positive-probability mask, explicitly oversampled at evaluation)",
         scope="Oracle-complete-data supervised conditional GAN reform, explicitly different information access from original incomplete-data MisGAN. Joint recovery is not inferred from imputation, and no archived MisGAN arm is qualified.")
         for mechanism in ("block", "mcar_p20", "mcar_p50", "mcar_p80")],
+    _definition(
+        "misgan-block-recovery", "pr196-block-recovery", "2-pair MisGAN recovery on 8D block sensor-dropout",
+        "2-pair incomplete-data MisGAN with detached mask gradient in L_x on 8D block sensor-dropout problem; recovers 2D manifold, 8D subspace, mask distribution and ppost Bayesian imputation.", 7000,
+        kind="misgan_recovery",
+        thresholds={"modes_min": 100, "hq_min": 0.90, "mass_tv_max": 0.10, "off_plane_max": 0.04, "mask_tv_max": 0.05, "acc_min": 0.96, "acc_lo_min": 0.70},
+        sampling="8D block sensor-dropout problem; 2-pair MisGAN (G_x, D_x) and (G_m, D_m); ppost imputation",
+        scope="Tier 4 incomplete-data 2-pair MisGAN with detached mask gradient in L_x."),
+    _definition(
+        "misgan-block-neural-imputer", "pr196-block-neural-imputer", "3-pair MisGAN neural imputer on 8D block sensor-dropout",
+        "3-pair MisGAN grading neural imputer G_i([x*m, m, z_i]) on held-out ambiguous single-sensor queries without ppost.", 7000,
+        kind="misgan_neural_imputer",
+        thresholds={"observed_max_error_max": 1e-6, "acc_min": 0.95, "acc_lo_min": 0.65, "missing_std_ratio": [0.70, 1.30]},
+        sampling="8D block sensor-dropout problem; 3-pair MisGAN (G_x, D_x), (G_m, D_m), (G_i, D_i); ambiguous single-sensor queries",
+        scope="Tier 4 3-pair MisGAN grading neural imputer G_i([x*m, m, z_i])."),
 ]
 for _row in _CASES:
-    if _row["id"].startswith(("api-mask-","api-posterior-")): _row["eval_samples"]=4096
+    if _row["id"].startswith(("api-mask-","api-posterior-","api-misgan-")): _row["eval_samples"]=4096
     if _row["id"].startswith("api-sparse-"):
         _row["thresholds"]={k:v for k,v in _row["thresholds"].items() if k not in ("full_original_update_budget","terminal_observations")}
     _fixed_rows={"api-trajectory-edit":12,"api-trajectory-residual":12,"api-unipolar-hold":2,
@@ -623,7 +637,560 @@ class ConditionalFixture:
             fixed_task=task_state,global_rng=torch.random.get_rng_state(),last_losses=self.last_losses))
 
 
+def misgan_masked_sqdist(x, m, table):
+    xm = x * m
+    d = m @ (table * table).T - 2 * xm @ table.T + (xm * x).sum(1, keepdim=True)
+    return d.clamp_min(0)
+
+
+def misgan_ppost_indices(table, x, m, sigma=0.005, draws=1, generator=None, chunk=2048):
+    if len(table) == 0:
+        raise ValueError("candidate particle table cannot be empty")
+    table_dtype = table.dtype if table.dtype.is_floating_point else torch.float32
+    table = table.to(dtype=table_dtype)
+    x = x.to(device=table.device, dtype=table_dtype)
+    m = m.to(device=table.device, dtype=table_dtype)
+
+    table_sq_t = (table * table).T
+    table_t = table.T
+    scale = -1.0 / (2.0 * sigma * sigma)
+    n_table = table.shape[0]
+
+    out = []
+    for xb, mb in zip(x.split(chunk), m.split(chunk)):
+        xm = xb * mb
+        d = mb @ table_sq_t - 2.0 * xm @ table_t + (xm * xb).sum(1, keepdim=True)
+        d = d.clamp_min(0.0)
+        w = torch.softmax(d * scale, dim=1)
+        if not torch.all(torch.isfinite(w)):
+            nan_mask = ~torch.isfinite(w).all(dim=1)
+            w = w.clone()
+            w[nan_mask] = 1.0 / n_table
+        if generator is not None and generator.device.type == "cpu" and w.is_cuda:
+            sampled = torch.multinomial(w.cpu(), draws, replacement=True, generator=generator).to(table.device)
+        else:
+            sampled = torch.multinomial(w, draws, replacement=True, generator=generator)
+        out.append(sampled.T)
+    return torch.cat(out, 1)
+
+
+@torch.no_grad()
+def score_misgan_recovery(x, m, problem=None, eval_seed=99123, use_ppost=True):
+    if problem is None:
+        problem = misgan.Problem("block", 20000, 10000, 0, "cpu")
+    
+    if not torch.all(torch.isfinite(x)) or not torch.all(torch.isfinite(m)):
+        metrics = dict(
+            modes=0,
+            hq=0.0,
+            mass_tv=1.0,
+            off_plane=float("inf"),
+            mask_tv=1.0,
+            acc=0.0,
+            acc_lo=0.0,
+        )
+        failures = ["modes", "hq", "mass_tv", "off_plane", "mask_tv", "acc", "acc_lo", "nonfinite_output"]
+        return observation(metrics, failures, [])
+
+    off_plane = problem.off_plane(x)
+
+    x2 = problem.to2d(x)
+    centers = misgan.grid_centers(device=x.device, dtype=torch.float32)
+    dists = torch.cdist(x2, centers)
+    d, nearest = dists.min(1)
+    hq = float((d <= 0.09).float().mean())
+    hq_counts = torch.bincount(nearest[d <= 0.09], minlength=100)
+    modes = int((hq_counts >= 10).sum())
+    all_counts = torch.bincount(nearest, minlength=100).float()
+    mass_tv = float(0.5 * (all_counts / len(x) - 0.01).abs().sum())
+
+    hard_m = (m > 0.5).float()
+    emp = torch.bincount(misgan.pattern_index(hard_m).cpu(), minlength=256).double() / len(m)
+    mask_tv = float(0.5 * (emp - problem.probs.cpu()).abs().sum())
+
+    centers_eval = centers.to(device=problem.x_test.device, dtype=problem.x_test.dtype)
+    y_test_eval = problem.y_test.to(device=problem.x_test.device)
+    lo = problem.m_test.sum(1) <= 1
+
+    if use_ppost:
+        k = misgan_ppost_indices(x, problem.x_test, problem.m_test, sigma=0.005, draws=4, generator=_rng(eval_seed))
+        hit_list = []
+        imp_x2 = None
+        for draw_idx in range(k.shape[0]):
+            x_k = x[k[draw_idx]].to(device=problem.x_test.device, dtype=problem.x_test.dtype)
+            imp_d = problem.m_test * problem.x_test + (1 - problem.m_test) * x_k
+            imp_x2_d = problem.to2d(imp_d)
+            if draw_idx == 0:
+                imp_x2 = imp_x2_d
+            imp_nearest = torch.cdist(imp_x2_d, centers_eval).argmin(1)
+            hit_d = (imp_nearest == y_test_eval).float()
+            hit_list.append(hit_d)
+        hit = torch.stack(hit_list, dim=0).mean(dim=0)
+    else:
+        _, imp_draws = misgan.bayes_posterior(problem, problem.x_test, problem.m_test, draws=1, generator=_rng(eval_seed))
+        imp = imp_draws.squeeze(0)
+        imp_x2 = problem.to2d(imp)
+        imp_nearest = torch.cdist(imp_x2, centers_eval).argmin(1)
+        hit = (imp_nearest == y_test_eval).float()
+
+    acc = float(hit.mean())
+    acc_lo = float(hit[lo].mean()) if lo.any() else 0.0
+
+    metrics = dict(
+        modes=modes,
+        hq=hq,
+        mass_tv=mass_tv,
+        off_plane=off_plane,
+        mask_tv=mask_tv,
+        acc=acc,
+        acc_lo=acc_lo,
+    )
+
+    limits = [
+        ("modes", 100, 100),
+        ("hq", 0.90, None),
+        ("mass_tv", None, 0.10),
+        ("off_plane", None, 0.04),
+        ("mask_tv", None, 0.05),
+        ("acc", 0.96, None),
+        ("acc_lo", 0.70, None),
+    ]
+    failures = [item for name, lo_val, hi_val in limits for item in _bound(metrics, name, lo_val, hi_val)]
+    views = [
+        view("Generated 8D data projected to 2D grid", centers, x2[:1024], "scatter"),
+        view("Mask pattern distribution vs true", problem.probs, emp.float(), "bar"),
+        view("Imputed test data projected to 2D", centers, imp_x2[:1024], "scatter"),
+    ]
+    return observation(metrics, failures, views)
+
+
+@torch.no_grad()
+def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
+    if problem is None:
+        problem = misgan.Problem("block", 20000, 10000, 0, "cpu")
+    
+    rng = _rng(eval_seed)
+    if callable(predict_fn):
+        draws = predict_fn(problem.x_test, problem.m_test, rng)
+    else:
+        draws = predict_fn
+    
+    if draws.ndim == 2:
+        draws = draws.unsqueeze(0)
+    
+    if not torch.all(torch.isfinite(draws)):
+        metrics = dict(
+            observed_max_error=float("inf"),
+            acc=0.0,
+            acc_lo=0.0,
+            missing_std_ratio=0.0,
+        )
+        failures = ["observed_max_error", "acc", "acc_lo", "missing_std_ratio", "nonfinite_output"]
+        return observation(metrics, failures, [])
+
+    obs_err = float(((draws - problem.x_test[None]) * problem.m_test[None]).abs().max())
+
+    x2 = problem.to2d(draws.reshape(-1, 8))
+    centers = misgan.grid_centers(device=draws.device, dtype=torch.float32)
+    nearest = torch.cdist(x2, centers).argmin(1).reshape(len(draws), len(problem.x_test))
+    hit = (nearest == problem.y_test[None]).float()
+    lo = problem.m_test.sum(1) <= 1
+    acc = float(hit.mean())
+    acc_lo = float(hit[:, lo].mean()) if lo.any() else 0.0
+
+    ref_rng = _rng(eval_seed + 1)
+    _, ref_draws = misgan.bayes_posterior(problem, problem.x_test, problem.m_test, draws=len(draws), generator=ref_rng)
+    miss = 1 - problem.m_test
+    nmiss = miss.sum().clamp_min(1)
+    cand_std = (draws.std(0, correction=0) * miss).sum() / nmiss
+    ref_std = (ref_draws.std(0, correction=0) * miss).sum() / nmiss
+    missing_std_ratio = float(cand_std / ref_std.clamp_min(1e-6))
+
+    metrics = dict(
+        observed_max_error=obs_err,
+        acc=acc,
+        acc_lo=acc_lo,
+        missing_std_ratio=missing_std_ratio,
+    )
+
+    limits = [
+        ("observed_max_error", None, 1e-6),
+        ("acc", 0.95, None),
+        ("acc_lo", 0.65, None),
+        ("missing_std_ratio", 0.70, 1.30),
+    ]
+    failures = [item for name, lo_val, hi_val in limits for item in _bound(metrics, name, lo_val, hi_val)]
+    views = [
+        view("Neural imputer ambiguous draws projected to 2D", centers, x2[:1024], "scatter"),
+    ]
+    return observation(metrics, failures, views)
+
+
+class MisGANRecoveryFixture:
+    api_components = (
+        "Recipe.make_prior",
+        "Recipe.make_optimizers",
+        "Recipe.make_loss",
+        "scale_learning_rates",
+    )
+
+    def __init__(self, case, seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, device="cpu"):
+        self.case = case
+        self.seed = int(seed)
+        self.device = torch.device(device)
+        self.completed_steps = 0
+        self.limit = case["default_steps"] if max_steps is None else max_steps
+        if type(self.limit) is not int or not 0 < self.limit <= case["default_steps"]:
+            raise ValueError("max_steps must be in the declared budget")
+        
+        self.recipe = get_recipe(
+            "ka2" if recipe_name in ("ka2", "atlas", "bcap", None) else recipe_name,
+            batch_size=case["batch_size"],
+            total_steps=case["default_steps"],
+            num_particles=128,
+            z_dim=8,
+            prior_kind="mog",
+            sigma_rel=0.25,
+            standardize=False,
+            input_noise_std=0.0,
+            output_noise_std=0.0,
+            lr=0.002,
+        ).replace(name="misgan_recovery_" + str(recipe_name))
+
+        self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
+        self.data_rng = _rng(self.seed + 10)
+        self.latent_rng = _rng(self.seed + 11)
+
+        with construction_rng(self.seed, "cpu"):
+            self.G_x = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 8),
+            ).to(self.device)
+            self.G_m = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 8), nn.Sigmoid(),
+            ).to(self.device)
+            self.D_x = nn.Sequential(
+                nn.Linear(16, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 1),
+            ).to(self.device)
+            self.D_m = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 1),
+            ).to(self.device)
+            self.prior = self.recipe.make_prior()
+
+        init.deterministic_orthogonal_(self.G_x, seed=self.seed + 1)
+        init.deterministic_orthogonal_(self.G_m, seed=self.seed + 2)
+        init.deterministic_orthogonal_(self.D_x, seed=self.seed + 3)
+        init.deterministic_orthogonal_(self.D_m, seed=self.seed + 4)
+        if self.prior is not None:
+            init.deterministic_orthogonal_(self.prior, seed=self.seed + 5)
+
+        self.opt_g = torch.optim.Adam(
+            list(self.G_x.parameters()) + list(self.G_m.parameters()),
+            lr=self.recipe.lr,
+        )
+        self.opt_d = torch.optim.Adam(
+            list(self.D_x.parameters()) + list(self.D_m.parameters()),
+            lr=self.recipe.lr,
+        )
+        self.loss = self.recipe.make_loss()
+        self.last_losses = {}
+
+    def step(self):
+        if self.completed_steps >= self.limit:
+            raise RuntimeError("declared execution cap reached")
+        scale_learning_rates(self.completed_steps, self.recipe, [self.opt_g, self.opt_d], [[g["lr"] for g in self.opt_g.param_groups], [g["lr"] for g in self.opt_d.param_groups]], self.prior)
+        
+        self.G_x.train(); self.G_m.train(); self.D_x.train(); self.D_m.train()
+        x_real, m_real, _ = self.problem.train_batch(self.recipe.batch_size, self.data_rng)
+        
+        z_x, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+        z_m, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+        x_fake = self.G_x(z_x)
+        m_fake = self.G_m(z_m)
+        
+        real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
+        fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
+        
+        loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
+        loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
+        loss_d = loss_dx + loss_dm
+        
+        self.opt_d.zero_grad()
+        loss_d.backward()
+        self.opt_d.step()
+        
+        m_detached = m_fake.detach()
+        fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
+        
+        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), self.D_x(real_dx_in).squeeze(-1))
+        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), self.D_m(m_real).squeeze(-1))
+        loss_g = loss_gx + loss_gm
+        
+        self.opt_g.zero_grad()
+        loss_g.backward()
+        self.opt_g.step()
+        
+        self.completed_steps += 1
+        self.last_losses = dict(
+            loss_g=float(loss_g.detach()),
+            loss_d=float(loss_d.detach()),
+            loss_gx=float(loss_gx.detach()),
+            loss_gm=float(loss_gm.detach()),
+        )
+        if not all(math.isfinite(v) for v in self.last_losses.values()):
+            raise FloatingPointError("nonfinite actual GAN update")
+        return dict(step=self.completed_steps, **self.last_losses)
+
+    @torch.no_grad()
+    def observe(self, n=4096, seed=99123):
+        self.G_x.eval(); self.G_m.eval()
+        gen = _rng(seed)
+        z_x, _ = self.prior.sample(n, generator=gen)
+        z_m, _ = self.prior.sample(n, generator=gen)
+        x = self.G_x(z_x)
+        m = self.G_m(z_m)
+        return score_misgan_recovery(x, m, self.problem, eval_seed=seed, use_ppost=True)
+
+    def state_dict(self):
+        return {
+            "version": VERSION,
+            "case_id": self.case["id"],
+            "seed": self.seed,
+            "limit": self.limit,
+            "completed_steps": self.completed_steps,
+            "recipe": self.recipe.to_dict(),
+            "G_x": self.G_x.state_dict(),
+            "G_m": self.G_m.state_dict(),
+            "D_x": self.D_x.state_dict(),
+            "D_m": self.D_m.state_dict(),
+            "prior": self.prior.state_dict(),
+            "opt_g": self.opt_g.state_dict(),
+            "opt_d": self.opt_d.state_dict(),
+            "last_losses": self.last_losses,
+        }
+
+    def load_state_dict(self, state):
+        self.completed_steps = state["completed_steps"]
+        self.G_x.load_state_dict(state["G_x"])
+        self.G_m.load_state_dict(state["G_m"])
+        self.D_x.load_state_dict(state["D_x"])
+        self.D_m.load_state_dict(state["D_m"])
+        if self.prior is not None and "prior" in state and state["prior"] is not None:
+            self.prior.load_state_dict(state["prior"])
+        self.opt_g.load_state_dict(state["opt_g"])
+        self.opt_d.load_state_dict(state["opt_d"])
+        self.last_losses = state["last_losses"]
+
+
+class MisGANNeuralImputerFixture:
+    api_components = (
+        "Recipe.make_prior",
+        "Recipe.make_optimizers",
+        "Recipe.make_loss",
+        "scale_learning_rates",
+    )
+
+    def __init__(self, case, seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, device="cpu"):
+        self.case = case
+        self.seed = int(seed)
+        self.device = torch.device(device)
+        self.completed_steps = 0
+        self.limit = case["default_steps"] if max_steps is None else max_steps
+        if type(self.limit) is not int or not 0 < self.limit <= case["default_steps"]:
+            raise ValueError("max_steps must be in the declared budget")
+        
+        self.recipe = get_recipe(
+            "ka2" if recipe_name in ("ka2", "atlas", "bcap", None) else recipe_name,
+            batch_size=case["batch_size"],
+            total_steps=case["default_steps"],
+            num_particles=128,
+            z_dim=8,
+            prior_kind="mog",
+            sigma_rel=0.25,
+            standardize=False,
+            input_noise_std=0.0,
+            output_noise_std=0.0,
+            lr=0.002,
+        ).replace(name="misgan_neural_imputer_" + str(recipe_name))
+
+        self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
+        self.data_rng = _rng(self.seed + 10)
+        self.latent_rng = _rng(self.seed + 11)
+
+        with construction_rng(self.seed, "cpu"):
+            self.G_x = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 8),
+            ).to(self.device)
+            self.G_m = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 8), nn.Sigmoid(),
+            ).to(self.device)
+            self.G_i = nn.Sequential(
+                nn.Linear(20, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 8),
+            ).to(self.device)
+
+            self.D_x = nn.Sequential(
+                nn.Linear(16, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 1),
+            ).to(self.device)
+            self.D_m = nn.Sequential(
+                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 1),
+            ).to(self.device)
+            self.D_i = nn.Sequential(
+                nn.Linear(16, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 64), nn.LeakyReLU(0.2),
+                nn.Linear(64, 1),
+            ).to(self.device)
+            self.prior = self.recipe.make_prior()
+
+        init.deterministic_orthogonal_(self.G_x, seed=self.seed + 1)
+        init.deterministic_orthogonal_(self.G_m, seed=self.seed + 2)
+        init.deterministic_orthogonal_(self.G_i, seed=self.seed + 3)
+        init.deterministic_orthogonal_(self.D_x, seed=self.seed + 4)
+        init.deterministic_orthogonal_(self.D_m, seed=self.seed + 5)
+        init.deterministic_orthogonal_(self.D_i, seed=self.seed + 6)
+        if self.prior is not None:
+            init.deterministic_orthogonal_(self.prior, seed=self.seed + 7)
+
+        self.opt_g = torch.optim.Adam(
+            list(self.G_x.parameters()) + list(self.G_m.parameters()) + list(self.G_i.parameters()),
+            lr=self.recipe.lr,
+        )
+        self.opt_d = torch.optim.Adam(
+            list(self.D_x.parameters()) + list(self.D_m.parameters()) + list(self.D_i.parameters()),
+            lr=self.recipe.lr,
+        )
+        self.loss = self.recipe.make_loss()
+        self.last_losses = {}
+
+    def step(self):
+        if self.completed_steps >= self.limit:
+            raise RuntimeError("declared execution cap reached")
+        scale_learning_rates(self.completed_steps, self.recipe, [self.opt_g, self.opt_d], [[g["lr"] for g in self.opt_g.param_groups], [g["lr"] for g in self.opt_d.param_groups]], self.prior)
+
+        self.G_x.train(); self.G_m.train(); self.G_i.train()
+        self.D_x.train(); self.D_m.train(); self.D_i.train()
+        x_real, m_real, _ = self.problem.train_batch(self.recipe.batch_size, self.data_rng)
+
+        z_x, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+        z_m, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+        z_i = torch.randn(self.recipe.batch_size, 4, generator=self.latent_rng, device=self.device)
+
+        x_fake = self.G_x(z_x)
+        m_fake = self.G_m(z_m)
+
+        cond = torch.cat([x_real * m_real, m_real, z_i], dim=1)
+        raw_imp = self.G_i(cond)
+        completed = m_real * x_real + (1 - m_real) * raw_imp
+
+        real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
+        fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
+
+        loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
+        loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
+        
+        real_di_in = torch.cat([x_fake.detach(), m_real], dim=1)
+        fake_di_in = torch.cat([completed.detach(), m_real], dim=1)
+        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
+
+        loss_d = loss_dx + loss_dm + loss_di
+        self.opt_d.zero_grad()
+        loss_d.backward()
+        self.opt_d.step()
+
+        m_detached = m_fake.detach()
+        fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
+        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), self.D_x(real_dx_in).squeeze(-1))
+        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), self.D_m(m_real).squeeze(-1))
+        
+        loss_gi = self.loss.g_loss(self.D_i(torch.cat([completed, m_real], dim=1)).squeeze(-1), self.D_i(real_di_in).squeeze(-1))
+
+        loss_g = loss_gx + loss_gm + loss_gi
+        self.opt_g.zero_grad()
+        loss_g.backward()
+        self.opt_g.step()
+
+        self.completed_steps += 1
+        self.last_losses = dict(
+            loss_g=float(loss_g.detach()),
+            loss_d=float(loss_d.detach()),
+            loss_gx=float(loss_gx.detach()),
+            loss_gm=float(loss_gm.detach()),
+            loss_gi=float(loss_gi.detach()),
+        )
+        if not all(math.isfinite(v) for v in self.last_losses.values()):
+            raise FloatingPointError("nonfinite actual GAN update")
+        return dict(step=self.completed_steps, **self.last_losses)
+
+    @torch.no_grad()
+    def observe(self, n=4096, seed=99123):
+        self.G_i.eval()
+        def predict_fn(x, m, rng, draws=16):
+            out_draws = []
+            for d in range(draws):
+                zi = torch.randn(len(x), 4, generator=rng, device=x.device)
+                cond = torch.cat([x * m, m, zi], dim=1)
+                raw = self.G_i(cond)
+                grafted = m * x + (1 - m) * raw
+                out_draws.append(grafted)
+            return torch.stack(out_draws, dim=0)
+        return score_misgan_neural_imputer(predict_fn, self.problem, eval_seed=seed)
+
+    def state_dict(self):
+        return {
+            "version": VERSION,
+            "case_id": self.case["id"],
+            "seed": self.seed,
+            "limit": self.limit,
+            "completed_steps": self.completed_steps,
+            "recipe": self.recipe.to_dict(),
+            "G_x": self.G_x.state_dict(),
+            "G_m": self.G_m.state_dict(),
+            "G_i": self.G_i.state_dict(),
+            "D_x": self.D_x.state_dict(),
+            "D_m": self.D_m.state_dict(),
+            "D_i": self.D_i.state_dict(),
+            "prior": self.prior.state_dict(),
+            "opt_g": self.opt_g.state_dict(),
+            "opt_d": self.opt_d.state_dict(),
+            "last_losses": self.last_losses,
+        }
+
+    def load_state_dict(self, state):
+        self.completed_steps = state["completed_steps"]
+        self.G_x.load_state_dict(state["G_x"])
+        self.G_m.load_state_dict(state["G_m"])
+        self.G_i.load_state_dict(state["G_i"])
+        self.D_x.load_state_dict(state["D_x"])
+        self.D_m.load_state_dict(state["D_m"])
+        self.D_i.load_state_dict(state["D_i"])
+        if self.prior is not None and "prior" in state and state["prior"] is not None:
+            self.prior.load_state_dict(state["prior"])
+        self.opt_g.load_state_dict(state["opt_g"])
+        self.opt_d.load_state_dict(state["opt_d"])
+        self.last_losses = state["last_losses"]
+
+
 def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name="atlas",max_steps=None):
     if case_id not in CASES: raise ValueError(f"unknown conditional API case {case_id!r}")
     if torch.device(device).type!="cpu": raise ValueError("This frozen caller-owned conditional protocol is CPU-only")
+    if case_id == "api-misgan-block-recovery":
+        return MisGANRecoveryFixture(deepcopy(CASES[case_id]), seed=seed, recipe_name=recipe_name, max_steps=max_steps, device=device)
+    if case_id == "api-misgan-block-neural-imputer":
+        return MisGANNeuralImputerFixture(deepcopy(CASES[case_id]), seed=seed, recipe_name=recipe_name, max_steps=max_steps, device=device)
     return ConditionalFixture(deepcopy(CASES[case_id]),_task(case_id.removeprefix("api-")),seed,recipe_name,max_steps)

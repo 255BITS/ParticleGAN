@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 12,
+  "revision": 13,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -39,6 +39,12 @@
       "order": 5,
       "qualification_tier": 1,
       "task": "five_word_joint_smoke"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "zero_tanh_smoke"
     },
     {
       "task": "gaussian1d_stability",
@@ -254,6 +260,96 @@
       "order": 100,
       "qualification_tier": 1,
       "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "importance": "held",
+      "order": 2,
+      "qualification_tier": 3,
+      "task": "zero_tanh_rail_escape",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "Dynamic target shift (+0.90, -0.90) -> (0.0, 0.0) rail escape with 400-update deadline held pending passing recipe.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes zero_tanh_rail_escape under its unchanged declaration and satisfies all Tier 1-3 requirements."
+      }
+    },
+    {
+      "importance": "held",
+      "order": 0,
+      "qualification_tier": 4,
+      "task": "grid100_mlp16",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "16-hidden-layer 128-wide LeakyReLU MLP generator on grid100 target held pending passing recipe across all 100 modes.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes grid100_mlp16 under its unchanged declaration and satisfies all counted requirements."
+      }
+    },
+    {
+      "importance": "held",
+      "order": 1,
+      "qualification_tier": 4,
+      "task": "grid100_res16_tanh",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "16-layer residual MLP with S=5.25 bounded tanh head on grid100 target held pending non-saturating passing recipe.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes grid100_res16_tanh under its unchanged declaration without saturation."
+      }
+    },
+    {
+      "importance": "held",
+      "order": 2,
+      "qualification_tier": 4,
+      "task": "misgan_block_recovery",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "2-pair incomplete-data MisGAN on 8D block problem held pending passing recipe for manifold recovery and ppost imputation.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes misgan_block_recovery under its unchanged declaration."
+      }
+    },
+    {
+      "importance": "held",
+      "order": 3,
+      "qualification_tier": 4,
+      "task": "misgan_block_neural_imputer",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "3-pair MisGAN neural imputer on ambiguous single-sensor queries held pending passing recipe without ppost fallback.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes misgan_block_neural_imputer under its unchanged declaration."
+      }
+    },
+    {
+      "importance": "held",
+      "order": 4,
+      "qualification_tier": 4,
+      "task": "ring16_bigan_continuous",
+      "hold": {
+        "schema": "forge_hold_v1",
+        "previous_importance": "required",
+        "reason": "unsolved",
+        "blocked_by": [],
+        "summary": "Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
+        "reentry": "Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration."
+      }
     }
   ],
   "eligibility": {},
@@ -266,10 +362,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "0.10 convergence policy: accurate acquisition, Gaussian settling and post-acquisition endurance/recovery are required even when no current recipe passes. The owner explicitly restores these requirements; their previous holds are archived, not satisfied or regraded. Task protocols, numerical bounds, recipe/source selections and historical qualifications remain unchanged.",
+  "policy_change_reason": "Milestone 4: Register extensible Tier 4 stress_and_formulations suite (grid100_mlp16, grid100_res16_tanh, misgan_block_recovery, misgan_block_neural_imputer, ring16_bigan_continuous) as held tasks, zero_tanh_rail_escape in Tier 3 as held, and zero_tanh_smoke in Tier 1 as required.",
   "previous_revision": {
-    "revision": 11,
-    "archive": "configs/forge/view-history/discriminator_stability-v11.json",
-    "policy_fingerprint": "3d6f9b3b540eef6834c8512937094b729317147865965723869fddd2dd7a838e"
+    "archive": "configs/forge/view-history/discriminator_stability-v12.json",
+    "policy_fingerprint": "efe09cd3a8b28b45585c6e16c52c1a11b4ae34f68a32217e27929ed529d55871",
+    "revision": 12
   }
 }

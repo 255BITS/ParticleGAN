@@ -276,7 +276,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         request = entry["request"]
         if diagnostic_evidence_scope(request) or request.get("promotion"):
             continue
-        if type(request.get("through_tier")) is not int or request["through_tier"] not in (1, 2, 3):
+        if type(request.get("through_tier")) is not int or isinstance(request.get("through_tier"), bool) or request["through_tier"] < 1:
             unavailable_caps += 1
             continue
         assignments = [a for a in request["view"]["assignments"] if a["qualification_tier"] <= request["through_tier"]]

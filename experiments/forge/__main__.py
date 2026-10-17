@@ -30,6 +30,26 @@ def queue_location(root: Path, override=None) -> Path:
     return repository / "runs/forge"
 
 
+def _qualification_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid qualification tier integer: {val!r}")
+    if i < 1:
+        raise argparse.ArgumentTypeError(f"qualification tier must be >= 1, got {i}")
+    return i
+
+
+def _minimum_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid tier integer: {val!r}")
+    if i < 0:
+        raise argparse.ArgumentTypeError(f"tier must be >= 0, got {i}")
+    return i
+
+
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2], help="Forge checkout containing declarations and durable reports")
@@ -71,7 +91,8 @@ def parser():
         c.add_argument("candidate")
         c.add_argument("--view")
         c.add_argument("--study", help="explicit research study id or JSON path")
-        c.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=None)
+        c.add_argument("--through-tier", type=_qualification_tier, default=None,
+                       help="maximum qualification tier (>= 1)")
         c.add_argument("--device", choices=("cpu", "cuda"), default=None, help="compute cohort (default CUDA; run infers it from --gpus)")
         c.add_argument("--cuda-model", help="required CUDA model on heterogeneous machines")
         if name == "plan":
@@ -103,7 +124,7 @@ def parser():
     b.add_argument("--json", action="store_true", help="emit full machine-readable board instead of a compact table")
     b.add_argument("--scope", choices=("all", "current", "pinned", "historical", "calibration_diagnostic"), default="all")
     b.add_argument("--candidate", help="filter candidate names by substring")
-    b.add_argument("--tier", type=int, choices=(0, 1, 2, 3), help="minimum qualified tier")
+    b.add_argument("--tier", type=_minimum_tier, help="minimum qualified tier (>= 0)")
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
     b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
     b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
@@ -117,7 +138,8 @@ def parser():
     for stage in ("plan", "enqueue", "run"):
         inv = inventory_stages.add_parser(stage)
         inv.add_argument("--view", default="discriminator_stability")
-        inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
+        inv.add_argument("--through-tier", type=_qualification_tier, default=3,
+                         help="maximum qualification tier (>= 1)")
         inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
         inv.add_argument("--cuda-model")
         inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
@@ -199,7 +221,8 @@ def parser():
     retier = commands.add_parser("retier", help="change only view policy, archive the previous revision, validate and recompute; never enqueue")
     retier.add_argument("view")
     retier.add_argument("--task", required=True)
-    retier.add_argument("--tier", type=int, choices=(1, 2, 3), required=True)
+    retier.add_argument("--tier", type=_qualification_tier, required=True,
+                        help="new qualification tier (>= 1)")
     retier.add_argument("--reason", required=True)
     dispositions = commands.add_parser("test-dispositions", help="check or apply held/removed-from-count test dispositions as archived view revisions; no training")
     dispositions.add_argument("stage", choices=("check", "apply"), help="check writes nothing and exits 1 on drift; apply archives first and is idempotent")

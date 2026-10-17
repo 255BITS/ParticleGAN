@@ -22,8 +22,15 @@ FAMILY_DIRECTORY = Path("reports/forge/families")
 PROBLEM_DEFINITIONS = Path("reports/forge/problem-definitions.json")
 PROBLEM_PAGE = Path("reports/forge/problems.md")
 COMPLETE = {"PASS", "FAIL"}
-TIERS = ("1", "2", "3")
+BASE_TIERS = ("1", "2", "3")
+TIERS = BASE_TIERS
 COVERAGE_PREFLIGHT = Path("reports/forge/tier-coverage-20261014/preflight.json")
+
+
+def evaluated_tiers(views) -> tuple[str, ...]:
+    """Return tuple of tier strings from 1 to max tier present (at least 3)."""
+    highest = max([3] + [a["qualification_tier"] for view in views for a in view.get("assignments", [])])
+    return tuple(str(t) for t in range(1, highest + 1))
 
 
 FIRST_FULL_ATLAS_RESULT = Path("reports/forge/common26-first-two-pole-full-atlas-20261004/results.json")
@@ -812,10 +819,11 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             if name in results:
                 results[name].update(cell)
 
+        progress_tiers = evaluated_tiers(views)
         def view_row(view):
             tiers = {}
             assignments = sorted(view["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
-            for tier in TIERS:
+            for tier in progress_tiers:
                 required = [results[a["task"]] for a in assignments if str(a["qualification_tier"]) == tier
                             and a["importance"] == "required"]
                 if overlay is not None and view["id"] in POLICY_CLOUD_VIEWS:
@@ -839,7 +847,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                                                             "cohort": item["row"].get("cohort"),
                                                             "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
                                                            for item in separate],
-                                   "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
+                                   "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in progress_tiers},
                                    "total": _sum([view["total"] for view in view_rows])})
         if retry_history:
             family["cohorts"][-1]["retry_history"] = retry_history
@@ -869,7 +877,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     problems = load(PROBLEM_DEFINITIONS) if (root / PROBLEM_DEFINITIONS).is_file() else None
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
-                "scoped_views": [view["id"] for view in scoped],
+                "scoped_views": [view["id"] for view in scoped], "tiers": list(progress_tiers),
                 "families": active,
                 "configuration_families": configurations,
                 "historical_families": [family for family in families.values() if family["historical_only"]],
@@ -892,13 +900,18 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     return progress
 
 
-def _table_header(*, selected=False, held=False):
-    header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Total view requirements |"
-              if selected else "| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Total distinct tests |")
+def _table_header(tiers=None, *, selected=False, held=False):
+    if tiers is None:
+        tiers = TIERS
+    req_cols = " | ".join(f"Tier {t} requirements" for t in tiers)
+    test_cols = " | ".join(f"Tier {t} tests" for t in tiers)
+    header = (f"| Family / selected recipe | {req_cols} | Total view requirements |"
+              if selected else f"| View | {test_cols} | Total distinct tests |")
+    div_cols = ["---"] + ["---:"] * (len(tiers) + 1)
     if held:
-        return [header + " Held (measured, not counted) |", "| --- | ---: | ---: | ---: | ---: | ---: |"]
-    return [header,
-            "| --- | ---: | ---: | ---: | ---: |"]
+        header += " Held (measured, not counted) |"
+        div_cols.append("---:")
+    return [header, "| " + " | ".join(div_cols) + " |"]
 
 
 def _held_cell(root, page, family, cohort, view):
@@ -1159,10 +1172,12 @@ def _uncounted_section(root, page, summed, selected):
     return lines + [""]
 
 
-def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False):
+def _score_cells(root, page, family, cohort, counts, *, tiers=None, view_id=None, bold=False):
+    if tiers is None:
+        tiers = tuple(counts["tiers"].keys()) if "tiers" in counts else TIERS
     base = cohort["anchor"] + ("-" + view_id if view_id else "")
     cells = []
-    for tier in (*TIERS, "total"):
+    for tier in (*tiers, "total"):
         count = counts["total"] if tier == "total" else counts["tiers"][tier]
         target = base + ("-tier-" + tier if tier != "total" else "")
         text = link(root, page, score(count), family["page"], target)
@@ -1172,6 +1187,7 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
+    report_tiers = tuple(progress.get("tiers", TIERS))
     from .research_tiers import tier_rows, historical_seed_rows
     research = tier_rows(root, page)
     historical_seeds = historical_seed_rows(root, page)
@@ -1198,7 +1214,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "These totals project recorded task outcomes onto the current requirements; historical qualifications "
              "keep their original policy revisions. Held failures remain visible in the "
              "full-suite results below; separate diagnostic runs appear below.", "",
-             *_table_header(selected=True)]
+             *_table_header(tiers=report_tiers, selected=True)]
     selected = list(_selected_cohorts(progress))
     for family, cohort in selected:
         name = family["label"]
@@ -1209,7 +1225,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
             cells[0] += " · " + link(root, page, configuration["label"], configuration["page"])
-        cells += _score_cells(root, page, family, cohort, cohort, bold=True)
+        cells += _score_cells(root, page, family, cohort, cohort, tiers=report_tiers, bold=True)
         lines.append("| " + " | ".join(cells) + " |")
     lines += [""]
     for row in publication.get("rows", []):
@@ -1275,14 +1291,14 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     lines += ["<details>", "<summary>Selected recipe breakdown by view (shared tests repeat across views)</summary>", "",
               "Each view uses the selected recipe above. View scores are the requirements summed in its selected-recipe total." +
               (" Held cells count passes / held tests of that view; they are in no total." if held else ""), "",
-              "| Family / selected recipe | View | Tier 1 | Tier 2 | Tier 3 | Total view requirements |" +
+              f"| Family / selected recipe | View | {' | '.join(f'Tier {t}' for t in report_tiers)} | Total view requirements |" +
               (" Held (measured, not counted) |" if held else ""),
-              "| --- | --- | ---: | ---: | ---: | ---: |" + (" ---: |" if held else "")]
+              f"| --- | --- | {' | '.join(['---:'] * len(report_tiers))} | ---: |" + (" ---: |" if held else "")]
     for family, cohort in selected:
         for view in cohort["views"]:
             label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
             lines.append("| " + " | ".join([link(root, page, family["label"], family["page"]), label,
-                                           *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                           *_score_cells(root, page, family, cohort, view, tiers=report_tiers, view_id=view["id"]),
                                            *([_held_cell(root, page, family, cohort, view)] if held else [])]) + " |")
     lines += ["", "</details>", "",
               "## Reading the results", "",
@@ -1497,6 +1513,7 @@ def _displayed_for(view, family_id):
 def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
+    report_tiers = tuple(progress.get("tiers", TIERS))
     views = {view["id"]: view for view in progress["views"]}
     lines = ["<!-- Generated Forge family report -->", "", f"# {family['label']}", "",
              link(root, page, "← Family leaderboard", "reports/forge/technique-inventory.md"), "",
@@ -1566,7 +1583,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   link(root, page, "Complete recipe, prior, initialization and sampling bindings", "reports/forge/technique-inventory.json"), "",
                   "Selection: " + cell(row.get("selection", {}).get("selection_kind", "canonical fallback")) + ". " +
                   cell(row.get("selection", {}).get("reason", "No qualified configuration has been selected.")), "",
-                  "</details>", "", *_table_header(held=held_views)]
+                  "</details>", "", *_table_header(tiers=report_tiers, held=held_views)]
         if row.get("selection", {}).get("measurement_complete"):
             lines[-2:-2] = ["Complete current Tier 1 measurement in: " +
                             ", ".join(row["selection"]["measurement_views"]) +
@@ -1578,14 +1595,14 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             lines[-2:-2] = details
         for view in cohort["views"]:
             lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
-                                            *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                            *_score_cells(root, page, family, cohort, view, tiers=report_tiers, view_id=view["id"]),
                                             *([_held_cell(root, page, family, cohort, view)] if held_views else [])]) + " |")
         if cohort.get("scoped_views"):
             held_scoped = any("held" in view for view in cohort["scoped_views"])
-            lines += ["", "Separate cohort coverage (excluded from family totals):", "", *_table_header(held=held_scoped)]
+            lines += ["", "Separate cohort coverage (excluded from family totals):", "", *_table_header(tiers=report_tiers, held=held_scoped)]
             for view in cohort["scoped_views"]:
                 lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
-                                                *_score_cells(root, page, family, cohort, view, view_id=view["id"]),
+                                                *_score_cells(root, page, family, cohort, view, tiers=report_tiers, view_id=view["id"]),
                                                 *([_held_cell(root, page, family, cohort, view)] if held_scoped else [])]) + " |")
             policy = cohort.get("policy_cloud_publication")
             if policy:
@@ -1610,7 +1627,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       link(root, page, repair["attempt_id"], repair["receipt"]) + " → " +
                       link(root, page, repair["superseded_by"], repair["retry_receipt"]) +
                       ". The original outcome and cost remain recorded; displayed task metrics use the certified successor.", ""]
-        for tier in TIERS:
+        for tier in report_tiers:
             members, held, removed = {}, {}, {}
             for definition in progress["views"]:
                 if definition["id"] in progress["diagnostic_views"] + progress.get("scoped_views", []):
@@ -1676,11 +1693,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                               "policy; its measurements are excluded from family totals and give no parent-cohort credit.", ""]
                 def per_tier(role):
                     return [sum(a["importance"] == role and str(a["qualification_tier"]) == tier
-                                for a in definition["assignments"]) for tier in TIERS]
+                                for a in definition["assignments"]) for tier in report_tiers]
 
                 requirements, held_counts = per_tier("required"), per_tier("held")
+                tier_label = " / ".join(report_tiers)
                 text = ("Qualification requires every required experiment to pass, with all lower tiers and "
-                        f"task dependencies passed first. Required counts (Tier 1 / 2 / 3): **{' / '.join(map(str, requirements))}**.")
+                        f"task dependencies passed first. Required counts (Tier {tier_label}): **{' / '.join(map(str, requirements))}**.")
                 if any(held_counts):
                     text += f" Held counts (measured and shown, not counted): **{' / '.join(map(str, held_counts))}**."
                     top = max(a["qualification_tier"] for a in definition["assignments"])
@@ -1699,7 +1717,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                 lines += ["- Capability: " + cell(name) for name in eligibility.get("requires_capabilities", [])]
                 lines += [f"- Claim {cell(name)}: {cell(value)}" for name, value in eligibility.get("claim_contract", {}).items()]
                 lines.append("")
-            for tier in TIERS:
+            for tier in report_tiers:
                 assignments = sorted((a for a in definition["assignments"] if str(a["qualification_tier"]) == tier),
                                      key=lambda a: (a.get("order", 0), a["task"]))
                 lines += _heading(3, "Tier " + tier, anchor + "-tier-" + tier)

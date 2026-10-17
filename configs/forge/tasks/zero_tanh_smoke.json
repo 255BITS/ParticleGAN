@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "zero_tanh_smoke",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "zero_tanh_smoke",
+    "steps": 1000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.1,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "hidden": 32,
+      "layers": 2,
+      "fourier": 2,
+      "z_dim": 2,
+      "particles": 256,
+      "batch": 128,
+      "steps": 1000,
+      "output_activation": "tanh"
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "zero_tanh_smoke",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["mean_abs_error", "<=", 0.005],
+      ["rms_error", "<=", 0.01],
+      ["p99_abs_error", "<=", 0.025],
+      ["saturated_fraction", "==", 0.0]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 120
+  },
+  "requires_capabilities": ["checkpoint", "named_rng", "live_sampling", "mog_prior"],
+  "dependencies": []
+}

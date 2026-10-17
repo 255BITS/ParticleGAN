@@ -259,8 +259,8 @@ class Queue:
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
-        if request["through_tier"] not in (1, 2, 3):
-            raise ValueError("through_tier must be 1, 2 or 3")
+        if not isinstance(request["through_tier"], int) or isinstance(request["through_tier"], bool) or request["through_tier"] < 1:
+            raise ValueError("through_tier must be an integer >= 1")
         # Campaign is part of request identity, but not scientific compatibility.
         request = {**request, "campaign_id": campaign["id"], "queue_root": str(self.root)}
         request_id = stable_hash(request)[:24]

@@ -77,7 +77,7 @@ def validate_shape(contract: dict) -> None:
     if (not isinstance(scope, dict) or set(scope) != {"view", "through_tier", "task_ids", "max_rounds",
                                                     "candidate_budget_seconds", "campaign_budget_seconds",
                                                     "protocol_sha256", "source_digest", "execution_backend", "runtime_cohort_sha256", "jobs_sha256"}
-            or type(scope["through_tier"]) is not int or scope["through_tier"] not in (1, 2, 3)
+            or type(scope["through_tier"]) is not int or isinstance(scope["through_tier"], bool) or scope["through_tier"] < 1
             or type(scope["max_rounds"]) is not int or scope["max_rounds"] != 1
             or not isinstance(scope["task_ids"], list) or not scope["task_ids"]
             or len(scope["task_ids"]) != len(set(scope["task_ids"]))):

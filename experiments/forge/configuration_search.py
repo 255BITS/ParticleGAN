@@ -62,8 +62,8 @@ def _load_spec(root, spec, *, validate_current_protocol=True):
         raise ValueError("search spec missing required fields or unsupported schema")
     for key in ("id", "trainer_family", "base_candidate", "view", "protocol"):
         identifier(value[key], f"search {key}")
-    if value["tuning_through_tier"] not in (1, 2, 3) or isinstance(value["tuning_through_tier"], bool):
-        raise ValueError("tuning_through_tier must be 1, 2 or 3")
+    if not isinstance(value["tuning_through_tier"], int) or isinstance(value["tuning_through_tier"], bool) or value["tuning_through_tier"] < 1:
+        raise ValueError("tuning_through_tier must be an integer >= 1")
     if value["execution_backend"] not in {"cpu", "cuda"}:
         raise ValueError("execution_backend must be cpu or cuda")
     if validate_current_protocol:
@@ -579,8 +579,8 @@ def _prepare(root, queue_root, spec, queue):
 
 def select_configuration(trials: list[dict], through_tier: int) -> dict:
     """Frozen lexicographic objective, with a content-hash-only tie break."""
-    if not trials or through_tier not in (1, 2, 3):
-        raise ValueError("selection requires trials and a declared tuning tier")
+    if not trials or not isinstance(through_tier, int) or isinstance(through_tier, bool) or through_tier < 1:
+        raise ValueError("selection requires trials and a declared tuning tier >= 1")
     def counts(trial):
         return tuple(sum(t["importance"] == "required" and t["qualification_tier"] == tier
                          and t["gate_status"] == "PASS" for t in trial["tasks"])

@@ -18,7 +18,17 @@ from .views import load_tasks, load_view
 
 
 REPORT_PATH = Path("reports/forge/EXPERIMENTS_BY_TIER.md")
-TIER_NAMES = {1: "smoke", 2: "quality", 3: "endurance"}
+TIER_NAMES = {
+    1: "smoke",
+    2: "quality",
+    3: "endurance",
+    4: "stress_and_formulations",
+}
+
+
+def tier_name(tier: int) -> str:
+    """Return canonical tier name with automatic fallback for Tier N >= 5."""
+    return TIER_NAMES.get(tier, f"tier-{tier}")
 # Held tasks are measured and shown but not counted (experiments/forge/views.py).
 IMPORTANCES = ("required", "held", "ranking", "diagnostic")
 
@@ -67,11 +77,15 @@ def build_report(root: Path, view_id: str | None = None, *, publication: dict | 
         }
 
     result_views = []
+    all_assigned_tiers = [a["qualification_tier"] for v in views for a in v.get("assignments", [])]
+    max_tier = max([3] + all_assigned_tiers)
+
     for view, path in zip(views, view_paths):
         if view_id is not None and view["id"] != view_id:
             continue
         tiers = []
-        for tier, name in TIER_NAMES.items():
+        for tier in range(1, max_tier + 1):
+            name = tier_name(tier)
             assignments = sorted(
                 (a for a in view["assignments"] if a["qualification_tier"] == tier),
                 key=lambda a: (a["order"], a["task"]))
@@ -146,6 +160,10 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
     command_parts += ["--output", output.relative_to(root).as_posix() if output.is_relative_to(root) else str(output)]
     command = shlex.join(command_parts)
     uncounted = any(role_note(task) for view in report["views"] for tier in view["tiers"] for task in tier["tasks"])
+    max_tier = max((tier["qualification_tier"] for view in report["views"] for tier in view["tiers"]), default=3)
+    tier_cols = [f"Tier {t}" for t in range(1, max_tier + 1)]
+    table_header = "| View | Revision | " + " | ".join(tier_cols) + " | Declared calibration |"
+    table_divider = "| --- | ---: | " + " | ".join(["---"] * len(tier_cols)) + " | --- |"
     lines = [
         "# Forge experiments by tier", "",
         "Current task assignments, grouped by goal view and qualification tier. "
@@ -168,7 +186,9 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         "Historical results retain their original bindings.", "",
         f"Regenerate from the repository root with `{command}`. Add `--json` for machine-readable output "
         "(use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.", "",
-        "Tier 1 is smoke, Tier 2 is quality, and Tier 3 is endurance. "
+        ("Tier 1 is smoke, Tier 2 is quality, and Tier 3 is endurance. " if max_tier <= 3 else
+         "Tier 1 is smoke, Tier 2 is quality, Tier 3 is endurance, and Tier 4 is stress_and_formulations. " if max_tier == 4 else
+         "Tier 1 is smoke, Tier 2 is quality, Tier 3 is endurance, Tier 4 is stress_and_formulations, and subsequent tiers follow tier-N. ") +
         "Views may leave later tiers empty. Placement follows each view's policy.", "",
         *(["Held tasks are still run and shown but are not counted until one recipe passes them together with "
            "every counted task. A diagnostic task removed from the count is carried by another counted task or "
@@ -178,8 +198,8 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         "Steps and timeouts are declared per task, rather than measured costs. "
         "Tasks in an uninterrupted execution group share one run; their budgets must not be added together. "
         "Continuation rows distinguish total steps from additional or extension steps.", "",
-        "| View | Revision | Tier 1 | Tier 2 | Tier 3 | Declared calibration |",
-        "| --- | ---: | --- | --- | --- | --- |",
+        table_header,
+        table_divider,
     ]
     artifacts = report["review_artifacts"]
     review = ["## Review experiments and solutions", "",
@@ -204,7 +224,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
                "A smoke-qualified entry or historical pass alone does not establish release readiness.", "",
                "## Current tier assignments", ""]
     # Put the review path before the assignment summary, after the introduction.
-    index = lines.index("| View | Revision | Tier 1 | Tier 2 | Tier 3 | Declared calibration |")
+    index = lines.index(table_header)
     lines[index:index] = review
 
     def count_text(tier):

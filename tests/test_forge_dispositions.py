@@ -290,7 +290,7 @@ def record(value, task):
     (lambda v: record(v, "two_pole_tier1_policy_selected_cloud_v1").pop("apply_in"), "apply_in"),
     (lambda v: record(v, "two_pole_tier1_policy_selected_cloud_v1")["hold"].update(reason="later"), "hold reason"),
     (lambda v: record(v, "grid100").update(explanation="reports/other.md#grid100"), "link into"),
-    (lambda v: record(v, "grid100").update(views={"adaptation": 4}), "tiers 1-3"),
+    (lambda v: record(v, "grid100").update(views={"adaptation": 0}), "positive integer tiers"),
     (lambda v: record(v, "grid100").update(task="not_a_task"), "unknown task"),
     (lambda v: v["dispositions"].append(deepcopy(record(v, "grid100"))), "one disposition per test"),
     (lambda v: record(v, "17 indexed variants")["tasks"].append("missing_variant"), "declared tasks"),

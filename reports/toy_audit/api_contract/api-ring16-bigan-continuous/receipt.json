@@ -1,0 +1,1239 @@
+{
+  "api_components": [
+    "particlegan.Recipe",
+    "particlegan.GANTrainer",
+    "particlegan.MoGParticlePrior",
+    "particlegan.GANLoss.joint_g_loss",
+    "particlegan.init"
+  ],
+  "artifacts": {
+    "final-state.pt": {
+      "bytes": 118864,
+      "sha256": "81a97b47b15846180a9de5df746f83eb45f37ad6d6ccd7edcbe27aa58373097f"
+    },
+    "goal.gif": {
+      "bytes": 472414,
+      "sha256": "01d5420a0588808ed9c962ea164fb072a21352bcbca9ff19cb4991f640e16407"
+    },
+    "observations.npz": {
+      "bytes": 3031982,
+      "sha256": "5430d4db38a568b1f5ff5f84a0dd929049a3239c842b37b9458b584a226b11e5"
+    }
+  },
+  "case": {
+    "batch_size": 128,
+    "comparison_version": "toy-comparison-v3-serial-autograd",
+    "default_recipe": "bcap",
+    "default_steps": 4000,
+    "eval_samples": 4096,
+    "evaluation_observations": 24,
+    "goal": "Continuous 2D multimodal joint (G(z), E(x), D(x, z)) on 16-Gaussian ring with MoGParticlePrior(sigma=0.1).",
+    "id": "api-ring16-bigan-continuous",
+    "kind": "vector",
+    "legacy_ids": [
+      "develop-ring16-bigan-continuous"
+    ],
+    "protocol_seed": 0,
+    "provider": "api_ring16",
+    "sampling": "Continuous 16-Gaussian ring (R=3.0, sigma=0.1); MoGParticlePrior(sigma=0.1); paired round-trip x -> G(E(x))",
+    "scope": "Tier 4 continuous 2D multimodal joint BiGAN (G(z), E(x), D(x, z)).",
+    "terminal_observations": 5,
+    "thresholds": {
+      "hq_min": 0.85,
+      "mass_tv_max": 0.15,
+      "mode_consistency_min": 0.98,
+      "modes_min": 16,
+      "recon_rmse_max": 0.12
+    },
+    "title": "Sixteen Gaussian clusters: continuous multimodal joint BiGAN"
+  },
+  "completed_updates": 4000,
+  "default_protocol_complete": true,
+  "elapsed_seconds": 29.180070973932743,
+  "failed_bounds": [
+    "hq",
+    "mass_tv",
+    "recon_rmse",
+    "last 5 post-update metric observations do not all pass"
+  ],
+  "gif_frames": 9,
+  "historical_results_changed": false,
+  "metric_passed": false,
+  "observations": [
+    {
+      "elapsed_seconds": 0.1394330490147695,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "mode_consistency",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.0615234375,
+        "hq": 0.0,
+        "mass_tv": 0.5,
+        "mode_consistency": 0.0615234375,
+        "modes": 0,
+        "recon_rmse": 3.017348051071167
+      },
+      "passed": false,
+      "step": 0,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 1.7563943489221856,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "mode_consistency",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.928955078125,
+        "hq": 0.008544921875,
+        "mass_tv": 0.6017857789993286,
+        "mode_consistency": 0.928955078125,
+        "modes": 1,
+        "recon_rmse": 0.6066318154335022
+      },
+      "passed": false,
+      "step": 167,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 2.964174158987589,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.044921875,
+        "mass_tv": 0.17391304671764374,
+        "mode_consistency": 1.0,
+        "modes": 10,
+        "recon_rmse": 0.13513343036174774
+      },
+      "passed": false,
+      "step": 334,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 4.178566404967569,
+      "failed_bounds": [
+        "hq",
+        "mode_consistency",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.771484375,
+        "hq": 0.047607421875,
+        "mass_tv": 0.10737181454896927,
+        "mode_consistency": 0.771484375,
+        "modes": 13,
+        "recon_rmse": 1.1473329067230225
+      },
+      "passed": false,
+      "step": 500,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 5.357474970980547,
+      "failed_bounds": [
+        "hq",
+        "mode_consistency",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.352294921875,
+        "hq": 0.074462890625,
+        "mass_tv": 0.12971311807632446,
+        "mode_consistency": 0.352294921875,
+        "modes": 16,
+        "recon_rmse": 1.15622079372406
+      },
+      "passed": false,
+      "step": 667,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 6.648161327000707,
+      "failed_bounds": [
+        "hq",
+        "mode_consistency",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.486572265625,
+        "hq": 0.07373046875,
+        "mass_tv": 0.11589404195547104,
+        "mode_consistency": 0.486572265625,
+        "modes": 15,
+        "recon_rmse": 1.4312032461166382
+      },
+      "passed": false,
+      "step": 834,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 7.862803934956901,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.07763671875,
+        "mass_tv": 0.11635220050811768,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.12718184292316437
+      },
+      "passed": false,
+      "step": 1000,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 9.086601070943289,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.0986328125,
+        "mass_tv": 0.09220298379659653,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.16306336224079132
+      },
+      "passed": false,
+      "step": 1167,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 10.26979367993772,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.158203125,
+        "mass_tv": 0.22145062685012817,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.12619537115097046
+      },
+      "passed": false,
+      "step": 1334,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 11.465519755962305,
+      "failed_bounds": [
+        "hq",
+        "mass_tv"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.256103515625,
+        "mass_tv": 0.17546473443508148,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.10067678242921829
+      },
+      "passed": false,
+      "step": 1500,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 12.685116579988971,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.38232421875,
+        "mass_tv": 0.07782566547393799,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.12796953320503235
+      },
+      "passed": false,
+      "step": 1667,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 13.888820598949678,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.36328125,
+        "mass_tv": 0.125,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.13650670647621155
+      },
+      "passed": false,
+      "step": 1834,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 15.048901422997005,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.294189453125,
+        "mass_tv": 0.15700209140777588,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.15197619795799255
+      },
+      "passed": false,
+      "step": 2000,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 16.228586192941293,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.9931640625,
+        "hq": 0.296875,
+        "mass_tv": 0.10608551651239395,
+        "mode_consistency": 0.9931640625,
+        "modes": 16,
+        "recon_rmse": 0.241130530834198
+      },
+      "passed": false,
+      "step": 2167,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 17.40059036097955,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.266357421875,
+        "mass_tv": 0.15736709535121918,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.14506396651268005
+      },
+      "passed": false,
+      "step": 2334,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 18.569149410934187,
+      "failed_bounds": [
+        "hq",
+        "mode_consistency",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.978271484375,
+        "hq": 0.2451171875,
+        "mass_tv": 0.10956175625324249,
+        "mode_consistency": 0.978271484375,
+        "modes": 16,
+        "recon_rmse": 0.2725880742073059
+      },
+      "passed": false,
+      "step": 2500,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 19.785194805939682,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.992431640625,
+        "hq": 0.248046875,
+        "mass_tv": 0.10285432636737823,
+        "mode_consistency": 0.992431640625,
+        "modes": 16,
+        "recon_rmse": 0.19641080498695374
+      },
+      "passed": false,
+      "step": 2667,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 21.00829538900871,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.995361328125,
+        "hq": 0.252685546875,
+        "mass_tv": 0.14830917119979858,
+        "mode_consistency": 0.995361328125,
+        "modes": 16,
+        "recon_rmse": 0.17496833205223083
+      },
+      "passed": false,
+      "step": 2834,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 22.18316337291617,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.18505859375,
+        "mass_tv": 0.27655014395713806,
+        "mode_consistency": 1.0,
+        "modes": 15,
+        "recon_rmse": 0.1512441486120224
+      },
+      "passed": false,
+      "step": 3000,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 23.348758977022953,
+      "failed_bounds": [
+        "hq",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.996826171875,
+        "hq": 0.26513671875,
+        "mass_tv": 0.13432320952415466,
+        "mode_consistency": 0.996826171875,
+        "modes": 15,
+        "recon_rmse": 0.18288394808769226
+      },
+      "passed": false,
+      "step": 3167,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 24.51506297395099,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "modes",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.222900390625,
+        "mass_tv": 0.29524919390678406,
+        "mode_consistency": 1.0,
+        "modes": 15,
+        "recon_rmse": 0.15524600446224213
+      },
+      "passed": false,
+      "step": 3334,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 25.68233853694983,
+      "failed_bounds": [
+        "hq",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 1.0,
+        "hq": 0.199951171875,
+        "mass_tv": 0.14224666357040405,
+        "mode_consistency": 1.0,
+        "modes": 16,
+        "recon_rmse": 0.17644833028316498
+      },
+      "passed": false,
+      "step": 3500,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 26.853382510947995,
+      "failed_bounds": [
+        "hq",
+        "mode_consistency",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.974365234375,
+        "hq": 0.26904296875,
+        "mass_tv": 0.13237296044826508,
+        "mode_consistency": 0.974365234375,
+        "modes": 16,
+        "recon_rmse": 0.247433140873909
+      },
+      "passed": false,
+      "step": 3667,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 28.02544660901185,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.999755859375,
+        "hq": 0.21728515625,
+        "mass_tv": 0.1778089851140976,
+        "mode_consistency": 0.999755859375,
+        "modes": 16,
+        "recon_rmse": 0.14388078451156616
+      },
+      "passed": false,
+      "step": 3834,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 29.179958653985523,
+      "failed_bounds": [
+        "hq",
+        "mass_tv",
+        "recon_rmse"
+      ],
+      "metrics": {
+        "consistency": 0.9951171875,
+        "hq": 0.23828125,
+        "mass_tv": 0.15573769807815552,
+        "mode_consistency": 0.9951171875,
+        "modes": 16,
+        "recon_rmse": 0.22041048109531403
+      },
+      "passed": false,
+      "step": 4000,
+      "views": [
+        {
+          "kind": "scatter",
+          "title": "Forward generation vs 16-mode ring"
+        },
+        {
+          "kind": "scatter",
+          "title": "Paired round-trip reconstruction x -> G(E(x))"
+        },
+        {
+          "kind": "bar",
+          "title": "Mode mass distribution"
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "protocol": {
+    "default_evaluation_samples": 4096,
+    "default_updates": 4000,
+    "evaluation_samples": 4096,
+    "evaluation_steps": [
+      0,
+      167,
+      334,
+      500,
+      667,
+      834,
+      1000,
+      1167,
+      1334,
+      1500,
+      1667,
+      1834,
+      2000,
+      2167,
+      2334,
+      2500,
+      2667,
+      2834,
+      3000,
+      3167,
+      3334,
+      3500,
+      3667,
+      3834,
+      4000
+    ],
+    "media_frames": 9,
+    "media_steps": [
+      0,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000
+    ],
+    "metric_evaluation_steps": [
+      0,
+      167,
+      334,
+      500,
+      667,
+      834,
+      1000,
+      1167,
+      1334,
+      1500,
+      1667,
+      1834,
+      2000,
+      2167,
+      2334,
+      2500,
+      2667,
+      2834,
+      3000,
+      3167,
+      3334,
+      3500,
+      3667,
+      3834,
+      4000
+    ],
+    "metric_observations": 24,
+    "terminal_observations": 5,
+    "updates": 4000,
+    "wall_cap_seconds": null
+  },
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "constraint_geometry_mode": "direction_blend",
+    "continuous_policy": null,
+    "critic_formulation": "bcap",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "loss": "non_saturating",
+    "lr": 0.002,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "bcap",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 256,
+    "observation_sigma": 0.03,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 2.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.1,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 4000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "reproducibility": {
+    "comparison_version": "toy-comparison-v3-serial-autograd",
+    "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+    "historical_evidence": "original source, seed and initialization retained; no regrading",
+    "initial_models": {
+      "D": "0af8bac33b9bb579b84f5e85ff0344dfdbdf7c20ff2a5285b2f7597678532e7d",
+      "E": "e683ea5061253361dd15867d52c71f951d0bb3b11f09e6c483a97266aa9749c8",
+      "G": "21f8e7bb48c1e8e89d486575576858573ab6f042c43f0bb69e5cb97262cec996",
+      "prior": "63df45759d32b076d4ce340ee48c325acb1e523275134b74040023ffbae52674"
+    },
+    "initial_state_sha256": "c1fe0f60e7d375d45381329fa6d71eb4ccf9d8843ef5691753515128e715f4cd"
+  },
+  "requested_recipe_overrides": {},
+  "runtime": {
+    "autograd_multithreading_enabled": false,
+    "cuda": "13.0",
+    "cudnn_benchmark": false,
+    "cudnn_tf32": false,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "matmul_tf32": false,
+    "python": "3.14.8",
+    "torch": "2.14.0+cu130",
+    "torch_threads": 1
+  },
+  "schema": "particlegan_api_toy_run_v1",
+  "seed": 0,
+  "source": {
+    "commit": "de43f22f0fb743af73f61492de84f8d7d4a01fad",
+    "files_sha256": {
+      "benchmarks/__init__.py": "5b3d047f10122eef719de3126e7424b671376d0c1b4392208a5f487f15eed0f7",
+      "benchmarks/gan_v3.py": "00ca856749c82ce3d4e554ced924dda4399311d2e31ca8dbea8b8d5829141538",
+      "benchmarks/learned_lr_evaluation.py": "2bbaf1caba19f7d31632178782ce81ae93e71c1e9455e0ec1e3c5bb740737532",
+      "benchmarks/legacy/__init__.py": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04",
+      "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+      "benchmarks/legacy/grad_regularizers.py": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+      "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+      "benchmarks/legacy/recipe.py": "9a78476be08d90068bd772b141fa21db6ebe193a9d73db2323b9bab018d27d62",
+      "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+      "benchmarks/locked_shared/hosts/ae_gan_hold.py": "3d2f45e3542e177d008a8fe4e1fcef49117909b39ef2fe5855e0e8883e5abeff",
+      "benchmarks/locked_shared/hosts/cover_leftover.py": "7c9c29c2d748689c83b703abd9129adcfafc8c259fe107a50aac035825e1bed0",
+      "benchmarks/locked_shared/hosts/mid_scale_identity.py": "48f4d4842ef73ebf92bedbfad83a915d4010cd1b8eed408a913ddcbfb366a06e",
+      "benchmarks/locked_shared/hosts/residual_student.py": "e9464727cda9fa0ad035774adf4ff1c2fb0b1017e47e01566f551e29305a912f",
+      "benchmarks/locked_shared/hosts/unipolar.py": "c166445fa2d0b8d5a02d4cfa4464782d419064b2b2ccc4273bd372cd6e1e497c",
+      "benchmarks/locked_shared/hosts/unused_token_hold.py": "6ea45140c617ad8c9effbab11979825d3ddeb7a78301cccc0e675a0e2436ef38",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "benchmarks/locked_shared/mode_hold.py": "d312aa76fd631fb2adb2b8de53b92b1dc3f486b9c0a845ab2a25e895e643e855",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/locked_shared/trajectory.py": "16c4772609210454d3eb37c7493ea922d4cf43e2cb765deb0bd978af671a58af",
+      "benchmarks/locked_shared/two_pole.py": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188",
+      "benchmarks/smart_descent/__init__.py": "e71448ddd8f5c404eede89e9046d342866d2e9a9faa1642fe950db4dc1d42369",
+      "benchmarks/smart_descent/controller.py": "b2c00ade7ec77d1acba7917d8689bd29db4406fde5cf84cd67976dea274a42cf",
+      "benchmarks/smart_descent/evaluate.py": "7d053ee8397f13e0579baf671867a16a1207c06e2763b1c0a3e8551e9fd38407",
+      "benchmarks/smart_descent/study.py": "01b7f1c994d4de893d0424a20218ca26105dabf65d2e77d5a84c8871dcb3509f",
+      "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "benchmarks/toy100/__main__.py": "50b9d164a7aae10f8dc20684dbc7be86e5f19152d989ad1247d2a5b9335545ce",
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/affine_replay.py": "6850a45ad099018aaf12126b998907e6eea0471de0a28b73a74eb5cac229b6c8",
+      "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+      "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+      "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "benchmarks/toy100/gate.py": "561717e0a6c981b20efdf4a1d41e2cf9cace0c8c619546c4bf7f52748e09fbc3",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+      "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+      "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+      "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+      "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+      "benchmarks/toy100/train.py": "d58a9a9862fbbdf31a53302fcee5d986ea4b10b5c337d901dbe51af2ca5ee649",
+      "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "benchmarks/toy_audit/__init__.py": "30dbbd092746095414a291a135065be420088a8f14170b94d643d403a0bd12c9",
+      "benchmarks/toy_audit/api_conditionals.py": "1f3d6122e1023e7e198fed94177c39512692bbdab129a11d574e801ce20e2271",
+      "benchmarks/toy_audit/api_contract.py": "a6062190bb6cd8e9653ab0044f33f5c367afab838af4bd740bbf4a87e30403d0",
+      "benchmarks/toy_audit/api_diagnostics.py": "c7d6f008dd7f195b2bff82b4dc7fdbb8348c8470c10c6691f2d0399942465629",
+      "benchmarks/toy_audit/api_family_search.py": "fcbf0473c8eee55e01aa0fc96ea10efd4801b53ff514e90ba3ad8977593d03e1",
+      "benchmarks/toy_audit/api_gaussian1d.py": "b76befd43a1b1c797952950d6bbf50375cd4c6ba082927112ec3b96ca65c70de",
+      "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
+      "benchmarks/toy_audit/api_publish.py": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+      "benchmarks/toy_audit/api_readout.py": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+      "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "benchmarks/toy_audit/api_ring16.py": "91402218ea67aa7ea84ce364bd9bbdc8c65d4d20b39f1f5405b0b1bbe93e0005",
+      "benchmarks/toy_audit/api_run.py": "03aa0a74fcfd3ca859a1f97b3a2e988a1e89ef7c0d099f5786158f2c21175baa",
+      "benchmarks/toy_audit/api_sources/__init__.py": "622170cc5a621286b1b46dc9e0e0199ec451e08e3c404c857268a0e5a4de9e30",
+      "benchmarks/toy_audit/api_sources/circle.py": "540eaa74918c1e218d31eb0d18a62e35bdefdd5eb89d8e0d9ed7f288dd9c6e13",
+      "benchmarks/toy_audit/api_sources/misgan.py": "d701ef0f12178ad6965fa52136bd6f4fdc4f7fe3b61d0af6aff8944f02c19516",
+      "benchmarks/toy_audit/api_sources/sprite.py": "53f0cca3e2c7481c89dc6e014444841b4fa17f66a430fcc046c6fb57e96a77c7",
+      "benchmarks/toy_audit/api_vectors.py": "e531ece103966a874bcf6360c8989ce6cc0238ea336e74b6bfcecf91821d3e92",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+      "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
+      "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+      "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43",
+      "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+      "benchmarks/transfer_suite/__init__.py": "8d105e8141cf36010abf315aa2b5f74fab872c341612b567236e7fe96c5177dc",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+      "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "examples/e22_external_loop.py": "c3463363f0420e70b60b5fb3e1cc0ff9bdcb467a2341329de3ec13198e0d2a82",
+      "examples/e22_paired_residual_toy.py": "54cc1817a4dee15aa760d654ef0f68aa5cbb09091c8fce25a227442b23395acd",
+      "examples/e22_routed_antithetic_variance.py": "c82ce65adf1c2048ac5cc5312cb788af50bd7aa46bc3bea678cc66c65a6a1818",
+      "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+      "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+      "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+      "examples/e22_routed_caption_late_phase.py": "f4bad83b5ff9944a14c75bcf5d51d82e26fd3ed432a0730122255fffdc313b65",
+      "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+      "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+      "examples/e22_routed_convergence_guided_pair.py": "da3b0850fa438d4001c65cff1ae2a54c2930e98155b093748787fd51c11a2f2a",
+      "examples/e22_routed_convergence_neutral.py": "e831f67173d5499303a2cc01232388cdb8f338452a8189e09d1f9a6a69e14972",
+      "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+      "examples/e22_routed_g_clean.py": "4386576cebcf05669f2daff8f7cd8b8f28a60bd966b37e2de795de72ee6d045d",
+      "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
+      "examples/e22_routed_game_stationarity.py": "7cb2b3abb1e46710e1072445ee3e32fed6123f91bb58fc1dd2c2dbdc336e907a",
+      "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
+      "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
+      "examples/e22_routed_readbacks.py": "99b91b8eb157dfc4ff8362436184bdc4336a185256712da803ad25b4a67630f0",
+      "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
+      "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
+      "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
+      "examples/e22_stiff_game_reopen.py": "6615bcca20a9db746bf5a6125bc3d59626a2b7ef0c747228ede7c89f8e0f618d",
+      "experiments/forge/__init__.py": "5716a43a13f31b3c0987233e7b6e063c311a3b3f9bced2ffcd5c6af6565b7355",
+      "experiments/forge/api.py": "efb8b114f3a967a2e54daa6d4f831debeb06861d5ccefd89a19615cf618305b3",
+      "experiments/forge/boundaries.py": "43b6bfeb955fc0ae0a10852124d453912f5a03f6689794222d412b9a2faa4282",
+      "experiments/forge/configuration_search.py": "4d055388d48b55da5c5e4ea2643d413d8832981ea822634c76b55ffaa123be07",
+      "experiments/forge/contracts.py": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262",
+      "experiments/forge/execution_policy.py": "920b51c509e5afa41ba35dafc34371645956fe601112fe4a1e9b377ec13e7665",
+      "experiments/forge/initialization.py": "c2674617c306e24337f1dbbf910d2110b7c852557b9c3e43b47f7fe1dce26634",
+      "experiments/forge/planning.py": "a39325b6f7af8bc087daabcbb9fa63e9a6f2f97a101e28fba86259eb4fc472c0",
+      "experiments/forge/policy_execution.py": "43250d372e38a34a75962bf76c36d7e78a787d2ef1cfd5d35455a39b965d1ff8",
+      "experiments/forge/preflight.py": "22b69480187d5a5595490ea356deb63f44e14039389c576984b6d4217aafa90e",
+      "experiments/forge/priors.py": "315ab55030a4ed5bc5895794c826d1f4561c640d80930e7f73f68316762e6f5c",
+      "experiments/forge/queue.py": "05a253c5c9fa547198be205208d86d6e793709cc411648d2b2d33b174960a089",
+      "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+      "experiments/forge/sampling.py": "1627f36afa2d34870ca29d8578b555d875be18041eb82d7aa46b72b5238cbe29",
+      "experiments/forge/sources.py": "59c6333f74d3fdb2090f8704c769cd94b74599b3f2e423f7dd1385ee42494008",
+      "experiments/forge/state.py": "d8dca45f1b87d55cc379058191c26dbd20852a8237bcd830de2e9264ad66e5f0",
+      "experiments/forge/taskrecipes.py": "18c5a910bde37c39e1aee70f51829e6644edfc552efd417494cf4891dd3841a2",
+      "experiments/forge/technique_inventory.py": "5b622dbe7740829a3f11448b0891d3fb0ecc3e0ba36ff4a66220c16c1f2e013d",
+      "experiments/forge/techniques.py": "e16ed3775b5dbf67a8964ed42e5c4b1a5b34b6d8fb64fa71c5b4090e182c4665",
+      "experiments/forge/views.py": "ea815aeb56274aa96b490f03e0cef34d6d6436c513877ff446cd0ee9cc7cf64b",
+      "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+      "lib/safe_fast_landing.py": "8a158b3a950534b5846cc6df00f10f8f996a9b96e59fe252eccb1a280b13cfd1",
+      "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+      "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+      "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+      "lib/transition.py": "87bb3cfb65a96ac058860a06df421601caf02a44a05c5c62b265d3e1850fcf76",
+      "lib/vendor/concept_slider_core/reference.py": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
+      "lib/yue2_particle_toy.py": "3614955db1eb00cd7113022915ed9c4f22a1c053f80e79dbba9e7528252cb808",
+      "particlegan/__init__.py": "607c6bb12acd631ae1ff98f6e61d990ff4ab5b60ec86f5a8cb5864cda7c11864",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "4af5a0915f927ca3d8e753195227d59c97f07304e9927ca1383bda9acd0ccb8f",
+      "particlegan/bispf.py": "ec8274b7d1290032fd7329b5067d0c7e90f0a0f4fb0952cc4ed770908c87aa99",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/coulomb_prior.py": "cd4fed5a3b22510911bc098e7b48bfb794366ef5a9c8c983d1672172f15b10a3",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/execution.py": "015151489dd0b6c9933b9a9dc3f02edc721907770b82ab72d7e7ee2739d03c9d",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "3534ff23efa413cdf8b4125b91e0d30671d873b3e2958547d4e744b750454b9b",
+      "particlegan/initial_mmd.py": "59b9573dd79ac9d846779f2198d5864f865d0ae8207101ed8b3f4da720260615",
+      "particlegan/k3p.py": "45ceabdc067fb420e163d3d4ac5a4edb0bb47d154c38c73865f95dabeaefcad7",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/moment_tether.py": "16bc50edae9ca43464240c84ffd20cb93691194f2b285a1056b56ff3a98c0e5a",
+      "particlegan/optim/__init__.py": "8e0403422e18e52c6fcd3bc73ddb138116bd910a6645207fe3b9f1e71a82274a",
+      "particlegan/optim/constraint_geometry.py": "b78f2d6dec2d345c1357b3812a7f9adac8c4da0f86c8536ebfe0092c18269c5e",
+      "particlegan/optim/convolution_frobenius.py": "0916f94d13c7213856faf5d40f5896891fb102f8995caa17e255ba8237bb9e3a",
+      "particlegan/optim/direction_blend.py": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72",
+      "particlegan/optim/dualnorm.py": "05ba0bbe470b06418c04dbb6da88733ac1dff5fecdcf01d8c2dfd61c178fe92b",
+      "particlegan/optim/strict_progress.py": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "7b904bec09c4bbcfaa59b74465102489e5b45456f5725441b6538da6adf2accc",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_compat.py": "f9dc60da36a7a21e1951015ad9b952a21e0462c0e9c0a84252089214d68ead23",
+      "particlegan/recipe_schedules.py": "b675bdc9f72224b11e9887f8ed66b1a541ffc76d80242709969cc67ac47ca46a",
+      "particlegan/recipes.py": "6c45c87469dee61a1cf6aad448bdebbdd71124534bd2d6341295fcb064b314a6",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/sigreg.py": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b",
+      "particlegan/tensorflow_adam.py": "37f1192e48b84907446d8f676c62631bf87ff450b2a2e6b63e7489adc33e24e9",
+      "particlegan/training.py": "f84bf044405a1ea105350a260bfc903bade9b8d464ad80eb005b0e4a307a6c2b",
+      "particlegan/vicreg_loss.py": "177a68b98036e4725cacf6bc0d95277111184c0dcb9566d3f7fc1527046cefda"
+    }
+  },
+  "source_unchanged": true,
+  "status": "COMPLETE",
+  "sustained_metric_passed": false,
+  "timing": {
+    "excludes": "initial inventory/queue wait and post-run artifact/media export",
+    "includes": "fixture initialization, updates, source binding, sampling and evaluation",
+    "method": "monotonic elapsed execution; CUDA synchronized at observations",
+    "start": "immediately before fixture construction"
+  },
+  "verdict": "FAIL"
+}
