@@ -247,3 +247,38 @@ saves representative actual gradient matrices for solver diagnosis. These tensor
 bundles, traces, logs, checkpoints and GIFs stay in local artifacts. A compact
 readout may reference their exact paths and hashes. All ordinary qualification,
 sampling and default-adoption rules remain unchanged.
+
+## Comparing a new source with an older recorded policy
+
+When a later view changes only counted/held dispositions, the explicit
+`--comparison-policy` option can compare a new measured source with the existing
+inventory without regrading historical implementations:
+
+```sh
+python reports/forge/regenerate_technique_inventory.py \
+  --source-commit EXECUTED_COMMIT --device cuda \
+  --comparison-policy configs/forge/view-history/discriminator_stability-v9.json \
+  --output-prefix /tmp/forge-new-source-comparison
+```
+
+The frozen reader first reconstructs and grades the actual admitted study under
+its original view. It then reuses those verified requests to reduce the new
+receipts under the comparison policy. Task identities, tiers, ordering, gates,
+initialization, prior, sampling and budget contracts must match the recorded
+family measurement; numerical task verdicts cannot change. Actual executed-view
+qualification remains separately signed in `comparison_policy_projection` and
+on each measured row. An actual revision-11 Tier 3 pass does not confer revision-9
+Tier 3 qualification when its required failures remain.
+
+After reviewing the complete quality and performance evidence, register with the
+same source and comparison-policy arguments, omitting `--output-prefix`, and pin
+one verified whole candidate row. Cached regeneration accepts the same explicit
+comparison policy and never regrades historical rows. `--advance-policy` and
+`--recorded-policy` remain separate operations. Public default adoption retains
+its existing calibration requirements.
+
+For BISPF optimizer version 2, the existing image quality hosts have at most 24
+convolution channels and use the preserved native path. Their passes establish
+preservation of the known task suite. Large convolution solver checks and DCGAN
+mock-data benchmarks establish numerical behavior and latency; image quality on
+large images remains unmeasured.
