@@ -127,8 +127,9 @@ class Logger:
 
 
 def pretrain(log):
-    # The recipe default (critic penalty, optimizers, LR schedule) at this toy's rates.
-    recipe = get_recipe(prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
+    # Preserve the K3P cohort used by this historical control comparison.
+    # A change to the public default must not change its optimizer or penalty.
+    recipe = get_recipe(trainer="k3p", prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
                         total_steps=FINE, batch_size=B, lr=.0006, d_lr_mult=1.5,
                         prior_lr_mult=100., prior_reg=1.)
     spread = recipe.make_prior_regularizer()
