@@ -123,6 +123,19 @@ def parser():
         inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
         if stage == "run":
             inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
+    scaling = commands.add_parser("scaling", help="bounded DCGAN mock-data speed and memory diagnostics; no qualification")
+    scaling_stages = scaling.add_subparsers(dest="stage", required=True)
+    scaling_register = scaling_stages.add_parser("register", help="freeze exact selected recipes, studies and finite reservation; no training")
+    scaling_register.add_argument("registration")
+    scaling_register.add_argument("--view", default="dcgan_performance")
+    scaling_register.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
+    scaling_register.add_argument("--cuda-model")
+    scaling_register.add_argument("--family", action="append", help="select a current family; repeat, default all")
+    for stage in ("plan", "enqueue"):
+        scaling_stages.add_parser(stage).add_argument("registration")
+    scaling_publish = scaling_stages.add_parser("publish", help="export frozen queue performance summaries and refresh the current overview; no training")
+    scaling_publish.add_argument("registration")
+    scaling_publish.add_argument("--allow-partial", action="store_true", help="explicitly publish a snapshot with queued/running cells marked unknown")
     tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")
     tiers.add_argument("--view", help="show one view; default all current views")
     tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
@@ -377,6 +390,18 @@ def main(argv=None):
         else:
             emit(run_inventory(root, queue_root, devices=args.gpus.split(","), queue=queue, **options))
             publish()
+    elif command == "scaling":
+        from .scaling import register, plan, enqueue
+        if args.stage == "register":
+            emit(register(root, args.registration, view_id=args.view, execution_backend=args.device,
+                          cuda_model=args.cuda_model, family_ids=args.family))
+        elif args.stage == "plan":
+            emit(plan(root, queue_root, args.registration, queue=queue))
+        elif args.stage == "publish":
+            from .scaling_export import publish as publish_scaling
+            emit(publish_scaling(root, queue_root, args.registration, allow_partial=args.allow_partial))
+        else:
+            emit(enqueue(root, queue_root, args.registration, queue=queue))
     elif command == "search":
         from .configuration_search import plan_search, enqueue_search, run_search, report_search
         from .search_space import (MANIFEST_SCHEMA, write_compilation, plan_compilation,

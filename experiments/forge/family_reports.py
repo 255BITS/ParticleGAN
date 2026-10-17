@@ -1226,6 +1226,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                   ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
     lines += _full_suite_section(root, publication, page, selected)
     lines += _uncounted_section(root, page, summed, selected)
+    from .scaling_publication import performance_section
+    lines += performance_section(root, publication, page)
     if any(research.values()):
         declared_view = publication.get("declared_view", {})
         no_longer = sum(len(names) for names in declared_view.get("no_longer_required_tasks", {}).values())
@@ -1503,6 +1505,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   "This page preserves the original configuration evidence and diagnostics.", ""]
     if family["id"] == "atlas":
         lines += _full_original_atlas_status(root, page, progress)
+    if publication.get("scaling_performance") and not family.get("historical_only"):
+        from .scaling_publication import render_performance
+        lines += render_performance(root, publication, page, family_id=family["id"])
     declared = views.get(publication["view"], {}).get("revision", publication["view_revision"])
     declared_note = ("" if declared == publication["view_revision"] else
                      " Their counts follow the declared view revisions (" +

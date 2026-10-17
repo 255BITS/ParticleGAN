@@ -355,7 +355,19 @@ def validate_screening_submission(request: dict) -> None:
         from .studies import contract_for
         contract = contract_for(request)
         from .decision_contracts import validate_shape
-        if candidate.get("schema_version") not in (2, 3) or not isinstance(contract, dict):
+        # Performance compares the exact selected recipe, including immutable
+        # legacy declarations such as Atlas/E22. Its new bounded study owns the
+        # question; converting the recipe card solely to admit it would change
+        # the selected identity. Queue.submit independently verifies this study
+        # against repository declarations before this screening check.
+        from .scaling_adapter import is_performance_task
+        study = request.get("study", {})
+        performance_study = (isinstance(study, dict) and study.get("schema_version") == 1
+                             and study.get("status") == "ready" and study.get("candidate") == candidate.get("id")
+                             and bool(request.get("tasks"))
+                             and all(is_performance_task(task) for task in request["tasks"].values()))
+        if ((candidate.get("schema_version") not in (2, 3) and not performance_study)
+                or not isinstance(contract, dict)):
             _block("research diagnostics require a ready v2 bounded decision_contract")
         validate_shape(contract)
         review = request.get("study_review" if "study" in request else "decision_review", {})

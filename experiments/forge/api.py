@@ -220,6 +220,16 @@ def task_policy_blockers(task, candidate):
     if policy_task:
         from .tier1_policy import blockers
         return blockers(task, recipe)
+    # Update throughput does not certify the generated sampling distribution.
+    # This explicit diagnostic host runs GANTrainer's full policy lifecycle;
+    # it never disables policy controls to fit an ordinary clean/live gate.
+    from .scaling_adapter import is_performance_task, validate_task as validate_performance_task
+    if is_performance_task(task):
+        try:
+            validate_performance_task(task)
+        except (KeyError, TypeError, ValueError) as error:
+            return [str(error)]
+        return []
     if not policy_controls(recipe):
         return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
