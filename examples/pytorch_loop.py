@@ -9,7 +9,7 @@ the same update GANTrainer performs, with the control flow in your hands:
 * role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
 * critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
 * ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``:
-  recipe-owned optimizers, currently BCAP DualNorm with direction blending,
+  recipe-owned optimizers, currently optimized BISPF DualNorm with direction blending,
 * sampled prior rows and protected generator loss bound before the G step,
 * ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
   critic loss like any other term.
@@ -30,7 +30,7 @@ import time
 import torch
 from torch import nn
 
-from particlegan import InputNoise, get_recipe, init, learning_rate_scales
+from particlegan import InputNoise, get_recipe, init, learning_rate_scales, scale_learning_rates
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from particlegan.training import input_noise_std, output_noise_std
 
@@ -90,9 +90,10 @@ def main():
     init.deterministic_orthogonal_(critic, seed=1)
     init.deterministic_orthogonal_(prior)
     gan = recipe.make_loss()
-    spread = recipe.make_prior_regularizer()
     # Joint generator/prior optimizer and critic optimizer, selected by the recipe.
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, ema_critic=copy.deepcopy(critic))
+    # Optimizer construction binds the initialized prior's reference buffers.
+    spread = recipe.make_prior_regularizer(prior=prior)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
     noise = torch.Generator(device=device).manual_seed(43)
@@ -111,9 +112,7 @@ def main():
     started = time.monotonic()
     for step in range(1, recipe.total_steps + 1):
         network, prior_scale = learning_rate_scales(step - 1, recipe)
-        opt_g.param_groups[0]["lr"] = base_lrs[0][0] * network
-        opt_g.param_groups[1]["lr"] = base_lrs[0][1] * prior_scale
-        opt_d.param_groups[0]["lr"] = base_lrs[1][0] * network
+        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
         noisy_critic.std = input_noise_std(recipe, step - 1)
         sigma_out = output_noise_std(recipe, step - 1)
 
