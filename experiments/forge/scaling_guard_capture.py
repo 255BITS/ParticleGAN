@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+from contextlib import ExitStack
 import json
 from pathlib import Path
 from unittest.mock import patch
@@ -23,6 +24,131 @@ from .state import state_digest
 
 
 SCHEMA = "forge_polar_guard_capture_v1"
+
+
+class ReplayCapture:
+    """Read-only guard observations; immediately archive each failing batch."""
+    def __init__(self, trainer, output):
+        self.trainer, self.output = trainer, Path(output)
+        self.current, self.records, self.bundles = {}, [], []
+
+    def attach(self, stack):
+        import particlegan.optim.dualnorm as dualnorm
+        original_polar, original_solve = dualnorm._newton_schulz_polar, dualnorm._PolarGraphCache.solve
+        def polar(matrices, **kwargs):
+            step = self.trainer.completed_steps+1
+            if step <= 3:
+                return original_polar(matrices, **kwargs)
+            pointer=matrices.untyped_storage().data_ptr()
+            owners=[(role,name,p,opt) for role,model,opt in
+                    (("critic",self.trainer.D,self.trainer.opt_d),("generator",self.trainer.G,self.trainer.opt_g))
+                    for name,p in model.named_parameters() if p.grad is not None
+                    and p.grad.untyped_storage().data_ptr()==pointer]
+            if len(owners)!=1:
+                raise ValueError("actual convolution batch does not have one parameter owner")
+            role,name,parameter,optimizer=owners[0]
+            group=next(group for group in optimizer.param_groups if any(p is parameter for p in group["params"]))
+            self.current.update(step=step,role=role,parameter=name,metadata=copy.deepcopy(group["dualnorm_convolution"]))
+            try:
+                return original_polar(matrices,**kwargs)
+            finally:
+                self.current.clear()
+        def solve(cache,oriented,smoothing):
+            result,failed=original_solve(cache,oriented,smoothing)
+            if not self.current:
+                return result,failed
+            entry=next(entry for entry in cache.entries.values() if entry.result.data_ptr()==result.data_ptr())
+            with torch.no_grad():
+                orthogonality=(entry.identity-result.mT@result-entry.lower.mT@entry.lower).abs().sum(-1).amax(-1)
+                denominator=entry.regularizer.flatten()*result.norm(dim=(-2,-1))
+                relation=((entry.regularizer*result-entry.scaled@entry.lower).norm(dim=(-2,-1))/
+                          denominator.clamp_min(torch.finfo(result.dtype).tiny))
+            failed_cpu=failed.detach().cpu()
+            indices=failed_cpu.nonzero(as_tuple=False).flatten().tolist()
+            kh,kw=self.current["metadata"]["kernel_size"]
+            row=dict(call=len(self.records),**copy.deepcopy(self.current),shape=list(oriented.shape),smoothing=smoothing,
+                     failed_indices=indices,failed_iterations=32 if indices else None,
+                     failed_offsets=[dict(group=i//(kh*kw),row=(i//kw)%kh,column=i%kw) for i in indices],
+                     orthogonality=orthogonality.detach().cpu().tolist(),relation=relation.detach().cpu().tolist())
+            if indices:
+                name=f"failed-step{row['step']:03d}-call{row['call']:03d}.pt"
+                torch.save(dict(**row,matrices=oriented.detach().cpu(),failed=failed_cpu,
+                                result_before_fallback=result.detach().cpu(),lower=entry.lower.detach().cpu(),
+                                scaled=entry.scaled.detach().cpu(),regularizer=entry.regularizer.detach().cpu()),self.output/name)
+                artifact=dict(path=str(self.output/name),sha256=file_hash(self.output/name),step=row["step"],
+                              role=row["role"],parameter=row["parameter"],failed=len(indices))
+                self.bundles.append(artifact)
+                row["artifact"]=artifact
+            self.records.append(row)
+            with (self.output/"guards.jsonl").open("a") as stream:
+                stream.write(canonical(row)+"\n")
+            print(canonical(dict(event="replay_guard",step=row["step"],call=row["call"],role=row["role"],
+                                 parameter=row["parameter"],failed=len(indices),artifact=row.get("artifact"))),flush=True)
+            return result,failed
+        stack.enter_context(patch.object(dualnorm,"_newton_schulz_polar",polar))
+        stack.enter_context(patch.object(dualnorm._PolarGraphCache,"solve",solve))
+
+
+def declare_replay(root,output,baseline,continuation,*,source_commit):
+    """Charge a conservative60s completed continuation plus180s replay <=240s."""
+    root,output,baseline,continuation=map(lambda x:Path(x).resolve(),(root,output,baseline,continuation))
+    previous=json.loads(continuation.read_text())
+    previous_declaration=continuation.parent/"declaration.json"
+    if continuation.stat().st_mtime-previous_declaration.stat().st_mtime>55 or not previous["passed"]:
+        raise ValueError("completed continuation cannot fit conservative60s charge")
+    reference=json.loads(baseline.read_text())
+    files=sorted(set((root/"particlegan").rglob("*.py"))|set((root/"experiments/forge").glob("*.py"))|
+                 {root/"benchmarks/toy_audit/reproducibility.py"})
+    declaration=dict(schema="forge_polar_guard_replay_v1",source_commit=source_commit,
+                     source_composition="Exact declared H baseline plus new read-only capture harness; all source bytes bound.",
+                     source_files_sha256={str(p.relative_to(root)):file_hash(p) for p in files},
+                     original_benchmark=dict(path=str(baseline),sha256=file_hash(baseline)),
+                     completed_negative_continuation=dict(path=str(continuation),sha256=file_hash(continuation)),
+                     recipe=reference["recipe"],spec=reference["spec"],
+                     budget=dict(total_capture_round_seconds=240,completed_continuation_charge_upper_bound=60,
+                                 replay_hard_timeout_seconds=180,paid_retries=0),
+                     scope="New guard-cause instrumentation question: replay original13 updates, capture every failed full batch at4–13 before fallback. No latency, quality, qualification or benchmark replacement.",
+                     numerical_gate="full finite benchmark PASS and exact original initial G/D/prior, batch sequence and final learned parameter hashes; source/recipe/task unchanged")
+    output.mkdir(parents=True,exist_ok=True)
+    path=output/"declaration.json"
+    if path.exists() and json.loads(path.read_text())!=declaration:
+        raise ValueError("immutable replay declaration differs")
+    atomic_json(path,declaration)
+    return declaration
+
+
+def run_replay(root,output,device="cuda:0"):
+    from particlegan import Recipe
+    from .scaling_benchmark import run_benchmark
+    root,output=Path(root).resolve(),Path(output).resolve()
+    declaration=json.loads((output/"declaration.json").read_text())
+    for relative,expected in declaration["source_files_sha256"].items():
+        if file_hash(root/relative)!=expected:
+            raise ValueError(f"frozen replay source changed: {relative}")
+    baseline=Path(declaration["original_benchmark"]["path"])
+    if file_hash(baseline)!=declaration["original_benchmark"]["sha256"]:
+        raise ValueError("original benchmark receipt changed")
+    original=json.loads(baseline.read_text());original_build=FormulationContext.build_trainer
+    captures=[]
+    with ExitStack() as stack:
+        def build(context,*args,**kwargs):
+            trainer=original_build(context,*args,**kwargs)
+            capture=ReplayCapture(trainer,output);capture.attach(stack);captures.append(capture)
+            return trainer
+        stack.enter_context(patch.object(FormulationContext,"build_trainer",build))
+        measured=run_benchmark(Recipe(**declaration["recipe"]),declaration["spec"],output/"replay",device)
+    checks={key:measured["identity"][key]==original["identity"][key] for key in
+            ("initial_model_sha256","initial_parameter_sha256","initialization_sha256","batch_sequence_sha256","final_parameter_sha256")}
+    capture=captures[0]
+    result=dict(schema="forge_polar_guard_replay_v1",declaration_sha256=file_hash(output/"declaration.json"),
+                source_commit=declaration["source_commit"],parity=checks,
+                passed=measured["status"]=="PASS" and all(checks.values()),
+                scope=declaration["scope"],failed_count=sum(len(row["failed_indices"]) for row in capture.records),
+                bundles=capture.bundles,guards=capture.records,
+                replay_receipt=dict(path=str(output/"replay/result.json"),sha256=file_hash(output/"replay/result.json")))
+    atomic_json(output/"result.json",result)
+    print(canonical(dict(event="guard_replay_complete",passed=result["passed"],failed=result["failed_count"],output=str(output))),flush=True)
+    return result
 
 
 def declare(root, output, checkpoint, *, source_commit, reservation_seconds=240):
@@ -164,17 +290,26 @@ def run(*, root, output, device="cuda:0", seed=0):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action",choices=("declare","run"))
+    parser.add_argument("action",choices=("declare","run","declare-replay","replay"))
     parser.add_argument("--root",type=Path,default=Path.cwd())
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--checkpoint",type=Path)
     parser.add_argument("--source-commit")
+    parser.add_argument("--baseline",type=Path)
+    parser.add_argument("--continuation",type=Path)
     parser.add_argument("--device",default="cuda:0")
     args=parser.parse_args()
     if args.action=="declare":
         if not args.checkpoint or not args.source_commit:
             parser.error("declare requires --checkpoint and --source-commit")
         declare(args.root,args.output,args.checkpoint,source_commit=args.source_commit)
+    elif args.action=="declare-replay":
+        if not args.baseline or not args.continuation or not args.source_commit:
+            parser.error("declare-replay requires baseline, continuation and source commit")
+        declare_replay(args.root,args.output,args.baseline,args.continuation,source_commit=args.source_commit)
+    elif args.action=="replay":
+        result=run_replay(args.root,args.output,args.device)
+        raise SystemExit(0 if result["passed"] else 1)
     else:
         result=run(root=args.root,output=args.output,device=args.device,seed=0)
         raise SystemExit(0 if result["passed"] else 1)
