@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "source": "reports/forge/EXPERIMENT_MEMORY.md#ring16-schedule-20261011",
+  "record_id": "ring16-schedule-20261011-readout",
+  "summary": "K3P, KA2 and R1/R2 pass the full ring16 gate at 6,400 updates with full-budget schedules (terminal passes 66/47/5) while matched 400-horizon baselines fail; every arm still fails at the sampled 1,600/3,200/4,800 cuts. Annealed families fail clockfree_audit_measurement_v1.",
+  "use": "motivation_only"
+}

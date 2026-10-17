@@ -1,0 +1,31 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "None: schema-3 copy of the shipped K3P recipe (step schedules over the task-owned horizon) as the matched step-schedule control"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-hc-step-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Matched step-schedule control on the same frozen source; identical recipe to the shipped k3p card.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "name": "k3p"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

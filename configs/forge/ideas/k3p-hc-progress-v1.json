@@ -1,0 +1,37 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "K3P's cosine LR, input-noise anneal and output-noise warmup are driven by an internal progress value p (critic paired-order accuracy gate, at most 0.001 per update, monotone) instead of completed_steps/total_steps",
+    "Critic spike guard active from the first update (d_guard_min_steps=0) to remove the fixed-count release"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-hc-progress-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Horizon-free annealing: progress advances only while the critic cannot order real above generated samples better than 75%, so schedules follow training state rather than the step label or declared horizon.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "name": "k3p",
+    "progress_ema": 0.98,
+    "progress_rate": 0.001,
+    "progress_schedule": "critic_order",
+    "progress_target": 0.75
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

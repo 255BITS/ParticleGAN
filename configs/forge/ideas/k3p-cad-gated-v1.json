@@ -1,0 +1,38 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Schedules driven by critic-order progress (round-1 C hyperparameters unchanged: at most 0.001 per update, zero when the critic orders 75% of pairs)",
+    "Critic spike guard active from the first update (d_guard_min_steps=0)"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-cad-gated-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "State-driven anneal with no fixed duration: the horizon-free candidate under a strict counter policy.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "name": "k3p",
+    "network_lr_horizon_cap": null,
+    "progress_ema": 0.98,
+    "progress_rate": 0.001,
+    "progress_schedule": "critic_order",
+    "progress_target": 0.75
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

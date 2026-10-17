@@ -1,0 +1,34 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Matched step-schedule control: shipped cosine LR / input-noise / output-noise schedules over the task-owned 6,400-update horizon (network LR horizon cap removed so G/D anneal over the full run)",
+    "Critic spike guard active from the first update (d_guard_min_steps=0), as in every arm"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-cad-step-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Positive ring16 control at 6,400 updates; reads the step label and horizon, so it should fail the measured clock audit.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "name": "k3p",
+    "network_lr_horizon_cap": null
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}
