@@ -1,5 +1,78 @@
 # README 100-Gaussian visualization
 
+## Current default
+
+The root animation is generated from `get_recipe()` and follows the selected
+public default. In 0.9.0 that is optimized BISPF. The
+[current protocol](CURRENT_PROTOCOL.md) declares the fixed task, seed-0 public
+initialization, separate RNG streams, budget and mode-acquisition gate before
+execution. Historical K3P evidence below retains its original identity.
+
+| Current illustration | Updates | Covered modes | Within 3σ | Mode TV ↓ | Sliced W1 ↓ | Beyond 10σ ↓ | Gate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 0.9.0 optimized BISPF, clean/live, seed 0 | 7,000 | 100/100 | 36.645% | 0.12055 | 0.16725 | 3.39% | FAIL |
+
+The model covers all modes, but misses the declared 95% precision goal at all
+five terminal scoring checks. The final per-mode core width ratio is 2.055
+(target 1). These observations do not qualify full Gaussian fidelity. The
+[current receipt](summary-current.json) records the exact default, initializer,
+task, controls, all terminal checks, source hashes and artifact identities.
+Training took 262.4 seconds on an RTX A6000. This is not a controlled comparison
+to the old seed-1234/random-initialization animation; those results retain their
+own source and sampling contract.
+
+The recording used source commit
+[`dd2cfd8b0`](https://github.com/255BITS/ParticleGAN/commit/dd2cfd8b0).
+A later Python 3.10 TOML-import fallback changes no training setting or numerical
+operation. The rendering receipt separately binds the final visual source to
+the unchanged saved observations. Restoring the final public-API checkpoint
+reproduces both the plotted rows and the 20,000 evaluation outputs bit for bit.
+
+Recommendation: use this actual endpoint to illustrate the selected default;
+keep the precision failure visible. Reuse the saved observations for visual
+changes. A grid-accuracy investigation would be a separate research task.
+
+Generate the current animation from one actual public-API training run:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  python -u reports/readme-100gaussians/generate.py \
+  --device cuda:1 --output-dir /path/to/new-run > /path/to/training.log 2>&1
+tail -f /path/to/training.log
+```
+
+Use `--device cpu` or `cuda:0` as appropriate. The output directory must be new.
+Default playback has 250 training frames plus the untrained state, 25 fps, a
+smooth quadratic time warp and a 2.5-second final hold. The plot follows fixed
+particle IDs; trails connect saved observations. Targets are true 3σ circles.
+The right panel reports independent 20,000-draw metrics and their observed
+history; 24 fixed scoring checks determine the terminal verdict, independently
+of media density. The command writes results and exits 1 if the gate fails.
+
+Re-style the same saved observations without running training again:
+
+```bash
+python reports/readme-100gaussians/render.py /path/to/new-run
+```
+
+`observations.npz`, complete `initial.pt`/`final.pt` checkpoints, raw
+`metrics.jsonl`, the frozen `contract.json`, `summary.json`, previews and GIF
+stay in that local output directory. The renderer verifies the observations'
+hash, schedules and verdict against the receipt. Publish only the final GIF,
+compact summary and rendering receipt. `--record-only` separates recording
+from rendering; `--steps 4 --frames 4` is a software smoke, not a passing
+scientific run. No seed sweep or best-checkpoint selection is used.
+
+## Historical runs
+
+The following results describe archived GAN v3 and K3P runs. Their prior
+publication and root GIF are preserved at
+[commit 2b2108c6f](https://github.com/255BITS/ParticleGAN/tree/2b2108c6ff0270f72f599ab5ab4c9b1bef6c3007/reports/readme-100gaussians).
+The historical commands below require each run's original source bindings and
+resolved recipe, recorded in its summary. The old
+[root GIF](https://github.com/255BITS/ParticleGAN/blob/2b2108c6ff0270f72f599ab5ab4c9b1bef6c3007/100gaussians.gif)
+is preserved exactly as Git blob `a29394a6db151ad9ae25f044d871e818e22c123b`.
+
 An earlier root `100gaussians.gif` showed one run of
 `get_recipe("gan", total_steps=20000)` through the explicitly imported
 `GANTrainer`, using the existing `examples/100gaussians.py` generator and
@@ -113,14 +186,21 @@ the same budget and EMA readout. It did not use a longer training budget.
 Different hyperparameters and seeds make this an uncontrolled comparison,
 and the old GIF has no equivalently audited shape-metric protocol here.
 
-## README hero GIF
+## Historical README hero GIF
 
-The root `100gaussians.gif` shows the package default formulation exactly:
+The historical root `100gaussians.gif` showed the then-default formulation:
 `GANTrainer(get_recipe("gan"), G, D, seed=1234)` (K3P, 7,000 updates) with the
 small MLP generator and Fourier-feature discriminator from `examples/100gaussians.py`.
 No recipe, optimizer, penalty or schedule field is overridden; only visualization
 settings are chosen here. The animation shows live weights. Full provenance and
 metrics are in [summary-hero.json](summary-hero.json).
+
+All source hashes in that receipt match core checkout
+[`d1b06bcd6`](https://github.com/255BITS/ParticleGAN/commit/d1b06bcd604fee1fb74f2951975a1c16d50df6d9)
+with `generate.py` from
+[`bae4365a2`](https://github.com/255BITS/ParticleGAN/commit/bae4365a2).
+Use those recorded bytes to reproduce the historical hero; running the current
+command resolves today's selected default.
 
 Frames follow a smooth time warp, step = 7000·(i/250)², so early training
 (where the motion is) is dense and the cadence never jumps: 250 frames at

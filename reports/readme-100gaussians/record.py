@@ -7,7 +7,10 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10; included in the experiments extra.
+    import tomli as tomllib
 
 import numpy as np
 import torch

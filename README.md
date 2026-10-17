@@ -41,11 +41,13 @@ view requirements across 18 distinct counted tests; held failures remain
 visible. These results do not establish natural-image convergence or a
 universal architecture guarantee.
 
-![100 Gaussians: historical K3P recipe converging with live weights](100gaussians.gif)
+![Actual 100-Gaussian training with the optimized BISPF default: particle outputs, target modes and numerical learning curves](100gaussians.gif)
 
-Recorded with the historical 0.8.0 K3P recipe and its original random initialization, live weights, seed 1234:
-**100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
-at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
+Recorded with the **0.9.0 optimized BISPF default**, public deterministic initialization,
+live weights and protocol seed 0: **100/100 modes, 36.6% within 3σ after 7,000 updates**.
+The 95% precision goal is not met. The animation follows the selected public default;
+[metrics and reproduction](reports/readme-100gaussians/README.md#current-default)
+preserve the full result and the historical K3P animation.
 
 **Without a learning-rate schedule.** The [E22 configuration](docs/e22.md) has no schedule or training
 horizon, and no statistic of the raw data in its training control. It covers all 100 modes on three layouts,
