@@ -3,8 +3,10 @@
 The [current technique inventory](../technique-inventory.md) remains the single
 comparison board. This readout records component diagnosis and bounded optimizer
 iterations. The [protocol](../../../docs/bispf-optimization.md) freezes comparison
-rules and performance targets. The PR remains a draft while final performance
-and quality measurements are pending.
+rules and performance targets. The surviving quintic recipe passes the declared
+latency targets and preserves all 19 incumbent numerical passes. The
+[selection proof](selection-proof.json) binds ordinary quality, the exercised
+wide-channel path and matched performance to the same frozen source.
 
 ## Measured bottleneck
 
@@ -122,7 +124,6 @@ to 128 gives 107.13 ms versus 54.31 ms. Wider matrices still increase the
 fixed polynomial cost; larger images increasingly spend time in the shared
 network computation. Peak allocated memory matches native BISPF on every
 workload, including 2,119 MiB at 256 pixels, without persistent graph caches.
-The ordinary quality study remains required before selection.
 
 The [six-arm direct training readout](wide-quality.json) passes all shared
 initialization, public-prior, task, initial RNG and final consumed-data-stream
@@ -138,6 +139,31 @@ add no training updates or sampling draws. Total charged worker time is
 
 ## Quality scope
 
+The [completed ordinary readout](quality.json) contains all 30 task verdicts:
+19 PASS and the same 11 historical FAILs, with no regression. Its 29 original
+execution groups consume 3,155.05 worker seconds of the declared 46,620-second
+cap, with no retries or canceled tasks. The ring protocol confirms convergence
+at update 1,782, then passes all 1,200 disjoint hold checks and 300 extension
+checks, ending at update 3,282 within its 7,500-update maximum.
+
+The five-word smoke completes its entire 20,001-update allowance, with 23 of
+24 scheduled checks passing. One late failure at update 15,835 recovers; it
+remains explicit in the numerical readout. The declared smoke gate accepts a
+confirmed scheduled state after budget completion. Its separate hold resumes
+the earliest confirmed passing checkpoint at update 834 and passes all checks
+over its own 4,000-update continuation. Endpoint success alone supplies no hold
+credit. Saved-training GIFs illustrate these numerical outcomes without adding
+updates or sampling draws.
+
+The actually executed revision-11 policy qualifies Tier 3: all 17 counted gates
+and both positive diagnostics pass. The inventory retains its revision-9
+comparison policy so other techniques keep their original denominators. Under
+that policy, BISPF remains Tier 1 / FAIL, with tier counts 6/6, 10/21 and 2/2,
+plus the passing clock diagnostic. The separate executed-policy proof is retained;
+none of the 11 held failures is relabeled as a success or omitted. This is a
+recipe selection with preserved evidence, not a policy migration or public
+default adoption.
+
 CPU kernels, tiny convolution kernels, dense weights, vector updates and sampled
 prior-row updates retain native behavior. All current image-quality hosts have
 at most 24 channels, so a complete tie on the existing suite would preserve
@@ -151,5 +177,15 @@ and the original numerical quality gates. They exercise the accelerated path
 and retain actual-training GIFs. This portability scope provides no ordinary
 qualification and does not establish quality on large natural images.
 
-The selected BISPF recipe, historical evidence and public trainer default remain
-unchanged until the final candidate's evidence has been reviewed.
+The inventory now selects the quintic recipe for BISPF: it preserves known
+passes, improves the exercised sustained bars gate and meets every declared
+latency target. Native polar behavior remains the API default, and the overall
+public trainer default remains BCAP. Larger natural-image quality remains
+unmeasured.
+
+The [publication integrity receipt](publication-integrity.json) verifies that all
+eight other scientific rows, seven other selection pins and 42 other performance
+cells remain unchanged. The previous selection is archived byte for byte.
+[Software checks](software-checks.json) retain the optimizer, checkpoint,
+selection, source-reconstruction and final generated-page results, including
+the earlier publication failure and its verified resolution.

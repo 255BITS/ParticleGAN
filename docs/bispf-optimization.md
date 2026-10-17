@@ -114,7 +114,8 @@ git -C /tmp/bispf-h2-repro sparse-checkout set \
 git -C /tmp/bispf-h2-repro checkout d9d72d53761c898bce20102e1995fc3d899c1447
 ```
 
-Use the project environment from that checkout. Planning launches no training:
+Run the project Python environment with that checkout as the working directory.
+Planning launches no training:
 
 ```sh
 cd /tmp/bispf-h2-repro

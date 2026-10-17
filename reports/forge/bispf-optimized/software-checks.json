@@ -30,7 +30,8 @@
       "duration_seconds": 44.83,
       "failure": "test_committed_pages_and_every_drilldown_link_match_the_generator: new diagnostic declarations/history are not yet included in current family_progress; final inventory generation is intentionally deferred until quality selection",
       "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/publication-regression-tests.log",
-      "log_sha256": "2d2e42a001ec2778ace86a2be2cb2e5f60122282af7bff6c2dd4a457e0093704"
+      "log_sha256": "2d2e42a001ec2778ace86a2be2cb2e5f60122282af7bff6c2dd4a457e0093704",
+      "resolved_by": "Final generated overview/family/config/history freshness guard: 1 PASS after completed publication."
     },
     {
       "scope": "frozen catalog support closure and strict admission projection",
@@ -38,7 +39,7 @@
       "result": "PASS",
       "passed": 25,
       "duration_seconds": 0.36,
-      "command": "pytest -q tests/test_forge_comparison_policy.py",
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_comparison_policy.py",
       "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-frozen-catalog-closure-final-tests.log",
       "log_sha256": "c3ae8d756859b23acaca6d1a3e8a909d3c6ff1f25585871438a8917e7d1a46d2"
     },
@@ -48,9 +49,29 @@
       "result": "PASS",
       "passed": 255,
       "duration_seconds": 43.18,
-      "command": "pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_family_reports.py tests/test_forge_comparison_policy.py -k 'not test_committed_pages_and_every_drilldown_link_match_the_generator'",
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_comparison_policy.py tests/test_forge_current_technique_inventory.py tests/test_forge_family_reports.py -k 'not test_committed_pages_and_every_drilldown_link_match_the_generator'",
       "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-frozen-closure-publication-tests.log",
-      "log_sha256": "3826be42b46ad10fe135a7cd9041454ca8cf53de06ec3aebe09a055c56572967"
+      "log_sha256": "3826be42b46ad10fe135a7cd9041454ca8cf53de06ec3aebe09a055c56572967",
+      "executed_source_variant": "Pre-final diagnostic-only exclusion draft; finalized by the focused 25-check run."
+    },
+    {
+      "scope": "selection origin annotations with exact scientific bindings and cohort",
+      "source_commit": "26094895fdbc2ee8a419bf7706ce24319fae9f5a",
+      "result": "PASS",
+      "passed": 54,
+      "duration_seconds": 4.68,
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_bispf_selection_proposal.py",
+      "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-selection-origin-annotations.log",
+      "log_sha256": "d409030ee28a73ae789da363e2b1380c6f51b713a4def48984467c215a2a208d"
+    },
+    {
+      "scope": "final generated overview, family/config/history pages and every drilldown link",
+      "result": "PASS",
+      "passed": 1,
+      "duration_seconds": 7.06,
+      "command": "CUDA_VISIBLE_DEVICES='' /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+      "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/final-generated-pages.log",
+      "log_sha256": "725c2ae0148fc6310a7f08f52eeaf28ae2ea5c1cfba0d080b10de53c49221a6d"
     }
   ],
   "limitations": [
@@ -72,6 +93,16 @@
     ],
     "proof_path": "/tmp/bispf-h2-partial-check-PENDING.json",
     "proof_sha256": "7e1260d9f161a2580825e85175f0110fabb45d60da050739f90160ec5aaefbc2",
-    "note": "Verified partial reconstruction before the full study completed. Final source report must use newly completed evidence and concluded readout."
+    "note": "Verified partial reconstruction before the full study completed. Final source report must use newly completed evidence and concluded readout.",
+    "superseded_by": "publication-integrity.json: completed original study and final selected publication"
+  },
+  "final_publication": {
+    "status": "PASS",
+    "proof": "publication-integrity.json",
+    "sha256": "71c28092973f1346b6eec240a1d42bf961d65d9fea5951d5af9f24f9440856a9",
+    "actual_policy_revision": 11,
+    "comparison_policy_revision": 9,
+    "selection_proposal": "selection-proof.json",
+    "selection_proposal_sha256": "d1593f732521b12ba94cb339f5bc3cc97d9b235cf4e5c56ee87244aa2f883bcb"
   }
 }

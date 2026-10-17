@@ -866,6 +866,10 @@
     "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14"
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
+  "previous_selection": {
+    "path": "configs/forge/selections/history/family-current-138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2.json",
+    "sha256": "138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2"
+  },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
   "selections": [
@@ -905,22 +909,22 @@
       "trainer_family": "bcap-dualnorm"
     },
     {
-      "candidate_id": "bispf-v2",
-      "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967",
-      "cohort": "32a72f2c08988465153a840f30f0926f2f6164347cde45c03d69dbb1c8a852a6",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def",
+      "cohort": "a5c1a7106c9f87a47b7fba9ef08c8d27f8a8323752eae254adb7d25cca833949",
       "execution_backend": "cuda",
       "measurement_views": [
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Complete Tier 1, Tier 2, and Tier 3 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow v2 (BISPF-v2) on the BCAP DualNorm leader recipe.",
-      "recipe_sha256": "2ff56ec5abd077ede8ec957ad679fa1d2e0ab9611ab3fbbd354c7bc419d81ae3",
+      "reason": "Preserve every incumbent pass with one globally configured optimized BISPF recipe. Actual executed-policy qualification, older comparison-policy tiers, exercised wide-channel diagnostics and observed performance targets retain their separate source-bound proofs. No public-default adoption or natural-image quality claim.",
+      "recipe_sha256": "60ba0af155bfe843f31fc11606a9b37d690b74be69ffd7ea4243c4b0a891541e",
       "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
-      "runtime_cohort_sha256": "3faddec347a0533b6f201221400e07a0fbf0223d672bd6fb4403ccd4588ef110",
-      "scientific_row_sha256": "0cbf26323981730d0da2cad1aad167af8787b03ca33b3d217f7c2a1fd4785ffb",
+      "runtime_cohort_sha256": "1bf9d7d344222d41418cbbac14f9b298a4299461c5a62f71c3d11560c18e92aa",
+      "scientific_row_sha256": "52b403c34d09d3f730620488eb19cf18ed7879e08a9bb53bdcc4526a49414b88",
       "selection_kind": "current_measurement",
-      "source_digest": "df5ba19b79b329442f5141da24e4b22fa04569b8def42eb849b7af6d1693e141",
-      "task_keys_sha256": "8bd4fa5b69650ac88dbc1dd50de20f3fd222b38e1cdf8f2b86a4fa671fd3c74a",
+      "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+      "task_keys_sha256": "e85cbf6ae24493f0a275029ff227f21c013fe3cb69a79baee8f3e6561db7e650",
       "trainer_family": "bispf"
     },
     {
