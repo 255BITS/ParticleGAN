@@ -55,7 +55,8 @@ def test_one_selector_promotes_all_model_families_without_changing_explicit_pres
         # Task dimensions and component choices are tested separately below.
         recipe = get_recipe(model, lr=.002)
         for field in ('critic_formulation', 'optimizer_family', 'loss', 'reg_arm',
-                      'constraint_geometry_mode', 'continuous_policy', 'prior_update',
+                      'constraint_geometry_mode', 'optimizer_svd_backend', 'training_precision',
+                      'continuous_policy', 'prior_update',
                       'prior_regularizer', 'prior_reg', 'prior_l2'):
             assert getattr(recipe, field) == getattr(explicit[preset], field)
         assert recipe.lr == .002

@@ -1,0 +1,38 @@
+{
+  "schema": "bispf_throughput_release_verification_v1",
+  "version": "0.9.1",
+  "measured_publication_commit": "72db8af31586937045e24723fc17bea153fca652",
+  "measured_source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+  "default_matches_measured_candidate_except_label": true,
+  "recipe_delta": {
+    "training_precision": {
+      "before": "float32",
+      "after": "bf16_channels_last"
+    },
+    "optimizer_svd_backend": {
+      "before": "native",
+      "after": "batched"
+    }
+  },
+  "previous_concrete_recipe_restores": true,
+  "other_named_trainers_unchanged": true,
+  "changed_measured_source_files": [
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "training_body_unchanged_except_native_bf16_capability_gate": true,
+  "qualification_regraded": false,
+  "training_launched": false,
+  "software_checks": [
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-release-091-final.log",
+      "sha256": "f91b8629d7b871e3564eaddeb212f86cc757a3ce01f0c1af951d47f207e8c6dd",
+      "passed": 121
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-release-091-compat-final.log",
+      "sha256": "4a89c6b8df9fadbc51dcf12fc066a16a03315178ef7538a0d0a6cbcc8c1b502e",
+      "passed": 66
+    }
+  ]
+}

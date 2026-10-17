@@ -60,7 +60,8 @@ def test_quintic_graph_pool_handles_interleaved_shapes_and_noncontiguous_kernels
 def test_batched_optimizer_handles_groups_zero_slices_and_momentum(kind):
     module = kind(8, 12, (2, 3), groups=2, bias=False, device='cuda')
     native = deepcopy(module)
-    recipe = get_recipe('bispf_optimized', optimizer_momentum=.5, constraint_geometry_mode='none')
+    recipe = get_recipe('bispf_optimized', optimizer_momentum=.5, constraint_geometry_mode='none',
+                        optimizer_svd_backend='native')
     a = recipe.make_generator_optimizer(native)
     b = recipe.replace(optimizer_svd_backend='batched').make_generator_optimizer(module)
     for offset in [0., .3]:
@@ -111,8 +112,8 @@ def test_mixed_precision_is_training_only_and_checkpoint_continuation_is_exact()
         assert not trainer._in_training_step
 
 
-def test_precision_is_explicit_and_does_not_change_default_recipe_identity():
-    recipe = get_recipe('bispf_optimized')
+def test_previous_execution_policy_remains_explicit_and_restorable():
+    recipe = get_recipe('bispf_optimized', optimizer_svd_backend='native', training_precision='float32')
     assert 'training_precision' not in recipe.to_dict()
     assert type(recipe)(**recipe.to_dict()) == recipe
     with pytest.raises(ValueError, match='training_precision'):
@@ -120,3 +121,22 @@ def test_precision_is_explicit_and_does_not_change_default_recipe_identity():
     from experiments.forge.techniques import validate_same_technique
     with pytest.raises(ValueError, match='training_precision'):
         validate_same_technique(recipe, recipe.replace(training_precision='bf16_channels_last'))
+
+
+def test_public_default_keeps_cpu_convolutions_in_float32():
+    trainer = _trainer('bf16_channels_last', 'cpu')
+    assert not trainer._bf16_generator and not trainer._noisy_D.bf16
+    assert trainer.G[2].weight.is_contiguous()
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA capability fallback')
+def test_unsupported_cuda_bf16_falls_back_to_float32(monkeypatch):
+    monkeypatch.setattr(torch.cuda, 'is_bf16_supported', lambda **kwargs: False)
+    trainer = _trainer('bf16_channels_last', 'cuda')
+    assert not trainer._bf16_generator and not trainer._noisy_D.bf16
+    assert trainer.G[2].weight.is_contiguous()
+    observed = []
+    hook = trainer.G[2].register_forward_hook(lambda m, a, out: observed.append(out.dtype))
+    trainer.step(torch.zeros(4, 1, 4, 4, device='cuda'))
+    hook.remove()
+    assert observed and set(observed) == {torch.float32}

@@ -1,6 +1,6 @@
 # BISPF throughput readout
 
-The opt-in `bispf-throughput-v1` recipe is **2.15× faster at 256×256 DCGAN** and **about 2.3× faster on the small Forge image tasks**, compared with the selected quintic BISPF winner. It preserves all **19 incumbent numerical passes** across the same 30 task contracts. The [current technique inventory](../technique-inventory.md) remains the single leaderboard; selection pins and public defaults are unchanged.
+The `bispf-throughput-v1` recipe is **2.15× faster at 256×256 DCGAN** and **about 2.3× faster on the small Forge image tasks**, compared with the selected quintic BISPF winner. It preserves all **19 incumbent numerical passes** across the same 30 task contracts. The [current technique inventory](../technique-inventory.md) remains the single leaderboard. The original opt-in publication at `72db8af31` preserved selection pins and public defaults. The owner subsequently selected this execution policy as the **0.9.1 public default**; archived qualifications and Forge selection pins retain their original identities.
 
 ## Measured throughput
 
@@ -51,17 +51,18 @@ Learning rates, momentum, Born–Infeld penalty, learned-prior policy and SBNP r
 from particlegan import get_recipe
 
 recipe = get_recipe("bispf_optimized", optimizer_svd_backend="batched",
-                    training_precision="bf16_channels_last")
+                    training_precision="bf16_channels_last")  # also get_recipe() in 0.9.1
 ```
 
-Recommend this opt-in recipe for the measured CUDA image workloads. Keep the existing default and selection. Profile the candidate’s remaining 32/64-pixel overhead before another bounded implementation change; no optimizer retuning or seed study is warranted by this result. Natural-image quality is not measured by the synthetic timing workloads or the simple wide-image controls.
+Use this default for the measured CUDA image workloads. The 0.9.1 release adds a native-BF16 capability check, falling back to FP32 network execution on unsupported CUDA devices. That fallback is software-tested and supplies no measured speedup or trained quality claim for those devices. Profile the candidate’s remaining 32/64-pixel overhead before another bounded implementation change; no optimizer retuning or seed study is warranted by this result. Natural-image quality is not measured by the synthetic timing workloads or the simple wide-image controls.
 
 ## Evidence, budgets and reproduction
 
-The implementation was frozen at `bbd95834c`, based on `origin/develop` `de43f22f0`. Scientific source digest `014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8` still matches every captured source file in the final checkout. Original receipts, source snapshots, checkpoints, stdout, JSONL streams and profiler traces remain in the local artifact archive. Published receipt projections are display/provenance summaries, not substitutes for original qualification evidence.
+The measured implementation was frozen at `bbd95834c`, based on `origin/develop` `de43f22f0`. Scientific source digest `014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8` matches every captured source file in the original publication checkout `72db8af31`. The 0.9.1 default promotion and unsupported-device fallback are subsequent source changes; they do not rebind the frozen experiment evidence. Original receipts, source snapshots, checkpoints, stdout, JSONL streams and profiler traces remain in the local artifact archive. Published receipt projections are display/provenance summaries, not substitutes for original qualification evidence.
 
 - [All final metrics, matched-pair proofs, current-policy qualification and original archive receipts](results.json).
 - [Source integrity](source-integrity.json), [unchanged leaderboard/pin proof](publication-integrity.json), and [software checks](software-checks.json).
+- [0.9.1 default-promotion verification](release-verification.json) and its [reproduction source](verify_release.py): exact recipe binding, two changed scientific source files, unchanged training body outside the capability gate, and 187 passing release checks.
 - [Development probes](probes.json), including the first probe’s mismatched preliminary declaration and the retained layout-test failure. They grant no quality credit; the final registered comparison has separate correct bindings.
 - Actual-training GIFs: [small stripes](media/bispf-throughput-v1/img_stripes2.gif), [wide bars](media/bispf-throughput-v1/img_bars4_w64_optimizer_diagnostic.gif), [256-pixel finite updates](media/bispf-throughput-v1/dcgan_performance_r256.gif), and [endurance checks](media/bispf-throughput-v1/ring_extension.gif). Publication adds no updates or sampling draws.
 
@@ -76,7 +77,7 @@ The implementation was frozen at `bbd95834c`, based on `origin/develop` `de43f22
 
 Initial profiling additionally reserves 480 seconds and each of the three development probes 240 seconds. There are no paid retries. Small and endurance diagnostic view revision 1 bytes remain archived; revision 2 changes only family-page presentation. Frozen requests retain their original view identities.
 
-Use the project environment with the experiment dependencies to regenerate reporting from the existing archive, without training:
+Use the original publication checkout `72db8af31` and the project environment with the experiment dependencies to regenerate its reporting from the existing archive, without training:
 
 ```sh
 python reports/forge/bispf-throughput/publish.py \

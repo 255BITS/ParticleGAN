@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.9.1 — 2026-10-17
+
+- **Faster BISPF execution is the public default.** `bispf_optimized`,
+  `get_recipe()` and model-family factories now select batched convolution
+  updates and BF16/channels-last training for supported CUDA convolutional
+  networks. Parameters, optimizer arithmetic, losses and sampling stay FP32.
+  CPU, nonconvolutional and small networks retain their previous precision;
+  CUDA devices without native BF16 support also use FP32 network execution.
+- **Matched throughput:** 2.15× at 256×256 DCGAN, 2.14× at batch 64 and about
+  2.3× on the small Forge image tasks versus the 0.9.0 quintic default.
+  The six DCGAN workloads improve 1.02–2.15×, with a 1.66× geometric mean.
+  All 19 incumbent numerical passes and 11 existing failures are preserved.
+  Separate endurance controls pass; current revision-12 Tier 3 remains
+  blocked by existing required failures. This owner-directed default choice
+  adds no calibration or natural-image quality claim. See the
+  [source-bound readout](reports/forge/bispf-throughput/README.md).
+- **Restoration:** persist and restore complete recipe fields. To select the
+  0.9.0 execution policy explicitly, use
+  `get_recipe("bispf_optimized", optimizer_svd_backend="native", training_precision="float32")`.
+  Native and batched optimizer checkpoints reject mismatched backends; CUDA
+  graphs are disposable and rebuilt after restoration. Other named trainer
+  presets and bare `Recipe()` retain their earlier settings.
+
 ## 0.9.0 — 2026-10-17
 
 - **Optimized BISPF is the public recipe default.** `get_recipe()`, `"gan"`

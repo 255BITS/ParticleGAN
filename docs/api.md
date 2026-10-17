@@ -963,9 +963,9 @@ cutoff; finite iterations and floating-point rounding also differ. This option
 is a declared trainer change requiring its own quality evidence. Its checkpoints
 bind solver version 3 and reject earlier experimental solver states. CUDA graph
 caches are disposable execution state and are rebuilt after restoration. Native
-remains the default.
+remains the bare `Recipe()` default.
 
-`optimizer_svd_backend="batched"` is an opt-in CUDA execution backend for
+`optimizer_svd_backend="batched"` is the `bispf_optimized` CUDA execution backend for
 per-offset DualNorm convolutions. Channel matrices with both dimensions at
 most 32 use one batched native SVD per kernel, preserving the per-matrix rank
 cutoff and absolute smoothing. With the quintic rule, larger matrices replay
@@ -976,26 +976,29 @@ can change reduction rounding for strided kernels. Bitwise agreement with the
 native backend is not promised. Checkpoints bind backend version 1; graph caches are rebuilt after
 restore and are omitted from copies and checkpoints.
 
-`training_precision="bf16_channels_last"` separately opts `GANTrainer` into
+`training_precision="bf16_channels_last"` configures `GANTrainer` for
 BF16 training for CUDA generator/critic networks containing a Conv2d or
 ConvTranspose2d whose largest channel-matrix dimension exceeds 32. These
 networks use channels-last parameter storage and critic inputs. Only network
 forwards use autocast; outputs, losses, master parameters, optimizer arithmetic
 and prior regularization remain FP32. Sampling and evaluation run outside this
 training autocast. Smaller, CPU and nonconvolutional networks retain their
-original execution. This is a numerical trainer change requiring its own
+original execution, as do CUDA devices without native BF16 support. This is a numerical trainer change requiring its own
 quality evidence. Caller-owned component loops do not acquire autocast merely
 by carrying this field; they must explicitly implement the declared policy.
 
-For the combined, opt-in BISPF throughput recipe:
+The public BISPF default selects both policies:
 
 ```python
-recipe = get_recipe("bispf_optimized", optimizer_svd_backend="batched",
-                    training_precision="bf16_channels_last")
+recipe = get_recipe()
+# Previous 0.9.0 execution settings, including for matching native checkpoints:
+previous = get_recipe("bispf_optimized", optimizer_svd_backend="native",
+                      training_precision="float32")
 ```
 
 See the [source-bound throughput study](../reports/forge/bispf-throughput/README.md)
-for measured workload limits and quality gates. The existing default is unchanged.
+for measured workload limits and quality gates. Save resolved fields and restore
+them with `Recipe(**saved_fields)`; do not resolve a new default when resuming.
 
 `optimizer_convolution_rule="quintic"` selects a separately declared hybrid
 optimizer: large CUDA per-offset channel matrices use five fixed FP32 polynomial
@@ -1205,20 +1208,21 @@ The selector affects `get_recipe()`, `get_recipe("gan")` and all model-family
 recipes. Explicit presets and `Recipe(**saved_fields)` remain independent of
 it. Save resolved recipes, rather than resolving the current default when
 resuming. The selected recipe matches the complete
-[`bispf-optimized-quintic-v1` candidate](../configs/forge/ideas/bispf-optimized-quintic-v1.json),
+[`bispf-throughput-v1` candidate](../configs/forge/ideas/bispf-throughput-v1.json),
 apart from its public preset label. This owner-directed release choice retains
-the [19 passes and 11 failures](../reports/forge/bispf-optimized/README.md) in the
+the [19 passes and 11 failures](../reports/forge/bispf-throughput/README.md) in the
 30-task ordinary readout; it adds no calibration, universal architecture or
-natural-image quality claim. The observed matched DCGAN latency improvement is
-7.61–17.43× over native BISPF across six tasks, with unknown GPU contention.
+natural-image quality claim. Observed matched DCGAN speedups are 1.02–2.15×
+over the 0.9.0 quintic default across six tasks, with unknown GPU contention.
 
 `bispf_optimized` uses the Born-Infeld chord penalty and zero-mean logit gauge,
 non-saturating loss, zero-momentum DualNorm, smoothing `.001`, direction blending,
 learned sampled-prior row updates and SBNP regularization at `.01`. Generator,
 critic and prior step sizes are `.012`, `.018` and `.03`. Both schedule floors
-are `1`, so rates stay constant. Its quintic rule accelerates annotated CUDA
-convolution kernels with more than 32 channels per group. CPU, small convolutions
-and dense transformer matrices retain the native polar/SVD rule; transformer
+are `1`, so rates stay constant. Batched SVD handles small CUDA convolution
+kernels; larger quintic kernels use CUDA graphs. Supported wide convolutional
+networks use BF16/channels-last training. CPU and dense transformer matrices
+retain the native polar/SVD rule; transformer
 throughput is a separate profiling question. `get_recipe("bispf")`,
 `get_recipe("bcap")` and bare `Recipe()` preserve their earlier meanings.
 

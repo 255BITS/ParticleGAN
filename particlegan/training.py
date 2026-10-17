@@ -13,9 +13,15 @@ from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, i
 
 
 def _convolution_autocast(module, enabled):
-    return enabled and any(isinstance(child, (nn.Conv2d, nn.ConvTranspose2d))
-                           and max(child.in_channels, child.out_channels) // child.groups > 32
-                           for child in module.modules())
+    if not enabled or not any(isinstance(child, (nn.Conv2d, nn.ConvTranspose2d))
+                              and max(child.in_channels, child.out_channels) // child.groups > 32
+                              for child in module.modules()):
+        return False
+    parameter = next(module.parameters(), None)
+    if parameter is None or parameter.device.type != "cuda":
+        return False
+    with torch.cuda.device(parameter.device):
+        return torch.cuda.is_bf16_supported(including_emulation=False)
 
 
 def _float_output(value):

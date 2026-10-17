@@ -30,9 +30,9 @@ vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The default training recipe is
 the selected **optimized BISPF** leader: non-saturating loss, a Born-Infeld
 critic penalty, an SBNP prior regularizer, zero-momentum DualNorm and constant
-rates. Its quintic rule accelerates CUDA convolution kernels with more than
-32 channels per group; dense weights and smaller or CPU kernels retain native
-updates.
+rates. Batched convolution updates and BF16/channels-last training accelerate
+supported CUDA image networks; weights, optimizer arithmetic and sampling stay
+FP32. CPU and nonconvolutional networks retain their previous execution.
 [Recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the
 configuration. You write an ordinary PyTorch GAN loop; the recipe builds the pieces.
 
@@ -40,11 +40,11 @@ Future promotions change one line in [particlegan/recipes.py](particlegan/recipe
 `DEFAULT_RECIPE = "bispf_optimized"`. All model-family factories inherit that trainer preset.
 Explicit presets such as `get_recipe("ka2")` remain available. This is the
 owner-selected research default; Forge calibration remains provisional.
-The [optimization readout](reports/forge/bispf-optimized/README.md) preserves
-19 passing and 11 failing task verdicts. The overview's 81/81 counts repeated
-view requirements across 18 distinct counted tests; held failures remain
-visible. These results do not establish natural-image convergence or a
-universal architecture guarantee.
+The [throughput readout](reports/forge/bispf-throughput/README.md) preserves
+19 passing and 11 failing task verdicts, while measuring 2.15× faster 256×256
+DCGAN updates and about 2.3× faster small image updates versus 0.9.0. Across
+all six DCGAN workloads, speedups range from 1.02× to 2.15×. These results
+do not establish natural-image convergence or a universal architecture guarantee.
 
 ![Actual 100-Gaussian training with the optimized BISPF default: particle outputs, target modes and numerical learning curves](100gaussians.gif)
 
@@ -67,7 +67,7 @@ ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # the library (0.9.0)
+python -m pip install particlegan           # the library (0.9.1)
 ```
 
 For the examples, experiments and tests, install from source:
@@ -80,8 +80,8 @@ python -m pip install -e '.[experiments,dev]'  # plus examples, experiments and 
 
 ## Train a GAN
 
-Version 0.9.0 makes the optimized BISPF preset the default and retains explicit
-historical presets and saved recipe restoration. See the [changelog](CHANGELOG.md)
+Version 0.9.1 makes the faster BISPF execution policy the default and retains
+explicit historical settings and saved recipe restoration. See the [changelog](CHANGELOG.md)
 for the release and its compatibility limits.
 
 You supply ordinary PyTorch modules; `GANTrainer` binds the recipe's optimizers,

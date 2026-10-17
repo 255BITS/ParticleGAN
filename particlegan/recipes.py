@@ -1179,7 +1179,8 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     regularization, EMA serving and additive training noise.
     ``"bispf_optimized"`` is the selected BISPF research default: zero-momentum
     DualNorm, non-saturating loss, the Born-Infeld chord penalty, SBNP prior
-    regularization and the optimized per-offset convolution filter. Its current
+    regularization, batched convolution updates and BF16/channels-last training
+    for supported CUDA convolutional networks. Its current
     evidence retains 19 task passes and 11 failures; selection does not add
     calibration or natural-image quality credit.
     ``"bispf"`` retains the original Born-Infeld Sinkhorn Particle Flow formulation
@@ -1259,6 +1260,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
         **presets["bcap"], "critic_formulation": "bispf", "reg_arm": None,
         "optimizer_convolution_rule": "quintic", "prior_regularizer": "sbnp",
         "prior_reg": .01, "lr_schedule": "cosine",
+        "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
     }
     presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
