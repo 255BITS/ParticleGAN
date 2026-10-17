@@ -709,6 +709,63 @@ class BISPFLossAdapter:
         return loss
 
 
+class _NormalizedBISPFStepRecord(CriticStepRecord):
+    """The existing normalized observer law with complete BISPF continuation.
+
+    Keep ``CriticStepRecord.record_step`` and the penalty's original observer
+    fallback unchanged. Older normalized checkpoints omitted earned transport
+    moments; they cannot reconstruct an exact continuation from step counts.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.ema_residual = 1.0
+        self.ema_data_scale = 1.0
+        self.initialized = False
+        self._thermal_scale = 1.0
+        self._last_d_logits = None
+
+    def state_dict(self):
+        return {**super().state_dict(), "bispf": {
+            "schema": 1, "ema_residual": self.ema_residual,
+            "ema_data_scale": self.ema_data_scale, "initialized": self.initialized,
+            "thermal_scale": self._thermal_scale,
+        }}
+
+    @staticmethod
+    def base_state(state):
+        if not isinstance(state, dict) or "bispf" not in state:
+            raise ValueError("normalized BISPF checkpoint is missing transport observer state; "
+                             "resume the historical checkpoint with its original package source")
+        if set(state) != {*CriticStepRecord.KEYS, "bispf"}:
+            raise ValueError("invalid normalized BISPF record fields")
+        observer = state["bispf"]
+        if (not isinstance(observer, dict)
+                or set(observer) != {"schema", "ema_residual", "ema_data_scale", "initialized", "thermal_scale"}
+                or type(observer["schema"]) is not int or observer["schema"] != 1
+                or type(observer["initialized"]) is not bool):
+            raise ValueError("invalid normalized BISPF transport observer")
+        for key in ("ema_residual", "ema_data_scale", "thermal_scale"):
+            value = observer[key]
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError("invalid normalized BISPF observer value")
+        if observer["thermal_scale"] > 1:
+            raise ValueError("invalid normalized BISPF thermal scale")
+        return {key: state[key] for key in CriticStepRecord.KEYS}
+
+    def load_state_dict(self, state):
+        super().load_state_dict(self.base_state(state))
+        observer = state["bispf"]
+        self.ema_residual = float(observer["ema_residual"])
+        self.ema_data_scale = float(observer["ema_data_scale"])
+        self.initialized = observer["initialized"]
+        self._thermal_scale = float(observer["thermal_scale"])
+        self._last_d_logits = None
+
+    def restore_device_state(self, device):
+        _LAST_THERMAL_SCALE[device] = self._thermal_scale
+
+
 class BISPFStepRecord(CriticStepRecord):
     """Per-critic BISPF state traveling with ``optimizer.state_dict()``."""
 
