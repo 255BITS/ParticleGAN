@@ -20,6 +20,8 @@ SOURCE = "d9d72d53761c898bce20102e1995fc3d899c1447"
 SOURCE_DIGEST = "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213"
 CANDIDATES = ("bispf-v2", "bispf-optimized-frobenius-v1", "bispf-optimized-quintic-v1")
 TASKS = ("img_stripes2_w64_optimizer_diagnostic", "img_bars4_w64_optimizer_diagnostic")
+STUDIES = ("bispf-fastpath-alternatives-native-v1", "bispf-optimized-frobenius-v1-wide",
+           "bispf-optimized-quintic-v1-wide")
 
 
 def require(condition, message):
@@ -130,6 +132,18 @@ def publish(root, queue_root, durable_root):
                                           stripes_positive=raw_rows[candidate, TASKS[0]]["status"] == "PASS",
                                           eligible_for_further_comparison=not regressions
                                           and raw_rows[candidate, TASKS[0]]["status"] == "PASS")
+    concluded = []
+    for path in sorted((root / "reports/forge/records").glob("readout-*.json")):
+        record = read_json(path)
+        if record.get("study_id") in STUDIES:
+            require(record.get("evidence_scope") == "research_diagnostic"
+                    and record.get("qualified_tier") == 0
+                    and record.get("qualification_input") is False, "Unexpected readout scope")
+            concluded.append(dict(study=record["study_id"], record=path.relative_to(root).as_posix(),
+                                  sha256=file_hash(path), decision_outcomes=[item["outcome"]
+                                  for item in record["decision_outcomes"]]))
+    require({r["study"] for r in concluded} == set(STUDIES) and len(concluded) == 3,
+            "Conclude all three frozen studies before final publication")
     output = dict(schema="bispf_fastpath_quality_readout_v1", source_commit=SOURCE,
                   source_digest=SOURCE_DIGEST, campaign=CAMPAIGN,
                   budget=dict(reservation_seconds=1800, candidate_reservation_seconds=600,
@@ -140,6 +154,11 @@ def publish(root, queue_root, durable_root):
                   sampling_draws_added_by_publication=0, comparisons=comparisons,
                   rows=sorted(rows,key=lambda r:(r["candidate"],r["task"])),
                   candidate_interpretation=interpretations, attempt_summaries=receipts,
+                  concluded_studies=concluded,
+                  decision_contract_caveat="The frozen automatic prediction checks endpoint HQ only. "
+                  "Frobenius therefore records prediction_observed despite one-mode collapse and the sustained "
+                  "numerical FAIL. Its actual gates and native positive regression require stopping this revision; "
+                  "the archived automatic outcome is retained unchanged.",
                   publisher_sha256=file_hash(Path(__file__)))
     atomic_json(destination / "wide-quality.json", output)
     return output
