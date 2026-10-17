@@ -3270,7 +3270,7 @@
       "source_composition": "Exact Git tree 91c446fe5; only additional forge-source.json origin metadata outside source-file digest map. This preserves augmented solver version2 before the subsequent inactive-lane underflow guard and later iteration-limit revisions."
     }
   ],
-  "conclusion": "Native SVD dominates incumbent BISPF complete-update cost. The first Gram-based Newton\u2013Schulz revision remains slow because actual training gradients trigger exact fallbacks. Augmented solver version2 removes late r64 fallbacks and lowers its plain median from605.73ms to102.02ms, but r256 still falls back on approximately33 critic offsets per late update, retaining a1513.20ms plain median. Later solver revisions are separate source/candidate cohorts and receive no evidence transfer from these measurements.",
+  "conclusion": "Native SVD dominates incumbent BISPF complete-update cost. The first Gram-based Newton\u2013Schulz revision remains slow because actual training gradients trigger exact fallbacks. Augmented solver version 2 removes late r64 fallbacks and lowers its plain median from 605.73 ms to 102.02 ms, but r256 still falls back on approximately 33 critic offsets per late update, retaining a 1513.20 ms plain median. Later solver revisions are separate source/candidate cohorts and receive no evidence transfer from these measurements.",
   "cross_cohort_initial_conditions": {
     "dcgan_performance_r256": {
       "batch_sequence_sha256": true,
