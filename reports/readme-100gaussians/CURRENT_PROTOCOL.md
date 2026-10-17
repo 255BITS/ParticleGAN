@@ -15,10 +15,11 @@ include the trainer and every consumed stream. Plotting cannot consume training
 RNGs. Samples are clean/live; 4,096 fixed row IDs establish visual continuity.
 
 The mode-acquisition gate requires 100/100 covered modes and at least 95% of 20,000
-fixed evaluation draws within 3σ of a mode center, at each of the last five of
-24 evenly spaced scoring observations. A covered mode contains at least ten such
+fixed evaluation draws within 3σ of a mode center, at each of the last five
+scoring observations. The initial segment has 24 evenly spaced checks; the
+continuation adds 24 more while retaining all original checks. A covered mode contains at least ten such
 samples. An independent oracle draw must pass and a collapsed control must fail
-before training. The full default budget is required; short software smokes cannot
+before training. The declared execution budget is required; short software smokes cannot
 pass. Additional media observations cannot remove or change a scoring check.
 
 This gate describes mode acquisition, not Gaussian width or covariance fidelity.

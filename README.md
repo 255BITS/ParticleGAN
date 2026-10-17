@@ -44,7 +44,7 @@ universal architecture guarantee.
 ![Actual 100-Gaussian training with the optimized BISPF default: particle outputs, target modes and numerical learning curves](100gaussians.gif)
 
 Recorded with the **0.9.0 optimized BISPF default**, public deterministic initialization,
-live weights and protocol seed 0: **100/100 modes, 36.6% within 3σ after 7,000 updates**.
+live weights and protocol seed 0: **100/100 modes, 42.1% within 3σ after 20,000 updates**.
 The 95% precision goal is not met. The animation follows the selected public default;
 [metrics and reproduction](reports/readme-100gaussians/README.md#current-default)
 preserve the full result and the historical K3P animation.
