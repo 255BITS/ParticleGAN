@@ -803,8 +803,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
         if recipe.effective_critic_formulation == "bispf":
-            from ..bispf import _NormalizedBISPFStepRecord
-            optimizer.record = _NormalizedBISPFStepRecord()
+            from ..bispf import _BISPFObserverStepRecord
+            optimizer.record = _BISPFObserverStepRecord()
         else:
             optimizer.record = CriticStepRecord()
     return optimizer

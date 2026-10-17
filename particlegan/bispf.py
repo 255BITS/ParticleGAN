@@ -709,11 +709,11 @@ class BISPFLossAdapter:
         return loss
 
 
-class _NormalizedBISPFStepRecord(CriticStepRecord):
-    """The existing normalized observer law with complete BISPF continuation.
+class _BISPFObserverStepRecord(CriticStepRecord):
+    """The existing passive observer law with complete BISPF continuation.
 
     Keep ``CriticStepRecord.record_step`` and the penalty's original observer
-    fallback unchanged. Older normalized checkpoints omitted earned transport
+    fallback unchanged. Older passive checkpoints omitted earned transport
     moments; they cannot reconstruct an exact continuation from step counts.
     """
 
@@ -735,22 +735,22 @@ class _NormalizedBISPFStepRecord(CriticStepRecord):
     @staticmethod
     def base_state(state):
         if not isinstance(state, dict) or "bispf" not in state:
-            raise ValueError("normalized BISPF checkpoint is missing transport observer state; "
+            raise ValueError("BISPF observer checkpoint is missing transport observer state; "
                              "resume the historical checkpoint with its original package source")
         if set(state) != {*CriticStepRecord.KEYS, "bispf"}:
-            raise ValueError("invalid normalized BISPF record fields")
+            raise ValueError("invalid BISPF observer record fields")
         observer = state["bispf"]
         if (not isinstance(observer, dict)
                 or set(observer) != {"schema", "ema_residual", "ema_data_scale", "initialized", "thermal_scale"}
                 or type(observer["schema"]) is not int or observer["schema"] != 1
                 or type(observer["initialized"]) is not bool):
-            raise ValueError("invalid normalized BISPF transport observer")
+            raise ValueError("invalid BISPF observer metadata")
         for key in ("ema_residual", "ema_data_scale", "thermal_scale"):
             value = observer[key]
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
-                raise ValueError("invalid normalized BISPF observer value")
+                raise ValueError("invalid BISPF observer value")
         if observer["thermal_scale"] > 1:
-            raise ValueError("invalid normalized BISPF thermal scale")
+            raise ValueError("invalid BISPF observer thermal scale")
         return {key: state[key] for key in CriticStepRecord.KEYS}
 
     def load_state_dict(self, state):
@@ -820,13 +820,18 @@ class BISPFStepRecord(CriticStepRecord):
             "ema_residual": float(self.ema_residual),
             "ema_data_scale": float(self.ema_data_scale),
             "initialized": bool(self.initialized),
+            "thermal_scale": float(getattr(self, "_thermal_scale", 1.0)),
         }
 
     def load_state_dict(self, state: Dict[str, Any]) -> None:
         if not isinstance(state, dict) or state.get("formulation") != "bispf":
             raise ValueError("BISPF critic optimizer requires a BISPF controller checkpoint")
-        if set(state) != set(self.KEYS):
+        if set(state) not in (set(self.KEYS), {*self.KEYS, "thermal_scale"}):
             raise ValueError("invalid BISPF controller state keys")
+        if "thermal_scale" in state:
+            value = state["thermal_scale"]
+            if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
+                raise ValueError("invalid BISPF controller thermal scale")
         for key in self._COUNTERS:
             if type(state[key]) is not int or state[key] < 0:
                 raise ValueError(f"invalid BISPF controller {key}")
@@ -842,7 +847,9 @@ class BISPFStepRecord(CriticStepRecord):
             if key != "formulation":
                 setattr(self, key, state[key])
         self._last_d_logits = None
-        self._thermal_scale = max(0.05, min(1.0, float(self.ema_residual) / 0.020))
+        # Historical formulation packets retain their documented reconstruction;
+        # newly written packets preserve the exact earned scale.
+        self._thermal_scale = float(state.get("thermal_scale", max(0.05, min(1.0, float(self.ema_residual) / 0.020))))
 
 
 class ContinuousThermalCooler:
@@ -1004,6 +1011,11 @@ class BISPFCriticAdam(K3PCriticAdam):
         )
         self.record = record
         _attach_critic_input_hook(critic, record)
+
+    def load_state_dict(self, state_dict):
+        super().load_state_dict(state_dict)
+        device = self.param_groups[0]["params"][0].device
+        _LAST_THERMAL_SCALE[device] = self.record._thermal_scale
 
 
 class SinkhornRelativisticLoss(GANLoss):

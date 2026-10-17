@@ -1198,6 +1198,15 @@ Preset and field names are checked, while `Recipe(**fields)` validates values.
 Persist the returned complete fields with the run so later defaults cannot
 change its training method.
 
+BISPF checkpoints include transport residual/data-scale moving averages and
+the exact thermal scale alongside optimizer counters. Earlier normalized and
+plain-Adam BISPF packets omitted those earned moments and are rejected with an
+explicit compatibility error; use their original package source to inspect or
+continue them. Historical formulation-optimizer packets with the moments but
+without an exact thermal scale retain their previous reconstruction behavior.
+New packets preserve that scale exactly. BCAP and KA2 observer packets keep their
+existing formats.
+
 Model families share the default optimizer, loss, penalty and schedule;
 `trainer="ka2"` pins an explicit trainer while retaining the selected model
 components. `trainer` applies only to model-family names. The

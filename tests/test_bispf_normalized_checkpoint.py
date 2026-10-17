@@ -34,8 +34,10 @@ def equal(left, right):
         assert left == right
 
 
-def trainer():
-    recipe = get_recipe(num_particles=32, z_dim=4, batch_size=8, total_steps=6)
+def trainer(family=None):
+    options = {} if family is None else {"optimizer_family": family}
+    recipe = get_recipe("bispf_optimized" if family is None else "bispf",
+                        num_particles=32, z_dim=4, batch_size=8, total_steps=6, **options)
     generator = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Unflatten(1, (1, 4, 4)))
     critic = nn.Sequential(nn.Conv2d(1, 2, 1), nn.Tanh(), nn.Flatten(), nn.Linear(32, 1))
     prior = recipe.make_prior()
@@ -49,21 +51,23 @@ def batch(step):
     return torch.sin(values * .13 + step) * (.3 + step * .1)
 
 
-def test_nonconstant_images_resume_exact_next_three_steps_and_observer():
+@pytest.mark.parametrize("family", [None, "adam", "formulation"])
+def test_nonconstant_images_resume_exact_next_three_steps_and_observer(family):
     original_threads = torch.get_num_threads()
     torch.set_num_threads(1)
     try:
-        live = trainer()
+        live = trainer(family)
         for step in range(3):
             stats = live.step(batch(step))
             assert all(torch.isfinite(value).all() for value in stats.values() if isinstance(value, torch.Tensor))
         saved = live.state_dict()
-        observer = saved["optimizers"][1]["regularizer"]["record"]["bispf"]
+        record = saved["optimizers"][1]["regularizer"]["record"]
+        observer = record.get("bispf", record)
         assert observer["initialized"] and observer["ema_data_scale"] != 1.
         for step in range(3, 6):
             live.step(batch(step))
         expected = live.state_dict()
-        restored = trainer()
+        restored = trainer(family)
         restored.load_state_dict(saved)
         equal(restored.opt_d.state_dict(), saved["optimizers"][1])
         for step in range(3, 6):
@@ -73,18 +77,29 @@ def test_nonconstant_images_resume_exact_next_three_steps_and_observer():
         torch.set_num_threads(original_threads)
 
 
-def test_exact_thermal_value_and_device_state_restore():
-    live = trainer()
+@pytest.mark.parametrize("family", [None, "adam", "formulation"])
+def test_exact_thermal_value_and_device_state_restore(family):
+    live = trainer(family)
     live.opt_d.record.ema_residual = .0001
     live.opt_d.record.ema_data_scale = .37
     live.opt_d.record.initialized = True
     live.opt_d.record._thermal_scale = .00001
     saved = live.opt_d.state_dict()
-    restored = trainer()
+    restored = trainer(family)
     restored.opt_d.load_state_dict(saved)
     assert restored.opt_d.record._thermal_scale == .00001
     assert _LAST_THERMAL_SCALE[torch.device("cpu")] == .00001
     equal(saved, restored.opt_d.state_dict())
+
+
+def test_historical_formulation_packet_retains_earlier_thermal_reconstruction():
+    live = trainer("formulation")
+    saved = live.opt_d.state_dict()
+    record = saved["regularizer"]["record"]
+    record.pop("thermal_scale")
+    record["ema_residual"] = .001
+    live.opt_d.load_state_dict(saved)
+    assert live.opt_d.record._thermal_scale == .05
 
 
 def test_incomplete_historical_bispf_observer_fails_before_mutation():
@@ -104,7 +119,7 @@ def test_malformed_observer_rejected_atomically(field, value):
     before = deepcopy(live.opt_d.state_dict())
     bad = deepcopy(before)
     bad["regularizer"]["record"]["bispf"][field] = value
-    with pytest.raises(ValueError, match="normalized BISPF"):
+    with pytest.raises(ValueError, match="BISPF observer"):
         live.opt_d.load_state_dict(bad)
     equal(before, live.opt_d.state_dict())
 
