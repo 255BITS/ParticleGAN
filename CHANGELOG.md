@@ -1,6 +1,34 @@
 # Changelog
 
-## Unreleased
+## 0.9.0 — 2026-10-17
+
+- **Optimized BISPF is the public recipe default.** `get_recipe()`, `"gan"`
+  and model-family factories now select `"bispf_optimized"`, matching the
+  selected Forge recipe: non-saturating loss, Born-Infeld critic penalty,
+  SBNP prior regularization and zero-momentum DualNorm at constant rates.
+  Large annotated CUDA convolution kernels use the quintic update; CPU,
+  tiny kernels, dense matrices and sampled prior rows keep their native laws.
+  The owner-directed promotion adds no calibration or robustness credit.
+  Existing `"bcap"`, `"bispf"`, `"ka2"` and other explicit presets remain
+  available; `Recipe(**saved_fields)` retains its restoration semantics.
+- **Dependency-light recipe fields.** `get_recipe_fields` exposes resolved
+  preset settings for applications such as HyperGAN without constructing
+  networks or optimizer state.
+- **Module ownership for custom optimizer groups.**
+  `recipe.make_generator_optimizer(groups, modules=...)` binds convolution
+  layouts from ordinary PyTorch modules while preserving caller learning rates
+  and prior roles. Frozen parameters are excluded from this module-bound path;
+  no architecture-specific training wrapper is required.
+- **Measured optimization scope:** the frozen optimization cohort preserves
+  all 19 passing task verdicts and its 11 existing failures. The current
+  overview's 81/81 counts repeated view requirements from 18 distinct tests.
+  Wide synthetic image diagnostics exercise the accelerated path; these do
+  not establish CIFAR quality or transformer acceleration. See the
+  [complete readout](reports/forge/bispf-optimized/README.md).
+- **Release checks use the validated tagged commit.** Develop/master pull
+  requests and pushes run CPU CI; published releases run the complete existing
+  matrix and package checks regardless of the release target branch label.
+  The publisher uploads only the artifacts produced by those checks.
 
 - **Learned-noise floor release:** exclude the noise group's own stationarity
   scale from the model/table settlement gate, preventing clamped noise from
@@ -69,8 +97,8 @@
   `exp(log_sigma)` falls below the physical floor while `log_sigma` is at or
   above its log floor. The initial gradient stays active; ordinary floor
   gradients, native FP64 behavior and checkpoint parameter layout are retained.
-- **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
-  K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
+- **Explicit KA2 critic formulation** ([docs](docs/ka2.md)) replaces
+  K3P for the retained KA2 preset. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
   one-sided caps and an EMA-critic gradient anchor. The anchor's gate and the
   EMA critic's decay (`reg_anchor_min_decay`, default .9, replacing

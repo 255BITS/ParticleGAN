@@ -2,9 +2,17 @@ name: Tests
 
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
   workflow_dispatch:
   workflow_call:
+    inputs:
+      source_ref:
+        description: Immutable source commit validated by the release workflow
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -12,13 +20,6 @@ permissions:
 jobs:
   cpu-tests:
     name: CPU / Python ${{ matrix.python }}
-    # Run branch CI only on master, including manual/reusable calls.
-    # Tagged master releases use this workflow through release.yml.
-    if: >-
-      (github.event_name == 'release' &&
-       github.event.release.target_commitish == 'master') ||
-      (github.event_name != 'pull_request' &&
-       github.ref == 'refs/heads/master')
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -35,6 +36,7 @@ jobs:
         with:
           # Source-bound software tests replay exact published ancestor bytes.
           fetch-depth: 0
+          ref: ${{ inputs.source_ref || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -91,7 +93,7 @@ jobs:
               BatchDistanceDiscriminator, DDGAN, LinearSkipDiscriminator,
               E22Policy, UpdatePolicy, ParticleRows, ScalarHeadFeatures,
               RoutedRows, RoutedBatch, RoutedCandidate, RoutedExecution,
-              DEFAULT_RECIPE, MoGParticlePrior, ParticlePrior, Recipe, get_recipe,
+              DEFAULT_RECIPE, MoGParticlePrior, ParticlePrior, Recipe, get_recipe, get_recipe_fields,
           )
 
           assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
@@ -99,7 +101,9 @@ jobs:
           assert MoGParticlePrior(sigma=0.1).sample(2)[0].shape == (2, 4)
           assert DDGAN().steps == 4
           default = get_recipe()
+          assert DEFAULT_RECIPE == "bispf_optimized"
           assert default == get_recipe(DEFAULT_RECIPE)
+          assert Recipe(**get_recipe_fields()) == default
           assert Recipe(**default.to_dict()) == default
           assert get_recipe('gan') == default
           e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
@@ -120,7 +124,7 @@ jobs:
           assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
           assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013
           PY
-          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == .00425; assert recipe.make_prior().sigma > 0"
+          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == get_recipe().lr; assert recipe.make_prior().sigma > 0"
 
   distributions:
     name: Build release distributions
@@ -129,6 +133,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
