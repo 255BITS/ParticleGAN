@@ -108,6 +108,12 @@ are observed ratios rather than a certified paired ranking. Exact final matrices
 are archived for the [controls](../scaling-history/bispf-matrix-controls-v1-d0053fc17b21f7a7.json)
 and [quintic recipe](../scaling-history/bispf-matrix-quintic-v1-7c73a339487b7bfb.json).
 
+![Observed DCGAN update latency versus image resolution: optimized BISPF approaches R1/R2 while native SVD costs dominate.](resolution-scaling.png)
+
+The [vector plot](resolution-scaling.svg) and [renderer](reproduce_scaling.py)
+use the four resolution tasks only, holding batch size and width fixed. They
+read the exact archived manifests and validated original initialization proofs.
+
 Across all six tasks the native speedup ranges from 7.61x to 17.43x; it is not
 uniform. Relative overhead versus R1/R2 decreases from 2.94x at 32 pixels to
 2.08x at 64, 1.68x at 128 and 1.34x at 256. Increasing batch size to 64 at
