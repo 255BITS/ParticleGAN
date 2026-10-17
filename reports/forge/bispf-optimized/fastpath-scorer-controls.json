@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "controls": {
+        "collapsed": {
+          "metrics": {
+            "distribution_tv": 0.5,
+            "hq": 1.0,
+            "mean_rmse": 0.0,
+            "mode_fractions": [
+              1.0,
+              0.0
+            ],
+            "modes": 1,
+            "quality_mode_fractions": [
+              1.0,
+              0.0
+            ]
+          },
+          "status": "FAIL"
+        },
+        "nonfinite": {
+          "error_type": "ValueError",
+          "message": "finite N\u00d71\u00d78\u00d78 images required",
+          "status": "REJECTED"
+        },
+        "oracle": {
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 1.0,
+            "mean_rmse": 0.0,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.5,
+              0.5
+            ]
+          },
+          "status": "PASS"
+        },
+        "terminal_failure": {
+          "status": "FAIL"
+        },
+        "uniform_blur": {
+          "metrics": {
+            "distribution_tv": 0.5,
+            "hq": 0.0,
+            "mean_rmse": 0.5,
+            "mode_fractions": [
+              1.0,
+              0.0
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0
+            ]
+          },
+          "status": "FAIL"
+        }
+      },
+      "task": "img_stripes2_w64_optimizer_diagnostic",
+      "task_sha256": "d7270f85261d4ab0a02cac9dbc8ee9476bfaf0e5afbcf224f946658710f6bc96"
+    },
+    {
+      "controls": {
+        "collapsed": {
+          "metrics": {
+            "distribution_tv": 0.75,
+            "hq": 1.0,
+            "mean_rmse": 0.0,
+            "mode_fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "modes": 1,
+            "quality_mode_fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "status": "FAIL"
+        },
+        "nonfinite": {
+          "error_type": "ValueError",
+          "message": "finite N\u00d71\u00d78\u00d78 images required",
+          "status": "REJECTED"
+        },
+        "oracle": {
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 1.0,
+            "mean_rmse": 0.0,
+            "mode_fractions": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "status": "PASS"
+        },
+        "terminal_failure": {
+          "status": "FAIL"
+        },
+        "uniform_blur": {
+          "metrics": {
+            "distribution_tv": 0.75,
+            "hq": 0.0,
+            "mean_rmse": 0.5,
+            "mode_fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "status": "FAIL"
+        }
+      },
+      "task": "img_bars4_w64_optimizer_diagnostic",
+      "task_sha256": "656edda2d7b3c0bc9f6f0ce14f872b2a04d263f556627191a58fb8a57104fbfe"
+    }
+  ],
+  "schema": "bispf_fastpath_scorer_controls_v1",
+  "scope": "No training; validates the unchanged 600-update/24-observation public image scorer on exact balanced target, collapse, blur, terminal failure and nonfinite fixtures before paid execution.",
+  "source_sha256": {
+    "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+    "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+    "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+    "tests/test_bispf_fastpath_quality.py": "4c9187bb0ed509eb8ca53a5e3cdf6cb3f63a32602f18bc9ff460be836ae3585f"
+  }
+}
