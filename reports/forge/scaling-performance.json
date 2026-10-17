@@ -1,0 +1,641 @@
+{
+  "benchmark": "dcgan_performance_v1",
+  "default_adoption": false,
+  "entries": [
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "7af7f7165ef3fa089236a141fecc58c35bf33f0e23d27e939af2c470254e45e1",
+      "identity_sha256": "1277d943bde714a32e3f90b096886a3fb6bc06cb71025e0c95a3b4eec99b9747",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_b64-84b1001259e8b126.json",
+      "receipt_sha256": "ac83a4ca2256fa2f142d2af8ea475fa402db8589538c3f63787c99a3d920e84b",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "494cd066d30e29e3668e2e6a557c67d1eedc54d1d3efb050f1fad88355a0ffd0",
+      "identity_sha256": "c9905a14be7525e424169283e1021e2d0e4f62c33f1dcdc0afbe050464b958fd",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_r128-c6c57ab912f8045f.json",
+      "receipt_sha256": "c4c32d05546774459a6f59fa0eabbf65168b506c0267190ef1c328dc24da3d1e",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "cd5f860edf5ef1d90ccafb8ce5d012d0d83bab52feef9225a6aec9fcce5e5750",
+      "identity_sha256": "eee23b7f79d9f12c021017e91af1cd8bc1269a68c30630f78abfd23e1685e093",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_r256-7fe97d5adf8cc0b0.json",
+      "receipt_sha256": "603fc46a5e1b7bbb0f181d52261a74ef8177e9b5cc1a31806d697f52c571d6b4",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "740729d1c058d476bdf622215ff0f83f66f49a632d6a82bf81ab0566d10e8463",
+      "identity_sha256": "1271e9d6204b57fbc68f2ffbb65030a8a47ca70c633b03d533de16a708a11a54",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_r32-88484660a7be7ccf.json",
+      "receipt_sha256": "68554f009dbbef302ed572d728642bca9d851363ec0f07319414cb461b43553d",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "f76899752b1e517b4d12dfbba17d69173d14f800369c83016dddae3f230e62e2",
+      "identity_sha256": "fa6afbacc59c3824d6201c661b08ffd97592cdd5b69697527f40239732e2a854",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_r64-6a2345e63300123e.json",
+      "receipt_sha256": "94c8e2f8d302a2f7873f0c7ef7b5ebd7558c0bca8aa404faee749db128f755ee",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "atlas",
+      "comparison_key": "a9e2b7ac4925a0633aa2cd514c5cd95e67f562bffb4527d0f1f0588ac2c75383",
+      "identity_sha256": "0968f747054aa3ccf9af0f00dceea6b92b034fada43c8fe90e85899270c7b056",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_w128-ac98d32f068721c1.json",
+      "receipt_sha256": "843dd7d5d5daeb4eb0ed90ce11399d618da960752aa448c7cd78ed75c56bee6b",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "atlas"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "9dd3a2de86dad0f05b58847954b94257047feb69197140c1a1300c763736dbec",
+      "identity_sha256": "99797780c9614f6d7b9f11dd24d1e551cc3fcfae267bd20eed40ec5cf343e6bf",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_b64-addedac8ac836908.json",
+      "receipt_sha256": "d5d69421e156607ab5915b74e9bd1af58b7a6399e7dcb36d70d8187fe83322ad",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "407d9f8f26945b226f63a2860b8110dac402c3095a4d93df4cbbd12d4834dfc8",
+      "identity_sha256": "d42066f2ebce13cac1f5482dc7486e7679d54ed87b24e2eb9ad40dac3e1f8362",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r128-c22692c3830c20ce.json",
+      "receipt_sha256": "ce6cd4bb7e5893ee78f4d151901c885f956e95b6f810efbb4deae4fc2746fef8",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "ba89a65bd6f22762e00de97dea3666642c2314e8fbeeac48e676c0a97c77783b",
+      "identity_sha256": "fd689b8d1774153f789e7a2ce06e821e00326c513ac7b4bd9b651b09dfce7f27",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r256-3118dacf0ae5c52d.json",
+      "receipt_sha256": "38cdfa74fe01725b64a3371fd3b6e97a7cee757246e1188b02baaaa2b0c1168f",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "aa8ae6ab9aad7497239e5da8399ce7d0bc114c2322fe76b146fe905cc9c845af",
+      "identity_sha256": "353bb88cd406cc0fb0620f0c5d7b25d807443ad46b0f7242b09a2b723cbfe6fa",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r32-46e89b46758e758e.json",
+      "receipt_sha256": "a1974bfad7686c392446c5eccc0871f011498e5da9e85be793a744f1a6c24d58",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "2fc5fd72615ae1f696251de0e1176155588a4bdbbf39532f178fd82717f7aeaa",
+      "identity_sha256": "ccade7c85f206b842bde30383902b76b36e9485b220af04bdcb8cc2bafde49a7",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r64-7e4c561e05f1d529.json",
+      "receipt_sha256": "033fb9622791008579b4c511bfadba2a84d2c5419f0e213747fa7d779994724e",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "comparison_key": "d1b6083bd64a637ffcae16440910fbdd0b97b297657b5759e34719ed18e88b95",
+      "identity_sha256": "420be2f7afa65d8d8badd406b4806ffc4e677c475d38e5d005b47b9d5b1135ce",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_w128-fe0176afacfe207f.json",
+      "receipt_sha256": "ebc2232d3b72545ef43a95a8dde91556504e1bc62aa969798512f6e4c3d6094a",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "bcap-dualnorm"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "eedd0a26764ae3ec4bde35e7cf86c77c3114c14f870573541bc38ce8076197c6",
+      "identity_sha256": "ccf82c47c49585378747455ca38e9b9edbe378fc720b72917c0456719278a0cc",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_b64-8980e3805d46c8aa.json",
+      "receipt_sha256": "80b59a2ab07d3f87785d1195dfa08a1c48703d7765acaad9b1efe9ea4287fa4b",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "603af9e788d99f9ae9ea14789781c018667801e4c97b30839903a4802f10e0ed",
+      "identity_sha256": "8a3d8a19af85f5a672560acffe19dda97dee4d26448a087bad24d1e19fe8768c",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r128-c1e1d9fdb1e6e01b.json",
+      "receipt_sha256": "272be3ca241cb2dc258442d570d0638742df11e4f835d425f5a50e61f29a64ef",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "84f752c9d664511e051e8fa3ecd54b734afa381902f93c74ee9ea98191e06793",
+      "identity_sha256": "6a611845e1d73b50486075a17db9280fa5d129ecd4db3c86add9505f0c9daac3",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r256-ad812b07ff959bbc.json",
+      "receipt_sha256": "32a21aa08b4a1fb621d765023cf65dfad8b7778d9f8b1b01dfeb435e0686e1cf",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "66ecde1f427c246dcda9992633f060265ccb3bbb83129a13e1ebf5e9b022e600",
+      "identity_sha256": "69e70d6cc7f668e1a721bff90112eb999ae7f06aaf0f6814053a1b57d6745979",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r32-98e39beaee3a0b77.json",
+      "receipt_sha256": "c58e109bf9741107143ee8f7299739128836073a49611150c1c6863e0601a655",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "4504235950521b2610601b26f464056d2e7b28a574c49db9d3653677c33ce181",
+      "identity_sha256": "937804c7be613323469124fd1640df26fceab2384a28e5f0e6cfbad8c1d4a1dc",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r64-666c107d181c8e78.json",
+      "receipt_sha256": "2246ecafadad00145bf30d12e3d0fc3051595ed4f500f64d9ff3eb607a7269ed",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "60c16d28eb11aa33c5889df4ef7aeb7ab71d96a2a38289f60b16169a22514340",
+      "identity_sha256": "a99b8f9e5a183f3e27816a154fe71db3ec4fa89a3c02c6ce4f51a76c487d3144",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_w128-916fe46e41bccbc8.json",
+      "receipt_sha256": "9cf46dc9ea0b5a7f062c9f8dda75166ded11235c6b2f617eb7e660ec03e07075",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "cbe7f0f8a248f9d25fdf3cdf6e1ca7dd6c247aad50b8f7494c529741d3acb6f9",
+      "identity_sha256": "2d1e726e12873d6f5098770acffafa9986bfd257a6a7f4347e5636a6065378cf",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_b64-82b8a8a97ca180b5.json",
+      "receipt_sha256": "ef757861088fd4549e31a662e3923c73ba239685298d5cce199a912ac57899bb",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "6cd85031a93045b11be3a5e93ce0a349da47798b52f26dcd74addf467c0496da",
+      "identity_sha256": "fd844ad7f9fefcede2b8a0782b9ac93007df734a2f3e4893c6895ab0eb203b74",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_r128-93831eba91dcb414.json",
+      "receipt_sha256": "9d4fe4e49dca9e62287feb87d953b8de12de8bea40153d8077802c1b0663da99",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "5e6a5ace1ea07f323840e4e42097a54ff47b67df2d48a908a04a438583048690",
+      "identity_sha256": "882c2f9504b18535d645870a11f0153633ea5b2698272f6277fcd9d76b82c5d8",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_r256-379cdde582c93a8f.json",
+      "receipt_sha256": "a84a853fbece841f917c2a044cc63c4a77f9591a46f2cb0b0767a49b5b70a51c",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "46f337941b31c3a561692b0f983f1056518dabe741630c48189356e564878a0c",
+      "identity_sha256": "6b2664fc4d548e0f32b6c92a8bbdd2f579a21cbb447103d4a39a092cd7814549",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_r32-68ceccc3002426d4.json",
+      "receipt_sha256": "bc487b95fa81fc6be09c14d79355699b1f34eaef49fbabb6f4f10e5758ccb10b",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "18ddb96f28bdd8f73a0e31dc7cf1c76cf354f03edeb4e76e00056db3e9f7720e",
+      "identity_sha256": "4987e4d4ab0007368cc2897a8d2366bdf9cd98cf136df59e190a69c396db366c",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_r64-f5f744cd0fd57dca.json",
+      "receipt_sha256": "b6c0bb6168e0953fa9833e1cfcbe089b0b11af8981e65e7436fdf94b834e76a5",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "e22",
+      "comparison_key": "166796c46563cadd0e0f76cdfdcfb2eceeb4bcd1e53db88ae5c77dcb9a830b11",
+      "identity_sha256": "30b27244063b7fcc8f851a8e791c4957098a8755acc5ab10356141e8b5d953bd",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_w128-4f7fb91118a25596.json",
+      "receipt_sha256": "7d178f4c7f6f0a72410fea6485419aa6f3110bfda2e0c59165a61aa8c54c74a4",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "073862dcd1386fa3a4e89ca1b61a15aa63676376a13729e1e6e0f87761ce4cce",
+      "identity_sha256": "4c5ce7ebc1c2f8f8b6b1cd706dc909eccaec8b27ab20ae4554ba8b630cb9658f",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_b64-d323d8672d36f9c0.json",
+      "receipt_sha256": "c90aebe9d999561ed81282ec45abfd097926a3bb613b2fae586f98ea963c5aa0",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "0d0fda40e809554ce6ae3d5766ee9f2d8e2f19d6002ad416834faa1e78d3747f",
+      "identity_sha256": "14503d62be74e82ddec575b7f2ad53dd740f15f286dfa3990076311c4603fd7e",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_r128-d484574524ad93ba.json",
+      "receipt_sha256": "63f653794ee74f6fb745c7b98d91287a1bcf9566e6d7a7cfa011e1ae600551f0",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "d6f27d1a0bfb1feb69f641e8e234dca60da197a982683c2c065768a3e8e450ee",
+      "identity_sha256": "201a29f0ad2ffd86991fb52f9cd2e4236dd2d26148e4e2012484c93618e05d43",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_r256-19088c1195863363.json",
+      "receipt_sha256": "c59f8d9a7325fc8b8d72b1530ab68a8a73763944bd64b9326083845bae95f656",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "cf06f59d1f94ee26f6d5e5e7ae8cf9a21cd9d6fbda2684b1fd7966e8436b28fe",
+      "identity_sha256": "07083f052dc1b9f7d1b2924c2d3e7b81b62d29e66eb582639c24102f2f926805",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_r32-c65011d48f17cec7.json",
+      "receipt_sha256": "2f9d6d4d3269f64f557dad2922ce0f8a35a97de580ae5906ff8933d5e715c845",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "71242295318402df59880f1ea7b63666cddcdf3e4e4ddb9574d2e98b605b92c8",
+      "identity_sha256": "fbce871ac1bb3a331ac10cf45d29c0e82a6b109e5a37a8d4f0e2da514e01ca57",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_r64-62feb3bbb066e961.json",
+      "receipt_sha256": "eef2cb3d3ffc5913ab179744ae62d7a6e5a92a593b184ef2827a5de47cec020e",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "comparison_key": "f816f7b521fff78075d4cad7fcd69eacedb3dfc5c0427db39ac4240946d1e278",
+      "identity_sha256": "ecf79fe668da4d0d8b12e6a62b79078739fb4b7bb19f26679e853a6b52b54e46",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_w128-17c3d6e47365d3ac.json",
+      "receipt_sha256": "2fe28d2a1b4399456bca0d81958755fb56ec20af5821840981875c0b108cd12c",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "d368b9f4d656766a23a2a663195d8c4a1ffd4493ce16f94df25dd02535fe381d",
+      "identity_sha256": "99b50701e5ca519c384a8bfa8a6d3c4eb811a12c86669630303acb18bd137590",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json",
+      "receipt_sha256": "aaa3930a1415242854a74e6b565afdae6a8c42df36aa81b5321924c43c9f9338",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "e74a57a249609b7c6e36a06b5017432b652412b3c037c9a0655e788fd54999ea",
+      "identity_sha256": "d439a4a03dad960dc241fcb17c8005c20dfce05480906ee7ffd27e1039f1e142",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_r128-ed12adc0ddee2d40.json",
+      "receipt_sha256": "b6bb5382c8f2ce0393eae01efb97ad81864547b2b2811de81ba34405ef7908ea",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "871d345540aee671b629c2dab167c4e99631df15171813c72a6f99a1dd46f128",
+      "identity_sha256": "0ecb8f905284e49886a52024ed3bbf9b264396d3d2bc8a1e8771f29795d471b9",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_r256-05fe77adc4ab95c7.json",
+      "receipt_sha256": "a0357d13926d3112ac24c4bd4f587015d6d9ebff888d8e98a73df0e0ab211fb3",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "15b171c8eba9ac5d1e182c79b26e6f3d4c0a15151a8fb7ef4e22e8e06022d4c0",
+      "identity_sha256": "35c581cd2efa349b15f8df41710aac49d0c590590b52c8f94b90c1d3411a3cec",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_r32-f86a200255f3c7b3.json",
+      "receipt_sha256": "f74cd455bf81666359fe713eac5703d6781353409541f4bec947d213e312474f",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "5b4e0a717db40910912844d319dd684655752bb468d4fa14646da47c2fd9793d",
+      "identity_sha256": "013efa51ee8e10b63c17ab879c2976e0b4f55e328d852e64248ee186af51b9f6",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_r64-cf4d581c2cfc0fea.json",
+      "receipt_sha256": "7210e0bab507b6f9b5ff4731fe352168b383c317e6f09cf7cb4ba7a5697eab43",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "comparison_key": "ce63f5da235d07cba57ed457e0dd18f7982730b452d34aa75a2c03706e136835",
+      "identity_sha256": "815f6fb6337d381a966ce15d705fd6a9630783e4eecf9e44adb533bd8d1cce53",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_w128-f01e64b6569d5d0d.json",
+      "receipt_sha256": "e899293969d9d32465fc94152980eac3da4522140417f3e24db76a6458bbd29c",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "18622abc584d80b09cfffc83b18446a131392682bb78b3765e9e69174168e356",
+      "identity_sha256": "6052647c51a82ab82d278094df35e2d07654961ac4e79974db0708505a65b39a",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_b64-d64d96234ed8a651.json",
+      "receipt_sha256": "60518cf483d5dfcc55ba6541dac2b76eded205cd37bd2afa0743f02b17046a30",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "e5ac501f7e35f9cecc67f32dbe4dbb55bcf595c067cbea44ccb09a0039f0ed46",
+      "identity_sha256": "4442f729e0e0c50706a1797628d075bb392bfebbb46bfe8cd2f16c9789143118",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_r128-f41e982755bbecfc.json",
+      "receipt_sha256": "b87261c443af696a5e21aee114a88293e8a4c826f78477bfb90b3e288e1be364",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "49c376b79b6c3bfe4e5277ad8839f8df5adc916ec78c18fda2df009349aee137",
+      "identity_sha256": "8d06af23ed4c8e03c044dc019868ac46d9759f48bf2e980be94de39565c949a7",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_r256-c7a99cf2da962b0a.json",
+      "receipt_sha256": "28d7346cf0c8ff73c1c7dfe568e8a062fc9c2a5537d383433669f21beaa89107",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "ab35ef168ac3f125e4d19fceb4ecbeb723c01bdc0cc78754a329e6e0dbd2421d",
+      "identity_sha256": "6a86c73947ddb616f28a3bc713bebc831499009e23bcd8dde85df0c575591339",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_r32-9f8c3c0808ad0e58.json",
+      "receipt_sha256": "4ff3c35c7948c0c5883b8a899578f245d0a329cb20d03a3945abfef2238712ee",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "9495aaaa0cd10a48fc2c6c73b36590f443efdf427ce8e1f7c0dc9cafd5f70add",
+      "identity_sha256": "bd75b2a3121f877f034f2f5cf0c9ffcb16bfb0e1cf4abeb27a1ba1903312b525",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_r64-9632caaca466758e.json",
+      "receipt_sha256": "eea250340d92ffbc2e1126a30fb734731862f7c529a0d29703886982992be847",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "67969a2cdf0c36bda5a7e336fea5434cc4202151665eceae4340ee2957adab0c",
+      "identity_sha256": "bc9cc32d12b05553f2ebea849f214a5e57a5c5d53a5c932334f89ec77334743c",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_w128-18a67b5fdf6469c6.json",
+      "receipt_sha256": "84a331dc816b4e42ba4854abc028189cc14f54874f67c4c86ff5da66d8f85954",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "16cf9cb42fe11800738b8b1e622635a07e8e2d2c5027e515106f5e3bd5d4841e",
+      "identity_sha256": "dfa8bbe88d2052be4d27d6449d2c88456af5fc1ff9b7baede1e807e80a893388",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_b64-01718bbf7d27ee3b.json",
+      "receipt_sha256": "a168d2eb0ee4a1e98e2d00eb7a635adf069e31ccf9b18b5c1e13cb2dc58be5e7",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "62d3a9194c5dba04370d36d71c6949d21a8676da2e08385727b53ca6f6f441c8",
+      "identity_sha256": "b30eb7d82987f45f916c385700c6f7195173d38e1333655dd0c5368af7420bc3",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_r128-63a69ecfd11ac97f.json",
+      "receipt_sha256": "7a777a4c798e244a79bcdf7233b529ec940ba13dbf73ffc5d7aff630bec5dd5f",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "40d753911ae88b7344323ef57faae0eb6bc8da49e1cf20e1907fd2bdac8eb43b",
+      "identity_sha256": "d927878167f912c3a2896715f03ff8a70012c1ade8a059a918f9808c97ff7b9b",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_r256-190a5fe42b60209a.json",
+      "receipt_sha256": "57174a2a89322c45af1257bdd8a17d834c226ba9faf564a3d32fa22663161276",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "116da196d8cb07ad3d21fae88807c34883219cfd94cfd00bbd5751492e46afeb",
+      "identity_sha256": "a6ba94061737a8fb5d075b00263f94d0145a444384878bd30b60c7cd8108080a",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_r32-78174f27fa4ea467.json",
+      "receipt_sha256": "e523ea8c20d40bb305e78c51ff9197792720c174394595aa7fb227d36b3ea21f",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "b0cb84647fe492d9911f09835f05ffc9ff9b739657adffa361c38183949ab513",
+      "identity_sha256": "3e513706620853937616eb234a9c3866a47bcbff25a573a04272a28b8d4f5a0c",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_r64-e1236a3aea7d0363.json",
+      "receipt_sha256": "e146d616195008827983e881b4c585fd3ad9868cd26025e816bcefa1b1d90221",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "comparison_key": "248a285823484a1072db34638b332af4f75623a71c86737bef19a712c76264ec",
+      "identity_sha256": "36495eca95142a5fce101cfad2d872881e40d8484e11c8e3231d563de4ca4cbc",
+      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_w128-b043f3f3a7c91625.json",
+      "receipt_sha256": "43dd7b576366fed5764e39d7633850b15bafaf80c33398bf6da105faf70f62d9",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "release07-gan-v3"
+    }
+  ],
+  "export": {
+    "counts": {
+      "COMPLETE": 48
+    },
+    "exporter_sha256": "41b1d0262d17e6aaf08463888dbdb734f4288e725e84abc76f2e61c1a2f47838",
+    "family_selections": [
+      {
+        "candidate_id": "atlas",
+        "registration_family": "atlas",
+        "trainer_family": "atlas"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+        "registration_family": "bcap-pure",
+        "trainer_family": "bcap-dualnorm"
+      },
+      {
+        "candidate_id": "bispf-v2",
+        "registration_family": "bispf",
+        "trainer_family": "bispf"
+      },
+      {
+        "candidate_id": "e22",
+        "registration_family": "e22",
+        "trainer_family": "e22"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-k3p-v1",
+        "registration_family": "k3p",
+        "trainer_family": "k3p"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-ka2-v1",
+        "registration_family": "ka2",
+        "trainer_family": "ka2"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-r1r2-v1",
+        "registration_family": "r1r2",
+        "trainer_family": "r1r2"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+        "registration_family": "release07-gan-v3",
+        "trainer_family": "release07-gan-v3"
+      }
+    ],
+    "partial_snapshot": false,
+    "qualification_input": false,
+    "registration": "dcgan-performance-cloud-v2",
+    "registration_file": {
+      "path": "/home/martyn/dev/ParticleGAN-forge-scaling/configs/forge/performance/dcgan-performance-cloud-v2.json",
+      "sha256": "2c5a96bd9158407a51c1ec853ed67136cc92e3085dec95fb4b3cd5dbacf49fe5"
+    },
+    "schema": "forge_scaling_export_v1",
+    "training_launched": false
+  },
+  "input_digest": "c12d4245e8411413a973db4600e240fe50d202d40cd678ce322cb9506ad05987",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "dcgan_mock_performance",
+  "tasks": [
+    {
+      "id": "dcgan_performance_b64",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 64,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "f8b52af13cd2e7d1131983a71fac9ed5bc1dd5e4699825eab6ace5399f112df2"
+    },
+    {
+      "id": "dcgan_performance_r128",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 128,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "35a57d89ecf108814d001d1ad84190ea1268f661d978d68c454415b5145f4344"
+    },
+    {
+      "id": "dcgan_performance_r256",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 256,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 270.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "8125cf61a6d5efb28c32bc9076facb0cbc7b7312f6976f5c30b52de886cc7d88"
+    },
+    {
+      "id": "dcgan_performance_r32",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 32,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "7f98c9b997c36af81e1578d51be268afd568d1a267070e46a6cda4779d4b682a"
+    },
+    {
+      "id": "dcgan_performance_r64",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "5c385d34f5780cd8420fc5505e895aef0bdd3a9714626c10086fff8dedb1751e"
+    },
+    {
+      "id": "dcgan_performance_w128",
+      "spec": {
+        "base_channels": 128,
+        "batch_size": 16,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 1024,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "29f678ed0d7f313c2120c3975fa0da4b353f5944d15e3f95f2750dbc814abc4e"
+    }
+  ],
+  "timing_scope": "Synchronized wall time for one public trainer update, including its critic/generator/prior work; warmup, construction, mock-data generation, evaluation, GIFs and checkpoint writes are excluded.",
+  "unavailable": []
+}

@@ -68,6 +68,33 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 **Configuration detail for [BCAP](bcap-pure.md).** Its optimizer or settings do not create a separate solution family. This page preserves the original configuration evidence and diagnostics.
 
+## Performance
+
+DCGAN on deterministic mock RGB data measures finite-update speed and memory. These separate performance-source receipts confer no image-quality, scientific qualification or default-promotion credit. Standard BatchNorm is retained in generator and critic; critic input gradients therefore include batch coupling. The shared critic uses a flattened 4×4 Linear scalar head for policy feature extraction; its module layout is fixed across recipes.
+
+Synchronized wall time for one public trainer update, including its critic/generator/prior work; warmup, construction, mock-data generation, evaluation, GIFs and checkpoint writes are excluded.
+
+Every cell is one run; timings are never pooled across devices or contention states. Compare only rows with the same task and matched key (source, runtime/dtype, physical device, initialization and batch streams). Unknown or contended observations are unpaired. Resolution progression changes the task, while each candidate keeps one global recipe. Images/s is B divided by full update time (one D and one G/prior update with separate real batches). Three warmup and ten measured updates give short-window median/p95 measurements; long-horizon policy costs and component phase times remain unknown.
+
+[Compact performance evidence index](../scaling-performance.json) · [Protocol and bounded reproduction](../../../docs/forge-scaling-performance.md)
+
+This registration covers 8 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
+
+### NVIDIA RTX A6000 · GPU-ed080e41-3193-3755-6756-f3d46c433331
+
+Performance source `018b30e837ce` (commit `58ade47791367abd46c68ede8d5e7d9fea3dbafb`); runtime `ef504138f591`; torch.float32; PyTorch 2.14.0+cu130; 48538.75 MiB device memory.
+
+Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
+
+| Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 278.99 / 285.22 | 57.23 | 90.27 / 124.00 | unknown | `aa8ae6ab9aad` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r32-46e89b46758e758e.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 602.88 / 653.53 | 26.28 | 221.65 / 314.00 | unknown | `2fc5fd72615a` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r64-7e4c561e05f1d529.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 1,456.40 / 1,941.11 | 10.38 | 674.06 / 886.00 | unknown | `d1b6083bd64a` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_w128-fe0176afacfe207f.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 664.82 / 680.22 | 95.91 | 555.09 / 612.00 | unknown | `9dd3a2de86da` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_b64-addedac8ac836908.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 2,054.91 / 2,300.34 | 7.63 | 630.11 / 848.00 | unknown | `407d9f8f2694` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r128-c22692c3830c20ce.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 3,091.39 / 3,328.68 | 5.09 | 2,118.16 / 2,316.00 | unknown | `ba89a65bd6f2` · [receipt](../scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_r256-3118dacf0ae5c52d.json) |
+
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
 ## CUDA results
@@ -514,6 +541,71 @@ Additional eligibility requirements:
 | [rotated100_14k](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) | [held: prerequisite rotated100 is held](../test-dispositions-20261015/README.md#rotated100_14k) | UNKNOWN | recorded definition unavailable |
 | [staggered100_14k](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) | [held: prerequisite staggered100 is held](../test-dispositions-20261015/README.md#staggered100_14k) | UNKNOWN | recorded definition unavailable |
 | [target_shift_recovery](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#target_shift_recovery) | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance"></a>
+
+## dcgan_performance
+
+**dcgan_performance — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_r32](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r64](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r128](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r128) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r256](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r256) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_b64](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_b64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_w128](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_w128) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance_cpu_smoke"></a>
+
+## dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance_cpu_smoke.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance_cpu_smoke-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_cpu_smoke](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_cpu_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance_cpu_smoke-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-dcgan_performance_cpu_smoke-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability"></a>
 
@@ -1272,6 +1364,139 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_b64"></a>
+
+### dcgan_performance_b64
+
+**dcgan_performance_b64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_b64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_cpu_smoke"></a>
+
+### dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_cpu_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance_cpu_smoke / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance_cpu_smoke-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 3 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r128"></a>
+
+### dcgan_performance_r128
+
+**dcgan_performance_r128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r256"></a>
+
+### dcgan_performance_r256
+
+**dcgan_performance_r256: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r256.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r32"></a>
+
+### dcgan_performance_r32
+
+**dcgan_performance_r32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_r64"></a>
+
+### dcgan_performance_r64
+
+**dcgan_performance_r64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-dcgan_performance_w128"></a>
+
+### dcgan_performance_w128
+
+**dcgan_performance_w128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_w128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-1bf9d7d34422-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -3837,6 +4062,71 @@ Additional eligibility requirements:
 | [staggered100_14k](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-staggered100_14k) | [held: prerequisite staggered100 is held](../test-dispositions-20261015/README.md#staggered100_14k) | UNKNOWN | recorded definition unavailable |
 | [target_shift_recovery](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-target_shift_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#target_shift_recovery) | UNKNOWN | recorded definition unavailable |
 
+<a name="cohort-cuda-c195899a64af-dcgan_performance"></a>
+
+## dcgan_performance
+
+**dcgan_performance — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_r32](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_r32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r64](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_r64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r128](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_r128) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r256](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_r256) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_b64](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_b64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_w128](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_w128) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance_cpu_smoke"></a>
+
+## dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance_cpu_smoke.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance_cpu_smoke-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_cpu_smoke](bcap-dualnorm.md#cohort-cuda-c195899a64af-experiment-dcgan_performance_cpu_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance_cpu_smoke-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-dcgan_performance_cpu_smoke-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-c195899a64af-discriminator_stability"></a>
 
 ## discriminator_stability
@@ -4573,6 +4863,139 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_b64"></a>
+
+### dcgan_performance_b64
+
+**dcgan_performance_b64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_b64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_cpu_smoke"></a>
+
+### dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_cpu_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance_cpu_smoke / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance_cpu_smoke-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 3 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_r128"></a>
+
+### dcgan_performance_r128
+
+**dcgan_performance_r128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_r256"></a>
+
+### dcgan_performance_r256
+
+**dcgan_performance_r256: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r256.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_r32"></a>
+
+### dcgan_performance_r32
+
+**dcgan_performance_r32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_r64"></a>
+
+### dcgan_performance_r64
+
+**dcgan_performance_r64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-c195899a64af-experiment-dcgan_performance_w128"></a>
+
+### dcgan_performance_w128
+
+**dcgan_performance_w128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_w128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-c195899a64af-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-c195899a64af-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
@@ -6758,6 +7181,71 @@ Additional eligibility requirements:
 | [staggered100_14k](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | [held: prerequisite staggered100 is held](../test-dispositions-20261015/README.md#staggered100_14k) | UNKNOWN | recorded definition unavailable |
 | [target_shift_recovery](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#target_shift_recovery) | UNKNOWN | recorded definition unavailable |
 
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance"></a>
+
+## dcgan_performance
+
+**dcgan_performance — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_r32](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r64](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r128](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r128) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r256](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r256) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_b64](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_b64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_w128](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_w128) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance_cpu_smoke"></a>
+
+## dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance_cpu_smoke.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance_cpu_smoke-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_cpu_smoke](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-experiment-dcgan_performance_cpu_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance_cpu_smoke-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-dcgan_performance_cpu_smoke-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability"></a>
 
 ## discriminator_stability
@@ -7494,6 +7982,139 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_b64"></a>
+
+### dcgan_performance_b64
+
+**dcgan_performance_b64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_b64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_cpu_smoke"></a>
+
+### dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_cpu_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance_cpu_smoke / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance_cpu_smoke-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 3 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r128"></a>
+
+### dcgan_performance_r128
+
+**dcgan_performance_r128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r256"></a>
+
+### dcgan_performance_r256
+
+**dcgan_performance_r256: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r256.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r32"></a>
+
+### dcgan_performance_r32
+
+**dcgan_performance_r32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_r64"></a>
+
+### dcgan_performance_r64
+
+**dcgan_performance_r64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-dcgan_performance_w128"></a>
+
+### dcgan_performance_w128
+
+**dcgan_performance_w128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_w128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](bcap-dualnorm.md#cohort-cuda-0d83d78027c5-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 

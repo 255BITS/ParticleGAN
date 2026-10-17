@@ -28,10 +28,10 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1326 test/protocol rows**, **563 complete recipe/source/runtime identities**; below: **244 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1333 test/protocol rows**, **563 complete recipe/source/runtime identities**; below: **251 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
-<summary>Open all 244 selected-protocol rows and their exact recipe identities</summary>
+<summary>Open all 251 selected-protocol rows and their exact recipe identities</summary>
 
 | Recipe | Full identity |
 | --- | --- |
@@ -60,6 +60,13 @@ Indexed: **1326 test/protocol rows**, **563 complete recipe/source/runtime ident
 | cover_leftover<br>seed 0 · 800 updates · source a5eafc73e4<br>`0cb8b54f9b29` | [CHANGED](../../configs/forge/tasks/cover_leftover.json) | 0/9 | NO INDEXED WITNESS | [BLOCKED](technique-evidence/29979e41c9c05e3304156cf4a43ed9c9dda6953bffd0fb47096fe47d6b8af13a.json) | NOT RUN | NOT RUN | NOT RUN | [BLOCKED](technique-evidence/29979e41c9c05e3304156cf4a43ed9c9dda6953bffd0fb47096fe47d6b8af13a.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | cover_leftover<br>seed 0 · 800 updates · source cbb19c5e55<br>`5a4728a97296` | [CHANGED](../../configs/forge/tasks/cover_leftover.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | [NOT RUN](technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | cover_leftover_policy_cloud_coverage_v1<br>unmeasured declaration<br>`0541d5495763` | [matches](../../configs/forge/task-variants/policy_cloud_coverage_v1/cover_leftover_policy_cloud_coverage_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_b64<br>unmeasured declaration<br>`28ed0bf1786a` | [matches](../../configs/forge/tasks/dcgan_performance_b64.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_cpu_smoke<br>unmeasured declaration<br>`fe93c93f469c` | [matches](../../configs/forge/tasks/dcgan_performance_cpu_smoke.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_r128<br>unmeasured declaration<br>`fc3010ee7893` | [matches](../../configs/forge/tasks/dcgan_performance_r128.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_r256<br>unmeasured declaration<br>`cc57db8dea63` | [matches](../../configs/forge/tasks/dcgan_performance_r256.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_r32<br>unmeasured declaration<br>`aacadd3ad0bd` | [matches](../../configs/forge/tasks/dcgan_performance_r32.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_r64<br>unmeasured declaration<br>`00b5da6b5360` | [matches](../../configs/forge/tasks/dcgan_performance_r64.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| dcgan_performance_w128<br>unmeasured declaration<br>`9deef6b22f01` | [matches](../../configs/forge/tasks/dcgan_performance_w128.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | five_word_joint_acquisition<br>unmeasured declaration<br>`58e8b116db94` | [matches](../../configs/forge/tasks/five_word_joint_acquisition.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | five_word_joint_acquisition_tier1_policy_selected_cloud_v1<br>unmeasured declaration<br>`95facc1df0fc` | [matches](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | five_word_joint_hold<br>seed 0 · 4000 updates · source cbb19c5e55<br>`2f12ad4d1387` | [CHANGED](../../configs/forge/tasks/five_word_joint_hold.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | [NOT RUN](technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

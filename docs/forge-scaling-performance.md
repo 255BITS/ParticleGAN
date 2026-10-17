@@ -92,6 +92,14 @@ execution exclude the benchmark's own process. They are point-in-time observatio
 not continuous exclusivity proof. Unknown or contended measurements remain visible
 and unpaired. Use one worker per physical device and record other activity.
 
+When the public API initialization receipt is available, the initial-prior cohort
+uses its validated state hash before recipe-owned regularizer buffers are added.
+For example, BISPF adds moment-tether buffers without changing the shared initial
+prior distribution. The original post-setup prior hash remains unchanged in the
+receipt. Generator/discriminator state and batch hashes remain strict comparison
+keys. Imported receipts without public initialization proof retain the stricter
+post-setup prior-state binding as a separate comparison basis.
+
 OOM, unsupported capability, execution error, nonfinite result and incomplete
 budget remain distinct from completion. Partial timing observations stay attached
 to their failed/incomplete run. Missing cells remain unknown. A timeout during a
