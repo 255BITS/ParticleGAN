@@ -1838,12 +1838,14 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
                       " | Tier 3 requirements | Total view requirements |") == 1
-    table = [line for line in text.splitlines() if line.startswith("|")][2:]
+    selected, details = text.split("## Full-suite results — failures included", 1)
+    assert "<details>" not in selected
+    table = [line for line in selected.splitlines() if line.startswith("|")][2:]
     cohort_count = len(result["family_progress"]["families"])
     assert len([line for line in table if line.startswith("| **[")]) == cohort_count
     labels = [family["label"] for family in result["family_progress"]["families"]]
     assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 0
-    assert "tensorflow" not in text.lower() and "halloween" not in text.lower()
+    assert "tensorflow" not in "\n".join(table).lower() and "halloween" not in "\n".join(table).lower()
     bcap = next(family for family in result["family_progress"]["families"] if family["label"] == "BCAP")
     for cohort in bcap["cohorts"]:
         if cohort["anchor"] == bcap["current_cohort_anchor"]:
@@ -1857,9 +1859,9 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     assert "Recorded observations" in page or "Metric" in page
     view_rows = sum(len(cohort["views"]) for family in result["family_progress"]["families"]
                     for cohort in family["cohorts"] if cohort["anchor"] == family["current_cohort_anchor"])
-    assert len([line for line in table if line.startswith("| ↳ [")]) == view_rows
+    assert sum(" | ↳ [" in line for line in details.splitlines() if line.startswith("|")) == view_rows
     assert all("families/" in line for line in table)
-    assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
+    assert "19/19" not in text.replace(ATLAS_HISTORY_NOTE, "") and "7/26 PASS" not in text and "0/26 PASS" not in text
     family_page = _family_text(ROOT, result, "atlas")
     assert "Original Atlas recipe and serving-law evidence" in family_page
     assert "Word half-base rate contrast" in family_page

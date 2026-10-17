@@ -24,9 +24,13 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
     assert publication == original
     assert first == second == page.read_text()
     lines = first.splitlines()
-    selected = lines.index("## Selected recipes")
-    assert ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
-            " | Total view requirements |") in lines[selected:selected + 6]
+    header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
+              " | Total view requirements |")
+    assert next(line for line in lines if line.startswith("|")) == header
+    selected, full_suite = first.split("## Full-suite results — failures included", 1)
+    assert "<details>" not in selected and "<summary>Qualification subset" not in first
+    assert "## Selected recipes" in selected
+    assert "A held FAIL is still a failure" in full_suite
     details = {f["id"]: render_family(ROOT, publication, f)
                for f in publication["family_progress"]["families"] if f["id"] in {"atlas", "bcap-pure"}}
     for heading in (
