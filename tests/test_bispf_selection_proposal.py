@@ -18,8 +18,19 @@ spec.loader.exec_module(selection)
 @pytest.fixture
 def quality(tmp_path, monkeypatch):
     current = read_json(ROOT / 'reports/forge/technique-inventory.json')
-    incumbent = next(row for row in current['rows'] if row.get('trainer_family') == 'bispf')
+    # Replay the original native-to-optimized selection question even after
+    # the optimized recipe becomes the live incumbent. Preserve the archived
+    # row and recipe identities instead of inventing a polar version of it.
+    archived = read_json(ROOT / 'configs/forge/selections/history/family-current-138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2.json')
+    pin = next(row for row in archived['selections'] if row['trainer_family'] == 'bispf')
+    incumbent = next(row for row in current['evidence_rows']
+                     if row.get('candidate_id') == pin['candidate_id']
+                     and row.get('candidate_revision') == pin['candidate_revision']
+                     and row.get('cohort') == pin['cohort'])
+    incumbent = {**incumbent, 'trainer_family': pin['trainer_family']}
+    assert incumbent['bindings']['recipe_sha256'] == pin['recipe_sha256']
     before = current['recipe_contracts'][incumbent['bindings']['recipe_sha256']]
+    assert before.get('optimizer_convolution_rule', 'polar') == 'polar'
     atomic_json(tmp_path / 'reports/forge/technique-inventory.json',
                 {'rows': [incumbent], 'recipe_contracts': {incumbent['bindings']['recipe_sha256']: before}})
     view = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
