@@ -146,3 +146,69 @@ def make_plain_adam(recipe, params, *, critic=None, **options):
         optimizer.register_load_state_dict_pre_hook(_load_critic_before)
         optimizer.register_load_state_dict_post_hook(_load_critic_after)
     return optimizer
+
+
+def progress_fraction_scale(progress, start, floor):
+    """The scheduled cosine LR shape over a progress fraction instead of step/horizon."""
+    if floor == 1:
+        return 1.0
+    fraction = min(1.0, max(0.0, (progress - start) / (1 - start)))
+    return float(floor + (1 - floor) * .5 * (1 + math.cos(math.pi * fraction)))
+
+
+class ProgressClock:
+    """Opt-in, horizon-free schedule driver (``Recipe.progress_schedule``).
+
+    ``progress`` replaces ``completed_steps / total_steps`` for the scheduled
+    LR, input-noise and output-noise shapes. It depends only on observed
+    critic outputs and its own saved state, never on the step label, the
+    declared horizon or evaluation calls. It is monotone: annealing is never
+    undone. ``critic_order`` advances by ``rate * clamp((target - a) /
+    (target - 0.5), 0, 1)`` where ``a`` is an EMA of the paired order accuracy
+    mean[D(real_i) > D(fake_i)]; ``updates`` advances by ``rate`` every update
+    (a diagnostic internal counter).
+    """
+
+    KEYS = ("progress", "order_ema", "observed")
+
+    def __init__(self, recipe):
+        self.mode, self.rate = recipe.progress_schedule, float(recipe.progress_rate)
+        self.target, self.decay = float(recipe.progress_target), float(recipe.progress_ema)
+        self.progress, self.order_ema, self.observed = 0.0, None, 0
+
+    def observe(self, real_logits, fake_logits):
+        real = real_logits.detach().reshape(len(real_logits), -1).mean(1)
+        fake = fake_logits.detach().reshape(len(fake_logits), -1).mean(1)
+        count = min(len(real), len(fake))
+        accuracy = float((real[:count] > fake[:count]).float().mean())
+        self.order_ema = (accuracy if self.order_ema is None
+                          else self.decay * self.order_ema + (1 - self.decay) * accuracy)
+        gate = (1.0 if self.mode == "updates"
+                else min(1.0, max(0.0, (self.target - self.order_ema) / (self.target - .5))))
+        self.progress = min(1.0, self.progress + self.rate * gate)
+        self.observed += 1
+
+    def scales(self, recipe):
+        """(network, prior) LR multipliers at the current progress."""
+        return (progress_fraction_scale(self.progress, recipe.lr_anneal_start, recipe.resolved_network_lr_floor),
+                progress_fraction_scale(self.progress, recipe.lr_anneal_start, recipe.lr_floor))
+
+    def input_noise(self, recipe):
+        return float(recipe.input_noise_std * max(0.0, 1.0 - self.progress / recipe.input_noise_anneal_end))
+
+    def output_noise(self, recipe):
+        if recipe.output_noise_warmup == 0:
+            return float(recipe.output_noise_std)
+        return float(recipe.output_noise_std * min(1.0, self.progress / recipe.output_noise_warmup))
+
+    def state_dict(self):
+        return {"progress": self.progress, "order_ema": self.order_ema, "observed": self.observed}
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict) or set(state) != set(self.KEYS):
+            raise ValueError("invalid progress schedule checkpoint")
+        progress, ema, observed = state["progress"], state["order_ema"], state["observed"]
+        if (type(progress) is not float or not 0 <= progress <= 1 or type(observed) is not int or observed < 0
+                or (ema is not None and (type(ema) is not float or not 0 <= ema <= 1))):
+            raise ValueError("invalid progress schedule checkpoint values")
+        self.progress, self.order_ema, self.observed = progress, ema, observed

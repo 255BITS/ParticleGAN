@@ -1,0 +1,35 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Diagnostic: K3P schedules driven by an internal progress counter advancing 0.001 every update (no critic gate)",
+    "Critic spike guard active from the first update (d_guard_min_steps=0)"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-hc-progress-ungated-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Diagnostic control separating annealing within the 1,600-update cap from progress gating; internal counter, no step label or horizon dependence.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "name": "k3p",
+    "progress_rate": 0.001,
+    "progress_schedule": "updates"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

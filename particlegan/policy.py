@@ -390,6 +390,12 @@ class UpdatePolicy:
                     and len({id(stream) for stream in active_streams}) != len(active_streams))):
             raise ValueError("active policy RNG streams must be distinct")
         self.completed_steps = 0
+        if recipe.progress_schedule is None:
+            self.progress = None
+        else:
+            from .recipe_schedules import ProgressClock
+            self.progress = ProgressClock(recipe)
+        self._progress_seen = True
         self.controller = (None if recipe.continuous_policy is None else
                            DataDriftController(recipe.continuous_policy))
         if self.controller is not None:
@@ -631,8 +637,13 @@ class UpdatePolicy:
             self.birth_death.observe_real(real)
         from .recipe_schedules import apply_training_schedules
         apply_training_schedules(self.completed_steps, recipe, self.optimizers, self.penalty)
+        if self.progress is not None:
+            if not self._progress_seen:
+                raise RuntimeError("progress_schedule requires observe_critic_logits() once per update")
+            self._progress_seen = False
         if self.lr_settle is None:
-            network, prior_scale = (self.schedule(self.completed_steps, recipe)
+            network, prior_scale = (self.progress.scales(recipe) if self.progress is not None
+                                    else self.schedule(self.completed_steps, recipe)
                                     if self.controller is None else self.controller.observe_real(real))
             for optimizer, rates, roles in zip(self.optimizers, self.initial_lrs, self.roles):
                 for group, rate, role in zip(optimizer.param_groups, rates, roles):
@@ -681,9 +692,12 @@ class UpdatePolicy:
         if hold:
             self.row_evidence.counters["hold_steps"] = self.row_evidence.counters.get("hold_steps", 0) + 1
         self._stray_flags = flags
-        sigma = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+        progress = self.progress
+        sigma = self._output_sigma(output_noise_std(recipe, self.completed_steps) if progress is None
+                                   else progress.output_noise(recipe), detach=False)
         self.last_output_sigma = float(sigma.detach() if torch.is_tensor(sigma) else sigma)
-        self._noise = StepNoise(input_noise_std(recipe, self.completed_steps), sigma)
+        self._noise = StepNoise(input_noise_std(recipe, self.completed_steps) if progress is None
+                                else progress.input_noise(recipe), sigma)
         self._phase = "critic"
         return self._noise
 
@@ -701,6 +715,12 @@ class UpdatePolicy:
             raise RuntimeError("critic observations must precede after_critic_step")
         if self.controller is not None:
             self.controller.observe_pair(real, fake)
+
+    def observe_critic_logits(self, real_logits, fake_logits):
+        """Feed the opt-in progress schedule this step's critic outputs (no-op otherwise)."""
+        if self.progress is not None:
+            self.progress.observe(real_logits, fake_logits)
+            self._progress_seen = True
 
     def before_critic_backward(self):
         """Optional ordering check immediately before critic backward."""
@@ -975,7 +995,8 @@ class UpdatePolicy:
 
     def output_sigma(self):
         """Current output-noise standard deviation as a host float."""
-        return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+        return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps) if self.progress is None
+                                        else self.progress.output_noise(self.recipe)))
 
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
@@ -1225,6 +1246,7 @@ class UpdatePolicy:
                                  else self.row_evidence.state_dict()),
                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
                 **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
+                **({} if self.progress is None else {"progress": self.progress.state_dict()}),
                 **({} if self.reopen_guard is None else {"reopen_guard": self.reopen_guard.state_dict()}),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
@@ -1390,6 +1412,8 @@ class UpdatePolicy:
             self.routed_control.load_state_dict(state["routing"])
         if self.surprise is not None:
             self.surprise.load_state_dict(state["surprise"])
+        if self.progress is not None:
+            self.progress.load_state_dict(state["progress"])
         if self.reopen_guard is not None:
             self.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.roles,
                                               completed_steps=state["completed_steps"],
