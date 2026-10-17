@@ -483,18 +483,95 @@ def _extract_source(root, commit, destination, manifests, study_support=None):
     for name, digest in (study_support or {}).items():
         if not (destination / name).is_file() or file_hash(destination / name) != digest:
             raise ValueError("frozen Git study prior-evidence differs from its original admission hash")
-    _overlay_reports(root / "reports", destination / "reports")
+    closure = _catalog_support_closure(_frozen_catalog_support(destination), manifests, study_support or {})
+    closure["frozen_rule_files_sha256"] = {
+        name: file_hash(destination / name) for name in
+        ("experiments/forge/planning.py", "experiments/forge/hostprofiles.py") if (destination / name).is_file()}
+    _overlay_reports(root / "reports", destination / "reports",
+                     excluded=[Path(name).relative_to("reports") for name in closure["preserved_absent_paths"]])
+    return closure
 
 
-def _overlay_reports(original, destination):
+def _frozen_catalog_support(root):
+    """Ask the executed planner's helpers which optional catalog files it sees."""
+    program = """
+import json, sys
+from pathlib import Path
+from experiments.forge.views import load_tasks
+try:
+    from experiments.forge.hostprofiles import profile_source_paths
+except ImportError:
+    profile_source_paths = None
+paths = set()
+for task in load_tasks(Path(sys.argv[1])).values():
+    paths.update(task.get('evaluation', {}).get('sources', {}))
+    if profile_source_paths is not None:
+        try:
+            paths.update(profile_source_paths(task))
+        except (KeyError, TypeError, ValueError):
+            pass
+print(json.dumps(sorted(paths)))
+"""
+    environment = {**os.environ, "PYTHONPATH": str(root), "PYTHONDONTWRITEBYTECODE": "1",
+                   "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
+    output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(root)],
+                                     cwd=root, env=environment, text=True, stderr=subprocess.PIPE)
+    return json.loads(output)
+
+
+def _catalog_support_closure(support, manifests, study_support=()):
+    """Retain captured optional files and preserve recorded report-file absence."""
+    absent, present = [], []
+    for name in sorted(set(support)):
+        path = Path(name)
+        if path.is_absolute() or ".." in path.parts:
+            raise ValueError("unsafe frozen catalog support path")
+        if not path.parts or path.parts[0] != "reports":
+            continue
+        captured = {name in source["files"] for source in manifests.values()}
+        if len(captured) != 1:
+            raise ValueError("conflicting captured catalog support presence; publish source cohorts separately: " + name)
+        if True in captured:
+            present.append(name)
+        elif name not in study_support:
+            absent.append(name)
+    return {"captured_present_paths": present, "preserved_absent_paths": absent,
+            "source_manifest_digests": sorted(manifests),
+            "scope": "Frozen planner catalog evaluator/profile inventory only; captured source and original study support retain their exact bytes. Read-only report overlays cannot introduce previously absent optional source files.",
+            "qualification_reuse": False}
+
+
+def _overlay_reports(original, destination, *, excluded=()):
     """Expose current knowledge read-only while retaining frozen report helpers."""
     destination.mkdir(parents=True, exist_ok=True)
     for source in original.iterdir():
+        relative = [Path(path) for path in excluded if Path(path).parts[0] == source.name]
+        if any(len(path.parts) == 1 for path in relative):
+            continue
         target = destination / source.name
-        if not target.exists():
+        if relative and source.is_dir():
+            # Do not symlink an ancestor of an excluded optional source: the
+            # missing descendant must remain absent without touching live data.
+            target.mkdir(parents=True, exist_ok=True)
+            _overlay_reports(source, target, excluded=[Path(*path.parts[1:]) for path in relative])
+        elif not target.exists():
             target.symlink_to(source.resolve(), target_is_directory=source.is_dir())
         elif source.is_dir() and target.is_dir():
             _overlay_reports(source, target)
+
+
+def _validate_recorded_study_projection(studies, result, view_id, execution_backend):
+    """An unresolved declaration cannot erase a completed original study."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    expected = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    reconstructed = {proof["candidate_id"] for proof in result.get("registered_study_reconstruction", [])}
+    measured = {row["candidate_id"] for row in result["rows"] if row.get("attempt_ids")}
+    if not expected.issubset(reconstructed & measured):
+        raise ValueError("frozen publication lost recorded study admission or measured rows: "
+                         + ", ".join(sorted(expected - (reconstructed & measured))))
 
 
 def _publication_rows(result):
@@ -577,7 +654,7 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
     frozen_root = temporary / "source"
-    _extract_source(root, commit, frozen_root, manifests, study_support=support)
+    catalog_closure = _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
     atomic_text(contract, _json_text(manifests))
     study_contract = temporary / "recorded-studies.json"
@@ -774,6 +851,9 @@ print(json.dumps(result, sort_keys=True))
     metadata = json.loads(output)
     result = read_json(metadata["json"])
     result["rows"], unresolved = _bound_publication_rows(result, set(manifests))
+    _validate_recorded_study_projection(studies, result, view_id, execution_backend)
+    if catalog_closure is not None:
+        result["frozen_catalog_support_closure"] = catalog_closure
     if roster is not None:
         if {row["candidate_id"] for row in result["rows"] + unresolved} != set(roster["candidate_ids"]):
             raise ValueError("frozen publication omits a registered leader")

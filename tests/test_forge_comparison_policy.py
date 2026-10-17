@@ -129,3 +129,77 @@ def test_pending_snapshot_overlay_is_read_only_hash_checked_and_restored_on_fail
         with publication._pending_publication_inputs(tmp_path, (pending, text)):
             pytest.fail('conflicting immutable source must not be overlaid')
     assert pending.read_text() == '{}\n'
+
+
+@pytest.mark.parametrize('captured', [False, True])
+def test_frozen_catalog_overlay_preserves_captured_presence_and_absence(tmp_path, captured):
+    name = 'reports/transfer_suite/unadjusted/leading_profile.json'
+    live, frozen = tmp_path / 'live', tmp_path / 'frozen'
+    source, target = live / name, frozen / name
+    source.parent.mkdir(parents=True)
+    source.write_text('{"live": "later optional profile"}\n')
+    sibling = source.with_name('readout.json')
+    sibling.write_text('{"knowledge": true}\n')
+    files = {}
+    if captured:
+        target.parent.mkdir(parents=True)
+        target.write_text('{"frozen": "original profile"}\n')
+        files[name] = file_hash(target)
+    closure = publication._catalog_support_closure([name], {'recorded-source': {'files': files}})
+    publication._overlay_reports(live / 'reports', frozen / 'reports',
+                                 excluded=[Path(p).relative_to('reports') for p in closure['preserved_absent_paths']])
+    assert target.exists() == captured
+    if captured:
+        assert target.read_text() == '{"frozen": "original profile"}\n'
+        assert closure['captured_present_paths'] == [name]
+        assert not target.is_symlink()
+    else:
+        assert closure['preserved_absent_paths'] == [name]
+    assert (target.parent / sibling.name).read_bytes() == sibling.read_bytes()
+    assert source.read_text() == '{"live": "later optional profile"}\n'
+
+
+def test_catalog_closure_retains_original_study_support_and_rejects_conflicting_source_presence():
+    name = 'reports/profile.json'
+    sources = {'sparse': {'files': {}}, 'full': {'files': {name: 'original-hash'}}}
+    with pytest.raises(ValueError, match='conflicting captured'):
+        publication._catalog_support_closure([name], sources)
+    closure = publication._catalog_support_closure([name], {'sparse': sources['sparse']}, {name: 'study-hash'})
+    assert closure['preserved_absent_paths'] == []
+    with pytest.raises(ValueError, match='unsafe'):
+        publication._catalog_support_closure(['reports/../escape.json'], {'source': {'files': {}}})
+
+
+def test_catalog_inventory_uses_frozen_profile_rules_in_a_fresh_process(tmp_path):
+    package = tmp_path / 'experiments/forge'
+    package.mkdir(parents=True)
+    (package.parent / '__init__.py').write_text('')
+    (package / '__init__.py').write_text('')
+    (package / 'views.py').write_text(
+        "def load_tasks(root):\n    return {'task': {'evaluation': {'sources': {'reports/evaluator.py': 'hash'}}}}\n")
+    (package / 'hostprofiles.py').write_text(
+        "def profile_source_paths(task):\n    return ['reports/frozen-profile.json']\n")
+    assert publication._frozen_catalog_support(tmp_path) == ['reports/evaluator.py', 'reports/frozen-profile.json']
+
+
+@pytest.mark.parametrize('missing', ['proof', 'measured', 'both'])
+def test_projection_refuses_to_turn_recorded_study_into_silent_unresolved_rows(missing):
+    request = {'candidate': {'id': 'optimized'}, 'view': {'id': 'stability'}, 'execution_backend': 'cuda'}
+    studies = [{'request': request}]
+    result = {'registered_study_reconstruction': [{'candidate_id': 'optimized'}],
+              'rows': [{'candidate_id': 'optimized', 'attempt_ids': ['original']} ]}
+    publication._validate_recorded_study_projection(studies, result, 'stability', 'cuda')
+    if missing in {'proof', 'both'}:
+        result['registered_study_reconstruction'] = []
+    if missing in {'measured', 'both'}:
+        result['rows'] = [{'candidate_id': 'optimized', 'attempt_ids': []}]
+    with pytest.raises(ValueError, match='lost recorded study admission or measured rows'):
+        publication._validate_recorded_study_projection(studies, result, 'stability', 'cuda')
+    publication._validate_recorded_study_projection(studies, result, 'another-view', 'cuda')
+
+
+@pytest.mark.parametrize('scope', ['research_diagnostic', 'calibration_diagnostic'])
+def test_diagnostic_study_does_not_require_an_ordinary_qualifying_row(scope):
+    studies = [{'request': {'candidate': {'id': 'diagnostic'}, 'view': {'id': 'view', 'evidence_scope': scope},
+                            'execution_backend': 'cuda'}}]
+    publication._validate_recorded_study_projection(studies, {'rows': []}, 'view', 'cuda')
