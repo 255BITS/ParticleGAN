@@ -31,10 +31,47 @@
       "failure": "test_committed_pages_and_every_drilldown_link_match_the_generator: new diagnostic declarations/history are not yet included in current family_progress; final inventory generation is intentionally deferred until quality selection",
       "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/publication-regression-tests.log",
       "log_sha256": "2d2e42a001ec2778ace86a2be2cb2e5f60122282af7bff6c2dd4a457e0093704"
+    },
+    {
+      "scope": "frozen catalog support closure and strict admission projection",
+      "source_commit": "43aa6e92f636ee01564cfb1f506a44e809e330a6",
+      "result": "PASS",
+      "passed": 25,
+      "duration_seconds": 0.36,
+      "command": "pytest -q tests/test_forge_comparison_policy.py",
+      "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-frozen-catalog-closure-final-tests.log",
+      "log_sha256": "c3ae8d756859b23acaca6d1a3e8a909d3c6ff1f25585871438a8917e7d1a46d2"
+    },
+    {
+      "scope": "current inventory, family reports and comparison policy after source-closure fix; only final generated-artifact guard deselected",
+      "source_commit": "43aa6e92f636ee01564cfb1f506a44e809e330a6",
+      "result": "PASS",
+      "passed": 255,
+      "duration_seconds": 43.18,
+      "command": "pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_family_reports.py tests/test_forge_comparison_policy.py -k 'not test_committed_pages_and_every_drilldown_link_match_the_generator'",
+      "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-frozen-closure-publication-tests.log",
+      "log_sha256": "3826be42b46ad10fe135a7cd9041454ca8cf53de06ec3aebe09a055c56572967"
     }
   ],
   "limitations": [
     "Software checks establish implementation contracts; trained quality and observed performance are separate evidence.",
     "The optimizer step is not an atomic transaction across parameter groups; checkpoint loading validates compatibility before applying state."
-  ]
+  ],
+  "publication_dry_run": {
+    "status": "PENDING_PARTIAL_SNAPSHOT",
+    "source_commit": "d9d72d53761c898bce20102e1995fc3d899c1447",
+    "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+    "completed_receipts": 6,
+    "task_contracts_matching_incumbent": 30,
+    "actual_policy_revision": 11,
+    "comparison_policy_revision": 9,
+    "qualification_granted": false,
+    "shared_critical_files_unchanged": true,
+    "preserved_absent_optional_source": [
+      "reports/transfer_suite/unadjusted/leading_profile.json"
+    ],
+    "proof_path": "/tmp/bispf-h2-partial-check-PENDING.json",
+    "proof_sha256": "7e1260d9f161a2580825e85175f0110fabb45d60da050739f90160ec5aaefbc2",
+    "note": "Verified partial reconstruction before the full study completed. Final source report must use newly completed evidence and concluded readout."
+  }
 }
