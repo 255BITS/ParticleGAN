@@ -1,5 +1,7 @@
 # ParticleGAN
 
+![ParticleGAN — conceptual artwork of luminous particles flowing into distinct clusters](docs/media/readme/particlegan-hero.png)
+
 [Research attempt catalog](reports/forge/research-catalog/README.md): source-bound results, reusable lessons, failures and publication links.
 
 **GANs with a learnable particle prior, for PyTorch.**
