@@ -167,9 +167,25 @@ def _contention(device):
         return {"available": False, "reason": "CPU benchmark; GPU contention not applicable"}
     query = _command(["nvidia-smi", "--query-gpu=index,uuid,pci.bus_id,memory.used,utilization.gpu", "--format=csv,noheader,nounits"])
     processes = _command(["nvidia-smi", "--query-compute-apps=gpu_uuid,pid,used_memory", "--format=csv,noheader,nounits"])
-    return {"available": query is not None, "gpu_rows": [] if query is None else query.splitlines(),
-            "compute_process_rows": [] if processes is None else processes.splitlines(),
+    gpu_rows = [] if query is None else query.splitlines()
+    process_rows = [] if processes is None else processes.splitlines()
+    gpu_fields = [[part.strip() for part in line.split(",")] for line in gpu_rows]
+    process_fields = [[part.strip() for part in line.split(",")] for line in process_rows]
+    # Some hosts provide an nvidia-smi shim that silently returns a GPU listing
+    # for unsupported queries with exit code zero. That is unknown contention.
+    valid_gpus = bool(gpu_fields) and all(len(parts) == 5 and parts[0].isdigit()
+                                         and parts[1].startswith("GPU-") for parts in gpu_fields)
+    valid_processes = all(len(parts) == 3 and parts[0].startswith("GPU-") and parts[1].isdigit()
+                          for parts in process_fields)
+    return {"available": query is not None and processes is not None and valid_gpus and valid_processes,
+            "gpu_rows": gpu_rows, "compute_process_rows": process_rows,
             "benchmark_pid": os.getpid(), "scope": "point-in-time before/after; does not prove exclusive occupancy"}
+
+
+def _gpu_uuid(value):
+    """Torch exposes bare UUIDs; nvidia-smi exposes the same UUID with GPU-."""
+    value = str(value or "").strip()
+    return value if not value or value.startswith("GPU-") else "GPU-" + value
 
 
 def _hardware(device):
@@ -181,12 +197,12 @@ def _hardware(device):
     if device.type == "cuda":
         properties = torch.cuda.get_device_properties(device)
         result.update(name=properties.name, total_memory_mib=properties.total_memory / 2**20,
-                      physical_uuid=str(getattr(properties, "uuid", "")) or None)
+                      physical_uuid=_gpu_uuid(getattr(properties, "uuid", "")) or None)
         rows = _command(["nvidia-smi", "--query-gpu=uuid,pci.bus_id", "--format=csv,noheader"])
         for row in (rows or "").splitlines():
             uuid, bus = [item.strip() for item in row.split(",")]
-            if result["physical_uuid"] and uuid == result["physical_uuid"]:
-                result["pci_bus_id"] = bus
+            if result["physical_uuid"] and _gpu_uuid(uuid) == result["physical_uuid"]:
+                result["pci_bus_id"] = bus or None
     return result
 
 

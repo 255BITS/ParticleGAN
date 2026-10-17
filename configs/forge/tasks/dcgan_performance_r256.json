@@ -55,7 +55,7 @@
   ],
   "resources": {
     "cpu_threads": 1,
-    "gpu_memory_mb": 2048,
+    "gpu_memory_mb": 24576,
     "gpus": 1,
     "timeout_seconds": 300
   },

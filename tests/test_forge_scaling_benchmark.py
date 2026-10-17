@@ -1,5 +1,6 @@
 """Software/measurement controls, not scientific quality or throughput claims."""
 import json
+from types import SimpleNamespace
 
 import pytest
 import torch
@@ -9,6 +10,7 @@ from experiments.forge.contracts import file_hash, stable_hash
 from experiments.forge.scaling_benchmark import (DCGANCritic, DCGANGenerator,
                                                 recipe_blockers, run_benchmark, validate_spec)
 from experiments.forge.state import require_consistent_rng
+from experiments.forge import scaling_benchmark
 
 
 SPEC = dict(image_size=32, batch_size=2, base_channels=2, max_channels=8,
@@ -50,6 +52,42 @@ def test_recipe_preflight_keeps_task_resources_and_normalization_explicit():
     assert any("batch_size" in value for value in recipe_blockers(recipe(batch_size=4), SPEC))
     with pytest.raises(ValueError, match="standardize"):
         run_benchmark(recipe(), {**SPEC, "prior": dict(kind="mog", sigma=.1, standardize=True)}, "/tmp/unused")
+
+
+def test_bare_torch_gpu_uuid_matches_nvidia_identity_and_contention_rows(monkeypatch):
+    uuid = "548116b7-9dbe-de58-b3d9-a6e27b0f74ce"
+    monkeypatch.setattr(torch.cuda, "get_device_properties", lambda device:
+                        SimpleNamespace(name="test GPU", total_memory=2**30, uuid=uuid))
+    def query(arguments):
+        if "--query-gpu=uuid,pci.bus_id" in arguments:
+            return f"GPU-{uuid}, 0000:01:00.0"
+        if "--query-gpu=index,uuid,pci.bus_id,memory.used,utilization.gpu" in arguments:
+            return f"0, GPU-{uuid}, 0000:01:00.0, 10, 0"
+        return f"GPU-{uuid}, 999999, 10"
+    monkeypatch.setattr(scaling_benchmark, "_command", query)
+    hardware = scaling_benchmark._hardware(torch.device("cuda:0"))
+    assert hardware["physical_uuid"] == "GPU-" + uuid
+    assert hardware["pci_bus_id"] == "0000:01:00.0"
+    assert hardware["contention_before"]["compute_process_rows"][0].split(",")[0] == hardware["physical_uuid"]
+    assert scaling_benchmark._gpu_uuid("GPU-" + uuid) == hardware["physical_uuid"]
+
+
+@pytest.mark.parametrize("failed_query", ["--query-compute-apps=gpu_uuid,pid,used_memory",
+                                           "--query-gpu=index,uuid,pci.bus_id,memory.used,utilization.gpu"])
+def test_failed_contention_query_is_unavailable(monkeypatch, failed_query):
+    monkeypatch.setattr(scaling_benchmark, "_command", lambda arguments:
+                        None if failed_query in arguments else "")
+    assert not scaling_benchmark._contention(torch.device("cuda:0"))["available"]
+
+
+def test_successful_but_non_csv_process_query_is_unknown(monkeypatch):
+    def query(arguments):
+        return ("GPU 0: test GPU (GPU-uuid)" if "--query-compute-apps=gpu_uuid,pid,used_memory" in arguments
+                else "0, GPU-uuid, , 10, 0")
+    monkeypatch.setattr(scaling_benchmark, "_command", query)
+    snapshot = scaling_benchmark._contention(torch.device("cuda:0"))
+    assert not snapshot["available"]
+    assert snapshot["compute_process_rows"] == ["GPU 0: test GPU (GPU-uuid)"]
 
 
 def test_matched_streams_real_updates_checkpoint_and_media(tmp_path):

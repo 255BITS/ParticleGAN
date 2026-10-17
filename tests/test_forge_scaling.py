@@ -121,22 +121,22 @@ def test_performance_view_never_qualifies_a_recipe():
         validate_view(view, tasks)
 
 
-@pytest.mark.parametrize("family", ["atlas", "bispf"])
-def test_actual_frozen_performance_enqueue_accepts_selected_legacy_and_v3_recipes_without_launch(tmp_path, family):
-    from experiments.forge.planning import resolve_idea
+def test_actual_frozen_performance_enqueue_accepts_all_eight_selected_recipes_without_launch(tmp_path):
     from experiments.forge.queue import Queue
     from experiments.forge.sources import verify_snapshot
     manifest = scaling._load(ROOT, "dcgan-performance-cloud-v1")
-    choice = next(row for row in manifest["family_selections"] if row["family"] == family)
     queue = Queue(tmp_path / "queue", report_root=ROOT / "reports/forge")
-    request = resolve_idea(ROOT, choice["candidate_id"], study=choice["study"],
-                           freeze_source=True, queue_root=queue.root)
-    verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
-    entry = queue.submit(request, manifest["campaign"])
-    assert entry["status"] == "queued"
+    result = scaling.enqueue(ROOT, queue.root, manifest["id"], queue=queue)
+    assert len(result["submissions"]) == len(manifest["family_selections"]) == 8
+    assert all(entry["status"] == "queued" for entry in result["submissions"])
     saved = queue.inspect()
-    assert len(saved["submissions"]) == 1
-    assert len(saved["jobs"]) == 6
+    assert len(saved["submissions"]) == 8
+    assert len(saved["jobs"]) == 48
+    for submission in saved["submissions"].values():
+        request = submission["request"]
+        verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
+        assert request["study_review"]["status"] == "READY"
+    assert len({entry["request"]["source"]["digest"] for entry in saved["submissions"].values()}) == 1
     assert saved["charges"] == []
     assert saved["campaigns"][manifest["campaign"]["id"]]["spent_seconds"] == 0
     assert saved["campaigns"][manifest["campaign"]["id"]]["reserved_seconds"] == 0
