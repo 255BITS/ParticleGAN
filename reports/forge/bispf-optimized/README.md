@@ -98,11 +98,25 @@ different optimizer inspired by Muon's polynomial, with no SVD equivalence or
 inverse-root convergence claim. [Kernel details and scaling](KERNEL_AUDIT.md)
 explain the remaining forward/backward and activation-memory costs.
 
-At frozen source `d9d72d53761c898bce20102e1995fc3d899c1447`, the initial
-unwrapped profiles measure 48.82 ms at 64 pixels and 335.20 ms at 256 pixels,
-with the same peak allocated memory as the corresponding native profiles.
-The final same-source performance matrix and full ordinary quality study are
-required before selection.
+At frozen source `d9d72d53761c898bce20102e1995fc3d899c1447`, all 18 final
+performance arms complete with the same initialization, batches, runtime and
+physical GPU. At 64 pixels, native 608.99 ms becomes 51.42 ms (11.84x), versus
+R1/R2 24.72 ms. At 256 pixels, native 3,115.15 ms becomes 338.70 ms (9.20x),
+versus R1/R2 252.05 ms. The declared observed targets pass: at least 8x native
+at both sizes and at most 2x R1/R2 at 256. Contention remains unknown, so these
+are observed ratios rather than a certified paired ranking. Exact final matrices
+are archived for the [controls](../scaling-history/bispf-matrix-controls-v1-d0053fc17b21f7a7.json)
+and [quintic recipe](../scaling-history/bispf-matrix-quintic-v1-7c73a339487b7bfb.json).
+
+Across all six tasks the native speedup ranges from 7.61x to 17.43x; it is not
+uniform. Relative overhead versus R1/R2 decreases from 2.94x at 32 pixels to
+2.08x at 64, 1.68x at 128 and 1.34x at 256. Increasing batch size to 64 at
+64 pixels gives 88.16 ms versus R1/R2 60.83 ms, while doubling base channels
+to 128 gives 107.13 ms versus 54.31 ms. Wider matrices still increase the
+fixed polynomial cost; larger images increasingly spend time in the shared
+network computation. Peak allocated memory matches native BISPF on every
+workload, including 2,119 MiB at 256 pixels, without persistent graph caches.
+The ordinary quality study remains required before selection.
 
 The [six-arm direct training readout](wide-quality.json) passes all shared
 initialization, public-prior, task, initial RNG and final consumed-data-stream
